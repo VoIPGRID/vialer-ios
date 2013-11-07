@@ -66,7 +66,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dashboardNavigationViewController];
+    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController];
+    self.tabBarController.selectedIndex = 1;
     self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];

@@ -33,10 +33,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    [SVProgressHUD show];
     [[VoysRequestOperationManager sharedRequestOperationManager] userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://mijn.voys.nl"]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://partner.voipgrid.nl"]]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -52,10 +54,6 @@
 }
 
 #pragma mark - Web view delegate
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    [SVProgressHUD show];
-}
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [SVProgressHUD dismiss];

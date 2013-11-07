@@ -9,7 +9,6 @@
 #import "VoysRequestOperationManager.h"
 
 #import "SSKeychain.h"
-#import "SVProgressHUD.h"
 
 #define BASE_URL @"https://api.voipgrid.nl/api"
 #define SERVICE_NAME @"com.voys.appic"
@@ -39,11 +38,10 @@
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
         }
     }
-
 	return self;
 }
 
-- (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
+- (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
 
     [self userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -51,9 +49,9 @@
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [SSKeychain setPassword:password forService:SERVICE_NAME account:user];
-
+        
         success(operation, success);
-    } failure:nil];
+    } failure:failure];
 }
 
 - (void)logout {
@@ -78,46 +76,47 @@
 }
 
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [SVProgressHUD show];
     [self GET:@"userdestination/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [SVProgressHUD dismiss];
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
+        failure(operation, error);
         if ([operation.response statusCode] == 401) {
             [self loginFailed];
-        } else {
-            failure(operation, error);
         }
     }];
 }
 
 - (void)phoneAccountWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [SVProgressHUD show];
     [self GET:@"phoneaccount/phoneaccount/" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [SVProgressHUD dismiss];
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
+        failure(operation, error);
         if ([operation.response statusCode] == 401) {
             [self loginFailed];
-        } else {
-            failure(operation, error);
         }
     }];
 }
 
 - (void)clickToDialNumber:(NSString *)number success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Dialing...", nil)];
     [self POST:@"clicktodial/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:number, @"b_number", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [SVProgressHUD dismiss];
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
+        failure(operation, error);
         if ([operation.response statusCode] == 401) {
             [self loginFailed];
-        } else {
-            failure(operation, error);
+        }
+    }];
+}
+
+- (void)clickToDialStatusForCallId:(NSString *)callId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [[@"clicktodial/" stringByAppendingString:callId] stringByAppendingString:@"/"];
+
+    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(operation, responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
+        if ([operation.response statusCode] == 401) {
+            [self loginFailed];
         }
     }];
 }

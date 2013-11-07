@@ -10,6 +10,8 @@
 
 #import "VoysRequestOperationManager.h"
 
+#import "SVProgressHUD.h"
+
 @interface LogInViewController ()
 
 @end
@@ -63,8 +65,12 @@
     UITextField *usernameTextField = [alertView textFieldAtIndex:0];
     UITextField *passwordTextField = [alertView textFieldAtIndex:1];
 
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
     [[VoysRequestOperationManager sharedRequestOperationManager] loginWithUser:usernameTextField.text password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [SVProgressHUD dismiss];
         [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
     }];
 }
 
