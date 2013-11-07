@@ -8,13 +8,13 @@
 
 #import "AppDelegate.h"
 
-#import "AFNetworkActivityLogger.h"
-
 #import "VoysRequestOperationManager.h"
 #import "LogInViewController.h"
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DashboardViewController.h"
+
+#import "AFNetworkActivityLogger.h"
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;

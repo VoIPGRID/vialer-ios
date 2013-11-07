@@ -41,6 +41,7 @@
 		FB576B17182A81CF00C4FAB4 /* recents.png in Resources */ = {isa = PBXBuildFile; fileRef = FB576B15182A81CF00C4FAB4 /* recents.png */; };
 		FB576B18182A81CF00C4FAB4 /* recents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB576B16182A81CF00C4FAB4 /* recents@2x.png */; };
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
+		FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
 		FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */; };
 		FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */; };
@@ -114,6 +115,8 @@
 		FB576B1A182A858500C4FAB4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FB576B1B182A85A800C4FAB4 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
+		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
 		FB64313F182281C500E1BF17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FBAD7EFD182A8901002FC8FC /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
@@ -258,6 +261,7 @@
 			children = (
 				FB0CF33118226380002D4281 /* Api */,
 				FB302E63182A3AA4004B7D27 /* Resources */,
+				FB5D291A182BE407001DA8F2 /* Categories */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
 				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
@@ -288,6 +292,15 @@
 				FB4226E6182261D200707349 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FB5D291A182BE407001DA8F2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */,
+				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */ = {
@@ -406,6 +419,7 @@
 				FB0CF34B18226392002D4281 /* AFURLConnectionOperation.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
 				FB0CF34618226392002D4281 /* AFHTTPRequestOperation.m in Sources */,
+				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */,
 				FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */,
 				FB0CF34918226392002D4281 /* AFNetworkReachabilityManager.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "ContactsViewController.h"
-
 #import "VoysRequestOperationManager.h"
 
 #import <CoreTelephony/CTCallCenter.h>
@@ -48,6 +47,8 @@
             [weakSelf dismissStatus];
             NSLog(@"callEventHandler: %@", call.callState);
         }];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -158,6 +159,14 @@
         [self updateStatusForResponse:responseObject withInfo:timer.userInfo];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     }];
+}
+
+#pragma mark - Notifications
+
+- (void)didBecomeActiveNotification:(NSNotification *)notification {
+    if (self.updateStatusTimer) {
+        [self dismissStatus];
+    }
 }
 
 @end

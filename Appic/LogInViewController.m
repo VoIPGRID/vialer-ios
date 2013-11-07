@@ -7,7 +7,6 @@
 //
 
 #import "LogInViewController.h"
-
 #import "VoysRequestOperationManager.h"
 
 #import "SVProgressHUD.h"

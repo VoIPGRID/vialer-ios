@@ -7,9 +7,12 @@
 //
 
 #import "RecentsViewController.h"
+#import "VoysRequestOperationManager.h"
+
+#import "SVProgressHUD.h"
 
 @interface RecentsViewController ()
-
+@property (nonatomic, assign) BOOL fetching;
 @end
 
 @implementation RecentsViewController
@@ -29,6 +32,29 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (!self.fetching) {
+        self.fetching = YES;
+
+        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+        [offsetComponents setMonth:-1];
+
+        NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
+
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Fetching recents", nil)];
+        [[VoysRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:2 offset:0 callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            self.fetching = NO;
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.fetching = NO;
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning

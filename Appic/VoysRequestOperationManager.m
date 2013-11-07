@@ -7,18 +7,24 @@
 //
 
 #import "VoysRequestOperationManager.h"
+#import "NSDate+RelativeDate.h"
 
 #import "SSKeychain.h"
 
 #define BASE_URL @"https://api.voipgrid.nl/api"
 #define SERVICE_NAME @"com.voys.appic"
 
+enum VoysHttpErrors {
+    kVoysHTTPBadCredentials = 401,
+};
+typedef enum VoysHttpErrors VoysHttpErrors;
+
 @implementation VoysRequestOperationManager
 
 + (VoysRequestOperationManager *)sharedRequestOperationManager {
     static dispatch_once_t pred;
     static VoysRequestOperationManager *_sharedRequestOperationManager = nil;
-    
+
     dispatch_once(&pred, ^{
 		_sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
 	});
@@ -80,7 +86,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == 401) {
+        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -91,7 +97,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == 401) {
+        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -102,7 +108,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == 401) {
+        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -115,10 +121,27 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == 401) {
+        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
+}
+
+- (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [self GET:@"cdr/record/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         @(limit), @"limit",
+                                         @(offset), @"offset",
+                                         [date utcString], @"call_date__gte",
+                                         nil
+                                         ]
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          success(operation, responseObject);
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          failure(operation, error);
+          if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+              [self loginFailed];
+          }
+      }];
 }
 
 - (void)loginFailed {
