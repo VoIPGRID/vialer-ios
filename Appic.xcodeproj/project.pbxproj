@@ -21,6 +21,8 @@
 		FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
 		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
 		FB302E65182A3AA4004B7D27 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FB302E64182A3AA4004B7D27 /* background.png */; };
+		FB41773A182BF1B2006BFA43 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FB417739182BF1B2006BFA43 /* Icon.png */; };
+		FB41773C182BF1B8006BFA43 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB41773B182BF1B8006BFA43 /* Icon@2x.png */; };
 		FB4226D1182261D200707349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
 		FB4226D3182261D200707349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
 		FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
@@ -58,6 +60,7 @@
 		FBAD7F1E182B00F5002FC8FC /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7F1C182B00F5002FC8FC /* nav-bar@2x.png */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
 		FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */; };
+		FBF0BC98182BF2C000434746 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF0BC97182BF2C000434746 /* icon-120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +90,8 @@
 		FB302E60182A390E004B7D27 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		FB302E61182A390E004B7D27 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		FB302E64182A3AA4004B7D27 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		FB417739182BF1B2006BFA43 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		FB41773B182BF1B8006BFA43 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FB4226CD182261D200707349 /* Appic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB4226D0182261D200707349 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FB4226D2182261D200707349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -111,9 +116,6 @@
 		FB576B12182A802200C4FAB4 /* RecentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentsViewController.xib; sourceTree = "<group>"; };
 		FB576B15182A81CF00C4FAB4 /* recents.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recents.png; sourceTree = "<group>"; };
 		FB576B16182A81CF00C4FAB4 /* recents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recents@2x.png"; sourceTree = "<group>"; };
-		FB576B19182A857B00C4FAB4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		FB576B1A182A858500C4FAB4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		FB576B1B182A85A800C4FAB4 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
 		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FBB088CC18228E360004FFD1 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
 		FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
+		FBF0BC97182BF2C000434746 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,9 +222,9 @@
 		FB4226C4182261D200707349 = {
 			isa = PBXGroup;
 			children = (
-				FB576B1B182A85A800C4FAB4 /* icon-120.png */,
-				FB576B1A182A858500C4FAB4 /* Icon@2x.png */,
-				FB576B19182A857B00C4FAB4 /* Icon.png */,
+				FBF0BC97182BF2C000434746 /* icon-120.png */,
+				FB41773B182BF1B8006BFA43 /* Icon@2x.png */,
+				FB417739182BF1B2006BFA43 /* Icon.png */,
 				FBAD7F12182AE93B002FC8FC /* SVProgressHUD */,
 				FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */,
 				FBB088CB18228E360004FFD1 /* AFNetworkActivityLogger */,
@@ -259,8 +262,8 @@
 		FB4226D6182261D200707349 /* Appic */ = {
 			isa = PBXGroup;
 			children = (
-				FB0CF33118226380002D4281 /* Api */,
 				FB302E63182A3AA4004B7D27 /* Resources */,
+				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
@@ -392,6 +395,7 @@
 				FB4226E5182261D200707349 /* Default@2x.png in Resources */,
 				FB4226E7182261D200707349 /* Default-568h@2x.png in Resources */,
 				FB576B17182A81CF00C4FAB4 /* recents.png in Resources */,
+				FBF0BC98182BF2C000434746 /* icon-120.png in Resources */,
 				FB576B0A182A71E100C4FAB4 /* logo.png in Resources */,
 				FBAD7F09182A8E76002FC8FC /* logoMedium.png in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
@@ -405,6 +409,8 @@
 				FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */,
 				FB302E65182A3AA4004B7D27 /* background.png in Resources */,
 				FB576B07182A70BF00C4FAB4 /* contacts@2x.png in Resources */,
+				FB41773A182BF1B2006BFA43 /* Icon.png in Resources */,
+				FB41773C182BF1B8006BFA43 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
