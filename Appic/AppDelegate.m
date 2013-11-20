@@ -13,7 +13,9 @@
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DashboardViewController.h"
+#import "DialerViewController.h"
 
+#import "TestFlight.h"
 #import "AFNetworkActivityLogger.h"
 
 @interface AppDelegate()
@@ -24,25 +26,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Test flight
+    [TestFlight takeOff:@"41b7fa53-990b-4b64-86cc-75f14aee7db4"];
+
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 
     // Setup appearance
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:0xf9 / 255.f green:0xf9 / 255.f blue:0xf9 / 255.f alpha:1.0f]];
-        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0x9b / 255.f green:0xc3 / 255.f blue:0x2f / 255.f alpha:1.f]];
+        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0x3c / 255.f green:0x3c / 255.f blue:0x50 / 255.f alpha:1.f]];
+//    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0x9b / 255.f green:0xc3 / 255.f blue:0x2f / 255.f alpha:1.f]];
+    } else {
+        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0x3c / 255.f green:0x3c / 255.f blue:0x50 / 255.f alpha:1.f]];
     }
 
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]}];
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"nav-bar"] stretchableImageWithLeftCapWidth:20 topCapHeight:10] forBarMetrics:UIBarMetricsDefault];
+
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     } else {
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0x2e / 255.f green:0x31 / 255.f blue:0x92 / 255.f alpha:0.8f]];
+        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0x3c / 255.f green:0x3c / 255.f blue:0x50 / 255.f alpha:1.f]];
+//        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0x2e / 255.f green:0x31 / 255.f blue:0x92 / 255.f alpha:0.8f]];
     }
-
+    
     // Handler for failed authentications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
     
@@ -54,19 +63,23 @@
     contactsViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
+    recentsViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
     recentsNavigationViewController.view.backgroundColor = [UIColor clearColor];
     recentsNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 
     UIViewController *dashboardViewController = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:[NSBundle mainBundle]];
+    dashboardViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *dashboardNavigationViewController = [[UINavigationController alloc] initWithRootViewController:dashboardViewController];
     dashboardNavigationViewController.view.backgroundColor = [UIColor clearColor];
     dashboardNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 
+    UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController];
+    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerViewController];
     self.tabBarController.selectedIndex = 1;
     self.window.rootViewController = self.tabBarController;
     
@@ -119,6 +132,21 @@
 {
 }
 */
+
+- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    if (self.tabBarController.viewControllers.count >= 1 && [[self.tabBarController.viewControllers objectAtIndex:1] isKindOfClass:[ContactsViewController class]]) {
+        ContactsViewController *contactsViewController = (ContactsViewController *)[self.tabBarController.viewControllers objectAtIndex:1];
+        return [contactsViewController handlePerson:person property:property identifier:identifier];
+    }
+    return YES;
+}
+
+- (void)handlePhoneNumber:(NSString *)phoneNumber {
+    if (self.tabBarController.viewControllers.count >= 1 && [[self.tabBarController.viewControllers objectAtIndex:1] isKindOfClass:[ContactsViewController class]]) {
+        ContactsViewController *contactsViewController = (ContactsViewController *)[self.tabBarController.viewControllers objectAtIndex:1];
+        [contactsViewController handlePhoneNumber:phoneNumber];
+    }
+}
 
 #pragma mark - Notifications
 

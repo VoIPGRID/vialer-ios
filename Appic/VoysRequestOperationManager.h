@@ -9,6 +9,7 @@
 #import "AFHTTPRequestOperationManager.h"
 
 #define LOGIN_FAILED_NOTIFICATION @"login.failed"
+#define LOGIN_SUCCEEDED_NOTIFICATION @"login.succeeded"
 
 @interface VoysRequestOperationManager : AFHTTPRequestOperationManager
 

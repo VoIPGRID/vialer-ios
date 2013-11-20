@@ -12,7 +12,7 @@
 #import "SVProgressHUD.h"
 
 @interface LogInViewController ()
-
+@property (nonatomic, assign) BOOL loginAlertShown;
 @end
 
 @implementation LogInViewController
@@ -53,16 +53,27 @@
 }
 
 - (void)showLogin {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In to Voys Telecom", nil) message:NSLocalizedString(@"Enter your username and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-    [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-    [alert show];
+    if (!self.loginAlertShown) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In", nil) message:NSLocalizedString(@"Enter your username and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        [alert show];
+        
+        self.loginAlertShown = YES;
+    }
 }
 
 #pragma mark - Alert view delegate
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    self.loginAlertShown = NO;
+
     UITextField *usernameTextField = [alertView textFieldAtIndex:0];
     UITextField *passwordTextField = [alertView textFieldAtIndex:1];
+    
+    if (![usernameTextField.text length] || ![passwordTextField.text length]) {
+        [self showLogin];
+        return;
+    }
 
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
     [[VoysRequestOperationManager sharedRequestOperationManager] loginWithUser:usernameTextField.text password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {

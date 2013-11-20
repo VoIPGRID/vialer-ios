@@ -34,6 +34,7 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 - (id)initWithBaseURL:(NSURL *)url {
 	self = [super initWithBaseURL:url];
 	if (self) {
+//        [self setSecurityPolicy:[AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate]];
         [self setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
@@ -55,9 +56,17 @@ typedef enum VoysHttpErrors VoysHttpErrors;
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [SSKeychain setPassword:password forService:SERVICE_NAME account:user];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
         
         success(operation, success);
-    } failure:failure];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
+        // Handle error due to connection problems
+        if ([operation.response statusCode] != kVoysHTTPBadCredentials) {
+            [self loginFailed];
+        }
+    }];
 }
 
 - (void)logout {
@@ -128,10 +137,6 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 }
 
 - (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSString *json = @"{\"meta\": {\"limit\": 2,\"next\": \"/api/cdr/record/?limit=2&bound=inbound&offset=2\",\"offset\": 0,\"previous\": null,\"total_count\": 40000},\"objects\": [{\"atime\": 0,\"call_date\": \"2013-07-04T16:41:01\",\"callerid\": \"+31123456789\",\"client\": \"/api/apprelation/client/2/\",\"dialed_number\": \"+319005556664\",\"direction\": \"outbound\",\"dst_code\": \"10cpm_EUR\",\"dst_number\": \"+319005556664\",\"id\": \"30010\",\"orig_callerid\": \"+31123456789\",\"resource_uri\": \"/api/cdr/record/30010/\",\"src_number\": \"+31123456789\"},{\"amount\": 1,\"atime\": 136,\"call_date\": \"2013-07-04T16:41:01\",\"callerid\": \"+31123456789\",\"client\": \"/api/apprelation/client/2/\",\"client_id\": 2,\"dialed_number\": \"+31852100586\",\"direction\": \"outbound\",\"dst_code\": \"10cpm_EUR\",\"dst_number\": \"+319005556664\",\"id\": \"30008\",\"orig_callerid\": \"+31123456789\",\"resource_uri\": \"/api/cdr/record/30008/\",\"src_number\": \"+31123456789\"},]}";
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    success([[AFHTTPRequestOperation alloc] init], responseObject);
-    /*
     [self GET:@"cdr/record/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:
                                          @(limit), @"limit",
                                          @(offset), @"offset",
@@ -146,7 +151,6 @@ typedef enum VoysHttpErrors VoysHttpErrors;
               [self loginFailed];
           }
       }];
-     */
 }
 
 - (void)loginFailed {

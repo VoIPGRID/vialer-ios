@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Voys. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface RecentsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface RecentsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, ABPersonViewControllerDelegate, ABUnknownPersonViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

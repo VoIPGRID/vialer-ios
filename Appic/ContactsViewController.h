@@ -10,4 +10,7 @@
 
 @interface ContactsViewController : ABPeoplePickerNavigationController<ABPeoplePickerNavigationControllerDelegate, UINavigationControllerDelegate>
 
+- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
+- (void)handlePhoneNumber:(NSString *)phoneNumber;
+
 @end

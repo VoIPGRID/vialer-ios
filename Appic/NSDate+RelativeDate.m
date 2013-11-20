@@ -27,24 +27,30 @@ static NSDateFormatter *utcDateFormatter = nil;
 	NSDate *midnight = [midnightDateFormatter dateFromString:[midnightDateFormatter stringFromDate:self]];
 	NSInteger daysAgo = (NSInteger)[midnight timeIntervalSinceNow] / (60 * 60 * 24);
     NSString *day = [dayDateFormatter stringFromDate:self];
-	if (daysAgo == 0) {
-        day = NSLocalizedString(@"today", nil);
-    } else if (daysAgo == -1) {
+	if (daysAgo == -1) {
         day = NSLocalizedString(@"yesterday", nil);
     }
     if (daysAgo > -1) {
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
         [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
-        return [NSString stringWithFormat:@"%@ at %@", day, [timeFormatter stringFromDate:self]];
+        return [NSString stringWithFormat:@"%@", [timeFormatter stringFromDate:self]];
     }
 
     return day;
 }
 
 - (NSString *)relativeDayString {
+    if (!midnightDateFormatter) {
+        midnightDateFormatter = [[NSDateFormatter alloc] init];
+        [midnightDateFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    if (!dayDateFormatter) {
+        dayDateFormatter = [[NSDateFormatter alloc] init];
+        [dayDateFormatter setDateStyle:NSDateFormatterShortStyle];
+    }
+    
 	NSDate *midnight = [midnightDateFormatter dateFromString:[midnightDateFormatter stringFromDate:self]];
 	NSInteger daysAgo = (NSInteger)[midnight timeIntervalSinceNow] / (60 * 60 * 24);
-    
     NSString *day = [dayDateFormatter stringFromDate:self];
 
 	if (daysAgo == 0) {
