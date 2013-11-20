@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSTimer *updateStatusTimer;
 @property (nonatomic, strong) NSDictionary *callStatuses;
 @property (nonatomic, strong) CTCallCenter *callCenter;
+@property (nonatomic, strong) NSDictionary *userInfo;
 @end
 
 @implementation ContactsViewController
@@ -46,7 +47,9 @@
         __weak typeof(self) weakSelf = self;
         self.callCenter = [[CTCallCenter alloc] init];
         [self.callCenter setCallEventHandler:^(CTCall *call) {
-            [weakSelf dismissStatus];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf dismissStatus:nil];
+            });
             NSLog(@"callEventHandler: %@", call.callState);
         }];
         
@@ -57,12 +60,18 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+
+    [self dismissStatus:nil];
 }
 
-- (void)dismissStatus {
+- (void)dismissStatus:(NSString *)status {
     [self.updateStatusTimer invalidate];
     self.updateStatusTimer = nil;
-    [SVProgressHUD dismiss];
+    if (status) {
+        [SVProgressHUD showErrorWithStatus:status];
+    } else {
+        [SVProgressHUD dismiss];
+    }
 }
 
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
@@ -102,7 +111,8 @@
                 
                 NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:callId, @"callId", phoneNumber, @"dialedNumber", nil];
                 [self updateStatusForResponse:responseObject withInfo:info];
-                self.updateStatusTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(updateStatusInterval:) userInfo:info repeats:YES];
+                self.userInfo = info;
+                self.updateStatusTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(updateStatusInterval:) userInfo:nil repeats:YES];
                 [[NSRunLoop currentRunLoop] addTimer:self.updateStatusTimer forMode:NSDefaultRunLoopMode];
                 return;
             }
@@ -174,12 +184,16 @@
         NSDictionary *json = (NSDictionary *)responseObject;
         if ([[json objectForKey:@"status"] isKindOfClass:[NSString class]]) {
             NSString *status = [json objectForKey:@"status"];
-            if ([status isEqualToString:@"disconnected"]) {
-                [self dismissStatus];
+            NSString *statusDescription = [self.callStatuses objectForKey:status];
+            NSString *callStatus = nil;
+            if (statusDescription) {
+                callStatus = [NSString stringWithFormat:statusDescription, [info objectForKey:@"dialedNumber"]];
+            }
+
+            if ([@[@"disconnected", @"failed_a", @"blacklisted", @"failed_b"] containsObject:status]) {
+                [self dismissStatus:callStatus];
             } else {
-                NSString *statusDescription = [self.callStatuses objectForKey:status];
-                if (statusDescription) {
-                    NSString *callStatus = [NSString stringWithFormat:statusDescription, [info objectForKey:@"dialedNumber"]];
+                if (callStatus) {
                     [SVProgressHUD showWithStatus:callStatus];
                 }
             }
@@ -189,7 +203,7 @@
 
 - (void)updateStatusInterval:(NSTimer *)timer {
     NSLog(@"Update status");
-    __block NSDictionary *userInfo = timer.userInfo;
+    __block NSDictionary *userInfo = self.userInfo;
     NSString *callId = [userInfo objectForKey:@"callId"];
     [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialStatusForCallId:callId success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self updateStatusForResponse:responseObject withInfo:userInfo];
@@ -200,7 +214,7 @@
 #pragma mark - Notifications
 
 - (void)didBecomeActiveNotification:(NSNotification *)notification {
-    [self dismissStatus];
+    [self dismissStatus:nil];
 }
 
 @end

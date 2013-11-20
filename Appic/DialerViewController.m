@@ -59,7 +59,9 @@
         __weak typeof(self) weakSelf = self;
         self.callCenter = [[CTCallCenter alloc] init];
         [self.callCenter setCallEventHandler:^(CTCall *call) {
-            weakSelf.numberTextField.text = @"";
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.numberTextField.text = @"";
+            });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
     }
