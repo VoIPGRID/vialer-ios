@@ -61,6 +61,7 @@
         [self.callCenter setCallEventHandler:^(CTCall *call) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.numberTextField.text = @"";
+                weakSelf.callButton.enabled = YES;
             });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
@@ -200,6 +201,8 @@
     if (!phoneNumber.length) {
         return;
     }
+    
+    self.callButton.enabled = NO;
 
     AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
     [appDelegate handlePhoneNumber:phoneNumber];
@@ -224,6 +227,8 @@
             self.numberTextField.text = [self.numberTextField.text stringByAppendingString:character];
         }
     }
+    
+    self.callButton.enabled = YES;
 }
 
 @end

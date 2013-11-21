@@ -95,9 +95,11 @@
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Dialing...", nil)];
     
-    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
-    phoneNumber = [@"+" stringByAppendingString:phoneNumber];
-    
+    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+
+//    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
+//    phoneNumber = [@"+" stringByAppendingString:phoneNumber];
+
     NSLog(@"Calling %@...", phoneNumber);
     
     [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialNumber:phoneNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
