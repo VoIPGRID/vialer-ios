@@ -112,8 +112,8 @@ typedef enum VoysHttpErrors VoysHttpErrors;
     }];
 }
 
-- (void)clickToDialNumber:(NSString *)number success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self POST:@"clicktodial/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:number, @"b_number", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+- (void)clickToDialToNumber:(NSString *)toNumber fromNumber:(NSString *)fromNumber success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [self POST:@"clicktodial/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:toNumber, @"b_number", fromNumber, @"a_number", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
@@ -155,7 +155,7 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 
 - (void)loginFailed {
     // No credentials
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your username and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];
 }
 

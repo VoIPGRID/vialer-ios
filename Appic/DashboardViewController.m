@@ -32,7 +32,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (![[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+        return;
+    }
+    
     [SVProgressHUD show];
     [[VoysRequestOperationManager sharedRequestOperationManager] userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://partner.voipgrid.nl"]]];

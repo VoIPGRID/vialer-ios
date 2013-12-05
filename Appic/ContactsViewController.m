@@ -14,13 +14,15 @@
 
 #import "SVProgressHUD.h"
 
-#define DASHBOARD_ALERT_TAG 100
+#define DASHBOARD_ALERT_TAG    100
+#define PHONE_NUMBER_ALERT_TAG 101
 
 @interface ContactsViewController()
 @property (nonatomic, strong) NSTimer *updateStatusTimer;
 @property (nonatomic, strong) NSDictionary *callStatuses;
 @property (nonatomic, strong) CTCallCenter *callCenter;
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *clickToDialStatus;
+@property (nonatomic, strong) NSString *toNumber;
 @end
 
 @implementation ContactsViewController
@@ -37,7 +39,7 @@
                              NSLocalizedString(@"Your phone is being called...", nil), @"dialing_a",
                              NSLocalizedString(@"Press 1 to answer the call", nil), @"confirm",
                              NSLocalizedString(@"%@ is being called...", nil), @"dialing_b",
-                             NSLocalizedString(@"Connected", nil), @"connected",
+                             NSLocalizedString(@"Calling...", nil), @"connected",
                              NSLocalizedString(@"Disconnected", nil), @"disconnected",
                              NSLocalizedString(@"Phone couldn't be reached", nil), @"failed_a",
                              NSLocalizedString(@"The number is on the blacklist", nil), @"blacklisted",
@@ -72,6 +74,7 @@
     } else {
         [SVProgressHUD dismiss];
     }
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 }
 
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
@@ -93,41 +96,51 @@
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Dialing...", nil)];
+    self.toNumber = phoneNumber;
     
-    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number for calling you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    alert.tag = PHONE_NUMBER_ALERT_TAG;
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert textFieldAtIndex:0].text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
+    [alert show];
+}
 
-//    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
-//    phoneNumber = [@"+" stringByAppendingString:phoneNumber];
-
-    NSLog(@"Calling %@...", phoneNumber);
+- (void)clickToDial {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Dialing...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     
-    [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialNumber:phoneNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    
+    NSLog(@"Calling %@...", self.toNumber);
+
+    [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *json = (NSDictionary *)responseObject;
             if ([[json objectForKey:@"callid"] isKindOfClass:[NSString class]]) {
-                NSString *callId = [json objectForKey:@"callid"];
                 if (self.updateStatusTimer) {
                     [self.updateStatusTimer invalidate];
                 }
                 
-                NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:callId, @"callId", phoneNumber, @"dialedNumber", nil];
-                [self updateStatusForResponse:responseObject withInfo:info];
-                self.userInfo = info;
-                self.updateStatusTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(updateStatusInterval:) userInfo:nil repeats:YES];
+                [self updateStatusForResponse:responseObject];
+                self.updateStatusTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateStatusInterval:) userInfo:nil repeats:YES];
                 [[NSRunLoop currentRunLoop] addTimer:self.updateStatusTimer forMode:NSDefaultRunLoopMode];
                 return;
             }
         }
         [SVProgressHUD dismiss];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        
+        // {"error_message": "Sorry, this request could not be processed. Please try again later."}
         
         NSString *errorMessage = NSLocalizedString(@"Failed to set up a call.", nil);
         if ([operation.responseString isEqualToString:@"Extensions or phonenumbers not valid"]) {
             errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"Extensions or phonenumbers not valid.", nil)];
         }
-
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Call failed", nil) message:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
         [alert show];
     }];
@@ -145,6 +158,16 @@
     if (alertView.tag == DASHBOARD_ALERT_TAG) {
         if (buttonIndex == 1) {
             [[VoysRequestOperationManager sharedRequestOperationManager] logout];
+        }
+    } else if (alertView.tag == PHONE_NUMBER_ALERT_TAG) {
+        if (buttonIndex == 1) {
+            UITextField *mobileNumberTextField = [alertView textFieldAtIndex:0];
+            if ([mobileNumberTextField.text length]) {
+                [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [self clickToDial];
+            }
         }
     }
 }
@@ -181,23 +204,22 @@
 
 #pragma mark - Timer
 
-- (void)updateStatusForResponse:(id)responseObject withInfo:(NSDictionary *)info {
+- (void)updateStatusForResponse:(id)responseObject {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *json = (NSDictionary *)responseObject;
-        if ([[json objectForKey:@"status"] isKindOfClass:[NSString class]]) {
-            NSString *status = [json objectForKey:@"status"];
+        self.clickToDialStatus = responseObject;
+        
+        if ([[self.clickToDialStatus objectForKey:@"status"] isKindOfClass:[NSString class]]) {
+            NSString *status = [self.clickToDialStatus objectForKey:@"status"];
             NSString *statusDescription = [self.callStatuses objectForKey:status];
             NSString *callStatus = nil;
             if (statusDescription) {
-                callStatus = [NSString stringWithFormat:statusDescription, [info objectForKey:@"dialedNumber"]];
+                callStatus = [NSString stringWithFormat:statusDescription, [self.clickToDialStatus objectForKey:@"b_number"]];
             }
 
             if ([@[@"disconnected", @"failed_a", @"blacklisted", @"failed_b"] containsObject:status]) {
                 [self dismissStatus:callStatus];
-            } else {
-                if (callStatus) {
-                    [SVProgressHUD showWithStatus:callStatus];
-                }
+            } else if (callStatus) {
+                [SVProgressHUD showWithStatus:callStatus maskType:SVProgressHUDMaskTypeGradient];
             }
         }
     }
@@ -205,12 +227,14 @@
 
 - (void)updateStatusInterval:(NSTimer *)timer {
     NSLog(@"Update status");
-    __block NSDictionary *userInfo = self.userInfo;
-    NSString *callId = [userInfo objectForKey:@"callId"];
-    [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialStatusForCallId:callId success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self updateStatusForResponse:responseObject withInfo:userInfo];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    }];
+    NSString *callId = [self.clickToDialStatus objectForKey:@"callid"];
+    if ([callId length]) {
+        [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialStatusForCallId:callId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self updateStatusForResponse:responseObject];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error %@", [error localizedDescription]);
+        }];
+    }
 }
 
 #pragma mark - Notifications

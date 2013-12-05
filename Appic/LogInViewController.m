@@ -13,6 +13,7 @@
 
 @interface LogInViewController ()
 @property (nonatomic, assign) BOOL loginAlertShown;
+@property (nonatomic, strong) NSString *user;
 @end
 
 @implementation LogInViewController
@@ -54,10 +55,14 @@
 
 - (void)showLogin {
     if (!self.loginAlertShown) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In", nil) message:NSLocalizedString(@"Enter your username and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In", nil) message:NSLocalizedString(@"Enter your email and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), NSLocalizedString(@"Forgot password?", nil), nil];
         [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        [alert textFieldAtIndex:0].text = self.user;
         [alert show];
         
+        UITextField *usernameTextField = [alert textFieldAtIndex:0];
+        usernameTextField.placeholder = NSLocalizedString(@"Email", nil);
+
         self.loginAlertShown = YES;
     }
 }
@@ -70,13 +75,15 @@
     UITextField *usernameTextField = [alertView textFieldAtIndex:0];
     UITextField *passwordTextField = [alertView textFieldAtIndex:1];
     
+    self.user = usernameTextField.text;
+    
     if (![usernameTextField.text length] || ![passwordTextField.text length]) {
         [self showLogin];
         return;
     }
-
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
-    [[VoysRequestOperationManager sharedRequestOperationManager] loginWithUser:usernameTextField.text password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [[VoysRequestOperationManager sharedRequestOperationManager] loginWithUser:self.user password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

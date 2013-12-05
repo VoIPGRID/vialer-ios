@@ -73,17 +73,15 @@
         [offsetComponents setMonth:-1];
         NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
 
-        [[VoysRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:100 offset:0 callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
+            [[VoysRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 if ([[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
                     self.recents = [RecentCall recentCallsFromDictionary:responseObject];
                 }
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                });
-            });
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        }];
+                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            }];
+        });
     }
 }
 
