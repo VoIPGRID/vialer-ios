@@ -8,9 +8,6 @@
 
 #import <AddressBookUI/AddressBookUI.h>
 
-@interface ContactsViewController : ABPeoplePickerNavigationController<ABPeoplePickerNavigationControllerDelegate, UINavigationControllerDelegate>
-
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
-- (void)handlePhoneNumber:(NSString *)phoneNumber;
+@interface ContactsViewController : ABPeoplePickerNavigationController<ABPeoplePickerNavigationControllerDelegate, UINavigationControllerDelegate, UISearchDisplayDelegate>
 
 @end

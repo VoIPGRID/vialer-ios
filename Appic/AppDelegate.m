@@ -10,6 +10,7 @@
 
 #import "VoysRequestOperationManager.h"
 #import "LogInViewController.h"
+#import "CallingViewController.h"
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DashboardViewController.h"
@@ -20,6 +21,7 @@
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
+@property (nonatomic, strong) CallingViewController *callingViewController;
 @end
 
 @implementation AppDelegate
@@ -57,6 +59,9 @@
     
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+    self.callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
+    self.callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
     ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
     contactsViewController.view.backgroundColor = [UIColor clearColor];
@@ -134,18 +139,11 @@
 */
 
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    if (self.tabBarController.viewControllers.count >= 1 && [[self.tabBarController.viewControllers objectAtIndex:1] isKindOfClass:[ContactsViewController class]]) {
-        ContactsViewController *contactsViewController = (ContactsViewController *)[self.tabBarController.viewControllers objectAtIndex:1];
-        return [contactsViewController handlePerson:person property:property identifier:identifier];
-    }
-    return YES;
+    return [self.callingViewController handlePerson:person property:property identifier:identifier];
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
-    if (self.tabBarController.viewControllers.count >= 1 && [[self.tabBarController.viewControllers objectAtIndex:1] isKindOfClass:[ContactsViewController class]]) {
-        ContactsViewController *contactsViewController = (ContactsViewController *)[self.tabBarController.viewControllers objectAtIndex:1];
-        [contactsViewController handlePhoneNumber:phoneNumber];
-    }
+    return [self.callingViewController handlePhoneNumber:phoneNumber forContact:nil];
 }
 
 #pragma mark - Notifications

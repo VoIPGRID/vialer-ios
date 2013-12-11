@@ -66,6 +66,8 @@
 		FB85316318398198008A7EF1 /* call-button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = FB85316118398198008A7EF1 /* call-button-background.png */; };
 		FB85316418398198008A7EF1 /* call-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB85316218398198008A7EF1 /* call-button-background@2x.png */; };
 		FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
+		FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB89C75B1850C153006A4556 /* CallingViewController.m */; };
+		FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB89C75C1850C153006A4556 /* CallingViewController.xib */; };
 		FB9692C4183CABD000241D7C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9692C2183CABD000241D7C /* logout.png */; };
 		FB9692C5183CABD000241D7C /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9692C3183CABD000241D7C /* logout@2x.png */; };
 		FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */; };
@@ -181,6 +183,9 @@
 		FB85316118398198008A7EF1 /* call-button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "call-button-background.png"; sourceTree = "<group>"; };
 		FB85316218398198008A7EF1 /* call-button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "call-button-background@2x.png"; sourceTree = "<group>"; };
 		FB853165183986A5008A7EF1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FB89C75A1850C153006A4556 /* CallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallingViewController.h; sourceTree = "<group>"; };
+		FB89C75B1850C153006A4556 /* CallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallingViewController.m; sourceTree = "<group>"; };
+		FB89C75C1850C153006A4556 /* CallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallingViewController.xib; sourceTree = "<group>"; };
 		FB9692C2183CABD000241D7C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		FB9692C3183CABD000241D7C /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
 		FBAD7EFD182A8901002FC8FC /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
@@ -387,6 +392,9 @@
 				FB364D111836846A00932D6E /* Sounds */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
+				FB89C75A1850C153006A4556 /* CallingViewController.h */,
+				FB89C75B1850C153006A4556 /* CallingViewController.m */,
+				FB89C75C1850C153006A4556 /* CallingViewController.xib */,
 				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
 				FB302E61182A390E004B7D27 /* ContactsViewController.m */,
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
@@ -569,6 +577,7 @@
 				FBF66AD61838D1C600C19859 /* keypad.png in Resources */,
 				FB364D1D1836846A00932D6E /* 1.wav in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
+				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
 				FB364D211836846A00932D6E /* 5.wav in Resources */,
 				FB576B06182A70BF00C4FAB4 /* contacts.png in Resources */,
 				FB576B0E182A7EED00C4FAB4 /* dashboard.png in Resources */,
@@ -626,6 +635,7 @@
 				FBAD7F18182AE93B002FC8FC /* SVProgressHUD.m in Sources */,
 				FB0CF34A18226392002D4281 /* AFSecurityPolicy.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
+				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				FB0CF34818226392002D4281 /* AFHTTPSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,20 +9,12 @@
 #import "ContactsViewController.h"
 #import "VoysRequestOperationManager.h"
 
-#import <CoreTelephony/CTCallCenter.h>
-#import <CoreTelephony/CTCall.h>
+#import "AppDelegate.h"
 
-#import "SVProgressHUD.h"
-
-#define DASHBOARD_ALERT_TAG    100
-#define PHONE_NUMBER_ALERT_TAG 101
+#define DASHBOARD_ALERT_TAG 100
 
 @interface ContactsViewController()
-@property (nonatomic, strong) NSTimer *updateStatusTimer;
-@property (nonatomic, strong) NSDictionary *callStatuses;
-@property (nonatomic, strong) CTCallCenter *callCenter;
-@property (nonatomic, strong) NSDictionary *clickToDialStatus;
-@property (nonatomic, strong) NSString *toNumber;
+@property (nonatomic, retain) id<UISearchDisplayDelegate> oldSearchDisplayDelegate;
 @end
 
 @implementation ContactsViewController
@@ -34,116 +26,13 @@
         self.peoplePickerDelegate = self;
         self.title = NSLocalizedString(@"Contacts", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"contacts"];
-
-        self.callStatuses = [NSDictionary dictionaryWithObjectsAndKeys:
-                             NSLocalizedString(@"Your phone is being called...", nil), @"dialing_a",
-                             NSLocalizedString(@"Press 1 to answer the call", nil), @"confirm",
-                             NSLocalizedString(@"%@ is being called...", nil), @"dialing_b",
-                             NSLocalizedString(@"Calling...", nil), @"connected",
-                             NSLocalizedString(@"Disconnected", nil), @"disconnected",
-                             NSLocalizedString(@"Phone couldn't be reached", nil), @"failed_a",
-                             NSLocalizedString(@"The number is on the blacklist", nil), @"blacklisted",
-                             NSLocalizedString(@"%@ could not be reached", nil), @"failed_b",
-                             nil];
-
-        __weak typeof(self) weakSelf = self;
-        self.callCenter = [[CTCallCenter alloc] init];
-        [self.callCenter setCallEventHandler:^(CTCall *call) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf dismissStatus:nil];
-            });
-            NSLog(@"callEventHandler: %@", call.callState);
-        }];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        self.searchDisplayController.delegate = self;
     }
     return self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
-    [self dismissStatus:nil];
-}
-
-- (void)dismissStatus:(NSString *)status {
-    [self.updateStatusTimer invalidate];
-    self.updateStatusTimer = nil;
-    if (status) {
-        [SVProgressHUD showErrorWithStatus:status];
-    } else {
-        [SVProgressHUD dismiss];
-    }
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-}
-
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    if (property == kABPersonPhoneProperty) {
-        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    	for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
-    		if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i)) {
-    			CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-    			CFRelease(multiPhones);
-                
-    			NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
-    			CFRelease(phoneNumberRef);
-
-                [self handlePhoneNumber:phoneNumber];
-            }
-        }
-    }
-    return NO;
-}
-
-- (void)handlePhoneNumber:(NSString *)phoneNumber {
-    self.toNumber = phoneNumber;
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number for calling you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-    alert.tag = PHONE_NUMBER_ALERT_TAG;
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert textFieldAtIndex:0].text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
-    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
-    [alert show];
-}
-
-- (void)clickToDial {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Dialing...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    
-    self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    
-    NSLog(@"Calling %@...", self.toNumber);
-
-    [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *json = (NSDictionary *)responseObject;
-            if ([[json objectForKey:@"callid"] isKindOfClass:[NSString class]]) {
-                if (self.updateStatusTimer) {
-                    [self.updateStatusTimer invalidate];
-                }
-                
-                [self updateStatusForResponse:responseObject];
-                self.updateStatusTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateStatusInterval:) userInfo:nil repeats:YES];
-                [[NSRunLoop currentRunLoop] addTimer:self.updateStatusTimer forMode:NSDefaultRunLoopMode];
-                return;
-            }
-        }
-        [SVProgressHUD dismiss];
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        
-        // {"error_message": "Sorry, this request could not be processed. Please try again later."}
-        
-        NSString *errorMessage = NSLocalizedString(@"Failed to set up a call.", nil);
-        if ([operation.responseString isEqualToString:@"Extensions or phonenumbers not valid"]) {
-            errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"Extensions or phonenumbers not valid.", nil)];
-        }
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Call failed", nil) message:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-        [alert show];
-    }];
 }
 
 - (void)dashboard {
@@ -159,22 +48,17 @@
         if (buttonIndex == 1) {
             [[VoysRequestOperationManager sharedRequestOperationManager] logout];
         }
-    } else if (alertView.tag == PHONE_NUMBER_ALERT_TAG) {
-        if (buttonIndex == 1) {
-            UITextField *mobileNumberTextField = [alertView textFieldAtIndex:0];
-            if ([mobileNumberTextField.text length]) {
-                [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                [self clickToDial];
-            }
-        }
     }
 }
 
 #pragma mark - Navigation controller delegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (viewController.searchDisplayController) {
+        self.oldSearchDisplayDelegate = viewController.searchDisplayController.delegate;
+        viewController.searchDisplayController.delegate = self;
+    }
+
     if ([navigationController.viewControllers indexOfObject:viewController] == 0) {
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
         viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"logout"] style:UIBarButtonItemStyleBordered target:self action:@selector(dashboard)];
@@ -189,6 +73,92 @@
     }
 }
 
+#pragma mark - Search controller delegate
+
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayControllerWillBeginSearch:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayControllerWillBeginSearch:controller];
+    }
+}
+
+- (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayControllerDidBeginSearch:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayControllerDidBeginSearch:controller];
+    }
+}
+
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayControllerWillEndSearch:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayControllerWillEndSearch:controller];
+    }
+    
+    if (controller.searchContentsController && controller.searchContentsController.navigationController && controller.searchContentsController.navigationController.viewControllers.count) {
+        UIViewController *viewController = [controller.searchContentsController.navigationController.viewControllers objectAtIndex:0];
+        if (!viewController) {
+            return;
+        }
+        
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
+        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"logout"] style:UIBarButtonItemStyleBordered target:self action:@selector(dashboard)];
+    }
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayControllerDidEndSearch:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayControllerDidEndSearch:controller];
+    }
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:didLoadSearchResultsTableView:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayController:controller didLoadSearchResultsTableView:tableView];
+    }
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:willUnloadSearchResultsTableView:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayController:controller willUnloadSearchResultsTableView:tableView];
+    }
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:willShowSearchResultsTableView:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayController:controller willShowSearchResultsTableView:tableView];
+    }
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:didShowSearchResultsTableView:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayController:controller didShowSearchResultsTableView:tableView];
+    }
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:willHideSearchResultsTableView:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayController:controller willHideSearchResultsTableView:tableView];
+    }
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:didHideSearchResultsTableView:)]) {
+        [self.oldSearchDisplayDelegate searchDisplayController:controller didHideSearchResultsTableView:tableView];
+    }
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:shouldReloadTableForSearchString:)]) {
+        return [self.oldSearchDisplayDelegate searchDisplayController:controller shouldReloadTableForSearchString:searchString];
+    }
+    return NO;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+    if ([self.oldSearchDisplayDelegate respondsToSelector:@selector(searchDisplayController:shouldReloadTableForSearchScope:)]) {
+        return [self.oldSearchDisplayDelegate searchDisplayController:controller shouldReloadTableForSearchScope:searchOption];
+    }
+    return NO;
+}
+
 #pragma mark - People picker delegaate
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
@@ -199,48 +169,9 @@
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    return [self handlePerson:person property:property identifier:identifier];
-}
 
-#pragma mark - Timer
-
-- (void)updateStatusForResponse:(id)responseObject {
-    if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        self.clickToDialStatus = responseObject;
-        
-        if ([[self.clickToDialStatus objectForKey:@"status"] isKindOfClass:[NSString class]]) {
-            NSString *status = [self.clickToDialStatus objectForKey:@"status"];
-            NSString *statusDescription = [self.callStatuses objectForKey:status];
-            NSString *callStatus = nil;
-            if (statusDescription) {
-                callStatus = [NSString stringWithFormat:statusDescription, [self.clickToDialStatus objectForKey:@"b_number"]];
-            }
-
-            if ([@[@"disconnected", @"failed_a", @"blacklisted", @"failed_b"] containsObject:status]) {
-                [self dismissStatus:callStatus];
-            } else if (callStatus) {
-                [SVProgressHUD showWithStatus:callStatus maskType:SVProgressHUDMaskTypeGradient];
-            }
-        }
-    }
-}
-
-- (void)updateStatusInterval:(NSTimer *)timer {
-    NSLog(@"Update status");
-    NSString *callId = [self.clickToDialStatus objectForKey:@"callid"];
-    if ([callId length]) {
-        [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialStatusForCallId:callId success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [self updateStatusForResponse:responseObject];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error %@", [error localizedDescription]);
-        }];
-    }
-}
-
-#pragma mark - Notifications
-
-- (void)didBecomeActiveNotification:(NSNotification *)notification {
-    [self dismissStatus:nil];
+    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+    return [appDelegate handlePerson:person property:property identifier:identifier];
 }
 
 @end
