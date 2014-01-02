@@ -68,19 +68,21 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 }
 
 - (void)logout {
-    NSError *error;
+    [self.operationQueue cancelAllOperations];
 
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    [SSKeychain deletePasswordForService:SERVICE_NAME account:user error:&error];
     
+    NSError *error;
+    [SSKeychain deletePasswordForService:SERVICE_NAME account:user error:&error];
+
     if (error) {
         NSLog(@"Error logging out: %@", [error localizedDescription]);
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"User"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
     }
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"User"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
 }
 
 - (BOOL)isLoggedIn {
@@ -111,7 +113,12 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 }
 
 - (void)clickToDialToNumber:(NSString *)toNumber fromNumber:(NSString *)fromNumber success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self POST:@"clicktodial/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:toNumber, @"b_number", fromNumber, @"a_number", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:@"clicktodial/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:
+                                           toNumber, @"b_number",
+                                           fromNumber, @"a_number",
+                                           @"default_number", @"b_cli",
+                                           nil
+                                           ] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
@@ -134,10 +141,11 @@ typedef enum VoysHttpErrors VoysHttpErrors;
     }];
 }
 
-- (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset sourceNumber:(NSString *)sourceNumber callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self GET:@"cdr/record/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:
                                          @(limit), @"limit",
                                          @(offset), @"offset",
+                                         sourceNumber, @"src_number",
                                          nil
                                          ]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -148,6 +156,19 @@ typedef enum VoysHttpErrors VoysHttpErrors;
               [self loginFailed];
           }
       }];
+}
+
+- (void)passwordResetWithEmail:(NSString *)email success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+    [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [manager POST:@"permission/password_reset/" parameters:[NSDictionary dictionaryWithObjectsAndKeys:email, @"email", nil]
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              success(operation, responseObject);
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              failure(operation, error);
+          }];
 }
 
 - (void)loginFailed {

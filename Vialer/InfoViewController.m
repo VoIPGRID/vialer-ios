@@ -30,7 +30,16 @@
 
     NSData *htmlData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"]];
     if (htmlData) {
-        NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+        NSString *body = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+        NSString *htmlString = [NSString stringWithFormat:@"<html>\n"
+                                "<head>\n"
+                                "<style type=\"text/css\">\n"
+                                "body {color:#000; background-color:transparent; font-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica; font-size: 17px;}\n"
+                                "h1 {font-family: \"HelveticaNeue-Medium\", \"Helvetica Neue Medium\", \"Helvetica Neue\", Helvetica; font-weight: normal;}\n"
+                                "</style>\n"
+                                "</head>\n"
+                                "<body>%@</body>\n"
+                                "</html>", body];
         [self.webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     }
     

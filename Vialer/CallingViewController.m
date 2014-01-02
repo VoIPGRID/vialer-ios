@@ -8,12 +8,14 @@
 
 #import "CallingViewController.h"
 #import "VoysRequestOperationManager.h"
+#import "SelectRecentsFilterViewController.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 
 #define PHONE_NUMBER_ALERT_TAG 100
-#define FAILED_ALERT_TAG       101
+#define DOUBLE_TICKS_ALERT_TAG 101
+#define FAILED_ALERT_TAG       102
 
 @interface CallingViewController ()
 @property (nonatomic, strong) NSTimer *updateStatusTimer;
@@ -89,12 +91,20 @@
             if ([mobileNumberTextField.text length]) {
                 [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
+
+                [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
                 [self clickToDial];
             }
         }
     } else if (alertView.tag == FAILED_ALERT_TAG) {
         [self dismiss];
+    } else if (alertView.tag == DOUBLE_TICKS_ALERT_TAG) {
+        if (buttonIndex == 1) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DoubleTicksAlertShown"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+            [self clickToDial];
+        }
     }
 }
 
@@ -153,19 +163,26 @@
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     self.toNumber = phoneNumber;
     self.toContact = contact ? contact : phoneNumber;
+    [self clickToDial];
+}
 
+- (void)clickToDial {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
-        [self clickToDial];
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DoubleTicksAlertShown"]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double tick costs", nil) message:NSLocalizedString(@"Double tick costs will be calculated once you continue.\nCheck Settings for more Info regarding double tick costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+            alert.tag = DOUBLE_TICKS_ALERT_TAG;
+            [alert show];
+            return;
+        }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number for calling you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
         alert.tag = PHONE_NUMBER_ALERT_TAG;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
         [alert show];
+        return;
     }
-}
 
-- (void)clickToDial {
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
@@ -204,6 +221,8 @@
             errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"Extensions or phonenumbers not valid.", nil)];
         } else if ([operation.responseString isEqualToString:@"User has no permission to provide a_number for ClickToDial"]) {
             errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"You don't have permission to provide a mobile number in Click to dial.", nil)];
+        } else if ([operation.responseString isEqualToString:@"Click to Dial object not found"]) {
+            errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"Click to Dial not supported for this account.", nil)];
         }
 
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Call failed", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];

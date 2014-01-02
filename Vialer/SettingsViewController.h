@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+#import "SelectRecentsFilterViewController.h"
+
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, SelectRecentsFilterViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

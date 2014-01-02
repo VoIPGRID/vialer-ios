@@ -44,6 +44,8 @@
 		FB4226E3182261D200707349 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FB4226E2182261D200707349 /* Default.png */; };
 		FB4226E5182261D200707349 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB4226E4182261D200707349 /* Default@2x.png */; };
 		FB4226E7182261D200707349 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB4226E6182261D200707349 /* Default-568h@2x.png */; };
+		FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */; };
+		FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */; };
 		FB50316F1835266C006FEBAA /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5031691835266C006FEBAA /* libTestFlight.a */; };
 		FB5031701835266C006FEBAA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FB50316A1835266C006FEBAA /* README.md */; };
 		FB5031711835266C006FEBAA /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = FB50316B1835266C006FEBAA /* release_notes.md */; };
@@ -159,6 +161,9 @@
 		FB4226E2182261D200707349 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FB4226E4182261D200707349 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FB4226E6182261D200707349 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectRecentsFilterViewController.xib; sourceTree = "<group>"; };
+		FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRecentsFilterViewController.h; sourceTree = "<group>"; };
+		FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRecentsFilterViewController.m; sourceTree = "<group>"; };
 		FB5031691835266C006FEBAA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		FB50316A1835266C006FEBAA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		FB50316B1835266C006FEBAA /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -421,6 +426,9 @@
 				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
 				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
 				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
+				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
+				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
+				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
 				FBDAF7331858D238005BA203 /* SettingsViewController.h */,
 				FBDAF7341858D238005BA203 /* SettingsViewController.m */,
 				FBDAF7351858D238005BA203 /* SettingsViewController.xib */,
@@ -586,6 +594,7 @@
 				FB5031701835266C006FEBAA /* README.md in Resources */,
 				FBDAF73E1858DEC2005BA203 /* info.html in Resources */,
 				FB576B0A182A71E100C4FAB4 /* logo.png in Resources */,
+				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
 				FBAD7F09182A8E76002FC8FC /* logoMedium.png in Resources */,
 				FB364D1E1836846A00932D6E /* 2.wav in Resources */,
 				FBF66AD61838D1C600C19859 /* keypad.png in Resources */,
@@ -653,6 +662,7 @@
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				FB0CF34818226392002D4281 /* AFHTTPSessionManager.m in Sources */,
 				FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */,
+				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,8 @@
 #import "NSDate+RelativeDate.h"
 #import "AppDelegate.h"
 #import "ContactsViewController.h"
+#import "SettingsViewController.h"
+#import "SelectRecentsFilterViewController.h"
 
 #import "SVProgressHUD.h"
 
@@ -34,7 +36,8 @@
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
 
         self.recents = [RecentCall cachedRecentCalls];
-        
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recentsFilterUpdatedNotification:) name:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceededNotification:) name:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -47,6 +50,10 @@
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
@@ -57,6 +64,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)clearRecents {
+    [[VoysRequestOperationManager sharedRequestOperationManager].operationQueue cancelAllOperations];
+    [RecentCall clearCachedRecentCalls];
+    self.previousSearchDateTime = nil;
+    self.recents = @[];
+    [self.tableView reloadData];
 }
 
 - (void)refreshRecents {
@@ -73,12 +88,20 @@
         NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
-            [[VoysRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *sourceNumber = nil;
+            RecentsFilter filter = [[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
+            if (filter == RecentsFilterSelf) {
+                sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+            }
+            [[VoysRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 if ([[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
                     self.recents = [RecentCall recentCallsFromDictionary:responseObject];
                 }
                 [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+                [alert show];
             }];
         });
     }
@@ -199,9 +222,13 @@
 }
 
 - (void)loginFailedNotification:(NSNotification *)notification {
-    [RecentCall clearCachedRecentCalls];
-    self.recents = @[];
-    [self.tableView reloadData];
+    [self clearRecents];
+    [self refreshRecents];
+}
+
+- (void)recentsFilterUpdatedNotification:(NSNotification *)notification {
+    [self clearRecents];
+    [self refreshRecents];
 }
 
 @end
