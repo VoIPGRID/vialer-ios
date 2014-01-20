@@ -99,9 +99,9 @@
                 }
                 [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                if ([operation.response statusCode] != kVoysHTTPBadCredentials) {
+                if (error.code != -999 && [operation.response statusCode] != kVoysHTTPBadCredentials) {
                     NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
                     [alert show];
                 }
             }];

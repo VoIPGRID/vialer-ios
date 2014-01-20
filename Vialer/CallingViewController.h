@@ -10,7 +10,7 @@
 
 #import <AddressBookUI/AddressBookUI.h>
 
-@interface CallingViewController : UIViewController
+@interface CallingViewController : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 

@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSDictionary *clickToDialStatus;
 @property (nonatomic, strong) NSString *toNumber;
 @property (nonatomic, strong) NSString *toContact;
+@property (nonatomic, strong) NSString *mobileCC;
 @end
 
 @implementation CallingViewController
@@ -89,10 +90,11 @@
     if (alertView.tag == PHONE_NUMBER_ALERT_TAG) {
         if (buttonIndex == 1) {
             UITextField *mobileNumberTextField = [alertView textFieldAtIndex:0];
-            if ([mobileNumberTextField.text length]) {
+            NSString *mobileNumber = [mobileNumberTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([mobileNumber length] && ![mobileNumber isEqualToString:self.mobileCC]) {
                 [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-
+   
                 [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
                 [self clickToDial];
             }
@@ -170,21 +172,22 @@
 - (void)clickToDial {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DoubleTicksAlertShown"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double tick costs", nil) message:NSLocalizedString(@"Double tick costs will be calculated once you continue.\nCheck Settings for more Info regarding double tick costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double costs", nil) message:NSLocalizedString(@"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will charged.\n\nCheck settings for more info regarding double costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
             alert.tag = DOUBLE_TICKS_ALERT_TAG;
             [alert show];
             return;
         }
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number with country code for calling you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number starting with your country code.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
         alert.tag = PHONE_NUMBER_ALERT_TAG;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         
-        NSString *cc = [NSString systemCallingCode];
-        if ([cc isEqualToString:@"+31"]) {
-            cc = @"+316";
+        self.mobileCC = [NSString systemCallingCode];
+        if ([self.mobileCC isEqualToString:@"+31"]) {
+            self.mobileCC = @"+316";
         }
-        [alert textFieldAtIndex:0].text = cc;
+        [alert textFieldAtIndex:0].delegate = self;
+        [alert textFieldAtIndex:0].text = self.mobileCC;
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
         [alert show];
         return;
@@ -236,6 +239,20 @@
         alert.tag = FAILED_ALERT_TAG;
         [alert show];
     }];
+}
+
+#pragma mark - Textfield delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newString.length != [[newString componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789 ()"] invertedSet]] componentsJoinedByString:@""].length) {
+        return NO;
+    }
+    
+    if (![self.mobileCC length] || [newString hasPrefix:self.mobileCC]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Timer

@@ -81,7 +81,7 @@
         self.user = usernameTextField.text;
         
         if (buttonIndex == 1) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password forgot", nil) message:NSLocalizedString(@"Please enter your email.\n\nWe'll send you an email with a link you can click to reset your password.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Forgot Password", nil) message:NSLocalizedString(@"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [alert textFieldAtIndex:0].text = self.user;
             alert.tag = PASSWORD_FORGOT_ALERT;

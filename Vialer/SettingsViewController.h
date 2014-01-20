@@ -10,6 +10,6 @@
 
 #import "SelectRecentsFilterViewController.h"
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, SelectRecentsFilterViewControllerDelegate>
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SelectRecentsFilterViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

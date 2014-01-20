@@ -22,6 +22,7 @@
 
 @interface SettingsViewController ()
 @property (nonatomic, strong) NSArray *sectionTitles;
+@property (nonatomic, strong) NSString *mobileCC;
 @end
 
 @implementation SettingsViewController
@@ -54,6 +55,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Textfield delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newString.length != [[newString componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789 ()"] invertedSet]] componentsJoinedByString:@""].length) {
+        return NO;
+    }
+
+    if (![self.mobileCC length] || [newString hasPrefix:self.mobileCC]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Table view data source
@@ -115,17 +130,19 @@
         InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:infoViewController animated:YES];
     } else if (indexPath.section == PHONE_NUMBER_IDX) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number with country code used to call you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number starting with your country code.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
         alert.tag = PHONE_NUMBER_ALERT_TAG;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        
         NSString *mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
         if (![mobileNumber length]) {
-            NSString *cc = [NSString systemCallingCode];
-            if ([cc isEqualToString:@"+31"]) {
-                cc = @"+316";
+            self.mobileCC = [NSString systemCallingCode];
+            if ([self.mobileCC isEqualToString:@"+31"]) {
+                self.mobileCC = @"+316";
             }
-            mobileNumber = cc;
+            mobileNumber = self.mobileCC;
         }
+        [alert textFieldAtIndex:0].delegate = self;
         [alert textFieldAtIndex:0].text = mobileNumber;
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
         [alert show];
@@ -135,6 +152,7 @@
         selectRecentsFilterViewController.delegate = self;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectRecentsFilterViewController];
+        navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
         [self presentViewController:navigationController animated:YES completion:^{}];
     } else if (indexPath.section == LOG_OUT_IDX) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log out", nil) message:NSLocalizedString(@"Are you sure you want to log out?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
@@ -149,8 +167,9 @@
     if (alertView.tag == PHONE_NUMBER_ALERT_TAG) {
         if (buttonIndex == 1) {
             UITextField *mobileNumberTextField = [alertView textFieldAtIndex:0];
-            if ([mobileNumberTextField.text length]) {
-                [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
+            NSString *mobileNumber = [mobileNumberTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([mobileNumber length] && ![mobileNumber isEqualToString:self.mobileCC]) {
+                [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 [self.tableView reloadData];
