@@ -11,6 +11,11 @@
 #define LOGIN_FAILED_NOTIFICATION @"login.failed"
 #define LOGIN_SUCCEEDED_NOTIFICATION @"login.succeeded"
 
+enum VoysHttpErrors {
+    kVoysHTTPBadCredentials = 401,
+};
+typedef enum VoysHttpErrors VoysHttpErrors;
+
 @interface VoysRequestOperationManager : AFHTTPRequestOperationManager
 
 + (VoysRequestOperationManager *)sharedRequestOperationManager;

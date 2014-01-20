@@ -14,11 +14,6 @@
 #define BASE_URL @"https://api.voipgrid.nl/api"
 #define SERVICE_NAME @"com.voys.vialer"
 
-enum VoysHttpErrors {
-    kVoysHTTPBadCredentials = 401,
-};
-typedef enum VoysHttpErrors VoysHttpErrors;
-
 @implementation VoysRequestOperationManager
 
 + (VoysRequestOperationManager *)sharedRequestOperationManager {
@@ -50,18 +45,21 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
 
-    [self userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self GET:@"userdestination/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // Store credentials
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [SSKeychain setPassword:password forService:SERVICE_NAME account:user];
-
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
         
         success(operation, success);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] != kVoysHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            [alert show];
+        } else {
             [self connectionFailed];
         }
     }];
@@ -173,12 +171,13 @@ typedef enum VoysHttpErrors VoysHttpErrors;
 
 - (void)loginFailed {
     // No credentials
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    [self logout];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];
 }
 
 - (void)connectionFailed {
-    // No credentials
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Unknown error, please check your internet connection.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];
 }

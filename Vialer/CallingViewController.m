@@ -9,6 +9,7 @@
 #import "CallingViewController.h"
 #import "VoysRequestOperationManager.h"
 #import "SelectRecentsFilterViewController.h"
+#import "NSString+Mobile.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
@@ -175,9 +176,15 @@
             return;
         }
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number for calling you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number with country code for calling you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
         alert.tag = PHONE_NUMBER_ALERT_TAG;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        
+        NSString *cc = [NSString systemCallingCode];
+        if ([cc isEqualToString:@"+31"]) {
+            cc = @"+316";
+        }
+        [alert textFieldAtIndex:0].text = cc;
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
         [alert show];
         return;

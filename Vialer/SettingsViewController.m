@@ -10,6 +10,7 @@
 #import "VoysRequestOperationManager.h"
 #import "InfoViewController.h"
 #import "SelectRecentsFilterViewController.h"
+#import "NSString+Mobile.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
 #define LOG_OUT_ALERT_TAG 101
@@ -114,10 +115,18 @@
         InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:infoViewController animated:YES];
     } else if (indexPath.section == PHONE_NUMBER_IDX) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number used to call you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number with country code used to call you back.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
         alert.tag = PHONE_NUMBER_ALERT_TAG;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        [alert textFieldAtIndex:0].text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+        NSString *mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+        if (![mobileNumber length]) {
+            NSString *cc = [NSString systemCallingCode];
+            if ([cc isEqualToString:@"+31"]) {
+                cc = @"+316";
+            }
+            mobileNumber = cc;
+        }
+        [alert textFieldAtIndex:0].text = mobileNumber;
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
         [alert show];
     } else if (indexPath.section == SHOW_RECENTS_IDX) {
