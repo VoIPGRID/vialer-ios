@@ -44,6 +44,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    self.mobileCC = [NSString systemCallingCode];
+    if ([self.mobileCC isEqualToString:@"+31"]) {
+        self.mobileCC = @"+316";
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated  {
@@ -136,10 +141,6 @@
         
         NSString *mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
         if (![mobileNumber length]) {
-            self.mobileCC = [NSString systemCallingCode];
-            if ([self.mobileCC isEqualToString:@"+31"]) {
-                self.mobileCC = @"+316";
-            }
             mobileNumber = self.mobileCC;
         }
         [alert textFieldAtIndex:0].delegate = self;

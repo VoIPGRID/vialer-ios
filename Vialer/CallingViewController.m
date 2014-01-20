@@ -59,11 +59,6 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
@@ -172,7 +167,7 @@
 - (void)clickToDial {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DoubleTicksAlertShown"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double costs", nil) message:NSLocalizedString(@"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will charged.\n\nCheck settings for more info regarding double costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double costs", nil) message:NSLocalizedString(@"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will be charged.\n\nCheck settings for more info regarding double costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
             alert.tag = DOUBLE_TICKS_ALERT_TAG;
             [alert show];
             return;
@@ -186,6 +181,7 @@
         if ([self.mobileCC isEqualToString:@"+31"]) {
             self.mobileCC = @"+316";
         }
+
         [alert textFieldAtIndex:0].delegate = self;
         [alert textFieldAtIndex:0].text = self.mobileCC;
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;

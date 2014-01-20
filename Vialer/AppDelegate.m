@@ -20,6 +20,8 @@
 #import "TestFlight.h"
 #import "AFNetworkActivityLogger.h"
 
+#import <NewRelicAgent/NewRelicAgent.h>
+
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
 @property (nonatomic, strong) CallingViewController *callingViewController;
@@ -31,6 +33,9 @@
 {
     // Test flight
     [TestFlight takeOff:@"41b7fa53-990b-4b64-86cc-75f14aee7db4"];
+    
+    // New Relic
+    [NewRelicAgent startWithApplicationToken:@"AA1a092ac029754cfbc049123fa0cd1351c1945e4d"];
 
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
