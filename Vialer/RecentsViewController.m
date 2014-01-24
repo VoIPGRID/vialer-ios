@@ -89,7 +89,7 @@
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
             NSString *sourceNumber = nil;
-            RecentsFilter filter = [[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
+            RecentsFilter filter = RecentsFilterNone;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
             if (filter == RecentsFilterSelf) {
                 sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
             }
@@ -137,14 +137,24 @@
     if (cell == nil) {
         cell = [[RecentTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
+
     RecentCall *recent = [self.recents objectAtIndex:indexPath.row];
     if (recent.callDirection == CallDirectionOutbound) {
         cell.iconImageView.image = [UIImage imageNamed:@"outbound"];
+    } else {
+        cell.iconImageView.image = nil;
     }
     cell.nameLabel.text = recent.callerName;
     cell.descriptionLabel.text = recent.callerPhoneType;
     cell.dateTimeLabel.text = [recent.callDate relativeDayTimeString];
+
+    // Check if call was answered or not
+    if (recent.atime == 0 && recent.callDirection == CallDirectionInbound) {
+        cell.nameLabel.textColor = [UIColor colorWithRed:0xff / 255.f green:0x3b / 255.f blue:0x30 / 255.f alpha:1.f];
+    } else {
+        cell.nameLabel.textColor = [UIColor blackColor];
+    }
+
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
     } else {

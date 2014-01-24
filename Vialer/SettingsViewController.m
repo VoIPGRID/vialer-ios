@@ -17,8 +17,8 @@
 
 #define COST_INFO_IDX    0
 #define PHONE_NUMBER_IDX 1
-#define SHOW_RECENTS_IDX 2
-#define LOG_OUT_IDX      3
+#define SHOW_RECENTS_IDX -1 // Disabled for now
+#define LOG_OUT_IDX      2
 
 @interface SettingsViewController ()
 @property (nonatomic, strong) NSArray *sectionTitles;
@@ -35,7 +35,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"settings"];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
         
-        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), NSLocalizedString(@"Recents", nil), NSLocalizedString(@"Log out", nil)];
+        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil)];
     }
     return self;
 }
@@ -110,7 +110,7 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     } else if (indexPath.section == SHOW_RECENTS_IDX) {
         RecentsFilter recentsFilter = [[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
-        cell.userInteractionEnabled = 0 < [[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] length];
+        cell.userInteractionEnabled = NO; //0 < [[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] length];
         cell.alpha = cell.userInteractionEnabled ? 1.0f : 0.5f;
         cell.textLabel.text = (recentsFilter == RecentsFilterNone || !cell.userInteractionEnabled) ? NSLocalizedString(@"Show all recent calls", nil) : NSLocalizedString(@"Show your recent calls", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];

@@ -20,12 +20,13 @@
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super init]) {
         self.callerRecordId = -1;
-        self.callerName = [dict objectForKey:@"src_number"];
+        self.callerName = [dict objectForKey:@"dst_number"];
         self.callerPhoneType = NSLocalizedString(@"phone", nil);
+        self.atime = [[dict objectForKey:@"atime"] integerValue];
 
-        self.callerPhoneNumber = [dict objectForKey:@"src_number"];
+        self.callerPhoneNumber = [dict objectForKey:@"dst_number"];
         self.callDirection = [[dict objectForKey:@"direction"] isEqualToString:@"outbound"] ? CallDirectionOutbound : CallDirectionInbound;
-        self.callDate = [dict objectForKey:@"call_date"] ? [NSDate dateFromUtcString:[dict objectForKey:@"call_date"]] : [NSDate date];
+        self.callDate = [dict objectForKey:@"call_date"] ? [NSDate dateFromString:[dict objectForKey:@"call_date"]] : [NSDate date];
     }
     return self;
 }

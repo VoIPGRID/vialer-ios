@@ -71,19 +71,35 @@ static NSDateFormatter *utcDateFormatter = nil;
 - (NSString *)utcString {
     if (!utcDateFormatter) {
         utcDateFormatter = [[NSDateFormatter alloc] init];
-        [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-        [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
     }
+    [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
     return [utcDateFormatter stringFromDate:self];
 }
 
 + (NSDate *)dateFromUtcString:(NSString *)utcString {
     if (!utcDateFormatter) {
         utcDateFormatter = [[NSDateFormatter alloc] init];
-        [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-        [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
     }
+    [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
     return [utcDateFormatter dateFromString:utcString];
+}
+
++ (NSDate *)dateFromString:(NSString *)utcString {
+    if (!utcDateFormatter) {
+        utcDateFormatter = [[NSDateFormatter alloc] init];
+    }
+    [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];   // Try with time zone
+
+    NSDate *date = [utcDateFormatter dateFromString:utcString];
+    if (!date) {    // Failed with time zone, try without (Amsterdam)
+        [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT+1"]];
+        [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+        date = [utcDateFormatter dateFromString:utcString];
+    }
+    return date;
 }
 
 + (NSDate *)emptyDate {

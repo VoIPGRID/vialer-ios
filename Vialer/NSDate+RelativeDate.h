@@ -16,6 +16,7 @@
 - (BOOL)isEmpty;
 
 + (NSDate *)dateFromUtcString:(NSString *)utcString;
++ (NSDate *)dateFromString:(NSString *)string;
 + (NSDate *)emptyDate;
 
 @end

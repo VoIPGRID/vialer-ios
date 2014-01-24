@@ -21,6 +21,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *callerPhoneNumber;
 @property (nonatomic, assign) CallDirection callDirection;
 @property (nonatomic, strong) NSDate *callDate;
+@property (nonatomic, assign) NSInteger atime;
 
 - (BOOL)isEqualToRecentCall:(RecentCall *)other;
 

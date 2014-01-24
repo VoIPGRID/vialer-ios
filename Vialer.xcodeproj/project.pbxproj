@@ -17,11 +17,11 @@
 		FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */; };
 		FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34518226392002D4281 /* AFURLSessionManager.m */; };
 		FB0CF351182267AA002D4281 /* VoysRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoysRequestOperationManager.m */; };
+		FB1D9F43188FCA9F00C71D61 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */; };
 		FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
 		FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
 		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
 		FB302E65182A3AA4004B7D27 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FB302E64182A3AA4004B7D27 /* background.png */; };
-		FB308368188DBA5D00BC186B /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB308367188DBA5D00BC186B /* NewRelicAgent.framework */; };
 		FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB364D0D18367F0700932D6E /* DialerViewController.m */; };
 		FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB364D0E18367F0700932D6E /* DialerViewController.xib */; };
 		FB364D1C1836846A00932D6E /* 0.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D121836846A00932D6E /* 0.wav */; };
@@ -130,12 +130,12 @@
 		FB0CF34518226392002D4281 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoysRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoysRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoysRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoysRequestOperationManager.m; sourceTree = "<group>"; };
+		FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB302E5C182A38E5004B7D27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		FB302E60182A390E004B7D27 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		FB302E61182A390E004B7D27 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		FB302E64182A3AA4004B7D27 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		FB308367188DBA5D00BC186B /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = ../ThirdParty/NewRelic_iOS_Agent_1.376/NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB364D0C18367F0700932D6E /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		FB364D0D18367F0700932D6E /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
 		FB364D0E18367F0700932D6E /* DialerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DialerViewController.xib; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
-				FB308368188DBA5D00BC186B /* NewRelicAgent.framework in Frameworks */,
+				FB1D9F43188FCA9F00C71D61 /* NewRelicAgent.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
@@ -384,7 +384,7 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FB308367188DBA5D00BC186B /* NewRelicAgent.framework */,
+				FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */,
 				FB853165183986A5008A7EF1 /* AudioToolbox.framework */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
 				FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */,
@@ -551,7 +551,7 @@
 				ORGANIZATIONNAME = Voys;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
-						DevelopmentTeam = AM8JDXQ3L4;
+						DevelopmentTeam = 6QG672DXVZ;
 					};
 				};
 			};
@@ -756,6 +756,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/reinier/Documents/iOS/ThirdParty/NewRelic_iOS_Agent_1.376,
+					/Users/reinier/Documents/iOS/Appic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
@@ -771,10 +772,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/reinier/Documents/iOS/ThirdParty/NewRelic_iOS_Agent_1.376,
+					/Users/reinier/Documents/iOS/Appic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
