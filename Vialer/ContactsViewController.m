@@ -3,16 +3,17 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "ContactsViewController.h"
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import "AppDelegate.h"
 
 @interface ContactsViewController()
 @property (nonatomic, retain) id<UISearchDisplayDelegate> oldSearchDisplayDelegate;
+@property (nonatomic, strong) UIColor *tableTintColor;
 @end
 
 @implementation ContactsViewController
@@ -25,6 +26,13 @@
         self.title = NSLocalizedString(@"Contacts", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"contacts"];
         self.searchDisplayController.delegate = self;
+        
+        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+        NSAssert(config != nil, @"Config.plist not found!");
+
+        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
+        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
+        self.tableTintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
     }
     return self;
 }
@@ -49,7 +57,10 @@
 
         if ([viewController isKindOfClass:[UITableViewController class]]) {
             UITableViewController *tableViewController = (UITableViewController *)viewController;
-            tableViewController.tableView.sectionIndexColor = [UIColor colorWithRed:0x3c / 255.f green:0x3c / 255.f blue:0x50 / 255.f alpha:1.f];
+            tableViewController.tableView.sectionIndexColor = self.tableTintColor;
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+                tableViewController.tableView.tintColor = self.tableTintColor;
+            }
         }
     } else {
         viewController.navigationItem.rightBarButtonItem = nil;

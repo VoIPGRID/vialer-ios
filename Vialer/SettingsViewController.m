@@ -3,11 +3,11 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 11/12/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "SettingsViewController.h"
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "InfoViewController.h"
 #import "SelectRecentsFilterViewController.h"
 #import "NSString+Mobile.h"
@@ -45,6 +45,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+        NSAssert(config != nil, @"Config.plist not found!");
+        
+        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
+        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
+        self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
+    }
+    
     self.mobileCC = [NSString systemCallingCode];
     if ([self.mobileCC isEqualToString:@"+31"]) {
         self.mobileCC = @"+316";
@@ -179,7 +188,7 @@
         }
     } else if (alertView.tag == LOG_OUT_ALERT_TAG) {
         if (buttonIndex == 1) {
-            [[VoysRequestOperationManager sharedRequestOperationManager] logout];
+            [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
         }
     }
 }

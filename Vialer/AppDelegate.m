@@ -3,12 +3,12 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 31/10/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "AppDelegate.h"
 
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "LogInViewController.h"
 #import "CallingViewController.h"
 #import "ContactsViewController.h"
@@ -31,19 +31,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Test flight
-    [TestFlight takeOff:@"41b7fa53-990b-4b64-86cc-75f14aee7db4"];
-    
-    // New Relic
-    [NewRelicAgent startWithApplicationToken:@"AA1a092ac029754cfbc049123fa0cd1351c1945e4d"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSAssert(config != nil, @"Config.plist not found!");
 
+    // Test flight
+    NSString *testFlightToken = [[config objectForKey:@"Tokens"] objectForKey:@"Test Flight"];
+    if ([testFlightToken length]) {
+        [TestFlight takeOff:[[config objectForKey:@"Tokens"] objectForKey:@"Test Flight"]];
+    }
+
+    // New Relic
+    NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
+    if ([newRelicToken length]) {
+        [NewRelicAgent startWithApplicationToken:newRelicToken];
+    }
+
+#ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
+#endif
 
     // Setup appearance
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0x3c / 255.f green:0x3c / 255.f blue:0x50 / 255.f alpha:1.f]];
+        NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
+        NSAssert(tabBarColor != nil && tabBarColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
+        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
     }
 
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
@@ -53,9 +66,11 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     } else {
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0xf0 / 255.f green:0x82 / 255.f blue:0x25 / 255.f alpha:1.f]];
+        NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
+        NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f]];
     }
-    
+
     // Handler for failed authentications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
     
@@ -98,7 +113,7 @@
     
     [self.window makeKeyAndVisible];
 
-    if (![[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+    if (![[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
         [self showLogin];
     }
 

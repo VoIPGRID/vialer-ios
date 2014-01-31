@@ -16,8 +16,10 @@
 		FB0CF34C18226392002D4281 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34118226392002D4281 /* AFURLRequestSerialization.m */; };
 		FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */; };
 		FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34518226392002D4281 /* AFURLSessionManager.m */; };
-		FB0CF351182267AA002D4281 /* VoysRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoysRequestOperationManager.m */; };
+		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB1D9F43188FCA9F00C71D61 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */; };
+		FB29D913189BA0FF00345976 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
+		FB29D915189BAB0200345976 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB29D917189BAB0200345976 /* Config.plist */; };
 		FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
 		FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
 		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
@@ -74,6 +76,7 @@
 		FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB89C75C1850C153006A4556 /* CallingViewController.xib */; };
 		FB9692C4183CABD000241D7C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9692C2183CABD000241D7C /* logout.png */; };
 		FB9692C5183CABD000241D7C /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9692C3183CABD000241D7C /* logout@2x.png */; };
+		FBA850C0189AA87E008099C5 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = FBA850C2189AA87E008099C5 /* info.html */; };
 		FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */; };
 		FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
@@ -97,7 +100,6 @@
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDAF73B1858DD22005BA203 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7391858DD22005BA203 /* InfoViewController.m */; };
 		FBDAF73C1858DD22005BA203 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF73A1858DD22005BA203 /* InfoViewController.xib */; };
-		FBDAF73E1858DEC2005BA203 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF73D1858DEC2005BA203 /* info.html */; };
 		FBF0BC98182BF2C000434746 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF0BC97182BF2C000434746 /* icon-120.png */; };
 		FBF381EF183517580059E494 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF381EE183517580059E494 /* background@2x.png */; };
 		FBF66AD21838D1C600C19859 /* dialer-button.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF66ACC1838D1C600C19859 /* dialer-button.png */; };
@@ -128,9 +130,13 @@
 		FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		FB0CF34418226392002D4281 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		FB0CF34518226392002D4281 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		FB0CF34F182267AA002D4281 /* VoysRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoysRequestOperationManager.h; sourceTree = "<group>"; };
-		FB0CF350182267AA002D4281 /* VoysRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoysRequestOperationManager.m; sourceTree = "<group>"; };
+		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
+		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
 		FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		FB29D912189BA0FF00345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FB29D916189BAB0200345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
+		FB29D918189BAB0600345976 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file; name = nl; path = nl.lproj/Config.plist; sourceTree = "<group>"; };
 		FB302E5C182A38E5004B7D27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		FB302E60182A390E004B7D27 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
@@ -201,6 +207,9 @@
 		FB89C75C1850C153006A4556 /* CallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallingViewController.xib; sourceTree = "<group>"; };
 		FB9692C2183CABD000241D7C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		FB9692C3183CABD000241D7C /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
+		FBA850C1189AA87E008099C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/info.html; sourceTree = "<group>"; };
+		FBA850C3189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/info.html; sourceTree = "<group>"; };
+		FBA850C4189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBAD7EFD182A8901002FC8FC /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
@@ -234,7 +243,6 @@
 		FBDAF7381858DD22005BA203 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		FBDAF7391858DD22005BA203 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		FBDAF73A1858DD22005BA203 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
-		FBDAF73D1858DEC2005BA203 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 		FBF0BC97182BF2C000434746 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		FBF381EE183517580059E494 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		FBF66ACC1838D1C600C19859 /* dialer-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dialer-button.png"; sourceTree = "<group>"; };
@@ -272,8 +280,8 @@
 		FB0CF33118226380002D4281 /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				FB0CF34F182267AA002D4281 /* VoysRequestOperationManager.h */,
-				FB0CF350182267AA002D4281 /* VoysRequestOperationManager.m */,
+				FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */,
+				FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -384,9 +392,9 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB503172183527BE006FEBAA /* libz.dylib */,
 				FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */,
 				FB853165183986A5008A7EF1 /* AudioToolbox.framework */,
-				FB503172183527BE006FEBAA /* libz.dylib */,
 				FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */,
 				FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */,
 				FB302E5C182A38E5004B7D27 /* AddressBook.framework */,
@@ -403,6 +411,7 @@
 		FB4226D6182261D200707349 /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
+				FBA850C7189AAEC4008099C5 /* Config */,
 				FB302E63182A3AA4004B7D27 /* Resources */,
 				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories */,
@@ -421,10 +430,11 @@
 				FBAD7EFD182A8901002FC8FC /* DashboardViewController.h */,
 				FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */,
 				FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */,
-				FBDAF73D1858DEC2005BA203 /* info.html */,
+				FBA850C2189AA87E008099C5 /* info.html */,
 				FBDAF7381858DD22005BA203 /* InfoViewController.h */,
 				FBDAF7391858DD22005BA203 /* InfoViewController.m */,
 				FBDAF73A1858DD22005BA203 /* InfoViewController.xib */,
+				FB29D911189BA0FF00345976 /* Localizable.strings */,
 				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
 				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
 				FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */,
@@ -480,6 +490,14 @@
 				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		FBA850C7189AAEC4008099C5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				FB29D917189BAB0200345976 /* Config.plist */,
+			);
+			name = Config;
 			sourceTree = "<group>";
 		};
 		FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */ = {
@@ -548,7 +566,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = Voys;
+				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
 						DevelopmentTeam = 6QG672DXVZ;
@@ -561,6 +579,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				nl,
 			);
 			mainGroup = FB4226C4182261D200707349;
 			productRefGroup = FB4226CE182261D200707349 /* Products */;
@@ -592,6 +611,7 @@
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
 				FB4226E5182261D200707349 /* Default@2x.png in Resources */,
 				FB4226E7182261D200707349 /* Default-568h@2x.png in Resources */,
+				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				FB5031711835266C006FEBAA /* release_notes.md in Resources */,
 				FB576B17182A81CF00C4FAB4 /* recents.png in Resources */,
 				FB85316318398198008A7EF1 /* call-button-background.png in Resources */,
@@ -601,7 +621,8 @@
 				FB364D251836846A00932D6E /* 9.wav in Resources */,
 				FBF0BC98182BF2C000434746 /* icon-120.png in Resources */,
 				FB5031701835266C006FEBAA /* README.md in Resources */,
-				FBDAF73E1858DEC2005BA203 /* info.html in Resources */,
+				FB29D915189BAB0200345976 /* Config.plist in Resources */,
+				FBA850C0189AA87E008099C5 /* info.html in Resources */,
 				FB576B0A182A71E100C4FAB4 /* logo.png in Resources */,
 				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
 				FBAD7F09182A8E76002FC8FC /* logoMedium.png in Resources */,
@@ -659,7 +680,7 @@
 				FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
-				FB0CF351182267AA002D4281 /* VoysRequestOperationManager.m in Sources */,
+				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */,
 				FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
@@ -679,12 +700,40 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		FB29D911189BA0FF00345976 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB29D912189BA0FF00345976 /* en */,
+				FB29D914189BA10200345976 /* nl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		FB29D917189BAB0200345976 /* Config.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB29D916189BAB0200345976 /* en */,
+				FB29D918189BAB0600345976 /* nl */,
+			);
+			name = Config.plist;
+			sourceTree = "<group>";
+		};
 		FB4226D9182261D200707349 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FB4226DA182261D200707349 /* en */,
+				FBA850C4189AAA08008099C5 /* nl */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FBA850C2189AA87E008099C5 /* info.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBA850C1189AA87E008099C5 /* en */,
+				FBA850C3189AAA08008099C5 /* nl */,
+			);
+			name = info.html;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

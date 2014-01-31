@@ -3,7 +3,7 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 15/11/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "DialerViewController.h"
@@ -79,6 +79,8 @@
     [self.backButton addGestureRecognizer:longPress];
     
     self.backButton.hidden = YES;
+
+    [self.callButton setTitle:NSLocalizedString(@"Call", nil) forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning

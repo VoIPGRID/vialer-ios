@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Tokens</key>
+	<dict>
+		<key>Test Flight</key>
+		<string>41b7fa53-990b-4b64-86cc-75f14aee7db4</string>
+		<key>New Relic</key>
+		<string>AA1a092ac029754cfbc049123fa0cd1351c1945e4d</string>
+	</dict>
+	<key>Tint colors</key>
+	<dict>
+		<key>TabBar</key>
+		<array>
+			<integer>60</integer>
+			<integer>60</integer>
+			<integer>80</integer>
+		</array>
+		<key>NavigationBar</key>
+		<array>
+			<integer>240</integer>
+			<integer>130</integer>
+			<integer>37</integer>
+		</array>
+		<key>Table</key>
+		<array>
+			<integer>60</integer>
+			<integer>60</integer>
+			<integer>80</integer>
+		</array>
+	</dict>
+	<key>URLS</key>
+	<dict>
+		<key>API</key>
+		<string>https://api.voipgrid.nl/api</string>
+		<key>How it works</key>
+		<string>www.vialerapp.com/hoe-het-werkt</string>
+	</dict>
+</dict>
+</plist>

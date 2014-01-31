@@ -3,11 +3,11 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "RecentsViewController.h"
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "RecentCall.h"
 #import "RecentTableViewCell.h"
 #import "NSDate+RelativeDate.h"
@@ -48,6 +48,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+        NSAssert(config != nil, @"Config.plist not found!");
+
+        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
+        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
+        self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,7 +76,7 @@
 }
 
 - (void)clearRecents {
-    [[VoysRequestOperationManager sharedRequestOperationManager].operationQueue cancelAllOperations];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager].operationQueue cancelAllOperations];
     [RecentCall clearCachedRecentCalls];
     self.previousSearchDateTime = nil;
     self.recents = @[];
@@ -75,7 +84,7 @@
 }
 
 - (void)refreshRecents {
-    if (![[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+    if (![[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
         return;
     }
 
@@ -93,13 +102,13 @@
             if (filter == RecentsFilterSelf) {
                 sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
             }
-            [[VoysRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                if ([[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+            [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                if ([[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
                     self.recents = [RecentCall recentCallsFromDictionary:responseObject];
                 }
                 [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                if (error.code != -999 && [operation.response statusCode] != kVoysHTTPBadCredentials) {
+                if (error.code != -999 && [operation.response statusCode] != kVoIPGRIDHTTPBadCredentials) {
                     NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
                     [alert show];

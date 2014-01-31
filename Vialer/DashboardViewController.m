@@ -3,11 +3,11 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "DashboardViewController.h"
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import "SVProgressHUD.h"
 
@@ -37,12 +37,12 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (![[VoysRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+    if (![[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
         return;
     }
     
     [SVProgressHUD show];
-    [[VoysRequestOperationManager sharedRequestOperationManager] userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://partner.voipgrid.nl"]]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
@@ -74,7 +74,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [[VoysRequestOperationManager sharedRequestOperationManager] logout];
+        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
     }
 }
 

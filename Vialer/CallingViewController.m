@@ -3,11 +3,11 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 05/12/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "CallingViewController.h"
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "SelectRecentsFilterViewController.h"
 #import "NSString+Mobile.h"
 
@@ -203,7 +203,7 @@
     
     self.contactLabel.text = self.toContact;
 
-    [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *json = (NSDictionary *)responseObject;
             if ([[json objectForKey:@"callid"] isKindOfClass:[NSString class]]) {
@@ -280,7 +280,7 @@
     NSLog(@"Update status");
     NSString *callId = [self.clickToDialStatus objectForKey:@"callid"];
     if ([callId length]) {
-        [[VoysRequestOperationManager sharedRequestOperationManager] clickToDialStatusForCallId:callId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialStatusForCallId:callId success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self updateStatusForResponse:responseObject];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error %@", [error localizedDescription]);

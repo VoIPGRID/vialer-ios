@@ -1,27 +1,34 @@
 //
-//  VoysRequestOperationManager.m
+//  VoIPGRIDRequestOperationManager.m
 //  Vialer
 //
 //  Created by Reinier Wieringa on 31/10/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
 
 #import "SSKeychain.h"
 
-#define BASE_URL @"https://api.voipgrid.nl/api"
-#define SERVICE_NAME @"com.voys.vialer"
+@interface VoIPGRIDRequestOperationManager ()
+@property (nonatomic, strong) NSString *serviceName;
+@end
 
-@implementation VoysRequestOperationManager
+@implementation VoIPGRIDRequestOperationManager
 
-+ (VoysRequestOperationManager *)sharedRequestOperationManager {
++ (VoIPGRIDRequestOperationManager *)sharedRequestOperationManager {
     static dispatch_once_t pred;
-    static VoysRequestOperationManager *_sharedRequestOperationManager = nil;
+    static VoIPGRIDRequestOperationManager *_sharedRequestOperationManager = nil;
 
     dispatch_once(&pred, ^{
-		_sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+        NSAssert(config != nil, @"Config.plist not found!");
+
+        NSString *baseUrl = [[config objectForKey:@"URLS"] objectForKey:@"API"];
+        NSAssert(baseUrl != nil, @"URLS - API not found in Config.plist!");
+        
+		_sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
 	});
     return _sharedRequestOperationManager;
 }
@@ -29,13 +36,14 @@
 - (id)initWithBaseURL:(NSURL *)url {
 	self = [super initWithBaseURL:url];
 	if (self) {
+        self.serviceName = [[NSBundle mainBundle] bundleIdentifier];
         [self setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
         // Set basic authentication if user is logged in
         NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
         if (user) {
-            NSString *password = [SSKeychain passwordForService:SERVICE_NAME account:user];
+            NSString *password = [SSKeychain passwordForService:self.serviceName account:user];
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
         }
     }
@@ -49,14 +57,14 @@
         // Store credentials
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [SSKeychain setPassword:password forService:SERVICE_NAME account:user];
+        [SSKeychain setPassword:password forService:self.serviceName account:user];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
         
         success(operation, success);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
@@ -71,7 +79,7 @@
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     
     NSError *error;
-    [SSKeychain deletePasswordForService:SERVICE_NAME account:user error:&error];
+    [SSKeychain deletePasswordForService:self.serviceName account:user error:&error];
 
     if (error) {
         NSLog(@"Error logging out: %@", [error localizedDescription]);
@@ -85,7 +93,7 @@
 
 - (BOOL)isLoggedIn {
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    return (user != nil) && ([SSKeychain passwordForService:SERVICE_NAME account:user] != nil);
+    return (user != nil) && ([SSKeychain passwordForService:self.serviceName account:user] != nil);
 }
 
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
@@ -93,7 +101,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -104,7 +112,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -120,7 +128,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -133,7 +141,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
             [self loginFailed];
         }
     }];
@@ -150,14 +158,14 @@
           success(operation, responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           failure(operation, error);
-          if ([operation.response statusCode] == kVoysHTTPBadCredentials) {
+          if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
               [self loginFailed];
           }
       }];
 }
 
 - (void)passwordResetWithEmail:(NSString *)email success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:self.baseURL];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     

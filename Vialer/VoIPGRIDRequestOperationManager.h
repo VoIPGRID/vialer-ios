@@ -1,9 +1,9 @@
 //
-//  VoysRequestOperationManager.h
+//  VoIPGRIDRequestOperationManager.h
 //  Vialer
 //
 //  Created by Reinier Wieringa on 31/10/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "AFHTTPRequestOperationManager.h"
@@ -11,14 +11,14 @@
 #define LOGIN_FAILED_NOTIFICATION @"login.failed"
 #define LOGIN_SUCCEEDED_NOTIFICATION @"login.succeeded"
 
-enum VoysHttpErrors {
-    kVoysHTTPBadCredentials = 401,
+enum VoIPGRIDHttpErrors {
+    kVoIPGRIDHTTPBadCredentials = 401,
 };
-typedef enum VoysHttpErrors VoysHttpErrors;
+typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 
-@interface VoysRequestOperationManager : AFHTTPRequestOperationManager
+@interface VoIPGRIDRequestOperationManager : AFHTTPRequestOperationManager
 
-+ (VoysRequestOperationManager *)sharedRequestOperationManager;
++ (VoIPGRIDRequestOperationManager *)sharedRequestOperationManager;
 
 // Log in / Log out
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;

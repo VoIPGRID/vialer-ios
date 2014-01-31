@@ -3,7 +3,7 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 11/12/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "InfoViewController.h"
@@ -27,10 +27,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSAssert(config != nil, @"Config.plist not found!");
+
+    NSString *howItWorks = [[config objectForKey:@"URLS"] objectForKey:@"How it works"];
+    NSAssert(howItWorks != nil, @"URLS - How it works not found in Config.plist!");
 
     NSData *htmlData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"]];
     if (htmlData) {
         NSString *body = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+        body = [body stringByReplacingOccurrencesOfString:@"<#URLS - How it works#>" withString:howItWorks];
+
         NSString *htmlString = [NSString stringWithFormat:@"<html>\n"
                                 "<head>\n"
                                 "<style type=\"text/css\">\n"

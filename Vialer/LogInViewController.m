@@ -3,11 +3,11 @@
 //  Vialer
 //
 //  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2013 Voys. All rights reserved.
+//  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import "LogInViewController.h"
-#import "VoysRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import "SVProgressHUD.h"
 
@@ -98,7 +98,7 @@
         }
         
         [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-        [[VoysRequestOperationManager sharedRequestOperationManager] loginWithUser:self.user password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:self.user password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -115,7 +115,7 @@
                 self.user = emailTextField.text;
                 
                 [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
-                [[VoysRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:emailTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:emailTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
                     [self performSelector:@selector(showLogin) withObject:nil afterDelay:3];
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
