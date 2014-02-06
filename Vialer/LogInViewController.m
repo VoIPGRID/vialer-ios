@@ -61,9 +61,10 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In", nil) message:NSLocalizedString(@"Enter your email and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), NSLocalizedString(@"Forgot password?", nil), nil];
         [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
         [alert textFieldAtIndex:0].text = self.user;
+        [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
         alert.tag = SHOW_LOGIN_ALERT;
         [alert show];
-        
+
         UITextField *usernameTextField = [alert textFieldAtIndex:0];
         usernameTextField.placeholder = NSLocalizedString(@"Email", nil);
 
