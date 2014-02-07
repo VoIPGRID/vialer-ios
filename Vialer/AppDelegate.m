@@ -108,7 +108,11 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerViewController, settingsNavigationViewController];
-    self.tabBarController.selectedIndex = 1;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
+        self.tabBarController.selectedIndex = 1;    // Contacts
+    } else {
+        self.tabBarController.selectedIndex = 3;    // Settings
+    }
     self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];

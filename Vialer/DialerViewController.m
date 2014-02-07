@@ -7,7 +7,6 @@
 //
 
 #import "DialerViewController.h"
-#import "ContactsViewController.h"
 #import "AppDelegate.h"
 
 #import <AudioToolbox/AudioServices.h>
