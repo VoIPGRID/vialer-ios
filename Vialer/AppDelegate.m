@@ -20,7 +20,7 @@
 #import "TestFlight.h"
 #import "AFNetworkActivityLogger.h"
 
-#import <NewRelicAgent/NewRelicAgent.h>
+#import <NewRelicAgent/NewRelic.h>
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
