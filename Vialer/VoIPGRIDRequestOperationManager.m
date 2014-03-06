@@ -12,7 +12,6 @@
 #import "SSKeychain.h"
 
 @interface VoIPGRIDRequestOperationManager ()
-@property (nonatomic, strong) NSString *serviceName;
 @end
 
 @implementation VoIPGRIDRequestOperationManager
@@ -36,14 +35,13 @@
 - (id)initWithBaseURL:(NSURL *)url {
 	self = [super initWithBaseURL:url];
 	if (self) {
-        self.serviceName = [[NSBundle mainBundle] bundleIdentifier];
         [self setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
         // Set basic authentication if user is logged in
         NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
         if (user) {
-            NSString *password = [SSKeychain passwordForService:self.serviceName account:user];
+            NSString *password = [SSKeychain passwordForService:[[self class] serviceName] account:user];
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
         }
     }
@@ -57,7 +55,7 @@
         // Store credentials
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [SSKeychain setPassword:password forService:self.serviceName account:user];
+        [SSKeychain setPassword:password forService:[[self class] serviceName] account:user];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
         
@@ -79,7 +77,7 @@
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     
     NSError *error;
-    [SSKeychain deletePasswordForService:self.serviceName account:user error:&error];
+    [SSKeychain deletePasswordForService:[[self class] serviceName] account:user error:&error];
 
     if (error) {
         NSLog(@"Error logging out: %@", [error localizedDescription]);
@@ -91,9 +89,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
 }
 
-- (BOOL)isLoggedIn {
++ (BOOL)isLoggedIn {
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    return (user != nil) && ([SSKeychain passwordForService:self.serviceName account:user] != nil);
+    return (user != nil) && ([SSKeychain passwordForService:[[self class] serviceName] account:user] != nil);
 }
 
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
@@ -188,6 +186,11 @@
 - (void)connectionFailed {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Unknown error, please check your internet connection.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];
+}
+
+
++ (NSString *)serviceName {
+    return [[NSBundle mainBundle] bundleIdentifier];
 }
 
 #pragma mark - Alert view delegate

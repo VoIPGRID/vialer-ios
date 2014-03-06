@@ -37,7 +37,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (![[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
         return;
     }
     

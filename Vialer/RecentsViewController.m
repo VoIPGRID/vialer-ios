@@ -40,7 +40,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recentsFilterUpdatedNotification:) name:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceededNotification:) name:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -61,6 +60,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -84,7 +84,7 @@
 }
 
 - (void)refreshRecents {
-    if (![[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
         return;
     }
 
@@ -103,7 +103,7 @@
                 sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
             }
             [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                if ([[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+                if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
                     self.recents = [RecentCall recentCallsFromDictionary:responseObject];
                 }
                 [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];

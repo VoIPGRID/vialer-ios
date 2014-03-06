@@ -117,7 +117,7 @@
     
     [self.window makeKeyAndVisible];
 
-    if (![[VoIPGRIDRequestOperationManager sharedRequestOperationManager] isLoggedIn]) {
+    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
         [self showLogin];
     }
 
