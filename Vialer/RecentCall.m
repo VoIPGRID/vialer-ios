@@ -105,11 +105,13 @@
                     for (RecentCall *recent in filtered) {
                         // Save record id for contact
                         recent.callerRecordId = ABRecordGetRecordID(person);
-                        
+
                         // Save phone type
                         CFStringRef label = ABMultiValueCopyLabelAtIndex(phoneNumbers, k);
-                        recent.callerPhoneType = (__bridge NSString *)(ABAddressBookCopyLocalizedLabel(label));
-                        CFRelease(label);
+                        if (label) {
+                            recent.callerPhoneType = (__bridge NSString *)(ABAddressBookCopyLocalizedLabel(label));
+                            CFRelease(label);
+                        }
                         
                         // Save name
                         NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
