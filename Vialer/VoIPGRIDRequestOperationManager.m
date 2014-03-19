@@ -52,14 +52,23 @@
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
 
     [self GET:@"userdestination/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // Store credentials
-        [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [SSKeychain setPassword:password forService:[[self class] serviceName] account:user];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
-        
-        success(operation, success);
+        NSArray *userDestinations = [responseObject objectForKey:@"objects"];
+        if ([userDestinations count] == 0) {
+            // This is a partner account, don't log in!
+            failure(operation, nil);
+
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            [alert show];
+        } else {
+            // Store credentials
+            [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [SSKeychain setPassword:password forService:[[self class] serviceName] account:user];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
+            
+            success(operation, success);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
         if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
