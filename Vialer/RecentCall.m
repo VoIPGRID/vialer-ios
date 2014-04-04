@@ -8,6 +8,7 @@
 
 #import "RecentCall.h"
 #import "NSDate+RelativeDate.h"
+#import "NSString+Mobile.h"
 
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
@@ -87,6 +88,13 @@
     }
 #endif
     
+    // Calculate calling code prefixes (NOTE: Only works in some countries, like The Netherlands)
+    NSArray *prefixes = nil;
+    NSString *mobileCC = [NSString systemCallingCode];
+    if ([mobileCC length]) {
+        prefixes = @[mobileCC, [@"00" stringByAppendingString:[mobileCC stringByReplacingOccurrencesOfString:@"+" withString:@""]], @"0"];
+    }
+    
     // Scan address book people for corresponding phone numbers
     NSArray *people = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     if (people) {
@@ -97,10 +105,19 @@
             
             for (int k = 0; k < ABMultiValueGetCount(phoneNumbers); k++) {
                 NSString *value = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneNumbers, k);
-                NSString *phoneNumber = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
-                phoneNumber = [@"+" stringByAppendingString:phoneNumber];
-                
-                NSArray *filtered = [recents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF._callerPhoneNumber == %@", phoneNumber]];
+                NSString *phoneNumber = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789+"] invertedSet]] componentsJoinedByString:@""];
+
+                if (prefixes) {
+                    for (NSString *prefix in prefixes) {
+                        if ([phoneNumber hasPrefix:prefix]) {
+                            // Remove prefix
+                            phoneNumber = [phoneNumber substringFromIndex:[prefix length]];
+                            break;
+                        }
+                    }
+                }
+
+                NSArray *filtered = [recents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF._callerPhoneNumber ENDSWITH[cd] %@", phoneNumber]];
                 if (filtered.count) {
                     for (RecentCall *recent in filtered) {
                         // Save record id for contact
