@@ -221,7 +221,7 @@
 }
 
 - (void)dialerButtonPressed:(UIButton *)sender {
-    SystemSoundID soundID = [[self.sounds objectAtIndex:sender.tag] integerValue];
+    SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:sender.tag] integerValue];
     if (soundID > 0) {
         AudioServicesPlaySystemSound(soundID);
     }

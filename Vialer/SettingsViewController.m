@@ -118,7 +118,7 @@
         cell.textLabel.text = [phoneNumber length] ? phoneNumber : NSLocalizedString(@"Provide your mobile number", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     } else if (indexPath.section == SHOW_RECENTS_IDX) {
-        RecentsFilter recentsFilter = [[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
+        RecentsFilter recentsFilter = (RecentsFilter)[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
         cell.userInteractionEnabled = NO; //0 < [[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] length];
         cell.alpha = cell.userInteractionEnabled ? 1.0f : 0.5f;
         cell.textLabel.text = (recentsFilter == RecentsFilterNone || !cell.userInteractionEnabled) ? NSLocalizedString(@"Show all recent calls", nil) : NSLocalizedString(@"Show your recent calls", nil);
@@ -158,7 +158,7 @@
         [alert show];
     } else if (indexPath.section == SHOW_RECENTS_IDX) {
         SelectRecentsFilterViewController *selectRecentsFilterViewController = [[SelectRecentsFilterViewController alloc] initWithNibName:@"SelectRecentsFilterViewController" bundle:[NSBundle mainBundle]];
-        selectRecentsFilterViewController.recentsFilter = [[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
+        selectRecentsFilterViewController.recentsFilter = (RecentsFilter)[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
         selectRecentsFilterViewController.delegate = self;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectRecentsFilterViewController];

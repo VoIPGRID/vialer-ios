@@ -804,8 +804,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/reinier/Documents/iOS/ThirdParty/NewRelic_iOS_Agent_1.376,
-					/Users/reinier/Documents/iOS/Appic,
+					"\"$(SRCROOT)/\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
@@ -824,8 +823,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/reinier/Documents/iOS/ThirdParty/NewRelic_iOS_Agent_1.376,
-					/Users/reinier/Documents/iOS/Appic,
+					"\"$(SRCROOT)/\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
