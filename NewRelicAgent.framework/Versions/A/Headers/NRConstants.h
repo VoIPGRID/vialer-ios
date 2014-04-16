@@ -35,6 +35,9 @@ typedef NSString NRMetricUnit;
 #define kNRMetricUnitsBytesPerSecond    (NRMetricUnit*)(@"bytes/second")
 #define kNRmetricUnitsOperations        (NRMetricUnit*)@"op"
 
+#define kNRSupportabilityPrefix          @"Supportability/MobileAgent"
+
+#define kNRCarrierNameCacheLifetime     50 // milliseconds
 
 // Network Failure Codes
 enum NRNetworkFailureCode {

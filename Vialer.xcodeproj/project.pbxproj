@@ -17,7 +17,6 @@
 		FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */; };
 		FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34518226392002D4281 /* AFURLSessionManager.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
-		FB1D9F43188FCA9F00C71D61 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */; };
 		FB29D913189BA0FF00345976 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		FB29D915189BAB0200345976 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB29D917189BAB0200345976 /* Config.plist */; };
 		FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
@@ -100,6 +99,7 @@
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDAF73B1858DD22005BA203 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7391858DD22005BA203 /* InfoViewController.m */; };
 		FBDAF73C1858DD22005BA203 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF73A1858DD22005BA203 /* InfoViewController.xib */; };
+		FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */; };
 		FBF0BC98182BF2C000434746 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF0BC97182BF2C000434746 /* icon-120.png */; };
 		FBF381EF183517580059E494 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF381EE183517580059E494 /* background@2x.png */; };
 		FBF66AD21838D1C600C19859 /* dialer-button.png in Resources */ = {isa = PBXBuildFile; fileRef = FBF66ACC1838D1C600C19859 /* dialer-button.png */; };
@@ -132,7 +132,6 @@
 		FB0CF34518226392002D4281 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
-		FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB29D912189BA0FF00345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB29D916189BAB0200345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
@@ -243,6 +242,7 @@
 		FBDAF7381858DD22005BA203 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		FBDAF7391858DD22005BA203 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		FBDAF73A1858DD22005BA203 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
+		FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FBF0BC97182BF2C000434746 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		FBF381EE183517580059E494 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		FBF66ACC1838D1C600C19859 /* dialer-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dialer-button.png"; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
-				FB1D9F43188FCA9F00C71D61 /* NewRelicAgent.framework in Frameworks */,
+				FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
@@ -393,7 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				FB503172183527BE006FEBAA /* libz.dylib */,
-				FB1D9F42188FCA9F00C71D61 /* NewRelicAgent.framework */,
+				FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */,
 				FB853165183986A5008A7EF1 /* AudioToolbox.framework */,
 				FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */,
 				FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */,
@@ -783,8 +783,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -805,6 +805,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
@@ -824,6 +825,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
