@@ -19,6 +19,7 @@
 #define PHONE_NUMBER_IDX 1
 #define SHOW_RECENTS_IDX -1 // Disabled for now
 #define LOG_OUT_IDX      2
+#define VERSION_IDX      3
 
 @interface SettingsViewController ()
 @property (nonatomic, strong) NSArray *sectionTitles;
@@ -35,7 +36,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"settings"];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
         
-        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil)];
+        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil), NSLocalizedString(@"Version", nil)];
     }
     return self;
 }
@@ -126,6 +127,9 @@
     } else if (indexPath.section == LOG_OUT_IDX) {
         cell.textLabel.text = NSLocalizedString(@"Log out from this app", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    } else if (indexPath.section == VERSION_IDX) {
+        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
 
     return cell;
