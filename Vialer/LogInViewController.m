@@ -64,12 +64,20 @@
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
         alert.tag = SHOW_LOGIN_ALERT;
         [alert show];
-
+        
         UITextField *usernameTextField = [alert textFieldAtIndex:0];
         usernameTextField.placeholder = NSLocalizedString(@"Email", nil);
-
+        
         self.loginAlertShown = YES;
     }
+}
+
+- (void)showForgotPassword {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Forgot Password", nil) message:NSLocalizedString(@"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [alert textFieldAtIndex:0].text = self.user;
+    alert.tag = PASSWORD_FORGOT_ALERT;
+    [alert show];
 }
 
 #pragma mark - Alert view delegate
@@ -78,16 +86,11 @@
     if (alertView.tag == SHOW_LOGIN_ALERT) {
         UITextField *usernameTextField = [alertView textFieldAtIndex:0];
         UITextField *passwordTextField = [alertView textFieldAtIndex:1];
-
+        
         self.user = usernameTextField.text;
         
         if (buttonIndex == 1) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Forgot Password", nil) message:NSLocalizedString(@"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert textFieldAtIndex:0].text = self.user;
-            alert.tag = PASSWORD_FORGOT_ALERT;
-            [alert show];
-            
+            [self showForgotPassword];
             return;
         }
         
@@ -123,6 +126,8 @@
                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
                     [self performSelector:@selector(showLogin) withObject:nil afterDelay:3];
                 }];
+            } else {
+                [self showForgotPassword];
             }
         }
     }
