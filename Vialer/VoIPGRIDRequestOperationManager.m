@@ -130,6 +130,7 @@
                                            toNumber, @"b_number",
                                            fromNumber, @"a_number",
                                            @"default_number", @"b_cli",
+                                           @"default_number", @"a_cli",
                                            nil
                                            ] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation, responseObject);
@@ -165,9 +166,6 @@
           success(operation, responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           failure(operation, error);
-          if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
-              [self loginFailed];
-          }
       }];
 }
 

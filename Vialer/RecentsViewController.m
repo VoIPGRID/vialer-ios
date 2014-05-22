@@ -21,6 +21,9 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 @interface RecentsViewController ()
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (assign) BOOL reloading;
+@property (assign) BOOL unauthorized;
 @property (nonatomic, strong) NSArray *recents;
 @property (nonatomic, strong) NSDate *previousSearchDateTime;
 @end
@@ -56,6 +59,12 @@
         NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
         self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
     }
+
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+
+    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,38 +92,62 @@
     [self.tableView reloadData];
 }
 
-- (void)refreshRecents {
+- (void)refresh {
     if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
+        return;
+    }
+    
+    self.previousSearchDateTime = [NSDate date];
+    
+    // Retrieve recent calls from last month
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:-1];
+    NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
+        NSString *sourceNumber = nil;
+        RecentsFilter filter = RecentsFilterNone;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
+        if (filter == RecentsFilterSelf) {
+            sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+        }
+        
+        self.reloading = YES;
+        [self.refreshControl beginRefreshing];
+        
+        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            self.unauthorized = NO;
+            self.reloading = NO;
+            [self.refreshControl endRefreshing];
+
+            if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+                self.recents = [RecentCall recentCallsFromDictionary:responseObject];
+            }
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.reloading = NO;
+            [self.refreshControl endRefreshing];
+            
+            if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+                // No permissions
+                self.unauthorized = YES;
+                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            } else if (error.code != -999) {
+                NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    });
+}
+
+- (void)refreshRecents {
+    if (self.reloading) {
+        // Don't reload twice
         return;
     }
 
     if (!self.previousSearchDateTime || [[NSDate date] timeIntervalSinceDate:self.previousSearchDateTime] > 60) {
-        self.previousSearchDateTime = [NSDate date];
-        
-        // Retrieve recent calls from last month
-        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-        [offsetComponents setMonth:-1];
-        NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
-
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
-            NSString *sourceNumber = nil;
-            RecentsFilter filter = RecentsFilterNone;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
-            if (filter == RecentsFilterSelf) {
-                sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
-            }
-            [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
-                    self.recents = [RecentCall recentCallsFromDictionary:responseObject];
-                }
-                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                if (error.code != -999 && [operation.response statusCode] != kVoIPGRIDHTTPBadCredentials) {
-                    NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-                    [alert show];
-                }
-            }];
-        });
+        [self refresh];
     }
 }
 
@@ -136,7 +169,10 @@
         }
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont systemFontOfSize:17.f];
-        cell.textLabel.text = NSLocalizedString(@"Loading...", nil);
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.text = (self.unauthorized ? NSLocalizedString(@"No access to the recent calls", nil) :
+                               (self.reloading ? NSLocalizedString(@"Loading...", nil) :
+                                NSLocalizedString(@"No recent calls", nil)));
         return cell;
     }
 
@@ -177,6 +213,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row >= self.recents.count) {
+        return;
+    }
 
     RecentCall *recent = [self.recents objectAtIndex:indexPath.row];
     
