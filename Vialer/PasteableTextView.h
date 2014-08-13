@@ -1,5 +1,5 @@
 //
-//  PasteableTextField.h
+//  PasteableTextView.h
 //  Vialer
 //
 //  Created by Reinier Wieringa on 13/08/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PasteableTextField : UITextField
+@interface PasteableTextView : UITextView
 
 @end

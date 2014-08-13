@@ -1,31 +1,20 @@
 //
-//  PasteableTextField.m
+//  PasteableTextView.m
 //  Vialer
 //
 //  Created by Reinier Wieringa on 13/08/14.
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import "PasteableTextField.h"
+#import "PasteableTextView.h"
 
-@implementation PasteableTextField
+@implementation PasteableTextView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(paste:)) {
+        return YES;
     }
-    return self;
+    return [super canPerformAction:action withSender:sender];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
