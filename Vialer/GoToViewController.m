@@ -103,7 +103,8 @@
                 PBWebViewController *webViewController = [[PBWebViewController alloc] init];
                 webViewController.URL = url;
                 webViewController.title = title;
-                webViewController.showsNavigationToolbar = NO;
+                webViewController.showsNavigationToolbar = YES;
+                webViewController.hidesBottomBarWhenPushed = YES;
 
                 [self.navigationController pushViewController:webViewController animated:YES];
             }
