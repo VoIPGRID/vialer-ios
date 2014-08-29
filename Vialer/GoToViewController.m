@@ -106,9 +106,8 @@
                 webViewController.showsNavigationToolbar = NO;
 
                 [self.navigationController pushViewController:webViewController animated:YES];
-
-                [SVProgressHUD dismiss];
             }
+            [SVProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error %@", [error localizedDescription]);
