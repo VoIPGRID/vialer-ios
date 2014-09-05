@@ -574,7 +574,7 @@
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
-						DevelopmentTeam = E2Q9UE8HM6;
+						DevelopmentTeam = 6QG672DXVZ;
 					};
 				};
 			};
