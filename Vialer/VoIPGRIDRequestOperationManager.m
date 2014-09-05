@@ -182,6 +182,15 @@
           }];
 }
 
+- (void)autoLoginTokenWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [self GET:@"autologin/token/" parameters:[NSDictionary dictionary]
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          success(operation, responseObject);
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          failure(operation, error);
+      }];
+}
+
 - (void)loginFailed {
     // No credentials
     [self logout];
