@@ -95,6 +95,7 @@
 		FBAFB3FF18343FAA00848B2E /* outbound@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBAFB3FD18343FAA00848B2E /* outbound@2x.png */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
 		FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */; };
+		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDAF73B1858DD22005BA203 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7391858DD22005BA203 /* InfoViewController.m */; };
@@ -236,6 +237,8 @@
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FBB088CC18228E360004FFD1 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
 		FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
+		FBBC8621199BA2C600060261 /* PasteableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableTextView.h; sourceTree = "<group>"; };
+		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -414,7 +417,7 @@
 				FBA850C7189AAEC4008099C5 /* Config */,
 				FB302E63182A3AA4004B7D27 /* Resources */,
 				FB0CF33118226380002D4281 /* Api */,
-				FB5D291A182BE407001DA8F2 /* Categories */,
+				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
@@ -481,15 +484,17 @@
 			path = TestFlightSDK;
 			sourceTree = "<group>";
 		};
-		FB5D291A182BE407001DA8F2 /* Categories */ = {
+		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FBBC8621199BA2C600060261 /* PasteableTextView.h */,
+				FBBC8622199BA2C600060261 /* PasteableTextView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
 				FB48BB401875B63700C0D5DB /* NSString+Mobile.m */,
 				FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */,
 				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
 			);
-			name = Categories;
+			name = Categories/Helpers;
 			sourceTree = "<group>";
 		};
 		FBA850C7189AAEC4008099C5 /* Config */ = {
@@ -678,6 +683,7 @@
 				FB0CF34C18226392002D4281 /* AFURLRequestSerialization.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */,
+				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
