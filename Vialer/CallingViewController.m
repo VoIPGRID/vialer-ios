@@ -200,9 +200,13 @@
     
     NSLog(@"Calling %@...", self.toNumber);
     
+    NSString *fromNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+    fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+
     self.contactLabel.text = self.toContact;
 
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:fromNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *json = (NSDictionary *)responseObject;
             if ([[json objectForKey:@"callid"] isKindOfClass:[NSString class]]) {
