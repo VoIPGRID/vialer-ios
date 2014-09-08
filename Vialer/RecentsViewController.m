@@ -88,7 +88,9 @@
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager].operationQueue cancelAllOperations];
     [RecentCall clearCachedRecentCalls];
     self.previousSearchDateTime = nil;
-    self.recents = @[];
+    @synchronized(self.recents) {
+        self.recents = @[];
+    }
     [self.tableView reloadData];
 }
 
@@ -97,45 +99,55 @@
         return;
     }
     
+    if (self.reloading) {
+        return;
+    }
+
     self.previousSearchDateTime = [NSDate date];
-    
+
     // Retrieve recent calls from last month
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setMonth:-1];
     NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
         NSString *sourceNumber = nil;
         RecentsFilter filter = RecentsFilterNone;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
         if (filter == RecentsFilterSelf) {
             sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
         }
-        
+
         self.reloading = YES;
         [self.refreshControl beginRefreshing];
         
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            self.unauthorized = NO;
-            self.reloading = NO;
-            [self.refreshControl endRefreshing];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.unauthorized = NO;
+                self.reloading = NO;
+                [self.refreshControl endRefreshing];
 
-            if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
-                self.recents = [RecentCall recentCallsFromDictionary:responseObject];
-            }
-            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+                if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+                    @synchronized(self.recents) {
+                        self.recents = [RecentCall recentCallsFromDictionary:responseObject];
+                    }
+                }
+                [self.tableView reloadData];
+            });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            self.reloading = NO;
-            [self.refreshControl endRefreshing];
-            
-            if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
-                // No permissions
-                self.unauthorized = YES;
-                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            } else if (error.code != -999) {
-                NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-                [alert show];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.reloading = NO;
+                [self.refreshControl endRefreshing];
+
+                if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+                    // No permissions
+                    self.unauthorized = YES;
+                    [self.tableView reloadData];
+                } else if (error.code != -999) {
+                    NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+                    [alert show];
+                }
+            });
         }];
     });
 }

@@ -52,6 +52,7 @@
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
 
     [self GET:@"userdestination/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    [self GET:@"permission/systemuser/profile/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *userDestinations = [responseObject objectForKey:@"objects"];
         if ([userDestinations count] == 0) {
             // This is a partner account, don't log in!
