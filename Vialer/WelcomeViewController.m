@@ -7,6 +7,7 @@
 //
 
 #import "WelcomeViewController.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 @interface WelcomeViewController ()
 
@@ -39,13 +40,25 @@
 
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     self.descriptionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"From now you can dial out using %@.\nThe number you are calling with is:", nil), appName];
-    self.phoneNumberLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+    self.phoneNumberLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
+        if (outgoingCli) {
+            [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
+            self.phoneNumberLabel.text = outgoingCli;
+        }
+    } failure:nil];
 }
 
 #pragma mark - Table view data source

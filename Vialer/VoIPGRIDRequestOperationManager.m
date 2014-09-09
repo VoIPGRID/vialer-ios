@@ -51,16 +51,21 @@
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
 
-    [self GET:@"userdestination/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//    [self GET:@"permission/systemuser/profile/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *userDestinations = [responseObject objectForKey:@"objects"];
-        if ([userDestinations count] == 0) {
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:@"permission/systemuser/profile/" relativeToURL:self.baseURL] absoluteString] parameters:nil];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *client = [responseObject objectForKey:@"client"];
+        if (!client) {
             // This is a partner account, don't log in!
             failure(operation, nil);
-
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
+            NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
+            if (outgoingCli) {
+                [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
+            }
+
             // Store credentials
             [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -79,6 +84,20 @@
             [self connectionFailed];
         }
     }];
+
+    // NOTE: AFNetworking doesn't redirect the authorization header, so handle it here
+    __block NSString *authorization = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+    [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
+        if ([request.allHTTPHeaderFields objectForKey:@"Authorization"] != nil) {
+            return request;
+        }
+
+        NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL cachePolicy:request.cachePolicy timeoutInterval:request.timeoutInterval];
+        [urlRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
+        return  urlRequest;
+    }];
+
+    [self.operationQueue addOperation:operation];
 }
 
 - (void)logout {
@@ -113,6 +132,32 @@
             [self loginFailed];
         }
     }];
+}
+
+- (void)userProfileWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:@"permission/systemuser/profile/" relativeToURL:self.baseURL] absoluteString] parameters:nil];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(operation, responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
+        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+            [self loginFailed];
+        }
+    }];
+    
+    // NOTE: AFNetworking doesn't redirect the authorization header, so handle it here
+    __block NSString *authorization = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+    [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
+        if ([request.allHTTPHeaderFields objectForKey:@"Authorization"] != nil) {
+            return request;
+        }
+        
+        NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL cachePolicy:request.cachePolicy timeoutInterval:request.timeoutInterval];
+        [urlRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
+        return  urlRequest;
+    }];
+
+    [self.operationQueue addOperation:operation];
 }
 
 - (void)phoneAccountWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
