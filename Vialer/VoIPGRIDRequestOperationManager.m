@@ -113,8 +113,9 @@
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"User"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
 }
 
