@@ -18,6 +18,12 @@
 		FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */; };
 		FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34518226392002D4281 /* AFURLSessionManager.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
+		FB22439B19BF3FB600428DB7 /* info-01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB22439719BF3FB600428DB7 /* info-01.jpg */; };
+		FB22439C19BF3FB600428DB7 /* info-02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB22439819BF3FB600428DB7 /* info-02.jpg */; };
+		FB22439D19BF3FB600428DB7 /* info-03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB22439919BF3FB600428DB7 /* info-03.jpg */; };
+		FB22439E19BF3FB600428DB7 /* info-04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB22439A19BF3FB600428DB7 /* info-04.jpg */; };
+		FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */; };
+		FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */; };
 		FB29D913189BA0FF00345976 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		FB29D915189BAB0200345976 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB29D917189BAB0200345976 /* Config.plist */; };
 		FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
@@ -143,6 +149,13 @@
 		FB0CF34518226392002D4281 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
+		FB22439719BF3FB600428DB7 /* info-01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "info-01.jpg"; sourceTree = "<group>"; };
+		FB22439819BF3FB600428DB7 /* info-02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "info-02.jpg"; sourceTree = "<group>"; };
+		FB22439919BF3FB600428DB7 /* info-03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "info-03.jpg"; sourceTree = "<group>"; };
+		FB22439A19BF3FB600428DB7 /* info-04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "info-04.jpg"; sourceTree = "<group>"; };
+		FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCarouselViewController.h; sourceTree = "<group>"; };
+		FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCarouselViewController.m; sourceTree = "<group>"; };
+		FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoCarouselViewController.xib; sourceTree = "<group>"; };
 		FB29D912189BA0FF00345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB29D916189BAB0200345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
@@ -359,6 +372,10 @@
 				FBF66ACD1838D1C600C19859 /* dialer-button@2x.png */,
 				FBBC8628199BBB4500060261 /* goto.png */,
 				FBBC8625199BBB0900060261 /* goto@2x.png */,
+				FB22439719BF3FB600428DB7 /* info-01.jpg */,
+				FB22439819BF3FB600428DB7 /* info-02.jpg */,
+				FB22439919BF3FB600428DB7 /* info-03.jpg */,
+				FB22439A19BF3FB600428DB7 /* info-04.jpg */,
 				FBF66ACE1838D1C600C19859 /* keypad-back.png */,
 				FBF66ACF1838D1C600C19859 /* keypad-back@2x.png */,
 				FBF66AD01838D1C600C19859 /* keypad.png */,
@@ -471,6 +488,9 @@
 				FBDAF7381858DD22005BA203 /* InfoViewController.h */,
 				FBDAF7391858DD22005BA203 /* InfoViewController.m */,
 				FBDAF73A1858DD22005BA203 /* InfoViewController.xib */,
+				FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */,
+				FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */,
+				FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */,
 				FB29D911189BA0FF00345976 /* Localizable.strings */,
 				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
 				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
@@ -503,19 +523,6 @@
 				FB4226E6182261D200707349 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FB5031681835266B006FEBAA /* TestFlightSDK */ = {
-			isa = PBXGroup;
-			children = (
-				FB5031691835266C006FEBAA /* libTestFlight.a */,
-				FB50316A1835266C006FEBAA /* README.md */,
-				FB50316B1835266C006FEBAA /* release_notes.md */,
-				FB50316C1835266C006FEBAA /* TestFlight+AsyncLogging.h */,
-				FB50316D1835266C006FEBAA /* TestFlight+ManualSessions.h */,
-				FB50316E1835266C006FEBAA /* TestFlight.h */,
-			);
-			path = TestFlightSDK;
 			sourceTree = "<group>";
 		};
 		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
@@ -639,6 +646,7 @@
 				FBF66AD21838D1C600C19859 /* dialer-button.png in Resources */,
 				FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */,
 				FBF66AD41838D1C600C19859 /* keypad-back.png in Resources */,
+				FB22439D19BF3FB600428DB7 /* info-03.jpg in Resources */,
 				FB4226DB182261D200707349 /* InfoPlist.strings in Resources */,
 				FB4226E3182261D200707349 /* Default.png in Resources */,
 				FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */,
@@ -654,6 +662,8 @@
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				FBBC8627199BBB0900060261 /* goto@2x.png in Resources */,
 				FB576B17182A81CF00C4FAB4 /* recents.png in Resources */,
+				FB22439B19BF3FB600428DB7 /* info-01.jpg in Resources */,
+				FB22439E19BF3FB600428DB7 /* info-04.jpg in Resources */,
 				FB85316318398198008A7EF1 /* call-button-background.png in Resources */,
 				FB364D201836846A00932D6E /* 4.wav in Resources */,
 				FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */,
@@ -671,6 +681,7 @@
 				FB364D1D1836846A00932D6E /* 1.wav in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
 				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
+				FB22439C19BF3FB600428DB7 /* info-02.jpg in Resources */,
 				FB364D211836846A00932D6E /* 5.wav in Resources */,
 				FB576B06182A70BF00C4FAB4 /* contacts.png in Resources */,
 				FB576B0E182A7EED00C4FAB4 /* settings.png in Resources */,
@@ -682,6 +693,7 @@
 				FBAD7F1D182B00F5002FC8FC /* nav-bar.png in Resources */,
 				FB85315F18397E55008A7EF1 /* dialer-button-highlighted.png in Resources */,
 				FBAD7F0A182A8E76002FC8FC /* logoMedium@2x.png in Resources */,
+				FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */,
 				FB576B18182A81CF00C4FAB4 /* recents@2x.png in Resources */,
 				FBAFB3FF18343FAA00848B2E /* outbound@2x.png in Resources */,
 				FBF66AD71838D1C600C19859 /* keypad@2x.png in Resources */,
@@ -727,6 +739,7 @@
 				FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
 				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
+				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,

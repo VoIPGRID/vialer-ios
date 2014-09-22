@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InfoCarouselViewController : UIViewController
+@interface InfoCarouselViewController : UIViewController<UIScrollViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+
+- (IBAction)pageChanged:(id)sender;
 
 @end
