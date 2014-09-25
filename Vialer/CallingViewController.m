@@ -244,10 +244,7 @@
         return NO;
     }
     
-    if (![self.mobileCC length] || [newString hasPrefix:self.mobileCC]) {
-        return YES;
-    }
-    return NO;
+    return YES;
 }
 
 #pragma mark - Timer
