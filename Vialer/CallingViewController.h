@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WelcomeViewController.h"
 
 #import <AddressBookUI/AddressBookUI.h>
 
-@interface CallingViewController : UIViewController<UITextFieldDelegate>
+@interface CallingViewController : UIViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 

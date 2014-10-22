@@ -85,6 +85,8 @@
 		FB8ECF58199CE6780065EF6D /* accessibility@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB8ECF56199CE6780065EF6D /* accessibility@2x.png */; };
 		FB9692C4183CABD000241D7C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9692C2183CABD000241D7C /* logout.png */; };
 		FB9692C5183CABD000241D7C /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9692C3183CABD000241D7C /* logout@2x.png */; };
+		FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */; };
+		FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */; };
 		FBA850C0189AA87E008099C5 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = FBA850C2189AA87E008099C5 /* info.html */; };
 		FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */; };
 		FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */; };
@@ -230,6 +232,9 @@
 		FB8ECF56199CE6780065EF6D /* accessibility@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accessibility@2x.png"; sourceTree = "<group>"; };
 		FB9692C2183CABD000241D7C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		FB9692C3183CABD000241D7C /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
+		FB9CC6BF19BD967C00BF2A82 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		FBA850C1189AA87E008099C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/info.html; sourceTree = "<group>"; };
 		FBA850C3189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/info.html; sourceTree = "<group>"; };
 		FBA850C4189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -506,6 +511,9 @@
 				FBDAF7331858D238005BA203 /* SettingsViewController.h */,
 				FBDAF7341858D238005BA203 /* SettingsViewController.m */,
 				FBDAF7351858D238005BA203 /* SettingsViewController.xib */,
+				FB9CC6BF19BD967C00BF2A82 /* WelcomeViewController.h */,
+				FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */,
+				FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */,
 				FB4226D7182261D200707349 /* Supporting Files */,
 			);
 			path = Vialer;
@@ -653,6 +661,7 @@
 				FB364D241836846A00932D6E /* 8.wav in Resources */,
 				FBDAF73C1858DD22005BA203 /* InfoViewController.xib in Resources */,
 				FB364D221836846A00932D6E /* 6.wav in Resources */,
+				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
 				FB576B0F182A7EED00C4FAB4 /* settings@2x.png in Resources */,
 				FB364D231836846A00932D6E /* 7.wav in Resources */,
 				FBBC8629199BBB4500060261 /* goto.png in Resources */,
@@ -741,6 +750,7 @@
 				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
+				FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */,

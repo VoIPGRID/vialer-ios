@@ -10,6 +10,7 @@
 #import "VoIPGRIDRequestOperationManager.h"
 #import "InfoCarouselViewController.h"
 #import "SelectRecentsFilterViewController.h"
+#import "WelcomeViewController.h"
 #import "NSString+Mobile.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
@@ -183,11 +184,20 @@
             UITextField *mobileNumberTextField = [alertView textFieldAtIndex:0];
             NSString *mobileNumber = [mobileNumberTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             if ([mobileNumber length] && ![mobileNumber isEqualToString:self.mobileCC]) {
+                BOOL hasPhoneNumber = [[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] length];
+
                 [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-
+                
                 [self.tableView reloadData];
                 [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
+                
+                if (!hasPhoneNumber) {
+                    // Show welcome screen the first time a user enters his number
+                    WelcomeViewController *welcomeViewController = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
+                    UINavigationController *welcomeNavigationViewController = [[UINavigationController alloc] initWithRootViewController:welcomeViewController];
+                    [self presentViewController:welcomeNavigationViewController animated:YES completion:nil];
+                }
             }
         }
     } else if (alertView.tag == LOG_OUT_ALERT_TAG) {

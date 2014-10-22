@@ -88,9 +88,12 @@
             if ([mobileNumber length] && ![mobileNumber isEqualToString:self.mobileCC]) {
                 [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-   
+
                 [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
-                [self clickToDial];
+
+                WelcomeViewController *welcomeViewController = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
+                welcomeViewController.delegate = self;
+                [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:[[UINavigationController alloc] initWithRootViewController:welcomeViewController] animated:YES completion:nil];
             }
         }
     } else if (alertView.tag == FAILED_ALERT_TAG) {
@@ -248,6 +251,12 @@
         return YES;
     }
     return NO;
+}
+
+#pragma mark - Welcome view controller delegate
+
+- (void)welcomeViewControllerDidFinish:(WelcomeViewController *)welcomeViewController {
+    [self clickToDial];
 }
 
 #pragma mark - Timer
