@@ -50,7 +50,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
         NSAssert(config != nil, @"Config.plist not found!");
@@ -98,7 +98,7 @@
     if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
         return;
     }
-    
+
     if (self.reloading) {
         return;
     }
@@ -119,7 +119,7 @@
 
         self.reloading = YES;
         [self.refreshControl beginRefreshing];
-        
+
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.unauthorized = NO;
@@ -143,7 +143,7 @@
                     self.unauthorized = YES;
                     [self.tableView reloadData];
                 } else if (error.code != -999) {
-                    NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.\n%@", nil), [error localizedDescription]];
+                    NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.", nil)];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
                     [alert show];
                 }
@@ -189,7 +189,7 @@
     }
 
     static NSString *CellIdentifier = @"RecentTableViewCell";
-    
+
     RecentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[RecentTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
@@ -225,13 +225,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     if (indexPath.row >= self.recents.count) {
         return;
     }
 
     RecentCall *recent = [self.recents objectAtIndex:indexPath.row];
-    
+
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     ABRecordRef person = nil;
     if (recent.callerRecordId >= 0) {
@@ -247,7 +247,7 @@
         [self.navigationController pushViewController:personViewController animated:YES];
     } else if (recent.callerPhoneNumber.length) {
         person = ABPersonCreate();
-        
+
         CFErrorRef error = nil;
         ABMutableMultiValueRef phoneNumberMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
         ABMultiValueAddValueAndLabel(phoneNumberMultiValue, (__bridge CFTypeRef)(recent.callerPhoneNumber), kABPersonPhoneMainLabel, NULL);

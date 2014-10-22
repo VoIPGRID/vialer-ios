@@ -143,8 +143,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == COST_INFO_IDX) {
-        InfoCarouselViewController *infoViewController = [[InfoCarouselViewController alloc] initWithNibName:@"InfoCarouselViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:infoViewController animated:YES];
+        InfoCarouselViewController *infoCarouselViewController = [[InfoCarouselViewController alloc] initWithNibName:@"InfoCarouselViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:infoCarouselViewController animated:YES];
     } else if (indexPath.section == PHONE_NUMBER_IDX) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number starting with your country code.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
         alert.tag = PHONE_NUMBER_ALERT_TAG;
