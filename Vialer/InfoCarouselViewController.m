@@ -47,9 +47,9 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.pageControl.numberOfPages, 1.f);
 
     for (int i = 1; i <= self.pageControl.numberOfPages; i++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"info_%02d", i]]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"info_%02d.jpg", i]]];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.frame = CGRectMake(self.scrollView.frame.size.width * (i - 1), 0.0f, self.scrollView.frame.size.width, self.pageControl.frame.origin.y - self.tabBarController.tabBar.frame.size.height - self.pageControl.frame.size.height);
+        imageView.frame = CGRectMake(self.scrollView.frame.size.width * (i - 1), -self.tabBarController.tabBar.frame.size.height, self.scrollView.frame.size.width, self.pageControl.frame.origin.y - self.tabBarController.tabBar.frame.size.height);
         [self.scrollView addSubview:imageView];
     }
 }
