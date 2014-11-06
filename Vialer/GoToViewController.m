@@ -44,10 +44,10 @@
     self.partnerBaseUrl = [[config objectForKey:@"URLS"] objectForKey:@"Partner"];
     NSAssert(self.partnerBaseUrl != nil, @"URLS - Partner not found in Config.plist!");
 
-    self.texts = @[NSLocalizedString(@"Dial plan", nil), NSLocalizedString(@"Statistics", nil), NSLocalizedString(@"Accessibility", nil)];
-    self.detailTexts = @[NSLocalizedString(@"Change your dial plan", nil), NSLocalizedString(@"Show statistics about your accessibility", nil), NSLocalizedString(@"Change your accessibility", nil)];
-    self.icons = @[@"dialPlan", @"statistics", @"accessibility"];
-    self.targetUrls = @[@"/dialplan/", @"/stats/dashboard/", @"/dashboard/"];
+    self.texts = @[NSLocalizedString(@"Accessibility", nil), NSLocalizedString(@"Dial plan", nil), NSLocalizedString(@"Statistics", nil)];
+    self.detailTexts = @[NSLocalizedString(@"Change your accessibility", nil), NSLocalizedString(@"Change your dial plan", nil), NSLocalizedString(@"Show statistics about your accessibility", nil)];
+    self.icons = @[@"accessibility", @"dialPlan", @"statistics"];
+    self.targetUrls = @[@"/dashboard/", @"/dialplan/", @"/stats/dashboard/"];
 }
 
 - (void)didReceiveMemoryWarning
