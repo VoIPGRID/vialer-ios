@@ -70,7 +70,7 @@
             [alert show];
         } else {
             NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
-            if (outgoingCli) {
+            if ([outgoingCli isKindOfClass:[NSString class]]) {
                 [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
             }
 

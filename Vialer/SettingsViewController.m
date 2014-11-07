@@ -126,7 +126,7 @@
         cell.textLabel.text = NSLocalizedString(@"Log out from this app", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     } else if (indexPath.section == VERSION_IDX) {
-        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
 
