@@ -60,7 +60,7 @@
         [self.callCenter setCallEventHandler:^(CTCall *call) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.backButton.hidden = YES;
-                weakSelf.numberTextField.text = @"";
+                weakSelf.numberTextView.text = @"";
             });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
@@ -185,33 +185,47 @@
     return capturedImage;
 }
 
+#pragma mark - TextView delegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"0123456789+#*() "];
+    if (newString.length != [[newString componentsSeparatedByCharactersInSet:[characterSet invertedSet]] componentsJoinedByString:@""].length) {
+        return NO;
+    }
+
+    self.backButton.hidden = NO;
+
+    return YES;
+}
+
 #pragma mark - Actions
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        if (self.numberTextField.text.length) {
-            self.numberTextField.text = [self.numberTextField.text substringToIndex:self.numberTextField.text.length - 1];
+        if (self.numberTextView.text.length) {
+            self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
         }
-        self.numberTextField.text = [self.numberTextField.text stringByAppendingString:@"+"];
+        self.numberTextView.text = [self.numberTextView.text stringByAppendingString:@"+"];
     }
 }
 
 - (void)backButtonLongPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        self.numberTextField.text = @"";
+        self.numberTextView.text = @"";
         self.backButton.hidden = YES;
     }
 }
 
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender {
-    if (self.numberTextField.text.length) {
-        self.numberTextField.text = [self.numberTextField.text substringToIndex:self.numberTextField.text.length - 1];
+    if (self.numberTextView.text.length) {
+        self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
     }
-    self.backButton.hidden = (self.numberTextField.text.length == 0);
+    self.backButton.hidden = (self.numberTextView.text.length == 0);
 }
 
 - (IBAction)callButtonPressed:(UIButton *)sender {
-    NSString *phoneNumber = self.numberTextField.text;
+    NSString *phoneNumber = self.numberTextView.text;
     if (!phoneNumber.length) {
         return;
     }
@@ -226,17 +240,17 @@
         AudioServicesPlaySystemSound(soundID);
     }
     
-    if (!self.numberTextField.text) {
-        self.numberTextField.text = @"";
+    if (!self.numberTextView.text) {
+        self.numberTextView.text = @"";
     }
 
     NSString *cipher = [self.titles objectAtIndex:sender.tag];
     if (cipher.length) {
-        self.numberTextField.text = [self.numberTextField.text stringByAppendingString:cipher];
+        self.numberTextView.text = [self.numberTextView.text stringByAppendingString:cipher];
     } else {
         NSString *character = [self.subTitles objectAtIndex:sender.tag];
         if (character.length) {
-            self.numberTextField.text = [self.numberTextField.text stringByAppendingString:character];
+            self.numberTextView.text = [self.numberTextView.text stringByAppendingString:character];
         }
     }
     

@@ -88,9 +88,12 @@
             if ([mobileNumber length] && ![mobileNumber isEqualToString:self.mobileCC]) {
                 [[NSUserDefaults standardUserDefaults] setObject:mobileNumberTextField.text forKey:@"MobileNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-   
+
                 [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
-                [self clickToDial];
+
+                WelcomeViewController *welcomeViewController = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
+                welcomeViewController.delegate = self;
+                [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:[[UINavigationController alloc] initWithRootViewController:welcomeViewController] animated:YES completion:nil];
             }
         }
     } else if (alertView.tag == FAILED_ALERT_TAG) {
@@ -200,9 +203,13 @@
     
     NSLog(@"Calling %@...", self.toNumber);
     
+    NSString *fromNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+    fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+
     self.contactLabel.text = self.toContact;
 
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:fromNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *json = (NSDictionary *)responseObject;
             if ([[json objectForKey:@"callid"] isKindOfClass:[NSString class]]) {
@@ -244,10 +251,13 @@
         return NO;
     }
     
-    if (![self.mobileCC length] || [newString hasPrefix:self.mobileCC]) {
-        return YES;
-    }
-    return NO;
+    return YES;
+}
+
+#pragma mark - Welcome view controller delegate
+
+- (void)welcomeViewControllerDidFinish:(WelcomeViewController *)welcomeViewController {
+    [self clickToDial];
 }
 
 #pragma mark - Timer

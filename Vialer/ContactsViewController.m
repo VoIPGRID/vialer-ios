@@ -54,7 +54,7 @@
     if ([navigationController.viewControllers indexOfObject:viewController] == 0) {
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
         viewController.navigationItem.rightBarButtonItem = nil;
-
+        
         if ([viewController isKindOfClass:[UITableViewController class]]) {
             UITableViewController *tableViewController = (UITableViewController *)viewController;
             tableViewController.tableView.sectionIndexColor = self.tableTintColor;
@@ -166,6 +166,11 @@
 
     AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
     return [appDelegate handlePerson:person property:property identifier:identifier];
+}
+
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+    [appDelegate handlePerson:person property:property identifier:identifier];
 }
 
 @end

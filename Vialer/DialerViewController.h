@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DialerViewController : UIViewController
+@interface DialerViewController : UIViewController<UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *buttonsView;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UITextField *numberTextField;
+@property (weak, nonatomic) IBOutlet UITextView *numberTextView;
 
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender;
 - (IBAction)callButtonPressed:(UIButton *)sender;

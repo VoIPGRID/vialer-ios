@@ -95,7 +95,7 @@ static NSDateFormatter *utcDateFormatter = nil;
 
     NSDate *date = [utcDateFormatter dateFromString:utcString];
     if (!date) {    // Failed with time zone, try without (Amsterdam)
-        [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT+1:00"]];
+        [utcDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"CET"]];
         [utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
         date = [utcDateFormatter dateFromString:utcString];
     }

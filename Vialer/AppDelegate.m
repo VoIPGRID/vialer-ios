@@ -16,8 +16,8 @@
 #import "DashboardViewController.h"
 #import "DialerViewController.h"
 #import "SettingsViewController.h"
+#import "GoToViewController.h"
 
-#import "TestFlight.h"
 #import "AFNetworkActivityLogger.h"
 
 @interface AppDelegate()
@@ -31,12 +31,6 @@
 {
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
     NSAssert(config != nil, @"Config.plist not found!");
-
-    // Test flight
-    NSString *testFlightToken = [[config objectForKey:@"Tokens"] objectForKey:@"Test Flight"];
-    if ([testFlightToken length]) {
-        [TestFlight takeOff:[[config objectForKey:@"Tokens"] objectForKey:@"Test Flight"]];
-    }
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
@@ -55,6 +49,7 @@
         NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
         NSAssert(tabBarColor != nil && tabBarColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
         [[UITabBar appearance] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
+        [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
     }
 
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
@@ -99,17 +94,23 @@
     UINavigationController *settingsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     settingsNavigationViewController.view.backgroundColor = [UIColor clearColor];
     settingsNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+
+    UIViewController *gotoViewController = [[GoToViewController alloc] initWithNibName:@"GoToViewController" bundle:[NSBundle mainBundle]];
+    gotoViewController.view.backgroundColor = [UIColor clearColor];
+    UINavigationController *gotoNavigationViewController = [[UINavigationController alloc] initWithRootViewController:gotoViewController];
+    gotoNavigationViewController.view.backgroundColor = [UIColor clearColor];
+    gotoNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerViewController, settingsNavigationViewController];
+    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerViewController, gotoNavigationViewController, settingsNavigationViewController];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         self.tabBarController.selectedIndex = 1;    // Contacts
     } else {
-        self.tabBarController.selectedIndex = 3;    // Settings
+        self.tabBarController.selectedIndex = 4;    // Settings
     }
     self.window.rootViewController = self.tabBarController;
     

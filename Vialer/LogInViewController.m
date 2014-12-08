@@ -76,6 +76,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Forgot Password", nil) message:NSLocalizedString(@"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [alert textFieldAtIndex:0].text = self.user;
+    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
     alert.tag = PASSWORD_FORGOT_ALERT;
     [alert show];
 }
