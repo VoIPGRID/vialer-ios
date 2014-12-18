@@ -44,6 +44,9 @@
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 #endif
 
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+
     // Setup appearance
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
@@ -52,8 +55,10 @@
         [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
     }
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"nav-bar"] stretchableImageWithLeftCapWidth:20 topCapHeight:10] forBarMetrics:UIBarMetricsDefault];
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
@@ -75,31 +80,26 @@
 
     ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
     contactsViewController.view.backgroundColor = [UIColor clearColor];
-    contactsViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-    
+
     UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
     recentsViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
     recentsNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    recentsNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 
     UIViewController *dashboardViewController = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:[NSBundle mainBundle]];
     dashboardViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *dashboardNavigationViewController = [[UINavigationController alloc] initWithRootViewController:dashboardViewController];
     dashboardNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    dashboardNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 
     UIViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:[NSBundle mainBundle]];
     settingsViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *settingsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     settingsNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    settingsNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 
     UIViewController *gotoViewController = [[GoToViewController alloc] initWithNibName:@"GoToViewController" bundle:[NSBundle mainBundle]];
     gotoViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *gotoNavigationViewController = [[UINavigationController alloc] initWithRootViewController:gotoViewController];
     gotoNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    gotoNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
     

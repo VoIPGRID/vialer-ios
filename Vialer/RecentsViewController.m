@@ -117,10 +117,8 @@
             sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
         }
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.reloading = YES;
-            [self.refreshControl beginRefreshing];
-        });
+        self.reloading = YES;
+        [self.refreshControl beginRefreshing];
 
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
             dispatch_async(dispatch_get_main_queue(), ^{

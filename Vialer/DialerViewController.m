@@ -9,8 +9,11 @@
 #import "DialerViewController.h"
 #import "AppDelegate.h"
 
+#import "AFNetworkReachabilityManager.h"
+
 #import <AudioToolbox/AudioServices.h>
 #import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCall.h>
 
 @interface DialerViewController ()
@@ -19,6 +22,8 @@
 @property (nonatomic, strong) NSArray *sounds;
 @property (nonatomic, strong) NSArray *waves;
 @property (nonatomic, strong) CTCallCenter *callCenter;
+@property (nonatomic, assign) BOOL isOnWiFi;
+@property (nonatomic, assign) BOOL isOn4G;
 @end
 
 @implementation DialerViewController
@@ -27,8 +32,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Keypad", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"keypad"];
+        self.title = NSLocalizedString(@"Call", nil);
+        self.tabBarItem.image = [UIImage imageNamed:@"call"];
 
         self.titles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"", @"0", @""];
         self.subTitles = @[@"", @"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ", @"*", @"+", @"#"];
@@ -64,6 +69,21 @@
             });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
+
+        // Check if radio access is at least 4G
+        __block CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
+        self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyWCDMA];//CTRadioAccessTechnologyLTE];
+        [NSNotificationCenter.defaultCenter addObserverForName:CTRadioAccessTechnologyDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyWCDMA];//CTRadioAccessTechnologyLTE];
+            [self networkStatusChanged];
+        }];
+
+        // Check WiFi or no WiFi
+        self.isOnWiFi = [AFNetworkReachabilityManager sharedManager].reachableViaWiFi;
+        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            self.isOnWiFi = (status == AFNetworkReachabilityStatusReachableViaWiFi);
+            [self networkStatusChanged];
+        }];
     }
     return self;
 }
@@ -71,7 +91,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
+
     [self addDialerButtonsToView:self.buttonsView];
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonLongPress:)];
@@ -79,17 +101,14 @@
     
     self.backButton.hidden = YES;
 
-    [self.callButton setTitle:NSLocalizedString(@"Call", nil) forState:UIControlStateNormal];
+    [self.callButton setTitle:((self.isOnWiFi || self.isOn4G) ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+//    [self.callButton setTitle:NSLocalizedString(@"Call", nil) forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -108,8 +127,8 @@
 }
 
 - (void)addDialerButtonsToView:(UIView *)view {
-    CGFloat buttonXSpace = 94.f;
-    CGFloat buttonYSpace = [UIScreen mainScreen].bounds.size.height > 480.f ? 88.f : 78.f;
+    CGFloat buttonXSpace = [UIScreen mainScreen].bounds.size.width / 3.4f;
+    CGFloat buttonYSpace = [UIScreen mainScreen].bounds.size.height > 480.f ? [UIScreen mainScreen].bounds.size.height / 6.45f : 78.f;
     CGFloat leftOffset = (view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     
     CGPoint offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height > 480.f ? 16.f : 0.f);
@@ -176,13 +195,18 @@
     [buttonGraphic addSubview:subTitleLabel];
     
     CGRect rect = [buttonGraphic bounds];
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0f);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [buttonGraphic.layer renderInContext:context];
     UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return capturedImage;
+}
+
+- (void)networkStatusChanged {
+    NSLog(@"WIFI: %@, 4G: %@", self.isOnWiFi ? @"YES" : @"-", self.isOn4G ? @"YES" : @"-");
+    [self.callButton setTitle:((self.isOnWiFi || self.isOn4G) ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
 
 #pragma mark - TextView delegate

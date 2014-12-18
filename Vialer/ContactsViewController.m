@@ -11,6 +11,10 @@
 
 #import "AppDelegate.h"
 
+@interface ABPeoplePickerNavigationController ()
+- (void)setAllowsCancel:(BOOL)allowsCancel;
+@end
+
 @interface ContactsViewController()
 @property (nonatomic, retain) id<UISearchDisplayDelegate> oldSearchDisplayDelegate;
 @property (nonatomic, strong) UIColor *tableTintColor;
@@ -26,7 +30,9 @@
         self.title = NSLocalizedString(@"Contacts", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"contacts"];
         self.searchDisplayController.delegate = self;
-        
+
+        [self setAllowsCancel:NO];
+
         NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
         NSAssert(config != nil, @"Config.plist not found!");
 

@@ -12,6 +12,7 @@
 #import "SelectRecentsFilterViewController.h"
 #import "WelcomeViewController.h"
 #import "NSString+Mobile.h"
+#import "PJSIPTestViewController.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
 #define LOG_OUT_ALERT_TAG 101
@@ -21,10 +22,12 @@
 #define SHOW_RECENTS_IDX -1 // Disabled for now
 #define LOG_OUT_IDX      2
 #define VERSION_IDX      3
+#define TEST_IDX         4
 
 @interface SettingsViewController ()
 @property (nonatomic, strong) NSArray *sectionTitles;
 @property (nonatomic, strong) NSString *mobileCC;
+@property (nonatomic, strong) PJSIPTestViewController *testViewController;
 @end
 
 @implementation SettingsViewController
@@ -37,7 +40,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"settings"];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
         
-        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil), NSLocalizedString(@"Version", nil)];
+        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil), NSLocalizedString(@"Version", nil), @"PJSIP Test"];
     }
     return self;
 }
@@ -126,8 +129,11 @@
         cell.textLabel.text = NSLocalizedString(@"Log out from this app", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     } else if (indexPath.section == VERSION_IDX) {
-        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+    } else if (indexPath.section == TEST_IDX) {
+        cell.textLabel.text = @"PJ SIP Test";
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
 
     return cell;
@@ -164,12 +170,16 @@
         selectRecentsFilterViewController.delegate = self;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectRecentsFilterViewController];
-        navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
         [self presentViewController:navigationController animated:YES completion:^{}];
     } else if (indexPath.section == LOG_OUT_IDX) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log out", nil) message:NSLocalizedString(@"Are you sure you want to log out?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
         [alert show];
         alert.tag = LOG_OUT_ALERT_TAG;
+    } else if (indexPath.section == TEST_IDX) {
+        if (!self.testViewController) {
+            self.testViewController = [[PJSIPTestViewController alloc] initWithNibName:@"PJSIPTestViewController" bundle:[NSBundle mainBundle]];
+        }
+        [self.navigationController pushViewController:self.testViewController animated:YES];
     }
 }
 
