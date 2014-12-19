@@ -128,34 +128,6 @@
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.5f];
 }
 
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    if (property == kABPersonPhoneProperty) {
-        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    	for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
-    		if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i)) {
-    			CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-    			CFRelease(multiPhones);
-                
-    			NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
-    			CFRelease(phoneNumberRef);
-
-                NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
-                if (!fullName) {
-                    NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-                    NSString *middleName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-                    NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-                    if (firstName) {
-                        fullName = [NSString stringWithFormat:@"%@ %@%@", firstName, [middleName length] ? [NSString stringWithFormat:@"%@ ", middleName] : @"", lastName];
-                    }
-                }
-
-                [self handlePhoneNumber:phoneNumber forContact:fullName];
-            }
-        }
-    }
-    return NO;
-}
-
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     self.toNumber = phoneNumber;
     self.toContact = contact ? contact : phoneNumber;

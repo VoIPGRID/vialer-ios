@@ -147,7 +147,7 @@
 
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Enter SIP account" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alertView textFieldAtIndex:0].text = @"0508009000@ha.voys.nl";
+    [alertView textFieldAtIndex:0].text = @"0508009000";
 //    [alertView textFieldAtIndex:0].text = @"129500005@ha.voys.nl";
 //    [alertView textFieldAtIndex:0].text = @"129500039@ha.voys.nl";
     [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
@@ -158,6 +158,9 @@
         }
 
         NSString *address = [alertView textFieldAtIndex:0].text;
+        if ([address rangeOfString:@"@"].location == NSNotFound) {
+            address = [address stringByAppendingString:@"@ha.voys.nl"];
+        }
 
         self.outgoingCall = [GSCall outgoingCallToUri:address fromAccount:self.userAgent.account];
 

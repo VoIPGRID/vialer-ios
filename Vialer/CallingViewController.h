@@ -9,13 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "WelcomeViewController.h"
 
-#import <AddressBookUI/AddressBookUI.h>
-
 @interface CallingViewController : UIViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;
 
 @end

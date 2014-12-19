@@ -11,18 +11,21 @@
 #import "VoIPGRIDRequestOperationManager.h"
 #import "LogInViewController.h"
 #import "CallingViewController.h"
+#import "SIPCallingViewController.h"
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DashboardViewController.h"
 #import "DialerViewController.h"
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
+#import "ConnectionStatusHandler.h"
 
 #import "AFNetworkActivityLogger.h"
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
 @property (nonatomic, strong) CallingViewController *callingViewController;
+@property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @end
 
 @implementation AppDelegate
@@ -45,6 +48,9 @@
 #endif
 
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+
+    [[ConnectionStatusHandler sharedConnectionStatusHandler] start];
+
     [UIDevice currentDevice].proximityMonitoringEnabled = YES;
 
     // Setup appearance
@@ -77,6 +83,9 @@
     
     self.callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
     self.callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
+    self.sipCallingViewController = [[SIPCallingViewController alloc] initWithNibName:@"SIPCallingViewController" bundle:[NSBundle mainBundle]];
+    self.sipCallingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
     ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
     contactsViewController.view.backgroundColor = [UIColor clearColor];
@@ -165,11 +174,42 @@
 */
 
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    return [self.callingViewController handlePerson:person property:property identifier:identifier];
+    if (property == kABPersonPhoneProperty) {
+        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+            if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i)) {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+                CFRelease(multiPhones);
+
+                NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
+                CFRelease(phoneNumberRef);
+
+                NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
+                if (!fullName) {
+                    NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+                    NSString *middleName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
+                    NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+                    if (firstName) {
+                        fullName = [NSString stringWithFormat:@"%@ %@%@", firstName, [middleName length] ? [NSString stringWithFormat:@"%@ ", middleName] : @"", lastName];
+                    }
+                }
+
+                [self handlePhoneNumber:phoneNumber forContact:fullName];
+            }
+        }
+    }
+    return NO;
+}
+
+- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
+    if ([ConnectionStatusHandler sharedConnectionStatusHandler].connectionStatus == ConnectionStatusHigh) {
+        return [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
+    }
+    return [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
-    return [self.callingViewController handlePhoneNumber:phoneNumber forContact:nil];
+    [self handlePhoneNumber:phoneNumber forContact:nil];
 }
 
 #pragma mark - Notifications

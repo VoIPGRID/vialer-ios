@@ -18,6 +18,7 @@
 		FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */; };
 		FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34518226392002D4281 /* AFURLSessionManager.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
+		FB202BC11A4396DB00024CDE /* ConnectionStatusHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB202BC01A4396DB00024CDE /* ConnectionStatusHandler.m */; };
 		FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */; };
 		FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */; };
@@ -128,6 +129,8 @@
 		FB0CF34518226392002D4281 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
+		FB202BBF1A4396DB00024CDE /* ConnectionStatusHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionStatusHandler.h; sourceTree = "<group>"; };
+		FB202BC01A4396DB00024CDE /* ConnectionStatusHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionStatusHandler.m; sourceTree = "<group>"; };
 		FB21E03F1A3B48D800AE746B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCarouselViewController.h; sourceTree = "<group>"; };
 		FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCarouselViewController.m; sourceTree = "<group>"; };
@@ -338,6 +341,15 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		FB202BC21A4396E700024CDE /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				FB202BBF1A4396DB00024CDE /* ConnectionStatusHandler.h */,
+				FB202BC01A4396DB00024CDE /* ConnectionStatusHandler.m */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
 		FB364D111836846A00932D6E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +459,7 @@
 				FBA850C7189AAEC4008099C5 /* Config */,
 				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
+				FB202BC21A4396E700024CDE /* Handlers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
@@ -683,6 +696,7 @@
 				FB0CF34618226392002D4281 /* AFHTTPRequestOperation.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */,
+				FB202BC11A4396DB00024CDE /* ConnectionStatusHandler.m in Sources */,
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */,
 				FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */,

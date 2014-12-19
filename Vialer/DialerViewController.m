@@ -8,6 +8,7 @@
 
 #import "DialerViewController.h"
 #import "AppDelegate.h"
+#import "ConnectionStatusHandler.h"
 
 #import "AFNetworkReachabilityManager.h"
 
@@ -20,10 +21,7 @@
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *subTitles;
 @property (nonatomic, strong) NSArray *sounds;
-@property (nonatomic, strong) NSArray *waves;
 @property (nonatomic, strong) CTCallCenter *callCenter;
-@property (nonatomic, assign) BOOL isOnWiFi;
-@property (nonatomic, assign) BOOL isOn4G;
 @end
 
 @implementation DialerViewController
@@ -69,21 +67,6 @@
             });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
-
-        // Check if radio access is at least 4G
-        __block CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
-        self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyWCDMA];//CTRadioAccessTechnologyLTE];
-        [NSNotificationCenter.defaultCenter addObserverForName:CTRadioAccessTechnologyDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-            self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyWCDMA];//CTRadioAccessTechnologyLTE];
-            [self networkStatusChanged];
-        }];
-
-        // Check WiFi or no WiFi
-        self.isOnWiFi = [AFNetworkReachabilityManager sharedManager].reachableViaWiFi;
-        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            self.isOnWiFi = (status == AFNetworkReachabilityStatusReachableViaWiFi);
-            [self networkStatusChanged];
-        }];
     }
     return self;
 }
@@ -91,6 +74,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
 
@@ -101,7 +86,7 @@
     
     self.backButton.hidden = YES;
 
-    [self.callButton setTitle:((self.isOnWiFi || self.isOn4G) ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+    [self.callButton setTitle:([ConnectionStatusHandler sharedConnectionStatusHandler].connectionStatus == ConnectionStatusHigh ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 //    [self.callButton setTitle:NSLocalizedString(@"Call", nil) forState:UIControlStateNormal];
 }
 
@@ -204,9 +189,8 @@
     return capturedImage;
 }
 
-- (void)networkStatusChanged {
-    NSLog(@"WIFI: %@, 4G: %@", self.isOnWiFi ? @"YES" : @"-", self.isOn4G ? @"YES" : @"-");
-    [self.callButton setTitle:((self.isOnWiFi || self.isOn4G) ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+- (void)connectionStatusChangedNotification:(NSNotification *)notification {
+    [self.callButton setTitle:([ConnectionStatusHandler sharedConnectionStatusHandler].connectionStatus == ConnectionStatusHigh ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
 
 #pragma mark - TextView delegate
