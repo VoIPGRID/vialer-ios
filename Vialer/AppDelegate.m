@@ -51,8 +51,6 @@
 
     [[ConnectionStatusHandler sharedConnectionStatusHandler] start];
 
-    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-
     // Setup appearance
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];

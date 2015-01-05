@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIPCallingViewController : UIViewController
+#import "Gossip.h"
+
+@interface SIPCallingViewController : UIViewController<GSAccountDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *buttonsView;
 @property (strong, nonatomic) IBOutlet UIButton *hangupButton;

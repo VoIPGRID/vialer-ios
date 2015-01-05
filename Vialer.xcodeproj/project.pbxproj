@@ -103,6 +103,7 @@
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */; };
+		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -266,6 +267,8 @@
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
+		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,9 +276,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */,
 				FB3820DA1A1E510C0033FF78 /* CoreVideo.framework in Frameworks */,
 				FB3820D81A1E51040033FF78 /* CoreMedia.framework in Frameworks */,
-				FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */,
 				FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */,
 				FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */,
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
@@ -526,6 +529,8 @@
 		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
+				FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */,
 				FBBC8621199BA2C600060261 /* PasteableTextView.h */,
 				FBBC8622199BA2C600060261 /* PasteableTextView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
@@ -688,6 +693,7 @@
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				FB0CF34B18226392002D4281 /* AFURLConnectionOperation.m in Sources */,
 				FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */,
+				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
 				FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */,
