@@ -41,10 +41,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
+
     self.images = @[@"numbers-button", @"pause-button", @"mute-button", @"", @"speaker-button", @""];
     self.subTitles = @[NSLocalizedString(@"numbers", nil), NSLocalizedString(@"pause", nil), NSLocalizedString(@"sound off", nil), @"", NSLocalizedString(@"speaker", nil), @""];
-
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
@@ -141,6 +141,7 @@
 }
 
 - (void)stopTickerTimer {
+    self.tickerStartDate = nil;
     [self.tickerTimer invalidate];
     self.tickerTimer = nil;
 }
@@ -188,6 +189,9 @@
 }
 
 - (void)call {
+    self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+
     NSString *address = self.toNumber;
     if ([address rangeOfString:@"@"].location == NSNotFound) {
         address = [address stringByAppendingString:@"@ha.voys.nl"];
@@ -264,7 +268,6 @@
     NSLog(@"Calling %@...", self.toNumber);
 
     self.contactLabel.text = self.toContact;
-    [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
 }
 
 - (void)callStatusDidChange {
@@ -273,7 +276,6 @@
         } break;
 
         case GSCallStatusConnecting: {
-            [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
         } break;
 
         case GSCallStatusCalling: {
@@ -283,7 +285,6 @@
             [self startTickerTimer];
             [UIDevice currentDevice].proximityMonitoringEnabled = YES;
             self.pauseButton.enabled = YES;
-            [self showWithStatus:@"00:00"];
         } break;
 
         case GSCallStatusDisconnected: {
@@ -351,7 +352,7 @@
     }
 
     NSInteger timePassed = -[self.tickerStartDate timeIntervalSinceNow];
-    [self showWithStatus:[NSString stringWithFormat:@"%02d:%02d", timePassed / 60, timePassed % 60]];
+    [self showWithStatus:[NSString stringWithFormat:@"%02ld:%02ld", timePassed / 60, timePassed % 60]];
 }
 
 #pragma mark - Actions

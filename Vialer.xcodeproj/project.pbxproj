@@ -100,6 +100,11 @@
 		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
 		FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC862B199BBB7400060261 /* GoToViewController.m */; };
 		FBBC862E199BBB7400060261 /* GoToViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC862C199BBB7400060261 /* GoToViewController.xib */; };
+		FBBD8DE11A5B403400F6A184 /* info_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DD71A5B403400F6A184 /* info_01.jpg */; };
+		FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DD91A5B403400F6A184 /* info_02.jpg */; };
+		FBBD8DE31A5B403400F6A184 /* info_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DDB1A5B403400F6A184 /* info_03.jpg */; };
+		FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DDD1A5B403400F6A184 /* info_04.jpg */; };
+		FBBD8DE51A5B403400F6A184 /* info_05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DDF1A5B403400F6A184 /* info_05.jpg */; };
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */; };
@@ -263,6 +268,16 @@
 		FBBC862A199BBB7400060261 /* GoToViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoToViewController.h; sourceTree = "<group>"; };
 		FBBC862B199BBB7400060261 /* GoToViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoToViewController.m; sourceTree = "<group>"; };
 		FBBC862C199BBB7400060261 /* GoToViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoToViewController.xib; sourceTree = "<group>"; };
+		FBBD8DD81A5B403400F6A184 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/info_01.jpg; sourceTree = "<group>"; };
+		FBBD8DDA1A5B403400F6A184 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/info_02.jpg; sourceTree = "<group>"; };
+		FBBD8DDC1A5B403400F6A184 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/info_03.jpg; sourceTree = "<group>"; };
+		FBBD8DDE1A5B403400F6A184 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/info_04.jpg; sourceTree = "<group>"; };
+		FBBD8DE01A5B403400F6A184 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/info_05.jpg; sourceTree = "<group>"; };
+		FBBD8DE61A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_01.jpg; sourceTree = "<group>"; };
+		FBBD8DE71A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_02.jpg; sourceTree = "<group>"; };
+		FBBD8DE81A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_03.jpg; sourceTree = "<group>"; };
+		FBBD8DE91A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_04.jpg; sourceTree = "<group>"; };
+		FBBD8DEA1A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_05.jpg; sourceTree = "<group>"; };
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -465,6 +480,7 @@
 				FB202BC21A4396E700024CDE /* Handlers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
+				FBBD8DEB1A5B404400F6A184 /* Info Screen */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
 				FB89C75A1850C153006A4556 /* CallingViewController.h */,
@@ -484,7 +500,6 @@
 				FBBC862A199BBB7400060261 /* GoToViewController.h */,
 				FBBC862B199BBB7400060261 /* GoToViewController.m */,
 				FBBC862C199BBB7400060261 /* GoToViewController.xib */,
-				FBA850C2189AA87E008099C5 /* info.html */,
 				FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */,
 				FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */,
 				FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */,
@@ -592,6 +607,19 @@
 			path = AFNetworkActivityLogger;
 			sourceTree = "<group>";
 		};
+		FBBD8DEB1A5B404400F6A184 /* Info Screen */ = {
+			isa = PBXGroup;
+			children = (
+				FBA850C2189AA87E008099C5 /* info.html */,
+				FBBD8DD71A5B403400F6A184 /* info_01.jpg */,
+				FBBD8DD91A5B403400F6A184 /* info_02.jpg */,
+				FBBD8DDB1A5B403400F6A184 /* info_03.jpg */,
+				FBBD8DDD1A5B403400F6A184 /* info_04.jpg */,
+				FBBD8DDF1A5B403400F6A184 /* info_05.jpg */,
+			);
+			name = "Info Screen";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -618,7 +646,7 @@
 		FB4226C5182261D200707349 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
@@ -651,6 +679,7 @@
 			files = (
 				FB364D1C1836846A00932D6E /* 0.wav in Resources */,
 				FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */,
+				FBBD8DE51A5B403400F6A184 /* info_05.jpg in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB4226DB182261D200707349 /* InfoPlist.strings in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
@@ -658,8 +687,10 @@
 				FB364D241836846A00932D6E /* 8.wav in Resources */,
 				FB364D221836846A00932D6E /* 6.wav in Resources */,
 				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
+				FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */,
 				FB364D231836846A00932D6E /* 7.wav in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
+				FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */,
 				FB3820DF1A1E536C0033FF78 /* PJSIPTestViewController.xib in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				FB364D201836846A00932D6E /* 4.wav in Resources */,
@@ -670,7 +701,9 @@
 				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
 				FB364D1E1836846A00932D6E /* 2.wav in Resources */,
 				FB364D1D1836846A00932D6E /* 1.wav in Resources */,
+				FBBD8DE11A5B403400F6A184 /* info_01.jpg in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
+				FBBD8DE31A5B403400F6A184 /* info_03.jpg in Resources */,
 				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
 				FB364D211836846A00932D6E /* 5.wav in Resources */,
 				FB364D1F1836846A00932D6E /* 3.wav in Resources */,
@@ -780,6 +813,51 @@
 			name = info.html;
 			sourceTree = "<group>";
 		};
+		FBBD8DD71A5B403400F6A184 /* info_01.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBBD8DD81A5B403400F6A184 /* en */,
+				FBBD8DE61A5B403E00F6A184 /* nl */,
+			);
+			name = info_01.jpg;
+			sourceTree = "<group>";
+		};
+		FBBD8DD91A5B403400F6A184 /* info_02.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBBD8DDA1A5B403400F6A184 /* en */,
+				FBBD8DE71A5B403E00F6A184 /* nl */,
+			);
+			name = info_02.jpg;
+			sourceTree = "<group>";
+		};
+		FBBD8DDB1A5B403400F6A184 /* info_03.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBBD8DDC1A5B403400F6A184 /* en */,
+				FBBD8DE81A5B403E00F6A184 /* nl */,
+			);
+			name = info_03.jpg;
+			sourceTree = "<group>";
+		};
+		FBBD8DDD1A5B403400F6A184 /* info_04.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBBD8DDE1A5B403400F6A184 /* en */,
+				FBBD8DE91A5B403E00F6A184 /* nl */,
+			);
+			name = info_04.jpg;
+			sourceTree = "<group>";
+		};
+		FBBD8DDF1A5B403400F6A184 /* info_05.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBBD8DE01A5B403400F6A184 /* en */,
+				FBBD8DEA1A5B403E00F6A184 /* nl */,
+			);
+			name = info_05.jpg;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -787,7 +865,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -813,7 +890,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -821,7 +898,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -841,14 +917,13 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -883,7 +958,7 @@
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -891,7 +966,6 @@
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -926,7 +1000,7 @@
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
