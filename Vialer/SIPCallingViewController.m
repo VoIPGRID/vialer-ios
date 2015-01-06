@@ -54,12 +54,6 @@
     [self addButtonsToView:self.buttonsView];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [self connect];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -148,11 +142,17 @@
 
 - (void)connect {
     if (!self.account) {
+        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+        NSAssert(config != nil, @"Config.plist not found!");
+
+        NSString *sipDomain = [[config objectForKey:@"URLS"] objectForKey:@"SIP domain"];
+        NSAssert(sipDomain != nil, @"URLS - SIP domain not found in Config.plist!");
+
         self.account = [GSAccountConfiguration defaultConfiguration];
-        self.account.address = @"129500039@ha.voys.nl";
-        self.account.username = @"129500039";
-        self.account.password = @"nj2xbhTe4AMfA2s";
-        self.account.domain = @"ha.voys.nl";
+        self.account.domain = sipDomain;
+        self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+        self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
+        self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
         self.account.enableRingback = NO;
     }
 
@@ -186,15 +186,20 @@
     if (self.userAgent.account.status == GSAccountStatusConnected) {
         [self.userAgent.account disconnect];
     }
+
+    self.userAgent.account.delegate = nil;
+    [self.userAgent.account removeObserver:self forKeyPath:@"status"];
+    [self.userAgent reset];
+
+    self.userAgent = nil;
+    self.account = nil;
+    self.config = nil;
 }
 
 - (void)call {
-    self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
-
     NSString *address = self.toNumber;
     if ([address rangeOfString:@"@"].location == NSNotFound) {
-        address = [address stringByAppendingString:@"@ha.voys.nl"];
+        address = [address stringByAppendingFormat:@"@%@", self.account.domain];
     }
 
     self.outgoingCall = [GSCall outgoingCallToUri:address fromAccount:self.userAgent.account];
@@ -258,16 +263,52 @@
 }
 
 - (void)sipDial {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Enter SIP account" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        [alertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+//        [alertView textFieldAtIndex:0].text = @"129500039";
+        [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
+//        [alertView textFieldAtIndex:1].text = @"nj2xbhTe4AMfA2s";
+
+        [alertView setTapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }
+
+            NSString *account = [alertView textFieldAtIndex:0].text;
+            NSString *password = [alertView textFieldAtIndex:1].text;
+            NSArray *accountComponents = [account componentsSeparatedByString:@"@"];
+            if ([accountComponents count] == 2) {
+                account = accountComponents[0];
+            }
+
+            account = [[account componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+            password = [[password componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+            if ([account length] && [password length]) {
+                [[NSUserDefaults standardUserDefaults] setObject:account forKey:@"SIPAccount"];
+                [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"SIPPassword"];   // TODO: Use key chain when SIP account is available through API
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+
+            [self sipDial];
+        }];
+
+        [alertView show];
+
+        return;
+    }
+
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
 
     self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+    self.contactLabel.text = self.toContact;
 
     NSLog(@"Calling %@...", self.toNumber);
 
-    self.contactLabel.text = self.toContact;
+    [self connect];
 }
 
 - (void)callStatusDidChange {
@@ -289,7 +330,7 @@
 
         case GSCallStatusDisconnected: {
             [self stopTickerTimer];
-            [self showErrorWithStatus:NSLocalizedString(@"Disconnected.", nil)];
+            [self showErrorWithStatus:NSLocalizedString(@"Hung up", nil)];
             [self.outgoingCall removeObserver:self forKeyPath:@"status"];
             self.outgoingCall = nil;
         } break;
@@ -303,7 +344,7 @@
         } break;
 
         case GSAccountStatusInvalid: {
-            [self showErrorWithStatus:NSLocalizedString(@"Invalid account.", nil)];
+            [self showErrorWithStatus:NSLocalizedString(@"Invalid account", nil)];
         } break;
 
         case GSAccountStatusConnecting: {

@@ -38,6 +38,8 @@
 		<string>https://partner.voipgrid.nl</string>
 		<key>How it works</key>
 		<string>www.vialerapp.com/hoe-het-werkt</string>
+		<key>SIP domain</key>
+		<string>ha.voys.nl</string>
 	</dict>
 </dict>
 </plist>

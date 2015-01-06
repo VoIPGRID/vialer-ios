@@ -12,7 +12,7 @@
 #import "SelectRecentsFilterViewController.h"
 #import "WelcomeViewController.h"
 #import "NSString+Mobile.h"
-#import "PJSIPTestViewController.h"
+#import "UIAlertView+Blocks.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
 #define LOG_OUT_ALERT_TAG 101
@@ -27,7 +27,6 @@
 @interface SettingsViewController ()
 @property (nonatomic, strong) NSArray *sectionTitles;
 @property (nonatomic, strong) NSString *mobileCC;
-@property (nonatomic, strong) PJSIPTestViewController *testViewController;
 @end
 
 @implementation SettingsViewController
@@ -132,7 +131,7 @@
         cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     } else if (indexPath.section == TEST_IDX) {
-        cell.textLabel.text = @"PJ SIP Test";
+        cell.textLabel.text = @"Enter SIP Account";
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
 
@@ -176,10 +175,33 @@
         [alert show];
         alert.tag = LOG_OUT_ALERT_TAG;
     } else if (indexPath.section == TEST_IDX) {
-        if (!self.testViewController) {
-            self.testViewController = [[PJSIPTestViewController alloc] initWithNibName:@"PJSIPTestViewController" bundle:[NSBundle mainBundle]];
-        }
-        [self.navigationController pushViewController:self.testViewController animated:YES];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Enter SIP account" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        [alertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        [alertView textFieldAtIndex:0].text = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+        [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
+
+        [alertView setTapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }
+
+            NSString *account = [alertView textFieldAtIndex:0].text;
+            NSString *password = [alertView textFieldAtIndex:1].text;
+            NSArray *accountComponents = [account componentsSeparatedByString:@"@"];
+            if ([accountComponents count] == 2) {
+                account = accountComponents[0];
+            }
+
+            account = [[account componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+            password = [[password componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+            if ([account length] && [password length]) {
+                [[NSUserDefaults standardUserDefaults] setObject:account forKey:@"SIPAccount"];
+                [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"SIPPassword"];   // TODO: Use key chain when SIP account is available through API
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }];
+
+        [alertView show];
     }
 }
 
