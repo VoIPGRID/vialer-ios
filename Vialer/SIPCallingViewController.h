@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "Gossip.h"
+#import "NumberPadViewController.h"
 
-@interface SIPCallingViewController : UIViewController<GSAccountDelegate>
+@interface SIPCallingViewController : UIViewController<GSAccountDelegate, NumberPadViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *buttonsView;
+@property (strong, nonatomic) IBOutlet UIView *numbersButtonsView;
 @property (strong, nonatomic) IBOutlet UIButton *hangupButton;
 @property (strong, nonatomic) IBOutlet UILabel *contactLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;

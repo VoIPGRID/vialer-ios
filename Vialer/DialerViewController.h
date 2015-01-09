@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DialerViewController : UIViewController<UITextViewDelegate>
+#import "NumberPadViewController.h"
+
+@interface DialerViewController : UIViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *buttonsView;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;

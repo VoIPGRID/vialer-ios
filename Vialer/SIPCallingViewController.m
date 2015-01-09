@@ -18,6 +18,7 @@
 #import <CoreTelephony/CTCall.h>
 
 @interface SIPCallingViewController ()
+@property (nonatomic, strong) NumberPadViewController *numberPadViewController;
 @property (nonatomic, strong) NSString *toNumber;
 @property (nonatomic, strong) NSString *toContact;
 @property (nonatomic, strong) NSArray *images;
@@ -43,6 +44,13 @@
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
+    self.numberPadViewController = [[NumberPadViewController alloc] init];
+    self.numberPadViewController.view.frame = self.buttonsView.frame;
+    [self.view addSubview:self.numberPadViewController.view];
+    [self addChildViewController:self.numberPadViewController];
+    self.numberPadViewController.delegate = self;
+    self.numberPadViewController.view.hidden = YES;
+
     self.images = @[@"numbers-button", @"pause-button", @"mute-button", @"", @"speaker-button", @""];
     self.subTitles = @[NSLocalizedString(@"numbers", nil), NSLocalizedString(@"pause", nil), NSLocalizedString(@"sound off", nil), @"", NSLocalizedString(@"speaker", nil), @""];
 
@@ -54,14 +62,11 @@
     [self addButtonsToView:self.buttonsView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
+    self.numberPadViewController.view.hidden = YES;
+    self.buttonsView.hidden = NO;
 }
 
 - (void)addButtonsToView:(UIView *)view {
@@ -69,7 +74,7 @@
     CGFloat buttonYSpace = self.view.frame.size.width / 3.f;
     CGFloat leftOffset = (view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
 
-    CGPoint offset = CGPointMake(0, 0);
+    CGPoint offset = CGPointMake(0, ((self.view.frame.size.height + 49.f - (buttonYSpace * 2.f)) / 2.f) - view.frame.origin.y);
     for (int j = 0; j < 2; j++) {
         offset.x = leftOffset;
         for (int i = 0; i < 3; i++) {
@@ -106,8 +111,6 @@
         }
         offset.y += buttonYSpace;
     }
-
-    view.frame = CGRectMake(view.frame.origin.x, (self.view.frame.size.height + 49.f - offset.y) / 2.f, view.frame.size.width, view.frame.size.height);
 }
 
 - (UIButton *)createDialerButtonWithImage:(NSString *)image andSubTitle:(NSString *)subTitle {
@@ -330,7 +333,7 @@
 
         case GSCallStatusDisconnected: {
             [self stopTickerTimer];
-            [self showErrorWithStatus:NSLocalizedString(@"Hung up", nil)];
+            [self showErrorWithStatus:NSLocalizedString(@"Call ended", nil)];
             [self.outgoingCall removeObserver:self forKeyPath:@"status"];
             self.outgoingCall = nil;
         } break;
@@ -399,6 +402,19 @@
 #pragma mark - Actions
 
 - (void)numbersButtonPressed:(UIButton *)sender {
+    self.numberPadViewController.view.alpha = 0.f;
+    self.numberPadViewController.view.hidden = NO;
+    self.numberPadViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    [UIView animateWithDuration:0.4f animations:^{
+        self.buttonsView.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+        self.buttonsView.alpha = 0.f;
+        self.numberPadViewController.view.alpha = 1.f;
+        self.numberPadViewController.view.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        self.buttonsView.hidden = YES;
+        self.buttonsView.alpha = 1.f;
+        self.buttonsView.transform = CGAffineTransformIdentity;
+    }];
 }
 
 - (void)muteButtonPressed:(UIButton *)sender {
@@ -433,6 +449,11 @@
 - (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
     self.incomingCall = call;
     [self.incomingCall begin];
+}
+
+#pragma mark - NumberPadViewController delegate
+
+- (void)numberPadPressedWithCharacter:(NSString *)character {
 }
 
 @end
