@@ -51,7 +51,6 @@
 		FB3820CC1A1E4F510033FF78 /* GSPJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BB1A1E4F510033FF78 /* GSPJUtil.m */; };
 		FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BD1A1E4F510033FF78 /* GSRingback.m */; };
 		FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820C01A1E4F510033FF78 /* GSUserAgent.m */; };
-		FB3820D01A1E4FC50033FF78 /* libGossip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820CF1A1E4FC50033FF78 /* libGossip.a */; };
 		FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
 		FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
 		FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
@@ -106,6 +105,8 @@
 		FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DDD1A5B403400F6A184 /* info_04.jpg */; };
 		FBBD8DE51A5B403400F6A184 /* info_05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBBD8DDF1A5B403400F6A184 /* info_05.jpg */; };
 		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
+		FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3941A64824F00E88E9B /* libGossip7.a */; };
+		FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3951A64824F00E88E9B /* libGossip64.a */; };
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */; };
@@ -281,6 +282,9 @@
 		FBBD8DEA1A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_05.jpg; sourceTree = "<group>"; };
 		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
+		FBC9B3921A6481F200E88E9B /* _libGossip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = _libGossip.a; sourceTree = "<group>"; };
+		FBC9B3941A64824F00E88E9B /* libGossip7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip7.a; sourceTree = "<group>"; };
+		FBC9B3951A64824F00E88E9B /* libGossip64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip64.a; sourceTree = "<group>"; };
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -302,11 +306,12 @@
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
 				FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
+				FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */,
+				FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
 				FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */,
 				FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */,
-				FB3820D01A1E4FC50033FF78 /* libGossip.a in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
 				FB643140182281C500E1BF17 /* Security.framework in Frameworks */,
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
@@ -452,6 +457,9 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FBC9B3941A64824F00E88E9B /* libGossip7.a */,
+				FBC9B3951A64824F00E88E9B /* libGossip64.a */,
+				FBC9B3921A6481F200E88E9B /* _libGossip.a */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
 				FB3820CF1A1E4FC50033FF78 /* libGossip.a */,
 				FB3820D91A1E510C0033FF78 /* CoreVideo.framework */,

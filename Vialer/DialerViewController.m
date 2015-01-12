@@ -58,6 +58,7 @@
     [self.buttonsView addSubview:self.numberPadViewController.view];
     [self addChildViewController:self.numberPadViewController];
     self.numberPadViewController.delegate = self;
+    self.numberPadViewController.tonesEnabled = YES;
 
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonLongPress:)];
     [self.backButton addGestureRecognizer:longPress];

@@ -10,6 +10,7 @@
                 <outlet property="buttonsView" destination="Gc4-2O-ucp" id="cXk-RE-uU2"/>
                 <outlet property="contactLabel" destination="JJS-G2-94E" id="UO0-48-Py2"/>
                 <outlet property="hangupButton" destination="EkR-fK-TWG" id="KyL-AV-3EP"/>
+                <outlet property="hideButton" destination="mbV-IJ-ZLZ" id="7kz-Ws-tia"/>
                 <outlet property="statusLabel" destination="PTI-2a-Rah" id="fHi-NT-pbO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,7 +25,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="Gc4-2O-ucp" userLabel="Buttons View">
-                    <rect key="frame" x="0.0" y="140" width="320" height="428"/>
+                    <rect key="frame" x="0.0" y="122" width="320" height="446"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                 </view>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo" id="Lc5-gs-D6r">
@@ -32,27 +33,39 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erwin de Vriez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JJS-G2-94E">
-                    <rect key="frame" x="0.0" y="59" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="40" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting up connection..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PTI-2a-Rah">
-                    <rect key="frame" x="0.0" y="106" width="320" height="27"/>
+                    <rect key="frame" x="0.0" y="87" width="320" height="27"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EkR-fK-TWG" userLabel="Hangup Button">
-                    <rect key="frame" x="0.0" y="421" width="320" height="147"/>
+                    <rect key="frame" x="0.0" y="476" width="320" height="92"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" image="decline-button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="hangupButtonPressed:" destination="-1" eventType="touchUpInside" id="PL1-lD-ekH"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbV-IJ-ZLZ">
+                    <rect key="frame" x="213" y="476" width="107" height="92"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Hide">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="hideButtonPressed:" destination="-1" eventType="touchDown" id="TSq-y7-C1Z"/>
                     </connections>
                 </button>
             </subviews>

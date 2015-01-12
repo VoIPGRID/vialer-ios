@@ -15,4 +15,5 @@
 
 @interface NumberPadViewController : UIViewController
 @property (nonatomic, assign) id <NumberPadViewControllerDelegate> delegate;
+@property (nonatomic, assign) BOOL tonesEnabled;
 @end

@@ -148,9 +148,11 @@
 }
 
 - (void)dialerButtonPressed:(UIButton *)sender {
-    SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:sender.tag] integerValue];
-    if (soundID > 0) {
-        AudioServicesPlaySystemSound(soundID);
+    if (self.tonesEnabled) {
+        SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:sender.tag] integerValue];
+        if (soundID > 0) {
+            AudioServicesPlaySystemSound(soundID);
+        }
     }
 
     if ([self.delegate respondsToSelector:@selector(numberPadPressedWithCharacter:)]) {

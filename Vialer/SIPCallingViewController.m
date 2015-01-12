@@ -45,7 +45,7 @@
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
     self.numberPadViewController = [[NumberPadViewController alloc] init];
-    self.numberPadViewController.view.frame = self.buttonsView.frame;
+    self.numberPadViewController.view.frame = CGRectOffset(self.buttonsView.frame, 0, -16.f);
     [self.view addSubview:self.numberPadViewController.view];
     [self addChildViewController:self.numberPadViewController];
     self.numberPadViewController.delegate = self;
@@ -66,6 +66,7 @@
     [super viewDidDisappear:animated];
 
     self.numberPadViewController.view.hidden = YES;
+    self.hideButton.hidden = YES;
     self.buttonsView.hidden = NO;
 }
 
@@ -269,9 +270,9 @@
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Enter SIP account" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         [alertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-//        [alertView textFieldAtIndex:0].text = @"129500039";
+        [alertView textFieldAtIndex:0].text = @"129500039";
         [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-//        [alertView textFieldAtIndex:1].text = @"nj2xbhTe4AMfA2s";
+        [alertView textFieldAtIndex:1].text = @"nj2xbhTe4AMfA2s";
 
         [alertView setTapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 0) {
@@ -396,18 +397,21 @@
     }
 
     NSInteger timePassed = -[self.tickerStartDate timeIntervalSinceNow];
-    [self showWithStatus:[NSString stringWithFormat:@"%02ld:%02ld", timePassed / 60, timePassed % 60]];
+    [self showWithStatus:[NSString stringWithFormat:@"%02d:%02d", (unsigned)(timePassed / 60), (unsigned)(timePassed % 60)]];
 }
 
 #pragma mark - Actions
 
 - (void)numbersButtonPressed:(UIButton *)sender {
+    self.hideButton.alpha = 0.f;
+    self.hideButton.hidden = NO;
     self.numberPadViewController.view.alpha = 0.f;
     self.numberPadViewController.view.hidden = NO;
     self.numberPadViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
     [UIView animateWithDuration:0.4f animations:^{
         self.buttonsView.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
         self.buttonsView.alpha = 0.f;
+        self.hideButton.alpha = 1.f;
         self.numberPadViewController.view.alpha = 1.f;
         self.numberPadViewController.view.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
@@ -446,6 +450,24 @@
     [self dismiss];
 }
 
+- (IBAction)hideButtonPressed:(UIButton *)sender {
+    self.buttonsView.alpha = 0.f;
+    self.buttonsView.hidden = NO;
+    self.buttonsView.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    [UIView animateWithDuration:0.4f animations:^{
+        self.hideButton.alpha = 0.f;
+        self.numberPadViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+        self.numberPadViewController.view.alpha = 0.f;
+        self.buttonsView.alpha = 1.f;
+        self.buttonsView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        self.hideButton.hidden = YES;
+        self.numberPadViewController.view.hidden = YES;
+        self.numberPadViewController.view.alpha = 1.f;
+        self.numberPadViewController.view.transform = CGAffineTransformIdentity;
+    }];
+}
+
 - (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
     self.incomingCall = call;
     [self.incomingCall begin];
@@ -454,6 +476,9 @@
 #pragma mark - NumberPadViewController delegate
 
 - (void)numberPadPressedWithCharacter:(NSString *)character {
+    if (self.outgoingCall) {
+        [self.outgoingCall sendDTMFDigits:character];
+    }
 }
 
 @end
