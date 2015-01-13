@@ -46,7 +46,7 @@
 
     self.numberPadViewController = [[NumberPadViewController alloc] init];
     self.numberPadViewController.view.frame = CGRectOffset(self.buttonsView.frame, 0, -16.f);
-    [self.view addSubview:self.numberPadViewController.view];
+    [self.view insertSubview:self.numberPadViewController.view aboveSubview:self.buttonsView];
     [self addChildViewController:self.numberPadViewController];
     self.numberPadViewController.delegate = self;
     self.numberPadViewController.view.hidden = YES;
@@ -396,8 +396,10 @@
         return;
     }
 
-    NSInteger timePassed = -[self.tickerStartDate timeIntervalSinceNow];
-    [self showWithStatus:[NSString stringWithFormat:@"%02d:%02d", (unsigned)(timePassed / 60), (unsigned)(timePassed % 60)]];
+    if (self.outgoingCall.status == GSCallStatusConnected) {
+        NSInteger timePassed = -[self.tickerStartDate timeIntervalSinceNow];
+        [self showWithStatus:[NSString stringWithFormat:@"%02d:%02d", (unsigned)(timePassed / 60), (unsigned)(timePassed % 60)]];
+    }
 }
 
 #pragma mark - Actions
