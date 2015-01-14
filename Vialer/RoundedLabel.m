@@ -19,7 +19,7 @@
 }
 
 - (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:UIEdgeInsetsInsetRect(frame, UIEdgeInsetsMake(0.f, 0.f, 0.f, -6.f))];
+    self = [super initWithFrame:UIEdgeInsetsInsetRect(frame, UIEdgeInsetsMake(0.f, 0.f, 0.f, -12.f))];
     if (self) {
         self.layer.cornerRadius = 12.f;
     }
@@ -28,12 +28,12 @@
 
 - (void)sizeToFit {
     [super sizeToFit];
-    
-    self.frame = UIEdgeInsetsInsetRect(self.frame, UIEdgeInsetsMake(0.f, 0.f, 0.f, -6.f));
+
+    self.frame = UIEdgeInsetsInsetRect(self.frame, UIEdgeInsetsMake(0.f, 0.f, 0.f, -12.f));
 }
 
 - (void)drawTextInRect:(CGRect)rect {
-    [super drawTextInRect:UIEdgeInsetsInsetRect(rect, UIEdgeInsetsMake(0.f, 3.f, 0.f, 3.f))];
+    [super drawTextInRect:UIEdgeInsetsInsetRect(rect, UIEdgeInsetsMake(0.f, 6.f, 0.f, 6.f))];
 }
 
 @end

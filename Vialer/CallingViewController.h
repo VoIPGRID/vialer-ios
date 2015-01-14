@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "WelcomeViewController.h"
+#import "RoundedLabel.h"
 
 @interface CallingViewController : UIViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet RoundedLabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *infoImageView;
 

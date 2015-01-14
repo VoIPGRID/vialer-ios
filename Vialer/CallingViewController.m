@@ -60,19 +60,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
 
-    CGSize statusTextSize = [self.statusLabel.text sizeWithAttributes:@{NSFontAttributeName:self.statusLabel.font}];
-    self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, statusTextSize.width - (leftOffset * 2), self.statusLabel.frame.size.height);
+    self.statusLabel.text = NSLocalizedString(@"NO WIFI OR 4G", nil);
+    [self.statusLabel sizeToFit];
+    self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.statusLabel.frame.size.width, self.statusLabel.frame.size.height);
 
     self.infoLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil);
     self.infoLabel.frame = CGRectMake(leftOffset, self.infoLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2), self.infoLabel.frame.size.height);
-    [self.infoLabel sizeThatFits:CGSizeMake(self.infoLabel.frame.size.width, MAXFLOAT)];
+    [self.infoLabel sizeToFit];
 
-    self.infoImageView.frame = CGRectMake(self.infoImageView.frame.origin.x, self.infoLabel.frame.origin.y + self.infoLabel.frame.size.height, self.infoImageView.frame.size.width, self.infoImageView.frame.size.height);
+    self.infoImageView.frame = CGRectMake(self.infoImageView.frame.origin.x, self.infoLabel.frame.origin.y + self.infoLabel.frame.size.height + 20.f, self.infoImageView.frame.size.width, self.infoImageView.frame.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
