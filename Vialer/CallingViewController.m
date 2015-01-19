@@ -9,6 +9,7 @@
 #import "CallingViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SelectRecentsFilterViewController.h"
+#import "ConnectionHandler.h"
 #import "NSString+Mobile.h"
 
 #import <CoreTelephony/CTCallCenter.h>
@@ -65,16 +66,13 @@
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
+    self.infoLabel.frame = CGRectMake(leftOffset, self.infoLabel.frame.origin.y, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
 
-    self.statusLabel.text = NSLocalizedString(@"NO WIFI OR 4G", nil);
+    self.statusLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil);
+    self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2), self.statusLabel.frame.size.height);
     [self.statusLabel sizeToFit];
-    self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.statusLabel.frame.size.width, self.statusLabel.frame.size.height);
 
-    self.infoLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil);
-    self.infoLabel.frame = CGRectMake(leftOffset, self.infoLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2), self.infoLabel.frame.size.height);
-    [self.infoLabel sizeToFit];
-
-    self.infoImageView.frame = CGRectMake(self.infoImageView.frame.origin.x, self.infoLabel.frame.origin.y + self.infoLabel.frame.size.height + 20.f, self.infoImageView.frame.size.width, self.infoImageView.frame.size.height);
+    self.infoImageView.frame = CGRectMake(self.infoImageView.frame.origin.x, self.statusLabel.frame.origin.y + self.statusLabel.frame.size.height + 20.f, self.infoImageView.frame.size.width, self.infoImageView.frame.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -140,12 +138,18 @@
 }
 
 - (void)showWithStatus:(NSString *)status {
-//    self.statusLabel.text = status;
+    self.statusLabel.text = status;
 }
 
 - (void)showErrorWithStatus:(NSString *)status {
-//    self.statusLabel.text = status;
+    self.statusLabel.text = status;
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.5f];
+}
+
+- (void)showInfo:(NSString *)info {
+    self.infoLabel.text = info;
+    [self.infoLabel sizeToFit];
+    self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x, self.infoLabel.frame.origin.y, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
@@ -196,6 +200,8 @@
     fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
 
     self.contactLabel.text = self.toContact;
+    [self showInfo:([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusInvalid) ? NSLocalizedString(@"NO WIFI OR 4G", nil) : NSLocalizedString(@"FAILED CONNECTION", nil)];
+    [self showWithStatus:NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil)];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:fromNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {

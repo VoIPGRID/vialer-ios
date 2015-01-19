@@ -18,7 +18,7 @@
 		FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34318226392002D4281 /* AFURLResponseSerialization.m */; };
 		FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF34518226392002D4281 /* AFURLSessionManager.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
-		FB202BC11A4396DB00024CDE /* ConnectionStatusHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB202BC01A4396DB00024CDE /* ConnectionStatusHandler.m */; };
+		FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB202BC01A4396DB00024CDE /* ConnectionHandler.m */; };
 		FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */; };
 		FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */; };
@@ -111,6 +111,8 @@
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */; };
 		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
+		FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */; };
+		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 /* End PBXBuildFile section */
 
@@ -138,8 +140,8 @@
 		FB0CF34518226392002D4281 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
-		FB202BBF1A4396DB00024CDE /* ConnectionStatusHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionStatusHandler.h; sourceTree = "<group>"; };
-		FB202BC01A4396DB00024CDE /* ConnectionStatusHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionStatusHandler.m; sourceTree = "<group>"; };
+		FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionHandler.h; sourceTree = "<group>"; };
+		FB202BC01A4396DB00024CDE /* ConnectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionHandler.m; sourceTree = "<group>"; };
 		FB21E03F1A3B48D800AE746B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCarouselViewController.h; sourceTree = "<group>"; };
 		FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCarouselViewController.m; sourceTree = "<group>"; };
@@ -292,6 +294,9 @@
 		FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedLabel.h; sourceTree = "<group>"; };
 		FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedLabel.m; sourceTree = "<group>"; };
+		FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingViewController.h; sourceTree = "<group>"; };
+		FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingViewController.m; sourceTree = "<group>"; };
+		FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPIncomingViewController.xib; sourceTree = "<group>"; };
 		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -373,8 +378,8 @@
 		FB202BC21A4396E700024CDE /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
-				FB202BBF1A4396DB00024CDE /* ConnectionStatusHandler.h */,
-				FB202BC01A4396DB00024CDE /* ConnectionStatusHandler.m */,
+				FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */,
+				FB202BC01A4396DB00024CDE /* ConnectionHandler.m */,
 			);
 			name = Handlers;
 			sourceTree = "<group>";
@@ -503,6 +508,9 @@
 				FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */,
 				FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */,
 				FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */,
+				FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */,
+				FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */,
+				FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */,
 				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
 				FB302E61182A390E004B7D27 /* ContactsViewController.m */,
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
@@ -727,6 +735,7 @@
 				FBBD8DE11A5B403400F6A184 /* info_01.jpg in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
 				FBBD8DE31A5B403400F6A184 /* info_03.jpg in Resources */,
+				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
 				FB364D211836846A00932D6E /* 5.wav in Resources */,
 				FB364D1F1836846A00932D6E /* 3.wav in Resources */,
@@ -752,13 +761,14 @@
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
+				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */,
 				FB3820C51A1E4F510033FF78 /* GSCall.m in Sources */,
 				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
 				FB0CF34618226392002D4281 /* AFHTTPRequestOperation.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */,
-				FB202BC11A4396DB00024CDE /* ConnectionStatusHandler.m in Sources */,
+				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */,
 				FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "NumberPadViewController.h"
-#import "ConnectionStatusHandler.h"
+#import "ConnectionHandler.h"
 
 #import "AFNetworkReachabilityManager.h"
 

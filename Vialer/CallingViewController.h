@@ -12,8 +12,8 @@
 
 @interface CallingViewController : UIViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
-@property (weak, nonatomic) IBOutlet RoundedLabel *statusLabel;
-@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+@property (weak, nonatomic) IBOutlet RoundedLabel *infoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *infoImageView;
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;

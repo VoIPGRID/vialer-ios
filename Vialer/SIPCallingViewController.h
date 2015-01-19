@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "Gossip.h"
 #import "NumberPadViewController.h"
 
-@interface SIPCallingViewController : UIViewController<GSAccountDelegate, NumberPadViewControllerDelegate>
+NSString * const OutgoingSIPCallNotification;
+
+@interface SIPCallingViewController : UIViewController<NumberPadViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *buttonsView;
 @property (strong, nonatomic) IBOutlet UIView *numbersButtonsView;

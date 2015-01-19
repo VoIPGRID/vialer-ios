@@ -8,8 +8,9 @@
 
 #import "DialerViewController.h"
 #import "AppDelegate.h"
-#import "ConnectionStatusHandler.h"
+#import "ConnectionHandler.h"
 #import "NumberPadViewController.h"
+#import "SIPCallingViewController.h"
 
 #import "AFNetworkReachabilityManager.h"
 
@@ -50,6 +51,7 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingSIPCallNotification:) name:OutgoingSIPCallNotification object:nil];
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
 
@@ -65,7 +67,7 @@
     
     self.backButton.hidden = YES;
 
-    [self.callButton setTitle:([ConnectionStatusHandler sharedConnectionStatusHandler].connectionStatus == ConnectionStatusHigh ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 //    [self.callButton setTitle:NSLocalizedString(@"Call", nil) forState:UIControlStateNormal];
 }
 
@@ -91,7 +93,12 @@
 }
 
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
-    [self.callButton setTitle:([ConnectionStatusHandler sharedConnectionStatusHandler].connectionStatus == ConnectionStatusHigh ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+}
+
+- (void)outgoingSIPCallNotification:(NSNotification *)notification {
+    self.backButton.hidden = YES;
+    self.numberTextView.text = @"";
 }
 
 #pragma mark - TextView delegate

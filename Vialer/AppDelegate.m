@@ -18,7 +18,7 @@
 #import "DialerViewController.h"
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
-#import "ConnectionStatusHandler.h"
+#import "ConnectionHandler.h"
 
 #import "AFNetworkActivityLogger.h"
 
@@ -49,7 +49,7 @@
 
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
-    [[ConnectionStatusHandler sharedConnectionStatusHandler] start];
+    [[ConnectionHandler sharedConnectionHandler] start];
 
     // Setup appearance
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
@@ -200,7 +200,8 @@
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
-    if ([ConnectionStatusHandler sharedConnectionStatusHandler].connectionStatus == ConnectionStatusHigh) {
+    if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
+        [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
         return [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
     }
     return [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];

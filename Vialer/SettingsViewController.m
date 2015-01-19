@@ -12,6 +12,7 @@
 #import "SelectRecentsFilterViewController.h"
 #import "WelcomeViewController.h"
 #import "NSString+Mobile.h"
+#import "ConnectionHandler.h"
 #import "UIAlertView+Blocks.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
@@ -198,6 +199,8 @@
                 [[NSUserDefaults standardUserDefaults] setObject:account forKey:@"SIPAccount"];
                 [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"SIPPassword"];   // TODO: Use key chain when SIP account is available through API
                 [[NSUserDefaults standardUserDefaults] synchronize];
+
+                [[ConnectionHandler sharedConnectionHandler] sipConnect];
             }
         }];
 

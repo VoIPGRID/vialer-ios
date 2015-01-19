@@ -7,6 +7,7 @@
 //
 
 #import "SIPCallingViewController.h"
+#import "ConnectionHandler.h"
 #import "Gossip+Extra.h"
 
 #import "UIAlertView+Blocks.h"
@@ -16,6 +17,8 @@
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
+
+NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotification";
 
 @interface SIPCallingViewController ()
 @property (nonatomic, strong) NumberPadViewController *numberPadViewController;
@@ -27,9 +30,6 @@
 @property (nonatomic, assign) UIButton *pauseButton;
 @property (nonatomic, assign) UIButton *muteButton;
 @property (nonatomic, assign) UIButton *speakerButton;
-@property (nonatomic, strong) GSAccountConfiguration *account;
-@property (nonatomic, strong) GSConfiguration *config;
-@property (nonatomic, strong) GSUserAgent *userAgent;
 @property (nonatomic, strong) GSCall *outgoingCall;
 @property (nonatomic, strong) GSCall *incomingCall;
 @property (nonatomic, strong) NSDate *tickerStartDate;
@@ -62,9 +62,26 @@
     [self addButtonsToView:self.buttonsView];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(IncomingSIPCallNotification:) name:IncomingSIPCallNotification object:nil];
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
+
+    // Disable all buttons
+    self.pauseButton.selected = self.muteButton.selected = self.speakerButton.selected = YES;
+    [self speakerButtonPressed:self.speakerButton];
+    [self muteButtonPressed:self.muteButton];
+    [self pauseButtonPressed:self.pauseButton];
+
+    // Hide number pad view
     self.numberPadViewController.view.hidden = YES;
     self.hideButton.hidden = YES;
     self.buttonsView.hidden = NO;
@@ -144,69 +161,13 @@
     self.tickerTimer = nil;
 }
 
-- (void)connect {
-    if (!self.account) {
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-
-        NSString *sipDomain = [[config objectForKey:@"URLS"] objectForKey:@"SIP domain"];
-        NSAssert(sipDomain != nil, @"URLS - SIP domain not found in Config.plist!");
-
-        self.account = [GSAccountConfiguration defaultConfiguration];
-        self.account.domain = sipDomain;
-        self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-        self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
-        self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
-        self.account.enableRingback = NO;
-    }
-
-    if (!self.config) {
-        self.config = [GSConfiguration defaultConfiguration];
-        self.config.account = self.account;
-        self.config.logLevel = 3;
-        self.config.consoleLogLevel = 3;
-    }
-
-    if (!self.userAgent) {
-        self.userAgent = [GSUserAgent sharedAgent];
-
-        [self.userAgent configure:self.config];
-        [self.userAgent start];
-
-        [self.userAgent.account addObserver:self
-                                 forKeyPath:@"status"
-                                    options:NSKeyValueObservingOptionInitial
-                                    context:nil];
-    }
-
-    self.userAgent.account.delegate = self;
-
-    if (self.userAgent.account.status == GSAccountStatusOffline) {
-        [self.userAgent.account connect];
-    }
-}
-
-- (void)disconnect {
-    if (self.userAgent.account.status == GSAccountStatusConnected) {
-        [self.userAgent.account disconnect];
-    }
-
-    self.userAgent.account.delegate = nil;
-    [self.userAgent.account removeObserver:self forKeyPath:@"status"];
-    [self.userAgent reset];
-
-    self.userAgent = nil;
-    self.account = nil;
-    self.config = nil;
-}
-
 - (void)call {
     NSString *address = self.toNumber;
     if ([address rangeOfString:@"@"].location == NSNotFound) {
-        address = [address stringByAppendingFormat:@"@%@", self.account.domain];
+        address = [address stringByAppendingFormat:@"@%@", [ConnectionHandler sharedConnectionHandler].sipDomain];
     }
 
-    self.outgoingCall = [GSCall outgoingCallToUri:address fromAccount:self.userAgent.account];
+    self.outgoingCall = [GSCall outgoingCallToUri:address fromAccount:[GSUserAgent sharedAgent].account];
 
     // Register status change observer
     [self.outgoingCall addObserver:self
@@ -239,7 +200,6 @@
 - (void)dismiss {
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;
     [self hangup];
-    [self disconnect];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -312,27 +272,35 @@
 
     NSLog(@"Calling %@...", self.toNumber);
 
-    [self connect];
+    [self call];
 }
 
 - (void)callStatusDidChange {
     switch (self.outgoingCall.status) {
         case GSCallStatusReady: {
+            self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
         } break;
 
         case GSCallStatusConnecting: {
+            [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
         } break;
 
         case GSCallStatusCalling: {
         } break;
 
         case GSCallStatusConnected: {
+            self.numbersButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = YES;
+
             [self startTickerTimer];
             [UIDevice currentDevice].proximityMonitoringEnabled = YES;
             self.pauseButton.enabled = YES;
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:OutgoingSIPCallNotification object:self.outgoingCall];
         } break;
 
         case GSCallStatusDisconnected: {
+            self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
+
             [self stopTickerTimer];
             [self showErrorWithStatus:NSLocalizedString(@"Call ended", nil)];
             [self.outgoingCall removeObserver:self forKeyPath:@"status"];
@@ -341,51 +309,12 @@
     }
 }
 
-- (void)accountStatusDidChange {
-    switch (self.userAgent.account.status) {
-        case GSAccountStatusOffline: {
-            self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
-        } break;
-
-        case GSAccountStatusInvalid: {
-            [self showErrorWithStatus:NSLocalizedString(@"Invalid account", nil)];
-        } break;
-
-        case GSAccountStatusConnecting: {
-            [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
-        } break;
-
-        case GSAccountStatusConnected: {
-            self.numbersButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = YES;
-
-            if (self.userAgent.status >= GSUserAgentStateConfigured) {
-                NSArray *codecs = [self.userAgent arrayOfAvailableCodecs];
-                for (GSCodecInfo *codec in codecs) {
-                    if ([codec.codecId isEqual:@"PCMA/8000/1"]) {
-                        [codec setPriority:254];
-                    }
-                }
-            }
-
-            [self call];
-        } break;
-
-        case GSAccountStatusDisconnecting: {
-            [self showWithStatus:NSLocalizedString(@"Disconnecting...", nil)];
-        } break;
-    }
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    if ([keyPath isEqualToString:@"status"]) {
-        if ([object isKindOfClass:[GSAccount class]]) {
-            [self accountStatusDidChange];
-        } else {
-            [self callStatusDidChange];
-        }
+    if ([keyPath isEqualToString:@"status"] && [object isKindOfClass:[GSCall class]]) {
+        [self callStatusDidChange];
     }
 }
 
@@ -470,8 +399,8 @@
     }];
 }
 
-- (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
-    self.incomingCall = call;
+- (void)IncomingSIPCallNotification:(NSNotification *)notification {
+    self.incomingCall = notification.object;
     [self.incomingCall begin];
 }
 
