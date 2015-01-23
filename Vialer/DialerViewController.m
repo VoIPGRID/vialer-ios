@@ -51,7 +51,7 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingSIPCallNotification:) name:OutgoingSIPCallNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
 
@@ -96,7 +96,7 @@
     [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
 
-- (void)outgoingSIPCallNotification:(NSNotification *)notification {
+- (void)sipCallStartedNotification:(NSNotification *)notification {
     self.backButton.hidden = YES;
     self.numberTextView.text = @"";
 }

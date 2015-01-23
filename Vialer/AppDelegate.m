@@ -12,6 +12,7 @@
 #import "LogInViewController.h"
 #import "CallingViewController.h"
 #import "SIPCallingViewController.h"
+#import "SIPIncomingViewController.h"
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DashboardViewController.h"
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) LogInViewController *loginViewController;
 @property (nonatomic, strong) CallingViewController *callingViewController;
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
+@property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
 @end
 
 @implementation AppDelegate
@@ -84,6 +86,9 @@
 
     self.sipCallingViewController = [[SIPCallingViewController alloc] initWithNibName:@"SIPCallingViewController" bundle:[NSBundle mainBundle]];
     self.sipCallingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
+    self.sipIncomingViewController = [[SIPIncomingViewController alloc] initWithNibName:@"SIPIncomingViewController" bundle:[NSBundle mainBundle]];
+    self.sipIncomingViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 
     ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
     contactsViewController.view.backgroundColor = [UIColor clearColor];
@@ -209,6 +214,10 @@
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
     [self handlePhoneNumber:phoneNumber forContact:nil];
+}
+
+- (void)handleSipCall:(GSCall *)sipCall {
+    return [self.sipCallingViewController handleSipCall:sipCall];
 }
 
 #pragma mark - Notifications

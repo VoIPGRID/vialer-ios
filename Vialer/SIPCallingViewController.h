@@ -10,7 +10,9 @@
 
 #import "NumberPadViewController.h"
 
-NSString * const OutgoingSIPCallNotification;
+NSString * const SIPCallStartedNotification;
+
+@class GSCall;
 
 @interface SIPCallingViewController : UIViewController<NumberPadViewControllerDelegate>
 
@@ -22,6 +24,7 @@ NSString * const OutgoingSIPCallNotification;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;
+- (void)handleSipCall:(GSCall *)sipCall;
 - (IBAction)hangupButtonPressed:(UIButton *)sender;
 - (IBAction)hideButtonPressed:(UIButton *)sender;
 

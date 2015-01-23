@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+@class GSCall;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -16,6 +18,8 @@
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
+- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;
 - (void)handlePhoneNumber:(NSString *)phoneNumber;
+- (void)handleSipCall:(GSCall *)sipCall;
 
 @end

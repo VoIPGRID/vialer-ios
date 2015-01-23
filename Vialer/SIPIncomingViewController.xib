@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIPIncomingViewController">
             <connections>
+                <outlet property="acceptButton" destination="Udd-2A-2wh" id="1iQ-yp-FzP"/>
                 <outlet property="contactLabel" destination="JJS-G2-94E" id="UO0-48-Py2"/>
+                <outlet property="declineButton" destination="60c-8Y-bf0" id="CcN-Bp-HMi"/>
                 <outlet property="statusLabel" destination="PTI-2a-Rah" id="fHi-NT-pbO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,13 +41,35 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="60c-8Y-bf0" userLabel="Decline Button">
+                    <rect key="frame" x="0.0" y="418" width="160" height="150"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="decline-button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="declineButtonPressed:" destination="-1" eventType="touchUpInside" id="dbo-Yl-1AJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Udd-2A-2wh" userLabel="Accept Button">
+                    <rect key="frame" x="168" y="417" width="160" height="151"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="accept-button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="acceptButtonPressed:" destination="-1" eventType="touchUpInside" id="xRL-sm-5ui"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="362" y="308"/>
         </view>
     </objects>
     <resources>
+        <image name="accept-button" width="76" height="76"/>
         <image name="background" width="320" height="568"/>
+        <image name="decline-button" width="76" height="76"/>
         <image name="logo" width="75" height="19"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

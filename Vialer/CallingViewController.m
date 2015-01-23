@@ -186,7 +186,7 @@
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
-    
+
     [self showWithStatus:NSLocalizedString(@"Dialing...", nil)];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     

@@ -10,4 +10,9 @@
 
 @interface GSCall (Gossip_Extra)
 @property (nonatomic, assign) BOOL paused;
+@property (nonatomic, readonly) NSString *remoteInfo;
+@property (nonatomic, readonly) NSTimeInterval callDuration;
+
++ (NSArray *)activeCalls;
+
 @end

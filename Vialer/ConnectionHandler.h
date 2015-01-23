@@ -27,6 +27,7 @@ NSString * const IncomingSIPCallNotification;
 - (void)start;
 - (void)sipConnect;
 - (void)sipDisconnect;
+- (void)sipUpdateConnectionStatus;
 
 + (ConnectionHandler *)sharedConnectionHandler;
 

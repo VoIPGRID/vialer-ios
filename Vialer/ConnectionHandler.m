@@ -45,12 +45,7 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 - (void)connectionStatusChanged {
     NSLog(@"connectionStatusChanged: WIFI %@, 4G %@", self.isOnWiFi ? @"YES" : @"-", self.isOn4G ? @"YES" : @"-");
     [[NSNotificationCenter defaultCenter] postNotificationName:ConnectionStatusChangedNotification object:self];
-
-    if (self.connectionStatus == ConnectionStatusHigh &&
-        self.accountStatus != GSAccountStatusConnected &&
-        self.accountStatus != GSAccountStatusConnecting) {
-        [self sipConnect];
-    }
+    [self sipUpdateConnectionStatus];
 }
 
 - (ConnectionStatus)connectionStatus {
@@ -68,13 +63,13 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 
 - (void)start {
     // Check if radio access is at least 4G
-    __block NSString *HighNetwork = CTRadioAccessTechnologyLTE; // 4G
-//    __block NSString *HighNetwork = CTRadioAccessTechnologyWCDMA; // 3G
+    __block NSString *highNetworkTechnology = CTRadioAccessTechnologyLTE; // 4G
+//    __block NSString *highNetworkTechnology = CTRadioAccessTechnologyWCDMA; // 3G
 
     CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
-    self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:HighNetwork];
-    [NSNotificationCenter.defaultCenter addObserverForName:CTRadioAccessTechnologyDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *notification) {
-        BOOL isOn4G = [notification.object isEqualToString:HighNetwork];
+    self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:highNetworkTechnology];
+    [[NSNotificationCenter defaultCenter] addObserverForName:CTRadioAccessTechnologyDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *notification) {
+        BOOL isOn4G = [notification.object isEqualToString:highNetworkTechnology];
         if (self.isOn4G != isOn4G) {
             self.isOn4G = isOn4G;
             [self connectionStatusChanged];
@@ -94,6 +89,10 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 
 - (void)sipConnect {
     [self sipDisconnect];
+
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"] || ![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"]) {
+        return;
+    }
 
     if (!self.account) {
         self.account = [GSAccountConfiguration defaultConfiguration];
@@ -142,6 +141,18 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
     self.userAgent = nil;
     self.account = nil;
     self.config = nil;
+}
+
+- (void)sipUpdateConnectionStatus {
+    if (self.connectionStatus == ConnectionStatusHigh) {
+        // Only connect if we're not already connect(ed/ing)
+        if (self.accountStatus != GSAccountStatusConnected && self.accountStatus != GSAccountStatusConnecting) {
+            [self sipConnect];
+        }
+    } else if ([[GSCall activeCalls] count] == 0) {
+        // Only disconnect if no active calls are being made
+        [self sipDisconnect];
+    }
 }
 
 - (NSString *)sipDomain {

@@ -9,6 +9,7 @@
 #import "SIPCallingViewController.h"
 #import "ConnectionHandler.h"
 #import "Gossip+Extra.h"
+#import "SIPIncomingViewController.h"
 
 #import "UIAlertView+Blocks.h"
 
@@ -18,7 +19,7 @@
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 
-NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotification";
+NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotification";
 
 @interface SIPCallingViewController ()
 @property (nonatomic, strong) NumberPadViewController *numberPadViewController;
@@ -30,8 +31,7 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
 @property (nonatomic, assign) UIButton *pauseButton;
 @property (nonatomic, assign) UIButton *muteButton;
 @property (nonatomic, assign) UIButton *speakerButton;
-@property (nonatomic, strong) GSCall *outgoingCall;
-@property (nonatomic, strong) GSCall *incomingCall;
+@property (nonatomic, strong) GSCall *currentCall;
 @property (nonatomic, strong) NSDate *tickerStartDate;
 @property (nonatomic, strong) NSDate *tickerPausedDate;
 @property (nonatomic, strong) NSTimer *tickerTimer;
@@ -64,14 +64,10 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(IncomingSIPCallNotification:) name:IncomingSIPCallNotification object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
 
@@ -161,40 +157,43 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
     self.tickerTimer = nil;
 }
 
-- (void)call {
-    NSString *address = self.toNumber;
-    if ([address rangeOfString:@"@"].location == NSNotFound) {
-        address = [address stringByAppendingFormat:@"@%@", [ConnectionHandler sharedConnectionHandler].sipDomain];
-    }
+- (void)acceptCall:(GSCall *)currentCall {
+    [self hangup];  // TODO: Put in wait?
 
-    self.outgoingCall = [GSCall outgoingCallToUri:address fromAccount:[GSUserAgent sharedAgent].account];
+    self.currentCall = currentCall;
 
     // Register status change observer
-    [self.outgoingCall addObserver:self
-                        forKeyPath:@"status"
-                           options:NSKeyValueObservingOptionInitial
-                           context:nil];
+    [self.currentCall addObserver:self
+                       forKeyPath:@"status"
+                          options:NSKeyValueObservingOptionInitial
+                          context:nil];
 
     // begin calling after 1s
     const double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.outgoingCall begin];
+        [self.currentCall begin];
         [self callStatusDidChange];
+        if (self.toContact) {
+            self.contactLabel.text = self.toContact;
+        } else {
+            self.contactLabel.text = self.currentCall.remoteInfo;
+        }
     });
 }
 
 - (void)hangup {
-    if (!self.outgoingCall) {
-        return;
+    if (self.currentCall) {
+        if (self.currentCall.status == GSCallStatusConnected) {
+            [self.currentCall end];
+        }
+
+        [self.currentCall removeObserver:self forKeyPath:@"status"];
+        self.currentCall = nil;
     }
 
-    if (self.outgoingCall.status == GSCallStatusConnected) {
-        [self.outgoingCall end];
-    }
-
-    [self.outgoingCall removeObserver:self forKeyPath:@"status"];
-    self.outgoingCall = nil;
+    // Update connection when a call has ended
+    [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
 }
 
 - (void)dismiss {
@@ -223,44 +222,6 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     self.toNumber = phoneNumber;
     self.toContact = contact ? contact : phoneNumber;
-    [self sipDial];
-}
-
-- (void)sipDial {
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Enter SIP account" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        [alertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        [alertView textFieldAtIndex:0].text = @"129500039";
-        [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-        [alertView textFieldAtIndex:1].text = @"nj2xbhTe4AMfA2s";
-
-        [alertView setTapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            if (buttonIndex == 0) {
-                return;
-            }
-
-            NSString *account = [alertView textFieldAtIndex:0].text;
-            NSString *password = [alertView textFieldAtIndex:1].text;
-            NSArray *accountComponents = [account componentsSeparatedByString:@"@"];
-            if ([accountComponents count] == 2) {
-                account = accountComponents[0];
-            }
-
-            account = [[account componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-            password = [[password componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-            if ([account length] && [password length]) {
-                [[NSUserDefaults standardUserDefaults] setObject:account forKey:@"SIPAccount"];
-                [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"SIPPassword"];   // TODO: Use key chain when SIP account is available through API
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-
-            [self sipDial];
-        }];
-
-        [alertView show];
-
-        return;
-    }
 
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
@@ -272,11 +233,24 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
 
     NSLog(@"Calling %@...", self.toNumber);
 
-    [self call];
+    NSString *address = self.toNumber;
+    if ([address rangeOfString:@"@"].location == NSNotFound) {
+        address = [address stringByAppendingFormat:@"@%@", [ConnectionHandler sharedConnectionHandler].sipDomain];
+    }
+
+    [self acceptCall:[GSCall outgoingCallToUri:address fromAccount:[GSUserAgent sharedAgent].account]];
+}
+
+- (void)handleSipCall:(GSCall *)sipCall {
+    if (!self.presentingViewController) {
+        [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
+    }
+
+    [self acceptCall:sipCall];
 }
 
 - (void)callStatusDidChange {
-    switch (self.outgoingCall.status) {
+    switch (self.currentCall.status) {
         case GSCallStatusReady: {
             self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
         } break;
@@ -289,22 +263,20 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
         } break;
 
         case GSCallStatusConnected: {
-            self.numbersButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = YES;
+            self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = YES;
 
             [self startTickerTimer];
             [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-            self.pauseButton.enabled = YES;
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:OutgoingSIPCallNotification object:self.outgoingCall];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SIPCallStartedNotification object:self.currentCall];
         } break;
 
         case GSCallStatusDisconnected: {
             self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
 
             [self stopTickerTimer];
+
             [self showErrorWithStatus:NSLocalizedString(@"Call ended", nil)];
-            [self.outgoingCall removeObserver:self forKeyPath:@"status"];
-            self.outgoingCall = nil;
         } break;
     }
 }
@@ -321,11 +293,11 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
 #pragma mark - Timer
 
 - (void)updateTickerInterval:(NSTimer *)timer {
-    if (self.pauseButton.isSelected) {
+    if (self.currentCall.paused) {
         return;
     }
 
-    if (self.outgoingCall.status == GSCallStatusConnected) {
+    if (self.currentCall.status == GSCallStatusConnected) {
         NSInteger timePassed = -[self.tickerStartDate timeIntervalSinceNow];
         [self showWithStatus:[NSString stringWithFormat:@"%02d:%02d", (unsigned)(timePassed / 60), (unsigned)(timePassed % 60)]];
     }
@@ -354,12 +326,12 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
 
 - (void)muteButtonPressed:(UIButton *)sender {
     [sender setSelected:!sender.isSelected];
-    self.outgoingCall.volume = sender.isSelected ? 0.f : 1.f;
+    self.currentCall.volume = sender.isSelected ? 0.f : 1.f;
 }
 
 - (void)pauseButtonPressed:(UIButton *)sender {
     [sender setSelected:!sender.isSelected];
-    self.outgoingCall.paused = sender.isSelected;
+    self.currentCall.paused = sender.isSelected;
     if (sender.isSelected) {
         self.tickerPausedDate = [NSDate date];
     } else {
@@ -399,16 +371,11 @@ NSString * const OutgoingSIPCallNotification = @"com.vialer.OutgoingSIPCallNotif
     }];
 }
 
-- (void)IncomingSIPCallNotification:(NSNotification *)notification {
-    self.incomingCall = notification.object;
-    [self.incomingCall begin];
-}
-
 #pragma mark - NumberPadViewController delegate
 
 - (void)numberPadPressedWithCharacter:(NSString *)character {
-    if (self.outgoingCall) {
-        [self.outgoingCall sendDTMFDigits:character];
+    if (self.currentCall) {
+        [self.currentCall sendDTMFDigits:character];
     }
 }
 
