@@ -43,9 +43,8 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 }
 
 - (void)connectionStatusChanged {
-    NSLog(@"connectionStatusChanged: WIFI %@, 4G %@", self.isOnWiFi ? @"YES" : @"-", self.isOn4G ? @"YES" : @"-");
-    [[NSNotificationCenter defaultCenter] postNotificationName:ConnectionStatusChangedNotification object:self];
     [self sipUpdateConnectionStatus];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ConnectionStatusChangedNotification object:self];
 }
 
 - (ConnectionStatus)connectionStatus {
@@ -187,6 +186,7 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 
         case GSAccountStatusConnected: {
             [self setCodecs];
+            [self connectionStatusChanged];
         } break;
 
         case GSAccountStatusDisconnecting: {
