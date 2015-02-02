@@ -11,6 +11,8 @@
 
 #import "PJSIP.h"
 
+#import <AudioToolbox/AudioToolbox.h>
+
 @implementation GSCall (Gossip_Extra)
 
 - (void)setPaused:(BOOL)paused {
@@ -61,6 +63,18 @@
     }
 
     return activeCalls;
+}
+
+- (void)startRinging {
+    if (![[self ringback] isPlaying]) {
+        [[self ringback] play];
+    }
+}
+
+- (void)stopRinging {
+    if ([[self ringback] isPlaying]) {
+        [[self ringback] stop];
+    }
 }
 
 @end

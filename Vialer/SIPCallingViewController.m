@@ -293,6 +293,14 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 #pragma mark - Timer
 
 - (void)updateTickerInterval:(NSTimer *)timer {
+    if (self.tickerTimer != timer) {
+        [timer invalidate];
+    }
+
+    if (!self.tickerTimer) {
+        return;
+    }
+
     if (self.currentCall.paused) {
         return;
     }

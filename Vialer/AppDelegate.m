@@ -20,6 +20,8 @@
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
 #import "ConnectionHandler.h"
+#import "PJSIP.h"
+#import "BackgroundTaskHandler.h"
 
 #import "AFNetworkActivityLogger.h"
 
@@ -31,6 +33,9 @@
 @end
 
 @implementation AppDelegate
+
+static pj_thread_desc   a_thread_desc;
+static pj_thread_t     *a_thread;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -132,6 +137,20 @@
         [self showLogin];
     }
 
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert |  UIUserNotificationTypeSound) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    } else {
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
+
+    // Local notification
+    NSDictionary *options = [launchOptions objectForKey:@"UIApplicationLaunchOptionsLocalNotificationKey"];
+    NSDictionary *aps = [options objectForKey:@"aps"];
+    if (aps) {
+        [application.delegate application:application didReceiveRemoteNotification:options];
+    }
+
     return YES;
 }
 
@@ -141,15 +160,31 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
+- (void)keepAlive {
+    if (!pj_thread_is_registered()) {
+        pj_thread_register("ipjsua", a_thread_desc, &a_thread);
+    }
+
+    for (int i = 0; i < (int)pjsua_acc_get_count(); ++i) {
+        NSLog(@"Keep account %d alive", i);
+        if (pjsua_acc_is_valid(i)) {
+            pjsua_acc_set_registration(i, PJ_TRUE);
+        }
+    }
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+        [self performSelectorOnMainThread:@selector(keepAlive) withObject:nil waitUntilDone:YES];
+    }];
+    [[BackgroundTaskHandler sharedBackgroundTaskHandler] startBackgroundTask];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[UIApplication sharedApplication] clearKeepAliveTimeout];
+    [[BackgroundTaskHandler sharedBackgroundTaskHandler] endAllBackgroundTasks];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -160,6 +195,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    if (application.applicationState != UIApplicationStateActive) {
+        NSLog(@"Local notification");
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification];
+    }
 }
 
 /*

@@ -15,4 +15,7 @@
 
 + (NSArray *)activeCalls;
 
+- (void)startRinging;
+- (void)stopRinging;
+
 @end

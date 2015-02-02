@@ -72,6 +72,12 @@
 - (void)incomingSIPCallNotification:(NSNotification *)notification {
     self.incomingCall = notification.object;
     if (self.incomingCall) {
+        // Register status change observer
+        [self.incomingCall addObserver:self
+                            forKeyPath:@"status"
+                               options:NSKeyValueObservingOptionInitial
+                               context:nil];
+
         UIViewController *presentedViewController = [[[[UIApplication sharedApplication] delegate] window].rootViewController presentedViewController];
         if (presentedViewController) {
             [presentedViewController presentViewController:self animated:YES completion:nil];
@@ -88,8 +94,58 @@
 }
 
 - (IBAction)declineButtonPressed:(UIButton *)sender {
+    [self dismiss];
+}
+
+- (void)hangup {
+    if (self.incomingCall) {
+        if (self.incomingCall.status == GSCallStatusConnected) {
+            [self.incomingCall end];
+        }
+
+        [self.incomingCall removeObserver:self forKeyPath:@"status"];
+        self.incomingCall = nil;
+    }
+
+    // Update connection when a call has ended
+    [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+}
+
+- (void)dismiss {
+    [self hangup];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.incomingCall end];
+}
+
+- (void)callStatusDidChange {
+    switch (self.incomingCall.status) {
+        case GSCallStatusReady: {
+            [self.incomingCall startRinging];
+        } break;
+
+        case GSCallStatusConnecting: {
+            [self.incomingCall startRinging];
+        } break;
+
+        case GSCallStatusCalling: {
+        } break;
+
+        case GSCallStatusConnected: {
+        } break;
+
+        case GSCallStatusDisconnected: {
+            [self.incomingCall stopRinging];
+            [self dismiss];
+        } break;
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:@"status"] && [object isKindOfClass:[GSCall class]]) {
+        [self callStatusDidChange];
+    }
 }
 
 @end

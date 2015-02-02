@@ -7,6 +7,7 @@
 //
 
 #import "ConnectionHandler.h"
+#import "AppDelegate.h"
 #import "Gossip+Extra.h"
 
 #import "AFNetworkReachabilityManager.h"
@@ -21,6 +22,7 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 @property (nonatomic, strong) GSAccountConfiguration *account;
 @property (nonatomic, strong) GSConfiguration *config;
 @property (nonatomic, strong) GSUserAgent *userAgent;
+@property (nonatomic, strong) GSCall *lastIncomingCall;
 @end
 
 @implementation ConnectionHandler
@@ -99,7 +101,6 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
         self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
         self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
         self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
-        self.account.enableRingback = NO;
     }
 
     if (!self.config) {
@@ -151,6 +152,20 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
     } else if ([[GSCall activeCalls] count] == 0) {
         // Only disconnect if no active calls are being made
         [self sipDisconnect];
+    }
+}
+
+- (void)handleLocalNotification:(UILocalNotification *)notification {
+    if (self.lastIncomingCall) {
+        NSDictionary *userInfo = notification.userInfo;
+        NSNumber *callId = [userInfo objectForKey:@"callId"];
+        if ([callId isKindOfClass:[NSNumber class]] && self.lastIncomingCall.callId == [callId intValue] && self.lastIncomingCall.status != GSCallStatusDisconnected) {
+            AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+            [appDelegate handleSipCall:self.lastIncomingCall];
+        }
+
+        self.lastIncomingCall = nil;
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
     }
 }
 
@@ -208,7 +223,21 @@ NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotif
 #pragma mark - GSAccount delegate
 
 - (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
-    [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:call];
+    NSLog(@"Received incoming call");
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    if (state == UIApplicationStateActive) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:call];
+    } else {
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), call.remoteInfo];
+        notification.alertAction = NSLocalizedString(@"Accept call", nil);
+        notification.soundName = @"incoming.caf";
+        notification.userInfo = @{@"callId":@(call.callId)};
+
+        self.lastIncomingCall = call;
+
+        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    }
 }
 
 @end

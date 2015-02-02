@@ -29,16 +29,6 @@
 		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
 		FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB364D0D18367F0700932D6E /* DialerViewController.m */; };
 		FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB364D0E18367F0700932D6E /* DialerViewController.xib */; };
-		FB364D1C1836846A00932D6E /* 0.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D121836846A00932D6E /* 0.wav */; };
-		FB364D1D1836846A00932D6E /* 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D131836846A00932D6E /* 1.wav */; };
-		FB364D1E1836846A00932D6E /* 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D141836846A00932D6E /* 2.wav */; };
-		FB364D1F1836846A00932D6E /* 3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D151836846A00932D6E /* 3.wav */; };
-		FB364D201836846A00932D6E /* 4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D161836846A00932D6E /* 4.wav */; };
-		FB364D211836846A00932D6E /* 5.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D171836846A00932D6E /* 5.wav */; };
-		FB364D221836846A00932D6E /* 6.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D181836846A00932D6E /* 6.wav */; };
-		FB364D231836846A00932D6E /* 7.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D191836846A00932D6E /* 7.wav */; };
-		FB364D241836846A00932D6E /* 8.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D1A1836846A00932D6E /* 8.wav */; };
-		FB364D251836846A00932D6E /* 9.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB364D1B1836846A00932D6E /* 9.wav */; };
 		FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A71A1E4F510033FF78 /* GSAccount.m */; };
 		FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A91A1E4F510033FF78 /* GSAccountConfiguration.m */; };
 		FB3820C51A1E4F510033FF78 /* GSCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AC1A1E4F510033FF78 /* GSCall.m */; };
@@ -96,6 +86,21 @@
 		FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
 		FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */; };
+		FBB8540F1A7FCD4F00121366 /* BackgroundTaskHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB8540E1A7FCD4F00121366 /* BackgroundTaskHandler.m */; };
+		FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
+		FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
+		FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854131A7FE3CE00121366 /* dtmf-1.aif */; };
+		FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854141A7FE3CE00121366 /* dtmf-2.aif */; };
+		FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854151A7FE3CE00121366 /* dtmf-3.aif */; };
+		FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854161A7FE3CE00121366 /* dtmf-4.aif */; };
+		FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854171A7FE3CE00121366 /* dtmf-5.aif */; };
+		FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854181A7FE3CE00121366 /* dtmf-6.aif */; };
+		FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854191A7FE3CE00121366 /* dtmf-7.aif */; };
+		FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
+		FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
+		FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */; };
+		FBB854291A7FE67300121366 /* incoming.caf in Resources */ = {isa = PBXBuildFile; fileRef = FBB854101A7FE24C00121366 /* incoming.caf */; };
+		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
 		FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC862B199BBB7400060261 /* GoToViewController.m */; };
 		FBBC862E199BBB7400060261 /* GoToViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC862C199BBB7400060261 /* GoToViewController.xib */; };
@@ -157,16 +162,6 @@
 		FB364D0C18367F0700932D6E /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		FB364D0D18367F0700932D6E /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
 		FB364D0E18367F0700932D6E /* DialerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DialerViewController.xib; sourceTree = "<group>"; };
-		FB364D121836846A00932D6E /* 0.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 0.wav; sourceTree = "<group>"; };
-		FB364D131836846A00932D6E /* 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1.wav; sourceTree = "<group>"; };
-		FB364D141836846A00932D6E /* 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 2.wav; sourceTree = "<group>"; };
-		FB364D151836846A00932D6E /* 3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 3.wav; sourceTree = "<group>"; };
-		FB364D161836846A00932D6E /* 4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 4.wav; sourceTree = "<group>"; };
-		FB364D171836846A00932D6E /* 5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 5.wav; sourceTree = "<group>"; };
-		FB364D181836846A00932D6E /* 6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 6.wav; sourceTree = "<group>"; };
-		FB364D191836846A00932D6E /* 7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 7.wav; sourceTree = "<group>"; };
-		FB364D1A1836846A00932D6E /* 8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 8.wav; sourceTree = "<group>"; };
-		FB364D1B1836846A00932D6E /* 9.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 9.wav; sourceTree = "<group>"; };
 		FB3820A41A1E4F510033FF78 /* Gossip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gossip.h; sourceTree = "<group>"; };
 		FB3820A51A1E4F510033FF78 /* GSAccount+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSAccount+Private.h"; sourceTree = "<group>"; };
 		FB3820A61A1E4F510033FF78 /* GSAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSAccount.h; sourceTree = "<group>"; };
@@ -198,7 +193,6 @@
 		FB3820C01A1E4F510033FF78 /* GSUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSUserAgent.m; sourceTree = "<group>"; };
 		FB3820C11A1E4F510033FF78 /* PJSIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSIP.h; sourceTree = "<group>"; };
 		FB3820C21A1E4F510033FF78 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		FB3820CF1A1E4FC50033FF78 /* libGossip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip.a; sourceTree = "<group>"; };
 		FB3820D11A1E50D60033FF78 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FB3820D31A1E50E30033FF78 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		FB3820D51A1E50F10033FF78 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -268,6 +262,22 @@
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FBB088CC18228E360004FFD1 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
 		FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
+		FBB8540D1A7FCD4F00121366 /* BackgroundTaskHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskHandler.h; sourceTree = "<group>"; };
+		FBB8540E1A7FCD4F00121366 /* BackgroundTaskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskHandler.m; sourceTree = "<group>"; };
+		FBB854101A7FE24C00121366 /* incoming.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incoming.caf; sourceTree = "<group>"; };
+		FBB854111A7FE3CE00121366 /* dtmf-#.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-#.aif"; sourceTree = "<group>"; };
+		FBB854121A7FE3CE00121366 /* dtmf-0.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-0.aif"; sourceTree = "<group>"; };
+		FBB854131A7FE3CE00121366 /* dtmf-1.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-1.aif"; sourceTree = "<group>"; };
+		FBB854141A7FE3CE00121366 /* dtmf-2.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-2.aif"; sourceTree = "<group>"; };
+		FBB854151A7FE3CE00121366 /* dtmf-3.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-3.aif"; sourceTree = "<group>"; };
+		FBB854161A7FE3CE00121366 /* dtmf-4.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-4.aif"; sourceTree = "<group>"; };
+		FBB854171A7FE3CE00121366 /* dtmf-5.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-5.aif"; sourceTree = "<group>"; };
+		FBB854181A7FE3CE00121366 /* dtmf-6.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-6.aif"; sourceTree = "<group>"; };
+		FBB854191A7FE3CE00121366 /* dtmf-7.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-7.aif"; sourceTree = "<group>"; };
+		FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-8.aif"; sourceTree = "<group>"; };
+		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
+		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
+		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
 		FBBC8621199BA2C600060261 /* PasteableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableTextView.h; sourceTree = "<group>"; };
 		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
 		FBBC862A199BBB7400060261 /* GoToViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoToViewController.h; sourceTree = "<group>"; };
@@ -285,7 +295,6 @@
 		FBBD8DEA1A5B403E00F6A184 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nl; path = nl.lproj/info_05.jpg; sourceTree = "<group>"; };
 		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
-		FBC9B3921A6481F200E88E9B /* _libGossip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = _libGossip.a; sourceTree = "<group>"; };
 		FBC9B3941A64824F00E88E9B /* libGossip7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip7.a; sourceTree = "<group>"; };
 		FBC9B3951A64824F00E88E9B /* libGossip64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip64.a; sourceTree = "<group>"; };
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -378,6 +387,8 @@
 		FB202BC21A4396E700024CDE /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
+				FBB8540D1A7FCD4F00121366 /* BackgroundTaskHandler.h */,
+				FBB8540E1A7FCD4F00121366 /* BackgroundTaskHandler.m */,
 				FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */,
 				FB202BC01A4396DB00024CDE /* ConnectionHandler.m */,
 			);
@@ -387,16 +398,20 @@
 		FB364D111836846A00932D6E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				FB364D121836846A00932D6E /* 0.wav */,
-				FB364D131836846A00932D6E /* 1.wav */,
-				FB364D141836846A00932D6E /* 2.wav */,
-				FB364D151836846A00932D6E /* 3.wav */,
-				FB364D161836846A00932D6E /* 4.wav */,
-				FB364D171836846A00932D6E /* 5.wav */,
-				FB364D181836846A00932D6E /* 6.wav */,
-				FB364D191836846A00932D6E /* 7.wav */,
-				FB364D1A1836846A00932D6E /* 8.wav */,
-				FB364D1B1836846A00932D6E /* 9.wav */,
+				FBB854111A7FE3CE00121366 /* dtmf-#.aif */,
+				FBB854121A7FE3CE00121366 /* dtmf-0.aif */,
+				FBB854131A7FE3CE00121366 /* dtmf-1.aif */,
+				FBB854141A7FE3CE00121366 /* dtmf-2.aif */,
+				FBB854151A7FE3CE00121366 /* dtmf-3.aif */,
+				FBB854161A7FE3CE00121366 /* dtmf-4.aif */,
+				FBB854171A7FE3CE00121366 /* dtmf-5.aif */,
+				FBB854181A7FE3CE00121366 /* dtmf-6.aif */,
+				FBB854191A7FE3CE00121366 /* dtmf-7.aif */,
+				FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */,
+				FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */,
+				FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */,
+				FBB854101A7FE24C00121366 /* incoming.caf */,
+				FBB8542C1A7FF15300121366 /* ringtone.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -467,9 +482,7 @@
 			children = (
 				FBC9B3941A64824F00E88E9B /* libGossip7.a */,
 				FBC9B3951A64824F00E88E9B /* libGossip64.a */,
-				FBC9B3921A6481F200E88E9B /* _libGossip.a */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
-				FB3820CF1A1E4FC50033FF78 /* libGossip.a */,
 				FB3820D91A1E510C0033FF78 /* CoreVideo.framework */,
 				FB3820D71A1E51040033FF78 /* CoreMedia.framework */,
 				FB3820D51A1E50F10033FF78 /* AVFoundation.framework */,
@@ -708,37 +721,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB364D1C1836846A00932D6E /* 0.wav in Resources */,
+				FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */,
+				FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */,
+				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
+				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
+				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
+				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
+				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
+				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
+				FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */,
+				FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */,
+				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
+				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
+				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
+				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
 				FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */,
 				FBBD8DE51A5B403400F6A184 /* info_05.jpg in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB4226DB182261D200707349 /* InfoPlist.strings in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
 				FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */,
-				FB364D241836846A00932D6E /* 8.wav in Resources */,
-				FB364D221836846A00932D6E /* 6.wav in Resources */,
 				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
 				FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */,
-				FB364D231836846A00932D6E /* 7.wav in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
 				FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */,
 				FB3820DF1A1E536C0033FF78 /* PJSIPTestViewController.xib in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
-				FB364D201836846A00932D6E /* 4.wav in Resources */,
 				FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */,
-				FB364D251836846A00932D6E /* 9.wav in Resources */,
 				FB29D915189BAB0200345976 /* Config.plist in Resources */,
 				FBA850C0189AA87E008099C5 /* info.html in Resources */,
 				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
-				FB364D1E1836846A00932D6E /* 2.wav in Resources */,
-				FB364D1D1836846A00932D6E /* 1.wav in Resources */,
 				FBBD8DE11A5B403400F6A184 /* info_01.jpg in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
 				FBBD8DE31A5B403400F6A184 /* info_03.jpg in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
-				FB364D211836846A00932D6E /* 5.wav in Resources */,
-				FB364D1F1836846A00932D6E /* 3.wav in Resources */,
 				FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */,
 				FBBC862E199BBB7400060261 /* GoToViewController.xib in Resources */,
 				FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */,
@@ -778,6 +795,7 @@
 				FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */,
 				FB0CF34C18226392002D4281 /* AFURLRequestSerialization.m in Sources */,
 				FB3820CA1A1E4F510033FF78 /* GSNotifications.m in Sources */,
+				FBB8540F1A7FCD4F00121366 /* BackgroundTaskHandler.m in Sources */,
 				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,

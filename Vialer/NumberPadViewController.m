@@ -29,13 +29,8 @@
     self.subTitles = @[@"", @"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ", @"*", @"+", @"#"];
 
     NSMutableArray *sounds = [NSMutableArray array];
-    for (NSString *sound in self.titles) {
-        if (!sound.length) {
-            [sounds addObject:@(0)];
-            continue;
-        }
-
-        NSString *path = [[NSBundle mainBundle] pathForResource:sound ofType:@"wav"];
+    for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"s", @"0", @"#"]) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"dtmf-%@", sound] ofType:@"aif"];
         NSURL *fileURL = [NSURL fileURLWithPath:path isDirectory:NO];
         if (fileURL) {
             SystemSoundID soundID;
