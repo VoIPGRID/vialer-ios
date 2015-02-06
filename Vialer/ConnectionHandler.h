@@ -28,7 +28,10 @@ NSString * const IncomingSIPCallNotification;
 - (void)sipConnect;
 - (void)sipDisconnect;
 - (void)sipUpdateConnectionStatus;
-- (void)handleLocalNotification:(UILocalNotification *)notification;
+
+- (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier;
+- (void)registerForLocalNotifications;
+- (void)handleKeepAlive;
 
 + (ConnectionHandler *)sharedConnectionHandler;
 

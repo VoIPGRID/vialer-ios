@@ -20,7 +20,6 @@
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
 #import "ConnectionHandler.h"
-#import "PJSIP.h"
 #import "BackgroundTaskHandler.h"
 
 #import "AFNetworkActivityLogger.h"
@@ -33,9 +32,6 @@
 @end
 
 @implementation AppDelegate
-
-static pj_thread_desc   a_thread_desc;
-static pj_thread_t     *a_thread;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -137,19 +133,7 @@ static pj_thread_t     *a_thread;
         [self showLogin];
     }
 
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert |  UIUserNotificationTypeSound) categories:nil];
-        [application registerUserNotificationSettings:settings];
-    } else {
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-    }
-
-    // Local notification
-    NSDictionary *options = [launchOptions objectForKey:@"UIApplicationLaunchOptionsLocalNotificationKey"];
-    NSDictionary *aps = [options objectForKey:@"aps"];
-    if (aps) {
-        [application.delegate application:application didReceiveRemoteNotification:options];
-    }
+    [[ConnectionHandler sharedConnectionHandler] registerForLocalNotifications];
 
     return YES;
 }
@@ -160,23 +144,10 @@ static pj_thread_t     *a_thread;
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)keepAlive {
-    if (!pj_thread_is_registered()) {
-        pj_thread_register("ipjsua", a_thread_desc, &a_thread);
-    }
-
-    for (int i = 0; i < (int)pjsua_acc_get_count(); ++i) {
-        NSLog(@"Keep account %d alive", i);
-        if (pjsua_acc_is_valid(i)) {
-            pjsua_acc_set_registration(i, PJ_TRUE);
-        }
-    }
-}
-
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
-        [self performSelectorOnMainThread:@selector(keepAlive) withObject:nil waitUntilDone:YES];
+        [[ConnectionHandler sharedConnectionHandler] performSelectorOnMainThread:@selector(handleKeepAlive) withObject:nil waitUntilDone:YES];
     }];
     [[BackgroundTaskHandler sharedBackgroundTaskHandler] startBackgroundTask];
 }
@@ -199,8 +170,16 @@ static pj_thread_t     *a_thread;
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     if (application.applicationState != UIApplicationStateActive) {
-        NSLog(@"Local notification");
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification];
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
+    }
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    if (application.applicationState != UIApplicationStateActive) {
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
+        if (completionHandler) {
+            completionHandler();
+        }
     }
 }
 
