@@ -275,7 +275,7 @@ static pj_thread_t *a_thread;
         [declineAction setIdentifier:NotificationActionDecline];
 
         UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
-        [acceptAction setActivationMode:UIUserNotificationActivationModeBackground];
+        [acceptAction setActivationMode:UIUserNotificationActivationModeForeground];
         [acceptAction setTitle:NSLocalizedString(@"Accept", nil)];
         [acceptAction setIdentifier:NotificationActionAccept];
 
