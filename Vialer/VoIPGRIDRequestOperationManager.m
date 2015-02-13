@@ -99,6 +99,13 @@
 
 - (void)logout {
     [self.operationQueue cancelAllOperations];
+    [self.requestSerializer clearAuthorizationHeader];
+
+    // Clear cookies for web view
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
 
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
 
