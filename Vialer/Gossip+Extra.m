@@ -1,4 +1,4 @@
-//
+	//
 //  Gossip+Extra.m
 //  Vialer
 //
@@ -10,6 +10,9 @@
 #import "GSPJUtil.h"
 
 #import "PJSIP.h"
+#import "GSNotifications.h"
+#import "GSDispatch.h"
+#import "Util.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -74,6 +77,39 @@
 - (void)stopRinging {
     if ([[self ringback] isPlaying]) {
         [[self ringback] stop];
+    }
+}
+
+@end
+
+typedef void (^disconnectFinishedBlock)();
+
+@implementation GSAccount (Gossip_Extra)
+
+- (void)disconnect:(void (^)())finished {
+    [self addObserver:self
+           forKeyPath:@"status"
+              options:NSKeyValueObservingOptionInitial
+              context:(void *)CFBridgingRetain(finished)];
+    [self disconnect];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:@"status"]) {
+        if (self.status == GSAccountStatusOffline) {
+            disconnectFinishedBlock finished = (__bridge disconnectFinishedBlock)(context);
+            if (finished) {
+                double delayInSeconds = 1.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    finished();
+                });
+            }
+            [self removeObserver:self forKeyPath:@"status"];
+        }
     }
 }
 

@@ -19,3 +19,9 @@
 - (void)stopRinging;
 
 @end
+
+@interface GSAccount (Gossip_Extra)
+
+- (void)disconnect:(void (^)())finished;
+
+@end

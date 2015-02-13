@@ -98,49 +98,51 @@ static pj_thread_t *a_thread;
 }
 
 - (void)sipConnect {
-    [self sipDisconnect];
+    [self sipDisconnect:^{
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"] || ![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"]) {
+            return;
+        }
 
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"] || ![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"]) {
-        return;
-    }
+        if (!self.account) {
+            self.account = [GSAccountConfiguration defaultConfiguration];
+            self.account.domain = self.sipDomain;
+            self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+            self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
+            self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
+        }
 
-    if (!self.account) {
-        self.account = [GSAccountConfiguration defaultConfiguration];
-        self.account.domain = self.sipDomain;
-        self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-        self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
-        self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
-    }
+        if (!self.config) {
+            self.config = [GSConfiguration defaultConfiguration];
+            self.config.account = self.account;
+            self.config.logLevel = 3;
+            self.config.consoleLogLevel = 3;
+        }
 
-    if (!self.config) {
-        self.config = [GSConfiguration defaultConfiguration];
-        self.config.account = self.account;
-        self.config.logLevel = 3;
-        self.config.consoleLogLevel = 3;
-    }
+        if (!self.userAgent) {
+            self.userAgent = [GSUserAgent sharedAgent];
 
-    if (!self.userAgent) {
-        self.userAgent = [GSUserAgent sharedAgent];
+            [self.userAgent configure:self.config];
+            [self.userAgent start];
 
-        [self.userAgent configure:self.config];
-        [self.userAgent start];
+            [self.userAgent.account addObserver:self
+                                     forKeyPath:@"status"
+                                        options:NSKeyValueObservingOptionInitial
+                                        context:nil];
+        }
 
-        [self.userAgent.account addObserver:self
-                                 forKeyPath:@"status"
-                                    options:NSKeyValueObservingOptionInitial
-                                    context:nil];
-    }
+        self.userAgent.account.delegate = self;
 
-    self.userAgent.account.delegate = self;
-
-    if (self.userAgent.account.status == GSAccountStatusOffline) {
-        [self.userAgent.account connect];
-    }
+        if (self.userAgent.account.status == GSAccountStatusOffline) {
+            [self.userAgent.account connect];
+        }
+    }];
 }
 
-- (void)sipDisconnect {
+- (void)sipDisconnect:(void (^)())finished {
+    BOOL shouldFinish = YES;
     if (self.userAgent.account.status == GSAccountStatusConnected) {
-        [self.userAgent.account disconnect];
+        [self.userAgent.account disconnect:finished];
+        shouldFinish = NO;
     }
 
     self.userAgent.account.delegate = nil;
@@ -150,6 +152,10 @@ static pj_thread_t *a_thread;
     self.userAgent = nil;
     self.account = nil;
     self.config = nil;
+
+    if (shouldFinish && finished) {
+        finished();
+    }
 }
 
 - (void)sipUpdateConnectionStatus {
@@ -160,7 +166,7 @@ static pj_thread_t *a_thread;
         }
     } else if ([[GSCall activeCalls] count] == 0) {
         // Only disconnect if no active calls are being made
-        [self sipDisconnect];
+        [self sipDisconnect:nil];
     }
 }
 
@@ -193,15 +199,15 @@ static pj_thread_t *a_thread;
                        context:(void *)context {
     if ([keyPath isEqualToString:@"status"]) {
         if ([object isKindOfClass:[GSAccount class]]) {
-            [self accountStatusDidChange];
+            [self accountStatusDidChange:object];
         } else {
             [self callStatusDidChange];
         }
     }
 }
 
-- (void)accountStatusDidChange {
-    switch (self.userAgent.account.status) {
+- (void)accountStatusDidChange:(GSAccount *)account {
+    switch (account.status) {
         case GSAccountStatusOffline: {
         } break;
 

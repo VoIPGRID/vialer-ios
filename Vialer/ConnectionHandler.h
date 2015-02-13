@@ -26,7 +26,7 @@ NSString * const IncomingSIPCallNotification;
 
 - (void)start;
 - (void)sipConnect;
-- (void)sipDisconnect;
+- (void)sipDisconnect:(void (^)())finished;
 - (void)sipUpdateConnectionStatus;
 
 - (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier;
