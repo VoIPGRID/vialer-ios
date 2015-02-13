@@ -64,6 +64,7 @@
 		FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB576B12182A802200C4FAB4 /* RecentsViewController.xib */; };
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
 		FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
+		FB5EBF121A8E131600B6BD9D /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
 		FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB89C75B1850C153006A4556 /* CallingViewController.m */; };
@@ -114,7 +115,6 @@
 		FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3951A64824F00E88E9B /* libGossip64.a */; };
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
-		FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */; };
 		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
 		FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */; };
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
@@ -227,6 +227,7 @@
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
 		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
+		FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB64313F182281C500E1BF17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FB853165183986A5008A7EF1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FB89C75A1850C153006A4556 /* CallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallingViewController.h; sourceTree = "<group>"; };
@@ -300,7 +301,6 @@
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedLabel.h; sourceTree = "<group>"; };
 		FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedLabel.m; sourceTree = "<group>"; };
 		FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingViewController.h; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 				FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */,
 				FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */,
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
-				FBDB058B18FEB89400B8CA04 /* NewRelicAgent.framework in Frameworks */,
+				FB5EBF121A8E131600B6BD9D /* NewRelicAgent.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
 				FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */,
 				FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */,
@@ -488,7 +488,7 @@
 				FB3820D51A1E50F10033FF78 /* AVFoundation.framework */,
 				FB3820D31A1E50E30033FF78 /* CoreAudio.framework */,
 				FB3820D11A1E50D60033FF78 /* CFNetwork.framework */,
-				FBDB058A18FEB89400B8CA04 /* NewRelicAgent.framework */,
+				FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */,
 				FB853165183986A5008A7EF1 /* AudioToolbox.framework */,
 				FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */,
 				FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */,
