@@ -23,5 +23,12 @@
 @interface GSAccount (Gossip_Extra)
 
 - (void)disconnect:(void (^)())finished;
++ (void)reregisterActiveAccounts;
+
+@end
+
+@interface GSUserAgent (Gossip_Extra)
+
+- (BOOL)configure:(GSConfiguration *)config withRegistrationTimeOut:(NSUInteger)registrationTimeOut;
 
 @end

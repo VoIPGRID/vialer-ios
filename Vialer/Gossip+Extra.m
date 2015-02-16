@@ -16,7 +16,14 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
+/*
+ * GSCall
+ */
+
 @implementation GSCall (Gossip_Extra)
+
+static NSTimer *ringTimer = nil;
+static SystemSoundID ringSoundId;
 
 - (void)setPaused:(BOOL)paused {
     if (paused) {
@@ -69,29 +76,68 @@
 }
 
 - (void)startRinging {
-    if (![[self ringback] isPlaying]) {
-        [[self ringback] play];
+    if (ringTimer) {
+        return;
+    }
+
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"ringtone"
+                                                         ofType:@"wav"];
+    OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL URLWithString:filename], &ringSoundId);
+    if (error == kAudioServicesNoError) {
+        ringTimer = [NSTimer timerWithTimeInterval:29.f target:self selector:@selector(ringTimerInterval:) userInfo:@(ringSoundId) repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:ringTimer forMode:NSDefaultRunLoopMode];
+        [ringTimer fire];
     }
 }
 
 - (void)stopRinging {
-    if ([[self ringback] isPlaying]) {
-        [[self ringback] stop];
+    if (ringTimer) {
+        [ringTimer invalidate];
+        ringTimer = nil;
+        AudioServicesDisposeSystemSoundID(ringSoundId);
     }
+}
+
+- (void)ringTimerInterval:(NSTimer *)timer {
+    AudioServicesPlayAlertSound(ringSoundId);
 }
 
 @end
 
+/*
+ * GSAccount
+ */
+
 typedef void (^disconnectFinishedBlock)();
+
+static pj_thread_desc a_thread_desc;
+static pj_thread_t *a_thread;
 
 @implementation GSAccount (Gossip_Extra)
 
 - (void)disconnect:(void (^)())finished {
-    [self addObserver:self
-           forKeyPath:@"status"
-              options:NSKeyValueObservingOptionInitial
-              context:(void *)CFBridgingRetain(finished)];
-    [self disconnect];
+    if (self.status == GSAccountStatusConnected) {
+        [self addObserver:self
+               forKeyPath:@"status"
+                  options:NSKeyValueObservingOptionInitial
+                  context:(void *)CFBridgingRetain(finished)];
+        [self disconnect];
+    } else if (finished) {
+        finished();
+    }
+}
+
++ (void)reregisterActiveAccounts {
+    if (!pj_thread_is_registered()) {
+        pj_thread_register("ipjsua", a_thread_desc, &a_thread);
+    }
+
+    for (int i = 0; i < (int)pjsua_acc_get_count(); ++i) {
+        NSLog(@"Keep account %d alive", i);
+        if (pjsua_acc_is_valid(i)) {
+            pjsua_acc_set_registration(i, PJ_TRUE);
+        }
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -111,6 +157,30 @@ typedef void (^disconnectFinishedBlock)();
             [self removeObserver:self forKeyPath:@"status"];
         }
     }
+}
+
+@end
+
+/*
+ * GSUserAgent
+ */
+
+@implementation GSUserAgent (Gossip_Extra)
+
+- (BOOL)configure:(GSConfiguration *)config withRegistrationTimeOut:(NSUInteger)registrationTimeOut {
+    if ([self configure:config]) {
+        pj_pool_t *pool = pjsua_pool_create("accCfg", 2208, 128);
+        if (pool) {
+            pjsua_acc_config accCfg;
+            pj_status_t status = pjsua_acc_get_config(self.account.accountId, pool, &accCfg);
+            if (status == PJ_SUCCESS) {
+                accCfg.reg_timeout = (unsigned int)registrationTimeOut;
+                GSLogIfFails(pjsua_acc_modify(self.account.accountId, &accCfg));
+            }
+            pj_pool_release(pool);
+        }
+    }
+    return YES;
 }
 
 @end

@@ -46,8 +46,6 @@
 		FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
 		FB3820D81A1E51040033FF78 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D71A1E51040033FF78 /* CoreMedia.framework */; };
 		FB3820DA1A1E510C0033FF78 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D91A1E510C0033FF78 /* CoreVideo.framework */; };
-		FB3820DE1A1E536C0033FF78 /* PJSIPTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820DC1A1E536C0033FF78 /* PJSIPTestViewController.m */; };
-		FB3820DF1A1E536C0033FF78 /* PJSIPTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3820DD1A1E536C0033FF78 /* PJSIPTestViewController.xib */; };
 		FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */; };
 		FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */; };
 		FB4226D1182261D200707349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
@@ -198,9 +196,6 @@
 		FB3820D51A1E50F10033FF78 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FB3820D71A1E51040033FF78 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FB3820D91A1E510C0033FF78 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		FB3820DB1A1E536C0033FF78 /* PJSIPTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSIPTestViewController.h; sourceTree = "<group>"; };
-		FB3820DC1A1E536C0033FF78 /* PJSIPTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJSIPTestViewController.m; sourceTree = "<group>"; };
-		FB3820DD1A1E536C0033FF78 /* PJSIPTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PJSIPTestViewController.xib; sourceTree = "<group>"; };
 		FB3820E01A1E87730033FF78 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		FB3820E21A1E87730033FF78 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
@@ -544,9 +539,6 @@
 				FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */,
 				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
 				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
-				FB3820DB1A1E536C0033FF78 /* PJSIPTestViewController.h */,
-				FB3820DC1A1E536C0033FF78 /* PJSIPTestViewController.m */,
-				FB3820DD1A1E536C0033FF78 /* PJSIPTestViewController.xib */,
 				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
 				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
 				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
@@ -745,7 +737,6 @@
 				FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
 				FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */,
-				FB3820DF1A1E536C0033FF78 /* PJSIPTestViewController.xib in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */,
 				FB29D915189BAB0200345976 /* Config.plist in Resources */,
@@ -801,7 +792,6 @@
 				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,
 				FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
-				FB3820DE1A1E536C0033FF78 /* PJSIPTestViewController.m in Sources */,
 				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,

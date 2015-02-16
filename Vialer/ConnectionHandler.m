@@ -32,9 +32,6 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 
 @implementation ConnectionHandler
 
-static pj_thread_desc a_thread_desc;
-static pj_thread_t *a_thread;
-
 + (ConnectionHandler *)sharedConnectionHandler {
     static dispatch_once_t pred;
     static ConnectionHandler *_sharedConnectionHandler = nil;
@@ -121,7 +118,7 @@ static pj_thread_t *a_thread;
         if (!self.userAgent) {
             self.userAgent = [GSUserAgent sharedAgent];
 
-            [self.userAgent configure:self.config];
+            [self.userAgent configure:self.config withRegistrationTimeOut:60];
             [self.userAgent start];
 
             [self.userAgent.account addObserver:self
@@ -139,10 +136,9 @@ static pj_thread_t *a_thread;
 }
 
 - (void)sipDisconnect:(void (^)())finished {
-    BOOL shouldFinish = YES;
-    if (self.userAgent.account.status == GSAccountStatusConnected) {
+    BOOL connected = (self.userAgent.account.status == GSAccountStatusConnected);
+    if (connected) {
         [self.userAgent.account disconnect:finished];
-        shouldFinish = NO;
     }
 
     self.userAgent.account.delegate = nil;
@@ -153,7 +149,7 @@ static pj_thread_t *a_thread;
     self.account = nil;
     self.config = nil;
 
-    if (shouldFinish && finished) {
+    if (!connected && finished) {
         finished();
     }
 }
@@ -171,16 +167,7 @@ static pj_thread_t *a_thread;
 }
 
 - (void)handleKeepAlive {
-    if (!pj_thread_is_registered()) {
-        pj_thread_register("ipjsua", a_thread_desc, &a_thread);
-    }
-
-    for (int i = 0; i < (int)pjsua_acc_get_count(); ++i) {
-        NSLog(@"Keep account %d alive", i);
-        if (pjsua_acc_is_valid(i)) {
-            pjsua_acc_set_registration(i, PJ_TRUE);
-        }
-    }
+    [GSAccount reregisterActiveAccounts];
 }
 
 - (NSString *)sipDomain {
