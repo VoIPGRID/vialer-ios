@@ -12,7 +12,7 @@
 #define LOGIN_SUCCEEDED_NOTIFICATION @"login.succeeded"
 
 enum VoIPGRIDHttpErrors {
-    kVoIPGRIDHTTPBadCredentials = 401,
+    kVoIPGRIDHTTPBadCredentials = 403,
 };
 typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 

@@ -103,6 +103,7 @@
             [self.incomingCall end];
         }
 
+        [self.incomingCall stopRinging];
         [self.incomingCall removeObserver:self forKeyPath:@"status"];
         self.incomingCall = nil;
     }
@@ -123,17 +124,16 @@
         } break;
 
         case GSCallStatusConnecting: {
-            [self.incomingCall startRinging];
         } break;
 
         case GSCallStatusCalling: {
         } break;
 
         case GSCallStatusConnected: {
+            [self.incomingCall stopRinging];
         } break;
 
         case GSCallStatusDisconnected: {
-            [self.incomingCall stopRinging];
             [self dismiss];
         } break;
     }

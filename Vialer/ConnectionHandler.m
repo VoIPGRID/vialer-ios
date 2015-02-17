@@ -118,7 +118,7 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
         if (!self.userAgent) {
             self.userAgent = [GSUserAgent sharedAgent];
 
-            [self.userAgent configure:self.config withRegistrationTimeOut:60];
+            [self.userAgent configure:self.config withEchoCancellation:200];
             [self.userAgent start];
 
             [self.userAgent.account addObserver:self

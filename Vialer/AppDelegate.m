@@ -23,6 +23,9 @@
 #import "BackgroundTaskHandler.h"
 
 #import "AFNetworkActivityLogger.h"
+#import "UIAlertView+Blocks.h"
+
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
@@ -51,7 +54,6 @@
 #endif
 
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-
     [[ConnectionHandler sharedConnectionHandler] start];
 
     // Setup appearance
@@ -129,7 +131,17 @@
     
     [self.window makeKeyAndVisible];
 
-    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
+    if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            if (!granted) {
+                [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil) message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:@[NSLocalizedString(@"Ok", nil)] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    if (buttonIndex == 1 && UIApplicationOpenSettingsURLString != nil) {
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                    }
+                }];
+            }
+        }];
+    } else {
         [self showLogin];
     }
 
@@ -228,9 +240,12 @@
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
         [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
-        return [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
+        });
+    } else {
+        [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
     }
-    return [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {

@@ -1,4 +1,4 @@
-	//
+//
 //  Gossip+Extra.m
 //  Vialer
 //
@@ -167,9 +167,9 @@ static pj_thread_t *a_thread;
 
 @implementation GSUserAgent (Gossip_Extra)
 
-- (BOOL)configure:(GSConfiguration *)config withRegistrationTimeOut:(NSUInteger)registrationTimeOut {
+- (BOOL)configure:(GSConfiguration *)config withEchoCancellation:(NSUInteger)echoCancellation {
     if ([self configure:config]) {
-        pj_pool_t *pool = pjsua_pool_create("accCfg", 2208, 128);
+/*        pj_pool_t *pool = pjsua_pool_create("accCfg", 2208, 128);
         if (pool) {
             pjsua_acc_config accCfg;
             pj_status_t status = pjsua_acc_get_config(self.account.accountId, pool, &accCfg);
@@ -178,8 +178,11 @@ static pj_thread_t *a_thread;
                 GSLogIfFails(pjsua_acc_modify(self.account.accountId, &accCfg));
             }
             pj_pool_release(pool);
-        }
+        }*/
+
+        GSLogIfFails(pjsua_set_ec((unsigned int)echoCancellation, 0));
     }
+
     return YES;
 }
 

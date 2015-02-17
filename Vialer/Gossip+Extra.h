@@ -29,6 +29,6 @@
 
 @interface GSUserAgent (Gossip_Extra)
 
-- (BOOL)configure:(GSConfiguration *)config withRegistrationTimeOut:(NSUInteger)registrationTimeOut;
+- (BOOL)configure:(GSConfiguration *)config withEchoCancellation:(NSUInteger)echoCancellation;
 
 @end

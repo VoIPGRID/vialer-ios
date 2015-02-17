@@ -11,6 +11,8 @@
 
 #import "SVProgressHUD.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
 
@@ -103,6 +105,7 @@
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:self.user password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
             [self dismissViewControllerAnimated:YES completion:nil];
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
         }];
