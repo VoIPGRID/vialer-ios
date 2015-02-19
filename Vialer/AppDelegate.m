@@ -21,6 +21,7 @@
 #import "GoToViewController.h"
 #import "ConnectionHandler.h"
 #import "BackgroundTaskHandler.h"
+#import "Gossip+Extra.h"
 
 #import "AFNetworkActivityLogger.h"
 #import "UIAlertView+Blocks.h"
@@ -159,7 +160,9 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
-        [[ConnectionHandler sharedConnectionHandler] performSelectorOnMainThread:@selector(handleKeepAlive) withObject:nil waitUntilDone:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [GSAccount reregisterActiveAccounts];
+        });
     }];
     [[BackgroundTaskHandler sharedBackgroundTaskHandler] startBackgroundTask];
 }

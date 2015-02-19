@@ -80,11 +80,10 @@ static SystemSoundID ringSoundId;
         return;
     }
 
-    NSString *filename = [[NSBundle mainBundle] pathForResource:@"ringtone"
-                                                         ofType:@"wav"];
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"incoming" ofType:@"wav"];
     OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL URLWithString:filename], &ringSoundId);
     if (error == kAudioServicesNoError) {
-        ringTimer = [NSTimer timerWithTimeInterval:29.f target:self selector:@selector(ringTimerInterval:) userInfo:@(ringSoundId) repeats:YES];
+        ringTimer = [NSTimer timerWithTimeInterval:3.f target:self selector:@selector(ringTimerInterval:) userInfo:@(ringSoundId) repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:ringTimer forMode:NSDefaultRunLoopMode];
         [ringTimer fire];
     }

@@ -158,16 +158,14 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
     if (self.connectionStatus == ConnectionStatusHigh) {
         // Only connect if we're not already connect(ed/ing)
         if (self.accountStatus != GSAccountStatusConnected && self.accountStatus != GSAccountStatusConnecting) {
+            NSLog(@"High traffic network: Connect SIP");
             [self sipConnect];
         }
     } else if ([[GSCall activeCalls] count] == 0) {
         // Only disconnect if no active calls are being made
+        NSLog(@"Low traffic network: Disconnect SIP");
         [self sipDisconnect:nil];
     }
-}
-
-- (void)handleKeepAlive {
-    [GSAccount reregisterActiveAccounts];
 }
 
 - (NSString *)sipDomain {

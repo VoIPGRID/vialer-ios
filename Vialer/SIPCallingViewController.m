@@ -12,6 +12,7 @@
 #import "SIPIncomingViewController.h"
 
 #import "UIAlertView+Blocks.h"
+#import "PJSIP.h"
 
 #import <AVFoundation/AVAudioSession.h>
 #import <AddressBook/AddressBook.h>
@@ -64,6 +65,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -266,7 +268,6 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
             self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = YES;
 
             [self startTickerTimer];
-            [UIDevice currentDevice].proximityMonitoringEnabled = YES;
 
             [[NSNotificationCenter defaultCenter] postNotificationName:SIPCallStartedNotification object:self.currentCall];
         } break;
@@ -350,6 +351,12 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
 - (void)speakerButtonPressed:(UIButton *)sender {
     [sender setSelected:!sender.isSelected];
+
+//    pjmedia_aud_dev_route route = PJMEDIA_AUD_DEV_ROUTE_LOUDSPEAKER;
+//    pj_status_t status = pjsua_snd_set_setting(PJMEDIA_AUD_DEV_CAP_INPUT_ROUTE, &route, PJ_FALSE);
+//    if (status != PJ_SUCCESS){
+//        NSLog(@"Error enabling loudspeaker");
+//    }
 
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:NULL];

@@ -31,7 +31,6 @@ NSString * const IncomingSIPCallNotification;
 
 - (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier;
 - (void)registerForLocalNotifications;
-- (void)handleKeepAlive;
 
 + (ConnectionHandler *)sharedConnectionHandler;
 

@@ -257,7 +257,7 @@
 
         NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL cachePolicy:request.cachePolicy timeoutInterval:request.timeoutInterval];
         [urlRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
-        return  urlRequest;
+        return urlRequest;
     }];
 }
 
