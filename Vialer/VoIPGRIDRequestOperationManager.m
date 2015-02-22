@@ -125,7 +125,7 @@
 
 + (BOOL)isLoggedIn {
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    return (user != nil) && ([SSKeychain passwordForService:[[self class] serviceName] account:user] != nil);
+    return (user != nil);
 }
 
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
