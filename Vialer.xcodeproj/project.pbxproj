@@ -72,8 +72,6 @@
 		FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */; };
 		FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */; };
 		FBA850C0189AA87E008099C5 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = FBA850C2189AA87E008099C5 /* info.html */; };
-		FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */; };
-		FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */; };
 		FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */; };
@@ -238,9 +236,6 @@
 		FBA850C1189AA87E008099C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/info.html; sourceTree = "<group>"; };
 		FBA850C3189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/info.html; sourceTree = "<group>"; };
 		FBA850C4189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FBAD7EFD182A8901002FC8FC /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
-		FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
-		FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
@@ -527,9 +522,6 @@
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
 				FB364D0D18367F0700932D6E /* DialerViewController.m */,
 				FB364D0E18367F0700932D6E /* DialerViewController.xib */,
-				FBAD7EFD182A8901002FC8FC /* DashboardViewController.h */,
-				FBAD7EFE182A8901002FC8FC /* DashboardViewController.m */,
-				FBAD7EFF182A8901002FC8FC /* DashboardViewController.xib */,
 				FBBC862A199BBB7400060261 /* GoToViewController.h */,
 				FBBC862B199BBB7400060261 /* GoToViewController.m */,
 				FBBC862C199BBB7400060261 /* GoToViewController.xib */,
@@ -736,7 +728,6 @@
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB4226DB182261D200707349 /* InfoPlist.strings in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
-				FBAD7F01182A8901002FC8FC /* DashboardViewController.xib in Resources */,
 				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
 				FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
@@ -803,7 +794,6 @@
 				FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
-				FBAD7F00182A8901002FC8FC /* DashboardViewController.m in Sources */,
 				FB3820C71A1E4F510033FF78 /* GSConfiguration.m in Sources */,
 				FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */,
 				FB3820C81A1E4F510033FF78 /* GSDispatch.m in Sources */,

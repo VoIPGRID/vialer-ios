@@ -15,7 +15,6 @@
 #import "SIPIncomingViewController.h"
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
-#import "DashboardViewController.h"
 #import "DialerViewController.h"
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
@@ -101,11 +100,6 @@
     recentsViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
     recentsNavigationViewController.view.backgroundColor = [UIColor clearColor];
-
-    UIViewController *dashboardViewController = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:[NSBundle mainBundle]];
-    dashboardViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *dashboardNavigationViewController = [[UINavigationController alloc] initWithRootViewController:dashboardViewController];
-    dashboardNavigationViewController.view.backgroundColor = [UIColor clearColor];
 
     UIViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:[NSBundle mainBundle]];
     settingsViewController.view.backgroundColor = [UIColor clearColor];
@@ -247,7 +241,9 @@
             [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
     } else {
-        [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
+        });
     }
 }
 
