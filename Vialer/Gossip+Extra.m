@@ -168,18 +168,7 @@ static pj_thread_t *a_thread;
 
 - (BOOL)configure:(GSConfiguration *)config withEchoCancellation:(NSUInteger)echoCancellation {
     if ([self configure:config]) {
-/*        pj_pool_t *pool = pjsua_pool_create("accCfg", 2208, 128);
-        if (pool) {
-            pjsua_acc_config accCfg;
-            pj_status_t status = pjsua_acc_get_config(self.account.accountId, pool, &accCfg);
-            if (status == PJ_SUCCESS) {
-                accCfg.reg_timeout = (unsigned int)registrationTimeOut;
-                GSLogIfFails(pjsua_acc_modify(self.account.accountId, &accCfg));
-            }
-            pj_pool_release(pool);
-        }*/
-
-        GSLogIfFails(pjsua_set_ec((unsigned int)echoCancellation, 0));
+        GSLogIfFails(pjsua_set_ec((unsigned int)echoCancellation, 100));
     }
 
     return YES;
