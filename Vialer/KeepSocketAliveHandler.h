@@ -1,37 +1,15 @@
 //
-//  ConnectionHandler.h
+//  KeepSocketAliveHandler.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 19/12/14.
+//  Created by Reinier Wieringa on 19/02/15.
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-#import "Gossip.h"
+@interface KeepSocketAliveHandler : NSObject<NSStreamDelegate>
 
-typedef enum {
-    ConnectionStatusLow  = 0,
-    ConnectionStatusHigh = 1,   // WIFI or 4G
-} ConnectionStatus;
-
-NSString * const ConnectionStatusChangedNotification;
-NSString * const IncomingSIPCallNotification;
-
-@interface ConnectionHandler : NSObject<GSAccountDelegate>
-
-@property (nonatomic, readonly) ConnectionStatus connectionStatus;
-@property (nonatomic, readonly) GSAccountStatus accountStatus;
-@property (nonatomic, readonly) NSString *sipDomain;
-
-- (void)start;
-- (void)sipConnect;
-- (void)sipDisconnect:(void (^)())finished;
-- (void)sipUpdateConnectionStatus;
-
-- (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier;
-- (void)registerForLocalNotifications;
-
-+ (ConnectionHandler *)sharedConnectionHandler;
++ (KeepSocketAliveHandler *)sharedKeepSocketAliveHandler;
 
 @end

@@ -1,319 +1,151 @@
 //
-//  ConnectionHandler.m
+//  KeepSocketAliveHandler.m
 //  Vialer
 //
-//  Created by Reinier Wieringa on 19/12/14.
+//  Created by Reinier Wieringa on 19/02/15.
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import "ConnectionHandler.h"
+#import "KeepSocketAliveHandler.h"
 #import "AppDelegate.h"
 #import "Gossip+Extra.h"
 #import "PJSIP.h"
 
-#import "AFNetworkReachabilityManager.h"
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-
-NSString * const ConnectionStatusChangedNotification = @"com.vialer.ConnectionStatusChangedNotification";
-NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotification";
-
-NSString * const NotificationAcceptDeclineCategory = @"com.vialer.notification.accept.decline.category";
-NSString * const NotificationActionDecline = @"com.vialer.notification.decline";
-NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
-
-@interface ConnectionHandler ()
-@property (nonatomic, assign) BOOL isOnWiFi;
-@property (nonatomic, assign) BOOL isOn4G;
-@property (nonatomic, strong) GSAccountConfiguration *account;
-@property (nonatomic, strong) GSConfiguration *config;
-@property (nonatomic, strong) GSUserAgent *userAgent;
-@property (nonatomic, strong) GSCall *lastNotifiedCall;
+@interface KeepSocketAliveHandler ()
+@property (nonatomic, strong) NSInputStream *inputStream;
+@property (nonatomic, strong) NSOutputStream *outputStream;
+@property (nonatomic, strong) NSMutableString *communicationLog;
+@property (nonatomic) BOOL sentPing;
 @end
 
-@implementation ConnectionHandler
 
-+ (ConnectionHandler *)sharedConnectionHandler {
+const uint8_t pingString[] = "ping\n";
+const uint8_t pongString[] = "pong\n";
+
+@implementation KeepSocketAliveHandler
+
++ (KeepSocketAliveHandler *)sharedKeepSocketAliveHandler {
     static dispatch_once_t pred;
-    static ConnectionHandler *_sharedConnectionHandler = nil;
+    static KeepSocketAliveHandler *_sharedKeepAliveHandler = nil;
 
     dispatch_once(&pred, ^{
-        _sharedConnectionHandler = [[self alloc] init];
+        _sharedKeepAliveHandler = [[self alloc] init];
     });
-    return _sharedConnectionHandler;
+    return _sharedKeepAliveHandler;
 }
 
 - (id)init {
     self = [super init];
     if (self != nil) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        if (!self.inputStream)
+        {
+            CFReadStreamRef readStream;
+            CFWriteStreamRef writeStream;
+            CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)(@"ha.voys.nl"), 5060, &readStream, &writeStream);
+
+            self.sentPing = NO;
+            self.communicationLog = [[NSMutableString alloc] init];
+            self.inputStream = (__bridge_transfer NSInputStream *)readStream;
+            self.outputStream = (__bridge_transfer NSOutputStream *)writeStream;
+            [self.inputStream setProperty:NSStreamNetworkServiceTypeVoIP forKey:NSStreamNetworkServiceType];
+            [self.inputStream setDelegate:self];
+            [self.outputStream setDelegate:self];
+            [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            [self.inputStream open];
+            [self.outputStream open];
+
+            [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+                if (self.outputStream)
+                {
+                    [self.outputStream write:pingString maxLength:strlen((char*)pingString)];
+                    [self addEvent:@"Ping sent"];
+                }
+            }];
+        }
     }
     return self;
 }
 
-- (void)connectionStatusChanged {
-    [self sipUpdateConnectionStatus];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ConnectionStatusChangedNotification object:self];
-}
-
-- (ConnectionStatus)connectionStatus {
-    return (self.isOn4G || self.isOnWiFi) ? ConnectionStatusHigh : ConnectionStatusLow;
-}
-
-- (GSAccountStatus)accountStatus {
-    GSAccount *account = [GSUserAgent sharedAgent].account;
-    GSAccountStatus status = GSAccountStatusInvalid;
-    if (account) {
-        status = account.status;
+- (void)addEvent:(NSString *)event
+{
+    [self.communicationLog appendFormat:@"%@\n", event];
+    if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive)
+    {
+        NSLog(@"App is foreground. New event: %@", event);
     }
-    return status;
-}
-
-- (void)start {
-    // Check if radio access is at least 4G
-    __block NSString *highNetworkTechnology = CTRadioAccessTechnologyLTE; // 4G
-//    __block NSString *highNetworkTechnology = CTRadioAccessTechnologyWCDMA; // 3G
-
-    CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
-    self.isOn4G = [telephonyInfo.currentRadioAccessTechnology isEqualToString:highNetworkTechnology];
-    [[NSNotificationCenter defaultCenter] addObserverForName:CTRadioAccessTechnologyDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *notification) {
-        BOOL isOn4G = [notification.object isEqualToString:highNetworkTechnology];
-        if (self.isOn4G != isOn4G) {
-            self.isOn4G = isOn4G;
-            [self connectionStatusChanged];
-        }
-    }];
-
-    // Check WiFi or no WiFi
-    self.isOnWiFi = [AFNetworkReachabilityManager sharedManager].reachableViaWiFi;
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        BOOL isOnWiFi = (status == AFNetworkReachabilityStatusReachableViaWiFi);
-        if (self.isOnWiFi != isOnWiFi) {
-            self.isOnWiFi = isOnWiFi;
-            [self connectionStatusChanged];
-        }
-    }];
-}
-
-- (void)sipConnect {
-    [self sipDisconnect:^{
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"] || ![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"]) {
-            return;
-        }
-
-        if (!self.account) {
-            self.account = [GSAccountConfiguration defaultConfiguration];
-            self.account.domain = self.sipDomain;
-            self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-            self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
-            self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
-        }
-
-        if (!self.config) {
-            self.config = [GSConfiguration defaultConfiguration];
-            self.config.account = self.account;
-            self.config.logLevel = 3;
-            self.config.consoleLogLevel = 3;
-        }
-
-        if (!self.userAgent) {
-            self.userAgent = [GSUserAgent sharedAgent];
-
-            [self.userAgent configure:self.config withEchoCancellation:200];
-            [self.userAgent start];
-
-            [self.userAgent.account addObserver:self
-                                     forKeyPath:@"status"
-                                        options:NSKeyValueObservingOptionInitial
-                                        context:nil];
-        }
-
-        self.userAgent.account.delegate = self;
-
-        if (self.userAgent.account.status == GSAccountStatusOffline) {
-            [self.userAgent.account connect];
-        }
-    }];
-}
-
-- (void)sipDisconnect:(void (^)())finished {
-    BOOL connected = (self.userAgent.account.status == GSAccountStatusConnected);
-    if (connected) {
-        [self.userAgent.account disconnect:finished];
-    }
-
-    self.userAgent.account.delegate = nil;
-    [self.userAgent.account removeObserver:self forKeyPath:@"status"];
-    [self.userAgent reset];
-
-    self.userAgent = nil;
-    self.account = nil;
-    self.config = nil;
-
-    if (!connected && finished) {
-        finished();
+    else
+    {
+        NSLog(@"App is backgrounded. New event: %@", event);
     }
 }
 
-- (void)sipUpdateConnectionStatus {
-    if (self.connectionStatus == ConnectionStatusHigh) {
-        // Only connect if we're not already connect(ed/ing)
-        if (self.accountStatus != GSAccountStatusConnected && self.accountStatus != GSAccountStatusConnecting) {
-            NSLog(@"High traffic network: Connect SIP");
-            [self sipConnect];
-        }
-    } else if ([[GSCall activeCalls] count] == 0) {
-        // Only disconnect if no active calls are being made
-        NSLog(@"Low traffic network: Disconnect SIP");
-        [self sipDisconnect:nil];
-    }
-}
+#pragma mark - NSStreamDelegate
 
-- (NSString *)sipDomain {
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+{
+    switch (eventCode) {
+        case NSStreamEventNone:
+            // do nothing.
+            break;
 
-    NSString *sipDomain = [[config objectForKey:@"URLS"] objectForKey:@"SIP domain"];
-    NSAssert(sipDomain != nil, @"URLS - SIP domain not found in Config.plist!");
+        case NSStreamEventEndEncountered:
+            [self addEvent:@"Connection Closed"];
+            break;
 
-    return sipDomain;
-}
+        case NSStreamEventErrorOccurred:
+            [self addEvent:[NSString stringWithFormat:@"Had error: %@", aStream.streamError]];
+            break;
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    if ([keyPath isEqualToString:@"status"]) {
-        if ([object isKindOfClass:[GSAccount class]]) {
-            [self accountStatusDidChange:object];
-        } else {
-            [self callStatusDidChange];
-        }
-    }
-}
+        case NSStreamEventHasBytesAvailable:
+            if (aStream == self.inputStream)
+            {
+                [self addEvent:[NSString stringWithFormat:@"Bytes available"]];
+                break;
 
-- (void)accountStatusDidChange:(GSAccount *)account {
-    switch (account.status) {
-        case GSAccountStatusOffline: {
-        } break;
+                uint8_t buffer[1024];
+                NSInteger bytesRead = [self.inputStream read:buffer maxLength:1024];
+                NSString *stringRead = [[NSString alloc] initWithBytes:buffer length:bytesRead encoding:NSUTF8StringEncoding];
+                stringRead = [stringRead stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 
-        case GSAccountStatusInvalid: {
-        } break;
+                [self addEvent:[NSString stringWithFormat:@"Received: %@", stringRead]];
 
-        case GSAccountStatusConnecting: {
-        } break;
-
-        case GSAccountStatusConnected: {
-            [self setCodecs];
-            [self connectionStatusChanged];
-        } break;
-
-        case GSAccountStatusDisconnecting: {
-        } break;
-    }
-}
-
-- (void)callStatusDidChange {
-    if (self.lastNotifiedCall.status == GSCallStatusDisconnected) {
-        [self clearLastNotifiedCall];
-    }
-}
-
-- (void)setCodecs {
-    if (self.userAgent.status >= GSUserAgentStateConfigured) {
-        NSArray *codecs = [self.userAgent arrayOfAvailableCodecs];
-        for (GSCodecInfo *codec in codecs) {
-            if ([codec.codecId isEqual:@"PCMA/8000/1"]) {
-                [codec setPriority:254];
+                if ([stringRead isEqualToString:@"notify"])
+                {
+                    UILocalNotification *notification = [[UILocalNotification alloc] init];
+                    notification.alertBody = @"New VOIP call";
+                    notification.alertAction = @"Answer";
+                    [self addEvent:@"Notification sent"];
+                    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+                }
+                else if ([stringRead isEqualToString:@"ping"])
+                {
+                    [self.outputStream write:pongString maxLength:strlen((char*)pongString)];
+                }
             }
-        }
-    }
-}
+            break;
 
-#pragma mark - Notifications
-
-- (void)didBecomeActiveNotification:(NSNotification *)notification {
-    if (self.lastNotifiedCall) {
-        AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-        [appDelegate handleSipCall:self.lastNotifiedCall];
-    }
-    [self clearLastNotifiedCall];
-}
-
-- (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier {
-    if (self.lastNotifiedCall) {
-        NSDictionary *userInfo = notification.userInfo;
-        NSNumber *callId = [userInfo objectForKey:@"callId"];
-        if ([callId isKindOfClass:[NSNumber class]] && self.lastNotifiedCall.callId == [callId intValue] && self.lastNotifiedCall.status != GSCallStatusDisconnected) {
-            if ([identifier isEqualToString:NotificationActionDecline]) {
-                [self.lastNotifiedCall end];
-            } else {
-                AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-                [appDelegate handleSipCall:self.lastNotifiedCall];
+        case NSStreamEventHasSpaceAvailable:
+            if (aStream == self.outputStream && !self.sentPing)
+            {
+                self.sentPing = YES;
+                if (aStream == self.outputStream)
+                {
+                    [self.outputStream write:pingString maxLength:strlen((char*)pingString)];
+                    [self addEvent:@"Ping sent"];
+                }
             }
-        }
+            break;
 
-        [self clearLastNotifiedCall];
-    }
-}
+        case NSStreamEventOpenCompleted:
+            if (aStream == self.inputStream)
+            {
+                [self addEvent:@"Connection Opened"];
+            }
+            break;
 
-- (void)registerForLocalNotifications {
-    UIApplication *application = [UIApplication sharedApplication];
-
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIMutableUserNotificationAction *declineAction = [[UIMutableUserNotificationAction alloc] init];
-        [declineAction setActivationMode:UIUserNotificationActivationModeBackground];
-        [declineAction setTitle:NSLocalizedString(@"Decline", nil)];
-        [declineAction setIdentifier:NotificationActionDecline];
-
-        UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
-        [acceptAction setActivationMode:UIUserNotificationActivationModeForeground];
-        [acceptAction setTitle:NSLocalizedString(@"Accept", nil)];
-        [acceptAction setIdentifier:NotificationActionAccept];
-
-        UIMutableUserNotificationCategory *actionCategory = [[UIMutableUserNotificationCategory alloc] init];
-        [actionCategory setIdentifier:NotificationAcceptDeclineCategory];
-        [actionCategory setActions:@[acceptAction, declineAction]
-                        forContext:UIUserNotificationActionContextDefault];
-
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge)
-                                                                                 categories:[NSSet setWithObject:actionCategory]];
-        [application registerUserNotificationSettings:settings];
-    } else {
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-    }
-}
-
-- (void)clearLastNotifiedCall {
-    [self.lastNotifiedCall removeObserver:self forKeyPath:@"status"];
-    self.lastNotifiedCall = nil;
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-}
-
-#pragma mark - GSAccount delegate
-
-- (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
-    NSLog(@"Received incoming call");
-    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-    if (state == UIApplicationStateActive) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:call];
-    } else {
-        UILocalNotification *notification = [[UILocalNotification alloc] init];
-        notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), call.remoteInfo];
-        notification.soundName = @"incoming.caf";
-        notification.userInfo = @{@"callId":@(call.callId)};
-
-        if ([notification respondsToSelector:@selector(setCategory:)]) {
-            notification.category = NotificationAcceptDeclineCategory;
-        }
-
-        self.lastNotifiedCall = call;
-
-        [self.lastNotifiedCall addObserver:self
-                                forKeyPath:@"status"
-                                   options:NSKeyValueObservingOptionInitial
-                                   context:nil];
-
-        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        default:
+            break;
     }
 }
 
