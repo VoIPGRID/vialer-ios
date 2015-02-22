@@ -106,6 +106,8 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
             self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
             self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
             self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
+            self.account.proxyServer = [self.account.domain stringByAppendingString:@";transport=tcp"];
+            self.account.enableRingback = NO;
         }
 
         if (!self.config) {
@@ -113,6 +115,7 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
             self.config.account = self.account;
             self.config.logLevel = 3;
             self.config.consoleLogLevel = 3;
+            self.config.transportType = GSTCPTransportType;
         }
 
         if (!self.userAgent) {
