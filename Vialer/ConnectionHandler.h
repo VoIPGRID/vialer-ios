@@ -33,5 +33,6 @@ NSString * const IncomingSIPCallNotification;
 - (void)registerForLocalNotifications;
 
 + (ConnectionHandler *)sharedConnectionHandler;
++ (void)showNotificationForCall:(GSCall *)call;
 
 @end

@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "Gossip+Extra.h"
 #import "PJSIP.h"
+#import "GSNotifications.h"
+#import "GSDispatch.h"
 
 #import "AFNetworkReachabilityManager.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
@@ -27,10 +29,11 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 @property (nonatomic, strong) GSAccountConfiguration *account;
 @property (nonatomic, strong) GSConfiguration *config;
 @property (nonatomic, strong) GSUserAgent *userAgent;
-@property (nonatomic, strong) GSCall *lastNotifiedCall;
 @end
 
 @implementation ConnectionHandler
+
+static GSCall *lastNotifiedCall;
 
 + (ConnectionHandler *)sharedConnectionHandler {
     static dispatch_once_t pred;
@@ -45,6 +48,7 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 - (id)init {
     self = [super init];
     if (self != nil) {
+        pj_activesock_enable_iphone_os_bg(PJ_TRUE);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
@@ -216,7 +220,7 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 }
 
 - (void)callStatusDidChange {
-    if (self.lastNotifiedCall.status == GSCallStatusDisconnected) {
+    if (lastNotifiedCall.status == GSCallStatusDisconnected) {
         [self clearLastNotifiedCall];
     }
 }
@@ -235,23 +239,23 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 #pragma mark - Notifications
 
 - (void)didBecomeActiveNotification:(NSNotification *)notification {
-    if (self.lastNotifiedCall) {
+    if (lastNotifiedCall) {
         AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-        [appDelegate handleSipCall:self.lastNotifiedCall];
+        [appDelegate handleSipCall:lastNotifiedCall];
     }
     [self clearLastNotifiedCall];
 }
 
 - (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier {
-    if (self.lastNotifiedCall) {
+    if (lastNotifiedCall) {
         NSDictionary *userInfo = notification.userInfo;
         NSNumber *callId = [userInfo objectForKey:@"callId"];
-        if ([callId isKindOfClass:[NSNumber class]] && self.lastNotifiedCall.callId == [callId intValue] && self.lastNotifiedCall.status != GSCallStatusDisconnected) {
+        if ([callId isKindOfClass:[NSNumber class]] && lastNotifiedCall.callId == [callId intValue] && lastNotifiedCall.status != GSCallStatusDisconnected) {
             if ([identifier isEqualToString:NotificationActionDecline]) {
-                [self.lastNotifiedCall end];
+                [lastNotifiedCall end];
             } else {
                 AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-                [appDelegate handleSipCall:self.lastNotifiedCall];
+                [appDelegate handleSipCall:lastNotifiedCall];
             }
         }
 
@@ -287,37 +291,36 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 }
 
 - (void)clearLastNotifiedCall {
-    [self.lastNotifiedCall removeObserver:self forKeyPath:@"status"];
-    self.lastNotifiedCall = nil;
+    [lastNotifiedCall removeObserver:self forKeyPath:@"status"];
+    lastNotifiedCall = nil;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
+
++ (void)showNotificationForCall:(GSCall *)call {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), call.remoteInfo];
+    notification.soundName = @"incoming.caf";
+    notification.userInfo = @{@"callId":@(call.callId)};
+
+    if ([notification respondsToSelector:@selector(setCategory:)]) {
+        notification.category = NotificationAcceptDeclineCategory;
+    }
+
+    lastNotifiedCall = call;
+
+    [lastNotifiedCall addObserver:[ConnectionHandler sharedConnectionHandler]
+                            forKeyPath:@"status"
+                               options:NSKeyValueObservingOptionInitial
+                               context:nil];
+
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
 #pragma mark - GSAccount delegate
 
 - (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
     NSLog(@"Received incoming call");
-    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-    if (state == UIApplicationStateActive) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:call];
-    } else {
-        UILocalNotification *notification = [[UILocalNotification alloc] init];
-        notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), call.remoteInfo];
-        notification.soundName = @"incoming.caf";
-        notification.userInfo = @{@"callId":@(call.callId)};
-
-        if ([notification respondsToSelector:@selector(setCategory:)]) {
-            notification.category = NotificationAcceptDeclineCategory;
-        }
-
-        self.lastNotifiedCall = call;
-
-        [self.lastNotifiedCall addObserver:self
-                                forKeyPath:@"status"
-                                   options:NSKeyValueObservingOptionInitial
-                                   context:nil];
-
-        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:call];
 }
 
 @end

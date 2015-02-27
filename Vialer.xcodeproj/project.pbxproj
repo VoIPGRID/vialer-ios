@@ -83,7 +83,6 @@
 		FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
 		FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */; };
-		FBB8540F1A7FCD4F00121366 /* BackgroundTaskHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB8540E1A7FCD4F00121366 /* BackgroundTaskHandler.m */; };
 		FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
 		FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
 		FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854131A7FE3CE00121366 /* dtmf-1.aif */; };
@@ -254,8 +253,6 @@
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FBB088CC18228E360004FFD1 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
 		FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
-		FBB8540D1A7FCD4F00121366 /* BackgroundTaskHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskHandler.h; sourceTree = "<group>"; };
-		FBB8540E1A7FCD4F00121366 /* BackgroundTaskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskHandler.m; sourceTree = "<group>"; };
 		FBB854101A7FE24C00121366 /* incoming.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incoming.caf; sourceTree = "<group>"; };
 		FBB854111A7FE3CE00121366 /* dtmf-#.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-#.aif"; sourceTree = "<group>"; };
 		FBB854121A7FE3CE00121366 /* dtmf-0.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-0.aif"; sourceTree = "<group>"; };
@@ -379,8 +376,6 @@
 		FB202BC21A4396E700024CDE /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
-				FBB8540D1A7FCD4F00121366 /* BackgroundTaskHandler.h */,
-				FBB8540E1A7FCD4F00121366 /* BackgroundTaskHandler.m */,
 				FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */,
 				FB202BC01A4396DB00024CDE /* ConnectionHandler.m */,
 			);
@@ -781,7 +776,6 @@
 				FB0CF34E18226392002D4281 /* AFURLSessionManager.m in Sources */,
 				FB0CF34C18226392002D4281 /* AFURLRequestSerialization.m in Sources */,
 				FB3820CA1A1E4F510033FF78 /* GSNotifications.m in Sources */,
-				FBB8540F1A7FCD4F00121366 /* BackgroundTaskHandler.m in Sources */,
 				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,

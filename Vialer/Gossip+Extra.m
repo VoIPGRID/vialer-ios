@@ -7,8 +7,9 @@
 //
 
 #import "Gossip+Extra.h"
-#import "GSPJUtil.h"
+#import "ConnectionHandler.h"
 
+#import "GSPJUtil.h"
 #import "PJSIP.h"
 #import "GSNotifications.h"
 #import "GSDispatch.h"
@@ -172,6 +173,40 @@ static pj_thread_t *a_thread;
     }
 
     return YES;
+}
+
+@end
+
+/*
+ * GSDispatch
+ */
+
+void onRegistrationStarted(pjsua_acc_id accountId, pj_bool_t renew);
+void onRegistrationState(pjsua_acc_id accountId);
+void onIncomingCall(pjsua_acc_id accountId, pjsua_call_id callId, pjsip_rx_data *rdata);
+void onCallMediaState(pjsua_call_id callId);
+void onCallState(pjsua_call_id callId, pjsip_event *e);
+
+@implementation GSDispatch (Gossip_Extra)
+
++ (void)configureCallbacksForAgent:(pjsua_config *)uaConfig {
+    // NOTE: Override original GSDispatch hook for incoming call that was set in the primary class
+    uaConfig->cb.on_reg_started = &onRegistrationStarted;
+    uaConfig->cb.on_reg_state = &onRegistrationState;
+    uaConfig->cb.on_incoming_call = &onIncomingCallOverride;
+    uaConfig->cb.on_call_media_state = &onCallMediaState;
+    uaConfig->cb.on_call_state = &onCallState;
+
+    // Set our user agent
+    uaConfig->user_agent = [GSPJUtil PJStringWithString:[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByAppendingString:@" iOS"]];
+}
+
+void onIncomingCallOverride(pjsua_acc_id accountId, pjsua_call_id callId, pjsip_rx_data *rdata) {
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+        onIncomingCall(accountId, callId, rdata);
+    } else {
+        [ConnectionHandler showNotificationForCall:[GSCall incomingCallWithId:callId toAccount:[GSUserAgent sharedAgent].account]];
+    }
 }
 
 @end

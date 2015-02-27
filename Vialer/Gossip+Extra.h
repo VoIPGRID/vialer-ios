@@ -7,6 +7,7 @@
 //
 
 #import "Gossip.h"
+#import "GSDispatch.h"
 
 @interface GSCall (Gossip_Extra)
 @property (nonatomic, assign) BOOL paused;
@@ -30,5 +31,11 @@
 @interface GSUserAgent (Gossip_Extra)
 
 - (BOOL)configure:(GSConfiguration *)config withEchoCancellation:(NSUInteger)echoCancellation;
+
+@end
+
+@interface GSDispatch (Gossip_Extra)
+
++ (void)configureCallbacksForAgent:(pjsua_config *)uaConfig;
 
 @end

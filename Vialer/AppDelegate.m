@@ -19,7 +19,6 @@
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
 #import "ConnectionHandler.h"
-#import "BackgroundTaskHandler.h"
 #import "Gossip+Extra.h"
 
 #import "AFNetworkActivityLogger.h"
@@ -142,6 +141,12 @@
 
     [[ConnectionHandler sharedConnectionHandler] registerForLocalNotifications];
 
+    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [GSAccount reregisterActiveAccounts];
+        });
+    }];
+
     return YES;
 }
 
@@ -153,18 +158,13 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [GSAccount reregisterActiveAccounts];
-        });
-    }];
-    [[BackgroundTaskHandler sharedBackgroundTaskHandler] startBackgroundTask];
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [[UIApplication sharedApplication] clearKeepAliveTimeout];
-    [[BackgroundTaskHandler sharedBackgroundTaskHandler] endAllBackgroundTasks];
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
