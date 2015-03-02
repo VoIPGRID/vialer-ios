@@ -142,12 +142,18 @@
     [[ConnectionHandler sharedConnectionHandler] registerForLocalNotifications];
 
     [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [GSAccount reregisterActiveAccounts];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [GSAccount reregisterActiveAccounts];
+//        });
     }];
 
+    NSSetUncaughtExceptionHandler(&HandleExceptions);
+
     return YES;
+}
+
+void HandleExceptions(NSException *exception) {
+    NSLog(@"The app has encountered an unhandled exception: %@", [exception debugDescription]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -183,7 +189,7 @@
     }
 }
 
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     if (application.applicationState != UIApplicationStateActive) {
         [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
         if (completionHandler) {

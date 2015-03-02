@@ -296,22 +296,22 @@ static GSCall *lastNotifiedCall;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
-+ (void)showNotificationForCall:(GSCall *)call {
++ (void)showNotificationForIncomingCall:(GSCall *)incomingCall {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), call.remoteInfo];
+    notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), incomingCall.remoteInfo];
     notification.soundName = @"incoming.caf";
-    notification.userInfo = @{@"callId":@(call.callId)};
+    notification.userInfo = @{@"callId":@(incomingCall.callId)};
 
     if ([notification respondsToSelector:@selector(setCategory:)]) {
         notification.category = NotificationAcceptDeclineCategory;
     }
 
-    lastNotifiedCall = call;
+    lastNotifiedCall = incomingCall;
 
     [lastNotifiedCall addObserver:[ConnectionHandler sharedConnectionHandler]
-                            forKeyPath:@"status"
-                               options:NSKeyValueObservingOptionInitial
-                               context:nil];
+                       forKeyPath:@"status"
+                          options:NSKeyValueObservingOptionInitial
+                          context:nil];
 
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }

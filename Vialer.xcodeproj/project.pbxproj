@@ -671,7 +671,6 @@
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
-						DevelopmentTeam = 6QG672DXVZ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;

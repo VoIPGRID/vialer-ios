@@ -16,6 +16,7 @@
 #import "Util.h"
 
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 /*
  * GSCall
@@ -80,6 +81,8 @@ static SystemSoundID ringSoundId;
     if (ringTimer) {
         return;
     }
+
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:NULL];
 
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"incoming" ofType:@"wav"];
     OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL URLWithString:filename], &ringSoundId);
@@ -205,7 +208,7 @@ void onIncomingCallOverride(pjsua_acc_id accountId, pjsua_call_id callId, pjsip_
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
         onIncomingCall(accountId, callId, rdata);
     } else {
-        [ConnectionHandler showNotificationForCall:[GSCall incomingCallWithId:callId toAccount:[GSUserAgent sharedAgent].account]];
+        [ConnectionHandler showNotificationForIncomingCall:[GSCall incomingCallWithId:callId toAccount:[GSUserAgent sharedAgent].account]];
     }
 }
 
