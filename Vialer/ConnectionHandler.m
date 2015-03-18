@@ -8,10 +8,8 @@
 
 #import "ConnectionHandler.h"
 #import "AppDelegate.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "Gossip+Extra.h"
-#import "PJSIP.h"
-#import "GSNotifications.h"
-#import "GSDispatch.h"
 
 #import "AFNetworkReachabilityManager.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
@@ -100,15 +98,17 @@ static GSCall *lastNotifiedCall;
 
 - (void)sipConnect {
     [self sipDisconnect:^{
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"] || ![[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"]) {
+        NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+        NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
+        if (!sipAccount || !sipPassword) {
             return;
         }
 
         if (!self.account) {
             self.account = [GSAccountConfiguration defaultConfiguration];
             self.account.domain = self.sipDomain;
-            self.account.username = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-            self.account.password = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPPassword"];    // TODO: In key chain
+            self.account.username = sipAccount;
+            self.account.password = sipPassword;
             self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
             self.account.proxyServer = [self.account.domain stringByAppendingString:@";transport=tcp"];
             self.account.enableRingback = NO;
@@ -296,7 +296,7 @@ static GSCall *lastNotifiedCall;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
-+ (void)showNotificationForIncomingCall:(GSCall *)incomingCall {
++ (void)showLocalNotificationForIncomingCall:(GSCall *)incomingCall {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), incomingCall.remoteInfo];
     notification.soundName = @"incoming.caf";

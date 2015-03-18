@@ -12,7 +12,6 @@
 #import "SIPIncomingViewController.h"
 
 #import "UIAlertView+Blocks.h"
-#import "PJSIP.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVAudioSession.h>

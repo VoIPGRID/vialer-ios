@@ -8,6 +8,7 @@
 
 #import "LogInViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
+#import "ConnectionHandler.h"
 
 #import "SVProgressHUD.h"
 
@@ -104,6 +105,13 @@
         [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:self.user password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
+            // Check if a SIP account 
+            if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
+                [[ConnectionHandler sharedConnectionHandler] sipConnect];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"No active voice over internet account found. Internet calls will be disabled.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+                [alert show];
+            }
             [self dismissViewControllerAnimated:YES completion:nil];
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

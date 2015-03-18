@@ -96,7 +96,7 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString *token = [responseObject objectForKey:@"token"];
             if ([token isKindOfClass:[NSString class]]) {
-                NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+                NSString *user = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] user];
                 NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", self.partnerBaseUrl, user, token, nextUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 NSLog(@"Go to url: %@", url);
 

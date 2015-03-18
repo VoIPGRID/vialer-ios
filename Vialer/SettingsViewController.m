@@ -23,7 +23,6 @@
 #define SHOW_RECENTS_IDX -1 // Disabled for now
 #define LOG_OUT_IDX      2
 #define VERSION_IDX      3
-#define TEST_IDX         4
 
 @interface SettingsViewController ()
 @property (nonatomic, strong) NSArray *sectionTitles;
@@ -40,7 +39,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"settings"];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
         
-        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil), NSLocalizedString(@"Version", nil), @"PJSIP Test"];
+        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil), NSLocalizedString(@"Version", nil)];
     }
     return self;
 }
@@ -131,9 +130,6 @@
     } else if (indexPath.section == VERSION_IDX) {
         cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
-    } else if (indexPath.section == TEST_IDX) {
-        cell.textLabel.text = @"Enter SIP Account";
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
 
     return cell;
@@ -175,36 +171,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log out", nil) message:NSLocalizedString(@"Are you sure you want to log out?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
         [alert show];
         alert.tag = LOG_OUT_ALERT_TAG;
-    } else if (indexPath.section == TEST_IDX) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Enter SIP account" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        [alertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        [alertView textFieldAtIndex:0].text = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-        [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-
-        [alertView setTapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            if (buttonIndex == 0) {
-                return;
-            }
-
-            NSString *account = [alertView textFieldAtIndex:0].text;
-            NSString *password = [alertView textFieldAtIndex:1].text;
-            NSArray *accountComponents = [account componentsSeparatedByString:@"@"];
-            if ([accountComponents count] == 2) {
-                account = accountComponents[0];
-            }
-
-            account = [[account componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-            password = [[password componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-            if ([account length] && [password length]) {
-                [[NSUserDefaults standardUserDefaults] setObject:account forKey:@"SIPAccount"];
-                [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"SIPPassword"];   // TODO: Use key chain when SIP account is available through API
-                [[NSUserDefaults standardUserDefaults] synchronize];
-
-                [[ConnectionHandler sharedConnectionHandler] sipConnect];
-            }
-        }];
-
-        [alertView show];
     }
 }
 

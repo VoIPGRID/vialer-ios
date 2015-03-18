@@ -71,6 +71,7 @@
 		FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */; };
 		FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */; };
 		FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */; };
+		FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */; };
 		FBA850C0189AA87E008099C5 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = FBA850C2189AA87E008099C5 /* info.html */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */; };
@@ -232,6 +233,7 @@
 		FB9CC6BF19BD967C00BF2A82 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossipi386.a; sourceTree = "<group>"; };
 		FBA850C1189AA87E008099C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/info.html; sourceTree = "<group>"; };
 		FBA850C3189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/info.html; sourceTree = "<group>"; };
 		FBA850C4189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
+				FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */,
 				FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */,
 				FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
@@ -470,6 +473,7 @@
 			children = (
 				FBC9B3941A64824F00E88E9B /* libGossip7.a */,
 				FBC9B3951A64824F00E88E9B /* libGossip64.a */,
+				FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
 				FB3820D91A1E510C0033FF78 /* CoreVideo.framework */,
 				FB3820D71A1E51040033FF78 /* CoreMedia.framework */,
