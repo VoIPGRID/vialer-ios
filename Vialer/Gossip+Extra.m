@@ -201,7 +201,9 @@ void onCallState(pjsua_call_id callId, pjsip_event *e);
     uaConfig->cb.on_call_state = &onCallState;
 
     // Set our user agent
-    uaConfig->user_agent = [GSPJUtil PJStringWithString:[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByAppendingString:@" iOS"]];
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    uaConfig->user_agent = [GSPJUtil PJStringWithString:[NSString stringWithFormat:@"%@ iOS V%@", appName, version]];
 }
 
 void onIncomingCallOverride(pjsua_acc_id accountId, pjsua_call_id callId, pjsip_rx_data *rdata) {
