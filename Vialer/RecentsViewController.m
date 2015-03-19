@@ -43,6 +43,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recentsFilterUpdatedNotification:) name:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceededNotification:) name:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -65,11 +66,6 @@
     self.refreshControl = refresh;
 
     [self.tableView addSubview:self.refreshControl];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -304,6 +300,11 @@
 - (void)recentsFilterUpdatedNotification:(NSNotification *)notification {
     [self clearRecents];
     [self refreshRecents];
+}
+
+- (void)dealloc {
+    // Remove self as observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
