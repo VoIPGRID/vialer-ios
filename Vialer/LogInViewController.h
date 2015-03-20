@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackedViewController.h"
 
-@interface LogInViewController : UIViewController
+@interface LogInViewController : TrackedViewController
 
 @end

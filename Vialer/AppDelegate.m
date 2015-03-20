@@ -23,6 +23,7 @@
 
 #import "AFNetworkActivityLogger.h"
 #import "UIAlertView+Blocks.h"
+#import "GAI.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -39,6 +40,13 @@
 {
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
     NSAssert(config != nil, @"Config.plist not found!");
+
+    // Google Analytics
+//    [GAI sharedInstance].trackUncaughtExceptions = YES;
+//    [GAI sharedInstance].dispatchInterval = 20;
+//    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
+//    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    id<GAITracker>tracker = [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];

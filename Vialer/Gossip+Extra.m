@@ -201,9 +201,8 @@ void onCallState(pjsua_call_id callId, pjsip_event *e);
     uaConfig->cb.on_call_state = &onCallState;
 
     // Set our user agent
-    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    uaConfig->user_agent = [GSPJUtil PJStringWithString:[NSString stringWithFormat:@"%@ iOS V%@", appName, version]];
+    NSString *userAgent = [NSString stringWithFormat:@"%@/%@ (%@; iOS %@; Scale/%0.2f)", [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleExecutableKey] ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleIdentifierKey], (__bridge id)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey) ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleVersionKey], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion], ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] ? [[UIScreen mainScreen] scale] : 1.0f)];
+    uaConfig->user_agent = [GSPJUtil PJStringWithString:userAgent];
 }
 
 void onIncomingCallOverride(pjsua_acc_id accountId, pjsua_call_id callId, pjsip_rx_data *rdata) {

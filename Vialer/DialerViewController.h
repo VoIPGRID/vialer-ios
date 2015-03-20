@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "NumberPadViewController.h"
+#import "TrackedViewController.h"
 
-@interface DialerViewController : UIViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
+@interface DialerViewController : TrackedViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *buttonsView;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;

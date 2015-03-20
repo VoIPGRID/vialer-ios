@@ -8,8 +8,11 @@
 
 #import "ContactsViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
-
 #import "AppDelegate.h"
+
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface ABPeoplePickerNavigationController ()
 - (void)setAllowsCancel:(BOOL)allowsCancel;
@@ -41,6 +44,13 @@
         self.tableTintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
