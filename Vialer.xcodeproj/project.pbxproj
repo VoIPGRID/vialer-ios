@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0716C919A4DAA800AB548D /* PBWebViewController.m */; };
 		FB0CF34618226392002D4281 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF33418226392002D4281 /* AFHTTPRequestOperation.m */; };
 		FB0CF34718226392002D4281 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF33618226392002D4281 /* AFHTTPRequestOperationManager.m */; };
@@ -124,6 +125,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
+		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
 		FB0716C819A4DAA800AB548D /* PBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBWebViewController.h; sourceTree = "<group>"; };
 		FB0716C919A4DAA800AB548D /* PBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBWebViewController.m; sourceTree = "<group>"; };
 		FB0CF33318226392002D4281 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -406,6 +409,8 @@
 			children = (
 				FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */,
 				FB202BC01A4396DB00024CDE /* ConnectionHandler.m */,
+				AA8048A31ABC2B2400B62B0C /* ContactHandler.h */,
+				AA8048A41ABC2B2400B62B0C /* ContactHandler.m */,
 			);
 			name = Handlers;
 			sourceTree = "<group>";
@@ -834,6 +839,7 @@
 				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,
 				FB0CF34D18226392002D4281 /* AFURLResponseSerialization.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
+				AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */,
 				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
