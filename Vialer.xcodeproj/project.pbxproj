@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
+		EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */; };
+		EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */; };
+		EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */; };
+		EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */; };
 		FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0716C919A4DAA800AB548D /* PBWebViewController.m */; };
 		FB0CF34618226392002D4281 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF33418226392002D4281 /* AFHTTPRequestOperation.m */; };
 		FB0CF34718226392002D4281 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF33618226392002D4281 /* AFHTTPRequestOperationManager.m */; };
@@ -127,6 +131,15 @@
 /* Begin PBXFileReference section */
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
 		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
+		EA46C50B1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		EA46C50D1AC2CC6A00F7FC13 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		EA46C50E1AC2CC6A00F7FC13 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		EA46C5101AC2CC6A00F7FC13 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		EA46C5121AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		FB0716C819A4DAA800AB548D /* PBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBWebViewController.h; sourceTree = "<group>"; };
 		FB0716C919A4DAA800AB548D /* PBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBWebViewController.m; sourceTree = "<group>"; };
 		FB0CF33318226392002D4281 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -360,6 +373,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				EA46C50B1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.h */,
+				EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */,
+				EA46C50D1AC2CC6A00F7FC13 /* MMDrawerController+Subclass.h */,
+				EA46C50E1AC2CC6A00F7FC13 /* MMDrawerController.h */,
+				EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */,
+				EA46C5101AC2CC6A00F7FC13 /* MMDrawerVisualState.h */,
+				EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */,
+				EA46C5121AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.h */,
+				EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */,
+			);
+			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
+		EA46C5181AC2CCA100F7FC13 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */,
+				FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */,
+				FB3820A31A1E4F510033FF78 /* Gossip */,
+				FB0716C719A4DAA800AB548D /* PBWebViewController */,
+				FBAD7F12182AE93B002FC8FC /* SVProgressHUD */,
+				FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */,
+				FBB088CB18228E360004FFD1 /* AFNetworkActivityLogger */,
+				FB0CF33218226392002D4281 /* AFNetworking */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
 		FB0716C719A4DAA800AB548D /* PBWebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,13 +522,7 @@
 		FB4226C4182261D200707349 = {
 			isa = PBXGroup;
 			children = (
-				FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */,
-				FB3820A31A1E4F510033FF78 /* Gossip */,
-				FB0716C719A4DAA800AB548D /* PBWebViewController */,
-				FBAD7F12182AE93B002FC8FC /* SVProgressHUD */,
-				FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */,
-				FBB088CB18228E360004FFD1 /* AFNetworkActivityLogger */,
-				FB0CF33218226392002D4281 /* AFNetworking */,
+				EA46C5181AC2CCA100F7FC13 /* Libs */,
 				FB4226D6182261D200707349 /* Vialer */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
@@ -810,6 +848,7 @@
 			files = (
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
+				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				FB0CF34B18226392002D4281 /* AFURLConnectionOperation.m in Sources */,
@@ -844,6 +883,7 @@
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
+				EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */,
 				FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
@@ -855,11 +895,13 @@
 				FB6B47E11ABC280200B0DBC4 /* TrackedViewController.m in Sources */,
 				FB0CF34718226392002D4281 /* AFHTTPRequestOperationManager.m in Sources */,
 				FBAD7F18182AE93B002FC8FC /* SVProgressHUD.m in Sources */,
+				EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */,
 				FB0CF34A18226392002D4281 /* AFSecurityPolicy.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				FB0CF34818226392002D4281 /* AFHTTPSessionManager.m in Sources */,
 				FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */,
+				EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
 			);
