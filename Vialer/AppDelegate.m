@@ -71,19 +71,7 @@
         [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
     }
 
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"nav-bar"] stretchableImageWithLeftCapWidth:20 topCapHeight:10] forBarMetrics:UIBarMetricsDefault];
-
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    } else {
-        NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-        NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f]];
-    }
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f]];
 
     // Handler for failed authentications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
@@ -106,24 +94,26 @@
     UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
     recentsViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
-    recentsNavigationViewController.view.backgroundColor = [UIColor clearColor];
+    recentsNavigationViewController.navigationBar.translucent = NO;
 
     UIViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:[NSBundle mainBundle]];
     settingsViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *settingsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    settingsNavigationViewController.view.backgroundColor = [UIColor clearColor];
+    settingsNavigationViewController.navigationBar.translucent = NO;
 
     UIViewController *gotoViewController = [[GoToViewController alloc] initWithNibName:@"GoToViewController" bundle:[NSBundle mainBundle]];
     gotoViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *gotoNavigationViewController = [[UINavigationController alloc] initWithRootViewController:gotoViewController];
-    gotoNavigationViewController.view.backgroundColor = [UIColor clearColor];
+    gotoNavigationViewController.navigationBar.translucent = NO;
     
     UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+    UINavigationController *dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
+    dialerNavigationController.navigationBar.translucent = NO;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerViewController, gotoNavigationViewController, settingsNavigationViewController];
+    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerNavigationController, gotoNavigationViewController, settingsNavigationViewController];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         self.tabBarController.selectedIndex = 1;    // Contacts
     } else {

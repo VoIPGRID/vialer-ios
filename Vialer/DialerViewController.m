@@ -32,12 +32,14 @@
     if (self) {
         self.title = NSLocalizedString(@"Call", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"call"];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         __weak typeof(self) weakSelf = self;
         self.callCenter = [[CTCallCenter alloc] init];
         [self.callCenter setCallEventHandler:^(CTCall *call) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.backButton.hidden = YES;
+                weakSelf.callButton.enabled = NO;
                 weakSelf.numberTextView.text = @"";
             });
             NSLog(@"callEventHandler2: %@", call.callState);
@@ -67,6 +69,9 @@
     [self.backButton addGestureRecognizer:longPress];
     
     self.backButton.hidden = YES;
+    self.callButton.enabled = NO;
+    
+    self.numberTextView.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:36.f];
 
     [self connectionStatusChangedNotification:nil];
 }
@@ -80,24 +85,18 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
-    CGRect frame = [UIScreen mainScreen].bounds;
+    CGRect frame = self.view.frame;
     frame.size.height -= 49.f;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
-        frame.origin.y -= 20.0f;
-    }
     self.view.frame = frame;
-    
-    if ([UIScreen mainScreen].bounds.size.height < 568.f) {
-        self.callButton.frame = CGRectMake(0, frame.size.height - 46.f, self.view.frame.size.width, 46.f);
-    }
 }
 
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
-    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
+//    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
 
 - (void)sipCallStartedNotification:(NSNotification *)notification {
     self.backButton.hidden = YES;
+    self.callButton.enabled = NO;
     self.numberTextView.text = @"";
 }
 
@@ -111,6 +110,7 @@
     }
 
     self.backButton.hidden = NO;
+    self.callButton.enabled = YES;
 
     return YES;
 }
@@ -121,6 +121,7 @@
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.numberTextView.text = @"";
         self.backButton.hidden = YES;
+        self.callButton.enabled = NO;
     }
 }
 
@@ -129,6 +130,7 @@
         self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
     }
     self.backButton.hidden = (self.numberTextView.text.length == 0);
+    self.callButton.enabled = (self.numberTextView.text.length > 0);
 }
 
 - (IBAction)callButtonPressed:(UIButton *)sender {
@@ -154,6 +156,7 @@
     self.numberTextView.text = [self.numberTextView.text stringByAppendingString:character];
 
     self.backButton.hidden = NO;
+    self.callButton.enabled = YES;
 }
 
 @end

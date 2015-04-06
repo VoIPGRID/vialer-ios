@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "keypad-back.png"
+      "filename" : "Backspace.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "keypad-back@2x.png"
+      "filename" : "Backspace@2x.png"
     },
     {
       "idiom" : "universal",

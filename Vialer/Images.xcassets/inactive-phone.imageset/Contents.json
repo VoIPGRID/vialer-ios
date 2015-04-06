@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "dialer-button-highlighted.png"
+      "filename" : "inactive-phone.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "dialer-button-highlighted@2x.png"
+      "filename" : "inactive-phone@2x.png"
     },
     {
       "idiom" : "universal",

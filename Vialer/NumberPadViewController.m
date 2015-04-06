@@ -55,21 +55,26 @@
 }
 
 - (void)addDialerButtonsToView:(UIView *)view {
-    CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
-    CGFloat buttonYSpace = [UIScreen mainScreen].bounds.size.height > 480.f ? [UIScreen mainScreen].bounds.size.height / 6.45f : 78.f;
-    CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
-
-    CGPoint offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height > 480.f ? 16.f : 0.f);
+    CGFloat buttonWidth = self.view.frame.size.width / 3.4f;
+    CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonWidth)) / 2.f;
+    
+    // Calculate height based on the remaining size on the screen
+    // - statusBarHeight - navBarHeight - tabBarHeight - numberFieldHeight - callButtonHeight
+    CGFloat buttonHeight = (self.view.frame.size.height - 20 - 44.f - 49.f - 53.f - 16.f - 55.f - 24.f) / 4.f;
+    
+    CGPoint offset = CGPointMake(0, 0);
+    
     for (int j = 0; j < 4; j++) {
         offset.x = leftOffset;
         for (int i = 0; i < 3; i++) {
             NSString *title = self.titles[j * 3 + i];
             NSString *subTitle = self.subTitles[j * 3 + i];
-            UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subTitle];
+            UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subTitle constrainedToSize:CGSizeMake(buttonWidth, buttonHeight)];
             [button addTarget:self action:@selector(dialerButtonPressed:) forControlEvents:UIControlEventTouchDown];
             button.tag = j * 3 + i;
 
-            button.frame = CGRectMake(offset.x, offset.y, buttonXSpace, buttonXSpace);
+            [button sizeToFit];
+            button.frame = CGRectMake(offset.x, offset.y, buttonWidth, buttonHeight);
             [view addSubview:button];
 
             if ([title isEqualToString:@"0"]) {
@@ -77,28 +82,42 @@
                 [button addGestureRecognizer:longPress];
             }
 
-            offset.x += buttonXSpace;
+            offset.x += buttonWidth;
         }
-        offset.y += buttonYSpace;
+        
+        offset.y += buttonHeight;
     }
 }
 
-- (UIButton *)createDialerButtonWithTitle:(NSString *)title andSubTitle:(NSString *)subTitle {
+- (UIButton *)createDialerButtonWithTitle:(NSString *)title
+                              andSubTitle:(NSString *)subTitle
+                        constrainedToSize:(CGSize)size
+{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[self stateImageForState:UIControlStateNormal andTitle:title andSubTitle:subTitle] forState:UIControlStateNormal];
-    [button setImage:[self stateImageForState:UIControlStateHighlighted andTitle:title andSubTitle:subTitle] forState:UIControlStateHighlighted];
-    button.frame = CGRectMake(0, 0, button.imageView.image.size.width, button.imageView.image.size.height);
+    [button setImage:[self stateImageForState:UIControlStateNormal
+                                     andTitle:title
+                                  andSubTitle:subTitle
+                            constrainedToSize:size]
+            forState:UIControlStateNormal];
+    [button setImage:[self stateImageForState:UIControlStateHighlighted
+                                     andTitle:title
+                                  andSubTitle:subTitle
+                            constrainedToSize:size]
+            forState:UIControlStateHighlighted];
+    button.frame = CGRectMake(0, 0, size.width, size.height);
     return button;
 }
 
-- (UIImage *)stateImageForState:(UIControlState)state andTitle:(NSString *)title andSubTitle:(NSString *)subTitle {
-    UIImage *image = [UIImage imageNamed:state == UIControlStateHighlighted ? @"dialer-button-highlighted" : @"dialer-button"];
-    
-    UIImageView *buttonGraphic = [[UIImageView alloc] initWithImage:image];
+- (UIImage *)stateImageForState:(UIControlState)state
+                       andTitle:(NSString *)title
+                    andSubTitle:(NSString *)subTitle
+              constrainedToSize:(CGSize)size
+{
+    UIView *buttonGraphic = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont systemFontOfSize:39.f];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32.f];
     titleLabel.textColor = state == UIControlStateHighlighted ? [UIColor blackColor] : [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = title;
@@ -106,17 +125,39 @@
     
     UILabel *subTitleLabel = [[UILabel alloc] init];
     subTitleLabel.backgroundColor = [UIColor clearColor];
-    subTitleLabel.font = title.length ? [UIFont fontWithName:@"Avenir" size:10.f] : [UIFont fontWithName:@"Avenir" size:39.f];
     subTitleLabel.textColor = state == UIControlStateHighlighted ? [UIColor blackColor] : [UIColor colorWithRed:0xed green:0xed blue:0xed alpha:1.f];
     subTitleLabel.textAlignment = NSTextAlignmentCenter;
-    subTitleLabel.text = subTitle;
+    
+    if (title.length > 0) {
+        if (subTitle.length > 1) {
+            subTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:9.f];
+        } else {
+            subTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.f];
+        }
+    } else {
+        subTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32.f];
+    }
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:subTitle];
+    [attributedString addAttribute:NSKernAttributeName
+                             value:@(5.f)
+                             range:NSMakeRange(0, subTitle.length)];
+    
+    subTitleLabel.attributedText = attributedString;
     [subTitleLabel sizeToFit];
     
+    CGFloat yOffset = 10.f;
+    if ([UIScreen mainScreen].bounds.size.height < 568.f) {
+        yOffset = 0;
+    }
+    
     if (title.length) {
-        titleLabel.frame = CGRectMake(0.f, 10.f, image.size.width, titleLabel.frame.size.height);
-        subTitleLabel.frame = CGRectMake(0.f, titleLabel.frame.origin.y + titleLabel.frame.size.height - 6.f, image.size.width, subTitleLabel.frame.size.height);
+        titleLabel.frame = CGRectMake(0.f, yOffset, size.width, titleLabel.frame.size.height);
+        
+        CGFloat yPadding = (subTitle.length > 1) ? 2.f : -4.f;
+        subTitleLabel.frame = CGRectMake(0.f, titleLabel.frame.origin.y + titleLabel.frame.size.height + yPadding, size.width, subTitleLabel.frame.size.height);
     } else {
-        subTitleLabel.frame = CGRectMake(0.f, 14.f, image.size.width, subTitleLabel.frame.size.height);
+        subTitleLabel.frame = CGRectMake(0.f, yOffset, size.width, subTitleLabel.frame.size.height);
     }
     
     [buttonGraphic addSubview:titleLabel];
