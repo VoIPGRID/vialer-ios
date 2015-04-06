@@ -33,6 +33,10 @@
         self.title = NSLocalizedString(@"Contacts", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"contacts"];
         self.searchDisplayController.delegate = self;
+        self.navigationBar.translucent = NO;
+        
+        UIViewController *rootViewController = [self.viewControllers firstObject];
+        rootViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         [self setAllowsCancel:NO];
 
@@ -68,7 +72,7 @@
     }
 
     if ([navigationController.viewControllers indexOfObject:viewController] == 0) {
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
+        viewController.navigationItem.leftBarButtonItem = nil;
         viewController.navigationItem.rightBarButtonItem = nil;
         
         if ([viewController isKindOfClass:[UITableViewController class]]) {

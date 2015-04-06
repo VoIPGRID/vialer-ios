@@ -36,7 +36,7 @@
     if (self) {
         self.title = NSLocalizedString(@"Recents", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"recents"];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         self.recents = [RecentCall cachedRecentCalls];
 
