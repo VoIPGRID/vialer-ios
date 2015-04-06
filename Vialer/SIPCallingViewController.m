@@ -27,7 +27,6 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 @property (nonatomic, strong) NSString *toNumber;
 @property (nonatomic, strong) NSString *toContact;
 @property (nonatomic, strong) NSArray *images;
-@property (nonatomic, strong) NSArray *subTitles;
 @property (nonatomic, assign) UIButton *numbersButton;
 @property (nonatomic, assign) UIButton *pauseButton;
 @property (nonatomic, assign) UIButton *muteButton;
@@ -52,13 +51,15 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     self.numberPadViewController.delegate = self;
     self.numberPadViewController.view.hidden = YES;
 
-    self.images = @[@"numbers-button", @"pause-button", @"mute-button", @"", @"speaker-button", @""];
-    self.subTitles = @[NSLocalizedString(@"numbers", nil), NSLocalizedString(@"pause", nil), NSLocalizedString(@"sound off", nil), @"", NSLocalizedString(@"speaker", nil), @""];
+    self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker", @"keypad-forward", @"keypad-addcall"];
 
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
     self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.statusLabel.frame.size.height);
+    
+    self.contactLabel.font = [UIFont systemFontOfSize:36.f];
+    self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24.f];
 
     [self addButtonsToView:self.buttonsView];
 }
@@ -96,8 +97,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
         for (int i = 0; i < 3; i++) {
             NSString *image = self.images[j * 3 + i];
             if ([image length] != 0) {
-                NSString *subTitle = self.subTitles[j * 3 + i];
-                UIButton *button = [self createDialerButtonWithImage:image andSubTitle:subTitle];
+                UIButton *button = [self createDialerButtonWithImage:image andSubTitle:nil];
                 switch (j * 3 + i) {
                     case 0:
                         self.numbersButton = button;
@@ -111,7 +111,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
                         self.muteButton = button;
                         [button addTarget:self action:@selector(muteButtonPressed:) forControlEvents:UIControlEventTouchDown];
                         break;
-                    case 4:
+                    case 3:
                         self.speakerButton = button;
                         [button addTarget:self action:@selector(speakerButtonPressed:) forControlEvents:UIControlEventTouchDown];
                         break;

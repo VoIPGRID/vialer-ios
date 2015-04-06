@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "numbers-button.png"
+      "filename" : "keypad-pause.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "numbers-button@2x.png"
+      "filename" : "keypad-pause@2x.png"
     },
     {
       "idiom" : "universal",
