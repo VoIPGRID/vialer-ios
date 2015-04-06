@@ -30,8 +30,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Call", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"call"];
+        self.title = NSLocalizedString(@"Keypad", nil);
+        self.tabBarItem.image = [UIImage imageNamed:@"tab-keypad"];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         __weak typeof(self) weakSelf = self;
@@ -80,14 +80,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-
-    CGRect frame = self.view.frame;
-    frame.size.height -= 49.f;
-    self.view.frame = frame;
 }
 
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {

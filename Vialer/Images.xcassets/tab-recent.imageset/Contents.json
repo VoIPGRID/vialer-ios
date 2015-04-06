@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "recents.png"
+      "filename" : "tab-recent.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "recents@2x.png"
+      "filename" : "tab-recent@2x.png"
     },
     {
       "idiom" : "universal",

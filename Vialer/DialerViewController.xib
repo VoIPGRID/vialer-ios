@@ -40,8 +40,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9vO-UL-7XZ">
-                    <rect key="frame" x="31" y="497" width="258" height="55"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <rect key="frame" x="31" y="497.00000095910559" width="258" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" backgroundImage="call-phone">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,11 +53,11 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="5aC-ux-iTG" userLabel="Buttons View">
-                    <rect key="frame" x="0.0" y="69" width="320" height="428"/>
+                    <rect key="frame" x="0.0" y="70" width="320" height="428"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.92941176470588238" green="0.52156862745098043" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92941176469999998" green="0.52156862749999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

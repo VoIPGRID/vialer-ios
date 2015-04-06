@@ -35,7 +35,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Recents", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"recents"];
+        self.tabBarItem.image = [UIImage imageNamed:@"tab-recent"];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         self.recents = [RecentCall cachedRecentCalls];

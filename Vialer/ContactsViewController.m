@@ -31,12 +31,12 @@
         self.delegate = self;
         self.peoplePickerDelegate = self;
         self.title = NSLocalizedString(@"Contacts", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"contacts"];
+        self.tabBarItem.image = [UIImage imageNamed:@"tab-contact"];
         self.searchDisplayController.delegate = self;
-        self.navigationBar.translucent = NO;
         
         UIViewController *rootViewController = [self.viewControllers firstObject];
         rootViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         [self setAllowsCancel:NO];
 

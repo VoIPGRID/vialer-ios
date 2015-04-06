@@ -64,15 +64,8 @@
     [[ConnectionHandler sharedConnectionHandler] start];
 
     // Setup appearance
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
-        NSAssert(tabBarColor != nil && tabBarColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
-        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
-        [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
-    }
-
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f]];
-
+    [self setupAppearance];
+    
     // Handler for failed authentications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
     
@@ -105,20 +98,20 @@
     gotoViewController.view.backgroundColor = [UIColor clearColor];
     UINavigationController *gotoNavigationViewController = [[UINavigationController alloc] initWithRootViewController:gotoViewController];
     gotoNavigationViewController.navigationBar.translucent = NO;
-    
+
     UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
     UINavigationController *dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
     dialerNavigationController.navigationBar.translucent = NO;
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
+
     self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.tabBar.translucent = NO;
     self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerNavigationController, gotoNavigationViewController, settingsNavigationViewController];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         self.tabBarController.selectedIndex = 1;    // Contacts
-    } else {
-        self.tabBarController.selectedIndex = 4;    // Settings
     }
+    
     self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];
@@ -269,6 +262,32 @@ void HandleExceptions(NSException *exception) {
 
 - (void)loginFailedNotification:(NSNotification *)notification {
     [self showLogin];
+}
+
+#pragma mark - Private Methods
+
+- (void)setupAppearance {
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSAssert(config != nil, @"Config.plist not found!");
+    
+    // Customize TabBar
+    NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
+    NSAssert(tabBarColor != nil && tabBarColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        [UITabBar appearance].barTintColor = [UIColor colorWithRed:(247 / 255.f) green:(247 / 255.f) blue:(247 / 255.f) alpha:1.f];
+    }
+    
+    // Customize NavigationBar
+    NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
+    NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f]];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f];
+    }
 }
 
 @end
