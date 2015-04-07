@@ -36,6 +36,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.contactLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:28.f];
+    self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20.f];
+    self.declineButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20.f];
+    self.declineButton.titleLabel.textColor = [UIColor blackColor];
+    self.acceptButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20.f];
+    self.acceptButton.titleLabel.textColor = [UIColor blackColor];
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
@@ -44,8 +51,8 @@
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
     self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.statusLabel.frame.size.height);
 
-    [self.acceptButton setTitle:NSLocalizedString(@"accept", nil) forState:UIControlStateNormal];
-    [self.declineButton setTitle:NSLocalizedString(@"decline", nil) forState:UIControlStateNormal];
+    [self.acceptButton setTitle:NSLocalizedString(@"Accept", nil) forState:UIControlStateNormal];
+    [self.declineButton setTitle:NSLocalizedString(@"Decline", nil) forState:UIControlStateNormal];
 
     CGFloat spacing = 4.0;
     CGSize imageSize = self.acceptButton.imageView.image.size;

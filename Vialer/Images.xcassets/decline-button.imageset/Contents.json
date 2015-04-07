@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "decline-button.png"
+      "filename" : "decline.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "decline-button@2x.png"
+      "filename" : "decline@2x.png"
     },
     {
       "idiom" : "universal",
