@@ -40,7 +40,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9vO-UL-7XZ">
-                    <rect key="frame" x="31" y="497.00000095910559" width="258" height="55"/>
+                    <rect key="frame" x="31" y="497" width="258" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="34"/>
                     <state key="normal" backgroundImage="call-phone">

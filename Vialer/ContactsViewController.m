@@ -34,9 +34,9 @@
         self.tabBarItem.image = [UIImage imageNamed:@"tab-contact"];
         self.searchDisplayController.delegate = self;
         
+        // This works for iOS7 and below
         UIViewController *rootViewController = [self.viewControllers firstObject];
         rootViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         [self setAllowsCancel:NO];
 
@@ -52,6 +52,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.topViewController.extendedLayoutIncludesOpaqueBars = YES;
 
     [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
@@ -112,7 +113,7 @@
             return;
         }
         
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
+        viewController.navigationItem.leftBarButtonItem = nil;
         viewController.navigationItem.rightBarButtonItem = nil;
     }
 }
