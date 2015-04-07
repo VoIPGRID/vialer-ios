@@ -52,14 +52,14 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     self.numberPadViewController.view.hidden = YES;
 
     self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker", @"keypad-forward", @"keypad-addcall"];
-
+    
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
     self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.statusLabel.frame.size.height);
     
-    self.contactLabel.font = [UIFont systemFontOfSize:36.f];
-    self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24.f];
+    self.contactLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32.f];
+    self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20.f];
 
     [self addButtonsToView:self.buttonsView];
 }
@@ -91,7 +91,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     CGFloat buttonYSpace = self.view.frame.size.width / 3.f;
     CGFloat leftOffset = (view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
 
-    CGPoint offset = CGPointMake(0, ((self.view.frame.size.height + 49.f - (buttonYSpace * 2.f)) / 2.f) - view.frame.origin.y);
+    CGPoint offset = CGPointMake(0, ((self.view.frame.size.height + 93.f - (buttonYSpace * 2.f)) / 2.f) - view.frame.origin.y);
     for (int j = 0; j < 2; j++) {
         offset.x = leftOffset;
         for (int i = 0; i < 3; i++) {

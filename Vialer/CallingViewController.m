@@ -67,6 +67,8 @@
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
     self.infoLabel.frame = CGRectMake(leftOffset, self.infoLabel.frame.origin.y, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
+    
+    self.contactLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32.f];
 
     self.statusLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil);
     self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2), self.statusLabel.frame.size.height);
