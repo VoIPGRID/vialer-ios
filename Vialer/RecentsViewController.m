@@ -25,6 +25,7 @@
 @property (assign) BOOL reloading;
 @property (assign) BOOL unauthorized;
 @property (nonatomic, strong) NSArray *recents;
+@property (nonatomic, strong) NSArray *missedRecents;
 @property (nonatomic, strong) NSDate *previousSearchDateTime;
 @end
 
@@ -39,6 +40,7 @@
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         self.recents = [RecentCall cachedRecentCalls];
+        self.missedRecents = [self filterMissedRecents:self.recents];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recentsFilterUpdatedNotification:) name:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
@@ -68,9 +70,24 @@
     [self.tableView addSubview:self.refreshControl];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSAssert(config != nil, @"Config.plist not found!");
+    NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
+    NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
+    UIColor *tintColor = [UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f];
+    [self.filterSegmentedControl setTintColor:tintColor];
+
+    // ExtendedNavBarView will draw its own hairline.
+    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"TransparentPixel"]];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
     [self refreshRecents];
 }
 
@@ -86,6 +103,7 @@
     self.previousSearchDateTime = nil;
     @synchronized(self.recents) {
         self.recents = @[];
+        self.missedRecents = @[];
     }
     [self.tableView reloadData];
 }
@@ -127,6 +145,7 @@
                 if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
                     @synchronized(self.recents) {
                         self.recents = [RecentCall recentCallsFromDictionary:responseObject];
+                        self.missedRecents = [self filterMissedRecents:self.recents];
                     }
                 }
                 [self.tableView reloadData];
@@ -161,17 +180,24 @@
     }
 }
 
+- (NSArray *)filterMissedRecents:(NSArray *)recents {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(atime == 0) AND (callDirection == 0)"];
+    return [recents filteredArrayUsingPredicate:predicate];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.recents.count == 0) {
+    NSArray *recents = self.filterSegmentedControl.selectedSegmentIndex == 0 ? self.recents : self.missedRecents;
+    if (recents.count == 0) {
         return 1;
     }
-    return self.recents.count;
+    return recents.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.recents.count == 0) {
+    NSArray *recents = self.filterSegmentedControl.selectedSegmentIndex == 0 ? self.recents : self.missedRecents;
+    if (recents.count == 0) {
         static NSString *CellIdentifier = @"LoadingTableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -193,7 +219,7 @@
         cell = [[RecentTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
 
-    RecentCall *recent = [self.recents objectAtIndex:indexPath.row];
+    RecentCall *recent = [recents objectAtIndex:indexPath.row];
     if (recent.callDirection == CallDirectionOutbound) {
         cell.iconImageView.image = [UIImage imageNamed:@"outbound"];
     } else {
@@ -305,6 +331,10 @@
 - (void)dealloc {
     // Remove self as observer
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender {
+    [self.tableView reloadData];
 }
 
 @end

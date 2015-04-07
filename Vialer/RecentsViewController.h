@@ -11,4 +11,7 @@
 
 @interface RecentsViewController : TrackedViewController<UITableViewDataSource, UITableViewDelegate, ABPersonViewControllerDelegate, ABUnknownPersonViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *filterSegmentedControl;
+
+- (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender;
 @end
