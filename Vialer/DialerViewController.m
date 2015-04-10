@@ -32,6 +32,7 @@
     if (self) {
         self.title = NSLocalizedString(@"Keypad", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"tab-keypad"];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-keypad-active"];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
 
         __weak typeof(self) weakSelf = self;

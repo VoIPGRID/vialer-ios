@@ -32,6 +32,7 @@
         self.peoplePickerDelegate = self;
         self.title = NSLocalizedString(@"Contacts", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"tab-contact"];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-contact-active"];
         self.searchDisplayController.delegate = self;
         
         // This works for iOS7 and below
