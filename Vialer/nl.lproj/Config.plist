@@ -11,6 +11,23 @@
 	</dict>
 	<key>Tint colors</key>
 	<dict>
+		<key>Background</key>
+		<dict>
+			<key>GradientStart</key>
+			<array>
+				<integer>255</integer>
+				<integer>141</integer>
+				<integer>7</integer>
+			</array>
+			<key>GradientEnd</key>
+			<array>
+				<integer>255</integer>
+				<integer>116</integer>
+				<integer>47</integer>
+			</array>
+			<key>GradientAngle</key>
+			<integer>300</integer>
+		</dict>
 		<key>TabBar</key>
 		<array>
 			<integer>232</integer>
@@ -19,9 +36,9 @@
 		</array>
 		<key>NavigationBar</key>
 		<array>
-			<integer>240</integer>
-			<integer>130</integer>
-			<integer>37</integer>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
 		</array>
 		<key>Table</key>
 		<array>

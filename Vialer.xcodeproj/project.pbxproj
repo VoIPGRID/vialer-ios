@@ -54,6 +54,7 @@
 		FB3820DA1A1E510C0033FF78 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D91A1E510C0033FF78 /* CoreVideo.framework */; };
 		FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */; };
 		FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */; };
+		FB3AA7E11ADF044E00B3753C /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3AA7E01ADF044E00B3753C /* GradientView.m */; };
 		FB4226D1182261D200707349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
 		FB4226D3182261D200707349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
 		FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
@@ -223,6 +224,8 @@
 		FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		FB3820E21A1E87730033FF78 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		FB3AA7DF1ADF044E00B3753C /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		FB3AA7E01ADF044E00B3753C /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		FB4226CD182261D200707349 /* Vialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB4226D0182261D200707349 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FB4226D2182261D200707349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -648,6 +651,8 @@
 			children = (
 				FBB9B9021AD4688000C2B63E /* ExtendedNavBarView.h */,
 				FBB9B9031AD4688000C2B63E /* ExtendedNavBarView.m */,
+				FB3AA7DF1ADF044E00B3753C /* GradientView.h */,
+				FB3AA7E01ADF044E00B3753C /* GradientView.m */,
 				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
 				FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */,
 				FBBC8621199BA2C600060261 /* PasteableTextView.h */,
@@ -863,6 +868,7 @@
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
+				FB3AA7E11ADF044E00B3753C /* GradientView.m in Sources */,
 				FBB9B9041AD4688000C2B63E /* ExtendedNavBarView.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */,
