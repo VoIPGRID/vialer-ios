@@ -118,14 +118,14 @@
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32.f];
-    titleLabel.textColor = state == UIControlStateHighlighted ? [UIColor blackColor] : [UIColor whiteColor];
+    titleLabel.textColor = state == UIControlStateHighlighted ? [UIColor colorWithRed:0xed green:0xed blue:0xed alpha:0.4f] : [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = title;
     [titleLabel sizeToFit];
     
     UILabel *subTitleLabel = [[UILabel alloc] init];
     subTitleLabel.backgroundColor = [UIColor clearColor];
-    subTitleLabel.textColor = state == UIControlStateHighlighted ? [UIColor blackColor] : [UIColor colorWithRed:0xed green:0xed blue:0xed alpha:1.f];
+    subTitleLabel.textColor = state == UIControlStateHighlighted ? [UIColor colorWithRed:0xed green:0xed blue:0xed alpha:0.4f] : [UIColor colorWithRed:0xed green:0xed blue:0xed alpha:1.f];
     subTitleLabel.textAlignment = NSTextAlignmentCenter;
     
     if (title.length > 0) {

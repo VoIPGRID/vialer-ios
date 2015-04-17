@@ -51,7 +51,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     self.numberPadViewController.delegate = self;
     self.numberPadViewController.view.hidden = YES;
 
-    self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker", @"keypad-forward", @"keypad-addcall"];
+    self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker"/*, @"keypad-forward", @"keypad-addcall"*/];
     
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
@@ -95,7 +95,8 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     for (int j = 0; j < 2; j++) {
         offset.x = leftOffset;
         for (int i = 0; i < 3; i++) {
-            NSString *image = self.images[j * 3 + i];
+            NSInteger imageIdx = j * 3 + i;
+            NSString *image = imageIdx < self.images.count ? self.images[j * 3 + i] : nil;
             if ([image length] != 0) {
                 UIButton *button = [self createDialerButtonWithImage:image andSubTitle:nil];
                 switch (j * 3 + i) {
@@ -134,16 +135,20 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     [button setImage:[UIImage imageNamed:[image stringByAppendingString:@"-highlighted"]] forState:UIControlStateHighlighted];
     [button setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:[image stringByAppendingString:@"-highlighted"]] forState:UIControlStateSelected];
-    [button setTitle:subTitle forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14.f];
+    button.adjustsImageWhenHighlighted = NO;
     button.enabled = NO;
 
-    // Center the image and title
-    CGFloat spacing = 4.0;
-    CGSize imageSize = button.imageView.image.size;
-    button.titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + spacing), 0.0);
-    CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
-    button.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + spacing), 0.0, 0.0, -titleSize.width);
+    if (subTitle) {
+        [button setTitle:subTitle forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:14.f];
+
+        // Center the image and title
+        CGFloat spacing = 4.0;
+        CGSize imageSize = button.imageView.image.size;
+        button.titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + spacing), 0.0);
+        CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
+        button.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + spacing), 0.0, 0.0, -titleSize.width);
+    }
     return button;
 }
 
