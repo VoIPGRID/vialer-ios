@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+IB_DESIGNABLE
 @interface GradientView : UIView
 
 @end
