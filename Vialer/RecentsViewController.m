@@ -15,6 +15,7 @@
 #import "ContactsViewController.h"
 #import "SettingsViewController.h"
 #import "SelectRecentsFilterViewController.h"
+#import "UIViewController+MMDrawerController.h"
 
 #import "SVProgressHUD.h"
 
@@ -39,6 +40,11 @@
         self.tabBarItem.image = [UIImage imageNamed:@"tab-recent"];
         self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-recent-active"];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        
+        // Add hamburger menu on navigation bar
+        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStyleBordered target:self action:@selector(leftDrawerButtonPress:)];
+        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
+        self.navigationItem.leftBarButtonItem = leftDrawerButton;
 
         self.recents = [RecentCall cachedRecentCalls];
         self.missedRecents = [self filterMissedRecents:self.recents];
@@ -184,6 +190,10 @@
 - (NSArray *)filterMissedRecents:(NSArray *)recents {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(atime == 0) AND (callDirection == 0)"];
     return [recents filteredArrayUsingPredicate:predicate];
+}
+
+- (void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source

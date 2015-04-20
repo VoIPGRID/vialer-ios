@@ -18,12 +18,14 @@
 #import "DialerViewController.h"
 #import "SettingsViewController.h"
 #import "GoToViewController.h"
+#import "SideMenuViewController.h"
 #import "ConnectionHandler.h"
 #import "Gossip+Extra.h"
 
 #import "AFNetworkActivityLogger.h"
 #import "UIAlertView+Blocks.h"
 #import "GAI.h"
+#import "MMDrawerController.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -69,6 +71,8 @@
     // Handler for failed authentications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
     
+    SideMenuViewController *sideMenuViewController = [[SideMenuViewController alloc] init];
+    
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
@@ -89,16 +93,6 @@
     UINavigationController *recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
     recentsNavigationViewController.navigationBar.translucent = NO;
 
-    UIViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:[NSBundle mainBundle]];
-    settingsViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *settingsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    settingsNavigationViewController.navigationBar.translucent = NO;
-
-    UIViewController *gotoViewController = [[GoToViewController alloc] initWithNibName:@"GoToViewController" bundle:[NSBundle mainBundle]];
-    gotoViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *gotoNavigationViewController = [[UINavigationController alloc] initWithRootViewController:gotoViewController];
-    gotoNavigationViewController.navigationBar.translucent = NO;
-
     UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
     UINavigationController *dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
     dialerNavigationController.navigationBar.translucent = NO;
@@ -107,12 +101,20 @@
 
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.tabBar.translucent = NO;
-    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerNavigationController, gotoNavigationViewController, settingsNavigationViewController];
+    self.tabBarController.viewControllers = @[ dialerNavigationController, contactsViewController,recentsNavigationViewController ];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         self.tabBarController.selectedIndex = 1;    // Contacts
     }
     
-    self.window.rootViewController = self.tabBarController;
+    MMDrawerController *drawerController = [[MMDrawerController alloc] initWithCenterViewController:self.tabBarController leftDrawerViewController:sideMenuViewController];
+    [drawerController setRestorationIdentifier:@"MMDrawer"];
+    [drawerController setMaximumLeftDrawerWidth:222.0];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [drawerController setShadowRadius:2.f];
+    [drawerController setShadowOpacity:0.5f];
+    
+    self.window.rootViewController = drawerController;
     
     [self.window makeKeyAndVisible];
 

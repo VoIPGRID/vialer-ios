@@ -11,6 +11,7 @@
 #import "ConnectionHandler.h"
 #import "NumberPadViewController.h"
 #import "SIPCallingViewController.h"
+#import "UIViewController+MMDrawerController.h"
 
 #import "AFNetworkReachabilityManager.h"
 
@@ -34,6 +35,11 @@
         self.tabBarItem.image = [UIImage imageNamed:@"tab-keypad"];
         self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-keypad-active"];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        
+        // Add hamburger menu on navigation bar
+        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStyleBordered target:self action:@selector(leftDrawerButtonPress:)];
+        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
+        self.navigationItem.leftBarButtonItem = leftDrawerButton;
 
         __weak typeof(self) weakSelf = self;
         self.callCenter = [[CTCallCenter alloc] init];
@@ -134,6 +140,10 @@
 
     AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
     [appDelegate handlePhoneNumber:phoneNumber];
+}
+
+- (void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 #pragma mark - NumberPadViewController delegate
