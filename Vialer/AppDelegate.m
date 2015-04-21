@@ -87,6 +87,7 @@
 
     ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
     contactsViewController.view.backgroundColor = [UIColor clearColor];
+    UINavigationController *contactsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:contactsViewController];
 
     UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
     recentsViewController.view.backgroundColor = [UIColor clearColor];
@@ -101,7 +102,7 @@
 
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.tabBar.translucent = NO;
-    self.tabBarController.viewControllers = @[ dialerNavigationController, contactsViewController,recentsNavigationViewController ];
+    self.tabBarController.viewControllers = @[ dialerNavigationController, contactsNavigationViewController,recentsNavigationViewController ];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
         self.tabBarController.selectedIndex = 1;    // Contacts
     }
