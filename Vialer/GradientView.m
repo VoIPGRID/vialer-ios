@@ -9,9 +9,7 @@
 #import "GradientView.h"
 
 @interface GradientView ()
-@property (nonatomic, strong) IBInspectable UIColor *startColor;
-@property (nonatomic, strong) IBInspectable UIColor *endColor;
-@property (nonatomic, assign) IBInspectable CGFloat angle;
+
 @end
 
 @implementation GradientView

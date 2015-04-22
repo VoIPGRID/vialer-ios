@@ -13,6 +13,7 @@
 #import "SVProgressHUD.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
 
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
@@ -42,6 +43,48 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self animateLogoToTop];            // 1) animate logo to top
+}
+
+#pragma mark - Navigation animations
+- (void)animateLogoToTop {
+    [UIView animateWithDuration:3.0 animations:^{
+        [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
+    }
+     completion:^(BOOL finished) {
+         [self animateLoginViewToVisible];
+     }];
+}
+
+- (void)animateLoginViewToVisible {
+    void(^animations)(void) = ^{
+        [self.loginFormView setAlpha:1.f];
+    };
+    [UIView animateWithDuration:2.5f
+                          delay:0.8f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:^(BOOL finished) {
+                         [self animateConfigureViewToVisible];
+                     }];
+}
+
+- (void)animateConfigureViewToVisible {
+    void(^animations)(void) = ^{
+        [self.loginFormView setAlpha:0.f];
+        [self.configureFormView setAlpha:1.f];
+    };
+    [UIView animateWithDuration:2.5f
+                          delay:0.8f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:nil];
+}
+
+#pragma mark -
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

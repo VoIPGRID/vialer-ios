@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "TrackedViewController.h"
+#import "LoginFormView.h"
+#import "ConfigureFormView.h"
 
 @interface LogInViewController : TrackedViewController
+
+@property (nonatomic, strong) IBOutlet UIImageView *logoView;
+@property (nonatomic, strong) IBOutlet LoginFormView *loginFormView;
+@property (nonatomic, strong) IBOutlet ConfigureFormView *configureFormView;
 
 @end
