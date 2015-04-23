@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ConfigTextField.h"
+
+IB_DESIGNABLE
 @interface ConfigureFormView : UIView
+
+@property (nonatomic, strong) IBOutlet ConfigTextField *phoneNumberField;
+@property (nonatomic, strong) IBOutlet ConfigTextField *outgoingNumberField;
 
 @end

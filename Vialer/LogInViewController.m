@@ -11,6 +11,7 @@
 #import "ConnectionHandler.h"
 
 #import "SVProgressHUD.h"
+#import "UIView+RoundedStyle.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
@@ -47,29 +48,26 @@
     [super viewDidAppear:animated];
     
     [self animateLogoToTop];            // 1) animate logo to top
+    [self animateLoginViewToVisible];
+    [self animateConfigureViewToVisible];
 }
 
 #pragma mark - Navigation animations
 - (void)animateLogoToTop {
-    [UIView animateWithDuration:3.0 animations:^{
+    [UIView animateWithDuration:4.0 animations:^{
         [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
-    }
-     completion:^(BOOL finished) {
-         [self animateLoginViewToVisible];
-     }];
+    }];
 }
 
 - (void)animateLoginViewToVisible {
     void(^animations)(void) = ^{
         [self.loginFormView setAlpha:1.f];
     };
-    [UIView animateWithDuration:2.5f
+    [UIView animateWithDuration:2.2f
                           delay:0.8f
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
-                     completion:^(BOOL finished) {
-                         [self animateConfigureViewToVisible];
-                     }];
+                     completion:nil];
 }
 
 - (void)animateConfigureViewToVisible {
@@ -77,7 +75,7 @@
         [self.loginFormView setAlpha:0.f];
         [self.configureFormView setAlpha:1.f];
     };
-    [UIView animateWithDuration:2.5f
+    [UIView animateWithDuration:2.2f
                           delay:0.8f
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
@@ -90,8 +88,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

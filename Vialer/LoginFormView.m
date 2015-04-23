@@ -7,11 +7,21 @@
 //
 
 #import "LoginFormView.h"
+#import "UIView+RoundedStyle.h"
 
 @implementation LoginFormView
 
-- (instancetype)init {
-    self = [super init];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupView];
+        [self setupConstraints];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         [self setupView];
         [self setupConstraints];
@@ -22,7 +32,16 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-
+    /* Remove all the default UITextField styling */
+    [self.emailField cleanStyle];
+    [self.passwordField cleanStyle];
+    /* Add top rounded corner mask */
+    [self.emailField styleWithTopBorderRadius:8.f];
+    /* Add bottom corner mask */
+    [self.passwordField styleWithBottomBorderRadius:8.f];
+    
+    [self.emailField setupPlaceHolder:@"required" labelText:@"E-mail"];
+    [self.passwordField setupPlaceHolder:@"required" labelText:@"Password"];
 }
 
 - (void)setupView {

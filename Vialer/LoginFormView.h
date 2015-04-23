@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ConfigTextField.h"
+
 IB_DESIGNABLE
 @interface LoginFormView : UIView <UITextFieldDelegate>
 
-@property (nonatomic, strong) IBOutlet UITextField *emailField;
-@property (nonatomic, strong) IBOutlet UITextField *passwordField;
+@property (nonatomic, strong) IBOutlet ConfigTextField *emailField;
+@property (nonatomic, strong) IBOutlet ConfigTextField *passwordField;
 
 @end
