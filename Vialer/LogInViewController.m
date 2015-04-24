@@ -33,8 +33,6 @@
     if (!UNLOCKED) {
         if (slideToUnlock.value == slideToUnlock.maximumValue) {  // if user slide to the most right side, stop the operation
             // Put here what happens when it is unlocked
-            slideToUnlock.hidden = YES;
-            myLabel.hidden = YES;
             UNLOCKED = YES;
         } else {
             // user did not slide far enough, so return back to 0 position

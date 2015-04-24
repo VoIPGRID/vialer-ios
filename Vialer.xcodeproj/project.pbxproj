@@ -10,6 +10,7 @@
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2F64151AE8F802003F7697 /* ConfigTextField.m */; };
+		3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4787371AEA5FC1002420FA /* VIASlider.m */; };
 		3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
@@ -153,6 +154,8 @@
 		3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
 		3D2F64141AE8F802003F7697 /* ConfigTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTextField.h; sourceTree = "<group>"; };
 		3D2F64151AE8F802003F7697 /* ConfigTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTextField.m; sourceTree = "<group>"; };
+		3D4787361AEA5FC1002420FA /* VIASlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIASlider.h; sourceTree = "<group>"; };
+		3D4787371AEA5FC1002420FA /* VIASlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIASlider.m; sourceTree = "<group>"; };
 		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
@@ -411,6 +414,8 @@
 				3D1A5E611AE543C000DBE64B /* Onboarding */,
 				3D2F64141AE8F802003F7697 /* ConfigTextField.h */,
 				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
+				3D4787361AEA5FC1002420FA /* VIASlider.h */,
+				3D4787371AEA5FC1002420FA /* VIASlider.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -700,8 +705,8 @@
 				FBB9B9031AD4688000C2B63E /* ExtendedNavBarView.m */,
 				FB3AA7DF1ADF044E00B3753C /* GradientView.h */,
 				FB3AA7E01ADF044E00B3753C /* GradientView.m */,
-				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
 				FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */,
+				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
 				FBBC8621199BA2C600060261 /* PasteableTextView.h */,
 				FBBC8622199BA2C600060261 /* PasteableTextView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
@@ -912,6 +917,7 @@
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
 				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
+				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				FB0CF34B18226392002D4281 /* AFURLConnectionOperation.m in Sources */,
@@ -1124,7 +1130,7 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
 				INFOPLIST_FILE = "Vialer/$(CONFIGURATION)-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
@@ -1228,7 +1234,7 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
 				INFOPLIST_FILE = "Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
@@ -1272,7 +1278,7 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
 				INFOPLIST_FILE = "Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
