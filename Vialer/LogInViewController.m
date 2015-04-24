@@ -29,7 +29,7 @@
 }
 
 /** SLIDER: todo refactor to 'UnlockSlider' class */
-- (IBAction)UnLockIt {
+- (IBAction)unlockIt {
     if (!UNLOCKED) {
         if (slideToUnlock.value == slideToUnlock.maximumValue) {  // if user slide to the most right side, stop the operation
             // Put here what happens when it is unlocked
@@ -81,9 +81,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self animateLogoToTop];            // 1) animate logo to top
-    [self animateLoginViewToVisible];
-    [self animateConfigureViewToVisible];
+//    [self animateLogoToTop];            // 1) animate logo to top
+//    [self animateLoginViewToVisible];
+//    [self animateConfigureViewToVisible];
 }
 
 #pragma mark - Navigation animations

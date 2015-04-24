@@ -12,7 +12,7 @@
 #import "ConfigureFormView.h"
 
 @interface LogInViewController : TrackedViewController {
-    IBOutlet UIView *sliderView;
+
     IBOutlet UISlider *slideToUnlock;
     IBOutlet UILabel *myLabel;
 }
@@ -20,8 +20,9 @@
 @property (nonatomic, strong) IBOutlet UIImageView *logoView;
 @property (nonatomic, strong) IBOutlet LoginFormView *loginFormView;
 @property (nonatomic, strong) IBOutlet ConfigureFormView *configureFormView;
+@property (nonatomic, strong) IBOutlet UIView *sliderView;
 
--(IBAction)UnLockIt;
+-(IBAction)unlockIt;
 -(IBAction)fadeLabel;
 
 @end
