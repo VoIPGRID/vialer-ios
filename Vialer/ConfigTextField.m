@@ -33,7 +33,7 @@
 - (void)setupPlaceHolder:(NSString*)placeholder labelText:(NSString*)text {
     [self setupView:placeholder text:text];
     [self setupConstraints];
-    [self.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.layer setBorderColor:[UIColor colorWithRed:219.f / 255.f green:219.f / 255.f blue:221.f / 255.f alpha:1.f].CGColor];
     [self.layer setBorderWidth:0.5f];
 }
 

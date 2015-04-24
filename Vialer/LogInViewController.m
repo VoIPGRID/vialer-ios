@@ -24,24 +24,60 @@
 @property (nonatomic, strong) NSString *user;
 @end
 
-@implementation LogInViewController
+@implementation LogInViewController {
+    BOOL UNLOCKED;
+}
+
+/** SLIDER: todo refactor to 'UnlockSlider' class */
+- (IBAction)UnLockIt {
+    if (!UNLOCKED) {
+        if (slideToUnlock.value == slideToUnlock.maximumValue) {  // if user slide to the most right side, stop the operation
+            // Put here what happens when it is unlocked
+            slideToUnlock.hidden = YES;
+            myLabel.hidden = YES;
+            UNLOCKED = YES;
+        } else {
+            // user did not slide far enough, so return back to 0 position
+            void (^animations)(void) = ^{
+                slideToUnlock.value = 0.0;
+                myLabel.alpha = 1.f;
+                
+            };
+            [UIView animateWithDuration:0.35
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:animations
+                             completion:nil];
+        }
+    }
+}
+
+- (IBAction)fadeLabel {
+    myLabel.alpha = slideToUnlock.maximumValue - slideToUnlock.value;  
+}
+
+/***/
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UNLOCKED= NO;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [slideToUnlock setThumbImage: [UIImage imageNamed:@"slider-button.png"] forState:UIControlStateNormal];
+    [slideToUnlock setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal]; // preventthe bar to be shown
+    [slideToUnlock setMaximumTrackImage:[UIImage new] forState:UIControlStateNormal]; // preventthe bar to be shown
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -93,33 +129,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showLogin {
-    if (!self.loginAlertShown) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In", nil) message:NSLocalizedString(@"Enter your email and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), NSLocalizedString(@"Forgot password?", nil), nil];
-        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        [alert textFieldAtIndex:0].text = self.user;
-        [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-        alert.tag = SHOW_LOGIN_ALERT;
-        [alert show];
-        
-        UITextField *usernameTextField = [alert textFieldAtIndex:0];
-        usernameTextField.placeholder = NSLocalizedString(@"Email", nil);
-        
-        self.loginAlertShown = YES;
-    }
-}
-
-- (void)showForgotPassword {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Forgot Password", nil) message:NSLocalizedString(@"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alert textFieldAtIndex:0].text = self.user;
-    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-    alert.tag = PASSWORD_FORGOT_ALERT;
-    [alert show];
-}
-
 #pragma mark - Alert view delegate
-
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (alertView.tag == SHOW_LOGIN_ALERT) {
         UITextField *usernameTextField = [alertView textFieldAtIndex:0];
@@ -128,14 +138,14 @@
         self.user = usernameTextField.text;
         
         if (buttonIndex == 1) {
-            [self showForgotPassword];
+//            [self showForgotPassword];
             return;
         }
         
         self.loginAlertShown = YES;
         
         if (![usernameTextField.text length] || ![passwordTextField.text length]) {
-            [self showLogin];
+//            [self showLogin];
             return;
         }
         
@@ -158,7 +168,7 @@
         self.loginAlertShown = NO;
         
         if (buttonIndex == 0) {
-            [self showLogin];
+//            [self showLogin];
         } else {
             UITextField *emailTextField = [alertView textFieldAtIndex:0];
             if ([emailTextField.text length]) {
@@ -173,16 +183,10 @@
                     [self performSelector:@selector(showLogin) withObject:nil afterDelay:3];
                 }];
             } else {
-                [self showForgotPassword];
+//                [self showForgotPassword];
             }
         }
     }
-}
-
-#pragma mark - Notifications
-
-- (void)loginFailedNotification:(NSNotification *)notification {
-    [self showLogin];
 }
 
 @end
