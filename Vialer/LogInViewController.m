@@ -81,15 +81,44 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-//    [self animateLogoToTop];            // 1) animate logo to top
+    [self animateLogoToTop];            // 1) animate logo to top
 //    [self animateLoginViewToVisible];
 //    [self animateConfigureViewToVisible];
 }
 
 #pragma mark - Navigation animations
 - (void)animateLogoToTop {
-    [UIView animateWithDuration:4.0 animations:^{
+    
+    UIImageView *cloudImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cloud"]];
+    [cloudImageView setCenter:CGPointMake(0.f, CGRectGetMaxY(self.view.frame))];
+    [self.view addSubview:cloudImageView];
+    
+    UIImageView *cloud1ImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-1"]];
+    [cloud1ImageView setCenter:CGPointMake(CGRectGetMaxX(self.view.frame), CGRectGetMaxY(self.view.frame))];
+    [self.view addSubview:cloud1ImageView];
+    
+    UIImageView *cloud3ImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cloud"]];
+    [cloud3ImageView setCenter:CGPointMake(0.f, CGRectGetMaxY(self.view.frame) + 0.5 * CGRectGetHeight(self.view.frame))];
+    [self.view addSubview:cloud3ImageView];
+    
+    UIImageView *cloud4ImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-2"]];
+    [cloud4ImageView setCenter:CGPointMake(CGRectGetMaxX(self.view.frame), CGRectGetMaxY(self.view.frame) + 0.31 * CGRectGetHeight(self.view.frame))];
+    [self.view addSubview:cloud4ImageView];
+    
+    [UIView animateWithDuration:2.37 animations:^{
         [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
+    }];
+    
+    [UIView animateWithDuration:2.07 animations:^{
+        [cloud3ImageView setCenter:CGPointMake(0.f, 4.f/5.f * CGRectGetHeight(self.view.frame))];
+        [cloud4ImageView setCenter:CGPointMake(CGRectGetMaxX(self.view.frame), 6.f / 7.f * CGRectGetMaxY(self.view.frame))];
+       
+        [self animateLoginViewToVisible];
+    }];
+    
+    [UIView animateWithDuration:1.9f animations:^{
+        [cloudImageView setCenter:CGPointMake(0.f, 1.f/4.f * CGRectGetHeight(self.view.frame))];
+        [cloud1ImageView setCenter:CGPointMake(CGRectGetMaxX(self.view.frame), 0.f)];
     }];
 }
 
