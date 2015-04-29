@@ -9,7 +9,7 @@
 #import "DialerViewController.h"
 #import "AppDelegate.h"
 #import "ConnectionHandler.h"
-#import "NumberPadViewController.h"
+#import "AnimatedNumberPadViewController.h"
 #import "SIPCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
 
@@ -22,7 +22,7 @@
 
 @interface DialerViewController ()
 @property (nonatomic, strong) CTCallCenter *callCenter;
-@property (nonatomic, strong) NumberPadViewController *numberPadViewController;
+@property (nonatomic, strong) AnimatedNumberPadViewController *numberPadViewController;
 @end
 
 @implementation DialerViewController
@@ -65,7 +65,7 @@
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
 
-    self.numberPadViewController = [[NumberPadViewController alloc] init];
+    self.numberPadViewController = [[AnimatedNumberPadViewController alloc] init];
     self.numberPadViewController.view.frame = self.buttonsView.bounds;
     [self.buttonsView addSubview:self.numberPadViewController.view];
     [self addChildViewController:self.numberPadViewController];

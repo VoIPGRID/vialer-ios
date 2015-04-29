@@ -13,6 +13,7 @@
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
 #import "InfoCarouselViewController.h"
+#import "UIAlertView+Blocks.h"
 
 #define MENU_INDEX_AVAILABILITY     0
 #define MENU_INDEX_STATS            1
@@ -123,6 +124,15 @@
         [self showInfoScreen];
     } else if (indexPath.row == MENU_INDEX_ACCOUNT) {
         // @TODO Open account screen
+        [UIAlertView showWithTitle:NSLocalizedString(@"Log out", nil)
+                           message:NSLocalizedString(@"Are you sure you want to log out?", nil)
+                 cancelButtonTitle:NSLocalizedString(@"No", nil)
+                 otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                              if (buttonIndex == 1) {
+                                  [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
+                              }
+                          }];
     } else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
         // @TODO Open autoconnect screen
     }
@@ -168,7 +178,7 @@
                 
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
                 
-                UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTappedCancel)];
+                UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
                 webViewController.navigationItem.leftBarButtonItem = cancelButton;
                 
                 [self presentViewController:navController animated:YES completion:nil];
@@ -184,14 +194,14 @@
 - (void)showInfoScreen {
     InfoCarouselViewController *infoCarouselViewController = [[InfoCarouselViewController alloc] initWithNibName:@"InfoCarouselViewController" bundle:[NSBundle mainBundle]];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:infoCarouselViewController];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTappedCancel)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
     infoCarouselViewController.navigationItem.leftBarButtonItem = cancelButton;
     [self presentViewController:navController animated:YES completion:nil];
 }
 
 #pragma mark - Selectors
 
-- (void)navigationDidTappedCancel {
+- (void)navigationDidTapCancel {
     if (self.presentedViewController) {
         [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
     }

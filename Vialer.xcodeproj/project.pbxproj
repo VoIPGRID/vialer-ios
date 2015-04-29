@@ -72,6 +72,7 @@
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
 		FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
 		FB5EBF121A8E131600B6BD9D /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */; };
+		FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
 		FB6B47711ABC190700B0DBC4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */; };
 		FB6B47D91ABC1B6D00B0DBC4 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47D81ABC1B6D00B0DBC4 /* libGoogleAnalyticsServices.a */; };
@@ -255,6 +256,8 @@
 		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
 		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
 		FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedNumberPadViewController.h; sourceTree = "<group>"; };
+		FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedNumberPadViewController.m; sourceTree = "<group>"; };
 		FB64313F182281C500E1BF17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB6B47CE1ABC1B3500B0DBC4 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
 				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
 				FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */,
+				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
+				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
 				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
 				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
 				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
@@ -871,6 +876,7 @@
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
+				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,
 				03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */,
 				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
