@@ -10,8 +10,11 @@
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2F64151AE8F802003F7697 /* ConfigTextField.m */; };
+		3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
+		3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
 		3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4787371AEA5FC1002420FA /* VIASlider.m */; };
 		3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
+		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */; };
@@ -154,10 +157,16 @@
 		3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
 		3D2F64141AE8F802003F7697 /* ConfigTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTextField.h; sourceTree = "<group>"; };
 		3D2F64151AE8F802003F7697 /* ConfigTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTextField.m; sourceTree = "<group>"; };
+		3D44303A1AEF67D50034156F /* AnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedImageView.h; sourceTree = "<group>"; };
+		3D44303B1AEF67D50034156F /* AnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedImageView.m; sourceTree = "<group>"; };
+		3D44303D1AEF8E1B0034156F /* VIAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIAScene.h; sourceTree = "<group>"; };
+		3D44303E1AEF8E1B0034156F /* VIAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIAScene.m; sourceTree = "<group>"; };
 		3D4787361AEA5FC1002420FA /* VIASlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIASlider.h; sourceTree = "<group>"; };
 		3D4787371AEA5FC1002420FA /* VIASlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIASlider.m; sourceTree = "<group>"; };
 		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
+		3DE6EAD91AF0CB4800C09935 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
+		3DE6EADA1AF0CB4800C09935 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
 		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
@@ -412,10 +421,6 @@
 			isa = PBXGroup;
 			children = (
 				3D1A5E611AE543C000DBE64B /* Onboarding */,
-				3D2F64141AE8F802003F7697 /* ConfigTextField.h */,
-				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
-				3D4787361AEA5FC1002420FA /* VIASlider.h */,
-				3D4787371AEA5FC1002420FA /* VIASlider.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -423,15 +428,49 @@
 		3D1A5E611AE543C000DBE64B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
-				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
-				3D1A5E631AE5483700DBE64B /* LoginFormView.h */,
-				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
-				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
-				3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */,
-				3D608B601AE67DC800FA02CE /* ConfigureFormView.m */,
+				3D4430411AEF8E330034156F /* General */,
+				3D4430401AEF8E290034156F /* Scene */,
+				3D4430391AEF67B70034156F /* Animated clouds */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		3D4430391AEF67B70034156F /* Animated clouds */ = {
+			isa = PBXGroup;
+			children = (
+				3D44303A1AEF67D50034156F /* AnimatedImageView.h */,
+				3D44303B1AEF67D50034156F /* AnimatedImageView.m */,
+			);
+			name = "Animated clouds";
+			sourceTree = "<group>";
+		};
+		3D4430401AEF8E290034156F /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				3D44303D1AEF8E1B0034156F /* VIAScene.h */,
+				3D44303E1AEF8E1B0034156F /* VIAScene.m */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		3D4430411AEF8E330034156F /* General */ = {
+			isa = PBXGroup;
+			children = (
+				3D1A5E631AE5483700DBE64B /* LoginFormView.h */,
+				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
+				3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */,
+				3D608B601AE67DC800FA02CE /* ConfigureFormView.m */,
+				3D2F64141AE8F802003F7697 /* ConfigTextField.h */,
+				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
+				3D4787361AEA5FC1002420FA /* VIASlider.h */,
+				3D4787371AEA5FC1002420FA /* VIASlider.m */,
+				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
+				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
+				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
+				3DE6EAD91AF0CB4800C09935 /* UnlockView.h */,
+				3DE6EADA1AF0CB4800C09935 /* UnlockView.m */,
+			);
+			name = General;
 			sourceTree = "<group>";
 		};
 		EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */ = {
@@ -923,6 +962,7 @@
 				FB0CF34B18226392002D4281 /* AFURLConnectionOperation.m in Sources */,
 				FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
+				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
 				FB3AA7E11ADF044E00B3753C /* GradientView.m in Sources */,
@@ -975,6 +1015,8 @@
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				FB0CF34818226392002D4281 /* AFHTTPSessionManager.m in Sources */,
 				FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */,
+				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
+				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,

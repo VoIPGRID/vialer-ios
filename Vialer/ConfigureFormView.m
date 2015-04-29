@@ -29,20 +29,23 @@
     return self;
 }
 
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
+    [self.phoneNumberField setTextFieldDelegate:delegate];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     /* Remove all the default UITextField styling */
-    [self.phoneNumberField cleanStyle];
+    [self.phoneNumberField cleanStyle];     // Remove the default styling of a UITextField.
     [self.outgoingNumberField cleanStyle];
-    /* Add top rounded corner mask */
-    [self.phoneNumberField styleWithTopBorderRadius:8.f];
-    /* Add bottom corner mask */
-    [self.outgoingNumberField styleWithBottomBorderRadius:8.f];
-    
+    [self.outgoingNumberField setUserInteractionEnabled:NO]; // Disable the outgoing field. we will fill it with profile data later!
+
+    [self.phoneNumberField styleWithTopBorderRadius:8.f];          /* Add top rounded corner mask */
+    [self.outgoingNumberField styleWithBottomBorderRadius:8.f];    /* Add bottom corner mask */
     
     [self.phoneNumberField setupPlaceHolder:@"required" labelText:@"Mobile"];
-    [self.outgoingNumberField setupPlaceHolder:@"required" labelText:@"Outgoing"];
+    [self.outgoingNumberField setupPlaceHolder:@"Automatically fetched" labelText:@"Outgoing"];
 }
 
 - (void)setupView {

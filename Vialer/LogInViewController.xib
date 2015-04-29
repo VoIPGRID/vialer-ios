@@ -13,6 +13,7 @@
                 <outlet property="myLabel" destination="H6u-uJ-Pz5" id="Btk-ZW-dhK"/>
                 <outlet property="slideToUnlock" destination="lsM-1W-Ala" id="aRq-XE-mSN"/>
                 <outlet property="sliderView" destination="kdx-6q-MLH" id="xGo-oc-kUD"/>
+                <outlet property="unlockView" destination="NFh-FZ-LDT" id="eni-Bj-fQh"/>
                 <outlet property="view" destination="8AL-Qd-h62" id="RgD-Df-jCY"/>
             </connections>
         </placeholder>
@@ -21,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vialer-logo" id="E0n-Q6-i8E">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vialer-logo" id="E0n-Q6-i8E" customClass="AnimatedImageView">
                     <rect key="frame" x="0.0" y="132" width="321" height="305"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -101,8 +102,8 @@
                         <outlet property="phoneNumberField" destination="roC-za-H1z" id="NzW-oW-4za"/>
                     </connections>
                 </view>
-                <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT">
-                    <rect key="frame" x="0.0" y="320" width="321.00000019406991" height="192"/>
+                <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT" customClass="UnlockView">
+                    <rect key="frame" x="0.0" y="320" width="321.00000061006313" height="192"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXO-T4-Aup" userLabel="titleLabel">
@@ -124,7 +125,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to start calling" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6u-uJ-Pz5">
-                                    <rect key="frame" x="72.000000045580009" y="0.0" width="204" height="72"/>
+                                    <rect key="frame" x="72.000000143281781" y="0.0" width="204" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.58823529409999997" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -163,7 +164,7 @@
                     <real key="value" value="315"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-767" y="-3007"/>
+            <point key="canvasLocation" x="-1082" y="-3690"/>
         </view>
     </objects>
     <resources>

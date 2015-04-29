@@ -11,9 +11,11 @@
 #import "ConfigTextField.h"
 
 IB_DESIGNABLE
-@interface LoginFormView : UIView <UITextFieldDelegate>
+@interface LoginFormView : UIView
 
 @property (nonatomic, strong) IBOutlet ConfigTextField *emailField;
 @property (nonatomic, strong) IBOutlet ConfigTextField *passwordField;
+
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
 
 @end

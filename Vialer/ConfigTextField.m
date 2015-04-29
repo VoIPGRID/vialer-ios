@@ -14,22 +14,6 @@
     UITextField *_field;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-
-    }
-    return self;
-}
-
 - (void)setupPlaceHolder:(NSString*)placeholder labelText:(NSString*)text {
     [self setupView:placeholder text:text];
     [self setupConstraints];
@@ -45,13 +29,33 @@
     }
     [_label setText:text];
     [self addSubview:_label];
-
+    
     if (!_field) {
         _field = [UITextField new];
         [_field  setTranslatesAutoresizingMaskIntoConstraints:NO];
     }
     [_field setPlaceholder:placeholder];
     [self addSubview:_field];
+}
+
+- (void)setSecureTextEntry:(BOOL)useSecure {
+    [_field setSecureTextEntry:useSecure];
+}
+
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
+    [_field setDelegate:delegate];
+}
+
+- (NSString*)text {
+    return _field.text;
+}
+
+- (void)setText:(NSString*)text {
+    [_field setText:text];
+}
+
+- (BOOL)isSelectedField:(UITextField*)field {
+    return [_field isEqual:field];
 }
 
 - (void)setupConstraints {

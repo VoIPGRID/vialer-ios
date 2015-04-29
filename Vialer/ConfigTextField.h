@@ -12,5 +12,12 @@ IB_DESIGNABLE
 @interface ConfigTextField : UIView
 
 - (void)setupPlaceHolder:(NSString*)placeholder labelText:(NSString*)text;
+- (void)setSecureTextEntry:(BOOL)useSecure;
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
+
+- (NSString*)text;
+- (void)setText:(NSString*)text;
+
+- (BOOL)isSelectedField:(UITextField*)field;
 
 @end

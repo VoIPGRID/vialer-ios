@@ -16,4 +16,6 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBOutlet ConfigTextField *phoneNumberField;
 @property (nonatomic, strong) IBOutlet ConfigTextField *outgoingNumberField;
 
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
+
 @end

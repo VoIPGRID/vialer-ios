@@ -14,8 +14,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setupView];
-        [self setupConstraints];
+
     }
     return self;
 }
@@ -23,8 +22,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupView];
-        [self setupConstraints];
+
     }
     return self;
 }
@@ -42,18 +40,13 @@
     
     [self.emailField setupPlaceHolder:@"required" labelText:@"E-mail"];
     [self.passwordField setupPlaceHolder:@"required" labelText:@"Password"];
+    
+    [self.passwordField setSecureTextEntry:YES];
 }
 
-- (void)setupView {
-    /**
-     * TODO: setup form!
-     */
-}
-
-- (void)setupConstraints {
-    /**
-     * TODO: constraints
-     */
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
+    [self.passwordField setTextFieldDelegate:delegate];
+    [self.emailField setTextFieldDelegate:delegate];
 }
 
 @end
