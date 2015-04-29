@@ -150,8 +150,8 @@
         [self.configureFormView setAlpha:0.f];
         [self.unlockView setAlpha:1.f];
     };
-    [UIView animateWithDuration:2.2f
-                          delay:0.8f
+    [UIView animateWithDuration:2.0f
+                          delay:0.4f
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:nil];

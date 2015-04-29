@@ -33,21 +33,15 @@
     CGPoint p = [v CGPointValue];
     [UIView animateWithDuration:duration
                           delay:delay
-                        options:UIViewAnimationOptionCurveEaseOut
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.center = p;
                      }
                      completion:^(BOOL finished) {
-                         NSLog(@"self.center: %@", NSStringFromCGPoint(self.center));
                          if (self.center.y < 0 || self.center.x < 0) {
                              [self removeFromSuperview];
                          }
                      }];
-    
-}
-
-- (NSString*)description {
-    return [NSString stringWithFormat:@"%s: self.center = %@, hasSuperView = %d", __PRETTY_FUNCTION__, NSStringFromCGPoint(self.center), self.superview != nil];
 }
 
 @end
