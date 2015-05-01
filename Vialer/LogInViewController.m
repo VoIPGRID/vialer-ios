@@ -11,8 +11,13 @@
 #import "ConnectionHandler.h"
 
 #import "SVProgressHUD.h"
+#import "UIView+RoundedStyle.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import "AnimatedImageView.h"
+#import "VIAScene.h"
 
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
@@ -22,130 +27,365 @@
 @property (nonatomic, strong) NSString *user;
 @end
 
-@implementation LogInViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+@implementation LogInViewController {
+    BOOL _isKeyboardShown;
+    VIAScene *_scene;
+    
+    __block NSUInteger _fetchAccountRetryCount;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    
+    [self addObservers];
+    
+    UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
+    [self.view addGestureRecognizer:tg];
+    
+    _fetchAccountRetryCount = 0;
+    [self.unlockView setupSlider];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-    [self showLogin];
+/**
+ * Deselect all textfields when a user taps somewhere in the view.
+ */
+- (void)deselectAllTextFields:(UITapGestureRecognizer*)recognizer {
+    [self.loginFormView.emailField resignFirstResponder];
+    [self.loginFormView.passwordField resignFirstResponder];
+    [self.configureFormView.phoneNumberField resignFirstResponder];
+    [self.configureFormView.outgoingNumberField resignFirstResponder];
+    [self.forgotPasswordView.emailTextfield resignFirstResponder];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)didReceiveMemoryWarning
-{
+#pragma mark - UIView lifecycle methods.
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showLogin {
-    if (!self.loginAlertShown) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sign In", nil) message:NSLocalizedString(@"Enter your email and password.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), NSLocalizedString(@"Forgot password?", nil), nil];
-        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        [alert textFieldAtIndex:0].text = self.user;
-        [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-        alert.tag = SHOW_LOGIN_ALERT;
-        [alert show];
+/* 
+ - Set all keyboard types and return keys for the textFields when the view did appear.
+ - Furthermore create login flow through the Return key.
+ */
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.loginFormView.emailField setKeyboardType:UIKeyboardTypeEmailAddress];
+    [self.loginFormView.emailField setReturnKeyType:UIReturnKeyNext];
+    
+    [self.loginFormView.passwordField setKeyboardType:UIKeyboardTypeDefault];
+    [self.loginFormView.passwordField setReturnKeyType:UIReturnKeyGo];
+    
+    // Set type to emailAddress for e-mail field for forgot password steps
+    [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
+    [self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
+    
+    // Set phone number input settings for outgoing and fallback call numbers.
+    [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    [self.configureFormView.phoneNumberField setReturnKeyType:UIReturnKeySend];
+    
+    [self.configureFormView.outgoingNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    [self.configureFormView.outgoingNumberField setReturnKeyType:UIReturnKeyGo];
+    
+    // Make text field react to Enter to login!
+    [self.loginFormView setTextFieldDelegate:self];
+    [self.configureFormView setTextFieldDelegate:self];
+    [self.forgotPasswordView.emailTextfield setDelegate:self];
+
+    // Create an animation scenes that transitions to configure view.
+    _scene = [[VIAScene alloc] initWithView:self.view];
+    
+    // animate logo to top
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self moveLogoOutOfScreen];
+    });
+}
+
+#pragma mark - UITextField delegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([self.loginFormView.emailField isSelectedField:textField]) {
+        // TODO: focus on password field
+        [textField resignFirstResponder];
+        [self.loginFormView.passwordField becomeFirstResponder];
+    } else if ([self.loginFormView.passwordField isSelectedField:textField]) {
+        NSString *username = [self.loginFormView.emailField text];
+        NSString *password = [self.loginFormView.passwordField text];
+        if ([username length] > 0 && [password length] > 0) {
+            [self doLoginCheckWithUname:username password:password];
+            [textField resignFirstResponder];
+            return YES;
+        }
+    } else if ([self.configureFormView.phoneNumberField isSelectedField:textField]) {
+        NSString *mobileNumber = textField.text;
+        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
-        UITextField *usernameTextField = [alert textFieldAtIndex:0];
-        usernameTextField.placeholder = NSLocalizedString(@"Email", nil);
+        [textField resignFirstResponder];
+        [self retrieveOutgoingNumber];
+        return YES;
+    } else if ([self.configureFormView.outgoingNumberField isSelectedField:textField]) {
+        [textField resignFirstResponder];
+        [self animateConfigureViewToVisible:0.f]; // Hide
+        [self animateUnlockViewToVisible:1.f];    // Show
+        [_scene runActThree];                     // Animate the clouds
+
+        return YES;
+    } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
+        [self resetPasswordWithEmail:textField.text];
+        [self animateForgotPasswordViewToVisible:0.f];
+        [self animateLoginViewToVisible:1.f];
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark Keyboard
+
+/**
+ * Add observers to check when keyboards is hidden and shown, to know when to animatie view up or down
+ */
+- (void)addObservers{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+- (void)keyboardWillShow:(NSNotification*)notification {
+    if(!_isKeyboardShown) {
+        NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        UIViewAnimationCurve curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+
+        NSValue *rect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
+        CGFloat height = CGRectGetHeight([rect CGRectValue]);
+
+        [UIView animateWithDuration:duration
+                              delay:0.0
+                            options:(curve << 16)
+                         animations:^{
+                             [self.loginFormView setFrame:CGRectOffset(self.loginFormView.frame, 0, -height)];
+                             [self.configureFormView setFrame:CGRectOffset(self.configureFormView.frame, 0, -height)];
+                             [self.forgotPasswordView setFrame:CGRectOffset(self.forgotPasswordView.frame, 0, -height)];
+                         }
+                         completion:nil];
         
-        self.loginAlertShown = YES;
+        _isKeyboardShown = YES;
     }
 }
 
-- (void)showForgotPassword {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Forgot Password", nil) message:NSLocalizedString(@"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alert textFieldAtIndex:0].text = self.user;
-    [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
-    alert.tag = PASSWORD_FORGOT_ALERT;
-    [alert show];
+- (void)keyboardWillHide:(NSNotification*)notification {
+    if(_isKeyboardShown) {
+        NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        UIViewAnimationCurve curve = (UIViewAnimationCurve) [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+        
+        NSValue *rect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
+        CGFloat height = CGRectGetHeight([rect CGRectValue]);
+        [UIView animateWithDuration:duration
+                              delay:0.0
+                            options:(UIViewAnimationOptions) (curve << 16)
+                         animations:^{
+                             [self.loginFormView setFrame:CGRectOffset(self.loginFormView.frame, 0, height)];
+                             [self.configureFormView setFrame:CGRectOffset(self.configureFormView.frame, 0, height)];
+                             [self.forgotPasswordView setFrame:CGRectOffset(self.forgotPasswordView.frame, 0, height)];
+                         }
+                         completion:nil];
+        
+        _isKeyboardShown = NO;
+    }
 }
 
-#pragma mark - Alert view delegate
+#pragma mark - Helper method that greets you when you reach the lock screen.
+- (void)setLockScreenFriendlyNameWithResponse:(id)responseObject {
+    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *userDict = (NSDictionary*)responseObject;
+        NSString *greeting = [NSString stringWithFormat:@"%@ %@", userDict[@"first_name"], userDict[@"last_name"]];
+        [self.unlockView.greetingsLabel setText:greeting];
+    }
+}
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == SHOW_LOGIN_ALERT) {
-        UITextField *usernameTextField = [alertView textFieldAtIndex:0];
-        UITextField *passwordTextField = [alertView textFieldAtIndex:1];
+#pragma mark - Navigation actions
+- (void)moveLogoOutOfScreen { /* Act one (1) */
+    void (^logoAnimations)(void) = ^{
+        [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
+    };
+    [UIView animateWithDuration:2.4 animations:logoAnimations];
+    
+    [_scene runActOne];
+    
+    void (^loginAnimations)(void) = ^{
+        [self animateLoginViewToVisible:1.f];
+    };
+    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:loginAnimations completion:nil];
+}
+
+- (IBAction)openForgotPassword:(id)sender {
+    [self.loginFormView.emailField resignFirstResponder];
+    [self.loginFormView.passwordField resignFirstResponder];
+
+    [self animateLoginViewToVisible:0.f];
+    [self animateForgotPasswordViewToVisible:1.f];
+}
+
+- (void)resetPasswordWithEmail:(NSString*)email {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:email success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
         
-        self.user = usernameTextField.text;
-        
-        if (buttonIndex == 1) {
-            [self showForgotPassword];
-            return;
-        }
-        
-        self.loginAlertShown = NO;
-        
-        if (![usernameTextField.text length] || ![passwordTextField.text length]) {
-            [self showLogin];
-            return;
-        }
-        
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:self.user password:passwordTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [SVProgressHUD dismiss];
-            // Check if a SIP account 
-            if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
-                [[ConnectionHandler sharedConnectionHandler] sipConnect];
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"No active voice over internet account found. Internet calls will be disabled.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-                [alert show];
-            }
-            [self dismissViewControllerAnimated:YES completion:nil];
+        [self animateLoginViewToVisible:1.f];
+        [self animateForgotPasswordViewToVisible:0.f];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
+        [self animateLoginViewToVisible:1.f];
+        [self animateForgotPasswordViewToVisible:0.f];
+    }];
+}
+
+- (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:username password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [SVProgressHUD dismiss];
+        // Check if a SIP account
+        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
+            [self animateLoginViewToVisible:0.f];     // Hide
+            [self animateConfigureViewToVisible:1.f]; // Show
+            [_scene runActTwo];                       // Animate the clouds
+            
+            NSLog(@"Response object: %@", operation.responseString);
+            
+            [[ConnectionHandler sharedConnectionHandler] sipConnect];
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [SVProgressHUD dismiss];
-        }];
-    } else if (alertView.tag == PASSWORD_FORGOT_ALERT) {
-        self.loginAlertShown = NO;
-        
-        if (buttonIndex == 0) {
-            [self showLogin];
         } else {
-            UITextField *emailTextField = [alertView textFieldAtIndex:0];
-            if ([emailTextField.text length]) {
-                self.user = emailTextField.text;
-                
-                [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
-                [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:emailTextField.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
-                    [self performSelector:@selector(showLogin) withObject:nil afterDelay:3];
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
-                    [self performSelector:@selector(showLogin) withObject:nil afterDelay:3];
-                }];
-            } else {
-                [self showForgotPassword];
-            }
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"Make sure you log in with an app account from your phone provider.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+            [alert show];
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+- (void)retrieveOutgoingNumber {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving outgoing number...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        _fetchAccountRetryCount = 0; // Reset the retry count
+        NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+        if (outgoingNumber) {
+            [self.configureFormView.outgoingNumberField setText:outgoingNumber];
+        } else {
+            [self.configureFormView.outgoingNumberField setText:@""];
+        }
+        [SVProgressHUD dismiss];
+        [self.configureFormView.outgoingNumberField becomeFirstResponder];
+        
+        [self setLockScreenFriendlyNameWithResponse:responseObject];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
+        ++_fetchAccountRetryCount;
+        if (_fetchAccountRetryCount != 3) { // When we retried 3 times
+            [self retrieveOutgoingNumber];
+        } else {
+            [self.configureFormView.outgoingNumberField setUserInteractionEnabled:YES];
+            [self.configureFormView.outgoingNumberField setText:@"Enter phonenumber manually"];
+        }
+    }];
+}
+
+#pragma mark - Navigation animations
+- (void)animateLoginViewToVisible:(CGFloat)alpha { /* Act one (2) */
+    void(^animations)(void) = ^{
+        [self.loginFormView setAlpha:alpha];
+    };
+    void(^completion)(BOOL) = ^(BOOL finished) {
+        if (alpha == 1.f) {
+            [self.loginFormView.emailField becomeFirstResponder];
+        } else if (alpha == 0.f) {
+            [self.loginFormView.emailField resignFirstResponder];
+        }
+    };
+    [UIView animateWithDuration:2.2f
+                          delay:0.8f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:completion];
+}
+
+- (void)animateForgotPasswordViewToVisible:(CGFloat)alpha {
+    void(^animations)(void) = ^{
+        [self.forgotPasswordView setAlpha:alpha];
+    };
+    void(^completion)(BOOL) = ^(BOOL finished) {
+        if (alpha == 1.f) {
+            [self.forgotPasswordView.emailTextfield becomeFirstResponder];
+        } else if (alpha == 0.f) {
+            [self.forgotPasswordView.emailTextfield resignFirstResponder];
+        }
+    };
+    [UIView animateWithDuration:2.2f
+                          delay:0.8f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:completion];
+}
+
+- (void)animateConfigureViewToVisible:(CGFloat)alpha { /* Act two */
+    void(^animations)(void) = ^{
+        [self.configureFormView setAlpha:alpha];
+    };
+    void(^completion)(BOOL) = ^(BOOL finished) {
+        if (alpha == 1.f) {
+            [self.configureFormView.phoneNumberField becomeFirstResponder];
+        } else if (alpha == 0.f) {
+            [self.configureFormView.phoneNumberField resignFirstResponder];
+        }
+    };
+    [UIView animateWithDuration:2.2f
+                          delay:0.8f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:completion];
+    
+}
+
+- (void)animateUnlockViewToVisible:(CGFloat)alpha { /* act three */
+    void(^animations)(void) = ^{
+        [self.unlockView setAlpha:alpha];
+    };
+    [UIView animateWithDuration:2.2f
+                          delay:0.8f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:nil];
+    
+}
+
+- (IBAction)unlockIt {
+    if (self.unlockView.slideToUnlock.value == self.unlockView.slideToUnlock.maximumValue) {  // if user slide to the most right side, stop the operation
+        // Put here what happens when it is unlocked
+        [_scene clean];
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self.unlockView setAlpha:0.f];
+            [self.logoView setAlpha:1.f];
+            [self.logoView setCenter:self.view.center];
+            
+            self.unlockView.slideToUnlock.value = 0.f;
+            self.unlockView.myLabel.alpha = 1.f;
+            
+        }];
+    } else {
+        // user did not slide far enough, so return back to 0 position
+        void (^animations)(void) = ^{
+            self.unlockView.slideToUnlock.value = 0.0;
+            self.unlockView.myLabel.alpha = 1.f;
+        };
+        [UIView animateWithDuration:0.35
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:animations
+                         completion:nil];
     }
 }
 
-#pragma mark - Notifications
-
-- (void)loginFailedNotification:(NSNotification *)notification {
-    [self showLogin];
+- (IBAction)fadeLabel {
+    self.unlockView.myLabel.alpha = self.unlockView.slideToUnlock.maximumValue - self.unlockView.slideToUnlock.value;
 }
 
 @end

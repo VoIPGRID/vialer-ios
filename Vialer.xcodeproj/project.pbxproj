@@ -10,7 +10,18 @@
 		03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */; };
 		03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */; };
 		03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */; };
+		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
+		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
+		3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2F64151AE8F802003F7697 /* ConfigTextField.m */; };
+		3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
+		3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
+		3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4787371AEA5FC1002420FA /* VIASlider.m */; };
+		3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
+		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
+		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
+		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
+		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */; };
 		EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */; };
 		EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */; };
@@ -88,7 +99,6 @@
 		FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */; };
 		FBA850C0189AA87E008099C5 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = FBA850C2189AA87E008099C5 /* info.html */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
-		FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */; };
 		FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */; };
 		FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0F182AA6CB002FC8FC /* SSKeychainQuery.m */; };
 		FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7F14182AE93B002FC8FC /* SVProgressHUD.bundle */; };
@@ -123,7 +133,6 @@
 		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
 		FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3941A64824F00E88E9B /* libGossip7.a */; };
 		FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3951A64824F00E88E9B /* libGossip64.a */; };
-		FBD4EE051AE5AE23007CEB16 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD4EE041AE5AE23007CEB16 /* GradientView.m */; };
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
@@ -133,6 +142,19 @@
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewCell.h; sourceTree = "<group>"; };
 		03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewCell.m; sourceTree = "<group>"; };
@@ -140,9 +162,30 @@
 		03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedNavBarView.m; sourceTree = "<group>"; };
 		03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
+		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
+		3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
+		3D2F64141AE8F802003F7697 /* ConfigTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTextField.h; sourceTree = "<group>"; };
+		3D2F64151AE8F802003F7697 /* ConfigTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTextField.m; sourceTree = "<group>"; };
+		3D44303A1AEF67D50034156F /* AnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedImageView.h; sourceTree = "<group>"; };
+		3D44303B1AEF67D50034156F /* AnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedImageView.m; sourceTree = "<group>"; };
+		3D44303D1AEF8E1B0034156F /* VIAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIAScene.h; sourceTree = "<group>"; };
+		3D44303E1AEF8E1B0034156F /* VIAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIAScene.m; sourceTree = "<group>"; };
+		3D4787361AEA5FC1002420FA /* VIASlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIASlider.h; sourceTree = "<group>"; };
+		3D4787371AEA5FC1002420FA /* VIASlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIASlider.m; sourceTree = "<group>"; };
+		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
+		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
+		3DE6EAD91AF0CB4800C09935 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
+		3DE6EADA1AF0CB4800C09935 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
+		3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
+		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
+		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
 		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
+		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
+		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		EA46C50B1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		EA46C50D1AC2CC6A00F7FC13 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -290,7 +333,6 @@
 		FBA850C4189AAA08008099C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
-		FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
 		FBAD7F0C182AA6CB002FC8FC /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		FBAD7F0E182AA6CB002FC8FC /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
@@ -339,8 +381,6 @@
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
 		FBC9B3941A64824F00E88E9B /* libGossip7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip7.a; sourceTree = "<group>"; };
 		FBC9B3951A64824F00E88E9B /* libGossip64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip64.a; sourceTree = "<group>"; };
-		FBD4EE031AE5AE23007CEB16 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
-		FBD4EE041AE5AE23007CEB16 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -389,6 +429,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D1A5E601AE543BB00DBE64B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3D1A5E611AE543C000DBE64B /* Onboarding */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3D1A5E611AE543C000DBE64B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3DE6EADF1AF24D0800C09935 /* Forms */,
+				3D4430411AEF8E330034156F /* General */,
+				3D4430401AEF8E290034156F /* Scene */,
+				3D4430391AEF67B70034156F /* Animated clouds */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		3D4430391AEF67B70034156F /* Animated clouds */ = {
+			isa = PBXGroup;
+			children = (
+				3D44303A1AEF67D50034156F /* AnimatedImageView.h */,
+				3D44303B1AEF67D50034156F /* AnimatedImageView.m */,
+			);
+			name = "Animated clouds";
+			sourceTree = "<group>";
+		};
+		3D4430401AEF8E290034156F /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				3D44303D1AEF8E1B0034156F /* VIAScene.h */,
+				3D44303E1AEF8E1B0034156F /* VIAScene.m */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		3D4430411AEF8E330034156F /* General */ = {
+			isa = PBXGroup;
+			children = (
+				3D2F64141AE8F802003F7697 /* ConfigTextField.h */,
+				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
+				3D4787361AEA5FC1002420FA /* VIASlider.h */,
+				3D4787371AEA5FC1002420FA /* VIASlider.m */,
+				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
+		3DE6EADF1AF24D0800C09935 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				3D1A5E631AE5483700DBE64B /* LoginFormView.h */,
+				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
+				3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */,
+				3D608B601AE67DC800FA02CE /* ConfigureFormView.m */,
+				3DE6EAD91AF0CB4800C09935 /* UnlockView.h */,
+				3DE6EADA1AF0CB4800C09935 /* UnlockView.m */,
+				3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */,
+				3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */,
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
 		EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +690,7 @@
 		FB4226D6182261D200707349 /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
+				3D1A5E601AE543BB00DBE64B /* Views */,
 				FBA850C7189AAEC4008099C5 /* Config */,
 				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
@@ -618,7 +723,6 @@
 				FB29D911189BA0FF00345976 /* Localizable.strings */,
 				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
 				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
-				FBAD7F04182A8D4C002FC8FC /* LogInViewController.xib */,
 				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
 				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
 				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
@@ -666,10 +770,10 @@
 		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
+				3DE6EAE01AF3BFA600C09935 /* GradientView.h */,
+				3DE6EAE11AF3BFA600C09935 /* GradientView.m */,
 				FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */,
-				FBD4EE031AE5AE23007CEB16 /* GradientView.h */,
-				FBD4EE041AE5AE23007CEB16 /* GradientView.m */,
+				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
 				FBBC8621199BA2C600060261 /* PasteableTextView.h */,
 				FBBC8622199BA2C600060261 /* PasteableTextView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
@@ -682,6 +786,8 @@
 				FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */,
 				FB3820E21A1E87730033FF78 /* UIAlertView+Blocks.h */,
 				FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */,
+				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
+				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
 			);
 			name = Categories/Helpers;
 			sourceTree = "<group>";
@@ -775,6 +881,7 @@
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
 				FB4226CB182261D200707349 /* Resources */,
+				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -795,6 +902,7 @@
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
+						DevelopmentTeam = 799N9ZYHX3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -841,7 +949,6 @@
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
-				FBAD7F06182A8D4C002FC8FC /* LogInViewController.xib in Resources */,
 				FBBD8DE51A5B403400F6A184 /* info_05.jpg in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB4226DB182261D200707349 /* InfoPlist.strings in Resources */,
@@ -851,6 +958,7 @@
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
 				FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
+				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
 				FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */,
 				FB29D915189BAB0200345976 /* Config.plist in Resources */,
 				FBA850C0189AA87E008099C5 /* info.html in Resources */,
@@ -878,15 +986,20 @@
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
 				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,
 				03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */,
+				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
+				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				FB0CF34B18226392002D4281 /* AFURLConnectionOperation.m in Sources */,
 				FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */,
+				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
+				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
 				03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */,
+				3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */,
 				FB3820C51A1E4F510033FF78 /* GSCall.m in Sources */,
@@ -896,7 +1009,6 @@
 				FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */,
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
-				FBD4EE051AE5AE23007CEB16 /* GradientView.m in Sources */,
 				FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */,
 				FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */,
 				FB3820C91A1E4F510033FF78 /* GSIncomingCall.m in Sources */,
@@ -919,6 +1031,7 @@
 				FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
 				FB3820C71A1E4F510033FF78 /* GSConfiguration.m in Sources */,
 				FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */,
 				FB3820C81A1E4F510033FF78 /* GSDispatch.m in Sources */,
@@ -929,13 +1042,17 @@
 				FBAD7F18182AE93B002FC8FC /* SVProgressHUD.m in Sources */,
 				EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */,
 				FB0CF34A18226392002D4281 /* AFSecurityPolicy.m in Sources */,
+				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				FB0CF34818226392002D4281 /* AFHTTPSessionManager.m in Sources */,
 				FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */,
+				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
+				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
+				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,7 +1181,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Peperzaken BV";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Peperzaken BV";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1088,6 +1205,7 @@
 				);
 				INFOPLIST_FILE = "Vialer/$(CONFIGURATION)-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/pjsip/lib\"",
@@ -1191,6 +1309,7 @@
 				);
 				INFOPLIST_FILE = "Vialer/Vialer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/pjsip/lib\"",
@@ -1234,6 +1353,7 @@
 				);
 				INFOPLIST_FILE = "Vialer/Vialer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/pjsip/lib\"",

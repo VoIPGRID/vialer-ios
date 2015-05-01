@@ -9,9 +9,7 @@
 #import "GradientView.h"
 
 @interface GradientView ()
-@property (nonatomic, strong) UIColor *startColor;
-@property (nonatomic, strong) UIColor *endColor;
-@property (nonatomic, assign) CGFloat angle;
+
 @end
 
 @implementation GradientView
@@ -62,9 +60,8 @@
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colors, locations);
 
     CGFloat degree = self.angle * M_PI / 180;
-    CGPoint center = CGPointMake(self.bounds.size.width / 2.f, self.bounds.size.height / 2.f);
-    CGPoint startPoint = CGPointMake(center.x - cos(degree) * center.x, center.y - sin(degree) * center.y);
-    CGPoint endPoint = CGPointMake(center.x + cos(degree) * center.x, center.y + sin(degree) * center.y);
+    CGPoint startPoint = CGPointMake(self.center.x - cos(degree) * self.center.x, self.center.y - sin(degree) * self.center.y);
+    CGPoint endPoint = CGPointMake(self.center.x + cos(degree) * self.center.x, self.center.y + sin(degree) * self.center.y);
 
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation + kCGGradientDrawsAfterEndLocation);
 
