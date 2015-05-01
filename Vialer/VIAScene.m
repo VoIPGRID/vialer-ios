@@ -32,36 +32,43 @@
     AnimatedImageView *cloud1ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud"]];
     [cloud1ImageView setCenter:CGPointMake(0.f, CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud1ImageView.frame))];
     [_view addSubview:cloud1ImageView];
+    [_view sendSubviewToBack:cloud1ImageView];
     [_onStage addObject:cloud1ImageView];
     
     AnimatedImageView *cloud2ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-1"]];
     [cloud2ImageView setCenter:CGPointMake(CGRectGetMaxX(_view.frame), CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud2ImageView.frame))];
     [_view addSubview:cloud2ImageView];
+    [_view sendSubviewToBack:cloud2ImageView];
     [_onStage addObject:cloud2ImageView];
     
     AnimatedImageView *cloud3ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud"]];
     [cloud3ImageView setCenter:CGPointMake(0.f, CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud3ImageView.frame))];
     [_view addSubview:cloud3ImageView];
+    [_view sendSubviewToBack:cloud3ImageView];
     [_onStage addObject:cloud3ImageView];
     
     AnimatedImageView *cloud4ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-2"]];
     [cloud4ImageView setCenter:CGPointMake(CGRectGetMaxX(_view.frame), CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud4ImageView.frame))];
     [_view addSubview:cloud4ImageView];
+    [_view sendSubviewToBack:cloud4ImageView];
     [_onStage addObject:cloud4ImageView];
 
     AnimatedImageView *cloud5ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-1"]];
     [cloud5ImageView setCenter:CGPointMake(0.f, CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud3ImageView.frame))];
     [_view addSubview:cloud5ImageView];
+    [_view sendSubviewToBack:cloud5ImageView];
     [_onStage addObject:cloud5ImageView];
     
     AnimatedImageView *cloud6ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud"]];
     [cloud6ImageView setCenter:CGPointMake(CGRectGetMaxX(_view.frame), CGRectGetMaxY(_view.frame) +  CGRectGetHeight(cloud4ImageView.frame))];
     [_view addSubview:cloud6ImageView];
+    [_view sendSubviewToBack:cloud6ImageView];
     [_onStage addObject:cloud6ImageView];
     
     AnimatedImageView *cloudView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-2"]];
     [cloudView setCenter:CGPointMake(0, CGRectGetMaxY(_view.frame) +  CGRectGetHeight(cloudView.frame))];
     [_view addSubview:cloudView];
+    [_view sendSubviewToBack:cloud6ImageView];
     [_onStage addObject:cloudView];
 }
 

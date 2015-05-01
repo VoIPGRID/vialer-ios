@@ -8,10 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogInViewController">
             <connections>
                 <outlet property="configureFormView" destination="vMQ-YQ-10J" id="Shd-pj-eKN"/>
+                <outlet property="forgotPasswordView" destination="pWk-0c-VhQ" id="JuD-LB-rxX"/>
                 <outlet property="loginFormView" destination="y6s-6X-hya" id="lAQ-KF-BMl"/>
                 <outlet property="logoView" destination="E0n-Q6-i8E" id="fFY-rU-dlv"/>
-                <outlet property="myLabel" destination="H6u-uJ-Pz5" id="Btk-ZW-dhK"/>
-                <outlet property="slideToUnlock" destination="lsM-1W-Ala" id="aRq-XE-mSN"/>
                 <outlet property="sliderView" destination="kdx-6q-MLH" id="xGo-oc-kUD"/>
                 <outlet property="unlockView" destination="NFh-FZ-LDT" id="eni-Bj-fQh"/>
                 <outlet property="view" destination="8AL-Qd-h62" id="RgD-Df-jCY"/>
@@ -27,18 +26,18 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view alpha="0.0" contentMode="scaleToFill" id="y6s-6X-hya" customClass="LoginFormView">
-                    <rect key="frame" x="0.0" y="186" width="320" height="251"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="0.0" y="186" width="320" height="284"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sLm-R4-k6T" userLabel="titleLabel">
-                            <rect key="frame" x="32" y="12" width="255" height="44"/>
+                            <rect key="frame" x="32" y="12" width="255" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="28"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="calls in the cloud" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qbX-pS-6ES" userLabel="subtitleLabel">
-                            <rect key="frame" x="32" y="44" width="255" height="44"/>
+                            <rect key="frame" x="32" y="44" width="255" height="51"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,12 +54,15 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x0b-Ca-T7P">
-                            <rect key="frame" x="98" y="208" width="125" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <rect key="frame" x="98" y="221" width="125" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Forgot password?">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="openForgotPassword:" destination="-1" eventType="touchUpInside" id="swN-lV-6vO"/>
+                            </connections>
                         </button>
                     </subviews>
                     <connections>
@@ -103,7 +105,7 @@
                     </connections>
                 </view>
                 <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT" customClass="UnlockView">
-                    <rect key="frame" x="0.0" y="320" width="321.00000061006313" height="192"/>
+                    <rect key="frame" x="0.0" y="320" width="321.00000019406986" height="192"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXO-T4-Aup" userLabel="titleLabel">
@@ -125,7 +127,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to start calling" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6u-uJ-Pz5">
-                                    <rect key="frame" x="72.000000143281781" y="0.0" width="204" height="72"/>
+                                    <rect key="frame" x="72.000000045579995" y="0.0" width="204" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.58823529409999997" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -150,6 +152,41 @@
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="greetingsLabel" destination="LfQ-VU-vz0" id="KTZ-UT-MO0"/>
+                        <outlet property="myLabel" destination="H6u-uJ-Pz5" id="0wb-VE-Uer"/>
+                        <outlet property="slideToUnlock" destination="lsM-1W-Ala" id="f86-Mw-Wvi"/>
+                    </connections>
+                </view>
+                <view alpha="0.0" contentMode="scaleToFill" id="pWk-0c-VhQ" customClass="ForgotPasswordView">
+                    <rect key="frame" x="0.0" y="178" width="320" height="176"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot password?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rlf-YE-cri">
+                            <rect key="frame" x="32" y="0.0" width="256" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail " minimumFontSize="17" id="HPX-UU-Qz4">
+                            <rect key="frame" x="32" y="115" width="256" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your e-mail address and we will send you instructions on setting a new password." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gmk-ma-pt6">
+                            <rect key="frame" x="32" y="44" width="256" height="63"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="emailTextfield" destination="HPX-UU-Qz4" id="nJ7-q4-jEH"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -164,7 +201,7 @@
                     <real key="value" value="315"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-1082" y="-3690"/>
+            <point key="canvasLocation" x="-1432" y="-3680"/>
         </view>
     </objects>
     <resources>

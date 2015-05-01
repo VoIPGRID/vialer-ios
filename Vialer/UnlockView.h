@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UnlockView : UIView
+@interface UnlockView : UIView 
+
+@property (nonatomic, strong) IBOutlet UILabel *greetingsLabel;
+@property (nonatomic, strong) IBOutlet UISlider *slideToUnlock;
+@property (nonatomic, strong) IBOutlet UILabel *myLabel;
+
+- (void)setupSlider;
 
 @end

@@ -15,6 +15,7 @@
 		3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4787371AEA5FC1002420FA /* VIASlider.m */; };
 		3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
+		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */; };
@@ -167,6 +168,8 @@
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
 		3DE6EAD91AF0CB4800C09935 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
 		3DE6EADA1AF0CB4800C09935 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
+		3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
+		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
 		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
@@ -428,6 +431,7 @@
 		3D1A5E611AE543C000DBE64B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				3DE6EADF1AF24D0800C09935 /* Forms */,
 				3D4430411AEF8E330034156F /* General */,
 				3D4430401AEF8E290034156F /* Scene */,
 				3D4430391AEF67B70034156F /* Animated clouds */,
@@ -456,10 +460,6 @@
 		3D4430411AEF8E330034156F /* General */ = {
 			isa = PBXGroup;
 			children = (
-				3D1A5E631AE5483700DBE64B /* LoginFormView.h */,
-				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
-				3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */,
-				3D608B601AE67DC800FA02CE /* ConfigureFormView.m */,
 				3D2F64141AE8F802003F7697 /* ConfigTextField.h */,
 				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
 				3D4787361AEA5FC1002420FA /* VIASlider.h */,
@@ -467,10 +467,23 @@
 				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
 				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
 				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
-				3DE6EAD91AF0CB4800C09935 /* UnlockView.h */,
-				3DE6EADA1AF0CB4800C09935 /* UnlockView.m */,
 			);
 			name = General;
+			sourceTree = "<group>";
+		};
+		3DE6EADF1AF24D0800C09935 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				3D1A5E631AE5483700DBE64B /* LoginFormView.h */,
+				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
+				3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */,
+				3D608B601AE67DC800FA02CE /* ConfigureFormView.m */,
+				3DE6EAD91AF0CB4800C09935 /* UnlockView.h */,
+				3DE6EADA1AF0CB4800C09935 /* UnlockView.m */,
+				3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */,
+				3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */,
+			);
+			name = Forms;
 			sourceTree = "<group>";
 		};
 		EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */ = {
@@ -955,6 +968,7 @@
 			files = (
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
+				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
 				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,

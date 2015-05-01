@@ -20,4 +20,10 @@ IB_DESIGNABLE
 
 - (BOOL)isSelectedField:(UITextField*)field;
 
+- (void)becomeFirstResponder;
+- (void)resignFirstResponder;
+
+- (void)setKeyboardType:(UIKeyboardType)type;
+- (void)setReturnKeyType:(UIReturnKeyType)type;
+
 @end

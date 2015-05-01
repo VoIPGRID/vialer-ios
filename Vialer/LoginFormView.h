@@ -15,6 +15,7 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong) IBOutlet ConfigTextField *emailField;
 @property (nonatomic, strong) IBOutlet ConfigTextField *passwordField;
+@property (nonatomic, strong) IBOutlet UIButton *forgotPasswordButton;
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
 
