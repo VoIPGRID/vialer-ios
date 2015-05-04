@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UITextView *numberTextView;
 
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender;
 - (IBAction)callButtonPressed:(UIButton *)sender;
+
 @end

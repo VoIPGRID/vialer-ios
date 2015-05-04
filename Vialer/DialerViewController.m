@@ -27,8 +27,7 @@
 
 @implementation DialerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Keypad", nil);
@@ -55,8 +54,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -83,13 +81,21 @@
     [self connectionStatusChangedNotification:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
+    
+    GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
+    if (status == GSCallStatusDisconnected) {
+        [self.statusLabel setHidden:NO];
+    } else {
+        [self.statusLabel setHidden:YES];
+    }
+
+    
 //    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
 
@@ -115,7 +121,6 @@
 }
 
 #pragma mark - Actions
-
 - (void)backButtonLongPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.numberTextView.text = @"";
