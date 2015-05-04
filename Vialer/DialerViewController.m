@@ -87,14 +87,12 @@
 }
 
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
-    
     GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
     if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
         [self.statusLabel setHidden:NO];
     } else {
         [self.statusLabel setHidden:YES];
     }
-
     
 //    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
