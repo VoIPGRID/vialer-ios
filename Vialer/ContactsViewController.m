@@ -195,23 +195,33 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.addressBookContactsSorted.count;
+    if (self.addressBookContactsSorted.count > 0) {
+        return self.addressBookContactsSorted.count;
+    }
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddressBookContactCellIdentifier"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AddressBookContactCellIdentifier"];
     }
-    
-    NSDictionary *contact = [self.addressBookContactsSorted objectAtIndex:indexPath.row];
-    
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@", contact[@"firstName"], contact[@"lastName"]];
-    fullName = [fullName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
-    if (fullName.length == 0) {
-        fullName = contact[@"companyName"];
+
+    if (self.addressBookContactsSorted.count > 0) {
+        NSDictionary *contact = [self.addressBookContactsSorted objectAtIndex:indexPath.row];
+        NSString *fullName = [NSString stringWithFormat:@"%@ %@", contact[@"firstName"], contact[@"lastName"]];
+        fullName = [fullName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+        if (fullName.length == 0) {
+            fullName = contact[@"companyName"];
+        }
+        cell.textLabel.text = fullName;
+    } else {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont systemFontOfSize:17.f];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.text = NSLocalizedString(@"NO_CONTACTS_LABEL", nil);
     }
-    cell.textLabel.text = fullName;
     
     return cell;
 }
