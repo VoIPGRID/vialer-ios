@@ -89,7 +89,7 @@
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
     
     GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
-    if (status == GSCallStatusDisconnected) {
+    if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
         [self.statusLabel setHidden:NO];
     } else {
         [self.statusLabel setHidden:YES];
