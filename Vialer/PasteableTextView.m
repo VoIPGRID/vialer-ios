@@ -43,7 +43,7 @@
 
 - (void)paste:(id)sender {
     NSString *pastedText = [UIPasteboard generalPasteboard].string;
-    if ([self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
+    if (pastedText && [self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
         if ([self.delegate textView:self shouldChangeTextInRange:self.selectedRange replacementText:pastedText]) {
             NSString *text = self.label.text ? self.label.text : @"";
             self.text = [text stringByAppendingString:pastedText];
