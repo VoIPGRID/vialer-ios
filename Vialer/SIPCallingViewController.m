@@ -311,6 +311,10 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
         return;
     }
 
+    if (!self.currentCall.active) {
+        return;
+    }
+
     if (self.currentCall.status == GSCallStatusConnected) {
         NSInteger timePassed = -[self.tickerStartDate timeIntervalSinceNow];
         [self showWithStatus:[NSString stringWithFormat:@"%02d:%02d", (unsigned)(timePassed / 60), (unsigned)(timePassed % 60)]];

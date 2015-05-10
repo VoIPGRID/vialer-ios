@@ -41,6 +41,13 @@ static SystemSoundID ringSoundId;
     return (callInfo.media_status == PJSUA_CALL_MEDIA_LOCAL_HOLD) || (callInfo.media_status == PJSUA_CALL_MEDIA_REMOTE_HOLD);
 }
 
+- (BOOL)active {
+    // NOTE: Hack to receive the new call status when the other line has ended the call, otherwise we're not notified
+    GSLogIfFails(pjsua_call_update(self.callId,  PJSUA_CALL_UPDATE_CONTACT, NULL));
+
+    return pjsua_call_is_active(self.callId) != 0;
+}
+
 - (NSTimeInterval)callDuration {
     pjsua_call_info callInfo;
     pjsua_call_get_info(self.callId, &callInfo);
