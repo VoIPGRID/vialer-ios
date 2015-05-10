@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIPCallingViewController">
             <connections>
                 <outlet property="buttonsView" destination="Gc4-2O-ucp" id="cXk-RE-uU2"/>
                 <outlet property="contactLabel" destination="JJS-G2-94E" id="UO0-48-Py2"/>
-                <outlet property="hangupButton" destination="EkR-fK-TWG" id="KyL-AV-3EP"/>
                 <outlet property="hideButton" destination="mbV-IJ-ZLZ" id="7kz-Ws-tia"/>
                 <outlet property="statusLabel" destination="PTI-2a-Rah" id="fHi-NT-pbO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -38,7 +37,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="Gc4-2O-ucp" userLabel="Buttons View">
-                    <rect key="frame" x="0.0" y="155" width="320" height="332"/>
+                    <rect key="frame" x="0.0" y="164" width="320" height="290"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JJS-G2-94E">
@@ -56,7 +55,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EkR-fK-TWG" userLabel="Hangup Button">
-                    <rect key="frame" x="0.0" y="495" width="320" height="57"/>
+                    <rect key="frame" x="0.0" y="458" width="320" height="57"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" image="endcall-phone">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,8 +65,8 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbV-IJ-ZLZ">
-                    <rect key="frame" x="213" y="495" width="107" height="65"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                    <rect key="frame" x="0.0" y="514" width="320" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Hide">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -19,7 +19,6 @@ NSString * const SIPCallStartedNotification;
 
 @property (strong, nonatomic) IBOutlet UIView *buttonsView;
 @property (strong, nonatomic) IBOutlet UIView *numbersButtonsView;
-@property (strong, nonatomic) IBOutlet UIButton *hangupButton;
 @property (strong, nonatomic) IBOutlet UIButton *hideButton;
 @property (strong, nonatomic) IBOutlet UILabel *contactLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;

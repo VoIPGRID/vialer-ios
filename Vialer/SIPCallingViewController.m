@@ -91,7 +91,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     CGFloat buttonYSpace = self.view.frame.size.width / 3.f;
     CGFloat leftOffset = (view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
 
-    CGPoint offset = CGPointMake(0, ((self.view.frame.size.height + 93.f - (buttonYSpace * 2.f)) / 2.f) - view.frame.origin.y);
+    CGPoint offset = CGPointMake(0, ((self.view.frame.size.height + 64.f - (buttonYSpace * 2.f)) / 2.f) - view.frame.origin.y);
     for (int j = 0; j < 2; j++) {
         offset.x = leftOffset;
         for (int i = 0; i < 3; i++) {
