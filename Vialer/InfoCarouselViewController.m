@@ -39,7 +39,7 @@
     NSAssert(currentTintColor != nil && currentTintColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
 
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:[currentTintColor[0] intValue] / 255.f green:[currentTintColor[1] intValue] / 255.f blue:[currentTintColor[2] intValue] / 255.f alpha:1.f];
-    self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:[tintColor[0] intValue] / 255.f green:[tintColor[1] intValue] / 255.f blue:[tintColor[2] intValue] / 255.f alpha:1.f];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     self.pageControl.numberOfPages = 5;
 
     CGFloat topOffset = ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) ? 0.f : 44.f;
