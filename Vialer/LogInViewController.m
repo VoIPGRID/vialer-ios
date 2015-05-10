@@ -131,10 +131,21 @@
 
         return YES;
     } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
-        [self resetPasswordWithEmail:textField.text];
-        [self animateForgotPasswordViewToVisible:0.f];
-        [self animateLoginViewToVisible:1.f];
-        return YES;
+        NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+        if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
+             evaluateWithObject:textField.text]) {
+            [self resetPasswordWithEmail:textField.text];
+            [self animateForgotPasswordViewToVisible:0.f];
+            [self animateLoginViewToVisible:1.f];
+            return YES;
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil)
+                                                            message:NSLocalizedString(@"Please enter a valid email address.", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
     return NO;
 }
