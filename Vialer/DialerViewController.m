@@ -75,8 +75,6 @@
     
     self.backButton.hidden = YES;
     self.callButton.enabled = NO;
-    
-    self.numberTextView.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:36.f];
 
     [self connectionStatusChangedNotification:nil];
 }
