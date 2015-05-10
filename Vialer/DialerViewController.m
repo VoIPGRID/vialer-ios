@@ -104,7 +104,8 @@
 #pragma mark - TextView delegate
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    NSString *originalText = textView.text ? textView.text : @"";
+    NSString *newString = [originalText stringByReplacingCharactersInRange:range withString:text];
     NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"0123456789+#*() "];
     if (newString.length != [[newString componentsSeparatedByCharactersInSet:[characterSet invertedSet]] componentsJoinedByString:@""].length) {
         return NO;

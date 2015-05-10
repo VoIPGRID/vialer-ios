@@ -17,7 +17,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.textColor = self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
 
         // Add label for shrinking purposes
         self.label = [[UILabel alloc] initWithCoder:aDecoder];
@@ -41,9 +41,23 @@
     return [super canPerformAction:action withSender:sender];
 }
 
+- (void)paste:(id)sender {
+    NSString *pastedText = [UIPasteboard generalPasteboard].string;
+    if ([self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
+        if ([self.delegate textView:self shouldChangeTextInRange:self.selectedRange replacementText:pastedText]) {
+            NSString *text = self.label.text ? self.label.text : @"";
+            self.text = [text stringByAppendingString:pastedText];
+        }
+    }
+}
+
 - (void)setText:(NSString *)text {
-    [super setText:text];
+    [super setText:@""];
     self.label.text = text;
+}
+
+- (NSString *)text {
+    return self.label.text;
 }
 
 - (void)layoutSubviews {
