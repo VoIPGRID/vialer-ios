@@ -236,6 +236,14 @@
     [self animateForgotPasswordViewToVisible:1.f];
 }
 
+- (IBAction)closeButtonPressed:(UIButton *)sender {
+    [self.loginFormView.emailField resignFirstResponder];
+    [self.loginFormView.passwordField resignFirstResponder];
+
+    [self animateForgotPasswordViewToVisible:0.f];
+    [self animateLoginViewToVisible:1.f];
+}
+
 - (void)resetPasswordWithEmail:(NSString*)email {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:email success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -321,6 +329,7 @@
 
 - (void)animateForgotPasswordViewToVisible:(CGFloat)alpha {
     void(^animations)(void) = ^{
+        [self.closeButton setAlpha:alpha];
         [self.forgotPasswordView setAlpha:alpha];
     };
     void(^completion)(BOOL) = ^(BOOL finished) {

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogInViewController">
             <connections>
+                <outlet property="closeButton" destination="0U0-85-hbF" id="EMO-mM-2sd"/>
                 <outlet property="configureFormView" destination="vMQ-YQ-10J" id="Shd-pj-eKN"/>
                 <outlet property="forgotPasswordView" destination="pWk-0c-VhQ" id="JuD-LB-rxX"/>
                 <outlet property="loginFormView" destination="y6s-6X-hya" id="lAQ-KF-BMl"/>
@@ -105,7 +106,7 @@
                     </connections>
                 </view>
                 <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT" customClass="UnlockView">
-                    <rect key="frame" x="0.0" y="320" width="321.00000039728116" height="192"/>
+                    <rect key="frame" x="0.0" y="320" width="321.00000211455131" height="192"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXO-T4-Aup" userLabel="titleLabel">
@@ -127,7 +128,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to start calling" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6u-uJ-Pz5">
-                                    <rect key="frame" x="72.000000093306994" y="0.0" width="204" height="72"/>
+                                    <rect key="frame" x="72.000000496631714" y="0.0" width="204" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.58823529409999997" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -188,6 +189,16 @@
                         <outlet property="emailTextfield" destination="HPX-UU-Qz4" id="nJ7-q4-jEH"/>
                     </connections>
                 </view>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0U0-85-hbF" userLabel="Close Button">
+                    <rect key="frame" x="277" y="20" width="35" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="close">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="L6g-EB-cBR"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <userDefinedRuntimeAttributes>
@@ -205,6 +216,7 @@
         </view>
     </objects>
     <resources>
+        <image name="close" width="27" height="27"/>
         <image name="vialer-logo" width="149" height="209"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
