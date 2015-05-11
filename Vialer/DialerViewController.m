@@ -87,8 +87,14 @@
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
     GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
     if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
+        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
+        self.callButton.enabled = NO;
+
         [self.statusLabel setHidden:NO];
     } else {
+        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
+        self.callButton.enabled = YES;
+
         [self.statusLabel setHidden:YES];
     }
     
