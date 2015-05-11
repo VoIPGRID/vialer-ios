@@ -124,8 +124,14 @@
         [self showInfoScreen];
     } else if (indexPath.row == MENU_INDEX_ACCOUNT) {
         // @TODO Open account screen
+        
+        NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedString(@"%@\nis currently logged in.", nil),
+                                    [[NSUserDefaults standardUserDefaults] objectForKey:@"User"]];
+        
+        [message appendFormat:@"\n%@", NSLocalizedString(@"Are you sure you want to log out?", nil)];
+        
         [UIAlertView showWithTitle:NSLocalizedString(@"Log out", nil)
-                           message:NSLocalizedString(@"Are you sure you want to log out?", nil)
+                           message:message
                  cancelButtonTitle:NSLocalizedString(@"No", nil)
                  otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
                           tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
