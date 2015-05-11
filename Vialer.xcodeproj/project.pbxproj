@@ -878,6 +878,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB4226FE182261D200707349 /* Build configuration list for PBXNativeTarget "Vialer" */;
 			buildPhases = (
+				F2B947311B00DFEC00CE5112 /* config_site.h copy script */,
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
 				FB4226CB182261D200707349 /* Resources */,
@@ -975,6 +976,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F2B947311B00DFEC00CE5112 /* config_site.h copy script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "config_site.h copy script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -e $PROJECT_DIR/pjsip/src/pjlib/include/pj/config_site.h  ]\nthen\n    echo \"$PROJECT_DIR/pjsip/src/pjlib/include/pj/config_site.h file exists\"\nelse\n    echo \"No config_site.h in $PROJECT_DIR/pjsip/src/pjlib/include/pj/ copying....\"\n    cp $PROJECT_DIR/pjsip/config_site.h $PROJECT_DIR/pjsip/src/pjlib/include/pj/\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FB4226C9182261D200707349 /* Sources */ = {
