@@ -9,22 +9,20 @@
 #import "LoginFormView.h"
 #import "UIView+RoundedStyle.h"
 
+@interface LoginFormView ()
+@property (nonatomic, strong) IBOutlet UIButton *forgotPasswordButton;
+@end
+
 @implementation LoginFormView
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    //Localize elements of view
+    [self.emailField setupPlaceHolder:NSLocalizedString(@"required", nil)
+                                          labelText:NSLocalizedString(@"Email", nil)];
+    [self.passwordField setupPlaceHolder:NSLocalizedString(@"required", nil)
+                                             labelText:NSLocalizedString(@"Password", nil)];
+    [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
 }
 
 - (void)layoutSubviews {
@@ -37,9 +35,6 @@
     [self.emailField styleWithTopBorderRadius:8.f];
     /* Add bottom corner mask */
     [self.passwordField styleWithBottomBorderRadius:8.f];
-    
-    [self.emailField setupPlaceHolder:@"required" labelText:@"E-mail"];
-    [self.passwordField setupPlaceHolder:@"required" labelText:@"Password"];
     
     [self.passwordField setSecureTextEntry:YES];
 }

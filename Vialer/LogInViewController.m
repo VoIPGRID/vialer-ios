@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self addObservers];
     
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
@@ -378,7 +378,7 @@
 }
 
 - (IBAction)unlockIt {
-    if (self.unlockView.slideToUnlock.value == self.unlockView.slideToUnlock.maximumValue) {  // if user slide to the most right side, stop the operation
+    if (self.unlockView.slideToCallSlider.value == self.unlockView.slideToCallSlider.maximumValue) {  // if user slide to the most right side, stop the operation
         // Put here what happens when it is unlocked
         [_scene clean];
         [self dismissViewControllerAnimated:NO completion:^{
@@ -386,15 +386,15 @@
             [self.logoView setAlpha:1.f];
             [self.logoView setCenter:self.view.center];
             
-            self.unlockView.slideToUnlock.value = 0.f;
-            self.unlockView.myLabel.alpha = 1.f;
+            self.unlockView.slideToCallSlider.value = 0.f;
+            self.unlockView.slideToCallText.alpha = 1.f;
             
         }];
     } else {
         // user did not slide far enough, so return back to 0 position
         void (^animations)(void) = ^{
-            self.unlockView.slideToUnlock.value = 0.0;
-            self.unlockView.myLabel.alpha = 1.f;
+            self.unlockView.slideToCallSlider.value = 0.0;
+            self.unlockView.slideToCallText.alpha = 1.f;
         };
         [UIView animateWithDuration:0.35
                               delay:0.0
@@ -405,7 +405,7 @@
 }
 
 - (IBAction)fadeLabel {
-    self.unlockView.myLabel.alpha = self.unlockView.slideToUnlock.maximumValue - self.unlockView.slideToUnlock.value;
+    self.unlockView.slideToCallText.alpha = self.unlockView.slideToCallSlider.maximumValue - self.unlockView.slideToCallSlider.value;
 }
 
 @end

@@ -11,5 +11,6 @@
 @interface ForgotPasswordView : UIView
 
 @property (nonatomic, strong) IBOutlet UITextField *emailTextfield;
-
+@property (nonatomic, weak) IBOutlet UILabel* forgotPasswordLabel;
+@property (nonatomic, weak) IBOutlet UILabel* pleaseEnterEmailLabel;
 @end

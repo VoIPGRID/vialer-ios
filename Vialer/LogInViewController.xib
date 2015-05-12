@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -55,7 +55,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x0b-Ca-T7P">
-                            <rect key="frame" x="98" y="221" width="125" height="44"/>
+                            <rect key="frame" x="32" y="221" width="255" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Forgot password?">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,6 +68,7 @@
                     </subviews>
                     <connections>
                         <outlet property="emailField" destination="1U2-o2-44F" id="fuJ-Ph-V6r"/>
+                        <outlet property="forgotPasswordButton" destination="x0b-Ca-T7P" id="ADQ-Bh-ALK"/>
                         <outlet property="passwordField" destination="Gg8-dC-6Sx" id="2O6-3y-3ST"/>
                     </connections>
                 </view>
@@ -103,20 +104,22 @@
                     <connections>
                         <outlet property="outgoingNumberField" destination="cZZ-LC-VQv" id="V5D-aO-uQ6"/>
                         <outlet property="phoneNumberField" destination="roC-za-H1z" id="NzW-oW-4za"/>
+                        <outlet property="subtitleLable" destination="Bc9-gh-nNw" id="M1N-Qo-Qjb"/>
+                        <outlet property="titleLable" destination="VFh-Ph-zkM" id="4uK-Im-LW1"/>
                     </connections>
                 </view>
                 <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT" customClass="UnlockView">
-                    <rect key="frame" x="0.0" y="320" width="321.00000271572031" height="192"/>
+                    <rect key="frame" x="0.0" y="320" width="321.00000303770469" height="192"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXO-T4-Aup" userLabel="titleLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXO-T4-Aup" userLabel="helloLabel">
                             <rect key="frame" x="32" y="12" width="255" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="28"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname Lastname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LfQ-VU-vz0" userLabel="subtitleLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname Lastname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LfQ-VU-vz0" userLabel="greetingsLabel">
                             <rect key="frame" x="32" y="44" width="255" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -128,7 +131,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to start calling" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6u-uJ-Pz5">
-                                    <rect key="frame" x="72.000000637824598" y="0.0" width="204" height="72"/>
+                                    <rect key="frame" x="72.000000713447093" y="0.0" width="204" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.58823529409999997" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -154,9 +157,10 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="greetingsLabel" destination="LfQ-VU-vz0" id="KTZ-UT-MO0"/>
-                        <outlet property="myLabel" destination="H6u-uJ-Pz5" id="0wb-VE-Uer"/>
-                        <outlet property="slideToUnlock" destination="lsM-1W-Ala" id="f86-Mw-Wvi"/>
+                        <outlet property="greetingsLabel" destination="LfQ-VU-vz0" id="EqC-cs-nsO"/>
+                        <outlet property="helloLabel" destination="EXO-T4-Aup" id="aHc-24-Dke"/>
+                        <outlet property="slideToCallSlider" destination="lsM-1W-Ala" id="v7f-o3-sBR"/>
+                        <outlet property="slideToCallText" destination="H6u-uJ-Pz5" id="TJ4-ra-n4C"/>
                     </connections>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" id="pWk-0c-VhQ" customClass="ForgotPasswordView">
@@ -187,6 +191,8 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="emailTextfield" destination="HPX-UU-Qz4" id="nJ7-q4-jEH"/>
+                        <outlet property="forgotPasswordLabel" destination="Rlf-YE-cri" id="Njy-tT-xla"/>
+                        <outlet property="pleaseEnterEmailLabel" destination="gmk-ma-pt6" id="hf9-wz-PhG"/>
                     </connections>
                 </view>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0U0-85-hbF" userLabel="Close Button">
