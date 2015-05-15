@@ -1,3 +1,4 @@
 [submodule "pjsip/src"]
 	path = pjsip/src
 	url = git://github.com/chakrit/pjsip.git
+        ignore = dirty
