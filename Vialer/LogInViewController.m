@@ -234,7 +234,7 @@
 - (void)setLockScreenFriendlyNameWithResponse:(id)responseObject {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userDict = (NSDictionary*)responseObject;
-        NSString *greeting = [NSString stringWithFormat:@"%@ %@", userDict[@"first_name"], userDict[@"last_name"]];
+        NSString *greeting = [NSString stringWithFormat:@"%@ %@!", userDict[@"first_name"], userDict[@"last_name"]];
         [self.unlockView.greetingsLabel setText:greeting];
     }
 }
