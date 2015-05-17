@@ -47,8 +47,8 @@
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Availability", nil) andIcon:availabilityIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Statistics", nil) andIcon:statsIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Routing", nil) andIcon:routingIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Info", nil) andIcon:infoIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Account", nil) andIcon:accountIcon],
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Information", nil) andIcon:infoIcon],
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:accountIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Autoconnect A/B", nil) andIcon:autoconnectIcon]
     ];
     
