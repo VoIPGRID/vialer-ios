@@ -72,7 +72,8 @@
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 60000
-    if (ABAddressBookGetAuthorizationStatus != NULL) {
+    //TODO: is the below check realy needed? something to do with iOS6 ?
+    //if (ABAddressBookGetAuthorizationStatus != NULL) {
         if (ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusAuthorized) {
             dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
             ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
@@ -81,7 +82,7 @@
             
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
-    }
+    //}
     
     if (ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusAuthorized) {
         return recents;
