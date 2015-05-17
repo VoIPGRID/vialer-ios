@@ -29,7 +29,10 @@
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
     
     [self.phoneNumberField setupPlaceHolder:NSLocalizedString(@"phonenumber", nil) labelText:NSLocalizedString(@"mobile_label", nil)];
+    [self.phoneNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    
     [self.outgoingNumberField setupPlaceHolder:NSLocalizedString(@"Automatically fetched", nil) labelText:NSLocalizedString(@"Outgoing", nil)];
+    [self.outgoingNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
 }
 
 - (void)layoutSubviews {

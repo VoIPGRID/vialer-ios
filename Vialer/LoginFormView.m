@@ -20,8 +20,12 @@
     //Localize elements of view
     [self.emailField setupPlaceHolder:NSLocalizedString(@"required", nil)
                                           labelText:NSLocalizedString(@"Email", nil)];
+    [self.emailField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    
     [self.passwordField setupPlaceHolder:NSLocalizedString(@"required", nil)
                                              labelText:NSLocalizedString(@"Password", nil)];
+    [self.passwordField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
 }
 

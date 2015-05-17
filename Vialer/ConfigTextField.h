@@ -25,5 +25,6 @@ IB_DESIGNABLE
 
 - (void)setKeyboardType:(UIKeyboardType)type;
 - (void)setReturnKeyType:(UIReturnKeyType)type;
+- (void)setClearButtonMode:(UITextFieldViewMode)clearButtonMode;
 
 @end

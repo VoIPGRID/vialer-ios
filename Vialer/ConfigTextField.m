@@ -77,6 +77,10 @@
     [_field setReturnKeyType:type];
 }
 
+- (void)setClearButtonMode:(UITextFieldViewMode)clearButtonMode {
+    [_field setClearButtonMode:clearButtonMode];
+}
+
 - (void)setupConstraints {
     NSDictionary *views = @{
         @"superview": self,
