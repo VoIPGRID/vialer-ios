@@ -10,7 +10,11 @@
 #import "UIView+RoundedStyle.h"
 
 @interface LoginFormView ()
-@property (nonatomic, strong) IBOutlet UIButton *forgotPasswordButton;
+//Display's "Business"
+@property (nonatomic, weak) IBOutlet UILabel *businessLabel;
+//Display's "calls in the cloud"
+@property (nonatomic, weak) IBOutlet UILabel *callsInTheCloudLabel;
+@property (nonatomic, weak) IBOutlet UIButton *forgotPasswordButton;
 @end
 
 @implementation LoginFormView
@@ -18,6 +22,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     //Localize elements of view
+    self.businessLabel.text = NSLocalizedString(@"Business", nil);
+    self.callsInTheCloudLabel.text = NSLocalizedString(@"calls in the cloud", nil);
+    
     [self.emailField setupPlaceHolder:NSLocalizedString(@"required", nil)
                                           labelText:NSLocalizedString(@"Email", nil)];
     [self.emailField setClearButtonMode:UITextFieldViewModeWhileEditing];
