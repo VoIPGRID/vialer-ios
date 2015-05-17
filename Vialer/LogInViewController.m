@@ -23,7 +23,7 @@
 #define PASSWORD_FORGOT_ALERT 101
 
 @interface LogInViewController ()
-@property (nonatomic, assign) BOOL loginAlertShown;
+@property (nonatomic, assign) BOOL alertShown;
 @property (nonatomic, strong) NSString *user;
 @end
 
@@ -101,6 +101,10 @@
     });
 }
 
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    self.alertShown = NO;
+}
+
 #pragma mark - UITextField delegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([self.loginFormView.emailField isSelectedField:textField]) {
@@ -117,10 +121,11 @@
         } else {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No login data", nil)
                                         message:NSLocalizedString(@"Enter Your email address and password to login.", nil)
-                                       delegate:nil
+                                       delegate:self
                               cancelButtonTitle:NSLocalizedString(@"Ok", nil)
                               otherButtonTitles:nil]
              show];
+            self.alertShown = YES;
             return NO;
         }
     } else if ([self.configureFormView.phoneNumberField isSelectedField:textField]) {
@@ -153,6 +158,7 @@
                                                   cancelButtonTitle:NSLocalizedString(@"Ok", nil)
                                                   otherButtonTitles:nil];
             [alert show];
+            self.alertShown = YES;
         }
     }
     return NO;
@@ -174,37 +180,49 @@
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         UIViewAnimationCurve curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
 
-        NSValue *rect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
-        CGFloat height = CGRectGetHeight([rect CGRectValue]);
-
+        NSValue *keyboardRect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
+        CGFloat keyboardHeight = CGRectGetHeight([keyboardRect CGRectValue]);
+        
+        //After the animation, the respective view should be centered on the remaining screen height (original screen height -keyboard height)
+        CGFloat remainingScreenHeight = CGRectGetHeight(self.view.frame) - keyboardHeight;
+        //Divide the remaining screen height by 2, this will be the center of the displayed view
+        CGFloat newCenter = lroundf(remainingScreenHeight /2);
+        
         [UIView animateWithDuration:duration
                               delay:0.0
                             options:(curve << 16)
                          animations:^{
-                             [self.loginFormView setFrame:CGRectOffset(self.loginFormView.frame, 0, -height)];
-                             [self.configureFormView setFrame:CGRectOffset(self.configureFormView.frame, 0, -height)];
-                             [self.forgotPasswordView setFrame:CGRectOffset(self.forgotPasswordView.frame, 0, -height)];
+                             //TODO: Storing the frame's center in an ivar just to be able to restore it is a bit of a hack
+                             //but I could not think of a better way.
+                             self.loginFormView.centerBeforeKeyboardAnimation = self.loginFormView.center;
+                             self.loginFormView.center = CGPointMake(self.loginFormView.center.x, newCenter);
+                             
+                             self.configureFormView.centerBeforeKeyboardAnimation = self.configureFormView.center;
+                             self.configureFormView.center = CGPointMake(self.configureFormView.center.x, newCenter);
+                             
+                             self.forgotPasswordView.centerBeforeKeyboardAnimation = self.forgotPasswordView.center;
+                             self.forgotPasswordView.center = CGPointMake(self.forgotPasswordView.center.x, newCenter);
                          }
-                         completion:nil];
+                         completion:^(BOOL finished){
+                             
+                         }];
         
         _isKeyboardShown = YES;
     }
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification {
-    if(_isKeyboardShown) {
+    if(_isKeyboardShown  && !self.alertShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         UIViewAnimationCurve curve = (UIViewAnimationCurve) [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         
-        NSValue *rect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
-        CGFloat height = CGRectGetHeight([rect CGRectValue]);
         [UIView animateWithDuration:duration
                               delay:0.0
                             options:(UIViewAnimationOptions) (curve << 16)
                          animations:^{
-                             [self.loginFormView setFrame:CGRectOffset(self.loginFormView.frame, 0, height)];
-                             [self.configureFormView setFrame:CGRectOffset(self.configureFormView.frame, 0, height)];
-                             [self.forgotPasswordView setFrame:CGRectOffset(self.forgotPasswordView.frame, 0, height)];
+                             self.loginFormView.center = self.loginFormView.centerBeforeKeyboardAnimation;
+                             self.configureFormView.center = self.configureFormView.centerBeforeKeyboardAnimation;
+                             self.forgotPasswordView.center = self.forgotPasswordView.centerBeforeKeyboardAnimation;
                          }
                          completion:nil];
         
@@ -283,6 +301,7 @@
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"Make sure you log in with an app account from your phone provider.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
             [alert show];
+            self.alertShown = YES;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];

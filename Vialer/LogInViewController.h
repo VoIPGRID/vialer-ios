@@ -15,7 +15,7 @@
 #import "ConfigureFormView.h"
 #import "UnlockView.h"
 
-@interface LogInViewController : TrackedViewController <UITextFieldDelegate>
+@interface LogInViewController : TrackedViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 /* The vialier logo that moves out of screen when view opens. */
 @property (nonatomic, strong) IBOutlet AnimatedImageView *logoView;
