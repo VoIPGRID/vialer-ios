@@ -114,6 +114,14 @@
             [self doLoginCheckWithUname:username password:password];
             [textField resignFirstResponder];
             return YES;
+        } else {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No login data", nil)
+                                        message:NSLocalizedString(@"Enter Your email address and password to login.", nil)
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                              otherButtonTitles:nil]
+             show];
+            return NO;
         }
     } else if ([self.configureFormView.phoneNumberField isSelectedField:textField]) {
         NSString *mobileNumber = textField.text;
