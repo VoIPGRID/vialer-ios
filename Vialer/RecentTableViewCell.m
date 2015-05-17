@@ -56,14 +56,22 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    //for testing cgsize form old and new function:
+    //NSLog(@"%@ vs %@", NSStringFromCGSize(oldSize), NSStringFromCGSize(newSize));
     
-    CGSize dateTimeSize = [self.dateTimeLabel.text sizeWithFont:self.dateTimeLabel.font constrainedToSize:CGSizeMake(80.0f, self.dateTimeLabel.font.pointSize)];
+    //deprecated
+    //CGSize dateTimeSize = [self.dateTimeLabel.text sizeWithFont:self.dateTimeLabel.font constrainedToSize:CGSizeMake(80.0f, self.dateTimeLabel.font.pointSize)];
+    CGSize dateTimeSize = [self.dateTimeLabel.text sizeWithAttributes:@{NSFontAttributeName: self.dateTimeLabel.font}];
     self.dateTimeLabel.frame = CGRectMake(self.contentView.frame.size.width - dateTimeSize.width, (self.contentView.frame.size.height - dateTimeSize.height) / 2.f, dateTimeSize.width, dateTimeSize.height);
 
-    CGSize nameSize = [self.nameLabel.text sizeWithFont:self.nameLabel.font constrainedToSize:CGSizeMake(self.dateTimeLabel.frame.origin.x - 16.f, self.nameLabel.font.pointSize)];
+    //deprecated
+    //CGSize nameSize = [self.nameLabel.text sizeWithFont:self.nameLabel.font constrainedToSize:CGSizeMake(self.dateTimeLabel.frame.origin.x - 16.f, self.nameLabel.font.pointSize)];
+    CGSize nameSize = [self.nameLabel.text sizeWithAttributes:@{NSFontAttributeName: self.nameLabel.font}];
     self.nameLabel.frame = CGRectMake(29.f, 6.f, nameSize.width, nameSize.height);
     
-    CGSize phoneTypeSize = [self.descriptionLabel.text sizeWithFont:self.descriptionLabel.font constrainedToSize:CGSizeMake(self.dateTimeLabel.frame.origin.x, self.descriptionLabel.font.pointSize)];
+    //deprecated
+    //CGSize phoneTypeSize = [self.descriptionLabel.text sizeWithFont:self.descriptionLabel.font constrainedToSize:CGSizeMake(self.dateTimeLabel.frame.origin.x, self.descriptionLabel.font.pointSize)];
+    CGSize phoneTypeSize = [self.descriptionLabel.text sizeWithAttributes:@{NSFontAttributeName: self.descriptionLabel.font}];
     self.descriptionLabel.frame = CGRectMake(self.nameLabel.frame.origin.x, self.contentView.frame.size.height - phoneTypeSize.height - 8.f, phoneTypeSize.width, phoneTypeSize.height);
     
     if (self.iconImageView.image) {
