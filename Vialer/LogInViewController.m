@@ -134,7 +134,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [textField resignFirstResponder];
-        [self retrieveOutgoingNumber];
         return YES;
     } else if ([self.configureFormView.outgoingNumberField isSelectedField:textField]) {
         [textField resignFirstResponder];
@@ -163,6 +162,13 @@
     }
     return NO;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([self.configureFormView.outgoingNumberField isSelectedField:textField] && textField.text.length == 0) {
+        [self retrieveOutgoingNumber];
+    }
+}
+
 
 #pragma mark Keyboard
 
