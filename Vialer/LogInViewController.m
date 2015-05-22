@@ -147,11 +147,7 @@
         [textField resignFirstResponder];
         return YES;
     } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
-        [textField resignFirstResponder];
-        [self animateConfigureViewToVisible:0.f]; // Hide
-        [self animateUnlockViewToVisible:1.f];    // Show
-        [_scene runActThree];                     // Animate the clouds
-
+        [self continueFromConfigureFormViewToUnlockView];
         return YES;
     } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
         NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
@@ -214,14 +210,19 @@
     //If the continue button is pressed directly, make the API call to fetch the outgoing number if the field is empty
     if (self.configureFormView.outgoingNumberField.text.length == 0) {
         [self retrieveOutgoingNumberWithSuccessBlock:^{
-            [self.configureFormView.outgoingNumberField resignFirstResponder];
-            [self animateConfigureViewToVisible:0.f]; // Hide
-            [self animateUnlockViewToVisible:1.f];    // Show
-            [_scene runActThree];                     // Animate the clouds
+            [self continueFromConfigureFormViewToUnlockView];
         }];
-    }
+    } else
+        //dont fetch, just continue to the next screen
+        [self continueFromConfigureFormViewToUnlockView];
 }
 
+- (void)continueFromConfigureFormViewToUnlockView {
+    [self.configureFormView.outgoingNumberField resignFirstResponder];
+    [self animateConfigureViewToVisible:0.f]; // Hide
+    [self animateUnlockViewToVisible:1.f];    // Show
+    [_scene runActThree];                     // Animate the clouds
+}
 
 #pragma mark Keyboard
 
@@ -381,7 +382,10 @@
         [self.configureFormView.outgoingNumberField becomeFirstResponder];
         
         [self setLockScreenFriendlyNameWithResponse:responseObject];
-        success();
+        
+        //If a success block was provided, execute it
+        if (success)
+            success ();
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
