@@ -174,7 +174,10 @@ void HandleExceptions(NSException *exception) {
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // End all active calls when the app is terminated
+    for (GSCall *activeCall in [GSCall activeCalls]) {
+        [activeCall end];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
