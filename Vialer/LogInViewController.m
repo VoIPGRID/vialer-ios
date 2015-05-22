@@ -50,7 +50,7 @@
  * Deselect all textfields when a user taps somewhere in the view.
  */
 - (void)deselectAllTextFields:(UITapGestureRecognizer*)recognizer {
-    [self.loginFormView.emailField resignFirstResponder];
+    [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
     [self.configureFormView.phoneNumberField resignFirstResponder];
     [self.configureFormView.outgoingNumberField resignFirstResponder];
@@ -70,15 +70,26 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.loginFormView.emailField setKeyboardType:UIKeyboardTypeEmailAddress];
-    [self.loginFormView.emailField setReturnKeyType:UIReturnKeyNext];
+    [self.loginFormView.usernameField setKeyboardType:UIKeyboardTypeEmailAddress];
+    [self.loginFormView.usernameField setReturnKeyType:UIReturnKeyNext];
+    //to be able/disable the enable the login button
+    [self.loginFormView.usernameField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     
     [self.loginFormView.passwordField setKeyboardType:UIKeyboardTypeDefault];
     [self.loginFormView.passwordField setReturnKeyType:UIReturnKeyGo];
+    //to be able/disable the enable the login button
+    [self.loginFormView.passwordField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.loginFormView.loginButton.enabled = NO;
     
     // Set type to emailAddress for e-mail field for forgot password steps
     [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
     [self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
+    self.forgotPasswordView.requestPasswordButton.enabled = NO;
+    
+    //to be able/disable the enable the request password button
+    [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(forgotPasswordViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     // Set phone number input settings for outgoing and fallback call numbers.
     [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
@@ -107,12 +118,12 @@
 
 #pragma mark - UITextField delegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if ([self.loginFormView.emailField isSelectedField:textField]) {
+    if ([self.loginFormView.usernameField isEqual:textField]) {
         // TODO: focus on password field
         [textField resignFirstResponder];
         [self.loginFormView.passwordField becomeFirstResponder];
-    } else if ([self.loginFormView.passwordField isSelectedField:textField]) {
-        NSString *username = [self.loginFormView.emailField text];
+    } else if ([self.loginFormView.passwordField isEqual:textField]) {
+        NSString *username = [self.loginFormView.usernameField text];
         NSString *password = [self.loginFormView.passwordField text];
         if ([username length] > 0 && [password length] > 0) {
             [self doLoginCheckWithUname:username password:password];
@@ -128,14 +139,14 @@
             self.alertShown = YES;
             return NO;
         }
-    } else if ([self.configureFormView.phoneNumberField isSelectedField:textField]) {
+    } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
         NSString *mobileNumber = textField.text;
         [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [textField resignFirstResponder];
         return YES;
-    } else if ([self.configureFormView.outgoingNumberField isSelectedField:textField]) {
+    } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
         [textField resignFirstResponder];
         [self animateConfigureViewToVisible:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f];    // Show
@@ -164,8 +175,50 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if ([self.configureFormView.outgoingNumberField isSelectedField:textField] && textField.text.length == 0) {
-        [self retrieveOutgoingNumber];
+    //As soon as the user enters the ConfigureView's outgoing textfield, fetch this number if the field is still empty.
+    if ([self.configureFormView.outgoingNumberField isEqual:textField] && textField.text.length == 0) {
+        [self retrieveOutgoingNumberWithSuccessBlock:nil];
+    }
+}
+
+- (void)loginViewTextFieldDidChange:(UITextField *)textField {
+    if (self.loginFormView.usernameField.text.length > 0 && self.loginFormView.passwordField.text.length > 0)
+        self.loginFormView.loginButton.enabled = YES;
+    else
+        self.loginFormView.loginButton.enabled = NO;
+}
+
+//Check have been done to ensure the text fields have data, otherwise the button would not be clickable.
+- (IBAction)loginButtonPushed:(UIButton *)sender {
+    NSString *username = self.loginFormView.usernameField.text;
+    NSString *password = self.loginFormView.passwordField.text;
+    [self doLoginCheckWithUname:username password:password];
+    [self deselectAllTextFields:nil];
+}
+
+- (void)forgotPasswordViewTextFieldDidChange:(UITextField *)textField {
+    NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
+         evaluateWithObject:textField.text])
+        self.forgotPasswordView.requestPasswordButton.enabled = YES;
+    else
+        self.forgotPasswordView.requestPasswordButton.enabled = NO;
+}
+
+//Check for valid email is done, otherwise the button would not be enabled.
+- (IBAction)requestPasswordButtonPressed:(UIButton *)sender {
+    [self resetPasswordWithEmail:self.forgotPasswordView.emailTextfield.text];
+}
+
+- (IBAction)configureViewContinueButtonPressed:(UIButton *)sender {
+    //If the continue button is pressed directly, make the API call to fetch the outgoing number if the field is empty
+    if (self.configureFormView.outgoingNumberField.text.length == 0) {
+        [self retrieveOutgoingNumberWithSuccessBlock:^{
+            [self.configureFormView.outgoingNumberField resignFirstResponder];
+            [self animateConfigureViewToVisible:0.f]; // Hide
+            [self animateUnlockViewToVisible:1.f];    // Show
+            [_scene runActThree];                     // Animate the clouds
+        }];
     }
 }
 
@@ -261,7 +314,7 @@
 }
 
 - (IBAction)openForgotPassword:(id)sender {
-    [self.loginFormView.emailField resignFirstResponder];
+    [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
 
     [self animateLoginViewToVisible:0.f];
@@ -269,7 +322,7 @@
 }
 
 - (IBAction)closeButtonPressed:(UIButton *)sender {
-    [self.loginFormView.emailField resignFirstResponder];
+    [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
 
     [self animateForgotPasswordViewToVisible:0.f];
@@ -314,7 +367,7 @@
     }];
 }
 
-- (void)retrieveOutgoingNumber {
+- (void)retrieveOutgoingNumberWithSuccessBlock  :(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving outgoing number...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         _fetchAccountRetryCount = 0; // Reset the retry count
@@ -328,12 +381,13 @@
         [self.configureFormView.outgoingNumberField becomeFirstResponder];
         
         [self setLockScreenFriendlyNameWithResponse:responseObject];
+        success();
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
         ++_fetchAccountRetryCount;
         if (_fetchAccountRetryCount != 3) { // When we retried 3 times
-            [self retrieveOutgoingNumber];
+            [self retrieveOutgoingNumberWithSuccessBlock:nil];
         } else {
             [self.configureFormView.outgoingNumberField setUserInteractionEnabled:YES];
             [self.configureFormView.outgoingNumberField setText:@"Enter phonenumber manually"];
@@ -348,9 +402,9 @@
     };
     void(^completion)(BOOL) = ^(BOOL finished) {
         if (alpha == 1.f) {
-            [self.loginFormView.emailField becomeFirstResponder];
+            [self.loginFormView.usernameField becomeFirstResponder];
         } else if (alpha == 0.f) {
-            [self.loginFormView.emailField resignFirstResponder];
+            [self.loginFormView.usernameField resignFirstResponder];
         }
     };
     [UIView animateWithDuration:2.2f

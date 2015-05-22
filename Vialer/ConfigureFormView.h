@@ -13,8 +13,9 @@
 IB_DESIGNABLE
 @interface ConfigureFormView : UIView
 
-@property (nonatomic, strong) IBOutlet ConfigTextField *phoneNumberField;
-@property (nonatomic, strong) IBOutlet ConfigTextField *outgoingNumberField;
+@property (nonatomic, weak) IBOutlet UITextField *phoneNumberField;
+@property (nonatomic, weak) IBOutlet UITextField *outgoingNumberField;
+@property (nonatomic, weak) IBOutlet UIButton *continueButton;
 
 //Storing the frame's center in an ivar just to be able to restore is a bit of a hack
 //but I could not think of a better way.

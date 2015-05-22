@@ -37,6 +37,32 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="kmU-gh-GEs" userLabel="Username field">
+                            <rect key="frame" x="32" y="107" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="7po-7e-v2K" userLabel="Password field">
+                            <rect key="frame" x="32" y="145" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jQk-IH-C00" userLabel="Login button">
+                            <rect key="frame" x="32" y="183" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="loginButtonPushed:" destination="-1" eventType="touchUpInside" id="LfF-Di-mqH"/>
+                            </connections>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="calls in the cloud" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qbX-pS-6ES">
                             <rect key="frame" x="32" y="44" width="255" height="51"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -44,16 +70,6 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" id="1U2-o2-44F" customClass="ConfigTextField">
-                            <rect key="frame" x="32" y="120" width="255" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="Gg8-dC-6Sx" customClass="ConfigTextField">
-                            <rect key="frame" x="32" y="164" width="255" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x0b-Ca-T7P">
                             <rect key="frame" x="32" y="221" width="255" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,9 +85,10 @@
                     <connections>
                         <outlet property="businessLabel" destination="sLm-R4-k6T" id="R4b-8J-31H"/>
                         <outlet property="callsInTheCloudLabel" destination="qbX-pS-6ES" id="9PK-z0-jTT"/>
-                        <outlet property="emailField" destination="1U2-o2-44F" id="fuJ-Ph-V6r"/>
                         <outlet property="forgotPasswordButton" destination="x0b-Ca-T7P" id="ADQ-Bh-ALK"/>
-                        <outlet property="passwordField" destination="Gg8-dC-6Sx" id="2O6-3y-3ST"/>
+                        <outlet property="loginButton" destination="jQk-IH-C00" id="Ese-Cb-iG5"/>
+                        <outlet property="passwordField" destination="7po-7e-v2K" id="UE1-9v-7bL"/>
+                        <outlet property="usernameField" destination="kmU-gh-GEs" id="d9o-XF-2Ro"/>
                     </connections>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" id="vMQ-YQ-10J" customClass="ConfigureFormView">
@@ -92,26 +109,43 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" id="roC-za-H1z" customClass="ConfigTextField">
-                            <rect key="frame" x="32" y="120" width="254" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="cZZ-LC-VQv" customClass="ConfigTextField">
-                            <rect key="frame" x="32" y="164" width="254" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="r1D-2b-eui" userLabel="Phone Number Field">
+                            <rect key="frame" x="32" y="107" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="LmM-BL-X15" userLabel="Outgoing Number Field">
+                            <rect key="frame" x="32" y="145" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pAY-wz-scM" userLabel="Continue Button">
+                            <rect key="frame" x="32" y="183" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="configureViewContinueButtonPressed:" destination="-1" eventType="touchUpInside" id="xCA-D3-8Oe"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <connections>
-                        <outlet property="outgoingNumberField" destination="cZZ-LC-VQv" id="V5D-aO-uQ6"/>
-                        <outlet property="phoneNumberField" destination="roC-za-H1z" id="NzW-oW-4za"/>
+                        <outlet property="continueButton" destination="pAY-wz-scM" id="vic-1L-So0"/>
+                        <outlet property="outgoingNumberField" destination="LmM-BL-X15" id="eu9-cE-YPK"/>
+                        <outlet property="phoneNumberField" destination="r1D-2b-eui" id="wWK-db-I4l"/>
                         <outlet property="subtitleLable" destination="Bc9-gh-nNw" id="M1N-Qo-Qjb"/>
                         <outlet property="titleLable" destination="VFh-Ph-zkM" id="4uK-Im-LW1"/>
                     </connections>
                 </view>
                 <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT" customClass="UnlockView">
-                    <rect key="frame" x="0.0" y="320" width="321.00000337485494" height="192"/>
+                    <rect key="frame" x="0.0" y="320" width="321.00000372788554" height="192"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXO-T4-Aup" userLabel="helloLabel">
@@ -133,10 +167,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to start calling" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6u-uJ-Pz5">
-                                    <rect key="frame" x="72.000000792631511" y="0.0" width="204" height="72"/>
+                                    <rect key="frame" x="72.000000875545638" y="0.0" width="204" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                    <color key="textColor" red="0.98039215690000003" green="0.58823529409999997" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="lsM-1W-Ala" customClass="VIASlider">
@@ -182,6 +216,20 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YBv-dv-PlD" userLabel="Request Password Button">
+                            <rect key="frame" x="32" y="153" width="255" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="requestPasswordButtonPressed:" destination="-1" eventType="touchUpInside" id="HkV-9J-lsd"/>
+                            </connections>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your e-mail address and we will send you instructions on setting a new password." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gmk-ma-pt6">
                             <rect key="frame" x="32" y="44" width="256" height="63"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -195,6 +243,7 @@
                         <outlet property="emailTextfield" destination="HPX-UU-Qz4" id="nJ7-q4-jEH"/>
                         <outlet property="forgotPasswordLabel" destination="Rlf-YE-cri" id="Njy-tT-xla"/>
                         <outlet property="pleaseEnterEmailLabel" destination="gmk-ma-pt6" id="hf9-wz-PhG"/>
+                        <outlet property="requestPasswordButton" destination="YBv-dv-PlD" id="g7x-2i-sxH"/>
                     </connections>
                 </view>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0U0-85-hbF" userLabel="Close Button">
@@ -220,7 +269,7 @@
                     <real key="value" value="315"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-1672" y="-3688"/>
+            <point key="canvasLocation" x="-1853" y="-3692"/>
         </view>
     </objects>
     <resources>

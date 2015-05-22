@@ -25,34 +25,36 @@
     self.businessLabel.text = NSLocalizedString(@"Business", nil);
     self.callsInTheCloudLabel.text = NSLocalizedString(@"calls in the cloud", nil);
     
-    [self.emailField setupPlaceHolder:NSLocalizedString(@"required", nil)
-                                          labelText:NSLocalizedString(@"Email", nil)];
-    [self.emailField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    self.usernameField.placeholder = NSLocalizedString(@"Email", nil);
+    self.passwordField.placeholder = NSLocalizedString(@"Password", nil);
     
-    [self.passwordField setupPlaceHolder:NSLocalizedString(@"required", nil)
-                                             labelText:NSLocalizedString(@"Password", nil)];
-    [self.passwordField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [self.usernameField cleanStyle];
+    [self.passwordField cleanStyle];
+    
+    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    /* Remove all the default UITextField styling */
-    [self.emailField cleanStyle];
-    [self.passwordField cleanStyle];
-    /* Add top rounded corner mask */
-    [self.emailField styleWithTopBorderRadius:8.f];
-    /* Add bottom corner mask */
-    [self.passwordField styleWithBottomBorderRadius:8.f];
-    
-    [self.passwordField setSecureTextEntry:YES];
-}
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    
+//    //TODO: Really needed???
+//    
+//    /* Remove all the default UITextField styling */
+//    [self.usernameField cleanStyle];
+//    [self.passwordField cleanStyle];
+//    /* Add top rounded corner mask */
+//    [self.usernameField styleWithTopBorderRadius:8.f];
+//    /* Add bottom corner mask */
+//    [self.passwordField styleWithBottomBorderRadius:8.f];
+//    
+//    [self.passwordField setSecureTextEntry:YES];
+//}
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
-    [self.passwordField setTextFieldDelegate:delegate];
-    [self.emailField setTextFieldDelegate:delegate];
+    self.passwordField.delegate = delegate;
+    self.usernameField.delegate = delegate;
 }
 
 @end
