@@ -46,6 +46,10 @@
     [self.unlockView setupSlider];
 }
 
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 /**
  * Deselect all textfields when a user taps somewhere in the view.
  */

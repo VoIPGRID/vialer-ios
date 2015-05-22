@@ -39,6 +39,8 @@
 	</array>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackTranslucent</string>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
@@ -54,8 +56,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackTranslucent</string>
+	<true/>
 </dict>
 </plist>
