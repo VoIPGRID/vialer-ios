@@ -70,7 +70,7 @@
             NSString *title = self.titles[j * 3 + i];
             NSString *subTitle = self.subTitles[j * 3 + i];
             UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subTitle constrainedToSize:CGSizeMake(buttonWidth, buttonHeight)];
-            [button addTarget:self action:@selector(dialerButtonPressed:) forControlEvents:UIControlEventTouchDown];
+            [button addTarget:self action:@selector(dialerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = j * 3 + i;
 
             [button sizeToFit];

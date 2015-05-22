@@ -64,7 +64,9 @@
     [button addTarget:self
                action:@selector(buttonTitleTouchDown:)
      forControlEvents:UIControlEventTouchDown];
-    
+    [button addTarget:self
+               action:@selector(buttonTitleTouchUpInside:)
+     forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self
                action:@selector(buttonTitleTouchUp:)
      forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside | UIControlEventTouchCancel];
@@ -134,14 +136,16 @@
     [UIView animateWithDuration:0.1 animations:^{
         sender.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
     }];
-    
-    [self buttonPressedWithTag:(int)sender.tag];
 }
 
 - (void)buttonTitleTouchUp:(UIButton *)sender {
     [UIView animateWithDuration:0.1 animations:^{
         sender.transform = CGAffineTransformMakeScale(1.f, 1.f);
     }];
+}
+
+- (void)buttonTitleTouchUpInside:(UIButton *)sender {
+    [self buttonPressedWithTag:(int)sender.tag];
 }
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
