@@ -93,12 +93,10 @@
         [self.statusLabel setHidden:NO];
     } else {
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
-        self.callButton.enabled = YES;
+        self.callButton.enabled = [self.numberTextView.text length] > 0;
 
         [self.statusLabel setHidden:YES];
     }
-    
-//    [self.callButton setTitle:([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh && [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected ? [NSString stringWithFormat:@"%@ SIP", NSLocalizedString(@"Call", nil)] : NSLocalizedString(@"Call", nil)) forState:UIControlStateNormal];
 }
 
 - (void)sipCallStartedNotification:(NSNotification *)notification {
