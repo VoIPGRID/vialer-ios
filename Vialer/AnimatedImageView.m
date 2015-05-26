@@ -31,14 +31,18 @@
     [animationPath removeObject:v];
 
     CGPoint p = [v CGPointValue];
+    [self moveToPoint:p withDuration:duration delay:delay andRemoveWhenOffScreen:YES];
+}
+
+- (void)moveToPoint:(CGPoint)point withDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay andRemoveWhenOffScreen:(BOOL)remove {
     [UIView animateWithDuration:duration
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         self.center = p;
+                         self.center = point;
                      }
                      completion:^(BOOL finished) {
-                         if (self.center.y < 0 || self.center.x < 0) {
+                         if ((self.center.y < 0 || self.center.x < 0) && remove) {
                              [self removeFromSuperview];
                          }
                      }];

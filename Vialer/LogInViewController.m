@@ -85,7 +85,12 @@
     //to be able/disable the enable the login button
     [self.loginFormView.passwordField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    self.loginFormView.loginButton.enabled = NO;
+    if (self.loginFormView.usernameField.text.length >0 && self.loginFormView.passwordField.text.length >0)
+        self.loginFormView.loginButton.enabled = YES;
+    else
+        self.loginFormView.loginButton.enabled = NO;
+
+
     
     // Set type to emailAddress for e-mail field for forgot password steps
     [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
@@ -252,6 +257,9 @@
         //Divide the remaining screen height by 2, this will be the center of the displayed view
         CGFloat newCenter = lroundf(remainingScreenHeight /2);
         
+        //Move the left top most cloud away to make the text visable (white on white)
+        [_scene animateCloudsOutOfViewWithDuration:duration];
+        
         [UIView animateWithDuration:duration
                               delay:0.0
                             options:(curve << 16)
@@ -279,6 +287,8 @@
     if(_isKeyboardShown  && !self.alertShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         UIViewAnimationCurve curve = (UIViewAnimationCurve) [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+        
+        [_scene animateCloudsIntoViewWithDuration:duration];
         
         [UIView animateWithDuration:duration
                               delay:0.0
@@ -327,8 +337,7 @@
 }
 
 - (IBAction)closeButtonPressed:(UIButton *)sender {
-    [self.loginFormView.usernameField resignFirstResponder];
-    [self.loginFormView.passwordField resignFirstResponder];
+    [self.forgotPasswordView.emailTextfield resignFirstResponder];
 
     [self animateForgotPasswordViewToVisible:0.f];
     [self animateLoginViewToVisible:1.f];

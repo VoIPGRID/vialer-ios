@@ -20,4 +20,7 @@
 
 - (void)clean;
 
+- (void)animateCloudsOutOfViewWithDuration:(NSTimeInterval)duration;
+- (void)animateCloudsIntoViewWithDuration:(NSTimeInterval)duration;
+
 @end

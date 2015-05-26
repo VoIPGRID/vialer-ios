@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ConfigTextField.h"
+//#import "ConfigTextField.h"
 
 IB_DESIGNABLE
 @interface LoginFormView : UIView
