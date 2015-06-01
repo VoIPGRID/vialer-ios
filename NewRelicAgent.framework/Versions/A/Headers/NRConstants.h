@@ -27,7 +27,10 @@ enum NRTraceType {
 };
 
 #define kNRNetworkStatusDidChangeNotification @"com.newrelic.networkstatus.changed"
+#define kNRCarrierNameDidUpdateNotifcation @"com.newrelic.carrierName.changed"
 #define kNRMemoryUsageDidChangeNotification @"com.newrelic.memoryusage.changed"
+#define kNRInteractionDidCompleteNotification @"com.newrelic.interaction.complete"
+
 
 //Custom Metric Units
 typedef NSString NRMetricUnit;

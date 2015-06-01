@@ -1,4 +1,4 @@
-//  New Relic version 4.186
+//  New Relic version 5.0.3
 //
 //  New Relic for Mobile -- iOS edition
 //
@@ -12,10 +12,8 @@
 
 
 /*
- *  This document describes various APIs available to further customize New Relic
- *  data consumption. Using these APIs should provide a way to gain insight into
- *  un-instrumented methods and interactions.
- *
+ *  This document describes various APIs available to further customize New Relic's
+ *  data collection.
  */
 
 #import "NewRelicFeatureFlags.h"
@@ -38,7 +36,7 @@ extern "C" {
 /**************************************/
 
 
-
+#pragma mark - Helpers for trying out New Relic features
 
 /*!
  * Throws a demo run-time exception named "NewRelicDemoException" to test 
@@ -60,6 +58,8 @@ extern "C" {
 + (void) crashNow;
 
 
+#pragma mark - Configuring the New Relic SDK
+
 /*!
  Set this bit-wise flag to enable/disable  features.
 
@@ -69,9 +69,7 @@ extern "C" {
       See NewRelicFeatureFlags.h for more flag details.
 
 */
-
 + (void) enableFeatures:(NRMAFeatureFlags)featureFlags;
-
 + (void) disableFeatures:(NRMAFeatureFlags)featureFlags;
 
 
@@ -83,7 +81,6 @@ extern "C" {
        it will only be effective called before this method.
 
 */
-
 + (void) enableCrashReporting:(BOOL)enabled;
 
 /*!
@@ -97,7 +94,15 @@ extern "C" {
 + (void)setApplicationVersion:(NSString *)versionString;
 
 /*!
- Starts the New Relic agent.
+ Returns the current anonymous Session Identifier string reported to New Relic.
+ The SessionId changes each time your app comes to the foreground on the device.
+ This value will be present in all events recorded in New Relic Insights.
+ */
++ (NSString*) currentSessionId;
+
+
+/*!
+ Starts New Relic data collection.
 
  Call this at the beginning of your UIApplicationDelegate's application:didFinishLaunchingWithOptions: method.
  You can find your App Token in the Settings tab of your mobile app on https://rpm.newrelic.com/
@@ -108,7 +113,7 @@ extern "C" {
 
 
 /*!
- Starts the New Relic agent and optionally reports data to New Relic over unencrypted HTTP.
+ Starts New Relic data collection and optionally reports data to New Relic over unencrypted HTTP.
 
  Call this at the beginning of your UIApplicationDelegate's application:didFinishLaunchingWithOptions: method.
  You can find your App Token in the Settings tab of your mobile app on https://rpm.newrelic.com/
@@ -119,6 +124,8 @@ extern "C" {
  */
 + (void)startWithApplicationToken:(NSString*)appToken withoutSecurity:(BOOL)disableSSL;
 
+
+#pragma mark - Custom instrumentation
 
 /*!
  Create and start a timer object.
@@ -224,7 +231,7 @@ extern "C" {
  *      The interaction will record all instrumented methods until a timeout
  *      occurs, or stopCurrentInteraction is called.
  *
- *      TODO: link to Interaction Traces documentation.
+ *      https://docs.newrelic.com/docs/mobile-monitoring/mobile-sdk-api/new-relic-mobile-sdk-api/working-ios-sdk-api#interactions
  *
  * Note:
  *     - NR_START_NAMED_INTERACTION(NSString* name) is a helper
@@ -339,7 +346,7 @@ extern "C" {
 
 
 
-
+#pragma mark - Recording custom metrics
 
 /************************/
 /**      Metrics       **/
@@ -532,6 +539,7 @@ extern "C" {
 
 
 
+#pragma mark - Recording custom network events
 
 /*********************************/
 /**      Network Requests       **/
@@ -610,6 +618,111 @@ extern "C" {
 + (void)noticeNetworkFailureForURL:(NSURL *)url
                          withTimer:(NRTimer *)timer
                     andFailureCode:(NSInteger)iOSFailureCode __attribute__((deprecated));
+
+
+
+#pragma mark - Recording custom events
+
+/*!
+ Records a event.
+ @param name a name for the event. This will be stored in the 'category' attribute of Mobile events in New Relic Insights.
+ @param attributes A NSDictionary of attributes associated with the event. Attributes should have NSString keys and NSString or NSNumber values.
+ @return YES if successfully added event, NO if failed with error in log.
+ 
+ @note Events are transmitted at the end of the application session. Each event will include all global attributes defined at the end of the session.
+   If a session runs for more than `maxEventBufferTime` seconds, events will be transmitted mid-session and include all global attributes defined at the time of transmission.
+ */
++ (BOOL) recordEvent:(NSString*)name
+          attributes:(NSDictionary*)attributes;
+
+
+#pragma mark - Configuring event collection
+
+/*!
+ Change the maximum length of time before the SDK sends queued events to New Relic.
+ 
+ @param seconds The number of seconds to wait before sending any events to New Relic.
+ 
+ The default timeout before sending events is 600 seconds (10 minutes). If the user 
+ keeps your app open for longer than that, any stored events will be transmitted and the timer resets. 
+ 
+ @note events transmitted before the end of session will not have a `sessionDuration` attribute.
+ */
++ (void) setMaxEventBufferTime:(unsigned int)seconds;
+
+
+/*!
+ Change the maximum number of events that will be stored in memory.
+ 
+ @param size the maximum number of events to store in memory
+ 
+ By default the SDK will store up to 1000 events in memory. If more events are
+  recorded before `maxEventBufferTime` seconds elapse, events are sampled using 
+  a Reservoir Sampling algorithm. http://en.wikipedia.org/wiki/Reservoir_sampling
+ If `maxEventBufferTime` seconds elapse, the existing event buffer will be transmitted and then emptied.
+ */
++ (void) setMaxEventPoolSize:(unsigned int)size;
+
+
+#pragma mark - Tracking global attributes
+
+/*!
+ Records an attribute that will be added to all events in this app install.
+ Attributes are maintained across sessions and endure until removed or modified.
+ 
+  @param name The name of the attribute
+  @param value The value associated with the attribute; either an NSString* or NSNumber*
+  @return YES if successfully set attribute value, NO if failed with error in log.
+ 
+  @note The SDK limits you to storing 64 named attributes. Adding more than 64 will fail and return NO.
+ */
+
++ (BOOL) setAttribute:(NSString*)name
+                value:(id) value;
+
+/*!
+ Increments the value of the named attribute by 1.
+ 
+ @param name The name of the attribute
+ @return YES if successfully modified attribute value, NO if failed with error in log.
+ 
+ @note This method will create an attribute with value 1 if the attribute does not exist. 
+ @note Calling incrementAttribute on an attribute with a NSString* value is an error and will not alter the value of the attribute.
+ */
++ (BOOL) incrementAttribute:(NSString*)name;
+
+/*!
+ Increments the value of the named attribute by the supplied amount.
+ 
+ @param name The name of the attribute
+ @param amount Numeric value to add to the attribute
+ @return YES if successfully modified attribute value, NO if failed with error in log.
+ 
+ @note This method will create an attribute with value 'amount' if the attribute does not exist.
+ @note Calling incrementAttribute on an attribute with a NSString* value is an error and will not alter the value of the attribute.
+ */
++ (BOOL) incrementAttribute:(NSString*)name
+                      value:(NSNumber*)amount;
+
+
+/*!
+ Removes the named attribute.
+ 
+ @param name The name of the attribute to remove
+ @return YES if successfully removed attribute, NO if failed with error in log.
+ 
+ @note removing an attribute will remove it from all events that have been recorded but not yet sent to New Relic's server.
+ */
++ (BOOL) removeAttribute:(NSString*)name;
+
+/*!
+ Removes all defined attributes.
+ 
+ @return YES if successfully removed attributes, NO if failed with error in log.
+ 
+ @note removing attributes will remove them from all events that have been recorded but not yet sent to New Relic's server.
+ */
++ (BOOL) removeAllAttributes;
 
 
 

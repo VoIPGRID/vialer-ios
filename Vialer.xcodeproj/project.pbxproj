@@ -26,6 +26,7 @@
 		EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */; };
 		EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */; };
 		EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */; };
+		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F25B390F1B08EEA8005ED515 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */; };
 		F25B39101B08EEA8005ED515 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B38FF1B08EEA8005ED515 /* AFHTTPRequestOperationManager.m */; };
 		F25B39111B08EEA8005ED515 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B39011B08EEA8005ED515 /* AFHTTPSessionManager.m */; };
@@ -36,6 +37,7 @@
 		F25B39161B08EEA8005ED515 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390C1B08EEA8005ED515 /* AFURLResponseSerialization.m */; };
 		F25B39171B08EEA8005ED515 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		F2D36CF21B1C390D00D2894F /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */; };
 		FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0716C919A4DAA800AB548D /* PBWebViewController.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB10B11C1ABC18310074BB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
@@ -83,7 +85,6 @@
 		FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB576B12182A802200C4FAB4 /* RecentsViewController.xib */; };
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
 		FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
-		FB5EBF121A8E131600B6BD9D /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */; };
 		FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
 		FB6B47711ABC190700B0DBC4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */; };
@@ -196,6 +197,7 @@
 		EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		EA46C5121AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F25B38FC1B08EEA8005ED515 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F25B38FE1B08EEA8005ED515 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		F25B390D1B08EEA8005ED515 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB0716C819A4DAA800AB548D /* PBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBWebViewController.h; sourceTree = "<group>"; };
 		FB0716C919A4DAA800AB548D /* PBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBWebViewController.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
@@ -300,7 +303,6 @@
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
 		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
-		FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedNumberPadViewController.h; sourceTree = "<group>"; };
 		FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedNumberPadViewController.m; sourceTree = "<group>"; };
 		FB64313F182281C500E1BF17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -401,6 +403,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
 				F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */,
 				FB6B47DE1ABC277600B0DBC4 /* AdSupport.framework in Frameworks */,
@@ -412,13 +415,13 @@
 				FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */,
 				FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */,
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
-				FB5EBF121A8E131600B6BD9D /* NewRelicAgent.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
 				FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */,
 				FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
 				FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */,
+				F2D36CF21B1C390D00D2894F /* NewRelicAgent.framework in Frameworks */,
 				FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */,
 				FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */,
 				FB643140182281C500E1BF17 /* Security.framework in Frameworks */,
@@ -663,6 +666,8 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F21077EA1B1C398D003C8109 /* libc++.dylib */,
+				F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */,
 				F25B39181B08EF43005ED515 /* MobileCoreServices.framework */,
 				FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
@@ -676,7 +681,6 @@
 				FB3820D51A1E50F10033FF78 /* AVFoundation.framework */,
 				FB3820D31A1E50E30033FF78 /* CoreAudio.framework */,
 				FB3820D11A1E50D60033FF78 /* CFNetwork.framework */,
-				FB5EBF111A8E131600B6BD9D /* NewRelicAgent.framework */,
 				FB853165183986A5008A7EF1 /* AudioToolbox.framework */,
 				FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */,
 				FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */,
