@@ -61,10 +61,26 @@
     [self.forgotPasswordView.emailTextfield resignFirstResponder];
 }
 
+/**
+ * clears all text field contents from all views
+ */
+- (void)clearAllTextFields {
+    self.loginFormView.usernameField.text = nil;
+    self.loginFormView.passwordField.text = nil;
+    self.configureFormView.phoneNumberField.text = nil;
+    self.configureFormView.outgoingNumberField.text = nil;
+    self.forgotPasswordView.emailTextfield.text = nil;
+}
+
 #pragma mark - UIView lifecycle methods.
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self clearAllTextFields];
 }
 
 /* 
@@ -89,7 +105,6 @@
         self.loginFormView.loginButton.enabled = YES;
     else
         self.loginFormView.loginButton.enabled = NO;
-
 
     
     // Set type to emailAddress for e-mail field for forgot password steps
@@ -149,11 +164,9 @@
             return NO;
         }
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
-        NSString *mobileNumber = textField.text;
-        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         
         [textField resignFirstResponder];
+        [self.configureFormView.outgoingNumberField becomeFirstResponder];
         return YES;
     } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
         [self continueFromConfigureFormViewToUnlockView];
@@ -227,6 +240,10 @@
 }
 
 - (void)continueFromConfigureFormViewToUnlockView {
+    [[NSUserDefaults standardUserDefaults] setObject:self.configureFormView.phoneNumberField.text forKey:@"MobileNumber"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.configureFormView.phoneNumberField resignFirstResponder];
     [self.configureFormView.outgoingNumberField resignFirstResponder];
     [self animateConfigureViewToVisible:0.f]; // Hide
     [self animateUnlockViewToVisible:1.f];    // Show
@@ -331,6 +348,7 @@
 - (IBAction)openForgotPassword:(id)sender {
     [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
+    self.forgotPasswordView.emailTextfield.text = nil;
 
     [self animateLoginViewToVisible:0.f];
     [self animateForgotPasswordViewToVisible:1.f];

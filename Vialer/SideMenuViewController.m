@@ -56,6 +56,10 @@
 }
 
 #pragma mark - Table view data source
+- (void)viewWillAppear:(BOOL)animated {
+    //Force a reload of the data to display the proper phone number. Otherwise an old phone number could be displayed if it was changed.
+    [self.tableView reloadData];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.menuItems count];
