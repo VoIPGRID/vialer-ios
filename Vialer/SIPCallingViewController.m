@@ -189,6 +189,27 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     });
 }
 
+- (void)AudioInterruption:(NSNotification *)notification {
+    //Check the type of notification, especially if you are sending multiple AVAudioSession events here
+    if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
+        
+        //Check to see if it was a Begin interruption
+        if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
+            NSLog(@"Interruption began!");
+            pjsua_set_no_snd_dev();
+            
+        } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
+            NSLog(@"Interruption ended!");
+            //Resume your audio
+            int capture_dev, playback_dev;
+            pjsua_get_snd_dev(&capture_dev, &playback_dev);
+            pjsua_set_snd_dev(capture_dev, playback_dev);
+        }
+    }
+}
+
+
+
 - (void)hangup {
     if (self.currentCall) {
         if (self.currentCall.status == GSCallStatusConnected) {
@@ -259,27 +280,35 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 - (void)callStatusDidChange {
     switch (self.currentCall.status) {
         case GSCallStatusReady: {
+            NSLog(@"Call status changed: Ready");
             self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
         } break;
 
         case GSCallStatusConnecting: {
+            NSLog(@"Call status changed: Connecting...");
             [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
         } break;
 
         case GSCallStatusCalling: {
+            NSLog(@"Call status changed: Calling");
         } break;
 
         case GSCallStatusConnected: {
+            NSLog(@"Call status changed: Connected");
             self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = YES;
-
+            
+            //Register for the audio interruption notification to be able to restore the sip audio session after an interruption (incomming call/alarm....)
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AudioInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
+            
             [self startTickerTimer];
-
             [[NSNotificationCenter defaultCenter] postNotificationName:SIPCallStartedNotification object:self.currentCall];
         } break;
 
         case GSCallStatusDisconnected: {
+            NSLog(@"Call status changed: Disconnected");
             self.numbersButton.enabled = self.pauseButton.enabled = self.muteButton.enabled = self.speakerButton.enabled = NO;
-
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionInterruptionNotification object:nil];
+            
             [self stopTickerTimer];
 
             [self showErrorWithStatus:NSLocalizedString(@"Call ended", nil)];

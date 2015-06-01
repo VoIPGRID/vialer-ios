@@ -69,7 +69,7 @@
         
         self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.frame), 40.0)];
         self.searchBar.delegate = self;
-        self.searchBar.placeholder = @"Zoeken";
+        self.searchBar.placeholder = NSLocalizedString(@"Search", nil);
         self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
         self.tableView.tableHeaderView = self.searchBar;
        
