@@ -46,6 +46,12 @@
 			<integer>126</integer>
 			<integer>58</integer>
 		</array>
+        <key>SearchBar</key>
+        <array>
+            <integer>178</integer>
+            <integer>177</integer>
+            <integer>184</integer>
+        </array>
 	</dict>
 	<key>URLS</key>
 	<dict>

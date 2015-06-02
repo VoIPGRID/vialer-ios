@@ -37,6 +37,9 @@
 		F25B39161B08EEA8005ED515 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390C1B08EEA8005ED515 /* AFURLResponseSerialization.m */; };
 		F25B39171B08EEA8005ED515 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		F2900B4F1B1DD34C00E695FB /* HTCopyableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B4E1B1DD34C00E695FB /* HTCopyableLabel.m */; };
+		F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */; };
+		F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B531B1DD36000E695FB /* ContactTableViewCell.m */; };
 		F2D36CF21B1C390D00D2894F /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */; };
 		FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0716C919A4DAA800AB548D /* PBWebViewController.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
@@ -218,6 +221,12 @@
 		F25B390D1B08EEA8005ED515 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F2900B4D1B1DD34C00E695FB /* HTCopyableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCopyableLabel.h; sourceTree = "<group>"; };
+		F2900B4E1B1DD34C00E695FB /* HTCopyableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCopyableLabel.m; sourceTree = "<group>"; };
+		F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsSearchTableViewController.h; sourceTree = "<group>"; };
+		F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsSearchTableViewController.m; sourceTree = "<group>"; };
+		F2900B521B1DD36000E695FB /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		F2900B531B1DD36000E695FB /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		FB0716C819A4DAA800AB548D /* PBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBWebViewController.h; sourceTree = "<group>"; };
 		FB0716C919A4DAA800AB548D /* PBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBWebViewController.m; sourceTree = "<group>"; };
@@ -518,6 +527,7 @@
 		EA46C5181AC2CCA100F7FC13 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				F2900B4C1B1DD33700E695FB /* HTCopyableLabel */,
 				EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */,
 				FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */,
 				FB3820A31A1E4F510033FF78 /* Gossip */,
@@ -528,6 +538,15 @@
 				FB0CF33218226392002D4281 /* AFNetworking */,
 			);
 			name = Libs;
+			sourceTree = "<group>";
+		};
+		F2900B4C1B1DD33700E695FB /* HTCopyableLabel */ = {
+			isa = PBXGroup;
+			children = (
+				F2900B4D1B1DD34C00E695FB /* HTCopyableLabel.h */,
+				F2900B4E1B1DD34C00E695FB /* HTCopyableLabel.m */,
+			);
+			name = HTCopyableLabel;
 			sourceTree = "<group>";
 		};
 		FB0716C719A4DAA800AB548D /* PBWebViewController */ = {
@@ -719,6 +738,10 @@
 				FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */,
 				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
 				FB302E61182A390E004B7D27 /* ContactsViewController.m */,
+				F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */,
+				F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */,
+				F2900B521B1DD36000E695FB /* ContactTableViewCell.h */,
+				F2900B531B1DD36000E695FB /* ContactTableViewCell.m */,
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
 				FB364D0D18367F0700932D6E /* DialerViewController.m */,
 				FB364D0E18367F0700932D6E /* DialerViewController.xib */,
@@ -1009,6 +1032,7 @@
 			files = (
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
+				F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */,
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
 				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,
 				03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */,
@@ -1053,8 +1077,10 @@
 				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
+				F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */,
+				F2900B4F1B1DD34C00E695FB /* HTCopyableLabel.m in Sources */,
 				FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */,
 				F25B39151B08EEA8005ED515 /* AFURLRequestSerialization.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
