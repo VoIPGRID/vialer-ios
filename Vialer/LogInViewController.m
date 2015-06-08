@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self addObservers];
     
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
@@ -82,7 +82,7 @@
     [self clearAllTextFields];
 }
 
-/*
+/* 
  - Set all keyboard types and return keys for the textFields when the view did appear.
  - Furthermore create login flow through the Return key.
  */
@@ -93,7 +93,7 @@
     //Done in Interface builder[self.loginFormView.usernameField setReturnKeyType:UIReturnKeyNext];
     //to be able/disable the enable the login button
     [self.loginFormView.usernameField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
+
     //Done in Interface builder [self.loginFormView.passwordField setKeyboardType:UIKeyboardTypeDefault];
     //Done in Interface builder[self.loginFormView.passwordField setReturnKeyType:UIReturnKeyGo];
     //to be able/disable the enable the login button
@@ -103,7 +103,7 @@
         self.loginFormView.loginButton.enabled = YES;
     else
         self.loginFormView.loginButton.enabled = NO;
-    
+
     
     // Set type to emailAddress for e-mail field for forgot password steps
     //Done in Interface builder [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
@@ -121,7 +121,7 @@
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
     [self.forgotPasswordView.emailTextfield setDelegate:self];
-    
+
     // Create an animation scenes that transitions to configure view.
     _scene = [[VIAScene alloc] initWithView:self.view];
     
@@ -160,11 +160,11 @@
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
         
         [textField resignFirstResponder];
-        //        [self.configureFormView.outgoingNumberField becomeFirstResponder];
+//        [self.configureFormView.outgoingNumberField becomeFirstResponder];
         return YES;
-        //    } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
-        //        [self continueFromConfigureFormViewToUnlockView];
-        //        return YES;
+//    } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
+//        [self continueFromConfigureFormViewToUnlockView];
+//        return YES;
     } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
         NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
         if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
@@ -226,11 +226,9 @@
 - (void)continueFromLoginFormViewToConfigureFormView {
     NSString *username = self.loginFormView.usernameField.text;
     NSString *password = self.loginFormView.passwordField.text;
-    [self doLoginCheckWithUname:username password:password successBlock:
-     ^{
-         self.configureFormView.outgoingNumberLabel.text = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
-         //[self retrieveOutgoingNumberWithSuccessBlock:nil];
-     }];
+    [self doLoginCheckWithUname:username password:password successBlock:^{
+        [self retrieveOutgoingNumberWithSuccessBlock:nil];
+    }];
     [self deselectAllTextFields:nil];
 }
 
@@ -239,7 +237,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.configureFormView.phoneNumberField resignFirstResponder];
-    //    [self.configureFormView.outgoingNumberField resignFirstResponder];
+//    [self.configureFormView.outgoingNumberField resignFirstResponder];
     [self animateConfigureViewToVisible:0.f]; // Hide
     [self animateUnlockViewToVisible:1.f];    // Show
     [_scene runActThree];                     // Animate the clouds
@@ -260,7 +258,7 @@
     if(!_isKeyboardShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         UIViewAnimationCurve curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        
+
         NSValue *keyboardRect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
         CGFloat keyboardHeight = CGRectGetHeight([keyboardRect CGRectValue]);
         
@@ -344,14 +342,14 @@
     [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
     self.forgotPasswordView.emailTextfield.text = nil;
-    
+
     [self animateLoginViewToVisible:0.f];
     [self animateForgotPasswordViewToVisible:1.f];
 }
 
 - (IBAction)closeButtonPressed:(UIButton *)sender {
     [self.forgotPasswordView.emailTextfield resignFirstResponder];
-    
+
     [self animateForgotPasswordViewToVisible:0.f];
     [self animateLoginViewToVisible:1.f];
 }
@@ -398,49 +396,48 @@
     }];
 }
 
-//Call is unnececary. all account information is loaded with the login call and the VoIPGRIDRequestOperationManager holds the user information in it's ivars.
-//- (void)retrieveOutgoingNumberWithSuccessBlock:(void (^)())success {
-//    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving outgoing number...", nil) maskType:SVProgressHUDMaskTypeGradient];
-//    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        _fetchAccountRetryCount = 0; // Reset the retry count
-//        NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
-//        if (outgoingNumber) {
-//            [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
-//        } else {
-//            [self.configureFormView.outgoingNumberLabel setText:@""];
-//        }
-//        [SVProgressHUD dismiss];
-//        //        [self.configureFormView.outgoingNumberField becomeFirstResponder];
-//        
-//        [self setLockScreenFriendlyNameWithResponse:responseObject];
-//        
-//        //If a success block was provided, execute it
-//        if (success)
-//            success ();
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [SVProgressHUD dismiss];
-//        ++_fetchAccountRetryCount;
-//        if (_fetchAccountRetryCount != 3) { // When we retried 3 times
-//            [self retrieveOutgoingNumberWithSuccessBlock:nil];
-//        } else {
-//            [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
-//            [self.configureFormView.outgoingNumberLabel setText:@"Enter phonenumber manually"];
-//            
-//            [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
-//                               message:NSLocalizedString(@"Error while retreiving your outgoing number, please enter manually", nil)
-//                                 style:UIAlertViewStylePlainTextInput
-//                     cancelButtonTitle:nil
-//                     otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
-//                              tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//                                  //TODO: do something with the entered number
-//                                  NSLog(@"outgoing number = %@", [alertView textFieldAtIndex:0].text);
-//                                  
-//                              }];
-//            
-//        }
-//    }];
-//}
+- (void)retrieveOutgoingNumberWithSuccessBlock:(void (^)())success {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving outgoing number...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        _fetchAccountRetryCount = 0; // Reset the retry count
+        NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+        if (outgoingNumber) {
+            [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
+        } else {
+            [self.configureFormView.outgoingNumberLabel setText:@""];
+        }
+        [SVProgressHUD dismiss];
+//        [self.configureFormView.outgoingNumberField becomeFirstResponder];
+        
+        [self setLockScreenFriendlyNameWithResponse:responseObject];
+        
+        //If a success block was provided, execute it
+        if (success)
+            success ();
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
+        ++_fetchAccountRetryCount;
+        if (_fetchAccountRetryCount != 3) { // When we retried 3 times
+            [self retrieveOutgoingNumberWithSuccessBlock:nil];
+        } else {
+            [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
+            [self.configureFormView.outgoingNumberLabel setText:@"Enter phonenumber manually"];
+            
+            [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
+                               message:NSLocalizedString(@"Error while retreiving your outgoing number, please enter manually", nil)
+                                 style:UIAlertViewStylePlainTextInput
+                     cancelButtonTitle:nil
+                     otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
+                              tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                  //TODO: do something with the entered number
+                                  NSLog(@"outgoing number = %@", [alertView textFieldAtIndex:0].text);
+                                  
+                              }];
+
+        }
+    }];
+}
 
 #pragma mark - Navigation animations
 - (void)animateLoginViewToVisible:(CGFloat)alpha { /* Act one (2) */
