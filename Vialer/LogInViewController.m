@@ -89,14 +89,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.loginFormView.usernameField setKeyboardType:UIKeyboardTypeEmailAddress];
-    [self.loginFormView.usernameField setReturnKeyType:UIReturnKeyNext];
+    //Done in Interface builder [self.loginFormView.usernameField setKeyboardType:UIKeyboardTypeEmailAddress];
+    //Done in Interface builder[self.loginFormView.usernameField setReturnKeyType:UIReturnKeyNext];
     //to be able/disable the enable the login button
     [self.loginFormView.usernameField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    
-    [self.loginFormView.passwordField setKeyboardType:UIKeyboardTypeDefault];
-    [self.loginFormView.passwordField setReturnKeyType:UIReturnKeyGo];
+    //Done in Interface builder [self.loginFormView.passwordField setKeyboardType:UIKeyboardTypeDefault];
+    //Done in Interface builder[self.loginFormView.passwordField setReturnKeyType:UIReturnKeyGo];
     //to be able/disable the enable the login button
     [self.loginFormView.passwordField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
@@ -107,16 +106,16 @@
     
     
     // Set type to emailAddress for e-mail field for forgot password steps
-    [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
-    [self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
+    //Done in Interface builder [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
+    //Done in Interface builder[self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
     
     //to be able/disable the enable the request password button
     [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(forgotPasswordViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     // Set phone number input settings for outgoing and fallback call numbers.
-    [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
-    [self.configureFormView.phoneNumberField setReturnKeyType:UIReturnKeySend];
+    //Done in Interface builder [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    //Done in Interface builder [self.configureFormView.phoneNumberField setReturnKeyType:UIReturnKeySend];
     
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
