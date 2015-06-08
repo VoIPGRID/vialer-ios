@@ -9,7 +9,7 @@
 #import "LogInViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "ConnectionHandler.h"
-
+#import "UIAlertView+Blocks.h"
 #import "SVProgressHUD.h"
 #import "UIView+RoundedStyle.h"
 
@@ -57,7 +57,6 @@
     [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
     [self.configureFormView.phoneNumberField resignFirstResponder];
-    [self.configureFormView.outgoingNumberField resignFirstResponder];
     [self.forgotPasswordView.emailTextfield resignFirstResponder];
 }
 
@@ -68,7 +67,7 @@
     self.loginFormView.usernameField.text = nil;
     self.loginFormView.passwordField.text = nil;
     self.configureFormView.phoneNumberField.text = nil;
-    self.configureFormView.outgoingNumberField.text = nil;
+    self.configureFormView.outgoingNumberLabel.text = nil;
     self.forgotPasswordView.emailTextfield.text = nil;
 }
 
@@ -119,9 +118,6 @@
     [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
     [self.configureFormView.phoneNumberField setReturnKeyType:UIReturnKeySend];
     
-    [self.configureFormView.outgoingNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
-    [self.configureFormView.outgoingNumberField setReturnKeyType:UIReturnKeyGo];
-    
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
@@ -150,8 +146,7 @@
         NSString *username = [self.loginFormView.usernameField text];
         NSString *password = [self.loginFormView.passwordField text];
         if ([username length] > 0 && [password length] > 0) {
-            [self doLoginCheckWithUname:username password:password];
-            [textField resignFirstResponder];
+            [self continueFromLoginFormViewToConfigureFormView];
             return YES;
         } else {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No login data", nil)
@@ -166,11 +161,11 @@
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
         
         [textField resignFirstResponder];
-        [self.configureFormView.outgoingNumberField becomeFirstResponder];
+//        [self.configureFormView.outgoingNumberField becomeFirstResponder];
         return YES;
-    } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
-        [self continueFromConfigureFormViewToUnlockView];
-        return YES;
+//    } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
+//        [self continueFromConfigureFormViewToUnlockView];
+//        return YES;
     } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
         NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
         if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
@@ -192,12 +187,12 @@
     return NO;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    //As soon as the user enters the ConfigureView's outgoing textfield, fetch this number if the field is still empty.
-    if ([self.configureFormView.outgoingNumberField isEqual:textField] && textField.text.length == 0) {
-        [self retrieveOutgoingNumberWithSuccessBlock:nil];
-    }
-}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    //As soon as the user enters the ConfigureView's outgoing textfield, fetch this number if the field is still empty.
+//    if ([self.configureFormView.outgoingNumberField isEqual:textField] && textField.text.length == 0) {
+//        [self retrieveOutgoingNumberWithSuccessBlock:nil];
+//    }
+//}
 
 - (void)loginViewTextFieldDidChange:(UITextField *)textField {
     if (self.loginFormView.usernameField.text.length > 0 && self.loginFormView.passwordField.text.length > 0)
@@ -206,12 +201,9 @@
         self.loginFormView.loginButton.enabled = NO;
 }
 
-//Check have been done to ensure the text fields have data, otherwise the button would not be clickable.
+//Checks have been done to ensure the text fields have data, otherwise the button would not be clickable.
 - (IBAction)loginButtonPushed:(UIButton *)sender {
-    NSString *username = self.loginFormView.usernameField.text;
-    NSString *password = self.loginFormView.passwordField.text;
-    [self doLoginCheckWithUname:username password:password];
-    [self deselectAllTextFields:nil];
+    [self continueFromLoginFormViewToConfigureFormView];
 }
 
 - (void)forgotPasswordViewTextFieldDidChange:(UITextField *)textField {
@@ -229,14 +221,16 @@
 }
 
 - (IBAction)configureViewContinueButtonPressed:(UIButton *)sender {
-    //If the continue button is pressed directly, make the API call to fetch the outgoing number if the field is empty
-    if (self.configureFormView.outgoingNumberField.text.length == 0) {
-        [self retrieveOutgoingNumberWithSuccessBlock:^{
-            [self continueFromConfigureFormViewToUnlockView];
-        }];
-    } else
-        //dont fetch, just continue to the next screen
-        [self continueFromConfigureFormViewToUnlockView];
+    [self continueFromConfigureFormViewToUnlockView];
+}
+
+- (void)continueFromLoginFormViewToConfigureFormView {
+    NSString *username = self.loginFormView.usernameField.text;
+    NSString *password = self.loginFormView.passwordField.text;
+    [self doLoginCheckWithUname:username password:password successBlock:^{
+        [self retrieveOutgoingNumberWithSuccessBlock:nil];
+    }];
+    [self deselectAllTextFields:nil];
 }
 
 - (void)continueFromConfigureFormViewToUnlockView {
@@ -244,7 +238,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.configureFormView.phoneNumberField resignFirstResponder];
-    [self.configureFormView.outgoingNumberField resignFirstResponder];
+//    [self.configureFormView.outgoingNumberField resignFirstResponder];
     [self animateConfigureViewToVisible:0.f]; // Hide
     [self animateUnlockViewToVisible:1.f];    // Show
     [_scene runActThree];                     // Animate the clouds
@@ -375,7 +369,7 @@
     }];
 }
 
-- (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password {
+- (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:username password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
@@ -389,6 +383,10 @@
             
             [[ConnectionHandler sharedConnectionHandler] sipConnect];
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
+            
+            //If a success block was provided, execute it
+            if (success)
+                success ();
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"Make sure you log in with an app account from your phone provider.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
             [alert show];
@@ -399,18 +397,18 @@
     }];
 }
 
-- (void)retrieveOutgoingNumberWithSuccessBlock  :(void (^)())success {
+- (void)retrieveOutgoingNumberWithSuccessBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving outgoing number...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         _fetchAccountRetryCount = 0; // Reset the retry count
         NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
         if (outgoingNumber) {
-            [self.configureFormView.outgoingNumberField setText:outgoingNumber];
+            [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
         } else {
-            [self.configureFormView.outgoingNumberField setText:@""];
+            [self.configureFormView.outgoingNumberLabel setText:@""];
         }
         [SVProgressHUD dismiss];
-        [self.configureFormView.outgoingNumberField becomeFirstResponder];
+//        [self.configureFormView.outgoingNumberField becomeFirstResponder];
         
         [self setLockScreenFriendlyNameWithResponse:responseObject];
         
@@ -424,8 +422,20 @@
         if (_fetchAccountRetryCount != 3) { // When we retried 3 times
             [self retrieveOutgoingNumberWithSuccessBlock:nil];
         } else {
-            [self.configureFormView.outgoingNumberField setUserInteractionEnabled:YES];
-            [self.configureFormView.outgoingNumberField setText:@"Enter phonenumber manually"];
+            [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
+            [self.configureFormView.outgoingNumberLabel setText:@"Enter phonenumber manually"];
+            
+            [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
+                               message:NSLocalizedString(@"Error while retreiving your outgoing number, please enter manually", nil)
+                                 style:UIAlertViewStylePlainTextInput
+                     cancelButtonTitle:nil
+                     otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
+                              tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                  //TODO: do something with the entered number
+                                  NSLog(@"outgoing number = %@", [alertView textFieldAtIndex:0].text);
+                                  
+                              }];
+
         }
     }];
 }

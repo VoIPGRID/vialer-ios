@@ -20,7 +20,6 @@
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
     self.phoneNumberField.delegate = delegate;
-    self.outgoingNumberField.delegate = delegate;
 }
 
 - (void)awakeFromNib {
@@ -28,14 +27,13 @@
     self.titleLable.text = NSLocalizedString(@"Vialer is configuring", nil);
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
     
-    //[self.phoneNumberField setupPlaceHolder:NSLocalizedString(@"phonenumber", nil) labelText:NSLocalizedString(@"mobile_label", nil)];
+    //TODO: put 2 strings below in the localized strings file
+    self.phoneNumberDescriptionField.text = NSLocalizedString(@"This should hold a description about the phonenumber to be entered below", nil);
     self.phoneNumberField.placeholder = NSLocalizedString(@"mobile_label", nil);
     [self.phoneNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
     
-    //[self.outgoingNumberField setupPlaceHolder:NSLocalizedString(@"Automatically fetched", nil) labelText:];
-    self.outgoingNumberField.placeholder = NSLocalizedString(@"Outgoing", nil);
-    [self.outgoingNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
-
+    self.outgoingNumberDescriptionField.text = NSLocalizedString(@"This should hold a brief clarification about the outgoing number below", nil);
+    
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
 }
 
