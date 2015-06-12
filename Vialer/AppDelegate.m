@@ -262,7 +262,8 @@ void HandleExceptions(NSException *exception) {
 
 - (void)showLogin {
     if (!self.loginViewController.presentingViewController) {
-        [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+        // Set animated to NO to prevent a flip to the login/onboarding view.
+        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
     }
 }
 
