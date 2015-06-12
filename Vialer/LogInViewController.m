@@ -37,13 +37,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self addObservers];
+
     
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
     [self.view addGestureRecognizer:tg];
     
     _fetchAccountRetryCount = 0;
     [self.unlockView setupSlider];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self removeObservers];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
@@ -80,6 +86,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self clearAllTextFields];
+    [self addObservers];
 }
 
 /* 
@@ -253,6 +260,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)removeObservers {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
 
 - (void)keyboardWillShow:(NSNotification*)notification {
     if(!_isKeyboardShown) {
