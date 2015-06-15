@@ -27,6 +27,7 @@
 		EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */; };
 		EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
+		F235ED281B2855180028EDBC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F235ED271B2855180028EDBC /* Reachability.m */; };
 		F25B390F1B08EEA8005ED515 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */; };
 		F25B39101B08EEA8005ED515 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B38FF1B08EEA8005ED515 /* AFHTTPRequestOperationManager.m */; };
 		F25B39111B08EEA8005ED515 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B39011B08EEA8005ED515 /* AFHTTPSessionManager.m */; };
@@ -201,6 +202,8 @@
 		EA46C5121AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		F235ED261B2855180028EDBC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		F235ED271B2855180028EDBC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F25B38FC1B08EEA8005ED515 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F25B38FE1B08EEA8005ED515 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -527,6 +530,7 @@
 		EA46C5181AC2CCA100F7FC13 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				F235ED251B2854FD0028EDBC /* Reachability */,
 				F2900B4C1B1DD33700E695FB /* HTCopyableLabel */,
 				EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */,
 				FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */,
@@ -538,6 +542,15 @@
 				FB0CF33218226392002D4281 /* AFNetworking */,
 			);
 			name = Libs;
+			sourceTree = "<group>";
+		};
+		F235ED251B2854FD0028EDBC /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				F235ED261B2855180028EDBC /* Reachability.h */,
+				F235ED271B2855180028EDBC /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		F2900B4C1B1DD33700E695FB /* HTCopyableLabel */ = {
@@ -934,7 +947,7 @@
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
-						DevelopmentTeam = 799N9ZYHX3;
+						DevelopmentTeam = E2Q9UE8HM6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1040,6 +1053,7 @@
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
 				F25B39101B08EEA8005ED515 /* AFHTTPRequestOperationManager.m in Sources */,
+				F235ED281B2855180028EDBC /* Reachability.m in Sources */,
 				F25B39171B08EEA8005ED515 /* AFURLSessionManager.m in Sources */,
 				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,

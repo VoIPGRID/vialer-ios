@@ -58,16 +58,65 @@ static GSCall *lastNotifiedCall;
 }
 
 - (ConnectionStatus)connectionStatus {
-    return (self.isOn4G || self.isOnWiFi) ? ConnectionStatusHigh : ConnectionStatusLow;
+    ConnectionStatus newConnectionStatus = (self.isOn4G || self.isOnWiFi) ? ConnectionStatusHigh : ConnectionStatusLow;
+    NSLog(@"Connection Status changed to: %@", [self connectionStatusToString:newConnectionStatus]);
+    return newConnectionStatus;
+}
+
+- (NSString *)connectionStatusToString:(ConnectionStatus)connectionStatus {
+    NSString *humanReadableConnectionStatusString;
+    switch (connectionStatus) {
+        case ConnectionStatusHigh:
+            humanReadableConnectionStatusString = @"ConnectionStatusHigh";
+            break;
+            
+        case ConnectionStatusLow:
+            humanReadableConnectionStatusString = @"ConnectionStatusLow";
+            break;
+            
+        default:
+            humanReadableConnectionStatusString = [NSString stringWithFormat:@"Unknown ConnectionStatus(%u)",connectionStatus];
+            break;
+    }
+    return humanReadableConnectionStatusString;
 }
 
 - (GSAccountStatus)accountStatus {
     GSAccount *account = [GSUserAgent sharedAgent].account;
-    GSAccountStatus status = GSAccountStatusInvalid;
-    if (account) {
+    GSAccountStatus status = GSAccountStatusOffline; //GSAccountStatusInvalid;
+    if (account)
         status = account.status;
-    }
+    
+    NSLog(@"GS Account Status changed to: %@", [self gsAccountStatusToString:status]);
     return status;
+}
+
+- (NSString *)gsAccountStatusToString:(GSAccountStatus)accountStatus {
+    NSString *humanReadableStatusString;
+    
+    switch (accountStatus) {
+        case GSAccountStatusOffline: ///< Account is offline or no registration has been done.
+            humanReadableStatusString = @"GSAccountStatusOffline";
+            break;
+        case GSAccountStatusInvalid: ///< Gossip has attempted registration but the credentials were invalid.
+            humanReadableStatusString = @"GSAccountStatusInvalid";
+            break;
+        case GSAccountStatusConnecting: ///< Gossip is trying to register the account with the SIP server.
+            humanReadableStatusString = @"GSAccountStatusConnecting";
+            break;
+        case GSAccountStatusConnected: ///< Account has been successfully registered with the SIP server.
+            humanReadableStatusString = @"GSAccountStatusConnected";
+            break;
+        case GSAccountStatusDisconnecting: ///< Account is being unregistered from the SIP server.
+            humanReadableStatusString = @"GSAccountStatusDisconnecting";
+            break;
+            
+        default:
+            humanReadableStatusString = [NSString stringWithFormat:@"Unknown GSAccountStatus (%u)", accountStatus];
+            break;
+    }
+    
+    return humanReadableStatusString;
 }
 
 - (void)start {

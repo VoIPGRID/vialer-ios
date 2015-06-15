@@ -241,6 +241,7 @@
     [self animateConfigureViewToVisible:0.f]; // Hide
     [self animateUnlockViewToVisible:1.f];    // Show
     [_scene runActThree];                     // Animate the clouds
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
 }
 
 #pragma mark Keyboard
@@ -372,25 +373,45 @@
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:username password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
-        // Check if a SIP account
+//        // Check if a SIP account
+//        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
+//            [self animateLoginViewToVisible:0.f];     // Hide
+//            [self animateConfigureViewToVisible:1.f]; // Show
+//            [_scene runActTwo];                       // Animate the clouds
+//            
+//            //NSLog(@"Response object: %@", operation.responseString);
+//            
+//            [[ConnectionHandler sharedConnectionHandler] sipConnect];
+//            
+//            //If a success block was provided, execute it
+//            if (success)
+//                success ();
+//        } else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"Make sure you log in with an app account from your phone provider.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+//            [alert show];
+//            self.alertShown = YES;
+//        }
+        
+        
+        //Check if a SIP account is configured to be used with the App. The app should default the the Connect A/B behaviour simular to the old App.
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
-            [self animateLoginViewToVisible:0.f];     // Hide
-            [self animateConfigureViewToVisible:1.f]; // Show
-            [_scene runActTwo];                       // Animate the clouds
-            
-            NSLog(@"Response object: %@", operation.responseString);
-            
             [[ConnectionHandler sharedConnectionHandler] sipConnect];
-            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
-            
-            //If a success block was provided, execute it
-            if (success)
-                success ();
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"Make sure you log in with an app account from your phone provider.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-            [alert show];
-            self.alertShown = YES;
+            [UIAlertView showWithTitle:@"No SIP account" message:@"No Mobile app VoIP account configured, only Connect A/B functionality provided." cancelButtonTitle:@"OK" otherButtonTitles:nil tapBlock:nil];
+            //Just to make sure no sip connection is registered
+            [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
         }
+        NSLog(@"Response object: %@", operation.responseObject);
+        [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
+        
+        [self animateLoginViewToVisible:0.f];     // Hide
+        [self animateConfigureViewToVisible:1.f]; // Show
+        [_scene runActTwo];                       // Animate the clouds
+        
+        //If a success block was provided, execute it
+        if (success)
+            success ();
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
     }];

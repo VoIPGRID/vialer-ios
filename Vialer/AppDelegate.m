@@ -62,6 +62,7 @@
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 #endif
 
+
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [[ConnectionHandler sharedConnectionHandler] start];
 
@@ -119,6 +120,7 @@
     
     [self.window makeKeyAndVisible];
 
+    //TODO: Why not login again. What if the user was deactivated on the platform?
     if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
             if (!granted) {

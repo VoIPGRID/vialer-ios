@@ -12,6 +12,7 @@
 #import "AnimatedNumberPadViewController.h"
 #import "SIPCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import "AFNetworkReachabilityManager.h"
 
@@ -20,9 +21,12 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCall.h>
 
+#import "Reachability.h"
+
 @interface DialerViewController ()
 @property (nonatomic, strong) CTCallCenter *callCenter;
 @property (nonatomic, strong) AnimatedNumberPadViewController *numberPadViewController;
+@property (nonatomic, strong) Reachability *reachabilityManager;
 @end
 
 @implementation DialerViewController
@@ -50,13 +54,46 @@
             });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
+        
+        [self.reachabilityManager startNotifier];
     }
     return self;
 }
 
+-(void)dealloc {
+    [self.reachabilityManager stopNotifier];
+}
+
+- (Reachability *)reachabilityManager{
+    if (!_reachabilityManager) {
+        _reachabilityManager = [Reachability reachabilityForInternetConnection];
+        // Set the blocks
+        __weak typeof(self) weakSelf = self;
+        _reachabilityManager.reachableBlock = ^(Reachability*reach) {
+            // keep in mind this is called on a background thread
+            // and if you are updating the UI it needs to happen
+            // on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"REACHABLE!");
+                    [weakSelf connectionStatusChangedNotification:nil];
+                });
+            });
+        };
+        
+        _reachabilityManager.unreachableBlock = ^(Reachability*reach) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"UNREACHABLE!");
+                [weakSelf connectionStatusChangedNotification:nil];
+            });
+        };
+    }
+    return _reachabilityManager;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    //TODO: what about de-registering for these notifications in, for instance, -viewDidUnload
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
@@ -84,19 +121,58 @@
     // Dispose of any resources that can be recreated.
 }
 
+//We need a way to distinquish between
+// - no internet at all
+// - internet below wifi/4g -> connect A/B only
+// - A user who has no Mobile app VoIP account
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
-    GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
-    if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
+#warning test this logic
+    NSLog(@"User: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].user);
+    NSLog(@"SIP: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount);
+    NSLog(@"SIP Password: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipPassword);
+   //0502110064
+    //Function is called when inet connection is interrupted... but not always
+    
+    if ([self.reachabilityManager isReachable]) {
+    //we have internets!!
+        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
+        self.callButton.enabled = YES;
+        
+        //does the user have a sip account?
+        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
+            //Is the connection quality sufficient for SIP?
+            if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
+                [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+                [self.statusLabel setHidden:YES];
+            } else {
+                self.statusLabel.text = NSLocalizedString(@"Poor internet connection Connect A/B", nil);
+                [self.statusLabel setHidden:NO];
+            }
+        } else {
+            self.statusLabel.text = NSLocalizedString(@"Connect A/B calls only", nil);
+            [self.statusLabel setHidden:NO];
+        }
+    } else {
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
         self.callButton.enabled = NO;
-
+        
+        self.statusLabel.text = NSLocalizedString(@"No Connection", nil);
         [self.statusLabel setHidden:NO];
-    } else {
-        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
-        self.callButton.enabled = [self.numberTextView.text length] > 0;
-
-        [self.statusLabel setHidden:YES];
     }
+    
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
+//    if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
+//        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
+//        self.callButton.enabled = NO;
+//        
+//        [self.statusLabel setHidden:NO];
+//    } else {
+//        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
+//        self.callButton.enabled = [self.numberTextView.text length] > 0;
+//        
+//        [self.statusLabel setHidden:YES];
+//    }
 }
 
 - (void)sipCallStartedNotification:(NSNotification *)notification {
