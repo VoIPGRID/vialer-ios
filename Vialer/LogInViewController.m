@@ -165,20 +165,15 @@
             return NO;
         }
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
-        
         [textField resignFirstResponder];
-//        [self.configureFormView.outgoingNumberField becomeFirstResponder];
         return YES;
-//    } else if ([self.configureFormView.outgoingNumberField isEqual:textField]) {
-//        [self continueFromConfigureFormViewToUnlockView];
-//        return YES;
     } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
         NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
         if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
              evaluateWithObject:textField.text]) {
             [self resetPasswordWithEmail:textField.text];
-            [self animateForgotPasswordViewToVisible:0.f];
-            [self animateLoginViewToVisible:1.f];
+            [self animateForgotPasswordViewToVisible:0.f delay:0.8];
+            [self animateLoginViewToVisible:1.f delay:0.f];
             return YES;
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil)
@@ -192,13 +187,6 @@
     }
     return NO;
 }
-
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    //As soon as the user enters the ConfigureView's outgoing textfield, fetch this number if the field is still empty.
-//    if ([self.configureFormView.outgoingNumberField isEqual:textField] && textField.text.length == 0) {
-//        [self retrieveOutgoingNumberWithSuccessBlock:nil];
-//    }
-//}
 
 - (void)loginViewTextFieldDidChange:(UITextField *)textField {
     if (self.loginFormView.usernameField.text.length > 0 && self.loginFormView.passwordField.text.length > 0)
@@ -244,9 +232,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.configureFormView.phoneNumberField resignFirstResponder];
-//    [self.configureFormView.outgoingNumberField resignFirstResponder];
-    [self animateConfigureViewToVisible:0.f]; // Hide
-    [self animateUnlockViewToVisible:1.f];    // Show
+    [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
+    [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
     [_scene runActThree];                     // Animate the clouds
 }
 
@@ -339,12 +326,12 @@
     void (^logoAnimations)(void) = ^{
         [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
     };
-    [UIView animateWithDuration:2.4 animations:logoAnimations];
+    [UIView animateWithDuration:2.2 animations:logoAnimations];
     
     [_scene runActOne];
     
     void (^loginAnimations)(void) = ^{
-        [self animateLoginViewToVisible:1.f];
+        [self animateLoginViewToVisible:1.f delay:1.f];
     };
     [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:loginAnimations completion:nil];
 }
@@ -354,15 +341,15 @@
     [self.loginFormView.passwordField resignFirstResponder];
     self.forgotPasswordView.emailTextfield.text = nil;
 
-    [self animateLoginViewToVisible:0.f];
-    [self animateForgotPasswordViewToVisible:1.f];
+    [self animateLoginViewToVisible:0.f delay:0.f];
+    [self animateForgotPasswordViewToVisible:1.f delay:2.f];
 }
 
 - (IBAction)closeButtonPressed:(UIButton *)sender {
     [self.forgotPasswordView.emailTextfield resignFirstResponder];
 
-    [self animateForgotPasswordViewToVisible:0.f];
-    [self animateLoginViewToVisible:1.f];
+    [self animateForgotPasswordViewToVisible:0.f delay:0.f];
+    [self animateLoginViewToVisible:1.f delay:1.5f];
 }
 
 - (void)resetPasswordWithEmail:(NSString*)email {
@@ -370,12 +357,12 @@
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:email success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
         
-        [self animateLoginViewToVisible:1.f];
-        [self animateForgotPasswordViewToVisible:0.f];
+        [self animateLoginViewToVisible:1.f delay:1.f];
+        [self animateForgotPasswordViewToVisible:0.f delay:0.8f];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
-        [self animateLoginViewToVisible:1.f];
-        [self animateForgotPasswordViewToVisible:0.f];
+        [self animateLoginViewToVisible:1.f delay:0.8f];
+        [self animateForgotPasswordViewToVisible:0.f delay:0.8];
     }];
 }
 
@@ -385,8 +372,8 @@
         [SVProgressHUD dismiss];
         // Check if a SIP account
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
-            [self animateLoginViewToVisible:0.f];     // Hide
-            [self animateConfigureViewToVisible:1.f]; // Show
+            [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
+            [self animateConfigureViewToVisible:1.f delay:1.5f]; // Show
             [_scene runActTwo];                       // Animate the clouds
             
             NSLog(@"Response object: %@", operation.responseString);
@@ -418,13 +405,13 @@
             [self.configureFormView.outgoingNumberLabel setText:@""];
         }
         [SVProgressHUD dismiss];
-//        [self.configureFormView.outgoingNumberField becomeFirstResponder];
         
         [self setLockScreenFriendlyNameWithResponse:responseObject];
         
         //If a success block was provided, execute it
-        if (success)
+        if (success) {
             success ();
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
@@ -451,7 +438,7 @@
 }
 
 #pragma mark - Navigation animations
-- (void)animateLoginViewToVisible:(CGFloat)alpha { /* Act one (2) */
+- (void)animateLoginViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act one (2) */
     void(^animations)(void) = ^{
         [self.loginFormView setAlpha:alpha];
     };
@@ -463,13 +450,13 @@
         }
     };
     [UIView animateWithDuration:2.2f
-                          delay:0.8f
+                          delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:completion];
 }
 
-- (void)animateForgotPasswordViewToVisible:(CGFloat)alpha {
+- (void)animateForgotPasswordViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
     void(^animations)(void) = ^{
         [self.closeButton setAlpha:alpha];
         [self.forgotPasswordView setAlpha:alpha];
@@ -482,13 +469,13 @@
         }
     };
     [UIView animateWithDuration:2.2f
-                          delay:0.8f
+                          delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:completion];
 }
 
-- (void)animateConfigureViewToVisible:(CGFloat)alpha { /* Act two */
+- (void)animateConfigureViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act two */
     void(^animations)(void) = ^{
         [self.configureFormView setAlpha:alpha];
     };
@@ -500,19 +487,19 @@
         }
     };
     [UIView animateWithDuration:2.2f
-                          delay:0.8f
+                          delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:completion];
     
 }
 
-- (void)animateUnlockViewToVisible:(CGFloat)alpha { /* act three */
+- (void)animateUnlockViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* act three */
     void(^animations)(void) = ^{
         [self.unlockView setAlpha:alpha];
     };
     [UIView animateWithDuration:2.2f
-                          delay:0.8f
+                          delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:nil];
