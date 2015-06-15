@@ -74,7 +74,7 @@
     SideMenuViewController *sideMenuViewController = [[SideMenuViewController alloc] init];
     
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-    self.loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     self.callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
     self.callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -263,7 +263,7 @@ void HandleExceptions(NSException *exception) {
 - (void)showLogin {
     if (!self.loginViewController.presentingViewController) {
         // Set animated to NO to prevent a flip to the login/onboarding view.
-        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
+        [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
     }
 }
 
