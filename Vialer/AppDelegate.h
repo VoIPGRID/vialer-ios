@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+#import <PushKit/PushKit.h>
+
 @class GSCall;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, PKPushRegistryDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -28,6 +28,7 @@
 #import "MMDrawerController.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <PushKit/PushKit.h>
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
@@ -38,17 +39,31 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (void)registerForNotificationsForApplication:(UIApplication*)application {
+    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
+    voipRegistry.desiredPushTypes = [NSSet setWithArray:@[PKPushTypeVoIP]];
+    voipRegistry.delegate = self;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSLog(@"launchOptions: %@", launchOptions);
+    if (launchOptions != nil) {
+        NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dictionary != nil) {
+            NSLog(@"Launched from push notification: %@", dictionary);
+            return NO;
+        }
+    }
+    
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
     NSAssert(config != nil, @"Config.plist not found!");
-
-    // Google Analytics
-//    [GAI sharedInstance].trackUncaughtExceptions = YES;
-//    [GAI sharedInstance].dispatchInterval = 20;
-//    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
-//    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-//    id<GAITracker>tracker = [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
@@ -62,7 +77,6 @@
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 #endif
 
-
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [[ConnectionHandler sharedConnectionHandler] start];
 
@@ -72,8 +86,10 @@
     // Handler for failed authentications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
     
+    /**
+     * Menu setup including all its viewControllers.
+     */
     SideMenuViewController *sideMenuViewController = [[SideMenuViewController alloc] init];
-    
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
@@ -99,8 +115,9 @@
     UINavigationController *dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
     dialerNavigationController.navigationBar.translucent = NO;
 
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    /**
+     * tab bar setup
+     */
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.tabBar.translucent = NO;
     self.tabBarController.viewControllers = @[ dialerNavigationController, contactsNavigationViewController,recentsNavigationViewController ];
@@ -108,6 +125,9 @@
         self.tabBarController.selectedIndex = 1;    // Contacts
     }
     
+    /**
+     * Left drawer stup.
+     */
     MMDrawerController *drawerController = [[MMDrawerController alloc] initWithCenterViewController:self.tabBarController leftDrawerViewController:sideMenuViewController];
     [drawerController setRestorationIdentifier:@"MMDrawer"];
     [drawerController setMaximumLeftDrawerWidth:222.0];
@@ -116,8 +136,8 @@
     [drawerController setShadowRadius:2.f];
     [drawerController setShadowOpacity:0.5f];
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = drawerController;
-    
     [self.window makeKeyAndVisible];
 
     //TODO: Why not login again. What if the user was deactivated on the platform?
@@ -137,45 +157,105 @@
 
     [[ConnectionHandler sharedConnectionHandler] registerForLocalNotifications];
 
-    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+//    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            [GSAccount reregisterActiveAccounts];
 //        });
-    }];
+//    }];
 
     NSSetUncaughtExceptionHandler(&HandleExceptions);
 
     return YES;
 }
 
+/**
+ *
+ * Begin VOIP PUSH
+ *
+ */
+
+#pragma mark - PKPushRegistray management
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    // present a local notifcation to visually see when we are recieving a VoIP Notification
+    if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertBody = @"VoIP Notification Recieved";
+        localNotification.applicationIconBadgeNumber = 1;
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    } else {
+        /**
+         * TODO: show incoming call view instead of alert.
+         */
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"VoIP Notifications" message:@"Call!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
+    //print out the VoIP token. We will use this to test the nofications.
+    NSString* voipTokenString = [self _deviceTokenStringFromData:credentials.token];
+    NSLog(@"voip token: %@", voipTokenString);
+    
+    /**
+     * TODO:
+     * 1) store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
+     * 2) update backend with the new token if it has changend
+     */
+
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
+    NSLog(@"token invalidated");
+    /**
+     * TODO: unregister the token from backend because it apparently is invalid.
+     */
+}
+
+#pragma mark - token management
+- (NSString*) _deviceTokenStringFromData:(NSData*)deviceToken {
+    NSString* deviceTokenString = [[NSString alloc] initWithData:deviceToken encoding:NSASCIIStringEncoding];
+    return [self _hexadecimalStringForString:deviceTokenString];
+}
+
+- (NSString*) _hexadecimalStringForString:(NSString*)string {
+    NSMutableString* hexadecimalString = [[NSMutableString alloc] init];
+    for(NSUInteger i = 0; i < [string length]; i++) {
+        [hexadecimalString appendFormat:@"%02x", [string characterAtIndex:i]];
+    }
+    return hexadecimalString;
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    //register for voip notifications
+    [self registerForNotificationsForApplication:application];
+    [application registerForRemoteNotifications];
+}
+
+#pragma mark - Exception handling
 void HandleExceptions(NSException *exception) {
     NSLog(@"The app has encountered an unhandled exception: %@", [exception debugDescription]);
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
+#pragma mark - UIApplicationDelegate methods
+- (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
+- (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (void)applicationWillTerminate:(UIApplication *)application {
     // End all active calls when the app is terminated
     for (GSCall *activeCall in [GSCall activeCalls]) {
         [activeCall end];
@@ -183,6 +263,8 @@ void HandleExceptions(NSException *exception) {
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSLog(@"%s: %@", __PRETTY_FUNCTION__, notification.userInfo);
+    
     if (application.applicationState != UIApplicationStateActive) {
         [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
     }
@@ -197,20 +279,8 @@ void HandleExceptions(NSException *exception) {
     }
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-}
-*/
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
-}
-*/
-
+#pragma mark -
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
     if (property == kABPersonPhoneProperty) {
         ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
@@ -260,8 +330,7 @@ void HandleExceptions(NSException *exception) {
     return [self.sipCallingViewController handleSipCall:sipCall];
 }
 
-#pragma mark - Notifications
-
+#pragma mark - Notification actions
 - (void)showLogin {
     if (!self.loginViewController.presentingViewController) {
         // Set animated to NO to prevent a flip to the login/onboarding view.
@@ -274,7 +343,6 @@ void HandleExceptions(NSException *exception) {
 }
 
 #pragma mark - Private Methods
-
 - (void)setupAppearance {
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
     NSAssert(config != nil, @"Config.plist not found!");

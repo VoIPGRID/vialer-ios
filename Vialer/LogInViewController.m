@@ -402,8 +402,8 @@
         NSLog(@"Response object: %@", operation.responseObject);
         [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
         
-        [self animateLoginViewToVisible:0.f];     // Hide
-        [self animateConfigureViewToVisible:1.f]; // Show
+        [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
+        [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
         [_scene runActTwo];                       // Animate the clouds
         
         //If a success block was provided, execute it
