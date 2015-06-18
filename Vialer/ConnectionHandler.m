@@ -278,6 +278,7 @@ static GSCall *lastNotifiedCall;
     if (self.userAgent.status >= GSUserAgentStateConfigured) {
         NSArray *codecs = [self.userAgent arrayOfAvailableCodecs];
         for (GSCodecInfo *codec in codecs) {
+            NSLog(@"%@", codec.codecId);
             if ([codec.codecId isEqual:@"PCMA/8000/1"]) {
                 [codec setPriority:254];
             }

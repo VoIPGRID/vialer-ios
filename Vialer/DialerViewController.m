@@ -141,8 +141,7 @@
         //does the user have a sip account?
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
             //Is the connection quality sufficient for SIP?
-            if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
-                [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+            if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
                 [self.statusLabel setHidden:YES];
             } else {
                 self.statusLabel.text = NSLocalizedString(@"Poor internet connection Connect A/B", nil);
