@@ -24,4 +24,6 @@
 - (void)handlePhoneNumber:(NSString *)phoneNumber;
 - (void)handleSipCall:(GSCall *)sipCall;
 
+- (void)registerForVoIPNotifications;
+
 @end

@@ -19,6 +19,8 @@
 #import "AnimatedImageView.h"
 #import "VIAScene.h"
 
+#import "AppDelegate.h"
+
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
 
@@ -371,26 +373,7 @@
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:username password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
-//        // Check if a SIP account
-//        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
-//            [self animateLoginViewToVisible:0.f];     // Hide
-//            [self animateConfigureViewToVisible:1.f]; // Show
-//            [_scene runActTwo];                       // Animate the clouds
-//            
-//            //NSLog(@"Response object: %@", operation.responseString);
-//            
-//            [[ConnectionHandler sharedConnectionHandler] sipConnect];
-//            
-//            //If a success block was provided, execute it
-//            if (success)
-//                success ();
-//        } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:NSLocalizedString(@"Make sure you log in with an app account from your phone provider.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-//            [alert show];
-//            self.alertShown = YES;
-//        }
-        
-        
+
         //Check if a SIP account is configured to be used with the App. The app should default the the Connect A/B behaviour simular to the old App.
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
             [[ConnectionHandler sharedConnectionHandler] sipConnect];
@@ -399,12 +382,15 @@
             //Just to make sure no sip connection is registered
             [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
         }
-        NSLog(@"Response object: %@", operation.responseObject);
         [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
         
         [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
         [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
         [_scene runActTwo];                       // Animate the clouds
+
+        // When login is successfull: register with incoming call middleware to get notifications when being called
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [delegate registerForVoIPNotifications];
         
         //If a success block was provided, execute it
         if (success)
