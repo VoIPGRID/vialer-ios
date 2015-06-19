@@ -28,7 +28,7 @@
 #import "MMDrawerController.h"
 
 #import <AVFoundation/AVFoundation.h>
-#import <PushKit/PushKit.h>
+#import "PZPushMiddleware.h"
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
@@ -39,7 +39,9 @@
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    PZPushMiddleware *pzPushHandlerMiddleware;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -156,51 +158,13 @@
 }
 
 #pragma mark - VoiP push notifications
-- (void)handleNotificationWithDictionary:(NSDictionary*)payload {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // Connect tot the voys sip service.
-        [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
-    });
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // notify the PZ middleware that we registered and are ready for calls using data from payload.
-        [self updateMiddleWareWithData:payload];
-    });
-}
-
-/**
- * Update a service link from payload with a unique key to register we are ready for incoming calls.
- *
- * @param data dictionary with payload from a notification with all necessary data.
- */
-- (void)updateMiddleWareWithData:(NSDictionary*)data {
-    NSString *link      = data[@"response_api"];
-    NSString *uniqueKey = data[@"unique_key"];
-    
-    if (link && uniqueKey) {
-        [[AFHTTPRequestOperationManager manager] POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Success"); // TODO: should I tell the user something?
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error); //TODO: We should probably tell someone... ?
-        }];
-    } else {
-        NSLog(@"Error! Did not get enough info to notify the middleware!");
-    }
-}
-
-/**
- * Use PushKit to register for VoIP notifications from an external source. Handle the notification receival and registration in self.
- */
 - (void)registerForVoIPNotifications {
-    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
-    voipRegistry.desiredPushTypes = [NSSet setWithArray:@[PKPushTypeVoIP]];
-    voipRegistry.delegate = self;
+    [pzPushHandlerMiddleware registerForVoIPNotifications];
 }
 
 #pragma mark - UIApplication notification delegate
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [self handleNotificationWithDictionary:notification.userInfo];
+    [pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
     
     if (application.applicationState != UIApplicationStateActive) {
         [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
@@ -216,79 +180,31 @@
     }
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    // I (Karsten) have no clue why we're doing this. We are not using these remote notifications.
+    // Don't know if PushKit suffers from removing it...
+    [application registerForRemoteNotifications];
+}
+
 #pragma mark - PKPushRegistray management
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
-    if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-        // present a local notifcation to visually see when we are recieving a VoIP Notification.
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        NSDictionary *payloadDict = [payload dictionaryPayload];
-        NSString *callerId = (payloadDict[@"caller_id"] ? payloadDict[@"caller_id"] : @"Unknown");
-        localNotification.alertBody = [NSString stringWithFormat:@"Incoming call from %@", callerId];
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
-    } else {
-        // If the app is open: try and handle the notification
-        [self handleNotificationWithDictionary:[payload dictionaryPayload]];
-    }
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    NSDictionary *payloadDict = [payload dictionaryPayload];
+    [pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
+                                                               payload:payloadDict];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
-    //print out the VoIP token. We will use this to test the nofications.
-    NSString* voipTokenString = [self _deviceTokenStringFromData:credentials.token];
-    NSLog(@"voip token: %@", voipTokenString);
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
-    
-    if (storedVoipToken == nil || ![voipTokenString isEqualToString:storedVoipToken]) {
-        // store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
-        [defaults setObject:voipTokenString forKey:VOIP_TOKEN_STORAGE_KEY];
-         // update backend with the token
-        NSDictionary *params = @{
-            @"name": [[UIDevice currentDevice] name],
-            @"token": voipTokenString,
-            @"sip_user_id": [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount],
-            @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
-            @"client_version": [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]
-        };
-        
-        void (^success)(AFHTTPRequestOperation*, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Registration successfull!");    // TODO: we should probably tell someone...
-        };
-        void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Registration failed! -> %@", error);    // TODO: we should probably tell someone...
-        };
-        [[AFHTTPRequestOperationManager manager] POST:@"http://peperdock15.peperzaken.nl:8000/api/register-apns-device/"
-                                           parameters:params
-                                              success:success
-                                              failure:failure];
+    if (credentials.token) {
+        [pzPushHandlerMiddleware registerToken:credentials.token];
     }
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
-    NSLog(@"token invalidated");
-    /**
-     * TODO: unregister the token from backend because it apparently is invalid.
-     */
-}
-
-#pragma mark - token management
-- (NSString*) _deviceTokenStringFromData:(NSData*)deviceToken {
-    NSString* deviceTokenString = [[NSString alloc] initWithData:deviceToken encoding:NSASCIIStringEncoding];
-    return [self _hexadecimalStringForString:deviceTokenString];
-}
-
-- (NSString*) _hexadecimalStringForString:(NSString*)string {
-    NSMutableString* hexadecimalString = [[NSMutableString alloc] init];
-    for(NSUInteger i = 0; i < [string length]; i++) {
-        [hexadecimalString appendFormat:@"%02x", [string characterAtIndex:i]];
+    NSData *token = [registry pushTokenForType:type];
+    if (token) {
+        [pzPushHandlerMiddleware unregisterToken:token];
     }
-    return hexadecimalString;
-}
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    //register for voip notifications
-    [application registerForRemoteNotifications];
 }
 
 #pragma mark - Exception handling

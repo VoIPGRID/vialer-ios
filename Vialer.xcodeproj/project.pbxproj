@@ -18,6 +18,7 @@
 		3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
 		3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4787371AEA5FC1002420FA /* VIASlider.m */; };
 		3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
+		3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD6E6F51B32FF070033692B /* PZPushMiddleware.m */; };
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
@@ -183,6 +184,8 @@
 		3D4787371AEA5FC1002420FA /* VIASlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIASlider.m; sourceTree = "<group>"; };
 		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
+		3DD6E6F41B32FF070033692B /* PZPushMiddleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZPushMiddleware.h; sourceTree = "<group>"; };
+		3DD6E6F51B32FF070033692B /* PZPushMiddleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZPushMiddleware.m; sourceTree = "<group>"; };
 		3DE6EAD91AF0CB4800C09935 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
 		3DE6EADA1AF0CB4800C09935 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
 		3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
@@ -579,6 +582,8 @@
 			children = (
 				FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */,
 				FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */,
+				3DD6E6F41B32FF070033692B /* PZPushMiddleware.h */,
+				3DD6E6F51B32FF070033692B /* PZPushMiddleware.m */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -1094,6 +1099,7 @@
 				AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */,
 				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
+				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
 				F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
