@@ -83,8 +83,8 @@
         [self.view addSubview:self.tableView];
         
         _searchTableViewController = [[ContactsSearchTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        NSLog(@"%s: self = %@", __PRETTY_FUNCTION__, NSStringFromCGRect(self.view.frame));
-        NSLog(@"%s: search = %@", __PRETTY_FUNCTION__, NSStringFromCGRect(_searchTableViewController.view.frame));
+        //NSLog(@"%s: self = %@", __PRETTY_FUNCTION__, NSStringFromCGRect(self.view.frame));
+        //NSLog(@"%s: search = %@", __PRETTY_FUNCTION__, NSStringFromCGRect(_searchTableViewController.view.frame));
         
         _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
         _searchController.delegate = self;
@@ -124,7 +124,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     [super viewDidAppear:animated];
     
     [self loadContacts];
@@ -135,9 +135,9 @@
 }
 
 - (void)addContactButtonPressed:(id)sender {
-    NSLog(@"%s sender: %@", __PRETTY_FUNCTION__, sender);
+    //NSLog(@"%s sender: %@", __PRETTY_FUNCTION__, sender);
     [[ContactHandler sharedContactHandler] presentNewPersonViewControllerWithPerson:NULL presentingViewControllerDelegate:self completion:^(ABNewPersonViewController *newPersonView, ABRecordRef person) {
-        NSLog(@"%s newPersonView: %@ person: %@", __PRETTY_FUNCTION__, newPersonView, person);
+        //NSLog(@"%s newPersonView: %@ person: %@", __PRETTY_FUNCTION__, newPersonView, person);
         [self.tableView reloadData];
     }];
 }
@@ -146,12 +146,12 @@
 #pragma mark - ABAddressBook
 
 - (void)loadContacts {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     [self checkAddressBookAccess];
 }
 
 - (void) checkAddressBookAccess {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     // Request authorization to Address Book
     self.addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
@@ -159,7 +159,7 @@
         ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error) {
             if (granted) {
                 // First time access has been granted
-                NSLog(@"%s First time access has been granted", __PRETTY_FUNCTION__);
+                //NSLog(@"%s First time access has been granted", __PRETTY_FUNCTION__);
                 [self loadContactsFromAddressBook:self.addressBook];
             } else {
                 // User denied access
@@ -169,7 +169,7 @@
     }
     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
         // The user has previously given access
-        NSLog(@"%s The user has previously given access", __PRETTY_FUNCTION__);
+        //NSLog(@"%s The user has previously given access", __PRETTY_FUNCTION__);
         [self loadContactsFromAddressBook:self.addressBook];
     }
     else {
@@ -180,7 +180,7 @@
 }
 
 - (void)loadContactsFromAddressBook:(ABAddressBookRef)addressBookRef {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     [self.addressBookContactsSorted removeAllObjects];
     self.addressBookContacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBookRef));
     for (int i = 0; i < [self.addressBookContacts count]; i++) {

@@ -45,7 +45,7 @@
     }
 
     // Return the number of rows in the section.
-    NSLog(@"%s: ResultCount -> %ld", __PRETTY_FUNCTION__, (unsigned long)_searchResults.count);
+    //NSLog(@"%s: ResultCount -> %ld", __PRETTY_FUNCTION__, (unsigned long)_searchResults.count);
     return self.searchResults.count;
 }
 
