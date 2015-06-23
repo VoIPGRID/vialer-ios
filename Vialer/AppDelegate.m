@@ -40,13 +40,13 @@
 @end
 
 @implementation AppDelegate {
-    PZPushMiddleware *pzPushHandlerMiddleware;
+    PZPushMiddleware *_pzPushHandlerMiddleware;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // Create a middleware class
-    pzPushHandlerMiddleware = [PZPushMiddleware new];
+    _pzPushHandlerMiddleware = [PZPushMiddleware new];
     
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
@@ -162,12 +162,12 @@
 
 #pragma mark - VoiP push notifications
 - (void)registerForVoIPNotifications {
-    [pzPushHandlerMiddleware registerForVoIPNotifications];
+    [_pzPushHandlerMiddleware registerForVoIPNotifications];
 }
 
 #pragma mark - UIApplication notification delegate
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
+    [_pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
     
     if (application.applicationState != UIApplicationStateActive) {
         [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
@@ -193,20 +193,20 @@
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     NSDictionary *payloadDict = [payload dictionaryPayload];
-    [pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
+    [_pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
                                                                payload:payloadDict];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
     if (credentials.token) {
-        [pzPushHandlerMiddleware registerToken:credentials.token];
+        [_pzPushHandlerMiddleware registerToken:credentials.token];
     }
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
     NSData *token = [registry pushTokenForType:type];
     if (token) {
-        [pzPushHandlerMiddleware unregisterToken:token];
+        [_pzPushHandlerMiddleware unregisterToken:token];
     }
 }
 
