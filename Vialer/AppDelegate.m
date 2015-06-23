@@ -332,10 +332,9 @@ void HandleExceptions(NSException *exception) {
 
 #pragma mark - Notification actions
 - (void)showLogin {
-    if (!self.loginViewController.presentingViewController) {
+    if (!self.loginViewController.presentingViewController)
         // Set animated to NO to prevent a flip to the login/onboarding view.
         [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
-    }
 }
 
 - (void)loginFailedNotification:(NSNotification *)notification {

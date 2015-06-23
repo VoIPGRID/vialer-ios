@@ -14,13 +14,15 @@
 #import "SVProgressHUD.h"
 #import "InfoCarouselViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "AccountViewController.h"
 
 #define MENU_INDEX_AVAILABILITY     0
 #define MENU_INDEX_STATS            1
 #define MENU_INDEX_ROUTING          2
 #define MENU_INDEX_INFO             3
 #define MENU_INDEX_ACCOUNT          4
-#define MENU_INDEX_AUTOCONNECT      5
+//#define MENU_INDEX_AUTOCONNECT      5
+#define MENU_INDEX_LOGOUT           5
 
 #define WEBVIEW_TARGET_ACCESSIBILITY    0
 #define WEBVIEW_TARGET_DIALPLAN         1
@@ -28,6 +30,7 @@
 
 @interface SideMenuViewController ()
 @property (strong, nonatomic) NSArray *menuItems;
+@property (nonatomic, strong) AccountViewController *accountViewController;
 @end
 
 @implementation SideMenuViewController
@@ -41,15 +44,15 @@
     UIImage *routingIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:tintColor];
     UIImage *infoIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-info"] color:tintColor];
     UIImage *accountIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:tintColor];
-    UIImage *autoconnectIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:tintColor];
+    //UIImage *autoconnectIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:tintColor];
     
     self.menuItems = @[
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Availability", nil) andIcon:availabilityIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Statistics", nil) andIcon:statsIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Routing", nil) andIcon:routingIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Information", nil) andIcon:infoIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:accountIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Autoconnect A/B", nil) andIcon:autoconnectIcon]
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Account", nil) andIcon:accountIcon],
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:nil]
     ];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -73,7 +76,7 @@
     }
     
     cell.menuItem = self.menuItems[indexPath.row];
-    
+
     return cell;
 }
 
@@ -127,8 +130,11 @@
     } else if (indexPath.row == MENU_INDEX_INFO) {
         [self showInfoScreen];
     } else if (indexPath.row == MENU_INDEX_ACCOUNT) {
-        // @TODO Open account screen
+        [self showAccountView];
+    //} else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
         
+    } else if (indexPath.row == MENU_INDEX_LOGOUT) {
+    
         NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedString(@"%@\nis currently logged in.", nil),
                                     [[NSUserDefaults standardUserDefaults] objectForKey:@"User"]];
         
@@ -143,9 +149,14 @@
                                   [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
                               }
                           }];
-    } else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
-        // @TODO Open autoconnect screen
     }
+}
+
+- (AccountViewController *)accountViewController {
+    if (!_accountViewController) {
+        _accountViewController = [[AccountViewController alloc] initWithNibName:@"AccountViewController" bundle:[NSBundle mainBundle]];
+    }
+    return _accountViewController;
 }
 
 #pragma mark - Private Methods
@@ -199,6 +210,13 @@
         NSLog(@"Error %@", [error localizedDescription]);
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", nil), title]];
     }];
+}
+
+- (void)showAccountView {
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.accountViewController];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
+    self.accountViewController.navigationItem.leftBarButtonItem = cancelButton;
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)showInfoScreen {

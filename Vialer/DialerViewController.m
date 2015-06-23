@@ -126,11 +126,6 @@
 // - internet below wifi/4g -> connect A/B only
 // - A user who has no Mobile app VoIP account
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
-#warning test this logic
-    NSLog(@"User: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].user);
-    NSLog(@"SIP: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount);
-    NSLog(@"SIP Password: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipPassword);
-   //0502110064
     //Function is called when inet connection is interrupted... but not always
     
     if ([self.reachabilityManager isReachable]) {
