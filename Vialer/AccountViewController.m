@@ -16,26 +16,8 @@
 
 @implementation AccountViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2; //3 if you want to display logout
-}
 //To enable the logout button,
 //- change number of sections to 3
 //- change LOGOUT_BUTTON_SECTION to 1
@@ -52,6 +34,10 @@
 #define MY_NUMBER_ROW 0
 #define OUTGOING_NUMBER_ROW 1
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2; //3 if you want to display the logout button
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == LOGOUT_BUTTON_SECTION)
         return 1;
@@ -59,13 +45,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"ConfigViewCell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //2 types of cells are used by this tableView
+    static NSString *tableViewCellStyleValue1Identifier = @"UITableViewCellStyleValue1";
+    static NSString *tableViewCellStyleDefault = @"UITableViewCellStyleDefault";
     
-    NSLog(@"User: %@",[VoIPGRIDRequestOperationManager sharedRequestOperationManager].user);
-    
+    UITableViewCell *cell;
+
+    //Specific config according to cell function
     if (indexPath.section == VOIP_ACCOUNT_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == SIP_ACCOUNT_ROW) {
             cell.textLabel.text = NSLocalizedString(@"SIP Account", nil);
             cell.detailTextLabel.text = [VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount;
@@ -73,13 +62,10 @@
             cell.textLabel.text = NSLocalizedString(@"Password", nil);
             cell.detailTextLabel.text = [VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipPassword;
         }
-    } else if (indexPath.section == LOGOUT_BUTTON_SECTION) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.text = NSLocalizedString(@"Logout", nil);
-        cell.textLabel.textColor = [UIColor redColor];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    
+        
     } else if (indexPath.section == NUMBERS_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == MY_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"My Number", nil);
             cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
@@ -89,13 +75,25 @@
             cell.textLabel.text = NSLocalizedString(@"Outgoing Number", nil);
             cell.detailTextLabel.text = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
         }
+        
+    }  else if (indexPath.section == LOGOUT_BUTTON_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleDefault]))
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableViewCellStyleDefault];
+        cell.textLabel.text = NSLocalizedString(@"Logout", nil);
+        cell.textLabel.textColor = [UIColor redColor];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
+    
+    //Common properties for all cells
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    //Only the VOIP_ACCOUNT_SECTION has gets a header.
     if (section == VOIP_ACCOUNT_SECTION)
         return 35;
     return 0;

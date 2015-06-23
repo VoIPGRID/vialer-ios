@@ -15,11 +15,8 @@
 
 @implementation AccountViewFooterView
 
-
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        //NSLog(@"AccountViewFooterView frame: %@", NSStringFromCGRect(frame));
-
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectInset(frame, 10, 8)];
         self.textLabel.text = NSLocalizedString(@"Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available.", nil);
         self.textLabel.textColor = [UIColor darkGrayColor];
@@ -37,15 +34,12 @@
 }
 
 - (void)layoutSubviews {
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
     [super layoutSubviews];
     [self sizeToFit];
     [self.textLabel sizeToFit];
     [self.logoView sizeToFit];
 
-    //NSLog(@"%@", NSStringFromCGSize(self.textLabel.frame.size));
-    self.logoView.center = CGPointMake(self.center.x, self.textLabel.frame.size.height+60);
-    //NSLog(@"LogoView center: %@", NSStringFromCGPoint(self.logoView.center));
+    self.logoView.center = CGPointMake(self.center.x, CGRectGetMaxY(self.textLabel.frame)+60);
 }
 
 @end

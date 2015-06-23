@@ -9,10 +9,6 @@
 #import "EditNumberTableViewController.h"
 #import "CellWithTextField.h"
 
-@interface EditNumberTableViewController ()
-@property (nonatomic,weak)CellWithTextField *numberTextFieldCell;
-@end
-
 @implementation EditNumberTableViewController
 
 - (void)viewDidLoad {
@@ -24,7 +20,6 @@
 }
 
 - (void)saveButtonPressed {
-    //NSLog(@"Save Button Pressed. Number: %@", self.numberTextFieldCell.textField.text);
     [self.delegate numberHasChanged:self.numberTextFieldCell.textField.text];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -48,8 +43,11 @@
     cell.textField.text = self.numberToEdit;
     [cell.textField becomeFirstResponder];
     
-    self.numberTextFieldCell = cell;
     return cell;
+}
+
+- (CellWithTextField *)numberTextFieldCell {
+    return (CellWithTextField *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 @end
