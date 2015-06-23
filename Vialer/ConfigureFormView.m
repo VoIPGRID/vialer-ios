@@ -28,11 +28,11 @@
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
     
     //TODO: put 2 strings below in the localized strings file
-    self.phoneNumberDescriptionField.text = NSLocalizedString(@"This should hold a description about the phonenumber to be entered below", nil);
+    self.phoneNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT", nil);
     self.phoneNumberField.placeholder = NSLocalizedString(@"mobile_label", nil);
     [self.phoneNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
     
-    self.outgoingNumberDescriptionField.text = NSLocalizedString(@"This should hold a brief clarification about the outgoing number below", nil);
+    self.outgoingNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_OUTGOING_DESCRIPTION_TEXT", nil);
     
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
 }
