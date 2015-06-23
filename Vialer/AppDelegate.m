@@ -42,9 +42,7 @@
 
 @end
 
-@implementation AppDelegate {
-    PZPushMiddleware *_pzPushHandlerMiddleware;
-}
+@implementation AppDelegate
 
 - (PZPushMiddleware*)getPzPushMiddleware {
     // Create a middleware class
