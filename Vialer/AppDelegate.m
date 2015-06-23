@@ -44,7 +44,7 @@
 
 @implementation AppDelegate
 
-- (PZPushMiddleware*)getPzPushMiddleware {
+- (PZPushMiddleware*)pzPushHandlerMiddleware {
     // Create a middleware class
     if(!_pzPushHandlerMiddleware) {
         _pzPushHandlerMiddleware = [PZPushMiddleware new];
