@@ -37,17 +37,25 @@
 @property (nonatomic, strong) CallingViewController *callingViewController;
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
+
+@property (nonatomic, strong) PZPushMiddleware *pzPushHandlerMiddleware;
+
 @end
 
 @implementation AppDelegate {
     PZPushMiddleware *_pzPushHandlerMiddleware;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+- (PZPushMiddleware*)getPzPushMiddleware {
     // Create a middleware class
-    _pzPushHandlerMiddleware = [PZPushMiddleware new];
-    
+    if(!_pzPushHandlerMiddleware) {
+        _pzPushHandlerMiddleware = [PZPushMiddleware new];
+    }
+    return _pzPushHandlerMiddleware;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
@@ -162,12 +170,12 @@
 
 #pragma mark - VoiP push notifications
 - (void)registerForVoIPNotifications {
-    [_pzPushHandlerMiddleware registerForVoIPNotifications];
+    [self.pzPushHandlerMiddleware registerForVoIPNotifications];
 }
 
 #pragma mark - UIApplication notification delegate
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [_pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
+    [self.pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
     
     if (application.applicationState != UIApplicationStateActive) {
         [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
@@ -191,22 +199,25 @@
 
 #pragma mark - PKPushRegistray management
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    
+    NSLog(@"%s: received payload -> %@",__PRETTY_FUNCTION__, [payload dictionaryPayload]);
+    
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     NSDictionary *payloadDict = [payload dictionaryPayload];
-    [_pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
+    [self.pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
                                                                payload:payloadDict];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
     if (credentials.token) {
-        [_pzPushHandlerMiddleware registerToken:credentials.token];
+        [self.pzPushHandlerMiddleware registerToken:credentials.token];
     }
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
     NSData *token = [registry pushTokenForType:type];
     if (token) {
-        [_pzPushHandlerMiddleware unregisterToken:token];
+        [self.pzPushHandlerMiddleware unregisterToken:token];
     }
 }
 
