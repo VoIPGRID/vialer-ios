@@ -120,8 +120,6 @@
     NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
 
     if (storedVoipToken == nil || ![voipTokenString isEqualToString:storedVoipToken]) {
-        // store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
-        [defaults setObject:voipTokenString forKey:VOIP_TOKEN_STORAGE_KEY];
          // update middleware with the token
         NSDictionary *params = @{
             // Pretty name for a device in middleware.
@@ -137,6 +135,9 @@
         };
 
         void (^success)(AFHTTPRequestOperation*, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
+            // store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
+            [defaults setObject:voipTokenString forKey:VOIP_TOKEN_STORAGE_KEY];
+
             NSLog(@"Registration successfull!");    // TODO: we should probably tell someone...
         };
         void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
