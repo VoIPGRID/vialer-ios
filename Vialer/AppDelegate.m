@@ -28,34 +28,40 @@
 #import "MMDrawerController.h"
 
 #import <AVFoundation/AVFoundation.h>
-#import <PushKit/PushKit.h>
+#import "PZPushMiddleware.h"
+
+#define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
 @interface AppDelegate()
 @property (nonatomic, strong) LogInViewController *loginViewController;
 @property (nonatomic, strong) CallingViewController *callingViewController;
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
+
+@property (nonatomic, strong) PZPushMiddleware *pzPushHandlerMiddleware;
+
 @end
 
 @implementation AppDelegate
 
-- (void)registerForNotificationsForApplication:(UIApplication*)application {
-    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
-    voipRegistry.desiredPushTypes = [NSSet setWithArray:@[PKPushTypeVoIP]];
-    voipRegistry.delegate = self;
+- (PZPushMiddleware*)pzPushHandlerMiddleware {
+    // Create a middleware class
+    if(!_pzPushHandlerMiddleware) {
+        _pzPushHandlerMiddleware = [PZPushMiddleware new];
+    }
+    return _pzPushHandlerMiddleware;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    NSLog(@"launchOptions: %@", launchOptions);
-    if (launchOptions != nil) {
-        NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (dictionary != nil) {
-            NSLog(@"Launched from push notification: %@", dictionary);
-            return NO;
-        }
+- (void)doRegistrationWithLoginCheck {
+    if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+        [self registerForVoIPNotifications];
     }
-    
+}
+
+#pragma mark - UIApplication delegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   
+    [self doRegistrationWithLoginCheck];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
@@ -126,7 +132,7 @@
     }
     
     /**
-     * Left drawer stup.
+     * Left drawer setup.
      */
     MMDrawerController *drawerController = [[MMDrawerController alloc] initWithCenterViewController:self.tabBarController leftDrawerViewController:sideMenuViewController];
     [drawerController setRestorationIdentifier:@"MMDrawer"];
@@ -168,67 +174,57 @@
     return YES;
 }
 
-/**
- *
- * Begin VOIP PUSH
- *
- */
-
-#pragma mark - PKPushRegistray management
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
-    // present a local notifcation to visually see when we are recieving a VoIP Notification
-    if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.alertBody = @"VoIP Notification Recieved";
-        localNotification.applicationIconBadgeNumber = 1;
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
-    } else {
-        /**
-         * TODO: show incoming call view instead of alert.
-         */
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"VoIP Notifications" message:@"Call!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-    }
+#pragma mark - VoiP push notifications
+- (void)registerForVoIPNotifications {
+    [self.pzPushHandlerMiddleware registerForVoIPNotifications];
 }
-- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
-    //print out the VoIP token. We will use this to test the nofications.
-    NSString* voipTokenString = [self _deviceTokenStringFromData:credentials.token];
-    NSLog(@"voip token: %@", voipTokenString);
+
+#pragma mark - UIApplication notification delegate
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [self.pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
     
-    /**
-     * TODO:
-     * 1) store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
-     * 2) update backend with the new token if it has changend
-     */
-
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
-    NSLog(@"token invalidated");
-    /**
-     * TODO: unregister the token from backend because it apparently is invalid.
-     */
-}
-
-#pragma mark - token management
-- (NSString*) _deviceTokenStringFromData:(NSData*)deviceToken {
-    NSString* deviceTokenString = [[NSString alloc] initWithData:deviceToken encoding:NSASCIIStringEncoding];
-    return [self _hexadecimalStringForString:deviceTokenString];
-}
-
-- (NSString*) _hexadecimalStringForString:(NSString*)string {
-    NSMutableString* hexadecimalString = [[NSMutableString alloc] init];
-    for(NSUInteger i = 0; i < [string length]; i++) {
-        [hexadecimalString appendFormat:@"%02x", [string characterAtIndex:i]];
+    if (application.applicationState != UIApplicationStateActive) {
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
     }
-    return hexadecimalString;
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
+    if (application.applicationState != UIApplicationStateActive) {
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
+        if (completionHandler) {
+            completionHandler();
+        }
+    }
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    //register for voip notifications
-    [self registerForNotificationsForApplication:application];
+    // I (Karsten) have no clue why we're doing this. We are not using these remote notifications.
+    // Don't know if PushKit suffers from removing it...
     [application registerForRemoteNotifications];
+}
+
+#pragma mark - PKPushRegistray management
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    
+    NSLog(@"%s: received payload -> %@",__PRETTY_FUNCTION__, [payload dictionaryPayload]);
+    
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    NSDictionary *payloadDict = [payload dictionaryPayload];
+    [self.pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
+                                                               payload:payloadDict];
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
+    if (credentials.token) {
+        [self.pzPushHandlerMiddleware registerToken:credentials.token];
+    }
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
+    NSData *token = [registry pushTokenForType:type];
+    if (token) {
+        [self.pzPushHandlerMiddleware unregisterToken:token];
+    }
 }
 
 #pragma mark - Exception handling
@@ -249,6 +245,7 @@ void HandleExceptions(NSException *exception) {
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [self doRegistrationWithLoginCheck];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -262,25 +259,7 @@ void HandleExceptions(NSException *exception) {
     }
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    NSLog(@"%s: %@", __PRETTY_FUNCTION__, notification.userInfo);
-    
-    if (application.applicationState != UIApplicationStateActive) {
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
-    }
-}
-
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
-    if (application.applicationState != UIApplicationStateActive) {
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
-        if (completionHandler) {
-            completionHandler();
-        }
-    }
-}
-
-
-#pragma mark -
+#pragma mark - Handle person(s)
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
     if (property == kABPersonPhoneProperty) {
         ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);

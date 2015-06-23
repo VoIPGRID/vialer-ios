@@ -367,7 +367,6 @@ static GSCall *lastNotifiedCall;
 }
 
 #pragma mark - GSAccount delegate
-
 - (void)account:(GSAccount *)account didReceiveIncomingCall:(GSCall *)call {
     NSLog(@"Received incoming call");
     [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:call];
