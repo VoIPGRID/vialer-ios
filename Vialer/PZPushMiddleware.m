@@ -48,11 +48,11 @@
 * @param payload data dictionary containing date to notify the middleware with.
 */
 - (void)handleNotificationWithDictionary:(NSDictionary*)payload {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Connect tot the voys sip service.
         [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
     });
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // notify the PZ middleware that we registered and are ready for calls using data from payload.
         [self updateMiddleWareWithData:payload];
     });
@@ -63,15 +63,55 @@
 * @param payload data for presenting the notification to a user.
 */
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
-    if(state == UIApplicationStateBackground) {
-        // present a local notifcation to visually see when we are recieving a VoIP Notification.
-        [self showLocalNotificationWithPayload:payload];
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // If the app is open: try and handle the notification
-            [self handleNotificationWithDictionary:payload];
-        });
+    
+    NSString *type = payload[@"type"];
+    if ([type isEqualToString:@"call"]) {
+        if(state == UIApplicationStateBackground) {
+            // present a local notifcation to visually see when we are recieving a VoIP Notification.
+            [self showLocalIncomingCallNotificationWithPayload:payload];
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // If the app is open: try and handle the notification
+                [self handleNotificationWithDictionary:payload];
+            });
+        }
+    } else if ([type isEqualToString:@"checkin"]) {
+        [self doDeviceCheckinWithData:payload];
+    } else if ([type isEqualToString:@"message"]) {
+        NSString *message = payload[@"message"];
+        if (state == UIApplicationStateBackground) {
+            [self showLocalUnregisterWarning:message];
+        } else {
+            if (message) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"Warning")
+                                                                    message:message
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                });
+            }
+        }
     }
+}
+
+/**
+* Register your APNS token with the backend as SIP call ready.
+*/
+- (void)doDeviceCheckinWithData:(NSDictionary*)payload {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+    });
+
+    NSString *link = payload[@"response_api"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
+    [_manager POST:link parameters:@{@"token": storedVoipToken}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // TODO: notify user?
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        // TODO: notify user?
+    }];
 }
 
 /**
@@ -79,11 +119,24 @@
 *
 * @param payload dictionary with a callerId and phonenumber to present to a user as the incoming caller.
 */
-- (void)showLocalNotificationWithPayload:(NSDictionary*)payloadDict {
+- (void)showLocalIncomingCallNotificationWithPayload:(NSDictionary*)payloadDict {
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     NSString *callerId = (payloadDict[@"caller_id"] ? payloadDict[@"caller_id"] : @"Unknown");
     localNotification.alertBody = [NSString stringWithFormat:@"Incoming call from %@", callerId];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.userInfo = @{@"type": @"call"};
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+}
+
+/**
+* @param message a string to present as local notification to a user that his/her device
+ is not registered anymore for incoming calls when app runs in background.
+*/
+- (void)showLocalUnregisterWarning:(NSString*)message {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.alertBody = message;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.userInfo = @{@"type": @"message"};
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 
