@@ -56,7 +56,7 @@
         if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == SIP_ACCOUNT_ROW) {
-            cell.textLabel.text = NSLocalizedString(@"SIP Account", nil);
+            cell.textLabel.text = NSLocalizedString(@"SIP account", nil);
             cell.detailTextLabel.text = [VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount;
         } else if (indexPath.row == SIP_PASSWORD_ROW) {
             cell.textLabel.text = NSLocalizedString(@"Password", nil);
@@ -67,12 +67,12 @@
         if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == MY_NUMBER_ROW) {
-            cell.textLabel.text = NSLocalizedString(@"My Number", nil);
+            cell.textLabel.text = NSLocalizedString(@"My number", nil);
             cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
         } else if (indexPath.row == OUTGOING_NUMBER_ROW) {
-            cell.textLabel.text = NSLocalizedString(@"Outgoing Number", nil);
+            cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
             cell.detailTextLabel.text = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
         }
         

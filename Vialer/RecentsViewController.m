@@ -75,6 +75,9 @@
     self.refreshControl = refresh;
 
     [self.tableView addSubview:self.refreshControl];
+    
+    [self.filterSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:0];
+    [self.filterSegmentedControl setTitle:NSLocalizedString(@"Missed", nil) forSegmentAtIndex:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
