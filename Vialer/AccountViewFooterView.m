@@ -18,7 +18,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectInset(frame, 10, 8)];
-        self.textLabel.text = NSLocalizedString(@"Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available.", nil);
+        self.textLabel.text = NSLocalizedString(@"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION", nil);
         self.textLabel.textColor = [UIColor darkGrayColor];
         self.textLabel.font = [UIFont systemFontOfSize:12];
         self.textLabel.numberOfLines = 3;
