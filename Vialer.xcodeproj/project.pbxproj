@@ -265,8 +265,8 @@
 		FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCarouselViewController.h; sourceTree = "<group>"; };
 		FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCarouselViewController.m; sourceTree = "<group>"; };
 		FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoCarouselViewController.xib; sourceTree = "<group>"; };
-		FB29D912189BA0FF00345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FB29D912189BA0FF00345976 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB29D916189BAB0200345976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
 		FB29D918189BAB0600345976 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/Config.plist; sourceTree = "<group>"; };
 		FB302E5C182A38E5004B7D27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -1299,6 +1299,7 @@
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peperzaken (799N9ZYHX3)";
@@ -1334,6 +1335,7 @@
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "475f4d51-14d7-46c9-91f3-6c30a67fe317";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1402,6 +1404,7 @@
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peperzaken (799N9ZYHX3)";
@@ -1437,6 +1440,7 @@
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "475f4d51-14d7-46c9-91f3-6c30a67fe317";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1445,6 +1449,7 @@
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Peperzaken (799N9ZYHX3)";
@@ -1480,6 +1485,7 @@
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "475f4d51-14d7-46c9-91f3-6c30a67fe317";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
