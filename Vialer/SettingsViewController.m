@@ -12,6 +12,8 @@
 #import "SelectRecentsFilterViewController.h"
 #import "WelcomeViewController.h"
 #import "NSString+Mobile.h"
+#import "ConnectionHandler.h"
+#import "UIAlertView+Blocks.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
 #define LOG_OUT_ALERT_TAG 101
@@ -126,7 +128,7 @@
         cell.textLabel.text = NSLocalizedString(@"Log out from this app", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     } else if (indexPath.section == VERSION_IDX) {
-        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
 
@@ -164,7 +166,6 @@
         selectRecentsFilterViewController.delegate = self;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectRecentsFilterViewController];
-        navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
         [self presentViewController:navigationController animated:YES completion:^{}];
     } else if (indexPath.section == LOG_OUT_IDX) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log out", nil) message:NSLocalizedString(@"Are you sure you want to log out?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];

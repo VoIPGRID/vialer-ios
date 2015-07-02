@@ -41,9 +41,9 @@
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     self.descriptionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"From now you can dial out using %@.\nThe number you are calling with is:", nil), appName];
 
-    NSString *outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
-    if ([outgoingNumber isKindOfClass:[NSString class]]) {
-        self.phoneNumberLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
+    NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+    if (outgoingNumber) {
+        self.phoneNumberLabel.text = outgoingNumber;
     } else {
         self.phoneNumberLabel.text = @"";
     }
@@ -59,14 +59,11 @@
     [super viewWillAppear:animated];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
-        if ([outgoingCli isKindOfClass:[NSString class]]) {
-            [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
-            if ([outgoingCli isKindOfClass:[NSString class]]) {
-                self.phoneNumberLabel.text = outgoingCli;
-            } else {
-                self.phoneNumberLabel.text = @"";
-            }
+        NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+        if (outgoingNumber) {
+            self.phoneNumberLabel.text = outgoingNumber;
+        } else {
+            self.phoneNumberLabel.text = @"";
         }
     } failure:nil];
 }

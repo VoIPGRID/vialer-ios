@@ -56,22 +56,34 @@
     return self;
 }
 
+- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [self GET:[phoneAccountUrl stringByReplacingOccurrencesOfString:@"/api/" withString:@""] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(operation, responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
+    }];
+}
+
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
-
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
+    
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
+    //deprecated
+    //NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *client = [responseObject objectForKey:@"client"];
         if (!client) {
             // This is a partner account, don't log in!
             failure(operation, nil);
 
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
             NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
             if ([outgoingCli isKindOfClass:[NSString class]]) {
                 [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
             }
 
             // Store credentials
@@ -81,12 +93,31 @@
 
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
 
-            success(operation, success);
+            // Fetch SIP account credentials
+            NSString *appAccountUrl = [responseObject objectForKey:@"app_account"];
+            if ([appAccountUrl isKindOfClass:[NSString class]]) {
+                [self retrievePhoneAccountForUrl:appAccountUrl success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSObject *account = [responseObject objectForKey:@"account_id"];
+                    NSObject *password = [responseObject objectForKey:@"password"];
+                    if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
+                        [self setSipAccount:[(NSNumber *)account stringValue] andSipPassword:(NSString *)password];
+                    } else {
+                        [self setSipAccount:nil andSipPassword:nil];
+                    }
+                    success(operation, success);
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    [self setSipAccount:nil andSipPassword:nil];
+                    success(operation, success);
+                }];
+            } else {
+                [self setSipAccount:nil andSipPassword:nil];
+                success(operation, success);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
         if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
             [self connectionFailed];
@@ -99,18 +130,32 @@
 
 - (void)logout {
     [self.operationQueue cancelAllOperations];
+    [self.requestSerializer clearAuthorizationHeader];
 
-    NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    // Clear cookies for web view
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
+
+    // Remove sip account if present
+    NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+    if (sipAccount) {
+        [SSKeychain deletePasswordForService:[[self class] serviceName] account:sipAccount error:NULL];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+    }
 
     NSError *error;
-    [SSKeychain deletePasswordForService:[[self class] serviceName] account:user error:&error];
+    NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
 
+    [SSKeychain deletePasswordForService:[[self class] serviceName] account:user error:&error];
     if (error) {
         NSLog(@"Error logging out: %@", [error localizedDescription]);
     }
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"User"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
@@ -118,7 +163,7 @@
 
 + (BOOL)isLoggedIn {
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    return (user != nil) && ([SSKeychain passwordForService:[[self class] serviceName] account:user] != nil);
+    return (user != nil);
 }
 
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
@@ -133,8 +178,14 @@
 }
 
 - (void)userProfileWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
+        if ([outgoingCli isKindOfClass:[NSString class]]) {
+            [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+        }
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
@@ -228,7 +279,7 @@
     // No credentials
     [self logout];
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];
 }
 
@@ -250,8 +301,41 @@
 
         NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL cachePolicy:request.cachePolicy timeoutInterval:request.timeoutInterval];
         [urlRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
-        return  urlRequest;
+        return urlRequest;
     }];
+}
+
+- (void)setSipAccount:(NSString *)sipAccount andSipPassword:(NSString *)sipPassword {
+    if (sipAccount) {
+        [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
+        [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
+        NSLog(@"Setting SIP Account %@", sipAccount);
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+        NSLog(@"No SIP Account");
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)user {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+}
+
+- (NSString *)outgoingNumber {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
+}
+
+- (NSString *)sipAccount {
+    NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+    return sipAccount;
+}
+
+- (NSString *)sipPassword {
+    NSString *sipAccount = [self sipAccount];
+    if (sipAccount) {
+        return [SSKeychain passwordForService:[[self class] serviceName] account:sipAccount];
+    }
+    return nil;
 }
 
 #pragma mark - Alert view delegate

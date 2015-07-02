@@ -8,212 +8,195 @@
 
 #import "DialerViewController.h"
 #import "AppDelegate.h"
+#import "ConnectionHandler.h"
+#import "AnimatedNumberPadViewController.h"
+#import "SIPCallingViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "VoIPGRIDRequestOperationManager.h"
+
+#import "AFNetworkReachabilityManager.h"
 
 #import <AudioToolbox/AudioServices.h>
 #import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCall.h>
 
+#import "Reachability.h"
+
 @interface DialerViewController ()
-@property (nonatomic, strong) NSArray *titles;
-@property (nonatomic, strong) NSArray *subTitles;
-@property (nonatomic, strong) NSArray *sounds;
-@property (nonatomic, strong) NSArray *waves;
 @property (nonatomic, strong) CTCallCenter *callCenter;
+@property (nonatomic, strong) AnimatedNumberPadViewController *numberPadViewController;
+@property (nonatomic, strong) Reachability *reachabilityManager;
 @end
 
 @implementation DialerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Keypad", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"keypad"];
-
-        self.titles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"", @"0", @""];
-        self.subTitles = @[@"", @"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ", @"*", @"+", @"#"];
+        self.tabBarItem.image = [UIImage imageNamed:@"tab-keypad"];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-keypad-active"];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
         
-        NSMutableArray *sounds = [NSMutableArray array];
-        for (NSString *sound in self.titles) {
-            if (!sound.length) {
-                [sounds addObject:@(0)];
-                continue;
-            }
+        // Add hamburger menu on navigation bar
+        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStyleBordered target:self action:@selector(leftDrawerButtonPress:)];
+        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
+        self.navigationItem.leftBarButtonItem = leftDrawerButton;
 
-            NSString *path = [[NSBundle mainBundle] pathForResource:sound ofType:@"wav"];
-            NSURL *fileURL = [NSURL fileURLWithPath:path isDirectory:NO];
-            if (fileURL) {
-                SystemSoundID soundID;
-                OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)fileURL, &soundID);
-                if (error == kAudioServicesNoError) {
-                    [sounds addObject:@(soundID)];
-                } else {
-                    [sounds addObject:@(0)];
-                    NSLog(@"Error (%d) loading sound at path: %@", (int)error, path);
-                }
-            }
-        }
-        self.sounds = sounds;
-        
         __weak typeof(self) weakSelf = self;
         self.callCenter = [[CTCallCenter alloc] init];
         [self.callCenter setCallEventHandler:^(CTCall *call) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.backButton.hidden = YES;
+                weakSelf.callButton.enabled = NO;
                 weakSelf.numberTextView.text = @"";
             });
             NSLog(@"callEventHandler2: %@", call.callState);
         }];
+        
+        [self.reachabilityManager startNotifier];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+-(void)dealloc {
+    [self.reachabilityManager stopNotifier];
+}
+
+- (Reachability *)reachabilityManager{
+    if (!_reachabilityManager) {
+        _reachabilityManager = [Reachability reachabilityForInternetConnection];
+        // Set the blocks
+        __weak typeof(self) weakSelf = self;
+        _reachabilityManager.reachableBlock = ^(Reachability*reach) {
+            // keep in mind this is called on a background thread
+            // and if you are updating the UI it needs to happen
+            // on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"REACHABLE!");
+                    [weakSelf connectionStatusChangedNotification:nil];
+                });
+            });
+        };
+        
+        _reachabilityManager.unreachableBlock = ^(Reachability*reach) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"UNREACHABLE!");
+                [weakSelf connectionStatusChangedNotification:nil];
+            });
+        };
+    }
+    return _reachabilityManager;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self addDialerButtonsToView:self.buttonsView];
-    
+    //TODO: what about de-registering for these notifications in, for instance, -viewDidUnload
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
+
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
+
+    self.numberPadViewController = [[AnimatedNumberPadViewController alloc] init];
+    self.numberPadViewController.view.frame = self.buttonsView.bounds;
+    [self.buttonsView addSubview:self.numberPadViewController.view];
+    [self addChildViewController:self.numberPadViewController];
+    self.numberPadViewController.delegate = self;
+    self.numberPadViewController.tonesEnabled = YES;
+
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonLongPress:)];
     [self.backButton addGestureRecognizer:longPress];
     
     self.backButton.hidden = YES;
+    self.callButton.enabled = NO;
 
-    [self.callButton setTitle:NSLocalizedString(@"Call", nil) forState:UIControlStateNormal];
+    [self connectionStatusChangedNotification:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-
-    CGRect frame = [UIScreen mainScreen].bounds;
-    frame.size.height -= 49.f;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
-        frame.origin.y -= 20.0f;
-    }
-    self.view.frame = frame;
+//We need a way to distinquish between
+// - no internet at all
+// - internet below wifi/4g -> connect A/B only
+// - A user who has no Mobile app VoIP account
+- (void)connectionStatusChangedNotification:(NSNotification *)notification {
+    //Function is called when inet connection is interrupted... but not always
     
-    if ([UIScreen mainScreen].bounds.size.height < 568.f) {
-        self.callButton.frame = CGRectMake(0, frame.size.height - 46.f, self.view.frame.size.width, 46.f);
-    }
-}
-
-- (void)addDialerButtonsToView:(UIView *)view {
-    CGFloat buttonXSpace = 94.f;
-    CGFloat buttonYSpace = [UIScreen mainScreen].bounds.size.height > 480.f ? 88.f : 78.f;
-    CGFloat leftOffset = (view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
-    
-    CGPoint offset = CGPointMake(0, [UIScreen mainScreen].bounds.size.height > 480.f ? 16.f : 0.f);
-    for (int j = 0; j < 4; j++) {
-        offset.x = leftOffset;
-        for (int i = 0; i < 3; i++) {
-            NSString *title = self.titles[j * 3 + i];
-            NSString *subTitle = self.subTitles[j * 3 + i];
-            UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subTitle];
-            [button addTarget:self action:@selector(dialerButtonPressed:) forControlEvents:UIControlEventTouchDown];
-            button.tag = j * 3 + i;
-
-            button.frame = CGRectMake(offset.x, offset.y, buttonXSpace, buttonXSpace);
-            [view addSubview:button];
-            
-            if ([title isEqualToString:@"0"]) {
-                UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-                [button addGestureRecognizer:longPress];
+    if ([self.reachabilityManager isReachable]) {
+    //we have internets!!
+        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
+        self.callButton.enabled = YES;
+        
+        //does the user have a sip account?
+        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
+            //Is the connection quality sufficient for SIP?
+            if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
+                [self.statusLabel setHidden:YES];
+            } else {
+                self.statusLabel.text = NSLocalizedString(@"Poor internet connection Connect A/B", nil);
+                [self.statusLabel setHidden:NO];
             }
-
-            offset.x += buttonXSpace;
+        } else {
+            self.statusLabel.text = NSLocalizedString(@"Connect A/B calls only", nil);
+            [self.statusLabel setHidden:NO];
         }
-        offset.y += buttonYSpace;
-    }
-}
-
-- (UIButton *)createDialerButtonWithTitle:(NSString *)title andSubTitle:(NSString *)subTitle {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[self stateImageForState:UIControlStateNormal andTitle:title andSubTitle:subTitle] forState:UIControlStateNormal];
-    [button setImage:[self stateImageForState:UIControlStateHighlighted andTitle:title andSubTitle:subTitle] forState:UIControlStateHighlighted];
-    button.frame = CGRectMake(0, 0, button.imageView.image.size.width, button.imageView.image.size.height);
-    return button;
-}
-
-- (UIImage *)stateImageForState:(UIControlState)state andTitle:(NSString *)title andSubTitle:(NSString *)subTitle {
-    UIImage *image = [UIImage imageNamed:state == UIControlStateHighlighted ? @"dialer-button-highlighted" : @"dialer-button"];
-    
-    UIImageView *buttonGraphic = [[UIImageView alloc] initWithImage:image];
-    
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont systemFontOfSize:39.f];
-    titleLabel.textColor = state == UIControlStateHighlighted ? [UIColor blackColor] : [UIColor whiteColor];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = title;
-    [titleLabel sizeToFit];
-    
-    UILabel *subTitleLabel = [[UILabel alloc] init];
-    subTitleLabel.backgroundColor = [UIColor clearColor];
-    subTitleLabel.font = title.length ? [UIFont fontWithName:@"Avenir" size:10.f] : [UIFont fontWithName:@"Avenir" size:39.f];
-    subTitleLabel.textColor = state == UIControlStateHighlighted ? [UIColor blackColor] : [UIColor colorWithRed:0xed green:0xed blue:0xed alpha:1.f];
-    subTitleLabel.textAlignment = NSTextAlignmentCenter;
-    subTitleLabel.text = subTitle;
-    [subTitleLabel sizeToFit];
-    
-    if (title.length) {
-        titleLabel.frame = CGRectMake(0.f, 10.f, image.size.width, titleLabel.frame.size.height);
-        subTitleLabel.frame = CGRectMake(0.f, titleLabel.frame.origin.y + titleLabel.frame.size.height - 6.f, image.size.width, subTitleLabel.frame.size.height);
     } else {
-        subTitleLabel.frame = CGRectMake(0.f, 14.f, image.size.width, subTitleLabel.frame.size.height);
+        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
+        self.callButton.enabled = NO;
+        
+        self.statusLabel.text = NSLocalizedString(@"No Connection", nil);
+        [self.statusLabel setHidden:NO];
     }
     
-    [buttonGraphic addSubview:titleLabel];
-    [buttonGraphic addSubview:subTitleLabel];
-    
-    CGRect rect = [buttonGraphic bounds];
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [buttonGraphic.layer renderInContext:context];
-    UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return capturedImage;
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
+//    if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
+//        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
+//        self.callButton.enabled = NO;
+//        
+//        [self.statusLabel setHidden:NO];
+//    } else {
+//        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
+//        self.callButton.enabled = [self.numberTextView.text length] > 0;
+//        
+//        [self.statusLabel setHidden:YES];
+//    }
+}
+
+- (void)sipCallStartedNotification:(NSNotification *)notification {
+    self.backButton.hidden = YES;
+    self.callButton.enabled = NO;
+    self.numberTextView.text = @"";
 }
 
 #pragma mark - TextView delegate
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    NSString *originalText = textView.text ? textView.text : @"";
+    NSString *newString = [originalText stringByReplacingCharactersInRange:range withString:text];
     NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"0123456789+#*() "];
     if (newString.length != [[newString componentsSeparatedByCharactersInSet:[characterSet invertedSet]] componentsJoinedByString:@""].length) {
         return NO;
     }
 
     self.backButton.hidden = NO;
+    self.callButton.enabled = YES;
 
     return YES;
 }
 
 #pragma mark - Actions
-
-- (void)longPress:(UILongPressGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        if (self.numberTextView.text.length) {
-            self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
-        }
-        self.numberTextView.text = [self.numberTextView.text stringByAppendingString:@"+"];
-    }
-}
-
 - (void)backButtonLongPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.numberTextView.text = @"";
         self.backButton.hidden = YES;
+        self.callButton.enabled = NO;
     }
 }
 
@@ -222,6 +205,7 @@
         self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
     }
     self.backButton.hidden = (self.numberTextView.text.length == 0);
+    self.callButton.enabled = (self.numberTextView.text.length > 0);
 }
 
 - (IBAction)callButtonPressed:(UIButton *)sender {
@@ -234,27 +218,24 @@
     [appDelegate handlePhoneNumber:phoneNumber];
 }
 
-- (void)dialerButtonPressed:(UIButton *)sender {
-    SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:sender.tag] integerValue];
-    if (soundID > 0) {
-        AudioServicesPlaySystemSound(soundID);
-    }
-    
+- (void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
+#pragma mark - NumberPadViewController delegate
+
+- (void)numberPadPressedWithCharacter:(NSString *)character {
     if (!self.numberTextView.text) {
         self.numberTextView.text = @"";
     }
 
-    NSString *cipher = [self.titles objectAtIndex:sender.tag];
-    if (cipher.length) {
-        self.numberTextView.text = [self.numberTextView.text stringByAppendingString:cipher];
-    } else {
-        NSString *character = [self.subTitles objectAtIndex:sender.tag];
-        if (character.length) {
-            self.numberTextView.text = [self.numberTextView.text stringByAppendingString:character];
-        }
+    if ([character isEqualToString:@"+"] && self.numberTextView.text.length > 0) {
+        self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
     }
-    
+    self.numberTextView.text = [self.numberTextView.text stringByAppendingString:character];
+
     self.backButton.hidden = NO;
+    self.callButton.enabled = YES;
 }
 
 @end

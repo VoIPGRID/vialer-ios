@@ -25,6 +25,12 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 - (void)logout;
 + (BOOL)isLoggedIn;
 
+// Account info
+- (NSString *)user;
+- (NSString *)outgoingNumber;
+- (NSString *)sipAccount;
+- (NSString *)sipPassword;
+
 // User requests
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)userProfileWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
