@@ -71,6 +71,19 @@
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
     NSAssert(config != nil, @"Config.plist not found!");
 
+    // Google Analytics
+    //    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    //    [GAI sharedInstance].dispatchInterval = 20;
+    //    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
+    //    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+#ifdef DEBUG
+    [GAI sharedInstance].logger.logLevel = kGAILogLevelVerbose;
+#endif
+
+    
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
     if ([newRelicToken length]) {
