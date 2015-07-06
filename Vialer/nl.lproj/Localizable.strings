@@ -287,7 +287,12 @@
 
 "My number" =  "Mijn nummer";
 "Outgoing number" = "Uitgaand nummer";
-"Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available." = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available.";
+
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4F of wifi netwerk beschikbaar is";
 
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
 "CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "Het telefoonnummer waarmee uitgebeld wordt is:";
+
+/* RecentsViewController segmentendControll */
+"All" = "Alle";
+"Missed" = "Gemist";

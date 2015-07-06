@@ -285,8 +285,11 @@
 
 "My number" =  "My number";
 "Outgoing number" = "Outgoing number";
-"Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available." = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available.";
-
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available";
 
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Please enter your mobile number here.";
 "CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "The phonenumber that this app will use is:";
+
+/* RecentsViewController segmentendControll */
+"All" = "All";
+"Missed" = "Missed";
