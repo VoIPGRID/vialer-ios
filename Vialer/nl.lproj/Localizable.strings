@@ -296,3 +296,5 @@
 /* RecentsViewController segmentendControll */
 "All" = "Alle";
 "Missed" = "Gemist";
+
+"Warning" = "Waarschuwing";
