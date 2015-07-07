@@ -80,11 +80,11 @@
     } else if ([type isEqualToString:@"message"]) {
         NSString *message = payload[@"message"];
         if (state == UIApplicationStateBackground) {
-            [self showLocalUnregisterWarning:message];
+            [self showLocalAlertMessage:message];
         } else {
             if (message) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"Warning")
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                                     message:message
                                                                    delegate:nil
                                                           cancelButtonTitle:NSLocalizedString(@"Ok", nil)
@@ -132,7 +132,7 @@
 * @param message a string to present as local notification to a user that his/her device
  is not registered anymore for incoming calls when app runs in background.
 */
-- (void)showLocalUnregisterWarning:(NSString*)message {
+- (void)showLocalAlertMessage:(NSString*)message {
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.alertBody = message;
     localNotification.soundName = UILocalNotificationDefaultSoundName;
