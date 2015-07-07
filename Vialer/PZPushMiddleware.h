@@ -18,7 +18,7 @@
 
 - (void)handleNotificationWithDictionary:(NSDictionary*)payload;
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload;
-- (void)showLocalNotificationWithPayload:(NSDictionary*)payloadDict;
+- (void)showLocalIncomingCallNotificationWithPayload:(NSDictionary*)payloadDict;
 
 - (void)updateMiddleWareWithData:(NSDictionary*)data;
 
