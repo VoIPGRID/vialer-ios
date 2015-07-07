@@ -194,11 +194,17 @@
 
 #pragma mark - UIApplication notification delegate
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [self.pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
     
-    if (application.applicationState != UIApplicationStateActive) {
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
-    }
+    NSString *type = notification.userInfo[@"type"];
+    if ([type isEqualToString:@"call"]) {
+        [self.pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
+        if (application.applicationState != UIApplicationStateActive) { //
+            [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
+        }
+    } else if ([type isEqualToString:@"message"]) {
+        // Nothing todo here...
+        // We might show an extra alert, but not really necessary.
+    }    
 }
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
@@ -218,9 +224,6 @@
 
 #pragma mark - PKPushRegistray management
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
-    
-    NSLog(@"%s: received payload -> %@",__PRETTY_FUNCTION__, [payload dictionaryPayload]);
-    
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     NSDictionary *payloadDict = [payload dictionaryPayload];
     [self.pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
@@ -254,6 +257,10 @@ void HandleExceptions(NSException *exception) {
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+        NSLog(@"SIP disconnected. Should now receive calls through notifications from middleware.");
+    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
