@@ -36,22 +36,6 @@
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
 }
 
-//- (void)layoutSubviews {
-//    [super layoutSubviews];
-//    
-//    //TODO: Really needed???
-//    
-//    /* Remove all the default UITextField styling */
-//    [self.usernameField cleanStyle];
-//    [self.passwordField cleanStyle];
-//    /* Add top rounded corner mask */
-//    [self.usernameField styleWithTopBorderRadius:8.f];
-//    /* Add bottom corner mask */
-//    [self.passwordField styleWithBottomBorderRadius:8.f];
-//    
-//    [self.passwordField setSecureTextEntry:YES];
-//}
-
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
     self.passwordField.delegate = delegate;
     self.usernameField.delegate = delegate;

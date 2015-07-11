@@ -24,11 +24,13 @@
 
 #import "AFNetworkActivityLogger.h"
 #import "UIAlertView+Blocks.h"
-#import "GAI.h"
 #import "MMDrawerController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import "PZPushMiddleware.h"
+
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
@@ -83,7 +85,6 @@
     [GAI sharedInstance].logger.logLevel = kGAILogLevelVerbose;
 #endif
 
-    
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
     if ([newRelicToken length]) {
@@ -309,12 +310,22 @@ void HandleExceptions(NSException *exception) {
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
     if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
         [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                              action:@"Outbound"
+                                                               label:@"SIP"
+                                                               value:nil] build]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
     } else {
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                              action:@"Outbound"
+                                                               label:@"ConnectAB"
+                                                               value:nil] build]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });

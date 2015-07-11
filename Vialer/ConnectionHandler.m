@@ -14,6 +14,9 @@
 #import "AFNetworkReachabilityManager.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
 NSString * const ConnectionStatusChangedNotification = @"com.vialer.ConnectionStatusChangedNotification";
 NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotification";
 
@@ -303,6 +306,12 @@ static GSCall *lastNotifiedCall;
         if ([callId isKindOfClass:[NSNumber class]] && lastNotifiedCall.callId == [callId intValue] && lastNotifiedCall.status != GSCallStatusDisconnected) {
             if ([identifier isEqualToString:NotificationActionDecline]) {
                 [lastNotifiedCall end];
+                
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                                      action:@"Inbound"
+                                                                       label:@"Declined"
+                                                                       value:nil] build]];
             } else {
                 AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
                 [appDelegate handleSipCall:lastNotifiedCall];
@@ -336,7 +345,15 @@ static GSCall *lastNotifiedCall;
                                                                                  categories:[NSSet setWithObject:actionCategory]];
         [application registerUserNotificationSettings:settings];
     } else {
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+        //[application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+        
+        
+        
+        
+        
+        
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
+        [application registerForRemoteNotifications];
     }
 }
 
