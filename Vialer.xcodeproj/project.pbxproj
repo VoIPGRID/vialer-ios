@@ -972,6 +972,7 @@
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
 				FB4226CB182261D200707349 /* Resources */,
+				F217146F1B54F4F00078B0A0 /* Update Build version */,
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1071,6 +1072,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		F217146F1B54F4F00078B0A0 /* Update Build version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = $SRCROOT/scripts/update_build_number.sh;
+			showEnvVarsInLog = 0;
+		};
 		F2B947311B00DFEC00CE5112 /* config_site.h copy script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
