@@ -46,23 +46,25 @@
 			<integer>126</integer>
 			<integer>58</integer>
 		</array>
-        <key>SearchBar</key>
-        <array>
-            <integer>178</integer>
-            <integer>177</integer>
-            <integer>184</integer>
-        </array>
+		<key>SearchBar</key>
+		<array>
+			<integer>178</integer>
+			<integer>177</integer>
+			<integer>184</integer>
+		</array>
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Middelware BaseLink</key>
+		<string>http://vialerpush.voipgrid.nl:8000</string>
 		<key>API</key>
-		<string>https://api.voipgrid.nl/api</string>
+		<string>https://test.voipgrid.nl/api</string>
 		<key>Partner</key>
-		<string>https://partner.voipgrid.nl</string>
+		<string>https://test.voipgrid.nl</string>
 		<key>How it works</key>
-		<string>www.vialerapp.com/hoe-het-werkt</string>
+		<string>www.vialerapp.com/how-it-works</string>
 		<key>SIP domain</key>
-		<string>ha.voys.nl</string>
+		<string>sipproxy.test.voipgrid.nl</string>
 	</dict>
 </dict>
 </plist>

@@ -30,7 +30,18 @@
 }
 
 - (NSString*)baseLink {
-    return @"http://peperdock15.peperzaken.nl:8000";
+    static NSString* baseLink;
+    if (!baseLink) {
+        NSLog(@"FETCHED FROM PLIST");
+        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+        NSAssert(config != nil, @"Config.plist not found!");
+        
+        baseLink = [[config objectForKey:@"URLS"] objectForKey:@"Middelware BaseLink"];
+        NSAssert(baseLink, @"URLS - Middelware BaseLink not found in Config.plist!");
+    } else {
+        NSLog(@"Using stored baseLink from PLIST");
+    }
+    return baseLink;
 }
 
 /**
