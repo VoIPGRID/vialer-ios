@@ -58,18 +58,8 @@
     }
 }
 
-- (NSString *)appVersion {
-    NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-    NSString *version = [NSString stringWithFormat:@"Version:%@ - Build:%@ Commit:%@",
-                         [infoDict objectForKey:@"CFBundleShortVersionString"],
-                         [infoDict objectForKey:@"CFBundleVersion"],
-                         [infoDict objectForKey:@"Commit_Short_Hash"]];
-    return version;
-}
-
 #pragma mark - UIApplication delegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@"%@", [self appVersion]);
     
     [self doRegistrationWithLoginCheck];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
