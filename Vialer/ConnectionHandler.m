@@ -162,7 +162,7 @@ static GSCall *lastNotifiedCall;
             self.account.username = sipAccount;
             self.account.password = sipPassword;
             self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
-            self.account.proxyServer = [self.account.domain stringByAppendingString:@";transport=tcp"];
+            self.account.proxyServer = [self.account.domain stringByAppendingString:@";transport=udp"];
             self.account.enableRingback = NO;
         }
 
@@ -171,7 +171,7 @@ static GSCall *lastNotifiedCall;
             self.config.account = self.account;
             self.config.logLevel = 3;
             self.config.consoleLogLevel = 3;
-            self.config.transportType = GSTCPTransportType;
+            self.config.transportType = GSUDPTransportType;
         }
 
         if (!self.userAgent) {
