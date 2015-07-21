@@ -8,6 +8,7 @@
 #    http://blog.jaredsinclair.com/post/97193356620/the-best-of-all-possible-xcode-automated-build
 #    http://www.egeek.me/2013/02/09/xcode-insert-git-build-info-into-ios-app/
 
+#  Consider using https://github.com/Autorevision/autorevision for both Verion and Build number  
  
 GIT=`sh /etc/profile; which git`
 PLISTBUDDY=/usr/libexec/PlistBuddy
@@ -32,5 +33,6 @@ echo "Commit short hash:${COMMIT_SHORT_HASH}"
 #  the info.plist in the target build directory. This way, you don’t have to check-in a 
 #  constantly-modifying info.plist.
 ${PLISTBUDDY} -c "Set :CFBundleVersion ${BUILDNUMBER}" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
-${PLISTBUDDY} -c "Set :CFBundleVersion ${BUILDNUMBER}" "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist"
+#Also update dSYM file
+${PLISTBUDDY} -c "Set :CFBundleVersion ${BUILDNUMBER}" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
 ${PLISTBUDDY} -c "Set :Commit_Short_Hash ${COMMIT_SHORT_HASH}" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
