@@ -135,7 +135,7 @@
     NSString *callerId = (payloadDict[@"caller_id"] ? payloadDict[@"caller_id"] : @"Unknown");
     localNotification.alertBody = [NSString stringWithFormat:@"Incoming call from %@", callerId];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
-    localNotification.userInfo = @{@"type": @"call"};
+    localNotification.userInfo = payloadDict;
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 
