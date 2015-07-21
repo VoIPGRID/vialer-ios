@@ -11,10 +11,22 @@
 #import "AccountViewFooterView.h"
 #import "EditNumberTableViewController.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 @interface AccountViewController ()
 @end
 
 @implementation AccountViewController
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
 
 #pragma mark - Table view data source
 

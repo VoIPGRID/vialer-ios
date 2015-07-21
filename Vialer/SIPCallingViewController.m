@@ -20,6 +20,9 @@
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
 NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotification";
 
 @interface SIPCallingViewController ()
@@ -166,7 +169,6 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
 - (void)acceptCall:(GSCall *)currentCall {
     [self hangup];  // TODO: Put in wait?
-
     self.currentCall = currentCall;
 
     // Register status change observer
@@ -175,6 +177,12 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
                           options:NSKeyValueObservingOptionInitial
                           context:nil];
 
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Accepted"
+                                                           value:nil] build]];
+    
     // begin calling after 1s
     const double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
