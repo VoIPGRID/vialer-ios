@@ -101,10 +101,35 @@
         [headerView addSubview:logo];
         [headerView addSubview:numberLabel];
         
+#ifdef DEBUG
+        yOffset = CGRectGetMaxY(headerView.bounds) - 18.f;
+        CGRect versionBuildLabelFrame = CGRectMake(0, yOffset, CGRectGetWidth(headerView.frame), 20.f);
+        [headerView addSubview:[self versionBuildLabel:versionBuildLabelFrame]];
+#endif
+        
         return headerView;
     } else {
         return nil;
     }
+}
+
+- (UILabel *)versionBuildLabel:(CGRect)frame {
+    UILabel *versionBuildLabel = [[UILabel alloc] initWithFrame:frame];
+    versionBuildLabel.font = [UIFont systemFontOfSize:10.f];
+    versionBuildLabel.textAlignment = NSTextAlignmentCenter;
+    versionBuildLabel.textColor = [UIColor darkGrayColor];
+    versionBuildLabel.text = [self  appVersionBuildString];
+        
+    return versionBuildLabel;
+}
+
+- (NSString *)appVersionBuildString {
+    NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
+    NSString *version = [NSString stringWithFormat:@"Version:%@  Build:%@  Commit:%@",
+                         [infoDict objectForKey:@"CFBundleShortVersionString"],
+                         [infoDict objectForKey:@"CFBundleVersion"],
+                         [infoDict objectForKey:@"Commit_Short_Hash"]];
+    return version;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

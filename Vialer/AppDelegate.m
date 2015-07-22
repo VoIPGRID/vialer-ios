@@ -60,7 +60,7 @@
 
 #pragma mark - UIApplication delegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
+    
     [self doRegistrationWithLoginCheck];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
