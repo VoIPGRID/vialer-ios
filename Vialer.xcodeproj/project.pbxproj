@@ -1339,7 +1339,6 @@
 					"\"$(SRCROOT)/pjsip/lib\"",
 					"\"$(SRCROOT)/pjsip\"",
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					/Users/Harold/Programming/GoogleAnalyticsServicesiOS_3.12,
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "1ff7c9d4-8cbf-43a5-803a-3e89de4a896e";
@@ -1445,7 +1444,6 @@
 					"\"$(SRCROOT)/pjsip/lib\"",
 					"\"$(SRCROOT)/pjsip\"",
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					/Users/Harold/Programming/GoogleAnalyticsServicesiOS_3.12,
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "303d7ff3-49ac-489b-a40a-b2abd1fc0c7e";
@@ -1491,7 +1489,6 @@
 					"\"$(SRCROOT)/pjsip/lib\"",
 					"\"$(SRCROOT)/pjsip\"",
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					/Users/Harold/Programming/GoogleAnalyticsServicesiOS_3.12,
 				);
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "8545b5e4-375e-478c-b695-8bc971f6d66b";
