@@ -27,7 +27,6 @@
     self.titleLable.text = NSLocalizedString(@"Vialer is configuring", nil);
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
     
-    //TODO: put 2 strings below in the localized strings file
     self.phoneNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT", nil);
     self.phoneNumberField.placeholder = NSLocalizedString(@"mobile_label", nil);
     [self.phoneNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
@@ -36,19 +35,5 @@
     
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
 }
-
-
-//- (void)layoutSubviews {
-//    [super layoutSubviews];
-//    
-//    /* Remove all the default UITextField styling */
-//    [self.phoneNumberField cleanStyle];     // Remove the default styling of a UITextField.
-//    [self.outgoingNumberField cleanStyle];
-//
-////    [self.outgoingNumberField setUserInteractionEnabled:NO]; // Disable the outgoing field. we will fill it with profile data later!
-//
-//    [self.phoneNumberField styleWithTopBorderRadius:8.f];          /* Add top rounded corner mask */
-//    [self.outgoingNumberField styleWithBottomBorderRadius:8.f];    /* Add bottom corner mask */
-//}
 
 @end
