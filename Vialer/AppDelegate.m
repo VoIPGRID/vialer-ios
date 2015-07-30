@@ -80,10 +80,6 @@
     //    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
     [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-#ifdef DEBUG
-    [GAI sharedInstance].logger.logLevel = kGAILogLevelVerbose;
-#endif
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
