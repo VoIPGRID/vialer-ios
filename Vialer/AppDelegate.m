@@ -80,10 +80,6 @@
     //    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
     [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-#ifdef DEBUG
-    [GAI sharedInstance].logger.logLevel = kGAILogLevelVerbose;
-#endif
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
@@ -192,21 +188,7 @@
 - (void)registerForVoIPNotifications {
     [self.pzPushHandlerMiddleware registerForVoIPNotifications];
 }
-
 #pragma mark - UIApplication notification delegate
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    
-    NSString *type = notification.userInfo[@"type"];
-    if ([type isEqualToString:@"call"]) {
-        [self.pzPushHandlerMiddleware handleNotificationWithDictionary:notification.userInfo];
-        if (application.applicationState != UIApplicationStateActive) { //
-            [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
-        }
-    } else if ([type isEqualToString:@"message"]) {
-        // Nothing todo here...
-        // We might show an extra alert, but not really necessary.
-    }    
-}
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     if (application.applicationState != UIApplicationStateActive) {
@@ -221,6 +203,12 @@
     // I (Karsten) have no clue why we're doing this. We are not using these remote notifications.
     // Don't know if PushKit suffers from removing it...
     [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    if (application.applicationState != UIApplicationStateActive) { //
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
+    }
 }
 
 #pragma mark - PKPushRegistray management
@@ -258,10 +246,6 @@ void HandleExceptions(NSException *exception) {
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
-        NSLog(@"SIP disconnected. Should now receive calls through notifications from middleware.");
-    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
