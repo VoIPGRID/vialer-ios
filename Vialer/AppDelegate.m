@@ -221,7 +221,7 @@
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
     if (credentials.token) {
-        [self.pzPushHandlerMiddleware registerToken:credentials.token];
+        [self.pzPushHandlerMiddleware updateDeviceRecordForToken:credentials.token];
     }
 }
 

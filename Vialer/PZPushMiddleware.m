@@ -138,26 +138,28 @@
 *
 * @param token the NSData object containing a APNS registration token used by a backend.
 */
-- (void)registerToken:(NSData*)token {
+- (void)updateDeviceRecordForToken:(NSData*)token {
     NSString* voipTokenString = [self _deviceTokenStringFromData:token];
     NSLog(@"voip token: %@", voipTokenString);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
 
-    if (storedVoipToken == nil || ![voipTokenString isEqualToString:storedVoipToken]) {
-         // update middleware with the token
+    //Only check for Sip Account and VoiP Token, rest is "nice to know" info
+    if (sipAccount.length > 0 && voipTokenString.length > 0) {
+        // update middleware with the token
+        NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
         NSDictionary *params = @{
             // Pretty name for a device in middleware.
             @"name": [[UIDevice currentDevice] name],
             // token used to send notifications to this device.
             @"token": voipTokenString,
             // user id used as primary key of the SIP account registered with the currently logged in user.
-            @"sip_user_id": [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount],
+            @"sip_user_id": sipAccount,
             // The version of the OS of this phone. Useful when debugging possible issues in the future.
             @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
             // The version of this client app. Useful when debugging possible issues in the future.
-            @"client_version": [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]
+            @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:@"CFBundleShortVersionString"], [infoDict objectForKey:@"CFBundleVersion"]]
         };
 
         void (^success)(AFHTTPRequestOperation*, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -174,8 +176,12 @@
                                            parameters:params
                                               success:success
                                               failure:failure];
+    } else {
+        NSLog(@"SipAccount(%@) or VoIPToken(%@) not provided unable to update middleware", sipAccount, voipTokenString);
     }
 }
+
+
 
 /**
 * When a token is disabled or invalidated we should notify the middleware.

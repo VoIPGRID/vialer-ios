@@ -22,7 +22,7 @@
 
 - (void)updateMiddleWareWithData:(NSDictionary*)data;
 
-- (void)registerToken:(NSData*)token;
+- (void)updateDeviceRecordForToken:(NSData*)token;
 - (void)unregisterToken:(NSData*)token;
 
 @end
