@@ -56,7 +56,7 @@
 	<key>URLS</key>
 	<dict>
 		<key>Middelware BaseLink</key>
-		<string>http://vialer-test.peperzaken.nl:8000</string>
+		<string>http://vialerpush.voipgrid.nl:8000</string>
 		<key>API</key>
 		<string>https://test.voipgrid.nl/api</string>
 		<key>Partner</key>
