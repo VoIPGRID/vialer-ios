@@ -18,6 +18,8 @@
 #define GetCdrRecordUrl @"cdr/record/"
 #define PostPermissionPasswordResetUrl @"permission/password_reset/"
 #define GetAutoLoginTokenUrl @"autologin/token/"
+#define PutMobileNumber @"/api/permission/mobile_number/"
+
 
 @interface VoIPGRIDRequestOperationManager ()
 @end
@@ -336,6 +338,32 @@
         return [SSKeychain passwordForService:[[self class] serviceName] account:sipAccount];
     }
     return nil;
+}
+
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure {
+    if ([mobileNumber length] > 0) {
+        //Strip whitespaces
+        mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+        //replace leading zero with +31
+        if ([mobileNumber hasPrefix:@"0"])
+            mobileNumber = [NSString stringWithFormat:@"+31%@", [mobileNumber substringFromIndex:1]];
+        
+        NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
+        [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            success();
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSString *userFriendlyErrorString;
+            
+            if (operation.response.statusCode == 400)
+                userFriendlyErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
+            
+            failure(error, userFriendlyErrorString);
+        }];
+    } else {
+        failure(nil, NSLocalizedString(@"Unable to save \"My number\"", nil));
+    }
 }
 
 #pragma mark - Alert view delegate

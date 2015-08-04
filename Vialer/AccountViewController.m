@@ -10,6 +10,7 @@
 #import "VoIPGRIDRequestOperationManager.h"
 #import "AccountViewFooterView.h"
 #import "EditNumberTableViewController.h"
+#import "UIAlertView+Blocks.h"
 
 #import "GAI.h"
 #import "GAIFields.h"
@@ -154,11 +155,18 @@
 #pragma mark - Editnumber delegate
 
 - (void)numberHasChanged:(NSString *)newNumber {
-    //Update the userdefaults
-    [[NSUserDefaults standardUserDefaults] setObject:newNumber forKey:@"MobileNumber"];
-    //Update the tableView Cell
-    UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MY_NUMBER_ROW inSection:NUMBERS_SECTION]];
-    myNumberCell.detailTextLabel.text = newNumber;
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber success:^{
+        //Update the tableView Cell
+        UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MY_NUMBER_ROW inSection:NUMBERS_SECTION]];
+        myNumberCell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+    } failure:^(NSError *error, NSString *userFriendlyErrorString) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                        message:userFriendlyErrorString
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 @end

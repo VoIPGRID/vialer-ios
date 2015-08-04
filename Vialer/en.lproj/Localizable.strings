@@ -271,7 +271,7 @@
 "Search" = "Search";
 
 "Error" = "Error";
-"Error while retreiving your outgoing number, please enter manually" = "Error while retreiving your outgoing number, please enter manually";
+"Error while retrieving your outgoing number, please enter manually" = "Error while retrieving your outgoing number, please enter manually";
 
 "No Connection" = "No Connection";
 "Connect A/B calls only" = "Connect A/B calls only";
@@ -295,3 +295,4 @@
 "Missed" = "Missed";
 
 "Warning" = "Warning";
+"Unable to save My number" = "Unable to save My number";
