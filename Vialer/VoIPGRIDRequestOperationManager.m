@@ -341,15 +341,14 @@
 }
 
 - (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure {
-    //Strip whitespaces
-    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //replace leading zero with +31
-    if ([mobileNumber hasPrefix:@"0"])
-        mobileNumber = [NSString stringWithFormat:@"+31%@", [mobileNumber substringFromIndex:1]];
-    
-    NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
-    
     if ([mobileNumber length] > 0) {
+        //Strip whitespaces
+        mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+        //replace leading zero with +31
+        if ([mobileNumber hasPrefix:@"0"])
+            mobileNumber = [NSString stringWithFormat:@"+31%@", [mobileNumber substringFromIndex:1]];
+        
+        NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
         [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
             [[NSUserDefaults standardUserDefaults] synchronize];
