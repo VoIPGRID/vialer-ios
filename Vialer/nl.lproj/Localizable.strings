@@ -273,7 +273,7 @@
 "Search" = "Zoeken";
 
 "Error" = "Fout";
-"Error while retreiving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
+"Error while retrieving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
 
 "No Connection" = "Geen Verbinding";
 "Connect A/B calls only" = "Alleen Connect A/B mogelijk";
@@ -298,3 +298,4 @@
 "Missed" = "Gemist";
 
 "Warning" = "Waarschuwing";
+"Unable to save My number" = "Mijn nummer kan niet worden opgeslagen";

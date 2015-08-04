@@ -41,4 +41,11 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 - (void)passwordResetWithEmail:(NSString *)email success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)autoLoginTokenWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ * Pushes the user's mobile number to the server
+ * @param mobileNumber the mobile number to push
+ * @param succes the block being called on success
+ * @param failure the block being called on failure including the NSError and a userFriendlyErrorString which can be presented to the user because it is serverside localized
+ */
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure;
 @end

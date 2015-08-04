@@ -230,14 +230,26 @@
 }
 
 - (void)continueFromConfigureFormViewToUnlockView {
-    [[NSUserDefaults standardUserDefaults] setObject:self.configureFormView.phoneNumberField.text forKey:@"MobileNumber"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [self.configureFormView.phoneNumberField resignFirstResponder];
-    [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
-    [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
-    [_scene runActThree];                     // Animate the clouds
-    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:self.configureFormView.phoneNumberField.text success:^{
+        [self.configureFormView.phoneNumberField resignFirstResponder];
+        [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
+        [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
+        [_scene runActThree];                     // Animate the clouds
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
+    } failure:^(NSError *error, NSString *userFriendlyErrorString) {
+        NSString *message;
+        if ([userFriendlyErrorString length] > 0)
+            message = userFriendlyErrorString;
+        else
+            message = NSLocalizedString(@"Unable to save \"My number\"", nil);
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma mark Keyboard
@@ -435,7 +447,7 @@
             [self.configureFormView.outgoingNumberLabel setText:@"Enter phonenumber manually"];
             
             [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
-                               message:NSLocalizedString(@"Error while retreiving your outgoing number, please enter manually", nil)
+                               message:NSLocalizedString(@"Error while retrieving your outgoing number, please enter manually", nil)
                                  style:UIAlertViewStylePlainTextInput
                      cancelButtonTitle:nil
                      otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
