@@ -352,17 +352,19 @@
         [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            success();
+            if (success)
+                success();
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSString *userFriendlyErrorString;
             
             if (operation.response.statusCode == 400)
                 userFriendlyErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
-            
-            failure(error, userFriendlyErrorString);
+            if (failure)
+                failure(error, userFriendlyErrorString);
         }];
     } else {
-        failure(nil, NSLocalizedString(@"Unable to save \"My number\"", nil));
+        if (failure)
+            failure(nil, NSLocalizedString(@"Unable to save \"My number\"", nil));
     }
 }
 

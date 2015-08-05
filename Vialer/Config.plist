@@ -56,15 +56,15 @@
 	<key>URLS</key>
 	<dict>
 		<key>Middelware BaseLink</key>
-		<string>http://vialerpush.voipgrid.nl:8000</string>
+		<string>http://vialerpush.voipgrid.nl</string>
 		<key>API</key>
-		<string>https://test.voipgrid.nl/api</string>
+		<string>https://api.voipgrid.nl/api</string>
 		<key>Partner</key>
-		<string>https://test.voipgrid.nl</string>
+		<string>https://partner.voipgrid.nl</string>
 		<key>How it works</key>
 		<string>www.vialerapp.com/how-it-works</string>
 		<key>SIP domain</key>
-		<string>sipproxy.test.voipgrid.nl</string>
+		<string>sipproxy.voipgrid.nl</string>
 	</dict>
 </dict>
 </plist>
