@@ -285,6 +285,7 @@
 
 "My number" =  "My number";
 "Outgoing number" = "Outgoing number";
+"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR" = "Your mobile number should start with your country code e.g. +31 or 0031";
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available";
 
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Please enter your mobile number here.";
@@ -295,4 +296,8 @@
 "Missed" = "Missed";
 
 "Warning" = "Warning";
-"Unable to save My number" = "Unable to save My number";
+"SAVING_NUMBER..." = "Saving number...";
+"Unable to save My number" = "Unable to save My Number";
+"NUMBER_SAVED_SUCCESS" = "Number saved";
+
+
