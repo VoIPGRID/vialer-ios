@@ -81,11 +81,20 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
+            
+            
             NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
             if ([outgoingCli isKindOfClass:[NSString class]]) {
                 [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
             } else {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+            }
+            
+            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
+            if ([mobile_nr isKindOfClass:[NSString class]]) {
+                [[NSUserDefaults standardUserDefaults] setObject:mobile_nr forKey:@"MobileNumber"];
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
             }
 
             // Store credentials
