@@ -43,10 +43,10 @@
         [self.delegate numberHasChanged:newNumber];
         [self.navigationController popViewControllerAnimated:YES];
     
-    } failure:^(NSError *error, NSString *userFriendlyErrorString) {
+    } failure:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                        message:userFriendlyErrorString
+                                                        message:localizedErrorString
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"Ok", nil)
                                               otherButtonTitles:nil];
