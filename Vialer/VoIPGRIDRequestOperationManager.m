@@ -349,10 +349,10 @@
     return nil;
 }
 
-- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure {
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
     //Has the user entered a number
     if (![mobileNumber length] > 0) {
-        if (failure) failure(nil, NSLocalizedString(@"Unable to save \"My number\"", nil));
+        if (failure) failure(NSLocalizedString(@"Unable to save \"My number\"", nil));
         return;
     }
     //Strip whitespaces
@@ -364,7 +364,7 @@
     
     //Has the user entered the number in the international format with check above 00xx is also accepted
     if (![mobileNumber hasPrefix:@"+"]) {
-        if (failure) failure(nil, NSLocalizedString(@"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR", nil));
+        if (failure) failure(NSLocalizedString(@"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR", nil));
         return;
     }
 
@@ -381,12 +381,14 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         if (success) success();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSString *userFriendlyErrorString;
+        //Provide user with the message from the error
+        NSString *localizedErrorString = [error localizedDescription];
         
+        //if the status code was 400, the platform will give us a localized error description in the mobile_nr parameter
         if (operation.response.statusCode == 400)
-            userFriendlyErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
+            localizedErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
         
-        if (failure) failure(error, userFriendlyErrorString);
+        if (failure) failure(localizedErrorString);
     }];
 
 }

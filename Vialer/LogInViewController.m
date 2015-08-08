@@ -242,10 +242,10 @@
         [_scene runActThree];                     // Animate the clouds
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
         
-    } failure:^(NSError *error, NSString *userFriendlyErrorString) {
+    } failure:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                        message:userFriendlyErrorString
+                                                        message:localizedErrorString
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"Ok", nil)
                                               otherButtonTitles:nil];

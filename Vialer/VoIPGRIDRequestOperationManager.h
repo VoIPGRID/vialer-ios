@@ -45,7 +45,7 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
  * Pushes the user's mobile number to the server
  * @param mobileNumber the mobile number to push
  * @param succes the block being called on success
- * @param failure the block being called on failure including the NSError and a userFriendlyErrorString which can be presented to the user because it is serverside localized
+ * @param failure the block being called on failure including an localized error string which can be presented to the user  
  */
-- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure;
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure;
 @end
