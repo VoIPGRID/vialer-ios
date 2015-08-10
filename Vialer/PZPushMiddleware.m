@@ -133,18 +133,35 @@
     }
 }
 
+- (void)updateDeviceRecord {
+    NSString* voipTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY];
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+    
+    [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
+}
+
+- (void)updateDeviceRecordForToken:(NSData*)token {
+    NSString* voipTokenString = [[self class] deviceTokenStringFromData:token];
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+
+    [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
+}
+
 /**
 * Register a token with the PZ middleware which can be used to notify this device of incoming calls, etc.
 *
 * @param token the NSData object containing a APNS registration token used by a backend.
 */
-- (void)updateDeviceRecordForToken:(NSData*)token {
-    NSString* voipTokenString = [self _deviceTokenStringFromData:token];
+- (void)updateDeviceRecordForVoIPToken:(NSString *)voipTokenString sipAccount:(NSString *)sipAccount {
     NSLog(@"voip token: %@", voipTokenString);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
 
+    if (sipAccount.length <= 0) {
+        [self unregisterToken:voipTokenString];
+        return;
+    }
+    
     //Only check for Sip Account and VoiP Token, rest is "nice to know" info
     if (sipAccount.length > 0 && voipTokenString.length > 0) {
         // update middleware with the token
@@ -188,7 +205,7 @@
 *
 * Currently NOTIMPLEMENTED in middleware!
 */
-- (void)unregisterToken:(NSData*)token {
+- (void)unregisterToken:(NSString *)token {
     /* TODO */
 }
 
@@ -199,7 +216,7 @@
 * @param deviceToken NSData object to convert to hex string.
 * @returns hexadecimal string containing APNS token.
 */
-- (NSString*) _deviceTokenStringFromData:(NSData*)deviceToken {
++ (NSString*) deviceTokenStringFromData:(NSData*)deviceToken {
     NSString* deviceTokenString = [[NSString alloc] initWithData:deviceToken encoding:NSASCIIStringEncoding];
     return [self _hexadecimalStringForString:deviceTokenString];
 }
@@ -208,7 +225,7 @@
 * @param string data object to convert to hexadecimal format.
 * @returns hexadecimal version of input string.
 */
-- (NSString*) _hexadecimalStringForString:(NSString*)string {
++ (NSString*) _hexadecimalStringForString:(NSString*)string {
     NSMutableString* hexadecimalString = [[NSMutableString alloc] init];
     for(NSUInteger i = 0; i < [string length]; i++) {
         [hexadecimalString appendFormat:@"%02x", [string characterAtIndex:i]];

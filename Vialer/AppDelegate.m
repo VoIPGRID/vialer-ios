@@ -228,7 +228,7 @@
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
     NSData *token = [registry pushTokenForType:type];
     if (token) {
-        [self.pzPushHandlerMiddleware unregisterToken:token];
+        [self.pzPushHandlerMiddleware unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]];
     }
 }
 
@@ -254,7 +254,9 @@ void HandleExceptions(NSException *exception) {
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] updateSIPAccountWithSuccess:^{
+        [self.pzPushHandlerMiddleware updateDeviceRecord];
+    } failure:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
