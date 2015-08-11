@@ -81,11 +81,20 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
+            
+            
             NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
             if ([outgoingCli isKindOfClass:[NSString class]]) {
                 [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
             } else {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+            }
+            
+            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
+            if ([mobile_nr isKindOfClass:[NSString class]]) {
+                [[NSUserDefaults standardUserDefaults] setObject:mobile_nr forKey:@"MobileNumber"];
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
             }
 
             // Store credentials
@@ -340,32 +349,47 @@
     return nil;
 }
 
-- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure {
-    if ([mobileNumber length] > 0) {
-        //Strip whitespaces
-        mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-        //replace leading zero with +31
-        if ([mobileNumber hasPrefix:@"0"])
-            mobileNumber = [NSString stringWithFormat:@"+31%@", [mobileNumber substringFromIndex:1]];
-        
-        NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
-        [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            if (success)
-                success();
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSString *userFriendlyErrorString;
-            
-            if (operation.response.statusCode == 400)
-                userFriendlyErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
-            if (failure)
-                failure(error, userFriendlyErrorString);
-        }];
-    } else {
-        if (failure)
-            failure(nil, NSLocalizedString(@"Unable to save \"My number\"", nil));
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
+    //Has the user entered a number
+    if (![mobileNumber length] > 0) {
+        if (failure) failure(NSLocalizedString(@"Unable to save \"My number\"", nil));
+        return;
     }
+    //Strip whitespaces
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    //Change country code from 00xx to +xx
+    if ([mobileNumber hasPrefix:@"00"])
+        mobileNumber = [NSString stringWithFormat:@"+%@", [mobileNumber substringFromIndex:2]];
+    
+    //Has the user entered the number in the international format with check above 00xx is also accepted
+    if (![mobileNumber hasPrefix:@"+"]) {
+        if (failure) failure(NSLocalizedString(@"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR", nil));
+        return;
+    }
+
+    //With all the checks and replacements done, is the number actually different from the stored one?
+    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]]) {
+        if (success) success();
+        return;
+    }
+    
+    //Sent the new number to the server
+    NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
+    [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (success) success();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //Provide user with the message from the error
+        NSString *localizedErrorString = [error localizedDescription];
+        
+        //if the status code was 400, the platform will give us a localized error description in the mobile_nr parameter
+        if (operation.response.statusCode == 400)
+            localizedErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
+        
+        if (failure) failure(localizedErrorString);
+    }];
 }
 
 #pragma mark - Alert view delegate
