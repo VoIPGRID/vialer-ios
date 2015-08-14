@@ -61,14 +61,9 @@
 }
 
 #pragma mark - UIApplication delegate
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
     [self doRegistrationWithLoginCheck];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-    [application registerUserNotificationSettings:settings];
     
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
     NSAssert(config != nil, @"Config.plist not found!");
@@ -171,13 +166,7 @@
         [self showLogin];
     }
 
-    [[ConnectionHandler sharedConnectionHandler] registerForLocalNotifications];
-
-//    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [GSAccount reregisterActiveAccounts];
-//        });
-//    }];
+    [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
 
     NSSetUncaughtExceptionHandler(&HandleExceptions);
 
@@ -191,6 +180,7 @@
 #pragma mark - UIApplication notification delegate
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
+    NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
     if (application.applicationState != UIApplicationStateActive) {
         [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
         if (completionHandler) {
@@ -202,6 +192,7 @@
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     // I (Karsten) have no clue why we're doing this. We are not using these remote notifications.
     // Don't know if PushKit suffers from removing it...
+    NSLog(@"Registering device for push notifications..."); // iOS 8
     [application registerForRemoteNotifications];
 }
 
@@ -213,6 +204,7 @@
 
 #pragma mark - PKPushRegistray management
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    NSLog(@"%s Incomming push notification of type: %@", __PRETTY_FUNCTION__, type);
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     NSDictionary *payloadDict = [payload dictionaryPayload];
     [self.pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
@@ -220,6 +212,7 @@
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
+    NSLog(@"Registration successful, bundle identifier: %@, device token: %@", [NSBundle.mainBundle bundleIdentifier], credentials.token);
     if (credentials.token) {
         [self.pzPushHandlerMiddleware registerToken:credentials.token];
     }
@@ -262,6 +255,9 @@ void HandleExceptions(NSException *exception) {
     for (GSCall *activeCall in [GSCall activeCalls]) {
         [activeCall end];
     }
+    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
+    }];
 }
 
 #pragma mark - Handle person(s)

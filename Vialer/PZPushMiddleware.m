@@ -17,6 +17,11 @@
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
+@interface PZPushMiddleware ()
+@property (nonatomic, strong)NSMutableArray *storedCallPayloadsToSent;
+@end
+
+
 @implementation PZPushMiddleware {
     AFHTTPRequestOperationManager *_manager;
 }
@@ -25,9 +30,39 @@
     self = [super init];
     if (self) {
         _manager = [AFHTTPRequestOperationManager manager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pjConnectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
     }
     return self;
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
+}
+
+- (void)pjConnectionStatusChangedNotification:(NSNotification *)notification {
+    NSLog(@"Notification :%@", notification);
+    ConnectionHandler *handler = [notification object];
+
+    if (handler.accountStatus == GSAccountStatusConnected)
+        [self sentCallStoredPayloads];
+}
+
+- (void)sentCallStoredPayloads {
+    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+        NSLog(@"%s GSAccountStatusConnected, sending #%d stored stored payloads", __PRETTY_FUNCTION__, [self.storedCallPayloadsToSent count]);
+        //TODO:we probably want to implement a queue and lock the array but the change of multiple simultatious calls is quite small
+        for (id storedPayload in self.storedCallPayloadsToSent)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // notify the PZ middleware that we registered, the PJSIP and are ready for calls using data from payload.
+                [self updateMiddleWareWithData:storedPayload];
+            });
+        
+        self.storedCallPayloadsToSent = nil;
+    } else {
+        NSLog(@"%s. PJSIP not connected, not sending stored Payloads!", __PRETTY_FUNCTION__);
+    }
+}
+
 
 - (NSString*)baseLink {
     static NSString* baseLink;
@@ -60,10 +95,15 @@
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
     NSString *type = payload[@"type"];
     if ([type isEqualToString:@"call"]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            // notify the PZ middleware that we registered and are ready for calls using data from payload.
+        //Check to see if we have a SIP connection, if so, update middleware directly, if not, store payload to sent when middleware becomes connected
+        if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+            NSLog(@"PJSIP connected with SIP Proxy, update middleware");
             [self updateMiddleWareWithData:payload];
-        });
+        } else {
+            //Store the payload so it can be sent when PJSIP becomes connected
+            NSLog(@"PJSIP not connected, %s Storing Payload", __PRETTY_FUNCTION__);
+            [self.storedCallPayloadsToSent addObject:payload];
+        }
     } else if ([type isEqualToString:@"checkin"]) {
         [self doDeviceCheckinWithData:payload];
     } else if ([type isEqualToString:@"message"]) {
@@ -121,9 +161,11 @@
     NSString *link      = data[@"response_api"];
     NSString *uniqueKey = data[@"unique_key"];
     
+    NSLog(@"Updating middleware: %@ %@", link, uniqueKey);
+    //sleep(40);
     if (link && uniqueKey) {
         [_manager POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Success"); // TODO: should I tell the user something?
+            NSLog(@"%s Success", __PRETTY_FUNCTION__); // TODO: should I tell the user something?
             [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error); //TODO: We should probably tell someone... ?
@@ -164,7 +206,7 @@
             // store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
             [defaults setObject:voipTokenString forKey:VOIP_TOKEN_STORAGE_KEY];
 
-            NSLog(@"Registration successfull!");    // TODO: we should probably tell someone...
+            NSLog(@"Middleware Registration successfull!");    // TODO: we should probably tell someone...
         };
         void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Registration failed! -> %@", error);    // TODO: we should probably tell someone...
@@ -208,6 +250,12 @@
         [hexadecimalString appendFormat:@"%02x", [string characterAtIndex:i]];
     }
     return hexadecimalString;
+}
+
+- (NSMutableArray *)storedCallPayloadsToSent {
+    if (!_storedCallPayloadsToSent)
+        _storedCallPayloadsToSent = [[NSMutableArray alloc] init];
+    return _storedCallPayloadsToSent;
 }
 
 @end

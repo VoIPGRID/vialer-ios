@@ -62,11 +62,11 @@ static GSCall *lastNotifiedCall;
 
 - (ConnectionStatus)connectionStatus {
     ConnectionStatus newConnectionStatus = (self.isOn4G || self.isOnWiFi) ? ConnectionStatusHigh : ConnectionStatusLow;
-    NSLog(@"Connection Status changed to: %@", [self connectionStatusToString:newConnectionStatus]);
+    NSLog(@"Connection Status changed to: %@", [[self class] connectionStatusToString:newConnectionStatus]);
     return newConnectionStatus;
 }
 
-- (NSString *)connectionStatusToString:(ConnectionStatus)connectionStatus {
++ (NSString *)connectionStatusToString:(ConnectionStatus)connectionStatus {
     NSString *humanReadableConnectionStatusString;
     switch (connectionStatus) {
         case ConnectionStatusHigh:
@@ -317,44 +317,31 @@ static GSCall *lastNotifiedCall;
                 [appDelegate handleSipCall:lastNotifiedCall];
             }
         }
-
         [self clearLastNotifiedCall];
     }
 }
 
-- (void)registerForLocalNotifications {
-    UIApplication *application = [UIApplication sharedApplication];
+- (void)registerForPushNotifications {
+    UIMutableUserNotificationAction *declineAction = [[UIMutableUserNotificationAction alloc] init];
+    [declineAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [declineAction setTitle:NSLocalizedString(@"Decline", nil)];
+    [declineAction setIdentifier:NotificationActionDecline];
+    
+    UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
+    [acceptAction setActivationMode:UIUserNotificationActivationModeForeground];
+    [acceptAction setTitle:NSLocalizedString(@"Accept", nil)];
+    [acceptAction setIdentifier:NotificationActionAccept];
+    
+    UIMutableUserNotificationCategory *actionCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [actionCategory setIdentifier:NotificationAcceptDeclineCategory];
+    [actionCategory setActions:@[acceptAction, declineAction]
+                    forContext:UIUserNotificationActionContextDefault];
 
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIMutableUserNotificationAction *declineAction = [[UIMutableUserNotificationAction alloc] init];
-        [declineAction setActivationMode:UIUserNotificationActivationModeBackground];
-        [declineAction setTitle:NSLocalizedString(@"Decline", nil)];
-        [declineAction setIdentifier:NotificationActionDecline];
-
-        UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
-        [acceptAction setActivationMode:UIUserNotificationActivationModeForeground];
-        [acceptAction setTitle:NSLocalizedString(@"Accept", nil)];
-        [acceptAction setIdentifier:NotificationActionAccept];
-
-        UIMutableUserNotificationCategory *actionCategory = [[UIMutableUserNotificationCategory alloc] init];
-        [actionCategory setIdentifier:NotificationAcceptDeclineCategory];
-        [actionCategory setActions:@[acceptAction, declineAction]
-                        forContext:UIUserNotificationActionContextDefault];
-
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge)
-                                                                                 categories:[NSSet setWithObject:actionCategory]];
-        [application registerUserNotificationSettings:settings];
-    } else {
-        //[application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-        
-        
-        
-        
-        
-        
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
-        [application registerForRemoteNotifications];
-    }
+    NSLog(@"Requesting permission for push notifications...");
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:
+                                            UIUserNotificationTypeAlert | UIUserNotificationTypeBadge |
+                                            UIUserNotificationTypeSound categories:[NSSet setWithObject:actionCategory]];
+    [UIApplication.sharedApplication registerUserNotificationSettings:settings];
 }
 
 - (void)clearLastNotifiedCall {

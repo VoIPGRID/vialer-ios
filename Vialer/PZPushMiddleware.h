@@ -16,9 +16,7 @@
 
 - (void)registerForVoIPNotifications;
 
-- (void)handleNotificationWithDictionary:(NSDictionary*)payload;
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload;
-- (void)showLocalIncomingCallNotificationWithPayload:(NSDictionary*)payloadDict;
 
 - (void)updateMiddleWareWithData:(NSDictionary*)data;
 

@@ -56,7 +56,7 @@
 	<key>URLS</key>
 	<dict>
 		<key>Middelware BaseLink</key>
-		<string>http://vialerpush.voipgrid.nl</string>
+		<string>https://vialerpush.voipgrid.nl</string>
 		<key>API</key>
 		<string>https://api.voipgrid.nl/api</string>
 		<key>Partner</key>
