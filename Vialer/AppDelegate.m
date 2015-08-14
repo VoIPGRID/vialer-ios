@@ -39,20 +39,9 @@
 @property (nonatomic, strong) CallingViewController *callingViewController;
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
-
-@property (nonatomic, strong) PZPushMiddleware *pzPushHandlerMiddleware;
-
 @end
 
 @implementation AppDelegate
-
-- (PZPushMiddleware*)pzPushHandlerMiddleware {
-    // Create a middleware class
-    if(!_pzPushHandlerMiddleware) {
-        _pzPushHandlerMiddleware = [PZPushMiddleware new];
-    }
-    return _pzPushHandlerMiddleware;
-}
 
 - (void)doRegistrationWithLoginCheck {
     if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
@@ -186,7 +175,7 @@
 
 #pragma mark - VoiP push notifications
 - (void)registerForVoIPNotifications {
-    [self.pzPushHandlerMiddleware registerForVoIPNotifications];
+    [[PZPushMiddleware sharedInstance]  registerForVoIPNotifications];
 }
 #pragma mark - UIApplication notification delegate
 
@@ -215,20 +204,21 @@
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     NSDictionary *payloadDict = [payload dictionaryPayload];
-    [self.pzPushHandlerMiddleware handleReceivedNotificationForApplicationState:state
+    [[PZPushMiddleware sharedInstance] handleReceivedNotificationForApplicationState:state
                                                                payload:payloadDict];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
     if (credentials.token) {
-        [self.pzPushHandlerMiddleware updateDeviceRecordForToken:credentials.token];
+        [[PZPushMiddleware sharedInstance]  updateDeviceRecordForToken:credentials.token];
     }
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
     NSData *token = [registry pushTokenForType:type];
     if (token) {
-        [self.pzPushHandlerMiddleware unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]];
+        [[PZPushMiddleware sharedInstance]  unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]
+                                        andSipAccount:[VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount];
     }
 }
 
@@ -255,7 +245,7 @@ void HandleExceptions(NSException *exception) {
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] updateSIPAccountWithSuccess:^{
-        [self.pzPushHandlerMiddleware updateDeviceRecord];
+        [[PZPushMiddleware sharedInstance]  updateDeviceRecord];
     } failure:nil];
 }
 

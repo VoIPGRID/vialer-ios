@@ -8,6 +8,7 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
+#import "PZPushMiddleware.h"
 
 #import "SSKeychain.h"
 
@@ -346,6 +347,9 @@
         [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
         NSLog(@"Setting SIP Account %@", sipAccount);
     } else {
+        //First unregister the account with the middleware
+        [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+        //Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
         NSLog(@"No SIP Account");
     }

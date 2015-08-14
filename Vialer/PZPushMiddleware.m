@@ -17,16 +17,30 @@
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
-@implementation PZPushMiddleware {
-    AFHTTPRequestOperationManager *_manager;
+@interface PZPushMiddleware ()
+/**
+ * @property pzMiddleware represents the API endpoint of the middleware.
+ */
+@property (nonatomic, strong)AFHTTPRequestOperationManager *pzMiddleware;
+@end
+
+@implementation PZPushMiddleware
+
++ (PZPushMiddleware *)sharedInstance {
+    static dispatch_once_t pred;
+    static PZPushMiddleware *_sharedInstance = nil;
+    
+    dispatch_once(&pred, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    return _sharedInstance;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _manager = [AFHTTPRequestOperationManager manager];
+- (AFHTTPRequestOperationManager *)pzMiddleware {
+    if (!_pzMiddleware) {
+        _pzMiddleware = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseLink]];
     }
-    return self;
+    return _pzMiddleware;
 }
 
 - (NSString*)baseLink {
@@ -92,12 +106,14 @@
     NSString *link = payload[@"response_api"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
-    [_manager POST:link parameters:@{@"token": storedVoipToken}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // TODO: notify user?
-        [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // TODO: notify user?
-    }];
+    [self.pzMiddleware POST:link parameters:@{@"token": storedVoipToken}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Device successfully checked in with Middleware");
+            // TODO: notify user?
+            [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            // TODO: notify user?
+            NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
+        }];
 }
 
 /**
@@ -122,7 +138,7 @@
     NSString *uniqueKey = data[@"unique_key"];
     
     if (link && uniqueKey) {
-        [_manager POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.pzMiddleware POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Success"); // TODO: should I tell the user something?
             [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -156,11 +172,6 @@
     NSLog(@"voip token: %@", voipTokenString);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    if (sipAccount.length <= 0) {
-        [self unregisterToken:voipTokenString];
-        return;
-    }
     
     //Only check for Sip Account and VoiP Token, rest is "nice to know" info
     if (sipAccount.length > 0 && voipTokenString.length > 0) {
@@ -198,15 +209,23 @@
     }
 }
 
+- (void)unregisterSipAccount:(NSString *)sipAccount {
+    [self unregisterToken:[[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY] andSipAccount:sipAccount];
+}
 
-
-/**
-* When a token is disabled or invalidated we should notify the middleware.
-*
-* Currently NOTIMPLEMENTED in middleware!
-*/
-- (void)unregisterToken:(NSString *)token {
-    /* TODO */
+- (void)unregisterToken:(NSString *)token andSipAccount:(NSString *)sipAccount {
+    NSAssert(token, @"Token must be supplied");
+    NSAssert(sipAccount, @"SIP Account must be supplied");
+    
+    NSDictionary *params = @{@"token": token,
+                             @"sip_user_id": sipAccount };
+    
+    NSString *apiLink = @"/api/unregister-apns-device/";
+    [self.pzMiddleware POST:apiLink parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Device was successfully unregistered");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
+    }];
 }
 
 #pragma mark - token management
