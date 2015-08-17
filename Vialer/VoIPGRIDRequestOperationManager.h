@@ -25,6 +25,13 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 - (void)logout;
 + (BOOL)isLoggedIn;
 
+/**
+ * Fetches and stores the users SIP account data
+ * @param success the success block called on successfull completion
+ * @param failure the failure block called when the operation fails
+ */
+- (void)updateSIPAccountWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure;
+
 // Account info
 - (NSString *)user;
 - (NSString *)outgoingNumber;

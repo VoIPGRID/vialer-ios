@@ -8,6 +8,7 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
+#import "PZPushMiddleware.h"
 
 #import "SSKeychain.h"
 
@@ -70,8 +71,6 @@
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
     
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
-    //deprecated
-    //NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *client = [responseObject objectForKey:@"client"];
         if (!client) {
@@ -105,25 +104,12 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
 
             // Fetch SIP account credentials
-            NSString *appAccountUrl = [responseObject objectForKey:@"app_account"];
-            if ([appAccountUrl isKindOfClass:[NSString class]]) {
-                [self retrievePhoneAccountForUrl:appAccountUrl success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSObject *account = [responseObject objectForKey:@"account_id"];
-                    NSObject *password = [responseObject objectForKey:@"password"];
-                    if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
-                        [self setSipAccount:[(NSNumber *)account stringValue] andSipPassword:(NSString *)password];
-                    } else {
-                        [self setSipAccount:nil andSipPassword:nil];
-                    }
-                    success(operation, success);
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    [self setSipAccount:nil andSipPassword:nil];
-                    success(operation, success);
-                }];
-            } else {
-                [self setSipAccount:nil andSipPassword:nil];
-                success(operation, success);
-            }
+            [self updateSIPAccountWithSuccess:^{
+                if (success) success(operation, success);
+            } failure:^(NSError *error) {
+                //The old code stated that success should also be called on a failure
+                if (success) success(operation, success);
+            }];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
@@ -316,12 +302,65 @@
     }];
 }
 
+// TODO: don't use success/failblocks, use one completion block
+// http://collindonnell.com/2013/04/07/stop-using-success-failure-blocks/
+- (void)updateSIPAccountWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
+    if ([[self class] isLoggedIn]) {
+        NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET"
+                                                                       URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString]
+                                                                      parameters:nil
+                                                                           error:nil];
+        
+        AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *appAccountUrl = [responseObject objectForKey:@"app_account"];
+            [self fetchSipAccountFromAppAccountURL:appAccountUrl withSuccess:^(NSString *sipUsername, NSString *sipPassword) {
+                [self setSipAccount:sipUsername andSipPassword:sipPassword];
+                if (success) success ();
+            } failure:^(NSError *error) {
+                if (failure) failure(error);
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (failure) failure(error);
+        }];
+        
+        [self setHandleAuthorizationRedirectForRequest:request andOperation:operation];
+        [self.operationQueue addOperation:operation];
+    }
+}
+
+/**
+ * Given an URL to an App specific SIP account (phoneaccount) this function fetches and sets the SIP account details for use in the app if any, otherwise the SIP data is set to nil.
+ * @param appAccountURL the URL from where to fetch the SIP account details e.g. /api/phoneaccount/basic/phoneaccount/XXXXX/
+ */
+- (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success failure:(void (^)(NSError *error))failure {
+    if ([appAccountURL isKindOfClass:[NSString class]])
+        [self retrievePhoneAccountForUrl:appAccountURL success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSObject *account = [responseObject objectForKey:@"account_id"];
+            NSObject *password = [responseObject objectForKey:@"password"];
+            if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
+                if (success) success([(NSNumber *)account stringValue], (NSString *)password);
+            } else {
+                //No information about SIP account found, removed by user
+                if (success) success(nil, nil);
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (failure) failure(error);
+        }];
+    else
+        //No URL supplied for Mobile app account, this means the user does not have the account set.
+        //We are also going to unset it by calling success with but sipUsername and sipPassword set to nil
+        if (success) success(nil, nil);
+}
+
 - (void)setSipAccount:(NSString *)sipAccount andSipPassword:(NSString *)sipPassword {
     if (sipAccount) {
         [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
         [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
         NSLog(@"Setting SIP Account %@", sipAccount);
     } else {
+        //First unregister the account with the middleware
+        [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+        //Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
         NSLog(@"No SIP Account");
     }
