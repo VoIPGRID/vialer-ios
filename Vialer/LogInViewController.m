@@ -38,14 +38,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
     
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
     [self.view addGestureRecognizer:tg];
     
     _fetchAccountRetryCount = 0;
+    
+    // Load the styling colors
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSAssert(config != nil, @"Config.plist not found!");
+    NSArray *currentTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
+    NSAssert(currentTintColor != nil && currentTintColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
+    
     [self.unlockView setupSlider];
+    self.unlockView.slideToCallText.textColor = [UIColor colorWithRed:[currentTintColor[0] intValue] / 255.f green:[currentTintColor[1] intValue] / 255.f blue:[currentTintColor[2] intValue] / 255.f alpha:1.f];
+    self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
