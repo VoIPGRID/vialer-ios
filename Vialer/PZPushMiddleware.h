@@ -37,7 +37,6 @@
  * Unregisters a device from the middleware with the specified SIP account
  * @param sipAccount SIP account ID of the device to unregister
  */
-
 - (void)unregisterSipAccount:(NSString *)sipAccount;
 
 /**
