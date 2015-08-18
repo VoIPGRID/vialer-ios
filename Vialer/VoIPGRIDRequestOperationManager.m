@@ -8,6 +8,7 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
+#import "PZPushMiddleware.h"
 
 #import "SSKeychain.h"
 
@@ -70,8 +71,6 @@
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
     
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
-    //deprecated
-    //NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *client = [responseObject objectForKey:@"client"];
         if (!client) {
@@ -81,11 +80,20 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
+            
+            
             NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
             if ([outgoingCli isKindOfClass:[NSString class]]) {
                 [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
             } else {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+            }
+            
+            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
+            if ([mobile_nr isKindOfClass:[NSString class]]) {
+                [[NSUserDefaults standardUserDefaults] setObject:mobile_nr forKey:@"MobileNumber"];
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
             }
 
             // Store credentials
@@ -96,25 +104,12 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
 
             // Fetch SIP account credentials
-            NSString *appAccountUrl = [responseObject objectForKey:@"app_account"];
-            if ([appAccountUrl isKindOfClass:[NSString class]]) {
-                [self retrievePhoneAccountForUrl:appAccountUrl success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSObject *account = [responseObject objectForKey:@"account_id"];
-                    NSObject *password = [responseObject objectForKey:@"password"];
-                    if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
-                        [self setSipAccount:[(NSNumber *)account stringValue] andSipPassword:(NSString *)password];
-                    } else {
-                        [self setSipAccount:nil andSipPassword:nil];
-                    }
-                    success(operation, success);
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    [self setSipAccount:nil andSipPassword:nil];
-                    success(operation, success);
-                }];
-            } else {
-                [self setSipAccount:nil andSipPassword:nil];
-                success(operation, success);
-            }
+            [self updateSIPAccountWithSuccess:^{
+                if (success) success(operation, success);
+            } failure:^(NSError *error) {
+                //The old code stated that success should also be called on a failure
+                if (success) success(operation, success);
+            }];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
@@ -307,12 +302,65 @@
     }];
 }
 
+// TODO: don't use success/failblocks, use one completion block
+// http://collindonnell.com/2013/04/07/stop-using-success-failure-blocks/
+- (void)updateSIPAccountWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
+    if ([[self class] isLoggedIn]) {
+        NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET"
+                                                                       URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString]
+                                                                      parameters:nil
+                                                                           error:nil];
+        
+        AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *appAccountUrl = [responseObject objectForKey:@"app_account"];
+            [self fetchSipAccountFromAppAccountURL:appAccountUrl withSuccess:^(NSString *sipUsername, NSString *sipPassword) {
+                [self setSipAccount:sipUsername andSipPassword:sipPassword];
+                if (success) success ();
+            } failure:^(NSError *error) {
+                if (failure) failure(error);
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (failure) failure(error);
+        }];
+        
+        [self setHandleAuthorizationRedirectForRequest:request andOperation:operation];
+        [self.operationQueue addOperation:operation];
+    }
+}
+
+/**
+ * Given an URL to an App specific SIP account (phoneaccount) this function fetches and sets the SIP account details for use in the app if any, otherwise the SIP data is set to nil.
+ * @param appAccountURL the URL from where to fetch the SIP account details e.g. /api/phoneaccount/basic/phoneaccount/XXXXX/
+ */
+- (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success failure:(void (^)(NSError *error))failure {
+    if ([appAccountURL isKindOfClass:[NSString class]])
+        [self retrievePhoneAccountForUrl:appAccountURL success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSObject *account = [responseObject objectForKey:@"account_id"];
+            NSObject *password = [responseObject objectForKey:@"password"];
+            if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
+                if (success) success([(NSNumber *)account stringValue], (NSString *)password);
+            } else {
+                //No information about SIP account found, removed by user
+                if (success) success(nil, nil);
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (failure) failure(error);
+        }];
+    else
+        //No URL supplied for Mobile app account, this means the user does not have the account set.
+        //We are also going to unset it by calling success with but sipUsername and sipPassword set to nil
+        if (success) success(nil, nil);
+}
+
 - (void)setSipAccount:(NSString *)sipAccount andSipPassword:(NSString *)sipPassword {
     if (sipAccount) {
         [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
         [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
         NSLog(@"Setting SIP Account %@", sipAccount);
     } else {
+        //First unregister the account with the middleware
+        [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+        //Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
         NSLog(@"No SIP Account");
     }
@@ -340,32 +388,47 @@
     return nil;
 }
 
-- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSError *error, NSString *userFriendlyErrorString))failure {
-    if ([mobileNumber length] > 0) {
-        //Strip whitespaces
-        mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-        //replace leading zero with +31
-        if ([mobileNumber hasPrefix:@"0"])
-            mobileNumber = [NSString stringWithFormat:@"+31%@", [mobileNumber substringFromIndex:1]];
-        
-        NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
-        [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            if (success)
-                success();
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSString *userFriendlyErrorString;
-            
-            if (operation.response.statusCode == 400)
-                userFriendlyErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
-            if (failure)
-                failure(error, userFriendlyErrorString);
-        }];
-    } else {
-        if (failure)
-            failure(nil, NSLocalizedString(@"Unable to save \"My number\"", nil));
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
+    //Has the user entered a number
+    if (![mobileNumber length] > 0) {
+        if (failure) failure(NSLocalizedString(@"Unable to save \"My number\"", nil));
+        return;
     }
+    //Strip whitespaces
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    //Change country code from 00xx to +xx
+    if ([mobileNumber hasPrefix:@"00"])
+        mobileNumber = [NSString stringWithFormat:@"+%@", [mobileNumber substringFromIndex:2]];
+    
+    //Has the user entered the number in the international format with check above 00xx is also accepted
+    if (![mobileNumber hasPrefix:@"+"]) {
+        if (failure) failure(NSLocalizedString(@"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR", nil));
+        return;
+    }
+
+    //With all the checks and replacements done, is the number actually different from the stored one?
+    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]]) {
+        if (success) success();
+        return;
+    }
+    
+    //Sent the new number to the server
+    NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
+    [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (success) success();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //Provide user with the message from the error
+        NSString *localizedErrorString = [error localizedDescription];
+        
+        //if the status code was 400, the platform will give us a localized error description in the mobile_nr parameter
+        if (operation.response.statusCode == 400)
+            localizedErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
+        
+        if (failure) failure(localizedErrorString);
+    }];
 }
 
 #pragma mark - Alert view delegate

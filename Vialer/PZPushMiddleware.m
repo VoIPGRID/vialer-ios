@@ -17,17 +17,69 @@
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
-@implementation PZPushMiddleware {
-    AFHTTPRequestOperationManager *_manager;
+@interface PZPushMiddleware ()
+/**
+ * @property pzMiddleware represents the API endpoint of the middleware.
+ */
+@property (nonatomic, strong)AFHTTPRequestOperationManager *pzMiddleware;
+@property (nonatomic, strong)NSMutableArray *storedCallPayloadsToSent;
+@end
+
+@implementation PZPushMiddleware
+
++ (PZPushMiddleware *)sharedInstance {
+    static dispatch_once_t pred;
+    static PZPushMiddleware *_sharedInstance = nil;
+    
+    dispatch_once(&pred, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    return _sharedInstance;
+}
+
+- (AFHTTPRequestOperationManager *)pzMiddleware {
+    if (!_pzMiddleware) {
+        _pzMiddleware = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseLink]];
+    }
+    return _pzMiddleware;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _manager = [AFHTTPRequestOperationManager manager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pjConnectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
     }
     return self;
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
+}
+
+- (void)pjConnectionStatusChangedNotification:(NSNotification *)notification {
+    NSLog(@"Notification :%@", notification);
+    ConnectionHandler *handler = [notification object];
+
+    if (handler.accountStatus == GSAccountStatusConnected)
+        [self sentCallStoredPayloads];
+}
+
+- (void)sentCallStoredPayloads {
+    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+        NSLog(@"%s GSAccountStatusConnected, sending #%d stored payload(s)", __PRETTY_FUNCTION__, [self.storedCallPayloadsToSent count]);
+        //TODO:we probably want to implement a queue and lock the array but the change of multiple simultatious calls is quite small
+        for (id storedPayload in self.storedCallPayloadsToSent)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // notify the PZ middleware that we registered, the PJSIP and are ready for calls using data from payload.
+                [self updateMiddleWareWithData:storedPayload];
+            });
+        
+        self.storedCallPayloadsToSent = nil;
+    } else {
+        NSLog(@"%s. PJSIP not connected, not sending stored Payloads!", __PRETTY_FUNCTION__);
+    }
+}
+
 
 - (NSString*)baseLink {
     static NSString* baseLink;
@@ -60,10 +112,16 @@
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
     NSString *type = payload[@"type"];
     if ([type isEqualToString:@"call"]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            // notify the PZ middleware that we registered and are ready for calls using data from payload.
+        [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+        //Check to see if we have a SIP connection, if so, update middleware directly, if not, store payload to sent when middleware becomes connected
+        if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
+            NSLog(@"PJSIP connected with SIP Proxy, update middleware");
             [self updateMiddleWareWithData:payload];
-        });
+        } else {
+            //Store the payload so it can be sent when PJSIP becomes connected
+            NSLog(@"PJSIP not connected, %s Storing Payload", __PRETTY_FUNCTION__);
+            [self.storedCallPayloadsToSent addObject:payload];
+        }
     } else if ([type isEqualToString:@"checkin"]) {
         [self doDeviceCheckinWithData:payload];
     } else if ([type isEqualToString:@"message"]) {
@@ -92,12 +150,14 @@
     NSString *link = payload[@"response_api"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
-    [_manager POST:link parameters:@{@"token": storedVoipToken}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // TODO: notify user?
-        [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // TODO: notify user?
-    }];
+    [self.pzMiddleware POST:link parameters:@{@"token": storedVoipToken}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Device successfully checked in with Middleware");
+            // TODO: notify user?
+            [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            // TODO: notify user?
+            NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
+        }];
 }
 
 /**
@@ -121,9 +181,11 @@
     NSString *link      = data[@"response_api"];
     NSString *uniqueKey = data[@"unique_key"];
     
+    NSLog(@"Updating middleware: %@ %@", link, uniqueKey);
+    //sleep(40);
     if (link && uniqueKey) {
-        [_manager POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Success"); // TODO: should I tell the user something?
+        [self.pzMiddleware POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%s Success", __PRETTY_FUNCTION__); // TODO: should I tell the user something?
             [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error); //TODO: We should probably tell someone... ?
@@ -133,38 +195,52 @@
     }
 }
 
+- (void)updateDeviceRecord {
+    NSString* voipTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY];
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+    
+    [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
+}
+
+- (void)updateDeviceRecordForToken:(NSData*)token {
+    NSString* voipTokenString = [[self class] deviceTokenStringFromData:token];
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+
+    [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
+}
+
 /**
 * Register a token with the PZ middleware which can be used to notify this device of incoming calls, etc.
 *
 * @param token the NSData object containing a APNS registration token used by a backend.
 */
-- (void)registerToken:(NSData*)token {
-    NSString* voipTokenString = [self _deviceTokenStringFromData:token];
+- (void)updateDeviceRecordForVoIPToken:(NSString *)voipTokenString sipAccount:(NSString *)sipAccount {
     NSLog(@"voip token: %@", voipTokenString);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
-
-    if (storedVoipToken == nil || ![voipTokenString isEqualToString:storedVoipToken]) {
-         // update middleware with the token
+    
+    //Only check for Sip Account and VoiP Token, rest is "nice to know" info
+    if (sipAccount.length > 0 && voipTokenString.length > 0) {
+        // update middleware with the token
+        NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
         NSDictionary *params = @{
             // Pretty name for a device in middleware.
             @"name": [[UIDevice currentDevice] name],
             // token used to send notifications to this device.
             @"token": voipTokenString,
             // user id used as primary key of the SIP account registered with the currently logged in user.
-            @"sip_user_id": [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount],
+            @"sip_user_id": sipAccount,
             // The version of the OS of this phone. Useful when debugging possible issues in the future.
             @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
             // The version of this client app. Useful when debugging possible issues in the future.
-            @"client_version": [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]
+            @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:@"CFBundleShortVersionString"], [infoDict objectForKey:@"CFBundleVersion"]]
         };
 
         void (^success)(AFHTTPRequestOperation*, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
             // store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
             [defaults setObject:voipTokenString forKey:VOIP_TOKEN_STORAGE_KEY];
 
-            NSLog(@"Registration successfull!");    // TODO: we should probably tell someone...
+            NSLog(@"Middleware Registration successfull!");    // TODO: we should probably tell someone...
         };
         void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Registration failed! -> %@", error);    // TODO: we should probably tell someone...
@@ -174,16 +250,28 @@
                                            parameters:params
                                               success:success
                                               failure:failure];
+    } else {
+        NSLog(@"SipAccount(%@) or VoIPToken(%@) not provided unable to update middleware", sipAccount, voipTokenString);
     }
 }
 
-/**
-* When a token is disabled or invalidated we should notify the middleware.
-*
-* Currently NOTIMPLEMENTED in middleware!
-*/
-- (void)unregisterToken:(NSData*)token {
-    /* TODO */
+- (void)unregisterSipAccount:(NSString *)sipAccount {
+    [self unregisterToken:[[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY] andSipAccount:sipAccount];
+}
+
+- (void)unregisterToken:(NSString *)token andSipAccount:(NSString *)sipAccount {
+    NSAssert(token, @"Token must be supplied");
+    NSAssert(sipAccount, @"SIP Account must be supplied");
+    
+    NSDictionary *params = @{@"token": token,
+                             @"sip_user_id": sipAccount };
+    
+    NSString *apiLink = @"/api/unregister-apns-device/";
+    [self.pzMiddleware POST:apiLink parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Device was successfully unregistered");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
+    }];
 }
 
 #pragma mark - token management
@@ -193,7 +281,7 @@
 * @param deviceToken NSData object to convert to hex string.
 * @returns hexadecimal string containing APNS token.
 */
-- (NSString*) _deviceTokenStringFromData:(NSData*)deviceToken {
++ (NSString*) deviceTokenStringFromData:(NSData*)deviceToken {
     NSString* deviceTokenString = [[NSString alloc] initWithData:deviceToken encoding:NSASCIIStringEncoding];
     return [self _hexadecimalStringForString:deviceTokenString];
 }
@@ -202,12 +290,18 @@
 * @param string data object to convert to hexadecimal format.
 * @returns hexadecimal version of input string.
 */
-- (NSString*) _hexadecimalStringForString:(NSString*)string {
++ (NSString*) _hexadecimalStringForString:(NSString*)string {
     NSMutableString* hexadecimalString = [[NSMutableString alloc] init];
     for(NSUInteger i = 0; i < [string length]; i++) {
         [hexadecimalString appendFormat:@"%02x", [string characterAtIndex:i]];
     }
     return hexadecimalString;
+}
+
+- (NSMutableArray *)storedCallPayloadsToSent {
+    if (!_storedCallPayloadsToSent)
+        _storedCallPayloadsToSent = [[NSMutableArray alloc] init];
+    return _storedCallPayloadsToSent;
 }
 
 @end

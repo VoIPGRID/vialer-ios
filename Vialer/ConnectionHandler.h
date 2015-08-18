@@ -30,9 +30,10 @@ NSString * const IncomingSIPCallNotification;
 - (void)sipUpdateConnectionStatus;
 
 - (void)handleLocalNotification:(UILocalNotification *)notification withActionIdentifier:(NSString *)identifier;
-- (void)registerForLocalNotifications;
+- (void)registerForPushNotifications;
 
 + (ConnectionHandler *)sharedConnectionHandler;
 + (void)showLocalNotificationForIncomingCall:(GSCall *)incomingCall;
 
++ (NSString *)connectionStatusToString:(ConnectionStatus)connectionStatus;
 @end

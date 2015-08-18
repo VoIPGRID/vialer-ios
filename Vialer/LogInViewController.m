@@ -224,27 +224,28 @@
     NSString *username = self.loginFormView.usernameField.text;
     NSString *password = self.loginFormView.passwordField.text;
     [self doLoginCheckWithUname:username password:password successBlock:^{
+        self.configureFormView.phoneNumberField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
         [self retrieveOutgoingNumberWithSuccessBlock:nil];
     }];
     [self deselectAllTextFields:nil];
 }
 
 - (void)continueFromConfigureFormViewToUnlockView {
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:self.configureFormView.phoneNumberField.text success:^{
+    NSString *newNumber = self.configureFormView.phoneNumberField.text;
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber success:^{
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
         [self.configureFormView.phoneNumberField resignFirstResponder];
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
         [_scene runActThree];                     // Animate the clouds
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
-    } failure:^(NSError *error, NSString *userFriendlyErrorString) {
-        NSString *message;
-        if ([userFriendlyErrorString length] > 0)
-            message = userFriendlyErrorString;
-        else
-            message = NSLocalizedString(@"Unable to save \"My number\"", nil);
         
+    } failure:^(NSString *localizedErrorString) {
+        [SVProgressHUD dismiss];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                        message:message
+                                                        message:localizedErrorString
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"Ok", nil)
                                               otherButtonTitles:nil];

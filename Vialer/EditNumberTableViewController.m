@@ -13,6 +13,9 @@
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 
+#import "VoIPGRIDRequestOperationManager.h"
+#import "SVProgressHUD.h"
+
 @implementation EditNumberTableViewController
 
 - (void)viewDidLoad {
@@ -32,8 +35,23 @@
 }
 
 - (void)saveButtonPressed {
-    [self.delegate numberHasChanged:self.numberTextFieldCell.textField.text];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *newNumber = self.numberTextFieldCell.textField.text;
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber success:^{
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
+        [self.delegate numberHasChanged:newNumber];
+        [self.navigationController popViewControllerAnimated:YES];
+    
+    } failure:^(NSString *localizedErrorString) {
+        [SVProgressHUD dismiss];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                        message:localizedErrorString
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma mark - Table view data source
