@@ -66,7 +66,7 @@
 
 - (void)sentCallStoredPayloads {
     if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
-        NSLog(@"%s GSAccountStatusConnected, sending #%d stored stored payloads", __PRETTY_FUNCTION__, [self.storedCallPayloadsToSent count]);
+        NSLog(@"%s GSAccountStatusConnected, sending #%d stored payload(s)", __PRETTY_FUNCTION__, [self.storedCallPayloadsToSent count]);
         //TODO:we probably want to implement a queue and lock the array but the change of multiple simultatious calls is quite small
         for (id storedPayload in self.storedCallPayloadsToSent)
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -112,6 +112,7 @@
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
     NSString *type = payload[@"type"];
     if ([type isEqualToString:@"call"]) {
+        [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
         //Check to see if we have a SIP connection, if so, update middleware directly, if not, store payload to sent when middleware becomes connected
         if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
             NSLog(@"PJSIP connected with SIP Proxy, update middleware");

@@ -21,6 +21,7 @@
 #import "SideMenuViewController.h"
 #import "ConnectionHandler.h"
 #import "Gossip+Extra.h"
+#import "SSKeychain.h"
 
 #import "AFNetworkActivityLogger.h"
 #import "UIAlertView+Blocks.h"
@@ -52,6 +53,7 @@
 #pragma mark - UIApplication delegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
     [self doRegistrationWithLoginCheck];
+    [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
