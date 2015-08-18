@@ -44,6 +44,7 @@
     UIImage *routingIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:tintColor];
     UIImage *infoIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-info"] color:tintColor];
     UIImage *accountIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:tintColor];
+    UIImage *logoutIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-logout"] color:tintColor];
     //UIImage *autoconnectIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:tintColor];
     
     self.menuItems = @[
@@ -52,7 +53,7 @@
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Routing", nil) andIcon:routingIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Information", nil) andIcon:infoIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Account", nil) andIcon:accountIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:nil]
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:logoutIcon]
     ];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -88,6 +89,7 @@
         CGFloat xOffset = (CGRectGetWidth(headerView.frame) - 171.f) / 2;
         UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, 40.f, 171.f, 41.f)];
         logo.image = [UIImage imageNamed:@"logoMedium"];
+        logo.contentMode = UIViewContentModeCenter;
         
         CGFloat yOffset = CGRectGetMaxY(logo.frame) + 10.f;
         UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, yOffset, CGRectGetWidth(headerView.frame), 20.f)];
