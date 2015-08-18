@@ -303,8 +303,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
         case GSCallStatusConnected: {
             NSLog(@"Call status changed: Connected");
-            self.numbersButton.enabled = self.pauseButton.enabled =  self.speakerButton.enabled = YES;
-            //self.muteButton.enabled = keeping mute button disabled... not implemented
+            self.numbersButton.enabled = self.pauseButton.enabled =  self.speakerButton.enabled = self.muteButton.enabled = YES;
             //Register for the audio interruption notification to be able to restore the sip audio session after an interruption (incomming call/alarm....)
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AudioInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
             
@@ -381,7 +380,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
 - (void)muteButtonPressed:(UIButton *)sender {
     [sender setSelected:!sender.isSelected];
-    self.currentCall.volume = sender.isSelected ? 0.f : 1.f;
+    self.currentCall.micVolume = sender.isSelected ? 0.f : 1.f;
 }
 
 - (void)pauseButtonPressed:(UIButton *)sender {
