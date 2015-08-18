@@ -134,7 +134,9 @@
     for (NSHTTPCookie *cookie in cookieStorage.cookies) {
         [cookieStorage deleteCookie:cookie];
     }
-
+    //unregister from middleware
+    [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+    
     // Remove sip account if present
     NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
     if (sipAccount) {
