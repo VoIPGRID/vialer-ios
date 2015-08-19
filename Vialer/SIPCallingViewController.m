@@ -294,6 +294,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
         case GSCallStatusConnecting: {
             NSLog(@"Call status changed: Connecting...");
+            self.speakerButton.enabled = YES;
             [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
         } break;
 
