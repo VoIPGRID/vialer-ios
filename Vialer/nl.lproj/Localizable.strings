@@ -302,3 +302,9 @@
 "Unable to save My number" = "Mijn nummer kan niet worden opgeslagen";
 "SAVING_NUMBER..." = "Nummer opslaan...";
 "NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
+
+/* Keypad icons mappings */
+"keypad-numbers" = "numbers";
+"keypad-pause" = "pause";
+"keypad-soundoff" = "mute";
+"keypad-speaker" = "speaker";

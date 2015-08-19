@@ -54,6 +54,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     self.numberPadViewController.delegate = self;
     self.numberPadViewController.view.hidden = YES;
 
+    // These image name also map to the localization text
     self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker"/*, @"keypad-forward", @"keypad-addcall"*/];
     
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
@@ -101,7 +102,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
             NSInteger imageIdx = j * 3 + i;
             NSString *image = imageIdx < self.images.count ? self.images[j * 3 + i] : nil;
             if ([image length] != 0) {
-                UIButton *button = [self createDialerButtonWithImage:image andSubTitle:nil];
+                UIButton *button = [self createDialerButtonWithImage:image andSubTitle:NSLocalizedString(image, nil)];
                 switch (j * 3 + i) {
                     case 0:
                         self.numbersButton = button;
@@ -143,10 +144,12 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
     if (subTitle) {
         [button setTitle:subTitle forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:14.f];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateDisabled];
+        button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Neue" size:18.f];
 
         // Center the image and title
-        CGFloat spacing = 4.0;
+        CGFloat spacing = 12.0;
         CGSize imageSize = button.imageView.image.size;
         button.titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + spacing), 0.0);
         CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
