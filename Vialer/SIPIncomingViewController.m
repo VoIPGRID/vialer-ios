@@ -80,7 +80,7 @@
  * Handle an incoming SIP call. Active GSCall object is attached to notification.object. 
  * The 'self.incomingCall' property is the active GSCall object which manages call interaction. 
  * It is set to nil when the call is ended or interupted by [self callStatusDidChange].
- * So, on every incoming call; check if there is an active one. If there is: end the newly oncoming call.
+ * So, on every incoming call; check if there is an active one. If there is: end the newly incoming call.
  */
 - (void)incomingSIPCallNotification:(NSNotification *)notification {
 
