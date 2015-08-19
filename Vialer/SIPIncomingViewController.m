@@ -77,8 +77,15 @@
 }
 
 - (void)incomingSIPCallNotification:(NSNotification *)notification {
-    self.incomingCall = notification.object;
-    if (self.incomingCall) {
+
+    // First check if the notification.object contains an incoming GSCall object instance
+    id possibleNewCall = notification.object;
+    if (!(possibleNewCall && [possibleNewCall isKindOfClass:GSCall.class])) {
+        return; // The new expected "call" is nil or not of the expected type!
+    }
+    
+    if (self.incomingCall == nil) { // There is no active call. Handle newly incoming.
+        self.incomingCall = notification.object;
         // Register status change observer
         [self.incomingCall addObserver:self
                             forKeyPath:@"status"
@@ -91,6 +98,9 @@
         } else {
             [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
         }
+    } else {
+        // There is an active call: end the newly incoming one
+        [(GSCall *)possibleNewCall end];
     }
 }
 
