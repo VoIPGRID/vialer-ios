@@ -175,6 +175,7 @@
         }
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
         [textField resignFirstResponder];
+        [self continueFromConfigureFormViewToUnlockView];
         return YES;
     } else if ([self.forgotPasswordView.emailTextfield isEqual:textField]) {
         NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
