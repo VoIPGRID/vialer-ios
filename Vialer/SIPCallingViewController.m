@@ -38,6 +38,8 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 @property (nonatomic, strong) NSDate *tickerStartDate;
 @property (nonatomic, strong) NSDate *tickerPausedDate;
 @property (nonatomic, strong) NSTimer *tickerTimer;
+@property (nonatomic, strong) NSString *dtmfHistory;
+
 @end
 
 @implementation SIPCallingViewController
@@ -53,6 +55,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     [self addChildViewController:self.numberPadViewController];
     self.numberPadViewController.delegate = self;
     self.numberPadViewController.view.hidden = YES;
+    self.numberPadViewController.tonesEnabled = YES;
 
     // These image name also map to the localization text
     self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker"/*, @"keypad-forward", @"keypad-addcall"*/];
@@ -364,6 +367,8 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 #pragma mark - Actions
 
 - (void)numbersButtonPressed:(UIButton *)sender {
+    // Reset the dtmf history
+    self.dtmfHistory = @"";
     self.hideButton.alpha = 0.f;
     self.hideButton.hidden = NO;
     self.numberPadViewController.view.alpha = 0.f;
@@ -421,6 +426,13 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
         self.numberPadViewController.view.alpha = 0.f;
         self.buttonsView.alpha = 1.f;
         self.buttonsView.transform = CGAffineTransformIdentity;
+        // Restore the call information
+        self.statusLabel.alpha = 1.f;
+        if (self.toContact) {
+            self.contactLabel.text = self.toContact;
+        } else {
+            self.contactLabel.text = self.toNumber;
+        }
     } completion:^(BOOL finished) {
         self.hideButton.hidden = YES;
         self.numberPadViewController.view.hidden = YES;
@@ -432,6 +444,11 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 #pragma mark - NumberPadViewController delegate
 
 - (void)numberPadPressedWithCharacter:(NSString *)character {
+    // Append the dtmf character to the history
+    self.dtmfHistory = [NSString stringWithFormat:@"%@%@", self.dtmfHistory, character];
+    self.contactLabel.text = self.dtmfHistory;
+    // Hide the status label
+    self.statusLabel.alpha = 0.f;
     if (self.currentCall) {
         [self.currentCall sendDTMFDigits:character];
     }
