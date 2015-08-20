@@ -38,6 +38,8 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 @property (nonatomic, strong) NSDate *tickerStartDate;
 @property (nonatomic, strong) NSDate *tickerPausedDate;
 @property (nonatomic, strong) NSTimer *tickerTimer;
+@property (nonatomic, strong) NSString *dtmfHistory;
+
 @end
 
 @implementation SIPCallingViewController
@@ -53,7 +55,9 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     [self addChildViewController:self.numberPadViewController];
     self.numberPadViewController.delegate = self;
     self.numberPadViewController.view.hidden = YES;
+    self.numberPadViewController.tonesEnabled = YES;
 
+    // These image name also map to the localization text
     self.images = @[@"keypad-numbers", @"keypad-pause", @"keypad-soundoff", @"keypad-speaker"/*, @"keypad-forward", @"keypad-addcall"*/];
     
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
@@ -101,7 +105,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
             NSInteger imageIdx = j * 3 + i;
             NSString *image = imageIdx < self.images.count ? self.images[j * 3 + i] : nil;
             if ([image length] != 0) {
-                UIButton *button = [self createDialerButtonWithImage:image andSubTitle:nil];
+                UIButton *button = [self createDialerButtonWithImage:image andSubTitle:NSLocalizedString(image, nil)];
                 switch (j * 3 + i) {
                     case 0:
                         self.numbersButton = button;
@@ -143,10 +147,12 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
     if (subTitle) {
         [button setTitle:subTitle forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:14.f];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateDisabled];
+        button.titleLabel.font = [UIFont fontWithName:@"Helvetica-Neue" size:18.f];
 
         // Center the image and title
-        CGFloat spacing = 4.0;
+        CGFloat spacing = 12.0;
         CGSize imageSize = button.imageView.image.size;
         button.titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + spacing), 0.0);
         CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
@@ -294,6 +300,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
         case GSCallStatusConnecting: {
             NSLog(@"Call status changed: Connecting...");
+            self.speakerButton.enabled = YES;
             [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
         } break;
 
@@ -303,8 +310,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
         case GSCallStatusConnected: {
             NSLog(@"Call status changed: Connected");
-            self.numbersButton.enabled = self.pauseButton.enabled =  self.speakerButton.enabled = YES;
-            //self.muteButton.enabled = keeping mute button disabled... not implemented
+            self.numbersButton.enabled = self.pauseButton.enabled =  self.speakerButton.enabled = self.muteButton.enabled = YES;
             //Register for the audio interruption notification to be able to restore the sip audio session after an interruption (incomming call/alarm....)
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AudioInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
             
@@ -361,6 +367,8 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 #pragma mark - Actions
 
 - (void)numbersButtonPressed:(UIButton *)sender {
+    // Reset the dtmf history
+    self.dtmfHistory = @"";
     self.hideButton.alpha = 0.f;
     self.hideButton.hidden = NO;
     self.numberPadViewController.view.alpha = 0.f;
@@ -381,7 +389,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
 - (void)muteButtonPressed:(UIButton *)sender {
     [sender setSelected:!sender.isSelected];
-    self.currentCall.volume = sender.isSelected ? 0.f : 1.f;
+    self.currentCall.micVolume = sender.isSelected ? 0.f : 1.f;
 }
 
 - (void)pauseButtonPressed:(UIButton *)sender {
@@ -418,6 +426,13 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
         self.numberPadViewController.view.alpha = 0.f;
         self.buttonsView.alpha = 1.f;
         self.buttonsView.transform = CGAffineTransformIdentity;
+        // Restore the call information
+        self.statusLabel.alpha = 1.f;
+        if (self.toContact) {
+            self.contactLabel.text = self.toContact;
+        } else {
+            self.contactLabel.text = self.toNumber;
+        }
     } completion:^(BOOL finished) {
         self.hideButton.hidden = YES;
         self.numberPadViewController.view.hidden = YES;
@@ -429,6 +444,11 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 #pragma mark - NumberPadViewController delegate
 
 - (void)numberPadPressedWithCharacter:(NSString *)character {
+    // Append the dtmf character to the history
+    self.dtmfHistory = [NSString stringWithFormat:@"%@%@", self.dtmfHistory, character];
+    self.contactLabel.text = self.dtmfHistory;
+    // Hide the status label
+    self.statusLabel.alpha = 0.f;
     if (self.currentCall) {
         [self.currentCall sendDTMFDigits:character];
     }

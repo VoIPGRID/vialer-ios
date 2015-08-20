@@ -3,7 +3,7 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "cload-2.png"
+      "filename" : "cloud-2.png"
     },
     {
       "idiom" : "universal",
@@ -12,7 +12,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "cloud-2@3x.png"
     }
   ],
   "info" : {

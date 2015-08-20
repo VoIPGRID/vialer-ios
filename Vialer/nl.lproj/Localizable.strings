@@ -289,7 +289,7 @@
 "Outgoing number" = "Uitgaand nummer";
 "MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR" = "Het mobiele nummer moet beginnen met beginnen met een landcode b.v. +31 of 0031";
 
-"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4F of wifi netwerk beschikbaar is";
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
 
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
 "CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "Het telefoonnummer waarmee uitgebeld wordt is:";
@@ -302,3 +302,9 @@
 "Unable to save My number" = "Mijn nummer kan niet worden opgeslagen";
 "SAVING_NUMBER..." = "Nummer opslaan...";
 "NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
+
+/* Keypad icons mappings */
+"keypad-numbers" = "numbers";
+"keypad-pause" = "pause";
+"keypad-soundoff" = "mute";
+"keypad-speaker" = "speaker";

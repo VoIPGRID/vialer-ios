@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "tab-keypad.png"
+      "filename" : "keypad.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "tab-keypad@2x.png"
+      "filename" : "keypad@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "keypad@3x.png"
     }
   ],
   "info" : {

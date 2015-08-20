@@ -154,6 +154,7 @@
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
 		FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBE564F81A954EAD002C6DF3 /* incoming.wav */; };
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
+		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 		FE3423F41B822F88005020BA /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */; };
 		FE3423F51B822F88005020BA /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB576B11182A802200C4FAB4 /* RecentsViewController.m */; };
@@ -587,6 +588,7 @@
 		FBE564F81A954EAD002C6DF3 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
+		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
 		FE3424911B822F88005020BA /* Voys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3424941B822FF4005020BA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 				FBB854101A7FE24C00121366 /* incoming.caf */,
 				FBE564F81A954EAD002C6DF3 /* incoming.wav */,
 				FBB8542C1A7FF15300121366 /* ringtone.wav */,
+				FE2523B21B84896600CF5C22 /* ringback.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -1279,6 +1282,7 @@
 				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
 				FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
+				FE2523B31B84896600CF5C22 /* ringback.wav in Resources */,
 				FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
