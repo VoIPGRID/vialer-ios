@@ -127,7 +127,7 @@
 
 - (NSString *)appVersionBuildString {
     NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-    NSString *version = [NSString stringWithFormat:@"Version:%@  Build:%@  Commit:%@",
+    NSString *version = [NSString stringWithFormat:@"v:%@ (%@) | %@",
                          [infoDict objectForKey:@"CFBundleShortVersionString"],
                          [infoDict objectForKey:@"CFBundleVersion"],
                          [infoDict objectForKey:@"Commit_Short_Hash"]];

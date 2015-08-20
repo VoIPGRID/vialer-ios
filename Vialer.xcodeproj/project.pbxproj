@@ -1098,7 +1098,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/scripts/update_version_number.sh master";
+			shellScript = $SRCROOT/scripts/update_version_number.sh;
 		};
 		F2B947311B00DFEC00CE5112 /* config_site.h copy script */ = {
 			isa = PBXShellScriptBuildPhase;

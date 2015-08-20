@@ -10,9 +10,12 @@
 
 GIT=`sh /etc/profile; which git`
 PLISTBUDDY=/usr/libexec/PlistBuddy
-BRANCH=${1}
 
-VERSION_NUMBER=`${GIT} describe ${BRANCH}`
+#Use the argument supplied branch or otherwise the current branch
+BRANCH=${1:-`${GIT} rev-parse --abbrev-ref HEAD`}
+echo "Using tag from branch '${BRANCH}' for versioning"
+
+VERSION_NUMBER=`${GIT} describe ${BRANCH} --abbrev=0`
 echo "Version number: ${VERSION_NUMBER}"
 
 ${PLISTBUDDY} -c "Set :CFBundleShortVersionString ${VERSION_NUMBER}" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
