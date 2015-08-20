@@ -194,7 +194,7 @@
                                                                             action:nil];
     space_.width = 60.0f;
     
-    self.toolbarItems = @[self.stopLoadingButton, space, self.backButton, space_, self.forwardButton, space];
+    self.toolbarItems = @[self.stopLoadingButton, space, self.backButton, space_, self.forwardButton];
 }
 
 - (void)toggleState
