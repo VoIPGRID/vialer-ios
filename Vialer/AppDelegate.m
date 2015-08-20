@@ -169,6 +169,10 @@
     [[PZPushMiddleware sharedInstance]  registerForVoIPNotifications];
 }
 #pragma mark - UIApplication notification delegate
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
