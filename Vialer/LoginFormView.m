@@ -31,7 +31,7 @@
     [self.usernameField cleanStyle];
     [self.passwordField cleanStyle];
     
-    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
+//    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
 }

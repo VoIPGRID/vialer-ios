@@ -308,3 +308,5 @@
 "keypad-pause" = "pause";
 "keypad-soundoff" = "mute";
 "keypad-speaker" = "speaker";
+
+"onboarding" = "onboarding-nl";
