@@ -127,8 +127,16 @@
 
 - (NSString *)appVersionBuildString {
     NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-    NSString *version = [NSString stringWithFormat:@"v:%@ (%@) | %@",
-                         [infoDict objectForKey:@"CFBundleShortVersionString"],
+    NSMutableString *versionString = [NSMutableString stringWithFormat:@"v:%@", [infoDict objectForKey:@"CFBundleShortVersionString"]];
+    //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
+    //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
+    NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
+    NSLog(@"Additional_Version_String = %@", additionalVersionString);
+    if ([additionalVersionString length] >0)
+        [versionString appendFormat:@".%@", additionalVersionString];
+    
+    NSString *version = [NSString stringWithFormat:@"%@ (%@) | %@",
+                         versionString,
                          [infoDict objectForKey:@"CFBundleVersion"],
                          [infoDict objectForKey:@"Commit_Short_Hash"]];
     return version;
