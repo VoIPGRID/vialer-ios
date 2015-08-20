@@ -300,4 +300,10 @@
 "Unable to save My number" = "Unable to save My Number";
 "NUMBER_SAVED_SUCCESS" = "Number saved";
 
+/* Keypad icons mappings */
+"keypad-numbers" = "numbers";
+"keypad-pause" = "pause";
+"keypad-soundoff" = "sound off";
+"keypad-speaker" = "speaker";
 
+"onboarding" = "onboarding-en";

@@ -15,7 +15,6 @@ IB_DESIGNABLE
 
 @property (nonatomic, weak) IBOutlet UITextField *usernameField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordField;
-@property (nonatomic, weak) IBOutlet UIButton *loginButton;
 
 //Storing the frame's center in an ivar just to be able to restore is a bit of a hack
 //but I could not think of a better way.

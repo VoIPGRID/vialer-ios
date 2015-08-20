@@ -154,6 +154,8 @@
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
 		FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBE564F81A954EAD002C6DF3 /* incoming.wav */; };
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
+		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
+		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -226,7 +228,7 @@
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F235ED261B2855180028EDBC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		F235ED271B2855180028EDBC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B38FC1B08EEA8005ED515 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F25B38FE1B08EEA8005ED515 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -329,7 +331,7 @@
 		FB4226D0182261D200707349 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FB4226D2182261D200707349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB4226D4182261D200707349 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		FB4226D8182261D200707349 /* Vialer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
+		FB4226D8182261D200707349 /* Vialer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Vialer-Info.plist"; path = "Vialer/Vialer-Info.plist"; sourceTree = "<group>"; };
 		FB4226DC182261D200707349 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FB4226DE182261D200707349 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		FB4226DF182261D200707349 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -427,6 +429,8 @@
 		FBE564F81A954EAD002C6DF3 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
+		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
+		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -675,6 +679,7 @@
 				FBB854101A7FE24C00121366 /* incoming.caf */,
 				FBE564F81A954EAD002C6DF3 /* incoming.wav */,
 				FBB8542C1A7FF15300121366 /* ringtone.wav */,
+				FE2523B21B84896600CF5C22 /* ringback.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -772,7 +777,6 @@
 			isa = PBXGroup;
 			children = (
 				3D1A5E601AE543BB00DBE64B /* Views */,
-				FBA850C7189AAEC4008099C5 /* Config */,
 				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
 				FB202BC21A4396E700024CDE /* Handlers */,
@@ -836,6 +840,7 @@
 				03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */,
 				F2E811BF1B37E2EB00EA640F /* Account View */,
 				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
+				FE3423F01B822D6A005020BA /* Vialer */,
 				FB4226D7182261D200707349 /* Supporting Files */,
 			);
 			path = Vialer;
@@ -844,7 +849,6 @@
 		FB4226D7182261D200707349 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FB4226D8182261D200707349 /* Vialer-Info.plist */,
 				AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */,
 				FB4226DC182261D200707349 /* main.m */,
 				FB4226DE182261D200707349 /* Vialer-Prefix.pch */,
@@ -894,14 +898,6 @@
 			);
 			name = "GoogleAnalytics-iOS-SDK";
 			path = "GoogleAnalytics-iOS-SDK/GoogleAnalytics/Library";
-			sourceTree = "<group>";
-		};
-		FBA850C7189AAEC4008099C5 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				F245E7701B577AD100FBA37C /* Config.plist */,
-			);
-			name = Config;
 			sourceTree = "<group>";
 		};
 		FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */ = {
@@ -954,6 +950,16 @@
 				FBBD8DDF1A5B403400F6A184 /* info_05.jpg */,
 			);
 			name = "Info Screen";
+			sourceTree = "<group>";
+		};
+		FE3423F01B822D6A005020BA /* Vialer */ = {
+			isa = PBXGroup;
+			children = (
+				FE3423EE1B822D59005020BA /* Vialer.xcassets */,
+				FB4226D8182261D200707349 /* Vialer-Info.plist */,
+				F245E7701B577AD100FBA37C /* Config.plist */,
+			);
+			name = Vialer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1045,6 +1051,7 @@
 				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
 				FBBD8DE41A5B403400F6A184 /* info_04.jpg in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
+				FE2523B31B84896600CF5C22 /* ringback.wav in Resources */,
 				FBBD8DE21A5B403400F6A184 /* info_02.jpg in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
@@ -1052,6 +1059,7 @@
 				F245E7711B577AD100FBA37C /* Config.plist in Resources */,
 				FBA850C0189AA87E008099C5 /* info.html in Resources */,
 				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
+				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
 				FBBD8DE11A5B403400F6A184 /* info_01.jpg in Resources */,
 				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
 				FBBD8DE31A5B403400F6A184 /* info_03.jpg in Resources */,
@@ -1094,7 +1102,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/scripts/update_version_number.sh master";
+			shellScript = $SRCROOT/scripts/update_version_number.sh;
 		};
 		F2B947311B00DFEC00CE5112 /* config_site.h copy script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1297,9 +1305,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = AdHocDistribution;
 		};
@@ -1331,7 +1337,7 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/crypto/include",
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
-				INFOPLIST_FILE = "Vialer/$(CONFIGURATION)-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Vialer/Vialer/Vialer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1343,7 +1349,6 @@
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "cf993705-29c0-4e37-a688-bce19bdb9b21";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AdHocDistribution;
@@ -1377,7 +1382,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1404,7 +1408,6 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -1436,7 +1439,7 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/crypto/include",
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
-				INFOPLIST_FILE = "Vialer/Vialer-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Vialer/Vialer/Vialer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1448,7 +1451,6 @@
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1481,7 +1483,7 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/crypto/include",
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
-				INFOPLIST_FILE = "Vialer/Vialer-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Vialer/Vialer/Vialer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1493,7 +1495,6 @@
 				PRODUCT_NAME = Vialer;
 				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

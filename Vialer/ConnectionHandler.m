@@ -163,7 +163,8 @@ static GSCall *lastNotifiedCall;
             self.account.password = sipPassword;
             self.account.address = [self.account.username stringByAppendingFormat:@"@%@", self.account.domain];
             self.account.proxyServer = [self.account.domain stringByAppendingString:@";transport=udp"];
-            self.account.enableRingback = NO;
+            self.account.enableRingback = YES;
+            self.account.ringbackFilename = @"ringback.wav";
         }
 
         if (!self.config) {

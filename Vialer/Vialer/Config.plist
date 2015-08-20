@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Tokens</key>
+	<dict>
+		<key>New Relic</key>
+		<string>AA1a092ac029754cfbc049123fa0cd1351c1945e4d</string>
+		<key>Google Analytics</key>
+		<string>UA-60726618-2</string>
+	</dict>
+	<key>Tint colors</key>
+	<dict>
+		<key>Background</key>
+		<dict>
+			<key>GradientStart</key>
+			<array>
+				<integer>255</integer>
+				<integer>141</integer>
+				<integer>7</integer>
+			</array>
+			<key>GradientEnd</key>
+			<array>
+				<integer>255</integer>
+				<integer>116</integer>
+				<integer>47</integer>
+			</array>
+			<key>GradientAngle</key>
+			<integer>300</integer>
+		</dict>
+		<key>TabBar</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>NavigationBar</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>Table</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>SearchBar</key>
+		<array>
+			<integer>178</integer>
+			<integer>177</integer>
+			<integer>184</integer>
+		</array>
+	</dict>
+	<key>URLS</key>
+	<dict>
+		<key>Middelware BaseLink</key>
+		<string>https://vialerpush.voipgrid.nl</string>
+		<key>API</key>
+		<string>https://api.voipgrid.nl/api</string>
+		<key>Partner</key>
+		<string>https://partner.voipgrid.nl</string>
+		<key>How it works</key>
+		<string>www.vialerapp.com/how-it-works</string>
+		<key>SIP domain</key>
+		<string>sipproxy.voipgrid.nl</string>
+		<key>onboarding-nl</key>
+		<string>http://vialerapp.com/nl/app-info</string>
+		<key>onboarding-en</key>
+		<string>http://vialerapp.com/app-info</string>
+	</dict>
+</dict>
+</plist>

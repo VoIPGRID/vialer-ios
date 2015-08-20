@@ -76,9 +76,22 @@
     [super viewDidDisappear:animated];
 }
 
+/**
+ * Handle an incoming SIP call. Active GSCall object is attached to notification.object. 
+ * The 'self.incomingCall' property is the active GSCall object which manages call interaction. 
+ * It is set to nil when the call is ended or interupted by [self callStatusDidChange].
+ * So, on every incoming call; check if there is an active one. If there is: end the newly incoming call.
+ */
 - (void)incomingSIPCallNotification:(NSNotification *)notification {
-    self.incomingCall = notification.object;
-    if (self.incomingCall) {
+
+    // First check if the notification.object contains an incoming GSCall object instance
+    id possibleNewCall = notification.object;
+    if (!(possibleNewCall && [possibleNewCall isKindOfClass:GSCall.class])) {
+        return; // The new expected "call" is nil or not of the expected type!
+    }
+    
+    if (self.incomingCall == nil) { // There is no active call. Handle newly incoming.
+        self.incomingCall = notification.object;
         // Register status change observer
         [self.incomingCall addObserver:self
                             forKeyPath:@"status"
@@ -91,6 +104,9 @@
         } else {
             [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
         }
+    } else {
+        // There is an active call: end the newly incoming one. We did a nil and type check earlier.
+        [(GSCall *)possibleNewCall end];
     }
 }
 

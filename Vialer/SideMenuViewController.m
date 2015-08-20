@@ -75,6 +75,12 @@
         cell = [[SideMenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
     
+    // Special styling for the Logout item
+    if (indexPath.row == MENU_INDEX_LOGOUT) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.separatorInset = UIEdgeInsetsMake(0.0, self.view.bounds.size.width, 0.0, 0.0);
+    }
+    
     cell.menuItem = self.menuItems[indexPath.row];
 
     return cell;
@@ -88,6 +94,7 @@
         CGFloat xOffset = (CGRectGetWidth(headerView.frame) - 171.f) / 2;
         UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, 40.f, 171.f, 41.f)];
         logo.image = [UIImage imageNamed:@"logoMedium"];
+        logo.contentMode = UIViewContentModeCenter;
         
         CGFloat yOffset = CGRectGetMaxY(logo.frame) + 10.f;
         UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, yOffset, CGRectGetWidth(headerView.frame), 20.f)];
@@ -125,8 +132,16 @@
 
 - (NSString *)appVersionBuildString {
     NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-    NSString *version = [NSString stringWithFormat:@"Version:%@  Build:%@  Commit:%@",
-                         [infoDict objectForKey:@"CFBundleShortVersionString"],
+    NSMutableString *versionString = [NSMutableString stringWithFormat:@"v:%@", [infoDict objectForKey:@"CFBundleShortVersionString"]];
+    //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
+    //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
+    NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
+    NSLog(@"Additional_Version_String = %@", additionalVersionString);
+    if ([additionalVersionString length] >0)
+        [versionString appendFormat:@".%@", additionalVersionString];
+    
+    NSString *version = [NSString stringWithFormat:@"%@ (%@) | %@",
+                         versionString,
                          [infoDict objectForKey:@"CFBundleVersion"],
                          [infoDict objectForKey:@"Commit_Short_Hash"]];
     return version;
