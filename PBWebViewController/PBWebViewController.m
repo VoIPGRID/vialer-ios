@@ -181,9 +181,9 @@
     self.backButton.enabled = NO;
     self.forwardButton.enabled = NO;
     
-    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                  target:self
-                                                                                  action:@selector(action:)];
+    //UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+    //                                                                              target:self
+    //                                                                              action:@selector(action:)];
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                            target:nil
@@ -194,7 +194,7 @@
                                                                             action:nil];
     space_.width = 60.0f;
     
-    self.toolbarItems = @[self.stopLoadingButton, space, self.backButton, space_, self.forwardButton, space, actionButton];
+    self.toolbarItems = @[self.stopLoadingButton, space, self.backButton, space_, self.forwardButton, space];
 }
 
 - (void)toggleState
