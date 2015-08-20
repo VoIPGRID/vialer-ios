@@ -188,7 +188,12 @@
             
         case PJSIP_INV_STATE_EARLY:
         case PJSIP_INV_STATE_CONNECTING: {
-            [self startRingback];
+            // Check if we get the Ringing status code, if there is no media play our own ringback
+            if (callInfo.last_status == PJSIP_SC_RINGING &&
+                !pjsua_call_has_media(_callId)) {
+                // Check if we have media
+                [self startRingback];
+            }
             callStatus = GSCallStatusConnecting;
         } break;
             

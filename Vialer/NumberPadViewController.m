@@ -177,6 +177,13 @@
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
+        if (self.tonesEnabled) {
+            SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:gesture.view.tag] integerValue];
+            if (soundID > 0) {
+                AudioServicesPlaySystemSound(soundID);
+            }
+        }
+        
         if ([self.delegate respondsToSelector:@selector(numberPadPressedWithCharacter:)]) {
             [self.delegate numberPadPressedWithCharacter:@"+"];
         }

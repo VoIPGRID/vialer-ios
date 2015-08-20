@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSArray *recents;
 @property (nonatomic, strong) NSArray *missedRecents;
 @property (nonatomic, strong) NSDate *previousSearchDateTime;
+@property (nonatomic, assign) NSTimeInterval lastRecentsFailure;
 @end
 
 @implementation RecentsViewController
@@ -127,8 +128,6 @@
         return;
     }
 
-    self.previousSearchDateTime = [NSDate date];
-
     // Retrieve recent calls from last month
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setMonth:-1];
@@ -148,6 +147,9 @@
 
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                // Register the time when we had a succesfull retrieval
+                self.lastRecentsFailure = 0;
+                self.previousSearchDateTime = [NSDate date];
                 self.unauthorized = NO;
                 self.reloading = NO;
                 [self.refreshControl endRefreshing];
@@ -170,9 +172,18 @@
                     self.unauthorized = YES;
                     [self.tableView reloadData];
                 } else if (error.code != -999) {
-                    NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.", nil)];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-                    [alert show];
+                    // Check if we last shown this warning more than 30 minutes ago.
+                    if ([NSDate timeIntervalSinceReferenceDate] - self.lastRecentsFailure > 1800) {
+                        // Register this new time
+                        self.lastRecentsFailure = [NSDate timeIntervalSinceReferenceDate];
+                        // Show a warning to the user
+                        NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Failed to fetch your recent calls.", nil)];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil) message:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+                        [alert show];
+                    }
+                    [self.tableView reloadData];
+                    // Let's retry automatically in 5 minutes.
+                    [self performSelector:@selector(refreshRecents) withObject:nil afterDelay:300];
                 }
             });
         }];
@@ -222,7 +233,8 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = (self.unauthorized ? NSLocalizedString(@"No access to the recent calls", nil) :
                                (self.reloading ? NSLocalizedString(@"Loading...", nil) :
-                                NSLocalizedString(@"No recent calls", nil)));
+                                (self.lastRecentsFailure != 0 ? NSLocalizedString(@"Failed to fetch your recent calls.\nPull down to refresh", nil) :
+                                NSLocalizedString(@"No recent calls", nil))));
         return cell;
     }
 
