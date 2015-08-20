@@ -8,6 +8,7 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
+#import "PZPushMiddleware.h"
 
 #import "SSKeychain.h"
 
@@ -18,6 +19,8 @@
 #define GetCdrRecordUrl @"cdr/record/"
 #define PostPermissionPasswordResetUrl @"permission/password_reset/"
 #define GetAutoLoginTokenUrl @"autologin/token/"
+#define PutMobileNumber @"/api/permission/mobile_number/"
+
 
 @interface VoIPGRIDRequestOperationManager ()
 @end
@@ -56,22 +59,41 @@
     return self;
 }
 
+- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    [self GET:[phoneAccountUrl stringByReplacingOccurrencesOfString:@"/api/" withString:@""] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(operation, responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
+    }];
+}
+
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
-
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
+    
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *client = [responseObject objectForKey:@"client"];
         if (!client) {
             // This is a partner account, don't log in!
             failure(operation, nil);
 
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
+            
+            
             NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
             if ([outgoingCli isKindOfClass:[NSString class]]) {
                 [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+            }
+            
+            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
+            if ([mobile_nr isKindOfClass:[NSString class]]) {
+                [[NSUserDefaults standardUserDefaults] setObject:mobile_nr forKey:@"MobileNumber"];
+            } else {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
             }
 
             // Store credentials
@@ -81,12 +103,18 @@
 
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
 
-            success(operation, success);
+            // Fetch SIP account credentials
+            [self updateSIPAccountWithSuccess:^{
+                if (success) success(operation, success);
+            } failure:^(NSError *error) {
+                //The old code stated that success should also be called on a failure
+                if (success) success(operation, success);
+            }];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
         if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
             [self connectionFailed];
@@ -99,18 +127,34 @@
 
 - (void)logout {
     [self.operationQueue cancelAllOperations];
+    [self.requestSerializer clearAuthorizationHeader];
 
-    NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    // Clear cookies for web view
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
+    //unregister from middleware
+    [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+    
+    // Remove sip account if present
+    NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+    if (sipAccount) {
+        [SSKeychain deletePasswordForService:[[self class] serviceName] account:sipAccount error:NULL];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+    }
 
     NSError *error;
-    [SSKeychain deletePasswordForService:[[self class] serviceName] account:user error:&error];
+    NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
 
+    [SSKeychain deletePasswordForService:[[self class] serviceName] account:user error:&error];
     if (error) {
         NSLog(@"Error logging out: %@", [error localizedDescription]);
     }
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"User"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
@@ -118,7 +162,7 @@
 
 + (BOOL)isLoggedIn {
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    return (user != nil) && ([SSKeychain passwordForService:[[self class] serviceName] account:user] != nil);
+    return (user != nil);
 }
 
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
@@ -133,8 +177,14 @@
 }
 
 - (void)userProfileWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
+        if ([outgoingCli isKindOfClass:[NSString class]]) {
+            [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
+        }
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
@@ -228,7 +278,7 @@
     // No credentials
     [self logout];
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];
 }
 
@@ -250,7 +300,136 @@
 
         NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL cachePolicy:request.cachePolicy timeoutInterval:request.timeoutInterval];
         [urlRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
-        return  urlRequest;
+        return urlRequest;
+    }];
+}
+
+// TODO: don't use success/failblocks, use one completion block
+// http://collindonnell.com/2013/04/07/stop-using-success-failure-blocks/
+- (void)updateSIPAccountWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
+    if ([[self class] isLoggedIn]) {
+        NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET"
+                                                                       URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString]
+                                                                      parameters:nil
+                                                                           error:nil];
+        
+        AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *appAccountUrl = [responseObject objectForKey:@"app_account"];
+            [self fetchSipAccountFromAppAccountURL:appAccountUrl withSuccess:^(NSString *sipUsername, NSString *sipPassword) {
+                [self setSipAccount:sipUsername andSipPassword:sipPassword];
+                if (success) success ();
+            } failure:^(NSError *error) {
+                if (failure) failure(error);
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (failure) failure(error);
+        }];
+        
+        [self setHandleAuthorizationRedirectForRequest:request andOperation:operation];
+        [self.operationQueue addOperation:operation];
+    }
+}
+
+/**
+ * Given an URL to an App specific SIP account (phoneaccount) this function fetches and sets the SIP account details for use in the app if any, otherwise the SIP data is set to nil.
+ * @param appAccountURL the URL from where to fetch the SIP account details e.g. /api/phoneaccount/basic/phoneaccount/XXXXX/
+ */
+- (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success failure:(void (^)(NSError *error))failure {
+    if ([appAccountURL isKindOfClass:[NSString class]])
+        [self retrievePhoneAccountForUrl:appAccountURL success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSObject *account = [responseObject objectForKey:@"account_id"];
+            NSObject *password = [responseObject objectForKey:@"password"];
+            if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
+                if (success) success([(NSNumber *)account stringValue], (NSString *)password);
+            } else {
+                //No information about SIP account found, removed by user
+                if (success) success(nil, nil);
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (failure) failure(error);
+        }];
+    else
+        //No URL supplied for Mobile app account, this means the user does not have the account set.
+        //We are also going to unset it by calling success with but sipUsername and sipPassword set to nil
+        if (success) success(nil, nil);
+}
+
+- (void)setSipAccount:(NSString *)sipAccount andSipPassword:(NSString *)sipPassword {
+    if (sipAccount) {
+        [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
+        [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
+        NSLog(@"Setting SIP Account %@", sipAccount);
+    } else {
+        //First unregister the account with the middleware
+        [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+        //Now delete it from the user defaults
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+        NSLog(@"No SIP Account");
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)user {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+}
+
+- (NSString *)outgoingNumber {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
+}
+
+- (NSString *)sipAccount {
+    NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+    return sipAccount;
+}
+
+- (NSString *)sipPassword {
+    NSString *sipAccount = [self sipAccount];
+    if (sipAccount) {
+        return [SSKeychain passwordForService:[[self class] serviceName] account:sipAccount];
+    }
+    return nil;
+}
+
+- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
+    //Has the user entered a number
+    if (![mobileNumber length] > 0) {
+        if (failure) failure(NSLocalizedString(@"Unable to save \"My number\"", nil));
+        return;
+    }
+    //Strip whitespaces
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    //Change country code from 00xx to +xx
+    if ([mobileNumber hasPrefix:@"00"])
+        mobileNumber = [NSString stringWithFormat:@"+%@", [mobileNumber substringFromIndex:2]];
+    
+    //Has the user entered the number in the international format with check above 00xx is also accepted
+    if (![mobileNumber hasPrefix:@"+"]) {
+        if (failure) failure(NSLocalizedString(@"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR", nil));
+        return;
+    }
+
+    //With all the checks and replacements done, is the number actually different from the stored one?
+    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]]) {
+        if (success) success();
+        return;
+    }
+    
+    //Sent the new number to the server
+    NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
+    [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (success) success();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //Provide user with the message from the error
+        NSString *localizedErrorString = [error localizedDescription];
+        
+        //if the status code was 400, the platform will give us a localized error description in the mobile_nr parameter
+        if (operation.response.statusCode == 400)
+            localizedErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
+        
+        if (failure) failure(localizedErrorString);
     }];
 }
 

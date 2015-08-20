@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackedViewController.h"
 
-@interface GoToViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface GoToViewController : TrackedViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end

@@ -8,13 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DialerViewController : UIViewController<UITextViewDelegate>
+#import "NumberPadViewController.h"
+#import "TrackedViewController.h"
+#import "PasteableTextView.h"
+
+@interface DialerViewController : TrackedViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *buttonsView;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UITextView *numberTextView;
+@property (weak, nonatomic) IBOutlet PasteableTextView *numberTextView;
+
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender;
 - (IBAction)callButtonPressed:(UIButton *)sender;
+
 @end

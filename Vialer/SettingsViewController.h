@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "SelectRecentsFilterViewController.h"
+#import "TrackedViewController.h"
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SelectRecentsFilterViewControllerDelegate>
+@interface SettingsViewController : TrackedViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SelectRecentsFilterViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
