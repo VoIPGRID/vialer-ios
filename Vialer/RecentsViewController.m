@@ -183,7 +183,7 @@
                     }
                     [self.tableView reloadData];
                     // Let's retry automatically in 5 minutes.
-                    [self performSelector:@selector(refreshRecents) withObject:nil afterDelay:5];
+                    [self performSelector:@selector(refreshRecents) withObject:nil afterDelay:300];
                 }
             });
         }];
