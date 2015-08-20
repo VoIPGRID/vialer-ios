@@ -21,6 +21,8 @@
 
 #import "AppDelegate.h"
 
+#import "PBWebViewController.h"
+
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
 
@@ -53,6 +55,14 @@
     [self.unlockView setupSlider];
     self.unlockView.slideToCallText.textColor = [UIColor colorWithRed:[currentTintColor[0] intValue] / 255.f green:[currentTintColor[1] intValue] / 255.f blue:[currentTintColor[2] intValue] / 255.f alpha:1.f];
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+    
+    // Create an animation scenes that transitions to configure view.
+    _scene = [[VIAScene alloc] initWithView:self.view];
+    
+    // animate logo to top
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self moveLogoOutOfScreen];
+    });
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -105,22 +115,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    //Done in Interface builder [self.loginFormView.usernameField setKeyboardType:UIKeyboardTypeEmailAddress];
-    //Done in Interface builder[self.loginFormView.usernameField setReturnKeyType:UIReturnKeyNext];
-    //to be able/disable the enable the login button
-    [self.loginFormView.usernameField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-
-    //Done in Interface builder [self.loginFormView.passwordField setKeyboardType:UIKeyboardTypeDefault];
-    //Done in Interface builder[self.loginFormView.passwordField setReturnKeyType:UIReturnKeyGo];
-    //to be able/disable the enable the login button
-    [self.loginFormView.passwordField addTarget:self action:@selector(loginViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-    if (self.loginFormView.usernameField.text.length >0 && self.loginFormView.passwordField.text.length >0)
-        self.loginFormView.loginButton.enabled = YES;
-    else
-        self.loginFormView.loginButton.enabled = NO;
-
-    
     // Set type to emailAddress for e-mail field for forgot password steps
     //Done in Interface builder [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
     //Done in Interface builder[self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
@@ -137,14 +131,6 @@
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
     [self.forgotPasswordView.emailTextfield setDelegate:self];
-
-    // Create an animation scenes that transitions to configure view.
-    _scene = [[VIAScene alloc] initWithView:self.view];
-    
-    // animate logo to top
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self moveLogoOutOfScreen];
-    });
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -196,13 +182,6 @@
         }
     }
     return NO;
-}
-
-- (void)loginViewTextFieldDidChange:(UITextField *)textField {
-    if (self.loginFormView.usernameField.text.length > 0 && self.loginFormView.passwordField.text.length > 0)
-        self.loginFormView.loginButton.enabled = YES;
-    else
-        self.loginFormView.loginButton.enabled = NO;
 }
 
 //Checks have been done to ensure the text fields have data, otherwise the button would not be clickable.
@@ -395,6 +374,27 @@
     }];
 }
 
+- (void)openConfigurationInstructions:(id)sender {
+    PBWebViewController *webViewController = [[PBWebViewController alloc] init];
+
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSString *onboardingUrl = [[config objectForKey:@"URLS"] objectForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+    webViewController.URL = [NSURL URLWithString:onboardingUrl];
+    webViewController.showsNavigationToolbar = YES;
+    webViewController.hidesBottomBarWhenPushed = YES;
+    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeConfigurationInstructions)];
+    webViewController.navigationItem.rightBarButtonItem = cancelButton;
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (void)closeConfigurationInstructions {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:username password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -471,6 +471,7 @@
 }
 
 #pragma mark - Navigation animations
+
 - (void)animateLoginViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act one (2) */
     void(^animations)(void) = ^{
         [self.loginFormView setAlpha:alpha];

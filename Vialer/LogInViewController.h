@@ -36,4 +36,6 @@
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;
 
+- (IBAction)openConfigurationInstructions:(id)sender;
+
 @end

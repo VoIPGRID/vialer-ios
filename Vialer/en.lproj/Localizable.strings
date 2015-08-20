@@ -305,3 +305,5 @@
 "keypad-pause" = "pause";
 "keypad-soundoff" = "sound off";
 "keypad-speaker" = "speaker";
+
+"onboarding" = "onboarding-en";

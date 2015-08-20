@@ -65,6 +65,10 @@
 		<string>www.vialerapp.com/how-it-works</string>
 		<key>SIP domain</key>
 		<string>sipproxy.voipgrid.nl</string>
+		<key>onboarding-nl</key>
+		<string>http://voys.nl/app-info</string>
+		<key>onboarding-en</key>
+		<string>http://voys.nl/en/app-info</string>
 	</dict>
 </dict>
 </plist>
