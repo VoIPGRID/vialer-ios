@@ -71,14 +71,12 @@
 /* No comment provided by engineer. */
 "Failed to set up a call." = "Opzetten van een gesprek mislukt.";
 
-/* No comment provided by engineer. */
-//"Forgot Password" = "Wachtwoord vergeten"; - removed, duplicate
-
 "Business" = "Zakelijke";
 "calls in the cloud" = "telefonie in de cloud";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
+"HOW_DOES_VIALER_WORK_BUTTON_TEXT" = "Hoe werkt bellen via Vialer";
 
 "required" = "verplicht";
 
