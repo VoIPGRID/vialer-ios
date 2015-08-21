@@ -137,7 +137,7 @@
         NSString *sourceNumber = nil;
         RecentsFilter filter = RecentsFilterNone;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
         if (filter == RecentsFilterSelf) {
-            sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+            sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"Outgoing number"];
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{

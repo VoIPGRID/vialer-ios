@@ -23,6 +23,7 @@
 
 
 @interface VoIPGRIDRequestOperationManager ()
+@property (nonatomic, strong)NSDateFormatter *callDateGTFormatter;
 @end
 
 @implementation VoIPGRIDRequestOperationManager
@@ -238,13 +239,28 @@
     }];
 }
 
+/**
+ * Since a DateFormatter is pretty expensive to load, lazy load it and keep it in memory
+ */
+- (NSDateFormatter *)callDateGTFormatter {
+    if (! _callDateGTFormatter) {
+        _callDateGTFormatter = [[NSDateFormatter alloc] init];
+        [_callDateGTFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    return _callDateGTFormatter;
+}
+
 - (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset sourceNumber:(NSString *)sourceNumber callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self GET:GetCdrRecordUrl parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                          @(limit), @"limit",
-                                          @(offset), @"offset",
-                                          sourceNumber, @"src_number",
-                                          nil
-                                          ]
+
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@(limit) forKey:@"limit"];
+    [params setObject:@(offset) forKey:@"offset"];
+    [params setObject:[self.callDateGTFormatter stringFromDate:date] forKey:@"call_date__gt"];
+    
+    if ([sourceNumber length] > 0)
+        [params setObject:sourceNumber forKey:@"src_number"];
+
+    [self GET:GetCdrRecordUrl parameters:params
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           success(operation, responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
