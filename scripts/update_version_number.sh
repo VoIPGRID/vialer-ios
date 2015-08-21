@@ -15,7 +15,7 @@ PLISTBUDDY=/usr/libexec/PlistBuddy
 BRANCH=${1:-`${GIT} rev-parse --abbrev-ref HEAD`}
 echo "Using tag from branch '${BRANCH}' for versioning"
 
-VERSION_NUMBER=`${GIT} describe ${BRANCH} --abbrev=0`
+VERSION_NUMBER=`${GIT} describe ${BRANCH} --tags --abbrev=0`
 
 #LetS have a look at the version number, does it only include numbers and dots (the way apple likes it) or do we have something like 1.0.2.Beta.50
 REGEX="([0-9\.]*)(.*)"
