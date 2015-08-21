@@ -294,6 +294,7 @@
         personViewController.displayedPerson = person;
         personViewController.addressBook = addressBook;
         personViewController.allowsEditing = NO;
+        personViewController.allowsActions = NO;
         [self.navigationController pushViewController:personViewController animated:YES];
     } else if (recent.callerPhoneNumber.length) {
         person = ABPersonCreate();
@@ -307,6 +308,7 @@
         unknownPersonViewController.unknownPersonViewDelegate = self;
         unknownPersonViewController.displayedPerson = person;
         unknownPersonViewController.addressBook = addressBook;
+        unknownPersonViewController.allowsActions = NO;
         [self.navigationController pushViewController:unknownPersonViewController animated:YES];
     }
 }
