@@ -9,6 +9,7 @@
 #import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
 #import "PZPushMiddleware.h"
+#import "ConnectionHandler.h"
 
 #import "SSKeychain.h"
 
@@ -374,12 +375,18 @@
     if (sipAccount) {
         [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
         [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
+        //Inform the connection handler to connect to the new sip account
+        [[ConnectionHandler sharedConnectionHandler] sipConnect];
+        //Update the middleware that we are reachable under a new sip account
+        [[PZPushMiddleware sharedInstance] updateDeviceRecord];
         NSLog(@"Setting SIP Account %@", sipAccount);
     } else {
         //First unregister the account with the middleware
         [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
         //Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+        //And disconnect the Sip Connection Handler
+        [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
         NSLog(@"No SIP Account");
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -406,7 +413,11 @@
     return nil;
 }
 
-- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
+/**
+ * Under some circumstances we would like to force setting of the mobile number. For instance with the migration of v1.x to version 2.0
+ * in which case the user has entered his mobile number but it was never actually pushed to the server.
+ */
+- (void)pushMobileNumber:(NSString *)mobileNumber forcePush:(BOOL)forcePush success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
     //Has the user entered a number
     if (![mobileNumber length] > 0) {
         if (failure) failure(NSLocalizedString(@"Unable to save \"My number\"", nil));
@@ -426,7 +437,7 @@
     }
 
     //With all the checks and replacements done, is the number actually different from the stored one?
-    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]]) {
+    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]] && !forcePush) {
         if (success) success();
         return;
     }

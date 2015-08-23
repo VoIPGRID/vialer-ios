@@ -15,6 +15,14 @@
 #import "ConfigureFormView.h"
 #import "UnlockView.h"
 
+
+typedef NS_ENUM(NSInteger, OnboardingScreens) {
+    OnboardingScreenLogin      = 0,
+    OnboardingScreenConfigure  = 1,
+    //Not supported yet
+    //OnboardingScreenUnlock     = 2,
+};
+
 @interface LogInViewController : TrackedViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 /* The vialier logo that moves out of screen when view opens. */
@@ -29,6 +37,12 @@
 
 // The unlock slider: should be refactored to unlockView.
 @property (nonatomic, strong) IBOutlet UIView *sliderView;
+
+
+/** @property screenToShow
+ *  The onboarding screen to show after the Logo animation
+ **/
+@property (nonatomic)OnboardingScreens screenToShow;
 
 - (IBAction)unlockIt;
 - (IBAction)fadeLabel;

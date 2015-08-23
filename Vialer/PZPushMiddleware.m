@@ -57,7 +57,6 @@
 }
 
 - (void)pjConnectionStatusChangedNotification:(NSNotification *)notification {
-    NSLog(@"Notification :%@", notification);
     ConnectionHandler *handler = [notification object];
 
     if (handler.accountStatus == GSAccountStatusConnected)
@@ -84,14 +83,11 @@
 - (NSString*)baseLink {
     static NSString* baseLink;
     if (!baseLink) {
-        NSLog(@"FETCHED FROM PLIST");
         NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
         NSAssert(config != nil, @"Config.plist not found!");
         
         baseLink = [[config objectForKey:@"URLS"] objectForKey:@"Middelware BaseLink"];
         NSAssert(baseLink, @"URLS - Middelware BaseLink not found in Config.plist!");
-    } else {
-        NSLog(@"Using stored baseLink from PLIST");
     }
     return baseLink;
 }
@@ -262,18 +258,19 @@
 }
 
 - (void)unregisterToken:(NSString *)token andSipAccount:(NSString *)sipAccount {
-    NSAssert(token, @"Token must be supplied");
-    NSAssert(sipAccount, @"SIP Account must be supplied");
-    
-    NSDictionary *params = @{@"token": token,
-                             @"sip_user_id": sipAccount };
-    
-    NSString *apiLink = @"/api/unregister-apns-device/";
-    [self.pzMiddleware POST:apiLink parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Device was successfully unregistered");
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
-    }];
+    if (sipAccount.length > 0 && token.length > 0) {
+        NSDictionary *params = @{@"token": token,
+                                 @"sip_user_id": sipAccount };
+
+        NSString *apiLink = @"/api/unregister-apns-device/";
+        [self.pzMiddleware POST:apiLink parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Device was successfully unregistered");
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
+        }];
+    } else {
+        NSLog(@"Could not unregister, SipAccount(%@) or VoIPToken(%@) not provided", sipAccount, token);
+    }
 }
 
 #pragma mark - token management

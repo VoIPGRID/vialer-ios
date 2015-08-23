@@ -150,6 +150,7 @@ static GSCall *lastNotifiedCall;
 
 - (void)sipConnect {
     [self sipDisconnect:^{
+        NSLog(@"%s Connecting.... ", __PRETTY_FUNCTION__);
         NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
         NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
         if (!sipAccount || !sipPassword) {
@@ -197,6 +198,7 @@ static GSCall *lastNotifiedCall;
 
 - (void)sipDisconnect:(void (^)())finished {
     BOOL connected = (self.userAgent.account.status == GSAccountStatusConnected);
+    NSLog(@"\n\n %s | %@ \n\n", __PRETTY_FUNCTION__, [self gsAccountStatusToString:self.userAgent.account.status]);
     if (connected) {
         [self.userAgent.account disconnect:finished];
     }

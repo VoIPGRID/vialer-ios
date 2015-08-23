@@ -60,28 +60,25 @@
     NSAssert(config != nil, @"Config.plist not found!");
 
     // Google Analytics
-    //    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    //    [GAI sharedInstance].dispatchInterval = 20;
-    //    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
-    //    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
     [GAI sharedInstance].trackUncaughtExceptions = YES;
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
-    if ([newRelicToken length]) {
+    if ([newRelicToken length])
         [NewRelicAgent startWithApplicationToken:newRelicToken];
-    }
 
 #ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
+    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
 #endif
 
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [[ConnectionHandler sharedConnectionHandler] start];
-
+    [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];    
+    
     // Setup appearance
     [self setupAppearance];
     
@@ -141,9 +138,20 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = drawerController;
     [self.window makeKeyAndVisible];
+    
+    //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
+    //v2.x and start onboarding at the "configure numbers view".
 
     //TODO: Why not login again. What if the user was deactivated on the platform?
-    if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
+        //Not logged in, not v21.x, nor in v2.x
+        self.loginViewController.screenToShow = OnboardingScreenLogin;
+        [self showOnboarding];
+    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
+        //Also show the Mobile number onboarding screen
+        self.loginViewController.screenToShow = OnboardingScreenConfigure;
+        [self showOnboarding];
+    } else {
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
             if (!granted) {
                 [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil) message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:@[NSLocalizedString(@"Ok", nil)] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -153,12 +161,8 @@
                 }];
             }
         }];
-    } else {
-        [self showLogin];
     }
-
-    [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
-
+    
     NSSetUncaughtExceptionHandler(&HandleExceptions);
 
     return YES;
@@ -318,14 +322,15 @@ void HandleExceptions(NSException *exception) {
 }
 
 #pragma mark - Notification actions
-- (void)showLogin {
+- (void)showOnboarding {
     if (!self.loginViewController.presentingViewController)
         // Set animated to NO to prevent a flip to the login/onboarding view.
         [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
 }
 
 - (void)loginFailedNotification:(NSNotification *)notification {
-    [self showLogin];
+    self.loginViewController.screenToShow = OnboardingScreenLogin;
+    [self showOnboarding];
 }
 
 #pragma mark - Private Methods

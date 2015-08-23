@@ -15,6 +15,7 @@
 - (instancetype)initWithView:(UIView *)view;
 
 - (void)runActOne;
+- (void)runActOneInstantly;
 - (void)runActTwo;
 - (void)runActThree;
 

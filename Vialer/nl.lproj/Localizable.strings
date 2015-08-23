@@ -245,7 +245,7 @@
 "Outgoing" = "Uitgaand";
 "Automatically fetched" = "Automatisch opgehaald";
 
-"Retrieving outgoing number..." = "Ophalen uitgaand nummer...";
+"Retrieving phone numbers..." = "Telefoon nummers ophalen...";
 "No outgoing number configured." = "Uitgaand nummer niet ingesteld";
 
 "Vialer is configuring" = "Vialer configureert";
@@ -299,7 +299,7 @@
 "Warning" = "Waarschuwing";
 "Unable to save My number" = "Mijn nummer kan niet worden opgeslagen";
 "SAVING_NUMBER..." = "Nummer opslaan...";
-"NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
+"NUMBER_SAVED_SUCCESS" = "Nummers opgeslagen";
 
 /* Keypad icons mappings */
 "keypad-numbers" = "numbers";
