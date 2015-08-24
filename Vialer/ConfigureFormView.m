@@ -24,7 +24,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.titleLable.text = NSLocalizedString(@"Vialer is configuring", nil);
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    self.titleLable.text = [NSString stringWithFormat:NSLocalizedString(@"App is configuring", nil), appName];
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
     
     self.phoneNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT", nil);

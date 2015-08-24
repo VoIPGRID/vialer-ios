@@ -501,7 +501,7 @@
             [self retrievePhoneNumbersWithSuccessBlock:nil];
         } else {
             [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
-            [self.configureFormView.outgoingNumberLabel setText:@"Enter phonenumber manually"];
+            [self.configureFormView.outgoingNumberLabel setText:NSLocalizedString(@"Enter phonenumber manually", nil)];
             
             [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
                                message:NSLocalizedString(@"Error while retrieving your outgoing number, please enter manually", nil)

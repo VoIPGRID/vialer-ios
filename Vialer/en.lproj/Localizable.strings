@@ -34,7 +34,6 @@
 "Continue" = "Continue";
 
 /* No comment provided by engineer. */
-"Dashboard" = "Dashboard";
 
 /* No comment provided by engineer. */
 "Dialing..." = "Dialing...";
@@ -52,16 +51,13 @@
 "Email sent successfully." = "Email sent successfully.";
 
 /* No comment provided by engineer. */
-"Enter your email and password." = "Enter your email address and password.";
-
-/* No comment provided by engineer. */
 "Extensions or phonenumbers not valid." = "Extension or phonenumber not valid.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls.\n%@" = "Sorry, you don't have permission to see this content.\n%@";
+"Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
 
 /* No comment provided by engineer. */
-"Failed to load your dashboard." = "Failed to load your dashboard.";
+"Failed to fetch your recent calls.\nPull down to refresh" = "Failed to fetch your recent calls.\nPull down to refresh";
 
 /* No comment provided by engineer. */
 "Failed to send email." = "Failed to send email.";
@@ -69,23 +65,18 @@
 /* No comment provided by engineer. */
 "Failed to set up a call." = "Failed to set up a call.";
 
-/* No comment provided by engineer. */
-//"Forgot Password" = "Forgot Password"; removed, duplicate
-
 "Business" = "Business";
 "calls in the cloud" = "calls in the cloud";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Forgot password?";
-"HOW_DOES_VIALER_WORK_BUTTON_TEXT" = "How does Vialer work?";
+"HOW_DOES_APP_WORK_BUTTON_TEXT" = "How does %@ work?";
 
-"required" = "required";
 
 //Possible duplicate with the one below
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one." = "Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one.";
 
 "Request password" = "Request password";
 
@@ -96,7 +87,6 @@
 "Keypad" = "Keypad";
 
 /* No comment provided by engineer. */
-"Call" = "Call";
 
 /* No comment provided by engineer. */
 "Loading..." = "Loading...";
@@ -123,7 +113,6 @@
 "phone" = "phone";
 
 /* No comment provided by engineer. */
-"mobile" = "mobile";
 
 /* No comment provided by engineer. */
 "Phone couldn't be reached" = "Phone couldn't be reached";
@@ -159,7 +148,6 @@
 "Show your recent calls" = "Show your recent calls";
 
 /* No comment provided by engineer. */
-"Sign In" = "Sign In";
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
@@ -241,15 +229,11 @@
 
 /* Placeholder label shown in second step of onboarding. */
 "mobile_label" = "Mobile";
-"phonenumber" = "phonenumber";
 
-"Outgoing" = "Outgoing";
-"Automatically fetched" = "Automatically fetched";
 "Retrieving phone numbers..." = "Retrieving phone numbers...";
-"No outgoing number configured." = "No outgoing number configured.";
 
 
-"Vialer is configuring" = "Vialer is configuring";
+"App is configuring" = "%@ is configuring";
 "your account" = "your account";
 
 "Hello" = "Hello";
@@ -266,10 +250,8 @@
 "Routing" = "Routing";
 "Information" = "Information";
 "Logout" = "Logout";
-"Autoconnect A/B" = "Autoconnect A/B";
 
 "Continue" = "Continue";
-"Search" = "Search";
 
 "Error" = "Error";
 "Error while retrieving your outgoing number, please enter manually" = "Error while retrieving your outgoing number, please enter manually";
@@ -297,8 +279,8 @@
 "Missed" = "Missed";
 
 "Warning" = "Warning";
+"Unable to save \"My number\"" = "Unable to save \"My number\"";
 "SAVING_NUMBER..." = "Saving number...";
-"Unable to save My number" = "Unable to save My Number";
 "NUMBER_SAVED_SUCCESS" = "Numbers saved";
 
 /* Keypad icons mappings */
@@ -307,4 +289,23 @@
 "keypad-soundoff" = "sound off";
 "keypad-speaker" = "speaker";
 
-"onboarding" = "onboarding-en";
+"onboarding" = "onboarding-en"; /* Reference to URL String in the config.plist to the localized onboarding information page */
+
+/* New strings */
+"/dashboard/" = "/dashboard/";
+"/dialplan/" = "/dialplan/";
+"/stats/dashboard/" = "/stats/dashboard/";
+"A classic connection is being established. The default dialer will now be opened (double rate)." = "A classic connection is being established. The default dialer will now be opened (double rate).";
+"Accept" = "Accept";
+"Call ended" = "Call ended";
+"Decline" = "Decline";
+"Enter phonenumber manually" = "Enter phonenumber manually";
+"FAILED CONNECTION" = "FAILED CONNECTION";
+"Incoming call from %@" = "Incoming call from %@";
+"Microphone Access Denied" = "Microphone Access Denied";
+"Mobile" = "Mobile";
+"NO WIFI OR 4G" = "NO WIFI OR 4G";
+"Poor internet connection Connect A/B" = "Poor internet connection Connect A/B";
+"Setting up connection..." = "Setting up connection...";
+"VoIP Account" = "VoIP Account";
+"You must allow microphone access in Settings > Privacy > Microphone." = "You must allow microphone access in Settings > Privacy > Microphone.";

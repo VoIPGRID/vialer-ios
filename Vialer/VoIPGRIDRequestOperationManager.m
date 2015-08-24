@@ -136,15 +136,9 @@
     for (NSHTTPCookie *cookie in cookieStorage.cookies) {
         [cookieStorage deleteCookie:cookie];
     }
-    //unregister from middleware
-    [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
     
-    // Remove sip account if present
-    NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-    if (sipAccount) {
-        [SSKeychain deletePasswordForService:[[self class] serviceName] account:sipAccount error:NULL];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
-    }
+    // Remove sip account if present also disconnects PJSIP and signals Middleware
+    [self setSipAccount:nil andSipPassword:nil];
 
     NSError *error;
     NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
@@ -372,31 +366,34 @@
 }
 
 - (void)setSipAccount:(NSString *)newSipAccount andSipPassword:(NSString *)newSipPassword {
+    NSString *storedSipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
     if ([newSipAccount length] > 0) {
-        NSString *storedSipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
         if ([storedSipAccount isEqualToString:newSipAccount]) {
             NSLog(@"Not updating UserDefaults with SIP Account because the supplied account was no different from the stored one");
         } else {
+            [[NSUserDefaults standardUserDefaults] setObject:newSipAccount forKey:@"SIPAccount"];
+            [SSKeychain setPassword:newSipPassword forService:[[self class] serviceName] account:newSipAccount];
+            [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+            
+            [[ConnectionHandler sharedConnectionHandler] sipConnect];
             //So the SIP account was different from our last account... disconnect and reconnect.
-            [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
-                [[NSUserDefaults standardUserDefaults] setObject:newSipAccount forKey:@"SIPAccount"];
-                [SSKeychain setPassword:newSipPassword forService:[[self class] serviceName] account:newSipAccount];
-                //Inform the connection handler to connect to the new sip account
-                [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
-                //Update the middleware that we are reachable under a new sip account
-                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-                NSLog(@"Setting SIP Account %@", newSipAccount);
-            }];
+//            [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+//                //Inform the connection handler to connect to the new sip account
+//                [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+//                //Update the middleware that we are reachable under a new sip account
+//                NSLog(@"Setting SIP Account %@", newSipAccount);
+//            }];
         }
     } else {
+        NSLog(@"%s No SIP Account disconnecting and deleting", __PRETTY_FUNCTION__);
         //First unregister the account with the middleware
-        [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+        [[PZPushMiddleware sharedInstance] unregisterSipAccount:storedSipAccount];
         //Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+        [SSKeychain deletePasswordForService:[[self class] serviceName] account:storedSipAccount error:NULL];
         //And disconnect the Sip Connection Handler
         [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
-        NSLog(@"No SIP Account");
-    }
+            }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

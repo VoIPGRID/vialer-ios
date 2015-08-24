@@ -260,10 +260,19 @@
 }
 
 - (void)showInfoScreen {
-    InfoCarouselViewController *infoCarouselViewController = [[InfoCarouselViewController alloc] initWithNibName:@"InfoCarouselViewController" bundle:[NSBundle mainBundle]];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:infoCarouselViewController];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
-    infoCarouselViewController.navigationItem.leftBarButtonItem = cancelButton;
+    PBWebViewController *webViewController = [[PBWebViewController alloc] init];
+    
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSString *onboardingUrl = [[config objectForKey:@"URLS"] objectForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+    webViewController.URL = [NSURL URLWithString:onboardingUrl];
+    webViewController.showsNavigationToolbar = YES;
+    webViewController.hidesBottomBarWhenPushed = YES;
+    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(navigationDidTapCancel)];
+    webViewController.navigationItem.rightBarButtonItem = cancelButton;
+    
     [self presentViewController:navController animated:YES completion:nil];
 }
 

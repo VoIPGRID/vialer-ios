@@ -35,7 +35,8 @@
     
     [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
-    [self.configurationInstructionsButton setTitle:NSLocalizedString(@"HOW_DOES_VIALER_WORK_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    [self.configurationInstructionsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"HOW_DOES_APP_WORK_BUTTON_TEXT", nil), appName] forState:UIControlStateNormal];
 }
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {
