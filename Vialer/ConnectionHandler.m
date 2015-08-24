@@ -149,12 +149,21 @@ static GSCall *lastNotifiedCall;
 }
 
 - (void)sipConnect {
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+    NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
+    if (!sipAccount || !sipPassword) {
+        NSLog(@"No SIP Account set, ignoring connect request");
+        return;
+    }
+    
+    //If we are trying te reconnect with the same SIP Account... just ignore
+    if ([self.account.username isEqualToString:sipAccount]) {
+        NSLog(@"Connecting with same SIP Account as before... ignoring connect request");
+        return;
+    }
+    
     [self sipDisconnect:^{
-        NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
-        NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
-        if (!sipAccount || !sipPassword) {
-            return;
-        }
+        NSLog(@"%s Connecting.... ", __PRETTY_FUNCTION__);
 
         if (!self.account) {
             self.account = [GSAccountConfiguration defaultConfiguration];

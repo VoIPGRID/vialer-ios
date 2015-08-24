@@ -42,7 +42,7 @@
                          self.center = point;
                      }
                      completion:^(BOOL finished) {
-                         if ((self.center.y < 0 || self.center.x < 0) && remove) {
+                         if ((self.center.y < 0 || self.center.x < -60) && remove) {
                              [self removeFromSuperview];
                          }
                      }];

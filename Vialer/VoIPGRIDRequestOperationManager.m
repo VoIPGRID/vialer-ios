@@ -9,6 +9,7 @@
 #import "VoIPGRIDRequestOperationManager.h"
 #import "NSDate+RelativeDate.h"
 #import "PZPushMiddleware.h"
+#import "ConnectionHandler.h"
 
 #import "SSKeychain.h"
 
@@ -23,6 +24,7 @@
 
 
 @interface VoIPGRIDRequestOperationManager ()
+@property (nonatomic, strong)NSDateFormatter *callDateGTFormatter;
 @end
 
 @implementation VoIPGRIDRequestOperationManager
@@ -238,13 +240,28 @@
     }];
 }
 
+/**
+ * Since a DateFormatter is pretty expensive to load, lazy load it and keep it in memory
+ */
+- (NSDateFormatter *)callDateGTFormatter {
+    if (! _callDateGTFormatter) {
+        _callDateGTFormatter = [[NSDateFormatter alloc] init];
+        [_callDateGTFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    return _callDateGTFormatter;
+}
+
 - (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset sourceNumber:(NSString *)sourceNumber callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self GET:GetCdrRecordUrl parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                          @(limit), @"limit",
-                                          @(offset), @"offset",
-                                          sourceNumber, @"src_number",
-                                          nil
-                                          ]
+
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@(limit) forKey:@"limit"];
+    [params setObject:@(offset) forKey:@"offset"];
+    [params setObject:[self.callDateGTFormatter stringFromDate:date] forKey:@"call_date__gt"];
+    
+    if ([sourceNumber length] > 0)
+        [params setObject:sourceNumber forKey:@"src_number"];
+
+    [self GET:GetCdrRecordUrl parameters:params
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           success(operation, responseObject);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -354,16 +371,30 @@
         if (success) success(nil, nil);
 }
 
-- (void)setSipAccount:(NSString *)sipAccount andSipPassword:(NSString *)sipPassword {
-    if (sipAccount) {
-        [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
-        [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
-        NSLog(@"Setting SIP Account %@", sipAccount);
+- (void)setSipAccount:(NSString *)newSipAccount andSipPassword:(NSString *)newSipPassword {
+    if ([newSipAccount length] > 0) {
+        NSString *storedSipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+        if ([storedSipAccount isEqualToString:newSipAccount]) {
+            NSLog(@"Not updating UserDefaults with SIP Account because the supplied account was no different from the stored one");
+        } else {
+            //So the SIP account was different from our last account... disconnect and reconnect.
+            [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+                [[NSUserDefaults standardUserDefaults] setObject:newSipAccount forKey:@"SIPAccount"];
+                [SSKeychain setPassword:newSipPassword forService:[[self class] serviceName] account:newSipAccount];
+                //Inform the connection handler to connect to the new sip account
+                [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+                //Update the middleware that we are reachable under a new sip account
+                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+                NSLog(@"Setting SIP Account %@", newSipAccount);
+            }];
+        }
     } else {
         //First unregister the account with the middleware
         [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
         //Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+        //And disconnect the Sip Connection Handler
+        [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
         NSLog(@"No SIP Account");
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -390,7 +421,11 @@
     return nil;
 }
 
-- (void)pushMobileNumber:(NSString *)mobileNumber success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
+/**
+ * Under some circumstances we would like to force setting of the mobile number. For instance with the migration of v1.x to version 2.0
+ * in which case the user has entered his mobile number but it was never actually pushed to the server.
+ */
+- (void)pushMobileNumber:(NSString *)mobileNumber forcePush:(BOOL)forcePush success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
     //Has the user entered a number
     if (![mobileNumber length] > 0) {
         if (failure) failure(NSLocalizedString(@"Unable to save \"My number\"", nil));
@@ -410,7 +445,7 @@
     }
 
     //With all the checks and replacements done, is the number actually different from the stored one?
-    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]]) {
+    if ([mobileNumber isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]] && !forcePush) {
         if (success) success();
         return;
     }

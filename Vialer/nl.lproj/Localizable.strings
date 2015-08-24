@@ -71,14 +71,12 @@
 /* No comment provided by engineer. */
 "Failed to set up a call." = "Opzetten van een gesprek mislukt.";
 
-/* No comment provided by engineer. */
-//"Forgot Password" = "Wachtwoord vergeten"; - removed, duplicate
-
 "Business" = "Zakelijke";
 "calls in the cloud" = "telefonie in de cloud";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
+"HOW_DOES_VIALER_WORK_BUTTON_TEXT" = "Hoe werkt bellen via Vialer";
 
 "required" = "verplicht";
 
@@ -247,7 +245,7 @@
 "Outgoing" = "Uitgaand";
 "Automatically fetched" = "Automatisch opgehaald";
 
-"Retrieving outgoing number..." = "Ophalen uitgaand nummer...";
+"Retrieving phone numbers..." = "Telefoon nummers ophalen...";
 "No outgoing number configured." = "Uitgaand nummer niet ingesteld";
 
 "Vialer is configuring" = "Vialer configureert";
@@ -301,7 +299,7 @@
 "Warning" = "Waarschuwing";
 "Unable to save My number" = "Mijn nummer kan niet worden opgeslagen";
 "SAVING_NUMBER..." = "Nummer opslaan...";
-"NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
+"NUMBER_SAVED_SUCCESS" = "Nummers opgeslagen";
 
 /* Keypad icons mappings */
 "keypad-numbers" = "numbers";

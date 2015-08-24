@@ -56,7 +56,7 @@
     [_onStage addObject:cloud4ImageView];
 
     AnimatedImageView *cloud5ImageView = [[AnimatedImageView alloc] initWithImage:[UIImage imageNamed:@"cloud-1"]];
-    [cloud5ImageView setCenter:CGPointMake(0.f, CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud3ImageView.frame))];
+    [cloud5ImageView setCenter:CGPointMake(-60, CGRectGetMaxY(_view.frame) + CGRectGetHeight(cloud3ImageView.frame))];
     [_view addSubview:cloud5ImageView];
     [_view sendSubviewToBack:cloud5ImageView];
     [_onStage addObject:cloud5ImageView];
@@ -81,7 +81,6 @@
 //    ((UIView *)_onStage[4]).backgroundColor = [UIColor yellowColor];
 //    ((UIView *)_onStage[5]).backgroundColor = [UIColor purpleColor];
 //    ((UIView *)_onStage[6]).backgroundColor = [UIColor brownColor];
-    
 }
 
 
@@ -106,8 +105,8 @@
     [cloudFour addPoint:CGPointMake(CGRectGetMaxX(_view.frame), -CGRectGetHeight(cloudFour.frame))];
     
     AnimatedImageView *cloudFive = _onStage[4];
-    [cloudFive addPoint:CGPointMake(0.f, 1.5f/5.f * CGRectGetMaxY(_view.frame))];
-    [cloudFive addPoint:CGPointMake(0.f, -CGRectGetHeight(cloudFive.frame))];
+    [cloudFive addPoint:CGPointMake(-55, 1.5f/5.f * CGRectGetMaxY(_view.frame))];
+    [cloudFive addPoint:CGPointMake(-55, -CGRectGetHeight(cloudFive.frame))];
     
     AnimatedImageView *cloudSix = _onStage[5];
     [cloudSix addPoint:CGPointMake(CGRectGetMaxX(_view.frame), 5.5f / 7.f * CGRectGetMaxY(_view.frame))];
@@ -116,6 +115,13 @@
     // 6 higher
     AnimatedImageView *cloudSeven = _onStage[6];
     [cloudSeven addPoint:CGPointMake(0.f, _view.center.y)];
+}
+
+- (void)runActOneInstantly {
+    [_onStage[0] animateToNextWithDuration:0.f delay:0.f];
+    [_onStage[1] animateToNextWithDuration:0.f delay:0.f];
+    [_onStage[2] animateToNextWithDuration:0.f delay:0.f];
+    [_onStage[3] animateToNextWithDuration:0.f delay:0.f];
 }
 
 - (void) runActOne {
@@ -148,20 +154,18 @@
 
 - (void)animateCloudsOutOfViewWithDuration:(NSTimeInterval)duration {
     AnimatedImageView * cloudView = _onStage[0];
-    CGPoint nextPosition = CGPointMake(cloudView.center.x - 40, cloudView.center.y);
+    CGPoint nextPosition = CGPointMake(cloudView.center.x -55, cloudView.center.y);
     [cloudView moveToPoint:nextPosition withDuration:duration delay:0 andRemoveWhenOffScreen:NO];
 
     //Top right in ConfigureView
     cloudView = _onStage[3];
-    nextPosition = CGPointMake(cloudView.center.x + 20, cloudView.center.y);
+    nextPosition = CGPointMake(cloudView.center.x + 65, cloudView.center.y);
     [cloudView moveToPoint:nextPosition withDuration:duration delay:0 andRemoveWhenOffScreen:NO];
     
-    //Top left in ConfigureView
-    cloudView = _onStage[4];
-    nextPosition = CGPointMake(cloudView.center.x - 60, cloudView.center.y);
-    [cloudView moveToPoint:nextPosition withDuration:duration delay:0 andRemoveWhenOffScreen:NO];
-    
-
+//    //Top left in ConfigureView
+//    cloudView = _onStage[4];
+//    nextPosition = CGPointMake(cloudView.center.x - 60, cloudView.center.y);
+//    [cloudView moveToPoint:nextPosition withDuration:duration delay:0 andRemoveWhenOffScreen:NO];
 }
 
 - (void)animateCloudsIntoViewWithDuration:(NSTimeInterval)duration {
@@ -176,7 +180,7 @@
    
     //Top left in ConfigureView
     cloudView = _onStage[4];
-    nextPosition = CGPointMake(0, cloudView.center.y);
+    nextPosition = CGPointMake(-60, cloudView.center.y);
     [cloudView moveToPoint:nextPosition withDuration:duration delay:0 andRemoveWhenOffScreen:NO];
 }
 

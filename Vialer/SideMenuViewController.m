@@ -44,6 +44,7 @@
     UIImage *routingIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:tintColor];
     UIImage *infoIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-info"] color:tintColor];
     UIImage *accountIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:tintColor];
+    UIImage *logoutIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-logout"] color:tintColor];
     //UIImage *autoconnectIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:tintColor];
     
     self.menuItems = @[
@@ -52,7 +53,7 @@
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Routing", nil) andIcon:routingIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Information", nil) andIcon:infoIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Account", nil) andIcon:accountIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:nil]
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:logoutIcon]
     ];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -132,8 +133,15 @@
 
 - (NSString *)appVersionBuildString {
     NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-    NSString *version = [NSString stringWithFormat:@"Version:%@  Build:%@  Commit:%@",
-                         [infoDict objectForKey:@"CFBundleShortVersionString"],
+    NSMutableString *versionString = [NSMutableString stringWithFormat:@"v:%@", [infoDict objectForKey:@"CFBundleShortVersionString"]];
+    //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
+    //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
+    NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
+    if ([additionalVersionString length] >0)
+        [versionString appendFormat:@".%@", additionalVersionString];
+    
+    NSString *version = [NSString stringWithFormat:@"%@ (%@) | %@",
+                         versionString,
                          [infoDict objectForKey:@"CFBundleVersion"],
                          [infoDict objectForKey:@"Commit_Short_Hash"]];
     return version;

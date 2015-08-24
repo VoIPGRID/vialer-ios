@@ -339,6 +339,7 @@
             personViewController.addressBook = self.addressBook;
             personViewController.displayedPerson = person;
             personViewController.allowsEditing = YES;
+            personViewController.allowsActions = NO;
             [self.navigationController pushViewController:personViewController animated:YES];
         }
     }
