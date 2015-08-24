@@ -70,7 +70,7 @@
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
-"HOW_DOES_VIALER_WORK_BUTTON_TEXT" = "Hoe werkt bellen via Vialer";
+"HOW_DOES_APP_WORK_BUTTON_TEXT" = "Hoe werkt bellen via %@";
 
 //Possible duplicate with the one below
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
@@ -232,7 +232,7 @@
 "Retrieving phone numbers..." = "Telefoon nummers ophalen...";
 
 
-"Vialer is configuring" = "Vialer configureert";
+"App is configuring" = "%@ configureert";
 "your account" = "je gegevens";
 
 "Hello" = "Hallo";

@@ -70,7 +70,7 @@
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Forgot password?";
-"HOW_DOES_VIALER_WORK_BUTTON_TEXT" = "How does Vialer work?";
+"HOW_DOES_APP_WORK_BUTTON_TEXT" = "How does %@ work?";
 
 
 //Possible duplicate with the one below
@@ -233,7 +233,7 @@
 "Retrieving phone numbers..." = "Retrieving phone numbers...";
 
 
-"Vialer is configuring" = "Vialer is configuring";
+"App is configuring" = "%@ is configuring";
 "your account" = "your account";
 
 "Hello" = "Hello";
