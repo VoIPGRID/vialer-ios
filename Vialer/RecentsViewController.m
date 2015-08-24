@@ -149,6 +149,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.reloading = YES;
             [self.refreshControl beginRefreshing];
+            [self.tableView setContentOffset:CGPointMake(0, -CGRectGetHeight(self.refreshControl.frame)) animated:YES];
         });
 
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:50 offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -158,6 +159,7 @@
                 self.previousSearchDateTime = [NSDate date];
                 self.unauthorized = NO;
                 self.reloading = NO;
+                [self.tableView setContentOffset:CGPointZero animated:YES];
                 [self.refreshControl endRefreshing];
 
                 if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
@@ -171,6 +173,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.reloading = NO;
+                [self.tableView setContentOffset:CGPointZero animated:YES];
                 [self.refreshControl endRefreshing];
 
                 if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
