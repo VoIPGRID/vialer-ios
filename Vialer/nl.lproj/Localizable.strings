@@ -34,7 +34,6 @@
 "Continue" = "Verder";
 
 /* No comment provided by engineer. */
-"Dashboard" = "Dashboard";
 
 /* No comment provided by engineer. */
 "Dialing..." = "Kiezen...";
@@ -48,22 +47,17 @@
 /* No comment provided by engineer. */
 "Email" = "E-mailadres";
 
-"Password" = "Wachtwoord";
-
 /* No comment provided by engineer. */
 "Email sent successfully." = "E-mail verzonden.";
-
-/* No comment provided by engineer. */
-"Enter your email and password." = "Vul je e-mailadres en wachtwoord in.";
 
 /* No comment provided by engineer. */
 "Extensions or phonenumbers not valid." = "Extensie of telefoonnummer niet geldig.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls.\n%@" = "Sorry, je hebt geen rechten om deze inhoud te bekijken.\n%@";
+"Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
 
 /* No comment provided by engineer. */
-"Failed to load your dashboard." = "Mislukt om je dashboard te laden.";
+"Failed to fetch your recent calls.\nPull down to refresh" = "Failed to fetch your recent calls.\nPull down to refresh";
 
 /* No comment provided by engineer. */
 "Failed to send email." = "E-mail zenden mislukt.";
@@ -78,13 +72,10 @@
 "Forgot password?" = "Wachtwoord vergeten?";
 "HOW_DOES_VIALER_WORK_BUTTON_TEXT" = "Hoe werkt bellen via Vialer";
 
-"required" = "verplicht";
-
 //Possible duplicate with the one below
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Forgotten your password?\nPlease enter your email address, and we will email you instructions for setting a new one." = "Je wachtwoord vergeten?\nGeef je e-mailadres op en we sturen je per e-mail de instructies voor het instellen van een nieuw wachtwoord.";
 
 "Request password" = "Wachtwoord opvragen";
 
@@ -95,7 +86,6 @@
 "Keypad" = "Toetsen";
 
 /* No comment provided by engineer. */
-"Call" = "Bellen";
 
 /* No comment provided by engineer. */
 "Loading..." = "Laden...";
@@ -122,7 +112,6 @@
 "phone" = "vast";
 
 /* No comment provided by engineer. */
-"mobile" = "mobiel";
 
 /* No comment provided by engineer. */
 "Phone couldn't be reached" = "Telefoon kon niet worden bereikt";
@@ -158,7 +147,6 @@
 "Show your recent calls" = "Toon jouw recente oproepen";
 
 /* No comment provided by engineer. */
-"Sign In" = "Inloggen";
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
@@ -240,13 +228,9 @@
 
 /* Placeholder label shown in second step of onboarding. */
 "mobile_label" = "Mobiel";
-"phonenumber" = "telefoonnummer";
-
-"Outgoing" = "Uitgaand";
-"Automatically fetched" = "Automatisch opgehaald";
 
 "Retrieving phone numbers..." = "Telefoon nummers ophalen...";
-"No outgoing number configured." = "Uitgaand nummer niet ingesteld";
+
 
 "Vialer is configuring" = "Vialer configureert";
 "your account" = "je gegevens";
@@ -265,10 +249,8 @@
 "Routing" = "Belplan";
 "Information" = "Informatie";
 "Logout" = "Uitloggen";
-"Autoconnect A/B" = "Autoconnect A/B";
 
 "Continue" = "Doorgaan";
-"Search" = "Zoeken";
 
 "Error" = "Fout";
 "Error while retrieving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
@@ -281,12 +263,11 @@
 /*Config View */
 "VoIP Account" =  "VoIP Account";
 "SIP account" = "SIP account";
-"Password" = "Password";
+"Password" = "Wachtwoord";
 
 "My number" =  "Mijn nummer";
 "Outgoing number" = "Uitgaand nummer";
 "MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR" = "Het mobiele nummer moet beginnen met beginnen met een landcode b.v. +31 of 0031";
-
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
 
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
@@ -297,7 +278,7 @@
 "Missed" = "Gemist";
 
 "Warning" = "Waarschuwing";
-"Unable to save My number" = "Mijn nummer kan niet worden opgeslagen";
+"Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";
 "SAVING_NUMBER..." = "Nummer opslaan...";
 "NUMBER_SAVED_SUCCESS" = "Nummers opgeslagen";
 
@@ -307,4 +288,24 @@
 "keypad-soundoff" = "mute";
 "keypad-speaker" = "speaker";
 
-"onboarding" = "onboarding-nl";
+"onboarding" = "onboarding-nl"; /* Reference to URL String in the config.plist to the localized onboarding information page */
+
+/* New strings */
+"/dashboard/" = "/dashboard/";
+"/dialplan/" = "/dialplan/";
+"/stats/dashboard/" = "/stats/dashboard/";
+"A classic connection is being established. The default dialer will now be opened (double rate)." = "A classic connection is being established. The default dialer will now be opened (double rate).";
+"Accept" = "Accept";
+"Call ended" = "Call ended";
+"Decline" = "Decline";
+"Enter phonenumber manually" = "Enter phonenumber manually";
+"FAILED CONNECTION" = "FAILED CONNECTION";
+"Incoming call from %@" = "Incoming call from %@";
+"Microphone Access Denied" = "Microphone Access Denied";
+"Mobile" = "Mobile";
+"NO WIFI OR 4G" = "NO WIFI OR 4G";
+"Poor internet connection Connect A/B" = "Poor internet connection Connect A/B";
+"Setting up connection..." = "Setting up connection...";
+"VoIP Account" = "VoIP Account";
+"You must allow microphone access in Settings > Privacy > Microphone." = "You must allow microphone access in Settings > Privacy > Microphone.";
+
