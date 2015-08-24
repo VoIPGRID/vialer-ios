@@ -89,8 +89,6 @@
      * Menu setup including all its viewControllers.
      */
     SideMenuViewController *sideMenuViewController = [[SideMenuViewController alloc] init];
-    self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-    self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     self.callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
     self.callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -323,13 +321,18 @@ void HandleExceptions(NSException *exception) {
 
 #pragma mark - Notification actions
 - (void)showOnboarding {
-    if (!self.loginViewController.presentingViewController)
+    // Check if the loginViewController is created, and if present
+    NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
+    if (self.loginViewController == nil || !self.loginViewController.presentingViewController) {
+        // Create a new instance, and present it.
+        self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
+        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         // Set animated to NO to prevent a flip to the login/onboarding view.
         [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+    }
 }
 
 - (void)loginFailedNotification:(NSNotification *)notification {
-    self.loginViewController.screenToShow = OnboardingScreenLogin;
     [self showOnboarding];
 }
 
