@@ -71,7 +71,7 @@
 #ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
     [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
 #endif
 

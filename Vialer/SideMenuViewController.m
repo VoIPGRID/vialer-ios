@@ -137,7 +137,6 @@
     //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
     //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
     NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
-    NSLog(@"Additional_Version_String = %@", additionalVersionString);
     if ([additionalVersionString length] >0)
         [versionString appendFormat:@".%@", additionalVersionString];
     

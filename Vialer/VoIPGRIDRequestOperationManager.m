@@ -371,15 +371,23 @@
         if (success) success(nil, nil);
 }
 
-- (void)setSipAccount:(NSString *)sipAccount andSipPassword:(NSString *)sipPassword {
-    if (sipAccount) {
-        [[NSUserDefaults standardUserDefaults] setObject:sipAccount forKey:@"SIPAccount"];
-        [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipAccount];
-        //Inform the connection handler to connect to the new sip account
-        [[ConnectionHandler sharedConnectionHandler] sipConnect];
-        //Update the middleware that we are reachable under a new sip account
-        [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-        NSLog(@"Setting SIP Account %@", sipAccount);
+- (void)setSipAccount:(NSString *)newSipAccount andSipPassword:(NSString *)newSipPassword {
+    if ([newSipAccount length] > 0) {
+        NSString *storedSipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+        if ([storedSipAccount isEqualToString:newSipAccount]) {
+            NSLog(@"Not updating UserDefaults with SIP Account because the supplied account was no different from the stored one");
+        } else {
+            //So the SIP account was different from our last account... disconnect and reconnect.
+            [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+                [[NSUserDefaults standardUserDefaults] setObject:newSipAccount forKey:@"SIPAccount"];
+                [SSKeychain setPassword:newSipPassword forService:[[self class] serviceName] account:newSipAccount];
+                //Inform the connection handler to connect to the new sip account
+                [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
+                //Update the middleware that we are reachable under a new sip account
+                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+                NSLog(@"Setting SIP Account %@", newSipAccount);
+            }];
+        }
     } else {
         //First unregister the account with the middleware
         [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
