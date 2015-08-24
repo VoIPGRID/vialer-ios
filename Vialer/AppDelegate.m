@@ -31,6 +31,7 @@
 #import "PZPushMiddleware.h"
 
 #import "GAI.h"
+#import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
@@ -62,6 +63,8 @@
     // Google Analytics
     [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
     [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Set an additional dimensionValue for different brands.
+    [[GAI sharedInstance].defaultTracker set:[GAIFields customDimensionForIndex:1] value:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
 
     // New Relic
     NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
