@@ -204,22 +204,39 @@ static GSCall *lastNotifiedCall;
     }];
 }
 
+//There are a lot of calls made here which all do the same:
+// userAgent.account disconnect and self.userAgent reset all call the same disconnect
 - (void)sipDisconnect:(void (^)())finished {
+    
     BOOL connected = (self.userAgent.account.status == GSAccountStatusConnected);
     if (connected) {
-        [self.userAgent.account disconnect:finished];
-    }
-
-    self.userAgent.account.delegate = nil;
-    [self.userAgent.account removeObserver:self forKeyPath:@"status"];
-    [self.userAgent reset];
-
-    self.userAgent = nil;
-    self.account = nil;
-    self.config = nil;
-
-    if (!connected && finished) {
-        finished();
+        [self.userAgent.account disconnect:^{
+            self.userAgent.account.delegate = nil;
+            [self.userAgent.account removeObserver:self forKeyPath:@"status"];
+            //Reset cannot be called before the call to [self.userAgent. disconnect] has finished -> PJSIP_EBUSY error
+            [self.userAgent reset];
+            
+            self.userAgent = nil;
+            self.account = nil;
+            self.config = nil;
+            
+            if (finished) {
+                finished();
+            }
+        }];
+    } else {
+        self.userAgent.account.delegate = nil;
+        [self.userAgent.account removeObserver:self forKeyPath:@"status"];
+        //Reset cannot be called before the call to [self.userAgent. disconnect] had has finished -> PJSIP_EBUSY error
+        [self.userAgent reset];
+        
+        self.userAgent = nil;
+        self.account = nil;
+        self.config = nil;
+        
+        if (!connected && finished) {
+            finished();
+        }
     }
 }
 
