@@ -69,6 +69,9 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20.f];
 
     [self addButtonsToView:self.buttonsView];
+    
+    [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
+    [self.hideButton setTitle:NSLocalizedString(@"Hide", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
