@@ -54,10 +54,10 @@
 "Extensions or phonenumbers not valid." = "Extensie of telefoonnummer niet geldig.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
+"Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls.\nPull down to refresh" = "Failed to fetch your recent calls.\nPull down to refresh";
+"Failed to fetch your recent calls.\nPull down to refresh" = "Recente gesprekken konden niet worden opgehaald.\nTrek naar beneden om te verversen";
 
 /* No comment provided by engineer. */
 "Failed to send email." = "E-mail zenden mislukt.";
@@ -294,18 +294,18 @@
 "/dashboard/" = "/dashboard/";
 "/dialplan/" = "/dialplan/";
 "/stats/dashboard/" = "/stats/dashboard/";
-"A classic connection is being established. The default dialer will now be opened (double rate)." = "A classic connection is being established. The default dialer will now be opened (double rate).";
-"Accept" = "Accept";
-"Call ended" = "Call ended";
-"Decline" = "Decline";
-"Enter phonenumber manually" = "Enter phonenumber manually";
-"FAILED CONNECTION" = "FAILED CONNECTION";
-"Incoming call from %@" = "Incoming call from %@";
-"Microphone Access Denied" = "Microphone Access Denied";
-"Mobile" = "Mobile";
-"NO WIFI OR 4G" = "NO WIFI OR 4G";
-"Poor internet connection Connect A/B" = "Poor internet connection Connect A/B";
-"Setting up connection..." = "Setting up connection...";
-"VoIP Account" = "VoIP Account";
-"You must allow microphone access in Settings > Privacy > Microphone." = "You must allow microphone access in Settings > Privacy > Microphone.";
-
+"A classic connection is being established. The default dialer will now be opened (double rate)." = "Een verbinding via je eigen telefoonnummer wordt nu opgezet.";
+"Accept" = "Neem op";
+"Call ended" = "Gesprek beëindigd";
+"Decline" = "Weiger";
+"Enter phonenumber manually" = "Voer je telefoonnummer in";
+"FAILED CONNECTION" = "Geen verbinding met telefonieservice";
+"Incoming call from %@" = "Binnenkomend gesprek van %@";
+"Microphone Access Denied" = "Geen toegang tot microfoon";
+"Mobile" = "Mobiel";
+"NO WIFI OR 4G" = "Geen Wifi of 4G";
+"Poor internet connection Connect A/B" = "Matige verbindingskwaliteit. Gebruikt Connect A/B";
+"Setting up connection..." = "Maakt verbinding...";
+"Hide" = "Verberg";
+"VoIP Account" = "VoIP account";
+"You must allow microphone access in Settings > Privacy > Microphone." = "De app heeft toegang nodig tot de microfoon via Instellingen > Privacy > Microfoon.";
