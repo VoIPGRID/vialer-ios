@@ -231,7 +231,9 @@
             // The version of the OS of this phone. Useful when debugging possible issues in the future.
             @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
             // The version of this client app. Useful when debugging possible issues in the future.
-            @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:@"CFBundleShortVersionString"], [infoDict objectForKey:@"CFBundleVersion"]]
+            @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:@"CFBundleShortVersionString"], [infoDict objectForKey:@"CFBundleVersion"]],
+            // The bundle Id of this app, to allow middleware to distinguish between apps
+            @"app": [infoDict objectForKey:@"CFBundleIdentifier"]
         };
 
         void (^success)(AFHTTPRequestOperation*, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
