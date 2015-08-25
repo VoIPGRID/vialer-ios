@@ -149,12 +149,21 @@ static GSCall *lastNotifiedCall;
 }
 
 - (void)sipConnect {
+    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+    NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
+    if (!sipAccount || !sipPassword) {
+        NSLog(@"No SIP Account set, ignoring connect request");
+        return;
+    }
+    
+    //If we are trying te reconnect with the same SIP Account... just ignore
+    if ([self.account.username isEqualToString:sipAccount]) {
+        NSLog(@"Connecting with same SIP Account as before... ignoring connect request");
+        return;
+    }
+    
     [self sipDisconnect:^{
-        NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
-        NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
-        if (!sipAccount || !sipPassword) {
-            return;
-        }
+        NSLog(@"%s Connecting.... ", __PRETTY_FUNCTION__);
 
         if (!self.account) {
             self.account = [GSAccountConfiguration defaultConfiguration];
@@ -195,22 +204,39 @@ static GSCall *lastNotifiedCall;
     }];
 }
 
+//There are a lot of calls made here which all do the same:
+// userAgent.account disconnect and self.userAgent reset all call the same disconnect
 - (void)sipDisconnect:(void (^)())finished {
+    
     BOOL connected = (self.userAgent.account.status == GSAccountStatusConnected);
     if (connected) {
-        [self.userAgent.account disconnect:finished];
-    }
-
-    self.userAgent.account.delegate = nil;
-    [self.userAgent.account removeObserver:self forKeyPath:@"status"];
-    [self.userAgent reset];
-
-    self.userAgent = nil;
-    self.account = nil;
-    self.config = nil;
-
-    if (!connected && finished) {
-        finished();
+        [self.userAgent.account disconnect:^{
+            self.userAgent.account.delegate = nil;
+            [self.userAgent.account removeObserver:self forKeyPath:@"status"];
+            //Reset cannot be called before the call to [self.userAgent. disconnect] has finished -> PJSIP_EBUSY error
+            [self.userAgent reset];
+            
+            self.userAgent = nil;
+            self.account = nil;
+            self.config = nil;
+            
+            if (finished) {
+                finished();
+            }
+        }];
+    } else {
+        self.userAgent.account.delegate = nil;
+        [self.userAgent.account removeObserver:self forKeyPath:@"status"];
+        //Reset cannot be called before the call to [self.userAgent. disconnect] had has finished -> PJSIP_EBUSY error
+        [self.userAgent reset];
+        
+        self.userAgent = nil;
+        self.account = nil;
+        self.config = nil;
+        
+        if (!connected && finished) {
+            finished();
+        }
     }
 }
 

@@ -38,7 +38,7 @@
     NSString *newNumber = self.numberTextFieldCell.textField.text;
     [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
     
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber success:^{
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber forcePush:NO success:^{
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
         [self.delegate numberHasChanged:newNumber];
         [self.navigationController popViewControllerAnimated:YES];

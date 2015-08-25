@@ -14,7 +14,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *businessLabel;
 //Display's "calls in the cloud"
 @property (nonatomic, weak) IBOutlet UILabel *callsInTheCloudLabel;
+@property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, weak) IBOutlet UIButton *forgotPasswordButton;
+@property (nonatomic, weak) IBOutlet UIButton *configurationInstructionsButton;
 @end
 
 @implementation LoginFormView
@@ -31,9 +33,10 @@
     [self.usernameField cleanStyle];
     [self.passwordField cleanStyle];
     
-//    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
-    
+    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    [self.configurationInstructionsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"HOW_DOES_APP_WORK_BUTTON_TEXT", nil), appName] forState:UIControlStateNormal];
 }
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {

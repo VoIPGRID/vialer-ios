@@ -64,6 +64,15 @@ static SystemSoundID ringSoundId;
     if (range.location != NSNotFound) {
         remoteInfo = [remoteInfo substringToIndex:range.location];
     }
+ 
+    //Transform <sip:xxyyyyyyyyz@aaa.bbb.ccc.ddd> into xxyyyyyyyyz
+    if ([remoteInfo containsString:@"sip"]) {
+        NSInteger colonPosition = [remoteInfo rangeOfString:@":"].location+1; //Position of :
+        NSInteger atPosition = [remoteInfo rangeOfString:@"@"].location; //Psoition of @
+
+        //Starting at position of colon, get atPosition - colonPosition characters
+        remoteInfo = [remoteInfo substringWithRange: NSMakeRange(colonPosition, atPosition - colonPosition)];
+    }
     return [remoteInfo stringByReplacingOccurrencesOfString:@"\"" withString:@""];
 }
 

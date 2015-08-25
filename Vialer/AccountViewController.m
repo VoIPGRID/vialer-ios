@@ -126,17 +126,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     //The footer will be added to the last displayed section
     if (section == NUMBERS_SECTION) {
-        NSLog(@"Tableview size %@", NSStringFromCGRect(self.tableView.frame));
         CGRect frameOfLastRow = [tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:OUTGOING_NUMBER_ROW inSection:NUMBERS_SECTION]];
-        NSLog(@"fame of last row: %@", NSStringFromCGRect(frameOfLastRow));
         
         //the empty space below the last cell is the complete height of the tableview minus
         //the y position of the last row + the last rows height.
         CGRect emptyFrameBelowLastRow = CGRectMake(0, 0, self.tableView.frame.size.width,
                    self.tableView.frame.size.height - (frameOfLastRow.origin.y + frameOfLastRow.size.height));
-        
-        NSLog(@"empty space: %@", NSStringFromCGRect(emptyFrameBelowLastRow));
-        
+
         return [[AccountViewFooterView alloc] initWithFrame:emptyFrameBelowLastRow];
     }
     return nil;

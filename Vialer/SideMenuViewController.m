@@ -44,6 +44,7 @@
     UIImage *routingIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:tintColor];
     UIImage *infoIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-info"] color:tintColor];
     UIImage *accountIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:tintColor];
+    UIImage *logoutIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-logout"] color:tintColor];
     //UIImage *autoconnectIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:tintColor];
     
     self.menuItems = @[
@@ -52,7 +53,7 @@
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Routing", nil) andIcon:routingIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Information", nil) andIcon:infoIcon],
         [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Account", nil) andIcon:accountIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:nil]
+        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:logoutIcon]
     ];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -136,7 +137,6 @@
     //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
     //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
     NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
-    NSLog(@"Additional_Version_String = %@", additionalVersionString);
     if ([additionalVersionString length] >0)
         [versionString appendFormat:@".%@", additionalVersionString];
     
@@ -260,10 +260,19 @@
 }
 
 - (void)showInfoScreen {
-    InfoCarouselViewController *infoCarouselViewController = [[InfoCarouselViewController alloc] initWithNibName:@"InfoCarouselViewController" bundle:[NSBundle mainBundle]];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:infoCarouselViewController];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
-    infoCarouselViewController.navigationItem.leftBarButtonItem = cancelButton;
+    PBWebViewController *webViewController = [[PBWebViewController alloc] init];
+    
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSString *onboardingUrl = [[config objectForKey:@"URLS"] objectForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+    webViewController.URL = [NSURL URLWithString:onboardingUrl];
+    webViewController.showsNavigationToolbar = YES;
+    webViewController.hidesBottomBarWhenPushed = YES;
+    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(navigationDidTapCancel)];
+    webViewController.navigationItem.rightBarButtonItem = cancelButton;
+    
     [self presentViewController:navController animated:YES completion:nil];
 }
 

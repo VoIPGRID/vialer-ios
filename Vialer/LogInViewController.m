@@ -211,8 +211,7 @@
     NSString *username = self.loginFormView.usernameField.text;
     NSString *password = self.loginFormView.passwordField.text;
     [self doLoginCheckWithUname:username password:password successBlock:^{
-        self.configureFormView.phoneNumberField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
-        [self retrieveOutgoingNumberWithSuccessBlock:nil];
+        [self retrievePhoneNumbersWithSuccessBlock:nil];
     }];
     [self deselectAllTextFields:nil];
 }
@@ -221,8 +220,14 @@
     NSString *newNumber = self.configureFormView.phoneNumberField.text;
     [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
     
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber success:^{
+    //Force pushing the mobile number to the server. Covers the case where a user has set his mobile number in v1.x which was not pushed to server yet.
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber forcePush:YES success:^{
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
+        
+        //Now that numbers have been saved, localy stored phone number and server side mobile number are in sync,
+        //Migration was completed succesfully
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"v2.0_MigrationComplete"];
+        
         [self.configureFormView.phoneNumberField resignFirstResponder];
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
@@ -336,12 +341,42 @@
     };
     [UIView animateWithDuration:2.2 animations:logoAnimations];
     
-    [_scene runActOne];
+    switch (self.screenToShow) {
+        case OnboardingScreenLogin:
+            [_scene runActOne];
+            break;
+        case OnboardingScreenConfigure:
+            [_scene runActOneInstantly];  // Remove the scene 1 clouds instantly
+            [_scene runActTwo];           // Animate the clouds
+            [self retrievePhoneNumbersWithSuccessBlock:nil];
+            break;
+//        case OnboardingScreenUnlock:
+//            [_scene runActThree];
+//            break;
+        default:
+            //Show the login screen as default
+            [_scene runActOne];
+            break;
+    }
     
-    void (^loginAnimations)(void) = ^{
-        [self animateLoginViewToVisible:1.f delay:1.f];
+    void (^afterLogoAnimations)(void) = ^{
+        switch (self.screenToShow) {
+            case OnboardingScreenLogin:
+                [self animateLoginViewToVisible:1.f delay:0.f]; // show
+                break;
+            case OnboardingScreenConfigure:
+                [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
+                break;
+//            case OnboardingScreenUnlock:
+//                [self animateUnlockViewToVisible:1.f delay:0.f];
+//                break;
+            default:
+                //Show the login screen as default
+                [_scene runActOne];
+                break;
+        }
     };
-    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:loginAnimations completion:nil];
+    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:afterLogoAnimations completion:nil];
 }
 
 - (IBAction)openForgotPassword:(id)sender {
@@ -427,8 +462,8 @@
     }];
 }
 
-- (void)retrieveOutgoingNumberWithSuccessBlock:(void (^)())success {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving outgoing number...", nil) maskType:SVProgressHUDMaskTypeGradient];
+- (void)retrievePhoneNumbersWithSuccessBlock:(void (^)())success {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         _fetchAccountRetryCount = 0; // Reset the retry count
         NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
@@ -437,6 +472,19 @@
         } else {
             [self.configureFormView.outgoingNumberLabel setText:@""];
         }
+        
+        NSString *localStoreMobielNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+        //Give preference to the user entered phone number over the phone number stored on the server
+        if ([localStoreMobielNumber length] > 0) {
+            self.configureFormView.phoneNumberField.text = localStoreMobielNumber;
+        } else {
+            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
+            //if the response also contained the mobile nr, display it to the user
+            if ([mobile_nr isKindOfClass:[NSString class]]) {
+                self.configureFormView.phoneNumberField.text = mobile_nr;
+            }
+        }
+        
         [SVProgressHUD dismiss];
         
         [self setLockScreenFriendlyNameWithResponse:responseObject];
@@ -450,10 +498,10 @@
         [SVProgressHUD dismiss];
         ++_fetchAccountRetryCount;
         if (_fetchAccountRetryCount != 3) { // When we retried 3 times
-            [self retrieveOutgoingNumberWithSuccessBlock:nil];
+            [self retrievePhoneNumbersWithSuccessBlock:nil];
         } else {
             [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
-            [self.configureFormView.outgoingNumberLabel setText:@"Enter phonenumber manually"];
+            [self.configureFormView.outgoingNumberLabel setText:NSLocalizedString(@"Enter phonenumber manually", nil)];
             
             [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
                                message:NSLocalizedString(@"Error while retrieving your outgoing number, please enter manually", nil)
@@ -483,7 +531,7 @@
             [self.loginFormView.usernameField resignFirstResponder];
         }
     };
-    [UIView animateWithDuration:2.2f
+    [UIView animateWithDuration:0.2f
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
@@ -502,7 +550,7 @@
             [self.forgotPasswordView.emailTextfield resignFirstResponder];
         }
     };
-    [UIView animateWithDuration:2.2f
+    [UIView animateWithDuration:0.8f
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
