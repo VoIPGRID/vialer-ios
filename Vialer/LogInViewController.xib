@@ -100,7 +100,7 @@
                     </connections>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" id="vMQ-YQ-10J" customClass="ConfigureFormView">
-                    <rect key="frame" x="0.0" y="129" width="321.5" height="350"/>
+                    <rect key="frame" x="0.0" y="129" width="322" height="409"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vialer is configuring" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="VFh-Ph-zkM">
