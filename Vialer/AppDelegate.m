@@ -66,11 +66,6 @@
     // Set an additional dimensionValue for different brands.
     [[GAI sharedInstance].defaultTracker set:[GAIFields customDimensionForIndex:1] value:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
 
-    // New Relic
-    NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
-    if ([newRelicToken length])
-        [NewRelicAgent startWithApplicationToken:newRelicToken];
-
 #ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];

@@ -47,7 +47,6 @@
 		F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B531B1DD36000E695FB /* ContactTableViewCell.m */; };
 		F2CD45F61B330ADA00CE9B1D /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* AccountViewController.m */; };
 		F2CD45F71B330ADA00CE9B1D /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* AccountViewController.xib */; };
-		F2D36CF21B1C390D00D2894F /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */; };
 		F2E811BE1B37E2E000EA640F /* AccountViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* AccountViewFooterView.m */; };
 		F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */; };
 		F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */; };
@@ -252,7 +251,6 @@
 		F2CD45F31B330ADA00CE9B1D /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		F2CD45F51B330ADA00CE9B1D /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
-		F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		F2E811BC1B37E2E000EA640F /* AccountViewFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewFooterView.h; sourceTree = "<group>"; };
 		F2E811BD1B37E2E000EA640F /* AccountViewFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewFooterView.m; sourceTree = "<group>"; };
 		F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberTableViewController.h; sourceTree = "<group>"; };
@@ -440,7 +438,6 @@
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
 				FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */,
-				F2D36CF21B1C390D00D2894F /* NewRelicAgent.framework in Frameworks */,
 				FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */,
 				FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */,
 				FB643140182281C500E1BF17 /* Security.framework in Frameworks */,
@@ -727,7 +724,6 @@
 			children = (
 				3D15A4571B2ECAA8004C5012 /* PushKit.framework */,
 				F21077EA1B1C398D003C8109 /* libc++.dylib */,
-				F2D36CF11B1C390D00D2894F /* NewRelicAgent.framework */,
 				F25B39181B08EF43005ED515 /* MobileCoreServices.framework */,
 				FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
