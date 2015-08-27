@@ -16,6 +16,7 @@
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import <AudioToolbox/AudioServices.h>
 
 NSString * const ConnectionStatusChangedNotification = @"com.vialer.ConnectionStatusChangedNotification";
 NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotification";
@@ -30,6 +31,8 @@ NSString * const NotificationActionAccept = @"com.vialer.notification.accept";
 @property (nonatomic, strong) GSAccountConfiguration *account;
 @property (nonatomic, strong) GSConfiguration *config;
 @property (nonatomic, strong) GSUserAgent *userAgent;
+@property (nonatomic, strong) NSTimer *vibrateTimer;
+
 @end
 
 @implementation ConnectionHandler
@@ -374,6 +377,19 @@ static GSCall *lastNotifiedCall;
     [lastNotifiedCall removeObserver:self forKeyPath:@"status"];
     lastNotifiedCall = nil;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [self.vibrateTimer invalidate];
+}
+
+- (void)startVirbratingForCall {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.vibrateTimer invalidate];
+        self.vibrateTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(playVibrate) userInfo:nil repeats:YES];
+    });
+}
+
+- (void)playVibrate {
+    NSLog(@"Vibrarting");
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 + (void)showLocalNotificationForIncomingCall:(GSCall *)incomingCall {
@@ -394,6 +410,7 @@ static GSCall *lastNotifiedCall;
                           context:nil];
 
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    [[ConnectionHandler sharedConnectionHandler] startVirbratingForCall];
 }
 
 #pragma mark - GSAccount delegate

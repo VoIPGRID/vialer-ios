@@ -13,8 +13,6 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#import <NewRelicAgent/NewRelic.h>
-
 // Disable NSLog project wide when DEBUG is not defined
 #ifndef DEBUG
 #define NSLog(...) do {} while (0)

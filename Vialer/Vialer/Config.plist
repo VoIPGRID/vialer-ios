@@ -4,8 +4,6 @@
 <dict>
 	<key>Tokens</key>
 	<dict>
-		<key>New Relic</key>
-		<string>AA1a092ac029754cfbc049123fa0cd1351c1945e4d</string>
 		<key>Google Analytics</key>
 		<string>UA-60726618-2</string>
 	</dict>
@@ -61,8 +59,6 @@
 		<string>https://api.voipgrid.nl/api</string>
 		<key>Partner</key>
 		<string>https://partner.voipgrid.nl</string>
-		<key>How it works</key>
-		<string>www.vialerapp.com/how-it-works</string>
 		<key>SIP domain</key>
 		<string>sipproxy.voipgrid.nl</string>
 		<key>onboarding-nl</key>

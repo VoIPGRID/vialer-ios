@@ -290,7 +290,10 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
-
+    // Update the contact information to display from this call
+    self.toContact = sipCall.remoteInfo;
+    // Get the remoteInfo as calling information to display
+    self.contactLabel.text = self.toContact;
     [self acceptCall:sipCall];
 }
 
