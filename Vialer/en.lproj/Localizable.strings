@@ -291,6 +291,9 @@
 
 "onboarding" = "onboarding-en"; /* Reference to URL String in the config.plist to the localized onboarding information page */
 
+/* Answer part of the text: Slide to answer */
+"slide_to_answer" = "answer";
+
 /* New strings */
 "/dashboard/" = "/dashboard/";
 "/dialplan/" = "/dialplan/";

@@ -290,6 +290,9 @@
 
 "onboarding" = "onboarding-nl"; /* Reference to URL String in the config.plist to the localized onboarding information page */
 
+/* Answer part of the text: Slide to answer */
+"slide_to_answer" = "beantwoorden";
+
 /* New strings */
 "/dashboard/" = "/dashboard/";
 "/dialplan/" = "/dialplan/";
