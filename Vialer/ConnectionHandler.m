@@ -340,13 +340,10 @@ static GSCall *lastNotifiedCall;
                                                                       action:@"Inbound"
                                                                        label:@"Declined"
                                                                        value:nil] build]];
-            } else if ([identifier isEqualToString:NotificationActionAccept]) {
+            } else {
                 // Accept the incoming call right away.
                 AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
                 [appDelegate handleSipCall:lastNotifiedCall];
-            } else {
-                // We should show the incoming call view
-                [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:lastNotifiedCall];
             }
         }
         [self clearLastNotifiedCall];
@@ -400,7 +397,9 @@ static GSCall *lastNotifiedCall;
     notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from %@", nil), incomingCall.remoteInfo];
     notification.soundName = @"incoming.caf";
     notification.userInfo = @{@"callId":@(incomingCall.callId)};
-
+    // Show the text slide to "answer"
+    notification.alertAction = NSLocalizedString(@"slide_to_answer", @"Answer part of the text: Slide to answer");
+    
     if ([notification respondsToSelector:@selector(setCategory:)]) {
         notification.category = NotificationAcceptDeclineCategory;
     }
