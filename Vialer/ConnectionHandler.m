@@ -322,8 +322,7 @@ static GSCall *lastNotifiedCall;
 
 - (void)didBecomeActiveNotification:(NSNotification *)notification {
     if (lastNotifiedCall) {
-        AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-        [appDelegate handleSipCall:lastNotifiedCall];
+        [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:lastNotifiedCall];
     }
     [self clearLastNotifiedCall];
 }
@@ -341,9 +340,13 @@ static GSCall *lastNotifiedCall;
                                                                       action:@"Inbound"
                                                                        label:@"Declined"
                                                                        value:nil] build]];
-            } else {
+            } else if ([identifier isEqualToString:NotificationActionAccept]) {
+                // Accept the incoming call right away.
                 AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
                 [appDelegate handleSipCall:lastNotifiedCall];
+            } else {
+                // We should show the incoming call view
+                [[NSNotificationCenter defaultCenter] postNotificationName:IncomingSIPCallNotification object:lastNotifiedCall];
             }
         }
         [self clearLastNotifiedCall];
