@@ -149,6 +149,7 @@
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
+		FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAC297D1B948745003AC012 /* libGossipx86_64.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -411,6 +412,7 @@
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
+		FEAC297D1B948745003AC012 /* libGossipx86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossipx86_64.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +420,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */,
 				3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */,
 				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
@@ -722,6 +725,7 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FEAC297D1B948745003AC012 /* libGossipx86_64.a */,
 				3D15A4571B2ECAA8004C5012 /* PushKit.framework */,
 				F21077EA1B1C398D003C8109 /* libc++.dylib */,
 				F25B39181B08EF43005ED515 /* MobileCoreServices.framework */,
