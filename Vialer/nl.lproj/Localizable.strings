@@ -27,6 +27,8 @@
 "Login" = "Inloggen";
 "Login failed" = "Inloggen mislukt";
 
+"This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
+
 /* No comment provided by engineer. */
 "Contacts" = "Contacten";
 
@@ -255,8 +257,10 @@
 "Error" = "Fout";
 "Error while retrieving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
 
-"No Connection" = "Geen Verbinding";
-"Connect A/B calls only" = "Alleen Connect A/B mogelijk";
+"No Connection" = "Geen dataverbinding beschikbaar";
+"No Connection Info Text" = "Deze app heeft een internetverbinding nodig om telefoongesprekken te kunnen starten. Maak verbinding met een mobiele dataverbinding of wifi-netwerk om te bellen via deze app.";
+"Connect A/B calls only" = "Twee staps modus ingeschakeld";
+"Connect A/B Info" = "Je hebt nog geen VoIP account geconfigureerd voor dit gebruikersaccount. Je kan in de beheeromgeving een VoIP account selecteren welke zal worden gebruikt door de app. Zodra je dit hebt gedaan zal je ook via VoIP kunnen bellen in de app.";
 
 "Account" = "Account";
 
@@ -308,6 +312,7 @@
 "Mobile" = "Mobiel";
 "NO WIFI OR 4G" = "Geen Wifi of 4G";
 "Poor internet connection Connect A/B" = "Matige verbindingskwaliteit. Gebruikt Connect A/B";
+"Poor internet Info" = "Je internetverbinding is niet snel genoeg om te bellen via VoIP. Bellen in twee stappen is ingeschakeld. Wanneer je iemand belt via de app bellen wij jou eerst op je GSM waarmee we je daarna verbinden met degene die je wilt bellen. Het kan zijn dat je telefonieleverancier voor het opzetten van twee verbindingen dubbele kosten in rekening brengt.";
 "Setting up connection..." = "Maakt verbinding...";
 "Hide" = "Verberg";
 "VoIP Account" = "VoIP account";

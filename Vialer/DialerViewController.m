@@ -114,6 +114,13 @@
     self.callButton.enabled = NO;
 
     [self connectionStatusChangedNotification:nil];
+    
+    // Color the warning
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    NSAssert(config != nil, @"Config.plist not found!");
+    NSArray *messageColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Message"];
+    NSAssert(messageColor != nil && messageColor.count == 3, @"Tint colors - Message not found in Config.plist!");
+    self.statusView.backgroundColor = [UIColor colorWithRed:[messageColor[0] intValue] / 255.f green:[messageColor[1] intValue] / 255.f blue:[messageColor[2] intValue] / 255.f alpha:1.f];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,21 +144,18 @@
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
             //Is the connection quality sufficient for SIP?
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
-                [self.statusLabel setHidden:YES];
+                [self hideMessage];
             } else {
-                self.statusLabel.text = NSLocalizedString(@"Poor internet connection Connect A/B", nil);
-                [self.statusLabel setHidden:NO];
+                [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Your internet connection isn't fast enough to enable calling using VoIP. Two-step calling is therefore enabled. When you start a phonecall, we first call you on your mobile phone and when you pickup, we connect you to the person you want to call. It is possible that your telephony provider can charge you double rates for setting up two connections.", nil)];
             }
         } else {
-            self.statusLabel.text = NSLocalizedString(@"Connect A/B calls only", nil);
-            [self.statusLabel setHidden:NO];
+            [self showMessage:NSLocalizedString(@"Connect A/B calls only", nil) withInfo:NSLocalizedString(@"Connect A/B Info", nil)];
         }
     } else {
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
         self.callButton.enabled = NO;
         
-        self.statusLabel.text = NSLocalizedString(@"No Connection", nil);
-        [self.statusLabel setHidden:NO];
+        [self showMessage:NSLocalizedString(@"No Connection", nil) withInfo:NSLocalizedString(@"No Connection Info Text", nil)];
     }
     
 //    NSLog(@"%s",__PRETTY_FUNCTION__);
@@ -236,6 +240,46 @@
 
     self.backButton.hidden = NO;
     self.callButton.enabled = YES;
+}
+
+#pragma mark - Private status message handling
+
+- (void)showMessage:(NSString *)message withInfo:(NSString *)info {
+    self.infoMessage = info;
+    self.statusLabel.text = message;
+    self.statusView.hidden = NO;
+    // Move the input a bit down
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.numberTextView.frame = CGRectMake(self.numberTextView.frame.origin.x, 25.0,
+                                                                self.numberTextView.frame.size.width, self.numberTextView.frame.size.height);
+                         self.backButton.frame = CGRectMake(self.backButton.frame.origin.x, 25.0,
+                                                            self.backButton.frame.size.width, self.backButton.frame.size.height);
+                     }];
+}
+
+- (void)hideMessage {
+    self.infoMessage = nil;
+    // Hide the status label
+    self.statusView.hidden = YES;
+    // Position back the input fields
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.numberTextView.frame = CGRectMake(self.numberTextView.frame.origin.x, 8.f,
+                                                                self.numberTextView.frame.size.width, self.numberTextView.frame.size.height);
+                         self.backButton.frame = CGRectMake(self.backButton.frame.origin.x, 8.f,
+                                                            self.backButton.frame.size.width, self.backButton.frame.size.height);
+                     }];
+
+}
+
+- (void)messageInfoPressed:(UIButton *)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.statusLabel.text
+                                                    message:self.infoMessage
+                                                   delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+    [alert show];
 }
 
 @end

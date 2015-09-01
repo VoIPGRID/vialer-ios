@@ -19,9 +19,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet PasteableTextView *numberTextView;
 
-@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIView  *statusView;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIButton *statusButton;
+@property (strong, nonatomic) NSString *infoMessage;
 
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender;
 - (IBAction)callButtonPressed:(UIButton *)sender;
+
+- (IBAction)messageInfoPressed:(UIButton *)sender;
 
 @end

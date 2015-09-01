@@ -56,9 +56,6 @@
     self.unlockView.slideToCallText.textColor = [UIColor colorWithRed:[currentTintColor[0] intValue] / 255.f green:[currentTintColor[1] intValue] / 255.f blue:[currentTintColor[2] intValue] / 255.f alpha:1.f];
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     
-    // Create an animation scenes that transitions to configure view.
-    _scene = [[VIAScene alloc] initWithView:self.view];
-    
     // animate logo to top
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self moveLogoOutOfScreen];
@@ -336,6 +333,10 @@
 
 #pragma mark - Navigation actions
 - (void)moveLogoOutOfScreen { /* Act one (1) */
+    // Create an animation scenes that transitions to configure view.
+    // VIAScene uses view dimensions to calculate the positions of clouds, at this point the self.view is resized correctly from xib values.
+    _scene = [[VIAScene alloc] initWithView:self.view];
+    
     void (^logoAnimations)(void) = ^{
         [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
     };

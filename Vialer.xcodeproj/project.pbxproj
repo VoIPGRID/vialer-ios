@@ -291,6 +291,8 @@
 		FE3424971B822FF4005020BA /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE3424941B822FF4005020BA /* Config.plist */; };
 		FE3424981B822FF4005020BA /* ImagesVoys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3424951B822FF4005020BA /* ImagesVoys.xcassets */; };
 		FE3424991B822FF4005020BA /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE3424961B822FF4005020BA /* Voys-Info.plist */; };
+		FE5EBCC81B95E9FF0068C72F /* libGossipx86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAC297D1B948745003AC012 /* libGossipx86_64.a */; };
+		FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAC297D1B948745003AC012 /* libGossipx86_64.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -567,6 +569,7 @@
 		FE3424941B822FF4005020BA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		FE3424951B822FF4005020BA /* ImagesVoys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesVoys.xcassets; sourceTree = "<group>"; };
 		FE3424961B822FF4005020BA /* Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Voys-Info.plist"; sourceTree = "<group>"; };
+		FEAC297D1B948745003AC012 /* libGossipx86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossipx86_64.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -574,6 +577,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */,
 				3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */,
 				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
@@ -607,6 +611,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE5EBCC81B95E9FF0068C72F /* libGossipx86_64.a in Frameworks */,
 				FE3424461B822F88005020BA /* PushKit.framework in Frameworks */,
 				FE3424471B822F88005020BA /* libc++.dylib in Frameworks */,
 				FE3424481B822F88005020BA /* SystemConfiguration.framework in Frameworks */,
@@ -912,6 +917,7 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FEAC297D1B948745003AC012 /* libGossipx86_64.a */,
 				3D15A4571B2ECAA8004C5012 /* PushKit.framework */,
 				F21077EA1B1C398D003C8109 /* libc++.dylib */,
 				F25B39181B08EF43005ED515 /* MobileCoreServices.framework */,

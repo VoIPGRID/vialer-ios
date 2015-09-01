@@ -27,6 +27,8 @@
 "Login" = "Login";
 "Login failed" = "Login failed";
 
+"This user is not allowed to use the app" = "This user is not allowed to use the app";
+
 /* No comment provided by engineer. */
 "Contacts" = "Contacts";
 
@@ -256,8 +258,10 @@
 "Error" = "Error";
 "Error while retrieving your outgoing number, please enter manually" = "Error while retrieving your outgoing number, please enter manually";
 
-"No Connection" = "No Connection";
-"Connect A/B calls only" = "Connect A/B calls only";
+"No Connection" = "No data connection available";
+"No Connection Info Text" = "This app needs a data connection to setup phonecalls. Please connect to a cellular data connection or Wifi to start calling using the app.";
+"Connect A/B calls only" = "Two-step calling mode active";
+"Connect A/B Info" = "You dont' have a VoIP account configured for this account. Please configure a VoIP account in the portal for use with this user. After configuring, you can call using VoIP from the app.";
 
 "Account" = "Account";
 
@@ -309,6 +313,7 @@
 "Mobile" = "Mobile";
 "NO WIFI OR 4G" = "NO WIFI OR 4G";
 "Poor internet connection Connect A/B" = "Poor internet connection Connect A/B";
+"Poor internet Info" =  "Your internet connection isn't fast enough to enable calling using VoIP. Two-step calling is therefore enabled. When you start a phonecall, we first call you on your mobile phone and when you pickup, we connect you to the person you want to call. It is possible that your telephony provider can charge you double rates for setting up two connections.";
 "Setting up connection..." = "Setting up connection...";
 "Hide" = "Hide";
 "VoIP Account" = "VoIP Account";

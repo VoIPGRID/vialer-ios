@@ -50,6 +50,12 @@
 			<integer>177</integer>
 			<integer>184</integer>
 		</array>
+		<key>Message</key>
+		<array>
+			<integer>14</integer>
+			<integer>113</integer>
+			<integer>188</integer>
+		</array>
 	</dict>
 	<key>URLS</key>
 	<dict>
@@ -59,8 +65,6 @@
 		<string>https://api.voipgrid.nl/api</string>
 		<key>Partner</key>
 		<string>https://partner.voipgrid.nl</string>
-		<key>How it works</key>
-		<string>www.vialerapp.com/how-it-works</string>
 		<key>SIP domain</key>
 		<string>sipproxy.voipgrid.nl</string>
 		<key>onboarding-nl</key>
