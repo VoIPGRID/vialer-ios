@@ -88,7 +88,7 @@
 - (void)scriptForPlay {
     /** Act 1 */
     AnimatedImageView *firstCloud = _onStage[0];
-    [firstCloud addPoint:CGPointMake(0.f, 1.f/4.f * CGRectGetHeight(_view.frame))];
+    [firstCloud addPoint:CGPointMake(0.f, 100.f)];///4.f * CGRectGetHeight(_view.frame))];
     [firstCloud addPoint:CGPointMake(0.f, - CGRectGetHeight(firstCloud.frame))];
     
     AnimatedImageView *cloudOne = _onStage[1];
@@ -109,12 +109,12 @@
     [cloudFive addPoint:CGPointMake(-55, -CGRectGetHeight(cloudFive.frame))];
     
     AnimatedImageView *cloudSix = _onStage[5];
-    [cloudSix addPoint:CGPointMake(CGRectGetMaxX(_view.frame), 5.5f / 7.f * CGRectGetMaxY(_view.frame))];
+    [cloudSix addPoint:CGPointMake(CGRectGetMaxX(_view.frame) + 10.f, 0.85f * CGRectGetMaxY(_view.frame))];
     [cloudSix addPoint:CGPointMake(CGRectGetMaxX(_view.frame), 1.f / 7.f * CGRectGetMaxY(_view.frame))];
     
     // 6 higher
     AnimatedImageView *cloudSeven = _onStage[6];
-    [cloudSeven addPoint:CGPointMake(0.f, _view.center.y)];
+    [cloudSeven addPoint:CGPointMake(0.f, CGRectGetMidY(_view.bounds) - 10.0f)];
 }
 
 - (void)runActOneInstantly {
