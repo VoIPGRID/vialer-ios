@@ -27,6 +27,8 @@
 "Login" = "Inloggen";
 "Login failed" = "Inloggen mislukt";
 
+"This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
+
 /* No comment provided by engineer. */
 "Contacts" = "Contacten";
 

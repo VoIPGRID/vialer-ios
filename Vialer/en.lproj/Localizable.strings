@@ -27,6 +27,8 @@
 "Login" = "Login";
 "Login failed" = "Login failed";
 
+"This user is not allowed to use the app" = "This user is not allowed to use the app";
+
 /* No comment provided by engineer. */
 "Contacts" = "Contacts";
 
