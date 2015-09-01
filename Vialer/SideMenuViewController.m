@@ -201,6 +201,18 @@
 
 #pragma mark - Private Methods
 
+// Correctly encode according to RFC 3986
+- (NSString *)urlEncodedString:(NSString *)toEncode {
+    if (!toEncode) {
+        return @"";
+    }
+    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                 (CFStringRef)toEncode,
+                                                                                 NULL,
+                                                                                 (CFStringRef) @"!*'();:@&=+$,/?%#[]",  // RFC 3986 characters
+                                                                                 kCFStringEncodingUTF8));
+}
+
 - (void)showWebViewScreen:(int)webviewTarget {
     __block NSString *title = @"";
     __block NSString *nextUrl = @"";
@@ -227,8 +239,11 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString *token = [responseObject objectForKey:@"token"];
             if ([token isKindOfClass:[NSString class]]) {
-                NSString *user = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] user];
-                NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, nextUrl] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                // Encode the token and nextUrl, and also the user after retrieving it.
+                token = [self urlEncodedString:token];
+                nextUrl = [self urlEncodedString:nextUrl];
+                NSString *user = [self urlEncodedString:[[VoIPGRIDRequestOperationManager sharedRequestOperationManager] user]];
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, nextUrl]];
                 NSLog(@"Go to url: %@", url);
                 
                 PBWebViewController *webViewController = [[PBWebViewController alloc] init];
