@@ -222,7 +222,7 @@ void onCallState(pjsua_call_id callId, pjsip_event *e);
 }
 
 void onIncomingCallOverride(pjsua_acc_id accountId, pjsua_call_id callId, pjsip_rx_data *rdata) {
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
         onIncomingCall(accountId, callId, rdata);
     } else {
         [ConnectionHandler showLocalNotificationForIncomingCall:[GSCall incomingCallWithId:callId toAccount:[GSUserAgent sharedAgent].account]];

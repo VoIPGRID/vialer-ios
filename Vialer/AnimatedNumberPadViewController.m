@@ -65,9 +65,6 @@
                action:@selector(buttonTitleTouchDown:)
      forControlEvents:UIControlEventTouchDown];
     [button addTarget:self
-               action:@selector(buttonTitleTouchUpInside:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [button addTarget:self
                action:@selector(buttonTitleTouchUp:)
      forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside | UIControlEventTouchCancel];
     
@@ -133,19 +130,22 @@
 #pragma mark - Actions
 
 - (void)buttonTitleTouchDown:(UIButton *)sender {
-    [UIView animateWithDuration:0.1 animations:^{
-        sender.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
-    }];
+    [UIView animateWithDuration:0.1
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         sender.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+                     } completion:nil];
+    [self buttonPressedWithTag:(int)sender.tag];
 }
 
 - (void)buttonTitleTouchUp:(UIButton *)sender {
-    [UIView animateWithDuration:0.1 animations:^{
-        sender.transform = CGAffineTransformMakeScale(1.f, 1.f);
-    }];
-}
-
-- (void)buttonTitleTouchUpInside:(UIButton *)sender {
-    [self buttonPressedWithTag:(int)sender.tag];
+    [UIView animateWithDuration:0.1
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         sender.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                     } completion:nil];
 }
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {

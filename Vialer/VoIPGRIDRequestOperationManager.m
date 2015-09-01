@@ -74,12 +74,20 @@
     
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        id partner = [responseObject objectForKey:@"partner"];
         NSString *client = [responseObject objectForKey:@"client"];
-        if (!client) {
-            // This is a partner account, don't log in!
+        // Client should be valid, and partner should not be present.
+        BOOL clientValid = (client != nil && ![client isKindOfClass:[NSNull class]]);
+        BOOL partnerValid = (partner != nil && ![partner isKindOfClass:[NSNull class]]);
+        if (!clientValid || partnerValid) {
+            // This is a partner or superuser account, don't log in!
             failure(operation, nil);
 
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil)
+                                                            message:NSLocalizedString(@"This user is not allowed to use the app", nil)
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
             

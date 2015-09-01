@@ -19,11 +19,13 @@ pjsip armv7         # build armv7 static lib.
 pjsip armv7s        # build armv7s static lib.
 pjsip arm64         # build arm64 static lib.
 pjsip i386          # build i386 static lib.
+pjsip x86_64        # build x86_64 static lib.
 
 pjsip info armv7    # show architecture information for armv7 libs.
 pjsip info armv7s   # show architecture information for armv7s libs.
 pjsip info arm64    # show architecture information for arm64 libs.
 pjsip info i386     # show architecture information for i386 libs.
+pjsip info x86_64   # show architecture information for x86_64 libs.
 EOF
 }
 
@@ -67,8 +69,15 @@ export LDFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
 _build "i386"
 }
 
+function x86_64() {
+export DEVPATH=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer
+export CFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
+export LDFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
+_build "x86_64"
+}
+
 function all() {
-armv7 && echo && armv7s && echo && arm64 && echo && i386
+armv7 && echo && armv7s && echo && arm64 && echo && i386 && echo && x86_64
 echo
 _merge
 }
@@ -110,6 +119,7 @@ for lib in `find lib/i386/*.a`; do
     -arch armv7s lib/armv7s/${lib##*/} \
     -arch arm64 lib/arm64/${lib##*/} \
     -arch i386 lib/i386/${lib##*/} \
+    -arch x86_64 lib/x86_64/${lib##*/} \
     -create -output lib/${lib##*/}
 done | tee "$BASE_DIR"/merge.log
 }
