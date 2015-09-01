@@ -177,13 +177,16 @@
  * @param data dictionary with payload from a notification with all necessary data.
  */
 - (void)updateMiddleWareWithData:(NSDictionary*)data {
-    NSString *link      = data[@"response_api"];
-    NSString *uniqueKey = data[@"unique_key"];
+    NSString *link              = data[@"response_api"];
+    NSString *uniqueKey         = data[@"unique_key"];
+    NSString *messageStartTime  = data[@"message_start_time"];
     
     NSLog(@"Updating middleware: %@ %@", link, uniqueKey);
     //sleep(40);
     if (link && uniqueKey) {
-        [self.pzMiddleware POST:link parameters:@{@"unique_key" :uniqueKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.pzMiddleware POST:link parameters:@{@"unique_key" : uniqueKey,
+                                                  @"message_start_time" : messageStartTime}
+                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"%s Success", __PRETTY_FUNCTION__); // TODO: should I tell the user something?
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error); //TODO: We should probably tell someone... ?
