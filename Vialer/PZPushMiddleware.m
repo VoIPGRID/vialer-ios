@@ -181,11 +181,16 @@
     NSString *uniqueKey         = data[@"unique_key"];
     NSString *messageStartTime  = data[@"message_start_time"];
     
-    NSLog(@"Updating middleware: %@ %@", link, uniqueKey);
+    NSLog(@"Updating middleware: %@ %@ %@", link, uniqueKey, messageStartTime);
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"unique_key" : uniqueKey }];
+    // Check if we have a valid message start time
+    if ([messageStartTime isKindOfClass:[NSString class]]) {
+        // It is valid, add it to the params.
+        [params setObject:messageStartTime forKey:@"message_start_time"];
+    }
     //sleep(40);
     if (link && uniqueKey) {
-        [self.pzMiddleware POST:link parameters:@{@"unique_key" : uniqueKey,
-                                                  @"message_start_time" : messageStartTime}
+        [self.pzMiddleware POST:link parameters:params
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"%s Success", __PRETTY_FUNCTION__); // TODO: should I tell the user something?
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
