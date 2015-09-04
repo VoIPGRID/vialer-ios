@@ -82,7 +82,7 @@
       buildConfiguration = "AdHocDistribution">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "AdHocDistribution"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
