@@ -11,6 +11,5 @@
 @interface UnlockView : UIView 
 
 @property (nonatomic, strong) IBOutlet UILabel *greetingsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *letsGoButton;
 
 @end

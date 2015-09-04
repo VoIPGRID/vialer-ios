@@ -577,14 +577,17 @@
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:animations
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         // Automatically continue after 2 seconds
+                         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(unlockIt) userInfo:nil repeats:NO];
+                     }];
     
 }
 
 - (IBAction)unlockIt {
     // Put here what happens when it is unlocked
     [_scene clean];
-    [self dismissViewControllerAnimated:NO completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         [self.unlockView setAlpha:0.f];
         [self.logoView setAlpha:1.f];
         [self.logoView setCenter:self.view.center];
