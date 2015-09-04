@@ -186,24 +186,11 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lbU-wU-tej">
-                            <rect key="frame" x="20" y="114" width="280" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                            <color key="tintColor" red="0.23143861669999999" green="0.56301765540000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Lets get started" backgroundImage="letsgo-btn-bg">
-                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="unlockIt" destination="-1" eventType="touchUpInside" id="Kur-1P-xzS"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="greetingsLabel" destination="LfQ-VU-vz0" id="EqC-cs-nsO"/>
                         <outlet property="helloLabel" destination="EXO-T4-Aup" id="aHc-24-Dke"/>
-                        <outlet property="letsGoButton" destination="lbU-wU-tej" id="yug-VN-uIp"/>
                     </connections>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" id="pWk-0c-VhQ" customClass="ForgotPasswordView">
@@ -270,7 +257,6 @@
     </objects>
     <resources>
         <image name="Circle + Rectangle 45" width="20" height="19"/>
-        <image name="letsgo-btn-bg" width="95" height="60"/>
         <image name="vialer-logo" width="149" height="209"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
