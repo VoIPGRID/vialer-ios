@@ -11,7 +11,6 @@
                 <outlet property="forgotPasswordView" destination="pWk-0c-VhQ" id="JuD-LB-rxX"/>
                 <outlet property="loginFormView" destination="y6s-6X-hya" id="lAQ-KF-BMl"/>
                 <outlet property="logoView" destination="E0n-Q6-i8E" id="fFY-rU-dlv"/>
-                <outlet property="sliderView" destination="kdx-6q-MLH" id="xGo-oc-kUD"/>
                 <outlet property="unlockView" destination="NFh-FZ-LDT" id="eni-Bj-fQh"/>
                 <outlet property="view" destination="8AL-Qd-h62" id="RgD-Df-jCY"/>
             </connections>
@@ -170,7 +169,7 @@
                     </connections>
                 </view>
                 <view opaque="NO" alpha="0.0" contentMode="scaleToFill" id="NFh-FZ-LDT" customClass="UnlockView">
-                    <rect key="frame" x="0.0" y="320" width="321.00000019406991" height="192"/>
+                    <rect key="frame" x="0.0" y="320" width="320" height="192"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="EXO-T4-Aup" userLabel="helloLabel">
@@ -187,45 +186,28 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" id="kdx-6q-MLH">
-                            <rect key="frame" x="16" y="120" width="289" height="72"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lbU-wU-tej">
+                            <rect key="frame" x="20" y="114" width="280" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to start calling" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="H6u-uJ-Pz5">
-                                    <rect key="frame" x="72.000000045580009" y="0.0" width="204" height="72"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                    <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="lsM-1W-Ala" customClass="VIASlider">
-                                    <rect key="frame" x="6" y="20" width="277" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    <connections>
-                                        <action selector="fadeLabel" destination="-1" eventType="valueChanged" id="Fiz-EO-8qS"/>
-                                        <action selector="unlockIt" destination="-1" eventType="touchUpOutside" id="bha-aw-9sb"/>
-                                        <action selector="unlockIt" destination="-1" eventType="touchUpInside" id="vjf-6b-unk"/>
-                                    </connections>
-                                </slider>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="36"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                            <color key="tintColor" red="0.23143861669999999" green="0.56301765540000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Lets get started" backgroundImage="letsgo-btn-bg">
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="unlockIt" destination="-1" eventType="touchUpInside" id="Kur-1P-xzS"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="greetingsLabel" destination="LfQ-VU-vz0" id="EqC-cs-nsO"/>
                         <outlet property="helloLabel" destination="EXO-T4-Aup" id="aHc-24-Dke"/>
-                        <outlet property="slideToCallSlider" destination="lsM-1W-Ala" id="v7f-o3-sBR"/>
-                        <outlet property="slideToCallText" destination="H6u-uJ-Pz5" id="TJ4-ra-n4C"/>
+                        <outlet property="letsGoButton" destination="lbU-wU-tej" id="yug-VN-uIp"/>
                     </connections>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" id="pWk-0c-VhQ" customClass="ForgotPasswordView">
-                    <rect key="frame" x="0.0" y="178" width="321" height="176"/>
+                    <rect key="frame" x="0.0" y="178" width="320" height="176"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot password?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Rlf-YE-cri">
@@ -288,6 +270,7 @@
     </objects>
     <resources>
         <image name="Circle + Rectangle 45" width="20" height="19"/>
+        <image name="letsgo-btn-bg" width="95" height="60"/>
         <image name="vialer-logo" width="149" height="209"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

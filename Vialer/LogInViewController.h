@@ -36,7 +36,6 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 @property (strong, nonatomic) IBOutlet UIButton *closeButton;
 
 // The unlock slider: should be refactored to unlockView.
-@property (nonatomic, strong) IBOutlet UIView *sliderView;
 
 
 /** @property screenToShow
@@ -45,7 +44,6 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 @property (nonatomic)OnboardingScreens screenToShow;
 
 - (IBAction)unlockIt;
-- (IBAction)fadeLabel;
 
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;
