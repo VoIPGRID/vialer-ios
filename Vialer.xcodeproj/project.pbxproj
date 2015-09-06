@@ -1255,7 +1255,6 @@
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
 				);
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "cf993705-29c0-4e37-a688-bce19bdb9b21";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1357,7 +1356,6 @@
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
 				);
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1401,7 +1399,6 @@
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
 				);
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = app;
 			};
