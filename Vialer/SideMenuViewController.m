@@ -63,6 +63,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     //Force a reload of the data to display the proper phone number. Otherwise an old phone number could be displayed if it was changed.
     [self.tableView reloadData];
+    
+    NSLog(@"Frame: %@ bounds: %@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.view.bounds));
+    CGFloat yOffset = CGRectGetMaxY(self.view.bounds) - 18.f;
+    CGRect versionBuildLabelFrame = CGRectMake(0, yOffset, CGRectGetWidth(self.view.frame), 20.f);
+    [self.view addSubview:[self versionBuildLabel:versionBuildLabelFrame]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -109,12 +114,6 @@
         [headerView addSubview:logo];
         [headerView addSubview:numberLabel];
         
-#ifdef DEBUG
-        yOffset = CGRectGetMaxY(headerView.bounds) - 18.f;
-        CGRect versionBuildLabelFrame = CGRectMake(0, yOffset, CGRectGetWidth(headerView.frame), 20.f);
-        [headerView addSubview:[self versionBuildLabel:versionBuildLabelFrame]];
-#endif
-        
         return headerView;
     } else {
         return nil;
@@ -126,7 +125,7 @@
     versionBuildLabel.font = [UIFont systemFontOfSize:10.f];
     versionBuildLabel.textAlignment = NSTextAlignmentCenter;
     versionBuildLabel.textColor = [UIColor darkGrayColor];
-    versionBuildLabel.text = [self  appVersionBuildString];
+    versionBuildLabel.text = [self appVersionBuildString];
         
     return versionBuildLabel;
 }
@@ -139,11 +138,16 @@
     NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
     if ([additionalVersionString length] >0)
         [versionString appendFormat:@".%@", additionalVersionString];
-    
-    NSString *version = [NSString stringWithFormat:@"%@ (%@) | %@",
+    NSString *version = [NSString stringWithFormat:@"%@ (%@)",
                          versionString,
-                         [infoDict objectForKey:@"CFBundleVersion"],
-                         [infoDict objectForKey:@"Commit_Short_Hash"]];
+                         [infoDict objectForKey:@"CFBundleVersion"]];
+    
+#if DEBUG
+     version = [NSString stringWithFormat:@"%@ (%@) | %@",
+                versionString,
+                [infoDict objectForKey:@"CFBundleVersion"],
+                [infoDict objectForKey:@"Commit_Short_Hash"]];
+#endif
     return version;
 }
 
