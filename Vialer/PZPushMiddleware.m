@@ -107,6 +107,8 @@
 */
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
     NSString *type = payload[@"type"];
+    NSLog(@"Payload from middelware: %@", payload);
+    
     if ([type isEqualToString:@"call"]) {
         // We only try to force a SIP reconnection when we don't have an active one.
         if ([ConnectionHandler sharedConnectionHandler].accountStatus != GSAccountStatusConnected) {
@@ -177,18 +179,18 @@
  * @param data dictionary with payload from a notification with all necessary data.
  */
 - (void)updateMiddleWareWithData:(NSDictionary*)data {
-    NSString *link              = data[@"response_api"];
-    NSString *uniqueKey         = data[@"unique_key"];
-    NSString *messageStartTime  = data[@"message_start_time"];
+    NSString *link      = data[@"response_api"];
+    id uniqueKey        = data[@"unique_key"];
+    id messageStartTime = data[@"message_start_time"];
     
-    NSLog(@"Updating middleware: %@ %@ %@", link, uniqueKey, messageStartTime);
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"unique_key" : uniqueKey }];
     // Check if we have a valid message start time
-    if ([messageStartTime isKindOfClass:[NSString class]]) {
+    if (messageStartTime) {
         // It is valid, add it to the params.
         [params setObject:messageStartTime forKey:@"message_start_time"];
     }
-    //sleep(40);
+    
+    NSLog(@"Updating middleware@%@ with: %@", link, params);
     if (link && uniqueKey) {
         [self.pzMiddleware POST:link parameters:params
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {

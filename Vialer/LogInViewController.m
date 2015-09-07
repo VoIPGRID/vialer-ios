@@ -432,7 +432,6 @@
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
             [[ConnectionHandler sharedConnectionHandler] sipConnect];
         } else {
-            [UIAlertView showWithTitle:@"No SIP account" message:@"No Mobile app VoIP account configured, only Connect A/B functionality provided." cancelButtonTitle:@"OK" otherButtonTitles:nil tapBlock:nil];
             //Just to make sure no sip connection is registered
             [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
         }
