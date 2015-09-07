@@ -46,14 +46,6 @@
     
     _fetchAccountRetryCount = 0;
     
-    // Load the styling colors
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-    NSArray *currentTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
-    NSAssert(currentTintColor != nil && currentTintColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
-    
-    [self.unlockView setupSlider];
-    self.unlockView.slideToCallText.textColor = [UIColor colorWithRed:[currentTintColor[0] intValue] / 255.f green:[currentTintColor[1] intValue] / 255.f blue:[currentTintColor[2] intValue] / 255.f alpha:1.f];
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     
     // animate logo to top
@@ -440,7 +432,6 @@
         if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
             [[ConnectionHandler sharedConnectionHandler] sipConnect];
         } else {
-            [UIAlertView showWithTitle:@"No SIP account" message:@"No Mobile app VoIP account configured, only Connect A/B functionality provided." cancelButtonTitle:@"OK" otherButtonTitles:nil tapBlock:nil];
             //Just to make sure no sip connection is registered
             [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
         }
@@ -583,41 +574,23 @@
     };
     [UIView animateWithDuration:2.2f
                           delay:delay
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:animations
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         // Automatically continue after 2 seconds
+                         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(unlockIt) userInfo:nil repeats:NO];
+                     }];
     
 }
 
 - (IBAction)unlockIt {
-    if (self.unlockView.slideToCallSlider.value == self.unlockView.slideToCallSlider.maximumValue) {  // if user slide to the most right side, stop the operation
-        // Put here what happens when it is unlocked
-        [_scene clean];
-        [self dismissViewControllerAnimated:NO completion:^{
-            [self.unlockView setAlpha:0.f];
-            [self.logoView setAlpha:1.f];
-            [self.logoView setCenter:self.view.center];
-            
-            self.unlockView.slideToCallSlider.value = 0.f;
-            self.unlockView.slideToCallText.alpha = 1.f;
-            
-        }];
-    } else {
-        // user did not slide far enough, so return back to 0 position
-        void (^animations)(void) = ^{
-            self.unlockView.slideToCallSlider.value = 0.0;
-            self.unlockView.slideToCallText.alpha = 1.f;
-        };
-        [UIView animateWithDuration:0.35
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:animations
-                         completion:nil];
-    }
-}
-
-- (IBAction)fadeLabel {
-    self.unlockView.slideToCallText.alpha = self.unlockView.slideToCallSlider.maximumValue - self.unlockView.slideToCallSlider.value;
+    // Put here what happens when it is unlocked
+    [_scene clean];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.unlockView setAlpha:0.f];
+        [self.logoView setAlpha:1.f];
+        [self.logoView setCenter:self.view.center];
+    }];
 }
 
 @end

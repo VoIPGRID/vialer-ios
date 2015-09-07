@@ -17,13 +17,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.helloLabel.text = NSLocalizedString(@"Hello", nil);
-    self.slideToCallText.text = NSLocalizedString(@"Slide to start calling",nil);
-}
-
-- (void)setupSlider {
-    [self.slideToCallSlider setThumbImage: [UIImage imageNamed:@"slider-button.png"] forState:UIControlStateNormal];
-    [self.slideToCallSlider setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal]; // preventthe bar to be shown
-    [self.slideToCallSlider setMaximumTrackImage:[UIImage new] forState:UIControlStateNormal]; // preventthe bar to be shown
 }
 
 @end

@@ -146,7 +146,8 @@
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
                 [self hideMessage];
             } else {
-                [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Your internet connection isn't fast enough to enable calling using VoIP. Two-step calling is therefore enabled. When you start a phonecall, we first call you on your mobile phone and when you pickup, we connect you to the person you want to call. It is possible that your telephony provider can charge you double rates for setting up two connections.", nil)];
+                
+                [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Poor internet Info", nil)];
             }
         } else {
             [self showMessage:NSLocalizedString(@"Connect A/B calls only", nil) withInfo:NSLocalizedString(@"Connect A/B Info", nil)];

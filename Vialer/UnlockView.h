@@ -11,9 +11,5 @@
 @interface UnlockView : UIView 
 
 @property (nonatomic, strong) IBOutlet UILabel *greetingsLabel;
-@property (nonatomic, strong) IBOutlet UISlider *slideToCallSlider;
-@property (nonatomic, strong) IBOutlet UILabel *slideToCallText;
-
-- (void)setupSlider;
 
 @end

@@ -149,9 +149,13 @@
 }
 
 - (void)showInfo:(NSString *)info {
+    self.infoLabel.hidden = NO;
     self.infoLabel.text = info;
     [self.infoLabel sizeToFit];
-    self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x, self.infoLabel.frame.origin.y, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
+    // Center align the label with the new text
+    self.infoLabel.center = CGPointMake(CGRectGetMidX(self.view.bounds), self.infoLabel.center.y);
+    // Align the pixels if needed
+    self.infoLabel.frame = CGRectIntegral(self.infoLabel.frame);
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
@@ -202,7 +206,11 @@
     fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
 
     self.contactLabel.text = self.toContact;
-    [self showInfo:([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusInvalid) ? NSLocalizedString(@"NO WIFI OR 4G", nil) : NSLocalizedString(@"FAILED CONNECTION", nil)];
+    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusInvalid) {
+        [self showInfo:NSLocalizedString(@"NO WIFI OR 4G", nil)];
+    } else {
+        self.infoLabel.hidden = YES;
+    }
     [self showWithStatus:NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil)];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:fromNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
