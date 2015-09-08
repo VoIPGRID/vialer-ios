@@ -11,12 +11,14 @@
 
 #import "AFNetworkReachabilityManager.h"
 
-#import <AudioToolbox/AudioServices.h>
+#import <AVFoundation/AVAudioPlayer.h>
 
 @interface NumberPadViewController ()
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *subTitles;
 @property (nonatomic, strong) NSArray *sounds;
+@property (nonatomic, strong) NSMutableArray *soundsPlayers;
+
 @end
 
 @implementation NumberPadViewController
@@ -30,21 +32,20 @@
 
     NSMutableArray *sounds = [NSMutableArray array];
     for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"s", @"0", @"#"]) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"dtmf-%@", sound] ofType:@"aif"];
-        NSURL *fileURL = [NSURL fileURLWithPath:path isDirectory:NO];
-        if (fileURL) {
-            SystemSoundID soundID;
-            OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)fileURL, &soundID);
-            if (error == kAudioServicesNoError) {
-                [sounds addObject:@(soundID)];
-            } else {
-                [sounds addObject:@(0)];
-                NSLog(@"Error (%d) loading sound at path: %@", (int)error, path);
-            }
+        NSString *dtmfFile = [NSString stringWithFormat:@"dtmf-%@", sound];
+        NSError *error = nil;
+        NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif" ];
+        if (dtmfUrl) {
+            [sounds addObject:dtmfUrl];
+        } else {
+            NSLog(@"Error (%@) loading sound at path: %@", error, dtmfFile);
+            // Add a null object to correct array alignment
+            [sounds addObject:[[NSURL alloc] init]];
         }
     }
     self.sounds = sounds;
-
+    self.soundsPlayers = [NSMutableArray array];
+    
     [self addDialerButtonsToView:self.view];
 }
 
@@ -177,12 +178,7 @@
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        if (self.tonesEnabled) {
-            SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:gesture.view.tag] integerValue];
-            if (soundID > 0) {
-                AudioServicesPlaySystemSound(soundID);
-            }
-        }
+        [self playDtmfToneAtIndex:gesture.view.tag];
         
         if ([self.delegate respondsToSelector:@selector(numberPadPressedWithCharacter:)]) {
             [self.delegate numberPadPressedWithCharacter:@"+"];
@@ -191,13 +187,8 @@
 }
 
 - (void)dialerButtonPressed:(UIButton *)sender {
-    if (self.tonesEnabled) {
-        SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:sender.tag] integerValue];
-        if (soundID > 0) {
-            AudioServicesPlaySystemSound(soundID);
-        }
-    }
-
+    [self playDtmfToneAtIndex:sender.tag];
+    
     if ([self.delegate respondsToSelector:@selector(numberPadPressedWithCharacter:)]) {
         NSString *cipher = [self.titles objectAtIndex:sender.tag];
         if (cipher.length) {
@@ -208,6 +199,34 @@
                 [self.delegate numberPadPressedWithCharacter:character];
             }
         }
+    }
+}
+
+- (void)playDtmfToneAtIndex:(NSUInteger)index {
+    if (self.tonesEnabled &&
+        self.sounds.count > index) {
+        NSURL *url = [self.sounds objectAtIndex:index];
+        // Create a player for each play, to allow simultanus and fast input
+        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        if (player) {
+            [self.soundsPlayers addObject:player];
+            player.delegate = self;
+            [player play];
+        }
+    }
+}
+
+#pragma mark - Handle the AVAudioPlayers and free the instances
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    if ([self.soundsPlayers containsObject:player]) {
+        [self.soundsPlayers removeObject:player];
+    }
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    if ([self.soundsPlayers containsObject:player]) {
+        [self.soundsPlayers removeObject:player];
     }
 }
 

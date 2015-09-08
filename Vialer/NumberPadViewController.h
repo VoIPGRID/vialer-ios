@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVAudioPlayer.h>
 
 @protocol NumberPadViewControllerDelegate <NSObject>
 @optional
 - (void)numberPadPressedWithCharacter:(NSString *)character;
 @end
 
-@interface NumberPadViewController : UIViewController
+@interface NumberPadViewController : UIViewController <AVAudioPlayerDelegate>
+
 @property (nonatomic, assign) id <NumberPadViewControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL tonesEnabled;
+
+- (void)playDtmfToneAtIndex:(NSUInteger)index;
+
 @end
