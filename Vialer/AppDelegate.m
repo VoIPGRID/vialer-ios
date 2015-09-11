@@ -17,7 +17,6 @@
 #import "RecentsViewController.h"
 #import "DialerViewController.h"
 #import "SettingsViewController.h"
-#import "GoToViewController.h"
 #import "SideMenuViewController.h"
 #import "ConnectionHandler.h"
 #import "Gossip+Extra.h"
@@ -57,11 +56,8 @@
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-
     // Google Analytics
-    [[GAI sharedInstance] trackerWithTrackingId:[[config objectForKey:@"Tokens"] objectForKey:@"Google Analytics"]];
+    [[GAI sharedInstance] trackerWithTrackingId:[[Configuration new] objectInConfigKeyed:@"Tokens", @"Google Analytics", nil]];
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     // Set an additional dimensionValue for different brands.
     [[GAI sharedInstance].defaultTracker set:[GAIFields customDimensionForIndex:1] value:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
@@ -336,24 +332,17 @@ void HandleExceptions(NSException *exception) {
 
 #pragma mark - Private Methods
 - (void)setupAppearance {
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
+    Configuration *config = [Configuration new];
     
     // Customize TabBar
-    NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
-    NSAssert(tabBarColor != nil && tabBarColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
-    
+    [UITabBar appearance].tintColor = [config tintColorForKey:kTintColorTabBar];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:kTintColorTabBar]];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         [UITabBar appearance].barTintColor = [UIColor colorWithRed:(247 / 255.f) green:(247 / 255.f) blue:(247 / 255.f) alpha:1.f];
     }
     
     // Customize NavigationBar
-    NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-    NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f]];
-    
+    [UINavigationBar appearance].tintColor = [config tintColorForKey:kTintColorNavigationBar];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f];
     }

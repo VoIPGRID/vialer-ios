@@ -83,11 +83,7 @@
 - (NSString*)baseLink {
     static NSString* baseLink;
     if (!baseLink) {
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-        
-        baseLink = [[config objectForKey:@"URLS"] objectForKey:@"Middelware BaseLink"];
-        NSAssert(baseLink, @"URLS - Middelware BaseLink not found in Config.plist!");
+        baseLink = [Configuration UrlForKey:@"Middelware BaseLink"];
     }
     return baseLink;
 }

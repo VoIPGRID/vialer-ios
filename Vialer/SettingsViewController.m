@@ -49,14 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-        
-        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
-        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
-        self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
-    }
+    self.tableView.tintColor = [Configuration tintColorForKey:kTintColorTable];
     
     self.mobileCC = [NSString systemCallingCode];
     if ([self.mobileCC isEqualToString:@"+31"]) {

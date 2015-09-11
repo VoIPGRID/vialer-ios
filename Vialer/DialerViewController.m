@@ -116,11 +116,7 @@
     [self connectionStatusChangedNotification:nil];
     
     // Color the warning
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-    NSArray *messageColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Message"];
-    NSAssert(messageColor != nil && messageColor.count == 3, @"Tint colors - Message not found in Config.plist!");
-    self.statusView.backgroundColor = [UIColor colorWithRed:[messageColor[0] intValue] / 255.f green:[messageColor[1] intValue] / 255.f blue:[messageColor[2] intValue] / 255.f alpha:1.f];
+    self.statusView.backgroundColor = [Configuration tintColorForKey:kTintColorMessage];
 }
 
 - (void)didReceiveMemoryWarning {

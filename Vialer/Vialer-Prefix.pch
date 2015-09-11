@@ -11,6 +11,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    // Always have access to the configuration
+    #import "Configuration.h"
 #endif
 
 // Disable NSLog project wide when DEBUG is not defined

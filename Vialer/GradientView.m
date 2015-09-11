@@ -31,10 +31,7 @@
 }
 
 - (void)initFromConfig {
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-
-    NSDictionary *background = [[config objectForKey:@"Tint colors"] objectForKey:@"Background"];
+    NSDictionary *background = [[Configuration new] objectInConfigKeyed:@"Tint colors", @"Background", nil];
     NSAssert(background != nil, @"Tint colors - Backround not found in Config.plist!");
 
     NSArray *gradientStartColor = [background objectForKey:@"GradientStart"];

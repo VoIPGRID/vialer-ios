@@ -16,7 +16,6 @@
 #import "ContactHandler.h"
 #import "HTCopyableLabel.h"
 
-
 @interface ContactsViewController()
 @property (nonatomic, strong) UIColor *tableTintColor;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
@@ -48,17 +47,9 @@
         leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
         self.navigationItem.leftBarButtonItem = leftDrawerButton;
         
-        
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-        
-        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
-        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
-        
-        NSArray *searchBarTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"SearchBar"];
-        NSAssert(searchBarTintColor != nil && searchBarTintColor.count == 3, @"Tint colors - SearchBar not found in Config.plist!");
-        
-        self.tableTintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
+        // Load the configuration to access the tint colors
+        Configuration *config = [Configuration new];
+        self.tableTintColor = [config tintColorForKey:kTintColorTable];
         
         self.addressBookContacts = @[];
         self.addressBookContactsSorted = [@[] mutableCopy];
@@ -70,7 +61,7 @@
         self.searchBar.delegate = self;
         self.searchBar.placeholder = @"Zoeken";
         self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
-        self.searchBar.barTintColor = [UIColor colorWithRed:[searchBarTintColor[0] intValue] / 255.f green:[searchBarTintColor[1] intValue] / 255.f blue:[searchBarTintColor[2] intValue] / 255.f alpha:1.f];
+        self.searchBar.barTintColor = [config tintColorForKey:kTintColorSearchBar];
         self.searchBar.tintColor = [UIColor whiteColor];
         [self.view addSubview:self.searchBar];
         

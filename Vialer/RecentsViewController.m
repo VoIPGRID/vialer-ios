@@ -54,14 +54,7 @@
 {
     [super viewDidLoad];
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-
-        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
-        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
-        self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
-    }
+    self.tableView.tintColor = [Configuration tintColorForKey:kTintColorTable];
 
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
@@ -79,12 +72,7 @@
     self.recents = [RecentCall cachedRecentCalls];
     self.missedRecents = [self filterMissedRecents:self.recents];
     
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-    NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-    NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-    UIColor *tintColor = [UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f];
-    [self.filterSegmentedControl setTintColor:tintColor];
+    self.filterSegmentedControl.tintColor = [Configuration tintColorForKey:kTintColorNavigationBar];
 
     // ExtendedNavBarView will draw its own hairline.
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"TransparentPixel"]];

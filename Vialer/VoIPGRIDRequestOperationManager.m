@@ -34,13 +34,7 @@
     static VoIPGRIDRequestOperationManager *_sharedRequestOperationManager = nil;
 
     dispatch_once(&pred, ^{
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-
-        NSString *baseUrl = [[config objectForKey:@"URLS"] objectForKey:@"API"];
-        NSAssert(baseUrl != nil, @"URLS - API not found in Config.plist!");
-
-        _sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+        _sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:[Configuration UrlForKey:@"API"]]];
     });
     return _sharedRequestOperationManager;
 }

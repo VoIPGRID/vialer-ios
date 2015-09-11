@@ -232,10 +232,7 @@
         nextUrl = NSLocalizedString(@"/stats/dashboard/", nil);
     }
     
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-    __block NSString *partnerBaseUrl = [[config objectForKey:@"URLS"] objectForKey:@"Partner"];
-    NSAssert(partnerBaseUrl != nil, @"URLS - Partner not found in Config.plist!");
+    __block NSString *partnerBaseUrl = [Configuration UrlForKey:@"Partner"];
     
     [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), title]];
     
@@ -281,8 +278,7 @@
 - (void)showInfoScreen {
     PBWebViewController *webViewController = [[PBWebViewController alloc] init];
     
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSString *onboardingUrl = [[config objectForKey:@"URLS"] objectForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+    NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
     webViewController.showsNavigationToolbar = YES;
     webViewController.hidesBottomBarWhenPushed = YES;
@@ -306,11 +302,7 @@
 #pragma mark - Utils
 
 - (UIColor *)navigationBarTintColor {
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-    NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-    NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-    return [UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f];
+    return [Configuration tintColorForKey:kTintColorNavigationBar];
 }
 
 - (UIImage *)coloredImageWithImage:(UIImage*)image color:(UIColor*)color {

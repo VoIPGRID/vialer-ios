@@ -135,8 +135,6 @@
 		FBB854291A7FE67300121366 /* incoming.caf in Resources */ = {isa = PBXBuildFile; fileRef = FBB854101A7FE24C00121366 /* incoming.caf */; };
 		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
-		FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC862B199BBB7400060261 /* GoToViewController.m */; };
-		FBBC862E199BBB7400060261 /* GoToViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC862C199BBB7400060261 /* GoToViewController.xib */; };
 		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
 		FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3941A64824F00E88E9B /* libGossip7.a */; };
 		FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3951A64824F00E88E9B /* libGossip64.a */; };
@@ -150,6 +148,7 @@
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 		FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAC297D1B948745003AC012 /* libGossipx86_64.a */; };
+		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -392,9 +391,6 @@
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
 		FBBC8621199BA2C600060261 /* PasteableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableTextView.h; sourceTree = "<group>"; };
 		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
-		FBBC862A199BBB7400060261 /* GoToViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoToViewController.h; sourceTree = "<group>"; };
-		FBBC862B199BBB7400060261 /* GoToViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoToViewController.m; sourceTree = "<group>"; };
-		FBBC862C199BBB7400060261 /* GoToViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoToViewController.xib; sourceTree = "<group>"; };
 		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
 		FBC9B3941A64824F00E88E9B /* libGossip7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip7.a; sourceTree = "<group>"; };
@@ -413,6 +409,8 @@
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
 		FEAC297D1B948745003AC012 /* libGossipx86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossipx86_64.a; sourceTree = "<group>"; };
+		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -784,9 +782,6 @@
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
 				FB364D0D18367F0700932D6E /* DialerViewController.m */,
 				FB364D0E18367F0700932D6E /* DialerViewController.xib */,
-				FBBC862A199BBB7400060261 /* GoToViewController.h */,
-				FBBC862B199BBB7400060261 /* GoToViewController.m */,
-				FBBC862C199BBB7400060261 /* GoToViewController.xib */,
 				FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */,
 				FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */,
 				FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */,
@@ -907,6 +902,8 @@
 			children = (
 				FBAFB3F51834250500848B2E /* RecentCall.h */,
 				FBAFB3F61834250500848B2E /* RecentCall.m */,
+				FEE526961BA2CC42001906B5 /* Configuration.h */,
+				FEE526971BA2CC42001906B5 /* Configuration.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1029,7 +1026,6 @@
 				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
 				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
 				FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */,
-				FBBC862E199BBB7400060261 /* GoToViewController.xib in Resources */,
 				FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1133,9 +1129,9 @@
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,
 				F25B39161B08EEA8005ED515 /* AFURLResponseSerialization.m in Sources */,
+				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
 				AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */,
-				FBBC862D199BBB7400060261 /* GoToViewController.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,

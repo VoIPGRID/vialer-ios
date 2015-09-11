@@ -258,13 +258,7 @@ static GSCall *lastNotifiedCall;
 }
 
 - (NSString *)sipDomain {
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-
-    NSString *sipDomain = [[config objectForKey:@"URLS"] objectForKey:@"SIP domain"];
-    NSAssert(sipDomain != nil, @"URLS - SIP domain not found in Config.plist!");
-
-    return sipDomain;
+    return [Configuration UrlForKey:@"SIP domain"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

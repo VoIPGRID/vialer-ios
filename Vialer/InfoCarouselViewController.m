@@ -28,17 +28,8 @@
     [super viewDidLoad];
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-
-    NSArray *tintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-    NSAssert(tintColor != nil && tintColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-
-    NSArray *currentTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
-    NSAssert(currentTintColor != nil && currentTintColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
-
-    self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:[currentTintColor[0] intValue] / 255.f green:[currentTintColor[1] intValue] / 255.f blue:[currentTintColor[2] intValue] / 255.f alpha:1.f];
+    
+    self.pageControl.pageIndicatorTintColor = [Configuration tintColorForKey:kTintColorTabBar];
     self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     self.pageControl.numberOfPages = 5;
 
