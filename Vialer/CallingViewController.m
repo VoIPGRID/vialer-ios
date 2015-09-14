@@ -106,11 +106,7 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
-
-                WelcomeViewController *welcomeViewController = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
-                welcomeViewController.delegate = self;
-                [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:[[UINavigationController alloc] initWithRootViewController:welcomeViewController] animated:YES completion:nil];
-            }
+             }
         }
     } else if (alertView.tag == FAILED_ALERT_TAG) {
         [self dismiss];
@@ -165,26 +161,9 @@
 }
 
 - (void)clickToDial {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DoubleTicksAlertShown"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double costs", nil) message:NSLocalizedString(@"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will be charged.\n\nCheck settings for more info regarding double costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
-            alert.tag = DOUBLE_TICKS_ALERT_TAG;
-            [alert show];
-            return;
-        }
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number starting with your country code.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-        alert.tag = PHONE_NUMBER_ALERT_TAG;
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        
-        self.mobileCC = [NSString systemCallingCode];
-        if ([self.mobileCC isEqualToString:@"+31"]) {
-            self.mobileCC = @"+316";
-        }
-
-        [alert textFieldAtIndex:0].delegate = self;
-        [alert textFieldAtIndex:0].text = self.mobileCC;
-        [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DoubleTicksAlertShown"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double costs", nil) message:NSLocalizedString(@"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will be charged.\n\nCheck settings for more info regarding double costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+        alert.tag = DOUBLE_TICKS_ALERT_TAG;
         [alert show];
         return;
     }
@@ -256,12 +235,6 @@
     }
     
     return YES;
-}
-
-#pragma mark - Welcome view controller delegate
-
-- (void)welcomeViewControllerDidFinish:(WelcomeViewController *)welcomeViewController {
-    [self clickToDial];
 }
 
 #pragma mark - Timer

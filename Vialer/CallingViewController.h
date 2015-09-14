@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WelcomeViewController.h"
 #import "RoundedLabel.h"
 #import "TrackedViewController.h"
 
-@interface CallingViewController : TrackedViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
+@interface CallingViewController : TrackedViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
 @property (weak, nonatomic) IBOutlet RoundedLabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;

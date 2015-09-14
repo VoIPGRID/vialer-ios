@@ -16,7 +16,6 @@
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DialerViewController.h"
-#import "SettingsViewController.h"
 #import "SideMenuViewController.h"
 #import "ConnectionHandler.h"
 #import "Gossip+Extra.h"

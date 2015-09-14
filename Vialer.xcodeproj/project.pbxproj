@@ -107,8 +107,6 @@
 		FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB89C75C1850C153006A4556 /* CallingViewController.xib */; };
 		FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */; };
 		FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */; };
-		FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */; };
-		FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */; };
 		FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0F182AA6CB002FC8FC /* SSKeychainQuery.m */; };
@@ -135,8 +133,6 @@
 		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
 		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
-		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
-		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
 		FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */; };
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
@@ -144,8 +140,8 @@
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
-		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
+		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 /* End PBXBuildFile section */
 
@@ -352,9 +348,6 @@
 		FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
 		FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPCallingViewController.xib; sourceTree = "<group>"; };
-		FB9CC6BF19BD967C00BF2A82 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
-		FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
-		FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		FBAD7F0C182AA6CB002FC8FC /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
@@ -390,9 +383,6 @@
 		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
 		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
-		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedLabel.h; sourceTree = "<group>"; };
 		FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedLabel.m; sourceTree = "<group>"; };
 		FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingViewController.h; sourceTree = "<group>"; };
@@ -403,9 +393,9 @@
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
+		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
-		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
 		FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnected.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -795,12 +785,6 @@
 				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
 				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
 				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
-				FBDAF7331858D238005BA203 /* SettingsViewController.h */,
-				FBDAF7341858D238005BA203 /* SettingsViewController.m */,
-				FBDAF7351858D238005BA203 /* SettingsViewController.xib */,
-				FB9CC6BF19BD967C00BF2A82 /* WelcomeViewController.h */,
-				FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */,
-				FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */,
 				03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */,
 				03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */,
 				03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */,
@@ -1004,12 +988,10 @@
 				F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
-				FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */,
 				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
 				FE2523B31B84896600CF5C22 /* ringback.wav in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
-				FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */,
 				F245E7711B577AD100FBA37C /* Config.plist in Resources */,
 				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
@@ -1131,7 +1113,6 @@
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */,
 				F2900B4F1B1DD34C00E695FB /* HTCopyableLabel.m in Sources */,
-				FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */,
 				F25B39151B08EEA8005ED515 /* AFURLRequestSerialization.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
@@ -1149,7 +1130,6 @@
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				F25B39131B08EEA8005ED515 /* AFSecurityPolicy.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* AccountViewFooterView.m in Sources */,
-				FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */,

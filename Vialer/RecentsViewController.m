@@ -13,7 +13,6 @@
 #import "NSDate+RelativeDate.h"
 #import "AppDelegate.h"
 #import "ContactsViewController.h"
-#import "SettingsViewController.h"
 #import "SelectRecentsFilterViewController.h"
 #import "UIViewController+MMDrawerController.h"
 
