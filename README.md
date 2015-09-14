@@ -11,8 +11,7 @@ appic-ios
 ```bash
 git clone https://github.com/VoIPGRID/vialer-ios.git
 cd vialer-ios/
-git submodule init
-git submodule update --recursive
 cd pjsip/
+./pjsip svn_ckeckout
 ./pjsip all
 ```
