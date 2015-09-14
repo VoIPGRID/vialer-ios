@@ -109,7 +109,6 @@
 		FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */; };
 		FB9CC6C219BD967C00BF2A82 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */; };
 		FB9CC6C319BD967C00BF2A82 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */; };
-		FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */; };
 		FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0F182AA6CB002FC8FC /* SSKeychainQuery.m */; };
@@ -136,8 +135,6 @@
 		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
 		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
-		FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3941A64824F00E88E9B /* libGossip7.a */; };
-		FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC9B3951A64824F00E88E9B /* libGossip64.a */; };
 		FBDAF7361858D238005BA203 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDAF7341858D238005BA203 /* SettingsViewController.m */; };
 		FBDAF7371858D238005BA203 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBDAF7351858D238005BA203 /* SettingsViewController.xib */; };
 		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
@@ -147,8 +144,8 @@
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
-		FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAC297D1B948745003AC012 /* libGossipx86_64.a */; };
 		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
+		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -357,7 +354,6 @@
 		FB9CC6BF19BD967C00BF2A82 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		FB9CC6C019BD967C00BF2A82 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		FB9CC6C119BD967C00BF2A82 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
-		FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossipi386.a; sourceTree = "<group>"; };
 		FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		FBAD7F0C182AA6CB002FC8FC /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
@@ -393,8 +389,6 @@
 		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
 		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
-		FBC9B3941A64824F00E88E9B /* libGossip7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip7.a; sourceTree = "<group>"; };
-		FBC9B3951A64824F00E88E9B /* libGossip64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossip64.a; sourceTree = "<group>"; };
 		FBDAF7331858D238005BA203 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		FBDAF7341858D238005BA203 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		FBDAF7351858D238005BA203 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -408,9 +402,9 @@
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
-		FEAC297D1B948745003AC012 /* libGossipx86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGossipx86_64.a; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,7 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEAC297E1B948745003AC012 /* libGossipx86_64.a in Frameworks */,
+				FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */,
 				3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */,
 				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
@@ -434,11 +428,8 @@
 				FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */,
 				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
-				FBC9B3961A64824F00E88E9B /* libGossip7.a in Frameworks */,
-				FBC9B3971A64824F00E88E9B /* libGossip64.a in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,
-				FBA4C7FF1AA50C9A007BDA06 /* libGossipi386.a in Frameworks */,
 				FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */,
 				FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */,
 				FB643140182281C500E1BF17 /* Security.framework in Frameworks */,
@@ -723,15 +714,12 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FEAC297D1B948745003AC012 /* libGossipx86_64.a */,
+				FEABD67E1B9739830093A877 /* libpjsip.a */,
 				3D15A4571B2ECAA8004C5012 /* PushKit.framework */,
 				F21077EA1B1C398D003C8109 /* libc++.dylib */,
 				F25B39181B08EF43005ED515 /* MobileCoreServices.framework */,
 				FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */,
 				FB503172183527BE006FEBAA /* libz.dylib */,
-				FBC9B3941A64824F00E88E9B /* libGossip7.a */,
-				FBC9B3951A64824F00E88E9B /* libGossip64.a */,
-				FBA4C7FE1AA50C9A007BDA06 /* libGossipi386.a */,
 				FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */,
 				FB10B11A1ABC17900074BB78 /* CoreData.framework */,
 				FB3820D91A1E510C0033FF78 /* CoreVideo.framework */,
@@ -1249,6 +1237,7 @@
 					"\"$(SRCROOT)/pjsip/lib\"",
 					"\"$(SRCROOT)/pjsip\"",
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
+					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -1350,6 +1339,7 @@
 					"\"$(SRCROOT)/pjsip/lib\"",
 					"\"$(SRCROOT)/pjsip\"",
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
+					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -1393,6 +1383,7 @@
 					"\"$(SRCROOT)/pjsip/lib\"",
 					"\"$(SRCROOT)/pjsip\"",
 					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
+					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
