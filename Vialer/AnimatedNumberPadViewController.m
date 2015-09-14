@@ -12,7 +12,6 @@
 @interface AnimatedNumberPadViewController ()
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *subTitles;
-@property (nonatomic, strong) NSArray *sounds;
 @end
 
 @implementation AnimatedNumberPadViewController
@@ -107,12 +106,7 @@
 }
 
 - (void)buttonPressedWithTag:(int)tag {
-    if (self.tonesEnabled) {
-        SystemSoundID soundID = (SystemSoundID)[[self.sounds objectAtIndex:tag] integerValue];
-        if (soundID > 0) {
-            AudioServicesPlaySystemSound(soundID);
-        }
-    }
+    [self playDtmfToneAtIndex:tag];
     
     if ([self.delegate respondsToSelector:@selector(numberPadPressedWithCharacter:)]) {
         NSString *cipher = [self.titles objectAtIndex:tag];
