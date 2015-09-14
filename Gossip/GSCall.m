@@ -203,7 +203,14 @@
         } break;
             
         case PJSIP_INV_STATE_DISCONNECTED: {
+            // Stop ringback if this is an outgoing call.
             [self stopRingback];
+            // Check if the call is terminated normally, or if we should signal the user of an error.
+            if (callInfo.last_status != PJSIP_SC_OK) {
+                // Create / play the disconnected tone
+                _ringback = [GSRingback ringbackWithSoundNamed:[[NSBundle mainBundle] pathForResource:@"disconnected" ofType:@"wav"]];
+                [self startRingback];
+            }
             callStatus = GSCallStatusDisconnected;
         } break;
     }

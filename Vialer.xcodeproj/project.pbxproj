@@ -146,6 +146,7 @@
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
+		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -405,6 +406,7 @@
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
+		FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnected.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -635,6 +637,7 @@
 		FB364D111836846A00932D6E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */,
 				FBB854111A7FE3CE00121366 /* dtmf-#.aif */,
 				FBB854121A7FE3CE00121366 /* dtmf-0.aif */,
 				FBB854131A7FE3CE00121366 /* dtmf-1.aif */,
@@ -992,6 +995,7 @@
 				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
 				FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */,
 				FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */,
+				FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */,
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,

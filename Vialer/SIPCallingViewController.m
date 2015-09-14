@@ -40,6 +40,9 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 @property (nonatomic, strong) NSTimer *tickerTimer;
 @property (nonatomic, strong) NSString *dtmfHistory;
 
+/** Get notified on incoming calls */
+@property (nonatomic, strong) CTCallCenter *callCenter;
+
 @end
 
 @implementation SIPCallingViewController
@@ -204,6 +207,22 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
             self.contactLabel.text = self.currentCall.remoteInfo;
         }
     });
+    
+    self.callCenter = [[CTCallCenter alloc] init];
+    __weak SIPCallingViewController *weakSelf = self;
+    self.callCenter.callEventHandler = ^(CTCall *call) {
+        // Check if there are any active / ringing calls
+        for (CTCall *currentCall in weakSelf.callCenter.currentCalls) {
+            // If it is not disconnected, we should pause our current call
+            if (![currentCall.callState isEqualToString:CTCallStateDisconnected]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf pauseCall:YES];
+                });
+                break;
+            }
+        }
+    };
+    
 }
 
 - (void)AudioInterruption:(NSNotification *)notification {
@@ -212,11 +231,15 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
         
         //Check to see if it was a Begin interruption
         if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
+            // As there will be no audio on the other side, pause the call
+            [self pauseCall:YES];
             NSLog(@"Interruption began!");
             pjsua_set_no_snd_dev();
             
         } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
             NSLog(@"Interruption ended!");
+            // We can resume our call
+            [self pauseCall:NO];
             //Resume your audio
             int capture_dev, playback_dev;
             pjsua_get_snd_dev(&capture_dev, &playback_dev);
@@ -240,6 +263,24 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     // Update connection when a call has ended
     [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
 }
+
+
+- (void)pauseCall:(BOOL)pause {
+    if (self.currentCall.paused != pause) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.currentCall.paused = pause;
+            if (pause) {
+                self.tickerPausedDate = [NSDate date];
+            } else {
+                self.tickerStartDate = [self.tickerStartDate dateByAddingTimeInterval:-[self.tickerPausedDate timeIntervalSinceNow]];
+                self.tickerPausedDate = nil;
+            }
+            // Update the pause button UI.
+            self.pauseButton.selected = pause;
+        });
+    }
+}
+
 
 - (void)dismiss {
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;
@@ -400,13 +441,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
 - (void)pauseButtonPressed:(UIButton *)sender {
     [sender setSelected:!sender.isSelected];
-    self.currentCall.paused = sender.isSelected;
-    if (sender.isSelected) {
-        self.tickerPausedDate = [NSDate date];
-    } else {
-        self.tickerStartDate = [self.tickerStartDate dateByAddingTimeInterval:-[self.tickerPausedDate timeIntervalSinceNow]];
-        self.tickerPausedDate = nil;
-    }
+    [self pauseCall:sender.selected];
 }
 
 - (void)speakerButtonPressed:(UIButton *)sender {
