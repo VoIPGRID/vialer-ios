@@ -12,6 +12,8 @@
 #import "SelectRecentsFilterViewController.h"
 #import "WelcomeViewController.h"
 #import "NSString+Mobile.h"
+#import "ConnectionHandler.h"
+#import "UIAlertView+Blocks.h"
 
 #define PHONE_NUMBER_ALERT_TAG 100
 #define LOG_OUT_ALERT_TAG 101
@@ -47,14 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-        
-        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
-        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
-        self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
-    }
+    self.tableView.tintColor = [Configuration tintColorForKey:kTintColorTable];
     
     self.mobileCC = [NSString systemCallingCode];
     if ([self.mobileCC isEqualToString:@"+31"]) {
@@ -126,7 +121,7 @@
         cell.textLabel.text = NSLocalizedString(@"Log out from this app", nil);
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     } else if (indexPath.section == VERSION_IDX) {
-        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
 
@@ -164,7 +159,6 @@
         selectRecentsFilterViewController.delegate = self;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectRecentsFilterViewController];
-        navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
         [self presentViewController:navigationController animated:YES completion:^{}];
     } else if (indexPath.section == LOG_OUT_IDX) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log out", nil) message:NSLocalizedString(@"Are you sure you want to log out?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];

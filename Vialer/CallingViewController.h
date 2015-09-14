@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "WelcomeViewController.h"
+#import "RoundedLabel.h"
+#import "TrackedViewController.h"
 
-#import <AddressBookUI/AddressBookUI.h>
-
-@interface CallingViewController : UIViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
+@interface CallingViewController : TrackedViewController<UITextFieldDelegate, WelcomeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet RoundedLabel *infoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *infoImageView;
 
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;
 
 @end

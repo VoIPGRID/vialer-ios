@@ -9,6 +9,7 @@
 #import "CallingViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SelectRecentsFilterViewController.h"
+#import "ConnectionHandler.h"
 #import "NSString+Mobile.h"
 
 #import <CoreTelephony/CTCallCenter.h>
@@ -57,6 +58,25 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
+
+    CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
+    CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
+    self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
+    self.infoLabel.frame = CGRectMake(leftOffset, self.infoLabel.frame.origin.y, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
+    
+    self.contactLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32.f];
+
+    self.statusLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil);
+    self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2), self.statusLabel.frame.size.height);
+    [self.statusLabel sizeToFit];
+
+    self.infoImageView.frame = CGRectMake(self.infoImageView.frame.origin.x, self.statusLabel.frame.origin.y + self.statusLabel.frame.size.height + 20.f, self.infoImageView.frame.size.width, self.infoImageView.frame.size.height);
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -72,10 +92,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
 #pragma mark - Alert view delegate
@@ -132,32 +148,14 @@
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.5f];
 }
 
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    if (property == kABPersonPhoneProperty) {
-        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    	for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
-    		if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i)) {
-    			CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-    			CFRelease(multiPhones);
-                
-    			NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
-    			CFRelease(phoneNumberRef);
-
-                NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
-                if (!fullName) {
-                    NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-                    NSString *middleName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-                    NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-                    if (firstName) {
-                        fullName = [NSString stringWithFormat:@"%@ %@%@", firstName, [middleName length] ? [NSString stringWithFormat:@"%@ ", middleName] : @"", lastName];
-                    }
-                }
-
-                [self handlePhoneNumber:phoneNumber forContact:fullName];
-            }
-        }
-    }
-    return NO;
+- (void)showInfo:(NSString *)info {
+    self.infoLabel.hidden = NO;
+    self.infoLabel.text = info;
+    [self.infoLabel sizeToFit];
+    // Center align the label with the new text
+    self.infoLabel.center = CGPointMake(CGRectGetMidX(self.view.bounds), self.infoLabel.center.y);
+    // Align the pixels if needed
+    self.infoLabel.frame = CGRectIntegral(self.infoLabel.frame);
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
@@ -194,7 +192,7 @@
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
-    
+
     [self showWithStatus:NSLocalizedString(@"Dialing...", nil)];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     
@@ -208,6 +206,12 @@
     fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
 
     self.contactLabel.text = self.toContact;
+    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusInvalid) {
+        [self showInfo:NSLocalizedString(@"NO WIFI OR 4G", nil)];
+    } else {
+        self.infoLabel.hidden = YES;
+    }
+    [self showWithStatus:NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil)];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:fromNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {

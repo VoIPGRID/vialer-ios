@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackedViewController.h"
 
-@interface InfoCarouselViewController : UIViewController<UIScrollViewDelegate>
+@interface InfoCarouselViewController : TrackedViewController<UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 

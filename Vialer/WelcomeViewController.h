@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackedViewController.h"
 
 @class WelcomeViewController;
 
@@ -14,7 +15,7 @@
 - (void)welcomeViewControllerDidFinish:(WelcomeViewController *)welcomeViewController;
 @end
 
-@interface WelcomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface WelcomeViewController : TrackedViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *welcomeTableViewCell;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;

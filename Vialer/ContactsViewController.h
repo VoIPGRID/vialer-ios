@@ -7,7 +7,8 @@
 //
 
 #import <AddressBookUI/AddressBookUI.h>
+#import "TrackedViewController.h"
 
-@interface ContactsViewController : ABPeoplePickerNavigationController<ABPeoplePickerNavigationControllerDelegate, UINavigationControllerDelegate, UISearchDisplayDelegate>
+@interface ContactsViewController : TrackedViewController <ABPersonViewControllerDelegate, UINavigationControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @end

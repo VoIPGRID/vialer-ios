@@ -28,22 +28,16 @@
 {
     [super viewDidLoad];
 
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
-    
-    NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-    NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-
     [self.okButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.okButton setTitle:NSLocalizedString(@"Ok, got it!", nil) forState:UIControlStateNormal];
-    self.okButton.backgroundColor = [UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f];
-
+    self.okButton.backgroundColor = [Configuration tintColorForKey:kTintColorNavigationBar];
+    
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     self.descriptionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"From now you can dial out using %@.\nThe number you are calling with is:", nil), appName];
 
-    NSString *outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
-    if ([outgoingNumber isKindOfClass:[NSString class]]) {
-        self.phoneNumberLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
+    NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+    if (outgoingNumber) {
+        self.phoneNumberLabel.text = outgoingNumber;
     } else {
         self.phoneNumberLabel.text = @"";
     }
@@ -59,14 +53,11 @@
     [super viewWillAppear:animated];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
-        if ([outgoingCli isKindOfClass:[NSString class]]) {
-            [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
-            if ([outgoingCli isKindOfClass:[NSString class]]) {
-                self.phoneNumberLabel.text = outgoingCli;
-            } else {
-                self.phoneNumberLabel.text = @"";
-            }
+        NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+        if (outgoingNumber) {
+            self.phoneNumberLabel.text = outgoingNumber;
+        } else {
+            self.phoneNumberLabel.text = @"";
         }
     } failure:nil];
 }
