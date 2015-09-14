@@ -206,9 +206,10 @@
     if (self.tonesEnabled &&
         self.sounds.count > index) {
         NSURL *url = [self.sounds objectAtIndex:index];
-        // Create a player for each play, to allow simultanus and fast input
+        // Create a player for each play, to allow simultanious and fast input
         AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         if (player) {
+            // Keep reference to the player object, and destroy it in the delegate methods
             [self.soundsPlayers addObject:player];
             player.delegate = self;
             [player play];
@@ -219,12 +220,14 @@
 #pragma mark - Handle the AVAudioPlayers and free the instances
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    // Finished playing, so destroy the player object
     if ([self.soundsPlayers containsObject:player]) {
         [self.soundsPlayers removeObject:player];
     }
 }
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    // Failed playing, but destroy the player object anyway
     if ([self.soundsPlayers containsObject:player]) {
         [self.soundsPlayers removeObject:player];
     }
