@@ -9,8 +9,10 @@ def pods_for_all_targets
 	pod 'GoogleAnalytics'
 	pod 'HTCopyableLabel'
    	pod 'MMDrawerController'
+   	pod 'PBWebViewController'
    	pod 'Reachability'
    	pod 'SSKeychain'
+   	pod 'SVProgressHUD'
 end
 
 # Target specific pods can be specified here.
