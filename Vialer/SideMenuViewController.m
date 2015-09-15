@@ -10,6 +10,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "SideMenuTableViewCell.h"
 #import "VoIPGRIDRequestOperationManager.h"
+#import "SystemUser.h"
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
 #import "InfoCarouselViewController.h"
@@ -190,7 +191,7 @@
                  otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
                           tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                               if (buttonIndex == 1) {
-                                  [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
+                                  [SystemUser logout];
                               }
                           }];
     }
@@ -243,7 +244,7 @@
                 // Encode the token and nextUrl, and also the user after retrieving it.
                 token = [self urlEncodedString:token];
                 nextUrl = [self urlEncodedString:nextUrl];
-                NSString *user = [self urlEncodedString:[[VoIPGRIDRequestOperationManager sharedRequestOperationManager] user]];
+                NSString *user = [self urlEncodedString:[SystemUser user]];
                 NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, nextUrl]];
                 NSLog(@"Go to url: %@", url);
                 

@@ -7,6 +7,7 @@
 //
 
 #import "RecentsViewController.h"
+#import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "RecentCall.h"
 #import "RecentTableViewCell.h"
@@ -113,7 +114,7 @@
 }
 
 - (void)refresh {
-    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
+    if (![SystemUser isLoggedIn]) {
         return;
     }
 
@@ -149,7 +150,7 @@
                 [self.tableView setContentOffset:CGPointZero animated:YES];
                 [self.refreshControl endRefreshing];
 
-                if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+                if ([SystemUser isLoggedIn]) {
                     @synchronized(self.recents) {
                         self.recents = [RecentCall recentCallsFromDictionary:responseObject];
                         self.missedRecents = [self filterMissedRecents:self.recents];

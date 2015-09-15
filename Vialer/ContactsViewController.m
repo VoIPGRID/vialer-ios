@@ -7,7 +7,7 @@
 //
 
 #import "ContactsViewController.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "SystemUser.h"
 #import "AppDelegate.h"
 
 #import "ContactsSearchTableViewController.h"
@@ -104,7 +104,7 @@
     [headerView addSubview:numberTitle];
     
     HTCopyableLabel *numberValue = [HTCopyableLabel new];
-    [numberValue setText:[[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber]];
+    [numberValue setText:[SystemUser outgoingNumber]];
     [numberValue setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]];
     [numberValue sizeToFit];
     [numberValue setFrame:CGRectMake(CGRectGetMaxX(numberTitle.frame), 0, CGRectGetWidth(numberValue.frame), CGRectGetHeight(numberValue.frame))];

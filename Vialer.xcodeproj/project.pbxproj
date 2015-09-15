@@ -140,6 +140,7 @@
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
+		FE48F1681BA7163000F57544 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48F1671BA7163000F57544 /* SystemUser.m */; };
 		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
 		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
@@ -393,6 +394,8 @@
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
+		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
+		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
@@ -879,6 +882,8 @@
 				FBAFB3F61834250500848B2E /* RecentCall.m */,
 				FEE526961BA2CC42001906B5 /* Configuration.h */,
 				FEE526971BA2CC42001906B5 /* Configuration.m */,
+				FE48F1661BA7163000F57544 /* SystemUser.h */,
+				FE48F1671BA7163000F57544 /* SystemUser.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1068,6 +1073,7 @@
 				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
 				F25B39101B08EEA8005ED515 /* AFHTTPRequestOperationManager.m in Sources */,
 				F235ED281B2855180028EDBC /* Reachability.m in Sources */,
+				FE48F1681BA7163000F57544 /* SystemUser.m in Sources */,
 				F25B39171B08EEA8005ED515 /* AFURLSessionManager.m in Sources */,
 				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
