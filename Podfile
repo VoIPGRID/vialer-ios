@@ -6,7 +6,7 @@ platform :ios, '8.0'
 def pods_for_all_targets
    	pod 'AFNetworkActivityLogger', :configurations => ['Debug']
 	pod 'AFNetworking'
-	
+	pod 'GoogleAnalytics'
 	pod 'HTCopyableLabel'
    	pod 'MMDrawerController'
    	pod 'Reachability'

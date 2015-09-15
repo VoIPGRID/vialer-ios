@@ -24,7 +24,6 @@
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
-		F20C2D431B4A78BD00357EA3 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F20C2D421B4A78BD00357EA3 /* libGoogleAnalyticsServices.a */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
@@ -178,17 +177,6 @@
 		C415953F343DAA413EE2882E /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
-		F20C2D361B4A68A800357EA3 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = "GoogleAnalytics-iOS-SDK/GAI.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D371B4A68A800357EA3 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = "GoogleAnalytics-iOS-SDK/GAIDictionaryBuilder.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D381B4A68A800357EA3 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceFields.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommerceFields.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D391B4A68A800357EA3 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProduct.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommerceProduct.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3A1B4A68A800357EA3 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProductAction.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommerceProductAction.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3B1B4A68A800357EA3 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommercePromotion.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommercePromotion.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3C1B4A68A800357EA3 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = "GoogleAnalytics-iOS-SDK/GAIFields.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3D1B4A68A800357EA3 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = "GoogleAnalytics-iOS-SDK/GAILogger.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3E1B4A68A800357EA3 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = "GoogleAnalytics-iOS-SDK/GAITrackedViewController.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3F1B4A68A800357EA3 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = "GoogleAnalytics-iOS-SDK/GAITracker.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D421B4A78BD00357EA3 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = "GoogleAnalytics-iOS-SDK/libGoogleAnalyticsServices.a"; sourceTree = SOURCE_ROOT; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -357,7 +345,6 @@
 				3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */,
 				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
-				F20C2D431B4A78BD00357EA3 /* libGoogleAnalyticsServices.a in Frameworks */,
 				F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */,
 				FB6B47DE1ABC277600B0DBC4 /* AdSupport.framework in Frameworks */,
 				FB6B47711ABC190700B0DBC4 /* libsqlite3.dylib in Frameworks */,
@@ -461,7 +448,6 @@
 		EA46C5181AC2CCA100F7FC13 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */,
 				FB3820A31A1E4F510033FF78 /* Gossip */,
 				FB0716C719A4DAA800AB548D /* PBWebViewController */,
 				FBAD7F12182AE93B002FC8FC /* SVProgressHUD */,
@@ -726,25 +712,6 @@
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
 			);
 			name = Categories/Helpers;
-			sourceTree = "<group>";
-		};
-		FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */ = {
-			isa = PBXGroup;
-			children = (
-				F20C2D421B4A78BD00357EA3 /* libGoogleAnalyticsServices.a */,
-				F20C2D361B4A68A800357EA3 /* GAI.h */,
-				F20C2D371B4A68A800357EA3 /* GAIDictionaryBuilder.h */,
-				F20C2D381B4A68A800357EA3 /* GAIEcommerceFields.h */,
-				F20C2D391B4A68A800357EA3 /* GAIEcommerceProduct.h */,
-				F20C2D3A1B4A68A800357EA3 /* GAIEcommerceProductAction.h */,
-				F20C2D3B1B4A68A800357EA3 /* GAIEcommercePromotion.h */,
-				F20C2D3C1B4A68A800357EA3 /* GAIFields.h */,
-				F20C2D3D1B4A68A800357EA3 /* GAILogger.h */,
-				F20C2D3E1B4A68A800357EA3 /* GAITrackedViewController.h */,
-				F20C2D3F1B4A68A800357EA3 /* GAITracker.h */,
-			);
-			name = "GoogleAnalytics-iOS-SDK";
-			path = "GoogleAnalytics-iOS-SDK/GoogleAnalytics/Library";
 			sourceTree = "<group>";
 		};
 		FBAD7F12182AE93B002FC8FC /* SVProgressHUD */ = {
@@ -1109,11 +1076,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
+					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
-					"\"$(SRCROOT)/pjsip\"",
-					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -1213,11 +1177,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
+					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
-					"\"$(SRCROOT)/pjsip\"",
-					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -1259,11 +1220,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
+					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
-					"\"$(SRCROOT)/pjsip\"",
-					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
