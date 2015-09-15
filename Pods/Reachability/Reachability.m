@@ -88,12 +88,12 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 #pragma mark - Class Constructor Methods
 
-+(instancetype)reachabilityWithHostName:(NSString*)hostname
++(Reachability*)reachabilityWithHostName:(NSString*)hostname
 {
     return [Reachability reachabilityWithHostname:hostname];
 }
 
-+(instancetype)reachabilityWithHostname:(NSString*)hostname
++(Reachability*)reachabilityWithHostname:(NSString*)hostname
 {
     SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, [hostname UTF8String]);
     if (ref) 
@@ -106,7 +106,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return nil;
 }
 
-+(instancetype)reachabilityWithAddress:(void *)hostAddress
++(Reachability *)reachabilityWithAddress:(void *)hostAddress
 {
     SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*)hostAddress);
     if (ref) 
@@ -119,8 +119,8 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return nil;
 }
 
-+(instancetype)reachabilityForInternetConnection
-{
++(Reachability *)reachabilityForInternetConnection 
+{   
     struct sockaddr_in zeroAddress;
     bzero(&zeroAddress, sizeof(zeroAddress));
     zeroAddress.sin_len = sizeof(zeroAddress);
@@ -129,7 +129,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return [self reachabilityWithAddress:&zeroAddress];
 }
 
-+(instancetype)reachabilityForLocalWiFi
++(Reachability*)reachabilityForLocalWiFi
 {
     struct sockaddr_in localWifiAddress;
     bzero(&localWifiAddress, sizeof(localWifiAddress));
@@ -144,7 +144,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 // Initialization methods
 
--(instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef)ref
+-(Reachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref 
 {
     self = [super init];
     if (self != nil) 

@@ -162,7 +162,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
 
 -(instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController rightDrawerViewController:(UIViewController *)rightDrawerViewController{
     NSParameterAssert(centerViewController);
-    self = [self init];
+    self = [super init];
     if(self){
         [self setCenterViewController:centerViewController];
         [self setLeftDrawerViewController:leftDrawerViewController];
@@ -800,7 +800,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
     }
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+-(BOOL)shouldAutorotate{
     return YES;
 }
 
@@ -927,26 +927,19 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
 }
 
 -(void)setShowsStatusBarBackgroundView:(BOOL)showsDummyStatusBar{
-    NSArray *sysVersion = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
-    float majorVersion = [[sysVersion objectAtIndex:0] floatValue];
-    if (majorVersion >= 7){
-        if(showsDummyStatusBar!=_showsStatusBarBackgroundView){
-            _showsStatusBarBackgroundView = showsDummyStatusBar;
-            CGRect frame = self.childControllerContainerView.frame;
-            if(_showsStatusBarBackgroundView){
-                frame.origin.y = 20;
-                frame.size.height = CGRectGetHeight(self.view.bounds)-20;
-            }
-            else {
-                frame.origin.y = 0;
-                frame.size.height = CGRectGetHeight(self.view.bounds);
-            }
-            [self.childControllerContainerView setFrame:frame];
-            [self.dummyStatusBarView setHidden:!showsDummyStatusBar];
+    if(showsDummyStatusBar!=_showsStatusBarBackgroundView){
+        _showsStatusBarBackgroundView = showsDummyStatusBar;
+        CGRect frame = self.childControllerContainerView.frame;
+        if(_showsStatusBarBackgroundView){
+            frame.origin.y = 20;
+            frame.size.height = CGRectGetHeight(self.view.bounds)-20;
         }
-    }
-    else {
-        _showsStatusBarBackgroundView = NO;
+        else {
+            frame.origin.y = 0;
+            frame.size.height = CGRectGetHeight(self.view.bounds);
+        }
+        [self.childControllerContainerView setFrame:frame];
+        [self.dummyStatusBarView setHidden:!showsDummyStatusBar];
     }
 }
 
