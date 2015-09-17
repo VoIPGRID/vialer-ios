@@ -12,6 +12,6 @@ appic-ios
 git clone https://github.com/VoIPGRID/vialer-ios.git
 cd vialer-ios/
 cd pjsip/
-./pjsip svn_ckeckout
+./pjsip svn_checkout
 ./pjsip all
 ```
