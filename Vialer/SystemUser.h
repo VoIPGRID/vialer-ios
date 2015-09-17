@@ -14,27 +14,30 @@
  */
 @interface SystemUser : NSObject
 
++ (instancetype)currentUser;
+
 #pragma mark - Login handling
 
-+ (BOOL)isLoggedIn;
+@property (nonatomic, readonly, getter=isLoggedIn) BOOL loggedIn;
 
-+ (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(void(^)(BOOL loggedin))completion;
+- (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(void(^)(BOOL loggedin))completion;
 
-+ (void)logout;
+- (void)logout;
 
 #pragma mark - User/Settings information
 
-// Account info
-+ (NSString *)user;
-+ (NSString *)outgoingNumber;
-+ (NSString *)sipAccount;
-+ (NSString *)sipPassword;
+// Account information
+@property (nonatomic, readonly) NSString *user;
+@property (nonatomic, readonly) NSString *outgoingNumber;
+@property (nonatomic, readonly) NSString *mobileNumber;
+@property (nonatomic, readonly) NSString *sipAccount;
+@property (nonatomic, readonly) NSString *sipPassword;
 
 #pragma mark - Sip specific handling
 
-+ (BOOL)isAllowedToSip;
-+ (BOOL)isSipEnabled;
-+ (void)enableSip:(BOOL)enabled;
-+ (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))success;
+@property (nonatomic, readonly) BOOL isAllowedToSip;
+@property (nonatomic, assign) BOOL sipEnabled;
+
+- (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))success;
 
 @end

@@ -75,10 +75,10 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == SIP_ACCOUNT_ROW) {
             cell.textLabel.text = NSLocalizedString(@"SIP account", nil);
-            cell.detailTextLabel.text = [SystemUser sipAccount];
+            cell.detailTextLabel.text = [SystemUser currentUser].sipAccount;
         } else if (indexPath.row == SIP_PASSWORD_ROW) {
             cell.textLabel.text = NSLocalizedString(@"Password", nil);
-            cell.detailTextLabel.text = [SystemUser sipPassword];
+            cell.detailTextLabel.text = [SystemUser currentUser].sipPassword;
         }
         
     } else if (indexPath.section == NUMBERS_SECTION) {
@@ -91,7 +91,7 @@
 
         } else if (indexPath.row == OUTGOING_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
-            cell.detailTextLabel.text = [SystemUser outgoingNumber];
+            cell.detailTextLabel.text = [SystemUser currentUser].outgoingNumber;
         }
         
     }  else if (indexPath.section == LOGOUT_BUTTON_SECTION) {
@@ -142,7 +142,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == LOGOUT_BUTTON_SECTION && indexPath.row == LOGOUT_BUTTON_ROW) {
-        [SystemUser logout];
+        [[SystemUser currentUser] logout];
         [self.tableView reloadData];
     } else if (indexPath.section == NUMBERS_SECTION && indexPath.row == MY_NUMBER_ROW){
         

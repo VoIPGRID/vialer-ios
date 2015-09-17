@@ -277,7 +277,7 @@
 
 - (void)loginFailed {
     // No credentials, forward the logout call to SystemUser to clear all stored properties
-    [SystemUser logout];
+    [[SystemUser currentUser] logout];
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     [alert show];

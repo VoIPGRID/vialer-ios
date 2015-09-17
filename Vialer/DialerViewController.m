@@ -137,7 +137,7 @@
         self.callButton.enabled = YES;
         
         //does the user have a sip account?
-        if ([SystemUser sipAccount]) {
+        if ([SystemUser currentUser].sipAccount) {
             //Is the connection quality sufficient for SIP?
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
                 [self hideMessage];

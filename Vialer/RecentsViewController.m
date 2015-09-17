@@ -114,7 +114,7 @@
 }
 
 - (void)refresh {
-    if (![SystemUser isLoggedIn]) {
+    if (![SystemUser currentUser].isLoggedIn) {
         return;
     }
 
@@ -150,7 +150,7 @@
                 [self.tableView setContentOffset:CGPointZero animated:YES];
                 [self.refreshControl endRefreshing];
 
-                if ([SystemUser isLoggedIn]) {
+                if ([SystemUser currentUser].isLoggedIn) {
                     @synchronized(self.recents) {
                         self.recents = [RecentCall recentCallsFromDictionary:responseObject];
                         self.missedRecents = [self filterMissedRecents:self.recents];

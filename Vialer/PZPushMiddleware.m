@@ -201,14 +201,14 @@
 
 - (void)updateDeviceRecord {
     NSString* voipTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY];
-    NSString *sipAccount = [SystemUser sipAccount];
+    NSString *sipAccount = [SystemUser currentUser].sipAccount;
     
     [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
 }
 
 - (void)updateDeviceRecordForToken:(NSData*)token {
     NSString* voipTokenString = [[self class] deviceTokenStringFromData:token];
-    NSString *sipAccount = [SystemUser sipAccount];
+    NSString *sipAccount = [SystemUser currentUser].sipAccount;
 
     [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
 }

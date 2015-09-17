@@ -222,7 +222,7 @@
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
         [_scene runActThree];                     // Animate the clouds
-        if ([SystemUser isSipEnabled]) {
+        if ([SystemUser currentUser].sipEnabled) {
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
         }
     } failure:^(NSString *localizedErrorString) {
@@ -426,11 +426,12 @@
 
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [SystemUser loginWithUser:username password:password completion:^(BOOL loggedin) {
+    SystemUser *currentUser = [SystemUser currentUser];
+    [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
             //Check if a SIP account is configured to be used with the App. The app should default the the Connect A/B behaviour simular to the old App.
-            if ([SystemUser sipAccount]) {
+            if (currentUser.sipAccount) {
                 [[ConnectionHandler sharedConnectionHandler] sipConnect];
             } else {
                 //Just to make sure no sip connection is registered
@@ -457,7 +458,7 @@
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         _fetchAccountRetryCount = 0; // Reset the retry count
-        NSString *outgoingNumber = [SystemUser outgoingNumber];
+        NSString *outgoingNumber = [SystemUser currentUser].outgoingNumber;
         if (outgoingNumber) {
             [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
         } else {

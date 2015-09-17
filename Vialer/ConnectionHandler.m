@@ -152,8 +152,8 @@ static GSCall *lastNotifiedCall;
 }
 
 - (void)sipConnect {
-    NSString *sipAccount = [SystemUser sipAccount];
-    NSString *sipPassword = [SystemUser sipPassword];
+    NSString *sipAccount = [SystemUser currentUser].sipAccount;
+    NSString *sipPassword = [SystemUser currentUser].sipPassword;
     if (!sipAccount || !sipPassword) {
         NSLog(@"No SIP Account set, ignoring connect request");
         return;

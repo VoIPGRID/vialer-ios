@@ -10,5 +10,7 @@
 #import "SideMenuViewController.h"
 
 @interface SideMenuTableViewCell : UITableViewCell
-@property (strong, nonatomic) SideMenuItem *menuItem;
+
+- (void)setMenuItemTitle:(NSString *)title andIcon:(UIImage *)icon;
+
 @end

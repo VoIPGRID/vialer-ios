@@ -262,7 +262,7 @@
 "Connect A/B calls only" = "Twee staps modus ingeschakeld";
 "Connect A/B Info" = "Je hebt nog geen VoIP account geconfigureerd voor dit gebruikersaccount. Je kan in de beheeromgeving een VoIP account selecteren welke zal worden gebruikt door de app. Zodra je dit hebt gedaan zal je ook via VoIP kunnen bellen in de app.";
 
-"Account" = "Account";
+"Settings" = "Instellingen";
 
 /*Config View */
 "VoIP Account" =  "VoIP Account";

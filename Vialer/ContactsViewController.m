@@ -104,7 +104,7 @@
     [headerView addSubview:numberTitle];
     
     HTCopyableLabel *numberValue = [HTCopyableLabel new];
-    [numberValue setText:[SystemUser outgoingNumber]];
+    [numberValue setText:[SystemUser currentUser].outgoingNumber];
     [numberValue setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]];
     [numberValue sizeToFit];
     [numberValue setFrame:CGRectMake(CGRectGetMaxX(numberTitle.frame), 0, CGRectGetWidth(numberValue.frame), CGRectGetHeight(numberValue.frame))];

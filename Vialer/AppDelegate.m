@@ -47,7 +47,7 @@
 @implementation AppDelegate
 
 - (void)doRegistrationWithLoginCheck {
-    if ([SystemUser isLoggedIn]) {
+    if ([SystemUser currentUser].isLoggedIn) {
         [self registerForVoIPNotifications];
     }
 }
@@ -135,14 +135,14 @@
     //v2.x and start onboarding at the "configure numbers view".
 
     //TODO: Why not login again. What if the user was deactivated on the platform?
-    if (![SystemUser isLoggedIn]) {
+    if (![SystemUser currentUser].isLoggedIn) {
         //Not logged in, not v21.x, nor in v2.x
         [self showOnboarding:OnboardingScreenLogin];
     } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
         //Also show the Mobile number onboarding screen
         [self showOnboarding:OnboardingScreenConfigure];
     } else {
-        if ([SystemUser isSipEnabled]) {
+        if ([SystemUser currentUser].sipEnabled) {
             [[ConnectionHandler sharedConnectionHandler] start];
             [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
@@ -164,7 +164,7 @@
 
 #pragma mark - VoiP push notifications
 - (void)registerForVoIPNotifications {
-    if ([SystemUser isSipEnabled]) {
+    if ([SystemUser currentUser].sipEnabled) {
         [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
     }
 }
@@ -216,7 +216,7 @@
     NSData *token = [registry pushTokenForType:type];
     if (token) {
         [[PZPushMiddleware sharedInstance] unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]
-                                             andSipAccount:[SystemUser sipAccount]];
+                                             andSipAccount:[SystemUser currentUser].sipAccount];
     }
 }
 
@@ -242,7 +242,7 @@ void HandleExceptions(NSException *exception) {
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [SystemUser updateSIPAccountWithSuccess:^(BOOL success) {
+    [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
         if (success) {
             [[PZPushMiddleware sharedInstance] updateDeviceRecord];
         }
@@ -291,7 +291,7 @@ void HandleExceptions(NSException *exception) {
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
-    if ([SystemUser isSipEnabled] &&
+    if ([SystemUser currentUser].sipEnabled &&
         [ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
         [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"

@@ -12,15 +12,55 @@
 #import "PZPushMiddleware.h"
 #import "ConnectionHandler.h"
 
-@implementation SystemUser
+@interface SystemUser ()
+
+@end
+
+@implementation SystemUser {
+    BOOL _loggedIn;
+    BOOL _isSipAllowed;
+}
+
++ (instancetype)currentUser {
+    static SystemUser *_currentUser = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _currentUser = [[SystemUser alloc] initPrivate];
+    });
+    
+    return _currentUser;
+}
+
+// Override the init and throw an exception not allowing new instances
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+// Private initialisation used to load the singleton
+- (instancetype)initPrivate {
+    self = [super init];
+    if (self) {
+        [self reloadCurrentUser];
+    }
+    return self;
+}
+
+- (void)reloadCurrentUser {
+    _user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    // A user is considered logged in when its username is stored in the user defaults
+    _loggedIn = (_user != nil);
+    _sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
+    _outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
+    _sipEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"sip_enabled"];
+    _isSipAllowed = [[NSUserDefaults standardUserDefaults] boolForKey:@"allow_app_account"];
+}
 
 #pragma mark - Login specific handling
 
 /** Quick check if a system user has logged in successfully */
-+ (BOOL)isLoggedIn {
-    // A user is considered logged in when its username is stored in the user defaults
-    NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    return (user != nil);
+- (BOOL)isLoggedIn {
+    return _loggedIn;
 }
 
 /** Login with the specified user / password combination. The completion handler will be called with a boolean indicating if the loggin succeeded or not.
@@ -28,27 +68,27 @@
  @param password Passowrd to use for the login (on success is stored safely)
  @param completion Completion handled called when login was succesfull or failed.
  */
-+ (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(void(^)(BOOL loggedin))completion {
+- (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(void(^)(BOOL loggedin))completion {
     // Perform the login to VoIPGRID, in the future we would like to move more responsibility to the SystemUser class
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:user password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self reloadCurrentUser];
         // Check the reponse if this user is allowed to have an app_account
 //        if ([[responseObject objectForKey:@"allow_app_account"] boolValue]) {
-        // For now always allow until available in the backend
+// For development we currently still alow it.
         if (YES) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"allow_app_account"];
-            [SystemUser enableSip:YES];
+            [self setAllowedToSip:YES];
+            self.sipEnabled = YES;
             
             // This user is allowed to use SIP, check if the account is configured
             NSString *app_account = [responseObject objectForKey:@"app_account"];
-            [SystemUser updateSIPAccountWithURL:app_account andSuccess:^(BOOL success) {
+            [self updateSIPAccountWithURL:app_account andSuccess:^(BOOL success) {
                 if (completion) {
                     completion(YES);
                 }
             }];
         } else {
             // Not allowed to use SIP..
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"allow_app_account"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self setAllowedToSip:NO];
             if (completion) {
                 completion(YES);
             }
@@ -60,72 +100,71 @@
     }];
 }
 
-+ (void)logout {
+- (void)logout {
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
     // Clear the setting if SIP is allowed
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"allow_app_account"];
+    [self setAllowedToSip:NO];
     
     // Remove sip account if present also disconnects PJSIP and signals Middleware
-    [SystemUser setSIPAccount:nil andPassword:nil];
+    [self setSIPAccount:nil andPassword:nil];
 }
 
 #pragma mark -
 #pragma mark Account information
 
-+ (NSString *)user {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-}
-
-+ (NSString *)outgoingNumber {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
-}
-    
-+ (NSString *)sipAccount {
-    NSString *sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-    return sipAccount;
-}
-    
-+ (NSString *)sipPassword {
-    NSString *sipAccount = [SystemUser sipAccount];
-    if (sipAccount) {
-        return [SSKeychain passwordForService:[[self class] serviceName] account:sipAccount];
+- (NSString *)sipPassword {
+    if (self.sipAccount) {
+        return [SSKeychain passwordForService:[[self class] serviceName] account:self.sipAccount];
     }
     return nil;
 }
 
 /** Retrieve if the system user is allowed to have an app_account according to VoIPGRID */
-+ (BOOL)isAllowedToSip {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"allow_app_account"];
+- (BOOL)isAllowedToSip {
+    return _isSipAllowed;
+}
+
+/** Private method to set the local information is sip is allowed for this system user.
+ Stores this to the private member variable for retrieve via isAllowedToSip, and stored to user defaults.
+ @param allowed Boolean indicating if SIP is allowed or not
+ */
+- (void)setAllowedToSip:(BOOL)allowed {
+    _isSipAllowed = allowed;
+    [[NSUserDefaults standardUserDefaults] setBool:allowed forKey:@"allow_app_account"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /** Check if the user has SIP currently enabled.
  @return Boolean indicating if enabled in the application, or not.
  */
-+ (BOOL)isSipEnabled {
-    return [SystemUser isAllowedToSip] && [[NSUserDefaults standardUserDefaults] boolForKey:@"sip_enabled"];
+- (BOOL)isSipEnabled {
+    return self.isAllowedToSip && _sipEnabled;
 }
 
 /** User setting to enable/disable SIP support from the application.
  @param enabled Boolean value to set for Enabling / Disabling SIP.
  @see isSipEnabled
  */
-+ (void)enableSip:(BOOL)enabled {
-    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:@"sip_enabled"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)setSipEnabled:(BOOL)sipEnabled {
+    if (_sipEnabled != sipEnabled) {
+        _sipEnabled = sipEnabled;
+        [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:@"sip_enabled"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 #pragma mark -
 #pragma mark SIP Handling
 
 /** Request to update the SIP Account information from the VoIPGRID Platform */
-+ (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))completion {
-    if ([SystemUser isLoggedIn] &&
-        [SystemUser isSipEnabled]) {
+- (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))completion {
+    if (self.loggedIn &&
+        self.sipEnabled) {
         // Update the user profile
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             // This user is allowed to use SIP, check if the account is configured
             NSString *app_account = [responseObject objectForKey:@"app_account"];
-            [SystemUser updateSIPAccountWithURL:app_account andSuccess:^(BOOL success) {
+            [self updateSIPAccountWithURL:app_account andSuccess:^(BOOL success) {
                 if (completion) {
                     completion(success);
                 }
@@ -139,9 +178,9 @@
 }
 
 /** Private helper to retrieve the SIP Account information from the supplied accountUrl */
-+ (void)updateSIPAccountWithURL:(NSString *)accountUrl andSuccess:(void(^)(BOOL success))success {
-    [SystemUser fetchSipAccountFromAppAccountURL:accountUrl withSuccess:^(NSString *sipUsername, NSString *sipPassword) {
-        [SystemUser setSIPAccount:sipUsername andPassword:sipPassword];
+- (void)updateSIPAccountWithURL:(NSString *)accountUrl andSuccess:(void(^)(BOOL success))success {
+    [self fetchSipAccountFromAppAccountURL:accountUrl withSuccess:^(NSString *sipUsername, NSString *sipPassword) {
+        [self setSIPAccount:sipUsername andPassword:sipPassword];
         if (success) {
             success(YES);
         }
@@ -156,7 +195,7 @@
  * Given an URL to an App specific SIP account (phoneaccount) this function fetches and sets the SIP account details for use in the app if any, otherwise the SIP data is set to nil.
  * @param appAccountURL the URL from where to fetch the SIP account details e.g. /api/phoneaccount/basic/phoneaccount/XXXXX/
  */
-+ (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success andFailure:(void(^)())failure {
+- (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success andFailure:(void(^)())failure {
     if ([appAccountURL isKindOfClass:[NSString class]]) {
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] retrievePhoneAccountForUrl:appAccountURL success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSObject *account = [responseObject objectForKey:@"account_id"];
@@ -181,12 +220,13 @@
 }
 
 /** Private helper to update the Sip Account information and possibly trigger a re-register to SIP */
-+ (void)setSIPAccount:(NSString *)sipUsername andPassword:(NSString *)sipPassword {
+- (void)setSIPAccount:(NSString *)sipUsername andPassword:(NSString *)sipPassword {
     if (sipUsername.length > 0) {
         // Did the SIP Account change?
-        if ([sipUsername isEqualToString:[SystemUser sipAccount]]) {
+        if ([sipUsername isEqualToString:_sipAccount]) {
             NSLog(@"Not updating UserDefaults with SIP Account because the supplied account was no different from the stored one");
         } else {
+            _sipAccount = sipUsername;
             // We have a new SIP Account, store it
             [[NSUserDefaults standardUserDefaults] setObject:sipUsername forKey:@"SIPAccount"];
             [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipUsername];
@@ -196,12 +236,12 @@
         }
     } else {
         NSLog(@"%s No SIP Account disconnecting and deleting", __PRETTY_FUNCTION__);
-        NSString *currentSipAccount = [SystemUser sipAccount];
         // First unregister the account with the middleware
-        [[PZPushMiddleware sharedInstance] unregisterSipAccount:currentSipAccount];
+        [[PZPushMiddleware sharedInstance] unregisterSipAccount:_sipAccount];
         // Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
-        [SSKeychain deletePasswordForService:[[self class] serviceName] account:currentSipAccount error:NULL];
+        [SSKeychain deletePasswordForService:[[self class] serviceName] account:_sipAccount error:NULL];
+        _sipAccount = nil;
         // And disconnect the Sip Connection Handler
         [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
     }

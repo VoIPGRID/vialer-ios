@@ -17,21 +17,25 @@
 #import "UIAlertView+Blocks.h"
 #import "AccountViewController.h"
 
-#define MENU_INDEX_AVAILABILITY     0
-#define MENU_INDEX_STATS            1
-#define MENU_INDEX_ROUTING          2
-#define MENU_INDEX_INFO             3
-#define MENU_INDEX_ACCOUNT          4
-//#define MENU_INDEX_AUTOCONNECT      5
-#define MENU_INDEX_LOGOUT           5
+typedef enum : NSUInteger {
+    MENU_INDEX_STATS = 0,
+    MENU_INDEX_INFO,
+    MENU_INDEX_ACCOUNT,
+    MENU_INDEX_LOGOUT,
+    MENU_ITEM_COUNT,
+    // Items after this line are disabled (not shown in the menu)
+    MENU_INDEX_AVAILABILITY,
+    MENU_INDEX_ROUTING,
+    MENU_INDEX_AUTOCONNECT
+} SideMenuItems;
 
 #define WEBVIEW_TARGET_ACCESSIBILITY    0
 #define WEBVIEW_TARGET_DIALPLAN         1
 #define WEBVIEW_TARGET_STATISTICS       2
 
 @interface SideMenuViewController ()
-@property (strong, nonatomic) NSArray *menuItems;
 @property (nonatomic, strong) AccountViewController *accountViewController;
+@property (nonatomic, strong) UIColor *tintColor;
 @end
 
 @implementation SideMenuViewController
@@ -39,24 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIColor *tintColor = [self navigationBarTintColor];
-    UIImage *availabilityIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-availability"] color:tintColor];
-    UIImage *statsIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-stats"] color:tintColor];
-    UIImage *routingIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:tintColor];
-    UIImage *infoIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-info"] color:tintColor];
-    UIImage *accountIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:tintColor];
-    UIImage *logoutIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-logout"] color:tintColor];
-    //UIImage *autoconnectIcon = [self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:tintColor];
-    
-    self.menuItems = @[
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Availability", nil) andIcon:availabilityIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Statistics", nil) andIcon:statsIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Routing", nil) andIcon:routingIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Information", nil) andIcon:infoIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Account", nil) andIcon:accountIcon],
-        [SideMenuItem sideMenuItemWithTitle:NSLocalizedString(@"Logout", nil) andIcon:logoutIcon]
-    ];
-    
+    self.tintColor = [self navigationBarTintColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
@@ -72,7 +59,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.menuItems count];
+    return MENU_ITEM_COUNT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,7 +75,39 @@
         cell.separatorInset = UIEdgeInsetsMake(0.0, self.view.bounds.size.width, 0.0, 0.0);
     }
     
-    cell.menuItem = self.menuItems[indexPath.row];
+    switch (indexPath.row) {
+        case MENU_INDEX_STATS:
+            [cell setMenuItemTitle:NSLocalizedString(@"Statistics", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-stats"] color:self.tintColor]];
+            break;
+        case MENU_INDEX_INFO:
+            [cell setMenuItemTitle:NSLocalizedString(@"Information", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-info"] color:self.tintColor]];
+            break;
+        case MENU_INDEX_ACCOUNT:
+            [cell setMenuItemTitle:NSLocalizedString(@"Settings", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:self.tintColor]];
+            break;
+        case MENU_INDEX_LOGOUT:
+            [cell setMenuItemTitle:NSLocalizedString(@"Logout", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-logout"] color:self.tintColor]];
+            break;
+        case MENU_INDEX_AVAILABILITY:
+            [cell setMenuItemTitle:NSLocalizedString(@"Availability", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-availability"] color:self.tintColor]];
+            break;
+        case MENU_INDEX_ROUTING:
+            [cell setMenuItemTitle:NSLocalizedString(@"Routing", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:self.tintColor]];
+            break;
+        case MENU_INDEX_AUTOCONNECT:
+            [cell setMenuItemTitle:NSLocalizedString(@"Autoconnect", nil)
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:self.tintColor]];
+            break;
+        default:
+            [cell setMenuItemTitle:nil andIcon:nil];
+            break;
+    }
 
     return cell;
 }
@@ -191,7 +210,7 @@
                  otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
                           tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                               if (buttonIndex == 1) {
-                                  [SystemUser logout];
+                                  [[SystemUser currentUser] logout];
                               }
                           }];
     }
@@ -244,7 +263,7 @@
                 // Encode the token and nextUrl, and also the user after retrieving it.
                 token = [self urlEncodedString:token];
                 nextUrl = [self urlEncodedString:nextUrl];
-                NSString *user = [self urlEncodedString:[SystemUser user]];
+                NSString *user = [self urlEncodedString:[SystemUser currentUser].user];
                 NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, nextUrl]];
                 NSLog(@"Go to url: %@", url);
                 

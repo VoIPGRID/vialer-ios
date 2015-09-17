@@ -33,10 +33,9 @@
     return self;
 }
 
-- (void)setMenuItem:(SideMenuItem *)menuItem {
-    _menuItem = menuItem;
-    self.titleLabel.text = menuItem.title;
-    self.iconImageView.image = menuItem.icon;
+- (void)setMenuItemTitle:(NSString *)title andIcon:(UIImage *)icon {
+    self.titleLabel.text = title;
+    self.iconImageView.image = icon;
 }
 
 @end

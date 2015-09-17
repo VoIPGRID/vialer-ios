@@ -263,7 +263,7 @@
 "Connect A/B calls only" = "Two-step calling mode active";
 "Connect A/B Info" = "You dont' have a VoIP account configured for this account. Please configure a VoIP account in the portal for use with this user. After configuring, you can call using VoIP from the app.";
 
-"Account" = "Account";
+"Settings" = "Settings";
 
 /*Config View */
 "VoIP Account" =  "VoIP Account";
