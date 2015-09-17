@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "LogInViewController.h"
 #import "CallingViewController.h"
@@ -16,12 +17,14 @@
 #import "ContactsViewController.h"
 #import "RecentsViewController.h"
 #import "DialerViewController.h"
+
 #import "SideMenuViewController.h"
 #import "ConnectionHandler.h"
 #import "Gossip+Extra.h"
 #import "SSKeychain.h"
 
 #import "AFNetworkActivityLogger.h"
+#import "AFNetworkReachabilityManager.h"
 #import "UIAlertView+Blocks.h"
 #import "MMDrawerController.h"
 
@@ -44,7 +47,7 @@
 @implementation AppDelegate
 
 - (void)doRegistrationWithLoginCheck {
-    if ([VoIPGRIDRequestOperationManager isLoggedIn]) {
+    if ([SystemUser currentUser].isLoggedIn) {
         [self registerForVoIPNotifications];
     }
 }
@@ -69,8 +72,6 @@
 #endif
 
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[ConnectionHandler sharedConnectionHandler] start];
-    [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];    
     
     // Setup appearance
     [self setupAppearance];
@@ -134,24 +135,26 @@
     //v2.x and start onboarding at the "configure numbers view".
 
     //TODO: Why not login again. What if the user was deactivated on the platform?
-    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
+    if (![SystemUser currentUser].isLoggedIn) {
         //Not logged in, not v21.x, nor in v2.x
-        self.loginViewController.screenToShow = OnboardingScreenLogin;
-        [self showOnboarding];
+        [self showOnboarding:OnboardingScreenLogin];
     } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
         //Also show the Mobile number onboarding screen
-        self.loginViewController.screenToShow = OnboardingScreenConfigure;
-        [self showOnboarding];
+        [self showOnboarding:OnboardingScreenConfigure];
     } else {
-        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-            if (!granted) {
-                [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil) message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:@[NSLocalizedString(@"Ok", nil)] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                    if (buttonIndex == 1 && UIApplicationOpenSettingsURLString != nil) {
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                    }
-                }];
-            }
-        }];
+        if ([SystemUser currentUser].sipEnabled) {
+            [[ConnectionHandler sharedConnectionHandler] start];
+            [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+                if (!granted) {
+                    [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil) message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:@[NSLocalizedString(@"Ok", nil)] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        if (buttonIndex == 1 && UIApplicationOpenSettingsURLString != nil) {
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                        }
+                    }];
+                }
+            }];
+        }
     }
     
     NSSetUncaughtExceptionHandler(&HandleExceptions);
@@ -161,7 +164,9 @@
 
 #pragma mark - VoiP push notifications
 - (void)registerForVoIPNotifications {
-    [[PZPushMiddleware sharedInstance]  registerForVoIPNotifications];
+    if ([SystemUser currentUser].sipEnabled) {
+        [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
+    }
 }
 #pragma mark - UIApplication notification delegate
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -203,15 +208,15 @@
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
     NSLog(@"Registration successful, bundle identifier: %@, device token: %@", [NSBundle.mainBundle bundleIdentifier], credentials.token);
     if (credentials.token) {
-        [[PZPushMiddleware sharedInstance]  updateDeviceRecordForToken:credentials.token];
+        [[PZPushMiddleware sharedInstance] updateDeviceRecordForToken:credentials.token];
     }
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
     NSData *token = [registry pushTokenForType:type];
     if (token) {
-        [[PZPushMiddleware sharedInstance]  unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]
-                                        andSipAccount:[VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount];
+        [[PZPushMiddleware sharedInstance] unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]
+                                             andSipAccount:[SystemUser currentUser].sipAccount];
     }
 }
 
@@ -237,9 +242,11 @@ void HandleExceptions(NSException *exception) {
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] updateSIPAccountWithSuccess:^{
-        [[PZPushMiddleware sharedInstance]  updateDeviceRecord];
-    } failure:nil];
+    [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
+        if (success) {
+            [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+        }
+    }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -284,7 +291,8 @@ void HandleExceptions(NSException *exception) {
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
-    if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
+    if ([SystemUser currentUser].sipEnabled &&
+        [ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
         [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
                                                               action:@"Outbound"
@@ -313,12 +321,13 @@ void HandleExceptions(NSException *exception) {
 }
 
 #pragma mark - Notification actions
-- (void)showOnboarding {
+- (void)showOnboarding:(OnboardingScreens)screenToShow {
     // Check if the loginViewController is created, and if present
     NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
     if (self.loginViewController == nil || !self.loginViewController.presentingViewController) {
         // Create a new instance, and present it.
         self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
+        self.loginViewController.screenToShow = screenToShow;
         self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         // Set animated to NO to prevent a flip to the login/onboarding view.
         [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
@@ -326,7 +335,7 @@ void HandleExceptions(NSException *exception) {
 }
 
 - (void)loginFailedNotification:(NSNotification *)notification {
-    [self showOnboarding];
+    [self showOnboarding:OnboardingScreenLogin];
 }
 
 #pragma mark - Private Methods

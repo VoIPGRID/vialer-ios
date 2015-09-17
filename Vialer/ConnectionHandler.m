@@ -8,7 +8,7 @@
 
 #import "ConnectionHandler.h"
 #import "AppDelegate.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "SystemUser.h"
 #import "Gossip+Extra.h"
 
 #import "AFNetworkReachabilityManager.h"
@@ -152,8 +152,8 @@ static GSCall *lastNotifiedCall;
 }
 
 - (void)sipConnect {
-    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
-    NSString *sipPassword = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipPassword];
+    NSString *sipAccount = [SystemUser currentUser].sipAccount;
+    NSString *sipPassword = [SystemUser currentUser].sipPassword;
     if (!sipAccount || !sipPassword) {
         NSLog(@"No SIP Account set, ignoring connect request");
         return;
@@ -167,7 +167,9 @@ static GSCall *lastNotifiedCall;
     
     [self sipDisconnect:^{
         NSLog(@"%s Connecting.... ", __PRETTY_FUNCTION__);
-
+        
+        [self registerForPushNotifications];
+        
         if (!self.account) {
             self.account = [GSAccountConfiguration defaultConfiguration];
             self.account.domain = self.sipDomain;

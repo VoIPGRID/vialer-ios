@@ -8,6 +8,7 @@
 
 #import "LogInViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
+#import "SystemUser.h"
 #import "ConnectionHandler.h"
 #import "UIAlertView+Blocks.h"
 #import "SVProgressHUD.h"
@@ -221,8 +222,9 @@
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
         [_scene runActThree];                     // Animate the clouds
-        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
-        
+        if ([SystemUser currentUser].sipEnabled) {
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
+        }
     } failure:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
@@ -424,32 +426,31 @@
 
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:username password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    SystemUser *currentUser = [SystemUser currentUser];
+    [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
-
-        //Check if a SIP account is configured to be used with the App. The app should default the the Connect A/B behaviour simular to the old App.
-        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
-            [[ConnectionHandler sharedConnectionHandler] sipConnect];
-        } else {
-            //Just to make sure no sip connection is registered
-            [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
+        if (loggedin) {
+            //Check if a SIP account is configured to be used with the App. The app should default the the Connect A/B behaviour simular to the old App.
+            if (currentUser.sipAccount) {
+                [[ConnectionHandler sharedConnectionHandler] sipConnect];
+            } else {
+                //Just to make sure no sip connection is registered
+                [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
+            }
+//            [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
+            
+            [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
+            [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
+            [_scene runActTwo];                       // Animate the clouds
+            
+            // When login is successfull: register with incoming call middleware to get notifications when being called
+            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            [delegate registerForVoIPNotifications];
+            
+            //If a success block was provided, execute it
+            if (success)
+                success ();
         }
-        [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
-        
-        [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
-        [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
-        [_scene runActTwo];                       // Animate the clouds
-
-        // When login is successfull: register with incoming call middleware to get notifications when being called
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        [delegate registerForVoIPNotifications];
-        
-        //If a success block was provided, execute it
-        if (success)
-            success ();
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -457,7 +458,7 @@
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         _fetchAccountRetryCount = 0; // Reset the retry count
-        NSString *outgoingNumber = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] outgoingNumber];
+        NSString *outgoingNumber = [SystemUser currentUser].outgoingNumber;
         if (outgoingNumber) {
             [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
         } else {

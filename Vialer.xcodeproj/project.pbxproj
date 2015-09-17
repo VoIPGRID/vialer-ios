@@ -120,6 +120,7 @@
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
+		FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48F1671BA7163000F57544 /* SystemUser.m */; };
 		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 /* End PBXBuildFile section */
@@ -322,6 +323,8 @@
 		FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
+		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
+		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
@@ -702,6 +705,8 @@
 				FBAFB3F61834250500848B2E /* RecentCall.m */,
 				FEE526961BA2CC42001906B5 /* Configuration.h */,
 				FEE526971BA2CC42001906B5 /* Configuration.m */,
+				FE48F1661BA7163000F57544 /* SystemUser.h */,
+				FE48F1671BA7163000F57544 /* SystemUser.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
 				FB6B47E11ABC280200B0DBC4 /* TrackedViewController.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
+				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* AccountViewFooterView.m in Sources */,

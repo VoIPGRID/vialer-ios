@@ -12,7 +12,7 @@
 #import "AnimatedNumberPadViewController.h"
 #import "SIPCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "SystemUser.h"
 
 #import "AFNetworkReachabilityManager.h"
 
@@ -137,7 +137,7 @@
         self.callButton.enabled = YES;
         
         //does the user have a sip account?
-        if ([VoIPGRIDRequestOperationManager sharedRequestOperationManager].sipAccount) {
+        if ([SystemUser currentUser].sipAccount) {
             //Is the connection quality sufficient for SIP?
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
                 [self hideMessage];

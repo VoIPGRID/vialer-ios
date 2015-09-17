@@ -8,7 +8,7 @@
 
 #import "PZPushMiddleware.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "SystemUser.h"
 
 #import "ConnectionHandler.h"
 
@@ -201,14 +201,14 @@
 
 - (void)updateDeviceRecord {
     NSString* voipTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY];
-    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+    NSString *sipAccount = [SystemUser currentUser].sipAccount;
     
     [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
 }
 
 - (void)updateDeviceRecordForToken:(NSData*)token {
     NSString* voipTokenString = [[self class] deviceTokenStringFromData:token];
-    NSString *sipAccount = [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] sipAccount];
+    NSString *sipAccount = [SystemUser currentUser].sipAccount;
 
     [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
 }

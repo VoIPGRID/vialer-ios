@@ -23,20 +23,9 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 // Log in / Log out
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)logout;
-+ (BOOL)isLoggedIn;
 
-/**
- * Fetches and stores the users SIP account data
- * @param success the success block called on successfull completion
- * @param failure the failure block called when the operation fails
- */
-- (void)updateSIPAccountWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure;
+- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-// Account info
-- (NSString *)user;
-- (NSString *)outgoingNumber;
-- (NSString *)sipAccount;
-- (NSString *)sipPassword;
 
 // User requests
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
