@@ -14,7 +14,6 @@
 
 .DS_Store
 *.swp
-*.lock
 profile
 
 
