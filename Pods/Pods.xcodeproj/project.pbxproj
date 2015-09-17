@@ -17,7 +17,6 @@
 		164F2B120BB99AA7B90C88618CE8C457 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F873A5284E0AF5BAA0E61AFC6A3A62 /* MobileCoreServices.framework */; };
 		1977324FF70A0ECE4E9E062C95D9DAED /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 69331820D1F0E07583FC50C821FD170A /* UIAlertView+AFNetworking.m */; };
 		1A4EB37DFE2C50828350B65BB96DBF76 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 273056A481CC75C7DB5D50D535C73FEA /* AFHTTPSessionManager.h */; };
-		1A5B13FBC1B173CCABC30B21B4F8831B /* SVProgressHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE1AAE31310D4D9777B18856917AE4C /* SVProgressHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A7A86FC54F65D1288A6BD18CAC558FF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C8500CF42AE9AAA6ECBF9E728A5432 /* SystemConfiguration.framework */; };
 		1B1A5E4166D21E027A6975728D0FF0DD /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EC5532A6D86A23F8037A67EA03E5170 /* UIActivityIndicatorView+AFNetworking.h */; };
 		2311643D468B1844445181D83B43044F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406C080F779749BACEDB058D890EE54D /* CoreGraphics.framework */; };
@@ -32,14 +31,11 @@
 		4179F9F25C9D1F6A67CB3EE20E0A3F38 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 617152668EF34A7719FD128A5A246433 /* Reachability.m */; };
 		41FA3C6ACE265590CFEADD3A70A63FF4 /* SVIndefiniteAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8F7663C94C17DB219F4FA76BF34E60 /* SVIndefiniteAnimatedView.h */; };
 		43CF10537BA99AF2C449850EC38D3104 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47605477797E7D332259CDE8BD16869F /* Foundation.framework */; };
-		45EB0427009AC4E8CC957FAD14AAFF8D /* AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 961494E04398326BD7A0BF774D31848A /* AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B910481C991C57B17271A67BD882593 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CD75DADDF928FC1E8F4D5E23DF4DFF /* AFSecurityPolicy.m */; };
 		4BE0DCA88042484DD9F0EBCB662AC6A2 /* SVProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA5CF6735E4B8DCAD07A0ED6F97B73D /* SVProgressHUD.h */; };
 		4EED994D8C1E18D9C228270C63F2553D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB4790124C0D4BA21397C968E693609 /* QuartzCore.framework */; };
-		4F754E65FD082CCB41C698125E973817 /* SSKeychain-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A37BB14E7299ED43A689EA92B613BBF /* SSKeychain-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5351CC2626D955B914FA2E4296910D39 /* UIAlertView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 00AF2D9AAD0DC453242E8F20D24C1D5C /* UIAlertView+AFNetworking.h */; };
 		53D540DB2AB22DC4EC2B0ED1C79E3856 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F9DAA2C733195A9976533E0AD82C13 /* MMDrawerVisualState.m */; };
-		5822B06EDD40F2C9C6E852346FF46BD9 /* HTCopyableLabel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 55629FBD779C03823F76DC2A70B57723 /* HTCopyableLabel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58397EE2749E0FC03CD8FFF857E2E045 /* PBWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AD4265B51A6E59F14F3652E791F7DA7D /* PBWebViewController.h */; };
 		58C3BE549D74D3CF477CF4D2022F4420 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992C0D0B11753987B49800AB3285EAFF /* MMDrawerController.m */; };
 		5A0F1C8ABA20C513C0F4AC20F12C2D4C /* SSKeychain-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4ED2C4E156CA8014EEC5A09370A5840 /* SSKeychain-dummy.m */; };
@@ -48,7 +44,6 @@
 		62DAC567B9B4D61DFE3F0B9D8E1F3FD6 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA66E84ADB6C23B211D8937364E2D38 /* SVProgressHUD.m */; };
 		69D89F1BC4480BA495FA0D24BB5586F2 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C57123AF125C020422F47EB69ECE29 /* MMDrawerBarButtonItem.m */; };
 		714139727884D495960F2AF075CB557E /* MMDrawerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035CE90DD21BE3A393606F53BAA40CA /* MMDrawerController-dummy.m */; };
-		72F577D4BE8682A10F822AA3687F73EF /* Reachability-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B69DF51917430CCD62621D98B8C3807D /* Reachability-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73536BE4D2D8D38B139868499578C100 /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 252288D42DF3E01226A6E35A2DAA8DA7 /* UIWebView+AFNetworking.h */; };
 		7382F5CA178BB22408474185D21A4618 /* MMDrawerController+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 99F948DEBE2F2D0A9667BC98C1D8B1C3 /* MMDrawerController+Subclass.h */; };
 		742ECD74B395D3431499EA4C5F4ACB1F /* SSKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = AE2286EBB9216818E60CAC182737F54A /* SSKeychain.h */; };
@@ -61,7 +56,6 @@
 		8DCD8C29064265D0C7DA653334AB9AC0 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3142EE8CA903BAE07911DD12832B67B4 /* AFURLConnectionOperation.m */; };
 		8FA5F869B4063F8CD40718E964A401D9 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D673D7698740F921FACCF4C7300D2AD6 /* UIRefreshControl+AFNetworking.m */; };
 		907CE3EAA11C6C6FF846FC78729B6677 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF210F66BE57073213F9FA1F0E31698F /* AFHTTPRequestOperationManager.m */; };
-		917295AC9B33282434B9585D6B58ACAA /* PBWebViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C56D4A88079D28EC0C4D0F4910123C19 /* PBWebViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91CC052C6F8D5581DDCA89AAC6AC743C /* UIViewController+MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 465C1DB800BFA51446BA3A74A1BE4E23 /* UIViewController+MMDrawerController.h */; };
 		9488EA759977A082D6CF89EC5889113B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D151017ACE1C0C7029BD9D8546147C18 /* Security.framework */; };
 		9A5A63ED9632255DC2A3E33E365DB717 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47605477797E7D332259CDE8BD16869F /* Foundation.framework */; };
@@ -73,7 +67,6 @@
 		AA03580A84823B9112115BAECD77F0B5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D033BC1086BAE690F2D3FA03B0D9D1 /* AFHTTPRequestOperation.m */; };
 		AEE88AC6F58F9381EE513285E99FFB1A /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0710574C6E14D5E10948CA8315628 /* UIActivityIndicatorView+AFNetworking.m */; };
 		B1EF41E8021682D85CB6E726064F0A00 /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 644017E6C7EB1C88DEDDCE4629CEF3B9 /* UIProgressView+AFNetworking.h */; };
-		B5B04026FB89130C79EB35BAE21F9237 /* MMDrawerController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C9558C1F04FFAD4A74164381F9D2DBB /* MMDrawerController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B8B0EE25E532727C089C69F784E67032 /* MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 36116563139F7063B88740B8111C1804 /* MMDrawerController.h */; };
 		C1BA95BF77192DFCCA4637F8444A2927 /* SSKeychainQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F423745A38CCB6A2E5CCF9230D6D348 /* SSKeychainQuery.h */; };
 		C29BBF8BC683390B4325C9F9645AD36F /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = A74EA8CC1F7E634984C7CA312A30F208 /* UIImageView+AFNetworking.h */; };
@@ -102,7 +95,6 @@
 		F9A5858A686208E8295F7AA4FFFCCB8E /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C3D5A4F0B282EB6375AB590126554 /* SSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		FC1ED04BE3034C6F5F8A4A57A6F3EAA3 /* UIImage+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = AD0C094E3487AD0864894F7ED060D776 /* UIImage+AFNetworking.h */; };
 		FC37DA6A9C6C4EEE94EB032219AED18E /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = E310B5A01C1F82CBEE7F191A03224E09 /* AFSecurityPolicy.h */; };
-		FE9F338DE59D0F9113779AAC791F7101 /* AFNetworkActivityLogger-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3D5BA7F7F3D071F1AC0E904CB44AC5 /* AFNetworkActivityLogger-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -852,7 +844,6 @@
 			files = (
 				DFA358AE3A7B33FF84D3AFFE06173F0A /* MMDrawerBarButtonItem.h in Headers */,
 				7382F5CA178BB22408474185D21A4618 /* MMDrawerController+Subclass.h in Headers */,
-				B5B04026FB89130C79EB35BAE21F9237 /* MMDrawerController-umbrella.h in Headers */,
 				B8B0EE25E532727C089C69F784E67032 /* MMDrawerController.h in Headers */,
 				C8BEFEBCA329517AB93C2420005127F4 /* MMDrawerVisualState.h in Headers */,
 				91CC052C6F8D5581DDCA89AAC6AC743C /* UIViewController+MMDrawerController.h in Headers */,
@@ -868,7 +859,6 @@
 				1A4EB37DFE2C50828350B65BB96DBF76 /* AFHTTPSessionManager.h in Headers */,
 				795E10BFDA566B604D220511630A1006 /* AFNetworkActivityIndicatorManager.h in Headers */,
 				111191B8CCC404EA6B03111974DB5534 /* AFNetworkReachabilityManager.h in Headers */,
-				45EB0427009AC4E8CC957FAD14AAFF8D /* AFNetworking-umbrella.h in Headers */,
 				13A8992B120B423256FBB9F952AA1026 /* AFNetworking.h in Headers */,
 				FC37DA6A9C6C4EEE94EB032219AED18E /* AFSecurityPolicy.h in Headers */,
 				CF22DA1DCCB6FA74CEF81B904DBFE9EF /* AFURLConnectionOperation.h in Headers */,
@@ -891,7 +881,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				917295AC9B33282434B9585D6B58ACAA /* PBWebViewController-umbrella.h in Headers */,
 				58397EE2749E0FC03CD8FFF857E2E045 /* PBWebViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -900,7 +889,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5822B06EDD40F2C9C6E852346FF46BD9 /* HTCopyableLabel-umbrella.h in Headers */,
 				070BF561DF88D9B2A5203AF3B44BBA1B /* HTCopyableLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -909,7 +897,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE9F338DE59D0F9113779AAC791F7101 /* AFNetworkActivityLogger-umbrella.h in Headers */,
 				28AC0BAD041DF5321E18383797BF5BCD /* AFNetworkActivityLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -918,7 +905,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F754E65FD082CCB41C698125E973817 /* SSKeychain-umbrella.h in Headers */,
 				742ECD74B395D3431499EA4C5F4ACB1F /* SSKeychain.h in Headers */,
 				C1BA95BF77192DFCCA4637F8444A2927 /* SSKeychainQuery.h in Headers */,
 			);
@@ -929,7 +915,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41FA3C6ACE265590CFEADD3A70A63FF4 /* SVIndefiniteAnimatedView.h in Headers */,
-				1A5B13FBC1B173CCABC30B21B4F8831B /* SVProgressHUD-umbrella.h in Headers */,
 				4BE0DCA88042484DD9F0EBCB662AC6A2 /* SVProgressHUD.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -938,7 +923,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72F577D4BE8682A10F822AA3687F73EF /* Reachability-umbrella.h in Headers */,
 				9A721DC0E928B700BFDD0DD3C46CCF60 /* Reachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1354,6 +1338,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1521,6 +1506,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1605,6 +1591,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
