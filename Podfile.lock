@@ -1,5 +1,4 @@
 PODS:
-
   - AFNetworkActivityLogger (2.0.4):
     - AFNetworking/NSURLConnection (~> 2.0)
     - AFNetworking/NSURLSession (~> 2.0)
