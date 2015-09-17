@@ -106,7 +106,7 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
-             }
+            }
         }
     } else if (alertView.tag == FAILED_ALERT_TAG) {
         [self dismiss];

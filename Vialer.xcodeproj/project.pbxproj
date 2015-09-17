@@ -24,25 +24,9 @@
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
-		EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */; };
-		EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */; };
-		EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */; };
-		EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */; };
-		F20C2D431B4A78BD00357EA3 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F20C2D421B4A78BD00357EA3 /* libGoogleAnalyticsServices.a */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
-		F235ED281B2855180028EDBC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F235ED271B2855180028EDBC /* Reachability.m */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
-		F25B390F1B08EEA8005ED515 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */; };
-		F25B39101B08EEA8005ED515 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B38FF1B08EEA8005ED515 /* AFHTTPRequestOperationManager.m */; };
-		F25B39111B08EEA8005ED515 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B39011B08EEA8005ED515 /* AFHTTPSessionManager.m */; };
-		F25B39121B08EEA8005ED515 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B39041B08EEA8005ED515 /* AFNetworkReachabilityManager.m */; };
-		F25B39131B08EEA8005ED515 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B39061B08EEA8005ED515 /* AFSecurityPolicy.m */; };
-		F25B39141B08EEA8005ED515 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B39081B08EEA8005ED515 /* AFURLConnectionOperation.m */; };
-		F25B39151B08EEA8005ED515 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390A1B08EEA8005ED515 /* AFURLRequestSerialization.m */; };
-		F25B39161B08EEA8005ED515 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390C1B08EEA8005ED515 /* AFURLResponseSerialization.m */; };
-		F25B39171B08EEA8005ED515 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
-		F2900B4F1B1DD34C00E695FB /* HTCopyableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B4E1B1DD34C00E695FB /* HTCopyableLabel.m */; };
 		F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */; };
 		F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B531B1DD36000E695FB /* ContactTableViewCell.m */; };
 		F2CD45F61B330ADA00CE9B1D /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* AccountViewController.m */; };
@@ -52,7 +36,7 @@
 		F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */; };
 		F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811CB1B380A9400EA640F /* CellWithTextField.m */; };
 		F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811CC1B380A9400EA640F /* CellWithTextField.xib */; };
-		FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0716C919A4DAA800AB548D /* PBWebViewController.m */; };
+		F854B6A37CF0558FC0FCF27A /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C415953F343DAA413EE2882E /* libPods-Vialer.a */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB10B11C1ABC18310074BB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
 		FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB202BC01A4396DB00024CDE /* ConnectionHandler.m */; };
@@ -108,15 +92,10 @@
 		FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */; };
 		FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
-		FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */; };
-		FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F0F182AA6CB002FC8FC /* SSKeychainQuery.m */; };
-		FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBAD7F14182AE93B002FC8FC /* SVProgressHUD.bundle */; };
-		FBAD7F18182AE93B002FC8FC /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F16182AE93B002FC8FC /* SVProgressHUD.m */; };
 		FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */; };
 		FBAFB3F71834250500848B2E /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3F61834250500848B2E /* RecentCall.m */; };
 		FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
-		FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */; };
 		FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
 		FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
 		FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854131A7FE3CE00121366 /* dtmf-1.aif */; };
@@ -165,6 +144,7 @@
 		03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedNavBarView.m; sourceTree = "<group>"; };
 		03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
 		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
@@ -190,54 +170,13 @@
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
 		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
+		C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		C415953F343DAA413EE2882E /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
-		EA46C50B1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
-		EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
-		EA46C50D1AC2CC6A00F7FC13 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
-		EA46C50E1AC2CC6A00F7FC13 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
-		EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
-		EA46C5101AC2CC6A00F7FC13 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
-		EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
-		EA46C5121AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
-		EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		F20C2D361B4A68A800357EA3 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = "GoogleAnalytics-iOS-SDK/GAI.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D371B4A68A800357EA3 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = "GoogleAnalytics-iOS-SDK/GAIDictionaryBuilder.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D381B4A68A800357EA3 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceFields.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommerceFields.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D391B4A68A800357EA3 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProduct.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommerceProduct.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3A1B4A68A800357EA3 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProductAction.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommerceProductAction.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3B1B4A68A800357EA3 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIEcommercePromotion.h; path = "GoogleAnalytics-iOS-SDK/GAIEcommercePromotion.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3C1B4A68A800357EA3 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = "GoogleAnalytics-iOS-SDK/GAIFields.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3D1B4A68A800357EA3 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = "GoogleAnalytics-iOS-SDK/GAILogger.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3E1B4A68A800357EA3 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = "GoogleAnalytics-iOS-SDK/GAITrackedViewController.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D3F1B4A68A800357EA3 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = "GoogleAnalytics-iOS-SDK/GAITracker.h"; sourceTree = SOURCE_ROOT; };
-		F20C2D421B4A78BD00357EA3 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = "GoogleAnalytics-iOS-SDK/libGoogleAnalyticsServices.a"; sourceTree = SOURCE_ROOT; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		F235ED261B2855180028EDBC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		F235ED271B2855180028EDBC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
-		F25B38FC1B08EEA8005ED515 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		F25B38FE1B08EEA8005ED515 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		F25B38FF1B08EEA8005ED515 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		F25B39001B08EEA8005ED515 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		F25B39011B08EEA8005ED515 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		F25B39021B08EEA8005ED515 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		F25B39031B08EEA8005ED515 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		F25B39041B08EEA8005ED515 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		F25B39051B08EEA8005ED515 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		F25B39061B08EEA8005ED515 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		F25B39071B08EEA8005ED515 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		F25B39081B08EEA8005ED515 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		F25B39091B08EEA8005ED515 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		F25B390A1B08EEA8005ED515 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		F25B390B1B08EEA8005ED515 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		F25B390C1B08EEA8005ED515 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		F25B390D1B08EEA8005ED515 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		F2900B4D1B1DD34C00E695FB /* HTCopyableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCopyableLabel.h; sourceTree = "<group>"; };
-		F2900B4E1B1DD34C00E695FB /* HTCopyableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCopyableLabel.m; sourceTree = "<group>"; };
 		F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsSearchTableViewController.h; sourceTree = "<group>"; };
 		F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsSearchTableViewController.m; sourceTree = "<group>"; };
 		F2900B521B1DD36000E695FB /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
@@ -253,8 +192,6 @@
 		F2E811CA1B380A9400EA640F /* CellWithTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWithTextField.h; sourceTree = "<group>"; };
 		F2E811CB1B380A9400EA640F /* CellWithTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithTextField.m; sourceTree = "<group>"; };
 		F2E811CC1B380A9400EA640F /* CellWithTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithTextField.xib; sourceTree = "<group>"; };
-		FB0716C819A4DAA800AB548D /* PBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBWebViewController.h; sourceTree = "<group>"; };
-		FB0716C919A4DAA800AB548D /* PBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBWebViewController.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
 		FB10B11A1ABC17900074BB78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -350,21 +287,12 @@
 		FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPCallingViewController.xib; sourceTree = "<group>"; };
 		FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
-		FBAD7F0C182AA6CB002FC8FC /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
-		FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
-		FBAD7F0E182AA6CB002FC8FC /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
-		FBAD7F0F182AA6CB002FC8FC /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
-		FBAD7F14182AE93B002FC8FC /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		FBAD7F15182AE93B002FC8FC /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		FBAD7F16182AE93B002FC8FC /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FBAFB3F51834250500848B2E /* RecentCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCall.h; sourceTree = "<group>"; };
 		FBAFB3F61834250500848B2E /* RecentCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCall.m; sourceTree = "<group>"; };
 		FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		FBB088CC18228E360004FFD1 /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
-		FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
 		FBB854101A7FE24C00121366 /* incoming.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incoming.caf; sourceTree = "<group>"; };
 		FBB854111A7FE3CE00121366 /* dtmf-#.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-#.aif"; sourceTree = "<group>"; };
 		FBB854121A7FE3CE00121366 /* dtmf-0.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-0.aif"; sourceTree = "<group>"; };
@@ -391,6 +319,7 @@
 		FBE564F81A954EAD002C6DF3 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
+		FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
 		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
@@ -408,7 +337,6 @@
 				3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */,
 				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
-				F20C2D431B4A78BD00357EA3 /* libGoogleAnalyticsServices.a in Frameworks */,
 				F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */,
 				FB6B47DE1ABC277600B0DBC4 /* AdSupport.framework in Frameworks */,
 				FB6B47711ABC190700B0DBC4 /* libsqlite3.dylib in Frameworks */,
@@ -428,6 +356,7 @@
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
+				F854B6A37CF0558FC0FCF27A /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,55 +427,22 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */ = {
+		C01B88742FC628E4E890C190 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EA46C50B1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.h */,
-				EA46C50C1AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m */,
-				EA46C50D1AC2CC6A00F7FC13 /* MMDrawerController+Subclass.h */,
-				EA46C50E1AC2CC6A00F7FC13 /* MMDrawerController.h */,
-				EA46C50F1AC2CC6A00F7FC13 /* MMDrawerController.m */,
-				EA46C5101AC2CC6A00F7FC13 /* MMDrawerVisualState.h */,
-				EA46C5111AC2CC6A00F7FC13 /* MMDrawerVisualState.m */,
-				EA46C5121AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.h */,
-				EA46C5131AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m */,
+				C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */,
+				047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */,
+				FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */,
 			);
-			path = MMDrawerController;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		EA46C5181AC2CCA100F7FC13 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				F235ED251B2854FD0028EDBC /* Reachability */,
-				F2900B4C1B1DD33700E695FB /* HTCopyableLabel */,
-				EA46C50A1AC2CC6A00F7FC13 /* MMDrawerController */,
-				FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */,
 				FB3820A31A1E4F510033FF78 /* Gossip */,
-				FB0716C719A4DAA800AB548D /* PBWebViewController */,
-				FBAD7F12182AE93B002FC8FC /* SVProgressHUD */,
-				FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */,
-				FBB088CB18228E360004FFD1 /* AFNetworkActivityLogger */,
-				FB0CF33218226392002D4281 /* AFNetworking */,
 			);
 			name = Libs;
-			sourceTree = "<group>";
-		};
-		F235ED251B2854FD0028EDBC /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				F235ED261B2855180028EDBC /* Reachability.h */,
-				F235ED271B2855180028EDBC /* Reachability.m */,
-			);
-			name = Reachability;
-			sourceTree = "<group>";
-		};
-		F2900B4C1B1DD33700E695FB /* HTCopyableLabel */ = {
-			isa = PBXGroup;
-			children = (
-				F2900B4D1B1DD34C00E695FB /* HTCopyableLabel.h */,
-				F2900B4E1B1DD34C00E695FB /* HTCopyableLabel.m */,
-			);
-			name = HTCopyableLabel;
 			sourceTree = "<group>";
 		};
 		F2E811BF1B37E2EB00EA640F /* Account View */ = {
@@ -567,15 +463,6 @@
 			name = "Account View";
 			sourceTree = "<group>";
 		};
-		FB0716C719A4DAA800AB548D /* PBWebViewController */ = {
-			isa = PBXGroup;
-			children = (
-				FB0716C819A4DAA800AB548D /* PBWebViewController.h */,
-				FB0716C919A4DAA800AB548D /* PBWebViewController.m */,
-			);
-			path = PBWebViewController;
-			sourceTree = "<group>";
-		};
 		FB0CF33118226380002D4281 /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,32 +472,6 @@
 				3DD6E6F51B32FF070033692B /* PZPushMiddleware.m */,
 			);
 			name = Api;
-			sourceTree = "<group>";
-		};
-		FB0CF33218226392002D4281 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				F25B38FC1B08EEA8005ED515 /* AFHTTPRequestOperation.h */,
-				F25B38FD1B08EEA8005ED515 /* AFHTTPRequestOperation.m */,
-				F25B38FE1B08EEA8005ED515 /* AFHTTPRequestOperationManager.h */,
-				F25B38FF1B08EEA8005ED515 /* AFHTTPRequestOperationManager.m */,
-				F25B39001B08EEA8005ED515 /* AFHTTPSessionManager.h */,
-				F25B39011B08EEA8005ED515 /* AFHTTPSessionManager.m */,
-				F25B39021B08EEA8005ED515 /* AFNetworking.h */,
-				F25B39031B08EEA8005ED515 /* AFNetworkReachabilityManager.h */,
-				F25B39041B08EEA8005ED515 /* AFNetworkReachabilityManager.m */,
-				F25B39051B08EEA8005ED515 /* AFSecurityPolicy.h */,
-				F25B39061B08EEA8005ED515 /* AFSecurityPolicy.m */,
-				F25B39071B08EEA8005ED515 /* AFURLConnectionOperation.h */,
-				F25B39081B08EEA8005ED515 /* AFURLConnectionOperation.m */,
-				F25B39091B08EEA8005ED515 /* AFURLRequestSerialization.h */,
-				F25B390A1B08EEA8005ED515 /* AFURLRequestSerialization.m */,
-				F25B390B1B08EEA8005ED515 /* AFURLResponseSerialization.h */,
-				F25B390C1B08EEA8005ED515 /* AFURLResponseSerialization.m */,
-				F25B390D1B08EEA8005ED515 /* AFURLSessionManager.h */,
-				F25B390E1B08EEA8005ED515 /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		FB202BC21A4396E700024CDE /* Handlers */ = {
@@ -693,6 +554,7 @@
 				FB4226D6182261D200707349 /* Vialer */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
+				C01B88742FC628E4E890C190 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -730,6 +592,7 @@
 				FB4226D0182261D200707349 /* UIKit.framework */,
 				FB4226D2182261D200707349 /* Foundation.framework */,
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
+				C415953F343DAA413EE2882E /* libPods-Vialer.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -832,46 +695,6 @@
 			name = Categories/Helpers;
 			sourceTree = "<group>";
 		};
-		FB6B47CD1ABC1B3500B0DBC4 /* GoogleAnalytics-iOS-SDK */ = {
-			isa = PBXGroup;
-			children = (
-				F20C2D421B4A78BD00357EA3 /* libGoogleAnalyticsServices.a */,
-				F20C2D361B4A68A800357EA3 /* GAI.h */,
-				F20C2D371B4A68A800357EA3 /* GAIDictionaryBuilder.h */,
-				F20C2D381B4A68A800357EA3 /* GAIEcommerceFields.h */,
-				F20C2D391B4A68A800357EA3 /* GAIEcommerceProduct.h */,
-				F20C2D3A1B4A68A800357EA3 /* GAIEcommerceProductAction.h */,
-				F20C2D3B1B4A68A800357EA3 /* GAIEcommercePromotion.h */,
-				F20C2D3C1B4A68A800357EA3 /* GAIFields.h */,
-				F20C2D3D1B4A68A800357EA3 /* GAILogger.h */,
-				F20C2D3E1B4A68A800357EA3 /* GAITrackedViewController.h */,
-				F20C2D3F1B4A68A800357EA3 /* GAITracker.h */,
-			);
-			name = "GoogleAnalytics-iOS-SDK";
-			path = "GoogleAnalytics-iOS-SDK/GoogleAnalytics/Library";
-			sourceTree = "<group>";
-		};
-		FBAD7F0B182AA6CB002FC8FC /* SSKeyChain */ = {
-			isa = PBXGroup;
-			children = (
-				FBAD7F0C182AA6CB002FC8FC /* SSKeychain.h */,
-				FBAD7F0D182AA6CB002FC8FC /* SSKeychain.m */,
-				FBAD7F0E182AA6CB002FC8FC /* SSKeychainQuery.h */,
-				FBAD7F0F182AA6CB002FC8FC /* SSKeychainQuery.m */,
-			);
-			path = SSKeyChain;
-			sourceTree = "<group>";
-		};
-		FBAD7F12182AE93B002FC8FC /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				FBAD7F14182AE93B002FC8FC /* SVProgressHUD.bundle */,
-				FBAD7F15182AE93B002FC8FC /* SVProgressHUD.h */,
-				FBAD7F16182AE93B002FC8FC /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		FBAFB3F81834250800848B2E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -881,15 +704,6 @@
 				FEE526971BA2CC42001906B5 /* Configuration.m */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		FBB088CB18228E360004FFD1 /* AFNetworkActivityLogger */ = {
-			isa = PBXGroup;
-			children = (
-				FBB088CC18228E360004FFD1 /* AFNetworkActivityLogger.h */,
-				FBB088CD18228E360004FFD1 /* AFNetworkActivityLogger.m */,
-			);
-			path = AFNetworkActivityLogger;
 			sourceTree = "<group>";
 		};
 		FE3423F01B822D6A005020BA /* Vialer */ = {
@@ -909,6 +723,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB4226FE182261D200707349 /* Build configuration list for PBXNativeTarget "Vialer" */;
 			buildPhases = (
+				70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */,
 				F2B947311B00DFEC00CE5112 /* config_site.h copy script */,
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
@@ -916,6 +731,7 @@
 				F298A9741B5E28D100467E31 /* Update Version number */,
 				F217146F1B54F4F00078B0A0 /* Update Build number */,
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
+				B23117DFF7F9D411D63FACFF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -995,7 +811,6 @@
 				F245E7711B577AD100FBA37C /* Config.plist in Resources */,
 				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
-				FBAD7F17182AE93B002FC8FC /* SVProgressHUD.bundle in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
 				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
@@ -1007,6 +822,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B23117DFF7F9D411D63FACFF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F217146F1B54F4F00078B0A0 /* Update Build number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1063,19 +908,13 @@
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
 				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,
 				03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */,
-				F25B39121B08EEA8005ED515 /* AFNetworkReachabilityManager.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
-				EA46C5151AC2CC6A00F7FC13 /* MMDrawerController.m in Sources */,
-				F25B39101B08EEA8005ED515 /* AFHTTPRequestOperationManager.m in Sources */,
-				F235ED281B2855180028EDBC /* Reachability.m in Sources */,
-				F25B39171B08EEA8005ED515 /* AFURLSessionManager.m in Sources */,
 				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
 				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */,
 				F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* AccountViewController.m in Sources */,
-				F25B39141B08EEA8005ED515 /* AFURLConnectionOperation.m in Sources */,
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
@@ -1086,23 +925,17 @@
 				3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */,
-				F25B390F1B08EEA8005ED515 /* AFHTTPRequestOperation.m in Sources */,
 				FB3820C51A1E4F510033FF78 /* GSCall.m in Sources */,
 				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
-				FBB088D118228E360004FFD1 /* AFNetworkActivityLogger.m in Sources */,
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
-				F25B39111B08EEA8005ED515 /* AFHTTPSessionManager.m in Sources */,
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
-				FBAD7F10182AA6CB002FC8FC /* SSKeychain.m in Sources */,
-				FB0716CA19A4DAA800AB548D /* PBWebViewController.m in Sources */,
 				FB3820C91A1E4F510033FF78 /* GSIncomingCall.m in Sources */,
 				FB3820CC1A1E4F510033FF78 /* GSPJUtil.m in Sources */,
 				FB3820CA1A1E4F510033FF78 /* GSNotifications.m in Sources */,
 				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,
-				F25B39161B08EEA8005ED515 /* AFURLResponseSerialization.m in Sources */,
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
 				AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */,
@@ -1111,28 +944,20 @@
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
 				F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
-				EA46C5171AC2CC6A00F7FC13 /* UIViewController+MMDrawerController.m in Sources */,
-				F2900B4F1B1DD34C00E695FB /* HTCopyableLabel.m in Sources */,
-				F25B39151B08EEA8005ED515 /* AFURLRequestSerialization.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
 				FB3820C71A1E4F510033FF78 /* GSConfiguration.m in Sources */,
-				FBAD7F11182AA6CB002FC8FC /* SSKeychainQuery.m in Sources */,
 				FB3820C81A1E4F510033FF78 /* GSDispatch.m in Sources */,
 				FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
 				FB6B47E11ABC280200B0DBC4 /* TrackedViewController.m in Sources */,
-				FBAD7F18182AE93B002FC8FC /* SVProgressHUD.m in Sources */,
-				EA46C5141AC2CC6A00F7FC13 /* MMDrawerBarButtonItem.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
-				F25B39131B08EEA8005ED515 /* AFSecurityPolicy.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* AccountViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
-				EA46C5161AC2CC6A00F7FC13 /* MMDrawerVisualState.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
@@ -1180,19 +1005,19 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 			};
 			name = AdHocDistribution;
 		};
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/\"",
@@ -1214,18 +1039,13 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vialer/Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
+					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
-					"\"$(SRCROOT)/pjsip\"",
-					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
-				WRAPPER_EXTENSION = app;
 			};
 			name = AdHocDistribution;
 		};
@@ -1255,7 +1075,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1280,7 +1100,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1289,12 +1109,12 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/\"",
@@ -1316,29 +1136,24 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vialer/Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
+					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
-					"\"$(SRCROOT)/pjsip\"",
-					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/\"",
@@ -1360,18 +1175,13 @@
 					"$(SRCROOT)/pjsip/src/third_party/srtp/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vialer/Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
+					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
-					"\"$(SRCROOT)/pjsip\"",
-					"$(PROJECT_DIR)/GoogleAnalytics-iOS-SDK",
-					"$(PROJECT_DIR)/pjsip/lib",
 				);
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
