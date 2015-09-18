@@ -246,6 +246,11 @@ static GSCall *lastNotifiedCall;
 }
 
 - (void)sipUpdateConnectionStatus {
+    if (![SystemUser currentUser].sipEnabled) {
+        [self sipDisconnect:nil];
+        return;
+    }
+    
     if (self.connectionStatus == ConnectionStatusHigh) {
         // Only connect if we're not already connect(ed/ing)
         if (self.accountStatus != GSAccountStatusConnected && self.accountStatus != GSAccountStatusConnecting) {

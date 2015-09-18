@@ -71,6 +71,7 @@
     [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
 #endif
 
+    [[ConnectionHandler sharedConnectionHandler] start];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     // Setup appearance
@@ -142,19 +143,7 @@
         //Also show the Mobile number onboarding screen
         [self showOnboarding:OnboardingScreenConfigure];
     } else {
-        if ([SystemUser currentUser].sipEnabled) {
-            [[ConnectionHandler sharedConnectionHandler] start];
-            [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
-            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-                if (!granted) {
-                    [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil) message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:@[NSLocalizedString(@"Ok", nil)] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                        if (buttonIndex == 1 && UIApplicationOpenSettingsURLString != nil) {
-                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                        }
-                    }];
-                }
-            }];
-        }
+        [[SystemUser currentUser] checkSipStatus];
     }
     
     NSSetUncaughtExceptionHandler(&HandleExceptions);

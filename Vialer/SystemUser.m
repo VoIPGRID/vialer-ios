@@ -11,6 +11,9 @@
 #import "SSKeychain.h"  // Store the SipPassword safely
 #import "PZPushMiddleware.h"
 #import "ConnectionHandler.h"
+#import "AppDelegate.h"
+#import "UIAlertView+Blocks.h"
+#import <AVFoundation/AVAudioSession.h>
 
 @interface SystemUser ()
 
@@ -19,6 +22,7 @@
 @implementation SystemUser {
     BOOL _loggedIn;
     BOOL _isSipAllowed;
+    BOOL _sipEnabled;
 }
 
 + (instancetype)currentUser {
@@ -73,11 +77,11 @@
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:user password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self reloadCurrentUser];
         // Check the reponse if this user is allowed to have an app_account
-//        if ([[responseObject objectForKey:@"allow_app_account"] boolValue]) {
-// For development we currently still alow it.
-        if (YES) {
+        if ([[responseObject objectForKey:@"allow_app_account"] boolValue] ||
+            [responseObject objectForKey:@"allow_app_account"] == nil) {
             [self setAllowedToSip:YES];
-            self.sipEnabled = YES;
+            // Enabled SIP when allowed, or for development purpose disable if allow_app_account is not available.
+            self.sipEnabled = [[responseObject objectForKey:@"allow_app_account"] boolValue];
             
             // This user is allowed to use SIP, check if the account is configured
             NSString *app_account = [responseObject objectForKey:@"app_account"];
@@ -143,7 +147,7 @@
 
 /** User setting to enable/disable SIP support from the application.
  @param enabled Boolean value to set for Enabling / Disabling SIP.
- @see isSipEnabled
+ @see sipEnabled
  */
 - (void)setSipEnabled:(BOOL)sipEnabled {
     if (_sipEnabled != sipEnabled) {
@@ -157,6 +161,11 @@
 
 #pragma mark -
 #pragma mark SIP Handling
+
+/** Used to check / perform the initial SIP Status at startup of the app. */
+- (void)checkSipStatus {
+    [self updateSipAccountStatus:_sipEnabled];
+}
 
 /** Request to update the SIP Account information from the VoIPGRID Platform */
 - (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))completion {
@@ -250,8 +259,24 @@
 /** Private helper to switch the SIP Account status and trigger the correct methods */
 - (void)updateSipAccountStatus:(BOOL)enabled {
     if (enabled) {
+        [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
+        [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
         [[PZPushMiddleware sharedInstance] updateDeviceRecord];
         [[ConnectionHandler sharedConnectionHandler] sipConnect];
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            if (!granted) {
+                [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil)
+                                   message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil)
+                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                         otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
+                                  tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                      if (buttonIndex == 1 && UIApplicationOpenSettingsURLString != nil) {
+                                          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                      }
+                                  }];
+            }
+        }];
+
     } else {
         if (_sipAccount) {
             // First unregister the account with the middleware

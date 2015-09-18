@@ -36,8 +36,9 @@
 #pragma mark - Sip specific handling
 
 @property (nonatomic, readonly) BOOL isAllowedToSip;
-@property (nonatomic, assign) BOOL sipEnabled;
+@property (nonatomic, assign, getter=isSipEnabled) BOOL sipEnabled;
 
+- (void)checkSipStatus;
 - (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))success;
 
 @end

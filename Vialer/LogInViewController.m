@@ -430,22 +430,12 @@
     [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
-            //Check if a SIP account is configured to be used with the App. The app should default the the Connect A/B behaviour simular to the old App.
-            if (currentUser.sipAccount) {
-                [[ConnectionHandler sharedConnectionHandler] sipConnect];
-            } else {
-                //Just to make sure no sip connection is registered
-                [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
-            }
+
 //            [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
             
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
             [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
             [_scene runActTwo];                       // Animate the clouds
-            
-            // When login is successfull: register with incoming call middleware to get notifications when being called
-            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-            [delegate registerForVoIPNotifications];
             
             //If a success block was provided, execute it
             if (success)

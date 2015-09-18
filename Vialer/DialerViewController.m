@@ -136,13 +136,17 @@
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
         self.callButton.enabled = YES;
         
-        //does the user have a sip account?
-        if ([SystemUser currentUser].sipAccount) {
+        
+        // Check if the user has sip enabled
+        if (![SystemUser currentUser].sipEnabled) {
+            // SIP is not enabled, and we are connected to internet, no info needed
+            [self hideMessage];
+        // Check if the user has a sip account configured
+        } else if ([SystemUser currentUser].sipAccount) {
             //Is the connection quality sufficient for SIP?
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
                 [self hideMessage];
             } else {
-                
                 [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Poor internet Info", nil)];
             }
         } else {
