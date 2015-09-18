@@ -132,6 +132,7 @@
         if (indexPath.row == MY_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"My number", nil);
             cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+            cell.accessoryView = nil;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
         } else if (indexPath.row == OUTGOING_NUMBER_ROW) {
