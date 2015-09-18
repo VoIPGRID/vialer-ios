@@ -15,7 +15,7 @@
 #import "SVProgressHUD.h"
 #import "InfoCarouselViewController.h"
 #import "UIAlertView+Blocks.h"
-#import "AccountViewController.h"
+#import "SettingsViewController.h"
 
 typedef enum : NSUInteger {
     MENU_INDEX_STATS = 0,
@@ -34,7 +34,7 @@ typedef enum : NSUInteger {
 #define WEBVIEW_TARGET_STATISTICS       2
 
 @interface SideMenuViewController ()
-@property (nonatomic, strong) AccountViewController *accountViewController;
+@property (nonatomic, strong) SettingsViewController *settingsViewController;
 @property (nonatomic, strong) UIColor *tintColor;
 @end
 
@@ -86,7 +86,7 @@ typedef enum : NSUInteger {
             break;
         case MENU_INDEX_ACCOUNT:
             [cell setMenuItemTitle:NSLocalizedString(@"Settings", nil)
-                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-account"] color:self.tintColor]];
+                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-settings"] color:self.tintColor]];
             break;
         case MENU_INDEX_LOGOUT:
             [cell setMenuItemTitle:NSLocalizedString(@"Logout", nil)
@@ -216,11 +216,11 @@ typedef enum : NSUInteger {
     }
 }
 
-- (AccountViewController *)accountViewController {
-    if (!_accountViewController) {
-        _accountViewController = [[AccountViewController alloc] initWithNibName:@"AccountViewController" bundle:[NSBundle mainBundle]];
+- (SettingsViewController *)settingsViewController {
+    if (!_settingsViewController) {
+        _settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:[NSBundle mainBundle]];
     }
-    return _accountViewController;
+    return _settingsViewController;
 }
 
 #pragma mark - Private Methods
@@ -289,9 +289,10 @@ typedef enum : NSUInteger {
 }
 
 - (void)showAccountView {
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.accountViewController];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
-    self.accountViewController.navigationItem.leftBarButtonItem = cancelButton;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.settingsViewController];
+    // Place a done button
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(navigationDidTapCancel)];
+    self.settingsViewController.navigationItem.rightBarButtonItem = doneButton;
     [self presentViewController:navController animated:YES completion:nil];
 }
 

@@ -150,6 +150,8 @@
         _sipEnabled = sipEnabled;
         [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:@"sip_enabled"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self updateSipAccountStatus:_sipEnabled];
     }
 }
 
@@ -231,21 +233,33 @@
             [[NSUserDefaults standardUserDefaults] setObject:sipUsername forKey:@"SIPAccount"];
             [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipUsername];
             
-            [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-            [[ConnectionHandler sharedConnectionHandler] sipConnect];
+            [self updateSipAccountStatus:_sipEnabled];
         }
     } else {
         NSLog(@"%s No SIP Account disconnecting and deleting", __PRETTY_FUNCTION__);
-        // First unregister the account with the middleware
-        [[PZPushMiddleware sharedInstance] unregisterSipAccount:_sipAccount];
+        [self updateSipAccountStatus:NO];
+        
         // Now delete it from the user defaults
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
         [SSKeychain deletePasswordForService:[[self class] serviceName] account:_sipAccount error:NULL];
         _sipAccount = nil;
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+/** Private helper to switch the SIP Account status and trigger the correct methods */
+- (void)updateSipAccountStatus:(BOOL)enabled {
+    if (enabled) {
+        [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+        [[ConnectionHandler sharedConnectionHandler] sipConnect];
+    } else {
+        if (_sipAccount) {
+            // First unregister the account with the middleware
+            [[PZPushMiddleware sharedInstance] unregisterSipAccount:_sipAccount];
+        }
         // And disconnect the Sip Connection Handler
         [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
     }
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSString *)serviceName {

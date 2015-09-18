@@ -265,9 +265,11 @@
 "Settings" = "Instellingen";
 
 /*Config View */
-"VoIP Account" =  "VoIP Account";
+"VOIP Account" =  "VoIP Account";
 "SIP account" = "SIP account";
 "Password" = "Wachtwoord";
+
+"EnabledVOIPCalls" = "Bellen via VoIP";
 
 "My number" =  "Mijn nummer";
 "Outgoing number" = "Uitgaand nummer";

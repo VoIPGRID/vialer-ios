@@ -1,19 +1,19 @@
 //
-//  AccountViewFooterView.m
+//  SettingsViewFooterView.m
 //  Vialer
 //
 //  Created by Harold on 22/06/15.
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
-#import "AccountViewFooterView.h"
+#import "SettingsViewFooterView.h"
 
-@interface AccountViewFooterView ()
+@interface SettingsViewFooterView ()
 @property (nonatomic, strong)UILabel *textLabel;
 @property (nonatomic, strong)UIImageView *logoView;
 @end
 
-@implementation AccountViewFooterView
+@implementation SettingsViewFooterView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

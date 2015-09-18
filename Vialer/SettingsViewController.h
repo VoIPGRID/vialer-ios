@@ -1,5 +1,5 @@
 //
-//  AccountViewController.h
+//  SettingsViewController.h
 //  Vialer
 //
 //  Created by Harold on 18/06/15.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "EditNumberTableViewController.h"
 
-@interface AccountViewController : UITableViewController <EditNumberDelegate>
+@interface SettingsViewController : UITableViewController <EditNumberDelegate>
 
 @end

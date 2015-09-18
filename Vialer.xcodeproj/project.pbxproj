@@ -29,9 +29,9 @@
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */; };
 		F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B531B1DD36000E695FB /* ContactTableViewCell.m */; };
-		F2CD45F61B330ADA00CE9B1D /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* AccountViewController.m */; };
-		F2CD45F71B330ADA00CE9B1D /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* AccountViewController.xib */; };
-		F2E811BE1B37E2E000EA640F /* AccountViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* AccountViewFooterView.m */; };
+		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
+		F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */; };
+		F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
 		F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */; };
 		F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */; };
 		F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811CB1B380A9400EA640F /* CellWithTextField.m */; };
@@ -182,11 +182,11 @@
 		F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsSearchTableViewController.m; sourceTree = "<group>"; };
 		F2900B521B1DD36000E695FB /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
 		F2900B531B1DD36000E695FB /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
-		F2CD45F31B330ADA00CE9B1D /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
-		F2CD45F41B330ADA00CE9B1D /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		F2CD45F51B330ADA00CE9B1D /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
-		F2E811BC1B37E2E000EA640F /* AccountViewFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewFooterView.h; sourceTree = "<group>"; };
-		F2E811BD1B37E2E000EA640F /* AccountViewFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewFooterView.m; sourceTree = "<group>"; };
+		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewFooterView.h; sourceTree = "<group>"; };
+		F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewFooterView.m; sourceTree = "<group>"; };
 		F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberTableViewController.h; sourceTree = "<group>"; };
 		F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberTableViewController.m; sourceTree = "<group>"; };
 		F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditNumberTableViewController.xib; sourceTree = "<group>"; };
@@ -448,14 +448,14 @@
 			name = Libs;
 			sourceTree = "<group>";
 		};
-		F2E811BF1B37E2EB00EA640F /* Account View */ = {
+		F2E811BF1B37E2EB00EA640F /* Settings View */ = {
 			isa = PBXGroup;
 			children = (
-				F2CD45F31B330ADA00CE9B1D /* AccountViewController.h */,
-				F2CD45F41B330ADA00CE9B1D /* AccountViewController.m */,
-				F2CD45F51B330ADA00CE9B1D /* AccountViewController.xib */,
-				F2E811BC1B37E2E000EA640F /* AccountViewFooterView.h */,
-				F2E811BD1B37E2E000EA640F /* AccountViewFooterView.m */,
+				F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */,
+				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
+				F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */,
+				F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */,
+				F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */,
 				F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */,
 				F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */,
 				F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */,
@@ -463,7 +463,7 @@
 				F2E811CB1B380A9400EA640F /* CellWithTextField.m */,
 				F2E811CC1B380A9400EA640F /* CellWithTextField.xib */,
 			);
-			name = "Account View";
+			name = "Settings View";
 			sourceTree = "<group>";
 		};
 		FB0CF33118226380002D4281 /* Api */ = {
@@ -655,7 +655,7 @@
 				03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */,
 				03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */,
 				03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */,
-				F2E811BF1B37E2EB00EA640F /* Account View */,
+				F2E811BF1B37E2EB00EA640F /* Settings View */,
 				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
 				FE3423F01B822D6A005020BA /* Vialer */,
 				FB4226D7182261D200707349 /* Supporting Files */,
@@ -805,7 +805,7 @@
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
-				F2CD45F71B330ADA00CE9B1D /* AccountViewController.xib in Resources */,
+				F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */,
 				F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
@@ -919,7 +919,7 @@
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */,
 				F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */,
-				F2CD45F61B330ADA00CE9B1D /* AccountViewController.m in Sources */,
+				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
@@ -961,7 +961,7 @@
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
-				F2E811BE1B37E2E000EA640F /* AccountViewFooterView.m in Sources */,
+				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,

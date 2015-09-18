@@ -266,9 +266,11 @@
 "Settings" = "Settings";
 
 /*Config View */
-"VoIP Account" =  "VoIP Account";
+"VOIP Account" =  "VoIP Account";
 "SIP account" = "SIP account";
 "Password" = "Password";
+
+"EnabledVOIPCalls" = "VoIP calling";
 
 "My number" =  "My number";
 "Outgoing number" = "Outgoing number";

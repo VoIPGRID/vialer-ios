@@ -1,5 +1,5 @@
 //
-//  AccountViewFooterView.h
+//  SettingsViewFooterView.h
 //  Vialer
 //
 //  Created by Harold on 22/06/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AccountViewFooterView : UIView
+@interface SettingsViewFooterView : UIView
 
 @end
