@@ -64,8 +64,8 @@
 }
 
 - (void)sentCallStoredPayloads {
-    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
-        NSLog(@"%s GSAccountStatusConnected, sending #%d stored payload(s)", __PRETTY_FUNCTION__, [self.storedCallPayloadsToSent count]);
+    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {        
+        NSLog(@"%s GSAccountStatusConnected, sending #%@ stored payload(s)", __PRETTY_FUNCTION__, [NSNumber numberWithInteger:[self.storedCallPayloadsToSent count]]);
         //TODO:we probably want to implement a queue and lock the array but the change of multiple simultatious calls is quite small
         for (id storedPayload in self.storedCallPayloadsToSent)
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{

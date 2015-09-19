@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = NSLocalizedString(@"Show recents", nil);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", nil) style:UIBarButtonItemStyleDone target:self action:@selector(saveButtonPressed:)];
 
     self.recents = @[NSLocalizedString(@"Show your recent calls", nil), NSLocalizedString(@"Show all recent calls", nil)];
