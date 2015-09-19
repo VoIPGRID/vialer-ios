@@ -4,7 +4,7 @@ platform :ios, '8.0'
 
 # Specify the project wide pods here which are used by all Targets.
 def pods_for_all_targets
-   	pod 'AFNetworkActivityLogger', :configurations => ['Debug']
+   	pod 'AFNetworkActivityLogger'
 	pod 'AFNetworking'
 	pod 'GoogleAnalytics'
 	pod 'HTCopyableLabel'

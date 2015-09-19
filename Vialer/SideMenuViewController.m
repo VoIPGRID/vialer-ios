@@ -52,7 +52,6 @@ typedef enum : NSUInteger {
     //Force a reload of the data to display the proper phone number. Otherwise an old phone number could be displayed if it was changed.
     [self.tableView reloadData];
     
-    NSLog(@"Frame: %@ bounds: %@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.view.bounds));
     CGFloat yOffset = CGRectGetMaxY(self.view.bounds) - 18.f;
     CGRect versionBuildLabelFrame = CGRectMake(0, yOffset, CGRectGetWidth(self.view.frame), 20.f);
     [self.view addSubview:[self versionBuildLabel:versionBuildLabelFrame]];
