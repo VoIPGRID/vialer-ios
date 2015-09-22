@@ -59,10 +59,10 @@
         
         self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), 44.0)];
         self.searchBar.delegate = self;
-        self.searchBar.placeholder = @"Zoeken";
+        self.searchBar.placeholder = @"Search";
         self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
-        self.searchBar.barTintColor = [config tintColorForKey:kTintColorSearchBar];
-        self.searchBar.tintColor = [UIColor whiteColor];
+        self.searchBar.barTintColor = [config tintColorForKey:kBarTintColorSearchBar];
+        self.searchBar.tintColor = [config tintColorForKey:kTintColorSearchBar];
         [self.view addSubview:self.searchBar];
         
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, CGRectGetMaxY(self.searchBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.searchBar.frame))];
@@ -346,7 +346,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"firstName CONTAINS[cd] %@ OR lastName CONTAINS[cd] %@ OR companyName CONTAINS[cd] %@", searchText, searchText, searchText];
     _searchResults = [self.addressBookContactsSorted filteredArrayUsingPredicate:pred];
     _searchTableViewController.searchResults = _searchResults;
-    
+
     // Reload the searchResultsTableView
     [_searchController.searchResultsTableView reloadData];
 }

@@ -12,6 +12,7 @@
 extern NSString * const kTintColorTabBar;
 extern NSString * const kTintColorNavigationBar;
 extern NSString * const kTintColorTable;
+extern NSString * const kBarTintColorSearchBar;
 extern NSString * const kTintColorSearchBar;
 extern NSString * const kTintColorMessage;
 

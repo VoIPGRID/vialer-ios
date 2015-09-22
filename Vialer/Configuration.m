@@ -12,6 +12,7 @@
 NSString * const kTintColorTabBar = @"TabBar";
 NSString * const kTintColorNavigationBar = @"NavigationBar";
 NSString * const kTintColorTable = @"Table";
+NSString * const kBarTintColorSearchBar = @"SearchBarBar";
 NSString * const kTintColorSearchBar = @"SearchBar";
 NSString * const kTintColorMessage = @"Message";
 

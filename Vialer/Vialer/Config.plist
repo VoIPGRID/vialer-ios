@@ -38,13 +38,19 @@
 			<integer>126</integer>
 			<integer>58</integer>
 		</array>
+		<key>SearchBar</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
 		<key>Table</key>
 		<array>
 			<integer>232</integer>
 			<integer>126</integer>
 			<integer>58</integer>
 		</array>
-		<key>SearchBar</key>
+		<key>SearchBarBar</key>
 		<array>
 			<integer>178</integer>
 			<integer>177</integer>
