@@ -32,6 +32,8 @@ typedef enum : NSUInteger {
 #define WEBVIEW_TARGET_ACCESSIBILITY    0
 #define WEBVIEW_TARGET_DIALPLAN         1
 #define WEBVIEW_TARGET_STATISTICS       2
+#define X_OFFSET_LOGO_PHONE_NUMBER      8
+#define SPACING_LOGO_PHONE_NUMBER       15.f
 
 @interface SideMenuViewController ()
 @property (nonatomic, strong) SettingsViewController *settingsViewController;
@@ -116,15 +118,14 @@ typedef enum : NSUInteger {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 222.f, 144.f)];
         headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
-        CGFloat xOffset = (CGRectGetWidth(headerView.frame) - 171.f) / 2;
-        UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, 40.f, 171.f, 41.f)];
-        logo.image = [UIImage imageNamed:@"logoMedium"];
-        logo.contentMode = UIViewContentModeCenter;
+        UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(X_OFFSET_LOGO_PHONE_NUMBER, 40.f, 171.f, 41.f)];
+        logo.image = [UIImage imageNamed:@"sideMenuLogo"];
+        logo.contentMode = UIViewContentModeLeft;
         
-        CGFloat yOffset = CGRectGetMaxY(logo.frame) + 10.f;
-        UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, yOffset, CGRectGetWidth(headerView.frame), 20.f)];
+        CGFloat yOffset = CGRectGetMaxY(logo.frame) + SPACING_LOGO_PHONE_NUMBER;
+        UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_OFFSET_LOGO_PHONE_NUMBER, yOffset, CGRectGetWidth(headerView.frame), 20.f)];
         numberLabel.font = [UIFont systemFontOfSize:14.f];
-        numberLabel.textAlignment = NSTextAlignmentCenter;
+        numberLabel.textAlignment = NSTextAlignmentLeft;
         numberLabel.textColor = [self navigationBarTintColor];
         
         NSString *phoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
@@ -134,9 +135,8 @@ typedef enum : NSUInteger {
         [headerView addSubview:numberLabel];
         
         return headerView;
-    } else {
-        return nil;
     }
+    return nil;
 }
 
 - (UILabel *)versionBuildLabel:(CGRect)frame {
