@@ -128,8 +128,8 @@ typedef enum : NSUInteger {
         numberLabel.textAlignment = NSTextAlignmentLeft;
         numberLabel.textColor = [self navigationBarTintColor];
         
-        NSString *phoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
-        numberLabel.text = [phoneNumber length] ? phoneNumber : NSLocalizedString(@"No mobile number configured", nil);
+        NSString *phoneNumber = [SystemUser currentUser].outgoingNumber;
+        numberLabel.text = [phoneNumber length] ? phoneNumber : NSLocalizedString(@"No outgoing number configured", nil);
         
         [headerView addSubview:logo];
         [headerView addSubview:numberLabel];
