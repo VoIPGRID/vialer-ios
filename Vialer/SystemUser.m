@@ -15,6 +15,22 @@
 #import "UIAlertView+Blocks.h"
 #import <AVFoundation/AVAudioSession.h>
 
+#define kMobileNumberKey    @"mobile_nr"
+#define kSIPAccountKey      @"account_id"
+#define kSIPPasswordKey     @"password"
+#define kOutgoingNumberKey  @"outgoing_cli"
+#define kEmailAddressKey    @"email"
+#define kSIPAllowedKey      @"allow_app_account"
+#define kAppAccount         @"app_account"
+
+#define kUserSUD            @"User"
+#define kSIPAccountSUD      @"SIPAccount"
+#define kOutgoingNumberSUD  @"OutgoingCLI"
+#define kMobileNumberSUD    @"MobileNumber"
+#define kEmailAddressSUD    @"Email"
+#define kSIPEnabledSUD      @"SipEnabled"
+#define kSIPAllowedSUD      @"SIPAllowed"
+
 @interface SystemUser ()
 
 @end
@@ -25,14 +41,72 @@
     BOOL _sipEnabled;
 }
 
+@synthesize emailAddress = _emailAddress;
+
 + (instancetype)currentUser {
     static SystemUser *_currentUser = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _currentUser = [[SystemUser alloc] initPrivate];
     });
-    
+
     return _currentUser;
+}
+
++ (instancetype)initWithUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
+    NSString *outgoingCli = [userDict objectForKey:kOutgoingNumberKey];
+    if ([outgoingCli isKindOfClass:[NSString class]]) {
+        [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:kOutgoingNumberSUD];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kOutgoingNumberSUD];
+    }
+
+    NSString *mobileNumber = [userDict objectForKey:kMobileNumberKey];
+    if ([mobileNumber isKindOfClass:[NSString class]]) {
+        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:kMobileNumberSUD];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kMobileNumberSUD];
+    }
+
+    NSString *emailAddress = [userDict objectForKey:kEmailAddressKey];
+    if ([emailAddress isKindOfClass:[NSString class]]) {
+        [[NSUserDefaults standardUserDefaults] setObject:emailAddress forKey:kEmailAddressSUD];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEmailAddressSUD];
+    }
+
+    // Store credentials
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserSUD];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSKeychain setPassword:password forService:[[self class] serviceName] account:username];
+
+    return [[SystemUser alloc] initPrivate];
+}
+
+- (void)removeCurrentUser {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    _user = nil;
+    _loggedIn = false;
+    _sipAccount = nil;
+    _outgoingNumber = nil;
+    _mobileNumber = nil;
+    _emailAddress = nil;
+    _sipEnabled = false;
+    _isSipAllowed = false;
+
+    NSString *username = [defaults objectForKey:kUserSUD];
+
+    [defaults removeObjectForKey:kUserSUD];
+    [defaults removeObjectForKey:kSIPAccountSUD];
+    [defaults removeObjectForKey:kOutgoingNumberSUD];
+    [defaults removeObjectForKey:kEmailAddressSUD];
+    [defaults removeObjectForKey:kMobileNumberSUD];
+    [defaults removeObjectForKey:kSIPEnabledSUD];
+    [defaults removeObjectForKey:kSIPAllowedSUD];
+    [defaults synchronize];
+
+    [SSKeychain deletePasswordForService:[[self class] serviceName] account:username];
 }
 
 // Override the init and throw an exception not allowing new instances
@@ -50,14 +124,25 @@
     return self;
 }
 
+-(NSString *)emailAddress {
+    if (_emailAddress) {
+        return _emailAddress;
+    } else if (self.user) {
+        return self.user;
+    }
+    return NSLocalizedString(@"No email address configured", nil);
+}
+
 - (void)reloadCurrentUser {
-    _user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    _user = [[NSUserDefaults standardUserDefaults] objectForKey:kUserSUD];
     // A user is considered logged in when its username is stored in the user defaults
     _loggedIn = (_user != nil);
-    _sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"SIPAccount"];
-    _outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"OutgoingNumber"];
-    _sipEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"sip_enabled"];
-    _isSipAllowed = [[NSUserDefaults standardUserDefaults] boolForKey:@"allow_app_account"];
+    _sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:kSIPAccountSUD];
+    _outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kOutgoingNumberSUD];
+    _mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kMobileNumberSUD];
+    _emailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:kEmailAddressSUD];
+    _sipEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kSIPEnabledSUD];
+    _isSipAllowed = [[NSUserDefaults standardUserDefaults] boolForKey:kSIPAllowedSUD];
 }
 
 #pragma mark - Login specific handling
@@ -77,15 +162,15 @@
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:user password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self reloadCurrentUser];
         // Check the reponse if this user is allowed to have an app_account
-        if ([[responseObject objectForKey:@"allow_app_account"] boolValue] ||
-            [responseObject objectForKey:@"allow_app_account"] == nil) {
+        if ([[responseObject objectForKey:kSIPAllowedKey] boolValue] ||
+            [responseObject objectForKey:kSIPAllowedKey] == nil) {
             [self setAllowedToSip:YES];
             // Enabled SIP when allowed, or for development purpose disable if allow_app_account is not available.
-            self.sipEnabled = [[responseObject objectForKey:@"allow_app_account"] boolValue];
-            
+            self.sipEnabled = [[responseObject objectForKey:kSIPAllowedKey] boolValue];
+
             // This user is allowed to use SIP, check if the account is configured
-            NSString *app_account = [responseObject objectForKey:@"app_account"];
-            [self updateSIPAccountWithURL:app_account andSuccess:^(BOOL success) {
+            NSString *appAccount = [responseObject objectForKey:kAppAccount];
+            [self updateSIPAccountWithURL:appAccount andSuccess:^(BOOL success) {
                 if (completion) {
                     completion(YES);
                 }
@@ -108,7 +193,7 @@
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
     // Clear the setting if SIP is allowed
     [self setAllowedToSip:NO];
-    
+
     // Remove sip account if present also disconnects PJSIP and signals Middleware
     [self setSIPAccount:nil andPassword:nil];
 }
@@ -134,7 +219,7 @@
  */
 - (void)setAllowedToSip:(BOOL)allowed {
     _isSipAllowed = allowed;
-    [[NSUserDefaults standardUserDefaults] setBool:allowed forKey:@"allow_app_account"];
+    [[NSUserDefaults standardUserDefaults] setBool:allowed forKey:kSIPAllowedSUD];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -152,9 +237,9 @@
 - (void)setSipEnabled:(BOOL)sipEnabled {
     if (_sipEnabled != sipEnabled) {
         _sipEnabled = sipEnabled;
-        [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:@"sip_enabled"];
+        [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:kSIPEnabledSUD];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
+
         [self updateSipAccountStatus:_sipEnabled];
     }
 }
@@ -174,8 +259,8 @@
         // Update the user profile
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             // This user is allowed to use SIP, check if the account is configured
-            NSString *app_account = [responseObject objectForKey:@"app_account"];
-            [self updateSIPAccountWithURL:app_account andSuccess:^(BOOL success) {
+            NSString *appAccount = [responseObject objectForKey:kAppAccount];
+            [self updateSIPAccountWithURL:appAccount andSuccess:^(BOOL success) {
                 if (completion) {
                     completion(success);
                 }
@@ -209,8 +294,8 @@
 - (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success andFailure:(void(^)())failure {
     if ([appAccountURL isKindOfClass:[NSString class]]) {
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] retrievePhoneAccountForUrl:appAccountURL success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSObject *account = [responseObject objectForKey:@"account_id"];
-            NSObject *password = [responseObject objectForKey:@"password"];
+            NSObject *account = [responseObject objectForKey:kSIPAccountKey];
+            NSObject *password = [responseObject objectForKey:kSIPPasswordKey];
             if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
                 if (success) success([(NSNumber *)account stringValue], (NSString *)password);
             } else {
@@ -239,17 +324,17 @@
         } else {
             _sipAccount = sipUsername;
             // We have a new SIP Account, store it
-            [[NSUserDefaults standardUserDefaults] setObject:sipUsername forKey:@"SIPAccount"];
+            [[NSUserDefaults standardUserDefaults] setObject:sipUsername forKey:kSIPAccountSUD];
             [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipUsername];
-            
+
             [self updateSipAccountStatus:_sipEnabled];
         }
     } else {
         NSLog(@"%s No SIP Account disconnecting and deleting", __PRETTY_FUNCTION__);
         [self updateSipAccountStatus:NO];
-        
+
         // Now delete it from the user defaults
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SIPAccount"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSIPAccountSUD];
         [SSKeychain deletePasswordForService:[[self class] serviceName] account:_sipAccount error:NULL];
         _sipAccount = nil;
     }

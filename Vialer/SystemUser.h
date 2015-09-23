@@ -10,11 +10,15 @@
 
 /** SystemUser class is representing the user information as available on the VoIPGRID platform.
  Current the SystemUser class also represents a lot of information maintained/stored by the VoIPGRIDRequestOperationManager in the user defaults.
- 
+
  */
 @interface SystemUser : NSObject
 
 + (instancetype)currentUser;
+
+- (void)removeCurrentUser;
+
++ (instancetype)initWithUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password;
 
 #pragma mark - Login handling
 
@@ -28,6 +32,7 @@
 
 // Account information
 @property (nonatomic, readonly) NSString *user;
+@property (nonatomic, readonly) NSString *emailAddress;
 @property (nonatomic, readonly) NSString *outgoingNumber;
 @property (nonatomic, readonly) NSString *mobileNumber;
 @property (nonatomic, readonly) NSString *sipAccount;

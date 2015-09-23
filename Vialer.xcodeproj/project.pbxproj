@@ -23,6 +23,7 @@
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
+		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; settings = {ASSET_TAGS = (); }; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
@@ -176,6 +177,8 @@
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
 		C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		C415953F343DAA413EE2882E /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4FCC60A1BB925500013689F /* SideMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuHeaderView.h; sourceTree = "<group>"; };
+		C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuHeaderView.m; sourceTree = "<group>"; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -448,6 +451,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C4FCC6091BB925380013689F /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C4FCC60A1BB925500013689F /* SideMenuHeaderView.h */,
+				C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */,
+				03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */,
+				03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */,
+				03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */,
+				03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */,
+			);
+			name = "Side Menu";
+			sourceTree = "<group>";
+		};
 		EA46C5181AC2CCA100F7FC13 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,10 +704,7 @@
 				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
 				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
 				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
-				03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */,
-				03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */,
-				03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */,
-				03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */,
+				C4FCC6091BB925380013689F /* Side Menu */,
 				F2E811BF1B37E2EB00EA640F /* Settings View */,
 				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
 				FE3423F01B822D6A005020BA /* Vialer */,
@@ -947,6 +960,7 @@
 			files = (
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
+				C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */,
 				F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */,
 				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
 				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,

@@ -20,7 +20,7 @@
 #define PostPermissionPasswordResetUrl @"permission/password_reset/"
 #define GetAutoLoginTokenUrl @"autologin/token/"
 #define PutMobileNumber @"/api/permission/mobile_number/"
-
+#define kMobileNumberKey @"mobile_nr"
 
 @interface VoIPGRIDRequestOperationManager ()
 @property (nonatomic, strong)NSDateFormatter *callDateGTFormatter;
@@ -45,7 +45,7 @@
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
         // Set basic authentication if user is logged in
-        NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+        NSString *user = [SystemUser currentUser].user;
         if (user) {
             NSString *password = [SSKeychain passwordForService:[[self class] serviceName] account:user];
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
@@ -64,11 +64,12 @@
 
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
-    
+
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        id partner = [responseObject objectForKey:@"partner"];
-        NSString *client = [responseObject objectForKey:@"client"];
+        NSDictionary *responseData = (NSDictionary *)responseObject;
+        id partner = [responseData objectForKey:@"partner"];
+        NSString *client = [responseData objectForKey:@"client"];
         // Client should be valid, and partner should not be present.
         BOOL clientValid = (client != nil && ![client isKindOfClass:[NSNull class]]);
         BOOL partnerValid = (partner != nil && ![partner isKindOfClass:[NSNull class]]);
@@ -83,27 +84,8 @@
                                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
-            
-            
-            NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
-            if ([outgoingCli isKindOfClass:[NSString class]]) {
-                [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
-            } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
-            }
-            
-            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
-            if ([mobile_nr isKindOfClass:[NSString class]]) {
-                [[NSUserDefaults standardUserDefaults] setObject:mobile_nr forKey:@"MobileNumber"];
-            } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
-            }
 
-            // Store credentials
-            [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"User"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [SSKeychain setPassword:password forService:[[self class] serviceName] account:user];
-
+            [SystemUser initWithUserDict:responseData withUsername:user andPassword:password];
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
 
             // Notify we are completed here
@@ -136,17 +118,14 @@
     }
 
     NSError *error;
-    NSString *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    NSString *user = [SystemUser currentUser].user;
 
     [SSKeychain deletePasswordForService:[[self class] serviceName] account:user error:&error];
     if (error) {
         NSLog(@"Error logging out: %@", [error localizedDescription]);
     }
 
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"User"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MobileNumber"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[SystemUser currentUser] removeCurrentUser];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil];
 }
@@ -241,7 +220,7 @@
     [params setObject:@(limit) forKey:@"limit"];
     [params setObject:@(offset) forKey:@"offset"];
     [params setObject:[self.callDateGTFormatter stringFromDate:date] forKey:@"call_date__gt"];
-    
+
     if ([sourceNumber length] > 0)
         [params setObject:sourceNumber forKey:@"src_number"];
 
@@ -331,11 +310,11 @@
     }
     //Strip whitespaces
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
+
     //Change country code from 00xx to +xx
     if ([mobileNumber hasPrefix:@"00"])
         mobileNumber = [NSString stringWithFormat:@"+%@", [mobileNumber substringFromIndex:2]];
-    
+
     //Has the user entered the number in the international format with check above 00xx is also accepted
     if (![mobileNumber hasPrefix:@"+"]) {
         if (failure) failure(NSLocalizedString(@"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR", nil));
@@ -347,9 +326,9 @@
         if (success) success();
         return;
     }
-    
+
     //Sent the new number to the server
-    NSDictionary *parameters = @{@"mobile_nr" : mobileNumber};
+    NSDictionary *parameters = @{kMobileNumberKey : mobileNumber};
     [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -357,11 +336,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //Provide user with the message from the error
         NSString *localizedErrorString = [error localizedDescription];
-        
+
         //if the status code was 400, the platform will give us a localized error description in the mobile_nr parameter
         if (operation.response.statusCode == 400)
-            localizedErrorString = [[operation.responseObject objectForKey:@"mobile_nr"] firstObject];
-        
+            localizedErrorString = [[operation.responseObject objectForKey:kMobileNumberKey] firstObject];
+
         if (failure) failure(localizedErrorString);
     }];
 }

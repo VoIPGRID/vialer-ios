@@ -168,7 +168,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == MY_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"My number", nil);
-            cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+            cell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
             cell.accessoryView = nil;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
@@ -227,7 +227,7 @@
     if (indexPath.section == NUMBERS_SECTION && indexPath.row == MY_NUMBER_ROW) {
 
         EditNumberTableViewController *editNumberController = [[EditNumberTableViewController alloc] initWithNibName:@"EditNumberTableViewController" bundle:[NSBundle mainBundle]];
-        editNumberController.numberToEdit = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+        editNumberController.numberToEdit = [SystemUser currentUser].mobileNumber;
         editNumberController.delegate = self;
         [self.navigationController pushViewController:editNumberController animated:YES];
     } else if (indexPath.section == AVAILABILITY_SECTION && indexPath.row == AVAILABILITY_ROW) {
@@ -248,7 +248,7 @@
 - (void)numberHasChanged:(NSString *)newNumber {
     //Update the tableView Cell
     UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MY_NUMBER_ROW inSection:NUMBERS_SECTION]];
-    myNumberCell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+    myNumberCell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
 }
 
 #pragma mark - Availability delegate

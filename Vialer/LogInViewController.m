@@ -26,6 +26,7 @@
 
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
+#define kMobileNumberKey    @"mobile_nr"
 
 @interface LogInViewController ()
 @property (nonatomic, assign) BOOL alertShown;
@@ -35,20 +36,20 @@
 @implementation LogInViewController {
     BOOL _isKeyboardShown;
     VIAScene *_scene;
-    
+
     __block NSUInteger _fetchAccountRetryCount;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
     [self.view addGestureRecognizer:tg];
-    
+
     _fetchAccountRetryCount = 0;
-    
+
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
-    
+
     // animate logo to top
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self moveLogoOutOfScreen];
@@ -57,7 +58,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+
     [self removeObservers];
 }
 
@@ -98,25 +99,25 @@
     [self addObservers];
 }
 
-/* 
+/*
  - Set all keyboard types and return keys for the textFields when the view did appear.
  - Furthermore create login flow through the Return key.
  */
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     // Set type to emailAddress for e-mail field for forgot password steps
     //Done in Interface builder [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
     //Done in Interface builder[self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
-    
+
     //to be able/disable the enable the request password button
     [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(forgotPasswordViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
+
     // Set phone number input settings for outgoing and fallback call numbers.
     //Done in Interface builder [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
     //Done in Interface builder [self.configureFormView.phoneNumberField setReturnKeyType:UIReturnKeySend];
-    
+
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
@@ -209,15 +210,15 @@
 - (void)continueFromConfigureFormViewToUnlockView {
     NSString *newNumber = self.configureFormView.phoneNumberField.text;
     [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    
+
     //Force pushing the mobile number to the server. Covers the case where a user has set his mobile number in v1.x which was not pushed to server yet.
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber forcePush:YES success:^{
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
-        
+
         //Now that numbers have been saved, localy stored phone number and server side mobile number are in sync,
         //Migration was completed succesfully
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"v2.0_MigrationComplete"];
-        
+
         [self.configureFormView.phoneNumberField resignFirstResponder];
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
@@ -258,15 +259,15 @@
 
         NSValue *keyboardRect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
         CGFloat keyboardHeight = CGRectGetHeight([keyboardRect CGRectValue]);
-        
+
         //After the animation, the respective view should be centered on the remaining screen height (original screen height -keyboard height)
         CGFloat remainingScreenHeight = CGRectGetHeight(self.view.frame) - keyboardHeight;
         //Divide the remaining screen height by 2, this will be the center of the displayed view
         CGFloat newCenter = lroundf(remainingScreenHeight /2);
-        
+
         //Move the left top most cloud away to make the text visable (white on white)
         [_scene animateCloudsOutOfViewWithDuration:duration];
-        
+
         [UIView animateWithDuration:duration
                               delay:0.0
                             options:(curve << 16)
@@ -275,17 +276,17 @@
                              //but I could not think of a better way.
                              self.loginFormView.centerBeforeKeyboardAnimation = self.loginFormView.center;
                              self.loginFormView.center = CGPointMake(self.loginFormView.center.x, newCenter);
-                             
+
                              self.configureFormView.centerBeforeKeyboardAnimation = self.configureFormView.center;
                              self.configureFormView.center = CGPointMake(self.configureFormView.center.x, newCenter);
-                             
+
                              self.forgotPasswordView.centerBeforeKeyboardAnimation = self.forgotPasswordView.center;
                              self.forgotPasswordView.center = CGPointMake(self.forgotPasswordView.center.x, newCenter);
                          }
                          completion:^(BOOL finished){
-                             
+
                          }];
-        
+
         _isKeyboardShown = YES;
     }
 }
@@ -294,9 +295,9 @@
     if(_isKeyboardShown  && !self.alertShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         UIViewAnimationCurve curve = (UIViewAnimationCurve) [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        
+
         [_scene animateCloudsIntoViewWithDuration:duration];
-        
+
         [UIView animateWithDuration:duration
                               delay:0.0
                             options:(UIViewAnimationOptions) (curve << 16)
@@ -306,7 +307,7 @@
                              self.forgotPasswordView.center = self.forgotPasswordView.centerBeforeKeyboardAnimation;
                          }
                          completion:nil];
-        
+
         _isKeyboardShown = NO;
     }
 }
@@ -330,12 +331,12 @@
     // Create an animation scenes that transitions to configure view.
     // VIAScene uses view dimensions to calculate the positions of clouds, at this point the self.view is resized correctly from xib values.
     _scene = [[VIAScene alloc] initWithView:self.view];
-    
+
     void (^logoAnimations)(void) = ^{
         [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
     };
     [UIView animateWithDuration:2.2 animations:logoAnimations];
-    
+
     switch (self.screenToShow) {
         case OnboardingScreenLogin:
             [_scene runActOne];
@@ -345,15 +346,15 @@
             [_scene runActTwo];           // Animate the clouds
             [self retrievePhoneNumbersWithSuccessBlock:nil];
             break;
-//        case OnboardingScreenUnlock:
-//            [_scene runActThree];
-//            break;
+            //        case OnboardingScreenUnlock:
+            //            [_scene runActThree];
+            //            break;
         default:
             //Show the login screen as default
             [_scene runActOne];
             break;
     }
-    
+
     void (^afterLogoAnimations)(void) = ^{
         switch (self.screenToShow) {
             case OnboardingScreenLogin:
@@ -362,9 +363,9 @@
             case OnboardingScreenConfigure:
                 [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
                 break;
-//            case OnboardingScreenUnlock:
-//                [self animateUnlockViewToVisible:1.f delay:0.f];
-//                break;
+                //            case OnboardingScreenUnlock:
+                //                [self animateUnlockViewToVisible:1.f delay:0.f];
+                //                break;
             default:
                 //Show the login screen as default
                 [_scene runActOne];
@@ -394,7 +395,7 @@
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:email success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
-        
+
         [self animateLoginViewToVisible:1.f delay:1.f];
         [self animateForgotPasswordViewToVisible:0.f delay:0.8f];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -406,17 +407,17 @@
 
 - (void)openConfigurationInstructions:(id)sender {
     PBWebViewController *webViewController = [[PBWebViewController alloc] init];
-    
+
     NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
     webViewController.showsNavigationToolbar = YES;
     webViewController.hidesBottomBarWhenPushed = YES;
     webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    
+
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeConfigurationInstructions)];
     webViewController.navigationItem.rightBarButtonItem = cancelButton;
-    
+
     [self presentViewController:navController animated:YES completion:nil];
 }
 
@@ -431,12 +432,12 @@
         [SVProgressHUD dismiss];
         if (loggedin) {
 
-//            [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
-            
+            //            [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
+
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
             [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
             [_scene runActTwo];                       // Animate the clouds
-            
+
             //If a success block was provided, execute it
             if (success)
                 success ();
@@ -454,28 +455,28 @@
         } else {
             [self.configureFormView.outgoingNumberLabel setText:@""];
         }
-        
-        NSString *localStoreMobielNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+
+        NSString *localStoreMobileNumber = [SystemUser currentUser].mobileNumber;
         //Give preference to the user entered phone number over the phone number stored on the server
-        if ([localStoreMobielNumber length] > 0) {
-            self.configureFormView.phoneNumberField.text = localStoreMobielNumber;
+        if ([localStoreMobileNumber length] > 0) {
+            self.configureFormView.phoneNumberField.text = localStoreMobileNumber;
         } else {
-            NSString *mobile_nr = [responseObject objectForKey:@"mobile_nr"];
+            NSString *mobile_nr = [responseObject objectForKey:kMobileNumberKey];
             //if the response also contained the mobile nr, display it to the user
             if ([mobile_nr isKindOfClass:[NSString class]]) {
                 self.configureFormView.phoneNumberField.text = mobile_nr;
             }
         }
-        
+
         [SVProgressHUD dismiss];
-        
+
         [self setLockScreenFriendlyNameWithResponse:responseObject];
-        
+
         //If a success block was provided, execute it
         if (success) {
             success ();
         }
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
         ++_fetchAccountRetryCount;
@@ -484,7 +485,7 @@
         } else {
             [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
             [self.configureFormView.outgoingNumberLabel setText:NSLocalizedString(@"Enter phonenumber manually", nil)];
-            
+
             [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
                                message:NSLocalizedString(@"Error while retrieving your outgoing number, please enter manually", nil)
                                  style:UIAlertViewStylePlainTextInput
@@ -493,7 +494,7 @@
                               tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                   //TODO: do something with the entered number
                                   NSLog(@"outgoing number = %@", [alertView textFieldAtIndex:0].text);
-                                  
+
                               }];
 
         }
@@ -555,7 +556,7 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:completion];
-    
+
 }
 
 - (void)animateUnlockViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* act three */

@@ -9,6 +9,7 @@
 #import "SideMenuViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "SideMenuTableViewCell.h"
+#import "SideMenuHeaderView.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SystemUser.h"
 #import "PBWebViewController.h"
@@ -32,19 +33,19 @@ typedef enum : NSUInteger {
 #define WEBVIEW_TARGET_ACCESSIBILITY    0
 #define WEBVIEW_TARGET_DIALPLAN         1
 #define WEBVIEW_TARGET_STATISTICS       2
-#define X_OFFSET_LOGO_PHONE_NUMBER      8
-#define SPACING_LOGO_PHONE_NUMBER       15.f
 
 @interface SideMenuViewController ()
 @property (nonatomic, strong) SettingsViewController *settingsViewController;
 @property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIImageView *logoImageView;
+@property (nonatomic, strong) SideMenuHeaderView *headerView;
 @end
 
 @implementation SideMenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.tintColor = [self navigationBarTintColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
@@ -52,8 +53,8 @@ typedef enum : NSUInteger {
 #pragma mark - Table view data source
 - (void)viewWillAppear:(BOOL)animated {
     //Force a reload of the data to display the proper phone number. Otherwise an old phone number could be displayed if it was changed.
-    [self.tableView reloadData];
-    
+    [self reloadUserData];
+
     CGFloat yOffset = CGRectGetMaxY(self.view.bounds) - 18.f;
     CGRect versionBuildLabelFrame = CGRectMake(0, yOffset, CGRectGetWidth(self.view.frame), 20.f);
     [self.view addSubview:[self versionBuildLabel:versionBuildLabelFrame]];
@@ -69,13 +70,13 @@ typedef enum : NSUInteger {
     if (!cell) {
         cell = [[SideMenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
-    
+
     // Special styling for the Logout item
     if (indexPath.row == MENU_INDEX_LOGOUT) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.separatorInset = UIEdgeInsetsMake(0.0, self.view.bounds.size.width, 0.0, 0.0);
     }
-    
+
     switch (indexPath.row) {
         case MENU_INDEX_STATS:
             [cell setMenuItemTitle:NSLocalizedString(@"Statistics", nil)
@@ -109,34 +110,27 @@ typedef enum : NSUInteger {
             [cell setMenuItemTitle:nil andIcon:nil];
             break;
     }
-
     return cell;
+}
+
+- (void)reloadUserData {
+    SystemUser *user = [SystemUser currentUser];
+    self.headerView.phoneNumber = [user.outgoingNumber length] ? user.outgoingNumber : NSLocalizedString(@"No outgoing number configured", nil);
+    self.headerView.emailAddress = user.emailAddress;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 222.f, 144.f)];
-        headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
-        UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(X_OFFSET_LOGO_PHONE_NUMBER, 40.f, 171.f, 41.f)];
-        logo.image = [UIImage imageNamed:@"sideMenuLogo"];
-        logo.contentMode = UIViewContentModeLeft;
-        
-        CGFloat yOffset = CGRectGetMaxY(logo.frame) + SPACING_LOGO_PHONE_NUMBER;
-        UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_OFFSET_LOGO_PHONE_NUMBER, yOffset, CGRectGetWidth(headerView.frame), 20.f)];
-        numberLabel.font = [UIFont systemFontOfSize:14.f];
-        numberLabel.textAlignment = NSTextAlignmentLeft;
-        numberLabel.textColor = [self navigationBarTintColor];
-        
-        NSString *phoneNumber = [SystemUser currentUser].outgoingNumber;
-        numberLabel.text = [phoneNumber length] ? phoneNumber : NSLocalizedString(@"No outgoing number configured", nil);
-        
-        [headerView addSubview:logo];
-        [headerView addSubview:numberLabel];
-        
-        return headerView;
+        return self.headerView;
     }
     return nil;
+}
+
+- (SideMenuHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[SideMenuHeaderView alloc] initWithFrame:CGRectMake(0, 0, 222.f, 144.f) andTintColor:self.tintColor];
+    }
+    return _headerView;
 }
 
 - (UILabel *)versionBuildLabel:(CGRect)frame {
@@ -145,7 +139,7 @@ typedef enum : NSUInteger {
     versionBuildLabel.textAlignment = NSTextAlignmentCenter;
     versionBuildLabel.textColor = [UIColor darkGrayColor];
     versionBuildLabel.text = [self appVersionBuildString];
-        
+
     return versionBuildLabel;
 }
 
@@ -160,12 +154,12 @@ typedef enum : NSUInteger {
     NSString *version = [NSString stringWithFormat:@"%@ (%@)",
                          versionString,
                          [infoDict objectForKey:@"CFBundleVersion"]];
-    
+
 #if DEBUG
-     version = [NSString stringWithFormat:@"%@ (%@) | %@",
-                versionString,
-                [infoDict objectForKey:@"CFBundleVersion"],
-                [infoDict objectForKey:@"Commit_Short_Hash"]];
+    version = [NSString stringWithFormat:@"%@ (%@) | %@",
+               versionString,
+               [infoDict objectForKey:@"CFBundleVersion"],
+               [infoDict objectForKey:@"Commit_Short_Hash"]];
 #endif
     return version;
 }
@@ -183,7 +177,7 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-    
+
     if (indexPath.row == MENU_INDEX_AVAILABILITY) {
         [self showWebViewScreen:WEBVIEW_TARGET_ACCESSIBILITY];
     } else if (indexPath.row == MENU_INDEX_STATS) {
@@ -194,15 +188,15 @@ typedef enum : NSUInteger {
         [self showInfoScreen];
     } else if (indexPath.row == MENU_INDEX_ACCOUNT) {
         [self showAccountView];
-    //} else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
-        
+        //} else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
+
     } else if (indexPath.row == MENU_INDEX_LOGOUT) {
-    
+
         NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedString(@"%@\nis currently logged in.", nil),
-                                    [[NSUserDefaults standardUserDefaults] objectForKey:@"User"]];
-        
+                                    [SystemUser currentUser]];
+
         [message appendFormat:@"\n%@", NSLocalizedString(@"Are you sure you want to log out?", nil)];
-        
+
         [UIAlertView showWithTitle:NSLocalizedString(@"Log out", nil)
                            message:message
                  cancelButtonTitle:NSLocalizedString(@"No", nil)
@@ -239,7 +233,7 @@ typedef enum : NSUInteger {
 - (void)showWebViewScreen:(int)webviewTarget {
     __block NSString *title = @"";
     __block NSString *nextUrl = @"";
-    
+
     if (webviewTarget == WEBVIEW_TARGET_ACCESSIBILITY) {
         title = NSLocalizedString(@"Accessibility", nil);
         nextUrl = NSLocalizedString(@"/dashboard/", nil);
@@ -250,11 +244,11 @@ typedef enum : NSUInteger {
         title = NSLocalizedString(@"Statistics", nil);
         nextUrl = NSLocalizedString(@"/stats/dashboard/", nil);
     }
-    
+
     __block NSString *partnerBaseUrl = [Configuration UrlForKey:@"Partner"];
-    
+
     [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), title]];
-    
+
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] autoLoginTokenWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString *token = [responseObject objectForKey:@"token"];
@@ -265,18 +259,18 @@ typedef enum : NSUInteger {
                 NSString *user = [self urlEncodedString:[SystemUser currentUser].user];
                 NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, nextUrl]];
                 NSLog(@"Go to url: %@", url);
-                
+
                 PBWebViewController *webViewController = [[PBWebViewController alloc] init];
                 webViewController.URL = url;
                 webViewController.title = title;
                 webViewController.showsNavigationToolbar = YES;
                 webViewController.hidesBottomBarWhenPushed = YES;
-                
+
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
-                
+
                 UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(navigationDidTapCancel)];
                 webViewController.navigationItem.leftBarButtonItem = cancelButton;
-                
+
                 [self presentViewController:navController animated:YES completion:nil];
             }
             [SVProgressHUD dismiss];
@@ -297,17 +291,17 @@ typedef enum : NSUInteger {
 
 - (void)showInfoScreen {
     PBWebViewController *webViewController = [[PBWebViewController alloc] init];
-    
+
     NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
     webViewController.showsNavigationToolbar = YES;
     webViewController.hidesBottomBarWhenPushed = YES;
     webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    
+
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(navigationDidTapCancel)];
     webViewController.navigationItem.rightBarButtonItem = cancelButton;
-    
+
     [self presentViewController:navController animated:YES completion:nil];
 }
 
@@ -327,27 +321,27 @@ typedef enum : NSUInteger {
 
 - (UIImage *)coloredImageWithImage:(UIImage*)image color:(UIColor*)color {
     CGFloat scaleFactor = 1.0f;
-    
+
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(floor(image.size.width * scaleFactor), floor(image.size.height * scaleFactor)), NO, 0.0f);
-    
+
     [color set];
-    
+
     CGRect rect = CGRectZero;
     rect.size.width = floor(image.size.width * scaleFactor);
     rect.size.height = floor(image.size.height * scaleFactor);
-    
+
     UIRectFill(rect);
-    
+
     [image drawInRect:CGRectMake(0.0f,
                                  0.0f,
                                  floor(image.size.width * scaleFactor),
                                  floor(image.size.height * scaleFactor))
             blendMode:kCGBlendModeDestinationIn
                 alpha:1.0f];
-    
+
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     return newImage;
 }
 
