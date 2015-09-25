@@ -305,6 +305,20 @@
     }];
 }
 
+- (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict success:(void (^)())success failure:(void (^)(NSString *))failure {
+
+    [self PUT:selectedUserResourceUri parameters:destinationDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (success) {
+            success();
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSString *localizedErrorString = [error localizedDescription];
+        if (failure) {
+            failure(localizedErrorString);
+        }
+    }];
+}
+
 /**
  * Under some circumstances we would like to force setting of the mobile number. For instance with the migration of v1.x to version 2.0
  * in which case the user has entered his mobile number but it was never actually pushed to the server.
