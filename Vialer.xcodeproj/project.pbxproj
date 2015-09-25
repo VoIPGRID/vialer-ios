@@ -753,7 +753,7 @@
 		FB4226C5182261D200707349 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					FB4226CC182261D200707349 = {
@@ -869,7 +869,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/scripts/update_build_number.sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		F298A9741B5E28D100467E31 /* Update Version number */ = {
@@ -884,7 +884,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/scripts/update_version_number.sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
 		};
 		F2B947311B00DFEC00CE5112 /* config_site.h copy script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -898,7 +898,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -e $PROJECT_DIR/pjsip/src/pjlib/include/pj/config_site.h  ]\nthen\n    echo \"$PROJECT_DIR/pjsip/src/pjlib/include/pj/config_site.h file exists\"\nelse\n    echo \"No config_site.h in $PROJECT_DIR/pjsip/src/pjlib/include/pj/ copying....\"\n    cp $PROJECT_DIR/pjsip/config_site.h $PROJECT_DIR/pjsip/src/pjlib/include/pj/\nfi";
+			shellScript = "if [ -e \"${PROJECT_DIR}/pjsip/src/pjlib/include/pj/config_site.h\" ]\nthen\n    echo \"${PROJECT_DIR}/pjsip/src/pjlib/include/pj/config_site.h file exists\"\nelse\n    echo \"No config_site.h in ${PROJECT_DIR}/pjsip/src/pjlib/include/pj/ copying....\"\ncp \"${PROJECT_DIR}/pjsip/config_site.h $PROJECT_DIR/pjsip/src/pjlib/include/pj/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1051,7 +1051,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
+				PROVISIONING_PROFILE = "2dfaa99f-be8b-4264-bc85-cda51618f0c2";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = AdHocDistribution;
@@ -1071,6 +1073,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1149,6 +1152,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
@@ -1189,6 +1193,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/pjsip/lib\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
