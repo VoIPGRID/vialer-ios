@@ -15,7 +15,7 @@
 #define GetPermissionSystemUserProfileUrl @"permission/systemuser/profile/"
 #define GetUserDestinationUrl @"userdestination/"
 #define GetPhoneAccountUrl @"phoneaccount/phoneaccount/"
-#define GetClickToDialUrl @"clicktodial/"
+#define GetClickToDialUrl @"mobileapp/"
 #define GetCdrRecordUrl @"cdr/record/"
 #define PostPermissionPasswordResetUrl @"permission/password_reset/"
 #define GetAutoLoginTokenUrl @"autologin/token/"
