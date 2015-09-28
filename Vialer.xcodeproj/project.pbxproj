@@ -729,7 +729,7 @@
 			buildConfigurationList = FB4226FE182261D200707349 /* Build configuration list for PBXNativeTarget "Vialer" */;
 			buildPhases = (
 				70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */,
-				F2B947311B00DFEC00CE5112 /* config_site.h copy script */,
+				F2B947311B00DFEC00CE5112 /* config_site.h linking script */,
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
 				FB4226CB182261D200707349 /* Resources */,
@@ -886,19 +886,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
 		};
-		F2B947311B00DFEC00CE5112 /* config_site.h copy script */ = {
+		F2B947311B00DFEC00CE5112 /* config_site.h linking script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "config_site.h copy script";
+			name = "config_site.h linking script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -e \"${PROJECT_DIR}/pjsip/src/pjlib/include/pj/config_site.h\" ]\nthen\n    echo \"${PROJECT_DIR}/pjsip/src/pjlib/include/pj/config_site.h file exists\"\nelse\n    echo \"No config_site.h in ${PROJECT_DIR}/pjsip/src/pjlib/include/pj/ copying....\"\ncp \"${PROJECT_DIR}/pjsip/config_site.h $PROJECT_DIR/pjsip/src/pjlib/include/pj/\"\nfi";
+			shellScript = "\"${SRCROOT}/scripts/link_config_site.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
