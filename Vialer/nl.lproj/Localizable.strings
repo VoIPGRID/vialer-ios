@@ -286,7 +286,15 @@
 "Warning" = "Waarschuwing";
 "Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";
 "SAVING_NUMBER..." = "Nummer opslaan...";
-"NUMBER_SAVED_SUCCESS" = "Nummers opgeslagen";
+"SAVING_AVAILABILITY..." = "Bereikbaarheid opslaan...";
+"NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
+"AVAILABILITY_SAVED_SUCCESS" = "Bereikbaarheid opgeslagen";
+
+"Availability" = "Bereikbaarheid";
+"Not available" = "Niet bereikbaar";
+"Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
+"Error getting the availability options" = "Fout bij het ophalen van de bereikbaarheid opties.";
+"Loading availability options..." = "Bezig met laden van de opties voor de bereikbaarheid...";
 
 /* Keypad icons mappings */
 "keypad-numbers" = "toetsen";

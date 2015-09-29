@@ -287,7 +287,15 @@
 "Warning" = "Warning";
 "Unable to save \"My number\"" = "Unable to save \"My number\"";
 "SAVING_NUMBER..." = "Saving number...";
-"NUMBER_SAVED_SUCCESS" = "Numbers saved";
+"NUMBER_SAVED_SUCCESS" = "Number saved";
+"SAVING_AVAILABILITY..." = "Saving availability...";
+"AVAILABILITY_SAVED_SUCCESS" = "Availability saved";
+
+"Availability" = "Availability";
+"Not available" = "Not available";
+"Saving availability has failed" = "Saving availability has failed";
+"Error getting the availability options" = "Error getting the availability options.";
+"Loading availability options..." = "Loading availability options...";
 
 /* Keypad icons mappings */
 "keypad-numbers" = "numbers";

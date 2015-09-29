@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "EditNumberTableViewController.h"
+#import "AvailabilityViewController.h"
 
-@interface SettingsViewController : UITableViewController <EditNumberDelegate>
+@interface SettingsViewController : UITableViewController <EditNumberDelegate, AvailabilityViewControllerDelegate>
 
 @end

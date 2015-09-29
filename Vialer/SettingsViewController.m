@@ -8,16 +8,33 @@
 
 #import "SettingsViewController.h"
 #import "SystemUser.h"
+#import "AvailabilityModel.h"
 #import "SettingsViewFooterView.h"
+#import "VoIPGRIDRequestOperationManager.h"
 #import "EditNumberTableViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "AvailabilityViewController.h"
+#import "SVProgressHUD.h"
 
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 
+#define VOIP_ACCOUNT_SECTION 0
+#define SIP_ENABLED_ROW 0
+#define SIP_ACCOUNT_ROW 1
+#define SIP_PASSWORD_ROW 2
+
+#define AVAILABILITY_SECTION 1
+#define AVAILABILITY_ROW 0
+
+#define NUMBERS_SECTION 2
+#define MY_NUMBER_ROW 0
+#define OUTGOING_NUMBER_ROW 1
+
 @interface SettingsViewController ()
 
+@property (nonatomic, strong) AvailabilityModel *availabilityModel;
 @property (nonatomic, weak) SystemUser *currentUser;
 
 @end
@@ -26,13 +43,27 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self.tableView reloadData];
+
+    [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
+        if (localizedErrorString != nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                            message:localizedErrorString
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }else{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION];
+            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+            [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
@@ -47,6 +78,15 @@
     return _currentUser;
 }
 
+- (AvailabilityModel *)availabilityModel {
+    if (_availabilityModel == nil) {
+        _availabilityModel = [[AvailabilityModel alloc] init];
+    }
+
+    return _availabilityModel;
+}
+
+
 #pragma mark - Table view data source
 
 //To enable the logout button,
@@ -54,20 +94,8 @@
 //- change LOGOUT_BUTTON_SECTION to 1
 //- change NUMBERS_SECTION to 2
 
-#define VOIP_ACCOUNT_SECTION 0
-#define SIP_ENABLED_ROW 0
-#define SIP_ACCOUNT_ROW 1
-#define SIP_PASSWORD_ROW 2
-
-#define LOGOUT_BUTTON_SECTION 99 //unused should be 1
-#define LOGOUT_BUTTON_ROW 0
-
-#define NUMBERS_SECTION 1 //was 2
-#define MY_NUMBER_ROW 0
-#define OUTGOING_NUMBER_ROW 1
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2; //3 if you want to display the logout button
+    return 3; //4 if you want to display the logout button
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -85,10 +113,10 @@
             }
             // Not allowed to sip, hide the content
             return 0;
-        case LOGOUT_BUTTON_SECTION:
-            return 1;
         case NUMBERS_SECTION:
             return 2;
+        case AVAILABILITY_SECTION:
+            return 1;
         default:
             break;
     }
@@ -99,8 +127,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //2 types of cells are used by this tableView
     static NSString *tableViewCellStyleValue1Identifier = @"UITableViewCellStyleValue1";
-    static NSString *tableViewCellStyleDefault = @"UITableViewCellStyleDefault";
-    
+
     UITableViewCell *cell;
 
     //Specific config according to cell function
@@ -125,7 +152,17 @@
             cell.detailTextLabel.text = [SystemUser currentUser].sipPassword;
             cell.accessoryView = nil;
         }
-        
+    } else if (indexPath.section == AVAILABILITY_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier])) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+        }
+
+        if (indexPath.row == AVAILABILITY_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"Availability", nil);
+            cell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }
+
     } else if (indexPath.section == NUMBERS_SECTION) {
         if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
@@ -140,20 +177,13 @@
             cell.detailTextLabel.text = [SystemUser currentUser].outgoingNumber;
             cell.accessoryView = nil;
         }
-        
-    }  else if (indexPath.section == LOGOUT_BUTTON_SECTION) {
-        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleDefault]))
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableViewCellStyleDefault];
-        cell.textLabel.text = NSLocalizedString(@"Logout", nil);
-        cell.textLabel.textColor = [UIColor redColor];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
-    
+
     //Common properties for all cells
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
-    
+
     return cell;
 }
 
@@ -180,11 +210,11 @@
     //The footer will be added to the last displayed section
     if (section == NUMBERS_SECTION) {
         CGRect frameOfLastRow = [tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:OUTGOING_NUMBER_ROW inSection:NUMBERS_SECTION]];
-        
+
         //the empty space below the last cell is the complete height of the tableview minus
         //the y position of the last row + the last rows height.
         CGRect emptyFrameBelowLastRow = CGRectMake(0, 0, self.tableView.frame.size.width,
-                   self.tableView.frame.size.height - (frameOfLastRow.origin.y + frameOfLastRow.size.height));
+                                                   self.tableView.frame.size.height - (frameOfLastRow.origin.y + frameOfLastRow.size.height));
 
         return [[SettingsViewFooterView alloc] initWithFrame:emptyFrameBelowLastRow];
     }
@@ -194,16 +224,23 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == LOGOUT_BUTTON_SECTION && indexPath.row == LOGOUT_BUTTON_ROW) {
-        [[SystemUser currentUser] logout];
-        [self.tableView reloadData];
-    } else if (indexPath.section == NUMBERS_SECTION && indexPath.row == MY_NUMBER_ROW){
-        
+    if (indexPath.section == NUMBERS_SECTION && indexPath.row == MY_NUMBER_ROW) {
+
         EditNumberTableViewController *editNumberController = [[EditNumberTableViewController alloc] initWithNibName:@"EditNumberTableViewController" bundle:[NSBundle mainBundle]];
         editNumberController.numberToEdit = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
         editNumberController.delegate = self;
         [self.navigationController pushViewController:editNumberController animated:YES];
+    } else if (indexPath.section == AVAILABILITY_SECTION && indexPath.row == AVAILABILITY_ROW) {
+        AvailabilityViewController *availabilityViewController = [[AvailabilityViewController alloc] initWithNibName:@"AvailabilityViewController" bundle:[NSBundle mainBundle]];
+        availabilityViewController.delegate = self;
+        [self.navigationController pushViewController:availabilityViewController animated:YES];
     }
+}
+
+- (void)userDestinationsFinishedLoading {
+    UITableViewCell *availabilityCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION]];
+    availabilityCell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
+
 }
 
 #pragma mark - Editnumber delegate
@@ -212,6 +249,14 @@
     //Update the tableView Cell
     UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MY_NUMBER_ROW inSection:NUMBERS_SECTION]];
     myNumberCell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
+}
+
+#pragma mark - Availability delegate
+
+- (void)availabilityHasChanged {
+    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"AVAILABILITY_SAVED_SUCCESS", nil)];
+    UITableViewCell *availabilityCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION]];
+    availabilityCell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
 }
 
 #pragma mark - SIP Enabled switch handler
