@@ -14,7 +14,7 @@
 @interface SideMenuHeaderView ()
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) UILabel *numberLabel;
-@property (nonatomic, strong) UILabel *emailLabel;
+@property (nonatomic, strong) UILabel *nameLabel;
 @end
 
 @implementation SideMenuHeaderView
@@ -26,16 +26,15 @@
         self.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [self addSubview:self.logoImageView];
         [self addSubview:self.numberLabel];
-        [self addSubview:self.emailLabel];
-        self.emailLabel.textColor = tintColor;
+        [self addSubview:self.nameLabel];
+        self.nameLabel.textColor = tintColor;
         self.numberLabel.textColor = tintColor;
     }
-
     return self;
 }
 
-- (void)setEmailAddress:(NSString *)emailAddress {
-    self.emailLabel.text = emailAddress;
+- (void)setDisplayName:(NSString *)displayName {
+    self.nameLabel.text = displayName;
 }
 
 - (void)setPhoneNumber:(NSString *)phoneNumber {
@@ -66,17 +65,17 @@
     return _numberLabel;
 }
 
-- (UILabel *)emailLabel {
-    if (!_emailLabel) {
+- (UILabel *)nameLabel {
+    if (!_nameLabel) {
         CGFloat yOffset = CGRectGetMaxY(self.numberLabel.frame);
-        _emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_OFFSET_LOGO_PHONE_NUMBER, yOffset, CGRectGetWidth(self.frame), 20.f)];
-        _emailLabel.font = [UIFont systemFontOfSize:14.f];
-        _emailLabel.adjustsFontSizeToFitWidth = true;
-        _emailLabel.minimumScaleFactor = 0.5;
-        _emailLabel.textAlignment = NSTextAlignmentLeft;
-        _emailLabel.textColor = self.tintColor;
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_OFFSET_LOGO_PHONE_NUMBER, yOffset, CGRectGetWidth(self.frame), 20.f)];
+        _nameLabel.font = [UIFont systemFontOfSize:14.f];
+        _nameLabel.adjustsFontSizeToFitWidth = true;
+        _nameLabel.minimumScaleFactor = 0.5;
+        _nameLabel.textAlignment = NSTextAlignmentLeft;
+        _nameLabel.textColor = self.tintColor;
     }
-    return _emailLabel;
+    return _nameLabel;
 }
 
 

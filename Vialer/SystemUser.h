@@ -32,7 +32,7 @@
 
 // Account information
 @property (nonatomic, readonly) NSString *user;
-@property (nonatomic, readonly) NSString *emailAddress;
+@property (nonatomic, readonly) NSString *displayName;
 @property (nonatomic, readonly) NSString *outgoingNumber;
 @property (nonatomic, readonly) NSString *mobileNumber;
 @property (nonatomic, readonly) NSString *sipAccount;

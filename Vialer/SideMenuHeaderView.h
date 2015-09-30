@@ -11,7 +11,7 @@
 @interface SideMenuHeaderView : UIView
 
 @property (strong, nonatomic) UIColor *tintColor;
-@property (strong, nonatomic) NSString *emailAddress;
+@property (strong, nonatomic) NSString *displayName;
 @property (strong, nonatomic) NSString *phoneNumber;
 
 - (instancetype)initWithFrame:(CGRect)frame andTintColor:(UIColor *)tintColor;

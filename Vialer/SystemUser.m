@@ -36,6 +36,12 @@ NSString * const kSuppressedKey = @"suppressed";
 
 @interface SystemUser ()
 
+@property (nonatomic, strong) NSString *user;
+@property (nonatomic, strong) NSString *sipAccount;
+@property (nonatomic, strong) NSString *outgoingNumber;
+@property (nonatomic, strong) NSString *mobileNumber;
+@property (nonatomic, strong) NSString *emailAddress;
+
 @end
 
 @implementation SystemUser {
@@ -43,8 +49,6 @@ NSString * const kSuppressedKey = @"suppressed";
     BOOL _isSipAllowed;
     BOOL _sipEnabled;
 }
-
-@synthesize emailAddress = _emailAddress;
 
 + (instancetype)currentUser {
     static SystemUser *_currentUser = nil;
@@ -89,12 +93,12 @@ NSString * const kSuppressedKey = @"suppressed";
 - (void)removeCurrentUser {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    _user = nil;
+    self.user = nil;
     _loggedIn = false;
-    _sipAccount = nil;
-    _outgoingNumber = nil;
-    _mobileNumber = nil;
-    _emailAddress = nil;
+    self.sipAccount = nil;
+    self.outgoingNumber = nil;
+    self.mobileNumber = nil;
+    self.emailAddress = nil;
     _sipEnabled = false;
     _isSipAllowed = false;
 
@@ -127,9 +131,9 @@ NSString * const kSuppressedKey = @"suppressed";
     return self;
 }
 
--(NSString *)emailAddress {
-    if (_emailAddress) {
-        return _emailAddress;
+-(NSString *)displayName {
+    if (self.emailAddress) {
+        return self.emailAddress;
     } else if (self.user) {
         return self.user;
     }
@@ -137,13 +141,13 @@ NSString * const kSuppressedKey = @"suppressed";
 }
 
 - (void)reloadCurrentUser {
-    _user = [[NSUserDefaults standardUserDefaults] objectForKey:kUserSUD];
+    self.user = [[NSUserDefaults standardUserDefaults] objectForKey:kUserSUD];
     // A user is considered logged in when its username is stored in the user defaults
     _loggedIn = (_user != nil);
-    _sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:kSIPAccountSUD];
-    _outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kOutgoingNumberSUD];
-    _mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kMobileNumberSUD];
-    _emailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:kEmailAddressSUD];
+    self.sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:kSIPAccountSUD];
+    self.outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kOutgoingNumberSUD];
+    self.mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kMobileNumberSUD];
+    self.emailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:kEmailAddressSUD];
     _sipEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kSIPEnabledSUD];
     _isSipAllowed = [[NSUserDefaults standardUserDefaults] boolForKey:kSIPAllowedSUD];
 }

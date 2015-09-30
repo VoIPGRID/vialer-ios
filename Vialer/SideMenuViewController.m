@@ -116,7 +116,7 @@ typedef enum : NSUInteger {
 - (void)reloadUserData {
     SystemUser *user = [SystemUser currentUser];
     self.headerView.phoneNumber = user.localizedOutgoingNumber;
-    self.headerView.emailAddress = user.emailAddress;
+    self.headerView.displayName = user.displayName;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -193,7 +193,7 @@ typedef enum : NSUInteger {
     } else if (indexPath.row == MENU_INDEX_LOGOUT) {
 
         NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedString(@"%@\nis currently logged in.", nil),
-                                    [SystemUser currentUser]];
+                                    [SystemUser currentUser].displayName];
 
         [message appendFormat:@"\n%@", NSLocalizedString(@"Are you sure you want to log out?", nil)];
 
