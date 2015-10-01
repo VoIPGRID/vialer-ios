@@ -563,15 +563,30 @@
     void(^animations)(void) = ^{
         [self.unlockView setAlpha:alpha];
     };
+    // Add a tap to the view to close immediately.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
+    [self.view addGestureRecognizer:tap];
+    
     [UIView animateWithDuration:2.2f
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:animations
                      completion:^(BOOL finished) {
-                         // Automatically continue after 2 seconds
-                         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(unlockIt) userInfo:nil repeats:NO];
+                         // If the animation finished normally, start the timer otherwise we were interrupted with the tap
+                         if (finished) {
+                             // Automatically continue after 2 seconds
+                             [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(unlockIt) userInfo:nil repeats:NO];
+                         }
                      }];
     
+}
+
+- (void)handleUnlockTap:(UITapGestureRecognizer *)gesture {
+    // Did we get a succesfull tap?
+    if (gesture.state == UIGestureRecognizerStateRecognized) {
+        // Move out of the welcome screen
+        [self unlockIt];
+    }
 }
 
 - (IBAction)unlockIt {
