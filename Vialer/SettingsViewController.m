@@ -189,9 +189,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     //Only the VOIP_ACCOUNT_SECTION has gets a header.
-    if (section == VOIP_ACCOUNT_SECTION
-        && self.currentUser.isAllowedToSip) {
-        return 35;
+    if (section == VOIP_ACCOUNT_SECTION) {
+        if (self.currentUser.isAllowedToSip) {
+            return 35;
+        }
+        // Returning 0 results in the default value (10), returning 1 to minimal
+        return 1;
     }
     return 0;
 }
