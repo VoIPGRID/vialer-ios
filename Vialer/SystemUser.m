@@ -244,6 +244,12 @@
     }
 }
 
+/** Retrieve a localized version of the outgoing number, this can match multiple translations if needed in the future
+ but currently only serves, `suppressed` */
+- (NSString *)localizedOutgoingNumber {
+    return NSLocalizedString(_outgoingNumber, @"Localized outgoing number, catching/translating suppressed");
+}
+
 #pragma mark -
 #pragma mark SIP Handling
 

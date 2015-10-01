@@ -174,7 +174,7 @@
 
         } else if (indexPath.row == OUTGOING_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
-            cell.detailTextLabel.text = [SystemUser currentUser].outgoingNumber;
+            cell.detailTextLabel.text = [[SystemUser currentUser] localizedOutgoingNumber];
             cell.accessoryView = nil;
         }
     }

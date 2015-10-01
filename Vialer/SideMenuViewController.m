@@ -115,7 +115,8 @@ typedef enum : NSUInteger {
 
 - (void)reloadUserData {
     SystemUser *user = [SystemUser currentUser];
-    self.headerView.phoneNumber = [user.outgoingNumber length] ? user.outgoingNumber : NSLocalizedString(@"No outgoing number configured", nil);
+    NSString *outgoing = user.localizedOutgoingNumber;
+    self.headerView.phoneNumber = [outgoing length] ? outgoing : NSLocalizedString(@"No outgoing number configured", nil);
     self.headerView.emailAddress = user.emailAddress;
 }
 
