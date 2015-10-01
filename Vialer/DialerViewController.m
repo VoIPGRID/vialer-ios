@@ -119,6 +119,12 @@
     self.statusView.backgroundColor = [Configuration tintColorForKey:kTintColorMessage];
 }
 
+// Override to always trigger a status change notification to update the user interface info messages
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self connectionStatusChangedNotification:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
