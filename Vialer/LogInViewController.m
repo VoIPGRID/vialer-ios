@@ -449,7 +449,7 @@
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         _fetchAccountRetryCount = 0; // Reset the retry count
-        NSString *outgoingNumber = [[SystemUser currentUser] localizedOutgoingNumber];
+        NSString *outgoingNumber = [SystemUser currentUser].localizedOutgoingNumber;
         if (outgoingNumber) {
             [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
         } else {
