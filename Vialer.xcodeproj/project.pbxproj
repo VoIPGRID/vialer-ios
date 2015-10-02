@@ -1107,7 +1107,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "03fa6780-a35c-4a4d-945a-a5bf60695370";
+				PROVISIONING_PROFILE = "2dfaa99f-be8b-4264-bc85-cda51618f0c2";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = AdHocDistribution;
