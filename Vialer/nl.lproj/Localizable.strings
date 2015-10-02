@@ -311,7 +311,7 @@
 "/dashboard/" = "/dashboard/";
 "/dialplan/" = "/dialplan/";
 "/stats/dashboard/" = "/stats/dashboard/";
-"A classic connection is being established. The default dialer will now be opened (double rate)." = "Een verbinding via je eigen telefoonnummer wordt nu opgezet.";
+"A classic connection is being established. The default dialer will now be opened." = "Een verbinding via je eigen telefoonnummer wordt nu opgezet.";
 "Accept" = "Neem op";
 "Call ended" = "Gesprek beëindigd";
 "Decline" = "Weiger";
@@ -322,7 +322,7 @@
 "Mobile" = "Mobiel";
 "NO WIFI OR 4G" = "Geen Wifi of 4G";
 "Poor internet connection Connect A/B" = "Twee staps modus ingeschakeld";
-"Poor internet Info" = "Je internetverbinding is niet snel genoeg om te bellen via VoIP. Bellen in twee stappen is ingeschakeld. Wanneer je iemand belt via de app bellen wij jou eerst op je GSM waarmee we je daarna verbinden met degene die je wilt bellen. Het kan zijn dat je telefonieleverancier voor het opzetten van twee verbindingen dubbele kosten in rekening brengt.";
+"Poor internet Info" = "Je internetverbinding is niet snel genoeg om te bellen via VoIP. Bellen in twee stappen is ingeschakeld. Wanneer je iemand belt via de app bellen wij jou eerst op je GSM waarmee we je daarna verbinden met degene die je wilt bellen.";
 "Setting up connection..." = "Maakt verbinding...";
 "Hide" = "Verberg";
 "VoIP Account" = "VoIP account";

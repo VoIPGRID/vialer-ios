@@ -312,7 +312,7 @@
 "/dashboard/" = "/dashboard/";
 "/dialplan/" = "/dialplan/";
 "/stats/dashboard/" = "/stats/dashboard/";
-"A classic connection is being established. The default dialer will now be opened (double rate)." = "A classic connection is being established. The default dialer will now be opened (double rate).";
+"A classic connection is being established. The default dialer will now be opened." = "A classic connection is being established. The default dialer will now be opened.";
 "Accept" = "Accept";
 "Call ended" = "Call ended";
 "Decline" = "Decline";
@@ -323,7 +323,7 @@
 "Mobile" = "Mobile";
 "NO WIFI OR 4G" = "NO WIFI OR 4G";
 "Poor internet connection Connect A/B" = "Poor internet connection Connect A/B";
-"Poor internet Info" =  "Your internet connection isn't fast enough to enable calling using VoIP. Two-step calling is therefore enabled. When you start a phonecall, we first call you on your mobile phone and when you pickup, we connect you to the person you want to call. It is possible that your telephony provider can charge you double rates for setting up two connections.";
+"Poor internet Info" =  "Your internet connection isn't fast enough to enable calling using VoIP. Two-step calling is therefore enabled. When you start a phonecall, we first call you on your mobile phone and when you pickup, we connect you to the person you want to call.";
 "Setting up connection..." = "Setting up connection...";
 "Hide" = "Hide";
 "VoIP Account" = "VoIP Account";

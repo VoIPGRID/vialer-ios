@@ -16,7 +16,6 @@
 #import <CoreTelephony/CTCall.h>
 
 #define PHONE_NUMBER_ALERT_TAG 100
-#define DOUBLE_TICKS_ALERT_TAG 101
 #define FAILED_ALERT_TAG       102
 
 @interface CallingViewController ()
@@ -70,7 +69,7 @@
     
     self.contactLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32.f];
 
-    self.statusLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil);
+    self.statusLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened.", nil);
     self.statusLabel.frame = CGRectMake(leftOffset, self.statusLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2), self.statusLabel.frame.size.height);
     [self.statusLabel sizeToFit];
 
@@ -110,13 +109,6 @@
         }
     } else if (alertView.tag == FAILED_ALERT_TAG) {
         [self dismiss];
-    } else if (alertView.tag == DOUBLE_TICKS_ALERT_TAG) {
-        if (buttonIndex == 1) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DoubleTicksAlertShown"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-
-            [self clickToDial];
-        }
     }
 }
 
@@ -161,13 +153,6 @@
 }
 
 - (void)clickToDial {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DoubleTicksAlertShown"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Double costs", nil) message:NSLocalizedString(@"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will be charged.\n\nCheck settings for more info regarding double costs.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
-        alert.tag = DOUBLE_TICKS_ALERT_TAG;
-        [alert show];
-        return;
-    }
-
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
@@ -190,7 +175,7 @@
     } else {
         self.infoLabel.hidden = YES;
     }
-    [self showWithStatus:NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened (double rate).", nil)];
+    [self showWithStatus:NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened.", nil)];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] clickToDialToNumber:self.toNumber fromNumber:fromNumber success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
