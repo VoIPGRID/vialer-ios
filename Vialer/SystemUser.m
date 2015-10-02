@@ -251,7 +251,7 @@ NSString * const kSuppressedKey = @"suppressed";
  but currently only serves, `suppressed` */
 - (NSString *)localizedOutgoingNumber {
     if ([_outgoingNumber isEqualToString:kSuppressedKey]) {
-        return NSLocalizedString(kSuppressedKey, @"Localized outgoing number, catching/translating suppressed");
+        return NSLocalizedString(@"suppressed", @"Localized outgoing number, catching/translating suppressed");
     }
     return _outgoingNumber;
 }
