@@ -38,7 +38,7 @@
 @property (nonatomic, readonly) NSString *sipAccount;
 @property (nonatomic, readonly) NSString *sipPassword;
 
-- (NSString *)localizedOutgoingNumber;
+@property (nonatomic, readonly) NSString *localizedOutgoingNumber;
 
 #pragma mark - Sip specific handling
 

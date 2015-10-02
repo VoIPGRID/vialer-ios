@@ -39,7 +39,11 @@
 }
 
 - (void)setPhoneNumber:(NSString *)phoneNumber {
-    self.numberLabel.text = phoneNumber;
+    if (phoneNumber.length > 0) {
+        self.numberLabel.text = phoneNumber;
+    } else {
+        self.numberLabel.text = NSLocalizedString(@"No outgoing number configured", nil);
+    }
 }
 
 - (UIImageView *)logoImageView {

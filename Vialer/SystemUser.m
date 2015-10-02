@@ -31,6 +31,9 @@
 #define kSIPEnabledSUD      @"SipEnabled"
 #define kSIPAllowedSUD      @"SIPAllowed"
 
+// Constant for "suppressed" key as supplied by api for outgoingNumber
+NSString * const kSuppressedKey = @"suppressed";
+
 @interface SystemUser ()
 
 @end
@@ -247,7 +250,10 @@
 /** Retrieve a localized version of the outgoing number, this can match multiple translations if needed in the future
  but currently only serves, `suppressed` */
 - (NSString *)localizedOutgoingNumber {
-    return NSLocalizedString(_outgoingNumber, @"Localized outgoing number, catching/translating suppressed");
+    if ([_outgoingNumber isEqualToString:kSuppressedKey]) {
+        return NSLocalizedString(kSuppressedKey, @"Localized outgoing number, catching/translating suppressed");
+    }
+    return _outgoingNumber;
 }
 
 #pragma mark -
