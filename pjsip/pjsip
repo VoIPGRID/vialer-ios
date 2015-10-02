@@ -43,7 +43,8 @@ rm -Rf "$BASE_DIR"/src/
 }
 
 function svn_checkout() {
-svn co http://svn.pjsip.org/repos/pjproject/trunk/ src/
+# Checkout version 2.4.5, rev 5163, check https://trac.pjsip.org/repos/browser/pjproject/tags for others
+svn co -r 5163 http://svn.pjsip.org/repos/pjproject/trunk/ src/
 }
 
 function info() {
@@ -92,7 +93,8 @@ echo ""
 cd "$BASE_DIR"/src
 cp "$BASE_DIR"/config_site.h "$BASE_DIR"/src/pjlib/include/pj
 #ARCH="-arch $1" ./configure-iphone --disable-video --disable-resample --disable-small-filter --disable-large-filter --disable-speex-aec --disable-speex-codec --disable-l16-codec --disable-gsm-codec --disable-g722-codec --disable-g7221-codec --disable-silk 2>&1 > "$BASE_DIR"/$1.log
-ARCH="-arch $1" ./configure-iphone  --disable-resample --disable-sdl --disable-ffmpeg --disable-v4l2 --disable-openh264 --disable-libyuv --disable-silk --disable-g722-codec --disable-g7221-codec --disable-speex-codec --disable-speex-aec --disable-l16-codec --disable-l16-codec 2>&1 > "$BASE_DIR"/$1.log
+#ARCH="-arch $1" ./configure-iphone  --disable-resample --disable-sdl --disable-ffmpeg --disable-v4l2 --disable-openh264 --disable-libyuv --disable-silk --disable-g722-codec --disable-g7221-codec --disable-speex-codec --disable-speex-aec --disable-l16-codec --disable-l16-codec 2>&1 > "$BASE_DIR"/$1.log
+ARCH="-arch $1" ./configure-iphone 2>&1 > "$BASE_DIR"/$1.log
 
 make dep 2>&1 >> "$BASE_DIR"/$1.log
 make clean 2>&1 >> "$BASE_DIR"/$1.log
