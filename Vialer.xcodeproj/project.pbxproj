@@ -53,18 +53,6 @@
 		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
 		FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB364D0D18367F0700932D6E /* DialerViewController.m */; };
 		FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB364D0E18367F0700932D6E /* DialerViewController.xib */; };
-		FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A71A1E4F510033FF78 /* GSAccount.m */; };
-		FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A91A1E4F510033FF78 /* GSAccountConfiguration.m */; };
-		FB3820C51A1E4F510033FF78 /* GSCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AC1A1E4F510033FF78 /* GSCall.m */; };
-		FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AF1A1E4F510033FF78 /* GSCodecInfo.m */; };
-		FB3820C71A1E4F510033FF78 /* GSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B11A1E4F510033FF78 /* GSConfiguration.m */; };
-		FB3820C81A1E4F510033FF78 /* GSDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B31A1E4F510033FF78 /* GSDispatch.m */; };
-		FB3820C91A1E4F510033FF78 /* GSIncomingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B51A1E4F510033FF78 /* GSIncomingCall.m */; };
-		FB3820CA1A1E4F510033FF78 /* GSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B71A1E4F510033FF78 /* GSNotifications.m */; };
-		FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B91A1E4F510033FF78 /* GSOutgoingCall.m */; };
-		FB3820CC1A1E4F510033FF78 /* GSPJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BB1A1E4F510033FF78 /* GSPJUtil.m */; };
-		FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BD1A1E4F510033FF78 /* GSRingback.m */; };
-		FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820C01A1E4F510033FF78 /* GSUserAgent.m */; };
 		FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
 		FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
 		FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
@@ -121,6 +109,18 @@
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
 		FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBE564F81A954EAD002C6DF3 /* incoming.wav */; };
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
+		FE0E5C901BBE848800243577 /* GSAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A71A1E4F510033FF78 /* GSAccount.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A91A1E4F510033FF78 /* GSAccountConfiguration.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C921BBE848800243577 /* GSCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AC1A1E4F510033FF78 /* GSCall.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C931BBE848800243577 /* GSCodecInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AF1A1E4F510033FF78 /* GSCodecInfo.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B11A1E4F510033FF78 /* GSConfiguration.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B31A1E4F510033FF78 /* GSDispatch.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B51A1E4F510033FF78 /* GSIncomingCall.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C971BBE848800243577 /* GSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B71A1E4F510033FF78 /* GSNotifications.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B91A1E4F510033FF78 /* GSOutgoingCall.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BB1A1E4F510033FF78 /* GSPJUtil.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BD1A1E4F510033FF78 /* GSRingback.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820C01A1E4F510033FF78 /* GSUserAgent.m */; settings = {ASSET_TAGS = (); }; };
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
@@ -959,56 +959,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
+				FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */,
 				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
 				C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */,
 				F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */,
-				FB3820C31A1E4F510033FF78 /* GSAccount.m in Sources */,
+				FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */,
 				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,
 				03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
-				FB3820CD1A1E4F510033FF78 /* GSRingback.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
-				FB3820C41A1E4F510033FF78 /* GSAccountConfiguration.m in Sources */,
 				F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
+				FE0E5C971BBE848800243577 /* GSNotifications.m in Sources */,
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
+				FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */,
+				FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
-				FB3820CE1A1E4F510033FF78 /* GSUserAgent.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
 				03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */,
 				3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
-				FB3820C61A1E4F510033FF78 /* GSCodecInfo.m in Sources */,
-				FB3820C51A1E4F510033FF78 /* GSCall.m in Sources */,
 				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
-				FB3820C91A1E4F510033FF78 /* GSIncomingCall.m in Sources */,
-				FB3820CC1A1E4F510033FF78 /* GSPJUtil.m in Sources */,
-				FB3820CA1A1E4F510033FF78 /* GSNotifications.m in Sources */,
+				FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */,
 				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
-				FB3820CB1A1E4F510033FF78 /* GSOutgoingCall.m in Sources */,
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
 				AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
+				FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */,
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
+				FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */,
 				F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				FE0E5C901BBE848800243577 /* GSAccount.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
-				FB3820C71A1E4F510033FF78 /* GSConfiguration.m in Sources */,
-				FB3820C81A1E4F510033FF78 /* GSDispatch.m in Sources */,
 				FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */,
+				FE0E5C921BBE848800243577 /* GSCall.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
 				FB6B47E11ABC280200B0DBC4 /* TrackedViewController.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
@@ -1017,8 +1015,10 @@
 				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
+				FE0E5C931BBE848800243577 /* GSCodecInfo.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
+				FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */,
 				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 			);
