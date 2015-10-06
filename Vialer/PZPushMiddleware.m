@@ -92,9 +92,11 @@
  * Use PushKit to register for VoIP notifications from an external source. Handle the notification receival and registration in self.
  */
 - (void)registerForVoIPNotifications {
-    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
-    voipRegistry.desiredPushTypes = [NSSet setWithArray:@[PKPushTypeVoIP]];
-    voipRegistry.delegate = (AppDelegate<PKPushRegistryDelegate>*)[UIApplication sharedApplication].delegate;
+    if ([SystemUser currentUser].sipEnabled) {
+        PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
+        voipRegistry.desiredPushTypes = [NSSet setWithArray:@[PKPushTypeVoIP]];
+        voipRegistry.delegate = (AppDelegate<PKPushRegistryDelegate>*)[UIApplication sharedApplication].delegate;
+    }
 }
 
 /**
@@ -104,13 +106,13 @@
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
     NSString *type = payload[@"type"];
     NSLog(@"Payload from middelware: %@", payload);
-    
+
     if ([type isEqualToString:@"call"]) {
         // We only try to force a SIP reconnection when we don't have an active one.
         if ([ConnectionHandler sharedConnectionHandler].accountStatus != GSAccountStatusConnected) {
             [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
         }
-        
+
         //Check to see if we have a SIP connection, if so, update middleware directly, if not, store payload to sent when middleware becomes connected
         if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
             NSLog(@"PJSIP connected with SIP Proxy, update middleware");

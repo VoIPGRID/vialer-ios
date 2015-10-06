@@ -23,6 +23,7 @@
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
+		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; settings = {ASSET_TAGS = (); }; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
@@ -177,6 +178,8 @@
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
 		C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		C415953F343DAA413EE2882E /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C43E92961BC400F900BC622B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		C43E92971BC400F900BC622B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C4FCC60A1BB925500013689F /* SideMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuHeaderView.h; sourceTree = "<group>"; };
 		C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuHeaderView.m; sourceTree = "<group>"; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
@@ -664,6 +667,8 @@
 				FB364D111836846A00932D6E /* Sounds */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
+				C43E92961BC400F900BC622B /* RootViewController.h */,
+				C43E92971BC400F900BC622B /* RootViewController.m */,
 				FB89C75A1850C153006A4556 /* CallingViewController.h */,
 				FB89C75B1850C153006A4556 /* CallingViewController.m */,
 				FB89C75C1850C153006A4556 /* CallingViewController.xib */,
@@ -976,6 +981,7 @@
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */,
 				FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */,
+				C43E92981BC400F900BC622B /* RootViewController.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
@@ -1107,7 +1113,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "2dfaa99f-be8b-4264-bc85-cda51618f0c2";
+				PROVISIONING_PROFILE = "68e91e59-0347-4193-8bb2-afb7c8a1967b";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = AdHocDistribution;

@@ -264,6 +264,15 @@ static GSCall *lastNotifiedCall;
     }
 }
 
+- (BOOL)sipOutboundCallPossible {
+
+    return (
+            [SystemUser currentUser].sipEnabled &&
+            [ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh &&
+            [ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected
+            );
+}
+
 - (NSString *)sipDomain {
     return [Configuration UrlForKey:@"SIP domain"];
 }
@@ -381,7 +390,7 @@ static GSCall *lastNotifiedCall;
     [self.vibrateTimer invalidate];
 }
 
-- (void)startVirbratingForCall {
+- (void)startVibratingForCall {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.vibrateTimer invalidate];
         self.vibrateTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(playVibrate) userInfo:nil repeats:YES];
@@ -389,7 +398,7 @@ static GSCall *lastNotifiedCall;
 }
 
 - (void)playVibrate {
-    NSLog(@"Vibrarting");
+    NSLog(@"Vibrating");
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
@@ -413,7 +422,7 @@ static GSCall *lastNotifiedCall;
                           context:nil];
 
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-    [[ConnectionHandler sharedConnectionHandler] startVirbratingForCall];
+    [[ConnectionHandler sharedConnectionHandler] startVibratingForCall];
 }
 
 #pragma mark - GSAccount delegate
