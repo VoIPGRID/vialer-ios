@@ -26,7 +26,6 @@
 #define VOIP_ACCOUNT_SECTION 1
 #define SIP_ENABLED_ROW 0
 #define SIP_ACCOUNT_ROW 1
-#define SIP_PASSWORD_ROW 2
 
 #define NUMBERS_SECTION 2
 #define MY_NUMBER_ROW 0
@@ -103,7 +102,7 @@
                 // Do we show all fields?
                 if (self.currentUser.sipEnabled) {
                     // Sip is enabled, show all fields
-                    return 3;
+                    return 2;
                 }
                 // Only show the enable switch
                 return 1;
@@ -154,10 +153,6 @@
         if (indexPath.row == SIP_ACCOUNT_ROW) {
             cell.textLabel.text = NSLocalizedString(@"SIP account", nil);
             cell.detailTextLabel.text = [SystemUser currentUser].sipAccount;
-            cell.accessoryView = nil;
-        } else if (indexPath.row == SIP_PASSWORD_ROW) {
-            cell.textLabel.text = NSLocalizedString(@"Password", nil);
-            cell.detailTextLabel.text = [SystemUser currentUser].sipPassword;
             cell.accessoryView = nil;
         }
     } else if (indexPath.section == NUMBERS_SECTION) {

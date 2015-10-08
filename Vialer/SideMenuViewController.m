@@ -22,16 +22,16 @@ typedef enum : NSUInteger {
     MENU_INDEX_STATS = 0,
     MENU_INDEX_INFO,
     MENU_INDEX_ACCOUNT,
+    MENU_INDEX_ROUTING,
     MENU_INDEX_LOGOUT,
     MENU_ITEM_COUNT,
     // Items after this line are disabled (not shown in the menu)
     MENU_INDEX_AVAILABILITY,
-    MENU_INDEX_ROUTING,
     MENU_INDEX_AUTOCONNECT
 } SideMenuItems;
 
-#define WEBVIEW_TARGET_ACCESSIBILITY    0
-#define WEBVIEW_TARGET_DIALPLAN         1
+#define WEBVIEW_TARGET_DIALPLAN         0
+#define WEBVIEW_TARGET_ACCESSIBILITY    1
 #define WEBVIEW_TARGET_STATISTICS       2
 
 @interface SideMenuViewController ()
