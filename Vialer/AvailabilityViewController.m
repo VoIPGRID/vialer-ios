@@ -36,9 +36,7 @@
     [super viewDidLoad];
 
     self.tableView.tintColor = [Configuration tintColorForKey:kTintColorTable];
-
     self.navigationItem.title = NSLocalizedString(@"Availability", nil);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
 }
 
 - (UIRefreshControl *)refreshControl {
@@ -73,24 +71,6 @@
         }else{
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
-        }
-    }];
-}
-
-- (void)saveButtonPressed {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_AVAILABILITY...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
-        if (localizedErrorString != nil) {
-            [SVProgressHUD dismiss];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:localizedErrorString
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
-        } else {
-            [self.delegate availabilityHasChanged];
-            [self.navigationController popViewControllerAnimated:YES];
         }
     }];
 }
@@ -133,8 +113,25 @@
     if (indexPath.row >= [self.availabilityModel countAvailabilityOptions]) {
         return;
     }
-
     self.lastSelected = indexPath;
+
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_AVAILABILITY...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
+        if (localizedErrorString != nil) {
+            [SVProgressHUD dismiss];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                            message:localizedErrorString
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                  otherButtonTitles:nil];
+            [alert show];
+        } else {
+            [self.delegate availabilityHasChanged];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+
+
 }
 
 @end

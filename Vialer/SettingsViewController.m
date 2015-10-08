@@ -20,13 +20,13 @@
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 
-#define VOIP_ACCOUNT_SECTION 0
+#define AVAILABILITY_SECTION 0
+#define AVAILABILITY_ROW 0
+
+#define VOIP_ACCOUNT_SECTION 1
 #define SIP_ENABLED_ROW 0
 #define SIP_ACCOUNT_ROW 1
 #define SIP_PASSWORD_ROW 2
-
-#define AVAILABILITY_SECTION 1
-#define AVAILABILITY_ROW 0
 
 #define NUMBERS_SECTION 2
 #define MY_NUMBER_ROW 0
@@ -89,17 +89,14 @@
 
 #pragma mark - Table view data source
 
-//To enable the logout button,
-//- change number of sections to 3
-//- change LOGOUT_BUTTON_SECTION to 1
-//- change NUMBERS_SECTION to 2
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3; //4 if you want to display the logout button
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
+        case AVAILABILITY_SECTION:
+            return 1;
         case VOIP_ACCOUNT_SECTION:
             // Are we allowed to show anything?
             if (self.currentUser.isAllowedToSip) {
@@ -115,8 +112,6 @@
             return 0;
         case NUMBERS_SECTION:
             return 2;
-        case AVAILABILITY_SECTION:
-            return 1;
         default:
             break;
     }
@@ -131,7 +126,20 @@
     UITableViewCell *cell;
 
     //Specific config according to cell function
-    if (indexPath.section == VOIP_ACCOUNT_SECTION) {
+    if (indexPath.section == AVAILABILITY_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier])) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+        }
+
+        if (indexPath.row == AVAILABILITY_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"Availability", nil);
+            cell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }
+
+        self.tableView.tableHeaderView.hidden = YES;
+
+    } else if (indexPath.section == VOIP_ACCOUNT_SECTION) {
         if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == SIP_ENABLED_ROW) {
@@ -152,17 +160,6 @@
             cell.detailTextLabel.text = [SystemUser currentUser].sipPassword;
             cell.accessoryView = nil;
         }
-    } else if (indexPath.section == AVAILABILITY_SECTION) {
-        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier])) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
-        }
-
-        if (indexPath.row == AVAILABILITY_ROW) {
-            cell.textLabel.text = NSLocalizedString(@"Availability", nil);
-            cell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
-            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }
-
     } else if (indexPath.section == NUMBERS_SECTION) {
         if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
@@ -206,7 +203,7 @@
         }
         return nil;
     }
-    return @"";
+    return nil;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
