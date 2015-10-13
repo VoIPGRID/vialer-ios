@@ -46,7 +46,7 @@
         
         // Add hamburger menu on navigation bar
         UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
+        leftDrawerButton.tintColor = [Configuration tintColorForKey:kTintColorLeftDrawerButton];
         self.navigationItem.leftBarButtonItem = leftDrawerButton;
     }
     return self;
