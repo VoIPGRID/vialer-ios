@@ -23,6 +23,14 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CocoaLumberjack (2.0.2):
+    - CocoaLumberjack/Default (= 2.0.2)
+    - CocoaLumberjack/Extensions (= 2.0.2)
+  - CocoaLumberjack/Core (2.0.2)
+  - CocoaLumberjack/Default (2.0.2):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.2):
+    - CocoaLumberjack/Default
   - GoogleAnalytics (3.13.0)
   - HTCopyableLabel (0.0.7)
   - MMDrawerController (0.6.0):
@@ -37,6 +45,19 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
+  - OHHTTPStubs (4.3.0):
+    - OHHTTPStubs/Default (= 4.3.0)
+  - OHHTTPStubs/Core (4.3.0)
+  - OHHTTPStubs/Default (4.3.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (4.3.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (4.3.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (4.3.0)
   - PBWebViewController (0.3)
   - Reachability (3.2)
   - SSKeychain (1.2.3)
@@ -45,9 +66,11 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
+  - CocoaLumberjack
   - GoogleAnalytics
   - HTCopyableLabel
   - MMDrawerController
+  - OHHTTPStubs
   - PBWebViewController
   - Reachability
   - SSKeychain
@@ -56,9 +79,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  CocoaLumberjack: dc96bf6c430c5a1a57cff0e90df0640f76cac8b2
   GoogleAnalytics: fcf1f1cad57ae1a9a53520018f0f680ceeeb8b49
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  OHHTTPStubs: 0aec5755528693a165bd616cb79f69387de306a8
   PBWebViewController: 909b1505da6ba7c5c82519a6457246027926061e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d

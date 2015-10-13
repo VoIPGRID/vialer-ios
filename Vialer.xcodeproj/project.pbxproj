@@ -10,6 +10,7 @@
 		03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */; };
 		03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */; };
 		03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */; };
+		0CA10D22294F86BC076328EA /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -22,6 +23,7 @@
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
+		59F75F50A24E17A0C5F6052C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */; };
 		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
 		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; settings = {ASSET_TAGS = (); }; };
@@ -29,16 +31,17 @@
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		F28B75011BCBE569000A3C48 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B75001BCBE569000A3C48 /* TwoStepCall.m */; settings = {ASSET_TAGS = (); }; };
 		F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */; };
 		F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B531B1DD36000E695FB /* ContactTableViewCell.m */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */; };
+		F2D983321BCC04FC005597F8 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D983311BCC04FC005597F8 /* TwoStepCallTests.m */; settings = {ASSET_TAGS = (); }; };
 		F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
 		F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */; };
 		F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */; };
 		F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811CB1B380A9400EA640F /* CellWithTextField.m */; };
 		F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811CC1B380A9400EA640F /* CellWithTextField.xib */; };
-		F854B6A37CF0558FC0FCF27A /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C415953F343DAA413EE2882E /* libPods-Vialer.a */; };
 		F919B9E01BA81B430082AD79 /* AvailabilityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F919B9DE1BA81B430082AD79 /* AvailabilityViewController.xib */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -130,6 +133,16 @@
 		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F2D983291BCC0488005597F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB4226CC182261D200707349;
+			remoteInfo = Vialer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -150,13 +163,14 @@
 		03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedNavBarView.m; sourceTree = "<group>"; };
 		03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
-		047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
 		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
 		3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
 		3D2F64141AE8F802003F7697 /* ConfigTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTextField.h; sourceTree = "<group>"; };
 		3D2F64151AE8F802003F7697 /* ConfigTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTextField.m; sourceTree = "<group>"; };
+		3D4356954652C7C86D242982 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D44303A1AEF67D50034156F /* AnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedImageView.h; sourceTree = "<group>"; };
 		3D44303B1AEF67D50034156F /* AnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedImageView.m; sourceTree = "<group>"; };
 		3D44303D1AEF8E1B0034156F /* VIAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIAScene.h; sourceTree = "<group>"; };
@@ -173,11 +187,15 @@
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
 		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
+		62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		857A8A980F3D76D2294D82DA /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
 		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
-		C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
-		C415953F343DAA413EE2882E /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C43E92961BC400F900BC622B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C43E92971BC400F900BC622B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C4FCC60A1BB925500013689F /* SideMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuHeaderView.h; sourceTree = "<group>"; };
@@ -187,6 +205,8 @@
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F28B74FF1BCBE569000A3C48 /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = Vialer/TwoStepCall/TwoStepCall.h; sourceTree = SOURCE_ROOT; };
+		F28B75001BCBE569000A3C48 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = Vialer/TwoStepCall/TwoStepCall.m; sourceTree = SOURCE_ROOT; };
 		F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsSearchTableViewController.h; sourceTree = "<group>"; };
 		F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsSearchTableViewController.m; sourceTree = "<group>"; };
 		F2900B521B1DD36000E695FB /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
@@ -194,6 +214,9 @@
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		F2D983241BCC0488005597F8 /* VialerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2D983281BCC0488005597F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2D983311BCC04FC005597F8 /* TwoStepCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallTests.m; sourceTree = "<group>"; };
 		F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewFooterView.h; sourceTree = "<group>"; };
 		F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewFooterView.m; sourceTree = "<group>"; };
 		F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberTableViewController.h; sourceTree = "<group>"; };
@@ -334,7 +357,6 @@
 		FBE564F81A954EAD002C6DF3 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
-		FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
 		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
@@ -346,6 +368,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F2D983211BCC0488005597F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59F75F50A24E17A0C5F6052C /* libPods-VialerTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4226CA182261D200707349 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -373,7 +403,7 @@
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
-				F854B6A37CF0558FC0FCF27A /* libPods-Vialer.a in Frameworks */,
+				0CA10D22294F86BC076328EA /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,12 +474,15 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		C01B88742FC628E4E890C190 /* Pods */ = {
+		752AD1FAE0F4299B6AF0D254 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */,
-				047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */,
-				FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */,
+				9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */,
+				9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */,
+				61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */,
+				ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */,
+				857A8A980F3D76D2294D82DA /* Pods-VialerTests.adhocdistribution.xcconfig */,
+				3D4356954652C7C86D242982 /* Pods-VialerTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -473,6 +506,25 @@
 				FB3820A31A1E4F510033FF78 /* Gossip */,
 			);
 			name = Libs;
+			sourceTree = "<group>";
+		};
+		F28B74FE1BCBE510000A3C48 /* TwoStepCall */ = {
+			isa = PBXGroup;
+			children = (
+				F28B74FF1BCBE569000A3C48 /* TwoStepCall.h */,
+				F28B75001BCBE569000A3C48 /* TwoStepCall.m */,
+			);
+			name = TwoStepCall;
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		F2D983251BCC0488005597F8 /* VialerTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2D983281BCC0488005597F8 /* Info.plist */,
+				F2D983311BCC04FC005597F8 /* TwoStepCallTests.m */,
+			);
+			path = VialerTests;
 			sourceTree = "<group>";
 		};
 		F2E811BF1B37E2EB00EA640F /* Settings View */ = {
@@ -610,9 +662,10 @@
 			children = (
 				EA46C5181AC2CCA100F7FC13 /* Libs */,
 				FB4226D6182261D200707349 /* Vialer */,
+				F2D983251BCC0488005597F8 /* VialerTests */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
-				C01B88742FC628E4E890C190 /* Pods */,
+				752AD1FAE0F4299B6AF0D254 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -620,6 +673,7 @@
 			isa = PBXGroup;
 			children = (
 				FB4226CD182261D200707349 /* Vialer.app */,
+				F2D983241BCC0488005597F8 /* VialerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -650,7 +704,8 @@
 				FB4226D0182261D200707349 /* UIKit.framework */,
 				FB4226D2182261D200707349 /* Foundation.framework */,
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
-				C415953F343DAA413EE2882E /* libPods-Vialer.a */,
+				2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */,
+				62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -665,6 +720,7 @@
 				FB202BC21A4396E700024CDE /* Handlers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
+				F28B74FE1BCBE510000A3C48 /* TwoStepCall */,
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
 				C43E92961BC400F900BC622B /* RootViewController.h */,
@@ -779,11 +835,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F2D983231BCC0488005597F8 /* VialerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2D9832E1BCC0488005597F8 /* Build configuration list for PBXNativeTarget "VialerTests" */;
+			buildPhases = (
+				4192F392CB9A057CA92F3EC8 /* Check Pods Manifest.lock */,
+				F2D983201BCC0488005597F8 /* Sources */,
+				F2D983211BCC0488005597F8 /* Frameworks */,
+				F2D983221BCC0488005597F8 /* Resources */,
+				1818C3815E7F06A6350CA0DB /* Embed Pods Frameworks */,
+				6939A68013597395E51718AF /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2D9832A1BCC0488005597F8 /* PBXTargetDependency */,
+			);
+			name = VialerTests;
+			productName = VialerTests;
+			productReference = F2D983241BCC0488005597F8 /* VialerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FB4226CC182261D200707349 /* Vialer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB4226FE182261D200707349 /* Build configuration list for PBXNativeTarget "Vialer" */;
 			buildPhases = (
-				70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */,
+				0784AD443F1A6953A2378219 /* Check Pods Manifest.lock */,
 				F2B947311B00DFEC00CE5112 /* config_site.h linking script */,
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
@@ -791,8 +868,8 @@
 				F298A9741B5E28D100467E31 /* Update Version number */,
 				F217146F1B54F4F00078B0A0 /* Update Build number */,
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
-				B23117DFF7F9D411D63FACFF /* Copy Pods Resources */,
-				90BE314ED57585ABB93C4029 /* Embed Pods Frameworks */,
+				61A4E925F54AA417DCC23DE6 /* Embed Pods Frameworks */,
+				243FF0FBA611B3D698FC4B5E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -812,6 +889,10 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
+					F2D983231BCC0488005597F8 = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = FB4226CC182261D200707349;
+					};
 					FB4226CC182261D200707349 = {
 						DevelopmentTeam = E2Q9UE8HM6;
 						SystemCapabilities = {
@@ -836,11 +917,19 @@
 			projectRoot = "";
 			targets = (
 				FB4226CC182261D200707349 /* Vialer */,
+				F2D983231BCC0488005597F8 /* VialerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F2D983221BCC0488005597F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4226CB182261D200707349 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -884,7 +973,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */ = {
+		0784AD443F1A6953A2378219 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -899,7 +988,52 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		90BE314ED57585ABB93C4029 /* Embed Pods Frameworks */ = {
+		1818C3815E7F06A6350CA0DB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		243FF0FBA611B3D698FC4B5E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4192F392CB9A057CA92F3EC8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		61A4E925F54AA417DCC23DE6 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -914,7 +1048,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B23117DFF7F9D411D63FACFF /* Copy Pods Resources */ = {
+		6939A68013597395E51718AF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -926,7 +1060,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F217146F1B54F4F00078B0A0 /* Update Build number */ = {
@@ -975,6 +1109,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F2D983201BCC0488005597F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2D983321BCC04FC005597F8 /* TwoStepCallTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4226C9182261D200707349 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1010,6 +1152,7 @@
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
+				F28B75011BCBE569000A3C48 /* TwoStepCall.m in Sources */,
 				FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */,
 				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
@@ -1047,6 +1190,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2D9832A1BCC0488005597F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB4226CC182261D200707349 /* Vialer */;
+			targetProxy = F2D983291BCC0488005597F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FB29D911189BA0FF00345976 /* Localizable.strings */ = {
@@ -1094,7 +1245,7 @@
 		};
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1133,6 +1284,94 @@
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = AdHocDistribution;
+		};
+		F2D9832B1BCC0488005597F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VialerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wearespindle.VialerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+			};
+			name = Debug;
+		};
+		F2D9832C1BCC0488005597F8 /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 857A8A980F3D76D2294D82DA /* Pods-VialerTests.adhocdistribution.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VialerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wearespindle.VialerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+			};
+			name = AdHocDistribution;
+		};
+		F2D9832D1BCC0488005597F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D4356954652C7C86D242982 /* Pods-VialerTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VialerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wearespindle.VialerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+			};
+			name = Release;
 		};
 		FB4226FC182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1195,7 +1434,7 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = 9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1209,11 +1448,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					"SANDBOX_APNS_TOKEN=1",
-				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1241,7 +1475,7 @@
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = 61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1283,6 +1517,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F2D9832E1BCC0488005597F8 /* Build configuration list for PBXNativeTarget "VialerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2D9832B1BCC0488005597F8 /* Debug */,
+				F2D9832C1BCC0488005597F8 /* AdHocDistribution */,
+				F2D9832D1BCC0488005597F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FB4226C8182261D200707349 /* Build configuration list for PBXProject "Vialer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -65,7 +65,7 @@
 "Failed to send email." = "Failed to send email.";
 
 /* No comment provided by engineer. */
-"Failed to set up a call." = "Failed to set up a call.";
+"Two step call failed" = "Two step call failed";
 
 "Business" = "Business";
 "calls in the cloud" = "calls in the cloud";
