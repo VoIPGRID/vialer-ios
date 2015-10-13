@@ -2,14 +2,14 @@
 //  SettingsViewController.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 11/12/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Created by Harold on 18/06/15.
+//  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "EditNumberTableViewController.h"
+#import "AvailabilityViewController.h"
 
-#import "SelectRecentsFilterViewController.h"
+@interface SettingsViewController : UITableViewController <EditNumberDelegate, AvailabilityViewControllerDelegate>
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SelectRecentsFilterViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

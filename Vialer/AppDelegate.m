@@ -6,182 +6,250 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "AppDelegate.h"
 
-#import "VoIPGRIDRequestOperationManager.h"
-#import "LogInViewController.h"
-#import "CallingViewController.h"
-#import "ContactsViewController.h"
-#import "RecentsViewController.h"
-#import "DashboardViewController.h"
-#import "DialerViewController.h"
-#import "SettingsViewController.h"
-#import "GoToViewController.h"
-
 #import "AFNetworkActivityLogger.h"
+#import "AFNetworkReachabilityManager.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+#import "Gossip+Extra.h"
+#import "SSKeychain.h"
+#import "UIAlertView+Blocks.h"
+
+#import "ConnectionHandler.h"
+#import "LogInViewController.h"
+#import "PZPushMiddleware.h"
+#import "RootViewController.h"
+#import "SystemUser.h"
+#import "VoIPGRIDRequestOperationManager.h"
+
+#define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
 @interface AppDelegate()
+@property (nonatomic, strong) RootViewController *rootViewController;
 @property (nonatomic, strong) LogInViewController *loginViewController;
-@property (nonatomic, strong) CallingViewController *callingViewController;
 @end
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-    NSAssert(config != nil, @"Config.plist not found!");
+#pragma mark - UIApplication delegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-    // New Relic
-    NSString *newRelicToken = [[config objectForKey:@"Tokens"] objectForKey:@"New Relic"];
-    if ([newRelicToken length]) {
-        [NewRelicAgent startWithApplicationToken:newRelicToken];
-    }
-
-#ifdef DEBUG
-    // Network logging
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
-#endif
-
-    // Setup appearance
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        NSArray *tabBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"TabBar"];
-        NSAssert(tabBarColor != nil && tabBarColor.count == 3, @"Tint colors - TabBar not found in Config.plist!");
-        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
-        [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[UIColor colorWithRed:[tabBarColor[0] intValue] / 255.f green:[tabBarColor[1] intValue] / 255.f blue:[tabBarColor[2] intValue] / 255.f alpha:1.f]];
-    }
-
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]}];
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"nav-bar"] stretchableImageWithLeftCapWidth:20 topCapHeight:10] forBarMetrics:UIBarMetricsDefault];
-
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    } else {
-        NSArray *navigationBarColor = [[config objectForKey:@"Tint colors"] objectForKey:@"NavigationBar"];
-        NSAssert(navigationBarColor != nil && navigationBarColor.count == 3, @"Tint colors - NavigationBar not found in Config.plist!");
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:[navigationBarColor[0] intValue] / 255.f green:[navigationBarColor[1] intValue] / 255.f blue:[navigationBarColor[2] intValue] / 255.f alpha:1.f]];
-    }
-
-    // Handler for failed authentications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-    
-    self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-    self.loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    
-    self.callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
-    self.callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-
-    ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
-    contactsViewController.view.backgroundColor = [UIColor clearColor];
-    contactsViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-    
-    UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
-    recentsViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
-    recentsNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    recentsNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-
-    UIViewController *dashboardViewController = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:[NSBundle mainBundle]];
-    dashboardViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *dashboardNavigationViewController = [[UINavigationController alloc] initWithRootViewController:dashboardViewController];
-    dashboardNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    dashboardNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-
-    UIViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:[NSBundle mainBundle]];
-    settingsViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *settingsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    settingsNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    settingsNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-
-    UIViewController *gotoViewController = [[GoToViewController alloc] initWithNibName:@"GoToViewController" bundle:[NSBundle mainBundle]];
-    gotoViewController.view.backgroundColor = [UIColor clearColor];
-    UINavigationController *gotoNavigationViewController = [[UINavigationController alloc] initWithRootViewController:gotoViewController];
-    gotoNavigationViewController.view.backgroundColor = [UIColor clearColor];
-    gotoNavigationViewController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-    
-    UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+    [self setupGoogleAnalytics];
+    [self setupConnectivity];
+    [self setupAppearance];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[recentsNavigationViewController, contactsViewController, dialerViewController, gotoNavigationViewController, settingsNavigationViewController];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"]) {
-        self.tabBarController.selectedIndex = 1;    // Contacts
-    } else {
-        self.tabBarController.selectedIndex = 4;    // Settings
-    }
-    self.window.rootViewController = self.tabBarController;
-    
+    self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
 
-    if (![VoIPGRIDRequestOperationManager isLoggedIn]) {
-        [self showLogin];
-    }
+    [self setupLogin];
+
+    NSSetUncaughtExceptionHandler(&HandleExceptions);
 
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+#pragma mark - setup helper methods
+- (void)setupGoogleAnalytics {
+    // Google Analytics
+    [[GAI sharedInstance] trackerWithTrackingId:[[Configuration new] objectInConfigKeyed:@"Tokens", @"Google Analytics", nil]];
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Set an additional dimensionValue for different brands.
+    [[GAI sharedInstance].defaultTracker set:[GAIFields customDimensionForIndex:1] value:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
+
+#ifdef DEBUG
+    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
+#endif
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (void)setupConnectivity {
+#ifdef DEBUG
+    // Network logging
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
+#endif
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
+    [[ConnectionHandler sharedConnectionHandler] start];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+- (void)setupAppearance {
+    Configuration *config = [Configuration new];
+
+    // Customize TabBar
+    [UITabBar appearance].tintColor = [config tintColorForKey:kTintColorTabBar];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:kTintColorTabBar]];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        [UITabBar appearance].barTintColor = [UIColor colorWithRed:(247 / 255.f) green:(247 / 255.f) blue:(247 / 255.f) alpha:1.f];
+    }
+
+    // Customize NavigationBar
+    [UINavigationBar appearance].tintColor = [config tintColorForKey:kTintColorNavigationBar];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f];
+    }
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+- (void)setupLogin {
+    // Handler for failed authentications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
+
+    //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
+    //v2.x and start onboarding at the "configure numbers view".
+
+    //TODO: Why not login again. What if the user was deactivated on the platform?
+    if (![SystemUser currentUser].isLoggedIn) {
+        //Not logged in, not v21.x, nor in v2.x
+        [self showOnboarding:OnboardingScreenLogin];
+    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
+        //Also show the Mobile number onboarding screen
+        [self showOnboarding:OnboardingScreenConfigure];
+    } else {
+        [[SystemUser currentUser] checkSipStatus];
+    }
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+#pragma mark - View Controllers
+- (RootViewController *)rootViewController {
+    if (!_rootViewController) {
+        _rootViewController = [[RootViewController alloc] init];
+    }
+    return _rootViewController;
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
+#pragma mark - UIApplication notification delegate
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    completionHandler(UIBackgroundFetchResultNoData);
 }
-*/
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
+    NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
+    if (application.applicationState != UIApplicationStateActive) {
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
+        if (completionHandler) {
+            completionHandler();
+        }
+    }
 }
-*/
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    if (application.applicationState != UIApplicationStateActive) { //
+        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
+    }
+}
+
+#pragma mark - PKPushRegistray management
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    NSLog(@"%s Incoming push notification of type: %@", __PRETTY_FUNCTION__, type);
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    NSDictionary *payloadDict = [payload dictionaryPayload];
+    [[PZPushMiddleware sharedInstance] handleReceivedNotificationForApplicationState:state payload:payloadDict];
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
+    NSLog(@"Registration successful, bundle identifier: %@, device token: %@", [NSBundle.mainBundle bundleIdentifier], credentials.token);
+    if (credentials.token) {
+        [[PZPushMiddleware sharedInstance] updateDeviceRecordForToken:credentials.token];
+    }
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
+    NSData *token = [registry pushTokenForType:type];
+    if (token) {
+        [[PZPushMiddleware sharedInstance] unregisterToken:[PZPushMiddleware deviceTokenStringFromData:token]
+                                             andSipAccount:[SystemUser currentUser].sipAccount];
+    }
+}
+
+#pragma mark - Exception handling
+void HandleExceptions(NSException *exception) {
+    NSLog(@"The app has encountered an unhandled exception: %@", [exception debugDescription]);
+}
+
+#pragma mark - UIApplicationDelegate methods
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
+        if (success) {
+            [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+        }
+    }];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // End all active calls when the app is terminated
+    for (GSCall *activeCall in [GSCall activeCalls]) {
+        [activeCall end];
+    }
+    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
+    }];
+}
+
+#pragma mark - Handle person(s) & calls
 - (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    return [self.callingViewController handlePerson:person property:property identifier:identifier];
+    if (property == kABPersonPhoneProperty) {
+        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+            if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i)) {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+                CFRelease(multiPhones);
+
+                NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
+                CFRelease(phoneNumberRef);
+
+                NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
+                if (!fullName) {
+                    NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+                    NSString *middleName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
+                    NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+                    if (firstName) {
+                        fullName = [NSString stringWithFormat:@"%@ %@%@", firstName, [middleName length] ? [NSString stringWithFormat:@"%@ ", middleName] : @"", lastName];
+                    }
+                }
+
+                [self handlePhoneNumber:phoneNumber forContact:fullName];
+            }
+        }
+    }
+    return NO;
+}
+
+- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
+    [self.rootViewController handlePhoneNumber:phoneNumber forContact:contact];
 }
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
-    return [self.callingViewController handlePhoneNumber:phoneNumber forContact:nil];
+    [self handlePhoneNumber:phoneNumber forContact:nil];
 }
 
-#pragma mark - Notifications
+- (void)handleSipCall:(GSCall *)sipCall {
+    return [self.rootViewController handleSipCall:sipCall];
+}
 
-- (void)showLogin {
-    if (!self.loginViewController.presentingViewController) {
-        [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+#pragma mark - Notification actions
+- (void)showOnboarding:(OnboardingScreens)screenToShow {
+    // Check if the loginViewController is created, and if present
+    NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
+    if (self.loginViewController == nil || !self.loginViewController.presentingViewController) {
+        // Create a new instance, and present it.
+        self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
+        if (!self.loginViewController.presentingViewController) {
+            self.loginViewController.screenToShow = screenToShow;
+            self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            // Set animated to NO to prevent a flip to the login/onboarding view.
+            [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+        }
     }
 }
 
 - (void)loginFailedNotification:(NSNotification *)notification {
-    [self showLogin];
+    [self showOnboarding:OnboardingScreenLogin];
 }
 
 @end

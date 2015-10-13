@@ -1,0 +1,146 @@
+#!/bin/bash
+
+cd `dirname $BASH_SOURCE`
+export BASE_DIR=`pwd -P`
+
+set -o errexit
+set -o errtrace
+
+export PRE=" ───── "
+
+function help() {
+cat <<EOF
+pjsip help          # shows this help message.
+pjsip svn_checkout  # Get the latest PJSIP sources from SVN
+pjsip clean         # cleans the pjsip source folder.
+
+pjsip all           # build fat binary that works on all architectures.
+pjsip armv7         # build armv7 static lib.
+pjsip armv7s        # build armv7s static lib.
+pjsip arm64         # build arm64 static lib.
+pjsip i386          # build i386 static lib.
+pjsip x86_64        # build x86_64 static lib.
+
+pjsip info armv7    # show architecture information for armv7 libs.
+pjsip info armv7s   # show architecture information for armv7s libs.
+pjsip info arm64    # show architecture information for arm64 libs.
+pjsip info i386     # show architecture information for i386 libs.
+pjsip info x86_64   # show architecture information for x86_64 libs.
+EOF
+}
+
+function clean() {
+echo "$PRE CLEAN"
+echo "WARNING: About to clean directory: $BASE_DIR/src"
+echo "waiting 5 seconds for sanity check... CTRL-C to abort now"
+sleep 1 && echo "4..." && \
+  sleep 1 && echo "3..." && \
+  sleep 1 && echo "2..." && \
+  sleep 1 && echo "1..." && \
+  sleep 1
+
+rm -Rf "$BASE_DIR"/src/
+}
+
+function svn_checkout() {
+# Checkout version 2.4.5, rev 5163, check https://trac.pjsip.org/repos/browser/pjproject/tags for others
+svn co -r 5163 http://svn.pjsip.org/repos/pjproject/trunk/ src/
+}
+
+function info() {
+echo "$PRE ARCH"
+find lib/$1/*.a | \
+  xargs lipo -info 2>/dev/null | grep "rchitecture" | \
+  sed -El "s/^.+\: .+\/(.+) (are|is architecture)\: (.+)$/\\3 - \\1/g" | \
+  sort
+
+echo
+echo "$PRE INCLUDES"
+find src | grep "\\include$" | sort
+}
+
+
+function armv7() { _build "armv7"; }
+function armv7s() { _build "armv7s"; }
+function arm64() { _build "arm64"; }
+
+function i386() {
+export DEVPATH=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer
+export CFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
+export LDFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
+_build "i386"
+}
+
+function x86_64() {
+export DEVPATH=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer
+export CFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
+export LDFLAGS="-O2 -m32 -mios-simulator-version-min=5.0"
+_build "x86_64"
+}
+
+function all() {
+armv7 && echo && armv7s && echo && arm64 && echo && i386 && echo && x86_64
+echo
+_merge
+}
+
+
+function _build() {
+echo "$PRE BUILD"
+echo "building for $1. this may take a while, tail -f $1.log to see progress."
+echo ""
+
+cd "$BASE_DIR"/src
+cp "$BASE_DIR"/config_site.h "$BASE_DIR"/src/pjlib/include/pj
+#ARCH="-arch $1" ./configure-iphone --disable-video --disable-resample --disable-small-filter --disable-large-filter --disable-speex-aec --disable-speex-codec --disable-l16-codec --disable-gsm-codec --disable-g722-codec --disable-g7221-codec --disable-silk 2>&1 > "$BASE_DIR"/$1.log
+#ARCH="-arch $1" ./configure-iphone  --disable-resample --disable-sdl --disable-ffmpeg --disable-v4l2 --disable-openh264 --disable-libyuv --disable-silk --disable-g722-codec --disable-g7221-codec --disable-speex-codec --disable-speex-aec --disable-l16-codec --disable-l16-codec 2>&1 > "$BASE_DIR"/$1.log
+ARCH="-arch $1" ./configure-iphone 2>&1 > "$BASE_DIR"/$1.log
+
+make dep 2>&1 >> "$BASE_DIR"/$1.log
+make clean 2>&1 >> "$BASE_DIR"/$1.log
+make 2>&1 >> "$BASE_DIR"/$1.log
+
+echo
+_collect $1
+}
+
+function _collect() {
+echo "$PRE COLLECT"
+cd "$BASE_DIR"
+mkdir -p lib/$1
+
+#for x in `find src | grep "\.a$"`; do
+for x in `find src -name *$1*.a`; do
+  cp -v ./$x ./lib/$1
+done | tee "$BASE_DIR"/collect.log
+}
+
+function _merge() {
+echo "$PRE MERGE"
+cd "$BASE_DIR"
+
+libtool -o lib/libpjsip.a `find ./lib -name *darwin_ios.a -exec printf '%s ' {} +`
+
+#for lib in `find lib/i386/*.a`; do
+#  lipo -arch armv7 lib/armv7/${lib##*/} \
+#    -arch armv7s lib/armv7s/${lib##*/} \
+#    -arch arm64 lib/arm64/${lib##*/} \
+#    -arch i386 lib/i386/${lib##*/} \
+#    -arch x86_64 lib/x86_64/${lib##*/} \
+#    -create -output lib/${lib##*/}
+#done | tee "$BASE_DIR"/merge.log
+}
+
+
+if [ -n "$1" ]; then
+  CMD=$1
+  shift
+  $CMD $*
+
+  echo
+  echo "$PRE DONE"
+
+else
+  help
+fi
+

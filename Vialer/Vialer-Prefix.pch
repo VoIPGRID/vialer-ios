@@ -11,6 +11,12 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    // Always have access to the configuration
+    #import "Configuration.h"
 #endif
 
-#import <NewRelicAgent/NewRelic.h>
+// Disable NSLog project wide when DEBUG is not defined
+#ifndef DEBUG
+#define NSLog(...) do {} while (0)
+#endif

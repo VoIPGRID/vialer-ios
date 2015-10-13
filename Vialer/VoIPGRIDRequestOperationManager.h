@@ -23,7 +23,9 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 // Log in / Log out
 - (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)logout;
-+ (BOOL)isLoggedIn;
+
+- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 
 // User requests
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
@@ -35,4 +37,14 @@ typedef enum VoIPGRIDHttpErrors VoIPGRIDHttpErrors;
 - (void)passwordResetWithEmail:(NSString *)email success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)autoLoginTokenWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ * Pushes the user's mobile number to the server
+ * @param mobileNumber the mobile number to push
+ * @param forcePush Pushes the number to the server irrespective of change or not
+ * @param succes the block being called on success
+ * @param failure the block being called on failure including an localized error string which can be presented to the user
+ */
+- (void)pushMobileNumber:(NSString *)mobileNumber forcePush:(BOOL)forcePush success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure;
+
+- (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict success: (void (^)())success failure:(void (^)(NSString * localizedErrorString))failure;
 @end

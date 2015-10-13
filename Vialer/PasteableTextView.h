@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PasteableTextView : UITextView
+@interface PasteableTextView : UITextView<UITextViewDelegate>
 
 @end

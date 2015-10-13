@@ -2,216 +2,264 @@
 //  SettingsViewController.m
 //  Vialer
 //
-//  Created by Reinier Wieringa on 11/12/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Created by Harold on 18/06/15.
+//  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
 #import "SettingsViewController.h"
+#import "SystemUser.h"
+#import "AvailabilityModel.h"
+#import "SettingsViewFooterView.h"
 #import "VoIPGRIDRequestOperationManager.h"
-#import "InfoCarouselViewController.h"
-#import "SelectRecentsFilterViewController.h"
-#import "WelcomeViewController.h"
-#import "NSString+Mobile.h"
+#import "EditNumberTableViewController.h"
+#import "UIAlertView+Blocks.h"
+#import "AvailabilityViewController.h"
+#import "SVProgressHUD.h"
 
-#define PHONE_NUMBER_ALERT_TAG 100
-#define LOG_OUT_ALERT_TAG 101
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 
-#define COST_INFO_IDX    0
-#define PHONE_NUMBER_IDX 1
-#define SHOW_RECENTS_IDX -1 // Disabled for now
-#define LOG_OUT_IDX      2
-#define VERSION_IDX      3
+#define AVAILABILITY_SECTION 0
+#define AVAILABILITY_ROW 0
+
+#define VOIP_ACCOUNT_SECTION 1
+#define SIP_ENABLED_ROW 0
+#define SIP_ACCOUNT_ROW 1
+
+#define NUMBERS_SECTION 2
+#define MY_NUMBER_ROW 0
+#define OUTGOING_NUMBER_ROW 1
 
 @interface SettingsViewController ()
-@property (nonatomic, strong) NSArray *sectionTitles;
-@property (nonatomic, strong) NSString *mobileCC;
+
+@property (nonatomic, strong) AvailabilityModel *availabilityModel;
+@property (nonatomic, weak) SystemUser *currentUser;
+
 @end
 
 @implementation SettingsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = NSLocalizedString(@"Settings", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"settings"];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]]];
-        
-        self.sectionTitles = @[NSLocalizedString(@"Information", nil), NSLocalizedString(@"Your number", nil), /*NSLocalizedString(@"Recents", nil), */ NSLocalizedString(@"Log out", nil), NSLocalizedString(@"Version", nil)];
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(config != nil, @"Config.plist not found!");
-        
-        NSArray *tableTintColor = [[config objectForKey:@"Tint colors"] objectForKey:@"Table"];
-        NSAssert(tableTintColor != nil && tableTintColor.count == 3, @"Tint colors - Table not found in Config.plist!");
-        self.tableView.tintColor = [UIColor colorWithRed:[tableTintColor[0] intValue] / 255.f green:[tableTintColor[1] intValue] / 255.f blue:[tableTintColor[2] intValue] / 255.f alpha:1.f];
-    }
-    
-    self.mobileCC = [NSString systemCallingCode];
-    if ([self.mobileCC isEqualToString:@"+31"]) {
-        self.mobileCC = @"+316";
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated  {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+
+    [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
+        if (localizedErrorString != nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                            message:localizedErrorString
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }else{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION];
+            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+            [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
-#pragma mark - Textfield delegate
+// Override to get the SystemUser instance only once
+- (SystemUser *)currentUser {
+    // Only retrieve the currentUser once
+    if (_currentUser == nil) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (newString.length != [[newString componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789 ()"] invertedSet]] componentsJoinedByString:@""].length) {
-        return NO;
+- (AvailabilityModel *)availabilityModel {
+    if (_availabilityModel == nil) {
+        _availabilityModel = [[AvailabilityModel alloc] init];
     }
 
-    return YES;
+    return _availabilityModel;
 }
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sectionTitles.count;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.sectionTitles[section];
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    switch (section) {
+        case AVAILABILITY_SECTION:
+            return 1;
+        case VOIP_ACCOUNT_SECTION:
+            // Are we allowed to show anything?
+            if (self.currentUser.isAllowedToSip) {
+                // Do we show all fields?
+                if (self.currentUser.sipEnabled) {
+                    // Sip is enabled, show all fields
+                    return 2;
+                }
+                // Only show the enable switch
+                return 1;
+            }
+            // Not allowed to sip, hide the content
+            return 0;
+        case NUMBERS_SECTION:
+            return 2;
+        default:
+            break;
+    }
+    // Unknown section, no items there
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"SettingsTableViewCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    
-    if (indexPath.section == COST_INFO_IDX) {
-        cell.textLabel.text = NSLocalizedString(@"Information about this app", nil);
-        
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-            [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
-        } else {
+    //2 types of cells are used by this tableView
+    static NSString *tableViewCellStyleValue1Identifier = @"UITableViewCellStyleValue1";
+
+    UITableViewCell *cell;
+
+    //Specific config according to cell function
+    if (indexPath.section == AVAILABILITY_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier])) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+        }
+
+        if (indexPath.row == AVAILABILITY_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"Availability", nil);
+            cell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
-    } else if (indexPath.section == PHONE_NUMBER_IDX) {
-        NSString *phoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
-        cell.textLabel.text = [phoneNumber length] ? phoneNumber : NSLocalizedString(@"Provide your mobile number", nil);
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    } else if (indexPath.section == SHOW_RECENTS_IDX) {
-        RecentsFilter recentsFilter = (RecentsFilter)[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
-        cell.userInteractionEnabled = NO; //0 < [[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] length];
-        cell.alpha = cell.userInteractionEnabled ? 1.0f : 0.5f;
-        cell.textLabel.text = (recentsFilter == RecentsFilterNone || !cell.userInteractionEnabled) ? NSLocalizedString(@"Show all recent calls", nil) : NSLocalizedString(@"Show your recent calls", nil);
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    } else if (indexPath.section == LOG_OUT_IDX) {
-        cell.textLabel.text = NSLocalizedString(@"Log out from this app", nil);
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    } else if (indexPath.section == VERSION_IDX) {
-        cell.textLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+
+        self.tableView.tableHeaderView.hidden = YES;
+
+    } else if (indexPath.section == VOIP_ACCOUNT_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+        if (indexPath.row == SIP_ENABLED_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"EnabledVOIPCalls", nil);
+            cell.detailTextLabel.text = nil;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+            cell.accessoryView = switchView;
+            [switchView setOn:[SystemUser currentUser].sipEnabled animated:NO];
+            [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+        }
+        if (indexPath.row == SIP_ACCOUNT_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"SIP account", nil);
+            cell.detailTextLabel.text = [SystemUser currentUser].sipAccount;
+            cell.accessoryView = nil;
+        }
+    } else if (indexPath.section == NUMBERS_SECTION) {
+        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+        if (indexPath.row == MY_NUMBER_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"My number", nil);
+            cell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
+            cell.accessoryView = nil;
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
+        } else if (indexPath.row == OUTGOING_NUMBER_ROW) {
+            cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
+            cell.detailTextLabel.text = [SystemUser currentUser].localizedOutgoingNumber;
+            cell.accessoryView = nil;
+        }
     }
+
+    //Common properties for all cells
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
 
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    [self tableView:tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    //Only the VOIP_ACCOUNT_SECTION has gets a header.
+    if (section == VOIP_ACCOUNT_SECTION) {
+        if (self.currentUser.isAllowedToSip) {
+            return 35;
+        }
+        // Returning 0 results in the default value (10), returning 1 to minimal
+        return 1;
+    }
+    return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == VOIP_ACCOUNT_SECTION) {
+        if (self.currentUser.isAllowedToSip) {
+            return NSLocalizedString(@"VoIP Account", nil);
+        }
+        return nil;
+    }
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    //The footer will be added to the last displayed section
+    if (section == NUMBERS_SECTION) {
+        CGRect frameOfLastRow = [tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:OUTGOING_NUMBER_ROW inSection:NUMBERS_SECTION]];
+
+        //the empty space below the last cell is the complete height of the tableview minus
+        //the y position of the last row + the last rows height.
+        CGRect emptyFrameBelowLastRow = CGRectMake(0, 0, self.tableView.frame.size.width,
+                                                   self.tableView.frame.size.height - (frameOfLastRow.origin.y + frameOfLastRow.size.height));
+
+        return [[SettingsViewFooterView alloc] initWithFrame:emptyFrameBelowLastRow];
+    }
+    return nil;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == COST_INFO_IDX) {
-        InfoCarouselViewController *infoCarouselViewController = [[InfoCarouselViewController alloc] initWithNibName:@"InfoCarouselViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:infoCarouselViewController animated:YES];
-    } else if (indexPath.section == PHONE_NUMBER_IDX) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mobile number", nil) message:NSLocalizedString(@"Please provide your mobile number starting with your country code.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-        alert.tag = PHONE_NUMBER_ALERT_TAG;
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        
-        NSString *mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
-        if (![mobileNumber length]) {
-            mobileNumber = self.mobileCC;
-        }
-        [alert textFieldAtIndex:0].delegate = self;
-        [alert textFieldAtIndex:0].text = mobileNumber;
-        [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypePhonePad;
-        [alert show];
-    } else if (indexPath.section == SHOW_RECENTS_IDX) {
-        SelectRecentsFilterViewController *selectRecentsFilterViewController = [[SelectRecentsFilterViewController alloc] initWithNibName:@"SelectRecentsFilterViewController" bundle:[NSBundle mainBundle]];
-        selectRecentsFilterViewController.recentsFilter = (RecentsFilter)[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
-        selectRecentsFilterViewController.delegate = self;
+    if (indexPath.section == NUMBERS_SECTION && indexPath.row == MY_NUMBER_ROW) {
 
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:selectRecentsFilterViewController];
-        navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-        [self presentViewController:navigationController animated:YES completion:^{}];
-    } else if (indexPath.section == LOG_OUT_IDX) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Log out", nil) message:NSLocalizedString(@"Are you sure you want to log out?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
-        [alert show];
-        alert.tag = LOG_OUT_ALERT_TAG;
+        EditNumberTableViewController *editNumberController = [[EditNumberTableViewController alloc] initWithNibName:@"EditNumberTableViewController" bundle:[NSBundle mainBundle]];
+        editNumberController.numberToEdit = [SystemUser currentUser].mobileNumber;
+        editNumberController.delegate = self;
+        [self.navigationController pushViewController:editNumberController animated:YES];
+    } else if (indexPath.section == AVAILABILITY_SECTION && indexPath.row == AVAILABILITY_ROW) {
+        AvailabilityViewController *availabilityViewController = [[AvailabilityViewController alloc] initWithNibName:@"AvailabilityViewController" bundle:[NSBundle mainBundle]];
+        availabilityViewController.delegate = self;
+        [self.navigationController pushViewController:availabilityViewController animated:YES];
     }
 }
 
-#pragma mark - Alert view delegate
+- (void)userDestinationsFinishedLoading {
+    UITableViewCell *availabilityCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION]];
+    availabilityCell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == PHONE_NUMBER_ALERT_TAG) {
-        if (buttonIndex == 1) {
-            UITextField *mobileNumberTextField = [alertView textFieldAtIndex:0];
-            NSString *mobileNumber = [mobileNumberTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            if ([mobileNumber length] && ![mobileNumber isEqualToString:self.mobileCC]) {
-                BOOL hasPhoneNumber = [[[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"] length];
-
-                [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                [self.tableView reloadData];
-                [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
-                
-                if (!hasPhoneNumber) {
-                    // Show welcome screen the first time a user enters his number
-                    WelcomeViewController *welcomeViewController = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
-                    UINavigationController *welcomeNavigationViewController = [[UINavigationController alloc] initWithRootViewController:welcomeViewController];
-                    [self presentViewController:welcomeNavigationViewController animated:YES completion:nil];
-                }
-            }
-        }
-    } else if (alertView.tag == LOG_OUT_ALERT_TAG) {
-        if (buttonIndex == 1) {
-            [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] logout];
-        }
-    }
 }
 
-#pragma mark - Select recents view controller delegate
+#pragma mark - Editnumber delegate
 
-- (void)selectRecentsFilterViewController:(SelectRecentsFilterViewController *)selectRecentsFilterViewController didFinishWithRecentsFilter:(RecentsFilter)recentsFilter {
-    [[NSUserDefaults standardUserDefaults] setObject:@(recentsFilter) forKey:@"RecentsFilter"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [self.tableView reloadData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RECENTS_FILTER_UPDATED_NOTIFICATION object:nil];
+- (void)numberHasChanged:(NSString *)newNumber {
+    //Update the tableView Cell
+    UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MY_NUMBER_ROW inSection:NUMBERS_SECTION]];
+    myNumberCell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
+}
+
+#pragma mark - Availability delegate
+
+- (void)availabilityHasChanged {
+    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"AVAILABILITY_SAVED_SUCCESS", nil)];
+    UITableViewCell *availabilityCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION]];
+    availabilityCell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
+}
+
+#pragma mark - SIP Enabled switch handler
+
+- (void)switchChanged:(UISwitch *)switchview {
+    self.currentUser.sipEnabled = switchview.on;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:VOIP_ACCOUNT_SECTION]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
