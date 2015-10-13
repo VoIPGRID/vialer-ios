@@ -94,10 +94,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //TODO: what about de-registering for these notifications in, for instance, -viewDidUnload
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
-
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
 
     self.numberPadViewController = [[AnimatedNumberPadViewController alloc] init];
@@ -122,12 +118,34 @@
 // Override to always trigger a status change notification to update the user interface info messages
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCallButtonState) name:UIApplicationDidBecomeActiveNotification object:nil];
+
     [self connectionStatusChangedNotification:nil];
+    [self setCallButtonState];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIPCallStartedNotification object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setCallButtonState {
+    if (!self.numberTextView.text.length) {
+        self.callButton.enabled = NO;
+        self.backButton.hidden = YES;
+    }
+
 }
 
 //We need a way to distinquish between
@@ -136,7 +154,7 @@
 // - A user who has no Mobile app VoIP account
 - (void)connectionStatusChangedNotification:(NSNotification *)notification {
     //Function is called when inet connection is interrupted... but not always
-    
+
     if ([self.reachabilityManager isReachable]) {
     //we have internets!!
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
@@ -164,20 +182,6 @@
         
         [self showMessage:NSLocalizedString(@"No Connection", nil) withInfo:NSLocalizedString(@"No Connection Info Text", nil)];
     }
-    
-//    NSLog(@"%s",__PRETTY_FUNCTION__);
-//    GSAccountStatus status = [ConnectionHandler sharedConnectionHandler].accountStatus;
-//    if (status == GSAccountStatusInvalid || status == GSAccountStatusOffline) {
-//        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
-//        self.callButton.enabled = NO;
-//        
-//        [self.statusLabel setHidden:NO];
-//    } else {
-//        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
-//        self.callButton.enabled = [self.numberTextView.text length] > 0;
-//        
-//        [self.statusLabel setHidden:YES];
-//    }
 }
 
 - (void)sipCallStartedNotification:(NSNotification *)notification {
@@ -212,9 +216,7 @@
 }
 
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender {
-    if (self.numberTextView.text.length) {
-        self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
-    }
+    self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
     self.backButton.hidden = (self.numberTextView.text.length == 0);
     self.callButton.enabled = (self.numberTextView.text.length > 0);
 }

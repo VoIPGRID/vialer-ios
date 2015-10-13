@@ -26,7 +26,5 @@
 
 - (IBAction)dialerBackButtonPressed:(UIButton *)sender;
 - (IBAction)callButtonPressed:(UIButton *)sender;
-
 - (IBAction)messageInfoPressed:(UIButton *)sender;
-
 @end
