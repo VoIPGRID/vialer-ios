@@ -30,7 +30,7 @@
 + (PZPushMiddleware *)sharedInstance {
     static dispatch_once_t pred;
     static PZPushMiddleware *_sharedInstance = nil;
-    
+
     dispatch_once(&pred, ^{
         _sharedInstance = [[self alloc] init];
     });
@@ -64,7 +64,7 @@
 }
 
 - (void)sentCallStoredPayloads {
-    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {        
+    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
         NSLog(@"%s GSAccountStatusConnected, sending #%@ stored payload(s)", __PRETTY_FUNCTION__, [NSNumber numberWithInteger:[self.storedCallPayloadsToSent count]]);
         //TODO:we probably want to implement a queue and lock the array but the change of multiple simultatious calls is quite small
         for (id storedPayload in self.storedCallPayloadsToSent)
@@ -72,7 +72,7 @@
                 // notify the PZ middleware that we registered, the PJSIP and are ready for calls using data from payload.
                 [self updateMiddleWareWithData:storedPayload];
             });
-        
+
         self.storedCallPayloadsToSent = nil;
     } else {
         NSLog(@"%s. PJSIP not connected, not sending stored Payloads!", __PRETTY_FUNCTION__);
@@ -100,9 +100,9 @@
 }
 
 /**
-* @param state the state of the application. Determines behaviour when receiving call (Background or not).
-* @param payload data for presenting the notification to a user.
-*/
+ * @param state the state of the application. Determines behaviour when receiving call (Background or not).
+ * @param payload data for presenting the notification to a user.
+ */
 - (void)handleReceivedNotificationForApplicationState:(UIApplicationState)state payload:(NSDictionary*)payload {
     NSString *type = payload[@"type"];
     NSLog(@"Payload from middelware: %@", payload);
@@ -144,25 +144,25 @@
 }
 
 /**
-* Register your APNS token with the backend as SIP call ready.
-*/
+ * Register your APNS token with the backend as SIP call ready.
+ */
 - (void)doDeviceCheckinWithData:(NSDictionary*)payload {
     NSString *link = payload[@"response_api"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *storedVoipToken = [defaults objectForKey:VOIP_TOKEN_STORAGE_KEY];
     [self.pzMiddleware POST:link parameters:@{@"token": storedVoipToken}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Device successfully checked in with Middleware");
-            // TODO: notify user?
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            // TODO: notify user?
-            NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
-        }];
+        // TODO: notify user?
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        // TODO: notify user?
+        NSLog(@"Unable to unregister device. Error:%@", [error localizedDescription]);
+    }];
 }
 
 /**
-* @param message a string to present as local notification to a user that his/her device
+ * @param message a string to present as local notification to a user that his/her device
  is not registered anymore for incoming calls when app runs in background.
-*/
+ */
 - (void)showLocalAlertMessage:(NSString*)message {
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.alertBody = message;
@@ -180,22 +180,22 @@
     NSString *link      = data[@"response_api"];
     id uniqueKey        = data[@"unique_key"];
     id messageStartTime = data[@"message_start_time"];
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"unique_key" : uniqueKey }];
     // Check if we have a valid message start time
     if (messageStartTime) {
         // It is valid, add it to the params.
         [params setObject:messageStartTime forKey:@"message_start_time"];
     }
-    
+
     NSLog(@"Updating middleware@%@ with: %@", link, params);
     if (link && uniqueKey) {
         [self.pzMiddleware POST:link parameters:params
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"%s Success", __PRETTY_FUNCTION__); // TODO: should I tell the user something?
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error); //TODO: We should probably tell someone... ?
-        }];
+                            NSLog(@"%s Success", __PRETTY_FUNCTION__); // TODO: should I tell the user something?
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"Error: %@", error); //TODO: We should probably tell someone... ?
+                        }];
     } else {
         NSLog(@"Error! Did not get enough info to notify the middleware!");
     }
@@ -204,7 +204,7 @@
 - (void)updateDeviceRecord {
     NSString* voipTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:VOIP_TOKEN_STORAGE_KEY];
     NSString *sipAccount = [SystemUser currentUser].sipAccount;
-    
+
     [self updateDeviceRecordForVoIPToken:voipTokenString sipAccount:sipAccount];
 }
 
@@ -216,33 +216,42 @@
 }
 
 /**
-* Register a token with the PZ middleware which can be used to notify this device of incoming calls, etc.
-*
-* @param token the NSData object containing a APNS registration token used by a backend.
-*/
+ * Register a token with the PZ middleware which can be used to notify this device of incoming calls, etc.
+ *
+ * @param token the NSData object containing a APNS registration token used by a backend.
+ */
 - (void)updateDeviceRecordForVoIPToken:(NSString *)voipTokenString sipAccount:(NSString *)sipAccount {
     NSLog(@"voip token: %@", voipTokenString);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+
     //Only check for Sip Account and VoiP Token, rest is "nice to know" info
     if (sipAccount.length > 0 && voipTokenString.length > 0) {
         // update middleware with the token
         NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
+
         NSDictionary *params = @{
-            // Pretty name for a device in middleware.
-            @"name": [[UIDevice currentDevice] name],
-            // token used to send notifications to this device.
-            @"token": voipTokenString,
-            // user id used as primary key of the SIP account registered with the currently logged in user.
-            @"sip_user_id": sipAccount,
-            // The version of the OS of this phone. Useful when debugging possible issues in the future.
-            @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
-            // The version of this client app. Useful when debugging possible issues in the future.
-            @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:@"CFBundleShortVersionString"], [infoDict objectForKey:@"CFBundleVersion"]],
-            // The bundle Id of this app, to allow middleware to distinguish between apps
-            @"app": [infoDict objectForKey:@"CFBundleIdentifier"]
-        };
+                                 // Pretty name for a device in middleware.
+                                 @"name": [[UIDevice currentDevice] name],
+                                 // token used to send notifications to this device.
+                                 @"token": voipTokenString,
+                                 // user id used as primary key of the SIP account registered with the currently logged in user.
+                                 @"sip_user_id": sipAccount,
+                                 // The version of the OS of this phone. Useful when debugging possible issues in the future.
+                                 @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
+                                 // The version of this client app. Useful when debugging possible issues in the future.
+                                 @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:@"CFBundleShortVersionString"], [infoDict objectForKey:@"CFBundleVersion"]],
+                                 // The bundle Id of this app, to allow middleware to distinguish between apps
+                                 @"app": [infoDict objectForKey:@"CFBundleIdentifier"],
+
+                                 //Sandbox is determined by the provisioning profile used on build, not on a build configuration.
+                                 //So, this is not the best way of detecting a Sandbox token or not.
+                                 //If this turns out to be unworkable, have a look at:
+                                 //https://github.com/blindsightcorp/BSMobileProvision
+#if SANDBOX_APNS_TOKEN
+                                 @"sandbox" : [NSNumber numberWithBool:YES]
+#endif
+                                 };
 
         void (^success)(AFHTTPRequestOperation*, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
             // store token locally to keep track of SIP to device mapping and prevent duplicate tokens in backend.
@@ -285,20 +294,20 @@
 
 #pragma mark - token management
 /**
-* The app returns the NSData containing a APNS token.
-*
-* @param deviceToken NSData object to convert to hex string.
-* @returns hexadecimal string containing APNS token.
-*/
+ * The app returns the NSData containing a APNS token.
+ *
+ * @param deviceToken NSData object to convert to hex string.
+ * @returns hexadecimal string containing APNS token.
+ */
 + (NSString*) deviceTokenStringFromData:(NSData*)deviceToken {
     NSString* deviceTokenString = [[NSString alloc] initWithData:deviceToken encoding:NSASCIIStringEncoding];
     return [self _hexadecimalStringForString:deviceTokenString];
 }
 
 /**
-* @param string data object to convert to hexadecimal format.
-* @returns hexadecimal version of input string.
-*/
+ * @param string data object to convert to hexadecimal format.
+ * @returns hexadecimal version of input string.
+ */
 + (NSString*) _hexadecimalStringForString:(NSString*)string {
     NSMutableString* hexadecimalString = [[NSMutableString alloc] init];
     for(NSUInteger i = 0; i < [string length]; i++) {
