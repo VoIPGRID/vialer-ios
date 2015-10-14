@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
+#import "PasteableTextView.h"
+#import "NumberPadViewController.h"
+
 #import <UIKit/UIKit.h>
 
-#import "NumberPadViewController.h"
-#import "TrackedViewController.h"
-#import "PasteableTextView.h"
-
-@interface DialerViewController : TrackedViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
+@interface DialerViewController : UIViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *buttonsView;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;

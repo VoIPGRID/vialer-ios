@@ -7,10 +7,11 @@
 //
 
 #import "VoIPGRIDRequestOperationManager.h"
+
 #import "NSDate+RelativeDate.h"
+#import "SystemUser.h"
 
 #import "SSKeychain.h"
-#import "SystemUser.h"
 
 #define GetPermissionSystemUserProfileUrl @"permission/systemuser/profile/"
 #define GetUserDestinationUrl @"userdestination/"

@@ -7,17 +7,17 @@
 //
 
 #import "SIPIncomingViewController.h"
-#import "ConnectionHandler.h"
-#import "Gossip+Extra.h"
-#import "AppDelegate.h"
 
+#import "AppDelegate.h"
+#import "ConnectionHandler.h"
+#import "GAITracker.h"
+#import "Gossip+Extra.h"
 #import "UIAlertView+Blocks.h"
 
-#import <AVFoundation/AVAudioSession.h>
 #import <AddressBook/AddressBook.h>
-
-#import <CoreTelephony/CTCallCenter.h>
+#import <AVFoundation/AVAudioSession.h>
 #import <CoreTelephony/CTCall.h>
+#import <CoreTelephony/CTCallCenter.h>
 
 @interface SIPIncomingViewController ()
 @property (nonatomic, strong) GSCall *incomingCall;
@@ -67,6 +67,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 
     self.contactLabel.text = self.incomingCall.remoteInfo;
     self.statusLabel.text = NSLocalizedString(@"Mobile", nil);

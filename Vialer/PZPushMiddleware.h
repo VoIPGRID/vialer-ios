@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class AppDelegate;
-
 @interface PZPushMiddleware : NSObject
 
 + (PZPushMiddleware *)sharedInstance;

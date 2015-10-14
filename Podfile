@@ -6,9 +6,9 @@ platform :ios, '8.0'
 
 target 'Vialer' do
    	pod 'AFNetworkActivityLogger'
-    pod 'AFNetworking'
-    pod 'GoogleAnalytics'
-    pod 'HTCopyableLabel'
+	pod 'AFNetworking'
+	pod 'Google/Analytics', '~> 1.0.7'
+	pod 'HTCopyableLabel'
    	pod 'MMDrawerController'
    	pod 'PBWebViewController'
    	pod 'Reachability'

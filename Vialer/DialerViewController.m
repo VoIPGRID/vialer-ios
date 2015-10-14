@@ -7,20 +7,21 @@
 //
 
 #import "DialerViewController.h"
+
+#import "AnimatedNumberPadViewController.h"
 #import "AppDelegate.h"
 #import "ConnectionHandler.h"
-#import "AnimatedNumberPadViewController.h"
+#import "GAITracker.h"
 #import "SIPCallingViewController.h"
-#import "UIViewController+MMDrawerController.h"
 #import "SystemUser.h"
-
-#import "AFNetworkReachabilityManager.h"
 
 #import <AudioToolbox/AudioServices.h>
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCall.h>
 
+#import "AFNetworkReachabilityManager.h"
+#import "UIViewController+MMDrawerController.h"
 #import "Reachability.h"
 
 static NSString * const kMenuImage = @"menu";
@@ -155,6 +156,10 @@ static NSString * const kMenuImage = @"menu";
     return _numberPadViewController;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+}
 
 #pragma mark - Notification handling
 

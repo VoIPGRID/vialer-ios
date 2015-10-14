@@ -7,7 +7,9 @@
 //
 
 #import "SIPCallingViewController.h"
+
 #import "ConnectionHandler.h"
+#import "GAITracker.h"
 #import "Gossip+Extra.h"
 #import "SIPIncomingViewController.h"
 
@@ -16,12 +18,8 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVAudioSession.h>
 #import <AddressBook/AddressBook.h>
-
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
-
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
 
 NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotification";
 
@@ -75,6 +73,11 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     
     [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
     [self.hideButton setTitle:NSLocalizedString(@"Hide", nil) forState:UIControlStateNormal];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -189,11 +192,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
                           options:NSKeyValueObservingOptionInitial
                           context:nil];
 
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                          action:@"Inbound"
-                                                           label:@"Accepted"
-                                                           value:nil] build]];
+    [GAITracker acceptIncomingCallEvent];
     
     // begin calling after 1s
     const double delayInSeconds = 1.0;

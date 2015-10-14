@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
-#import "GAI.h"
-#import "GAIFields.h"
-#import "GAIDictionaryBuilder.h"
-#import "SVProgressHUD.h"
-
 #import "AvailabilityViewController.h"
+
 #import "AvailabilityModel.h"
+#import "GAITracker.h"
 #import "VoIPGRIDRequestOperationManager.h"
+
+#import "SVProgressHUD.h"
 
 @interface AvailabilityViewController()
 @property (nonatomic, weak) NSIndexPath *lastSelected;
@@ -24,11 +23,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self loadUserDestinations];
 }
 
@@ -130,8 +125,6 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];
-
-
 }
 
 @end

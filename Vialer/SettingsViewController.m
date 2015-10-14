@@ -7,18 +7,17 @@
 //
 
 #import "SettingsViewController.h"
-#import "SystemUser.h"
-#import "AvailabilityModel.h"
-#import "SettingsViewFooterView.h"
-#import "VoIPGRIDRequestOperationManager.h"
-#import "EditNumberTableViewController.h"
-#import "UIAlertView+Blocks.h"
-#import "AvailabilityViewController.h"
-#import "SVProgressHUD.h"
 
-#import "GAI.h"
-#import "GAIFields.h"
-#import "GAIDictionaryBuilder.h"
+#import "AvailabilityModel.h"
+#import "AvailabilityViewController.h"
+#import "EditNumberTableViewController.h"
+#import "GAITracker.h"
+#import "SettingsViewFooterView.h"
+#import "SystemUser.h"
+#import "UIAlertView+Blocks.h"
+#import "VoIPGRIDRequestOperationManager.h"
+
+#import "SVProgressHUD.h"
 
 #define AVAILABILITY_SECTION 0
 #define AVAILABILITY_ROW 0
@@ -42,6 +41,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self.tableView reloadData];
 
     [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
@@ -60,14 +60,6 @@
     }];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:[NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-}
-
 // Override to get the SystemUser instance only once
 - (SystemUser *)currentUser {
     // Only retrieve the currentUser once
@@ -81,7 +73,6 @@
     if (_availabilityModel == nil) {
         _availabilityModel = [[AvailabilityModel alloc] init];
     }
-
     return _availabilityModel;
 }
 

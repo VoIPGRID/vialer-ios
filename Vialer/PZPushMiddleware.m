@@ -7,6 +7,7 @@
 //
 
 #import "PZPushMiddleware.h"
+
 #import "AFHTTPRequestOperationManager.h"
 #import "SystemUser.h"
 
@@ -14,8 +15,9 @@
 
 #import <PushKit/PushKit.h>
 
-
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
+
+@class AppDelegate;
 
 @interface PZPushMiddleware ()
 /**

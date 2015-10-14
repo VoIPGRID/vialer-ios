@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AvailabilityModel.h"
-#import "TrackedViewController.h"
 
 @protocol AvailabilityViewControllerDelegate <NSObject>
-@required
 - (void)availabilityHasChanged;
 @end
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
+#import <UIKit/UIKit.h>
 
 @protocol NumberPadViewControllerDelegate <NSObject>
 @optional
@@ -18,8 +18,8 @@
 
 @property (nonatomic, assign) id <NumberPadViewControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL tonesEnabled;
-@property (nonatomic, strong) NSArray *titles;
-@property (nonatomic, strong) NSArray *subtitles;
+@property (nonatomic, readonly) NSArray *titles;
+@property (nonatomic, readonly) NSArray *subtitles;
 
 - (void)playDtmfToneAtIndex:(NSUInteger)index;
 

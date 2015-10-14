@@ -7,9 +7,8 @@
 //
 
 #import <AddressBookUI/AddressBookUI.h>
-#import "TrackedViewController.h"
 
-@interface RecentsViewController : TrackedViewController<UITableViewDataSource, UITableViewDelegate, ABPersonViewControllerDelegate, ABUnknownPersonViewControllerDelegate>
+@interface RecentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ABPersonViewControllerDelegate, ABUnknownPersonViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *filterSegmentedControl;
 

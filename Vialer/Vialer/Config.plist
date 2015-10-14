@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Tokens</key>
-	<dict>
-		<key>Google Analytics</key>
-		<string>UA-60726618-2</string>
-	</dict>
 	<key>Tint colors</key>
 	<dict>
 		<key>Background</key>

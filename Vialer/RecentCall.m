@@ -7,14 +7,12 @@
 //
 
 #import "RecentCall.h"
+
 #import "NSDate+RelativeDate.h"
 #import "NSString+Mobile.h"
 
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-
-@interface RecentCall ()
-@end
 
 @implementation RecentCall
 

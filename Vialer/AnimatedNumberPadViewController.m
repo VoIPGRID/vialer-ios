@@ -7,6 +7,7 @@
 //
 
 #import "AnimatedNumberPadViewController.h"
+
 #import <AudioToolbox/AudioServices.h>
 
 @implementation AnimatedNumberPadViewController
@@ -42,7 +43,7 @@
 }
 
 - (UIView *)createDialerButtonViewWithTitle:(NSString *)title
-                                andSubTitle:(NSString *)subTitle
+                                andSubTitle:(NSString *)subtitle
                                         tag:(int)tag
                           constrainedToSize:(CGSize)size
 {
@@ -71,20 +72,20 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
 
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:subTitle];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:subtitle];
     [attributedString addAttribute:NSKernAttributeName
                              value:@(5.f)
-                             range:NSMakeRange(0, subTitle.length)];
+                             range:NSMakeRange(0, subtitle.length)];
     label.attributedText = attributedString;
 
     if (title.length > 0) {
-        if (subTitle.length > 1) {
+        if (subtitle.length > 1) {
             label.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:9.f];
         } else {
             label.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.f];
         }
     } else {
-        [button setTitle:subTitle forState:UIControlStateNormal];
+        [button setTitle:subtitle forState:UIControlStateNormal];
         label.attributedText = nil;
     }
 

@@ -7,22 +7,22 @@
 //
 
 #import "NumberPadViewController.h"
+
 #import "ConnectionHandler.h"
 
 #import "AFNetworkReachabilityManager.h"
 
-#import <AVFoundation/AVAudioPlayer.h>
-
 @interface NumberPadViewController ()
 @property (nonatomic, strong) NSArray *sounds;
 @property (nonatomic, strong) NSMutableArray *soundsPlayers;
+@property (nonatomic, strong) NSArray *titles;
+@property (nonatomic, strong) NSArray *subtitles;
 
 @end
 
 @implementation NumberPadViewController
 
-- (void)loadView
-{
+- (void)loadView {
     [super loadView];
     [self addDialerButtonsToView:self.view];
 }
@@ -49,7 +49,7 @@
         for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"s", @"0", @"#"]) {
             NSString *dtmfFile = [NSString stringWithFormat:@"dtmf-%@", sound];
             NSError *error = nil;
-            NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif"];
+            NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif" ];
             if (dtmfUrl) {
                 [sounds addObject:dtmfUrl];
             } else {
@@ -87,7 +87,7 @@
         for (int i = 0; i < 3; i++) {
             NSString *title = self.titles[j * 3 + i];
             NSString *subtitle = self.subtitles[j * 3 + i];
-            UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subtitle constrainedToSize:CGSizeMake(buttonWidth, buttonHeight)];
+            UIButton *button = [self createDialerButtonWithTitle:title andSubtitle:subtitle constrainedToSize:CGSizeMake(buttonWidth, buttonHeight)];
             [button addTarget:self action:@selector(dialerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = j * 3 + i;
 
@@ -108,7 +108,7 @@
 }
 
 - (UIButton *)createDialerButtonWithTitle:(NSString *)title
-                              andSubTitle:(NSString *)subTitle
+                              andSubtitle:(NSString *)subTitle
                         constrainedToSize:(CGSize)size
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

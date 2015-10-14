@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "EditNumberTableViewController.h"
 #import "AvailabilityViewController.h"
+#import "EditNumberTableViewController.h"
+
+#import <UIKit/UIKit.h>
 
 @interface SettingsViewController : UITableViewController <EditNumberDelegate, AvailabilityViewControllerDelegate>
 

@@ -7,22 +7,22 @@
 //
 
 #import "LogInViewController.h"
-#import "VoIPGRIDRequestOperationManager.h"
-#import "SystemUser.h"
+
+#import "AppDelegate.h"
+#import "AnimatedImageView.h"
 #import "ConnectionHandler.h"
+#import "GAITracker.h"
+#import "SystemUser.h"
 #import "UIAlertView+Blocks.h"
-#import "SVProgressHUD.h"
 #import "UIView+RoundedStyle.h"
+#import "VIAScene.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "AnimatedImageView.h"
-#import "VIAScene.h"
-
-#import "AppDelegate.h"
-
 #import "PBWebViewController.h"
+#import "SVProgressHUD.h"
 
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
@@ -54,12 +54,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self moveLogoOutOfScreen];
     });
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    [self removeObservers];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
@@ -95,6 +89,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self clearAllTextFields];
     [self addObservers];
 }
@@ -122,6 +117,11 @@
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
     [self.forgotPasswordView.emailTextfield setDelegate:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self removeObservers];
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {

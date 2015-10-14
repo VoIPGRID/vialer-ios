@@ -7,10 +7,12 @@
 //
 
 #import "CallingViewController.h"
-#import "VoIPGRIDRequestOperationManager.h"
-#import "SelectRecentsFilterViewController.h"
+
 #import "ConnectionHandler.h"
 #import "NSString+Mobile.h"
+#import "SelectRecentsFilterViewController.h"
+#import "GAITracker.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
@@ -104,6 +106,7 @@ static NSString * const failedBKey      = @"failed_b";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 

@@ -7,19 +7,21 @@
 //
 
 #import "RecentsViewController.h"
-#import "SystemUser.h"
-#import "VoIPGRIDRequestOperationManager.h"
-#import "RecentCall.h"
-#import "RecentTableViewCell.h"
-#import "NSDate+RelativeDate.h"
+
 #import "AppDelegate.h"
 #import "ContactsViewController.h"
+#import "NSDate+RelativeDate.h"
+#import "RecentCall.h"
+#import "RecentTableViewCell.h"
 #import "SelectRecentsFilterViewController.h"
+#import "SystemUser.h"
 #import "UIViewController+MMDrawerController.h"
-
-#import "SVProgressHUD.h"
+#import "GAITracker.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import <AddressBookUI/AddressBookUI.h>
+
+#import "SVProgressHUD.h"
 
 @interface RecentsViewController ()
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -68,7 +70,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+
     self.recents = [RecentCall cachedRecentCalls];
     self.missedRecents = [self filterMissedRecents:self.recents];
     

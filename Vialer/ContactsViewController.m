@@ -7,13 +7,15 @@
 //
 
 #import "ContactsViewController.h"
-#import "SystemUser.h"
-#import "AppDelegate.h"
 
+#import "AppDelegate.h"
+#import "ContactHandler.h"
 #import "ContactsSearchTableViewController.h"
 #import "ContactTableViewCell.h"
+#import "GAITracker.h"
+#import "SystemUser.h"
 #import "UIViewController+MMDrawerController.h"
-#import "ContactHandler.h"
+
 #import "HTCopyableLabel.h"
 
 @interface ContactsViewController()
@@ -112,6 +114,11 @@
     [headerView addSubview:numberValue];
 
     return headerView;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

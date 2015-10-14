@@ -7,16 +7,17 @@
 //
 
 #import "SideMenuViewController.h"
-#import "UIViewController+MMDrawerController.h"
-#import "SideMenuTableViewCell.h"
+
+#import "SettingsViewController.h"
 #import "SideMenuHeaderView.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "SideMenuTableViewCell.h"
 #import "SystemUser.h"
+#import "UIAlertView+Blocks.h"
+#import "UIViewController+MMDrawerController.h"
+#import "VoIPGRIDRequestOperationManager.h"
+
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
-#import "InfoCarouselViewController.h"
-#import "UIAlertView+Blocks.h"
-#import "SettingsViewController.h"
 
 typedef enum : NSUInteger {
     MENU_INDEX_STATS = 0,

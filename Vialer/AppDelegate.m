@@ -6,25 +6,24 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
-
 #import "AppDelegate.h"
 
-#import "AFNetworkActivityLogger.h"
-#import "AFNetworkReachabilityManager.h"
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
-#import "GAIFields.h"
-#import "Gossip+Extra.h"
-#import "SSKeychain.h"
-#import "UIAlertView+Blocks.h"
-
 #import "ConnectionHandler.h"
+#import "GAITracker.h"
+#import "Gossip+Extra.h"
 #import "LogInViewController.h"
 #import "PZPushMiddleware.h"
 #import "RootViewController.h"
 #import "SystemUser.h"
+#import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
+
+#import <AVFoundation/AVFoundation.h>
+
+#import "AFNetworkActivityLogger.h"
+#import "AFNetworkReachabilityManager.h"
+#import "SSKeychain.h"
+
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
@@ -40,7 +39,7 @@
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-    [self setupGoogleAnalytics];
+    [GAITracker setupGAITracker];
     [self setupConnectivity];
     [self setupAppearance];
     
@@ -56,17 +55,6 @@
 }
 
 #pragma mark - setup helper methods
-- (void)setupGoogleAnalytics {
-    // Google Analytics
-    [[GAI sharedInstance] trackerWithTrackingId:[[Configuration new] objectInConfigKeyed:@"Tokens", @"Google Analytics", nil]];
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    // Set an additional dimensionValue for different brands.
-    [[GAI sharedInstance].defaultTracker set:[GAIFields customDimensionForIndex:1] value:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
-
-#ifdef DEBUG
-    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
-#endif
-}
 
 - (void)setupConnectivity {
 #ifdef DEBUG

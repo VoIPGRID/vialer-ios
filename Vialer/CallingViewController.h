@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "RoundedLabel.h"
-#import "TrackedViewController.h"
 
-@interface CallingViewController : TrackedViewController<UITextFieldDelegate>
+#import <UIKit/UIKit.h>
+
+@interface CallingViewController : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
 @property (weak, nonatomic) IBOutlet RoundedLabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;

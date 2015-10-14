@@ -6,9 +6,8 @@
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import <AddressBookUI/AddressBookUI.h>
+#import <Foundation/Foundation.h>
 
 @interface ContactHandler : NSObject <ABNewPersonViewControllerDelegate>
 

@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "NumberPadViewController.h"
-#import "TrackedViewController.h"
 
 NSString * const SIPCallStartedNotification;
 
 @class GSCall;
 
-@interface SIPCallingViewController : TrackedViewController<NumberPadViewControllerDelegate>
+@interface SIPCallingViewController : UIViewController <NumberPadViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *buttonsView;
 @property (strong, nonatomic) IBOutlet UIView *numbersButtonsView;

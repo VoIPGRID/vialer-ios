@@ -5,16 +5,15 @@
 //  Created by Bob Voorneveld on 06/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
+#import "RootViewController.h"
 
 #import "CallingViewController.h"
 #import "ConnectionHandler.h"
 #import "ContactsViewController.h"
 #import "DialerViewController.h"
+#import "GAITracker.h"
 #import "LogInViewController.h"
 #import "RecentsViewController.h"
-#import "RootViewController.h"
 #import "SideMenuViewController.h"
 #import "SIPCallingViewController.h"
 #import "SIPIncomingViewController.h"
@@ -125,21 +124,14 @@
 #pragma mark - Handle calls
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
 
     if ([[ConnectionHandler sharedConnectionHandler] sipOutboundCallPossible]) {
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Outbound"
-                                                               label:@"SIP"
-                                                               value:nil] build]];
+        [GAITracker setupOutgoingSIPCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
     } else {
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Outbound"
-                                                               label:@"ConnectAB"
-                                                               value:nil] build]];
+        [GAITracker setupOutgoingConnectABCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
