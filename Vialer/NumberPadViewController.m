@@ -49,12 +49,6 @@
     [self addDialerButtonsToView:self.view];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)addDialerButtonsToView:(UIView *)view {
     CGFloat buttonWidth = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonWidth)) / 2.f;

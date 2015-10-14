@@ -18,6 +18,15 @@
 #define PHONE_NUMBER_ALERT_TAG 100
 #define FAILED_ALERT_TAG       102
 
+// API responses
+#define dialingAKey     @"@dialing_a"
+#define confirmKey      @"confirm"
+#define dailingBKey     @"dailing_b"
+#define connectedKey    @"connected"
+#define disconnectedKey @"disconnected"
+#define failedAKey      @"failed_a"
+#define failedBKey      @"failed_b"
+
 @interface CallingViewController ()
 @property (nonatomic, strong) NSTimer *updateStatusTimer;
 @property (nonatomic, strong) NSDictionary *callStatuses;
@@ -34,39 +43,56 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.callStatuses = [NSDictionary dictionaryWithObjectsAndKeys:
-                             NSLocalizedString(@"Your phone is being called...", nil), @"dialing_a",
-                             NSLocalizedString(@"Press 1 to answer the call", nil), @"confirm",
-                             NSLocalizedString(@"%@ is being called...", nil), @"dialing_b",
-                             NSLocalizedString(@"Calling...", nil), @"connected",
-                             NSLocalizedString(@"Disconnected", nil), @"disconnected",
-                             NSLocalizedString(@"Phone couldn't be reached", nil), @"failed_a",
-                             NSLocalizedString(@"The number is on the blacklist", nil), @"blacklisted",
-                             NSLocalizedString(@"%@ could not be reached", nil), @"failed_b",
-                             nil];
-        
-        __weak typeof(self) weakSelf = self;
-        self.callCenter = [[CTCallCenter alloc] init];
-        [self.callCenter setCallEventHandler:^(CTCall *call) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf dismissStatus:nil];
-            });
-            NSLog(@"callEventHandler: %@", call.callState);
-        }];
+        [self setupCellularCallEventsListener];
     }
     return self;
 }
 
+- (void)setupCellularCallEventsListener {
+    __weak typeof(self) weakSelf = self;
+    [self.callCenter setCallEventHandler:^(CTCall *call) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf dismissStatus:nil];
+        });
+        NSLog(@"callEventHandler: %@", call.callState);
+    }];
+}
+
+- (CTCallCenter *)callCenter {
+    if (!_callCenter) {
+        self.callCenter = [[CTCallCenter alloc] init];
+    }
+    return _callCenter;
+}
+
+- (NSDictionary *)callStatuses {
+    if (!_callStatuses) {
+        _callStatuses = @{
+                          dialingAKey: NSLocalizedString(@"Your phone is being called...", nil),
+                          confirmKey: NSLocalizedString(@"Press 1 to answer the call", nil),
+                          dailingBKey: NSLocalizedString(@"%@ is being called...", nil),
+                          connectedKey: NSLocalizedString(@"Calling...", nil),
+                          disconnectedKey: NSLocalizedString(@"Disconnected", nil),
+                          failedAKey: NSLocalizedString(@"Phone couldn't be reached", nil),
+                          failedBKey: NSLocalizedString(@"%@ could not be reached", nil),
+                          };
+    }
+    return _callStatuses;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupLayout];
+}
 
+- (void)setupLayout {
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
     CGFloat buttonXSpace = self.view.frame.size.width / 3.4f;
     CGFloat leftOffset = (self.view.frame.size.width - (3.f * buttonXSpace)) / 2.f;
     self.contactLabel.frame = CGRectMake(leftOffset, self.contactLabel.frame.origin.y, self.view.frame.size.width - (leftOffset * 2.f), self.contactLabel.frame.size.height);
     self.infoLabel.frame = CGRectMake(leftOffset, self.infoLabel.frame.origin.y, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
-    
+
     self.contactLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32.f];
 
     self.statusLabel.text = NSLocalizedString(@"A classic connection is being established. The default dialer will now be opened.", nil);
@@ -85,12 +111,6 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self dismissStatus:nil];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Alert view delegate
@@ -218,7 +238,6 @@
     if (newString.length != [[newString componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789 ()"] invertedSet]] componentsJoinedByString:@""].length) {
         return NO;
     }
-    
     return YES;
 }
 
