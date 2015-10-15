@@ -1,6 +1,0 @@
-module PBWebViewController {
-  umbrella header "PBWebViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}
