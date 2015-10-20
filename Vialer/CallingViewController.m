@@ -19,13 +19,13 @@
 #define FAILED_ALERT_TAG       102
 
 // API responses
-#define dialingAKey     @"@dialing_a"
-#define confirmKey      @"confirm"
-#define dailingBKey     @"dailing_b"
-#define connectedKey    @"connected"
-#define disconnectedKey @"disconnected"
-#define failedAKey      @"failed_a"
-#define failedBKey      @"failed_b"
+static NSString * const dialingAKey     = @"dialing_a";
+static NSString * const confirmKey      = @"confirm";
+static NSString * const dailingBKey     = @"dailing_b";
+static NSString * const connectedKey    = @"connected";
+static NSString * const disconnectedKey = @"disconnected";
+static NSString * const failedAKey      = @"failed_a";
+static NSString * const failedBKey      = @"failed_b";
 
 @interface CallingViewController ()
 @property (nonatomic, strong) NSTimer *updateStatusTimer;
@@ -179,12 +179,12 @@
 
     [self showWithStatus:NSLocalizedString(@"Dialing...", nil)];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    
+
     self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     self.toNumber = [[self.toNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
-    
+
     NSLog(@"Calling %@...", self.toNumber);
-    
+
     NSString *fromNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"MobileNumber"];
     fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     fromNumber = [[fromNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
@@ -204,7 +204,7 @@
                 if (self.updateStatusTimer) {
                     [self.updateStatusTimer invalidate];
                 }
-                
+
                 [self updateStatusForResponse:responseObject];
                 self.updateStatusTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateStatusInterval:) userInfo:nil repeats:YES];
                 [[NSRunLoop currentRunLoop] addTimer:self.updateStatusTimer forMode:NSDefaultRunLoopMode];
@@ -215,7 +215,7 @@
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        
+
         NSString *errorMessage = NSLocalizedString(@"Failed to set up a call.", nil);
         if ([operation.responseString isEqualToString:@"Extensions or phonenumbers not valid"]) {
             errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"Extensions or phonenumbers not valid.", nil)];
@@ -255,7 +255,7 @@
                 if (statusDescription) {
                     callStatus = [NSString stringWithFormat:statusDescription, [self.clickToDialStatus objectForKey:@"b_number"]];
                 }
-                
+
                 if ([@[@"disconnected", @"failed_a", @"blacklisted", @"failed_b"] containsObject:status]) {
                     [self dismissStatus:callStatus];
                 } else if (callStatus) {

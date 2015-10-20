@@ -23,7 +23,7 @@
 
 #import "Reachability.h"
 
-#define kMenuImage @"menu"
+static NSString * const kMenuImage = @"menu";
 
 @interface DialerViewController ()
 @property (nonatomic, strong) CTCallCenter *callCenter;
@@ -91,7 +91,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SIPCallStartedNotification object:nil];
-    
 }
 
 #pragma mark - Lazy loading properties
@@ -172,30 +171,30 @@
 }
 
 - (void)connectionStatusChangedNotification {
-    //Function is called when internet connection is changed
+    // Function is called when internet connection is changed.
     if ([self.reachabilityManager isReachable]) {
         // internet
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
         self.callButton.enabled = YES;
 
-        // Check if the user has sip enabled
-        if (!self.currentUser.sipEnabled && !self.currentUser.isAllowedToSip) {
-            // internet, No SIP enabled/allowed
+        // Check if the user has sip enabled.
+        if (self.currentUser.isAllowedToSip) {
+            // Internet, No SIP enabled/allowed.
             [self hideMessage];
         } else if (self.currentUser.sipAccount) {
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
-                // internet, SIP, good connection
+                // Internet, SIP, good connection.
                 [self hideMessage];
             } else {
                 // internet, SIP, but poor connection
                 [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Poor internet Info", nil)];
             }
         } else {
-            // internet, no SIP account configured
+            // Internet, no SIP account configured.
             [self showMessage:NSLocalizedString(@"Connect A/B calls only", nil) withInfo:NSLocalizedString(@"Connect A/B Info", nil)];
         }
     } else {
-        // no internet
+        // No internet.
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
         self.callButton.enabled = NO;
         [self showMessage:NSLocalizedString(@"No Connection", nil) withInfo:NSLocalizedString(@"No Connection Info Text", nil)];
