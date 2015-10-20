@@ -10,7 +10,21 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 
-NSString *const kCallIDKey = @"callID";
+static NSString * const TwoStepCallIDKey = @"callID";
+static NSString * const TwoStepCallStatusKey = @"status";
+
+/** @warning If this string array is changed in any way, also update the TwoStepCallStatus ENUM in the header file */
+static NSString * _Nonnull const kCallStatusStringArray[] = {
+    @"Unknown_Status",
+    @"dialing_a",
+    @"confirm",
+    @"dialing_b",
+    @"connected",
+    @"disconnected",
+    @"failed_a",
+    @"failed_b",
+    nil
+};
 
 @interface TwoStepCall()
 @property (nonatomic)TwoStepCallStatus status;
@@ -41,14 +55,14 @@ NSString *const kCallIDKey = @"callID";
              self.error = error;
          } else {
              //Start a timer which requests the status of this call every second.
-             NSDictionary *userInfo = @{kCallIDKey : callID};
+             NSDictionary *userInfo = @{TwoStepCallIDKey : callID};
              self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fetchCallStatus:) userInfo:userInfo repeats:YES];
          }
      }];
 }
 
 - (void)fetchCallStatus:(NSTimer *)timer {
-    NSString *callID = [[timer userInfo] objectForKey:kCallIDKey];
+    NSString *callID = [[timer userInfo] objectForKey:TwoStepCallIDKey];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] twoStepCallStatusForCallId:callID withCompletion:
      ^(NSString *callStatus, NSError *error) {
@@ -61,7 +75,7 @@ NSString *const kCallIDKey = @"callID";
          } else {
              self.status = [[self class] twoStepCallStatusFromString:callStatus];
              //If the call status is one of the following, invalidate the timer so it will stop polling.
-             if (self.status == (twoStepCallStatusDisconnected | twoStepCallStatusFailed_a | twoStepCallStatusBlacklisted | twoStepCallStatusFailed_b)) {
+             if (self.status == twoStepCallStatusDisconnected || self.status == twoStepCallStatusFailed_a || self.status == twoStepCallStatusFailed_b) {
                  NSLog(@"Call status changed to: %@ invalidating timer", [[self class] statusStringFromTwoStepCallStatus:self.status]);
                  [timer invalidate];
              }
@@ -70,7 +84,7 @@ NSString *const kCallIDKey = @"callID";
 }
 
 #pragma mark - TwoStepCallStatus enum to NSString en vice versa
-/** 
+/**
  Given a String, this function returns the corresponding TwoStepCallStatus or TwoStepCallStatusUnknown if
  the status of an unknown string is requested.
 
@@ -85,7 +99,7 @@ NSString *const kCallIDKey = @"callID";
     return indexOfString;
 }
 
-/** 
+/**
  Given a TwoStepCallStatus this functions returns a String representation of that status or the string at
  position 0 if an invalid status is supplied.
 
@@ -100,7 +114,7 @@ NSString *const kCallIDKey = @"callID";
     return [[[self class] callStatusStringArray] objectAtIndex:callStatus];
 }
 
-/** 
+/**
  A class function which initializes an array containing all String representations of the TwoStepCallStatus.
  @warning make sure that the order of the strings in the array corespond to the order of the TwoStepCallStatus enum.
  */
@@ -122,22 +136,22 @@ NSString *const kCallIDKey = @"callID";
 }
 
 #pragma mark - KVO automatic behaviour override
-/** 
- Overridden setter for status to manually fire KVO notifications only when the status actually changes 
+/**
+ Overridden setter for status to manually fire KVO notifications only when the status actually changes
  */
 - (void)setStatus:(TwoStepCallStatus)newStatus {
     if (_status != newStatus) {
-        [self willChangeValueForKey:kKVOTwoStepCallStatusKey];
+        [self willChangeValueForKey:TwoStepCallStatusKey];
         _status = newStatus;
-        [self didChangeValueForKey:kKVOTwoStepCallStatusKey];
+        [self didChangeValueForKey:TwoStepCallStatusKey];
     }
 }
 
-/** 
- By overriding this function and by overriding the getter you can manually control when an KVO event is fired 
+/**
+ By overriding this function and by overriding the getter you can manually control when an KVO event is fired
  */
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:kKVOTwoStepCallStatusKey]) {
+    if ([key isEqualToString:TwoStepCallStatusKey]) {
         return NO;
     } else {
         return [super automaticallyNotifiesObserversForKey:key];

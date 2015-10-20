@@ -10,6 +10,42 @@
 			<integer>145</integer>
 			<integer>145</integer>
 		</array>
+		<key>BackgroundInfoBarTwoStepScreen</key>
+		<array>
+			<string>229</string>
+			<string>229</string>
+			<string>229</string>
+		</array>
+		<key>VialerIconTwoStepScreen</key>
+		<array>
+			<string>61</string>
+			<string>65</string>
+			<string>84</string>
+		</array>
+		<key>BubblingTwoStepScreen</key>
+		<array>
+			<string>61</string>
+			<string>65</string>
+			<string>84</string>
+		</array>
+		<key>SideAIconTwoStepScreen</key>
+		<array>
+			<string>61</string>
+			<string>65</string>
+			<string>84</string>
+		</array>
+		<key>SideBIconTwoStepScreen</key>
+		<array>
+			<string>241</string>
+			<string>90</string>
+			<string>41</string>
+		</array>
+		<key>BackgroundHeaderTwoStepScreen</key>
+		<array>
+			<string>241</string>
+			<string>90</string>
+			<string>41</string>
+		</array>
 		<key>Background</key>
 		<dict>
 			<key>GradientStart</key>

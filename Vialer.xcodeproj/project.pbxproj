@@ -25,7 +25,14 @@
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		59F75F50A24E17A0C5F6052C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */; };
 		C41926331BE39C5900436D92 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926321BE39C5900436D92 /* TwoStepCall.m */; };
+		C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926351BE3A36600436D92 /* BubblingPoints.m */; };
+		C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
+		C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */; };
+		C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C419263B1BE3A36600436D92 /* ColoredCircle.m */; };
+		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
+		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
 		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; };
+		C46618B71BE7536500F696A0 /* TwoStepCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */; };
 		C4BFEA621BDFD50100D616A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */; };
 		C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
 		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; };
@@ -81,8 +88,6 @@
 		FB6B47711ABC190700B0DBC4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */; };
 		FB6B47DE1ABC277600B0DBC4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */; };
 		FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
-		FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB89C75B1850C153006A4556 /* CallingViewController.m */; };
-		FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB89C75C1850C153006A4556 /* CallingViewController.xib */; };
 		FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */; };
 		FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
@@ -194,8 +199,22 @@
 		ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C41926311BE39C5900436D92 /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C41926321BE39C5900436D92 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
+		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
+		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
+		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
+		C41926371BE3A36600436D92 /* CircleWithShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithShadow.m; sourceTree = "<group>"; };
+		C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithWhiteIcon.h; sourceTree = "<group>"; };
+		C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithWhiteIcon.m; sourceTree = "<group>"; };
+		C419263A1BE3A36600436D92 /* ColoredCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircle.h; sourceTree = "<group>"; };
+		C419263B1BE3A36600436D92 /* ColoredCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircle.m; sourceTree = "<group>"; };
+		C41926421BE3A36600436D92 /* VialerIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerIconView.h; sourceTree = "<group>"; };
+		C41926431BE3A36600436D92 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
+		C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
+		C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallingViewController.m; sourceTree = "<group>"; };
 		C43E92961BC400F900BC622B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C43E92971BC400F900BC622B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		C46618B81BE7536500F696A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
+		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
 		C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C4CEAB421BCE933000A56FC2 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		C4CEAB431BCE933000A56FC2 /* GAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAITracker.m; sourceTree = "<group>"; };
@@ -310,9 +329,6 @@
 		FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FB853165183986A5008A7EF1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		FB89C75A1850C153006A4556 /* CallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallingViewController.h; sourceTree = "<group>"; };
-		FB89C75B1850C153006A4556 /* CallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallingViewController.m; sourceTree = "<group>"; };
-		FB89C75C1850C153006A4556 /* CallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallingViewController.xib; sourceTree = "<group>"; };
 		FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
 		FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPCallingViewController.xib; sourceTree = "<group>"; };
@@ -439,8 +455,6 @@
 				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
 				3D4787361AEA5FC1002420FA /* VIASlider.h */,
 				3D4787371AEA5FC1002420FA /* VIASlider.m */,
-				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
-				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
 				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
 			);
 			name = General;
@@ -474,18 +488,32 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C41926511BE3A67100436D92 /* TwoStep */ = {
+			isa = PBXGroup;
+			children = (
+				C41926341BE3A36600436D92 /* BubblingPoints.h */,
+				C41926351BE3A36600436D92 /* BubblingPoints.m */,
+				C41926361BE3A36600436D92 /* CircleWithShadow.h */,
+				C41926371BE3A36600436D92 /* CircleWithShadow.m */,
+				C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */,
+				C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */,
+				C419263A1BE3A36600436D92 /* ColoredCircle.h */,
+				C419263B1BE3A36600436D92 /* ColoredCircle.m */,
+				C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */,
+				C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */,
+				C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */,
+				C41926421BE3A36600436D92 /* VialerIconView.h */,
+				C41926431BE3A36600436D92 /* VialerIconView.m */,
+				C41926311BE39C5900436D92 /* TwoStepCall.h */,
+				C41926321BE39C5900436D92 /* TwoStepCall.m */,
+			);
+			name = TwoStep;
+			sourceTree = "<group>";
+		};
 		C4CEAB3E1BCE794600A56FC2 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
 				C4CEAB401BCE7C0800A56FC2 /* Models */,
-				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
-				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
-				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
-				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
-				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
-				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
-				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
-				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
 			);
 			name = Recents;
 			sourceTree = "<group>";
@@ -493,18 +521,10 @@
 		C4CEAB3F1BCE7A5E00A56FC2 /* Calling */ = {
 			isa = PBXGroup;
 			children = (
-				C41926311BE39C5900436D92 /* TwoStepCall.h */,
-				C41926321BE39C5900436D92 /* TwoStepCall.m */,
-				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
-				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
-				FB89C75A1850C153006A4556 /* CallingViewController.h */,
-				FB89C75B1850C153006A4556 /* CallingViewController.m */,
-				FB89C75C1850C153006A4556 /* CallingViewController.xib */,
+				C41926511BE3A67100436D92 /* TwoStep */,
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
 				FB364D0D18367F0700932D6E /* DialerViewController.m */,
 				FB364D0E18367F0700932D6E /* DialerViewController.xib */,
-				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
-				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
 				FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */,
 				FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */,
 				FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */,
@@ -772,14 +792,32 @@
 				C4CEAB3F1BCE7A5E00A56FC2 /* Calling */,
 				3D1A5E611AE543C000DBE64B /* Onboarding/Login */,
 				C4CEAB3E1BCE794600A56FC2 /* Recents */,
-				F2E811BF1B37E2EB00EA640F /* Settings */,
-				C4FCC6091BB925380013689F /* Side Menu */,
 				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
 				FB202BC21A4396E700024CDE /* Handlers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
 				FB29D911189BA0FF00345976 /* Localizable.strings */,
+				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
+				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
+				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
+				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
+				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
+				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
+				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
+				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
+				03C8589C1AD370A5009CD05C /* ExtendedNavBarView.h */,
+				03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */,
+				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
+				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
+				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
+				FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */,
+				FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */,
+				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
+				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
+				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
+				C4FCC6091BB925380013689F /* Side Menu */,
+				F2E811BF1B37E2EB00EA640F /* Settings */,
 				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
 				FE3423F01B822D6A005020BA /* Vialer */,
 				FB4226D7182261D200707349 /* Supporting Files */,
@@ -816,10 +854,6 @@
 				FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */,
 				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
-				FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */,
-				FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */,
-				03C8589C1AD370A5009CD05C /* ExtendedNavBarView.h */,
-				03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */,
 				C4CEAB421BCE933000A56FC2 /* GAITracker.h */,
 				C4CEAB431BCE933000A56FC2 /* GAITracker.m */,
 			);
@@ -954,6 +988,7 @@
 			files = (
 				FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */,
 				FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */,
+				C46618B71BE7536500F696A0 /* TwoStepCallingViewController.xib in Resources */,
 				FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */,
 				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
 				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
@@ -983,7 +1018,6 @@
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
-				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
 				FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1157,6 +1191,7 @@
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */,
 				FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */,
+				C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */,
 				C43E92981BC400F900BC622B /* RootViewController.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
@@ -1181,8 +1216,11 @@
 				FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */,
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */,
+				C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */,
+				F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
+				C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */,
 				FE0E5C901BBE848800243577 /* GSAccount.m in Sources */,
@@ -1190,17 +1228,19 @@
 				FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */,
 				FE0E5C921BBE848800243577 /* GSCall.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
+				C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
-				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
+				C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */,
 				FE0E5C931BBE848800243577 /* GSCodecInfo.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */,
 				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
+				C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1216,6 +1256,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C46618B81BE7536500F696A0 /* en */,
+				C46618BA1BE7536C00F696A0 /* nl */,
+			);
+			name = TwoStepCallingViewController.xib;
+			sourceTree = "<group>";
+		};
 		FB29D911189BA0FF00345976 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

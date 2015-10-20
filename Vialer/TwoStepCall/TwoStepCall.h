@@ -8,32 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-NSString * const _Nonnull kKVOTwoStepCallStatusKey = @"status";
-
-/** @warning If this enum is changed in any way, also update the kCallStatusStringArray below */
+/** @warning If this enum is changed in any way, also update the kCallStatusStringArray in the implementation file */
 typedef NS_ENUM(NSInteger, TwoStepCallStatus) {
-    twoStepCallStatusUnknown = 0,
+    twoStepCallStatusUnknown,
     twoStepCallStatusDialing_a,
     twoStepCallStatusConfirm,
     twoStepCallStatusDialing_b,
     twoStepCallStatusConnected,
     twoStepCallStatusDisconnected,
     twoStepCallStatusFailed_a,
-    twoStepCallStatusBlacklisted,
     twoStepCallStatusFailed_b,
-};
-/** @warning If this string array is changed in any way, also update the TwoStepCallStatus ENUM above */
-NSString * _Nonnull const kCallStatusStringArray[] = {
-    @"Unknown_Status",
-    @"dialing_a",
-    @"confirm",
-    @"dialing_b",
-    @"connected",
-    @"disconnected",
-    @"failed_a",
-    @"blacklisted",
-    @"failed_b",
-    nil
 };
 
 @interface TwoStepCall : NSObject
@@ -56,7 +40,7 @@ NSString * _Nonnull const kCallStatusStringArray[] = {
  */
 - (_Nonnull instancetype)initWithANumber:(NSString * _Nonnull)aNumber andBNumber:(NSString * _Nonnull)bNumber;
 
-/** 
+/**
  Once the call is initialized, it can be started using this function. Changed to the call status
  can be monitored using the callStatus property. An error condition will be indicated by the error property being set.
  */

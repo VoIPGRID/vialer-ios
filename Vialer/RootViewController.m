@@ -7,7 +7,6 @@
 //
 #import "RootViewController.h"
 
-#import "CallingViewController.h"
 #import "ConnectionHandler.h"
 #import "ContactsViewController.h"
 #import "DialerViewController.h"
@@ -18,12 +17,13 @@
 #import "SIPCallingViewController.h"
 #import "SIPIncomingViewController.h"
 #import "SystemUser.h"
+#import "TwoStepCallingViewController.h"
 
 @interface RootViewController ()
-@property (nonatomic, strong) CallingViewController *callingViewController;
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
 @property (nonatomic, strong) SideMenuViewController *sideMenuViewController;
+@property (nonatomic, strong) TwoStepCallingViewController *twoStepCallingViewController;
 @property (nonatomic, strong) UINavigationController *contactsNavigationViewController;
 @property (nonatomic, strong) UINavigationController *dialerNavigationController;
 @property (nonatomic, strong) UINavigationController *recentsNavigationViewController;
@@ -56,14 +56,6 @@
         _sideMenuViewController = [[SideMenuViewController alloc] init];
     }
     return _sideMenuViewController;
-}
-
-- (CallingViewController *)callingViewController {
-    if (!_callingViewController) {
-        _callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
-        _callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    }
-    return _callingViewController;
 }
 
 - (SIPCallingViewController *)sipCallingViewController {
@@ -123,6 +115,13 @@
     return _recentsNavigationViewController;
 }
 
+- (TwoStepCallingViewController *)twoStepCallingViewController {
+    if (!_twoStepCallingViewController) {
+        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] initWithNibName:@"TwoStepCallingViewController" bundle:[NSBundle mainBundle]];
+    }
+    return _twoStepCallingViewController;
+}
+
 #pragma mark - Handle calls
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
@@ -135,7 +134,7 @@
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
+            [self.twoStepCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
     }
 }
