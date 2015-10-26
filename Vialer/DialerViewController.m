@@ -23,13 +23,20 @@
 
 #import "Reachability.h"
 
+static NSString * const kMenuImage = @"menu";
+
 @interface DialerViewController ()
 @property (nonatomic, strong) CTCallCenter *callCenter;
 @property (nonatomic, strong) AnimatedNumberPadViewController *numberPadViewController;
 @property (nonatomic, strong) Reachability *reachabilityManager;
+@property (nonatomic, strong) UIBarButtonItem *leftDrawerButton;
+@property (nonatomic, strong) SystemUser *currentUser;
 @end
 
 @implementation DialerViewController
+
+
+# pragma mark - Setup View
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,30 +45,77 @@
         self.tabBarItem.image = [UIImage imageNamed:@"tab-keypad"];
         self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-keypad-active"];
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        
-        // Add hamburger menu on navigation bar
-        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
-        self.navigationItem.leftBarButtonItem = leftDrawerButton;
+        self.navigationItem.leftBarButtonItem = self.leftDrawerButton;
 
-        __weak typeof(self) weakSelf = self;
-        self.callCenter = [[CTCallCenter alloc] init];
-        [self.callCenter setCallEventHandler:^(CTCall *call) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.backButton.hidden = YES;
-                weakSelf.callButton.enabled = NO;
-                weakSelf.numberTextView.text = @"";
-            });
-            NSLog(@"callEventHandler2: %@", call.callState);
-        }];
-        
+        [self setupCellularCallEventsListener];
         [self.reachabilityManager startNotifier];
     }
     return self;
 }
 
--(void)dealloc {
+- (void)dealloc {
     [self.reachabilityManager stopNotifier];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupLayout];
+
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonLongPress:)];
+    [self.backButton addGestureRecognizer:longPress];
+}
+
+- (void)setupLayout {
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
+
+    [self.buttonsView addSubview:self.numberPadViewController.view];
+    [self addChildViewController:self.numberPadViewController];
+    self.backButton.hidden = YES;
+    self.callButton.enabled = NO;
+
+    // Color the warning
+    self.statusView.backgroundColor = [Configuration tintColorForKey:kTintColorMessage];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomActiveNotification) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification) name:ConnectionStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification) name:SIPCallStartedNotification object:nil];
+    [self connectionStatusChangedNotification];
+    [self setCallButtonState];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIPCallStartedNotification object:nil];
+}
+
+#pragma mark - Lazy loading properties
+
+- (CTCallCenter *)callCenter {
+    if (!_callCenter) {
+        self.callCenter = [[CTCallCenter alloc] init];
+    }
+    return _callCenter;
+}
+
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
+
+- (UIBarButtonItem *)leftDrawerButton {
+    if (!_leftDrawerButton) {
+        // Add hamburger menu on navigation bar
+        _leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kMenuImage] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
+        _leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
+    }
+    return _leftDrawerButton;
 }
 
 - (Reachability *)reachabilityManager{
@@ -76,68 +130,37 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSLog(@"REACHABLE!");
-                    [weakSelf connectionStatusChangedNotification:nil];
+                    [weakSelf connectionStatusChangedNotification];
                 });
             });
         };
-        
+
         _reachabilityManager.unreachableBlock = ^(Reachability*reach) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"UNREACHABLE!");
-                [weakSelf connectionStatusChangedNotification:nil];
+                [weakSelf connectionStatusChangedNotification];
             });
         };
     }
     return _reachabilityManager;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //TODO: what about de-registering for these notifications in, for instance, -viewDidUnload
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
-
-    self.numberPadViewController = [[AnimatedNumberPadViewController alloc] init];
-    self.numberPadViewController.view.frame = self.buttonsView.bounds;
-    [self.buttonsView addSubview:self.numberPadViewController.view];
-    [self addChildViewController:self.numberPadViewController];
-    self.numberPadViewController.delegate = self;
-    self.numberPadViewController.tonesEnabled = YES;
-
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonLongPress:)];
-    [self.backButton addGestureRecognizer:longPress];
-    
-    self.backButton.hidden = YES;
-    self.callButton.enabled = NO;
-
-    [self connectionStatusChangedNotification:nil];
-    
-    // Color the warning
-    self.statusView.backgroundColor = [Configuration tintColorForKey:kTintColorMessage];
+- (AnimatedNumberPadViewController *)numberPadViewController {
+    if (!_numberPadViewController) {
+        _numberPadViewController = [[AnimatedNumberPadViewController alloc] init];
+        _numberPadViewController.view.frame = self.buttonsView.bounds;
+        _numberPadViewController.delegate = self;
+        _numberPadViewController.tonesEnabled = YES;
+    }
+    return _numberPadViewController;
 }
 
-// Override to always trigger a status change notification to update the user interface info messages
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCallButtonState) name:UIApplicationDidBecomeActiveNotification object:nil];
+#pragma mark - Notification handling
 
-    [self connectionStatusChangedNotification:nil];
+- (void)applicationDidBecomActiveNotification {
+    [self connectionStatusChangedNotification];
     [self setCallButtonState];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIPCallStartedNotification object:nil];
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setCallButtonState {
@@ -145,49 +168,55 @@
         self.callButton.enabled = NO;
         self.backButton.hidden = YES;
     }
-
 }
 
-//We need a way to distinquish between
-// - no internet at all
-// - internet below wifi/4g -> connect A/B only
-// - A user who has no Mobile app VoIP account
-- (void)connectionStatusChangedNotification:(NSNotification *)notification {
-    //Function is called when inet connection is interrupted... but not always
-
+- (void)connectionStatusChangedNotification {
+    // Function is called when internet connection is changed.
     if ([self.reachabilityManager isReachable]) {
-    //we have internets!!
+        // internet
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
         self.callButton.enabled = YES;
-        
-        
-        // Check if the user has sip enabled
-        if (![SystemUser currentUser].sipEnabled) {
-            // SIP is not enabled, and we are connected to internet, no info needed
+
+        // Check if the user has sip enabled.
+        if (self.currentUser.isAllowedToSip) {
+            // Internet, No SIP enabled/allowed.
             [self hideMessage];
-        // Check if the user has a sip account configured
-        } else if ([SystemUser currentUser].sipAccount) {
-            //Is the connection quality sufficient for SIP?
+        } else if (self.currentUser.sipAccount) {
             if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
+                // Internet, SIP, good connection.
                 [self hideMessage];
             } else {
+                // internet, SIP, but poor connection
                 [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Poor internet Info", nil)];
             }
         } else {
+            // Internet, no SIP account configured.
             [self showMessage:NSLocalizedString(@"Connect A/B calls only", nil) withInfo:NSLocalizedString(@"Connect A/B Info", nil)];
         }
     } else {
+        // No internet.
         self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
         self.callButton.enabled = NO;
-        
         [self showMessage:NSLocalizedString(@"No Connection", nil) withInfo:NSLocalizedString(@"No Connection Info Text", nil)];
     }
 }
 
-- (void)sipCallStartedNotification:(NSNotification *)notification {
+- (void)sipCallStartedNotification {
     self.backButton.hidden = YES;
     self.callButton.enabled = NO;
     self.numberTextView.text = @"";
+}
+
+- (void)setupCellularCallEventsListener {
+    __weak typeof(self) weakSelf = self;
+    [self.callCenter setCallEventHandler:^(CTCall *call) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.backButton.hidden = YES;
+            weakSelf.callButton.enabled = NO;
+            weakSelf.numberTextView.text = @"";
+        });
+        NSLog(@"callEventHandler2: %@", call.callState);
+    }];
 }
 
 #pragma mark - TextView delegate
@@ -207,6 +236,7 @@
 }
 
 #pragma mark - Actions
+
 - (void)backButtonLongPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.numberTextView.text = @"";
