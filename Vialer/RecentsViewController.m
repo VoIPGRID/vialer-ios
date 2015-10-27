@@ -164,7 +164,7 @@
                 [self.tableView setContentOffset:CGPointZero animated:YES];
                 [self.refreshControl endRefreshing];
 
-                if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+                if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
                     // No permissions
                     self.unauthorized = YES;
                     [self.tableView reloadData];

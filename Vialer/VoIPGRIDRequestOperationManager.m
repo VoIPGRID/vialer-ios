@@ -15,12 +15,16 @@
 #define GetPermissionSystemUserProfileUrl @"permission/systemuser/profile/"
 #define GetUserDestinationUrl @"userdestination/"
 #define GetPhoneAccountUrl @"phoneaccount/phoneaccount/"
-#define GetClickToDialUrl @"mobileapp/"
+#define twoStepCallURL @"mobileapp/"
 #define GetCdrRecordUrl @"cdr/record/"
 #define PostPermissionPasswordResetUrl @"permission/password_reset/"
 #define GetAutoLoginTokenUrl @"autologin/token/"
 #define PutMobileNumber @"/api/permission/mobile_number/"
 #define kMobileNumberKey @"mobile_nr"
+
+NSString *const VGErrorDomain = @"com.voipgrid.error";
+NSString *const TwoStepCallCallIDKey = @"callid";
+NSString *const TwoStepCallStatusKey = @"status";
 
 @interface VoIPGRIDRequestOperationManager ()
 @property (nonatomic, strong)NSDateFormatter *callDateGTFormatter;
@@ -95,7 +99,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
@@ -135,7 +139,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
             [self loginFailed];
         }
     }];
@@ -153,7 +157,7 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
             [self loginFailed];
         }
     }];
@@ -167,37 +171,111 @@
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
             [self loginFailed];
         }
     }];
 }
-
+//TODO: Remove, name changed to twoStepCall:
 - (void)clickToDialToNumber:(NSString *)toNumber fromNumber:(NSString *)fromNumber success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self POST:GetClickToDialUrl parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                             toNumber, @"b_number",
-                                             fromNumber, @"a_number",
-                                             @"default_number", @"b_cli",
-                                             @"default_number", @"a_cli",
-                                             nil
-                                             ] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:twoStepCallURL parameters:[NSDictionary dictionaryWithObjectsAndKeys:
+                                          toNumber, @"b_number",
+                                          fromNumber, @"a_number",
+                                          @"default_number", @"b_cli",
+                                          @"default_number", @"a_cli",
+                                          nil
+                                          ] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
             [self loginFailed];
         }
     }];
 }
 
+- (void)setupTwoStepCallWithANumber:( NSString *)aNumber bNumber:(NSString *)bNumber withCompletion:(void (^)(NSString *callID, NSError *error))completion {
+    NSAssert(aNumber, @"A Number must not be empty when setting up a two way call.");
+    NSAssert(bNumber, @"A Number must not be empty when setting up a two way call.");
+    NSAssert(completion, @"A completion block must be supplied.");
+
+    [self POST:twoStepCallURL
+    parameters:@{@"a_number" : aNumber,
+                 @"b_number" : bNumber,
+                 @"a_cli" : @"default_number",
+                 @"b_cli" : @"default_number",
+                 }
+       success:^(AFHTTPRequestOperation *operation, id  responseObject) {
+           NSString *callID;
+           if ((callID = [self getObjectForKey:TwoStepCallCallIDKey fromResponseObject:responseObject])) {
+               completion(callID, nil);
+           } else {
+               NSDictionary *userInfo = @{NSLocalizedString(@"Two step call failed", nil) : NSLocalizedDescriptionKey};
+               completion(nil, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorSetupFailed userInfo:userInfo]);
+           }
+       } failure:^(AFHTTPRequestOperation *operation, NSError * error) {
+           NSString *userInfoString = @"Two step call failed";
+
+           if (operation.response.statusCode == kVoIPGRIDHTTPBadRequest) {
+               //Request malfomed, the request returned the failure reason, return this wrapped in an error.
+
+               //Possible reasons:
+               //- Extensions or phonenumbers not valid
+               //- This number is not permitted.
+               if (operation.responseString.length > 0) {
+                   userInfoString = operation.responseString;
+               }
+           }
+           NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(userInfoString, nil)};
+           completion(nil, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorSetupFailed userInfo:userInfo]);
+       }];
+}
+
+- (void)twoStepCallStatusForCallId:(NSString *)callId withCompletion:(void (^)(NSString *callStatus, NSError *error))completion {
+    NSAssert(callId, @"Call ID cannot by empty when checking for it's status");
+    NSAssert(completion, @"A completion block must be supplied.");
+
+    NSString *updateStatusURL = [NSString stringWithFormat:@"%@%@/", twoStepCallURL, callId];
+    [self GET:updateStatusURL parameters:nil
+      success:^(AFHTTPRequestOperation * operation, id responseObject) {
+          //Get the callStatus from the response
+          NSString *callStatus;
+          if ((callStatus = [self getObjectForKey:TwoStepCallStatusKey fromResponseObject:responseObject])) {
+              completion(callStatus, nil);
+          } else {
+              NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call failed", nil)};
+              completion(nil, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorStatusRequestFailed userInfo:userInfo]);
+          }
+
+      } failure:^(AFHTTPRequestOperation * operation, NSError * error) {
+          NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call failed", nil)};
+          completion(nil, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorStatusRequestFailed userInfo:userInfo]);
+      }];
+}
+/**
+ * Return the Object for the given key from a response object
+ * @param key The key to search for in the respons object.
+ * @param responseObject The response object to query for the given key.
+ * @return The object found for the given key or nil.
+ */
+- (NSString *)getObjectForKey:(NSString *)key fromResponseObject:(id)responseObject {
+    NSString *callStatus = nil;
+    if ([[responseObject objectForKey:key] isKindOfClass:[NSString class]]) {
+        callStatus = [responseObject objectForKey:key];
+    }
+    return callStatus;
+}
+
+
+//TODO: old function, remove.
 - (void)clickToDialStatusForCallId:(NSString *)callId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSString *url = [[GetClickToDialUrl stringByAppendingString:callId] stringByAppendingString:@"/"];
+    NSString *url = [[twoStepCallURL stringByAppendingString:callId] stringByAppendingString:@"/"];
 
     [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == kVoIPGRIDHTTPBadCredentials) {
+        if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
             [self loginFailed];
         }
     }];
@@ -299,8 +377,8 @@
 }
 
 /**
- * Under some circumstances we would like to force setting of the mobile number. For instance with the migration of v1.x to version 2.0
- * in which case the user has entered his mobile number but it was never actually pushed to the server.
+ Under some circumstances we would like to force setting of the mobile number. For instance with the migration of v1.x to version 2.0
+ in which case the user has entered his mobile number but it was never actually pushed to the server.
  */
 - (void)pushMobileNumber:(NSString *)mobileNumber forcePush:(BOOL)forcePush success:(void (^)())success  failure:(void (^)(NSString *localizedErrorString))failure {
     //Has the user entered a number

@@ -65,7 +65,7 @@
 "Failed to send email." = "E-mail zenden mislukt.";
 
 /* No comment provided by engineer. */
-"Failed to set up a call." = "Opzetten van een gesprek mislukt.";
+"Two step call failed" = "Het twee staps gesprek is mislukt";
 
 "Business" = "Zakelijke";
 "calls in the cloud" = "telefonie in de cloud";

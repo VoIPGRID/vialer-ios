@@ -1,13 +1,14 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
+# source 'https://github.com/CocoaPods/Specs.git'
+# Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+# use_frameworks!
 
-# Specify the project wide pods here which are used by all Targets.
-def pods_for_all_targets
+target 'Vialer' do
    	pod 'AFNetworkActivityLogger'
-	pod 'AFNetworking'
-	pod 'GoogleAnalytics'
-	pod 'HTCopyableLabel'
+    pod 'AFNetworking'
+    pod 'GoogleAnalytics'
+    pod 'HTCopyableLabel'
    	pod 'MMDrawerController'
    	pod 'PBWebViewController'
    	pod 'Reachability'
@@ -15,11 +16,7 @@ def pods_for_all_targets
    	pod 'SVProgressHUD'
 end
 
-# Target specific pods can be specified here.
-target 'Vialer' do
-	pods_for_all_targets
+target 'VialerTests' do
+    pod 'CocoaLumberjack'
+    pod 'OHHTTPStubs'
 end
-
-#target 'Vialer-cocoapodsTests' do
-#	pods_for_all_targets
-#end

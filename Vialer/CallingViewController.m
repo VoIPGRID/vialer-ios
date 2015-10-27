@@ -216,7 +216,7 @@ static NSString * const failedBKey      = @"failed_b";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
-        NSString *errorMessage = NSLocalizedString(@"Failed to set up a call.", nil);
+        NSString *errorMessage = NSLocalizedString(@"Failed to set up the call.", nil);
         if ([operation.responseString isEqualToString:@"Extensions or phonenumbers not valid"]) {
             errorMessage = [[errorMessage stringByAppendingString:@"\n"] stringByAppendingString:NSLocalizedString(@"Extensions or phonenumbers not valid.", nil)];
         } else if ([operation.responseString isEqualToString:@"User has no permission to provide a_number for ClickToDial"]) {
@@ -238,6 +238,7 @@ static NSString * const failedBKey      = @"failed_b";
     if (newString.length != [[newString componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789 ()"] invertedSet]] componentsJoinedByString:@""].length) {
         return NO;
     }
+
     return YES;
 }
 
