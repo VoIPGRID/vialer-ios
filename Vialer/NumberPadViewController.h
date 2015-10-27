@@ -18,6 +18,8 @@
 
 @property (nonatomic, assign) id <NumberPadViewControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL tonesEnabled;
+@property (nonatomic, strong) NSArray *titles;
+@property (nonatomic, strong) NSArray *subtitles;
 
 - (void)playDtmfToneAtIndex:(NSUInteger)index;
 

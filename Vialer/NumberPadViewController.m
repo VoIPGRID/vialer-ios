@@ -14,8 +14,6 @@
 #import <AVFoundation/AVAudioPlayer.h>
 
 @interface NumberPadViewController ()
-@property (nonatomic, strong) NSArray *titles;
-@property (nonatomic, strong) NSArray *subTitles;
 @property (nonatomic, strong) NSArray *sounds;
 @property (nonatomic, strong) NSMutableArray *soundsPlayers;
 
@@ -38,11 +36,11 @@
     return _titles;
 }
 
-- (NSArray *)subTitles {
-    if (!_subTitles) {
-        _subTitles = @[@"", @"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ", @"*", @"+", @"#"];
+- (NSArray *)subtitles {
+    if (!_subtitles) {
+        _subtitles = @[@"", @"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ", @"*", @"+", @"#"];
     }
-    return _subTitles;
+    return _subtitles;
 }
 
 - (NSArray *)sounds {
@@ -88,8 +86,8 @@
         offset.x = leftOffset;
         for (int i = 0; i < 3; i++) {
             NSString *title = self.titles[j * 3 + i];
-            NSString *subTitle = self.subTitles[j * 3 + i];
-            UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subTitle constrainedToSize:CGSizeMake(buttonWidth, buttonHeight)];
+            NSString *subtitle = self.subtitles[j * 3 + i];
+            UIButton *button = [self createDialerButtonWithTitle:title andSubTitle:subtitle constrainedToSize:CGSizeMake(buttonWidth, buttonHeight)];
             [button addTarget:self action:@selector(dialerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = j * 3 + i;
 
@@ -213,7 +211,7 @@
         if (cipher.length) {
             [self.delegate numberPadPressedWithCharacter:cipher];
         } else {
-            NSString *character = [self.subTitles objectAtIndex:sender.tag];
+            NSString *character = [self.subtitles objectAtIndex:sender.tag];
             if (character.length) {
                 [self.delegate numberPadPressedWithCharacter:character];
             }
