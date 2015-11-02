@@ -24,7 +24,6 @@
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		59F75F50A24E17A0C5F6052C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */; };
-		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; };
 		C41926331BE39C5900436D92 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926321BE39C5900436D92 /* TwoStepCall.m */; };
 		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; };
 		C4BFEA621BDFD50100D616A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */; };
@@ -523,19 +522,6 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		C4CEAB411BCE7C3300A56FC2 /* Contacts */ = {
-			isa = PBXGroup;
-			children = (
-				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
-				FB302E61182A390E004B7D27 /* ContactsViewController.m */,
-				F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */,
-				F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */,
-				F2900B521B1DD36000E695FB /* ContactTableViewCell.h */,
-				F2900B531B1DD36000E695FB /* ContactTableViewCell.m */,
-			);
-			name = Contacts;
-			sourceTree = "<group>";
-		};
 		C4FCC6091BB925380013689F /* Side Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -784,7 +770,6 @@
 				C43E92971BC400F900BC622B /* RootViewController.m */,
 				F919B9D01BA812370082AD79 /* Availability */,
 				C4CEAB3F1BCE7A5E00A56FC2 /* Calling */,
-				C4CEAB411BCE7C3300A56FC2 /* Contacts */,
 				3D1A5E611AE543C000DBE64B /* Onboarding/Login */,
 				C4CEAB3E1BCE794600A56FC2 /* Recents */,
 				F2E811BF1B37E2EB00EA640F /* Settings */,
