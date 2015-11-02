@@ -8,16 +8,35 @@
 
 #import <Foundation/Foundation.h>
 
-/** @warning If this enum is changed in any way, also update the kCallStatusStringArray in the implementation file */
+/** @warning If this enum is changed in any way, also update the TwoStepCallStatusStringArray in the implementation file */
 typedef NS_ENUM(NSInteger, TwoStepCallStatus) {
-    twoStepCallStatusUnknown,
-    twoStepCallStatusDialing_a,
-    twoStepCallStatusConfirm,
-    twoStepCallStatusDialing_b,
-    twoStepCallStatusConnected,
-    twoStepCallStatusDisconnected,
-    twoStepCallStatusFailed_a,
-    twoStepCallStatusFailed_b,
+    TwoStepCallStatusUnAuthorized,
+    TwoStepCallStatusUnknown,
+    TwoStepCallStatusDialing_a,
+    TwoStepCallStatusConfirm,
+    TwoStepCallStatusDialing_b,
+    TwoStepCallStatusConnected,
+    TwoStepCallStatusDisconnected,
+    TwoStepCallStatusFailed_a,
+    TwoStepCallStatusFailed_b,
+    TwoStepCallStatusFailedSetup,
+    TwoStepCallStatusInvalidNumber,
+};
+
+/** @warning If this string array is changed in any way, also update the TwoStepCallStatus ENUM in the header file */
+NSString * _Nonnull const TwoStepCallStatusStringArray[] = {
+    @"unauthorized",
+    @"Unknown_Status",
+    @"dialing_a",
+    @"confirm",
+    @"dialing_b",
+    @"connected",
+    @"disconnected",
+    @"failed_a",
+    @"failed_b",
+    @"failed_setup",
+    @"invalid_number",
+    nil
 };
 
 @interface TwoStepCall : NSObject

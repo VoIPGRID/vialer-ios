@@ -11,7 +11,7 @@
 @interface CircleWithWhiteIcon : UIView
 
 /**
- The background color of the circle
+ The color of the inner circle.
 */
 @property (nonatomic, strong) UIColor *innerCircleColor;
 

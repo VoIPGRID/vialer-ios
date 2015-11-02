@@ -52,6 +52,10 @@ static NSString * const BubblingPointsDisconnectedIcon = @"disconnectedIcon";
 }
 
 - (void)setState:(BubblingPointsState)state {
+    // If state isn't changed, lets not do anything.
+    if (state == _state) {
+        return;
+    }
     _state = state;
     if (state == BubblingPointsStateConnecting) {
         [self setupTimer];
@@ -101,6 +105,7 @@ static NSString * const BubblingPointsDisconnectedIcon = @"disconnectedIcon";
         CGPointMake(sizeLarge.width/2, self.bounds.size.height - (sizeMedium.height/2)),
         CGPointMake(sizeLarge.width/2, sizeMedium.height/2)
     };
+    
     for (int i = 0; i < 3; i++) {
         CGSize size = sizeSmall;
         switch (self.state) {

@@ -167,7 +167,7 @@
                 [self.tableView setContentOffset:CGPointZero animated:YES];
                 [self.refreshControl endRefreshing];
 
-                if ([operation.response statusCode] == kVoIPGRIDHTTPUnauthorized) {
+                if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
                     // No permissions
                     self.unauthorized = YES;
                     [self.tableView reloadData];

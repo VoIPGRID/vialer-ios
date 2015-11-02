@@ -94,6 +94,9 @@
 "Couldn't connect with your phone" = "Couldn't connect with your phone";
 
 /* No comment provided by engineer. */
+"Couldn't login, authorization failed" = "Couldn't login, authorization failed";
+
+/* No comment provided by engineer. */
 "Decline" = "Decline";
 
 /* No comment provided by engineer. */
@@ -136,6 +139,9 @@
 "Failed to send email." = "Failed to send email.";
 
 /* No comment provided by engineer. */
+"Failed to setup call" = "Failed to setup call";
+
+/* No comment provided by engineer. */
 "Forgot password?" = "Forgot password?";
 
 /* No comment provided by engineer. */
@@ -152,6 +158,9 @@
 
 /* No comment provided by engineer. */
 "Information" = "Information";
+
+/* No comment provided by engineer. */
+"Invalid number used to setup call" = "Invalid number used to setup call";
 
 /* No comment provided by engineer. */
 "Keypad" = "Keypad";
@@ -245,6 +254,9 @@
 
 /* No comment provided by engineer. */
 "phone" = "phone";
+
+/* No comment provided by engineer. */
+"Phonenumber incorrect" = "Phonenumber incorrect";
 
 /* No comment provided by engineer. */
 "Please enter a valid email address." = "Please enter a valid email address.";
