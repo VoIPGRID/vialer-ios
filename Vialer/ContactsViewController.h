@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import <AddressBookUI/AddressBookUI.h>
+#import "ContactsUI/ContactsUI.h"
 
-@interface ContactsViewController : UIViewController <ABPersonViewControllerDelegate, UINavigationControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ContactsViewController : UITableViewController <UINavigationControllerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate, UISearchResultsUpdating, UISearchControllerDelegate>
 
 @end

@@ -15,6 +15,7 @@ NSString * const kTintColorTable = @"Table";
 NSString * const kBarTintColorSearchBar = @"SearchBarBar";
 NSString * const kTintColorSearchBar = @"SearchBar";
 NSString * const kTintColorMessage = @"Message";
+NSString * const kTintColorLeftDrawerButton = @"LeftDrawerButton";
 
 NSString * const kTintColorsKey = @"Tint colors";
 NSString * const kUrlsKey = @"URLS";

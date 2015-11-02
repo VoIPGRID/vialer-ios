@@ -4,6 +4,12 @@
 <dict>
 	<key>Tint colors</key>
 	<dict>
+		<key>LeftDrawerButton</key>
+		<array>
+			<integer>145</integer>
+			<integer>145</integer>
+			<integer>145</integer>
+		</array>
 		<key>Background</key>
 		<dict>
 			<key>GradientStart</key>

@@ -9,123 +9,198 @@
 #import "ContactsViewController.h"
 
 #import "AppDelegate.h"
-#import "ContactHandler.h"
-#import "ContactsSearchTableViewController.h"
-#import "ContactTableViewCell.h"
+#import "ContactModel.h"
+#import "ContactUtils.h"
 #import "GAITracker.h"
-#import "SystemUser.h"
-#import "UIViewController+MMDrawerController.h"
+#import "SystemUser.h" 
 
 #import "HTCopyableLabel.h"
+#import "UIViewController+MMDrawerController.h"
+
+static NSString *const ContactsViewControllerTabContactImageName = @"tab-contact";
+static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-contact-active";
+static NSString *const ContactsViewControllerLogoImageName = @"logo";
+static NSString *const ContactsViewControllerMenuImageName = @"menu";
+static NSString *const ContactsViewControllerPropertyPhoneNumbers = @"phoneNumbers";
+static CGFloat const ContactsViewControllerTableHeaderHeight = 30.0f;
+static CGFloat const ContactsViewControllerTableCellHeight = 44.0f;
+static CGFloat const ContactsViewControllerCustomCellLabelLeftOffset = 15.0f;
+static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
 
 @interface ContactsViewController()
-@property (nonatomic, strong) UIColor *tableTintColor;
-@property (nonatomic, strong) UISearchDisplayController *searchController;
-@property (nonatomic, strong) ContactsSearchTableViewController *searchTableViewController;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, assign) ABAddressBookRef addressBook;
-@property (nonatomic, strong) NSArray *addressBookContacts;
-@property (nonatomic, strong) NSMutableArray *addressBookContactsSorted;
-@property (nonatomic, strong) NSMutableDictionary *addressBookSectionsSorted;
-@property (nonatomic, strong) NSArray *addressBookSectionTitles;
-@property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) ContactModel *contactModel;
+@property (nonatomic, strong) UITableViewController *searchTableViewController;
+@property (nonatomic, strong) UITableView *searchResultsTableView;
+@property (nonatomic, strong) NSArray *contactsSectionTitles;
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) UIBarButtonItem *leftDrawerButton;
+@property (nonatomic, strong) UIButton *addContactButton;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIView *noMatchesView;
+@property (nonatomic, strong) UILabel *noMatchesLabel;
 @end
 
 @implementation ContactsViewController
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
+
     if (self) {
         self.title = NSLocalizedString(@"Contacts", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"tab-contact"];
-        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-contact-active"];
-        self.searchDisplayController.delegate = self;
-
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-
-        // Add hamburger menu on navigation bar
-        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
-        self.navigationItem.leftBarButtonItem = leftDrawerButton;
-
-        // Load the configuration to access the tint colors
-        Configuration *config = [Configuration new];
-        self.tableTintColor = [config tintColorForKey:kTintColorTable];
-
-        self.addressBookContacts = @[];
-        self.addressBookContactsSorted = [@[] mutableCopy];
-
-        // Set this to fix view behind navigation bar
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-
-        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), 44.0)];
-        self.searchBar.delegate = self;
-        self.searchBar.placeholder = @"Search";
-        self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
-        self.searchBar.barTintColor = [config tintColorForKey:kBarTintColorSearchBar];
-        self.searchBar.tintColor = [config tintColorForKey:kTintColorSearchBar];
-        [self.view addSubview:self.searchBar];
-
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, CGRectGetMaxY(self.searchBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.searchBar.frame))];
-        self.tableView.sectionIndexColor = self.tableTintColor;
-        self.tableView.delegate = self;
-        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        self.tableView.dataSource = self;
-        self.tableView.tableHeaderView = [self headerView];
-        [self.view addSubview:self.tableView];
-
-        _searchTableViewController = [[ContactsSearchTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        //NSLog(@"%s: self = %@", __PRETTY_FUNCTION__, NSStringFromCGRect(self.view.frame));
-        //NSLog(@"%s: search = %@", __PRETTY_FUNCTION__, NSStringFromCGRect(_searchTableViewController.view.frame));
-
-        _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
-        _searchController.delegate = self;
-        _searchController.searchResultsDataSource = _searchTableViewController;
-        _searchController.searchResultsDelegate = self;
-
-        //Set this or else the UISearchBar close animation looks buggy.
-        //[self setExtendedLayoutIncludesOpaqueBars:YES];
-
-        UIButton *addContactButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        [addContactButton addTarget:self action:@selector(addContactButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addContactButton];
-
+        self.tabBarItem.image = [UIImage imageNamed:ContactsViewControllerTabContactImageName];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:ContactsViewControllerTabContactActiveImageName];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
     }
     return self;
 }
 
-- (UIView*)headerView {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 47.f)];
-
-    UILabel *numberTitle = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 0, 0, 0)];;
-    [numberTitle setText:[NSString stringWithFormat:@"%@: ", NSLocalizedString(@"My number", nil)]];
-    [numberTitle setBackgroundColor:[UIColor whiteColor]];
-    [numberTitle sizeToFit];
-    [numberTitle setCenter:CGPointMake(numberTitle.center.x, headerView.center.y)];
-    [headerView addSubview:numberTitle];
-
-    HTCopyableLabel *numberValue = [HTCopyableLabel new];
-    [numberValue setText:[SystemUser currentUser].localizedOutgoingNumber];
-    [numberValue setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]];
-    [numberValue sizeToFit];
-    [numberValue setFrame:CGRectMake(CGRectGetMaxX(numberTitle.frame), 0, CGRectGetWidth(numberValue.frame), CGRectGetHeight(numberValue.frame))];
-    [numberValue setCenter:CGPointMake(numberValue.center.x, headerView.center.y)];
-    [headerView addSubview:numberValue];
-
-    return headerView;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [self setupLayout];
+    [self checkContactsAccess];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
-    [super viewDidAppear:animated];
+- (void)setupLayout {
+    // Add hamburger menu on navigation bar
+    self.navigationItem.leftBarButtonItem = self.leftDrawerButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.addContactButton];
+    self.definesPresentationContext = YES;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 
-    [self loadContacts];
+    self.tableView.tableHeaderView = self.headerView;
+    self.tableView.sectionIndexColor = [Configuration tintColorForKey:kTintColorNavigationBar];
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+}
+
+# pragma mark - Lazy loading properties
+- (ContactModel *)contactModel {
+    if (!_contactModel) {
+        _contactModel = [[ContactModel alloc] init];
+    }
+    return _contactModel;
+}
+
+- (NSArray *)contactsSectionTitles {
+    if (!_contactsSectionTitles) {
+        _contactsSectionTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G",
+                                   @"H", @"I", @"J", @"K", @"L", @"M", @"N",
+                                   @"O", @"P", @"Q", @"R", @"S", @"T", @"U",
+                                   @"V", @"W", @"X", @"Y", @"Z", @"#"];
+    }
+    return _contactsSectionTitles;
+}
+
+- (UITableViewController *)searchTableViewController {
+    if (!_searchTableViewController) {
+        _searchTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        _searchTableViewController.tableView = self.searchResultsTableView;
+    }
+    return _searchTableViewController;
+}
+
+- (UIBarButtonItem *)leftDrawerButton {
+    if (!_leftDrawerButton) {
+        _leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerMenuImageName]
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(leftDrawerButtonPress:)];
+        _leftDrawerButton.tintColor = [Configuration tintColorForKey: kTintColorLeftDrawerButton];
+    }
+    return _leftDrawerButton;
+}
+
+- (UITableView *)searchResultsTableView {
+    if (!_searchResultsTableView) {
+        _searchResultsTableView = [[UITableView alloc] initWithFrame:self.tableView.frame];
+        _searchResultsTableView.dataSource = self;
+        _searchResultsTableView.delegate = self;
+        [_searchResultsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"ContactsTableViewCell"];
+    }
+    return _searchResultsTableView;
+}
+
+- (UIButton *)addContactButton {
+    if (!_addContactButton) {
+        _addContactButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [_addContactButton addTarget:self action:@selector(addContactButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+
+    return _addContactButton;
+}
+
+- (UISearchController *)searchController {
+    if (!_searchController) {
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:self.searchTableViewController];
+        _searchController.searchResultsUpdater = self;
+        _searchController.searchBar.delegate = self;
+        _searchController.searchBar.keyboardType = UIKeyboardTypeAlphabet;
+        _searchController.searchBar.barTintColor = [Configuration tintColorForKey:kTintColorSearchBar];
+        _searchController.searchBar.tintColor = [UIColor whiteColor];
+        _searchController.searchBar.layer.borderWidth = 1;
+        _searchController.searchBar.layer.borderColor = [[Configuration tintColorForKey:kTintColorSearchBar] CGColor];
+        [_searchController.searchBar sizeToFit];
+    }
+    return _searchController;
+}
+
+- (UIView *)noMatchesView {
+    if (!_noMatchesView) {
+        _noMatchesView = [[UIView alloc] initWithFrame:self.searchResultsTableView.frame];
+        _noMatchesView.hidden = YES;
+        [_noMatchesView addSubview: self.noMatchesLabel];
+        [self.searchResultsTableView insertSubview:_noMatchesView belowSubview:self.searchResultsTableView];
+    }
+    return _noMatchesView;
+}
+
+- (UILabel *)noMatchesLabel {
+    if (!_noMatchesLabel) {
+        _noMatchesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+        _noMatchesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0];
+        _noMatchesLabel.shadowColor = [UIColor lightTextColor];
+        _noMatchesLabel.textColor = [UIColor grayColor];
+        _noMatchesLabel.shadowOffset = CGSizeMake(0, 1);
+        _noMatchesLabel.backgroundColor = [UIColor clearColor];
+        _noMatchesLabel.textAlignment = NSTextAlignmentCenter;
+        _noMatchesLabel.text = NSLocalizedString(@"No Results", nil);
+    }
+    return _noMatchesLabel;
+}
+
+- (UIView *)headerView {
+    if (!_headerView) {
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), ContactsViewControllerTableCellHeight * 2)];
+
+        UIView *searchBarHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_headerView.frame), ContactsViewControllerTableCellHeight)];
+        [searchBarHeaderView addSubview:self.searchController.searchBar];
+
+        UIView *meContactView = [[UIView alloc] initWithFrame: CGRectMake(0, ContactsViewControllerTableCellHeight / 2, CGRectGetWidth(_headerView.frame), ContactsViewControllerTableCellHeight)];
+
+        UILabel *numberTitle = [[UILabel alloc] initWithFrame:CGRectMake(ContactsViewControllerCustomCellLabelLeftOffset, 0, 0, 0)];;
+        [numberTitle setText:[NSString stringWithFormat:@"%@: ", NSLocalizedString(@"My number", nil)]];
+        [numberTitle setBackgroundColor:[UIColor whiteColor]];
+        [numberTitle sizeToFit];
+        [numberTitle setCenter:CGPointMake(numberTitle.center.x, meContactView.center.y)];
+        [meContactView addSubview:numberTitle];
+
+        HTCopyableLabel *numberValue = [HTCopyableLabel new];
+        [numberValue setText:[SystemUser currentUser].localizedOutgoingNumber];
+        [numberValue setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]];
+        [numberValue sizeToFit];
+        [numberValue setFrame:CGRectMake(CGRectGetMaxX(numberTitle.frame),
+                                         0,
+                                         CGRectGetWidth(numberValue.frame),
+                                         CGRectGetHeight(numberValue.frame))];
+        [numberValue setCenter:CGPointMake(numberValue.center.x, meContactView.center.y)];
+        [meContactView addSubview:numberValue];
+
+        [_headerView addSubview:searchBarHeaderView];
+        [_headerView addSubview:meContactView];
+
+    }
+    return _headerView;
 }
 
 - (void)leftDrawerButtonPress:(id)sender{
@@ -133,254 +208,193 @@
 }
 
 - (void)addContactButtonPressed:(id)sender {
-    //NSLog(@"%s sender: %@", __PRETTY_FUNCTION__, sender);
-    [[ContactHandler sharedContactHandler] presentNewPersonViewControllerWithPerson:NULL presentingViewControllerDelegate:self completion:^(ABNewPersonViewController *newPersonView, ABRecordRef person) {
-        //NSLog(@"%s newPersonView: %@ person: %@", __PRETTY_FUNCTION__, newPersonView, person);
+    CNContact *contact;
+    CNContactViewController *contactViewController = [CNContactViewController viewControllerForNewContact:contact];
+    contactViewController.allowsActions = NO;
+    contactViewController.delegate = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactViewController];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+#pragma mark - Contacts permission
+- (void)checkContactsAccess {
+    CNAuthorizationStatus authorizationStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+
+    if (authorizationStatus == CNAuthorizationStatusAuthorized) {
+        [self loadContacts];
+    } else if (authorizationStatus == CNAuthorizationStatusNotDetermined) {
+        CNContactStore *contactStore = [[CNContactStore alloc] init];
+        [contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted == YES) {
+                [self loadContacts];
+            } else {
+                [self contactStoreAuthorizationMessage:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Application denied access to 'Contacts'", nil)]];
+                NSLog(@"%s The user has denied access", __PRETTY_FUNCTION__);
+            }
+        }];
+    } else if (authorizationStatus == CNAuthorizationStatusDenied) {
+        NSLog(@"%s The user has previously denied access", __PRETTY_FUNCTION__);
+        [self contactStoreAuthorizationMessage:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Application denied access to 'Contacts'", nil)]];
+    } else if (authorizationStatus == CNAuthorizationStatusRestricted) {
+        NSLog(@"%s The application is not authorized to access contact data.", __PRETTY_FUNCTION__);
+        [self contactStoreAuthorizationMessage:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Application not authorized to access 'Contacts'", nil)]];
+    }
+}
+
+- (void)contactStoreAuthorizationMessage:(NSString *)message {
+    UILabel *authorizationLabel = [[UILabel alloc] initWithFrame:CGRectMake(ContactsViewControllerCustomCellLabelLeftOffset, 0, 0, 0)];
+    [authorizationLabel setText: message];
+    [authorizationLabel setBackgroundColor:[UIColor whiteColor]];
+    [authorizationLabel sizeToFit];
+    [authorizationLabel setCenter:CGPointMake(authorizationLabel.center.x, self.headerView.center.y)];
+
+    [self.headerView addSubview:authorizationLabel];
+}
+
+- (void)loadContacts {
+    [self.contactModel getContacts:^{
         [self.tableView reloadData];
     }];
 }
 
-
-#pragma mark - ABAddressBook
-
-- (void)loadContacts {
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self checkAddressBookAccess];
-}
-
-- (void) checkAddressBookAccess {
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
-    // Request authorization to Address Book
-    self.addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-        ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error) {
-            if (granted) {
-                // First time access has been granted
-                //NSLog(@"%s First time access has been granted", __PRETTY_FUNCTION__);
-                [self loadContactsFromAddressBook:self.addressBook];
-            } else {
-                // User denied access
-                NSLog(@"%s User denied access", __PRETTY_FUNCTION__);
-            }
-        });
-    }
-    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-        // The user has previously given access
-        //NSLog(@"%s The user has previously given access", __PRETTY_FUNCTION__);
-        [self loadContactsFromAddressBook:self.addressBook];
-    }
-    else {
-        // The user has previously denied access
-        NSLog(@"%s The user has previously denied access", __PRETTY_FUNCTION__);
-    }
-
-}
-
-- (void)loadContactsFromAddressBook:(ABAddressBookRef)addressBookRef {
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self.addressBookContactsSorted removeAllObjects];
-    self.addressBookContacts = (NSArray *)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBookRef));
-
-    for (int i = 0; i < [self.addressBookContacts count]; i++) {
-
-        ABRecordRef person = (__bridge ABRecordRef)[self.addressBookContacts objectAtIndex:i];
-
-        CFStringRef firstName, lastName, companyName;
-        firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
-        lastName  = ABRecordCopyValue(person, kABPersonLastNameProperty);
-        companyName = ABRecordCopyValue(person, kABPersonOrganizationProperty);
-        NSString *nsFirstname = @"";
-        if (firstName != nil) nsFirstname = (__bridge NSString*)firstName;
-        NSString *nsLastName = @"";
-        if (lastName != nil) nsLastName = (__bridge NSString*)lastName;
-        NSString *nsCompanyName = @"";
-        if (companyName != nil) nsCompanyName = (__bridge NSString*)companyName;
-        NSString *search = [NSString stringWithFormat:@"%@ %@ %@", nsFirstname, nsLastName, nsCompanyName];
-
-
-        [self.addressBookContactsSorted addObject:@{@"ContactABRecordRef": (__bridge id)(person),
-                                                    @"firstName": nsFirstname,
-                                                    @"lastName": nsLastName,
-                                                    @"companyName": nsCompanyName,
-                                                    @"search": search,
-                                                    }];
-    }
-
-    NSSortDescriptor *firstNameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    NSSortDescriptor *lastNameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
-    NSSortDescriptor *companyNameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"companyName" ascending:YES];
-    self.addressBookContactsSorted = [NSMutableArray arrayWithArray:[self.addressBookContactsSorted sortedArrayUsingDescriptors:@[firstNameSortDescriptor, lastNameSortDescriptor, companyNameSortDescriptor]]];
-    self.addressBookSectionsSorted = [NSMutableDictionary dictionary];
-
-    for (NSDictionary *contact in self.addressBookContactsSorted) {
-        NSString *firstName = contact[@"firstName"];
-        NSString *lastName = contact[@"lastName"];
-        NSString *companyName = contact[@"companyName"];
-
-        if(firstName.length > 0 || lastName.length > 0 || companyName.length > 0) {
-            NSString *firstCharCap = @"";
-            if (firstName.length > 0) {
-                firstCharCap = [[firstName substringToIndex:1] capitalizedString];
-            } else if(lastName.length > 0) {
-                firstCharCap = [[lastName substringToIndex:1] capitalizedString];
-            } else if(companyName.length > 0) {
-                firstCharCap = [[companyName   substringToIndex:1] capitalizedString];
-            }
-
-            // Check if starts with no letter than key is #
-            NSRange first = [firstCharCap rangeOfComposedCharacterSequenceAtIndex:0];
-            NSRange match = [firstCharCap rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet] options:0 range:first];
-            if (match.location == NSNotFound) {
-                // Check if key already exist
-                firstCharCap = @"#";
-            }
-
-            if (![self.addressBookSectionsSorted objectForKey:firstCharCap]) {
-                [self.addressBookSectionsSorted setObject:[NSMutableArray array] forKey:firstCharCap];
-            }
-
-            NSMutableArray *contacts = [self.addressBookSectionsSorted objectForKey:firstCharCap];
-            [contacts addObject:contact];
-
-            [self.addressBookSectionsSorted setObject:contacts forKey:firstCharCap];
-        }
-
-    }
-
-    self.addressBookSectionTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"];
-
-    [self.tableView reloadData];
-}
-
-#pragma mark - Person view controller delegate
-
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    // Delegate to the contacts view controller handler
-    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-    return [appDelegate handlePerson:person property:property identifier:identifier];
-}
-
 #pragma mark - Tableview delegate & datasource
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.addressBookSectionTitles.count;
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        return 1;
+    }
+    return self.contactsSectionTitles.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.addressBookSectionTitles objectAtIndex:section];
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        if ([self.contactModel countSearchContacts]) {
+            return NSLocalizedString(@"Top name matches", nil);
+        }
+        return nil;
+    }
+    return [self.contactsSectionTitles objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return [self.addressBookSectionTitles indexOfObject:title];
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        return 0;
+    }
+    return [self.contactsSectionTitles indexOfObject:title];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    // If search enabled show no headers
-    if(_searchResults.count || _searchBar.text.length) {
-        return 0.0f;
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        return ContactsViewControllerTableHeaderHeight;
     }
 
-    NSString *sectionTitle = [self.addressBookSectionTitles objectAtIndex:section];
-    NSArray *contacts = [self.addressBookSectionsSorted objectForKey:sectionTitle];
-    if (contacts.count == 0) {
+    NSString *sectionTitle = [self.contactsSectionTitles objectAtIndex:section];
+    NSInteger contactsCount = [self.contactModel countContactSection:sectionTitle];
+
+    if (!contactsCount) {
         return 0.0f;
     }
-
-    return 47.f; // Default height
+    return ContactsViewControllerTableHeaderHeight;
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return self.addressBookSectionTitles;
+- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        return nil;
+    }
+    return self.contactsSectionTitles;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        NSInteger numberOfSearchResults = [self.contactModel countSearchContacts];
+        self.noMatchesView.hidden = numberOfSearchResults ? YES : NO;
 
-    NSString *sectionTitle = [self.addressBookSectionTitles objectAtIndex:section];
-    NSArray *contacts = [self.addressBookSectionsSorted objectForKey:sectionTitle];
-
-    if(contacts.count > 0) {
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        return numberOfSearchResults;
     }
 
-    return contacts.count;
+    NSString *sectionTitle = [self.contactsSectionTitles objectAtIndex:section];
+    NSInteger contactsCount = [self.contactModel countContactSection:sectionTitle];
+
+    if (contactsCount > 0) {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    return contactsCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddressBookContactCellIdentifier"];
-    if (cell == nil) {
-        cell = [[ContactTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AddressBookContactCellIdentifier"];
+    static NSString *CellIdentifier = @"ContactsTableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    CNContact *contact;
+
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        contact = [self.contactModel getSearchContactAtIndex:indexPath.row];
+    } else {
+        NSString *sectionTitle = [self.contactsSectionTitles objectAtIndex:indexPath.section];
+        contact = [self.contactModel getContactsAtSectionAndIndex:sectionTitle andIndex:indexPath.row];
     }
 
-    NSString *sectionTitle = [self.addressBookSectionTitles objectAtIndex:indexPath.section];
-    NSArray *contacts = [self.addressBookSectionsSorted objectForKey:sectionTitle];
-    NSDictionary *contact = [contacts objectAtIndex:indexPath.row];
-
-    [cell populateBasedOnContactDict:contact];
+    cell.textLabel.attributedText = [ContactUtils getFormattedStyledContact:contact];
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.searchBar resignFirstResponder];
+    CNContact *contact;
+    NSString *sectionTitle = [self.contactsSectionTitles objectAtIndex:indexPath.section];
 
-    NSString *sectionTitle = [self.addressBookSectionTitles objectAtIndex:indexPath.section];
-    NSArray *contacts = [self.addressBookSectionsSorted objectForKey:sectionTitle];
-    NSDictionary *contact = [contacts objectAtIndex:indexPath.row];
-
-    // If search enabled use different data source
-    if(_searchResults.count || _searchBar.text.length) {
-        contact = [_searchResults objectAtIndex:indexPath.row];
+    if ([tableView isEqual:self.searchResultsTableView]) {
+        contact = [self.contactModel getSearchContactAtIndex:indexPath.row];
+    } else {
+        contact = [self.contactModel getContactsAtSectionAndIndex:sectionTitle andIndex:indexPath.row];
     }
 
-    if (contact) {
-        ABRecordRef person = (__bridge ABRecordRef)contact[@"ContactABRecordRef"];
-        if (person != NULL) {
-            ABPersonViewController *personViewController = [[ABPersonViewController alloc] init];
-            personViewController.personViewDelegate = self;
-            personViewController.addressBook = self.addressBook;
-            personViewController.displayedPerson = person;
-            personViewController.allowsEditing = YES;
-            personViewController.allowsActions = NO;
-            [self.navigationController pushViewController:personViewController animated:YES];
-        }
-    }
+    CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:contact];
+    contactViewController.contactStore = [self.contactModel getContactStore];
+    contactViewController.allowsActions = NO;
+    contactViewController.delegate = self;
+
+    [self.navigationController pushViewController:contactViewController animated:YES];
+
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 47.0;
+    return ContactsViewControllerTableCellHeight;
 }
 
-#pragma mark - UISearchBarDelegate methods
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSString* filter = @"%K CONTAINS[cd] %@";
-    NSArray* args = @[@"search", searchText];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:filter argumentArray:args];
-    _searchResults = [self.addressBookContactsSorted filteredArrayUsingPredicate:predicate];
-    _searchTableViewController.searchResults = _searchResults;
+- (BOOL)contactViewController:(CNContactViewController *)viewController shouldPerformDefaultActionForContactProperty:(CNContactProperty *)property {
+    if ([property.key isEqualToString:ContactsViewControllerPropertyPhoneNumbers]) {
+        CNPhoneNumber *phoneNumberProperty = property.value;
+        NSString *phoneNumber = [phoneNumberProperty stringValue];
 
-    // Reload the searchResultsTableView
-    [_searchController.searchResultsTableView reloadData];
+        AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+        [appDelegate handlePhoneNumber:phoneNumber];
+
+        return YES;
+    }
+    return NO;
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    _searchResults = [NSArray array];
-    [self.tableView reloadData];
+- (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(CNContact *)contact {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
-    [self.tableView reloadData];
-}
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    UISearchBar *searchBar = searchController.searchBar;
+    NSString *searchText = searchBar.text;
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
-    // Changing the frame of the searchResultTableView only works in this delegate method!
-    [_searchController.searchResultsTableView setFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 44.f)];
+    [self.searchTableViewController.tableView setFrame:CGRectMake(0.f, ContactsViewControllerTableCellHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - ContactsViewControllerTableCellHeight)];
     // Furthermore the searchResultTableview has a bottom inset (and bottom scrollIndicator inset) of 177px to perfectly fit the results.
     // Its a magic number for which I (Karsten W) do not have an explanation!
-    UIEdgeInsets contentInset = UIEdgeInsetsMake(0.f, 0.f, 177.f, 0.f);
-    [_searchController.searchResultsTableView setContentInset:contentInset];
-    [_searchController.searchResultsTableView setScrollIndicatorInsets:contentInset];
+    UIEdgeInsets contentInset = UIEdgeInsetsMake(ContactsViewControllerEdgeOffsetSearchTable, 0.f, 0.f, 0.f);
+    [self.searchTableViewController.tableView setContentInset:contentInset];
+    [self.searchTableViewController.tableView setScrollIndicatorInsets:contentInset];
+
+    [self.contactModel searchContacts:searchText withCompletion:^() {
+        [self.searchTableViewController.tableView reloadData];
+    }];
 }
 
 @end

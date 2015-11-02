@@ -36,7 +36,7 @@
 #pragma mark - views setup
 
 - (instancetype)init {
-    self = [super initWithCenterViewController:self.tabBarController leftDrawerViewController:self.sideMenuViewController];
+    self = [super init];
 
     if (self) {
         [self setRestorationIdentifier:@"MMDrawer"];
@@ -45,6 +45,8 @@
         [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
         [self setShadowRadius:2.f];
         [self setShadowOpacity:0.5f];
+        [self setCenterViewController:self.tabBarController];
+        [self setLeftDrawerViewController:self.sideMenuViewController];
     }
     return self;
 }
@@ -95,8 +97,8 @@
 - (UINavigationController *)contactsNavigationViewController {
     if(!_contactsNavigationViewController) {
         ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
-        contactsViewController.view.backgroundColor = [UIColor clearColor];
         _contactsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:contactsViewController];
+        _contactsNavigationViewController.navigationBar.translucent = NO;
     }
     return _contactsNavigationViewController;
 }

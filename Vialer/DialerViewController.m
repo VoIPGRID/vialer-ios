@@ -114,7 +114,7 @@ static NSString * const kMenuImage = @"menu";
     if (!_leftDrawerButton) {
         // Add hamburger menu on navigation bar
         _leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kMenuImage] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        _leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
+        _leftDrawerButton.tintColor = [Configuration tintColorForKey:kTintColorLeftDrawerButton];
     }
     return _leftDrawerButton;
 }
