@@ -8,24 +8,40 @@
 
 #import "RecentCall.h"
 
+#import "ContactModel.h"
+
+#import "ContactsUI/ContactsUI.h"
+
 #import "NSDate+RelativeDate.h"
 #import "NSString+Mobile.h"
 
-#import <AddressBook/ABAddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
+static NSString * const RecentCallDestinationNumber = @"dst_number";
+static NSString * const RecentCallSourceNumber = @"src_number";
+static NSString * const RecentCallATime = @"atime";
+static NSString * const RecentCallDirection = @"direction";
+static NSString * const RecentCallOutbound = @"outbound";
+static NSString * const RecentCallDate = @"call_date";
+static NSString * const RecentCallCallerId = @"callerid";
 
 @implementation RecentCall
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super init]) {
         self.callerRecordId = -1;
-        self.callerName = [dict objectForKey:@"dst_number"];
+        self.contactIdentifier = @"";
         self.callerPhoneType = NSLocalizedString(@"phone", nil);
-        self.atime = [[dict objectForKey:@"atime"] integerValue];
+        self.atime = [[dict objectForKey:RecentCallATime] integerValue];
+        self.callDirection = [[dict objectForKey:RecentCallDirection] isEqualToString:RecentCallOutbound] ? CallDirectionOutbound : CallDirectionInbound;
+        self.callDate = [dict objectForKey:RecentCallDate];
 
-        self.callerPhoneNumber = [dict objectForKey:@"dst_number"];
-        self.callDirection = [[dict objectForKey:@"direction"] isEqualToString:@"outbound"] ? CallDirectionOutbound : CallDirectionInbound;
-        self.callDate = [dict objectForKey:@"call_date"] ? [NSDate dateFromString:[dict objectForKey:@"call_date"]] : [NSDate date];
+        if (self.callDirection == CallDirectionInbound) {
+            self.callerId = [[[dict objectForKey:RecentCallCallerId] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] componentsJoinedByString:@""];
+            self.callerName = [dict objectForKey:RecentCallSourceNumber];
+            self.callerPhoneNumber = [dict objectForKey:RecentCallSourceNumber];
+        } else {
+            self.callerName = [dict objectForKey:RecentCallDestinationNumber];
+            self.callerPhoneNumber = [dict objectForKey:RecentCallDestinationNumber];
+        }
     }
     return self;
 }
@@ -46,7 +62,7 @@
     }
     if (self.callerRecordId >= 0 && self.callerRecordId == other.callerRecordId) {
         return YES;
-    }    
+    }
     if (!(!self.callerName && !other.callerName) && ![self.callerName isEqualToString:other.callerName]) {
         return NO;
     }
@@ -57,99 +73,51 @@
     if (!objects) {
         return @[];
     }
-    
+
     NSMutableArray *recents = [NSMutableArray array];
     for (NSDictionary *dict in objects) {
         [recents addObject:[[RecentCall alloc] initWithDictionary:dict]];
     }
-    
+
     if (!recents.count) {
         return @[];
     }
-    
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-    
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 60000
-    //TODO: is the below check realy needed? something to do with iOS6 ?
-    //if (ABAddressBookGetAuthorizationStatus != NULL) {
-        if (ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusAuthorized) {
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-                dispatch_semaphore_signal(semaphore);
-            });
-            
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        }
-    //}
-    
-    if (ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusAuthorized) {
-        return recents;
-    }
-#endif
-    
+
     // Calculate calling code prefixes (NOTE: Only works in some countries, like The Netherlands)
     NSArray *prefixes = nil;
     NSString *mobileCC = [NSString systemCallingCode];
     if ([mobileCC length]) {
         prefixes = @[mobileCC, [@"00" stringByAppendingString:[mobileCC stringByReplacingOccurrencesOfString:@"+" withString:@""]], @"0"];
     }
-    
-    // Scan address book people for corresponding phone numbers
-    NSArray *people = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
-    if (people) {
-        for (int i = 0; i < [people count]; i++) {
-            ABRecordRef person = (__bridge ABRecordRef)([people objectAtIndex:i]);
-            
-            ABMutableMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            
-            for (int k = 0; k < ABMultiValueGetCount(phoneNumbers); k++) {
-                NSString *value = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneNumbers, k);
-                NSString *phoneNumber = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789+"] invertedSet]] componentsJoinedByString:@""];
 
-                if (prefixes) {
-                    for (NSString *prefix in prefixes) {
-                        if ([phoneNumber hasPrefix:prefix]) {
-                            // Remove prefix
-                            phoneNumber = [phoneNumber substringFromIndex:[prefix length]];
-                            break;
-                        }
+    for (CNContact *contact in [ContactModel defaultContactModel].allContacts) {
+        NSArray *phoneNumbers = contact.phoneNumbers;
+        for (CNLabeledValue *phoneNumber in phoneNumbers) {
+            CNPhoneNumber *cnPhoneNumber = phoneNumber.value;
+            NSString *phoneNumberDigits = cnPhoneNumber.stringValue;
+            NSString *digits = [[phoneNumberDigits componentsSeparatedByCharactersInSet:[[self class] digitsCharacterSet]] componentsJoinedByString:@""];
+            NSString *phoneNumberLabel = [CNLabeledValue localizedStringForLabel:phoneNumber.label];
+
+            if (prefixes) {
+                for (NSString *prefix in prefixes) {
+                    if ([digits hasPrefix:prefix]) {
+                        // Remove prefix
+                        digits = [digits substringFromIndex:[prefix length]];
+                        break;
                     }
                 }
+            }
 
-                NSArray *filtered = [recents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF._callerPhoneNumber ENDSWITH[cd] %@", phoneNumber]];
-                if (filtered.count) {
-                    for (RecentCall *recent in filtered) {
-                        // Save record id for contact
-                        recent.callerRecordId = ABRecordGetRecordID(person);
-
-                        // Save phone type
-                        CFStringRef label = ABMultiValueCopyLabelAtIndex(phoneNumbers, k);
-                        if (label) {
-                            recent.callerPhoneType = (__bridge NSString *)(ABAddressBookCopyLocalizedLabel(label));
-                            CFRelease(label);
-                        }
-                        
-                        // Save name
-                        NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
-                        if (!fullName) {
-                            NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-                            NSString *middleName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-                            NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-                            if (firstName) {
-                                fullName = [NSString stringWithFormat:@"%@ %@%@", firstName, [middleName length] ? [NSString stringWithFormat:@"%@ ", middleName] : @"", lastName];
-                            }
-                        }
-                        if (fullName) {
-                            recent.callerName = fullName;
-                        }
-                    }
+            NSArray *filtered = [recents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF._callerPhoneNumber ENDSWITH[cd] %@", digits]];
+            if ([filtered count]) {
+                for (RecentCall *recent in filtered) {
+                    recent.contactIdentifier = contact.identifier;
+                    recent.callerName = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
+                    recent.callerPhoneType = phoneNumberLabel;
                 }
             }
         }
     }
-    
-    CFRelease(addressBook);
-    
     return recents;
 }
 
@@ -187,8 +155,17 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
-    
+
     return [self syncRecentsFromObjects:[dict objectForKey:@"objects"]];
+}
+
++ (NSCharacterSet *)digitsCharacterSet {
+    static NSCharacterSet *_digitsCharacterSet;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _digitsCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789+"] invertedSet];
+    });
+    return _digitsCharacterSet;
 }
 
 @end

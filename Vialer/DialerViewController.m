@@ -80,6 +80,8 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     self.title = NSLocalizedString(@"Keypad", nil);
     self.tabBarItem.image = [UIImage imageNamed:DialerViewControllerTabBarItemImage];
     self.tabBarItem.selectedImage = [UIImage imageNamed:DialerViewControllerTabBarItemActiveImage];
+
+    self.navigationItem.leftBarButtonItem = self.leftDrawerButton;
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DialerViewControllerLogoImage]];
 }
 
@@ -186,7 +188,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     if (![self.numberText length]) {
         self.numberText = self.lastCalledNumber;
 
-    // There is a number, let's call
+        // There is a number, let's call
     } else {
         self.lastCalledNumber = self.numberText;
         // TODO: implement 4g calling

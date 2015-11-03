@@ -21,6 +21,7 @@
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
+		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
 		C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926351BE3A36600436D92 /* BubblingPoints.m */; };
 		C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
 		C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */; };
@@ -28,10 +29,16 @@
 		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
 		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
 		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; };
-		C46618B71BE7536500F696A0 /* TwoStepCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */; };
+		C467430F1BF726AA0032D77B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46743081BF726AA0032D77B /* RecentsViewController.m */; };
+		C46743101BF726AA0032D77B /* RecentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46743091BF726AA0032D77B /* RecentsViewController.xib */; };
+		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
+		C46743121BF726AA0032D77B /* SelectRecentsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430D1BF726AA0032D77B /* SelectRecentsFilterViewController.m */; };
+		C46743131BF726AA0032D77B /* SelectRecentsFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C467430E1BF726AA0032D77B /* SelectRecentsFilterViewController.xib */; };
+		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
 		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
 		C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48752711BF1F51900B8B42B /* ReachabilityManager.m */; };
+		C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */; };
 		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
 		C4BFEA621BDFD50100D616A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */; };
 		C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
@@ -66,7 +73,6 @@
 		FB29D913189BA0FF00345976 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
 		FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
-		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
 		FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
 		FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
 		FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
@@ -79,12 +85,8 @@
 		FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
 		FB4226DD182261D200707349 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
 		FB4226E1182261D200707349 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
-		FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */; };
-		FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */; };
 		FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
 		FB503173183527BE006FEBAA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB503172183527BE006FEBAA /* libz.dylib */; };
-		FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB576B11182A802200C4FAB4 /* RecentsViewController.m */; };
-		FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB576B12182A802200C4FAB4 /* RecentsViewController.xib */; };
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
 		FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
@@ -96,7 +98,6 @@
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */; };
 		FBAFB3F71834250500848B2E /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3F61834250500848B2E /* RecentCall.m */; };
-		FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
 		FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
 		FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
@@ -191,6 +192,8 @@
 		9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
 		ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
 		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
 		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
@@ -206,6 +209,16 @@
 		C43E92961BC400F900BC622B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C43E92971BC400F900BC622B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
+		C46743071BF726AA0032D77B /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
+		C46743081BF726AA0032D77B /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
+		C46743091BF726AA0032D77B /* RecentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentsViewController.xib; sourceTree = "<group>"; };
+		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
+		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
+		C467430C1BF726AA0032D77B /* SelectRecentsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRecentsFilterViewController.h; sourceTree = "<group>"; };
+		C467430D1BF726AA0032D77B /* SelectRecentsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRecentsFilterViewController.m; sourceTree = "<group>"; };
+		C467430E1BF726AA0032D77B /* SelectRecentsFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectRecentsFilterViewController.xib; sourceTree = "<group>"; };
+		C47481991BF5CAAF00EA8672 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
+		C474819B1BF5CAB300EA8672 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = nl; path = nl.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
@@ -272,8 +285,6 @@
 		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB302E5C182A38E5004B7D27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		FB302E60182A390E004B7D27 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
-		FB302E61182A390E004B7D27 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ContactsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FB3820A41A1E4F510033FF78 /* Gossip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gossip.h; sourceTree = "<group>"; };
 		FB3820A51A1E4F510033FF78 /* GSAccount+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSAccount+Private.h"; sourceTree = "<group>"; };
 		FB3820A61A1E4F510033FF78 /* GSAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSAccount.h; sourceTree = "<group>"; };
@@ -323,15 +334,9 @@
 		FB4226DE182261D200707349 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		FB4226DF182261D200707349 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB4226E0182261D200707349 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectRecentsFilterViewController.xib; sourceTree = "<group>"; };
-		FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRecentsFilterViewController.h; sourceTree = "<group>"; };
-		FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRecentsFilterViewController.m; sourceTree = "<group>"; };
 		FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Mobile.h"; sourceTree = "<group>"; };
 		FB48BB401875B63700C0D5DB /* NSString+Mobile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Mobile.m"; sourceTree = "<group>"; };
 		FB503172183527BE006FEBAA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		FB576B10182A802200C4FAB4 /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
-		FB576B11182A802200C4FAB4 /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RecentsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		FB576B12182A802200C4FAB4 /* RecentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentsViewController.xib; sourceTree = "<group>"; };
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
 		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
@@ -347,8 +352,6 @@
 		FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FBAFB3F51834250500848B2E /* RecentCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCall.h; sourceTree = "<group>"; };
 		FBAFB3F61834250500848B2E /* RecentCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCall.m; sourceTree = "<group>"; };
-		FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
-		FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FBB854101A7FE24C00121366 /* incoming.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incoming.caf; sourceTree = "<group>"; };
 		FBB854111A7FE3CE00121366 /* dtmf-#.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-#.aif"; sourceTree = "<group>"; };
@@ -504,19 +507,27 @@
 			name = TwoStep;
 			sourceTree = "<group>";
 		};
+		C46743141BF726DC0032D77B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C46743071BF726AA0032D77B /* RecentsViewController.h */,
+				C46743081BF726AA0032D77B /* RecentsViewController.m */,
+				C46743091BF726AA0032D77B /* RecentsViewController.xib */,
+				C467430C1BF726AA0032D77B /* SelectRecentsFilterViewController.h */,
+				C467430D1BF726AA0032D77B /* SelectRecentsFilterViewController.m */,
+				C467430E1BF726AA0032D77B /* SelectRecentsFilterViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		C4CEAB3E1BCE794600A56FC2 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
+				C46743141BF726DC0032D77B /* Controllers */,
+				C467430A1BF726AA0032D77B /* RecentTableViewCell.h */,
+				C467430B1BF726AA0032D77B /* RecentTableViewCell.m */,
 				C4EFCF871BF22C850000CC6F /* ExtendedNavbarView.h */,
 				C4EFCF881BF22C850000CC6F /* ExtendedNavbarView.m */,
-				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
-				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
-				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
-				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
-				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
-				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
-				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
-				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
 				C4CEAB401BCE7C0800A56FC2 /* Models */,
 			);
 			name = Recents;
@@ -554,6 +565,8 @@
 		C4CEAB401BCE7C0800A56FC2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FBAFB3F51834250500848B2E /* RecentCall.h */,
+				FBAFB3F61834250500848B2E /* RecentCall.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -637,6 +650,7 @@
 		F94F47CA1BCB9F8400F40737 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */,
 				F94F47CC1BCB9F9A00F40737 /* Controllers */,
 				F94F47CB1BCB9F9300F40737 /* Models */,
 				F99856921BDF85390005253B /* Utils */,
@@ -656,8 +670,8 @@
 		F94F47CC1BCB9F9A00F40737 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
-				FB302E61182A390E004B7D27 /* ContactsViewController.m */,
+				C406C9E91BF4CDE9001363CA /* ContactsViewController.h */,
+				C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -871,8 +885,6 @@
 		FBAFB3F81834250800848B2E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FBAFB3F51834250500848B2E /* RecentCall.h */,
-				FBAFB3F61834250500848B2E /* RecentCall.m */,
 				FEE526961BA2CC42001906B5 /* Configuration.h */,
 				FEE526971BA2CC42001906B5 /* Configuration.m */,
 				FE48F1661BA7163000F57544 /* SystemUser.h */,
@@ -995,10 +1007,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */,
 				FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */,
 				FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */,
-				C46618B71BE7536500F696A0 /* TwoStepCallingViewController.xib in Resources */,
 				FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */,
+				C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */,
 				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
 				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
@@ -1012,6 +1025,7 @@
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
 				F919B9E01BA81B430082AD79 /* AvailabilityViewController.xib in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
+				C46743131BF726AA0032D77B /* SelectRecentsFilterViewController.xib in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
 				F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */,
@@ -1023,11 +1037,10 @@
 				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
 				F245E7711B577AD100FBA37C /* Config.plist in Resources */,
 				C4EFCF801BF21E210000CC6F /* CallingStoryboard.storyboard in Resources */,
-				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
+				C46743101BF726AA0032D77B /* RecentsViewController.xib in Resources */,
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
-				FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,7 +1197,7 @@
 			files = (
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
 				FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */,
-				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
+				C467430F1BF726AA0032D77B /* RecentsViewController.m in Sources */,
 				C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */,
 				FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */,
 				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
@@ -1206,13 +1219,11 @@
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
-				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
 				C4EFCF8C1BF2301E0000CC6F /* OldNumberPadViewController.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
-				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
@@ -1223,6 +1234,7 @@
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */,
 				C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */,
+				C46743121BF726AA0032D77B /* SelectRecentsFilterViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */,
 				C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */,
@@ -1237,6 +1249,7 @@
 				C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
+				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				C4EFCF891BF22C850000CC6F /* ExtendedNavbarView.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
@@ -1246,9 +1259,9 @@
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */,
-				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
 				C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
+				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
 				C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1271,6 +1284,15 @@
 				C4EFCF751BF21C690000CC6F /* Base */,
 			);
 			name = TwoStepCallingViewController.xib;
+			sourceTree = "<group>";
+		};
+		C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C47481991BF5CAAF00EA8672 /* en */,
+				C474819B1BF5CAB300EA8672 /* nl */,
+			);
+			name = ContactsStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */ = {

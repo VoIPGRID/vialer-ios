@@ -28,10 +28,10 @@
 "App is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
-"Application denied access to 'Contacts'" = "Application heeft geen toegang tot 'Contacten'";
+"Application denied access to 'Contacts'" = "App heeft geen toegang tot 'Contacten'";
 
 /* No comment provided by engineer. */
-"Application not authorized to access 'Contacts'" = "Application heeft geen toegangsrechten tot 'Contacten'";
+"Application not authorized to access 'Contacts'" = "App heeft geen toegangsrechten tot 'Contacten'";
 
 /* No comment provided by engineer. */
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";

@@ -9,12 +9,22 @@
 #import "ContactUtils.h"
 
 @implementation ContactUtils
+
 + (NSMutableAttributedString *)getFormattedStyledContact:(CNContact *)contact {
     NSString *fullName = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
     NSString *givenName = [contact givenName];
 
     if (!fullName) {
-        return [[NSMutableAttributedString alloc] initWithString:@""];
+        NSString *otherContext = @"";
+        NSArray *emailadresses = contact.emailAddresses;
+
+        if ([emailadresses count]) {
+            for (CNLabeledValue  *emailadress in emailadresses) {
+                otherContext = emailadress.value;
+                break;
+            }
+        }
+        return [[NSMutableAttributedString alloc] initWithString:otherContext];
     }
 
     NSMutableAttributedString *fullNameAttrString = [[NSMutableAttributedString alloc] initWithString: fullName];

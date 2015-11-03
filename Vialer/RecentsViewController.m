@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "ContactsViewController.h"
+#import "ContactModel.h"
 #import "NSDate+RelativeDate.h"
 #import "RecentCall.h"
 #import "RecentTableViewCell.h"
@@ -19,18 +20,28 @@
 #import "GAITracker.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
-#import <AddressBookUI/AddressBookUI.h>
-
 #import "SVProgressHUD.h"
+
+static NSString *const RecentsViewControllerTabContactImageName = @"tab-recent";
+static NSString *const RecentsViewControllerTabContactActiveImageName = @"tab-recent-active";
+static NSString *const RecentsViewControllerLogoImageName = @"logo";
+static NSString *const RecentsViewControllerMenuImageName = @"menu";
+static NSString *const RecentsViewControllerOutbound = @"outbound";
+static NSString *const RecentsViewControllerTransparentPixel = @"TransparentPixel";
+static NSString *const RecentsViewControllerPropertyPhoneNumbers = @"phoneNumbers";
 
 @interface RecentsViewController ()
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) UIBarButtonItem *leftDrawerButton;
+
 @property (assign) BOOL reloading;
 @property (assign) BOOL unauthorized;
 @property (nonatomic, strong) NSArray *recents;
 @property (nonatomic, strong) NSArray *missedRecents;
 @property (nonatomic, strong) NSDate *previousSearchDateTime;
 @property (nonatomic, assign) NSTimeInterval lastRecentsFailure;
+@property (nonatomic, strong) RecentCall *recentCall;
+@property (nonatomic, strong) ContactModel *contactModel;
 @end
 
 @implementation RecentsViewController
@@ -40,22 +51,23 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Recents", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"tab-recent"];
-        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-recent-active"];
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        
+        self.tabBarItem.image = [UIImage imageNamed:RecentsViewControllerTabContactImageName];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:RecentsViewControllerTabContactActiveImageName];
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RecentsViewControllerLogoImageName]];
         // Add hamburger menu on navigation bar
-        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
+        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:RecentsViewControllerMenuImageName] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
         leftDrawerButton.tintColor = [Configuration tintColorForKey:ConfigurationLeftDrawerButtonTintColor];
         self.navigationItem.leftBarButtonItem = leftDrawerButton;
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupLayout];
+}
 
+- (void)setupLayout {
     self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationRecentsTableViewTintColor];
 
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
@@ -63,9 +75,11 @@
     self.refreshControl = refresh;
 
     [self.tableView addSubview:self.refreshControl];
-    
+
     [self.filterSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:0];
     [self.filterSegmentedControl setTitle:NSLocalizedString(@"Missed", nil) forSegmentAtIndex:1];
+
+    self.navigationItem.leftBarButtonItem = self.leftDrawerButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,7 +92,7 @@
     self.filterSegmentedControl.tintColor = [Configuration tintColorForKey:ConfigurationRecentsSegmentedControlTintColor];
 
     // ExtendedNavBarView will draw its own hairline.
-    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"TransparentPixel"]];
+    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:RecentsViewControllerTransparentPixel]];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 }
 
@@ -99,10 +113,31 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - properties
+
+- (UIBarButtonItem *)leftDrawerButton {
+    if (!_leftDrawerButton) {
+        _leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:RecentsViewControllerMenuImageName]
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(leftDrawerButtonPress:)];
+        _leftDrawerButton.tintColor = [Configuration tintColorForKey: ConfigurationLeftDrawerButtonTintColor];
+    }
+    return _leftDrawerButton;
+}
+
+- (ContactModel *)contactModel {
+    if (!_contactModel) {
+        _contactModel = [[ContactModel alloc] init];
+    }
+    return _contactModel;
+}
+
+- (RecentCall *)recentCall {
+    if (!_recentCall) {
+        _recentCall = [[RecentCall alloc] init];
+    }
+    return _recentCall;
 }
 
 - (void)clearRecents {
@@ -132,9 +167,9 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul), ^{
         NSString *sourceNumber = nil;
-        RecentsFilter filter = RecentsFilterNone;//[[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentsFilter"] integerValue];
+        RecentsFilter filter = RecentsFilterNone;
         if (filter == RecentsFilterSelf) {
-            sourceNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"Outgoing number"];
+            sourceNumber = [SystemUser currentUser].outgoingNumber;
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -247,13 +282,15 @@
 
     RecentCall *recent = [recents objectAtIndex:indexPath.row];
     if (recent.callDirection == CallDirectionOutbound) {
-        cell.iconImageView.image = [UIImage imageNamed:@"outbound"];
+        cell.iconImageView.image = [UIImage imageNamed:RecentsViewControllerOutbound];
     } else {
         cell.iconImageView.image = nil;
     }
     cell.nameLabel.text = recent.callerName;
     cell.descriptionLabel.text = recent.callerPhoneType;
-    cell.dateTimeLabel.text = [recent.callDate relativeDayTimeString];
+    if (recent.callDate) {
+        cell.dateTimeLabel.text = [[NSDate dateFromString:recent.callDate] relativeDayTimeString];
+    }
 
     // Check if call was answered or not
     if (recent.atime == 0 && recent.callDirection == CallDirectionInbound) {
@@ -282,56 +319,52 @@
 
     RecentCall *recent = [self.recents objectAtIndex:indexPath.row];
 
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-    ABRecordRef person = nil;
-    if (recent.callerRecordId >= 0) {
-        person = ABAddressBookGetPersonWithRecordID(addressBook, recent.callerRecordId);
-    }
+    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+    [appDelegate handlePhoneNumber:recent.callerPhoneNumber];
 
-    if (person) {
-        ABPersonViewController *personViewController = [[ABPersonViewController alloc] init];
-        personViewController.personViewDelegate = self;
-        personViewController.displayedPerson = person;
-        personViewController.addressBook = addressBook;
-        personViewController.allowsEditing = NO;
-        personViewController.allowsActions = NO;
-        [self.navigationController pushViewController:personViewController animated:YES];
-    } else if (recent.callerPhoneNumber.length) {
-        person = ABPersonCreate();
-
-        CFErrorRef error = nil;
-        ABMutableMultiValueRef phoneNumberMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        ABMultiValueAddValueAndLabel(phoneNumberMultiValue, (__bridge CFTypeRef)(recent.callerPhoneNumber), kABPersonPhoneMainLabel, NULL);
-        ABRecordSetValue(person, kABPersonPhoneProperty, phoneNumberMultiValue, &error);
-
-        ABUnknownPersonViewController *unknownPersonViewController = [[ABUnknownPersonViewController alloc] init];
-        unknownPersonViewController.unknownPersonViewDelegate = self;
-        unknownPersonViewController.displayedPerson = person;
-        unknownPersonViewController.addressBook = addressBook;
-        unknownPersonViewController.allowsActions = NO;
-        [self.navigationController pushViewController:unknownPersonViewController animated:YES];
-    }
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    [self tableView:tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath];
+
+    RecentCall *recent = [self.recents objectAtIndex:indexPath.row];
+
+    CNContact *contact = [self.contactModel getSelectedContactOnIdentifier:recent.contactIdentifier];
+    CNContactViewController *contactViewController;
+    if (contact) {
+        contactViewController = [CNContactViewController viewControllerForContact:contact];
+        contactViewController.title = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
+    } else {
+        CNPhoneNumber *phoneNumber = [[CNPhoneNumber alloc] initWithStringValue:recent.callerPhoneNumber];
+        CNLabeledValue *phoneNumbers = [[CNLabeledValue alloc] initWithLabel:CNLabelPhoneNumberMain value: phoneNumber];
+        CNMutableContact *unknownContact = [[CNMutableContact alloc] init];
+        unknownContact.phoneNumbers = @[phoneNumbers];
+        unknownContact.givenName = recent.callerId;
+
+        contactViewController = [CNContactViewController viewControllerForUnknownContact:unknownContact];
+        contactViewController.title = recent.callerPhoneNumber;
+    }
+
+    contactViewController.contactStore = [self.contactModel getContactStore];
+    contactViewController.allowsActions = NO;
+    contactViewController.allowsEditing = YES;
+    contactViewController.delegate = self;
+
+    [self.navigationController pushViewController:contactViewController animated:YES];
 }
 
-#pragma mark - Person view controller delegate
+#pragma mark - CNContactsViewControllerDelegate
 
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    // Delegate to the contacts view controller handler
-    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-    return [appDelegate handlePerson:person property:property identifier:identifier];
-}
+- (BOOL)contactViewController:(CNContactViewController *)viewController shouldPerformDefaultActionForContactProperty:(CNContactProperty *)property {
+    if ([property.key isEqualToString:RecentsViewControllerPropertyPhoneNumbers]) {
+        CNPhoneNumber *phoneNumberProperty = property.value;
+        NSString *phoneNumber = [phoneNumberProperty stringValue];
 
-#pragma mark - Unknown person view controller delegate
+        AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+        [appDelegate handlePhoneNumber:phoneNumber];
 
-- (BOOL)unknownPersonViewController:(ABUnknownPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    return [self personViewController:nil shouldPerformDefaultActionForPerson:person property:property identifier:identifier];
-}
-
-- (void)unknownPersonViewController:(ABUnknownPersonViewController *)personViewController didResolveToPerson:(ABRecordRef)person {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Notifications

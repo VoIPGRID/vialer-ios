@@ -107,9 +107,8 @@ static float const RootViewControllerShadowOpacity = 0.5f;
 
 - (UINavigationController *)contactsNavigationViewController {
     if(!_contactsNavigationViewController) {
-        ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
-        _contactsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:contactsViewController];
-        _contactsNavigationViewController.navigationBar.translucent = NO;
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ContactsStoryboard" bundle:nil];
+        _contactsNavigationViewController = [sb instantiateViewControllerWithIdentifier:@"ContactsNavigationViewController"];
     }
     return _contactsNavigationViewController;
 }

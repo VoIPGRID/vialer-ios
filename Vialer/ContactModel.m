@@ -12,9 +12,27 @@
 @property (nonatomic, strong) CNContactStore *contactStore;
 @property (nonatomic, strong) NSMutableDictionary *contactsSections;
 @property (nonatomic, strong) NSMutableArray *contactsSearchResult;
+@property (nonatomic, strong) NSArray *allContacts;
+@property (nonatomic, strong) NSArray *keysToFetch;
+@property (nonatomic, strong) CNContactFetchRequest *fetchRequest;
+
+@property (nonatomic, strong) NSArray *sectionTitles;
+
 @end
 
 @implementation ContactModel
+
+#pragma mark - initialization
+
++ (instancetype)defaultContactModel {
+    static ContactModel *_defaultContactModel;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^ {
+        _defaultContactModel = [[ContactModel alloc] init];
+        [_defaultContactModel refreshAllContacts];
+    });
+    return _defaultContactModel;
+}
 
 # pragma mark - properties
 
@@ -39,43 +57,69 @@
     return _contactsSections;
 }
 
-- (void)getContacts:(void (^)())completion {
-    id keysToFetch = @[[CNContactViewController descriptorForRequiredKeys]];
-    CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keysToFetch];
-    fetchRequest.sortOrder = CNContactSortOrderGivenName;
-
-    [self.contactsSections removeAllObjects];
-
-    BOOL success = [self.contactStore enumerateContactsWithFetchRequest:fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-
-        NSString *firstChar = [self getFirstChar:contact];
-
-        if (![self.contactsSections objectForKey:firstChar]) {
-            [self.contactsSections setObject:[NSMutableArray array] forKey:firstChar];
-        }
-
-        NSMutableArray *contacts = [self.contactsSections objectForKey:firstChar];
-        [contacts addObject:contact];
-
-        [self.contactsSections setObject:contacts forKey:firstChar];
-    }];
-
-    if (success && completion) {
-        completion();
+- (NSArray *)keysToFetch {
+    if (!_keysToFetch) {
+        _keysToFetch = @[[CNContactViewController descriptorForRequiredKeys], CNContactPhoneNumbersKey];
     }
+    return _keysToFetch;
 }
 
-- (void)searchContacts:(NSString *)searchText withCompletion:(void (^)())completion {
+- (CNContactFetchRequest *)fetchRequest {
+    if (!_fetchRequest) {
+        _fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:self.keysToFetch];
+        _fetchRequest.sortOrder = CNContactSortOrderGivenName;
+    }
+    return _fetchRequest;
+}
+
+- (NSArray *)sectionTitles {
+    if (![self.contactsSections count]) {
+        return nil;
+    }
+    NSMutableArray *sortedSectionTitles =[[[self.contactsSections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
+    // If there is a pound character, move it to last position
+    if ([sortedSectionTitles[0] isEqualToString:@"#"]) {
+        [sortedSectionTitles addObject:sortedSectionTitles[0]];
+        [sortedSectionTitles removeObjectAtIndex:0];
+    }
+    return [sortedSectionTitles copy];
+}
+
+- (NSArray *)searchResults {
+    return [self.contactsSearchResult copy];
+}
+
+# pragma mark - actions
+
+- (BOOL)refreshAllContacts {
+    NSMutableDictionary *newContacts = [NSMutableDictionary dictionary];
+    NSMutableArray *newAllContacts = [NSMutableArray array];
+
+    BOOL success = [self.contactStore enumerateContactsWithFetchRequest:self.fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+        [newAllContacts addObject:contact];
+        NSString *firstChar = [self getFirstChar:contact];
+
+        if (!newContacts[firstChar]) {
+            newContacts[firstChar] = [NSMutableArray array];
+        }
+        [newContacts[firstChar] addObject:contact];
+    }];
+
+    if (success) {
+        self.allContacts = newAllContacts;
+        self.contactsSections = newContacts;
+    }
+    return success;
+}
+
+- (BOOL)searchContacts:(NSString *)searchText {
     [self.contactsSearchResult removeAllObjects];
 
     if (!searchText) {
-        if (completion) {
-            completion();
-        }
+        return NO;
     }
 
-    id keysToFetch = @[[CNContactViewController descriptorForRequiredKeys]];
-    CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keysToFetch];
+    CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:self.keysToFetch];
     fetchRequest.sortOrder = CNContactSortOrderGivenName;
     fetchRequest.predicate = [CNContact predicateForContactsMatchingName:searchText];
 
@@ -83,9 +127,7 @@
         [self.contactsSearchResult addObject:contact];
     }];
 
-    if (success && completion) {
-        completion();
-    }
+    return success;
 }
 
 - (NSString *)getFirstChar:(CNContact *)contact {
@@ -100,16 +142,17 @@
     return firstChar;
 }
 
-- (NSInteger)countContactSection:(NSString*)section {
-    return [[self getContactsAtSection:section] count];
+- (CNContact *)getSelectedContactOnIdentifier:(NSString *)contactIdentifier {
+
+    return [self.contactStore unifiedContactWithIdentifier:contactIdentifier keysToFetch:self.keysToFetch error:nil];
 }
 
-- (NSArray *)getContactsAtSection:(NSString *)section {
-    return [self.contactsSections objectForKey:section];
+- (NSArray *)getContactsAtSection:(NSInteger)sectionIndex {
+    return self.contactsSections[self.sectionTitles[sectionIndex]];
 }
 
-- (CNContact *)getContactsAtSectionAndIndex:(NSString *)section andIndex:(NSInteger)index {
-    return [[self.contactsSections objectForKey:section] objectAtIndex:index];
+- (CNContact *)getContactsAtSection:(NSInteger)section andIndex:(NSInteger)index {
+    return [[self.contactsSections objectForKey:self.sectionTitles[section]] objectAtIndex:index];
 }
 
 - (NSInteger)countSearchContacts {

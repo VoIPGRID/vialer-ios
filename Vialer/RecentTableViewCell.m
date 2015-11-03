@@ -25,7 +25,7 @@
     if (self) {
         self.layer.shouldRasterize = YES;
         self.layer.rasterizationScale = [UIScreen mainScreen].scale;
-        
+
         [self.contentView addSubview:self.nameLabel];
         [self.contentView addSubview:self.descriptionLabel];
         [self.contentView addSubview:self.dateTimeLabel];
@@ -48,8 +48,9 @@
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.font = [UIFont systemFontOfSize:15.f];
-        _nameLabel.numberOfLines = 1;
+        _nameLabel.numberOfLines = 0;
         _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _nameLabel.opaque = YES;
     }
     return _nameLabel;
@@ -81,15 +82,16 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+
     CGSize dateTimeSize = [self.dateTimeLabel.text sizeWithAttributes:@{NSFontAttributeName: self.dateTimeLabel.font}];
     self.dateTimeLabel.frame = CGRectMake(self.contentView.frame.size.width - dateTimeSize.width, (self.contentView.frame.size.height - dateTimeSize.height) / 2.f, dateTimeSize.width, dateTimeSize.height);
 
     CGSize nameSize = [self.nameLabel.text sizeWithAttributes:@{NSFontAttributeName: self.nameLabel.font}];
-    self.nameLabel.frame = CGRectMake(29.f, 6.f, nameSize.width, nameSize.height);
-    
+    self.nameLabel.frame = CGRectMake(29.f, 6.f, CGRectGetWidth(self.contentView.frame) - (dateTimeSize.width * 2), nameSize.height);
+
     CGSize phoneTypeSize = [self.descriptionLabel.text sizeWithAttributes:@{NSFontAttributeName: self.descriptionLabel.font}];
     self.descriptionLabel.frame = CGRectMake(self.nameLabel.frame.origin.x, self.contentView.frame.size.height - phoneTypeSize.height - 8.f, phoneTypeSize.width, phoneTypeSize.height);
-    
+
     if (self.iconImageView.image) {
         CGSize imageSize = self.iconImageView.image.size;
         self.iconImageView.frame = CGRectMake((self.nameLabel.frame.origin.x - imageSize.width) / 2.f, (self.contentView.frame.size.height - imageSize.height) / 2.f, imageSize.width, imageSize.height);
