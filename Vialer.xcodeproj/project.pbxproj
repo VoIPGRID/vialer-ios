@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */; };
-		03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */; };
 		03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */; };
 		0C9D4760F8A17E2B466B7DE8 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */; };
 		0CA10D22294F86BC076328EA /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */; };
@@ -111,7 +110,6 @@
 		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
 		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
-		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
 		FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */; };
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
 		FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBE564F81A954EAD002C6DF3 /* incoming.wav */; };
@@ -162,8 +160,6 @@
 /* Begin PBXFileReference section */
 		03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewCell.h; sourceTree = "<group>"; };
 		03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewCell.m; sourceTree = "<group>"; };
-		03C8589C1AD370A5009CD05C /* ExtendedNavBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedNavBarView.h; sourceTree = "<group>"; };
-		03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedNavBarView.m; sourceTree = "<group>"; };
 		03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,8 +357,6 @@
 		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
 		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
 		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
-		FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedLabel.h; sourceTree = "<group>"; };
-		FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedLabel.m; sourceTree = "<group>"; };
 		FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingViewController.h; sourceTree = "<group>"; };
 		FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingViewController.m; sourceTree = "<group>"; };
 		FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPIncomingViewController.xib; sourceTree = "<group>"; };
@@ -425,6 +419,8 @@
 		3D1A5E611AE543C000DBE64B /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
+				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
+				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
 				3DE6EADF1AF24D0800C09935 /* Forms */,
 				3D4430411AEF8E330034156F /* General */,
 				3D4430401AEF8E290034156F /* Scene */,
@@ -516,6 +512,14 @@
 		C4CEAB3E1BCE794600A56FC2 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
+				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
+				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
+				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
+				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
+				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
+				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
+				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
+				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
 				C4CEAB401BCE7C0800A56FC2 /* Models */,
 			);
 			name = Recents;
@@ -524,6 +528,10 @@
 		C4CEAB3F1BCE7A5E00A56FC2 /* Calling */ = {
 			isa = PBXGroup;
 			children = (
+				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
+				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
+				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
+				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
 				C41926511BE3A67100436D92 /* TwoStep */,
 				FB364D0C18367F0700932D6E /* DialerViewController.h */,
 				FB364D0D18367F0700932D6E /* DialerViewController.m */,
@@ -813,24 +821,6 @@
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
 				FB29D911189BA0FF00345976 /* Localizable.strings */,
-				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
-				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
-				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
-				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
-				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
-				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
-				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
-				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
-				03C8589C1AD370A5009CD05C /* ExtendedNavBarView.h */,
-				03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */,
-				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
-				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
-				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
-				FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */,
-				FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */,
-				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
-				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
-				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
 				C4FCC6091BB925380013689F /* Side Menu */,
 				F2E811BF1B37E2EB00EA640F /* Settings */,
 				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
@@ -1212,7 +1202,6 @@
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
-				03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */,
 				3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
@@ -1221,7 +1210,6 @@
 				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */,
-				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
 				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,

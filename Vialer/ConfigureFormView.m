@@ -27,14 +27,16 @@
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     self.titleLable.text = [NSString stringWithFormat:NSLocalizedString(@"App is configuring", nil), appName];
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
-    
+
     self.phoneNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT", nil);
     self.phoneNumberField.placeholder = NSLocalizedString(@"mobile_label", nil);
     [self.phoneNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
-    
+
     self.outgoingNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_OUTGOING_DESCRIPTION_TEXT", nil);
-    
+
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
+
+    self.isMoved = NO;
 }
 
 @end

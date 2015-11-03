@@ -37,6 +37,8 @@
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     [self.configurationInstructionsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"HOW_DOES_APP_WORK_BUTTON_TEXT", nil), appName] forState:UIControlStateNormal];
+
+    self.isMoved = NO;
 }
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {

@@ -191,15 +191,21 @@ typedef NS_ENUM(NSInteger, SideMenuItems) {
 
         [message appendFormat:@"\n%@", NSLocalizedString(@"Are you sure you want to log out?", nil)];
 
-        [UIAlertView showWithTitle:NSLocalizedString(@"Log out", nil)
-                           message:message
-                 cancelButtonTitle:NSLocalizedString(@"No", nil)
-                 otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
-                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                              if (buttonIndex == 1) {
-                                  [[SystemUser currentUser] logout];
-                              }
-                          }];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Log out", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[SystemUser currentUser] logout];
+        }];
+        [alert addAction:defaultAction];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil) style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:cancelAction];
+
+        // Make sure we have the current presenting viewcontroller.
+        UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topRootViewController.presentedViewController && ![topRootViewController.presentedViewController isKindOfClass:[UIAlertController class]]) {
+            topRootViewController = topRootViewController.presentedViewController;
+        }
+        [topRootViewController presentViewController:alert animated:YES completion:nil];
+
     }
 }
 

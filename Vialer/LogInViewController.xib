@@ -215,7 +215,7 @@
                     </connections>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" id="pWk-0c-VhQ" customClass="ForgotPasswordView">
-                    <rect key="frame" x="0.0" y="178" width="320" height="176"/>
+                    <rect key="frame" x="0.0" y="250" width="320" height="176"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot password?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Rlf-YE-cri">

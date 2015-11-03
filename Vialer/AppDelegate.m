@@ -42,7 +42,7 @@
     [GAITracker setupGAITracker];
     [self setupConnectivity];
     [self setupAppearance];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
@@ -109,6 +109,13 @@
         _rootViewController = [[RootViewController alloc] init];
     }
     return _rootViewController;
+}
+
+- (LogInViewController *)loginViewController {
+    if (!_loginViewController) {
+        _loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
+    }
+    return _loginViewController;
 }
 
 #pragma mark - UIApplication notification delegate
@@ -224,20 +231,16 @@ void HandleExceptions(NSException *exception) {
 - (void)showOnboarding:(OnboardingScreens)screenToShow {
     // Check if the loginViewController is created, and if present
     NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
-    if (self.loginViewController == nil || !self.loginViewController.presentingViewController) {
-        // Create a new instance, and present it.
-        self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-        if (!self.loginViewController.presentingViewController) {
-            self.loginViewController.screenToShow = screenToShow;
-            self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    if (!self.loginViewController.presentingViewController) {
+        self.loginViewController.screenToShow = screenToShow;
+        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 
-            // Make sure we have the current presenting viewcontroller.
-            UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-            while (topRootViewController.presentedViewController) {
-                topRootViewController = topRootViewController.presentedViewController;
-            }
-            [topRootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+        // Make sure we have the current presenting viewcontroller.
+        UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topRootViewController.presentedViewController) {
+            topRootViewController = topRootViewController.presentedViewController;
         }
+        [topRootViewController presentViewController:self.loginViewController animated:YES completion:nil];
     }
 }
 
