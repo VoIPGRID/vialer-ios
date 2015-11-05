@@ -16,7 +16,8 @@
 
 @implementation ContactModel
 
-# pragma mark - Lazy loading properties
+# pragma mark - properties
+
 - (CNContactStore *)contactStore {
     if (!_contactStore) {
         _contactStore = [[CNContactStore alloc] init];

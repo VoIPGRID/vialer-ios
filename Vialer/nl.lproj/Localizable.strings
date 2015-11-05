@@ -46,7 +46,7 @@
 "Business" = "Zakelijke";
 
 /* No comment provided by engineer. */
-"Call ended" = "Gesprek be√´indigd";
+"Call ended" = "Gesprek be\U00EBindigd";
 
 /* No comment provided by engineer. */
 "Calling other party" = "Andere partij aan het bellen";
@@ -65,12 +65,6 @@
 
 /* No comment provided by engineer. */
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
-
-/* No comment provided by engineer. */
-"Connect A/B calls only" = "Twee staps modus ingeschakeld";
-
-/* No comment provided by engineer. */
-"Connect A/B Info" = "Je hebt nog geen VoIP account geconfigureerd voor dit gebruikersaccount. Je kan in de beheeromgeving een VoIP account selecteren welke zal worden gebruikt door de app. Zodra je dit hebt gedaan zal je ook via VoIP kunnen bellen in de app.";
 
 /* No comment provided by engineer. */
 "Connected with other party" = "Verbonden met andere partij";
@@ -217,12 +211,6 @@
 "No access to the recent calls" = "Geen toegang tot de recente oproepen";
 
 /* No comment provided by engineer. */
-"No Connection" = "Geen dataverbinding beschikbaar";
-
-/* No comment provided by engineer. */
-"No Connection Info Text" = "Deze app heeft een internetverbinding nodig om telefoongesprekken te kunnen starten. Maak verbinding met een mobiele dataverbinding of wifi-netwerk om te bellen via deze app.";
-
-/* No comment provided by engineer. */
 "No email address configured" = "Geen emailadres ingesteld";
 
 /* No comment provided by engineer. */
@@ -266,12 +254,6 @@
 
 /* No comment provided by engineer. */
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
-
-/* No comment provided by engineer. */
-"Poor internet connection Connect A/B" = "Twee staps modus ingeschakeld";
-
-/* No comment provided by engineer. */
-"Poor internet Info" = "Je internetverbinding is niet snel genoeg om te bellen via VoIP. Bellen in twee stappen is ingeschakeld. Wanneer je iemand belt via de app bellen wij jou eerst op je GSM waarmee we je daarna verbinden met degene die je wilt bellen.";
 
 /* No comment provided by engineer. */
 "Recents" = "Recent";
@@ -341,6 +323,12 @@
 
 /* No comment provided by engineer. */
 "Two step call failed" = "Het twee staps gesprek is mislukt";
+
+/* No comment provided by engineer. */
+"Two step modus" = "Twee staps modus";
+
+/* No comment provided by engineer. */
+"Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Twee staps modus zal een gesprek opzetten naar je telefoon en zal na beantwooring het gesprek opzetten naar de andere partij.";
 
 /* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";

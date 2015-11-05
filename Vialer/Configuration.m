@@ -14,7 +14,7 @@ NSString * const kTintColorNavigationBar = @"NavigationBar";
 NSString * const kTintColorTable = @"Table";
 NSString * const kBarTintColorSearchBar = @"SearchBarBar";
 NSString * const kTintColorSearchBar = @"SearchBar";
-NSString * const kTintColorMessage = @"Message";
+NSString * const ReachabilityBarBackgroundColor = @"ReachabilityBarBackgroundColor";
 NSString * const kTintColorLeftDrawerButton = @"LeftDrawerButton";
 
 // TwoStepScreen
@@ -24,6 +24,10 @@ NSString * const kBubblingTwoStepScreen = @"BubblingTwoStepScreen";
 NSString * const kSideAIconTwoStepScreen = @"SideAIconTwoStepScreen";
 NSString * const kSideBIconTwoStepScreen = @"SideBIconTwoStepScreen";
 NSString * const kVialerIconTwoStepScreen = @"VialerIconTwoStepScreen";
+
+// Dailer screen
+NSString * const NumberPadButtonTextColor = @"NumberPadButtonTextColor";
+NSString * const NumberPadButtonPressedColor = @"NumberPadButtonPressedColor";
 
 NSString * const kTintColorsKey = @"Tint colors";
 NSString * const kUrlsKey = @"URLS";

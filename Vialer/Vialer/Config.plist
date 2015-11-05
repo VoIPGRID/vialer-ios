@@ -4,6 +4,18 @@
 <dict>
 	<key>Tint colors</key>
 	<dict>
+		<key>NumberPadButtonPressedColor</key>
+		<array>
+			<integer>145</integer>
+			<integer>145</integer>
+			<integer>145</integer>
+		</array>
+		<key>NumberPadButtonTextColor</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+		</array>
 		<key>LeftDrawerButton</key>
 		<array>
 			<integer>145</integer>
@@ -93,7 +105,7 @@
 			<integer>177</integer>
 			<integer>184</integer>
 		</array>
-		<key>Message</key>
+		<key>ReachabilityBarBackgroundColor</key>
 		<array>
 			<integer>178</integer>
 			<integer>177</integer>

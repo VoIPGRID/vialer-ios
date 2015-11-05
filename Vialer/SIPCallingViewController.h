@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "NumberPadViewController.h"
+#import "OldNumberPadViewController.h"
 
 NSString * const SIPCallStartedNotification;
 
 @class GSCall;
 
-@interface SIPCallingViewController : UIViewController <NumberPadViewControllerDelegate>
+@interface SIPCallingViewController : UIViewController <OldNumberPadViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *buttonsView;
 @property (strong, nonatomic) IBOutlet UIView *numbersButtonsView;

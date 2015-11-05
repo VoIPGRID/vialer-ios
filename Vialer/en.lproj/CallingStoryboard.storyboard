@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Dialer View Controller-->
+        <scene sceneID="L3G-nM-XRV">
+            <objects>
+                <viewController storyboardIdentifier="DailerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYx-5X-82c" customClass="DialerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bIK-Mu-L7W"/>
+                        <viewControllerLayoutGuide type="bottom" id="Krn-1p-wH9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Je9-SI-kQJ" customClass="GradientView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
+                                <rect key="frame" x="524" y="58" width="56" height="54"/>
+                                <animations/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="J0y-Rp-1Bd"/>
+                                </constraints>
+                                <state key="normal" image="keypad-back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="keypad-back-highlighted"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="FYx-5X-82c" eventType="touchDown" id="qRB-tT-LsO"/>
+                                    <outletCollection property="gestureRecognizers" destination="gFY-xR-K1B" appends="YES" id="FCh-Eo-OYO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
+                                <rect key="frame" x="171" y="525" width="258" height="55"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="UYt-1U-3jl"/>
+                                    <constraint firstAttribute="width" constant="258" id="uaR-5j-nOs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" backgroundImage="call-phone">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" backgroundImage="inactive-phone"/>
+                                <connections>
+                                    <action selector="callButtonPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="quQ-nU-c62"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
+                                <rect key="frame" x="84" y="58" width="432" height="53"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="nT6-7N-5s3">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi">
+                                <rect key="frame" x="20" y="58" width="56" height="53"/>
+                                <animations/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0">
+                                <rect key="frame" x="20" y="119" width="560" height="398"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="NzT-M0-ktL" kind="embed" id="RFj-q2-x0c"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
+                                <rect key="frame" x="0.0" y="20" width="600" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="h5J-mQ-Y2V"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="QFZ-Of-wQr" kind="embed" id="Egt-H7-SHk"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <animations/>
+                        <constraints>
+                            <constraint firstItem="Krn-1p-wH9" firstAttribute="top" secondItem="fQq-Gl-ZNQ" secondAttribute="bottom" constant="20" id="3SI-1q-51E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hbs-mW-Umr" secondAttribute="trailing" id="3iy-Ia-CH6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QWH-Jj-CH0" secondAttribute="trailing" id="7Qn-Nh-Nqh"/>
+                            <constraint firstItem="Hbs-mW-Umr" firstAttribute="leading" secondItem="Z0R-4w-Bgg" secondAttribute="trailing" constant="8" symbolic="YES" id="7bf-Yc-3m4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lTu-kS-pvN" secondAttribute="trailing" constant="-20" id="BpS-KG-R6X"/>
+                            <constraint firstItem="WhT-rC-jEi" firstAttribute="width" secondItem="Hbs-mW-Umr" secondAttribute="width" id="O14-6d-ND6"/>
+                            <constraint firstItem="WhT-rC-jEi" firstAttribute="centerY" secondItem="Z0R-4w-Bgg" secondAttribute="centerY" id="PzB-PT-LM1"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="QWH-Jj-CH0" secondAttribute="leading" id="Ve1-4m-NC2"/>
+                            <constraint firstItem="Z0R-4w-Bgg" firstAttribute="top" secondItem="lTu-kS-pvN" secondAttribute="bottom" constant="8" symbolic="YES" id="Xxe-8s-pQ0"/>
+                            <constraint firstItem="WhT-rC-jEi" firstAttribute="top" secondItem="Z0R-4w-Bgg" secondAttribute="top" id="bcr-hp-ZQn"/>
+                            <constraint firstItem="QWH-Jj-CH0" firstAttribute="top" secondItem="Z0R-4w-Bgg" secondAttribute="bottom" constant="8" symbolic="YES" id="hyo-fQ-CfB">
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                            </constraint>
+                            <constraint firstItem="lTu-kS-pvN" firstAttribute="top" secondItem="bIK-Mu-L7W" secondAttribute="bottom" id="kKm-tM-twf"/>
+                            <constraint firstItem="Hbs-mW-Umr" firstAttribute="centerY" secondItem="Z0R-4w-Bgg" secondAttribute="centerY" id="kWC-vW-aeD"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="WhT-rC-jEi" secondAttribute="leading" id="pWd-eU-GIv"/>
+                            <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="top" secondItem="QWH-Jj-CH0" secondAttribute="bottom" constant="8" id="rti-Qz-4oz"/>
+                            <constraint firstItem="Z0R-4w-Bgg" firstAttribute="leading" secondItem="WhT-rC-jEi" secondAttribute="trailing" constant="8" symbolic="YES" id="s2i-PR-9xd"/>
+                            <constraint firstItem="Hbs-mW-Umr" firstAttribute="top" secondItem="Z0R-4w-Bgg" secondAttribute="top" id="v56-Fo-M80"/>
+                            <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="centerX" secondItem="QWH-Jj-CH0" secondAttribute="centerX" id="vQv-qZ-Vdt"/>
+                            <constraint firstItem="lTu-kS-pvN" firstAttribute="leading" secondItem="Je9-SI-kQJ" secondAttribute="leadingMargin" constant="-20" id="yul-Bo-O6t"/>
+                        </constraints>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="QWH-Jj-CH0"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="callButton" destination="fQq-Gl-ZNQ" id="q5t-qm-1k5"/>
+                        <outlet property="deleteButton" destination="Hbs-mW-Umr" id="8uS-ZV-xLn"/>
+                        <outlet property="numberLabel" destination="Z0R-4w-Bgg" id="9Dw-g0-ynO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zr4-97-iAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="gFY-xR-K1B">
+                    <connections>
+                        <action selector="backButtonLongPress:" destination="FYx-5X-82c" id="vce-Jk-Mdh"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="545" y="562"/>
+        </scene>
+        <!--Number Pad View Controller-->
+        <scene sceneID="sm1-hv-xNh">
+            <objects>
+                <viewController id="NzT-M0-ktL" customClass="NumberPadViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fBV-nx-831"/>
+                        <viewControllerLayoutGuide type="bottom" id="brJ-2w-c1D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FOs-p8-uzq">
+                        <rect key="frame" x="0.0" y="0.0" width="560" height="398"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-tv-0FO" customClass="NumberPadButton">
+                                <rect key="frame" x="234" y="102" width="93" height="93"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xf1-tv-0FO" secondAttribute="height" multiplier="1:1" id="Tm8-Rg-4f9"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="JKL"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="2j4-xt-cGB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-kg-Ni2" customClass="NumberPadButton">
+                                <rect key="frame" x="234" y="305" width="93" height="93"/>
+                                <animations/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QnY-kg-Ni2" secondAttribute="height" multiplier="1:1" id="1YF-gi-r1z"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="0"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="+"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="Kp8-lx-eHv"/>
+                                    <outletCollection property="gestureRecognizers" destination="ZSG-Xi-5oN" appends="YES" id="A0u-AU-4Cg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo9-W5-GXA" customClass="NumberPadButton">
+                                <rect key="frame" x="357" y="305" width="94" height="93"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Mo9-W5-GXA" secondAttribute="height" multiplier="1:1" id="CXd-yi-Spk"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="CA3-Tu-lLc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-yO-ovH" customClass="NumberPadButton">
+                                <rect key="frame" x="357" y="102" width="94" height="93"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2Pi-yO-ovH" secondAttribute="height" multiplier="1:1" id="xz5-EK-tKg"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="MNO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="KFS-XJ-XrL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-Ug-2q9" customClass="NumberPadButton">
+                                <rect key="frame" x="357" y="0.0" width="94" height="94"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LhT-Ug-2q9" secondAttribute="height" multiplier="1:1" id="Rx4-jK-Sc0"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="DEF"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="wZe-23-N4U"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-VL-1YG" customClass="NumberPadButton">
+                                <rect key="frame" x="110" y="305" width="94" height="93"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yQ4-VL-1YG" secondAttribute="height" multiplier="1:1" id="q0E-T1-dhu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="QXX-TF-qba"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-gw-ERF" customClass="NumberPadButton">
+                                <rect key="frame" x="110" y="102" width="94" height="93"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5V0-gw-ERF" secondAttribute="height" multiplier="1:1" id="SVl-gv-adD"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="GHI"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="opx-Ie-Dt3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zid-vc-HTf" customClass="NumberPadButton">
+                                <rect key="frame" x="110" y="0.0" width="94" height="94"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Zid-vc-HTf" secondAttribute="height" multiplier="1:1" id="5x9-Cz-usa"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="1"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="yz0-pP-S69"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkr-4Y-JuE" customClass="NumberPadButton">
+                                <rect key="frame" x="234" y="0.0" width="93" height="94"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jkr-4Y-JuE" secondAttribute="height" multiplier="1:1" id="NYc-1T-bO9"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="ABC"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="vnH-dx-3gX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipw-Ya-87A" customClass="NumberPadButton">
+                                <rect key="frame" x="234" y="203" width="93" height="94"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ipw-Ya-87A" secondAttribute="height" multiplier="1:1" id="T17-vk-Jsg"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="TUV"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="nzu-Zz-3do"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4A-Mw-yqa" customClass="NumberPadButton">
+                                <rect key="frame" x="110" y="203" width="94" height="94"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="z4A-Mw-yqa" secondAttribute="height" multiplier="1:1" id="LWR-s4-vhx"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="PQRS"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="GVo-D8-NJa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5o-gy-hak" customClass="NumberPadButton">
+                                <rect key="frame" x="357" y="203" width="94" height="94"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="o5o-gy-hak" secondAttribute="height" multiplier="1:1" id="FZA-Pm-BV4"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="WXYZ"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="hu5-W5-lvw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <constraints>
+                            <constraint firstItem="QnY-kg-Ni2" firstAttribute="top" secondItem="ipw-Ya-87A" secondAttribute="bottom" constant="8" symbolic="YES" id="0kG-1n-Rph"/>
+                            <constraint firstItem="5V0-gw-ERF" firstAttribute="top" secondItem="Xf1-tv-0FO" secondAttribute="top" id="7Po-he-v6s"/>
+                            <constraint firstItem="Jkr-4Y-JuE" firstAttribute="leading" secondItem="Zid-vc-HTf" secondAttribute="trailing" constant="30" id="A9w-F9-l8F"/>
+                            <constraint firstItem="LhT-Ug-2q9" firstAttribute="leading" secondItem="2Pi-yO-ovH" secondAttribute="leading" id="AQx-Po-v0j"/>
+                            <constraint firstItem="yQ4-VL-1YG" firstAttribute="top" secondItem="QnY-kg-Ni2" secondAttribute="top" id="B0I-iu-J55"/>
+                            <constraint firstItem="Jkr-4Y-JuE" firstAttribute="centerX" secondItem="FOs-p8-uzq" secondAttribute="centerX" id="BLC-Mj-TUz"/>
+                            <constraint firstItem="Xf1-tv-0FO" firstAttribute="leading" secondItem="ipw-Ya-87A" secondAttribute="leading" id="DHc-Ec-Bwn"/>
+                            <constraint firstItem="2Pi-yO-ovH" firstAttribute="trailing" secondItem="o5o-gy-hak" secondAttribute="trailing" id="EHZ-hb-934"/>
+                            <constraint firstItem="2Pi-yO-ovH" firstAttribute="leading" secondItem="o5o-gy-hak" secondAttribute="leading" id="FEf-fK-HhO"/>
+                            <constraint firstItem="2Pi-yO-ovH" firstAttribute="top" secondItem="Xf1-tv-0FO" secondAttribute="top" id="Ifg-Ar-w4C"/>
+                            <constraint firstItem="5V0-gw-ERF" firstAttribute="leading" secondItem="z4A-Mw-yqa" secondAttribute="leading" id="Ikg-Sl-1DU"/>
+                            <constraint firstItem="z4A-Mw-yqa" firstAttribute="trailing" secondItem="yQ4-VL-1YG" secondAttribute="trailing" id="JTb-DS-Qth"/>
+                            <constraint firstItem="z4A-Mw-yqa" firstAttribute="top" secondItem="ipw-Ya-87A" secondAttribute="top" id="JVz-o4-fPN"/>
+                            <constraint firstItem="z4A-Mw-yqa" firstAttribute="leading" secondItem="yQ4-VL-1YG" secondAttribute="leading" id="LIg-pe-f0c"/>
+                            <constraint firstItem="LhT-Ug-2q9" firstAttribute="bottom" secondItem="Jkr-4Y-JuE" secondAttribute="bottom" id="PBy-05-6UC"/>
+                            <constraint firstItem="5V0-gw-ERF" firstAttribute="trailing" secondItem="z4A-Mw-yqa" secondAttribute="trailing" id="R8D-ua-huz"/>
+                            <constraint firstItem="Mo9-W5-GXA" firstAttribute="top" secondItem="QnY-kg-Ni2" secondAttribute="top" id="ROt-WL-OEp"/>
+                            <constraint firstItem="Jkr-4Y-JuE" firstAttribute="top" secondItem="Zid-vc-HTf" secondAttribute="top" id="TvG-G0-njS"/>
+                            <constraint firstItem="LhT-Ug-2q9" firstAttribute="trailing" secondItem="2Pi-yO-ovH" secondAttribute="trailing" id="U3Z-zQ-XmI"/>
+                            <constraint firstItem="LhT-Ug-2q9" firstAttribute="top" secondItem="Jkr-4Y-JuE" secondAttribute="top" id="UXv-Rw-e6z"/>
+                            <constraint firstItem="Zid-vc-HTf" firstAttribute="trailing" secondItem="5V0-gw-ERF" secondAttribute="trailing" id="YBo-j1-XUR"/>
+                            <constraint firstItem="QnY-kg-Ni2" firstAttribute="centerX" secondItem="ipw-Ya-87A" secondAttribute="centerX" id="Z1g-NP-N5d"/>
+                            <constraint firstItem="o5o-gy-hak" firstAttribute="leading" secondItem="Mo9-W5-GXA" secondAttribute="leading" id="acH-HK-9Tu"/>
+                            <constraint firstItem="ipw-Ya-87A" firstAttribute="leading" secondItem="QnY-kg-Ni2" secondAttribute="leading" id="fSw-Sw-O2p"/>
+                            <constraint firstItem="Zid-vc-HTf" firstAttribute="bottom" secondItem="Jkr-4Y-JuE" secondAttribute="bottom" id="fu7-ev-xej"/>
+                            <constraint firstItem="Jkr-4Y-JuE" firstAttribute="top" secondItem="fBV-nx-831" secondAttribute="bottom" id="j00-O6-mHs"/>
+                            <constraint firstItem="LhT-Ug-2q9" firstAttribute="leading" secondItem="Jkr-4Y-JuE" secondAttribute="trailing" constant="30" id="lKn-4q-myI"/>
+                            <constraint firstItem="ipw-Ya-87A" firstAttribute="centerX" secondItem="Xf1-tv-0FO" secondAttribute="centerX" id="m7F-dh-jNl"/>
+                            <constraint firstItem="brJ-2w-c1D" firstAttribute="top" secondItem="QnY-kg-Ni2" secondAttribute="bottom" id="o02-dA-sH4"/>
+                            <constraint firstItem="o5o-gy-hak" firstAttribute="trailing" secondItem="Mo9-W5-GXA" secondAttribute="trailing" id="oTN-Wc-j8K"/>
+                            <constraint firstItem="ipw-Ya-87A" firstAttribute="top" secondItem="Xf1-tv-0FO" secondAttribute="bottom" constant="8" symbolic="YES" id="p1D-yD-MsG"/>
+                            <constraint firstItem="Jkr-4Y-JuE" firstAttribute="leading" secondItem="Xf1-tv-0FO" secondAttribute="leading" id="p4H-04-U9v"/>
+                            <constraint firstItem="o5o-gy-hak" firstAttribute="top" secondItem="ipw-Ya-87A" secondAttribute="top" id="qIS-NO-3QU"/>
+                            <constraint firstItem="Zid-vc-HTf" firstAttribute="leading" secondItem="5V0-gw-ERF" secondAttribute="leading" id="vpa-oA-Pct"/>
+                            <constraint firstItem="Xf1-tv-0FO" firstAttribute="top" secondItem="Jkr-4Y-JuE" secondAttribute="bottom" constant="8" symbolic="YES" id="w5j-2O-zDq"/>
+                            <constraint firstItem="Xf1-tv-0FO" firstAttribute="centerX" secondItem="Jkr-4Y-JuE" secondAttribute="centerX" id="wfK-ok-oji"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8w-Hs-SGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ZSG-Xi-5oN">
+                    <connections>
+                        <action selector="longPressZeroButton:" destination="NzT-M0-ktL" id="Dfx-yu-vZn"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1359" y="487"/>
+        </scene>
+        <!--Reachability Bar View Controller-->
+        <scene sceneID="Sdr-k0-RwZ">
+            <objects>
+                <viewController id="QFZ-Of-wQr" customClass="ReachabilityBarViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZAR-ef-ZEN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Res-DM-6My"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9YK-wp-Ecu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No connection, cannot call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYl-go-ZtO">
+                                <rect key="frame" x="20" y="4" width="530" height="21"/>
+                                <animations/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poor connection, Two step calling enabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tG7-RZ-e0R">
+                                <rect key="frame" x="20" y="4" width="530" height="21"/>
+                                <animations/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-EM-fHb">
+                                <rect key="frame" x="558" y="4" width="22" height="22"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="c6l-EM-fHb" secondAttribute="height" multiplier="1:1" id="snA-HU-raK"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="infobuttonPressed:" destination="QFZ-Of-wQr" eventType="touchUpInside" id="vnr-tr-qEg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="c6l-EM-fHb" secondAttribute="trailing" id="JWI-i6-nJP"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="eYl-go-ZtO" secondAttribute="leading" id="Pnq-MX-dkG"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="tG7-RZ-e0R" secondAttribute="trailing" constant="8" symbolic="YES" id="SAJ-sA-BWd"/>
+                            <constraint firstItem="tG7-RZ-e0R" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="ciN-ec-ypn"/>
+                            <constraint firstItem="Res-DM-6My" firstAttribute="top" secondItem="c6l-EM-fHb" secondAttribute="bottom" constant="4" id="cvR-FX-1GR"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="tG7-RZ-e0R" secondAttribute="leading" id="lLs-Kv-l4v"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qP2-PH-p7O"/>
+                            <constraint firstItem="eYl-go-ZtO" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qWb-l3-cGx"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="eYl-go-ZtO" secondAttribute="trailing" constant="8" id="qry-Cv-gJF"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="top" secondItem="ZAR-ef-ZEN" secondAttribute="bottom" constant="4" id="xkY-Jg-GcM"/>
+                        </constraints>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="SAJ-sA-BWd"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="failedConnectionLabel" destination="eYl-go-ZtO" id="jis-Qe-ybn"/>
+                        <outlet property="twoStepInfoButton" destination="c6l-EM-fHb" id="v4O-OO-gnF"/>
+                        <outlet property="twoStepLabel" destination="tG7-RZ-e0R" id="MjY-nZ-X3k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sAT-kX-8ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="600" y="31"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="call-phone" width="296" height="55"/>
+        <image name="inactive-phone" width="258" height="55"/>
+        <image name="keypad-back" width="23" height="16"/>
+        <image name="keypad-back-highlighted" width="23" height="16"/>
+    </resources>
+</document>

@@ -60,19 +60,21 @@ static float const TwoStepCallingViewControllerDismissTime = 3.0;
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
-
-        self.callManager = [[TwoStepCall alloc] initWithANumber:[SystemUser currentUser].mobileNumber andBNumber:phoneNumber];
-        [self.callManager addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:NULL];
-        [self.callManager start];
-
-        self.numberALabel.text = self.callManager.aNumber;
-        self.numberBLabel.text = self.callManager.bNumber;
-        self.outgoingNumberLabel.text = [SystemUser currentUser].outgoingNumber;
     }
+
+    self.callManager = [[TwoStepCall alloc] initWithANumber:[SystemUser currentUser].mobileNumber andBNumber:phoneNumber];
+    [self.callManager addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:NULL];
+    [self.callManager start];
+    [self checkCallManagerStatus];
+
+    self.numberALabel.text = self.callManager.aNumber;
+    self.numberBLabel.text = self.callManager.bNumber;
+    self.outgoingNumberLabel.text = [SystemUser currentUser].outgoingNumber;
 }
 
 - (void)viewDidLoad {
     [self setup];
+    self.state = CallingStateIdle;
 }
 
 - (void)setup {
@@ -87,53 +89,57 @@ static float const TwoStepCallingViewControllerDismissTime = 3.0;
     self.bubblingOne.color = [Configuration tintColorForKey:kBubblingTwoStepScreen];
     self.bubblingTwo.color = [Configuration tintColorForKey:kBubblingTwoStepScreen];
 
-    self.state = CallingStateIdle;
+    [self checkCallManagerStatus];
 }
 
 # pragma mark - actions
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([object isKindOfClass:[TwoStepCall class]]) {
-        switch (self.callManager.status) {
-            case TwoStepCallStatusUnknown:
-                self.state = CallingStateIdle;
-                break;
-            case TwoStepCallStatusDialing_a:
-                self.state = CallingStateCallingA;
-                break;
-            case TwoStepCallStatusConfirm:
-                self.state = CallingStateConnectedA;
-                break;
-            case TwoStepCallStatusDialing_b:
-                self.state = CallingStateCallingB;
-                break;
-            case TwoStepCallStatusConnected:
-                self.state = CallingStateConnectedB;
-                break;
-            case TwoStepCallStatusDisconnected:
-                self.state = CallingStateDisconnectedB;
-                [self prepareDismissView];
-                break;
-            case TwoStepCallStatusFailed_a:
-                self.state = CallingStateConnectionFailedA;
-                [self prepareDismissView];
-                break;
-            case TwoStepCallStatusFailed_b:
-                self.state = CallingStateConnectionFailedB;
-                [self prepareDismissView];
-                break;
-            case TwoStepCallStatusUnAuthorized:
-                self.state = CallingStateConnectionFailedB;
-                break;
-            case TwoStepCallStatusFailedSetup:
-                self.state = CallingStateFailedSetup;
-                [self prepareDismissView];
-                break;
-            case TwoStepCallStatusInvalidNumber:
-                self.state = CallingStateInvalidNumber;
-                [self prepareDismissView];
-                break;
-        }
+        [self checkCallManagerStatus];
+    }
+}
+
+- (void) checkCallManagerStatus {
+    switch (self.callManager.status) {
+        case TwoStepCallStatusUnknown:
+            self.state = CallingStateIdle;
+            break;
+        case TwoStepCallStatusDialing_a:
+            self.state = CallingStateCallingA;
+            break;
+        case TwoStepCallStatusConfirm:
+            self.state = CallingStateConnectedA;
+            break;
+        case TwoStepCallStatusDialing_b:
+            self.state = CallingStateCallingB;
+            break;
+        case TwoStepCallStatusConnected:
+            self.state = CallingStateConnectedB;
+            break;
+        case TwoStepCallStatusDisconnected:
+            self.state = CallingStateDisconnectedB;
+            [self prepareDismissView];
+            break;
+        case TwoStepCallStatusFailed_a:
+            self.state = CallingStateConnectionFailedA;
+            [self prepareDismissView];
+            break;
+        case TwoStepCallStatusFailed_b:
+            self.state = CallingStateConnectionFailedB;
+            [self prepareDismissView];
+            break;
+        case TwoStepCallStatusUnAuthorized:
+            self.state = CallingStateConnectionFailedB;
+            break;
+        case TwoStepCallStatusFailedSetup:
+            self.state = CallingStateFailedSetup;
+            [self prepareDismissView];
+            break;
+        case TwoStepCallStatusInvalidNumber:
+            self.state = CallingStateInvalidNumber;
+            [self prepareDismissView];
+            break;
     }
 }
 
@@ -214,6 +220,7 @@ static float const TwoStepCallingViewControllerDismissTime = 3.0;
             self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
             [self activateASide];
             [self activeBSide];
+            break;
         }
         case CallingStateFailedSetup: {
             self.callStatusLabel.text = NSLocalizedString(@"Failed to setup call", nil);
@@ -278,8 +285,8 @@ static float const TwoStepCallingViewControllerDismissTime = 3.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.state = CallingStateIdle;
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [self checkCallManagerStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

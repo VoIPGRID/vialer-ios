@@ -2,11 +2,10 @@
 //  NumberPadViewController.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 9/1/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Created by Bob Voorneveld on 03/11/15.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <AVFoundation/AVAudioPlayer.h>
 #import <UIKit/UIKit.h>
 
 @protocol NumberPadViewControllerDelegate <NSObject>
@@ -14,13 +13,6 @@
 - (void)numberPadPressedWithCharacter:(NSString *)character;
 @end
 
-@interface NumberPadViewController : UIViewController <AVAudioPlayerDelegate>
-
-@property (nonatomic, assign) id <NumberPadViewControllerDelegate> delegate;
-@property (nonatomic, assign) BOOL tonesEnabled;
-@property (nonatomic, readonly) NSArray *titles;
-@property (nonatomic, readonly) NSArray *subtitles;
-
-- (void)playDtmfToneAtIndex:(NSUInteger)index;
-
+@interface NumberPadViewController : UIViewController
+@property (nonatomic, weak) id<NumberPadViewControllerDelegate> delegate;
 @end

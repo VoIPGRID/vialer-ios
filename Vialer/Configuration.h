@@ -14,7 +14,7 @@ extern NSString * const kTintColorNavigationBar;
 extern NSString * const kTintColorTable;
 extern NSString * const kBarTintColorSearchBar;
 extern NSString * const kTintColorSearchBar;
-extern NSString * const kTintColorMessage;
+extern NSString * const ReachabilityBarBackgroundColor;
 extern NSString * const kTintColorLeftDrawerButton;
 
 // TwoStepScreen
@@ -25,6 +25,10 @@ extern NSString * const kSideAIconTwoStepScreen;
 extern NSString * const kSideBIconTwoStepScreen;
 extern NSString * const kVialerIconTwoStepScreen;
 
+// Dailer screen
+extern NSString * const NumberPadButtonTextColor;
+extern NSString * const NumberPadButtonPressedColor;
+
 /** Generic class for accessing the Config.plist items, default the Config.plist from the main bundle is used.
  If you only need one value, you can access it by the static class functions e.g.
 
@@ -34,7 +38,7 @@ extern NSString * const kVialerIconTwoStepScreen;
  
      Configuration *config = [Configuration new];
      UIColor *tableColor = [config tintColorForKey:kTintColorTable];
-     UIColor *messagecolor = [config tintColorForKey:kTintColorMessage];
+     UIColor *messagecolor = [config tintColorForKey:ReachabilityBarBackGroundColor];
 
  */
 @interface Configuration : NSObject

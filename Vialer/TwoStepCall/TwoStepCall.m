@@ -27,6 +27,7 @@ static NSString * const TwoStepCallStatusKey = @"status";
     if (self = [super init]) {
         self.aNumber = aNumber;
         self.bNumber = bNumber;
+        self.status = TwoStepCallStatusUnknown;
     }
     return self;
 }

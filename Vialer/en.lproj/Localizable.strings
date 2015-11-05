@@ -67,12 +67,6 @@
 "CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Please enter your mobile number here.";
 
 /* No comment provided by engineer. */
-"Connect A/B calls only" = "Two-step calling mode active";
-
-/* No comment provided by engineer. */
-"Connect A/B Info" = "You dont' have a VoIP account configured for this account. Please configure a VoIP account in the portal for use with this user. After configuring, you can call using VoIP from the app.";
-
-/* No comment provided by engineer. */
 "Connected with other party" = "Connected with other party";
 
 /* No comment provided by engineer. */
@@ -217,12 +211,6 @@
 "No access to the recent calls" = "No access to recent calls";
 
 /* No comment provided by engineer. */
-"No Connection" = "No data connection available";
-
-/* No comment provided by engineer. */
-"No Connection Info Text" = "This app needs a data connection to setup phonecalls. Please connect to a cellular data connection or Wifi to start calling using the app.";
-
-/* No comment provided by engineer. */
 "No email address configured" = "No email address configured";
 
 /* No comment provided by engineer. */
@@ -266,12 +254,6 @@
 
 /* No comment provided by engineer. */
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
-
-/* No comment provided by engineer. */
-"Poor internet connection Connect A/B" = "Poor internet connection Connect A/B";
-
-/* No comment provided by engineer. */
-"Poor internet Info" = "Your internet connection isn't fast enough to enable calling using VoIP. Two-step calling is therefore enabled. When you start a phonecall, we first call you on your mobile phone and when you pickup, we connect you to the person you want to call.";
 
 /* No comment provided by engineer. */
 "Recents" = "Recents";
@@ -341,6 +323,12 @@
 
 /* No comment provided by engineer. */
 "Two step call failed" = "Two step call failed";
+
+/* No comment provided by engineer. */
+"Two step modus" = "Two step modus";
+
+/* No comment provided by engineer. */
+"Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Two step modus will setup a call to your phone first and will call the other party when you answer the call.";
 
 /* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Unable to save \"My number\"";

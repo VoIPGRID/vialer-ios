@@ -1,0 +1,6 @@
+
+/* Class = "UILabel"; text = "No connection, cannot call"; ObjectID = "eYl-go-ZtO"; */
+"eYl-go-ZtO.text" = "Geen verbinding, kan niet bellen";
+
+/* Class = "UILabel"; text = "Poor connection, Two step calling enabled"; ObjectID = "tG7-RZ-e0R"; */
+"tG7-RZ-e0R.text" = "Slechte verbinding, Twee staps modus geactiveerd";

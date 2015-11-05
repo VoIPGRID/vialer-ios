@@ -63,8 +63,10 @@
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
 #endif
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
-    [[ConnectionHandler sharedConnectionHandler] start];
+
+    // TODO: fix SIP
+//    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
+//    [[ConnectionHandler sharedConnectionHandler] start];
 }
 
 - (void)setupAppearance {
@@ -98,8 +100,9 @@
     } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
         //Also show the Mobile number onboarding screen
         [self showOnboarding:OnboardingScreenConfigure];
-    } else {
-        [[SystemUser currentUser] checkSipStatus];
+// TODO: fix SIP
+//    } else {
+//        [[SystemUser currentUser] checkSipStatus];
     }
 }
 
