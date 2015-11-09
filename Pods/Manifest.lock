@@ -71,6 +71,7 @@ PODS:
     - OHHTTPStubs/Core
   - OHHTTPStubs/OHPathHelpers (4.3.0)
   - PBWebViewController (0.3)
+  - pjsip (2.4.0-iOS8.0)
   - Reachability (3.2)
   - SSKeychain (1.2.3)
   - SVProgressHUD (1.1.3)
@@ -84,9 +85,19 @@ DEPENDENCIES:
   - MMDrawerController
   - OHHTTPStubs
   - PBWebViewController
+  - pjsip (from `https://github.com/bertoldofonseca/pjsip`)
   - Reachability
   - SSKeychain
   - SVProgressHUD
+
+EXTERNAL SOURCES:
+  pjsip:
+    :git: https://github.com/bertoldofonseca/pjsip
+
+CHECKOUT OPTIONS:
+  pjsip:
+    :commit: e71f2504b0488e1c09ef0b0725338535f98a1969
+    :git: https://github.com/bertoldofonseca/pjsip
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
@@ -101,6 +112,7 @@ SPEC CHECKSUMS:
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   OHHTTPStubs: 0aec5755528693a165bd616cb79f69387de306a8
   PBWebViewController: 909b1505da6ba7c5c82519a6457246027926061e
+  pjsip: 97b4aa9b3453de905bf38224234fe7ea11de2950
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

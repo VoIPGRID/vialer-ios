@@ -14,9 +14,12 @@ target 'Vialer' do
    	pod 'Reachability'
    	pod 'SSKeychain'
    	pod 'SVProgressHUD'
+   	
+   	pod 'pjsip', :git => 'https://github.com/bertoldofonseca/pjsip'
 end
 
 target 'VialerTests' do
     pod 'CocoaLumberjack'
     pod 'OHHTTPStubs'
 end
+
