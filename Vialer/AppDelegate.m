@@ -230,8 +230,13 @@ void HandleExceptions(NSException *exception) {
         if (!self.loginViewController.presentingViewController) {
             self.loginViewController.screenToShow = screenToShow;
             self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            // Set animated to NO to prevent a flip to the login/onboarding view.
-            [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+
+            // Make sure we have the current presenting viewcontroller.
+            UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+            while (topRootViewController.presentedViewController) {
+                topRootViewController = topRootViewController.presentedViewController;
+            }
+            [topRootViewController presentViewController:self.loginViewController animated:YES completion:nil];
         }
     }
 }
