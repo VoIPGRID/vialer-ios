@@ -92,7 +92,7 @@
     NSRange match = [firstChar rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]
                                                options:0
                                                  range:[firstChar rangeOfComposedCharacterSequenceAtIndex:0]];
-    if (match.location == NSNotFound) {
+    if (!firstChar || match.location == NSNotFound) {
         firstChar = @"#";
     }
 

@@ -19,17 +19,16 @@
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
 
-typedef enum : NSUInteger {
-    MENU_INDEX_STATS = 0,
+typedef NS_ENUM(NSInteger, SideMenuItems) {
+    MENU_INDEX_STATS,
     MENU_INDEX_INFO,
     MENU_INDEX_ACCOUNT,
     MENU_INDEX_ROUTING,
     MENU_INDEX_LOGOUT,
     MENU_ITEM_COUNT,
     // Items after this line are disabled (not shown in the menu)
-    MENU_INDEX_AVAILABILITY,
-    MENU_INDEX_AUTOCONNECT
-} SideMenuItems;
+    MENU_INDEX_AVAILABILITY
+};
 
 #define WEBVIEW_TARGET_DIALPLAN         0
 #define WEBVIEW_TARGET_ACCESSIBILITY    1
@@ -102,10 +101,6 @@ typedef enum : NSUInteger {
         case MENU_INDEX_ROUTING:
             [cell setMenuItemTitle:NSLocalizedString(@"Routing", nil)
                            andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:self.tintColor]];
-            break;
-        case MENU_INDEX_AUTOCONNECT:
-            [cell setMenuItemTitle:NSLocalizedString(@"Autoconnect", nil)
-                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:self.tintColor]];
             break;
         default:
             [cell setMenuItemTitle:nil andIcon:nil];
@@ -189,8 +184,6 @@ typedef enum : NSUInteger {
         [self showInfoScreen];
     } else if (indexPath.row == MENU_INDEX_ACCOUNT) {
         [self showAccountView];
-        //} else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
-
     } else if (indexPath.row == MENU_INDEX_LOGOUT) {
 
         NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedString(@"%@\nis currently logged in.", nil),

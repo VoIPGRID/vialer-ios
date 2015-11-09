@@ -54,12 +54,15 @@ static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self checkContactsAccess];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self setupLayout];
-    [self checkContactsAccess];
 }
 
 - (void)setupLayout {

@@ -12,15 +12,17 @@
 #define LOGIN_SUCCEEDED_NOTIFICATION @"login.succeeded"
 
 typedef NS_ENUM(NSInteger, VoIPGRIDHttpErrors) {
-    kVoIPGRIDHTTPBadRequest = 400,
-    kVoIPGRIDHTTPUnauthorized = 401,
-    kVoIPGRIDHTTPForbidden = 403,
-    kVoIPGRIDHTTPNotFound = 404,
+    VoIPGRIDHttpErrorsBadRequest = 400,
+    VoIPGRIDHttpErrorsUnauthorized = 401,
+    VoIPGRIDHttpErrorsForbidden = 403,
+    VoIPGRIDHttpErrorsNotFound = 404,
 };
 
 typedef NS_ENUM (NSUInteger, VGTwoStepCallErrors) {
     VGTwoStepCallErrorSetupFailed,
     VGTwoStepCallErrorStatusRequestFailed,
+    VGTwoStepCallErrorStatusUnAuthorized,
+    VGTwoStepCallInvalidNumber,
 };
 
 @interface VoIPGRIDRequestOperationManager : AFHTTPRequestOperationManager
@@ -38,7 +40,6 @@ typedef NS_ENUM (NSUInteger, VGTwoStepCallErrors) {
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)userProfileWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)phoneAccountWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-- (void)clickToDialToNumber:(NSString *)toNumber fromNumber:(NSString *)fromNumber success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)clickToDialStatusForCallId:(NSString *)callId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset sourceNumber:(NSString *)sourceNumber callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)passwordResetWithEmail:(NSString *)email success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;

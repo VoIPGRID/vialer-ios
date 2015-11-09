@@ -12,9 +12,17 @@
 + (NSMutableAttributedString *)getFormattedStyledContact:(CNContact *)contact {
     NSString *fullName = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
     NSString *givenName = [contact givenName];
-    NSMutableAttributedString *fullNameAttrString = [[NSMutableAttributedString alloc] initWithString: fullName];
 
-    NSRange boldedRange = NSMakeRange(0, givenName.length);
+    if (!fullName) {
+        return [[NSMutableAttributedString alloc] initWithString:@""];
+    }
+
+    NSMutableAttributedString *fullNameAttrString = [[NSMutableAttributedString alloc] initWithString: fullName];
+    NSUInteger boldedLength = givenName.length;
+    if (boldedLength > fullName.length) {
+        boldedLength = fullName.length;
+    }
+    NSRange boldedRange = NSMakeRange(0, boldedLength);
     [fullNameAttrString addAttribute:NSFontAttributeName
                                value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]
                                range:boldedRange];

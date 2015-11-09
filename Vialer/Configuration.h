@@ -17,17 +17,25 @@ extern NSString * const kTintColorSearchBar;
 extern NSString * const kTintColorMessage;
 extern NSString * const kTintColorLeftDrawerButton;
 
+// TwoStepScreen
+extern NSString * const kBackgroundHeaderTwoStepScreen;
+extern NSString * const kBackgroundInfoBarTwoStepScreen;
+extern NSString * const kBubblingTwoStepScreen;
+extern NSString * const kSideAIconTwoStepScreen;
+extern NSString * const kSideBIconTwoStepScreen;
+extern NSString * const kVialerIconTwoStepScreen;
+
 /** Generic class for accessing the Config.plist items, default the Config.plist from the main bundle is used.
  If you only need one value, you can access it by the static class functions e.g.
- 
+
  `[Configuration tintColorForKey:kTintColorTable];`
- 
+
  Otherwise create an instance of the configuration and access the member functions.
  
      Configuration *config = [Configuration new];
      UIColor *tableColor = [config tintColorForKey:kTintColorTable];
      UIColor *messagecolor = [config tintColorForKey:kTintColorMessage];
- 
+
  */
 @interface Configuration : NSObject
 

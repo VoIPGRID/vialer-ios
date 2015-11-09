@@ -224,7 +224,7 @@ static int ddLogLevel = DDLogLevelVerbose;
     NSString *aNumber = @"";
     NSString *bNumber = @"";
     TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:aNumber andBNumber:bNumber];
-    [self keyValueObservingExpectationForObject:call keyPath:kKVOTwoStepCallStatusKey
+    [self keyValueObservingExpectationForObject:call keyPath:@"status"
                                         handler:
      ^BOOL(id observedObject, NSDictionary *change) {
          TwoStepCallStatus oldStatus = [[change objectForKey:@"old"] intValue];
@@ -234,7 +234,7 @@ static int ddLogLevel = DDLogLevelVerbose;
                    [TwoStepCall statusStringFromTwoStepCallStatus:oldStatus],
                    [TwoStepCall statusStringFromTwoStepCallStatus:newStatus]);
 
-         if (newStatus == twoStepCallStatusDisconnected) {
+         if (newStatus == TwoStepCallStatusDisconnected) {
              return YES;
          }
          return NO;
@@ -246,25 +246,6 @@ static int ddLogLevel = DDLogLevelVerbose;
 
     [self waitForExpectationsWithTimeout:60.0 handler:^(NSError *error) {
     }];
-}
-
-- (void)testCallStatusStringArray {
-    //GIVEN
-    int i = 0;
-    NSString *cArrayStatusString = kCallStatusStringArray[i];
-    while (cArrayStatusString) {
-
-        //WHEN
-        TwoStepCallStatus status = [TwoStepCall twoStepCallStatusFromString:cArrayStatusString];
-        NSString *callStatusString = [TwoStepCall statusStringFromTwoStepCallStatus:status];
-
-        //THEN
-        XCTAssert(status == i);
-        XCTAssert([callStatusString isEqualToString:cArrayStatusString]);
-        
-        i++;
-        cArrayStatusString = kCallStatusStringArray[i];
-    }
 }
 
 @end

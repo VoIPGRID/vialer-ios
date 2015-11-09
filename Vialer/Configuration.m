@@ -17,6 +17,14 @@ NSString * const kTintColorSearchBar = @"SearchBar";
 NSString * const kTintColorMessage = @"Message";
 NSString * const kTintColorLeftDrawerButton = @"LeftDrawerButton";
 
+// TwoStepScreen
+NSString * const kBackgroundHeaderTwoStepScreen = @"BackgroundHeaderTwoStepScreen";
+NSString * const kBackgroundInfoBarTwoStepScreen = @"BackgroundInfoBarTwoStepScreen";
+NSString * const kBubblingTwoStepScreen = @"BubblingTwoStepScreen";
+NSString * const kSideAIconTwoStepScreen = @"SideAIconTwoStepScreen";
+NSString * const kSideBIconTwoStepScreen = @"SideBIconTwoStepScreen";
+NSString * const kVialerIconTwoStepScreen = @"VialerIconTwoStepScreen";
+
 NSString * const kTintColorsKey = @"Tint colors";
 NSString * const kUrlsKey = @"URLS";
 
