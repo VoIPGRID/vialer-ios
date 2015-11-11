@@ -41,6 +41,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 @property (strong, nonatomic) NSString *numberText;
 @property (nonatomic, strong) ReachabilityManager *reachabilityManager;
+@property (nonatomic, strong) NSString *lastCalledNumber;
 
 @end
 
@@ -96,7 +97,8 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 - (void)setupCallButton {
-    if (self.reachabilityManager.status == ReachabilityManagerStatusOffline || !self.numberText.length) {
+    if (self.reachabilityManager == ReachabilityManagerStatusOffline ||
+        (!self.lastCalledNumber.length && !self.numberText.length)) {
         self.callButton.enabled = NO;
     } else {
         self.callButton.enabled = YES;
@@ -121,8 +123,8 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 - (void)setNumberText:(NSString *)numberText {
     self.numberLabel.text = [self cleanPhonenumber:numberText];
-    [self setupCallButton];
     self.deleteButton.hidden = self.numberText.length == 0;
+    [self setupCallButton];
 }
 
 - (NSString *)cleanPhonenumber:(NSString *)phonenumber {
@@ -157,6 +159,11 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     return _twoStepCallingViewController;
 }
 
+- (void)setLastCalledNumber:(NSString *)lastCalledNumber {
+    _lastCalledNumber = lastCalledNumber;
+    [self setupCallButton];
+}
+
 # pragma mark - actions
 
 - (void)leftDrawerButtonPress:(id)sender{
@@ -175,18 +182,23 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 - (IBAction)callButtonPressed:(UIButton *)sender {
-    if (!self.numberText || [self.numberText isEqualToString:@""]) {
-        return;
-    }
-    // TODO: implement 4g calling
-    if (false) {
-        [GAITracker setupOutgoingSIPCallEvent];
-        [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-        [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+    // No number filled in yet, use old number (if stored)
+    if (![self.numberText length]) {
+        self.numberText = self.lastCalledNumber;
+
+    // There is a number, let's call
     } else {
-        [GAITracker setupOutgoingConnectABCallEvent];
-        [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-        [self.twoStepCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+        self.lastCalledNumber = self.numberText;
+        // TODO: implement 4g calling
+        if (false) {
+            [GAITracker setupOutgoingSIPCallEvent];
+            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+            [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+        } else {
+            [GAITracker setupOutgoingConnectABCallEvent];
+            [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
+            [self.twoStepCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+        }
     }
 }
 

@@ -86,8 +86,7 @@ static NSString * const ReachabilityManagerStatusKey = @"status";
 }
 
 - (void)stopMonitoring {
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kReachabilityChangedNotification];
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CTRadioAccessTechnologyDidChangeNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.reachabilityManager stopNotifier];
 }
 
