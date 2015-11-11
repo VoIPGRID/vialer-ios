@@ -1,8 +1,5 @@
 //
 //  SystemUser.m
-//  Vialer
-//
-//  Created by Maarten de Zwart on 14/09/15.
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
@@ -10,108 +7,123 @@
 
 #import "AppDelegate.h"
 #import "ConnectionHandler.h"
+#import "LogInViewController.h"
 #import "PZPushMiddleware.h"
-#import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import <AVFoundation/AVAudioSession.h>
 
 #import "SSKeychain.h"
 
-#define kMobileNumberKey    @"mobile_nr"
-#define kSIPAccountKey      @"account_id"
-#define kSIPPasswordKey     @"password"
-#define kOutgoingNumberKey  @"outgoing_cli"
-#define kEmailAddressKey    @"email"
-#define kSIPAllowedKey      @"allow_app_account"
-#define kAppAccount         @"app_account"
+static NSString * const SystemUserMobileNumberKey = @"mobile_nr";
+static NSString * const SystemUserSIPAccountKey = @"account_id";
+static NSString * const SystemUserSIPPasswordKey = @"password";
+static NSString * const SystemUserOutgoingNumberKey = @"outgoing_cli";
+static NSString * const SystemUserEmailAddressKey = @"email";
+static NSString * const SystemUserSIPAllowedKey = @"allow_app_account";
+static NSString * const SystemUserAppAccount = @"app_account";
+static NSString * const SystemUserFirstName = @"first_name";
+static NSString * const SystemUserLastName = @"last_name";
 
-#define kUserSUD            @"User"
-#define kSIPAccountSUD      @"SIPAccount"
-#define kOutgoingNumberSUD  @"OutgoingCLI"
-#define kMobileNumberSUD    @"MobileNumber"
-#define kEmailAddressSUD    @"Email"
-#define kSIPEnabledSUD      @"SipEnabled"
-#define kSIPAllowedSUD      @"SIPAllowed"
+static NSString * const SystemUserUserSUD = @"User";
+static NSString * const SystemUserSIPAccountSUD = @"SIPAccount";
+static NSString * const SystemUserOutgoingNumberSUD = @"OutgoingCLI";
+static NSString * const SystemUserMobileNumberSUD = @"MobileNumber";
+static NSString * const SystemUserEmailAddressSUD = @"Email";
+static NSString * const SystemUserSIPEnabledSUD = @"SipEnabled";
+static NSString * const SystemUserSIPAllowedSUD = @"SIPAllowed";
+static NSString * const SystemUserFirstNameSUD = @"FirstName";
+static NSString * const SystemUserLastNameSUD = @"LastName";
 
 // Constant for "suppressed" key as supplied by api for outgoingNumber
-NSString * const kSuppressedKey = @"suppressed";
+static NSString * const SystemUserSuppressedKey = @"suppressed";
 
 @interface SystemUser ()
 
-@property (nonatomic, strong) NSString *user;
-@property (nonatomic, strong) NSString *sipAccount;
-@property (nonatomic, strong) NSString *outgoingNumber;
-@property (nonatomic, strong) NSString *mobileNumber;
-@property (nonatomic, strong) NSString *emailAddress;
+@property (strong, nonatomic)NSString *user;
+@property (strong, nonatomic)NSString *sipAccount;
+@property (strong, nonatomic)NSString *mobileNumber;
+@property (strong, nonatomic)NSString *emailAddress;
+@property (strong, nonatomic)NSString *firstName;
+@property (strong, nonatomic)NSString *lastName;
 
+/** Quick check if a system user has logged in successfully */
+@property (nonatomic)BOOL loggedIn;
+/** Retrieve if the system user is allowed to have an app_account according to VoIPGRID */
+@property (nonatomic)BOOL isSipAllowed;
 @end
 
-@implementation SystemUser {
-    BOOL _loggedIn;
-    BOOL _isSipAllowed;
-    BOOL _sipEnabled;
-}
+@implementation SystemUser
+@synthesize sipEnabled = _sipEnabled;
 
 + (instancetype)currentUser {
     static SystemUser *_currentUser = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _currentUser = [[SystemUser alloc] initPrivate];
+        _currentUser = [[[self class] alloc] initPrivate];
     });
     return _currentUser;
 }
 
-+ (instancetype)initWithUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
-    NSString *outgoingCli = [userDict objectForKey:kOutgoingNumberKey];
-    if ([outgoingCli isKindOfClass:[NSString class]]) {
-        [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:kOutgoingNumberSUD];
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kOutgoingNumberSUD];
-    }
+- (void)setOwnPropertiesFromUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
+    self.outgoingNumber = [userDict objectForKey:SystemUserOutgoingNumberKey];
+    self.mobileNumber = [userDict objectForKey:SystemUserMobileNumberKey];
+    self.firstName = [userDict objectForKey:SystemUserFirstName];
+    self.lastName = [userDict objectForKey:SystemUserLastName];
 
-    NSString *mobileNumber = [userDict objectForKey:kMobileNumberKey];
-    if ([mobileNumber isKindOfClass:[NSString class]]) {
-        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:kMobileNumberSUD];
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kMobileNumberSUD];
-    }
-
-    NSString *emailAddress = [userDict objectForKey:kEmailAddressKey];
+    NSString *emailAddress = [userDict objectForKey:SystemUserEmailAddressKey];
     if ([emailAddress isKindOfClass:[NSString class]]) {
-        [[NSUserDefaults standardUserDefaults] setObject:emailAddress forKey:kEmailAddressSUD];
+        [[self class] persistObject:emailAddress forKey:SystemUserEmailAddressSUD];
     } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEmailAddressSUD];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserEmailAddressSUD];
     }
 
     // Store credentials
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserSUD];
+    [[self class] persistObject:username forKey:SystemUserUserSUD];
     [SSKeychain setPassword:password forService:[[self class] serviceName] account:username];
+}
 
-    return [[SystemUser alloc] initPrivate];
+- (BOOL)isSipAllowed {
+    return [[self class] readBoolForKey:SystemUserSIPAllowedSUD];
+}
+
+- (NSString *)emailAddress {
+    return [[self class] readObjectForKey:SystemUserEmailAddressSUD];
+}
+
+- (NSString *)user {
+    return [[self class] readObjectForKey:SystemUserUserSUD];
+}
+- (NSString *)sipAccount {
+    return [[self class] readObjectForKey:SystemUserSIPAccountSUD];
+}
+
+- (BOOL)isLoggedIn {
+    return self.user != nil;
 }
 
 - (void)removeCurrentUser {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     self.user = nil;
-    _loggedIn = false;
+    self.loggedIn = false;
     self.sipAccount = nil;
     self.outgoingNumber = nil;
     self.mobileNumber = nil;
     self.emailAddress = nil;
-    _sipEnabled = false;
-    _isSipAllowed = false;
 
-    NSString *username = [defaults objectForKey:kUserSUD];
+    self.firstName = nil;
+    self.lastName = nil;
+    self.sipEnabled = false;
+    self.isSipAllowed = false;
 
-    [defaults removeObjectForKey:kUserSUD];
-    [defaults removeObjectForKey:kSIPAccountSUD];
-    [defaults removeObjectForKey:kOutgoingNumberSUD];
-    [defaults removeObjectForKey:kEmailAddressSUD];
-    [defaults removeObjectForKey:kMobileNumberSUD];
-    [defaults removeObjectForKey:kSIPEnabledSUD];
-    [defaults removeObjectForKey:kSIPAllowedSUD];
+    NSString *username = [defaults objectForKey:SystemUserUserSUD];
+
+    [defaults removeObjectForKey:SystemUserUserSUD];
+    [defaults removeObjectForKey:SystemUserSIPAccountSUD];
+    [defaults removeObjectForKey:SystemUserEmailAddressSUD];
+    [defaults removeObjectForKey:SystemUserSIPEnabledSUD];
+    [defaults removeObjectForKey:SystemUserSIPAllowedSUD];
     [defaults synchronize];
 
     [SSKeychain deletePasswordForService:[[self class] serviceName] account:username];
@@ -125,9 +137,7 @@ NSString * const kSuppressedKey = @"suppressed";
 
 // Private initialisation used to load the singleton
 - (instancetype)initPrivate {
-    self = [super init];
-    if (self) {
-        [self reloadCurrentUser];
+    if (self = [super init]) {
     }
     return self;
 }
@@ -141,43 +151,25 @@ NSString * const kSuppressedKey = @"suppressed";
     return NSLocalizedString(@"No email address configured", nil);
 }
 
-- (void)reloadCurrentUser {
-    self.user = [[NSUserDefaults standardUserDefaults] objectForKey:kUserSUD];
-    // A user is considered logged in when its username is stored in the user defaults
-    _loggedIn = (_user != nil);
-    self.sipAccount = [[NSUserDefaults standardUserDefaults] objectForKey:kSIPAccountSUD];
-    self.outgoingNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kOutgoingNumberSUD];
-    self.mobileNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kMobileNumberSUD];
-    self.emailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:kEmailAddressSUD];
-    _sipEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kSIPEnabledSUD];
-    _isSipAllowed = [[NSUserDefaults standardUserDefaults] boolForKey:kSIPAllowedSUD];
-}
-
 #pragma mark - Login specific handling
-
-/** Quick check if a system user has logged in successfully */
-- (BOOL)isLoggedIn {
-    return _loggedIn;
-}
-
-/** Login with the specified user / password combination. The completion handler will be called with a boolean indicating if the loggin succeeded or not.
+/** Login with the specified user / password combination. The completion handler will be called with a boolean indicating if the login succeeded or not.
  @param user Username to use for the login (on success will be stored)
  @param password Passowrd to use for the login (on success is stored safely)
  @param completion Completion handled called when login was succesfull or failed.
  */
 - (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(void(^)(BOOL loggedin))completion {
     // Perform the login to VoIPGRID, in the future we would like to move more responsibility to the SystemUser class
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:user password:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self reloadCurrentUser];
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] loginWithUser:user password:password success:^(NSDictionary *responseData) {
+        [self setOwnPropertiesFromUserDict:responseData withUsername:user andPassword:password];
         // Check the reponse if this user is allowed to have an app_account
-        if ([[responseObject objectForKey:kSIPAllowedKey] boolValue] ||
-            [responseObject objectForKey:kSIPAllowedKey] == nil) {
+        if ([[responseData objectForKey:SystemUserSIPAllowedKey] boolValue] ||
+            [responseData objectForKey:SystemUserSIPAllowedKey] == nil) {
             [self setAllowedToSip:YES];
             // Enabled SIP when allowed, or for development purpose disable if allow_app_account is not available.
-            self.sipEnabled = [[responseObject objectForKey:kSIPAllowedKey] boolValue];
+            self.sipEnabled = [[responseData objectForKey:SystemUserSIPAllowedKey] boolValue];
 
             // This user is allowed to use SIP, check if the account is configured
-            NSString *appAccount = [responseObject objectForKey:kAppAccount];
+            NSString *appAccount = [responseData objectForKey:SystemUserAppAccount];
             [self updateSIPAccountWithURL:appAccount andSuccess:^(BOOL success) {
                 if (completion) {
                     completion(YES);
@@ -190,7 +182,7 @@ NSString * const kSuppressedKey = @"suppressed";
                 completion(YES);
             }
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         if (completion) {
             completion(NO);
         }
@@ -204,6 +196,9 @@ NSString * const kSuppressedKey = @"suppressed";
 
     // Remove sip account if present also disconnects PJSIP and signals Middleware
     [self setSIPAccount:nil andPassword:nil];
+
+    //Remove the Migration completed from system userdefaults.
+    [[self class]persistObject:nil forKey:LoginViewControllerMigrationCompleted];
 }
 
 #pragma mark -
@@ -216,18 +211,13 @@ NSString * const kSuppressedKey = @"suppressed";
     return nil;
 }
 
-/** Retrieve if the system user is allowed to have an app_account according to VoIPGRID */
-- (BOOL)isAllowedToSip {
-    return _isSipAllowed;
-}
-
 /** Private method to set the local information is sip is allowed for this system user.
  Stores this to the private member variable for retrieve via isAllowedToSip, and stored to user defaults.
  @param allowed Boolean indicating if SIP is allowed or not
  */
 - (void)setAllowedToSip:(BOOL)allowed {
     _isSipAllowed = allowed;
-    [[NSUserDefaults standardUserDefaults] setBool:allowed forKey:kSIPAllowedSUD];
+    [[NSUserDefaults standardUserDefaults] setBool:allowed forKey:SystemUserSIPAllowedSUD];
 }
 
 /** Check if the user has SIP currently enabled.
@@ -244,45 +234,34 @@ NSString * const kSuppressedKey = @"suppressed";
 - (void)setSipEnabled:(BOOL)sipEnabled {
     if (_sipEnabled != sipEnabled) {
         _sipEnabled = sipEnabled;
-        [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:kSIPEnabledSUD];
-
+        [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:SystemUserSIPEnabledSUD];
         [self updateSipAccountStatus:_sipEnabled];
     }
 }
 
-/** Retrieve a localized version of the outgoing number, this can match multiple translations if needed in the future
- but currently only serves, `suppressed` */
-- (NSString *)localizedOutgoingNumber {
-    if ([_outgoingNumber isEqualToString:kSuppressedKey]) {
-        return NSLocalizedString(@"suppressed", @"Localized outgoing number, catching/translating suppressed");
-    }
-    return _outgoingNumber;
-}
-
-#pragma mark -
-#pragma mark SIP Handling
-
+#pragma mark - SIP Handling
 /** Used to check / perform the initial SIP Status at startup of the app. */
 - (void)checkSipStatus {
-    [self updateSipAccountStatus:_sipEnabled];
+    [self updateSipAccountStatus:self.sipEnabled];
 }
 
 /** Request to update the SIP Account information from the VoIPGRID Platform */
 - (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))completion {
-    if (self.loggedIn &&
-        self.sipEnabled) {
+    if (self.loggedIn && self.sipEnabled) {
         // Update the user profile
-        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithCompletion:^(id responseObject, NSError *error) {
             // This user is allowed to use SIP, check if the account is configured
-            NSString *appAccount = [responseObject objectForKey:kAppAccount];
-            [self updateSIPAccountWithURL:appAccount andSuccess:^(BOOL success) {
+            if  (!error) {
+                NSString *appAccount = [responseObject objectForKey:SystemUserAppAccount];
+                [self updateSIPAccountWithURL:appAccount andSuccess:^(BOOL success) {
+                    if (completion) {
+                        completion(success);
+                    }
+                }];
+            } else {
                 if (completion) {
-                    completion(success);
+                    completion(NO);
                 }
-            }];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (completion) {
-                completion(NO);
             }
         }];
     }
@@ -309,8 +288,8 @@ NSString * const kSuppressedKey = @"suppressed";
 - (void)fetchSipAccountFromAppAccountURL:(NSString *)appAccountURL withSuccess:(void (^)(NSString *sipUsername, NSString *sipPassword))success andFailure:(void(^)())failure {
     if ([appAccountURL isKindOfClass:[NSString class]]) {
         [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] retrievePhoneAccountForUrl:appAccountURL success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSObject *account = [responseObject objectForKey:kSIPAccountKey];
-            NSObject *password = [responseObject objectForKey:kSIPPasswordKey];
+            NSObject *account = [responseObject objectForKey:SystemUserSIPAccountKey];
+            NSObject *password = [responseObject objectForKey:SystemUserSIPPasswordKey];
             if ([account isKindOfClass:[NSNumber class]] && [password isKindOfClass:[NSString class]]) {
                 if (success) success([(NSNumber *)account stringValue], (NSString *)password);
             } else {
@@ -339,17 +318,17 @@ NSString * const kSuppressedKey = @"suppressed";
         } else {
             _sipAccount = sipUsername;
             // We have a new SIP Account, store it
-            [[NSUserDefaults standardUserDefaults] setObject:sipUsername forKey:kSIPAccountSUD];
+            [[self class] persistObject:sipUsername forKey:SystemUserSIPAccountSUD];
             [SSKeychain setPassword:sipPassword forService:[[self class] serviceName] account:sipUsername];
 
-            [self updateSipAccountStatus:_sipEnabled];
+            [self updateSipAccountStatus:self.sipEnabled];
         }
     } else {
         NSLog(@"%s No SIP Account disconnecting and deleting", __PRETTY_FUNCTION__);
         [self updateSipAccountStatus:NO];
 
         // Now delete it from the user defaults
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSIPAccountSUD];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSIPAccountSUD];
         [SSKeychain deletePasswordForService:[[self class] serviceName] account:_sipAccount error:NULL];
         _sipAccount = nil;
     }
@@ -362,32 +341,141 @@ NSString * const kSuppressedKey = @"suppressed";
         [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
         [[PZPushMiddleware sharedInstance] updateDeviceRecord];
         [[ConnectionHandler sharedConnectionHandler] sipConnect];
-        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-            if (!granted) {
-                [UIAlertView showWithTitle:NSLocalizedString(@"Microphone Access Denied", nil)
-                                   message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil)
-                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                         otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
-                                  tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                      if (buttonIndex == 1 && UIApplicationOpenSettingsURLString != nil) {
-                                          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                      }
-                                  }];
-            }
-        }];
-
     } else {
-        if (_sipAccount) {
+        if (self.sipAccount) {
             // First unregister the account with the middleware
-            [[PZPushMiddleware sharedInstance] unregisterSipAccount:_sipAccount];
+            [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
         }
         // And disconnect the Sip Connection Handler
         [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
     }
 }
 
+#pragma mark - Properties
+//For read/write property, if you override the getter and setter, the backing ivar is not automatically created.
+//This is the behaviour I want here because I'm using the userdefaults as storage.
+//If you still would like a backing ivar, you could declare it in the interface or use @synthesize ivar = _ivar.
+//Possible return value's: a number, suppressed (localized) or nil.
+- (NSString *)outgoingNumber {
+    NSString *storedOutgoingNumber = [[self class] readObjectForKey:SystemUserOutgoingNumberSUD];
+
+    if ([storedOutgoingNumber isEqualToString:SystemUserSuppressedKey]) {
+        return NSLocalizedString(@"suppressed", @"Localized outgoing number, catching/translating suppressed");
+    } else {
+        return storedOutgoingNumber;
+    }
+}
+
+- (void)setOutgoingNumber:(NSString *)outgoingNumber {
+    if (![self.outgoingNumber isEqualToString:outgoingNumber]) {
+        [[self class] persistObject:outgoingNumber forKey:SystemUserOutgoingNumberSUD];
+    }
+}
+
+- (NSString *)mobileNumber {
+    return [[self class] readObjectForKey:SystemUserMobileNumberSUD];
+}
+
+- (void)setMobileNumber:(NSString *)mobileNumber {
+    if (![self.mobileNumber isEqualToString:mobileNumber]) {
+        [[self class] persistObject:mobileNumber forKey:SystemUserMobileNumberSUD];
+    }
+}
+
+- (NSString *)lastName {
+    return [[self class] readObjectForKey:SystemUserLastNameSUD];
+}
+
+- (void)setLastName:(NSString *)lastName {
+    if (![self.lastName isEqualToString:lastName]) {
+        [[self class] persistObject:lastName forKey:SystemUserLastNameSUD];
+    }
+}
+
+- (NSString *)firstName {
+    return [[self class] readObjectForKey:SystemUserFirstNameSUD];
+}
+
+- (void)setFirstName:(NSString *)firstName {
+    if (![self.firstName isEqualToString:firstName]) {
+        [[self class] persistObject:firstName forKey:SystemUserFirstNameSUD];
+    }
+}
+
+#pragma mark - API calls
+- (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion {
+    NSAssert(completion, @"A completion block must be specified.");
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithCompletion:^(id responseObject, NSError *error) {
+        if (!error) {
+            self.outgoingNumber = [responseObject objectForKey:SystemUserOutgoingNumberKey];
+            self.mobileNumber = [responseObject objectForKey:SystemUserMobileNumberKey];
+            self.firstName = [responseObject objectForKey:SystemUserFirstName];
+            self.lastName = [responseObject objectForKey:SystemUserLastName];
+            completion(nil);
+        } else {
+            completion(error);
+        }
+    }];
+}
+
+# pragma mark - Persisting data
+/**
+ This method is responsible for persisting the given object under the given key in the persistant store of choice.
+ When we want to change the persistant store, these read/write should be the only in need of updating.
+
+ @param object The object to persist
+ @param key the onder which to store the given object
+ */
++ (void)persistObject:(id)object forKey:(nonnull id)key {
+    NSAssert(key, @"Key must be a valid object");
+    if (object && ![object isKindOfClass:[NSNull class]]) {
+        [[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+    }
+}
+
+/**
+ Returns an object persisted onder the given key
+
+ @param key The key for which to find the desired object
+ @return an object for the given key, nil, 0 or False
+ */
++ (id)readObjectForKey:(nonnull id)key {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+/*BOOL's are special*/
++ (BOOL)readBoolForKey:(nonnull id)key {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:key];
+}
+
+#pragma mark - Utility function
+/**
+ This function is userd by SSKeyChain so it can store variables under a "Service name"
+ In this case, the bundle identifier of the app.
+
+ @return The app's bundle identifier.
+ */
 + (NSString *)serviceName {
     return [[NSBundle mainBundle] bundleIdentifier];
+}
+
+- (NSString *)debugDescription {
+    NSMutableString *desc = [[NSMutableString alloc] initWithFormat:@"%@\n", [self description]];
+    [desc appendFormat:@"\tUser: %@\n", self.user];
+    [desc appendFormat:@"\tdisplayName: %@\n", self.displayName];
+    [desc appendFormat:@"\toutgoingNumber: %@\n", self.outgoingNumber];
+    [desc appendFormat:@"\tmobileNumber: %@\n", self.mobileNumber];
+    [desc appendFormat:@"\tsipAccount: %@\n", self.sipAccount];
+    [desc appendFormat:@"\tsipPassword: %@\n", self.sipPassword];
+    [desc appendFormat:@"\tfirstName: %@\n", self.firstName];
+    [desc appendFormat:@"\tlastName: %@\n", self.lastName];
+
+    [desc appendFormat:@"\tisAllowedToSip: %@\n", self.isAllowedToSip ? @"YES" : @"NO"];
+    [desc appendFormat:@"\tsipEnabled: %@\n", self.sipEnabled ? @"YES" : @"NO"];
+    [desc appendFormat:@"\tloggedIn: %@", self.loggedIn ? @"YES" : @"NO"];
+    
+    return desc;
 }
 
 @end

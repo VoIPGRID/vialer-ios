@@ -83,7 +83,7 @@ static NSTimeInterval const RecentCallManagerLastRecentsFailureInterval = 1800; 
         completion(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.reloading = NO;
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
+        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
             // No permissions
             [[SystemUser currentUser] logout];
             [self clearRecents];

@@ -1,8 +1,5 @@
 //
 //  TwoStepCallingViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 19/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 

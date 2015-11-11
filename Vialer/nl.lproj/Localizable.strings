@@ -85,9 +85,6 @@
 "EnabledVOIPCalls" = "Bellen via VoIP";
 
 /* No comment provided by engineer. */
-"Enter phone number manually" = "Voer je telefoonnummer in";
-
-/* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
 
 /* No comment provided by engineer. */
@@ -97,7 +94,8 @@
 "Error getting the availability options" = "Fout bij het ophalen van de bereikbaarheid opties.";
 
 /* No comment provided by engineer. */
-"Error while retrieving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
+"Error while retrieving your outgoing number, make sure you are connected to the internet" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, ben je verbonden met het internet?";
+"Retry" = "Opnieuw proberen";
 
 /* No comment provided by engineer. */
 "Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";

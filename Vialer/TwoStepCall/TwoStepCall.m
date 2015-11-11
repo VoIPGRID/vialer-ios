@@ -1,8 +1,5 @@
 //
 //  TwoStepCall.m
-//  Vialer
-//
-//  Created by Harold on 12/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 

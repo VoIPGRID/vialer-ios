@@ -1,8 +1,5 @@
 //
 //  NumberPadViewController.h
-//  Vialer
-//
-//  Created by Bob Voorneveld on 03/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 

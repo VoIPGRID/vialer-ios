@@ -1,9 +1,6 @@
 //
-//  WifiPhone.m
-//  2stepscreen
-//
-//  Created by Bob Voorneveld on 15/10/15.
-//  Copyright © 2015 Bob Voorneveld. All rights reserved.
+//  VialerIconView.m
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "VialerIconView.h"

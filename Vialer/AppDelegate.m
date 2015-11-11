@@ -1,9 +1,6 @@
 //
 //  AppDelegate.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 31/10/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -13,7 +10,6 @@
 #import "Gossip+Extra.h"
 #import "PZPushMiddleware.h"
 #import "SystemUser.h"
-#import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import <AVFoundation/AVFoundation.h>
@@ -38,8 +34,6 @@
 
     [GAITracker setupGAITracker];
     [self setupConnectivity];
-
-    NSSetUncaughtExceptionHandler(&HandleExceptions);
 
     return YES;
 }
@@ -81,9 +75,9 @@
 }
 
 #pragma mark - UIApplication notification delegate
--(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    completionHandler(UIBackgroundFetchResultNoData);
-}
+//-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    completionHandler(UIBackgroundFetchResultNoData);
+//}
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
@@ -124,13 +118,7 @@
     }
 }
 
-#pragma mark - Exception handling
-void HandleExceptions(NSException *exception) {
-    NSLog(@"The app has encountered an unhandled exception: %@", [exception debugDescription]);
-}
-
 #pragma mark - Handle person(s) & calls
-
 - (void)handleSipCall:(GSCall *)sipCall {
     // TODO: fix sip call
 }

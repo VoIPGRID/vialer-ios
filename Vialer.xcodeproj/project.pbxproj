@@ -60,6 +60,7 @@
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */; };
 		F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
@@ -83,8 +84,6 @@
 		FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
 		FB3820D81A1E51040033FF78 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D71A1E51040033FF78 /* CoreMedia.framework */; };
 		FB3820DA1A1E510C0033FF78 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D91A1E510C0033FF78 /* CoreVideo.framework */; };
-		FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */; };
-		FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */; };
 		FB4226D1182261D200707349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
 		FB4226D3182261D200707349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
 		FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
@@ -279,6 +278,7 @@
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -344,10 +344,6 @@
 		FB3820D51A1E50F10033FF78 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FB3820D71A1E51040033FF78 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FB3820D91A1E510C0033FF78 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		FB3820E01A1E87730033FF78 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
-		FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
-		FB3820E21A1E87730033FF78 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
-		FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		FB4226CD182261D200707349 /* Vialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB4226D0182261D200707349 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FB4226D2182261D200707349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -656,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */,
+				F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */,
 				C4F49F2B1BF0B45700C25159 /* Info.plist */,
 			);
 			path = VialerTests;
@@ -947,10 +944,6 @@
 				FB48BB401875B63700C0D5DB /* NSString+Mobile.m */,
 				FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */,
 				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
-				FB3820E01A1E87730033FF78 /* UIActionSheet+Blocks.h */,
-				FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */,
-				FB3820E21A1E87730033FF78 /* UIAlertView+Blocks.h */,
-				FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */,
 				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
 				C4CEAB421BCE933000A56FC2 /* GAITracker.h */,
@@ -1269,6 +1262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
+				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1305,7 +1299,6 @@
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				C4EFCF8C1BF2301E0000CC6F /* OldNumberPadViewController.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
-				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
@@ -1314,7 +1307,6 @@
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
 				F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */,
-				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */,
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */,
@@ -1512,7 +1504,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "68e91e59-0347-4193-8bb2-afb7c8a1967b";
+				PROVISIONING_PROFILE = "de67894e-ed7a-44a6-bf32-5d48451fef13";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = AdHocDistribution;

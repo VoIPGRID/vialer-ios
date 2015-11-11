@@ -1,9 +1,6 @@
 //
 //  CircleWithWhiteIcon.m
-//  2stepscreen
-//
-//  Created by Bob Voorneveld on 16/10/15.
-//  Copyright © 2015 Bob Voorneveld. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "CircleWithWhiteIcon.h"

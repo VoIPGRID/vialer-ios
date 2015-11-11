@@ -1,8 +1,5 @@
 //
 //  ContactModel.m
-//  Vialer
-//
-//  Created by Redmer Loen on 12-10-15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 

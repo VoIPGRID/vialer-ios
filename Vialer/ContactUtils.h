@@ -1,8 +1,5 @@
 //
 //  ContactUtils.h
-//  Vialer
-//
-//  Created by Redmer Loen on 27-10-15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
