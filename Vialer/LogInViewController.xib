@@ -137,7 +137,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="r1D-2b-eui" userLabel="Phone Number Field">
-                            <rect key="frame" x="32" y="187" width="255" height="30"/>
+                            <rect key="frame" x="32" y="187" width="225" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -172,6 +172,15 @@
                             </state>
                             <connections>
                                 <action selector="configureViewContinueButtonPressed:" destination="-1" eventType="touchUpInside" id="xCA-D3-8Oe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="T5m-gw-8Wg">
+                            <rect key="frame" x="265" y="191" width="22" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="mobileNumberInfoButtonPressed:" destination="-1" eventType="touchUpInside" id="WL8-ou-Dn4"/>
                             </connections>
                         </button>
                     </subviews>

@@ -199,6 +199,9 @@
 "Mobile" = "Mobile";
 
 /* No comment provided by engineer. */
+"Mobile phone number" = "Mobile phone number";
+
+/* No comment provided by engineer. */
 "mobile_label" = "Mobile";
 
 /* No comment provided by engineer. */
@@ -329,6 +332,9 @@
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "This user is not allowed to use the app";
+
+/* No comment provided by engineer. */
+"To make Two step calling possible, we need to have your mobile phone number." = "To make Two step calling possible, we need to have your mobile phone number.";
 
 /* No comment provided by engineer. */
 "Top name matches" = "Top name matches";

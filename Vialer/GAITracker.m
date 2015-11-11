@@ -22,7 +22,7 @@
     GAI *gai = [GAI sharedInstance];
     gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
 #ifdef DEBUG
-    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app releaseAppDelegate.m
+//    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app releaseAppDelegate.m
     [gai setDryRun:YES];   // NOTE: Set to YES to disable tracking
 #endif
 }

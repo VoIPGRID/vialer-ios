@@ -402,16 +402,14 @@
     [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
-
-            //            [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
-
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
             [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
             [self.scene runActTwo];                       // Animate the clouds
 
             //If a success block was provided, execute it
-            if (success)
-                success ();
+            if (success) {
+                success();
+            }
         }
     }];
 }
@@ -445,7 +443,7 @@
 
         //If a success block was provided, execute it
         if (success) {
-            success ();
+            success();
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -560,7 +558,7 @@
     }
 }
 
-- (IBAction)unlockIt {
+- (void)unlockIt {
     // Put here what happens when it is unlocked
     [self.scene clean];
     [self dismissViewControllerAnimated:YES completion:^{
@@ -568,6 +566,14 @@
         [self.logoView setAlpha:1.f];
         [self.logoView setCenter:self.view.center];
     }];
+}
+
+- (IBAction)mobileNumberInfoButtonPressed:(UIButton *)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Mobile phone number", nil) message:NSLocalizedString(@"To make Two step calling possible, we need to have your mobile phone number.", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:defaultAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
