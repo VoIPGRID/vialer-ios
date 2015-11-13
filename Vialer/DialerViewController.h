@@ -2,28 +2,14 @@
 //  DialerViewController.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 15/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Created by Bob Voorneveld on 03/11/15.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
-
-#import "PasteableTextView.h"
-#import "NumberPadViewController.h"
 
 #import <UIKit/UIKit.h>
 
-@interface DialerViewController : UIViewController<UITextViewDelegate, NumberPadViewControllerDelegate>
+#import "NumberPadViewController.h"
 
-@property (weak, nonatomic) IBOutlet UIView *buttonsView;
-@property (weak, nonatomic) IBOutlet UIButton *callButton;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet PasteableTextView *numberTextView;
+@interface DialerViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIView  *statusView;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UIButton *statusButton;
-@property (strong, nonatomic) NSString *infoMessage;
-
-- (IBAction)dialerBackButtonPressed:(UIButton *)sender;
-- (IBAction)callButtonPressed:(UIButton *)sender;
-- (IBAction)messageInfoPressed:(UIButton *)sender;
 @end

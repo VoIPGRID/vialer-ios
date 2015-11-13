@@ -448,7 +448,7 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
-        ++self.fetchAccountRetryCount;
+        self.fetchAccountRetryCount++;
         if (self.fetchAccountRetryCount != 3) { // When we retried 3 times
             [self retrievePhoneNumbersWithSuccessBlock:nil];
         } else {

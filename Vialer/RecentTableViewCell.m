@@ -34,7 +34,7 @@
     return self;
 }
 
-# pragma mark - Lazy loading properties
+# pragma mark - properties
 
 - (UIImageView *)iconImageView {
     if (!_iconImageView) {

@@ -9,7 +9,6 @@
 
 #import "ConnectionHandler.h"
 #import "ContactsViewController.h"
-#import "DialerViewController.h"
 #import "GAITracker.h"
 #import "LogInViewController.h"
 #import "RecentsViewController.h"
@@ -97,7 +96,8 @@
 
 - (UINavigationController *)dialerNavigationController {
     if (!_dialerNavigationController) {
-        UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CallingStoryboard" bundle:nil];
+        UIViewController *dialerViewController = [sb instantiateViewControllerWithIdentifier:@"DailerViewController"];
         _dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
         _dialerNavigationController.navigationBar.translucent = NO;
     }

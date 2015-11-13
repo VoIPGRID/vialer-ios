@@ -24,7 +24,7 @@
 NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotification";
 
 @interface SIPCallingViewController ()
-@property (nonatomic, strong) NumberPadViewController *numberPadViewController;
+@property (nonatomic, strong) OldNumberPadViewController *numberPadViewController;
 @property (nonatomic, strong) NSString *toNumber;
 @property (nonatomic, strong) NSString *toContact;
 @property (nonatomic, strong) NSArray *images;
@@ -50,7 +50,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
-    self.numberPadViewController = [[NumberPadViewController alloc] init];
+    self.numberPadViewController = [[OldNumberPadViewController alloc] init];
     self.numberPadViewController.view.frame = CGRectOffset(self.buttonsView.frame, 0, -16.f);
     [self.view insertSubview:self.numberPadViewController.view aboveSubview:self.buttonsView];
     [self addChildViewController:self.numberPadViewController];

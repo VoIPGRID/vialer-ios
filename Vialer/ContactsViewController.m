@@ -77,7 +77,8 @@ static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 }
 
-# pragma mark - Lazy loading properties
+# pragma mark - properties
+
 - (ContactModel *)contactModel {
     if (!_contactModel) {
         _contactModel = [[ContactModel alloc] init];
