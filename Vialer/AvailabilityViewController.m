@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.tintColor = [Configuration tintColorForKey:kTintColorTable];
+    self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
     self.navigationItem.title = NSLocalizedString(@"Availability", nil);
 }
 

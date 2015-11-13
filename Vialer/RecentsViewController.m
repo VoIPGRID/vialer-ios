@@ -46,7 +46,7 @@
         
         // Add hamburger menu on navigation bar
         UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        leftDrawerButton.tintColor = [Configuration tintColorForKey:kTintColorLeftDrawerButton];
+        leftDrawerButton.tintColor = [Configuration tintColorForKey:ConfigurationLeftDrawerButtonTintColor];
         self.navigationItem.leftBarButtonItem = leftDrawerButton;
     }
     return self;
@@ -56,7 +56,7 @@
 {
     [super viewDidLoad];
 
-    self.tableView.tintColor = [Configuration tintColorForKey:kTintColorTable];
+    self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationRecentsTableViewTintColor];
 
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
@@ -75,7 +75,7 @@
     self.recents = [RecentCall cachedRecentCalls];
     self.missedRecents = [self filterMissedRecents:self.recents];
     
-    self.filterSegmentedControl.tintColor = [Configuration tintColorForKey:kTintColorNavigationBar];
+    self.filterSegmentedControl.tintColor = [Configuration tintColorForKey:ConfigurationRecentsSegmentedControlTintColor];
 
     // ExtendedNavBarView will draw its own hairline.
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"TransparentPixel"]];

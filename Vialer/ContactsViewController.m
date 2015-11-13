@@ -25,6 +25,7 @@ static NSString *const ContactsViewControllerPropertyPhoneNumbers = @"phoneNumbe
 static CGFloat const ContactsViewControllerTableHeaderHeight = 30.0f;
 static CGFloat const ContactsViewControllerTableCellHeight = 44.0f;
 static CGFloat const ContactsViewControllerCustomCellLabelLeftOffset = 15.0f;
+static CGFloat const ContactsViewControllerCustomCellLabelRightOffset = 10.0f;
 static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
 
 @interface ContactsViewController()
@@ -73,7 +74,7 @@ static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     self.tableView.tableHeaderView = self.headerView;
-    self.tableView.sectionIndexColor = [Configuration tintColorForKey:kTintColorNavigationBar];
+    self.tableView.sectionIndexColor = [Configuration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 }
 
@@ -110,7 +111,7 @@ static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(leftDrawerButtonPress:)];
-        _leftDrawerButton.tintColor = [Configuration tintColorForKey: kTintColorLeftDrawerButton];
+        _leftDrawerButton.tintColor = [Configuration tintColorForKey: ConfigurationLeftDrawerButtonTintColor];
     }
     return _leftDrawerButton;
 }
@@ -140,10 +141,10 @@ static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
         _searchController.searchResultsUpdater = self;
         _searchController.searchBar.delegate = self;
         _searchController.searchBar.keyboardType = UIKeyboardTypeAlphabet;
-        _searchController.searchBar.barTintColor = [Configuration tintColorForKey:kTintColorSearchBar];
-        _searchController.searchBar.tintColor = [UIColor whiteColor];
+        _searchController.searchBar.barTintColor = [Configuration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+        _searchController.searchBar.tintColor = [Configuration tintColorForKey:ConfigurationContactSearchBarTintColor];
         _searchController.searchBar.layer.borderWidth = 1;
-        _searchController.searchBar.layer.borderColor = [[Configuration tintColorForKey:kTintColorSearchBar] CGColor];
+        _searchController.searchBar.layer.borderColor = [[Configuration tintColorForKey:ConfigurationContactSearchBarTintColor] CGColor];
         [_searchController.searchBar sizeToFit];
     }
     return _searchController;
@@ -183,17 +184,17 @@ static CGFloat const ContactsViewControllerEdgeOffsetSearchTable = 20.0f;
         UIView *meContactView = [[UIView alloc] initWithFrame: CGRectMake(0, ContactsViewControllerTableCellHeight / 2, CGRectGetWidth(_headerView.frame), ContactsViewControllerTableCellHeight)];
 
         UILabel *numberTitle = [[UILabel alloc] initWithFrame:CGRectMake(ContactsViewControllerCustomCellLabelLeftOffset, 0, 0, 0)];;
-        [numberTitle setText:[NSString stringWithFormat:@"%@: ", NSLocalizedString(@"My number", nil)]];
-        [numberTitle setBackgroundColor:[UIColor whiteColor]];
+        numberTitle.text = NSLocalizedString(@"My number:", nil);
+        numberTitle.backgroundColor = [UIColor whiteColor];
         [numberTitle sizeToFit];
-        [numberTitle setCenter:CGPointMake(numberTitle.center.x, meContactView.center.y)];
+        numberTitle.center = CGPointMake(numberTitle.center.x, meContactView.center.y);
         [meContactView addSubview:numberTitle];
 
         HTCopyableLabel *numberValue = [HTCopyableLabel new];
         [numberValue setText:[SystemUser currentUser].localizedOutgoingNumber];
         [numberValue setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]];
         [numberValue sizeToFit];
-        [numberValue setFrame:CGRectMake(CGRectGetMaxX(numberTitle.frame),
+        [numberValue setFrame:CGRectMake(CGRectGetMaxX(numberTitle.frame) + ContactsViewControllerCustomCellLabelRightOffset,
                                          0,
                                          CGRectGetWidth(numberValue.frame),
                                          CGRectGetHeight(numberValue.frame))];

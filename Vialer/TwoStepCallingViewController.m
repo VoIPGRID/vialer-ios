@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, CallingState) {
 
 static float const TwoStepCallingViewControllerGreyedOutAlpha = .5f;
 static float const TwoStepCallingViewControllerDismissTime = 3.0;
+static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 
 @interface TwoStepCallingViewController ()
 @property (weak, nonatomic) IBOutlet BubblingPoints *bubblingOne;
@@ -79,15 +80,16 @@ static float const TwoStepCallingViewControllerDismissTime = 3.0;
 
 - (void)setup {
     // Setup colors & icons
-    self.backgroundHeader.backgroundColor = [Configuration tintColorForKey:kBackgroundHeaderTwoStepScreen];
-    self.infobarBackground.backgroundColor = [Configuration tintColorForKey:kBackgroundInfoBarTwoStepScreen];
-    self.vialerIconView.iconColor = [Configuration tintColorForKey:kVialerIconTwoStepScreen];
-    self.aSide.innerCircleColor = [Configuration tintColorForKey:kSideAIconTwoStepScreen];
-    self.aSide.icon = [UIImage imageNamed:@"personIcon"];
-    self.bSide.innerCircleColor = [Configuration tintColorForKey:kSideBIconTwoStepScreen];
-    self.bSide.icon = [UIImage imageNamed:@"personIcon"];
-    self.bubblingOne.color = [Configuration tintColorForKey:kBubblingTwoStepScreen];
-    self.bubblingTwo.color = [Configuration tintColorForKey:kBubblingTwoStepScreen];
+    self.backgroundHeader.backgroundColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
+    self.infobarBackground.backgroundColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
+    self.vialerIconView.iconColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenVialerIconColor];
+    self.aSide.innerCircleColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenSideAIconColor];
+    UIImage *iconForAAndBSide = [UIImage imageNamed:TwoStepCallingViewControllerAsideIcon];
+    self.aSide.icon = iconForAAndBSide;
+    self.bSide.innerCircleColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenSideBIconColor];
+    self.bSide.icon = iconForAAndBSide;
+    self.bubblingOne.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
+    self.bubblingTwo.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
 
     [self checkCallManagerStatus];
 }
@@ -232,7 +234,7 @@ static float const TwoStepCallingViewControllerDismissTime = 3.0;
             break;
         }
         case CallingStateInvalidNumber: {
-            self.callStatusLabel.text = NSLocalizedString(@"Phonenumber incorrect", nil);
+            self.callStatusLabel.text = NSLocalizedString(@"Phone number incorrect", nil);
             self.phoneNumberLabel.text = @"";
             self.bubblingOne.state = BubblingPointsStateIdle;
             self.bubblingTwo.state = BubblingPointsStateConnectionFailed;

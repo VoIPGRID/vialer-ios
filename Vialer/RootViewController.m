@@ -18,6 +18,10 @@
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 
+static float const RootViewControllerMaximunDrawerWidth = 222.0;
+static float const RootViewControllerShadowRadius = 2.0f;
+static float const RootViewControllerShadowOpacity = 0.5f;
+
 @interface RootViewController ()
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
@@ -39,16 +43,32 @@
 
     if (self) {
         [self setRestorationIdentifier:@"MMDrawer"];
-        [self setMaximumLeftDrawerWidth:222.0];
+        [self setMaximumLeftDrawerWidth:RootViewControllerMaximunDrawerWidth];
         [self setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
         [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-        [self setShadowRadius:2.f];
-        [self setShadowOpacity:0.5f];
+        [self setShadowRadius:RootViewControllerShadowRadius];
+        [self setShadowOpacity:RootViewControllerShadowOpacity];
         [self setCenterViewController:self.tabBarController];
         [self setLeftDrawerViewController:self.sideMenuViewController];
+        [self setupAppearance];
     }
     return self;
 }
+
+- (void)setupAppearance {
+    Configuration *config = [Configuration defaultConfiguration];
+
+    // Customize TabBar
+    [UITabBar appearance].tintColor = [config tintColorForKey:ConfigurationTabBarTintColor];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:ConfigurationTabBarTintColor]];
+    [UITabBar appearance].barTintColor = [config tintColorForKey:ConfigurationTabBarBackgroundColor];
+
+    // Customize NavigationBar
+    [UINavigationBar appearance].tintColor = [config tintColorForKey:ConfigurationNavigationBarTintColor];
+    [UINavigationBar appearance].barTintColor = [config tintColorForKey:ConfigurationNavigationBarBarTintColor];
+}
+
+#pragma mark - properties
 
 - (SideMenuViewController *)sideMenuViewController {
     if (!_sideMenuViewController) {

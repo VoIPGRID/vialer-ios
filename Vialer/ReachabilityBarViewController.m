@@ -45,14 +45,14 @@
     switch (self.status) {
         case ReachabilityManagerStatusOffline: {
             self.failedConnectionLabel.hidden = NO;
-            self.view.backgroundColor = [Configuration tintColorForKey:ReachabilityBarBackgroundColor];
+            self.view.backgroundColor = [Configuration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
             break;
         }
         case ReachabilityManagerStatusTwoStep: {
             if ([SystemUser currentUser].isSipEnabled) {
                 self.twoStepLabel.hidden = NO;
                 self.twoStepInfoButton.hidden = NO;
-                self.view.backgroundColor = [Configuration tintColorForKey:ReachabilityBarBackgroundColor];
+                self.view.backgroundColor = [Configuration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
             }
             break;
         }

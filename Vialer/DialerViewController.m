@@ -111,7 +111,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     if (!_leftDrawerButton) {
         // Add hamburger menu on navigation bar
         _leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:DialerViewControllerLeftDrawerButtonImage] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        _leftDrawerButton.tintColor = [Configuration tintColorForKey:kTintColorLeftDrawerButton];
+        _leftDrawerButton.tintColor = [Configuration tintColorForKey:ConfigurationLeftDrawerButtonTintColor];
     }
     return _leftDrawerButton;
 }

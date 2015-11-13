@@ -106,7 +106,7 @@
 "EnabledVOIPCalls" = "VoIP calling";
 
 /* No comment provided by engineer. */
-"Enter phonenumber manually" = "Enter phonenumber manually";
+"Enter phone number manually" = "Enter phone number manually";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Enter Your email address and password to login.";
@@ -205,6 +205,9 @@
 "My number" = "My number";
 
 /* No comment provided by engineer. */
+"My number:" = "My number:";
+
+/* No comment provided by engineer. */
 "No" = "No";
 
 /* No comment provided by engineer. */
@@ -247,7 +250,7 @@
 "phone" = "phone";
 
 /* No comment provided by engineer. */
-"Phonenumber incorrect" = "Phonenumber incorrect";
+"Phone number incorrect" = "Phone number incorrect";
 
 /* No comment provided by engineer. */
 "Please enter a valid email address." = "Please enter a valid email address.";

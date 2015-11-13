@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//#import "ConfigTextField.h"
-
 IB_DESIGNABLE
 @interface ConfigureFormView : UIView
 

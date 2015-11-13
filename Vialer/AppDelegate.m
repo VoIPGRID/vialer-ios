@@ -41,7 +41,6 @@
 
     [GAITracker setupGAITracker];
     [self setupConnectivity];
-    [self setupAppearance];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.rootViewController;
@@ -67,23 +66,6 @@
     // TODO: fix SIP
 //    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
 //    [[ConnectionHandler sharedConnectionHandler] start];
-}
-
-- (void)setupAppearance {
-    Configuration *config = [Configuration new];
-
-    // Customize TabBar
-    [UITabBar appearance].tintColor = [config tintColorForKey:kTintColorTabBar];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:kTintColorTabBar]];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [UITabBar appearance].barTintColor = [UIColor colorWithRed:(247 / 255.f) green:(247 / 255.f) blue:(247 / 255.f) alpha:1.f];
-    }
-
-    // Customize NavigationBar
-    [UINavigationBar appearance].tintColor = [config tintColorForKey:kTintColorNavigationBar];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f];
-    }
 }
 
 - (void)setupLogin {

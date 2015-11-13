@@ -59,7 +59,6 @@ NSString * const kSuppressedKey = @"suppressed";
     dispatch_once(&onceToken, ^{
         _currentUser = [[SystemUser alloc] initPrivate];
     });
-
     return _currentUser;
 }
 

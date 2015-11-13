@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, SideMenuItems) {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tintColor = [self navigationBarTintColor];
+    self.tintColor = [Configuration tintColorForKey:ConfigurationSideMenuTintColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
@@ -314,10 +314,6 @@ typedef NS_ENUM(NSInteger, SideMenuItems) {
 }
 
 #pragma mark - Utils
-
-- (UIColor *)navigationBarTintColor {
-    return [Configuration tintColorForKey:kTintColorNavigationBar];
-}
 
 - (UIImage *)coloredImageWithImage:(UIImage*)image color:(UIColor*)color {
     CGFloat scaleFactor = 1.0f;

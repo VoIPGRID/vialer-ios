@@ -106,7 +106,7 @@
 "EnabledVOIPCalls" = "Bellen via VoIP";
 
 /* No comment provided by engineer. */
-"Enter phonenumber manually" = "Voer je telefoonnummer in";
+"Enter phone number manually" = "Voer je telefoonnummer in";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
@@ -205,6 +205,9 @@
 "My number" = "Mijn nummer";
 
 /* No comment provided by engineer. */
+"My number:" = "Mijn nummer:";
+
+/* No comment provided by engineer. */
 "No" = "Nee";
 
 /* No comment provided by engineer. */
@@ -247,7 +250,7 @@
 "phone" = "vast";
 
 /* No comment provided by engineer. */
-"Phonenumber incorrect" = "Onjuist telefoonnummer";
+"Phone number incorrect" = "Telefoonnummer incorrect";
 
 /* No comment provided by engineer. */
 "Please enter a valid email address." = "Vul een geldig e-mailadres in.";
@@ -262,7 +265,7 @@
 "Request password" = "Wachtwoord opvragen";
 
 /* No comment provided by engineer. */
-"Retrieving phone numbers..." = "Telefoon nummers ophalen...";
+"Retrieving phone numbers..." = "Telefoonnummers ophalen...";
 
 /* No comment provided by engineer. */
 "Routing" = "Belplan";

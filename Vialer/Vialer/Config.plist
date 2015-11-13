@@ -16,49 +16,121 @@
 			<integer>255</integer>
 			<integer>255</integer>
 		</array>
-		<key>LeftDrawerButton</key>
+		<key>TabBarBackgroundColor</key>
 		<array>
-			<integer>145</integer>
-			<integer>145</integer>
-			<integer>145</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
 		</array>
-		<key>BackgroundInfoBarTwoStepScreen</key>
+		<key>TabBarTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>NavigationBarTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>ContactsTableSectionIndexColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>RecentsSegmentedControlTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>SideMenuTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>NavigationBarBarTintColor</key>
+		<array>
+			<integer>248</integer>
+			<integer>248</integer>
+			<integer>248</integer>
+		</array>
+		<key>AvailabilityTableViewTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>RecentsTableViewTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>ContactSearchBarTintColor</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>ContactSearchBarBarTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>LeftDrawerButtonTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
+		<key>TwoStepScreenInfoBarBackgroundColor</key>
 		<array>
 			<string>229</string>
 			<string>229</string>
 			<string>229</string>
 		</array>
-		<key>VialerIconTwoStepScreen</key>
+		<key>TwoStepScreenVialerIconColor</key>
 		<array>
 			<string>61</string>
 			<string>65</string>
 			<string>84</string>
 		</array>
-		<key>BubblingTwoStepScreen</key>
+		<key>TwoStepScreenBubblingColor</key>
 		<array>
 			<string>61</string>
 			<string>65</string>
 			<string>84</string>
 		</array>
-		<key>SideAIconTwoStepScreen</key>
+		<key>TwoStepScreenSideAIconColor</key>
 		<array>
 			<string>61</string>
 			<string>65</string>
 			<string>84</string>
 		</array>
-		<key>SideBIconTwoStepScreen</key>
+		<key>TwoStepScreenSideBIconColor</key>
 		<array>
 			<string>241</string>
 			<string>90</string>
 			<string>41</string>
 		</array>
-		<key>BackgroundHeaderTwoStepScreen</key>
+		<key>TwoStepScreenBackgroundHeaderColor</key>
 		<array>
 			<string>241</string>
 			<string>90</string>
 			<string>41</string>
 		</array>
-		<key>Background</key>
+		<key>ReachabilityBarBackgroundColor</key>
+		<array>
+			<integer>178</integer>
+			<integer>177</integer>
+			<integer>184</integer>
+		</array>
+		<key>GradientBackgroundColors</key>
 		<dict>
 			<key>GradientStart</key>
 			<array>
@@ -75,42 +147,6 @@
 			<key>GradientAngle</key>
 			<integer>300</integer>
 		</dict>
-		<key>TabBar</key>
-		<array>
-			<integer>232</integer>
-			<integer>126</integer>
-			<integer>58</integer>
-		</array>
-		<key>NavigationBar</key>
-		<array>
-			<integer>232</integer>
-			<integer>126</integer>
-			<integer>58</integer>
-		</array>
-		<key>SearchBar</key>
-		<array>
-			<integer>232</integer>
-			<integer>126</integer>
-			<integer>58</integer>
-		</array>
-		<key>Table</key>
-		<array>
-			<integer>232</integer>
-			<integer>126</integer>
-			<integer>58</integer>
-		</array>
-		<key>SearchBarBar</key>
-		<array>
-			<integer>178</integer>
-			<integer>177</integer>
-			<integer>184</integer>
-		</array>
-		<key>ReachabilityBarBackgroundColor</key>
-		<array>
-			<integer>178</integer>
-			<integer>177</integer>
-			<integer>184</integer>
-		</array>
 	</dict>
 	<key>URLS</key>
 	<dict>
