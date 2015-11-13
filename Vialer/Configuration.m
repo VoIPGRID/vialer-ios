@@ -59,7 +59,7 @@ static NSString * const ConfigurationUrlsKey = @"URLS";
 - (NSDictionary *)dictionary {
     if (!_dictionary) {
         _dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
-        NSAssert(_dictionary != nil, @"Config.plist not found!");
+        NSAssert(_dictionary, @"Config.plist not found!");
     }
     return _dictionary;
 }
