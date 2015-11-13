@@ -114,3 +114,8 @@ xcuserdata
 .xccheckout
 ./*.xccheckout
 
+####
+# Ignoring PJSIP src
+#
+/pjsip/src
+
