@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    CallDirectionInbound   = 0,
-    CallDirectionOutbound  = 1,
-} CallDirection;
+typedef NS_ENUM(NSInteger, CallDirection) {
+    CallDirectionInbound,
+    CallDirectionOutbound,
+};
 
 @interface RecentCall : NSObject
 

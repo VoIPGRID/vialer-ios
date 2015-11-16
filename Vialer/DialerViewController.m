@@ -52,7 +52,9 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setupTabBarItem];
+        self.title = NSLocalizedString(@"Keypad", nil);
+        self.tabBarItem.image = [UIImage imageNamed:DialerViewControllerTabBarItemImage];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:DialerViewControllerTabBarItemActiveImage];
     }
     return self;
 }
@@ -76,20 +78,10 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 #pragma mark - setup
 
-- (void)setupTabBarItem {
-    self.title = NSLocalizedString(@"Keypad", nil);
-    self.tabBarItem.image = [UIImage imageNamed:DialerViewControllerTabBarItemImage];
-    self.tabBarItem.selectedImage = [UIImage imageNamed:DialerViewControllerTabBarItemActiveImage];
-
-    self.navigationItem.leftBarButtonItem = self.leftDrawerButton;
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DialerViewControllerLogoImage]];
-}
-
+    
 - (void)setupLayout {
-    // Hamburger
-    self.navigationItem.leftBarButtonItem = self.leftDrawerButton;
-
     self.numberText = @"";
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DialerViewControllerLogoImage]];
 }
 
 - (void)setupReachability {
@@ -108,15 +100,6 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 #pragma mark - properties
-
-- (UIBarButtonItem *)leftDrawerButton {
-    if (!_leftDrawerButton) {
-        // Add hamburger menu on navigation bar
-        _leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:DialerViewControllerLeftDrawerButtonImage] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        _leftDrawerButton.tintColor = [Configuration tintColorForKey:ConfigurationLeftDrawerButtonTintColor];
-    }
-    return _leftDrawerButton;
-}
 
 - (void)setNumberLabel:(PasteableUILabel *)numberLabel {
     _numberLabel = numberLabel;
@@ -168,7 +151,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 # pragma mark - actions
 
-- (void)leftDrawerButtonPress:(id)sender{
+- (IBAction)leftDrawerButtonPress:(UIBarButtonItem *)sender{
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 

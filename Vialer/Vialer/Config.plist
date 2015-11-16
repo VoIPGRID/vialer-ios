@@ -88,6 +88,12 @@
 			<integer>126</integer>
 			<integer>58</integer>
 		</array>
+		<key>RecentsFilterControlTintColor</key>
+		<array>
+			<integer>232</integer>
+			<integer>126</integer>
+			<integer>58</integer>
+		</array>
 		<key>TwoStepScreenInfoBarBackgroundColor</key>
 		<array>
 			<string>229</string>

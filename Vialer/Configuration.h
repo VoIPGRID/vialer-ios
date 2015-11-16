@@ -35,6 +35,7 @@ extern NSString * const ConfigurationRecentsSegmentedControlTintColor;
 extern NSString * const ConfigurationContactsTableSectionIndexColor;
 extern NSString * const ConfigurationNumberPadButtonTextColor;
 extern NSString * const ConfigurationNumberPadButtonPressedColor;
+extern NSString * const ConfigurationRecentsFilterControlTintColor;
 
 /** Generic class for accessing the Config.plist items, default the Config.plist from the main bundle is used.
  If you only need one value, you can access it by the static class functions e.g.

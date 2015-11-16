@@ -19,6 +19,7 @@ static NSString * const TwoStepCallStatusKey = @"status";
 @property (nonatomic, strong)NSString *bNumber;
 @property (nonatomic, strong)NSError *error;
 @property (nonatomic, strong)NSTimer *statusTimer;
+@property (nonatomic) BOOL fetching;
 @end
 
 @implementation TwoStepCall
@@ -28,6 +29,7 @@ static NSString * const TwoStepCallStatusKey = @"status";
         self.aNumber = aNumber;
         self.bNumber = bNumber;
         self.status = TwoStepCallStatusUnknown;
+        self.fetching = NO;
     }
     return self;
 }
@@ -46,7 +48,11 @@ static NSString * const TwoStepCallStatusKey = @"status";
     _bNumber = [self cleanPhonenumber:bNumber];
 }
 
+#pragma mark - Actions
+
 - (void)start {
+    self.status = TwoStepCallStatusDialing_a;
+    
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] setupTwoStepCallWithANumber:self.aNumber bNumber:self.bNumber withCompletion:
      ^(NSString *callID, NSError * error) {
          if (error) {
@@ -66,6 +72,9 @@ static NSString * const TwoStepCallStatusKey = @"status";
                      break;
              }
          } else {
+             // Set fetch status to NO, no API call happening on this moment.
+             self.fetching = NO;
+
              //Start a timer which requests the status of this call every second.
              NSDictionary *userInfo = @{TwoStepCallIDKey : callID};
              self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fetchCallStatus:) userInfo:userInfo repeats:YES];
@@ -76,8 +85,15 @@ static NSString * const TwoStepCallStatusKey = @"status";
 - (void)fetchCallStatus:(NSTimer *)timer {
     NSString *callID = [[timer userInfo] objectForKey:TwoStepCallIDKey];
 
+    // If there is an API call still going on, skip this update
+    if (self.fetching) {
+        return;
+    }
+
+    self.fetching = YES;
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] twoStepCallStatusForCallId:callID withCompletion:
      ^(NSString *callStatus, NSError *error) {
+         self.fetching = NO;
          if (error) {
              NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", callID, error);
              [timer invalidate];

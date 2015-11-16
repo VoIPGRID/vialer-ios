@@ -22,9 +22,6 @@
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available";
 
 /* No comment provided by engineer. */
-"All" = "All";
-
-/* No comment provided by engineer. */
 "App is configuring" = "%@ is configuring";
 
 /* No comment provided by engineer. */
@@ -124,9 +121,6 @@
 "Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls.\nPull down to refresh" = "Failed to fetch your recent calls.\nPull down to refresh";
-
-/* No comment provided by engineer. */
 "Failed to load %@" = "Failed to load %@";
 
 /* No comment provided by engineer. */
@@ -166,9 +160,6 @@
 "Loading availability options..." = "Loading availability options...";
 
 /* No comment provided by engineer. */
-"Loading..." = "Loading...";
-
-/* No comment provided by engineer. */
 "Log out" = "Log out";
 
 /* No comment provided by engineer. */
@@ -187,9 +178,6 @@
 "Microphone Access Denied" = "Microphone Access Denied";
 
 /* No comment provided by engineer. */
-"Missed" = "Missed";
-
-/* No comment provided by engineer. */
 "Mobile" = "Mobile";
 
 /* No comment provided by engineer. */
@@ -205,13 +193,7 @@
 "My number" = "My number";
 
 /* No comment provided by engineer. */
-"My number:" = "My number:";
-
-/* No comment provided by engineer. */
 "No" = "No";
-
-/* No comment provided by engineer. */
-"No access to the recent calls" = "No access to recent calls";
 
 /* No comment provided by engineer. */
 "No email address configured" = "No email address configured";
@@ -221,12 +203,6 @@
 
 /* No comment provided by engineer. */
 "No outgoing number configured" = "No outgoing number configured";
-
-/* No comment provided by engineer. */
-"No recent calls" = "No recent calls";
-
-/* No comment provided by engineer. */
-"No Results" = "No Results";
 
 /* No comment provided by engineer. */
 "Not available" = "Not available";
@@ -259,6 +235,9 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
+"Recent Fetch error" = "Recent Fetch error";
+
+/* No comment provided by engineer. */
 "Recents" = "Recents";
 
 /* No comment provided by engineer. */
@@ -269,9 +248,6 @@
 
 /* No comment provided by engineer. */
 "Routing" = "Routing";
-
-/* No comment provided by engineer. */
-"Save" = "Save";
 
 /* No comment provided by engineer. */
 "Saving availability has failed" = "Saving availability has failed";
@@ -290,15 +266,6 @@
 
 /* No comment provided by engineer. */
 "Settings" = "Settings";
-
-/* No comment provided by engineer. */
-"Show all recent calls" = "Show all recent calls";
-
-/* No comment provided by engineer. */
-"Show recents" = "Show recents";
-
-/* No comment provided by engineer. */
-"Show your recent calls" = "Show your recent calls";
 
 /* No comment provided by engineer. */
 "SIP account" = "SIP account";
@@ -332,6 +299,9 @@
 
 /* No comment provided by engineer. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Two step modus will setup a call to your phone first and will call the other party when you answer the call.";
+
+/* No comment provided by engineer. */
+"Unable to fetch you recent call list." = "Unable to fetch you recent call list.";
 
 /* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Unable to save \"My number\"";

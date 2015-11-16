@@ -22,9 +22,6 @@
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
 
 /* No comment provided by engineer. */
-"All" = "Alle";
-
-/* No comment provided by engineer. */
 "App is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
@@ -124,9 +121,6 @@
 "Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls.\nPull down to refresh" = "Recente gesprekken konden niet worden opgehaald.\nTrek naar beneden om te verversen";
-
-/* No comment provided by engineer. */
 "Failed to load %@" = "%@ kon niet worden geladen";
 
 /* No comment provided by engineer. */
@@ -166,9 +160,6 @@
 "Loading availability options..." = "Bezig met laden van de opties voor de bereikbaarheid...";
 
 /* No comment provided by engineer. */
-"Loading..." = "Laden...";
-
-/* No comment provided by engineer. */
 "Log out" = "Uitloggen";
 
 /* No comment provided by engineer. */
@@ -187,9 +178,6 @@
 "Microphone Access Denied" = "Geen toegang tot microfoon";
 
 /* No comment provided by engineer. */
-"Missed" = "Gemist";
-
-/* No comment provided by engineer. */
 "Mobile" = "Mobiel";
 
 /* No comment provided by engineer. */
@@ -205,13 +193,7 @@
 "My number" = "Mijn nummer";
 
 /* No comment provided by engineer. */
-"My number:" = "Mijn nummer:";
-
-/* No comment provided by engineer. */
 "No" = "Nee";
-
-/* No comment provided by engineer. */
-"No access to the recent calls" = "Geen toegang tot de recente oproepen";
 
 /* No comment provided by engineer. */
 "No email address configured" = "Geen emailadres ingesteld";
@@ -221,12 +203,6 @@
 
 /* No comment provided by engineer. */
 "No outgoing number configured" = "Geen uitgaand nummer ingesteld";
-
-/* No comment provided by engineer. */
-"No recent calls" = "Geen recente oproepen";
-
-/* No comment provided by engineer. */
-"No Results" = "Niets gevonden";
 
 /* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
@@ -259,6 +235,9 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
+"Recent Fetch error" = "Recente Gesprekken ophalen mislukt";
+
+/* No comment provided by engineer. */
 "Recents" = "Recent";
 
 /* No comment provided by engineer. */
@@ -269,9 +248,6 @@
 
 /* No comment provided by engineer. */
 "Routing" = "Belplan";
-
-/* No comment provided by engineer. */
-"Save" = "Opslaan";
 
 /* No comment provided by engineer. */
 "Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
@@ -290,15 +266,6 @@
 
 /* No comment provided by engineer. */
 "Settings" = "Instellingen";
-
-/* No comment provided by engineer. */
-"Show all recent calls" = "Toon alle recente oproepen";
-
-/* No comment provided by engineer. */
-"Show recents" = "Toon recent";
-
-/* No comment provided by engineer. */
-"Show your recent calls" = "Toon jouw recente oproepen";
 
 /* No comment provided by engineer. */
 "SIP account" = "SIP account";
@@ -332,6 +299,9 @@
 
 /* No comment provided by engineer. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Twee staps modus zal een gesprek opzetten naar je telefoon en zal na beantwooring het gesprek opzetten naar de andere partij.";
+
+/* No comment provided by engineer. */
+"Unable to fetch you recent call list." = "Ophalen van recente gesprekken mislukt.";
 
 /* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";

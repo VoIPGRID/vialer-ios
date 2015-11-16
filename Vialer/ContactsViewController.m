@@ -31,7 +31,6 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 
 @implementation ContactsViewController
 
-
 #pragma mark - view lifecycle
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

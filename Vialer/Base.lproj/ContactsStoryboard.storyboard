@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Contacts-->
+        <!--Contacts View Controller-->
         <scene sceneID="kOh-YM-GiB">
             <objects>
                 <viewController id="0Ia-Zs-OfH" customClass="ContactsViewController" sceneMemberID="viewController">
@@ -33,14 +33,14 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="+31508009000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6nE-bA-fh5">
-                                            <rect key="frame" x="116" y="12" width="122" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6nE-bA-fh5">
+                                            <rect key="frame" x="238" y="12" width="0.0" height="0.0"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Warning message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5W-Kc-sfW">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5W-Kc-sfW">
                                             <rect key="frame" x="8" y="41" width="137" height="20"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -67,7 +67,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="595" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RTF-RC-BhL">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RTF-RC-BhL">
                                                     <rect key="frame" x="15" y="0.0" width="565" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -107,7 +107,7 @@
                             <constraint firstItem="M8h-9A-CeY" firstAttribute="leading" secondItem="wCx-cG-eqa" secondAttribute="leading" id="sr9-qi-aMS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="WNB-Uh-UGj">
+                    <navigationItem key="navigationItem" id="WNB-Uh-UGj">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="PNB-EM-6KD">
                             <connections>
                                 <action selector="leftDrawerButtonPressed:" destination="0Ia-Zs-OfH" id="PT2-yW-MMa"/>
@@ -143,7 +143,7 @@
         <!--Navigation Controller-->
         <scene sceneID="iP4-xK-DAd">
             <objects>
-                <navigationController storyboardIdentifier="ContactsNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t16-Xz-giH" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t16-Xz-giH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Aq7-Wf-8FB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

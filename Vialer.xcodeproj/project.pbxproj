@@ -29,11 +29,10 @@
 		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
 		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
 		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; };
-		C467430F1BF726AA0032D77B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46743081BF726AA0032D77B /* RecentsViewController.m */; };
-		C46743101BF726AA0032D77B /* RecentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46743091BF726AA0032D77B /* RecentsViewController.xib */; };
+		C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C461836C1BF9D9500075709B /* RecentCallManager.m */; };
+		C46183721BF9FB120075709B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
+		C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
 		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
-		C46743121BF726AA0032D77B /* SelectRecentsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430D1BF726AA0032D77B /* SelectRecentsFilterViewController.m */; };
-		C46743131BF726AA0032D77B /* SelectRecentsFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C467430E1BF726AA0032D77B /* SelectRecentsFilterViewController.xib */; };
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
 		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
@@ -46,7 +45,6 @@
 		C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860121BF14D960051BFDE /* NumberPadViewController.m */; };
 		C4E860191BF14D960051BFDE /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860141BF14D960051BFDE /* PasteableUILabel.m */; };
 		C4EFCF801BF21E210000CC6F /* CallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */; };
-		C4EFCF891BF22C850000CC6F /* ExtendedNavbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFCF881BF22C850000CC6F /* ExtendedNavbarView.m */; };
 		C4EFCF8C1BF2301E0000CC6F /* OldNumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFCF8A1BF2301E0000CC6F /* OldNumberPadViewController.m */; };
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; };
@@ -208,17 +206,15 @@
 		C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TwoStepCallingViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C43E92961BC400F900BC622B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C43E92971BC400F900BC622B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		C461836B1BF9D9500075709B /* RecentCallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCallManager.h; sourceTree = "<group>"; };
+		C461836C1BF9D9500075709B /* RecentCallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallManager.m; sourceTree = "<group>"; };
+		C46183701BF9FB120075709B /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
+		C46183711BF9FB120075709B /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
+		C461837C1BFA24660075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RecentsStoryboard.storyboard; sourceTree = "<group>"; };
+		C461837E1BFA24850075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CallingStoryboard.storyboard; sourceTree = "<group>"; };
 		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
-		C46743071BF726AA0032D77B /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
-		C46743081BF726AA0032D77B /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
-		C46743091BF726AA0032D77B /* RecentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentsViewController.xib; sourceTree = "<group>"; };
 		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
-		C467430C1BF726AA0032D77B /* SelectRecentsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRecentsFilterViewController.h; sourceTree = "<group>"; };
-		C467430D1BF726AA0032D77B /* SelectRecentsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRecentsFilterViewController.m; sourceTree = "<group>"; };
-		C467430E1BF726AA0032D77B /* SelectRecentsFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectRecentsFilterViewController.xib; sourceTree = "<group>"; };
-		C47481991BF5CAAF00EA8672 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
-		C474819B1BF5CAB300EA8672 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = nl; path = nl.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
@@ -227,6 +223,12 @@
 		C48752711BF1F51900B8B42B /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
+		C4BF69E71BFA24B000AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69EA1BFA2A2E00AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69EC1BFA2A3000AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
+		C4BF69F51BFA2D8700AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C4CEAB421BCE933000A56FC2 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		C4CEAB431BCE933000A56FC2 /* GAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAITracker.m; sourceTree = "<group>"; };
@@ -237,10 +239,7 @@
 		C4E860131BF14D960051BFDE /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
 		C4E860141BF14D960051BFDE /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
 		C4EFCF751BF21C690000CC6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
-		C4EFCF811BF21E210000CC6F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/CallingStoryboard.storyboard; sourceTree = "<group>"; };
 		C4EFCF861BF21E520000CC6F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
-		C4EFCF871BF22C850000CC6F /* ExtendedNavbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedNavbarView.h; sourceTree = "<group>"; };
-		C4EFCF881BF22C850000CC6F /* ExtendedNavbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedNavbarView.m; sourceTree = "<group>"; };
 		C4EFCF8A1BF2301E0000CC6F /* OldNumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldNumberPadViewController.m; sourceTree = "<group>"; };
 		C4EFCF8B1BF2301E0000CC6F /* OldNumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldNumberPadViewController.h; sourceTree = "<group>"; };
 		C4F49F271BF0B45700C25159 /* VialerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,12 +509,10 @@
 		C46743141BF726DC0032D77B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C46743071BF726AA0032D77B /* RecentsViewController.h */,
-				C46743081BF726AA0032D77B /* RecentsViewController.m */,
-				C46743091BF726AA0032D77B /* RecentsViewController.xib */,
-				C467430C1BF726AA0032D77B /* SelectRecentsFilterViewController.h */,
-				C467430D1BF726AA0032D77B /* SelectRecentsFilterViewController.m */,
-				C467430E1BF726AA0032D77B /* SelectRecentsFilterViewController.xib */,
+				C46183701BF9FB120075709B /* RecentsViewController.h */,
+				C46183711BF9FB120075709B /* RecentsViewController.m */,
+				C467430A1BF726AA0032D77B /* RecentTableViewCell.h */,
+				C467430B1BF726AA0032D77B /* RecentTableViewCell.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -523,11 +520,8 @@
 		C4CEAB3E1BCE794600A56FC2 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
+				C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */,
 				C46743141BF726DC0032D77B /* Controllers */,
-				C467430A1BF726AA0032D77B /* RecentTableViewCell.h */,
-				C467430B1BF726AA0032D77B /* RecentTableViewCell.m */,
-				C4EFCF871BF22C850000CC6F /* ExtendedNavbarView.h */,
-				C4EFCF881BF22C850000CC6F /* ExtendedNavbarView.m */,
 				C4CEAB401BCE7C0800A56FC2 /* Models */,
 			);
 			name = Recents;
@@ -567,6 +561,8 @@
 			children = (
 				FBAFB3F51834250500848B2E /* RecentCall.h */,
 				FBAFB3F61834250500848B2E /* RecentCall.m */,
+				C461836B1BF9D9500075709B /* RecentCallManager.h */,
+				C461836C1BF9D9500075709B /* RecentCallManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1014,6 +1010,7 @@
 				C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */,
 				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
 				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
+				C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
 				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
@@ -1025,7 +1022,6 @@
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
 				F919B9E01BA81B430082AD79 /* AvailabilityViewController.xib in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
-				C46743131BF726AA0032D77B /* SelectRecentsFilterViewController.xib in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
 				F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */,
@@ -1037,7 +1033,6 @@
 				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
 				F245E7711B577AD100FBA37C /* Config.plist in Resources */,
 				C4EFCF801BF21E210000CC6F /* CallingStoryboard.storyboard in Resources */,
-				C46743101BF726AA0032D77B /* RecentsViewController.xib in Resources */,
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
@@ -1197,7 +1192,7 @@
 			files = (
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
 				FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */,
-				C467430F1BF726AA0032D77B /* RecentsViewController.m in Sources */,
+				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
 				C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */,
 				FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */,
 				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
@@ -1214,6 +1209,7 @@
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */,
 				FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */,
+				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
 				C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */,
 				C43E92981BC400F900BC622B /* RootViewController.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
@@ -1234,7 +1230,6 @@
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
 				FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */,
 				C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */,
-				C46743121BF726AA0032D77B /* SelectRecentsFilterViewController.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */,
 				C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */,
@@ -1250,7 +1245,6 @@
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
-				C4EFCF891BF22C850000CC6F /* ExtendedNavbarView.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
@@ -1277,6 +1271,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C461837C1BFA24660075709B /* Base */,
+				C4BF69EA1BFA2A2E00AA81AD /* en */,
+				C4BF69EC1BFA2A3000AA81AD /* nl */,
+			);
+			name = RecentsStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1289,8 +1293,9 @@
 		C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C47481991BF5CAAF00EA8672 /* en */,
-				C474819B1BF5CAB300EA8672 /* nl */,
+				C4BF69ED1BFA2C6F00AA81AD /* Base */,
+				C4BF69F51BFA2D8700AA81AD /* en */,
+				C4BF69F71BFA2D8D00AA81AD /* nl */,
 			);
 			name = ContactsStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1298,8 +1303,9 @@
 		C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C4EFCF811BF21E210000CC6F /* en */,
 				C4EFCF861BF21E520000CC6F /* nl */,
+				C461837E1BFA24850075709B /* Base */,
+				C4BF69E71BFA24B000AA81AD /* en */,
 			);
 			name = CallingStoryboard.storyboard;
 			sourceTree = "<group>";

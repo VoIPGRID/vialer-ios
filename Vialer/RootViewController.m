@@ -107,29 +107,21 @@ static float const RootViewControllerShadowOpacity = 0.5f;
 
 - (UINavigationController *)contactsNavigationViewController {
     if(!_contactsNavigationViewController) {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ContactsStoryboard" bundle:nil];
-        _contactsNavigationViewController = [sb instantiateViewControllerWithIdentifier:@"ContactsNavigationViewController"];
+        _contactsNavigationViewController = [[UIStoryboard storyboardWithName:@"ContactsStoryboard" bundle:nil] instantiateInitialViewController];
     }
     return _contactsNavigationViewController;
 }
 
 - (UINavigationController *)dialerNavigationController {
     if (!_dialerNavigationController) {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CallingStoryboard" bundle:nil];
-        UIViewController *dialerViewController = [sb instantiateViewControllerWithIdentifier:@"DailerViewController"];
-        _dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
-        _dialerNavigationController.navigationBar.translucent = NO;
+        _dialerNavigationController = [[UIStoryboard storyboardWithName:@"CallingStoryboard" bundle:nil] instantiateInitialViewController];
     }
     return _dialerNavigationController;
 }
 
 - (UINavigationController *)recentsNavigationViewController {
     if (!_recentsNavigationViewController) {
-        UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
-        recentsViewController.view.backgroundColor = [UIColor clearColor];
-        _recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
-        _recentsNavigationViewController.navigationBar.translucent = NO;
-
+        _recentsNavigationViewController = [[UIStoryboard storyboardWithName:@"RecentsStoryboard" bundle:nil] instantiateInitialViewController];
     }
     return _recentsNavigationViewController;
 }

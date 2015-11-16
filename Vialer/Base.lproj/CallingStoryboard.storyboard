@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yxi-SJ-vi0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -10,7 +10,7 @@
         <!--Dialer View Controller-->
         <scene sceneID="L3G-nM-XRV">
             <objects>
-                <viewController storyboardIdentifier="DailerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYx-5X-82c" customClass="DialerViewController" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYx-5X-82c" customClass="DialerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bIK-Mu-L7W"/>
                         <viewControllerLayoutGuide type="bottom" id="Krn-1p-wH9"/>
@@ -116,6 +116,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="zim-dP-naY">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="Dwq-UY-NbK">
+                            <connections>
+                                <action selector="leftDrawerButtonPress:" destination="FYx-5X-82c" id="SU9-zn-YfC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="callButton" destination="fQq-Gl-ZNQ" id="q5t-qm-1k5"/>
                         <outlet property="deleteButton" destination="Hbs-mW-Umr" id="8uS-ZV-xLn"/>
@@ -129,7 +136,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="545" y="562"/>
+            <point key="canvasLocation" x="1357" y="562"/>
         </scene>
         <!--Number Pad View Controller-->
         <scene sceneID="sm1-hv-xNh">
@@ -359,7 +366,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1359" y="487"/>
+            <point key="canvasLocation" x="2171" y="487"/>
         </scene>
         <!--Reachability Bar View Controller-->
         <scene sceneID="Sdr-k0-RwZ">
@@ -428,7 +435,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAT-kX-8ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="600" y="31"/>
+            <point key="canvasLocation" x="2159" y="69"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wPM-ku-ZcD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yxi-SJ-vi0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o9U-kD-7LI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FYx-5X-82c" kind="relationship" relationship="rootViewController" id="9Iu-kM-vSu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="soa-v0-mzt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="545" y="562"/>
         </scene>
     </scenes>
     <resources>
@@ -436,5 +462,6 @@
         <image name="inactive-phone" width="258" height="55"/>
         <image name="keypad-back" width="23" height="16"/>
         <image name="keypad-back-highlighted" width="23" height="16"/>
+        <image name="menu" width="25" height="20"/>
     </resources>
 </document>

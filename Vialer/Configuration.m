@@ -35,6 +35,7 @@ NSString * const ConfigurationRecentsSegmentedControlTintColor = @"RecentsSegmen
 NSString * const ConfigurationContactsTableSectionIndexColor = @"ContactsTableSectionIndexColor";
 NSString * const ConfigurationNumberPadButtonTextColor = @"NumberPadButtonTextColor";
 NSString * const ConfigurationNumberPadButtonPressedColor = @"NumberPadButtonPressedColor";
+NSString * const ConfigurationRecentsFilterControlTintColor = @"RecentsFilterControlTintColor";
 
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
