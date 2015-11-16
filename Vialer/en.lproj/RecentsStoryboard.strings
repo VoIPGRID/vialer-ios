@@ -2,9 +2,6 @@
 /* Class = "UIViewController"; title = "Recents"; ObjectID = "0f0-Ph-M40"; */
 "0f0-Ph-M40.title" = "Recents";
 
-/* Class = "UINavigationItem"; title = "Recents"; ObjectID = "Wd2-lC-0lo"; */
-"Wd2-lC-0lo.title" = "Recents";
-
 /* Class = "UILabel"; text = "No recent calls"; ObjectID = "g0W-t5-b0b"; */
 "g0W-t5-b0b.text" = "No recent calls";
 

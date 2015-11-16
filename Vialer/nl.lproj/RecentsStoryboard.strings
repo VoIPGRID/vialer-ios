@@ -1,18 +1,15 @@
 
 /* Class = "UIViewController"; title = "Recents"; ObjectID = "0f0-Ph-M40"; */
-"0f0-Ph-M40.title" = "Recents";
-
-/* Class = "UINavigationItem"; title = "Recents"; ObjectID = "Wd2-lC-0lo"; */
-"Wd2-lC-0lo.title" = "Recents";
+"0f0-Ph-M40.title" = "Recent";
 
 /* Class = "UILabel"; text = "No recent calls"; ObjectID = "g0W-t5-b0b"; */
-"g0W-t5-b0b.text" = "No recent calls";
+"g0W-t5-b0b.text" = "Geen recente gesprekken";
 
 /* Class = "UILabel"; text = "No missed calls"; ObjectID = "pk2-hb-LTS"; */
-"pk2-hb-LTS.text" = "No missed calls";
+"pk2-hb-LTS.text" = "Geen gemiste gesprekken";
 
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[0] = "All"; ObjectID = "rDx-8g-SbK"; */
-"rDx-8g-SbK.segmentTitles[0]" = "All";
+"rDx-8g-SbK.segmentTitles[0]" = "Alle";
 
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[1] = "Missed"; ObjectID = "rDx-8g-SbK"; */
-"rDx-8g-SbK.segmentTitles[1]" = "Missed";
+"rDx-8g-SbK.segmentTitles[1]" = "Gemiste";

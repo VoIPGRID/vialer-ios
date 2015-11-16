@@ -223,9 +223,9 @@
 		C48752711BF1F51900B8B42B /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
+		C4A33BDC1BFA6AD5004C59DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C4A33BDE1BFA6AD8004C59DE /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
 		C4BF69E71BFA24B000AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
-		C4BF69EA1BFA2A2E00AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
-		C4BF69EC1BFA2A3000AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
 		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4BF69F51BFA2D8700AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
@@ -1275,8 +1275,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C461837C1BFA24660075709B /* Base */,
-				C4BF69EA1BFA2A2E00AA81AD /* en */,
-				C4BF69EC1BFA2A3000AA81AD /* nl */,
+				C4A33BDC1BFA6AD5004C59DE /* en */,
+				C4A33BDE1BFA6AD8004C59DE /* nl */,
 			);
 			name = RecentsStoryboard.storyboard;
 			sourceTree = "<group>";
