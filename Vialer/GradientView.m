@@ -8,9 +8,7 @@
 
 #import "GradientView.h"
 
-@interface GradientView ()
-
-@end
+#import "Configuration.h"
 
 @implementation GradientView
 
@@ -31,20 +29,15 @@
 }
 
 - (void)initFromConfig {
-    NSDictionary *background = [[Configuration new] objectInConfigKeyed:@"Tint colors", @"Background", nil];
-    NSAssert(background != nil, @"Tint colors - Backround not found in Config.plist!");
+    NSDictionary *background = [Configuration tintColorDictionaryForKey:ConfigurationGradientBackgroundColors];
 
-    NSArray *gradientStartColor = [background objectForKey:@"GradientStart"];
-    NSAssert(gradientStartColor != nil && gradientStartColor.count == 3, @"Tint colors - Backround - GradientStart not found in Config.plist!");
+    NSArray *gradientStartColor = [background objectForKey:ConfigurationGradientViewGradientStart];
+    self.startColor = [Configuration colorFromArray:gradientStartColor];
 
-    NSArray *gradientEndColor = [background objectForKey:@"GradientEnd"];
-    NSAssert(gradientEndColor != nil && gradientEndColor.count == 3, @"Tint colors - Backround - GradientEnd not found in Config.plist!");
+    NSArray *gradientEndColor = [background objectForKey:ConfigurationGradientViewGradientEnd];
+    self.endColor = [Configuration colorFromArray:gradientEndColor];
 
-    NSNumber *gradientAngle = [background objectForKey:@"GradientAngle"];
-    NSAssert(gradientAngle != nil, @"Tint colors - Backround - GradientAngle not found in Config.plist!");
-
-    self.startColor = [UIColor colorWithRed:[gradientStartColor[0] intValue] / 255.f green:[gradientStartColor[1] intValue] / 255.f blue:[gradientStartColor[2] intValue] / 255.f alpha:1.f];
-    self.endColor = [UIColor colorWithRed:[gradientEndColor[0] intValue] / 255.f green:[gradientEndColor[1] intValue] / 255.f blue:[gradientEndColor[2] intValue] / 255.f alpha:1.f];
+    NSNumber *gradientAngle = [background objectForKey:ConfigurationGradientViewGradientAngle];
     self.angle = [gradientAngle floatValue];
 }
 

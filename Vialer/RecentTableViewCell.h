@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "RecentCall.h"
+
 @interface RecentTableViewCell : UITableViewCell
-@property (nonatomic, readonly) UIImageView *iconImageView;
-@property (nonatomic, readonly) UILabel *nameLabel;
-@property (nonatomic, readonly) UILabel *descriptionLabel;
-@property (nonatomic, readonly) UILabel *dateTimeLabel;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *subtitle;
+@property (strong, nonatomic) NSString *date;
+@property (nonatomic) CallDirection callDirection;
+@property (nonatomic) BOOL answered;
 @end

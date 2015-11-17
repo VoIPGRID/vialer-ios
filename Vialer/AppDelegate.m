@@ -6,25 +6,24 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
-
 #import "AppDelegate.h"
 
-#import "AFNetworkActivityLogger.h"
-#import "AFNetworkReachabilityManager.h"
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
-#import "GAIFields.h"
-#import "Gossip+Extra.h"
-#import "SSKeychain.h"
-#import "UIAlertView+Blocks.h"
-
 #import "ConnectionHandler.h"
+#import "GAITracker.h"
+#import "Gossip+Extra.h"
 #import "LogInViewController.h"
 #import "PZPushMiddleware.h"
 #import "RootViewController.h"
 #import "SystemUser.h"
+#import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
+
+#import <AVFoundation/AVFoundation.h>
+
+#import "AFNetworkActivityLogger.h"
+#import "AFNetworkReachabilityManager.h"
+#import "SSKeychain.h"
+
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
@@ -40,10 +39,9 @@
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-    [self setupGoogleAnalytics];
+    [GAITracker setupGAITracker];
     [self setupConnectivity];
-    [self setupAppearance];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
@@ -56,17 +54,6 @@
 }
 
 #pragma mark - setup helper methods
-- (void)setupGoogleAnalytics {
-    // Google Analytics
-    [[GAI sharedInstance] trackerWithTrackingId:[[Configuration new] objectInConfigKeyed:@"Tokens", @"Google Analytics", nil]];
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    // Set an additional dimensionValue for different brands.
-    [[GAI sharedInstance].defaultTracker set:[GAIFields customDimensionForIndex:1] value:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
-
-#ifdef DEBUG
-    [GAI sharedInstance].dryRun = YES;    // NOTE: Set to YES to disable tracking
-#endif
-}
 
 - (void)setupConnectivity {
 #ifdef DEBUG
@@ -75,25 +62,10 @@
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
 #endif
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
-    [[ConnectionHandler sharedConnectionHandler] start];
-}
 
-- (void)setupAppearance {
-    Configuration *config = [Configuration new];
-
-    // Customize TabBar
-    [UITabBar appearance].tintColor = [config tintColorForKey:kTintColorTabBar];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:kTintColorTabBar]];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [UITabBar appearance].barTintColor = [UIColor colorWithRed:(247 / 255.f) green:(247 / 255.f) blue:(247 / 255.f) alpha:1.f];
-    }
-
-    // Customize NavigationBar
-    [UINavigationBar appearance].tintColor = [config tintColorForKey:kTintColorNavigationBar];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:(248 / 255.f) green:(248 / 255.f) blue:(248 / 255.f) alpha:1.f];
-    }
+    // TODO: fix SIP
+//    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
+//    [[ConnectionHandler sharedConnectionHandler] start];
 }
 
 - (void)setupLogin {
@@ -110,8 +82,9 @@
     } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
         //Also show the Mobile number onboarding screen
         [self showOnboarding:OnboardingScreenConfigure];
-    } else {
-        [[SystemUser currentUser] checkSipStatus];
+// TODO: fix SIP
+//    } else {
+//        [[SystemUser currentUser] checkSipStatus];
     }
 }
 
@@ -121,6 +94,13 @@
         _rootViewController = [[RootViewController alloc] init];
     }
     return _rootViewController;
+}
+
+- (LogInViewController *)loginViewController {
+    if (!_loginViewController) {
+        _loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
+    }
+    return _loginViewController;
 }
 
 #pragma mark - UIApplication notification delegate
@@ -236,15 +216,16 @@ void HandleExceptions(NSException *exception) {
 - (void)showOnboarding:(OnboardingScreens)screenToShow {
     // Check if the loginViewController is created, and if present
     NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
-    if (self.loginViewController == nil || !self.loginViewController.presentingViewController) {
-        // Create a new instance, and present it.
-        self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-        if (!self.loginViewController.presentingViewController) {
-            self.loginViewController.screenToShow = screenToShow;
-            self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            // Set animated to NO to prevent a flip to the login/onboarding view.
-            [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+    if (!self.loginViewController.presentingViewController) {
+        self.loginViewController.screenToShow = screenToShow;
+        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+        // Make sure we have the current presenting viewcontroller.
+        UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topRootViewController.presentedViewController) {
+            topRootViewController = topRootViewController.presentedViewController;
         }
+        [topRootViewController presentViewController:self.loginViewController animated:YES completion:nil];
     }
 }
 

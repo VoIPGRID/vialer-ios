@@ -8,29 +8,50 @@
 
 /* Begin PBXBuildFile section */
 		03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */; };
-		03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */; };
 		03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */; };
+		0C9D4760F8A17E2B466B7DE8 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */; };
+		0CA10D22294F86BC076328EA /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
-		3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2F64151AE8F802003F7697 /* ConfigTextField.m */; };
 		3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
 		3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4787371AEA5FC1002420FA /* VIASlider.m */; };
 		3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD6E6F51B32FF070033692B /* PZPushMiddleware.m */; };
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
-		AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8048A41ABC2B2400B62B0C /* ContactHandler.m */; };
-		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; settings = {ASSET_TAGS = (); }; };
-		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
+		C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926351BE3A36600436D92 /* BubblingPoints.m */; };
+		C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
+		C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */; };
+		C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C419263B1BE3A36600436D92 /* ColoredCircle.m */; };
+		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
+		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
+		C43E92981BC400F900BC622B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43E92971BC400F900BC622B /* RootViewController.m */; };
+		C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C461836C1BF9D9500075709B /* RecentCallManager.m */; };
+		C46183721BF9FB120075709B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
+		C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
+		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
+		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
+		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
+		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
+		C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48752711BF1F51900B8B42B /* ReachabilityManager.m */; };
+		C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */; };
+		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
+		C4BFEA621BDFD50100D616A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */; };
+		C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
+		C4E860161BF14D960051BFDE /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E8600E1BF14D960051BFDE /* DialerViewController.m */; };
+		C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860121BF14D960051BFDE /* NumberPadViewController.m */; };
+		C4E860191BF14D960051BFDE /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860141BF14D960051BFDE /* PasteableUILabel.m */; };
+		C4EFCF801BF21E210000CC6F /* CallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */; };
+		C4EFCF8C1BF2301E0000CC6F /* OldNumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFCF8A1BF2301E0000CC6F /* OldNumberPadViewController.m */; };
+		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
+		C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
-		F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */; };
-		F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2900B531B1DD36000E695FB /* ContactTableViewCell.m */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */; };
 		F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
@@ -38,22 +59,18 @@
 		F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */; };
 		F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811CB1B380A9400EA640F /* CellWithTextField.m */; };
 		F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811CC1B380A9400EA640F /* CellWithTextField.xib */; };
-		F854B6A37CF0558FC0FCF27A /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C415953F343DAA413EE2882E /* libPods-Vialer.a */; };
 		F919B9E01BA81B430082AD79 /* AvailabilityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F919B9DE1BA81B430082AD79 /* AvailabilityViewController.xib */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
-		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; settings = {ASSET_TAGS = (); }; };
+		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
+		F99856951BDF85590005253B /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
+		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB10B11C1ABC18310074BB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
 		FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB202BC01A4396DB00024CDE /* ConnectionHandler.m */; };
 		FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
-		FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */; };
-		FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */; };
 		FB29D913189BA0FF00345976 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		FB302E5E182A38E5004B7D27 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
 		FB302E5F182A38E5004B7D27 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
-		FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB302E61182A390E004B7D27 /* ContactsViewController.m */; };
-		FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB364D0D18367F0700932D6E /* DialerViewController.m */; };
-		FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB364D0E18367F0700932D6E /* DialerViewController.xib */; };
 		FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
 		FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
 		FB3820D61A1E50F10033FF78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
@@ -66,28 +83,19 @@
 		FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
 		FB4226DD182261D200707349 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
 		FB4226E1182261D200707349 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
-		FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */; };
-		FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */; };
 		FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
 		FB503173183527BE006FEBAA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB503172183527BE006FEBAA /* libz.dylib */; };
-		FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB576B11182A802200C4FAB4 /* RecentsViewController.m */; };
-		FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB576B12182A802200C4FAB4 /* RecentsViewController.xib */; };
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
 		FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
-		FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
 		FB6B47711ABC190700B0DBC4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */; };
 		FB6B47DE1ABC277600B0DBC4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */; };
-		FB6B47E11ABC280200B0DBC4 /* TrackedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6B47E01ABC280200B0DBC4 /* TrackedViewController.m */; };
 		FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
-		FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB89C75B1850C153006A4556 /* CallingViewController.m */; };
-		FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB89C75C1850C153006A4556 /* CallingViewController.xib */; };
 		FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */; };
 		FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */; };
 		FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */; };
 		FBAFB3F71834250500848B2E /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3F61834250500848B2E /* RecentCall.m */; };
-		FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */; };
 		FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
 		FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
 		FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
@@ -103,25 +111,22 @@
 		FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */; };
 		FBB854291A7FE67300121366 /* incoming.caf in Resources */ = {isa = PBXBuildFile; fileRef = FBB854101A7FE24C00121366 /* incoming.caf */; };
 		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
-		FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC8622199BA2C600060261 /* PasteableTextView.m */; };
-		FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */; };
-		FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */; };
 		FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */; };
 		FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */; };
 		FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBE564F81A954EAD002C6DF3 /* incoming.wav */; };
 		FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */; };
-		FE0E5C901BBE848800243577 /* GSAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A71A1E4F510033FF78 /* GSAccount.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A91A1E4F510033FF78 /* GSAccountConfiguration.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C921BBE848800243577 /* GSCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AC1A1E4F510033FF78 /* GSCall.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C931BBE848800243577 /* GSCodecInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AF1A1E4F510033FF78 /* GSCodecInfo.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B11A1E4F510033FF78 /* GSConfiguration.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B31A1E4F510033FF78 /* GSDispatch.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B51A1E4F510033FF78 /* GSIncomingCall.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C971BBE848800243577 /* GSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B71A1E4F510033FF78 /* GSNotifications.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B91A1E4F510033FF78 /* GSOutgoingCall.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BB1A1E4F510033FF78 /* GSPJUtil.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BD1A1E4F510033FF78 /* GSRingback.m */; settings = {ASSET_TAGS = (); }; };
-		FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820C01A1E4F510033FF78 /* GSUserAgent.m */; settings = {ASSET_TAGS = (); }; };
+		FE0E5C901BBE848800243577 /* GSAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A71A1E4F510033FF78 /* GSAccount.m */; };
+		FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820A91A1E4F510033FF78 /* GSAccountConfiguration.m */; };
+		FE0E5C921BBE848800243577 /* GSCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AC1A1E4F510033FF78 /* GSCall.m */; };
+		FE0E5C931BBE848800243577 /* GSCodecInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820AF1A1E4F510033FF78 /* GSCodecInfo.m */; };
+		FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B11A1E4F510033FF78 /* GSConfiguration.m */; };
+		FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B31A1E4F510033FF78 /* GSDispatch.m */; };
+		FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B51A1E4F510033FF78 /* GSIncomingCall.m */; };
+		FE0E5C971BBE848800243577 /* GSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B71A1E4F510033FF78 /* GSNotifications.m */; };
+		FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820B91A1E4F510033FF78 /* GSOutgoingCall.m */; };
+		FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BB1A1E4F510033FF78 /* GSPJUtil.m */; };
+		FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820BD1A1E4F510033FF78 /* GSRingback.m */; };
+		FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3820C01A1E4F510033FF78 /* GSUserAgent.m */; };
 		FE2523B31B84896600CF5C22 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE2523B21B84896600CF5C22 /* ringback.wav */; };
 		FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3423EE1B822D59005020BA /* Vialer.xcassets */; };
 		FEABD67F1B9739830093A877 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEABD67E1B9739830093A877 /* libpjsip.a */; };
@@ -129,6 +134,16 @@
 		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C4E8600B1BF14C970051BFDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB4226CC182261D200707349;
+			remoteInfo = Vialer;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */ = {
@@ -146,23 +161,18 @@
 /* Begin PBXFileReference section */
 		03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewCell.h; sourceTree = "<group>"; };
 		03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewCell.m; sourceTree = "<group>"; };
-		03C8589C1AD370A5009CD05C /* ExtendedNavBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedNavBarView.h; sourceTree = "<group>"; };
-		03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedNavBarView.m; sourceTree = "<group>"; };
 		03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
-		047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
 		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
 		3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
-		3D2F64141AE8F802003F7697 /* ConfigTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTextField.h; sourceTree = "<group>"; };
-		3D2F64151AE8F802003F7697 /* ConfigTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTextField.m; sourceTree = "<group>"; };
+		3D4356954652C7C86D242982 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D44303A1AEF67D50034156F /* AnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedImageView.h; sourceTree = "<group>"; };
 		3D44303B1AEF67D50034156F /* AnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedImageView.m; sourceTree = "<group>"; };
 		3D44303D1AEF8E1B0034156F /* VIAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIAScene.h; sourceTree = "<group>"; };
 		3D44303E1AEF8E1B0034156F /* VIAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIAScene.m; sourceTree = "<group>"; };
-		3D4787361AEA5FC1002420FA /* VIASlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIASlider.h; sourceTree = "<group>"; };
-		3D4787371AEA5FC1002420FA /* VIASlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIASlider.m; sourceTree = "<group>"; };
 		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
 		3DD6E6F41B32FF070033692B /* PZPushMiddleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZPushMiddleware.h; sourceTree = "<group>"; };
@@ -173,13 +183,70 @@
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
 		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		AA8048A31ABC2B2400B62B0C /* ContactHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactHandler.h; sourceTree = "<group>"; };
-		AA8048A41ABC2B2400B62B0C /* ContactHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactHandler.m; sourceTree = "<group>"; };
+		61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
+		62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		857A8A980F3D76D2294D82DA /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
-		C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
-		C415953F343DAA413EE2882E /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
+		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
+		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
+		C41926371BE3A36600436D92 /* CircleWithShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithShadow.m; sourceTree = "<group>"; };
+		C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithWhiteIcon.h; sourceTree = "<group>"; };
+		C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithWhiteIcon.m; sourceTree = "<group>"; };
+		C419263A1BE3A36600436D92 /* ColoredCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircle.h; sourceTree = "<group>"; };
+		C419263B1BE3A36600436D92 /* ColoredCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircle.m; sourceTree = "<group>"; };
+		C41926421BE3A36600436D92 /* VialerIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerIconView.h; sourceTree = "<group>"; };
+		C41926431BE3A36600436D92 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
+		C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
+		C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TwoStepCallingViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C43E92961BC400F900BC622B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C43E92971BC400F900BC622B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		C461836B1BF9D9500075709B /* RecentCallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCallManager.h; sourceTree = "<group>"; };
+		C461836C1BF9D9500075709B /* RecentCallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallManager.m; sourceTree = "<group>"; };
+		C46183701BF9FB120075709B /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
+		C46183711BF9FB120075709B /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
+		C461837C1BFA24660075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RecentsStoryboard.storyboard; sourceTree = "<group>"; };
+		C461837E1BFA24850075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CallingStoryboard.storyboard; sourceTree = "<group>"; };
+		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
+		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
+		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
+		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
+		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
+		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
+		C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewController.m; sourceTree = "<group>"; };
+		C48752701BF1F51900B8B42B /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
+		C48752711BF1F51900B8B42B /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
+		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
+		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
+		C4BF69E71BFA24B000AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69EA1BFA2A2E00AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69EC1BFA2A3000AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
+		C4BF69F51BFA2D8700AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
+		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
+		C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C4CEAB421BCE933000A56FC2 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		C4CEAB431BCE933000A56FC2 /* GAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAITracker.m; sourceTree = "<group>"; };
+		C4E8600D1BF14D960051BFDE /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
+		C4E8600E1BF14D960051BFDE /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
+		C4E860111BF14D960051BFDE /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
+		C4E860121BF14D960051BFDE /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
+		C4E860131BF14D960051BFDE /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
+		C4E860141BF14D960051BFDE /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
+		C4EFCF751BF21C690000CC6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
+		C4EFCF861BF21E520000CC6F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
+		C4EFCF8A1BF2301E0000CC6F /* OldNumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldNumberPadViewController.m; sourceTree = "<group>"; };
+		C4EFCF8B1BF2301E0000CC6F /* OldNumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldNumberPadViewController.h; sourceTree = "<group>"; };
+		C4F49F271BF0B45700C25159 /* VialerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4F49F2B1BF0B45700C25159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallTests.m; sourceTree = "<group>"; };
+		C4F49F341BF0C0FE00C25159 /* libPods-VialerTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-VialerTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-VialerTests.a"; sourceTree = "<group>"; };
+		C4F49F361BF0C13400C25159 /* libPods-Vialer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Vialer.a"; path = "Pods/../build/Debug-iphoneos/libPods-Vialer.a"; sourceTree = "<group>"; };
 		C4FCC60A1BB925500013689F /* SideMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuHeaderView.h; sourceTree = "<group>"; };
 		C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuHeaderView.m; sourceTree = "<group>"; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
@@ -187,10 +254,6 @@
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsSearchTableViewController.h; sourceTree = "<group>"; };
-		F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsSearchTableViewController.m; sourceTree = "<group>"; };
-		F2900B521B1DD36000E695FB /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
-		F2900B531B1DD36000E695FB /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -203,28 +266,24 @@
 		F2E811CB1B380A9400EA640F /* CellWithTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithTextField.m; sourceTree = "<group>"; };
 		F2E811CC1B380A9400EA640F /* CellWithTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithTextField.xib; sourceTree = "<group>"; };
 		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewController.h; sourceTree = "<group>"; };
-		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityViewController.m; sourceTree = "<group>"; };
+		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F919B9DE1BA81B430082AD79 /* AvailabilityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvailabilityViewController.xib; sourceTree = "<group>"; };
 		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityModel.h; sourceTree = "<group>"; };
 		F919B9E21BA856F60082AD79 /* AvailabilityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModel.m; sourceTree = "<group>"; };
+		F94F47CD1BCB9FF300F40737 /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
+		F94F47CE1BCB9FF300F40737 /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
+		F99856931BDF85590005253B /* ContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtils.h; sourceTree = "<group>"; };
+		F99856941BDF85590005253B /* ContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtils.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
 		FB10B11A1ABC17900074BB78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionHandler.h; sourceTree = "<group>"; };
 		FB202BC01A4396DB00024CDE /* ConnectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionHandler.m; sourceTree = "<group>"; };
 		FB21E03F1A3B48D800AE746B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCarouselViewController.h; sourceTree = "<group>"; };
-		FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCarouselViewController.m; sourceTree = "<group>"; };
-		FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoCarouselViewController.xib; sourceTree = "<group>"; };
 		FB29D912189BA0FF00345976 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB29D914189BA10200345976 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB302E5C182A38E5004B7D27 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		FB302E60182A390E004B7D27 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
-		FB302E61182A390E004B7D27 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
-		FB364D0C18367F0700932D6E /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
-		FB364D0D18367F0700932D6E /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
-		FB364D0E18367F0700932D6E /* DialerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DialerViewController.xib; sourceTree = "<group>"; };
 		FB3820A41A1E4F510033FF78 /* Gossip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gossip.h; sourceTree = "<group>"; };
 		FB3820A51A1E4F510033FF78 /* GSAccount+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSAccount+Private.h"; sourceTree = "<group>"; };
 		FB3820A61A1E4F510033FF78 /* GSAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSAccount.h; sourceTree = "<group>"; };
@@ -274,29 +333,16 @@
 		FB4226DE182261D200707349 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		FB4226DF182261D200707349 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB4226E0182261D200707349 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectRecentsFilterViewController.xib; sourceTree = "<group>"; };
-		FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRecentsFilterViewController.h; sourceTree = "<group>"; };
-		FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRecentsFilterViewController.m; sourceTree = "<group>"; };
 		FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Mobile.h"; sourceTree = "<group>"; };
 		FB48BB401875B63700C0D5DB /* NSString+Mobile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Mobile.m"; sourceTree = "<group>"; };
 		FB503172183527BE006FEBAA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		FB576B10182A802200C4FAB4 /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
-		FB576B11182A802200C4FAB4 /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
-		FB576B12182A802200C4FAB4 /* RecentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentsViewController.xib; sourceTree = "<group>"; };
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RelativeDate.h"; sourceTree = "<group>"; };
 		FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RelativeDate.m"; sourceTree = "<group>"; };
-		FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedNumberPadViewController.h; sourceTree = "<group>"; };
-		FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedNumberPadViewController.m; sourceTree = "<group>"; };
 		FB64313F182281C500E1BF17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FB6B47701ABC190700B0DBC4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		FB6B47DF1ABC280200B0DBC4 /* TrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackedViewController.h; sourceTree = "<group>"; };
-		FB6B47E01ABC280200B0DBC4 /* TrackedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackedViewController.m; sourceTree = "<group>"; };
 		FB853165183986A5008A7EF1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		FB89C75A1850C153006A4556 /* CallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallingViewController.h; sourceTree = "<group>"; };
-		FB89C75B1850C153006A4556 /* CallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallingViewController.m; sourceTree = "<group>"; };
-		FB89C75C1850C153006A4556 /* CallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallingViewController.xib; sourceTree = "<group>"; };
 		FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
 		FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPCallingViewController.xib; sourceTree = "<group>"; };
@@ -305,8 +351,6 @@
 		FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FBAFB3F51834250500848B2E /* RecentCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCall.h; sourceTree = "<group>"; };
 		FBAFB3F61834250500848B2E /* RecentCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCall.m; sourceTree = "<group>"; };
-		FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
-		FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
 		FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FBB854101A7FE24C00121366 /* incoming.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incoming.caf; sourceTree = "<group>"; };
 		FBB854111A7FE3CE00121366 /* dtmf-#.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-#.aif"; sourceTree = "<group>"; };
@@ -322,30 +366,31 @@
 		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
 		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
-		FBBC8621199BA2C600060261 /* PasteableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableTextView.h; sourceTree = "<group>"; };
-		FBBC8622199BA2C600060261 /* PasteableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableTextView.m; sourceTree = "<group>"; };
-		FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
-		FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
-		FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedLabel.h; sourceTree = "<group>"; };
-		FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedLabel.m; sourceTree = "<group>"; };
 		FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingViewController.h; sourceTree = "<group>"; };
 		FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingViewController.m; sourceTree = "<group>"; };
 		FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIPIncomingViewController.xib; sourceTree = "<group>"; };
 		FBE564F81A954EAD002C6DF3 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gossip+Extra.h"; sourceTree = "<group>"; };
 		FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gossip+Extra.m"; sourceTree = "<group>"; };
-		FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		FE2523B21B84896600CF5C22 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		FE3423EE1B822D59005020BA /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Vialer.xcassets; path = Vialer/Vialer.xcassets; sourceTree = "<group>"; };
 		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
 		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		FEABD67E1B9739830093A877 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = pjsip/lib/libpjsip.a; sourceTree = "<group>"; };
-		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
-		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Configuration.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Configuration.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnected.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C4F49F241BF0B45700C25159 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C9D4760F8A17E2B466B7DE8 /* libPods-VialerTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4226CA182261D200707349 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -373,30 +418,24 @@
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
-				F854B6A37CF0558FC0FCF27A /* libPods-Vialer.a in Frameworks */,
+				0CA10D22294F86BC076328EA /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D1A5E601AE543BB00DBE64B /* Views */ = {
+		3D1A5E611AE543C000DBE64B /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
-				3D1A5E611AE543C000DBE64B /* Onboarding */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		3D1A5E611AE543C000DBE64B /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
+				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
+				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
+				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
 				3DE6EADF1AF24D0800C09935 /* Forms */,
-				3D4430411AEF8E330034156F /* General */,
 				3D4430401AEF8E290034156F /* Scene */,
 				3D4430391AEF67B70034156F /* Animated clouds */,
 			);
-			name = Onboarding;
+			name = Onboarding/Login;
 			sourceTree = "<group>";
 		};
 		3D4430391AEF67B70034156F /* Animated clouds */ = {
@@ -417,18 +456,6 @@
 			name = Scene;
 			sourceTree = "<group>";
 		};
-		3D4430411AEF8E330034156F /* General */ = {
-			isa = PBXGroup;
-			children = (
-				3D2F64141AE8F802003F7697 /* ConfigTextField.h */,
-				3D2F64151AE8F802003F7697 /* ConfigTextField.m */,
-				3D4787361AEA5FC1002420FA /* VIASlider.h */,
-				3D4787371AEA5FC1002420FA /* VIASlider.m */,
-				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
-			);
-			name = General;
-			sourceTree = "<group>";
-		};
 		3DE6EADF1AF24D0800C09935 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,14 +471,109 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		C01B88742FC628E4E890C190 /* Pods */ = {
+		752AD1FAE0F4299B6AF0D254 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */,
-				047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */,
-				FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */,
+				9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */,
+				9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */,
+				61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */,
+				ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */,
+				857A8A980F3D76D2294D82DA /* Pods-VialerTests.adhocdistribution.xcconfig */,
+				3D4356954652C7C86D242982 /* Pods-VialerTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C41926511BE3A67100436D92 /* TwoStep */ = {
+			isa = PBXGroup;
+			children = (
+				C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */,
+				C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */,
+				C41926341BE3A36600436D92 /* BubblingPoints.h */,
+				C41926351BE3A36600436D92 /* BubblingPoints.m */,
+				C41926361BE3A36600436D92 /* CircleWithShadow.h */,
+				C41926371BE3A36600436D92 /* CircleWithShadow.m */,
+				C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */,
+				C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */,
+				C419263A1BE3A36600436D92 /* ColoredCircle.h */,
+				C419263B1BE3A36600436D92 /* ColoredCircle.m */,
+				C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */,
+				C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */,
+				C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */,
+				C41926421BE3A36600436D92 /* VialerIconView.h */,
+				C41926431BE3A36600436D92 /* VialerIconView.m */,
+			);
+			name = TwoStep;
+			sourceTree = "<group>";
+		};
+		C46743141BF726DC0032D77B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C46183701BF9FB120075709B /* RecentsViewController.h */,
+				C46183711BF9FB120075709B /* RecentsViewController.m */,
+				C467430A1BF726AA0032D77B /* RecentTableViewCell.h */,
+				C467430B1BF726AA0032D77B /* RecentTableViewCell.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C4CEAB3E1BCE794600A56FC2 /* Recents */ = {
+			isa = PBXGroup;
+			children = (
+				C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */,
+				C46743141BF726DC0032D77B /* Controllers */,
+				C4CEAB401BCE7C0800A56FC2 /* Models */,
+			);
+			name = Recents;
+			sourceTree = "<group>";
+		};
+		C4CEAB3F1BCE7A5E00A56FC2 /* Calling */ = {
+			isa = PBXGroup;
+			children = (
+				C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */,
+				C4E8600D1BF14D960051BFDE /* DialerViewController.h */,
+				C4E8600E1BF14D960051BFDE /* DialerViewController.m */,
+				C4E860111BF14D960051BFDE /* NumberPadViewController.h */,
+				C4E860121BF14D960051BFDE /* NumberPadViewController.m */,
+				C487526A1BF1E00000B8B42B /* NumberPadButton.h */,
+				C487526B1BF1E00000B8B42B /* NumberPadButton.m */,
+				C4E860131BF14D960051BFDE /* PasteableUILabel.h */,
+				C4E860141BF14D960051BFDE /* PasteableUILabel.m */,
+				C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */,
+				C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */,
+				C48752701BF1F51900B8B42B /* ReachabilityManager.h */,
+				C48752711BF1F51900B8B42B /* ReachabilityManager.m */,
+				C41926511BE3A67100436D92 /* TwoStep */,
+				FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */,
+				FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */,
+				FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */,
+				FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */,
+				FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */,
+				FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */,
+				C4EFCF8A1BF2301E0000CC6F /* OldNumberPadViewController.m */,
+				C4EFCF8B1BF2301E0000CC6F /* OldNumberPadViewController.h */,
+			);
+			name = Calling;
+			sourceTree = "<group>";
+		};
+		C4CEAB401BCE7C0800A56FC2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FBAFB3F51834250500848B2E /* RecentCall.h */,
+				FBAFB3F61834250500848B2E /* RecentCall.m */,
+				C461836B1BF9D9500075709B /* RecentCallManager.h */,
+				C461836C1BF9D9500075709B /* RecentCallManager.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C4F49F281BF0B45700C25159 /* VialerTests */ = {
+			isa = PBXGroup;
+			children = (
+				C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */,
+				C4F49F2B1BF0B45700C25159 /* Info.plist */,
+			);
+			path = VialerTests;
 			sourceTree = "<group>";
 		};
 		C4FCC6091BB925380013689F /* Side Menu */ = {
@@ -459,10 +581,10 @@
 			children = (
 				C4FCC60A1BB925500013689F /* SideMenuHeaderView.h */,
 				C4FCC60B1BB925500013689F /* SideMenuHeaderView.m */,
-				03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */,
-				03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */,
 				03BEC52F1AE336F200FB1ACC /* SideMenuTableViewCell.h */,
 				03BEC5301AE336F200FB1ACC /* SideMenuTableViewCell.m */,
+				03F277D21ADFDEF200EBFC7D /* SideMenuViewController.h */,
+				03F277D31ADFDEF200EBFC7D /* SideMenuViewController.m */,
 			);
 			name = "Side Menu";
 			sourceTree = "<group>";
@@ -475,22 +597,22 @@
 			name = Libs;
 			sourceTree = "<group>";
 		};
-		F2E811BF1B37E2EB00EA640F /* Settings View */ = {
+		F2E811BF1B37E2EB00EA640F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F2E811CA1B380A9400EA640F /* CellWithTextField.h */,
+				F2E811CB1B380A9400EA640F /* CellWithTextField.m */,
+				F2E811CC1B380A9400EA640F /* CellWithTextField.xib */,
+				F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */,
+				F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */,
+				F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */,
 				F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */,
 				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
 				F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */,
 				F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */,
 				F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */,
-				F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */,
-				F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */,
-				F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */,
-				F2E811CA1B380A9400EA640F /* CellWithTextField.h */,
-				F2E811CB1B380A9400EA640F /* CellWithTextField.m */,
-				F2E811CC1B380A9400EA640F /* CellWithTextField.xib */,
 			);
-			name = "Settings View";
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		F919B9D01BA812370082AD79 /* Availability */ = {
@@ -521,6 +643,44 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		F94F47CA1BCB9F8400F40737 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */,
+				F94F47CC1BCB9F9A00F40737 /* Controllers */,
+				F94F47CB1BCB9F9300F40737 /* Models */,
+				F99856921BDF85390005253B /* Utils */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		F94F47CB1BCB9F9300F40737 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F94F47CD1BCB9FF300F40737 /* ContactModel.h */,
+				F94F47CE1BCB9FF300F40737 /* ContactModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		F94F47CC1BCB9F9A00F40737 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C406C9E91BF4CDE9001363CA /* ContactsViewController.h */,
+				C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F99856921BDF85390005253B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F99856931BDF85590005253B /* ContactUtils.h */,
+				F99856941BDF85590005253B /* ContactUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		FB0CF33118226380002D4281 /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,8 +697,6 @@
 			children = (
 				FB202BBF1A4396DB00024CDE /* ConnectionHandler.h */,
 				FB202BC01A4396DB00024CDE /* ConnectionHandler.m */,
-				AA8048A31ABC2B2400B62B0C /* ContactHandler.h */,
-				AA8048A41ABC2B2400B62B0C /* ContactHandler.m */,
 			);
 			name = Handlers;
 			sourceTree = "<group>";
@@ -610,9 +768,10 @@
 			children = (
 				EA46C5181AC2CCA100F7FC13 /* Libs */,
 				FB4226D6182261D200707349 /* Vialer */,
+				C4F49F281BF0B45700C25159 /* VialerTests */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
-				C01B88742FC628E4E890C190 /* Pods */,
+				752AD1FAE0F4299B6AF0D254 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -620,6 +779,7 @@
 			isa = PBXGroup;
 			children = (
 				FB4226CD182261D200707349 /* Vialer.app */,
+				C4F49F271BF0B45700C25159 /* VialerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -627,6 +787,8 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4F49F361BF0C13400C25159 /* libPods-Vialer.a */,
+				C4F49F341BF0C0FE00C25159 /* libPods-VialerTests.a */,
 				FEABD67E1B9739830093A877 /* libpjsip.a */,
 				3D15A4571B2ECAA8004C5012 /* PushKit.framework */,
 				F21077EA1B1C398D003C8109 /* libc++.dylib */,
@@ -650,7 +812,8 @@
 				FB4226D0182261D200707349 /* UIKit.framework */,
 				FB4226D2182261D200707349 /* Foundation.framework */,
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
-				C415953F343DAA413EE2882E /* libPods-Vialer.a */,
+				2A22B69D38BF4BAF1BBBEEB7 /* libPods-Vialer.a */,
+				62358DE6DDC6D573B8BA2F28 /* libPods-VialerTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -658,59 +821,23 @@
 		FB4226D6182261D200707349 /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
+				FB4226DF182261D200707349 /* AppDelegate.h */,
+				FB4226E0182261D200707349 /* AppDelegate.m */,
+				C43E92961BC400F900BC622B /* RootViewController.h */,
+				C43E92971BC400F900BC622B /* RootViewController.m */,
+				F94F47CA1BCB9F8400F40737 /* Contacts */,
 				F919B9D01BA812370082AD79 /* Availability */,
-				3D1A5E601AE543BB00DBE64B /* Views */,
+				C4CEAB3F1BCE7A5E00A56FC2 /* Calling */,
+				3D1A5E611AE543C000DBE64B /* Onboarding/Login */,
+				C4CEAB3E1BCE794600A56FC2 /* Recents */,
 				FB0CF33118226380002D4281 /* Api */,
 				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
 				FB202BC21A4396E700024CDE /* Handlers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
-				FB4226DF182261D200707349 /* AppDelegate.h */,
-				FB4226E0182261D200707349 /* AppDelegate.m */,
-				C43E92961BC400F900BC622B /* RootViewController.h */,
-				C43E92971BC400F900BC622B /* RootViewController.m */,
-				FB89C75A1850C153006A4556 /* CallingViewController.h */,
-				FB89C75B1850C153006A4556 /* CallingViewController.m */,
-				FB89C75C1850C153006A4556 /* CallingViewController.xib */,
-				FB998C0E1A3F991B00B2CFC6 /* SIPCallingViewController.h */,
-				FB998C0F1A3F991B00B2CFC6 /* SIPCallingViewController.m */,
-				FB998C101A3F991B00B2CFC6 /* SIPCallingViewController.xib */,
-				FBE0D89E1A6DBCC400818C9E /* SIPIncomingViewController.h */,
-				FBE0D89F1A6DBCC400818C9E /* SIPIncomingViewController.m */,
-				FBE0D8A01A6DBCC400818C9E /* SIPIncomingViewController.xib */,
-				FB302E60182A390E004B7D27 /* ContactsViewController.h */,
-				FB302E61182A390E004B7D27 /* ContactsViewController.m */,
-				F2900B501B1DD36000E695FB /* ContactsSearchTableViewController.h */,
-				F2900B511B1DD36000E695FB /* ContactsSearchTableViewController.m */,
-				F2900B521B1DD36000E695FB /* ContactTableViewCell.h */,
-				F2900B531B1DD36000E695FB /* ContactTableViewCell.m */,
-				FB364D0C18367F0700932D6E /* DialerViewController.h */,
-				FB364D0D18367F0700932D6E /* DialerViewController.m */,
-				FB364D0E18367F0700932D6E /* DialerViewController.xib */,
-				FB22439F19BF420B00428DB7 /* InfoCarouselViewController.h */,
-				FB2243A019BF420B00428DB7 /* InfoCarouselViewController.m */,
-				FB2243A119BF420B00428DB7 /* InfoCarouselViewController.xib */,
 				FB29D911189BA0FF00345976 /* Localizable.strings */,
-				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
-				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
-				FB5F49641AF02B3D005F3A33 /* AnimatedNumberPadViewController.h */,
-				FB5F49651AF02B3D005F3A33 /* AnimatedNumberPadViewController.m */,
-				FBBF50301A5FE58400B14E28 /* NumberPadViewController.h */,
-				FBBF50311A5FE58400B14E28 /* NumberPadViewController.m */,
-				FBAFB3F91834380D00848B2E /* RecentTableViewCell.h */,
-				FBAFB3FA1834380D00848B2E /* RecentTableViewCell.m */,
-				03C8589C1AD370A5009CD05C /* ExtendedNavBarView.h */,
-				03C8589D1AD370A5009CD05C /* ExtendedNavBarView.m */,
-				FB576B10182A802200C4FAB4 /* RecentsViewController.h */,
-				FB576B11182A802200C4FAB4 /* RecentsViewController.m */,
-				FB576B12182A802200C4FAB4 /* RecentsViewController.xib */,
-				FBE0D89A1A65D6C800818C9E /* RoundedLabel.h */,
-				FBE0D89B1A65D6C800818C9E /* RoundedLabel.m */,
-				FB46AD6218631EAE008AA621 /* SelectRecentsFilterViewController.h */,
-				FB46AD6318631EAE008AA621 /* SelectRecentsFilterViewController.m */,
-				FB46AD6118631EAE008AA621 /* SelectRecentsFilterViewController.xib */,
 				C4FCC6091BB925380013689F /* Side Menu */,
-				F2E811BF1B37E2EB00EA640F /* Settings View */,
+				F2E811BF1B37E2EB00EA640F /* Settings */,
 				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
 				FE3423F01B822D6A005020BA /* Vialer */,
 				FB4226D7182261D200707349 /* Supporting Files */,
@@ -735,20 +862,18 @@
 				3DE6EAE11AF3BFA600C09935 /* GradientView.m */,
 				FBE795A41A4D5E3A004E4F1D /* Gossip+Extra.m */,
 				FBE795A31A4D5E3A004E4F1D /* Gossip+Extra.h */,
-				FBBC8621199BA2C600060261 /* PasteableTextView.h */,
-				FBBC8622199BA2C600060261 /* PasteableTextView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
 				FB48BB401875B63700C0D5DB /* NSString+Mobile.m */,
 				FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */,
 				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
-				FB6B47DF1ABC280200B0DBC4 /* TrackedViewController.h */,
-				FB6B47E01ABC280200B0DBC4 /* TrackedViewController.m */,
 				FB3820E01A1E87730033FF78 /* UIActionSheet+Blocks.h */,
 				FB3820E11A1E87730033FF78 /* UIActionSheet+Blocks.m */,
 				FB3820E21A1E87730033FF78 /* UIAlertView+Blocks.h */,
 				FB3820E31A1E87730033FF78 /* UIAlertView+Blocks.m */,
 				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
+				C4CEAB421BCE933000A56FC2 /* GAITracker.h */,
+				C4CEAB431BCE933000A56FC2 /* GAITracker.m */,
 			);
 			name = Categories/Helpers;
 			sourceTree = "<group>";
@@ -756,8 +881,6 @@
 		FBAFB3F81834250800848B2E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FBAFB3F51834250500848B2E /* RecentCall.h */,
-				FBAFB3F61834250500848B2E /* RecentCall.m */,
 				FEE526961BA2CC42001906B5 /* Configuration.h */,
 				FEE526971BA2CC42001906B5 /* Configuration.m */,
 				FE48F1661BA7163000F57544 /* SystemUser.h */,
@@ -769,6 +892,7 @@
 		FE3423F01B822D6A005020BA /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
+				C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */,
 				FE3423EE1B822D59005020BA /* Vialer.xcassets */,
 				FB4226D8182261D200707349 /* Vialer-Info.plist */,
 				F245E7701B577AD100FBA37C /* Config.plist */,
@@ -779,11 +903,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C4F49F261BF0B45700C25159 /* VialerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4F49F2E1BF0B45700C25159 /* Build configuration list for PBXNativeTarget "VialerTests" */;
+			buildPhases = (
+				80E00A46CD54F4F2692E12FB /* Check Pods Manifest.lock */,
+				C4F49F231BF0B45700C25159 /* Sources */,
+				C4F49F241BF0B45700C25159 /* Frameworks */,
+				C4F49F251BF0B45700C25159 /* Resources */,
+				77CD1800846E1053380F261C /* Embed Pods Frameworks */,
+				EBB5C2C72DB3C76BD5302994 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C4F49F2D1BF0B45700C25159 /* PBXTargetDependency */,
+			);
+			name = VialerTests;
+			productName = VialerTests;
+			productReference = C4F49F271BF0B45700C25159 /* VialerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FB4226CC182261D200707349 /* Vialer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB4226FE182261D200707349 /* Build configuration list for PBXNativeTarget "Vialer" */;
 			buildPhases = (
-				70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */,
+				0784AD443F1A6953A2378219 /* Check Pods Manifest.lock */,
 				F2B947311B00DFEC00CE5112 /* config_site.h linking script */,
 				FB4226C9182261D200707349 /* Sources */,
 				FB4226CA182261D200707349 /* Frameworks */,
@@ -791,8 +936,8 @@
 				F298A9741B5E28D100467E31 /* Update Version number */,
 				F217146F1B54F4F00078B0A0 /* Update Build number */,
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
-				B23117DFF7F9D411D63FACFF /* Copy Pods Resources */,
-				90BE314ED57585ABB93C4029 /* Embed Pods Frameworks */,
+				61A4E925F54AA417DCC23DE6 /* Embed Pods Frameworks */,
+				243FF0FBA611B3D698FC4B5E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -812,6 +957,10 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
+					C4F49F261BF0B45700C25159 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = FB4226CC182261D200707349;
+					};
 					FB4226CC182261D200707349 = {
 						DevelopmentTeam = E2Q9UE8HM6;
 						SystemCapabilities = {
@@ -829,6 +978,7 @@
 			knownRegions = (
 				en,
 				nl,
+				Base,
 			);
 			mainGroup = FB4226C4182261D200707349;
 			productRefGroup = FB4226CE182261D200707349 /* Products */;
@@ -836,23 +986,35 @@
 			projectRoot = "";
 			targets = (
 				FB4226CC182261D200707349 /* Vialer */,
+				C4F49F261BF0B45700C25159 /* VialerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C4F49F251BF0B45700C25159 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4226CB182261D200707349 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */,
 				FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */,
 				FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */,
 				FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */,
+				C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */,
 				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
 				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
+				C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
 				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
+				C4BFEA621BDFD50100D616A0 /* GoogleService-Info.plist in Resources */,
 				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
 				FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */,
 				FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */,
@@ -866,25 +1028,21 @@
 				F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
-				FB364D1018367F0700932D6E /* DialerViewController.xib in Resources */,
 				FE2523B31B84896600CF5C22 /* ringback.wav in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
 				3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */,
 				F245E7711B577AD100FBA37C /* Config.plist in Resources */,
-				FB46AD67186328BF008AA621 /* SelectRecentsFilterViewController.xib in Resources */,
+				C4EFCF801BF21E210000CC6F /* CallingStoryboard.storyboard in Resources */,
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
 				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
-				FB89C75E1850C153006A4556 /* CallingViewController.xib in Resources */,
-				FB2243A319BF420B00428DB7 /* InfoCarouselViewController.xib in Resources */,
-				FB576B14182A802200C4FAB4 /* RecentsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		70EFFDD88D5564A7DB5174A5 /* Check Pods Manifest.lock */ = {
+		0784AD443F1A6953A2378219 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -899,7 +1057,22 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		90BE314ED57585ABB93C4029 /* Embed Pods Frameworks */ = {
+		243FF0FBA611B3D698FC4B5E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61A4E925F54AA417DCC23DE6 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -914,7 +1087,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B23117DFF7F9D411D63FACFF /* Copy Pods Resources */ = {
+		77CD1800846E1053380F261C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80E00A46CD54F4F2692E12FB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EBB5C2C72DB3C76BD5302994 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -926,7 +1129,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F217146F1B54F4F00078B0A0 /* Update Build number */ = {
@@ -975,80 +1178,138 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C4F49F231BF0B45700C25159 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4226C9182261D200707349 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				03F277D41ADFDEF200EBFC7D /* SideMenuViewController.m in Sources */,
 				FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */,
-				FB576B13182A802200C4FAB4 /* RecentsViewController.m in Sources */,
+				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
 				C4FCC60C1BB925500013689F /* SideMenuHeaderView.m in Sources */,
-				F2900B551B1DD36000E695FB /* ContactTableViewCell.m in Sources */,
 				FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */,
-				FB5F49661AF02B3D005F3A33 /* AnimatedNumberPadViewController.m in Sources */,
+				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
 				03BEC5311AE336F200FB1ACC /* SideMenuTableViewCell.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
+				C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
-				3D4787381AEA5FC1002420FA /* VIASlider.m in Sources */,
+				C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
 				F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */,
+				C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				FE0E5C971BBE848800243577 /* GSNotifications.m in Sources */,
 				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */,
 				FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */,
+				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
+				C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */,
 				C43E92981BC400F900BC622B /* RootViewController.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				FBE795A51A4D5E3A004E4F1D /* Gossip+Extra.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
-				FB302E62182A390E004B7D27 /* ContactsViewController.m in Sources */,
-				03C8589E1AD370A5009CD05C /* ExtendedNavBarView.m in Sources */,
-				3D2F64161AE8F802003F7697 /* ConfigTextField.m in Sources */,
+				C4EFCF8C1BF2301E0000CC6F /* OldNumberPadViewController.m in Sources */,
 				FBE0D8A11A6DBCC400818C9E /* SIPIncomingViewController.m in Sources */,
 				FB3820E51A1E87730033FF78 /* UIAlertView+Blocks.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
 				FB202BC11A4396DB00024CDE /* ConnectionHandler.m in Sources */,
-				FBAFB3FB1834380D00848B2E /* RecentTableViewCell.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */,
-				FBE0D89C1A65D6C800818C9E /* RoundedLabel.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
-				FBBC8623199BA2C600060261 /* PasteableTextView.m in Sources */,
-				AA8048A51ABC2B2400B62B0C /* ContactHandler.m in Sources */,
+				F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */,
 				3DD6E6F61B32FF070033692B /* PZPushMiddleware.m in Sources */,
-				FB2243A219BF420B00428DB7 /* InfoCarouselViewController.m in Sources */,
 				FE0E5C981BBE848800243577 /* GSOutgoingCall.m in Sources */,
-				F2900B541B1DD36000E695FB /* ContactsSearchTableViewController.m in Sources */,
+				C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
-				FB364D0F18367F0700932D6E /* DialerViewController.m in Sources */,
+				C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */,
+				C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */,
 				FE0E5C901BBE848800243577 /* GSAccount.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
-				FBBF50331A5FE58400B14E28 /* NumberPadViewController.m in Sources */,
 				FE0E5C921BBE848800243577 /* GSCall.m in Sources */,
+				C4E860161BF14D960051BFDE /* DialerViewController.m in Sources */,
+				C4E860191BF14D960051BFDE /* PasteableUILabel.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
-				FB6B47E11ABC280200B0DBC4 /* TrackedViewController.m in Sources */,
+				C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
+				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
-				FB89C75D1850C153006A4556 /* CallingViewController.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
+				C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */,
 				FE0E5C931BBE848800243577 /* GSCodecInfo.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				FE0E5C961BBE848800243577 /* GSIncomingCall.m in Sources */,
-				FB46AD6518631EAE008AA621 /* SelectRecentsFilterViewController.m in Sources */,
+				C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
+				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
+				C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C4F49F2D1BF0B45700C25159 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB4226CC182261D200707349 /* Vialer */;
+			targetProxy = C4E8600B1BF14C970051BFDE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C461837C1BFA24660075709B /* Base */,
+				C4BF69EA1BFA2A2E00AA81AD /* en */,
+				C4BF69EC1BFA2A3000AA81AD /* nl */,
+			);
+			name = RecentsStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C46618BA1BE7536C00F696A0 /* nl */,
+				C4EFCF751BF21C690000CC6F /* Base */,
+			);
+			name = TwoStepCallingViewController.xib;
+			sourceTree = "<group>";
+		};
+		C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4BF69ED1BFA2C6F00AA81AD /* Base */,
+				C4BF69F51BFA2D8700AA81AD /* en */,
+				C4BF69F71BFA2D8D00AA81AD /* nl */,
+			);
+			name = ContactsStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4EFCF861BF21E520000CC6F /* nl */,
+				C461837E1BFA24850075709B /* Base */,
+				C4BF69E71BFA24B000AA81AD /* en */,
+			);
+			name = CallingStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		FB29D911189BA0FF00345976 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1094,7 +1355,7 @@
 		};
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 047ECE344B469A7845B17836 /* Pods-Vialer.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1133,6 +1394,108 @@
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = AdHocDistribution;
+		};
+		C4F49F2F1BF0B45700C25159 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VialerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wearespindle.VialerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+			};
+			name = Debug;
+		};
+		C4F49F301BF0B45700C25159 /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 857A8A980F3D76D2294D82DA /* Pods-VialerTests.adhocdistribution.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VialerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wearespindle.VialerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+			};
+			name = AdHocDistribution;
+		};
+		C4F49F311BF0B45700C25159 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D4356954652C7C86D242982 /* Pods-VialerTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VialerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wearespindle.VialerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+			};
+			name = Release;
 		};
 		FB4226FC182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1195,7 +1558,7 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C112FD1D804336625FDAFEB4 /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = 9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1209,11 +1572,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					"SANDBOX_APNS_TOKEN=1",
-				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1241,7 +1599,7 @@
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD9B22150EBB88642151AC6D /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = 61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1283,6 +1641,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C4F49F2E1BF0B45700C25159 /* Build configuration list for PBXNativeTarget "VialerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4F49F2F1BF0B45700C25159 /* Debug */,
+				C4F49F301BF0B45700C25159 /* AdHocDistribution */,
+				C4F49F311BF0B45700C25159 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FB4226C8182261D200707349 /* Build configuration list for PBXProject "Vialer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

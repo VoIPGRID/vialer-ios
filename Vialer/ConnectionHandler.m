@@ -7,16 +7,16 @@
 //
 
 #import "ConnectionHandler.h"
-#import "AppDelegate.h"
-#import "SystemUser.h"
-#import "Gossip+Extra.h"
 
-#import "AFNetworkReachabilityManager.h"
+#import "AppDelegate.h"
+#import "Gossip+Extra.h"
+#import "SystemUser.h"
+#import "GAITracker.h"
+
+#import <AudioToolbox/AudioServices.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
-#import <AudioToolbox/AudioServices.h>
+#import "AFNetworkReachabilityManager.h"
 
 NSString * const ConnectionStatusChangedNotification = @"com.vialer.ConnectionStatusChangedNotification";
 NSString * const IncomingSIPCallNotification = @"com.vialer.IncomingSIPCallNotification";
@@ -344,12 +344,8 @@ static GSCall *lastNotifiedCall;
         if ([callId isKindOfClass:[NSNumber class]] && lastNotifiedCall.callId == [callId intValue] && lastNotifiedCall.status != GSCallStatusDisconnected) {
             if ([identifier isEqualToString:NotificationActionDecline]) {
                 [lastNotifiedCall end];
-                
-                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                                      action:@"Inbound"
-                                                                       label:@"Declined"
-                                                                       value:nil] build]];
+
+                [GAITracker declineIncomingCallEvent];
             } else {
                 // Accept the incoming call right away.
                 AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);

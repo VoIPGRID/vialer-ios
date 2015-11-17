@@ -1,33 +1,76 @@
-﻿/* No comment provided by engineer. */
-"%@ could not be reached" = "%@ kon niet worden bereikt";
+/* Created with Localizable Strings Merge, the swiss-army knife for iOS and OS X localization. */
 
 /* No comment provided by engineer. */
-"%@ is being called..." = "%@ wordt gebeld...";
-
 "%@\nis currently logged in." = "%@\nis ingelogd.";
+
+/* No comment provided by engineer. */
+"/dashboard/" = "/dashboard/";
+
+/* No comment provided by engineer. */
+"/dialplan/" = "/dialplan/";
+
+/* No comment provided by engineer. */
+"/stats/dashboard/" = "/stats/dashboard/";
+
+/* No comment provided by engineer. */
+"Accept" = "Neem op";
+
+/* No comment provided by engineer. */
+"Accessibility" = "Bereikbaarheid";
+
+/* No comment provided by engineer. */
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
+
+/* No comment provided by engineer. */
+"App is configuring" = "%@ configureert";
+
+/* No comment provided by engineer. */
+"Application denied access to 'Contacts'" = "App heeft geen toegang tot 'Contacten'";
+
+/* No comment provided by engineer. */
+"Application not authorized to access 'Contacts'" = "App heeft geen toegangsrechten tot 'Contacten'";
 
 /* No comment provided by engineer. */
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";
 
 /* No comment provided by engineer. */
-"Call failed" = "Bellen mislukt";
+"Availability" = "Bereikbaarheid";
 
 /* No comment provided by engineer. */
-"Calling..." = "Bellen...";
+"AVAILABILITY_SAVED_SUCCESS" = "Bereikbaarheid opgeslagen";
+
+/* No comment provided by engineer. */
+"Business" = "Zakelijke";
+
+/* No comment provided by engineer. */
+"Call ended" = "Gesprek be\U00EBindigd";
+
+/* No comment provided by engineer. */
+"Calling other party" = "Andere partij aan het bellen";
+
+/* No comment provided by engineer. */
+"Calling your phone" = "Je telefoon aan het bellen";
+
+/* No comment provided by engineer. */
+"calls in the cloud" = "telefonie in de cloud";
 
 /* No comment provided by engineer. */
 "Cancel" = "Annuleer";
 
 /* No comment provided by engineer. */
-"Click to Dial not supported for this account." = "Click to Dial wordt niet ondersteund voor dit account.";
+"CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "Het telefoonnummer waarmee uitgebeld wordt is:";
+
+/* No comment provided by engineer. */
+"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
+
+/* No comment provided by engineer. */
+"Connected with other party" = "Verbonden met andere partij";
+
+/* No comment provided by engineer. */
+"Connected with your phone" = "Verbonden met je telefoon";
 
 /* No comment provided by engineer. */
 "Connection failed" = "Verbinding mislukt";
-
-"Login" = "Inloggen";
-"Login failed" = "Inloggen mislukt";
-
-"This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
 
 /* No comment provided by engineer. */
 "Contacts" = "Contacten";
@@ -36,15 +79,19 @@
 "Continue" = "Verder";
 
 /* No comment provided by engineer. */
+"Couldn't connect with other party" = "Kan niet verbinden met andere partij";
 
 /* No comment provided by engineer. */
-"Dialing..." = "Kiezen...";
+"Couldn't connect with your phone" = "Kan niet verbinden met je telefoon";
 
 /* No comment provided by engineer. */
-"Disconnected" = "Verbinding verbroken";
+"Couldn't login, authorization failed" = "Login mislukt, verkeerde login gegevens";
 
 /* No comment provided by engineer. */
-"Double costs" = "Dubbele kosten";
+"Decline" = "Weiger";
+
+/* No comment provided by engineer. */
+"Dial plan" = "Belplan";
 
 /* No comment provided by engineer. */
 "Email" = "E-mailadres";
@@ -53,114 +100,217 @@
 "Email sent successfully." = "E-mail verzonden.";
 
 /* No comment provided by engineer. */
-"Extensions or phonenumbers not valid." = "Extensie of telefoonnummer niet geldig.";
+"EnabledVOIPCalls" = "Bellen via VoIP";
+
+/* No comment provided by engineer. */
+"Enter phone number manually" = "Voer je telefoonnummer in";
+
+/* No comment provided by engineer. */
+"Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
+
+/* No comment provided by engineer. */
+"Error" = "Fout";
+
+/* No comment provided by engineer. */
+"Error getting the availability options" = "Fout bij het ophalen van de bereikbaarheid opties.";
+
+/* No comment provided by engineer. */
+"Error while retrieving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
 
 /* No comment provided by engineer. */
 "Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls.\nPull down to refresh" = "Recente gesprekken konden niet worden opgehaald.\nTrek naar beneden om te verversen";
+"Failed to load %@" = "%@ kon niet worden geladen";
 
 /* No comment provided by engineer. */
 "Failed to send email." = "E-mail zenden mislukt.";
 
 /* No comment provided by engineer. */
-"Failed to set up a call." = "Opzetten van een gesprek mislukt.";
-
-"Business" = "Zakelijke";
-"calls in the cloud" = "telefonie in de cloud";
+"Failed to setup call" = "Opzetten van gesprek mislukt";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
+
+/* No comment provided by engineer. */
+"Hello" = "Hallo";
+
+/* No comment provided by engineer. */
+"Hide" = "Verberg";
+
+/* No comment provided by engineer. */
 "HOW_DOES_APP_WORK_BUTTON_TEXT" = "Hoe werkt bellen via %@";
 
-//Possible duplicate with the one below
-"Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
+/* No comment provided by engineer. */
+"Incoming call from %@" = "Binnenkomend gesprek van %@";
 
 /* No comment provided by engineer. */
-
-"Request password" = "Wachtwoord opvragen";
+"Information" = "Informatie";
 
 /* No comment provided by engineer. */
-"Information about this app" = "Informatie over deze app";
+"Invalid number used to setup call" = "Foutief nummer gebruikt om gesprek op te zetten";
 
 /* No comment provided by engineer. */
 "Keypad" = "Toetsen";
 
 /* No comment provided by engineer. */
+"Loading %@..." = "%@ laden...";
 
 /* No comment provided by engineer. */
-"Loading..." = "Laden...";
+"Loading availability options..." = "Bezig met laden van de opties voor de bereikbaarheid...";
 
 /* No comment provided by engineer. */
 "Log out" = "Uitloggen";
 
 /* No comment provided by engineer. */
-"Log out from this app" = "Log uit van deze app";
-
-/* No comment provided by engineer. */
 "Logging in..." = "Inloggen...";
 
 /* No comment provided by engineer. */
-"Mobile number" = "Mobiele nummer";
+"Login" = "Inloggen";
+
+/* No comment provided by engineer. */
+"Login failed" = "Inloggen mislukt";
+
+/* No comment provided by engineer. */
+"Logout" = "Uitloggen";
+
+/* No comment provided by engineer. */
+"Microphone Access Denied" = "Geen toegang tot microfoon";
+
+/* No comment provided by engineer. */
+"Mobile" = "Mobiel";
+
+/* No comment provided by engineer. */
+"Mobile phone number" = "Mobiele telefoonnummer";
+
+/* No comment provided by engineer. */
+"mobile_label" = "Mobiel";
+
+/* No comment provided by engineer. */
+"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR" = "Het mobiele nummer moet beginnen met beginnen met een landcode b.v. +31 of 0031";
+
+/* No comment provided by engineer. */
+"My number" = "Mijn nummer";
 
 /* No comment provided by engineer. */
 "No" = "Nee";
 
 /* No comment provided by engineer. */
+"No email address configured" = "Geen emailadres ingesteld";
+
+/* No comment provided by engineer. */
+"No login data" = "Geen inloggegevens";
+
+/* No comment provided by engineer. */
+"No outgoing number configured" = "Geen uitgaand nummer ingesteld";
+
+/* No comment provided by engineer. */
+"Not available" = "Niet bereikbaar";
+
+/* No comment provided by engineer. */
+"NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
+
+/* No comment provided by engineer. */
 "Ok" = "OK";
+
+/* Reference to URL String in the config.plist to the localized onboarding information page */
+"onboarding" = "onboarding-nl";
+
+/* No comment provided by engineer. */
+"Outgoing number" = "Uitgaand nummer";
+
+/* No comment provided by engineer. */
+"Password" = "Wachtwoord";
 
 /* No comment provided by engineer. */
 "phone" = "vast";
 
 /* No comment provided by engineer. */
+"Phone number incorrect" = "Telefoonnummer incorrect";
 
 /* No comment provided by engineer. */
-"Phone couldn't be reached" = "Telefoon kon niet worden bereikt";
+"Please enter a valid email address." = "Vul een geldig e-mailadres in.";
 
 /* No comment provided by engineer. */
-"Please provide your mobile number starting with your country code." = "Geef je mobiele nummer te beginnen met je landcode.";
+"Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Press 1 to answer the call" = "Druk op 1 om de oproep te beantwoorden";
-
-/* No comment provided by engineer. */
-"Provide your mobile number" = "Geef je mobiele nummer";
+"Recent Fetch error" = "Recente Gesprekken ophalen mislukt";
 
 /* No comment provided by engineer. */
 "Recents" = "Recent";
 
 /* No comment provided by engineer. */
-"Save" = "Opslaan";
+"Request password" = "Wachtwoord opvragen";
+
+/* No comment provided by engineer. */
+"Retrieving phone numbers..." = "Telefoonnummers ophalen...";
+
+/* No comment provided by engineer. */
+"Routing" = "Belplan";
+
+/* No comment provided by engineer. */
+"Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
+
+/* No comment provided by engineer. */
+"SAVING_AVAILABILITY..." = "Bereikbaarheid opslaan...";
+
+/* No comment provided by engineer. */
+"SAVING_NUMBER..." = "Nummer opslaan...";
 
 /* No comment provided by engineer. */
 "Sending email..." = "Versturen e-mail...";
 
 /* No comment provided by engineer. */
+"Setting up connection..." = "Maakt verbinding...";
+
+/* No comment provided by engineer. */
 "Settings" = "Instellingen";
 
 /* No comment provided by engineer. */
-"Show all recent calls" = "Toon alle recente oproepen";
+"SIP account" = "SIP account";
 
-/* No comment provided by engineer. */
-"Show recents" = "Toon recent";
-
-/* No comment provided by engineer. */
-"Show your recent calls" = "Toon jouw recente oproepen";
-
-/* No comment provided by engineer. */
+/* Answer part of the text: Slide to answer */
+"slide_to_answer" = "beantwoorden";
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
 
 /* No comment provided by engineer. */
-"The number is on the blacklist" = "Het nummer staat op de zwarte lijst";
+"Statistics" = "Statistieken";
+
+/* Localized outgoing number, catching/translating suppressed */
+"suppressed" = "Anoniem (onderdrukt)";
 
 /* No comment provided by engineer. */
-"This app will set up two phone calls; one to your mobile phone and one to the number you selected.\nBoth calls will be charged.\n\nCheck settings for more info regarding double costs." = "Deze app zet twee gesprekken op; één naar je mobiel en één naar het geselecteerde nummer.\nJe betaalt dan ook voor beide gesprekken.\n\nControleer je instellingen voor meer informatie met betrekking tot dubbele kosten.";
+"This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
+
+/* No comment provided by engineer. */
+"To make Two step calling possible, we need to have your mobile phone number." = "Om Twee stap bellen mogelijk te maken, hebben we je mobiele nummer nodig.";
+
+/* No comment provided by engineer. */
+"Top name matches" = "Meest overeenkomende namen";
+
+/* No comment provided by engineer. */
+"Two step call failed" = "Het twee staps gesprek is mislukt";
+
+/* No comment provided by engineer. */
+"Two step modus" = "Twee staps modus";
+
+/* No comment provided by engineer. */
+"Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Twee staps modus zal een gesprek opzetten naar je telefoon en zal na beantwooring het gesprek opzetten naar de andere partij.";
+
+/* No comment provided by engineer. */
+"Unable to fetch you recent call list." = "Ophalen van recente gesprekken mislukt.";
+
+/* No comment provided by engineer. */
+"Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";
 
 /* No comment provided by engineer. */
 "Unknown error, please check your internet connection." = "Onbekende fout, controleer je internetverbinding.";
+
+/* No comment provided by engineer. */
+"VoIP Account" = "VoIP account";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
@@ -169,162 +319,11 @@
 "yesterday" = "gisteren";
 
 /* No comment provided by engineer. */
-"You don't have permission to provide a mobile number in Click to dial." = "Je hebt geen toestemming om een mobiel nummer te verstrekken in Click to dial.";
-
-/* No comment provided by engineer. */
-"Your email and/or password is incorrect." = "Je e-mailadres en/of wachtwoord is onjuist.";
-
-/* No comment provided by engineer. */
-"Your number" = "Jouw nummer";
-
-/* No comment provided by engineer. */
-"Your phone is being called..." = "Je telefoon wordt gebeld...";
-
-/* No comment provided by engineer. */
-"Version" = "Versie";
-
-/* No comment provided by engineer. */
-"No recent calls" = "Geen recente oproepen";
-
-/* No comment provided by engineer. */
-"No access to the recent calls" = "Geen toegang tot de recente oproepen";
-
-/* No comment provided by engineer. */
-"Go to" = "Ga naar";
-
-/* No comment provided by engineer. */
-"Dial plan" = "Belplan";
-
-/* No comment provided by engineer. */
-"Change your dial plan" = "Pas direct je belplan aan";
-
-/* No comment provided by engineer. */
-"Show statistics about your accessibility" = "Bekijk je cijfers over je bereikbaarheid";
-
-/* No comment provided by engineer. */
-"Accessibility" = "Bereikbaarheid";
-
-/* No comment provided by engineer. */
-"Change your accessibility" = "Pas je bereikbaarheid aan";
-
-/* No comment provided by engineer. */
-"Loading %@..." = "%@ laden...";
-
-/* No comment provided by engineer. */
-"Failed to load %@" = "%@ kon niet worden geladen";
-
-/* No comment provided by engineer. */
-"Welcome" = "Welkom";
-
-/* No comment provided by engineer. */
-"From now you can dial out using %@.\nThe number you are calling with is:" = "Je kunt vanaf nu uitbellen met %@.\nHet nummer waarmee je uitbelt is:";
-
-/* No comment provided by engineer. */
-"Ok, got it!" = "OK, got it!";
-
-/* No comment provided by engineer. */
-"Please enter a valid email address." = "Vul een geldig e-mailadres in.";
-
-/* No comment provided by engineer. */
-"NO_CONTACTS_LABEL" = "Geen contacten";
-
-/* Placeholder label shown in second step of onboarding. */
-"mobile_label" = "Mobiel";
-
-"Retrieving phone numbers..." = "Telefoon nummers ophalen...";
-
-
-"App is configuring" = "%@ configureert";
-"your account" = "je gegevens";
-
-"Hello" = "Hallo";
-"Lets get started" = "Aan de slag!";
-
-"No login data" = "Geen inloggegevens";
-"Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
-
-"No mobile number configured" = "Geen mobiel nummer aanwezig";
-
-/* Side-menu items */
-"Availability" = "Bereikbaarheid";
-"Statistics" = "Statistieken";
-"Routing" = "Belplan";
-"Information" = "Informatie";
-"Logout" = "Uitloggen";
-
-"Continue" = "Doorgaan";
-
-"Error" = "Fout";
-"Error while retrieving your outgoing number, please enter manually" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, voer het handmatig in.";
-
-"No Connection" = "Geen dataverbinding beschikbaar";
-"No Connection Info Text" = "Deze app heeft een internetverbinding nodig om telefoongesprekken te kunnen starten. Maak verbinding met een mobiele dataverbinding of wifi-netwerk om te bellen via deze app.";
-"Connect A/B calls only" = "Twee staps modus ingeschakeld";
-"Connect A/B Info" = "Je hebt nog geen VoIP account geconfigureerd voor dit gebruikersaccount. Je kan in de beheeromgeving een VoIP account selecteren welke zal worden gebruikt door de app. Zodra je dit hebt gedaan zal je ook via VoIP kunnen bellen in de app.";
-
-"Settings" = "Instellingen";
-
-/*Config View */
-"VOIP Account" =  "VoIP Account";
-"SIP account" = "SIP account";
-"Password" = "Wachtwoord";
-
-"EnabledVOIPCalls" = "Bellen via VoIP";
-
-"My number" =  "Mijn nummer";
-"Outgoing number" = "Uitgaand nummer";
-"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR" = "Het mobiele nummer moet beginnen met beginnen met een landcode b.v. +31 of 0031";
-"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
-
-"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
-"CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "Het telefoonnummer waarmee uitgebeld wordt is:";
-
-/* RecentsViewController segmentendControll */
-"All" = "Alle";
-"Missed" = "Gemist";
-
-"Warning" = "Waarschuwing";
-"Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";
-"SAVING_NUMBER..." = "Nummer opslaan...";
-"SAVING_AVAILABILITY..." = "Bereikbaarheid opslaan...";
-"NUMBER_SAVED_SUCCESS" = "Nummer opgeslagen";
-"AVAILABILITY_SAVED_SUCCESS" = "Bereikbaarheid opgeslagen";
-
-"Availability" = "Bereikbaarheid";
-"Not available" = "Niet bereikbaar";
-"Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
-"Error getting the availability options" = "Fout bij het ophalen van de bereikbaarheid opties.";
-"Loading availability options..." = "Bezig met laden van de opties voor de bereikbaarheid...";
-
-/* Keypad icons mappings */
-"keypad-numbers" = "toetsen";
-"keypad-pause" = "pauze";
-"keypad-soundoff" = "geluid uit";
-"keypad-speaker" = "luidspreker";
-
-"onboarding" = "onboarding-nl"; /* Reference to URL String in the config.plist to the localized onboarding information page */
-
-/* Answer part of the text: Slide to answer */
-"slide_to_answer" = "beantwoorden";
-
-/* New strings */
-"/dashboard/" = "/dashboard/";
-"/dialplan/" = "/dialplan/";
-"/stats/dashboard/" = "/stats/dashboard/";
-"A classic connection is being established. The default dialer will now be opened." = "Een verbinding via je eigen telefoonnummer wordt nu opgezet.";
-"Accept" = "Neem op";
-"Call ended" = "Gesprek beëindigd";
-"Decline" = "Weiger";
-"Enter phonenumber manually" = "Voer je telefoonnummer in";
-"FAILED CONNECTION" = "Geen verbinding met telefonieservice";
-"Incoming call from %@" = "Binnenkomend gesprek van %@";
-"Microphone Access Denied" = "Geen toegang tot microfoon";
-"Mobile" = "Mobiel";
-"NO WIFI OR 4G" = "Geen Wifi of 4G";
-"Poor internet connection Connect A/B" = "Twee staps modus ingeschakeld";
-"Poor internet Info" = "Je internetverbinding is niet snel genoeg om te bellen via VoIP. Bellen in twee stappen is ingeschakeld. Wanneer je iemand belt via de app bellen wij jou eerst op je GSM waarmee we je daarna verbinden met degene die je wilt bellen.";
-"Setting up connection..." = "Maakt verbinding...";
-"Hide" = "Verberg";
-"VoIP Account" = "VoIP account";
 "You must allow microphone access in Settings > Privacy > Microphone." = "De app heeft toegang nodig tot de microfoon via Instellingen > Privacy > Microfoon.";
-"suppressed" = "Anoniem (onderdrukt)";
+
+/* No comment provided by engineer. */
+"your account" = "je account";
+
+/* No comment provided by engineer. */
+"Your email and/or password is incorrect." = "Je email adres of password is incorrect.";
+

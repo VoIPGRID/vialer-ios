@@ -7,22 +7,22 @@
 //
 
 #import "LogInViewController.h"
-#import "VoIPGRIDRequestOperationManager.h"
-#import "SystemUser.h"
+
+#import "AppDelegate.h"
+#import "AnimatedImageView.h"
 #import "ConnectionHandler.h"
+#import "GAITracker.h"
+#import "SystemUser.h"
 #import "UIAlertView+Blocks.h"
-#import "SVProgressHUD.h"
 #import "UIView+RoundedStyle.h"
+#import "VIAScene.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "AnimatedImageView.h"
-#import "VIAScene.h"
-
-#import "AppDelegate.h"
-
 #import "PBWebViewController.h"
+#import "SVProgressHUD.h"
 
 #define SHOW_LOGIN_ALERT      100
 #define PASSWORD_FORGOT_ALERT 101
@@ -31,14 +31,11 @@
 @interface LogInViewController ()
 @property (nonatomic, assign) BOOL alertShown;
 @property (nonatomic, strong) NSString *user;
+@property (nonatomic, strong) VIAScene *scene;
+@property (nonatomic) NSUInteger fetchAccountRetryCount;
 @end
 
-@implementation LogInViewController {
-    BOOL _isKeyboardShown;
-    VIAScene *_scene;
-
-    __block NSUInteger _fetchAccountRetryCount;
-}
+@implementation LogInViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +43,7 @@
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
     [self.view addGestureRecognizer:tg];
 
-    _fetchAccountRetryCount = 0;
+    self.fetchAccountRetryCount = 0;
 
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
 
@@ -54,12 +51,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self moveLogoOutOfScreen];
     });
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    [self removeObservers];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
@@ -88,13 +79,10 @@
 }
 
 #pragma mark - UIView lifecycle methods.
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self clearAllTextFields];
     [self addObservers];
 }
@@ -106,22 +94,20 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    // Set type to emailAddress for e-mail field for forgot password steps
-    //Done in Interface builder [self.forgotPasswordView.emailTextfield setKeyboardType:UIKeyboardTypeEmailAddress];
-    //Done in Interface builder[self.forgotPasswordView.emailTextfield setReturnKeyType:UIReturnKeySend];
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
 
     //to be able/disable the enable the request password button
     [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(forgotPasswordViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
-    // Set phone number input settings for outgoing and fallback call numbers.
-    //Done in Interface builder [self.configureFormView.phoneNumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
-    //Done in Interface builder [self.configureFormView.phoneNumberField setReturnKeyType:UIReturnKeySend];
-
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
     [self.forgotPasswordView.emailTextfield setDelegate:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self removeObservers];
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -222,7 +208,7 @@
         [self.configureFormView.phoneNumberField resignFirstResponder];
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
-        [_scene runActThree];                     // Animate the clouds
+        [self.scene runActThree];                     // Animate the clouds
         if ([SystemUser currentUser].sipEnabled) {
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
         }
@@ -253,62 +239,53 @@
 }
 
 - (void)keyboardWillShow:(NSNotification*)notification {
-    if(!_isKeyboardShown) {
-        NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        UIViewAnimationCurve curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
 
-        NSValue *keyboardRect = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
-        CGFloat keyboardHeight = CGRectGetHeight([keyboardRect CGRectValue]);
+    NSValue *keyboardRect = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGFloat keyboardHeight = CGRectGetHeight([keyboardRect CGRectValue]);
 
-        //After the animation, the respective view should be centered on the remaining screen height (original screen height -keyboard height)
-        CGFloat remainingScreenHeight = CGRectGetHeight(self.view.frame) - keyboardHeight;
-        //Divide the remaining screen height by 2, this will be the center of the displayed view
-        CGFloat newCenter = lroundf(remainingScreenHeight /2);
+    // After the animation, the respective view should be centered on the remaining screen height (original screen height -keyboard height)
+    CGFloat remainingScreenHeight = CGRectGetHeight(self.view.frame) - keyboardHeight;
+    // Divide the remaining screen height by 2, this will be the center of the displayed view
+    CGFloat newCenter = lroundf(remainingScreenHeight /2);
 
-        //Move the left top most cloud away to make the text visable (white on white)
-        [_scene animateCloudsOutOfViewWithDuration:duration];
+    // Move the left top most cloud away to make the text visable (white on white)
+    [self.scene animateCloudsOutOfViewWithDuration:duration];
 
-        [UIView animateWithDuration:duration
-                              delay:0.0
-                            options:(curve << 16)
-                         animations:^{
-                             //TODO: Storing the frame's center in an ivar just to be able to restore it is a bit of a hack
-                             //but I could not think of a better way.
-                             self.loginFormView.centerBeforeKeyboardAnimation = self.loginFormView.center;
+    // Animate every form once to prevent jumping screens.
+    // Only animate when form is visible.
+    [UIView animateWithDuration:duration
+                          delay:0.0
+                        options:(curve << 16)
+                     animations:^{
+                         if (self.loginFormView.alpha > 0 && !self.loginFormView.isMoved) {
                              self.loginFormView.center = CGPointMake(self.loginFormView.center.x, newCenter);
-
-                             self.configureFormView.centerBeforeKeyboardAnimation = self.configureFormView.center;
+                         }
+                         if (self.configureFormView.alpha > 0 && !self.configureFormView.isMoved) {
                              self.configureFormView.center = CGPointMake(self.configureFormView.center.x, newCenter);
-
-                             self.forgotPasswordView.centerBeforeKeyboardAnimation = self.forgotPasswordView.center;
+                         }
+                         if (self.forgotPasswordView.alpha > 0 && !self.forgotPasswordView.isMoved) {
                              self.forgotPasswordView.center = CGPointMake(self.forgotPasswordView.center.x, newCenter);
                          }
-                         completion:^(BOOL finished){
-
-                         }];
-
-        _isKeyboardShown = YES;
-    }
+                     }
+                     completion:^(BOOL finished) {
+                         if (self.loginFormView.alpha > 0) {
+                             self.loginFormView.isMoved = YES;
+                         }
+                         if (self.configureFormView.alpha > 0) {
+                             self.configureFormView.isMoved = YES;
+                         }
+                         if (self.forgotPasswordView.alpha > 0) {
+                             self.forgotPasswordView.isMoved = YES;
+                         }
+                     }];
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification {
-    if(_isKeyboardShown  && !self.alertShown) {
+    if(!self.alertShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        UIViewAnimationCurve curve = (UIViewAnimationCurve) [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-
-        [_scene animateCloudsIntoViewWithDuration:duration];
-
-        [UIView animateWithDuration:duration
-                              delay:0.0
-                            options:(UIViewAnimationOptions) (curve << 16)
-                         animations:^{
-                             self.loginFormView.center = self.loginFormView.centerBeforeKeyboardAnimation;
-                             self.configureFormView.center = self.configureFormView.centerBeforeKeyboardAnimation;
-                             self.forgotPasswordView.center = self.forgotPasswordView.centerBeforeKeyboardAnimation;
-                         }
-                         completion:nil];
-
-        _isKeyboardShown = NO;
+        [self.scene animateCloudsIntoViewWithDuration:duration];
     }
 }
 
@@ -330,7 +307,7 @@
 - (void)moveLogoOutOfScreen { /* Act one (1) */
     // Create an animation scenes that transitions to configure view.
     // VIAScene uses view dimensions to calculate the positions of clouds, at this point the self.view is resized correctly from xib values.
-    _scene = [[VIAScene alloc] initWithView:self.view];
+    self.scene = [[VIAScene alloc] initWithView:self.view];
 
     void (^logoAnimations)(void) = ^{
         [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
@@ -339,19 +316,16 @@
 
     switch (self.screenToShow) {
         case OnboardingScreenLogin:
-            [_scene runActOne];
+            [self.scene runActOne];
             break;
         case OnboardingScreenConfigure:
-            [_scene runActOneInstantly];  // Remove the scene 1 clouds instantly
-            [_scene runActTwo];           // Animate the clouds
+            [self.scene runActOneInstantly];  // Remove the scene 1 clouds instantly
+            [self.scene runActTwo];           // Animate the clouds
             [self retrievePhoneNumbersWithSuccessBlock:nil];
             break;
-            //        case OnboardingScreenUnlock:
-            //            [_scene runActThree];
-            //            break;
         default:
             //Show the login screen as default
-            [_scene runActOne];
+            [self.scene runActOne];
             break;
     }
 
@@ -363,12 +337,9 @@
             case OnboardingScreenConfigure:
                 [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
                 break;
-                //            case OnboardingScreenUnlock:
-                //                [self animateUnlockViewToVisible:1.f delay:0.f];
-                //                break;
             default:
                 //Show the login screen as default
-                [_scene runActOne];
+                [self.scene runActOne];
                 break;
         }
     };
@@ -431,16 +402,14 @@
     [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
-
-            //            [self setLockScreenFriendlyNameWithResponse:operation.responseObject];
-
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
             [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
-            [_scene runActTwo];                       // Animate the clouds
+            [self.scene runActTwo];                       // Animate the clouds
 
             //If a success block was provided, execute it
-            if (success)
-                success ();
+            if (success) {
+                success();
+            }
         }
     }];
 }
@@ -448,7 +417,7 @@
 - (void)retrievePhoneNumbersWithSuccessBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        _fetchAccountRetryCount = 0; // Reset the retry count
+        self.fetchAccountRetryCount = 0; // Reset the retry count
         NSString *outgoingNumber = [SystemUser currentUser].localizedOutgoingNumber;
         if (outgoingNumber) {
             [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
@@ -474,17 +443,17 @@
 
         //If a success block was provided, execute it
         if (success) {
-            success ();
+            success();
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
-        ++_fetchAccountRetryCount;
-        if (_fetchAccountRetryCount != 3) { // When we retried 3 times
+        self.fetchAccountRetryCount++;
+        if (self.fetchAccountRetryCount != 3) { // When we retried 3 times
             [self retrievePhoneNumbersWithSuccessBlock:nil];
         } else {
             [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
-            [self.configureFormView.outgoingNumberLabel setText:NSLocalizedString(@"Enter phonenumber manually", nil)];
+            [self.configureFormView.outgoingNumberLabel setText:NSLocalizedString(@"Enter phone number manually", nil)];
 
             [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
                                message:NSLocalizedString(@"Error while retrieving your outgoing number, please enter manually", nil)
@@ -566,7 +535,7 @@
     // Add a tap to the view to close immediately.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
     [self.view addGestureRecognizer:tap];
-    
+
     [UIView animateWithDuration:2.2f
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
@@ -578,7 +547,7 @@
                              [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(unlockIt) userInfo:nil repeats:NO];
                          }
                      }];
-    
+
 }
 
 - (void)handleUnlockTap:(UITapGestureRecognizer *)gesture {
@@ -589,14 +558,22 @@
     }
 }
 
-- (IBAction)unlockIt {
+- (void)unlockIt {
     // Put here what happens when it is unlocked
-    [_scene clean];
+    [self.scene clean];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.unlockView setAlpha:0.f];
         [self.logoView setAlpha:1.f];
         [self.logoView setCenter:self.view.center];
     }];
+}
+
+- (IBAction)mobileNumberInfoButtonPressed:(UIButton *)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Mobile phone number", nil) message:NSLocalizedString(@"To make Two step calling possible, we need to have your mobile phone number.", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:defaultAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

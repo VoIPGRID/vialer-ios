@@ -7,28 +7,28 @@
 //
 
 #import "SideMenuViewController.h"
-#import "UIViewController+MMDrawerController.h"
-#import "SideMenuTableViewCell.h"
+
+#import "SettingsViewController.h"
 #import "SideMenuHeaderView.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "SideMenuTableViewCell.h"
 #import "SystemUser.h"
+#import "UIAlertView+Blocks.h"
+#import "UIViewController+MMDrawerController.h"
+#import "VoIPGRIDRequestOperationManager.h"
+
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
-#import "InfoCarouselViewController.h"
-#import "UIAlertView+Blocks.h"
-#import "SettingsViewController.h"
 
-typedef enum : NSUInteger {
-    MENU_INDEX_STATS = 0,
+typedef NS_ENUM(NSInteger, SideMenuItems) {
+    MENU_INDEX_STATS,
     MENU_INDEX_INFO,
     MENU_INDEX_ACCOUNT,
     MENU_INDEX_ROUTING,
     MENU_INDEX_LOGOUT,
     MENU_ITEM_COUNT,
     // Items after this line are disabled (not shown in the menu)
-    MENU_INDEX_AVAILABILITY,
-    MENU_INDEX_AUTOCONNECT
-} SideMenuItems;
+    MENU_INDEX_AVAILABILITY
+};
 
 #define WEBVIEW_TARGET_DIALPLAN         0
 #define WEBVIEW_TARGET_ACCESSIBILITY    1
@@ -46,7 +46,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tintColor = [self navigationBarTintColor];
+    self.tintColor = [Configuration tintColorForKey:ConfigurationSideMenuTintColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
@@ -101,10 +101,6 @@ typedef enum : NSUInteger {
         case MENU_INDEX_ROUTING:
             [cell setMenuItemTitle:NSLocalizedString(@"Routing", nil)
                            andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-routing"] color:self.tintColor]];
-            break;
-        case MENU_INDEX_AUTOCONNECT:
-            [cell setMenuItemTitle:NSLocalizedString(@"Autoconnect", nil)
-                           andIcon:[self coloredImageWithImage:[UIImage imageNamed:@"menu-autoconnect"] color:self.tintColor]];
             break;
         default:
             [cell setMenuItemTitle:nil andIcon:nil];
@@ -188,8 +184,6 @@ typedef enum : NSUInteger {
         [self showInfoScreen];
     } else if (indexPath.row == MENU_INDEX_ACCOUNT) {
         [self showAccountView];
-        //} else if (indexPath.row == MENU_INDEX_AUTOCONNECT) {
-
     } else if (indexPath.row == MENU_INDEX_LOGOUT) {
 
         NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedString(@"%@\nis currently logged in.", nil),
@@ -197,15 +191,21 @@ typedef enum : NSUInteger {
 
         [message appendFormat:@"\n%@", NSLocalizedString(@"Are you sure you want to log out?", nil)];
 
-        [UIAlertView showWithTitle:NSLocalizedString(@"Log out", nil)
-                           message:message
-                 cancelButtonTitle:NSLocalizedString(@"No", nil)
-                 otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
-                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                              if (buttonIndex == 1) {
-                                  [[SystemUser currentUser] logout];
-                              }
-                          }];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Log out", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[SystemUser currentUser] logout];
+        }];
+        [alert addAction:defaultAction];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil) style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:cancelAction];
+
+        // Make sure we have the current presenting viewcontroller.
+        UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topRootViewController.presentedViewController && ![topRootViewController.presentedViewController isKindOfClass:[UIAlertController class]]) {
+            topRootViewController = topRootViewController.presentedViewController;
+        }
+        [topRootViewController presentViewController:alert animated:YES completion:nil];
+
     }
 }
 
@@ -314,10 +314,6 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Utils
-
-- (UIColor *)navigationBarTintColor {
-    return [Configuration tintColorForKey:kTintColorNavigationBar];
-}
 
 - (UIImage *)coloredImageWithImage:(UIImage*)image color:(UIColor*)color {
     CGFloat scaleFactor = 1.0f;

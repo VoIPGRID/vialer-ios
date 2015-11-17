@@ -5,26 +5,28 @@
 //  Created by Bob Voorneveld on 06/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
+#import "RootViewController.h"
 
-#import "CallingViewController.h"
 #import "ConnectionHandler.h"
 #import "ContactsViewController.h"
-#import "DialerViewController.h"
+#import "GAITracker.h"
 #import "LogInViewController.h"
 #import "RecentsViewController.h"
-#import "RootViewController.h"
 #import "SideMenuViewController.h"
 #import "SIPCallingViewController.h"
 #import "SIPIncomingViewController.h"
 #import "SystemUser.h"
+#import "TwoStepCallingViewController.h"
+
+static float const RootViewControllerMaximunDrawerWidth = 222.0;
+static float const RootViewControllerShadowRadius = 2.0f;
+static float const RootViewControllerShadowOpacity = 0.5f;
 
 @interface RootViewController ()
-@property (nonatomic, strong) CallingViewController *callingViewController;
 @property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
 @property (nonatomic, strong) SIPIncomingViewController *sipIncomingViewController;
 @property (nonatomic, strong) SideMenuViewController *sideMenuViewController;
+@property (nonatomic, strong) TwoStepCallingViewController *twoStepCallingViewController;
 @property (nonatomic, strong) UINavigationController *contactsNavigationViewController;
 @property (nonatomic, strong) UINavigationController *dialerNavigationController;
 @property (nonatomic, strong) UINavigationController *recentsNavigationViewController;
@@ -37,32 +39,42 @@
 #pragma mark - views setup
 
 - (instancetype)init {
-    self = [super initWithCenterViewController:self.tabBarController leftDrawerViewController:self.sideMenuViewController];
+    self = [super init];
 
     if (self) {
         [self setRestorationIdentifier:@"MMDrawer"];
-        [self setMaximumLeftDrawerWidth:222.0];
+        [self setMaximumLeftDrawerWidth:RootViewControllerMaximunDrawerWidth];
         [self setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
         [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-        [self setShadowRadius:2.f];
-        [self setShadowOpacity:0.5f];
+        [self setShadowRadius:RootViewControllerShadowRadius];
+        [self setShadowOpacity:RootViewControllerShadowOpacity];
+        [self setCenterViewController:self.tabBarController];
+        [self setLeftDrawerViewController:self.sideMenuViewController];
+        [self setupAppearance];
     }
     return self;
 }
+
+- (void)setupAppearance {
+    Configuration *config = [Configuration defaultConfiguration];
+
+    // Customize TabBar
+    [UITabBar appearance].tintColor = [config tintColorForKey:ConfigurationTabBarTintColor];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:ConfigurationTabBarTintColor]];
+    [UITabBar appearance].barTintColor = [config tintColorForKey:ConfigurationTabBarBackgroundColor];
+
+    // Customize NavigationBar
+    [UINavigationBar appearance].tintColor = [config tintColorForKey:ConfigurationNavigationBarTintColor];
+    [UINavigationBar appearance].barTintColor = [config tintColorForKey:ConfigurationNavigationBarBarTintColor];
+}
+
+#pragma mark - properties
 
 - (SideMenuViewController *)sideMenuViewController {
     if (!_sideMenuViewController) {
         _sideMenuViewController = [[SideMenuViewController alloc] init];
     }
     return _sideMenuViewController;
-}
-
-- (CallingViewController *)callingViewController {
-    if (!_callingViewController) {
-        _callingViewController = [[CallingViewController alloc] initWithNibName:@"CallingViewController" bundle:[NSBundle mainBundle]];
-        _callingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    }
-    return _callingViewController;
 }
 
 - (SIPCallingViewController *)sipCallingViewController {
@@ -95,53 +107,45 @@
 
 - (UINavigationController *)contactsNavigationViewController {
     if(!_contactsNavigationViewController) {
-        ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
-        contactsViewController.view.backgroundColor = [UIColor clearColor];
-        _contactsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:contactsViewController];
+        _contactsNavigationViewController = [[UIStoryboard storyboardWithName:@"ContactsStoryboard" bundle:nil] instantiateInitialViewController];
     }
     return _contactsNavigationViewController;
 }
 
 - (UINavigationController *)dialerNavigationController {
     if (!_dialerNavigationController) {
-        UIViewController *dialerViewController = [[DialerViewController alloc] initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
-        _dialerNavigationController = [[UINavigationController alloc] initWithRootViewController:dialerViewController];
-        _dialerNavigationController.navigationBar.translucent = NO;
+        _dialerNavigationController = [[UIStoryboard storyboardWithName:@"CallingStoryboard" bundle:nil] instantiateInitialViewController];
     }
     return _dialerNavigationController;
 }
 
 - (UINavigationController *)recentsNavigationViewController {
     if (!_recentsNavigationViewController) {
-        UIViewController *recentsViewController = [[RecentsViewController alloc] initWithNibName:@"RecentsViewController" bundle:[NSBundle mainBundle]];
-        recentsViewController.view.backgroundColor = [UIColor clearColor];
-        _recentsNavigationViewController = [[UINavigationController alloc] initWithRootViewController:recentsViewController];
-        _recentsNavigationViewController.navigationBar.translucent = NO;
-
+        _recentsNavigationViewController = [[UIStoryboard storyboardWithName:@"RecentsStoryboard" bundle:nil] instantiateInitialViewController];
     }
     return _recentsNavigationViewController;
+}
+
+- (TwoStepCallingViewController *)twoStepCallingViewController {
+    if (!_twoStepCallingViewController) {
+        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] initWithNibName:@"TwoStepCallingViewController" bundle:[NSBundle mainBundle]];
+    }
+    return _twoStepCallingViewController;
 }
 
 #pragma mark - Handle calls
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
 
     if ([[ConnectionHandler sharedConnectionHandler] sipOutboundCallPossible]) {
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Outbound"
-                                                               label:@"SIP"
-                                                               value:nil] build]];
+        [GAITracker setupOutgoingSIPCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
     } else {
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Outbound"
-                                                               label:@"ConnectAB"
-                                                               value:nil] build]];
+        [GAITracker setupOutgoingConnectABCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.callingViewController handlePhoneNumber:phoneNumber forContact:contact];
+            [self.twoStepCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
         });
     }
 }

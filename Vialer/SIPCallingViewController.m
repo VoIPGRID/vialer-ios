@@ -7,7 +7,9 @@
 //
 
 #import "SIPCallingViewController.h"
+
 #import "ConnectionHandler.h"
+#import "GAITracker.h"
 #import "Gossip+Extra.h"
 #import "SIPIncomingViewController.h"
 
@@ -16,17 +18,13 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVAudioSession.h>
 #import <AddressBook/AddressBook.h>
-
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
-
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
 
 NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotification";
 
 @interface SIPCallingViewController ()
-@property (nonatomic, strong) NumberPadViewController *numberPadViewController;
+@property (nonatomic, strong) OldNumberPadViewController *numberPadViewController;
 @property (nonatomic, strong) NSString *toNumber;
 @property (nonatomic, strong) NSString *toContact;
 @property (nonatomic, strong) NSArray *images;
@@ -52,7 +50,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
 
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
 
-    self.numberPadViewController = [[NumberPadViewController alloc] init];
+    self.numberPadViewController = [[OldNumberPadViewController alloc] init];
     self.numberPadViewController.view.frame = CGRectOffset(self.buttonsView.frame, 0, -16.f);
     [self.view insertSubview:self.numberPadViewController.view aboveSubview:self.buttonsView];
     [self addChildViewController:self.numberPadViewController];
@@ -75,6 +73,11 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     
     [self showWithStatus:NSLocalizedString(@"Setting up connection...", nil)];
     [self.hideButton setTitle:NSLocalizedString(@"Hide", nil) forState:UIControlStateNormal];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -189,11 +192,7 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
                           options:NSKeyValueObservingOptionInitial
                           context:nil];
 
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                          action:@"Inbound"
-                                                           label:@"Accepted"
-                                                           value:nil] build]];
+    [GAITracker acceptIncomingCallEvent];
     
     // begin calling after 1s
     const double delayInSeconds = 1.0;

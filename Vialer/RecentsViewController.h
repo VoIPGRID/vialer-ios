@@ -2,16 +2,12 @@
 //  RecentsViewController.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Created by Bob Voorneveld on 16/11/15.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <AddressBookUI/AddressBookUI.h>
-#import "TrackedViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface RecentsViewController : TrackedViewController<UITableViewDataSource, UITableViewDelegate, ABPersonViewControllerDelegate, ABUnknownPersonViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *filterSegmentedControl;
+@interface RecentsViewController : UIViewController
 
-- (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender;
 @end

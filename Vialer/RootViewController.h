@@ -8,6 +8,8 @@
 
 #import "MMDrawerController.h"
 
+@class GSCall;
+
 @interface RootViewController : MMDrawerController
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;

@@ -2,293 +2,229 @@
 //  DialerViewController.m
 //  Vialer
 //
-//  Created by Reinier Wieringa on 15/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Created by Bob Voorneveld on 03/11/15.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "DialerViewController.h"
+
 #import "AppDelegate.h"
-#import "ConnectionHandler.h"
-#import "AnimatedNumberPadViewController.h"
+#import "Configuration.h"
+#import "GAITracker.h"
+#import "NumberPadViewController.h"
+#import "PasteableUILabel.h"
+#import "ReachabilityManager.h"
+#import "ReachabilityBarViewController.h"
 #import "SIPCallingViewController.h"
+#import "TwoStepCallingViewController.h"
+
 #import "UIViewController+MMDrawerController.h"
-#import "SystemUser.h"
 
-#import "AFNetworkReachabilityManager.h"
+#import <AVFoundation/AVAudioSession.h>
 
-#import <AudioToolbox/AudioServices.h>
-#import <CoreTelephony/CTCallCenter.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <CoreTelephony/CTCall.h>
+static NSString * const DialerViewControllerTabBarItemImage = @"tab-keypad";
+static NSString * const DialerViewControllerTabBarItemActiveImage = @"tab-keypad-active";
+static NSString * const DialerViewControllerLogoImage = @"logo";
+static NSString * const DialerViewControllerLeftDrawerButtonImage = @"menu";
 
-#import "Reachability.h"
+static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
-@interface DialerViewController ()
-@property (nonatomic, strong) CTCallCenter *callCenter;
-@property (nonatomic, strong) AnimatedNumberPadViewController *numberPadViewController;
-@property (nonatomic, strong) Reachability *reachabilityManager;
+@interface DialerViewController () <PasteableUILabelDelegate, NumberPadViewControllerDelegate>
+
+@property (nonatomic, strong) UIBarButtonItem *leftDrawerButton;
+@property (weak, nonatomic) IBOutlet PasteableUILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *callButton;
+@property (nonatomic, weak) ReachabilityBarViewController *reachabilityBarViewController;
+@property (nonatomic, strong) TwoStepCallingViewController *twoStepCallingViewController;
+@property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
+
+@property (strong, nonatomic) NSString *numberText;
+@property (nonatomic, strong) ReachabilityManager *reachabilityManager;
+@property (nonatomic, strong) NSString *lastCalledNumber;
+
 @end
 
 @implementation DialerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+#pragma mark - view lifecycle
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
         self.title = NSLocalizedString(@"Keypad", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"tab-keypad"];
-        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tab-keypad-active"];
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        
-        // Add hamburger menu on navigation bar
-        UIBarButtonItem *leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftDrawerButtonPress:)];
-        leftDrawerButton.tintColor = [UIColor colorWithRed:(145.f / 255.f) green:(145.f / 255.f) blue:(145.f / 255.f) alpha:1.f];
-        self.navigationItem.leftBarButtonItem = leftDrawerButton;
-
-        __weak typeof(self) weakSelf = self;
-        self.callCenter = [[CTCallCenter alloc] init];
-        [self.callCenter setCallEventHandler:^(CTCall *call) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.backButton.hidden = YES;
-                weakSelf.callButton.enabled = NO;
-                weakSelf.numberTextView.text = @"";
-            });
-            NSLog(@"callEventHandler2: %@", call.callState);
-        }];
-        
-        [self.reachabilityManager startNotifier];
+        self.tabBarItem.image = [UIImage imageNamed:DialerViewControllerTabBarItemImage];
+        self.tabBarItem.selectedImage = [UIImage imageNamed:DialerViewControllerTabBarItemActiveImage];
     }
     return self;
 }
 
--(void)dealloc {
-    [self.reachabilityManager stopNotifier];
+- (void)viewDidLoad {
+    [self setupLayout];
 }
 
-- (Reachability *)reachabilityManager{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+    [self setupReachability];
+    [self setupCallButton];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.reachabilityManager stopMonitoring];
+}
+
+#pragma mark - setup
+
+    
+- (void)setupLayout {
+    self.numberText = @"";
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DialerViewControllerLogoImage]];
+}
+
+- (void)setupReachability {
+    [self.reachabilityManager addObserver:self forKeyPath:DialerViewControllerReachabilityStatusKey options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [self.reachabilityManager startMonitoring];
+    self.reachabilityBarViewController.status = self.reachabilityManager.status;
+}
+
+- (void)setupCallButton {
+    if (self.reachabilityManager == ReachabilityManagerStatusOffline ||
+        (!self.lastCalledNumber.length && !self.numberText.length)) {
+        self.callButton.enabled = NO;
+    } else {
+        self.callButton.enabled = YES;
+    }
+}
+
+#pragma mark - properties
+
+- (void)setNumberLabel:(PasteableUILabel *)numberLabel {
+    _numberLabel = numberLabel;
+    _numberLabel.delegate = self;
+}
+
+- (void)setNumberText:(NSString *)numberText {
+    self.numberLabel.text = [self cleanPhonenumber:numberText];
+    self.deleteButton.hidden = self.numberText.length == 0;
+    [self setupCallButton];
+}
+
+- (NSString *)cleanPhonenumber:(NSString *)phonenumber {
+    phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    return [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
+}
+
+
+- (NSString *)numberText {
+    return self.numberLabel.text;
+}
+
+- (ReachabilityManager *)reachabilityManager {
     if (!_reachabilityManager) {
-        _reachabilityManager = [Reachability reachabilityForInternetConnection];
-        // Set the blocks
-        __weak typeof(self) weakSelf = self;
-        _reachabilityManager.reachableBlock = ^(Reachability*reach) {
-            // keep in mind this is called on a background thread
-            // and if you are updating the UI it needs to happen
-            // on the main thread, like this:
-            dispatch_async(dispatch_get_main_queue(), ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"REACHABLE!");
-                    [weakSelf connectionStatusChangedNotification:nil];
-                });
-            });
-        };
-        
-        _reachabilityManager.unreachableBlock = ^(Reachability*reach) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"UNREACHABLE!");
-                [weakSelf connectionStatusChangedNotification:nil];
-            });
-        };
+        _reachabilityManager = [[ReachabilityManager alloc] init];
     }
     return _reachabilityManager;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //TODO: what about de-registering for these notifications in, for instance, -viewDidUnload
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width);
-
-    self.numberPadViewController = [[AnimatedNumberPadViewController alloc] init];
-    self.numberPadViewController.view.frame = self.buttonsView.bounds;
-    [self.buttonsView addSubview:self.numberPadViewController.view];
-    [self addChildViewController:self.numberPadViewController];
-    self.numberPadViewController.delegate = self;
-    self.numberPadViewController.tonesEnabled = YES;
-
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backButtonLongPress:)];
-    [self.backButton addGestureRecognizer:longPress];
-    
-    self.backButton.hidden = YES;
-    self.callButton.enabled = NO;
-
-    [self connectionStatusChangedNotification:nil];
-    
-    // Color the warning
-    self.statusView.backgroundColor = [Configuration tintColorForKey:kTintColorMessage];
-}
-
-// Override to always trigger a status change notification to update the user interface info messages
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipCallStartedNotification:) name:SIPCallStartedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCallButtonState) name:UIApplicationDidBecomeActiveNotification object:nil];
-
-    [self connectionStatusChangedNotification:nil];
-    [self setCallButtonState];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SIPCallStartedNotification object:nil];
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)setCallButtonState {
-    if (!self.numberTextView.text.length) {
-        self.callButton.enabled = NO;
-        self.backButton.hidden = YES;
+- (SIPCallingViewController *)sipCallingViewController {
+    if (!_sipCallingViewController) {
+        _sipCallingViewController = [[SIPCallingViewController alloc] initWithNibName:@"SIPCallingViewController" bundle:[NSBundle mainBundle]];
+        _sipCallingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     }
-
+    return _sipCallingViewController;
 }
 
-//We need a way to distinquish between
-// - no internet at all
-// - internet below wifi/4g -> connect A/B only
-// - A user who has no Mobile app VoIP account
-- (void)connectionStatusChangedNotification:(NSNotification *)notification {
-    //Function is called when inet connection is interrupted... but not always
-
-    if ([self.reachabilityManager isReachable]) {
-    //we have internets!!
-        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = YES;
-        self.callButton.enabled = YES;
-        
-        
-        // Check if the user has sip enabled
-        if (![SystemUser currentUser].sipEnabled) {
-            // SIP is not enabled, and we are connected to internet, no info needed
-            [self hideMessage];
-        // Check if the user has a sip account configured
-        } else if ([SystemUser currentUser].sipAccount) {
-            //Is the connection quality sufficient for SIP?
-            if ([ConnectionHandler sharedConnectionHandler].connectionStatus == ConnectionStatusHigh) {
-                [self hideMessage];
-            } else {
-                [self showMessage:NSLocalizedString(@"Poor internet connection Connect A/B", nil) withInfo:NSLocalizedString(@"Poor internet Info", nil)];
-            }
-        } else {
-            [self showMessage:NSLocalizedString(@"Connect A/B calls only", nil) withInfo:NSLocalizedString(@"Connect A/B Info", nil)];
-        }
-    } else {
-        self.buttonsView.userInteractionEnabled = self.backButton.userInteractionEnabled = self.numberTextView.userInteractionEnabled = NO;
-        self.callButton.enabled = NO;
-        
-        [self showMessage:NSLocalizedString(@"No Connection", nil) withInfo:NSLocalizedString(@"No Connection Info Text", nil)];
+- (TwoStepCallingViewController *)twoStepCallingViewController {
+    if (!_twoStepCallingViewController) {
+        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] initWithNibName:@"TwoStepCallingViewController" bundle:[NSBundle mainBundle]];
     }
+    return _twoStepCallingViewController;
 }
 
-- (void)sipCallStartedNotification:(NSNotification *)notification {
-    self.backButton.hidden = YES;
-    self.callButton.enabled = NO;
-    self.numberTextView.text = @"";
+- (void)setLastCalledNumber:(NSString *)lastCalledNumber {
+    _lastCalledNumber = lastCalledNumber;
+    [self setupCallButton];
 }
 
-#pragma mark - TextView delegate
+# pragma mark - actions
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSString *originalText = textView.text ? textView.text : @"";
-    NSString *newString = [originalText stringByReplacingCharactersInRange:range withString:text];
-    NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"0123456789+#*() "];
-    if (newString.length != [[newString componentsSeparatedByCharactersInSet:[characterSet invertedSet]] componentsJoinedByString:@""].length) {
-        return NO;
-    }
-
-    self.backButton.hidden = NO;
-    self.callButton.enabled = YES;
-
-    return YES;
-}
-
-#pragma mark - Actions
-- (void)backButtonLongPress:(UILongPressGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        self.numberTextView.text = @"";
-        self.backButton.hidden = YES;
-        self.callButton.enabled = NO;
-    }
-}
-
-- (IBAction)dialerBackButtonPressed:(UIButton *)sender {
-    self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
-    self.backButton.hidden = (self.numberTextView.text.length == 0);
-    self.callButton.enabled = (self.numberTextView.text.length > 0);
-}
-
-- (IBAction)callButtonPressed:(UIButton *)sender {
-    NSString *phoneNumber = self.numberTextView.text;
-    if (!phoneNumber.length) {
-        return;
-    }
-
-    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-    [appDelegate handlePhoneNumber:phoneNumber];
-}
-
-- (void)leftDrawerButtonPress:(id)sender{
+- (IBAction)leftDrawerButtonPress:(UIBarButtonItem *)sender{
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
-#pragma mark - NumberPadViewController delegate
+- (IBAction)backButtonPressed:(UIButton *)sender {
+    self.numberText = [self.numberText substringToIndex:self.numberText.length - 1];
+}
+
+
+- (IBAction)backButtonLongPress:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.numberText = @"";
+    }
+}
+
+- (IBAction)callButtonPressed:(UIButton *)sender {
+    // No number filled in yet, use old number (if stored)
+    if (![self.numberText length]) {
+        self.numberText = self.lastCalledNumber;
+
+        // There is a number, let's call
+    } else {
+        self.lastCalledNumber = self.numberText;
+        // TODO: implement 4g calling
+        if (false) {
+            [GAITracker setupOutgoingSIPCallEvent];
+            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+            [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+        } else {
+            [GAITracker setupOutgoingConnectABCallEvent];
+            [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
+            [self.twoStepCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+        }
+    }
+}
+
+#pragma mark - seques
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[NumberPadViewController class]]) {
+        NumberPadViewController *npvc = (NumberPadViewController *)segue.destinationViewController;
+        npvc.delegate = self;
+    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
+        self.reachabilityBarViewController = (ReachabilityBarViewController *)segue.destinationViewController;
+    }
+}
+
+#pragma mark - NumberPadViewControllerDelegate
 
 - (void)numberPadPressedWithCharacter:(NSString *)character {
-    if (!self.numberTextView.text) {
-        self.numberTextView.text = @"";
+    if ([character isEqualToString:@"+"]) {
+        if ([self.numberText isEqualToString:@"0"] || !self.numberText.length) {
+            self.numberText = @"+";
+        }
+    } else {
+        self.numberText = [self.numberText stringByAppendingString:character];
     }
+}
 
-    if ([character isEqualToString:@"+"] && self.numberTextView.text.length > 0) {
-        self.numberTextView.text = [self.numberTextView.text substringToIndex:self.numberTextView.text.length - 1];
+#pragma mark - PasteableUILabelDelegate
+
+- (void) pasteableUILabel:(UILabel *)label didReceivePastedText:(NSString *)text {
+    self.numberText = text;
+}
+
+#pragma mark - kvo
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+
+    // Keep track of connection status from reachabilityManager
+    if ([keyPath isEqualToString:@"status"] && change[@"new"] != change[@"old"]) {
+        self.reachabilityBarViewController.status = self.reachabilityManager.status;
+        [self setupCallButton];
     }
-    self.numberTextView.text = [self.numberTextView.text stringByAppendingString:character];
-
-    self.backButton.hidden = NO;
-    self.callButton.enabled = YES;
-}
-
-#pragma mark - Private status message handling
-
-- (void)showMessage:(NSString *)message withInfo:(NSString *)info {
-    self.infoMessage = info;
-    self.statusLabel.text = message;
-    self.statusView.hidden = NO;
-    // Move the input a bit down
-    [UIView animateWithDuration:0.1
-                     animations:^{
-                         self.numberTextView.frame = CGRectMake(self.numberTextView.frame.origin.x, 25.0,
-                                                                self.numberTextView.frame.size.width, self.numberTextView.frame.size.height);
-                         self.backButton.frame = CGRectMake(self.backButton.frame.origin.x, 25.0,
-                                                            self.backButton.frame.size.width, self.backButton.frame.size.height);
-                     }];
-}
-
-- (void)hideMessage {
-    self.infoMessage = nil;
-    // Hide the status label
-    self.statusView.hidden = YES;
-    // Position back the input fields
-    [UIView animateWithDuration:0.1
-                     animations:^{
-                         self.numberTextView.frame = CGRectMake(self.numberTextView.frame.origin.x, 8.f,
-                                                                self.numberTextView.frame.size.width, self.numberTextView.frame.size.height);
-                         self.backButton.frame = CGRectMake(self.backButton.frame.origin.x, 8.f,
-                                                            self.backButton.frame.size.width, self.backButton.frame.size.height);
-                     }];
-
-}
-
-- (void)messageInfoPressed:(UIButton *)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.statusLabel.text
-                                                    message:self.infoMessage
-                                                   delegate:nil
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-    [alert show];
 }
 
 @end

@@ -6,15 +6,13 @@
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "TrackedViewController.h"
 #import "AnimatedImageView.h"
-
-#import "LoginFormView.h"
-#import "ForgotPasswordView.h"
 #import "ConfigureFormView.h"
+#import "ForgotPasswordView.h"
+#import "LoginFormView.h"
 #import "UnlockView.h"
 
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, OnboardingScreens) {
     OnboardingScreenLogin      = 0,
@@ -23,7 +21,7 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
     //OnboardingScreenUnlock     = 2,
 };
 
-@interface LogInViewController : TrackedViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface LogInViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 /* The vialier logo that moves out of screen when view opens. */
 @property (nonatomic, strong) IBOutlet AnimatedImageView *logoView;

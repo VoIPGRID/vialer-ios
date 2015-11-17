@@ -7,13 +7,16 @@
 //
 
 #import "SystemUser.h"
-#import "VoIPGRIDRequestOperationManager.h"
-#import "SSKeychain.h"  // Store the SipPassword safely
-#import "PZPushMiddleware.h"
-#import "ConnectionHandler.h"
+
 #import "AppDelegate.h"
+#import "ConnectionHandler.h"
+#import "PZPushMiddleware.h"
 #import "UIAlertView+Blocks.h"
+#import "VoIPGRIDRequestOperationManager.h"
+
 #import <AVFoundation/AVAudioSession.h>
+
+#import "SSKeychain.h"
 
 #define kMobileNumberKey    @"mobile_nr"
 #define kSIPAccountKey      @"account_id"
@@ -56,7 +59,6 @@ NSString * const kSuppressedKey = @"suppressed";
     dispatch_once(&onceToken, ^{
         _currentUser = [[SystemUser alloc] initPrivate];
     });
-
     return _currentUser;
 }
 

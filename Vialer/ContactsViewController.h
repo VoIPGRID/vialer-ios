@@ -2,13 +2,12 @@
 //  ContactsViewController.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Created by Bob Voorneveld on 12/11/15.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <AddressBookUI/AddressBookUI.h>
-#import "TrackedViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface ContactsViewController : TrackedViewController <ABPersonViewControllerDelegate, UINavigationControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ContactsViewController : UIViewController
 
 @end

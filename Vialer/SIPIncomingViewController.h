@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TrackedViewController.h"
 
-@interface SIPIncomingViewController : TrackedViewController
+@interface SIPIncomingViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *contactLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIButton *acceptButton;
