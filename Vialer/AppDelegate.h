@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AddressBookUI/AddressBookUI.h>
-
 #import <PushKit/PushKit.h>
 
 @class GSCall;
@@ -19,8 +17,6 @@
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
-- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;
 - (void)handlePhoneNumber:(NSString *)phoneNumber;
 - (void)handleSipCall:(GSCall *)sipCall;
 

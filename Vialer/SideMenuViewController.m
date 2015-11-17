@@ -223,11 +223,7 @@ typedef NS_ENUM(NSInteger, SideMenuItems) {
     if (!toEncode) {
         return @"";
     }
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                 (CFStringRef)toEncode,
-                                                                                 NULL,
-                                                                                 (CFStringRef) @"!*'();:@&=+$,/?%#[]",  // RFC 3986 characters
-                                                                                 kCFStringEncodingUTF8));
+    return [toEncode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]"]]; // RFC 3986 characters
 }
 
 - (void)showWebViewScreen:(int)webviewTarget {

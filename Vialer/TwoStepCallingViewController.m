@@ -58,7 +58,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 
 @implementation TwoStepCallingViewController
 
-- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
+- (void)handlePhoneNumber:(NSString *)phoneNumber {
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }

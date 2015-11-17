@@ -60,7 +60,7 @@ static float const RootViewControllerShadowOpacity = 0.5f;
 
     // Customize TabBar
     [UITabBar appearance].tintColor = [config tintColorForKey:ConfigurationTabBarTintColor];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTintColor:[config tintColorForKey:ConfigurationTabBarTintColor]];
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIToolbar class]]] setTintColor:[config tintColorForKey:ConfigurationTabBarTintColor]];
     [UITabBar appearance].barTintColor = [config tintColorForKey:ConfigurationTabBarBackgroundColor];
 
     // Customize NavigationBar
@@ -135,17 +135,17 @@ static float const RootViewControllerShadowOpacity = 0.5f;
 
 #pragma mark - Handle calls
 
-- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
+- (void)handlePhoneNumber:(NSString *)phoneNumber {
 
-    if ([[ConnectionHandler sharedConnectionHandler] sipOutboundCallPossible]) {
+    if (false) {
         [GAITracker setupOutgoingSIPCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
+            [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
         });
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.twoStepCallingViewController handlePhoneNumber:phoneNumber forContact:contact];
+            [self.twoStepCallingViewController handlePhoneNumber:phoneNumber];
         });
     }
 }
