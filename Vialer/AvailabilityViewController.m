@@ -48,7 +48,6 @@
     if (_availabilityModel == nil) {
         _availabilityModel = [[AvailabilityModel alloc] init];
     }
-
     return _availabilityModel;
 }
 
@@ -56,15 +55,10 @@
     [self.refreshControl beginRefreshing];
 
     [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
-        if (localizedErrorString != nil) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:localizedErrorString
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
+        [self.refreshControl endRefreshing];
+        if (localizedErrorString) {
+            [self presentAlertControllerWithErrorString:localizedErrorString];
         }else{
-            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }
     }];
@@ -77,17 +71,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"AvailabilityTableViewCell";
+    static NSString *DefaultCellIdentifier = @"AvailabilityTableViewDefaultCell";
+    static NSString *SubtitleCellIdentifier = @"AvailabilityTableViewSubtitleCell";
     NSDictionary *availabilityDict = [self.availabilityModel getAvailabilityAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
 
+    UITableViewCell *cell;
     if ([[availabilityDict objectForKey:kAvailabilityPhoneNumber] isEqualToNumber:@0]){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
         cell.textLabel.text = [availabilityDict objectForKey:kAvailabilityDescription];
     } else {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:SubtitleCellIdentifier];
         cell.textLabel.text = [availabilityDict objectForKey:kAvailabilityDescription];
         cell.detailTextLabel.text = [[availabilityDict objectForKey:kAvailabilityPhoneNumber] stringValue];
     }
@@ -96,7 +89,6 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.lastSelected = indexPath;
     }
-
     return cell;
 }
 
@@ -112,19 +104,24 @@
 
     [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_AVAILABILITY...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
-        if (localizedErrorString != nil) {
-            [SVProgressHUD dismiss];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:localizedErrorString
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
+        [SVProgressHUD dismiss];
+        if (localizedErrorString) {
+            [self presentAlertControllerWithErrorString:localizedErrorString];
         } else {
             [self.delegate availabilityHasChanged];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
 
+- (void)presentAlertControllerWithErrorString:(NSString *)errorString {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:errorString preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
 @end

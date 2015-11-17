@@ -42,10 +42,6 @@
     [GAITracker setupGAITracker];
     [self setupConnectivity];
 
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.rootViewController;
-    [self.window makeKeyAndVisible];
-
     [self setupLogin];
 
     NSSetUncaughtExceptionHandler(&HandleExceptions);
@@ -172,10 +168,6 @@ void HandleExceptions(NSException *exception) {
 }
 
 #pragma mark - Handle person(s) & calls
-
-- (void)handlePhoneNumber:(NSString *)phoneNumber {
-    [self.rootViewController handlePhoneNumber:phoneNumber];
-}
 
 - (void)handleSipCall:(GSCall *)sipCall {
     return [self.rootViewController handleSipCall:sipCall];

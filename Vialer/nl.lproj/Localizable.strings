@@ -4,19 +4,7 @@
 "%@\nis currently logged in." = "%@\nis ingelogd.";
 
 /* No comment provided by engineer. */
-"/dashboard/" = "/dashboard/";
-
-/* No comment provided by engineer. */
-"/dialplan/" = "/dialplan/";
-
-/* No comment provided by engineer. */
-"/stats/dashboard/" = "/stats/dashboard/";
-
-/* No comment provided by engineer. */
 "Accept" = "Neem op";
-
-/* No comment provided by engineer. */
-"Accessibility" = "Bereikbaarheid";
 
 /* No comment provided by engineer. */
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
@@ -35,9 +23,6 @@
 
 /* No comment provided by engineer. */
 "Availability" = "Bereikbaarheid";
-
-/* No comment provided by engineer. */
-"AVAILABILITY_SAVED_SUCCESS" = "Bereikbaarheid opgeslagen";
 
 /* No comment provided by engineer. */
 "Business" = "Zakelijke";
@@ -120,7 +105,7 @@
 /* No comment provided by engineer. */
 "Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
 
-/* No comment provided by engineer. */
+/* failed to load webpage with title */
 "Failed to load %@" = "%@ kon niet worden geladen";
 
 /* No comment provided by engineer. */
@@ -128,6 +113,9 @@
 
 /* No comment provided by engineer. */
 "Failed to setup call" = "Opzetten van gesprek mislukt";
+
+/* No comment provided by engineer. */
+"Fetching the latstest recent calls from the server." = "Meest recente gesprekken worden van de server gehaald.";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
@@ -143,9 +131,6 @@
 
 /* No comment provided by engineer. */
 "Incoming call from %@" = "Binnenkomend gesprek van %@";
-
-/* No comment provided by engineer. */
-"Information" = "Informatie";
 
 /* No comment provided by engineer. */
 "Invalid number used to setup call" = "Foutief nummer gebruikt om gesprek op te zetten";
@@ -170,9 +155,6 @@
 
 /* No comment provided by engineer. */
 "Login failed" = "Inloggen mislukt";
-
-/* No comment provided by engineer. */
-"Logout" = "Uitloggen";
 
 /* No comment provided by engineer. */
 "Microphone Access Denied" = "Geen toegang tot microfoon";
@@ -200,9 +182,6 @@
 
 /* No comment provided by engineer. */
 "No login data" = "Geen inloggegevens";
-
-/* No comment provided by engineer. */
-"No outgoing number configured" = "Geen uitgaand nummer ingesteld";
 
 /* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
@@ -247,9 +226,6 @@
 "Retrieving phone numbers..." = "Telefoonnummers ophalen...";
 
 /* No comment provided by engineer. */
-"Routing" = "Belplan";
-
-/* No comment provided by engineer. */
 "Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
 
 /* No comment provided by engineer. */
@@ -263,9 +239,6 @@
 
 /* No comment provided by engineer. */
 "Setting up connection..." = "Maakt verbinding...";
-
-/* No comment provided by engineer. */
-"Settings" = "Instellingen";
 
 /* No comment provided by engineer. */
 "SIP account" = "SIP account";

@@ -10,6 +10,7 @@ target 'Vialer' do
 	pod 'Google/Analytics', '~> 1.0.7'
 	pod 'HTCopyableLabel'
    	pod 'MMDrawerController'
+    pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
    	pod 'PBWebViewController'
    	pod 'Reachability'
    	pod 'SSKeychain'

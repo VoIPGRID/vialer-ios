@@ -1,0 +1,9 @@
+
+/* Class = "UITabBarItem"; title = "Contacts"; ObjectID = "hic-qE-fXK"; */
+"hic-qE-fXK.title" = "Contacten";
+
+/* Class = "UITabBarItem"; title = "Recents"; ObjectID = "lmK-Bc-OZa"; */
+"lmK-Bc-OZa.title" = "Recent";
+
+/* Class = "UITabBarItem"; title = "Keys"; ObjectID = "qlY-ML-87C"; */
+"qlY-ML-87C.title" = "Toetsen";

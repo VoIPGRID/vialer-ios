@@ -15,9 +15,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) UITabBarController *tabBarController;
-
-- (void)handlePhoneNumber:(NSString *)phoneNumber;
 - (void)handleSipCall:(GSCall *)sipCall;
 
 @end

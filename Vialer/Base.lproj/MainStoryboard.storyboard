@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="i10-iY-7zz">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--Vialer Drawer View Controller-->
+        <scene sceneID="Olp-zU-Nr0">
+            <objects>
+                <viewController id="i10-iY-7zz" customClass="VialerDrawerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PVF-Ou-Msd"/>
+                        <viewControllerLayoutGuide type="bottom" id="q1L-77-NcB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mzC-cA-UBR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="ALB-k4-yaR" kind="custom" identifier="mm_center" customClass="MMDrawerControllerSegue" id="tO0-Oo-pCK"/>
+                        <segue destination="ciJ-Ul-t4m" kind="custom" identifier="mm_left" customClass="MMDrawerControllerSegue" id="rYM-rH-MOq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oD8-kx-jiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3600" y="-584"/>
+        </scene>
+        <!--Main Tab Bar View Controller-->
+        <scene sceneID="gWm-cd-SPB">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ALB-k4-yaR" customClass="MainTabBarViewController" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="MpR-iT-2ec">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="7HG-I5-xKZ" kind="relationship" relationship="viewControllers" id="UJQ-lL-Wuc"/>
+                        <segue destination="iRw-Do-IKp" kind="relationship" relationship="viewControllers" id="Qfi-iz-4uN"/>
+                        <segue destination="05L-Wg-Fcr" kind="relationship" relationship="viewControllers" id="Tzc-rH-oQ9"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ySl-vq-9vu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4344" y="-187"/>
+        </scene>
+        <!--CallingStoryboard-->
+        <scene sceneID="7Gw-9Q-bJb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CallingStoryboard" id="7HG-I5-xKZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Keys" image="tab-keypad" selectedImage="tab-keypad-active" id="qlY-ML-87C"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MOG-2s-BfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4126.5" y="301"/>
+        </scene>
+        <!--ContactsStoryboard-->
+        <scene sceneID="zuy-hy-KEW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ContactsStoryboard" id="iRw-Do-IKp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contacts" image="tab-contact" selectedImage="tab-contact-active" id="hic-qE-fXK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b12-rL-OuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4344.5" y="301"/>
+        </scene>
+        <!--RecentsStoryboard-->
+        <scene sceneID="g5I-by-bs7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RecentsStoryboard" id="05L-Wg-Fcr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Recents" image="tab-recent" selectedImage="tab-recent-active" id="lmK-Bc-OZa"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nVm-hC-IY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4561.5" y="301"/>
+        </scene>
+        <!--SideMenuStoryboard-->
+        <scene sceneID="Aca-e1-6Ll">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MenuIdentifier" storyboardName="SideMenuStoryboard" id="ciJ-Ul-t4m" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6RD-VT-oEb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4344" y="-916"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tab-contact" width="30" height="30"/>
+        <image name="tab-contact-active" width="27" height="28"/>
+        <image name="tab-keypad" width="24" height="24"/>
+        <image name="tab-keypad-active" width="24" height="24"/>
+        <image name="tab-recent" width="26" height="26"/>
+        <image name="tab-recent-active" width="26" height="26"/>
+    </resources>
+</document>

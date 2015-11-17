@@ -12,7 +12,6 @@
 
 @interface RootViewController : MMDrawerController
 
-- (void)handlePhoneNumber:(NSString *)phoneNumber;
 - (void)handleSipCall:(GSCall *)sipCall;
 
 @end
