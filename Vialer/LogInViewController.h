@@ -41,8 +41,6 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
  **/
 @property (nonatomic)OnboardingScreens screenToShow;
 
-- (IBAction)unlockIt;
-
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;
 

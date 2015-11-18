@@ -24,7 +24,7 @@
     [super viewDidLoad];
 
     // prepare sounds
-    [self.sounds count];
+    [self setupSounds];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,8 +44,8 @@
     }
 }
 
-- (NSDictionary *)sounds {
-    if (!_sounds) {
+- (void)setupSounds {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSMutableDictionary *sounds = [NSMutableDictionary dictionary];
         for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#"]) {
             NSString *dtmfFile;
@@ -63,9 +63,8 @@
             }
             sounds[sound] = player;
         }
-        _sounds = [sounds copy];
-    }
-    return _sounds;
+        self.sounds = [sounds copy];
+    });
 }
 
 - (void)playSoundForCharacter:(NSString *)character {

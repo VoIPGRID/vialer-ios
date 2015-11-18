@@ -27,15 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.usernameLabel.text = [SystemUser currentUser].displayName;
     self.outgoingNumberLabel.text = [SystemUser currentUser].outgoingNumber;
-}
-- (void)setupLayout {
-
 }
 
 #pragma mark - properties

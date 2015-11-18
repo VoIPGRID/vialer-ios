@@ -22,9 +22,6 @@
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";
 
 /* No comment provided by engineer. */
-"Availability" = "Bereikbaarheid";
-
-/* No comment provided by engineer. */
 "Business" = "Zakelijke";
 
 /* No comment provided by engineer. */
@@ -131,6 +128,9 @@
 
 /* No comment provided by engineer. */
 "Incoming call from %@" = "Binnenkomend gesprek van %@";
+
+/* No comment provided by engineer. */
+"Information" = "Informatie";
 
 /* No comment provided by engineer. */
 "Invalid number used to setup call" = "Foutief nummer gebruikt om gesprek op te zetten";
@@ -256,6 +256,9 @@
 "suppressed" = "Anoniem (onderdrukt)";
 
 /* No comment provided by engineer. */
+"Syncing addressbook." = "Adresboek synchroniseren.";
+
+/* No comment provided by engineer. */
 "This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
 
 /* No comment provided by engineer. */
@@ -272,6 +275,9 @@
 
 /* No comment provided by engineer. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Twee staps modus zal een gesprek opzetten naar je telefoon en zal na beantwooring het gesprek opzetten naar de andere partij.";
+
+/* No comment provided by engineer. */
+"Unable to fetch availability" = "Niet mogelijk bereikbaarheid op te halen";
 
 /* No comment provided by engineer. */
 "Unable to fetch you recent call list." = "Ophalen van recente gesprekken mislukt.";

@@ -17,7 +17,6 @@
 @property (nonatomic, strong) CNContactFetchRequest *fetchRequest;
 
 @property (nonatomic, strong) NSArray *sectionTitles;
-
 @end
 
 @implementation ContactModel
@@ -29,7 +28,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^ {
         _defaultContactModel = [[ContactModel alloc] init];
-        [_defaultContactModel refreshAllContacts];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [_defaultContactModel refreshAllContacts];
+        });
     });
     return _defaultContactModel;
 }

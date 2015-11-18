@@ -84,7 +84,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 }
 
 - (NSArray *)createDestinations:(NSArray*) userDestinations withDestinationType:(NSString*)destinationType withSelectedDestination:(NSDictionary*)selectedDestination {
-    NSNumber *phoneNumber = @0;
+    NSNumber *phoneNumber;
 
     NSMutableArray *destinations = [[NSMutableArray alloc] init];
     if ([userDestinations count]) {

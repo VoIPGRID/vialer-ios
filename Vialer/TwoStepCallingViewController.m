@@ -74,6 +74,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     [self setup];
     self.state = CallingStateIdle;
 }
@@ -292,6 +293,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self stopUpdates];
 }
 

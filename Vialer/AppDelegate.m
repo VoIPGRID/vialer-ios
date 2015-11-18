@@ -11,7 +11,6 @@
 #import "ConnectionHandler.h"
 #import "GAITracker.h"
 #import "Gossip+Extra.h"
-#import "LogInViewController.h"
 #import "PZPushMiddleware.h"
 #import "RootViewController.h"
 #import "SystemUser.h"
@@ -29,7 +28,6 @@
 
 @interface AppDelegate()
 @property (nonatomic, strong) RootViewController *rootViewController;
-@property (nonatomic, strong) LogInViewController *loginViewController;
 @end
 
 @implementation AppDelegate
@@ -41,8 +39,6 @@
 
     [GAITracker setupGAITracker];
     [self setupConnectivity];
-
-    [self setupLogin];
 
     NSSetUncaughtExceptionHandler(&HandleExceptions);
 
@@ -64,39 +60,12 @@
 //    [[ConnectionHandler sharedConnectionHandler] start];
 }
 
-- (void)setupLogin {
-    // Handler for failed authentications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-
-    //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
-    //v2.x and start onboarding at the "configure numbers view".
-
-    //TODO: Why not login again. What if the user was deactivated on the platform?
-    if (![SystemUser currentUser].isLoggedIn) {
-        //Not logged in, not v21.x, nor in v2.x
-        [self showOnboarding:OnboardingScreenLogin];
-    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
-        //Also show the Mobile number onboarding screen
-        [self showOnboarding:OnboardingScreenConfigure];
-// TODO: fix SIP
-//    } else {
-//        [[SystemUser currentUser] checkSipStatus];
-    }
-}
-
 #pragma mark - View Controllers
 - (RootViewController *)rootViewController {
     if (!_rootViewController) {
         _rootViewController = [[RootViewController alloc] init];
     }
     return _rootViewController;
-}
-
-- (LogInViewController *)loginViewController {
-    if (!_loginViewController) {
-        _loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-    }
-    return _loginViewController;
 }
 
 #pragma mark - UIApplication notification delegate
@@ -150,11 +119,13 @@ void HandleExceptions(NSException *exception) {
 
 #pragma mark - UIApplicationDelegate methods
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
-        if (success) {
-            [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-        }
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
+            if (success) {
+                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+            }
+        }];
+    });
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -171,27 +142,6 @@ void HandleExceptions(NSException *exception) {
 
 - (void)handleSipCall:(GSCall *)sipCall {
     return [self.rootViewController handleSipCall:sipCall];
-}
-
-#pragma mark - Notification actions
-- (void)showOnboarding:(OnboardingScreens)screenToShow {
-    // Check if the loginViewController is created, and if present
-    NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
-    if (!self.loginViewController.presentingViewController) {
-        self.loginViewController.screenToShow = screenToShow;
-        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
-        // Make sure we have the current presenting viewcontroller.
-        UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-        while (topRootViewController.presentedViewController) {
-            topRootViewController = topRootViewController.presentedViewController;
-        }
-        [topRootViewController presentViewController:self.loginViewController animated:YES completion:nil];
-    }
-}
-
-- (void)loginFailedNotification:(NSNotification *)notification {
-    [self showOnboarding:OnboardingScreenLogin];
 }
 
 @end

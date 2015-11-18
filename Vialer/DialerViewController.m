@@ -60,6 +60,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     [self setupLayout];
 }
 

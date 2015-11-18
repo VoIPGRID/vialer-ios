@@ -22,9 +22,6 @@
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
 
 /* No comment provided by engineer. */
-"Availability" = "Availability";
-
-/* No comment provided by engineer. */
 "Business" = "Business";
 
 /* No comment provided by engineer. */
@@ -131,6 +128,9 @@
 
 /* No comment provided by engineer. */
 "Incoming call from %@" = "Incoming call from %@";
+
+/* No comment provided by engineer. */
+"Information" = "Information";
 
 /* No comment provided by engineer. */
 "Invalid number used to setup call" = "Invalid number used to setup call";
@@ -256,6 +256,9 @@
 "suppressed" = "Anonymous (suppressed)";
 
 /* No comment provided by engineer. */
+"Syncing addressbook." = "Syncing addressbook.";
+
+/* No comment provided by engineer. */
 "This user is not allowed to use the app" = "This user is not allowed to use the app";
 
 /* No comment provided by engineer. */
@@ -272,6 +275,9 @@
 
 /* No comment provided by engineer. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Two step modus will setup a call to your phone first and will call the other party when you answer the call.";
+
+/* No comment provided by engineer. */
+"Unable to fetch availability" = "Unable to fetch availability";
 
 /* No comment provided by engineer. */
 "Unable to fetch you recent call list." = "Unable to fetch you recent call list.";

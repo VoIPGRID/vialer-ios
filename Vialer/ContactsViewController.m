@@ -27,6 +27,7 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
 @property (strong, nonatomic) TwoStepCallingViewController *twoStepCallingViewController;
@@ -98,6 +99,22 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
         _twoStepCallingViewController = [[TwoStepCallingViewController alloc] init];
     }
     return _twoStepCallingViewController;
+}
+
+- (void)setTableView:(UITableView *)tableView {
+    _tableView = tableView;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [_tableView addSubview:self.refreshControl];
+}
+
+- (UIRefreshControl *)refreshControl {
+    if (!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Syncing addressbook.", nil) attributes:nil];
+        [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _refreshControl;
 }
 
 #pragma mark - actions
@@ -255,9 +272,11 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 }
 
 - (void)loadContacts {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+    [self.refreshControl beginRefreshing];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[ContactModel defaultContactModel] refreshAllContacts]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.refreshControl endRefreshing];
                 [self.tableView reloadData];
             });
         }
