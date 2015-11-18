@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class AvailabilityViewController;
 @protocol AvailabilityViewControllerDelegate <NSObject>
-- (void)availabilityHasChanged;
+- (void)availabilityViewController:(AvailabilityViewController *)controller availabilityHasChanged:(NSArray *)availabilityOptions;
 @end
 
 @interface AvailabilityViewController : UITableViewController
 
-@property (nonatomic, weak) id <AvailabilityViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <AvailabilityViewControllerDelegate> delegate;
 @end

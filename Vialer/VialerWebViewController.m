@@ -23,6 +23,11 @@
 
 #pragma mark - properties
 
+- (void)setURL:(NSURL *)URL {
+    [super setURL:URL];
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), self.title]];
+}
+
 -(void)setNextUrl:(NSString *)nextUrl {
     NSString *partnerBaseUrl = [Configuration UrlForKey:@"Partner"];
 
@@ -41,12 +46,23 @@
                 self.URL = url;
                 [self load];
             }
-            [SVProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error %@", [error localizedDescription]);
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", @"failed to load webpage with title"), self.title]];
     }];
+}
+
+#pragma mark - UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [super webViewDidFinishLoad:webView];
+    [SVProgressHUD dismiss];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [super webView:webView didFailLoadWithError:error];
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - actions

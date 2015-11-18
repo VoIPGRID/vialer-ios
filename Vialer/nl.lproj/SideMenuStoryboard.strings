@@ -11,8 +11,8 @@
 /* Class = "UILabel"; text = "Statistics"; ObjectID = "Ska-na-tJI"; */
 "Ska-na-tJI.text" = "Statistieken";
 
-/* Class = "UILabel"; text = "111 / VoipAccount"; ObjectID = "gUN-wn-IlP"; */
-"gUN-wn-IlP.text" = "111 / VoipAccount";
+/* Class = "UILabel"; text = "(checking availability)"; ObjectID = "gUN-wn-IlP"; */
+"gUN-wn-IlP.text" = "(bereikbaarheid ophalen)";
 
 /* Class = "UILabel"; text = "usernameLabel"; ObjectID = "hJT-a4-jHR"; */
 "hJT-a4-jHR.text" = "usernameLabel";

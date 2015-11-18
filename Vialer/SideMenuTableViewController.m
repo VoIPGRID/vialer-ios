@@ -8,6 +8,8 @@
 
 #import "SideMenuTableViewController.h"
 
+#import "AvailabilityModel.h"
+#import "AvailabilityViewController.h"
 #import "Configuration.h"
 #import "GAITracker.h"
 #import "SystemUser.h"
@@ -16,10 +18,11 @@
 static NSString * const SideMenuTableViewControllerShowStatisticsSegue = @"ShowStatisticsSegue";
 static NSString * const SideMenuTableViewControllerShowInformationSegue = @"ShowInformationSegue";
 static NSString * const SideMenuTableViewControllerShowDialPlanSegue = @"ShowDialPlanSegue";
+static NSString * const SideMenuTableViewControllerShowAvailabilitySegue = @"ShowAvailabilitySegue";
 
 static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
-@interface SideMenuTableViewController ()
+@interface SideMenuTableViewController () <AvailabilityViewControllerDelegate>
 @property (strong, nonatomic) UIColor *tintColor;
 @property (weak, nonatomic) IBOutlet UIImageView *availabilityIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *statisticsIcon;
@@ -28,9 +31,18 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 @property (weak, nonatomic) IBOutlet UIImageView *dialplanIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *logoutIcon;
 @property (weak, nonatomic) IBOutlet UILabel *availabilityDetailLabel;
+
+@property (strong, nonatomic) AvailabilityModel *availabilityModel;
 @end
 
 @implementation SideMenuTableViewController
+
+#pragma mark - view lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadAvailability];
+}
 
 #pragma mark - properties
 
@@ -68,10 +80,11 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
     _logoutIcon.image = [self coloredImageWithImage:_logoutIcon.image color:self.tintColor];
 }
 
-// TODO
-- (void)setAvailabilityDetailLabel:(UILabel *)availabilityDetailLabel {
-    _availabilityDetailLabel = availabilityDetailLabel;
-    _availabilityDetailLabel.hidden = YES;
+- (AvailabilityModel *)availabilityModel {
+    if (!_availabilityModel) {
+        _availabilityModel = [[AvailabilityModel alloc] init];
+    }
+    return _availabilityModel;
 }
 
 #pragma mark - actions
@@ -110,6 +123,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
         NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+        webController.title = NSLocalizedString(@"Information", nil);
         webController.URL = [NSURL URLWithString:onboardingUrl];
 
     } else if ([segue.identifier isEqualToString:SideMenuTableViewControllerShowDialPlanSegue]) {
@@ -118,9 +132,18 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.title = NSLocalizedString(@"Dial plan", nil);
         webController.nextUrl = @"/dialplan/";
+    } else if ([segue.identifier isEqualToString:SideMenuTableViewControllerShowAvailabilitySegue]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        AvailabilityViewController *availabilityVC = navController.viewControllers[0];
+        availabilityVC.delegate = self;
     }
 }
 
+#pragma mark - AvailabilityViewControllerDelegate
+
+- (void)availabilityViewController:(AvailabilityViewController *)controller availabilityHasChanged:(NSArray *)availabilityOptions {
+    [self loadAvailability];
+}
 
 #pragma mark - utils
 
@@ -148,6 +171,20 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
     UIGraphicsEndImageContext();
 
     return newImage;
+}
+
+- (void)loadAvailability {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.availabilityModel getCurrentAvailabilityWithBlock:^(NSString *currentAvailability, NSString *localizedError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (localizedError) {
+                    self.availabilityDetailLabel.text = NSLocalizedString(@"Unable to fetch availability", nil);
+                } else {
+                    self.availabilityDetailLabel.text = currentAvailability;
+                }
+            });
+        }];
+    });
 }
 
 @end

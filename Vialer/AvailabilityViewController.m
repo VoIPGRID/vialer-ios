@@ -29,9 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
-    self.navigationItem.title = NSLocalizedString(@"Availability", nil);
 }
 
 - (UIRefreshControl *)refreshControl {
@@ -67,13 +65,13 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.availabilityModel countAvailabilityOptions];
+    return [self.availabilityModel.availabilityOptions count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *DefaultCellIdentifier = @"AvailabilityTableViewDefaultCell";
     static NSString *SubtitleCellIdentifier = @"AvailabilityTableViewSubtitleCell";
-    NSDictionary *availabilityDict = [self.availabilityModel getAvailabilityAtIndex:indexPath.row];
+    NSDictionary *availabilityDict = self.availabilityModel.availabilityOptions[indexPath.row];
 
     UITableViewCell *cell;
     if ([[availabilityDict objectForKey:kAvailabilityPhoneNumber] isEqualToNumber:@0]){
@@ -97,7 +95,7 @@
     [tableView cellForRowAtIndexPath:self.lastSelected].accessoryType = UITableViewCellAccessoryNone;
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
 
-    if (indexPath.row >= [self.availabilityModel countAvailabilityOptions]) {
+    if (indexPath.row >= [self.availabilityModel.availabilityOptions count]) {
         return;
     }
     self.lastSelected = indexPath;
@@ -108,7 +106,7 @@
         if (localizedErrorString) {
             [self presentAlertControllerWithErrorString:localizedErrorString];
         } else {
-            [self.delegate availabilityHasChanged];
+            [self.delegate availabilityViewController:self availabilityHasChanged:self.availabilityModel.availabilityOptions];
             [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }];

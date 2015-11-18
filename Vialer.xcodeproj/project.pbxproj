@@ -214,6 +214,10 @@
 		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
 		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
+		C46E14DC1BFC7FFA001C9369 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
+		C46E14DE1BFC7FFC001C9369 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
+		C46E14E61BFC9F76001C9369 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
+		C46E14E81BFC9F78001C9369 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
@@ -232,11 +236,7 @@
 		C4C3EAEA1BFB73B200AA4B2A /* VialerWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerWebViewController.h; sourceTree = "<group>"; };
 		C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewController.m; sourceTree = "<group>"; };
 		C4C3EAF11BFB7C5E00AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SideMenuStoryboard.storyboard; sourceTree = "<group>"; };
-		C4C3EAF41BFB7C6600AA4B2A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
-		C4C3EAF61BFB7C6700AA4B2A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		C4C3EAF81BFB7C9900AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AvailabilityStoryboard.storyboard; sourceTree = "<group>"; };
-		C4C3EAFB1BFB7C9B00AA4B2A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
-		C4C3EAFD1BFB7C9C00AA4B2A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C4C3EAFE1BFB85DC00AA4B2A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C4C3EAFF1BFB85DC00AA4B2A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C4CEAB421BCE933000A56FC2 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -1382,8 +1382,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C4C3EAF11BFB7C5E00AA4B2A /* Base */,
-				C4C3EAF41BFB7C6600AA4B2A /* en */,
-				C4C3EAF61BFB7C6700AA4B2A /* nl */,
+				C46E14DC1BFC7FFA001C9369 /* en */,
+				C46E14DE1BFC7FFC001C9369 /* nl */,
 			);
 			name = SideMenuStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1392,8 +1392,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C4C3EAF81BFB7C9900AA4B2A /* Base */,
-				C4C3EAFB1BFB7C9B00AA4B2A /* en */,
-				C4C3EAFD1BFB7C9C00AA4B2A /* nl */,
+				C46E14E61BFC9F76001C9369 /* en */,
+				C46E14E81BFC9F78001C9369 /* nl */,
 			);
 			name = AvailabilityStoryboard.storyboard;
 			sourceTree = "<group>";

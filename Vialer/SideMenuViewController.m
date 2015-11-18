@@ -57,7 +57,6 @@
 - (void)setBuildVersionLabel:(UILabel *)buildVersionLabel {
     _buildVersionLabel = buildVersionLabel;
     _buildVersionLabel.text = self.appVersionBuildString;
-
 }
 
 #pragma mark - utils
