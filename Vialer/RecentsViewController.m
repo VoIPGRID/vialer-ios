@@ -82,7 +82,7 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 - (UIRefreshControl *)refreshControl {
     if (!_refreshControl) {
         _refreshControl = [[UIRefreshControl alloc] init];
-        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Fetching the latstest recent calls from the server.", nil) attributes:nil];
+        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Fetching the latest recent calls from the server.", nil) attributes:nil];
         [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;

@@ -83,7 +83,6 @@ DEPENDENCIES:
   - CocoaLumberjack
   - Google/Analytics (~> 1.0.7)
   - HTCopyableLabel
-  - MMDrawerController
   - MMDrawerController+Storyboard (from `https://github.com/TomSwift/MMDrawerController-Storyboard.git`)
   - OHHTTPStubs
   - PBWebViewController

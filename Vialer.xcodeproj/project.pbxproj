@@ -28,6 +28,7 @@
 		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
 		C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
+		C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C461836C1BF9D9500075709B /* RecentCallManager.m */; };
 		C46183721BF9FB120075709B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
 		C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
@@ -211,6 +212,8 @@
 		C45F3DF11BFCA6600012494D /* VailerRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VailerRootViewController.m; sourceTree = "<group>"; };
 		C45F3DF31BFCA7A70012494D /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
 		C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoAnimationSegue.m; sourceTree = "<group>"; };
+		C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Vialer.h"; sourceTree = "<group>"; };
+		C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Vialer.m"; sourceTree = "<group>"; };
 		C461836B1BF9D9500075709B /* RecentCallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCallManager.h; sourceTree = "<group>"; };
 		C461836C1BF9D9500075709B /* RecentCallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallManager.m; sourceTree = "<group>"; };
 		C46183701BF9FB120075709B /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
@@ -957,6 +960,8 @@
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
 				C4CEAB421BCE933000A56FC2 /* GAITracker.h */,
 				C4CEAB431BCE933000A56FC2 /* GAITracker.m */,
+				C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */,
+				C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */,
 			);
 			name = Categories/Helpers;
 			sourceTree = "<group>";
@@ -1313,6 +1318,7 @@
 				FE0E5C991BBE848800243577 /* GSPJUtil.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
+				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
 				F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */,
 				FB3820E41A1E87730033FF78 /* UIActionSheet+Blocks.m in Sources */,
 				FE0E5C9A1BBE848800243577 /* GSRingback.m in Sources */,

@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const kAvailabilityDescription;
-extern NSString *const kAvailabilityPhoneNumber;
-extern NSString *const kAvailabilitySelected;
-extern NSString *const KAvailabilityDestinationType;
+extern NSString *const AvailabilityModelDescription;
+extern NSString *const AvailabilityModelPhoneNumber;
+extern NSString *const AvailabilityModelSelected;
+extern NSString *const AvailabilityModelDestinationType;
 
 @interface AvailabilityModel : NSObject
 

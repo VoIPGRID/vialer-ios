@@ -10,6 +10,7 @@
 
 #import "AvailabilityModel.h"
 #import "GAITracker.h"
+#import "UIAlertController+Vialer.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import "SVProgressHUD.h"
@@ -55,7 +56,11 @@
     [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
         [self.refreshControl endRefreshing];
         if (localizedErrorString) {
-            [self presentAlertControllerWithErrorString:localizedErrorString];
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                            message:localizedErrorString
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
         }else{
             [self.tableView reloadData];
         }
@@ -74,16 +79,16 @@
     NSDictionary *availabilityDict = self.availabilityModel.availabilityOptions[indexPath.row];
 
     UITableViewCell *cell;
-    if ([[availabilityDict objectForKey:kAvailabilityPhoneNumber] isEqualToNumber:@0]){
+    if ([[availabilityDict objectForKey:AvailabilityModelPhoneNumber] isEqualToNumber:@0]){
         cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:kAvailabilityDescription];
+        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
     } else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:SubtitleCellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:kAvailabilityDescription];
-        cell.detailTextLabel.text = [[availabilityDict objectForKey:kAvailabilityPhoneNumber] stringValue];
+        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
+        cell.detailTextLabel.text = [[availabilityDict objectForKey:AvailabilityModelPhoneNumber] stringValue];
     }
 
-    if ([[availabilityDict objectForKey:kAvailabilitySelected] isEqualToNumber:@1]) {
+    if ([[availabilityDict objectForKey:AvailabilityModelSelected] isEqualToNumber:@1]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.lastSelected = indexPath;
     }
@@ -104,19 +109,16 @@
     [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         if (localizedErrorString) {
-            [self presentAlertControllerWithErrorString:localizedErrorString];
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                            message:localizedErrorString
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
         } else {
             [self.delegate availabilityViewController:self availabilityHasChanged:self.availabilityModel.availabilityOptions];
             [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
-}
-
-- (void)presentAlertControllerWithErrorString:(NSString *)errorString {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:errorString preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {

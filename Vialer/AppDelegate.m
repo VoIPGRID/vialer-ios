@@ -26,14 +26,15 @@
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
-@interface AppDelegate()
+@interface AppDelegate() <PKPushRegistryDelegate>
 @property (nonatomic, strong) RootViewController *rootViewController;
 @end
 
 @implementation AppDelegate
 
 #pragma mark - UIApplication delegate
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
@@ -43,6 +44,27 @@
     NSSetUncaughtExceptionHandler(&HandleExceptions);
 
     return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
+            if (success) {
+                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+            }
+        }];
+    });
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // End all active calls when the app is terminated
+    for (GSCall *activeCall in [GSCall activeCalls]) {
+        [activeCall end];
+    }
+    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
+    }];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - setup helper methods
@@ -115,27 +137,6 @@
 #pragma mark - Exception handling
 void HandleExceptions(NSException *exception) {
     NSLog(@"The app has encountered an unhandled exception: %@", [exception debugDescription]);
-}
-
-#pragma mark - UIApplicationDelegate methods
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
-            if (success) {
-                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-            }
-        }];
-    });
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // End all active calls when the app is terminated
-    for (GSCall *activeCall in [GSCall activeCalls]) {
-        [activeCall end];
-    }
-    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
-        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
-    }];
 }
 
 #pragma mark - Handle person(s) & calls

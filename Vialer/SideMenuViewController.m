@@ -13,7 +13,6 @@
 
 @interface SideMenuViewController ()
 
-@property (strong, nonatomic) UIColor *tintColor;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *outgoingNumberLabel;
@@ -25,10 +24,6 @@
 
 @implementation SideMenuViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.usernameLabel.text = [SystemUser currentUser].displayName;
@@ -36,10 +31,6 @@
 }
 
 #pragma mark - properties
-
-- (UIColor *)tintColor {
-    return [Configuration tintColorForKey:ConfigurationSideMenuTintColor];
-}
 
 - (void)setUsernameLabel:(UILabel *)usernameLabel {
     _usernameLabel = usernameLabel;
