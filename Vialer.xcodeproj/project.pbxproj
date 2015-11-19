@@ -43,7 +43,6 @@
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
-		C4C3EB001BFB85DC00AA4B2A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAFF1BFB85DC00AA4B2A /* RootViewController.m */; };
 		C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
 		C4DA5C781BFB27580043DED7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
@@ -246,8 +245,6 @@
 		C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewController.m; sourceTree = "<group>"; };
 		C4C3EAF11BFB7C5E00AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SideMenuStoryboard.storyboard; sourceTree = "<group>"; };
 		C4C3EAF81BFB7C9900AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AvailabilityStoryboard.storyboard; sourceTree = "<group>"; };
-		C4C3EAFE1BFB85DC00AA4B2A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		C4C3EAFF1BFB85DC00AA4B2A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C4CEAB421BCE933000A56FC2 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		C4CEAB431BCE933000A56FC2 /* GAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAITracker.m; sourceTree = "<group>"; };
 		C4DA5C791BFB27580043DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -908,8 +905,6 @@
 			children = (
 				FB4226DF182261D200707349 /* AppDelegate.h */,
 				FB4226E0182261D200707349 /* AppDelegate.m */,
-				C4C3EAFE1BFB85DC00AA4B2A /* RootViewController.h */,
-				C4C3EAFF1BFB85DC00AA4B2A /* RootViewController.m */,
 				C4C3EB011BFB882300AA4B2A /* Main */,
 				C4CEAB3F1BCE7A5E00A56FC2 /* Calling */,
 				F94F47CA1BCB9F8400F40737 /* Contacts */,
@@ -1284,7 +1279,6 @@
 				C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */,
 				FE0E5C951BBE848800243577 /* GSDispatch.m in Sources */,
 				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
-				C4C3EB001BFB85DC00AA4B2A /* RootViewController.m in Sources */,
 				FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */,
 				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,

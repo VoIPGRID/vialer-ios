@@ -14,8 +14,9 @@
 #import "VoIPGRIDRequestOperationManager.h"
 
 static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
+
 @interface VailerRootViewController ()
-@property (nonatomic, strong) LogInViewController *loginViewController;
+@property (strong, nonatomic) LogInViewController *loginViewController;
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
 @end
 

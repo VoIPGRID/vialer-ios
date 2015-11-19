@@ -12,7 +12,6 @@
 #import "GAITracker.h"
 #import "Gossip+Extra.h"
 #import "PZPushMiddleware.h"
-#import "RootViewController.h"
 #import "SystemUser.h"
 #import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -27,7 +26,6 @@
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
 @interface AppDelegate() <PKPushRegistryDelegate>
-@property (nonatomic, strong) RootViewController *rootViewController;
 @end
 
 @implementation AppDelegate
@@ -82,14 +80,6 @@
 //    [[ConnectionHandler sharedConnectionHandler] start];
 }
 
-#pragma mark - View Controllers
-- (RootViewController *)rootViewController {
-    if (!_rootViewController) {
-        _rootViewController = [[RootViewController alloc] init];
-    }
-    return _rootViewController;
-}
-
 #pragma mark - UIApplication notification delegate
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     completionHandler(UIBackgroundFetchResultNoData);
@@ -142,7 +132,7 @@ void HandleExceptions(NSException *exception) {
 #pragma mark - Handle person(s) & calls
 
 - (void)handleSipCall:(GSCall *)sipCall {
-    return [self.rootViewController handleSipCall:sipCall];
+    // TODO: fix sip call
 }
 
 @end

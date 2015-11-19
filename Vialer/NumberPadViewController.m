@@ -27,11 +27,6 @@
     [self setupSounds];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    self.sounds = nil;
-}
-
 - (IBAction)numberPressed:(NumberPadButton *)sender {
     [self.delegate numberPadPressedWithCharacter:sender.number];
     [self playSoundForCharacter:sender.number];
@@ -45,26 +40,28 @@
 }
 
 - (void)setupSounds {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSMutableDictionary *sounds = [NSMutableDictionary dictionary];
-        for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#"]) {
-            NSString *dtmfFile;
-            if ([sound isEqualToString:@"*"]) {
-                dtmfFile = @"dtmf-s";
-            } else {
-                dtmfFile = [NSString stringWithFormat:@"dtmf-%@", sound];
+    if (!self.sounds) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSMutableDictionary *sounds = [NSMutableDictionary dictionary];
+            for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#"]) {
+                NSString *dtmfFile;
+                if ([sound isEqualToString:@"*"]) {
+                    dtmfFile = @"dtmf-s";
+                } else {
+                    dtmfFile = [NSString stringWithFormat:@"dtmf-%@", sound];
+                }
+                NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif"];
+                NSAssert(dtmfUrl, @"No sound available");
+                NSError *error;
+                AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:dtmfUrl error:&error];
+                if (!error) {
+                    [player prepareToPlay];
+                }
+                sounds[sound] = player;
             }
-            NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif"];
-            NSAssert(dtmfUrl, @"No sound available");
-            NSError *error;
-            AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:dtmfUrl error:&error];
-            if (!error) {
-                [player prepareToPlay];
-            }
-            sounds[sound] = player;
-        }
-        self.sounds = [sounds copy];
-    });
+            self.sounds = [sounds copy];
+        });
+    }
 }
 
 - (void)playSoundForCharacter:(NSString *)character {
