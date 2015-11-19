@@ -10,6 +10,7 @@
 
 #import "AvailabilityModel.h"
 #import "GAITracker.h"
+#import "UIAlertController+Vialer.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import "SVProgressHUD.h"
@@ -29,9 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
-    self.navigationItem.title = NSLocalizedString(@"Availability", nil);
 }
 
 - (UIRefreshControl *)refreshControl {
@@ -48,7 +47,6 @@
     if (_availabilityModel == nil) {
         _availabilityModel = [[AvailabilityModel alloc] init];
     }
-
     return _availabilityModel;
 }
 
@@ -56,15 +54,14 @@
     [self.refreshControl beginRefreshing];
 
     [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
-        if (localizedErrorString != nil) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:localizedErrorString
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
+        [self.refreshControl endRefreshing];
+        if (localizedErrorString) {
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                            message:localizedErrorString
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
         }else{
-            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }
     }];
@@ -73,30 +70,28 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.availabilityModel countAvailabilityOptions];
+    return [self.availabilityModel.availabilityOptions count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"AvailabilityTableViewCell";
-    NSDictionary *availabilityDict = [self.availabilityModel getAvailabilityAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
+    static NSString *DefaultCellIdentifier = @"AvailabilityTableViewDefaultCell";
+    static NSString *SubtitleCellIdentifier = @"AvailabilityTableViewSubtitleCell";
+    NSDictionary *availabilityDict = self.availabilityModel.availabilityOptions[indexPath.row];
 
-    if ([[availabilityDict objectForKey:kAvailabilityPhoneNumber] isEqualToNumber:@0]){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:kAvailabilityDescription];
+    UITableViewCell *cell;
+    if ([[availabilityDict objectForKey:AvailabilityModelPhoneNumber] isEqualToNumber:@0]){
+        cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
+        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
     } else {
-        cell.textLabel.text = [availabilityDict objectForKey:kAvailabilityDescription];
-        cell.detailTextLabel.text = [[availabilityDict objectForKey:kAvailabilityPhoneNumber] stringValue];
+        cell = [self.tableView dequeueReusableCellWithIdentifier:SubtitleCellIdentifier];
+        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
+        cell.detailTextLabel.text = [[availabilityDict objectForKey:AvailabilityModelPhoneNumber] stringValue];
     }
 
-    if ([[availabilityDict objectForKey:kAvailabilitySelected] isEqualToNumber:@1]) {
+    if ([[availabilityDict objectForKey:AvailabilityModelSelected] isEqualToNumber:@1]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.lastSelected = indexPath;
     }
-
     return cell;
 }
 
@@ -105,26 +100,28 @@
     [tableView cellForRowAtIndexPath:self.lastSelected].accessoryType = UITableViewCellAccessoryNone;
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
 
-    if (indexPath.row >= [self.availabilityModel countAvailabilityOptions]) {
+    if (indexPath.row >= [self.availabilityModel.availabilityOptions count]) {
         return;
     }
     self.lastSelected = indexPath;
 
     [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_AVAILABILITY...", nil) maskType:SVProgressHUDMaskTypeGradient];
     [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
-        if (localizedErrorString != nil) {
-            [SVProgressHUD dismiss];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:localizedErrorString
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
+        [SVProgressHUD dismiss];
+        if (localizedErrorString) {
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                            message:localizedErrorString
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
         } else {
-            [self.delegate availabilityHasChanged];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.delegate availabilityViewController:self availabilityHasChanged:self.availabilityModel.availabilityOptions];
+            [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
 
+- (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
 @end

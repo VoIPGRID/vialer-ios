@@ -124,7 +124,6 @@ static NSString * const RecentCallCallerId = @"callerid";
 + (void)clearCachedRecentCalls {
     @synchronized([self class]) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RecentsCache"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -152,7 +151,6 @@ static NSString * const RecentCallCallerId = @"callerid";
         NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
         if (data) {
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"RecentsCache"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
 

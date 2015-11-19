@@ -16,6 +16,6 @@
  @param phoneNumber The phoneNumber that should be called.
  @param contact The name of the contact that is called. Currently not in use.
 */
-- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact;
+- (void)handlePhoneNumber:(NSString *)phoneNumber;
 
 @end

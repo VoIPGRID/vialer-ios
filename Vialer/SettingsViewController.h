@@ -11,6 +11,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UITableViewController <EditNumberDelegate, AvailabilityViewControllerDelegate>
+@interface SettingsViewController : UITableViewController
 
 @end

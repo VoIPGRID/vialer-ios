@@ -404,7 +404,6 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
     NSDictionary *parameters = @{kMobileNumberKey : mobileNumber};
     [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         if (success) success();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //Provide user with the message from the error

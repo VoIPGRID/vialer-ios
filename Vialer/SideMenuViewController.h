@@ -1,19 +1,13 @@
 //
-//  SideMenuViewController.h
+//  SideMenuTableViewController.h
 //  Vialer
 //
-//  Created by Reinier Wieringa on 4/16/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Created by Bob Voorneveld on 17/11/15.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface SideMenuViewController : UITableViewController
+@interface SideMenuViewController : UIViewController
 
-@end
-
-@interface SideMenuItem : NSObject
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) UIImage *icon;
-+ (instancetype)sideMenuItemWithTitle:(NSString *)title andIcon:(UIImage *)icon;
 @end

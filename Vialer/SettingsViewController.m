@@ -30,11 +30,7 @@
 #define MY_NUMBER_ROW 0
 #define OUTGOING_NUMBER_ROW 1
 
-@interface SettingsViewController ()
-
-@property (nonatomic, strong) AvailabilityModel *availabilityModel;
-@property (nonatomic, weak) SystemUser *currentUser;
-
+@interface SettingsViewController() <EditNumberDelegate>
 @end
 
 @implementation SettingsViewController
@@ -42,38 +38,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
-    [self.tableView reloadData];
-
-    [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
-        if (localizedErrorString != nil) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:localizedErrorString
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }else{
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION];
-            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-            [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-        }
-    }];
-}
-
-// Override to get the SystemUser instance only once
-- (SystemUser *)currentUser {
-    // Only retrieve the currentUser once
-    if (_currentUser == nil) {
-        _currentUser = [SystemUser currentUser];
-    }
-    return _currentUser;
-}
-
-- (AvailabilityModel *)availabilityModel {
-    if (_availabilityModel == nil) {
-        _availabilityModel = [[AvailabilityModel alloc] init];
-    }
-    return _availabilityModel;
 }
 
 
@@ -85,13 +49,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case AVAILABILITY_SECTION:
-            return 1;
         case VOIP_ACCOUNT_SECTION:
             // Are we allowed to show anything?
-            if (self.currentUser.isAllowedToSip) {
+            if ([SystemUser currentUser].isAllowedToSip) {
                 // Do we show all fields?
-                if (self.currentUser.sipEnabled) {
+                if ([SystemUser currentUser].sipEnabled) {
                     // Sip is enabled, show all fields
                     return 2;
                 }
@@ -113,25 +75,13 @@
     //2 types of cells are used by this tableView
     static NSString *tableViewCellStyleValue1Identifier = @"UITableViewCellStyleValue1";
 
-    UITableViewCell *cell;
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+    }
 
     //Specific config according to cell function
-    if (indexPath.section == AVAILABILITY_SECTION) {
-        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier])) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
-        }
-
-        if (indexPath.row == AVAILABILITY_ROW) {
-            cell.textLabel.text = NSLocalizedString(@"Availability", nil);
-            cell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
-            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }
-
-        self.tableView.tableHeaderView.hidden = YES;
-
-    } else if (indexPath.section == VOIP_ACCOUNT_SECTION) {
-        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
+    if (indexPath.section == VOIP_ACCOUNT_SECTION) {
         if (indexPath.row == SIP_ENABLED_ROW) {
             cell.textLabel.text = NSLocalizedString(@"EnabledVOIPCalls", nil);
             cell.detailTextLabel.text = nil;
@@ -147,8 +97,6 @@
             cell.accessoryView = nil;
         }
     } else if (indexPath.section == NUMBERS_SECTION) {
-        if (!(cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellStyleValue1Identifier]))
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:tableViewCellStyleValue1Identifier];
         if (indexPath.row == MY_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"My number", nil);
             cell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
@@ -173,7 +121,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     //Only the VOIP_ACCOUNT_SECTION has gets a header.
     if (section == VOIP_ACCOUNT_SECTION) {
-        if (self.currentUser.isAllowedToSip) {
+        if ([SystemUser currentUser].isAllowedToSip) {
             return 35;
         }
         // Returning 0 results in the default value (10), returning 1 to minimal
@@ -184,7 +132,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == VOIP_ACCOUNT_SECTION) {
-        if (self.currentUser.isAllowedToSip) {
+        if ([SystemUser currentUser].isAllowedToSip) {
             return NSLocalizedString(@"VoIP Account", nil);
         }
         return nil;
@@ -207,6 +155,12 @@
     return nil;
 }
 
+#pragma mark - actions
+
+- (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,17 +170,7 @@
         editNumberController.numberToEdit = [SystemUser currentUser].mobileNumber;
         editNumberController.delegate = self;
         [self.navigationController pushViewController:editNumberController animated:YES];
-    } else if (indexPath.section == AVAILABILITY_SECTION && indexPath.row == AVAILABILITY_ROW) {
-        AvailabilityViewController *availabilityViewController = [[AvailabilityViewController alloc] initWithNibName:@"AvailabilityViewController" bundle:[NSBundle mainBundle]];
-        availabilityViewController.delegate = self;
-        [self.navigationController pushViewController:availabilityViewController animated:YES];
     }
-}
-
-- (void)userDestinationsFinishedLoading {
-    UITableViewCell *availabilityCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION]];
-    availabilityCell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
-
 }
 
 #pragma mark - Editnumber delegate
@@ -237,18 +181,11 @@
     myNumberCell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
 }
 
-#pragma mark - Availability delegate
-
-- (void)availabilityHasChanged {
-    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"AVAILABILITY_SAVED_SUCCESS", nil)];
-    UITableViewCell *availabilityCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:AVAILABILITY_ROW inSection:AVAILABILITY_SECTION]];
-    availabilityCell.detailTextLabel.text = [self.availabilityModel getFormattedAvailability];
-}
 
 #pragma mark - SIP Enabled switch handler
 
 - (void)switchChanged:(UISwitch *)switchview {
-    self.currentUser.sipEnabled = switchview.on;
+    [SystemUser currentUser].sipEnabled = switchview.on;
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:VOIP_ACCOUNT_SECTION]
                   withRowAnimation:UITableViewRowAnimationAutomatic];
 }

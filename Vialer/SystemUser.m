@@ -86,7 +86,6 @@ NSString * const kSuppressedKey = @"suppressed";
 
     // Store credentials
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:kUserSUD];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [SSKeychain setPassword:password forService:[[self class] serviceName] account:username];
 
     return [[SystemUser alloc] initPrivate];
@@ -229,7 +228,6 @@ NSString * const kSuppressedKey = @"suppressed";
 - (void)setAllowedToSip:(BOOL)allowed {
     _isSipAllowed = allowed;
     [[NSUserDefaults standardUserDefaults] setBool:allowed forKey:kSIPAllowedSUD];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /** Check if the user has SIP currently enabled.
@@ -247,7 +245,6 @@ NSString * const kSuppressedKey = @"suppressed";
     if (_sipEnabled != sipEnabled) {
         _sipEnabled = sipEnabled;
         [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:kSIPEnabledSUD];
-        [[NSUserDefaults standardUserDefaults] synchronize];
 
         [self updateSipAccountStatus:_sipEnabled];
     }
@@ -356,7 +353,6 @@ NSString * const kSuppressedKey = @"suppressed";
         [SSKeychain deletePasswordForService:[[self class] serviceName] account:_sipAccount error:NULL];
         _sipAccount = nil;
     }
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /** Private helper to switch the SIP Account status and trigger the correct methods */

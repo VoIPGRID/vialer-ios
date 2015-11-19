@@ -60,6 +60,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     [self setupLayout];
 }
 
@@ -182,7 +183,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
         } else {
             [GAITracker setupOutgoingConnectABCallEvent];
             [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-            [self.twoStepCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+            [self.twoStepCallingViewController handlePhoneNumber:self.numberText];
         }
     }
 }

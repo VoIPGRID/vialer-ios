@@ -4,19 +4,7 @@
 "%@\nis currently logged in." = "%@\nis ingelogd.";
 
 /* No comment provided by engineer. */
-"/dashboard/" = "/dashboard/";
-
-/* No comment provided by engineer. */
-"/dialplan/" = "/dialplan/";
-
-/* No comment provided by engineer. */
-"/stats/dashboard/" = "/stats/dashboard/";
-
-/* No comment provided by engineer. */
 "Accept" = "Neem op";
-
-/* No comment provided by engineer. */
-"Accessibility" = "Bereikbaarheid";
 
 /* No comment provided by engineer. */
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
@@ -32,12 +20,6 @@
 
 /* No comment provided by engineer. */
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";
-
-/* No comment provided by engineer. */
-"Availability" = "Bereikbaarheid";
-
-/* No comment provided by engineer. */
-"AVAILABILITY_SAVED_SUCCESS" = "Bereikbaarheid opgeslagen";
 
 /* No comment provided by engineer. */
 "Business" = "Zakelijke";
@@ -120,7 +102,7 @@
 /* No comment provided by engineer. */
 "Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
 
-/* No comment provided by engineer. */
+/* failed to load webpage with title */
 "Failed to load %@" = "%@ kon niet worden geladen";
 
 /* No comment provided by engineer. */
@@ -128,6 +110,9 @@
 
 /* No comment provided by engineer. */
 "Failed to setup call" = "Opzetten van gesprek mislukt";
+
+/* No comment provided by engineer. */
+"Fetching the latest recent calls from the server." = "Meest recente gesprekken worden van de server gehaald.";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
@@ -172,9 +157,6 @@
 "Login failed" = "Inloggen mislukt";
 
 /* No comment provided by engineer. */
-"Logout" = "Uitloggen";
-
-/* No comment provided by engineer. */
 "Microphone Access Denied" = "Geen toegang tot microfoon";
 
 /* No comment provided by engineer. */
@@ -200,9 +182,6 @@
 
 /* No comment provided by engineer. */
 "No login data" = "Geen inloggegevens";
-
-/* No comment provided by engineer. */
-"No outgoing number configured" = "Geen uitgaand nummer ingesteld";
 
 /* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
@@ -247,9 +226,6 @@
 "Retrieving phone numbers..." = "Telefoonnummers ophalen...";
 
 /* No comment provided by engineer. */
-"Routing" = "Belplan";
-
-/* No comment provided by engineer. */
 "Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
 
 /* No comment provided by engineer. */
@@ -265,9 +241,6 @@
 "Setting up connection..." = "Maakt verbinding...";
 
 /* No comment provided by engineer. */
-"Settings" = "Instellingen";
-
-/* No comment provided by engineer. */
 "SIP account" = "SIP account";
 
 /* Answer part of the text: Slide to answer */
@@ -281,6 +254,9 @@
 
 /* Localized outgoing number, catching/translating suppressed */
 "suppressed" = "Anoniem (onderdrukt)";
+
+/* No comment provided by engineer. */
+"Syncing addressbook." = "Adresboek synchroniseren.";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
@@ -299,6 +275,9 @@
 
 /* No comment provided by engineer. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Twee staps modus zal een gesprek opzetten naar je telefoon en zal na beantwooring het gesprek opzetten naar de andere partij.";
+
+/* No comment provided by engineer. */
+"Unable to fetch availability" = "Niet mogelijk bereikbaarheid op te halen";
 
 /* No comment provided by engineer. */
 "Unable to fetch you recent call list." = "Ophalen van recente gesprekken mislukt.";

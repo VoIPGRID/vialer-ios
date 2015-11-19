@@ -5,13 +5,14 @@
 
 #import "ContactsViewController.h"
 
-#import "AppDelegate.h"
 #import "Configuration.h"
 #import "ContactsUI/ContactsUI.h"
 #import "ContactModel.h"
 #import "ContactUtils.h"
 #import "GAITracker.h"
+#import "SIPCallingViewController.h"
 #import "SystemUser.h"
+#import "TwoStepCallingViewController.h"
 
 #import "UIViewController+MMDrawerController.h"
 
@@ -26,7 +27,10 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
+@property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
+@property (strong, nonatomic) TwoStepCallingViewController *twoStepCallingViewController;
 @end
 
 @implementation ContactsViewController
@@ -81,6 +85,36 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
     } else {
         self.warningMessageLabel.hidden = YES;
     }
+}
+
+- (SIPCallingViewController *)sipCallingViewController {
+    if (!_sipCallingViewController) {
+        _sipCallingViewController = [[SIPCallingViewController alloc] init];
+    }
+    return _sipCallingViewController;
+}
+
+- (TwoStepCallingViewController *)twoStepCallingViewController {
+    if (!_twoStepCallingViewController) {
+        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] init];
+    }
+    return _twoStepCallingViewController;
+}
+
+- (void)setTableView:(UITableView *)tableView {
+    _tableView = tableView;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [_tableView addSubview:self.refreshControl];
+}
+
+- (UIRefreshControl *)refreshControl {
+    if (!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Syncing addressbook.", nil) attributes:nil];
+        [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _refreshControl;
 }
 
 #pragma mark - actions
@@ -180,8 +214,16 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
         CNPhoneNumber *phoneNumberProperty = property.value;
         NSString *phoneNumber = [phoneNumberProperty stringValue];
 
-        AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-        [appDelegate handlePhoneNumber:phoneNumber];
+        // TODO: implement 4g calling
+        if (false) {
+            [GAITracker setupOutgoingSIPCallEvent];
+            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+            [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
+        } else {
+            [GAITracker setupOutgoingConnectABCallEvent];
+            [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
+            [self.twoStepCallingViewController handlePhoneNumber:phoneNumber];
+        }
         return NO;
     }
     return YES;
@@ -230,9 +272,11 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 }
 
 - (void)loadContacts {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+    [self.refreshControl beginRefreshing];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[ContactModel defaultContactModel] refreshAllContacts]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.refreshControl endRefreshing];
                 [self.tableView reloadData];
             });
         }

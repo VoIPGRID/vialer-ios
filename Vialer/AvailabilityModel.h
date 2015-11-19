@@ -8,16 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const kAvailabilityDescription;
-extern NSString *const kAvailabilityPhoneNumber;
-extern NSString *const kAvailabilitySelected;
-extern NSString *const KAvailabilityDestinationType;
+extern NSString *const AvailabilityModelDescription;
+extern NSString *const AvailabilityModelPhoneNumber;
+extern NSString *const AvailabilityModelSelected;
+extern NSString *const AvailabilityModelDestinationType;
 
 @interface AvailabilityModel : NSObject
 
+@property (readonly, nonatomic) NSArray *availabilityOptions;
+
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion;
-- (void)saveUserDestination:(NSUInteger) index withCompletion:(void (^)(NSString *localizedErrorString))completion;
-- (NSInteger)countAvailabilityOptions;
-- (NSString *)getFormattedAvailability;
-- (NSDictionary *)getAvailabilityAtIndex:(NSUInteger)index;
+- (void)saveUserDestination:(NSUInteger)index withCompletion:(void (^)(NSString *localizedErrorString))completion;
+
+/**
+ Fetch the current Availabilty if unknown and store it. Makes sure it isn't fetched all the time.
+ @param completionBlock the block that will be called with the availability or error if couldn't be fetched.
+ */
+- (void)getCurrentAvailabilityWithBlock:(void (^)(NSString *currentAvailability, NSString *localizedError))completionBlock;
 @end
