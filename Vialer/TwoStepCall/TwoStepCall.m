@@ -8,6 +8,9 @@
 
 #import "TwoStepCall.h"
 
+#import "CoreTelephony/CTCallCenter.h"
+#import "CoreTelephony/CTCall.h"
+#import "ConnectionHandler.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 static NSString * const TwoStepCallIDKey = @"callID";
@@ -19,6 +22,7 @@ static NSString * const TwoStepCallStatusKey = @"status";
 @property (nonatomic, strong)NSString *bNumber;
 @property (nonatomic, strong)NSError *error;
 @property (nonatomic, strong)NSTimer *statusTimer;
+@property (nonatomic, strong)CTCallCenter *callCenter;
 @property (nonatomic) BOOL fetching;
 @end
 
@@ -46,6 +50,13 @@ static NSString * const TwoStepCallStatusKey = @"status";
 
 - (void)setBNumber:(NSString *)bNumber {
     _bNumber = [self cleanPhonenumber:bNumber];
+}
+
+- (CTCallCenter *)callCenter {
+    if (!_callCenter) {
+        _callCenter = [[CTCallCenter alloc] init];
+    }
+    return _callCenter;
 }
 
 #pragma mark - Actions
@@ -78,6 +89,19 @@ static NSString * const TwoStepCallStatusKey = @"status";
              //Start a timer which requests the status of this call every second.
              NSDictionary *userInfo = @{TwoStepCallIDKey : callID};
              self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fetchCallStatus:) userInfo:userInfo repeats:YES];
+
+             // When the user ends a call start dismissing the ConnectAB screen.
+             __weak typeof (self) weakSelf = self;
+             [self.callCenter setCallEventHandler:^(CTCall *call) {
+                 if (call.callState == CTCallStateDisconnected) {
+                     // Get the main queue so the status gets set on the correct thread.
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         weakSelf.status = TwoStepCallStatusDisconnected;
+                         // Invalidate the timer so there are no more api calls made.
+                         [weakSelf.statusTimer invalidate];
+                     });
+                 }
+             }];
          }
      }];
 }
