@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
                                 <rect key="frame" x="524" y="58" width="56" height="54"/>
                                 <animations/>
                                 <gestureRecognizers/>
@@ -51,30 +51,31 @@
                                     <action selector="callButtonPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="quQ-nU-c62"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
                                 <rect key="frame" x="84" y="58" width="432" height="53"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="nT6-7N-5s3">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="53" id="nT6-7N-5s3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi">
                                 <rect key="frame" x="20" y="58" width="56" height="53"/>
                                 <animations/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0">
-                                <rect key="frame" x="20" y="119" width="560" height="398"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0">
+                                <rect key="frame" x="20" y="163" width="560" height="354"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="900" constant="350" id="lQY-Tq-1Qm"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="NzT-M0-ktL" kind="embed" id="RFj-q2-x0c"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
                                 <rect key="frame" x="0.0" y="20" width="600" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -97,9 +98,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="QWH-Jj-CH0" secondAttribute="leading" id="Ve1-4m-NC2"/>
                             <constraint firstItem="Z0R-4w-Bgg" firstAttribute="top" secondItem="lTu-kS-pvN" secondAttribute="bottom" constant="8" symbolic="YES" id="Xxe-8s-pQ0"/>
                             <constraint firstItem="WhT-rC-jEi" firstAttribute="top" secondItem="Z0R-4w-Bgg" secondAttribute="top" id="bcr-hp-ZQn"/>
-                            <constraint firstItem="QWH-Jj-CH0" firstAttribute="top" secondItem="Z0R-4w-Bgg" secondAttribute="bottom" constant="8" symbolic="YES" id="hyo-fQ-CfB">
-                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
-                            </constraint>
+                            <constraint firstItem="QWH-Jj-CH0" firstAttribute="top" secondItem="Z0R-4w-Bgg" secondAttribute="bottom" priority="900" constant="8" symbolic="YES" id="hyo-fQ-CfB"/>
                             <constraint firstItem="lTu-kS-pvN" firstAttribute="top" secondItem="bIK-Mu-L7W" secondAttribute="bottom" id="kKm-tM-twf"/>
                             <constraint firstItem="Hbs-mW-Umr" firstAttribute="centerY" secondItem="Z0R-4w-Bgg" secondAttribute="centerY" id="kWC-vW-aeD"/>
                             <constraint firstAttribute="leadingMargin" secondItem="WhT-rC-jEi" secondAttribute="leading" id="pWd-eU-GIv"/>
@@ -146,11 +145,11 @@
                         <viewControllerLayoutGuide type="bottom" id="brJ-2w-c1D"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FOs-p8-uzq">
-                        <rect key="frame" x="0.0" y="0.0" width="560" height="398"/>
+                        <rect key="frame" x="0.0" y="0.0" width="560" height="354"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-tv-0FO" customClass="NumberPadButton">
-                                <rect key="frame" x="234" y="102" width="93" height="93"/>
+                                <rect key="frame" x="239" y="90" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Xf1-tv-0FO" secondAttribute="height" multiplier="1:1" id="Tm8-Rg-4f9"/>
@@ -164,7 +163,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-kg-Ni2" customClass="NumberPadButton">
-                                <rect key="frame" x="234" y="305" width="93" height="93"/>
+                                <rect key="frame" x="239" y="271" width="83" height="83"/>
                                 <animations/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -180,7 +179,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo9-W5-GXA" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="305" width="94" height="93"/>
+                                <rect key="frame" x="352" y="271" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Mo9-W5-GXA" secondAttribute="height" multiplier="1:1" id="CXd-yi-Spk"/>
@@ -193,7 +192,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-yO-ovH" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="102" width="94" height="93"/>
+                                <rect key="frame" x="352" y="90" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2Pi-yO-ovH" secondAttribute="height" multiplier="1:1" id="xz5-EK-tKg"/>
@@ -207,7 +206,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-Ug-2q9" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="0.0" width="94" height="94"/>
+                                <rect key="frame" x="352" y="0.0" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LhT-Ug-2q9" secondAttribute="height" multiplier="1:1" id="Rx4-jK-Sc0"/>
@@ -221,7 +220,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-VL-1YG" customClass="NumberPadButton">
-                                <rect key="frame" x="110" y="305" width="94" height="93"/>
+                                <rect key="frame" x="127" y="271" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yQ4-VL-1YG" secondAttribute="height" multiplier="1:1" id="q0E-T1-dhu"/>
@@ -234,7 +233,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-gw-ERF" customClass="NumberPadButton">
-                                <rect key="frame" x="110" y="102" width="94" height="93"/>
+                                <rect key="frame" x="127" y="90" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5V0-gw-ERF" secondAttribute="height" multiplier="1:1" id="SVl-gv-adD"/>
@@ -248,7 +247,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zid-vc-HTf" customClass="NumberPadButton">
-                                <rect key="frame" x="110" y="0.0" width="94" height="94"/>
+                                <rect key="frame" x="127" y="0.0" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Zid-vc-HTf" secondAttribute="height" multiplier="1:1" id="5x9-Cz-usa"/>
@@ -261,7 +260,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkr-4Y-JuE" customClass="NumberPadButton">
-                                <rect key="frame" x="234" y="0.0" width="93" height="94"/>
+                                <rect key="frame" x="239" y="0.0" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Jkr-4Y-JuE" secondAttribute="height" multiplier="1:1" id="NYc-1T-bO9"/>
@@ -275,7 +274,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipw-Ya-87A" customClass="NumberPadButton">
-                                <rect key="frame" x="234" y="203" width="93" height="94"/>
+                                <rect key="frame" x="239" y="181" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ipw-Ya-87A" secondAttribute="height" multiplier="1:1" id="T17-vk-Jsg"/>
@@ -289,7 +288,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4A-Mw-yqa" customClass="NumberPadButton">
-                                <rect key="frame" x="110" y="203" width="94" height="94"/>
+                                <rect key="frame" x="127" y="181" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="z4A-Mw-yqa" secondAttribute="height" multiplier="1:1" id="LWR-s4-vhx"/>
@@ -303,7 +302,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5o-gy-hak" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="203" width="94" height="94"/>
+                                <rect key="frame" x="352" y="181" width="83" height="83"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="o5o-gy-hak" secondAttribute="height" multiplier="1:1" id="FZA-Pm-BV4"/>

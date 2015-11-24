@@ -1477,6 +1477,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D37C2005FBEFB4F0E2C383C /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1681,6 +1682,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9390EBBCA4319AEC203DA46A /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1723,6 +1725,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 61902C4DBDAB0B8C636E930D /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -44,7 +44,7 @@ rm -Rf "$BASE_DIR"/src/
 
 function svn_checkout() {
 # Checkout version 2.4.5, rev 5163, check https://trac.pjsip.org/repos/browser/pjproject/tags for others
-svn co -r 5163 http://svn.pjsip.org/repos/pjproject/trunk/ src/
+svn co -r 5063 http://svn.pjsip.org/repos/pjproject/trunk/ src/
 }
 
 function info() {
