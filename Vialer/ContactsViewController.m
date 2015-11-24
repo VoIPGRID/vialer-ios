@@ -112,7 +112,7 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
     if (!_refreshControl) {
         _refreshControl = [[UIRefreshControl alloc] init];
         _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Syncing addressbook.", nil) attributes:nil];
-        [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
+        [_refreshControl addTarget:self action:@selector(loadContacts) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
 }
