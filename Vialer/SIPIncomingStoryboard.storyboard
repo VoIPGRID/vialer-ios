@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="1e6-Mw-0yQ">
+            <objects>
+                <navigationController id="nwa-17-waZ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UMD-GR-KIx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gU5-bE-K8d" kind="relationship" relationship="rootViewController" id="6K5-kh-2qQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zNf-T6-qaQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-461" y="666"/>
+        </scene>
+        <!--Incoming View Controller-->
+        <scene sceneID="Wvp-h7-xnb">
+            <objects>
+                <viewController id="gU5-bE-K8d" customClass="SIPIncomingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NVt-sg-wgQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="yQ6-Qt-aAC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xcd-5K-y8o" customClass="GradientView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkp-kf-uI8" userLabel="accept-button">
+                                <rect key="frame" x="186" y="480" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hkp-kf-uI8" secondAttribute="height" multiplier="1:1" id="5JO-1Q-bwq"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="EUX-ok-A1p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="Lgt-C3-h4k"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="ZdH-Dv-PRJ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="hcH-3O-l8F"/>
+                                </constraints>
+                                <state key="normal" image="accept-button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-JN-qTG" userLabel="decline-button">
+                                <rect key="frame" x="346" y="480" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="1zY-5f-pIo"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="Dl5-nR-VkI"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="Nsv-rv-ltx"/>
+                                    <constraint firstAttribute="width" secondItem="7dS-JN-qTG" secondAttribute="height" multiplier="1:1" id="OeC-YL-FVI"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="bhc-yo-Zdm"/>
+                                </constraints>
+                                <state key="normal" image="decline-button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 (0) 50 12 34 567" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WNk-Js-erb">
+                                <rect key="frame" x="20" y="134" width="560" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WNk-Js-erb" firstAttribute="leading" secondItem="Xcd-5K-y8o" secondAttribute="leadingMargin" id="AbW-CU-sYQ"/>
+                            <constraint firstItem="WNk-Js-erb" firstAttribute="trailing" secondItem="Xcd-5K-y8o" secondAttribute="trailingMargin" id="ThU-U1-fUl"/>
+                            <constraint firstItem="yQ6-Qt-aAC" firstAttribute="top" secondItem="hkp-kf-uI8" secondAttribute="bottom" constant="50" id="XmR-4v-nE2"/>
+                            <constraint firstItem="WNk-Js-erb" firstAttribute="top" secondItem="NVt-sg-wgQ" secondAttribute="bottom" constant="70" id="eI8-mt-Dda"/>
+                            <constraint firstItem="7dS-JN-qTG" firstAttribute="centerX" secondItem="Xcd-5K-y8o" secondAttribute="centerX" constant="80" id="fit-CD-con"/>
+                            <constraint firstItem="7dS-JN-qTG" firstAttribute="centerY" secondItem="hkp-kf-uI8" secondAttribute="centerY" id="kfD-7I-1Mg"/>
+                            <constraint firstItem="hkp-kf-uI8" firstAttribute="centerX" secondItem="Xcd-5K-y8o" secondAttribute="centerX" constant="-80" id="mHH-OM-kAA"/>
+                            <constraint firstItem="WNk-Js-erb" firstAttribute="centerX" secondItem="Xcd-5K-y8o" secondAttribute="centerX" id="xau-a4-1IK"/>
+                            <constraint firstItem="yQ6-Qt-aAC" firstAttribute="top" secondItem="7dS-JN-qTG" secondAttribute="bottom" constant="50" id="yex-5m-RoT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="whK-8p-dfZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MD9-kx-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285" y="666"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="accept-button" width="70" height="70"/>
+        <image name="decline-button" width="70" height="70"/>
+    </resources>
+</document>
