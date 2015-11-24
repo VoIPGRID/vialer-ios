@@ -1,8 +1,5 @@
 //
 //  AvailabilityViewController.m
-//  Vialer
-//
-//  Created by Redmer Loen on 15-09-15.
 //  Copyright (c) 2015 VoIPGRID. All rights reserved.
 //
 
@@ -109,9 +106,10 @@
     [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         if (localizedErrorString) {
-            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
-                                                                            message:localizedErrorString
-                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                           message:localizedErrorString
+                                                              andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+            [self presentViewController:alert
                                animated:YES
                              completion:nil];
         } else {

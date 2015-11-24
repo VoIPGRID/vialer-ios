@@ -1,9 +1,6 @@
 //
 //  Configuration.h
-//  Vialer
-//
-//  Created by Maarten de Zwart on 11/09/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

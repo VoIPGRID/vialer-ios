@@ -1,9 +1,6 @@
 //
 //  LogInViewController.h
-//  Vialer
-//
-//  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "AnimatedImageView.h"
@@ -14,6 +11,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const LoginViewControllerMigrationCompleted;
+
 typedef NS_ENUM(NSInteger, OnboardingScreens) {
     OnboardingScreenLogin      = 0,
     OnboardingScreenConfigure  = 1,
@@ -21,7 +20,7 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
     //OnboardingScreenUnlock     = 2,
 };
 
-@interface LogInViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface LogInViewController : UIViewController <UITextFieldDelegate>
 
 /* The vialier logo that moves out of screen when view opens. */
 @property (nonatomic, strong) IBOutlet AnimatedImageView *logoView;

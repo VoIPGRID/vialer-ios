@@ -1,9 +1,6 @@
 //
 //  EditNumberTableViewController.m
-//  Vialer
-//
-//  Created by Harold on 22/06/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 #import "EditNumberTableViewController.h"
 
@@ -30,20 +27,25 @@
 - (void)saveButtonPressed {
     NSString *newNumber = self.numberTextFieldCell.textField.text;
     [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    
+
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber forcePush:NO success:^{
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
         [self.delegate numberHasChanged:newNumber];
         [self.navigationController popViewControllerAnimated:YES];
-    
+
     } failure:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                        message:localizedErrorString
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                              message:localizedErrorString
+                                              preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 
@@ -65,7 +67,7 @@
     cell.textField.delegate = self;
     cell.textField.text = self.numberToEdit;
     [cell.textField becomeFirstResponder];
-    
+
     return cell;
 }
 

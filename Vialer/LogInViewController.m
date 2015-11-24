@@ -1,9 +1,6 @@
 //
 //  LogInViewController.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 06/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "LogInViewController.h"
@@ -13,7 +10,6 @@
 #import "ConnectionHandler.h"
 #import "GAITracker.h"
 #import "SystemUser.h"
-#import "UIAlertView+Blocks.h"
 #import "UIView+RoundedStyle.h"
 #import "VIAScene.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -24,15 +20,14 @@
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
 
-#define SHOW_LOGIN_ALERT      100
-#define PASSWORD_FORGOT_ALERT 101
-#define kMobileNumberKey    @"mobile_nr"
+NSString * const LoginViewControllerMigrationCompleted = @"v2.0_MigrationComplete";
+static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
+
 
 @interface LogInViewController ()
-@property (nonatomic, assign) BOOL alertShown;
-@property (nonatomic, strong) NSString *user;
-@property (nonatomic, strong) VIAScene *scene;
-@property (nonatomic) NSUInteger fetchAccountRetryCount;
+@property (assign, nonatomic) BOOL alertShown;
+@property (strong, nonatomic) NSString *user;
+@property (strong, nonatomic) VIAScene *scene;
 @end
 
 @implementation LogInViewController
@@ -43,14 +38,7 @@
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
     [self.view addGestureRecognizer:tg];
 
-    self.fetchAccountRetryCount = 0;
-
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
-
-    // animate logo to top
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self moveLogoOutOfScreen];
-    });
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
@@ -85,6 +73,11 @@
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self clearAllTextFields];
     [self addObservers];
+
+    // animate logo to top
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self moveLogoOutOfScreen];
+    });
 }
 
 /*
@@ -93,7 +86,7 @@
  */
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+NSLog(@"%s", __PRETTY_FUNCTION__);
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
 
     //to be able/disable the enable the request password button
@@ -102,16 +95,13 @@
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
-    [self.forgotPasswordView.emailTextfield setDelegate:self];
+    self.forgotPasswordView.emailTextfield.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self removeObservers];
-}
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    self.alertShown = NO;
 }
 
 #pragma mark - UITextField delegate methods
@@ -127,13 +117,21 @@
             [self continueFromLoginFormViewToConfigureFormView];
             return YES;
         } else {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No login data", nil)
-                                        message:NSLocalizedString(@"Enter Your email address and password to login.", nil)
-                                       delegate:self
-                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                              otherButtonTitles:nil]
-             show];
             self.alertShown = YES;
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:NSLocalizedString(@"No login data", nil)
+                                                  message:NSLocalizedString(@"Enter Your email address and password to login.", nil)
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction *action) {
+                                                                 self.alertShown = NO;
+                                                             }];
+
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+
             return NO;
         }
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
@@ -149,13 +147,20 @@
             [self animateLoginViewToVisible:1.f delay:0.f];
             return YES;
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry!", nil)
-                                                            message:NSLocalizedString(@"Please enter a valid email address.", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                                  otherButtonTitles:nil];
-            [alert show];
             self.alertShown = YES;
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:NSLocalizedString(@"Sorry!", nil)
+                                                  message:NSLocalizedString(@"Please enter a valid email address.", nil)
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction *action) {
+                                                                 self.alertShown = NO;
+                                                             }];
+
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
     }
     return NO;
@@ -203,23 +208,49 @@
 
         //Now that numbers have been saved, localy stored phone number and server side mobile number are in sync,
         //Migration was completed succesfully
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"v2.0_MigrationComplete"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LoginViewControllerMigrationCompleted];
 
         [self.configureFormView.phoneNumberField resignFirstResponder];
         [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
         [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
         [self.scene runActThree];                     // Animate the clouds
         if ([SystemUser currentUser].sipEnabled) {
-            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {}];
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+                if (!granted) {
+                    UIAlertController *alertController = [UIAlertController
+                                                          alertControllerWithTitle:NSLocalizedString(@"Microphone Access Denied", nil)
+                                                          message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil)
+                                                          preferredStyle:UIAlertControllerStyleAlert];
+
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                                           style:UIAlertActionStyleCancel
+                                                                         handler:nil];
+
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                                       style:UIAlertActionStyleDefault
+                                                                     handler:^(UIAlertAction *action) {
+                                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                                                     }];
+
+                    [alertController addAction:cancelAction];
+                    [alertController addAction:okAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            }];
         }
     } failure:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                        message:localizedErrorString
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                              message:localizedErrorString
+                                              preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 
@@ -286,20 +317,6 @@
     if(!self.alertShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         [self.scene animateCloudsIntoViewWithDuration:duration];
-    }
-}
-
-#pragma mark - Helper method that greets you when you reach the lock screen.
-- (void)setLockScreenFriendlyNameWithResponse:(id)responseObject {
-    if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *userDict = (NSDictionary*)responseObject;
-        NSString *firstName = userDict[@"first_name"];
-        NSString *lastName = userDict[@"last_name"];
-        NSString *greeting;
-        if (firstName && lastName)
-            greeting = [NSString stringWithFormat:@"%@ %@!", userDict[@"first_name"], userDict[@"last_name"]];
-
-        [self.unlockView.greetingsLabel setText:greeting];
     }
 }
 
@@ -399,6 +416,7 @@
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
     SystemUser *currentUser = [SystemUser currentUser];
+
     [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
@@ -416,56 +434,33 @@
 
 - (void)retrievePhoneNumbersWithSuccessBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userProfileWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.fetchAccountRetryCount = 0; // Reset the retry count
-        NSString *outgoingNumber = [SystemUser currentUser].localizedOutgoingNumber;
-        if (outgoingNumber) {
-            [self.configureFormView.outgoingNumberLabel setText:outgoingNumber];
-        } else {
-            [self.configureFormView.outgoingNumberLabel setText:@""];
-        }
+    [[SystemUser currentUser] updateSystemUserFromVGWithCompletion:^(NSError *error) {
+        [SVProgressHUD dismiss];
 
-        NSString *localStoreMobileNumber = [SystemUser currentUser].mobileNumber;
-        //Give preference to the user entered phone number over the phone number stored on the server
-        if ([localStoreMobileNumber length] > 0) {
-            self.configureFormView.phoneNumberField.text = localStoreMobileNumber;
-        } else {
-            NSString *mobile_nr = [responseObject objectForKey:kMobileNumberKey];
-            //if the response also contained the mobile nr, display it to the user
-            if ([mobile_nr isKindOfClass:[NSString class]]) {
-                self.configureFormView.phoneNumberField.text = mobile_nr;
+        if (!error) {
+            SystemUser *systemUser = [SystemUser currentUser];
+            self.configureFormView.outgoingNumberLabel.text = systemUser.outgoingNumber;
+            self.configureFormView.phoneNumberField.text = systemUser.mobileNumber;
+            self.unlockView.greetingsLabel.text = [NSString stringWithFormat:@"%@ %@!", systemUser.firstName, systemUser.lastName];
+
+            //If a success block was provided, execute it
+            if (success) {
+                success();
             }
-        }
-
-        [SVProgressHUD dismiss];
-
-        [self setLockScreenFriendlyNameWithResponse:responseObject];
-
-        //If a success block was provided, execute it
-        if (success) {
-            success();
-        }
-
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
-        self.fetchAccountRetryCount++;
-        if (self.fetchAccountRetryCount != 3) { // When we retried 3 times
-            [self retrievePhoneNumbersWithSuccessBlock:nil];
         } else {
-            [self.configureFormView.outgoingNumberLabel setUserInteractionEnabled:YES];
-            [self.configureFormView.outgoingNumberLabel setText:NSLocalizedString(@"Enter phone number manually", nil)];
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                  message:NSLocalizedString(@"Error while retrieving your outgoing number, make sure you are connected to the internet.", nil)
+                                                  preferredStyle:UIAlertControllerStyleAlert];
 
-            [UIAlertView showWithTitle:NSLocalizedString(@"Error", nil)
-                               message:NSLocalizedString(@"Error while retrieving your outgoing number, please enter manually", nil)
-                                 style:UIAlertViewStylePlainTextInput
-                     cancelButtonTitle:nil
-                     otherButtonTitles:@[NSLocalizedString(@"Ok", nil)]
-                              tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                  //TODO: do something with the entered number
-                                  NSLog(@"outgoing number = %@", [alertView textFieldAtIndex:0].text);
+            UIAlertAction *retryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Retry", nil)
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction *action) {
+                                                                    [self retrievePhoneNumbersWithSuccessBlock:success];
+                                                                }];
 
-                              }];
-
+            [alertController addAction:retryAction];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
     }];
 }
@@ -569,11 +564,16 @@
 }
 
 - (IBAction)mobileNumberInfoButtonPressed:(UIButton *)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Mobile phone number", nil) message:NSLocalizedString(@"To make Two step calling possible, we need to have your mobile phone number.", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:defaultAction];
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:NSLocalizedString(@"Mobile phone number", nil)
+                                          message:NSLocalizedString(@"To make Two step calling possible, we need to have your mobile phone number.", nil)
+                                          preferredStyle:UIAlertControllerStyleAlert];
 
-    [self presentViewController:alert animated:YES completion:nil];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                       style:UIAlertActionStyleDefault handler:nil];
+
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

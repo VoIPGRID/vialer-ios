@@ -24,18 +24,28 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
 
 #pragma mark - view life cycle
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:LOGIN_FAILED_NOTIFICATION];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLayout];
-    [self setupLogin];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([SystemUser currentUser].isLoggedIn && !self.loginViewController.presentingViewController) {
-        [self performSegueWithIdentifier:VailerRootViewControllerShowVialerDrawerViewSegue sender:nil];
-    } else {
+    if ([self shouldPresentLoginViewController]) {
         [self presentViewController:self.loginViewController animated:NO completion:nil];
+    } else {
+        [self performSegueWithIdentifier:VailerRootViewControllerShowVialerDrawerViewSegue sender:nil];
     }
 }
 
@@ -58,38 +68,27 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
     return _loginViewController;
 }
 
-- (void)setupLogin {
-    // Handler for failed authentications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-
+- (BOOL)shouldPresentLoginViewController {
     //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
     //v2.x and start onboarding at the "configure numbers view".
 
-    //TODO: Why not login again. What if the user was deactivated on the platform?
     if (![SystemUser currentUser].isLoggedIn) {
         //Not logged in, not v21.x, nor in v2.x
-        [self showOnboarding:OnboardingScreenLogin];
-    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
+        self.loginViewController.screenToShow = OnboardingScreenLogin;
+        return YES;
+    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:LoginViewControllerMigrationCompleted]){
         //Also show the Mobile number onboarding screen
-        [self showOnboarding:OnboardingScreenConfigure];
-// TODO: fix SIP
-//    } else {
-//        [[SystemUser currentUser] checkSipStatus];
+        self.loginViewController.screenToShow = OnboardingScreenConfigure;
+        return YES;
     }
+    return NO;
 }
 
 #pragma mark - Notification actions
-- (void)showOnboarding:(OnboardingScreens)screenToShow {
-    if (!self.loginViewController.presentingViewController) {
-        self.loginViewController.screenToShow = screenToShow;
-        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
-        [self dismissViewControllerAnimated:NO completion:nil];
-        [self presentViewController:self.loginViewController animated:YES completion:nil];
-    }
-}
-
 - (void)loginFailedNotification:(NSNotification *)notification {
-    [self showOnboarding:OnboardingScreenLogin];
+    self.loginViewController.screenToShow = OnboardingScreenLogin;
+    self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
+
 @end

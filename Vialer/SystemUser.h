@@ -1,9 +1,6 @@
 //
 //  SystemUser.h
-//  Vialer
-//
-//  Created by Maarten de Zwart on 14/09/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,34 +15,37 @@
 
 - (void)removeCurrentUser;
 
-+ (instancetype)initWithUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password;
-
 #pragma mark - Login handling
 
-@property (nonatomic, readonly, getter=isLoggedIn) BOOL loggedIn;
+@property (nonatomic, readonly, getter=isLoggedIn)BOOL loggedIn;
 
 - (void)loginWithUser:(NSString *)user password:(NSString *)password completion:(void(^)(BOOL loggedin))completion;
-
 - (void)logout;
 
 #pragma mark - User/Settings information
 
 // Account information
-@property (nonatomic, readonly) NSString *user;
-@property (nonatomic, readonly) NSString *displayName;
-@property (nonatomic, readonly) NSString *outgoingNumber;
-@property (nonatomic, readonly) NSString *mobileNumber;
-@property (nonatomic, readonly) NSString *sipAccount;
-@property (nonatomic, readonly) NSString *sipPassword;
-
-@property (nonatomic, readonly) NSString *localizedOutgoingNumber;
+@property (readonly, nonatomic)NSString *user;
+@property (readonly, nonatomic)NSString *displayName;
+@property (readonly, nonatomic)NSString *outgoingNumber;
+@property (readonly, nonatomic)NSString *mobileNumber;
+@property (readonly, nonatomic)NSString *sipAccount;
+@property (readonly, nonatomic)NSString *sipPassword;
+@property (readonly, nonatomic)NSString *firstName;
+@property (readonly, nonatomic)NSString *lastName;
 
 #pragma mark - Sip specific handling
 
-@property (nonatomic, readonly) BOOL isAllowedToSip;
-@property (nonatomic, assign, getter=isSipEnabled) BOOL sipEnabled;
+@property (readonly, nonatomic) BOOL isAllowedToSip;
+@property (nonatomic, getter=isSipEnabled) BOOL sipEnabled;
 
 - (void)checkSipStatus;
 - (void)updateSIPAccountWithSuccess:(void (^)(BOOL success))success;
 
+/**
+ Does a API call to update it's properties. Currently outgoingNumber, mobileNumber, firstName and lastName are retrieved.
+
+ @param completion A block giving access to the error variable which, when set, indicates an error condition.
+ */
+- (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion;
 @end

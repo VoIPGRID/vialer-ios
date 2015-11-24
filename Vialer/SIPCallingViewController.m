@@ -1,9 +1,6 @@
 //
 //  SIPCallingViewController.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 15/12/14.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "SIPCallingViewController.h"
@@ -12,8 +9,6 @@
 #import "GAITracker.h"
 #import "Gossip+Extra.h"
 #import "SIPIncomingViewController.h"
-
-#import "UIAlertView+Blocks.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVAudioSession.h>

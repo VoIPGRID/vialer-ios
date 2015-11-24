@@ -85,9 +85,6 @@
 "EnabledVOIPCalls" = "VoIP calling";
 
 /* No comment provided by engineer. */
-"Enter phone number manually" = "Enter phone number manually";
-
-/* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Enter Your email address and password to login.";
 
 /* No comment provided by engineer. */
@@ -97,7 +94,8 @@
 "Error getting the availability options" = "Error getting the availability options.";
 
 /* No comment provided by engineer. */
-"Error while retrieving your outgoing number, please enter manually" = "Error while retrieving your outgoing number, please enter manually";
+"Error while retrieving your outgoing number, make sure you are connected to the internet" = "Error while retrieving your outgoing number, make sure you are connected to the internet";
+"Retry" = "Retry";
 
 /* No comment provided by engineer. */
 "Failed to fetch your recent calls." = "Failed to fetch your recent calls.";

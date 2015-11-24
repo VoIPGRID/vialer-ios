@@ -65,10 +65,17 @@
 #pragma mark - actions
 
 - (IBAction)infobuttonPressed:(UIButton *)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Two step modus", nil) message:NSLocalizedString(@"Two step modus will setup a call to your phone first and will call the other party when you answer the call.", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:NSLocalizedString(@"Two step modus", nil)
+                                          message:NSLocalizedString(@"Two step modus will setup a call to your phone first and will call the other party when you answer the call.", nil)
+                                          preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:nil];
+
+    [alertController addAction:defaultAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

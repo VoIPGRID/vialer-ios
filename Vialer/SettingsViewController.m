@@ -1,9 +1,6 @@
 //
 //  SettingsViewController.m
-//  Vialer
-//
-//  Created by Harold on 18/06/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "SettingsViewController.h"
@@ -14,7 +11,6 @@
 #import "GAITracker.h"
 #import "SettingsViewFooterView.h"
 #import "SystemUser.h"
-#import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import "SVProgressHUD.h"
@@ -105,7 +101,7 @@
 
         } else if (indexPath.row == OUTGOING_NUMBER_ROW) {
             cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
-            cell.detailTextLabel.text = [SystemUser currentUser].localizedOutgoingNumber;
+            cell.detailTextLabel.text = [SystemUser currentUser].outgoingNumber;
             cell.accessoryView = nil;
         }
     }
