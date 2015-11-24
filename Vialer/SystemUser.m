@@ -336,19 +336,19 @@ static NSString * const SystemUserSuppressedKey = @"suppressed";
 
 /** Private helper to switch the SIP Account status and trigger the correct methods */
 - (void)updateSipAccountStatus:(BOOL)enabled {
-    if (enabled) {
-        [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
-        [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
-        [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-        [[ConnectionHandler sharedConnectionHandler] sipConnect];
-    } else {
-        if (self.sipAccount) {
-            // First unregister the account with the middleware
-            [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
-        }
-        // And disconnect the Sip Connection Handler
-        [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
-    }
+//    if (enabled) {
+//        [[ConnectionHandler sharedConnectionHandler] registerForPushNotifications];
+//        [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
+//        [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+//        [[ConnectionHandler sharedConnectionHandler] sipConnect];
+//    } else {
+//        if (self.sipAccount) {
+//            // First unregister the account with the middleware
+//            [[PZPushMiddleware sharedInstance] unregisterSipAccount:self.sipAccount];
+//        }
+//        // And disconnect the Sip Connection Handler
+//        [[ConnectionHandler sharedConnectionHandler] sipDisconnect:nil];
+//    }
 }
 
 #pragma mark - Properties
