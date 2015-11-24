@@ -1,9 +1,6 @@
 //
 //  VoIPGRIDRequestOperationManager.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 31/10/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "VoIPGRIDRequestOperationManager.h"
@@ -68,7 +65,10 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
     }];
 }
 
-- (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+typedef NS_ENUM(NSInteger, VoIPGRIDLoginErrors) {
+    VoIPGRIDLoginErrorUserTypeNotAllowed, //Partner or superuser login attempt. Denied.
+};
+- (void)loginWithUser:(NSString *)user password:(NSString *)password success:(void (^)(NSDictionary *responseData))success failure:(void (^)(NSError *error))failure {
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
 
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
@@ -81,7 +81,8 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
         BOOL partnerValid = (partner != nil && ![partner isKindOfClass:[NSNull class]]);
         if (!clientValid || partnerValid) {
             // This is a partner or superuser account, don't log in!
-            failure(operation, nil);
+            NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"user type not allowed", nil)};
+            failure([NSError errorWithDomain:VGErrorDomain code:VoIPGRIDLoginErrorUserTypeNotAllowed userInfo:userInfo]);
 
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil)
                                                             message:NSLocalizedString(@"This user is not allowed to use the app", nil)
@@ -90,18 +91,16 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
                                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
-
-            [SystemUser initWithUserDict:responseData withUsername:user andPassword:password];
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFICATION object:nil];
 
             // Notify we are completed here
             if (success) {
-                success (operation, responseObject);
+                success (responseObject);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(operation, error);
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
+        failure(error);
+        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", nil) message:NSLocalizedString(@"Your email and/or password is incorrect.", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
             [alert show];
         } else {
@@ -141,27 +140,19 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
+        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
             [self loginFailed];
         }
     }];
 }
 
-- (void)userProfileWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)userProfileWithCompletion:(void (^)(id responseObject, NSError *error))completion {
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:GetPermissionSystemUserProfileUrl relativeToURL:self.baseURL] absoluteString] parameters:nil error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *outgoingCli = [responseObject objectForKey:@"outgoing_cli"];
-        if ([outgoingCli isKindOfClass:[NSString class]]) {
-            [[NSUserDefaults standardUserDefaults] setObject:outgoingCli forKey:@"OutgoingNumber"];
-        } else {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OutgoingNumber"];
-        }
-        success(operation, responseObject);
+        completion(responseObject, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(operation, error);
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
-            [self loginFailed];
-        }
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"Error updating user profile", nil)};
+        completion(nil, [NSError errorWithDomain:VGErrorDomain code:operation.response.statusCode userInfo:userInfo]);
     }];
 
     [self setHandleAuthorizationRedirectForRequest:request andOperation:operation];
@@ -173,7 +164,7 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
+        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
             [self loginFailed];
         }
     }];
@@ -202,7 +193,7 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
            NSString *userInfoString = NSLocalizedString(@"Two step call failed", nil);
            NSInteger errorCode = -1;
 
-           if (operation.response.statusCode == VoIPGRIDHttpErrorsBadRequest) {
+           if (operation.response.statusCode == VoIPGRIDHttpErrorBadRequest) {
                //Request malfomed, the request returned the failure reason, return this wrapped in an error.
 
                //Possible reasons:
@@ -216,7 +207,7 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
                        userInfoString = operation.responseString;
                    }
                }
-           } else if (operation.response.statusCode == VoIPGRIDHttpErrorsUnauthorized) {
+           } else if (operation.response.statusCode == VoIPGRIDHttpErrorUnauthorized) {
                [self loginFailed];
                errorCode = VGTwoStepCallErrorStatusUnAuthorized;
                userInfoString = NSLocalizedString(@"Couldn't login, authorization failed", nil);
@@ -270,7 +261,7 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
         success(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation, error);
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorsUnauthorized) {
+        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
             [self loginFailed];
         }
     }];
@@ -404,7 +395,6 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
     NSDictionary *parameters = @{kMobileNumberKey : mobileNumber};
     [self PUT:PutMobileNumber parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:@"MobileNumber"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         if (success) success();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //Provide user with the message from the error

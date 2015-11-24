@@ -50,6 +50,8 @@ PODS:
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
     - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
     - MMDrawerController/Subclass (= 0.6.0)
+  - MMDrawerController+Storyboard (0.0.2):
+    - MMDrawerController
   - MMDrawerController/Core (0.6.0)
   - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
     - MMDrawerController/Core
@@ -81,12 +83,21 @@ DEPENDENCIES:
   - CocoaLumberjack
   - Google/Analytics (~> 1.0.7)
   - HTCopyableLabel
-  - MMDrawerController
+  - MMDrawerController+Storyboard (from `https://github.com/TomSwift/MMDrawerController-Storyboard.git`)
   - OHHTTPStubs
   - PBWebViewController
   - Reachability
   - SSKeychain
   - SVProgressHUD
+
+EXTERNAL SOURCES:
+  MMDrawerController+Storyboard:
+    :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
+
+CHECKOUT OPTIONS:
+  MMDrawerController+Storyboard:
+    :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
+    :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
@@ -99,6 +110,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
   OHHTTPStubs: 0aec5755528693a165bd616cb79f69387de306a8
   PBWebViewController: 909b1505da6ba7c5c82519a6457246027926061e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

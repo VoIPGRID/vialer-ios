@@ -1,9 +1,6 @@
 //
 //  AppDelegate.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 31/10/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -11,11 +8,8 @@
 #import "ConnectionHandler.h"
 #import "GAITracker.h"
 #import "Gossip+Extra.h"
-#import "LogInViewController.h"
 #import "PZPushMiddleware.h"
-#import "RootViewController.h"
 #import "SystemUser.h"
-#import "UIAlertView+Blocks.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import <AVFoundation/AVFoundation.h>
@@ -27,30 +21,42 @@
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
-@interface AppDelegate()
-@property (nonatomic, strong) RootViewController *rootViewController;
-@property (nonatomic, strong) LogInViewController *loginViewController;
+@interface AppDelegate() <PKPushRegistryDelegate>
 @end
 
 @implementation AppDelegate
 
 #pragma mark - UIApplication delegate
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [GAITracker setupGAITracker];
     [self setupConnectivity];
 
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.rootViewController;
-    [self.window makeKeyAndVisible];
-
-    [self setupLogin];
-
-    NSSetUncaughtExceptionHandler(&HandleExceptions);
-
     return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
+            if (success) {
+                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+            }
+        }];
+    });
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // End all active calls when the app is terminated
+    for (GSCall *activeCall in [GSCall activeCalls]) {
+        [activeCall end];
+    }
+    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
+        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
+    }];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - setup helper methods
@@ -68,45 +74,10 @@
 //    [[ConnectionHandler sharedConnectionHandler] start];
 }
 
-- (void)setupLogin {
-    // Handler for failed authentications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-
-    //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
-    //v2.x and start onboarding at the "configure numbers view".
-
-    //TODO: Why not login again. What if the user was deactivated on the platform?
-    if (![SystemUser currentUser].isLoggedIn) {
-        //Not logged in, not v21.x, nor in v2.x
-        [self showOnboarding:OnboardingScreenLogin];
-    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"v2.0_MigrationComplete"]){
-        //Also show the Mobile number onboarding screen
-        [self showOnboarding:OnboardingScreenConfigure];
-// TODO: fix SIP
-//    } else {
-//        [[SystemUser currentUser] checkSipStatus];
-    }
-}
-
-#pragma mark - View Controllers
-- (RootViewController *)rootViewController {
-    if (!_rootViewController) {
-        _rootViewController = [[RootViewController alloc] init];
-    }
-    return _rootViewController;
-}
-
-- (LogInViewController *)loginViewController {
-    if (!_loginViewController) {
-        _loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
-    }
-    return _loginViewController;
-}
-
 #pragma mark - UIApplication notification delegate
--(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    completionHandler(UIBackgroundFetchResultNoData);
-}
+//-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    completionHandler(UIBackgroundFetchResultNoData);
+//}
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
@@ -147,90 +118,9 @@
     }
 }
 
-#pragma mark - Exception handling
-void HandleExceptions(NSException *exception) {
-    NSLog(@"The app has encountered an unhandled exception: %@", [exception debugDescription]);
-}
-
-#pragma mark - UIApplicationDelegate methods
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
-        if (success) {
-            [[PZPushMiddleware sharedInstance] updateDeviceRecord];
-        }
-    }];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // End all active calls when the app is terminated
-    for (GSCall *activeCall in [GSCall activeCalls]) {
-        [activeCall end];
-    }
-    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
-        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
-    }];
-}
-
 #pragma mark - Handle person(s) & calls
-- (BOOL)handlePerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    if (property == kABPersonPhoneProperty) {
-        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-        for (CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
-            if (identifier == ABMultiValueGetIdentifierAtIndex(multiPhones, i)) {
-                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-                CFRelease(multiPhones);
-
-                NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
-                CFRelease(phoneNumberRef);
-
-                NSString *fullName = (__bridge NSString *)ABRecordCopyCompositeName(person);
-                if (!fullName) {
-                    NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-                    NSString *middleName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-                    NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-                    if (firstName) {
-                        fullName = [NSString stringWithFormat:@"%@ %@%@", firstName, [middleName length] ? [NSString stringWithFormat:@"%@ ", middleName] : @"", lastName];
-                    }
-                }
-
-                [self handlePhoneNumber:phoneNumber forContact:fullName];
-            }
-        }
-    }
-    return NO;
-}
-
-- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
-    [self.rootViewController handlePhoneNumber:phoneNumber forContact:contact];
-}
-
-- (void)handlePhoneNumber:(NSString *)phoneNumber {
-    [self handlePhoneNumber:phoneNumber forContact:nil];
-}
-
 - (void)handleSipCall:(GSCall *)sipCall {
-    return [self.rootViewController handleSipCall:sipCall];
-}
-
-#pragma mark - Notification actions
-- (void)showOnboarding:(OnboardingScreens)screenToShow {
-    // Check if the loginViewController is created, and if present
-    NSLog(@"self.loginViewController.presentingViewController %@", self.loginViewController.presentingViewController);
-    if (!self.loginViewController.presentingViewController) {
-        self.loginViewController.screenToShow = screenToShow;
-        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
-        // Make sure we have the current presenting viewcontroller.
-        UIViewController *topRootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-        while (topRootViewController.presentedViewController) {
-            topRootViewController = topRootViewController.presentedViewController;
-        }
-        [topRootViewController presentViewController:self.loginViewController animated:YES completion:nil];
-    }
-}
-
-- (void)loginFailedNotification:(NSNotification *)notification {
-    [self showOnboarding:OnboardingScreenLogin];
+    // TODO: fix sip call
 }
 
 @end

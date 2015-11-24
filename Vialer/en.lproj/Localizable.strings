@@ -4,19 +4,7 @@
 "%@\nis currently logged in." = "%@\nis currently logged in.";
 
 /* No comment provided by engineer. */
-"/dashboard/" = "/dashboard/";
-
-/* No comment provided by engineer. */
-"/dialplan/" = "/dialplan/";
-
-/* No comment provided by engineer. */
-"/stats/dashboard/" = "/stats/dashboard/";
-
-/* No comment provided by engineer. */
 "Accept" = "Accept";
-
-/* No comment provided by engineer. */
-"Accessibility" = "Accessibility";
 
 /* No comment provided by engineer. */
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available";
@@ -32,12 +20,6 @@
 
 /* No comment provided by engineer. */
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
-
-/* No comment provided by engineer. */
-"Availability" = "Availability";
-
-/* No comment provided by engineer. */
-"AVAILABILITY_SAVED_SUCCESS" = "Availability saved";
 
 /* No comment provided by engineer. */
 "Business" = "Business";
@@ -103,9 +85,6 @@
 "EnabledVOIPCalls" = "VoIP calling";
 
 /* No comment provided by engineer. */
-"Enter phone number manually" = "Enter phone number manually";
-
-/* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Enter Your email address and password to login.";
 
 /* No comment provided by engineer. */
@@ -115,12 +94,13 @@
 "Error getting the availability options" = "Error getting the availability options.";
 
 /* No comment provided by engineer. */
-"Error while retrieving your outgoing number, please enter manually" = "Error while retrieving your outgoing number, please enter manually";
+"Error while retrieving your outgoing number, make sure you are connected to the internet" = "Error while retrieving your outgoing number, make sure you are connected to the internet";
+"Retry" = "Retry";
 
 /* No comment provided by engineer. */
 "Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
 
-/* No comment provided by engineer. */
+/* failed to load webpage with title */
 "Failed to load %@" = "Failed to load %@";
 
 /* No comment provided by engineer. */
@@ -128,6 +108,9 @@
 
 /* No comment provided by engineer. */
 "Failed to setup call" = "Failed to setup call";
+
+/* No comment provided by engineer. */
+"Fetching the latest recent calls from the server." = "Fetching the latest recent calls from the server.";
 
 /* No comment provided by engineer. */
 "Forgot password?" = "Forgot password?";
@@ -172,9 +155,6 @@
 "Login failed" = "Login failed";
 
 /* No comment provided by engineer. */
-"Logout" = "Logout";
-
-/* No comment provided by engineer. */
 "Microphone Access Denied" = "Microphone Access Denied";
 
 /* No comment provided by engineer. */
@@ -200,9 +180,6 @@
 
 /* No comment provided by engineer. */
 "No login data" = "No login data";
-
-/* No comment provided by engineer. */
-"No outgoing number configured" = "No outgoing number configured";
 
 /* No comment provided by engineer. */
 "Not available" = "Not available";
@@ -247,9 +224,6 @@
 "Retrieving phone numbers..." = "Retrieving phone numbers...";
 
 /* No comment provided by engineer. */
-"Routing" = "Routing";
-
-/* No comment provided by engineer. */
 "Saving availability has failed" = "Saving availability has failed";
 
 /* No comment provided by engineer. */
@@ -265,9 +239,6 @@
 "Setting up connection..." = "Setting up connection...";
 
 /* No comment provided by engineer. */
-"Settings" = "Settings";
-
-/* No comment provided by engineer. */
 "SIP account" = "SIP account";
 
 /* Answer part of the text: Slide to answer */
@@ -281,6 +252,9 @@
 
 /* Localized outgoing number, catching/translating suppressed */
 "suppressed" = "Anonymous (suppressed)";
+
+/* No comment provided by engineer. */
+"Syncing addressbook." = "Syncing addressbook.";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "This user is not allowed to use the app";
@@ -299,6 +273,9 @@
 
 /* No comment provided by engineer. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Two step modus will setup a call to your phone first and will call the other party when you answer the call.";
+
+/* No comment provided by engineer. */
+"Unable to fetch availability" = "Unable to fetch availability";
 
 /* No comment provided by engineer. */
 "Unable to fetch you recent call list." = "Unable to fetch you recent call list.";

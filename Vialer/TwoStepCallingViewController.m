@@ -1,8 +1,5 @@
 //
 //  TwoStepCallingViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 19/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -58,7 +55,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 
 @implementation TwoStepCallingViewController
 
-- (void)handlePhoneNumber:(NSString *)phoneNumber forContact:(NSString *)contact {
+- (void)handlePhoneNumber:(NSString *)phoneNumber {
     if (!self.presentingViewController) {
         [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
     }
@@ -74,6 +71,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     [self setup];
     self.state = CallingStateIdle;
 }
@@ -292,6 +290,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self stopUpdates];
 }
 

@@ -1,9 +1,6 @@
 //
 //  Gossip+Extra.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 26/12/14.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "Gossip+Extra.h"

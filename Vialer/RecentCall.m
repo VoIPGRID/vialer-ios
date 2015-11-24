@@ -1,9 +1,6 @@
 //
 //  RecentCall.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 13/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "RecentCall.h"
@@ -124,7 +121,6 @@ static NSString * const RecentCallCallerId = @"callerid";
 + (void)clearCachedRecentCalls {
     @synchronized([self class]) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RecentsCache"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -152,7 +148,6 @@ static NSString * const RecentCallCallerId = @"callerid";
         NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
         if (data) {
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"RecentsCache"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
 

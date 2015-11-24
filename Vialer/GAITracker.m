@@ -1,8 +1,5 @@
 //
 //  VialerGAITracker.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 14/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -28,41 +25,51 @@
 }
 
 + (void)trackScreenForControllerName:(NSString *)name {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:[name stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:[name stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    });
 }
 
 + (void)acceptIncomingCallEvent {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                          action:@"Inbound"
-                                                           label:@"Accepted"
-                                                           value:nil] build]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                              action:@"Inbound"
+                                                               label:@"Accepted"
+                                                               value:nil] build]];
+    });
 }
 
 + (void)declineIncomingCallEvent {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                          action:@"Inbound"
-                                                           label:@"Declined"
-                                                           value:nil] build]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                              action:@"Inbound"
+                                                               label:@"Declined"
+                                                               value:nil] build]];
+    });
 }
 
 + (void)setupOutgoingSIPCallEvent {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                          action:@"Outbound"
-                                                           label:@"SIP"
-                                                           value:nil] build]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                              action:@"Outbound"
+                                                               label:@"SIP"
+                                                               value:nil] build]];
+    });
 }
 
 + (void)setupOutgoingConnectABCallEvent {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                          action:@"Outbound"
-                                                           label:@"ConnectAB"
-                                                           value:nil] build]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                              action:@"Outbound"
+                                                               label:@"ConnectAB"
+                                                               value:nil] build]];
+    });
 }
 
 @end

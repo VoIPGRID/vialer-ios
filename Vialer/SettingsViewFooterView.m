@@ -1,9 +1,6 @@
 //
 //  SettingsViewFooterView.m
-//  Vialer
-//
-//  Created by Harold on 22/06/15.
-//  Copyright (c) 2015 VoIPGRID. All rights reserved.
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "SettingsViewFooterView.h"

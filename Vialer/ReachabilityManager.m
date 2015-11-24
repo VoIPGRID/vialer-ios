@@ -129,7 +129,7 @@ static NSString * const ReachabilityManagerStatusKey = @"status";
 }
 
 - (void)radioAccessChanged:(NSNotification *)notification {
-    [self check4gStatus];
+    self.on4g = [(NSString *)notification.object isEqualToString:CTRadioAccessTechnologyLTE];
 }
 
 @end

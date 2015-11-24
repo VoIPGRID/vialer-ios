@@ -1,9 +1,6 @@
 //
-//  ChatMessageTableViewCell.h
-//  Vialer
-//
-//  Created by Reinier Wieringa on 13/11/13.
-//  Copyright (c) 2014 VoIPGRID. All rights reserved.
+//  RecentTableViewCell.h
+//  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

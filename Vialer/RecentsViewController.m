@@ -1,20 +1,18 @@
 //
 //  RecentsViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 16/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "RecentsViewController.h"
 
-#import "AppDelegate.h"
 #import "Configuration.h"
 #import "ContactModel.h"
 #import "GAITracker.h"
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
+#import "SIPCallingViewController.h"
+#import "TwoStepCallingViewController.h"
 
 #import "UIViewController+MMDrawerController.h"
 
@@ -32,7 +30,11 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 @interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *filterControl;
+
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
+@property (strong, nonatomic) TwoStepCallingViewController *twoStepCallingViewController;
+
 @end
 
 @implementation RecentsViewController
@@ -77,6 +79,7 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 - (UIRefreshControl *)refreshControl {
     if (!_refreshControl) {
         _refreshControl = [[UIRefreshControl alloc] init];
+        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Fetching the latest recent calls from the server.", nil) attributes:nil];
         [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
@@ -85,6 +88,20 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
     _filterControl.tintColor = [Configuration tintColorForKey:ConfigurationRecentsFilterControlTintColor];
+}
+
+- (SIPCallingViewController *)sipCallingViewController {
+    if (!_sipCallingViewController) {
+        _sipCallingViewController = [[SIPCallingViewController alloc] init];
+    }
+    return _sipCallingViewController;
+}
+
+- (TwoStepCallingViewController *)twoStepCallingViewController {
+    if (!_twoStepCallingViewController) {
+        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] init];
+    }
+    return _twoStepCallingViewController;
 }
 
 #pragma mark - actions
@@ -168,13 +185,20 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 
     RecentCall *recent;
     if (self.filterControl.selectedSegmentIndex == 0) {
+        // If there are no recent calls, do nothing
+        if ([[RecentCallManager defaultManager].recentCalls count] == 0) {
+            return;
+        }
         recent = [RecentCallManager defaultManager].recentCalls[indexPath.row];
     } else {
+        // If there are no missed recent calls, do nothing
+        if ([[RecentCallManager defaultManager].missedRecentCalls count] == 0) {
+            return;
+        }
         recent = [RecentCallManager defaultManager].missedRecentCalls[indexPath.row];
     }
-    AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-    [appDelegate handlePhoneNumber:recent.callerPhoneNumber];
 
+    [self callPhoneNumber:recent.callerPhoneNumber];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -216,17 +240,32 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
     if ([property.key isEqualToString:RecentsViewControllerPropertyPhoneNumbers]) {
         CNPhoneNumber *phoneNumberProperty = property.value;
         NSString *phoneNumber = [phoneNumberProperty stringValue];
-
-        AppDelegate *appDelegate = ((AppDelegate *)[UIApplication sharedApplication].delegate);
-        [appDelegate handlePhoneNumber:phoneNumber];
+        [self callPhoneNumber:phoneNumber];
         return NO;
     }
     return YES;
 }
 
+#pragma mark - CNContactViewControllerDelegate
+
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(CNContact *)contact {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self refreshRecents];
+}
+
+#pragma mark - utils
+
+- (void)callPhoneNumber:(NSString *)phoneNumber {
+    // TODO: implement 4g calling
+    if (false) {
+        [GAITracker setupOutgoingSIPCallEvent];
+        [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+        [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
+    } else {
+        [GAITracker setupOutgoingConnectABCallEvent];
+        [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
+        [self.twoStepCallingViewController handlePhoneNumber:phoneNumber];
+    }
 }
 
 @end

@@ -1,8 +1,5 @@
 //
 //  DialerViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 03/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -60,6 +57,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     [self setupLayout];
 }
 
@@ -67,6 +65,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupReachability) name:UIApplicationDidBecomeActiveNotification object:nil];
     [self setupReachability];
     [self setupCallButton];
 }
@@ -74,6 +73,11 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.reachabilityManager stopMonitoring];
+    @try{
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIApplicationDidBecomeActiveNotification];
+    }@catch(id anException){
+        //do nothing, obviously it wasn't attached because an exception was thrown
+    }
 }
 
 #pragma mark - setup
@@ -182,7 +186,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
         } else {
             [GAITracker setupOutgoingConnectABCallEvent];
             [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-            [self.twoStepCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+            [self.twoStepCallingViewController handlePhoneNumber:self.numberText];
         }
     }
 }

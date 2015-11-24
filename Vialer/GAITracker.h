@@ -1,8 +1,5 @@
 //
 //  VialerGAITracker.h
-//  Vialer
-//
-//  Created by Bob Voorneveld on 14/10/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 

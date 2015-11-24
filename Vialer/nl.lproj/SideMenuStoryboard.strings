@@ -1,0 +1,30 @@
+
+/* Class = "UILabel"; text = "Availability"; ObjectID = "36j-DX-rpd"; */
+"36j-DX-rpd.text" = "Bereikbaarheid";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5vU-uH-avc"; */
+"5vU-uH-avc.text" = "Label";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "AWc-be-pBe"; */
+"AWc-be-pBe.text" = "Uitloggen";
+
+/* Class = "UILabel"; text = "Statistics"; ObjectID = "Ska-na-tJI"; */
+"Ska-na-tJI.text" = "Statistieken";
+
+/* Class = "UILabel"; text = "(checking availability)"; ObjectID = "gUN-wn-IlP"; */
+"gUN-wn-IlP.text" = "(bereikbaarheid ophalen)";
+
+/* Class = "UILabel"; text = "usernameLabel"; ObjectID = "hJT-a4-jHR"; */
+"hJT-a4-jHR.text" = "usernameLabel";
+
+/* Class = "UILabel"; text = "Information"; ObjectID = "jis-QG-P2H"; */
+"jis-QG-P2H.text" = "Informatie";
+
+/* Class = "UILabel"; text = "Dailplan"; ObjectID = "njI-Cn-bnW"; */
+"njI-Cn-bnW.text" = "Belplan";
+
+/* Class = "UILabel"; text = "outGoingNumberLabel"; ObjectID = "wfp-aM-Tem"; */
+"wfp-aM-Tem.text" = "outGoingNumberLabel";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "z0e-h0-SQZ"; */
+"z0e-h0-SQZ.text" = "Instellingen";

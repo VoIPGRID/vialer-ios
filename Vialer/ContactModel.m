@@ -1,8 +1,5 @@
 //
 //  ContactModel.m
-//  Vialer
-//
-//  Created by Redmer Loen on 12-10-15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -17,7 +14,6 @@
 @property (nonatomic, strong) CNContactFetchRequest *fetchRequest;
 
 @property (nonatomic, strong) NSArray *sectionTitles;
-
 @end
 
 @implementation ContactModel
@@ -29,7 +25,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^ {
         _defaultContactModel = [[ContactModel alloc] init];
-        [_defaultContactModel refreshAllContacts];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [_defaultContactModel refreshAllContacts];
+        });
     });
     return _defaultContactModel;
 }
