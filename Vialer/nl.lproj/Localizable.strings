@@ -98,7 +98,11 @@
 "Retry" = "Opnieuw proberen";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
+"Could not load your recent calls" = "Recente gesprekken konden niet worden opgehaald";
+"No missed calls" = "Geen gemiste gesprekken";
+"No recent calls" = "Geen recente gesprekken";
+"You are not allowed to view recent calls" = "Je hebt geen toestemming om de recente gesprekken te bekijken";
+"Not allowed" = "Geen toestemming";
 
 /* failed to load webpage with title */
 "Failed to load %@" = "%@ kon niet worden geladen";
@@ -212,7 +216,7 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Recent Fetch error" = "Recente Gesprekken ophalen mislukt";
+"Error loading recent calls" = "Fout bij laden gesprekken";
 
 /* No comment provided by engineer. */
 "Recents" = "Recent";
@@ -276,9 +280,6 @@
 
 /* No comment provided by engineer. */
 "Unable to fetch availability" = "Niet mogelijk bereikbaarheid op te halen";
-
-/* No comment provided by engineer. */
-"Unable to fetch you recent call list." = "Ophalen van recente gesprekken mislukt.";
 
 /* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";

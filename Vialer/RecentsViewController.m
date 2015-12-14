@@ -14,6 +14,7 @@
 #import "SIPCallingViewController.h"
 #import "TwoStepCallingViewController.h"
 
+#import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
 
 #import "ContactsUI/ContactsUI.h"
@@ -24,8 +25,7 @@ static NSString * const RecentsViewControllerLogoImageName = @"logo";
 static NSString * const RecentsViewControllerPropertyPhoneNumbers = @"phoneNumbers";
 
 static NSString * const RecentViewControllerRecentCallCell = @"RecentCallCell";
-static NSString * const RecentViewControllerNoRecentCallCell = @"NoRecentCallsCell";
-static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedRecentCallsCell";
+static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorText";
 
 @interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -130,9 +130,20 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
                 [self.refreshControl endRefreshing];
                 [self.tableView reloadData];
                 if (error) {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Recent Fetch error", nil) message:NSLocalizedString(@"Unable to fetch you recent call list.", nil) preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
-                    [alert addAction:defaultAction];
+                    NSString *errorTitle;
+                    switch ([RecentCallManager defaultManager].recentsFetchErrorCode) {
+                        case RecentCallManagerFetchingUserNotAllowed:
+                            errorTitle = @"Not allowed";
+                            break;
+                        default:
+                            errorTitle = @"Error loading recent calls";
+                            break;
+                    }
+
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(errorTitle, nil)
+                                                                                   message:[error localizedDescription]
+                                                                      andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+
                     [self presentViewController:alert animated:YES completion:nil];
                 }
             });
@@ -151,20 +162,36 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     // Select correct recents
+    if ([RecentCallManager defaultManager].recentsFetchFailed) {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+        switch ([RecentCallManager defaultManager].recentsFetchErrorCode) {
+            case RecentCallManagerFetchingUserNotAllowed:
+                cell.textLabel.text = NSLocalizedString(@"You are not allowed to view recent calls", nil);
+                break;
+            default:
+                cell.textLabel.text = NSLocalizedString(@"Could not load your recent calls", nil);
+                break;
+        }
+        return cell;
+    }
+
     NSArray *recents;
     if (self.filterControl.selectedSegmentIndex == 0) {
         recents = [RecentCallManager defaultManager].recentCalls;
         // No recents, show other cell
         if ([recents count] == 0) {
-            return [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerNoRecentCallCell];
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+            cell.textLabel.text = NSLocalizedString(@"No recent calls", nil);
+            return cell;
         }
     } else {
         // No recents, show other cell
         recents = [RecentCallManager defaultManager].missedRecentCalls;
         if ([recents count] == 0) {
-            return [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerNoMissedRecentCallCell];
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+            cell.textLabel.text = NSLocalizedString(@"No missed calls", nil);
+            return cell;
         }
     }
     RecentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerRecentCallCell];
