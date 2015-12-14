@@ -80,15 +80,11 @@
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 #pragma mark - utils
-
-// Correctly encode according to RFC 3986
 - (NSString *)urlEncodedString:(NSString *)toEncode {
-    if (!toEncode) {
-        return @"";
-    }
-    return [toEncode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSMutableCharacterSet *URLQueryAllowedSetWithoutPlus = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+    [URLQueryAllowedSetWithoutPlus removeCharactersInString:@"+"];
+    return [toEncode stringByAddingPercentEncodingWithAllowedCharacters:URLQueryAllowedSetWithoutPlus];
 }
 
 @end

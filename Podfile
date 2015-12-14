@@ -5,15 +5,15 @@ platform :ios, '8.0'
 # use_frameworks!
 
 target 'Vialer' do
-   	pod 'AFNetworkActivityLogger'
-	pod 'AFNetworking'
-	pod 'Google/Analytics', '~> 1.0.7'
-	pod 'HTCopyableLabel'
+    pod 'AFNetworkActivityLogger'
+    pod 'AFNetworking'
+    pod 'Google/Analytics', '~> 1.0.7'
+    pod 'HTCopyableLabel'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
-   	pod 'PBWebViewController'
-   	pod 'Reachability'
-   	pod 'SSKeychain'
-   	pod 'SVProgressHUD'
+    pod 'PBWebViewController'
+    pod 'Reachability'
+    pod 'SSKeychain'
+    pod 'SVProgressHUD'
 end
 
 target 'VialerTests' do
