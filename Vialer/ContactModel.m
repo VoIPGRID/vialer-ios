@@ -65,7 +65,7 @@
 - (CNContactFetchRequest *)fetchRequest {
     if (!_fetchRequest) {
         _fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:self.keysToFetch];
-        _fetchRequest.sortOrder = CNContactSortOrderGivenName;
+        _fetchRequest.sortOrder = CNContactSortOrderUserDefault;
     }
     return _fetchRequest;
 }
@@ -118,7 +118,7 @@
     }
 
     CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:self.keysToFetch];
-    fetchRequest.sortOrder = CNContactSortOrderGivenName;
+    fetchRequest.sortOrder = CNContactSortOrderUserDefault;
     fetchRequest.predicate = [CNContact predicateForContactsMatchingName:searchText];
 
     BOOL success = [self.contactStore enumerateContactsWithFetchRequest:fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
@@ -129,7 +129,16 @@
 }
 
 - (NSString *)getFirstChar:(CNContact *)contact {
-    NSString *firstChar = [[[CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName] substringToIndex:1] capitalizedString];
+    NSString *familyName = [contact familyName];
+    NSString *givenName = [contact givenName];
+    NSString *firstChar;
+
+    if ([CNContactFormatter nameOrderForContact:contact] == CNContactDisplayNameOrderFamilyNameFirst && familyName.length > 0) {
+        firstChar = [[familyName substringToIndex:1] capitalizedString];
+    } else if (givenName.length > 0) {
+        firstChar = [[givenName substringToIndex:1] capitalizedString];
+    }
+
     NSRange match = [firstChar rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]
                                                options:0
                                                  range:[firstChar rangeOfComposedCharacterSequenceAtIndex:0]];

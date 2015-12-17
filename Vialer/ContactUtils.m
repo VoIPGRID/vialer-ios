@@ -8,8 +8,8 @@
 @implementation ContactUtils
 
 + (NSMutableAttributedString *)getFormattedStyledContact:(CNContact *)contact {
+
     NSString *fullName = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
-    NSString *givenName = [contact givenName];
 
     if (!fullName) {
         NSString *otherContext = @"";
@@ -25,10 +25,24 @@
     }
 
     NSMutableAttributedString *fullNameAttrString = [[NSMutableAttributedString alloc] initWithString: fullName];
-    NSUInteger boldedLength = givenName.length;
+    NSInteger boldedLength;
+    NSString *familyName = [contact familyName];
+    NSString *givenName = [contact givenName];
+
+    if ([CNContactFormatter nameOrderForContact:contact] == CNContactDisplayNameOrderFamilyNameFirst) {
+        boldedLength = familyName.length;
+
+        if (boldedLength == 0) {
+            boldedLength = givenName.length;
+        }
+    } else {
+        boldedLength = givenName.length;
+    }
+
     if (boldedLength > fullName.length) {
         boldedLength = fullName.length;
     }
+
     NSRange boldedRange = NSMakeRange(0, boldedLength);
     [fullNameAttrString addAttribute:NSFontAttributeName
                                value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]
