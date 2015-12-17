@@ -47,7 +47,6 @@
 		C4DA5C781BFB27580043DED7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
-		C4DA5C881BFB3E9E0043DED7 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C871BFB3E9E0043DED7 /* SettingsStoryboard.storyboard */; };
 		C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		C4DA5C981BFB64ED0043DED7 /* SideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C971BFB64ED0043DED7 /* SideMenuTableViewController.m */; };
 		C4E860161BF14D960051BFDE /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E8600E1BF14D960051BFDE /* DialerViewController.m */; };
@@ -58,6 +57,7 @@
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
+		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F245E7711B577AD100FBA37C /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
@@ -251,7 +251,6 @@
 		C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerDrawerViewController.m; sourceTree = "<group>"; };
 		C4DA5C821BFB31900043DED7 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
-		C4DA5C871BFB3E9E0043DED7 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4DA5C891BFB4A5C0043DED7 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		C4DA5C961BFB64ED0043DED7 /* SideMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewController.h; sourceTree = "<group>"; };
@@ -274,8 +273,9 @@
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		F23AF00C1C283D68000D7903 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
-		F23AF00E1C283D6C000D7903 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		F22362681C22EE6500D6F5FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		F223626A1C22EE6600D6F5FF /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
@@ -678,7 +678,7 @@
 		F2E811BF1B37E2EB00EA640F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				C4DA5C871BFB3E9E0043DED7 /* SettingsStoryboard.storyboard */,
+				F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */,
 				F2E811CA1B380A9400EA640F /* CellWithTextField.h */,
 				F2E811CB1B380A9400EA640F /* CellWithTextField.m */,
 				F2E811CC1B380A9400EA640F /* CellWithTextField.xib */,
@@ -1098,7 +1098,7 @@
 				FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */,
 				FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */,
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
-				C4DA5C881BFB3E9E0043DED7 /* SettingsStoryboard.storyboard in Resources */,
+				F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
@@ -1420,6 +1420,16 @@
 				C4BF69E71BFA24B000AA81AD /* en */,
 			);
 			name = CallingStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F22362651C22EE6200D6F5FF /* Base */,
+				F22362681C22EE6500D6F5FF /* en */,
+				F223626A1C22EE6600D6F5FF /* nl */,
+			);
+			name = SettingsStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		FB29D911189BA0FF00345976 /* Localizable.strings */ = {
