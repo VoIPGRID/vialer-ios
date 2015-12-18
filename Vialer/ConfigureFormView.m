@@ -34,6 +34,18 @@
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
 
     self.isMoved = NO;
+
+    self.continueButton.borderWidth = 1;
+    self.continueButton.cornerRadius = 10;
+    self.continueButton.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
+    self.continueButton.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
+}
+
+- (Configuration *)configuration {
+    if (!_configuration) {
+        _configuration = [Configuration defaultConfiguration];
+    }
+    return _configuration;
 }
 
 @end

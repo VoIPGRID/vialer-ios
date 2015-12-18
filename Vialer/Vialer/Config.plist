@@ -10,6 +10,19 @@
 			<integer>145</integer>
 			<integer>145</integer>
 		</array>
+		<key>LogInViewControllerButtonBorderColor</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+		</array>
+		<key>LogInViewControllerButtonBackgroundColorForPressedState</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+			<real>0.5</real>
+		</array>
 		<key>NumberPadButtonTextColor</key>
 		<array>
 			<integer>255</integer>

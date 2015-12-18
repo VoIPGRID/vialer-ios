@@ -18,5 +18,6 @@ end
 
 target 'VialerTests' do
     pod 'CocoaLumberjack'
+    pod 'OCMock'
     pod 'OHHTTPStubs'
 end

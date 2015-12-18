@@ -32,9 +32,6 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 @property (strong, nonatomic) IBOutlet UnlockView *unlockView;
 @property (strong, nonatomic) IBOutlet UIButton *closeButton;
 
-// The unlock slider: should be refactored to unlockView.
-
-
 /** @property screenToShow
  *  The onboarding screen to show after the Logo animation
  **/

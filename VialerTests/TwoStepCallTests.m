@@ -177,7 +177,7 @@ static int ddLogLevel = DDLogLevelVerbose;
                                                                                   withCompletion:
      ^(NSString *returnedCallID, NSError *error) {
          //THEN
-         XCTAssert([error.localizedDescription isEqualToString:NSLocalizedString(errorString, nil)]);
+         XCTAssert([error.localizedDescription isEqualToString:NSLocalizedString(@"Invalid number used to setup call", nil)]);
          [expectation fulfill];
      }];
 

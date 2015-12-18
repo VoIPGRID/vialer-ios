@@ -11,9 +11,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *businessLabel;
 //Display's "calls in the cloud"
 @property (nonatomic, weak) IBOutlet UILabel *callsInTheCloudLabel;
-@property (nonatomic, weak) IBOutlet UIButton *loginButton;
-@property (nonatomic, weak) IBOutlet UIButton *forgotPasswordButton;
-@property (nonatomic, weak) IBOutlet UIButton *configurationInstructionsButton;
 @end
 
 @implementation LoginFormView
@@ -36,6 +33,24 @@
     [self.configurationInstructionsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"HOW_DOES_APP_WORK_BUTTON_TEXT", nil), appName] forState:UIControlStateNormal];
 
     self.isMoved = NO;
+
+    [self setupRoundedButtons:@[self.loginButton, self.forgotPasswordButton, self.configurationInstructionsButton]];
+}
+
+- (Configuration *)configuration {
+    if (!_configuration) {
+        _configuration = [Configuration defaultConfiguration];
+    }
+    return _configuration;
+}
+
+- (void)setupRoundedButtons:(NSArray<RoundedAndColoredUIButton *> *)buttons {
+    for (RoundedAndColoredUIButton *button in buttons) {
+        button.borderWidth = 1;
+        button.cornerRadius = 5;
+        button.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
+        button.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
+    }
 }
 
 - (void)setTextFieldDelegate:(id<UITextFieldDelegate>)delegate {

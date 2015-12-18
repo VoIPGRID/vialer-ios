@@ -20,6 +20,11 @@
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
+		C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */; };
+		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
+		C409F3AA1C24D561007DCC4A /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F245E7701B577AD100FBA37C /* Config.plist */; };
+		C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */; };
+		C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */; };
 		C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926351BE3A36600436D92 /* BubblingPoints.m */; };
 		C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
 		C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */; };
@@ -39,6 +44,11 @@
 		C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48752711BF1F51900B8B42B /* ReachabilityManager.m */; };
 		C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */; };
 		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
+		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
+		C4A4525C1C244F4400846591 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
+		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
+		C4A452631C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
+		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
 		C4BFEA621BDFD50100D616A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4BFEA611BDFD50100D616A0 /* GoogleService-Info.plist */; };
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
@@ -194,6 +204,10 @@
 		ACAE7E4C435ADBB9A2492695 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
+		C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormViewTests.m; sourceTree = "<group>"; };
+		C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormViewTests.m; sourceTree = "<group>"; };
+		C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
 		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
 		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
@@ -233,6 +247,9 @@
 		C48752711BF1F51900B8B42B /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
+		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
+		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
+		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
 		C4BF69E71BFA24B000AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
 		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4BF69F51BFA2D8700AA81AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
@@ -451,6 +468,8 @@
 				FBAD7F02182A8D4C002FC8FC /* LogInViewController.h */,
 				FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */,
 				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
+				C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */,
+				C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */,
 				3DE6EADF1AF24D0800C09935 /* Forms */,
 				3D4430401AEF8E290034156F /* Scene */,
 				3D4430391AEF67B70034156F /* Animated clouds */,
@@ -504,6 +523,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C409F3A11C24B9D6007DCC4A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C409F3A71C24CFDB007DCC4A /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */,
+				C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */,
+				C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */,
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
 		C41926511BE3A67100436D92 /* TwoStep */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +572,15 @@
 				C467430B1BF726AA0032D77B /* RecentTableViewCell.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C4A452511C24452700846591 /* Onboarding/Login */ = {
+			isa = PBXGroup;
+			children = (
+				C409F3A71C24CFDB007DCC4A /* Forms */,
+				C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */,
+			);
+			name = Onboarding/Login;
 			sourceTree = "<group>";
 		};
 		C4C3EAEF1BFB7B9900AA4B2A /* Controllers */ = {
@@ -651,6 +697,8 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				C409F3A11C24B9D6007DCC4A /* Models */,
+				C4A452511C24452700846591 /* Onboarding/Login */,
 				C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */,
 				F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */,
 				C4F49F2B1BF0B45700C25159 /* Info.plist */,
@@ -1072,6 +1120,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C409F3AA1C24D561007DCC4A /* Config.plist in Resources */,
+				C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,8 +1311,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
+				C4A4525C1C244F4400846591 /* LogInViewController.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
+				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
+				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
+				C4A452631C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
+				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
+				C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1276,6 +1333,7 @@
 				FE0E5C9B1BBE848800243577 /* GSUserAgent.m in Sources */,
 				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
+				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
 				C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */,
 				C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
