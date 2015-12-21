@@ -28,15 +28,14 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - properties
 
 - (void)setURL:(NSURL *)URL {
     [super setURL:URL];
-    [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), self.title]];
 }
 
 -(void)setNextUrl:(NSString *)nextUrl {
@@ -64,6 +63,11 @@
 
 #pragma mark - UIWebViewDelegate
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [super webViewDidStartLoad:webView];
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), self.title]];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [super webViewDidFinishLoad:webView];
     [SVProgressHUD dismiss];
@@ -78,6 +82,7 @@
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - utils
