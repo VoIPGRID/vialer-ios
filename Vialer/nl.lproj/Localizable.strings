@@ -7,7 +7,7 @@
 "Accept" = "Neem op";
 
 /* No comment provided by engineer. */
-"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een twee-staps-gesprek op te zetten waarbij jouw zakelijke nummer wordt getoond";
 
 /* No comment provided by engineer. */
 "App is configuring" = "%@ configureert";
