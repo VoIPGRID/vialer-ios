@@ -98,7 +98,10 @@
 "Retry" = "Retry";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
+"Could not load your recent calls" = "Could not load your recent calls.";
+"No missed calls" = "No missed calls";
+"No recent calls" = "No recent calls";
+"You are not allowed to view recent calls" = "You are not allowed to view recent calls";
 
 /* failed to load webpage with title */
 "Failed to load %@" = "Failed to load %@";
@@ -212,7 +215,7 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Recent Fetch error" = "Recent Fetch error";
+"Error loading recent calls" = "Error loading recent calls";
 
 /* No comment provided by engineer. */
 "Recents" = "Recents";
@@ -276,9 +279,6 @@
 
 /* No comment provided by engineer. */
 "Unable to fetch availability" = "Unable to fetch availability";
-
-/* No comment provided by engineer. */
-"Unable to fetch you recent call list." = "Unable to fetch you recent call list.";
 
 /* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Unable to save \"My number\"";

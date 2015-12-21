@@ -16,14 +16,15 @@ static int const RecentCallManagerOffsetMonths = -1;
 static int const RecentCallManagerNumberOfCalls = 50;
 static NSString * const RecentCallManagerErrorDomain = @"RecentCallManagerError";
 static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rate not quicker than this amount of seconds.
-static NSTimeInterval const RecentCallManagerLastRecentsFailureInterval = 1800; // Do not fetch recents again after failure after this amound of seconds.
 
 @interface RecentCallManager()
 @property (strong, nonatomic) NSArray<RecentCall *> *recentCalls;
 @property (strong, nonatomic) NSArray<RecentCall *> *missedRecentCalls;
 @property (nonatomic) BOOL reloading;
-@property (nonatomic) NSDate *lastRecentsFailure;
 @property (strong, nonatomic) NSDate * previousRefresh;
+
+@property (nonatomic) BOOL recentsFetchFailed;
+@property (nonatomic) RecentCallManagerErrors recentsFetchErrorCode;
 @end
 
 @implementation RecentCallManager
@@ -41,6 +42,7 @@ static NSTimeInterval const RecentCallManagerLastRecentsFailureInterval = 1800; 
     self = [super init];
     if (self) {
         self.reloading = NO;
+        self.recentsFetchFailed = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
 
     }
@@ -52,15 +54,12 @@ static NSTimeInterval const RecentCallManagerLastRecentsFailureInterval = 1800; 
 }
 
 - (void)getLatestRecentCallsWithCompletion:(void(^)(NSError *error))completion {
-
     // User must be loggedin
     if (![SystemUser currentUser].isLoggedIn ||
         // no fetch going on
         self.reloading ||
         // rate limit fetching
-        (self.previousRefresh && fabs([self.previousRefresh timeIntervalSinceNow]) < RecentCallManagerRefreshInterval) ||
-        // wait after failure
-        (self.lastRecentsFailure && fabs([self.lastRecentsFailure timeIntervalSinceNow]) < RecentCallManagerLastRecentsFailureInterval)) {
+        (self.previousRefresh && fabs([self.previousRefresh timeIntervalSinceNow]) < RecentCallManagerRefreshInterval)) {
         completion(nil);
         return;
     }
@@ -75,21 +74,28 @@ static NSTimeInterval const RecentCallManagerLastRecentsFailureInterval = 1800; 
     self.reloading = YES;
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:RecentCallManagerNumberOfCalls offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // Register the time when we had a succesfull retrieval
-        self.lastRecentsFailure = nil;
         self.previousRefresh = [NSDate date];
         self.reloading = NO;
+        self.recentsFetchFailed = NO;
         self.recentCalls = [RecentCall recentCallsFromDictionary:responseObject];
         self.missedRecentCalls = [self filterMissedRecents:self.recentCalls];
         completion(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.reloading = NO;
+        self.recentsFetchFailed = YES;
+
         if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
+            self.recentsFetchErrorCode = RecentCallManagerFetchingUserUserNotLoggedIn;
             // No permissions
             [[SystemUser currentUser] logout];
             [self clearRecents];
+        } else if ([operation.response statusCode] == VoIPGRIDHttpErrorForbidden) {
+            self.recentsFetchErrorCode = RecentCallManagerFetchingUserNotAllowed;
+            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchingUserNotAllowed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"You are not allowed to view recent calls", nil)}];
+            completion(error);
         } else {
-            self.lastRecentsFailure = [NSDate date];
-            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to fetch your recent calls.", nil)}];
+            self.recentsFetchErrorCode = RecentCallManagerFetchFailed;
+            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Could not load your recent calls", nil)}];
             completion(error);
         }
     }];
