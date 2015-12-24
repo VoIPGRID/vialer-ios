@@ -46,6 +46,15 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark - properties
+
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
+
 /**
  * Deselect all textfields when a user taps somewhere in the view.
  */
@@ -87,7 +96,6 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
  */
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-NSLog(@"%s", __PRETTY_FUNCTION__);
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
 
     //to be able/disable the enable the request password button
@@ -112,8 +120,8 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
         [textField resignFirstResponder];
         [self.loginFormView.passwordField becomeFirstResponder];
     } else if ([self.loginFormView.passwordField isEqual:textField]) {
-        NSString *username = [self.loginFormView.usernameField text];
-        NSString *password = [self.loginFormView.passwordField text];
+        NSString *username = self.loginFormView.usernameField.text;
+        NSString *password = self.loginFormView.passwordField.text;
         if ([username length] > 0 && [password length] > 0) {
             [self continueFromLoginFormViewToConfigureFormView];
             return YES;
@@ -416,9 +424,7 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    SystemUser *currentUser = [SystemUser currentUser];
-
-    [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
+    [self.currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
@@ -429,6 +435,8 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
             if (success) {
                 success();
             }
+        } else {
+            self.loginFormView.passwordField.text = @"";
         }
     }];
 }
@@ -572,7 +580,6 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
                                                        style:UIAlertActionStyleDefault handler:nil];
-
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }

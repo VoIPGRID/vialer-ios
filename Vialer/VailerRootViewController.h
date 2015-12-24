@@ -1,13 +1,16 @@
 //
 //  VailerRootViewController.h
-//  Vialer
-//
-//  Created by Bob Voorneveld on 18/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
+
+#import "LogInViewController.h"
 
 #import <UIKit/UIKit.h>
 
 @interface VailerRootViewController : UIViewController
+
+@property (strong, nonatomic) LogInViewController *loginViewController;
+
+- (void)loginFailedNotification:(NSNotification *)notification;
 
 @end

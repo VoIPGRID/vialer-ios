@@ -7,6 +7,7 @@
 #import "ConfigureFormView.h"
 #import "ForgotPasswordView.h"
 #import "LoginFormView.h"
+#import "SystemUser.h"
 #import "UnlockView.h"
 
 #import <UIKit/UIKit.h>
@@ -32,6 +33,10 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 @property (strong, nonatomic) IBOutlet UnlockView *unlockView;
 @property (strong, nonatomic) IBOutlet UIButton *closeButton;
 
+
+/** Dependency Injection */
+@property (nonatomic) SystemUser *currentUser;
+
 /** @property screenToShow
  *  The onboarding screen to show after the Logo animation
  **/
@@ -39,6 +44,7 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;
+- (IBAction)loginButtonPushed:(UIButton *)sender;
 
 - (IBAction)openConfigurationInstructions:(id)sender;
 

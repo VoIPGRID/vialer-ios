@@ -4,6 +4,7 @@
 //
 
 #import "LogInViewController.h"
+#import "MockSystemUser.h"
 
 #import <XCTest/XCTest.h>
 
@@ -18,7 +19,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.loginViewController = [[LogInViewController alloc] init];
+    self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
 }
 
 - (void)tearDown {
@@ -26,9 +27,42 @@
     [super tearDown];
 }
 
+- (void)testLoginViewControllerHasCurrentSystemUserAsDependency {
+    XCTAssertNotNil(self.loginViewController.currentUser, @"There should be a systemuser");
+    XCTAssertEqual(self.loginViewController.currentUser, [SystemUser currentUser], @"The current user should be de default user");
+}
+
+- (void)testLoginActionWillAskCurrentUserToLogin {
+    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
+    systemUser.returnSuccess = YES;
+    self.loginViewController.currentUser = systemUser;
+    [self.loginViewController loadViewIfNeeded];
+    self.loginViewController.loginFormView.usernameField.text = @"testUsername";
+    self.loginViewController.loginFormView.passwordField.text = @"testPassword";
+
+    [self.loginViewController loginButtonPushed:nil];
+
+    XCTAssertTrue([systemUser.enteredUsername isEqualToString:@"testUsername"], @"The correct username should have been passed along");
+    XCTAssertTrue([systemUser.enteredPassword isEqualToString:@"testPassword"], @"The correct password should have been passed along");
+}
+
+- (void)testUnsuccessfulLoginActionWillKeepUsernameInFieldLogin {
+    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
+    systemUser.returnSuccess = NO;
+    self.loginViewController.currentUser = systemUser;
+    [self.loginViewController loadViewIfNeeded];
+    self.loginViewController.loginFormView.usernameField.text = @"testUsername";
+    self.loginViewController.loginFormView.passwordField.text = @"testPassword";
+
+    [self.loginViewController loginButtonPushed:nil];
+
+    XCTAssertTrue([self.loginViewController.loginFormView.usernameField.text isEqualToString:@"testUsername"], @"The username should stay in the field");
+    XCTAssertTrue([self.loginViewController.loginFormView.passwordField.text isEqualToString:@""], @"The passwordfield should be empty");
+}
+
 - (void)testThatConfigurationOpenActionOpensTheCorrectView {
     id loginViewControllerMock = OCMPartialMock(self.loginViewController);
-
+    
     [loginViewControllerMock openConfigurationInstructions:nil];
     OCMVerify([loginViewControllerMock presentViewController:[OCMArg checkWithBlock:^BOOL(id obj) {
         XCTAssertTrue([obj isKindOfClass:[UINavigationController class]], @"There should be a navigationcontroller.");
