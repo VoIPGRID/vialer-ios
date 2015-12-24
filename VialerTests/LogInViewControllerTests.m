@@ -75,4 +75,54 @@
     }] animated:[OCMArg any] completion:[OCMArg any]]);
 }
 
+- (void)testForgotPasswordViewHasUsernamePrefilledWhenUsernameIsFilled {
+    [self.loginViewController loadViewIfNeeded];
+    self.loginViewController.loginFormView.usernameField.text = @"testUsername";
+
+    [self.loginViewController openForgotPassword:nil];
+
+    XCTAssertTrue([self.loginViewController.forgotPasswordView.emailTextfield.text isEqualToString:@"testUsername"], @"the username should have been transferred");
+}
+
+- (void)testForgotPasswordViewHasUsernamePrefilledWhenSystemUsernameHasDefaultUsername {
+    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
+    systemUser.returnUser = @"presetUser";
+    self.loginViewController.currentUser = systemUser;
+    [self.loginViewController loadViewIfNeeded];
+
+    [self.loginViewController openForgotPassword:nil];
+
+    XCTAssertTrue([self.loginViewController.forgotPasswordView.emailTextfield.text isEqualToString:@"presetUser"], @"the username should have been transferred");
+}
+
+- (void)testForgotPasswordViewHasActiveButtonWhenEmailAddressIsPrefilled {
+    [self.loginViewController loadViewIfNeeded];
+    self.loginViewController.loginFormView.usernameField.text = @"testUsername@test.com";
+    [self.loginViewController viewDidAppear:NO];
+
+    [self.loginViewController openForgotPassword:nil];
+
+    XCTAssertTrue(self.loginViewController.forgotPasswordView.requestPasswordButton.enabled, @"The requestButton should be enabled when a emailadres is prefilled.");
+}
+
+- (void)testForgotPasswordViewHasInActiveButtonWhenNoEmailAddressIsPrefilled {
+    [self.loginViewController loadViewIfNeeded];
+    self.loginViewController.loginFormView.usernameField.text = @"testUsername";
+    [self.loginViewController viewDidAppear:NO];
+
+    [self.loginViewController openForgotPassword:nil];
+
+    XCTAssertFalse(self.loginViewController.forgotPasswordView.requestPasswordButton.enabled, @"The requestButton should be enabled when a emailadres is prefilled.");
+}
+
+- (void)testForgotPasswordViewHasInActiveButtonWhenNoUsernameIsFilled {
+    [self.loginViewController loadViewIfNeeded];
+    [self.loginViewController viewDidAppear:NO];
+
+    [self.loginViewController openForgotPassword:nil];
+    
+    XCTAssertFalse(self.loginViewController.forgotPasswordView.requestPasswordButton.enabled, @"The requestButton should be disabled when no emailadress is filled.");
+}
+
+
 @end

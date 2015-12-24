@@ -25,14 +25,14 @@
 #pragma mark - User/Settings information
 
 // Account information
-@property (readonly, nonatomic)NSString *user;
-@property (readonly, nonatomic)NSString *displayName;
-@property (readonly, nonatomic)NSString *outgoingNumber;
-@property (readonly, nonatomic)NSString *mobileNumber;
-@property (readonly, nonatomic)NSString *sipAccount;
-@property (readonly, nonatomic)NSString *sipPassword;
-@property (readonly, nonatomic)NSString *firstName;
-@property (readonly, nonatomic)NSString *lastName;
+@property (readonly, nonatomic) NSString *user;
+@property (readonly, nonatomic) NSString *displayName;
+@property (readonly, nonatomic) NSString *outgoingNumber;
+@property (readonly, nonatomic) NSString *mobileNumber;
+@property (readonly, nonatomic) NSString *sipAccount;
+@property (readonly, nonatomic) NSString *sipPassword;
+@property (readonly, nonatomic) NSString *firstName;
+@property (readonly, nonatomic) NSString *lastName;
 
 #pragma mark - Sip specific handling
 

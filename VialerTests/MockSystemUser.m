@@ -13,4 +13,8 @@
     completion(self.returnSuccess);
 }
 
+- (NSString *)user {
+    return self.returnUser;
+}
+
 @end

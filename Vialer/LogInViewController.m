@@ -109,7 +109,6 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self removeObservers];
 }
 
@@ -375,7 +374,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 - (IBAction)openForgotPassword:(id)sender {
     [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
-    self.forgotPasswordView.emailTextfield.text = nil;
+    self.forgotPasswordView.emailTextfield.text = self.loginFormView.usernameField.text;
 
     [self animateLoginViewToVisible:0.f delay:0.f];
     [self animateForgotPasswordViewToVisible:1.f delay:2.f];
@@ -495,6 +494,10 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)animateForgotPasswordViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
+    if (!self.forgotPasswordView.emailTextfield.text || [self.forgotPasswordView.emailTextfield.text isEqualToString:@""]) {
+        self.forgotPasswordView.emailTextfield.text = self.currentUser.user;
+    }
+    [self forgotPasswordViewTextFieldDidChange:self.forgotPasswordView.emailTextfield];
     void(^animations)(void) = ^{
         [self.closeButton setAlpha:alpha];
         [self.forgotPasswordView setAlpha:alpha];
