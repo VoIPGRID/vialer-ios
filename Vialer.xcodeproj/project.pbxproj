@@ -47,6 +47,7 @@
 		C496A8EB1C2AB23B00C42619 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C496A8ED1C2AB46900C42619 /* SideMenuTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuTableViewControllerTests.m */; };
 		C496A8F41C2C38B600C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8F31C2C38B600C42619 /* LogInViewControllerTests.m */; };
+		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		C4A4525C1C244F4400846591 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
@@ -212,6 +213,8 @@
 		C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormViewTests.m; sourceTree = "<group>"; };
 		C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormViewTests.m; sourceTree = "<group>"; };
 		C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
+		C40C11DD1C3A7393008CC1A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
+		C40C11DF1C3A7396008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
 		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
 		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
@@ -239,8 +242,6 @@
 		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
 		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
-		C46E14E61BFC9F76001C9369 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
-		C46E14E81BFC9F78001C9369 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
@@ -252,6 +253,9 @@
 		C496A8F01C2C2FAB00C42619 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		C496A8F31C2C38B600C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8F61C2C69FF00C42619 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
+		C496A8FA1C2C6F3100C42619 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C496A8FC1C2C6F3200C42619 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
 		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
@@ -298,8 +302,6 @@
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
-		F22362681C22EE6500D6F5FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
-		F223626A1C22EE6600D6F5FF /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		F245E7701B577AD100FBA37C /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Vialer/Config.plist; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
@@ -598,6 +600,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		C496A8F71C2C6EC500C42619 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		C4A452511C24452700846591 /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +732,7 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				C496A8F71C2C6EC500C42619 /* Settings */,
 				C496A8E71C2AB1FE00C42619 /* Side Menu */,
 				C409F3A11C24B9D6007DCC4A /* Models */,
 				C4A452511C24452700846591 /* Onboarding/Login */,
@@ -1346,6 +1357,7 @@
 				C496A8ED1C2AB46900C42619 /* SideMenuTableViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				C4A452631C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
+				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
 				C496A8EB1C2AB23B00C42619 /* VialerWebViewController.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
 				C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */,
@@ -1482,8 +1494,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C4C3EAF81BFB7C9900AA4B2A /* Base */,
-				C46E14E61BFC9F76001C9369 /* en */,
-				C46E14E81BFC9F78001C9369 /* nl */,
+				C40C11DD1C3A7393008CC1A4 /* en */,
+				C40C11DF1C3A7396008CC1A4 /* nl */,
 			);
 			name = AvailabilityStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1512,8 +1524,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F22362651C22EE6200D6F5FF /* Base */,
-				F22362681C22EE6500D6F5FF /* en */,
-				F223626A1C22EE6600D6F5FF /* nl */,
+				C496A8FA1C2C6F3100C42619 /* en */,
+				C496A8FC1C2C6F3200C42619 /* nl */,
 			);
 			name = SettingsStoryboard.storyboard;
 			sourceTree = "<group>";
