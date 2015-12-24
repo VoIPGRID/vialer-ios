@@ -5,6 +5,8 @@
 
 #import "ForgotPasswordView.h"
 
+static CGFloat const ForgotPasswordViewButtonRadius = 5.0;
+
 @implementation ForgotPasswordView
 
 - (void)awakeFromNib {
@@ -19,7 +21,7 @@
     self.isMoved = NO;
 
     self.requestPasswordButton.borderWidth = 1;
-    self.requestPasswordButton.cornerRadius = 10;
+    self.requestPasswordButton.cornerRadius = ForgotPasswordViewButtonRadius;
     self.requestPasswordButton.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
     self.requestPasswordButton.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
 }

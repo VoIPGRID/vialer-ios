@@ -34,7 +34,7 @@
     //When
     [SystemUser persistObject:object forKey:key];
     //Then
-    XCTAssertEqual([SystemUser readObjectForKey:key], object);
+    XCTAssertTrue([[SystemUser readObjectForKey:key] isEqualToString:object], @"The object should have been stored correct.");
 }
 
 - (void)testWrtieReadNilValue {

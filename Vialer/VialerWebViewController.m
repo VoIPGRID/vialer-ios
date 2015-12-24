@@ -1,8 +1,5 @@
 //
 //  VialerWebViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 17/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -34,12 +31,19 @@
 
 #pragma mark - properties
 
+- (Configuration *)configuration {
+    if (!_configuration) {
+        _configuration = [Configuration defaultConfiguration];
+    }
+    return _configuration;
+}
+
 - (void)setURL:(NSURL *)URL {
     [super setURL:URL];
 }
 
 -(void)setNextUrl:(NSString *)nextUrl {
-    NSString *partnerBaseUrl = [Configuration UrlForKey:@"Partner"];
+    NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] autoLoginTokenWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {

@@ -6,6 +6,8 @@
 #import "ConfigureFormView.h"
 #import "UIView+RoundedStyle.h"
 
+static CGFloat const ConfigureFormViewButtonRadius = 5.0;
+
 @interface ConfigureFormView ()
 //Displays: Vialer is configuring Outlet needed for localization
 @property (nonatomic, weak) IBOutlet UILabel *titleLable;
@@ -36,7 +38,7 @@
     self.isMoved = NO;
 
     self.continueButton.borderWidth = 1;
-    self.continueButton.cornerRadius = 10;
+    self.continueButton.cornerRadius = ConfigureFormViewButtonRadius;
     self.continueButton.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
     self.continueButton.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
 }

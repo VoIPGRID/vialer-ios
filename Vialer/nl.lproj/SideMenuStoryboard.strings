@@ -20,7 +20,10 @@
 /* Class = "UILabel"; text = "Information"; ObjectID = "jis-QG-P2H"; */
 "jis-QG-P2H.text" = "Informatie";
 
-/* Class = "UILabel"; text = "Dailplan"; ObjectID = "njI-Cn-bnW"; */
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "kla-WI-dhL"; */
+"kla-WI-dhL.title" = "Terug";
+
+/* Class = "UILabel"; text = "Dialplan"; ObjectID = "njI-Cn-bnW"; */
 "njI-Cn-bnW.text" = "Belplan";
 
 /* Class = "UILabel"; text = "outGoingNumberLabel"; ObjectID = "wfp-aM-Tem"; */

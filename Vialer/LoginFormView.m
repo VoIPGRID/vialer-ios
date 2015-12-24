@@ -6,6 +6,8 @@
 #import "LoginFormView.h"
 #import "UIView+RoundedStyle.h"
 
+static CGFloat const LoginFormViewButtonRadius = 5.0;
+
 @interface LoginFormView ()
 //Display's "Business"
 @property (nonatomic, weak) IBOutlet UILabel *businessLabel;
@@ -47,7 +49,7 @@
 - (void)setupRoundedButtons:(NSArray<RoundedAndColoredUIButton *> *)buttons {
     for (RoundedAndColoredUIButton *button in buttons) {
         button.borderWidth = 1;
-        button.cornerRadius = 5;
+        button.cornerRadius = LoginFormViewButtonRadius;
         button.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
         button.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
     }

@@ -1,8 +1,5 @@
 //
 //  SideMenuTableViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 17/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -14,11 +11,6 @@
 #import "GAITracker.h"
 #import "SystemUser.h"
 #import "VialerWebViewController.h"
-
-static NSString * const SideMenuTableViewControllerShowStatisticsSegue = @"ShowStatisticsSegue";
-static NSString * const SideMenuTableViewControllerShowInformationSegue = @"ShowInformationSegue";
-static NSString * const SideMenuTableViewControllerShowDialPlanSegue = @"ShowDialPlanSegue";
-static NSString * const SideMenuTableViewControllerShowAvailabilitySegue = @"ShowAvailabilitySegue";
 
 static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
@@ -125,6 +117,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
         webController.title = NSLocalizedString(@"Information", nil);
         webController.URL = [NSURL URLWithString:onboardingUrl];
+        webController.showsNavigationToolbar = NO;
 
     } else if ([segue.identifier isEqualToString:SideMenuTableViewControllerShowDialPlanSegue]) {
         [GAITracker trackScreenForControllerName:@"DialplanWebview"];

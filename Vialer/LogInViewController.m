@@ -22,6 +22,7 @@
 
 NSString * const LoginViewControllerMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
+static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 
 @interface LogInViewController ()
@@ -398,13 +399,13 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
     NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
-    webViewController.showsNavigationToolbar = YES;
+    webViewController.showsNavigationToolbar = NO;
     webViewController.hidesBottomBarWhenPushed = YES;
-    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:LogInViewControllerLogoImageName]];
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeConfigurationInstructions)];
-    webViewController.navigationItem.rightBarButtonItem = cancelButton;
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStylePlain target:self action:@selector(closeConfigurationInstructions)];
+    webViewController.navigationItem.leftBarButtonItem = cancelButton;
 
     [self presentViewController:navController animated:YES completion:nil];
 }

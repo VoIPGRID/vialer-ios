@@ -36,6 +36,8 @@ NSString * const ConfigurationRecentsFilterControlTintColor = @"RecentsFilterCon
 NSString * const ConfigurationLogInViewControllerButtonBorderColor = @"LogInViewControllerButtonBorderColor";
 NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState = @"LogInViewControllerButtonBackgroundColorForPressedState";
 
+NSString * const ConfigurationPartnerURLKey = @"Partner";
+
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
 

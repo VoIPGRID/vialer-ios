@@ -22,6 +22,9 @@
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
 
 /* No comment provided by engineer. */
+"Back" = "Back";
+
+/* No comment provided by engineer. */
 "Business" = "Business";
 
 /* No comment provided by engineer. */
@@ -94,8 +97,10 @@
 "Error getting the availability options" = "Error getting the availability options.";
 
 /* No comment provided by engineer. */
-"Error while retrieving your outgoing number, make sure you are connected to the internet" = "Error while retrieving your outgoing number, make sure you are connected to the internet";
-"Retry" = "Retry";
+"Error updating user profile" = "Error updating user profile";
+
+/* No comment provided by engineer. */
+"Error while retrieving your outgoing number, make sure you are connected to the internet." = "Error while retrieving your outgoing number, make sure you are connected to the internet.";
 
 /* No comment provided by engineer. */
 "Could not load your recent calls" = "Could not load your recent calls.";
@@ -227,6 +232,9 @@
 "Retrieving phone numbers..." = "Retrieving phone numbers...";
 
 /* No comment provided by engineer. */
+"Retry" = "Retry";
+
+/* No comment provided by engineer. */
 "Saving availability has failed" = "Saving availability has failed";
 
 /* No comment provided by engineer. */
@@ -285,6 +293,9 @@
 
 /* No comment provided by engineer. */
 "Unknown error, please check your internet connection." = "Unknown error, please check your internet connection.";
+
+/* No comment provided by engineer. */
+"user type not allowed" = "user type not allowed";
 
 /* No comment provided by engineer. */
 "VoIP Account" = "VoIP Account";
