@@ -191,7 +191,6 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="greetingsLabel" destination="LfQ-VU-vz0" id="EqC-cs-nsO"/>
                         <outlet property="helloLabel" destination="EXO-T4-Aup" id="aHc-24-Dke"/>
@@ -236,7 +235,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="emailTextfield" destination="HPX-UU-Qz4" id="nJ7-q4-jEH"/>
                         <outlet property="forgotPasswordLabel" destination="Rlf-YE-cri" id="Njy-tT-xla"/>

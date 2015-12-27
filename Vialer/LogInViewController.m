@@ -568,7 +568,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 - (void)unlockIt {
     // Put here what happens when it is unlocked
     [self.scene clean];
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
         [self.unlockView setAlpha:0.f];
         [self.logoView setAlpha:1.f];
         [self.logoView setCenter:self.view.center];
