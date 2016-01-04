@@ -217,6 +217,8 @@
 		C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		C40C11DD1C3A7393008CC1A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C40C11DF1C3A7396008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
+		C40C11E01C3ABA7A008CC1A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C40C11E11C3ABA7D008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
 		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
 		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
 		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
@@ -1465,6 +1467,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C461837C1BFA24660075709B /* Base */,
+				C40C11E01C3ABA7A008CC1A4 /* en */,
+				C40C11E11C3ABA7D008CC1A4 /* nl */,
 			);
 			name = RecentsStoryboard.storyboard;
 			sourceTree = "<group>";
