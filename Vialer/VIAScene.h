@@ -5,9 +5,17 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, VIASceneActs) {
+    VIASceneActNone,
+    VIASceneActOne,
+    VIASceneActTwo,
+    VIASceneActThree
+};
+
 @interface VIAScene : NSObject
 
-@property (nonatomic, strong) NSMutableArray *onStage;
+@property (strong, nonatomic) NSMutableArray *onStage;
+@property (nonatomic) VIASceneActs currentAct;
 
 - (instancetype)initWithView:(UIView *)view;
 

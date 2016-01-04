@@ -24,11 +24,11 @@ NSString * const LoginViewControllerMigrationCompleted = @"v2.0_MigrationComplet
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
 static NSString * const LogInViewControllerLogoImageName = @"logo";
 
-
 @interface LogInViewController ()
 @property (assign, nonatomic) BOOL alertShown;
 @property (strong, nonatomic) NSString *user;
 @property (strong, nonatomic) VIAScene *scene;
+@property (strong, nonatomic) UITapGestureRecognizer *tapToUnlock;
 @end
 
 @implementation LogInViewController
@@ -53,6 +53,20 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
         _currentUser = [SystemUser currentUser];
     }
     return _currentUser;
+}
+
+- (VIAScene *)scene {
+    if (!_scene) {
+        _scene = [[VIAScene alloc] initWithView:self.view];
+    }
+    return _scene;
+}
+
+- (UITapGestureRecognizer *)tapToUnlock {
+    if (!_tapToUnlock) {
+        _tapToUnlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
+    }
+    return _tapToUnlock;
 }
 
 /**
@@ -331,13 +345,12 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 #pragma mark - Navigation actions
 - (void)moveLogoOutOfScreen { /* Act one (1) */
     // Create an animation scenes that transitions to configure view.
-    // VIAScene uses view dimensions to calculate the positions of clouds, at this point the self.view is resized correctly from xib values.
-    self.scene = [[VIAScene alloc] initWithView:self.view];
 
-    void (^logoAnimations)(void) = ^{
-        [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
-    };
-    [UIView animateWithDuration:2.2 animations:logoAnimations];
+    if (CGRectGetMaxY(self.logoView.frame) > 0) {
+        [UIView animateWithDuration:2.2 animations:^{
+            [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
+        }];
+    }
 
     switch (self.screenToShow) {
         case OnboardingScreenLogin:
@@ -354,7 +367,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
             break;
     }
 
-    void (^afterLogoAnimations)(void) = ^{
+    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         switch (self.screenToShow) {
             case OnboardingScreenLogin:
                 [self animateLoginViewToVisible:1.f delay:0.f]; // show
@@ -367,8 +380,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
                 [self.scene runActOne];
                 break;
         }
-    };
-    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:afterLogoAnimations completion:nil];
+    } completion:nil];
 }
 
 - (IBAction)openForgotPassword:(id)sender {
@@ -539,9 +551,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
     void(^animations)(void) = ^{
         [self.unlockView setAlpha:alpha];
     };
-    // Add a tap to the view to close immediately.
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
-    [self.view addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:self.tapToUnlock];
 
     [UIView animateWithDuration:2.2f
                           delay:delay
@@ -567,12 +577,13 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 - (void)unlockIt {
     // Put here what happens when it is unlocked
-    [self.scene clean];
     [self dismissViewControllerAnimated:NO completion:^{
         [self.unlockView setAlpha:0.f];
         [self.logoView setAlpha:1.f];
         [self.logoView setCenter:self.view.center];
     }];
+    // Remove tap
+    [self.view removeGestureRecognizer:self.tapToUnlock];
 }
 
 - (IBAction)mobileNumberInfoButtonPressed:(UIButton *)sender {

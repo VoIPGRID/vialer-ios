@@ -127,33 +127,45 @@ static CGFloat const VIASceneCloudAlpha = 0.3;
 }
 
 - (void)runActOneInstantly {
-    [_onStage[0] animateToNextWithDuration:0.f delay:0.f];
-    [_onStage[1] animateToNextWithDuration:0.f delay:0.f];
-    [_onStage[2] animateToNextWithDuration:0.f delay:0.f];
-    [_onStage[3] animateToNextWithDuration:0.f delay:0.f];
+    if (self.currentAct != VIASceneActOne) {
+        [_onStage[0] animateToNextWithDuration:0.f delay:0.f];
+        [_onStage[1] animateToNextWithDuration:0.f delay:0.f];
+        [_onStage[2] animateToNextWithDuration:0.f delay:0.f];
+        [_onStage[3] animateToNextWithDuration:0.f delay:0.f];
+        self.currentAct = VIASceneActOne;
+    }
 }
 
-- (void) runActOne {
-    [_onStage[0] animateToNextWithDuration:1.8 delay:0.2f];
-    [_onStage[1] animateToNextWithDuration:1.8 delay:0.2f];
-    [_onStage[2] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
+- (void)runActOne {
+    if (self.currentAct != VIASceneActOne) {
+        [_onStage[0] animateToNextWithDuration:1.8 delay:0.2f];
+        [_onStage[1] animateToNextWithDuration:1.8 delay:0.2f];
+        [_onStage[2] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
+        self.currentAct = VIASceneActOne;
+    }
 }
 
 - (void)runActTwo {
-    [_onStage[0] animateToNextWithDuration:1.8 delay:0.2f];
-    [_onStage[1] animateToNextWithDuration:1.8 delay:0.2f];
-    [_onStage[2] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[4] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[5] animateToNextWithDuration:1.4 delay:0.6f];
+    if (self.currentAct != VIASceneActTwo) {
+        [_onStage[0] animateToNextWithDuration:1.8 delay:0.2f];
+        [_onStage[1] animateToNextWithDuration:1.8 delay:0.2f];
+        [_onStage[2] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[4] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[5] animateToNextWithDuration:1.4 delay:0.6f];
+        self.currentAct = VIASceneActTwo;
+    }
 }
 
 - (void)runActThree {
-    [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[4] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[5] animateToNextWithDuration:1.4 delay:0.6f];
-    [_onStage[6] animateToNextWithDuration:1.4 delay:0.6f];
+    if (self.currentAct != VIASceneActThree) {
+        [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[4] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[5] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[6] animateToNextWithDuration:1.4 delay:0.6f];
+        self.currentAct = VIASceneActThree;
+    }
 }
 
 - (void)clean {
