@@ -83,6 +83,8 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rat
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.reloading = NO;
         self.recentsFetchFailed = YES;
+        self.recentCalls = nil;
+        self.missedRecentCalls = nil;
 
         if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
             self.recentsFetchErrorCode = RecentCallManagerFetchingUserUserNotLoggedIn;
