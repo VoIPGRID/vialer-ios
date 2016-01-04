@@ -99,7 +99,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
 
     //to be able/disable the enable the request password button
-    [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(forgotPasswordViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(checkIfEmailIsSetInEmailTextField) forControlEvents:UIControlEventEditingChanged];
 
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
@@ -179,10 +179,10 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
     [self continueFromLoginFormViewToConfigureFormView];
 }
 
-- (void)forgotPasswordViewTextFieldDidChange:(UITextField *)textField {
+- (void)checkIfEmailIsSetInEmailTextField {
     NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
     if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
-         evaluateWithObject:textField.text])
+         evaluateWithObject:self.forgotPasswordView.emailTextfield.text])
         self.forgotPasswordView.requestPasswordButton.enabled = YES;
     else
         self.forgotPasswordView.requestPasswordButton.enabled = NO;
@@ -494,10 +494,10 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)animateForgotPasswordViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
-    if (!self.forgotPasswordView.emailTextfield.text || [self.forgotPasswordView.emailTextfield.text isEqualToString:@""]) {
+    if (![self.forgotPasswordView.emailTextfield.text length]) {
         self.forgotPasswordView.emailTextfield.text = self.currentUser.user;
     }
-    [self forgotPasswordViewTextFieldDidChange:self.forgotPasswordView.emailTextfield];
+    [self checkIfEmailIsSetInEmailTextField];
     void(^animations)(void) = ^{
         [self.closeButton setAlpha:alpha];
         [self.forgotPasswordView setAlpha:alpha];
