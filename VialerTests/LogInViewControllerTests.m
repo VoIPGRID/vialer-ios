@@ -72,7 +72,7 @@
         PBWebViewController *webViewController = (PBWebViewController *)navController.viewControllers[0];
         XCTAssertFalse(webViewController.showsNavigationToolbar, @"There should be no navigationbar visible");
         return YES;
-    }] animated:[OCMArg any] completion:[OCMArg any]]);
+    }] animated:YES completion:[OCMArg any]]);
 }
 
 - (void)testForgotPasswordViewHasUsernamePrefilledWhenUsernameIsFilled {
@@ -118,6 +118,8 @@
 - (void)testForgotPasswordViewHasInActiveButtonWhenNoUsernameIsFilled {
     [self.loginViewController loadViewIfNeeded];
     [self.loginViewController viewDidAppear:NO];
+    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
+    self.loginViewController.currentUser = systemUser;
 
     [self.loginViewController openForgotPassword:nil];
     
