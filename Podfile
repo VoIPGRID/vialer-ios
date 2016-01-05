@@ -13,6 +13,7 @@ target 'Vialer' do
     pod 'PBWebViewController'
     pod 'Reachability'
     pod 'SSKeychain'
+    pod 'SimulatorStatusMagic'
     pod 'SVProgressHUD'
 end
 

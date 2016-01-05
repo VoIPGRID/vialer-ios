@@ -48,12 +48,11 @@
         NSMutableArray *sounds = [NSMutableArray array];
         for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"s", @"0", @"#"]) {
             NSString *dtmfFile = [NSString stringWithFormat:@"dtmf-%@", sound];
-            NSError *error = nil;
             NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif" ];
             if (dtmfUrl) {
                 [sounds addObject:dtmfUrl];
             } else {
-                NSLog(@"Error (%@) loading sound at path: %@", error, dtmfFile);
+                NSLog(@"Error loading sound at path: %@", dtmfFile);
                 // Add a null object to correct array alignment
                 [sounds addObject:[[NSURL alloc] init]];
             }

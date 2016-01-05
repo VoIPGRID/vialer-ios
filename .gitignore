@@ -1,3 +1,31 @@
+# Own additions to the .gitignore
+#####
+# Ignoring own private constant files
+SnapshotUITests/Snapshot-Constants.swift
+
+####
+# Ignoring PJSIP src
+#
+/pjsip/src
+
+####
+# fastlane specific as recommended at:
+# https://github.com/fastlane/fastlane/blob/master/docs/Gitignore.md
+fastlane/report.xml
+
+# deliver temporary files
+fastlane/Preview.html
+
+# snapshot generated screenshots
+# fastlane/screenshots/**/*.png
+# fastlane/screenshots/screenshots.html
+
+# scan temporary files
+fastlane/test_output
+
+#########################
+# !! The .gitignore obtained from stackoverflow starts here.
+# !! When implementing an update, do not remove the lines above ^^.
 #########################
 # .gitignore file for Xcode4 / OS X Source projects
 #
@@ -11,31 +39,23 @@
 
 #####
 # OS X temporary files that should never be committed
-
 .DS_Store
 *.swp
 profile
 
-
 ####
 # Xcode temporary files that should never be committed
-# 
+#
 # NB: NIB/XIB files still exist even on Storyboard projects, so we want this...
-
 *~.nib
-
 
 ####
 # Xcode build files -
 #
 # NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "DerivedData"
-
 DerivedData/
-
 # NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "build"
-
 build/
-
 
 #####
 # Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)
@@ -47,7 +67,6 @@ build/
 #  saved in this file.
 # 99% of projects do NOT use those, so they do NOT want to version control this file.
 #  ..but if you're in the 1%, comment out the line "*.pbxuser"
-
 *.pbxuser
 *.mode1v3
 *.mode2v3
@@ -58,15 +77,12 @@ build/
 !default.mode2v3
 !default.perspectivev3
 
-
 ####
 # Xcode 4 - semi-personal settings, often included in workspaces
 #
 # You can safely ignore the xcuserdata files - but do NOT ignore the files next to them
 #
-
 xcuserdata
-
 
 ####
 # XCode 4 workspaces - more detailed
@@ -95,7 +111,6 @@ xcuserdata
 #
 !xcshareddata
 
-
 ####
 # Xcode 4 - Deprecated classes
 #
@@ -105,7 +120,6 @@ xcuserdata
 
 *.moved-aside
 
-
 ####
 # UNKNOWN: recommended by others, but I can't discover what these files are
 #
@@ -113,9 +127,3 @@ xcuserdata
 *.xccheckout
 .xccheckout
 ./*.xccheckout
-
-####
-# Ignoring PJSIP src
-#
-/pjsip/src
-

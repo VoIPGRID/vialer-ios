@@ -5,6 +5,7 @@
 
 #import "SideMenuViewController.h"
 
+#import "AppDelegate.h"
 #import "AvailabilityModel.h"
 #import "AvailabilityViewController.h"
 #import "Configuration.h"
@@ -58,6 +59,10 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 - (void)setBuildVersionLabel:(UILabel *)buildVersionLabel {
     _buildVersionLabel = buildVersionLabel;
     _buildVersionLabel.text = self.appVersionBuildString;
+
+    if ([AppDelegate isSnapshotScreenshotRun]) {
+        _buildVersionLabel.text = nil;
+    }
 }
 
 - (UIColor *)tintColor {

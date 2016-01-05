@@ -4,10 +4,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Google/Analytics.h>
 
 @interface GAITracker : NSObject
-
 + (void)setupGAITracker;
++ (void)setupGAITrackerWithLogLevel:(GAILogLevel)logLevel andDryRun:(BOOL)dryRun;
 + (void)trackScreenForControllerName:(NSString *)name;
 + (void)acceptIncomingCallEvent;
 + (void)declineIncomingCallEvent;

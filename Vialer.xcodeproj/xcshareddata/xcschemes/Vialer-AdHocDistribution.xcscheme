@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F2B43E691C3B9E9B0089A387"
+               BuildableName = "SnapshotUITests.xctest"
+               BlueprintName = "SnapshotUITests"
+               ReferencedContainer = "container:Vialer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
