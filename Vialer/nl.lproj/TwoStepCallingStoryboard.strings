@@ -1,0 +1,33 @@
+
+/* Class = "UILabel"; text = "Connecting you with"; ObjectID = "30v-HR-uET"; */
+"30v-HR-uET.text" = "Verbinding maken met";
+
+/* Class = "UILabel"; text = "0123456789"; ObjectID = "3cA-ny-tpl"; */
+"3cA-ny-tpl.text" = "0123456789";
+
+/* Class = "UILabel"; text = "0123456789"; ObjectID = "8wf-OZ-h10"; */
+"8wf-OZ-h10.text" = "0123456789";
+
+/* Class = "UILabel"; text = "Couldn't reach other party"; ObjectID = "CYt-no-34R"; */
+"CYt-no-34R.text" = "Kan nummer niet bereiken";
+
+/* Class = "UILabel"; text = "Outgoing number"; ObjectID = "K4Y-bn-hSd"; */
+"K4Y-bn-hSd.text" = "Uitgaande nummer";
+
+/* Class = "UILabel"; text = "Calling your phone"; ObjectID = "PG1-4R-ty6"; */
+"PG1-4R-ty6.text" = "Je telefoon aan het bellen";
+
+/* Class = "UILabel"; text = "Calling your phone"; ObjectID = "VtS-6G-cHT"; */
+"VtS-6G-cHT.text" = "Je telefoon aan het bellen";
+
+/* Class = "UILabel"; text = "+31508009000"; ObjectID = "cWW-x8-bRY"; */
+"cWW-x8-bRY.text" = "+31508009000";
+
+/* Class = "UILabel"; text = "0123456789"; ObjectID = "gSh-WG-NnA"; */
+"gSh-WG-NnA.text" = "0123456789";
+
+/* Class = "UILabel"; text = "Couldn't reach your phone"; ObjectID = "lub-lc-FPg"; */
+"lub-lc-FPg.text" = "Kan niet verbinden met je telefoon";
+
+/* Class = "UILabel"; text = "Two step modus enabled"; ObjectID = "qq9-WU-COt"; */
+"qq9-WU-COt.text" = "Twee staps modus ingeschakeld";

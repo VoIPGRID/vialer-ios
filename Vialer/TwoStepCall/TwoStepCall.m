@@ -10,17 +10,20 @@
 #import "ConnectionHandler.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
-static NSString * const TwoStepCallIDKey = @"callID";
 static NSString * const TwoStepCallStatusKey = @"status";
 
 @interface TwoStepCall()
-@property (nonatomic)TwoStepCallStatus status;
-@property (nonatomic, strong)NSString *aNumber;
-@property (nonatomic, strong)NSString *bNumber;
-@property (nonatomic, strong)NSError *error;
-@property (nonatomic, strong)NSTimer *statusTimer;
-@property (nonatomic, strong)CTCallCenter *callCenter;
+@property (nonatomic) TwoStepCallStatus status;
+@property (strong, nonatomic) NSString *aNumber;
+@property (strong, nonatomic) NSString *bNumber;
+@property (strong, nonatomic) NSError *error;
+@property (strong, nonatomic) NSTimer *statusTimer;
+@property (strong, nonatomic) CTCallCenter *callCenter;
 @property (nonatomic) BOOL fetching;
+@property (strong, nonatomic) NSString *callID;
+@property (nonatomic) BOOL cancelingCall;
+@property (nonatomic) BOOL cancelCallWhenPossible;
+@property (nonatomic) BOOL canCancel;
 @end
 
 @implementation TwoStepCall
@@ -56,36 +59,67 @@ static NSString * const TwoStepCallStatusKey = @"status";
     return _callCenter;
 }
 
+- (void)setStatus:(TwoStepCallStatus)status {
+    // Don't change status after the call was canceled.
+    if (_status == TwoStepCallStatusCanceled) {
+        return;
+    }
+    _status = status;
+
+    // Check if cancel is possible in this stage.
+    switch (status) {
+        case TwoStepCallStatusUnknown:
+        case TwoStepCallStatusSetupCall:
+        case TwoStepCallStatusDialing_a:
+        case TwoStepCallStatusConfirm:
+        case TwoStepCallStatusDialing_b:
+        case TwoStepCallStatusConnected:
+            self.canCancel = YES;
+            break;
+        case TwoStepCallStatusUnAuthorized:
+        case TwoStepCallStatusDisconnected:
+        case TwoStepCallStatusFailed_a:
+        case TwoStepCallStatusFailed_b:
+        case TwoStepCallStatusFailedSetup:
+        case TwoStepCallStatusInvalidNumber:
+        case TwoStepCallStatusCanceled:
+            self.canCancel = NO;
+            break;
+    }
+}
+
 #pragma mark - Actions
 
 - (void)start {
-    self.status = TwoStepCallStatusDialing_a;
+    self.status = TwoStepCallStatusSetupCall;
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] setupTwoStepCallWithANumber:self.aNumber bNumber:self.bNumber withCompletion:
-     ^(NSString *callID, NSError * error) {
+     ^(NSString *callID, NSError *error) {
          if (error) {
              self.error = error;
              switch (error.code) {
                  case VGTwoStepCallErrorStatusUnAuthorized:
                      self.status = TwoStepCallStatusUnAuthorized;
                      break;
-                 case VGTwoStepCallErrorSetupFailed:
-                     self.status = TwoStepCallStatusFailedSetup;
-                     break;
                  case VGTwoStepCallInvalidNumber:
                      self.status = TwoStepCallStatusInvalidNumber;
                      break;
                  default:
-                     self.status = TwoStepCallStatusUnknown;
+                     self.status = TwoStepCallStatusFailedSetup;
                      break;
              }
          } else {
+             self.callID = callID;
+             if (self.cancelCallWhenPossible) {
+                 [self cancel];
+                 return;
+             }
              // Set fetch status to NO, no API call happening on this moment.
              self.fetching = NO;
+             self.status = TwoStepCallStatusDialing_a;
 
              //Start a timer which requests the status of this call every second.
-             NSDictionary *userInfo = @{TwoStepCallIDKey : callID};
-             self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fetchCallStatus:) userInfo:userInfo repeats:YES];
+             self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
 
              // When the user ends a call start dismissing the ConnectAB screen.
              __weak typeof (self) weakSelf = self;
@@ -103,20 +137,44 @@ static NSString * const TwoStepCallStatusKey = @"status";
      }];
 }
 
-- (void)fetchCallStatus:(NSTimer *)timer {
-    NSString *callID = [[timer userInfo] objectForKey:TwoStepCallIDKey];
+- (void)cancel {
 
+    // Don't cancel twice
+    if (self.cancelingCall) {
+        return;
+
+    // If there is no call id, it isn't possible on this moment to cancel, as soon as the call is setup, it will be canceled.
+    } else if (!self.callID) {
+        self.status = TwoStepCallStatusCanceled;
+        self.cancelCallWhenPossible = YES;
+        return;
+    }
+
+    self.cancelingCall = YES;
+    self.canCancel = NO;
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cancelTwoStepCallForCallId:self.callID withCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            self.status = TwoStepCallStatusCanceled;
+            [self.statusTimer invalidate];
+        }
+        if (error) {
+            self.error = error;
+        }
+    }];
+}
+
+- (void)fetchCallStatus:(NSTimer *)timer {
     // If there is an API call still going on, skip this update
     if (self.fetching) {
         return;
     }
 
     self.fetching = YES;
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] twoStepCallStatusForCallId:callID withCompletion:
+    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] twoStepCallStatusForCallId:self.callID withCompletion:
      ^(NSString *callStatus, NSError *error) {
          self.fetching = NO;
          if (error) {
-             NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", callID, error);
+             NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
              [timer invalidate];
              self.status = [[self class] TwoStepCallStatusFromString:callStatus];
              self.error = error;
@@ -185,29 +243,6 @@ static NSString * const TwoStepCallStatusKey = @"status";
                                   ];
     });
     return callStatusStringArray;
-}
-
-#pragma mark - KVO automatic behaviour override
-/**
- Overridden setter for status to manually fire KVO notifications only when the status actually changes
- */
-- (void)setStatus:(TwoStepCallStatus)newStatus {
-    if (_status != newStatus) {
-        [self willChangeValueForKey:TwoStepCallStatusKey];
-        _status = newStatus;
-        [self didChangeValueForKey:TwoStepCallStatusKey];
-    }
-}
-
-/**
- By overriding this function and by overriding the getter you can manually control when an KVO event is fired
- */
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:TwoStepCallStatusKey]) {
-        return NO;
-    } else {
-        return [super automaticallyNotifiesObserversForKey:key];
-    }
 }
 
 /**

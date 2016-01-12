@@ -28,6 +28,9 @@
 "Business" = "Zakelijke";
 
 /* No comment provided by engineer. */
+"Call canceled" = "Gesprek geannuleerd";
+
+/* No comment provided by engineer. */
 "Call ended" = "Gesprek be\U00EBindigd";
 
 /* No comment provided by engineer. */
@@ -62,6 +65,9 @@
 
 /* No comment provided by engineer. */
 "Continue" = "Verder";
+
+/* No comment provided by engineer. */
+"Could not load your recent calls" = "Recente gesprekken konden niet worden opgehaald";
 
 /* No comment provided by engineer. */
 "Couldn't connect with other party" = "Kan niet verbinden met andere partij";
@@ -101,13 +107,6 @@
 
 /* No comment provided by engineer. */
 "Error while retrieving your outgoing number, make sure you are connected to the internet." = "Fout tijdens het ophalen van je uitgaande nummer, zorg ervoor dat je verbonden bent met internet.";
-
-/* No comment provided by engineer. */
-"Could not load your recent calls" = "Recente gesprekken konden niet worden opgehaald";
-"No missed calls" = "Geen gemiste gesprekken";
-"No recent calls" = "Geen recente gesprekken";
-"You are not allowed to view recent calls" = "Je hebt geen toestemming om de recente gesprekken te bekijken";
-"Not allowed" = "Geen toestemming";
 
 /* failed to load webpage with title */
 "Failed to load %@" = "%@ kon niet worden geladen";
@@ -191,6 +190,12 @@
 "No login data" = "Geen inloggegevens";
 
 /* No comment provided by engineer. */
+"No missed calls" = "Geen gemiste gesprekken";
+
+/* No comment provided by engineer. */
+"No recent calls" = "Geen recente gesprekken";
+
+/* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
 
 /* No comment provided by engineer. */
@@ -221,9 +226,6 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Error loading recent calls" = "Fout bij laden gesprekken";
-
-/* No comment provided by engineer. */
 "Recents" = "Recent";
 
 /* No comment provided by engineer. */
@@ -246,6 +248,9 @@
 
 /* No comment provided by engineer. */
 "Sending email..." = "Versturen e-mail...";
+
+/* No comment provided by engineer. */
+"Set up call" = "Gesprek wordt opgezet";
 
 /* No comment provided by engineer. */
 "Setting up connection..." = "Maakt verbinding...";
@@ -278,6 +283,9 @@
 "Top name matches" = "Meest overeenkomende namen";
 
 /* No comment provided by engineer. */
+"Two step call cancel failed" = "Twee staps gesprek annuleren mislukt";
+
+/* No comment provided by engineer. */
 "Two step call failed" = "Het twee staps gesprek is mislukt";
 
 /* No comment provided by engineer. */
@@ -306,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "yesterday" = "gisteren";
+
+/* No comment provided by engineer. */
+"You are not allowed to view recent calls" = "Je hebt geen toestemming om de recente gesprekken te bekijken";
 
 /* No comment provided by engineer. */
 "You must allow microphone access in Settings > Privacy > Microphone." = "De app heeft toegang nodig tot de microfoon via Instellingen > Privacy > Microfoon.";

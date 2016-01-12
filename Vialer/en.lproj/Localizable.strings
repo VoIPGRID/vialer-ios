@@ -28,6 +28,9 @@
 "Business" = "Business";
 
 /* No comment provided by engineer. */
+"Call canceled" = "Call canceled";
+
+/* No comment provided by engineer. */
 "Call ended" = "Call ended";
 
 /* No comment provided by engineer. */
@@ -62,6 +65,9 @@
 
 /* No comment provided by engineer. */
 "Continue" = "Continue";
+
+/* No comment provided by engineer. */
+"Could not load your recent calls" = "Could not load your recent calls.";
 
 /* No comment provided by engineer. */
 "Couldn't connect with other party" = "Couldn't connect with other party";
@@ -101,12 +107,6 @@
 
 /* No comment provided by engineer. */
 "Error while retrieving your outgoing number, make sure you are connected to the internet." = "Error while retrieving your outgoing number, make sure you are connected to the internet.";
-
-/* No comment provided by engineer. */
-"Could not load your recent calls" = "Could not load your recent calls.";
-"No missed calls" = "No missed calls";
-"No recent calls" = "No recent calls";
-"You are not allowed to view recent calls" = "You are not allowed to view recent calls";
 
 /* failed to load webpage with title */
 "Failed to load %@" = "Failed to load %@";
@@ -190,6 +190,12 @@
 "No login data" = "No login data";
 
 /* No comment provided by engineer. */
+"No missed calls" = "No missed calls";
+
+/* No comment provided by engineer. */
+"No recent calls" = "No recent calls";
+
+/* No comment provided by engineer. */
 "Not available" = "Not available";
 
 /* No comment provided by engineer. */
@@ -220,9 +226,6 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Error loading recent calls" = "Error loading recent calls";
-
-/* No comment provided by engineer. */
 "Recents" = "Recents";
 
 /* No comment provided by engineer. */
@@ -245,6 +248,9 @@
 
 /* No comment provided by engineer. */
 "Sending email..." = "Sending email...";
+
+/* No comment provided by engineer. */
+"Set up call" = "Set up call";
 
 /* No comment provided by engineer. */
 "Setting up connection..." = "Setting up connection...";
@@ -277,6 +283,9 @@
 "Top name matches" = "Top name matches";
 
 /* No comment provided by engineer. */
+"Two step call cancel failed" = "Two step call cancel failed";
+
+/* No comment provided by engineer. */
 "Two step call failed" = "Two step call failed";
 
 /* No comment provided by engineer. */
@@ -305,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "yesterday" = "yesterday";
+
+/* No comment provided by engineer. */
+"You are not allowed to view recent calls" = "You are not allowed to view recent calls";
 
 /* No comment provided by engineer. */
 "You must allow microphone access in Settings > Privacy > Microphone." = "You must allow microphone access in Settings > Privacy > Microphone.";

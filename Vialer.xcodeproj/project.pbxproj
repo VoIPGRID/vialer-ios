@@ -31,6 +31,7 @@
 		C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C419263B1BE3A36600436D92 /* ColoredCircle.m */; };
 		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
 		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
+		C4529E2F1C4542D10063F08B /* TwoStepCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */; };
 		C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
@@ -42,7 +43,6 @@
 		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
 		C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48752711BF1F51900B8B42B /* ReachabilityManager.m */; };
-		C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */; };
 		C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */; };
 		C496A8EB1C2AB23B00C42619 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C496A8ED1C2AB46900C42619 /* SideMenuTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuTableViewControllerTests.m */; };
@@ -231,6 +231,9 @@
 		C41926431BE3A36600436D92 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
 		C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
 		C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TwoStepCallingViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C4529E301C4542D10063F08B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TwoStepCallingStoryboard.storyboard; sourceTree = "<group>"; };
+		C4529E331C4542D90063F08B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TwoStepCallingStoryboard.strings; sourceTree = "<group>"; };
+		C4529E351C4542DA0063F08B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/TwoStepCallingStoryboard.strings; sourceTree = "<group>"; };
 		C45F3DF01BFCA6600012494D /* VailerRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VailerRootViewController.h; sourceTree = "<group>"; };
 		C45F3DF11BFCA6600012494D /* VailerRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VailerRootViewController.m; sourceTree = "<group>"; };
 		C45F3DF31BFCA7A70012494D /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
@@ -243,7 +246,6 @@
 		C46183711BF9FB120075709B /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
 		C461837C1BFA24660075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RecentsStoryboard.storyboard; sourceTree = "<group>"; };
 		C461837E1BFA24850075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CallingStoryboard.storyboard; sourceTree = "<group>"; };
-		C46618BA1BE7536C00F696A0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
 		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
@@ -295,7 +297,6 @@
 		C4E860121BF14D960051BFDE /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
 		C4E860131BF14D960051BFDE /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
 		C4E860141BF14D960051BFDE /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
-		C4EFCF751BF21C690000CC6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TwoStepCallingViewController.xib; sourceTree = "<group>"; };
 		C4EFCF861BF21E520000CC6F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/CallingStoryboard.strings; sourceTree = "<group>"; };
 		C4EFCF8A1BF2301E0000CC6F /* OldNumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldNumberPadViewController.m; sourceTree = "<group>"; };
 		C4EFCF8B1BF2301E0000CC6F /* OldNumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldNumberPadViewController.h; sourceTree = "<group>"; };
@@ -559,21 +560,10 @@
 		C41926511BE3A67100436D92 /* TwoStep */ = {
 			isa = PBXGroup;
 			children = (
-				C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */,
-				C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */,
-				C41926341BE3A36600436D92 /* BubblingPoints.h */,
-				C41926351BE3A36600436D92 /* BubblingPoints.m */,
-				C41926361BE3A36600436D92 /* CircleWithShadow.h */,
-				C41926371BE3A36600436D92 /* CircleWithShadow.m */,
-				C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */,
-				C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */,
-				C419263A1BE3A36600436D92 /* ColoredCircle.h */,
-				C419263B1BE3A36600436D92 /* ColoredCircle.m */,
-				C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */,
-				C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */,
-				C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */,
-				C41926421BE3A36600436D92 /* VialerIconView.h */,
-				C41926431BE3A36600436D92 /* VialerIconView.m */,
+				C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */,
+				C4675FEB1C463B0B008820C8 /* Controllers */,
+				C4675FEA1C463B00008820C8 /* Models */,
+				C4675FEC1C463B23008820C8 /* UI */,
 			);
 			name = TwoStep;
 			sourceTree = "<group>";
@@ -587,6 +577,52 @@
 				C467430B1BF726AA0032D77B /* RecentTableViewCell.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C4675FEA1C463B00008820C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */,
+				C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C4675FEB1C463B0B008820C8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */,
+				C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C4675FEC1C463B23008820C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C41926341BE3A36600436D92 /* BubblingPoints.h */,
+				C41926351BE3A36600436D92 /* BubblingPoints.m */,
+				C41926361BE3A36600436D92 /* CircleWithShadow.h */,
+				C41926371BE3A36600436D92 /* CircleWithShadow.m */,
+				C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */,
+				C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */,
+				C419263A1BE3A36600436D92 /* ColoredCircle.h */,
+				C419263B1BE3A36600436D92 /* ColoredCircle.m */,
+				C41926421BE3A36600436D92 /* VialerIconView.h */,
+				C41926431BE3A36600436D92 /* VialerIconView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		C4675FED1C463B3F008820C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C487526A1BF1E00000B8B42B /* NumberPadButton.h */,
+				C487526B1BF1E00000B8B42B /* NumberPadButton.m */,
+				C4E860131BF14D960051BFDE /* PasteableUILabel.h */,
+				C4E860141BF14D960051BFDE /* PasteableUILabel.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		C496A8E71C2AB1FE00C42619 /* Side Menu */ = {
@@ -675,10 +711,6 @@
 		C4C3EB041BFB889C00AA4B2A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C487526A1BF1E00000B8B42B /* NumberPadButton.h */,
-				C487526B1BF1E00000B8B42B /* NumberPadButton.m */,
-				C4E860131BF14D960051BFDE /* PasteableUILabel.h */,
-				C4E860141BF14D960051BFDE /* PasteableUILabel.m */,
 				C4E8600D1BF14D960051BFDE /* DialerViewController.h */,
 				C4E8600E1BF14D960051BFDE /* DialerViewController.m */,
 				C4E860111BF14D960051BFDE /* NumberPadViewController.h */,
@@ -720,6 +752,7 @@
 				C4EFCF821BF21E210000CC6F /* CallingStoryboard.storyboard */,
 				C4C3EB041BFB889C00AA4B2A /* Controllers */,
 				C4C3EB031BFB887F00AA4B2A /* Models */,
+				C4675FED1C463B3F008820C8 /* UI */,
 				C41926511BE3A67100436D92 /* TwoStep */,
 				C4C3EB051BFB88B000AA4B2A /* SIP */,
 			);
@@ -1174,11 +1207,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C48AC6A71BF72C440095E138 /* TwoStepCallingViewController.xib in Resources */,
 				FBB8541D1A7FE67300121366 /* dtmf-#.aif in Resources */,
 				FBB8541E1A7FE67300121366 /* dtmf-0.aif in Resources */,
 				FBE564F91A954EAD002C6DF3 /* incoming.wav in Resources */,
 				C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */,
+				C4529E2F1C4542D10063F08B /* TwoStepCallingStoryboard.storyboard in Resources */,
 				C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */,
 				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
 				C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */,
@@ -1463,6 +1496,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4529E301C4542D10063F08B /* Base */,
+				C4529E331C4542D90063F08B /* en */,
+				C4529E351C4542DA0063F08B /* nl */,
+			);
+			name = TwoStepCallingStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1471,15 +1514,6 @@
 				C40C11E11C3ABA7D008CC1A4 /* nl */,
 			);
 			name = RecentsStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
-		C46618B91BE7536500F696A0 /* TwoStepCallingViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C46618BA1BE7536C00F696A0 /* nl */,
-				C4EFCF751BF21C690000CC6F /* Base */,
-			);
-			name = TwoStepCallingViewController.xib;
 			sourceTree = "<group>";
 		};
 		C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */ = {

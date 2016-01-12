@@ -16,9 +16,10 @@
 
 #import "UIViewController+MMDrawerController.h"
 
-static NSString *const ContactsViewControllerLogoImageName = @"logo";
-static NSString *const ContactsViewControllerTabContactImageName = @"tab-contact";
-static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-contact-active";
+static NSString * const ContactsViewControllerLogoImageName = @"logo";
+static NSString * const ContactsViewControllerTabContactImageName = @"tab-contact";
+static NSString * const ContactsViewControllerTabContactActiveImageName = @"tab-contact-active";
+static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 
 
 @interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate>
@@ -30,7 +31,7 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
-@property (strong, nonatomic) TwoStepCallingViewController *twoStepCallingViewController;
+@property (strong, nonatomic) NSString *phoneNumberToCall;
 @end
 
 @implementation ContactsViewController
@@ -94,13 +95,6 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
     return _sipCallingViewController;
 }
 
-- (TwoStepCallingViewController *)twoStepCallingViewController {
-    if (!_twoStepCallingViewController) {
-        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] init];
-    }
-    return _twoStepCallingViewController;
-}
-
 - (void)setTableView:(UITableView *)tableView {
     _tableView = tableView;
     _tableView.delegate = self;
@@ -132,6 +126,13 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactViewController];
     [self presentViewController:nav animated:YES completion:nil];
 
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
+        [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    }
 }
 
 #pragma mark - tableview datasource
@@ -212,17 +213,16 @@ static NSString *const ContactsViewControllerTabContactActiveImageName = @"tab-c
 - (BOOL)contactViewController:(CNContactViewController *)viewController shouldPerformDefaultActionForContactProperty:(CNContactProperty *)property {
     if ([property.key isEqualToString:CNContactPhoneNumbersKey]) {
         CNPhoneNumber *phoneNumberProperty = property.value;
-        NSString *phoneNumber = [phoneNumberProperty stringValue];
+        self.phoneNumberToCall = [phoneNumberProperty stringValue];
 
         // TODO: implement 4g calling
         if (false) {
             [GAITracker setupOutgoingSIPCallEvent];
             [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-            [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
+            [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
         } else {
             [GAITracker setupOutgoingConnectABCallEvent];
-            [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-            [self.twoStepCallingViewController handlePhoneNumber:phoneNumber];
+            [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
         }
         return NO;
     }

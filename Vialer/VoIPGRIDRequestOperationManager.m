@@ -238,6 +238,24 @@ typedef NS_ENUM(NSInteger, VoIPGRIDLoginErrors) {
           completion(nil, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorStatusRequestFailed userInfo:userInfo]);
       }];
 }
+
+- (void)cancelTwoStepCallForCallId:(NSString * _Nonnull)callId withCompletion:(void (^ _Nonnull)(BOOL success, NSError *error))completion {
+    NSString *updateStatusURL = [NSString stringWithFormat:@"%@%@/", twoStepCallURL, callId];
+    [self DELETE:updateStatusURL parameters:nil
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          // Check if the cancelation was successfull by checking HTTP statusCode.
+          if (operation.response.statusCode == 204) {
+              completion(YES, nil);
+          } else {
+              NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call cancel failed", nil)};
+              completion(NO, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorCancelFailed userInfo:userInfo]);
+          }
+
+      } failure:^(AFHTTPRequestOperation * operation, NSError * error) {
+          NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call cancel failed", nil)};
+          completion(NO, [NSError errorWithDomain:VGErrorDomain code:VGTwoStepCallErrorCancelFailed userInfo:userInfo]);
+      }];
+}
 /**
  * Return the Object for the given key from a response object
  * @param key The key to search for in the respons object.
@@ -250,21 +268,6 @@ typedef NS_ENUM(NSInteger, VoIPGRIDLoginErrors) {
         callStatus = [responseObject objectForKey:key];
     }
     return callStatus;
-}
-
-
-//TODO: old function, remove.
-- (void)clickToDialStatusForCallId:(NSString *)callId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSString *url = [[twoStepCallURL stringByAppendingString:callId] stringByAppendingString:@"/"];
-
-    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        success(operation, responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(operation, error);
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
-            [self loginFailed];
-        }
-    }];
 }
 
 /**

@@ -33,6 +33,15 @@ static NSString * const VialerIconViewVialerIcon = @"wifi-phone";
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.icon.frame = CGRectMake(self.bounds.size.width * VialerIconViewScale / 2,
+                                 self.bounds.size.width * VialerIconViewScale / 2,
+                                 self.bounds.size.width-self.bounds.size.width * VialerIconViewScale,
+                                 self.bounds.size.height-self.bounds.size.width * VialerIconViewScale);
+
+    self.background.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+}
 - (void)setup {
     [self addSubview:self.background];
     [self addSubview:self.icon];
@@ -49,7 +58,7 @@ static NSString * const VialerIconViewVialerIcon = @"wifi-phone";
 
 - (CircleWithShadow *)background {
     if (!_background) {
-        _background = [[CircleWithShadow alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+        _background = [[CircleWithShadow alloc] initWithFrame:CGRectZero];
         _background.color = [UIColor whiteColor];
     }
     return _background;
@@ -57,10 +66,7 @@ static NSString * const VialerIconViewVialerIcon = @"wifi-phone";
 
 - (UIImageView *)icon {
     if (!_icon) {
-        _icon = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width * VialerIconViewScale / 2,
-                                                              self.bounds.size.width * VialerIconViewScale / 2,
-                                                              self.bounds.size.width-self.bounds.size.width * VialerIconViewScale,
-                                                              self.bounds.size.height-self.bounds.size.width * VialerIconViewScale)];
+        _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
         _icon.backgroundColor = self.iconColor;
         [_icon setImage:[UIImage imageNamed:VialerIconViewVialerIcon]];
     }

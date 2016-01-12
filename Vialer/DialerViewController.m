@@ -23,22 +23,22 @@ static NSString * const DialerViewControllerTabBarItemImage = @"tab-keypad";
 static NSString * const DialerViewControllerTabBarItemActiveImage = @"tab-keypad-active";
 static NSString * const DialerViewControllerLogoImage = @"logo";
 static NSString * const DialerViewControllerLeftDrawerButtonImage = @"menu";
+static NSString * const DialerViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 
 static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 @interface DialerViewController () <PasteableUILabelDelegate, NumberPadViewControllerDelegate>
 
-@property (nonatomic, strong) UIBarButtonItem *leftDrawerButton;
+@property (strong, nonatomic) UIBarButtonItem *leftDrawerButton;
 @property (weak, nonatomic) IBOutlet PasteableUILabel *numberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;
-@property (nonatomic, weak) ReachabilityBarViewController *reachabilityBarViewController;
-@property (nonatomic, strong) TwoStepCallingViewController *twoStepCallingViewController;
-@property (nonatomic, strong) SIPCallingViewController *sipCallingViewController;
+@property (weak, nonatomic) ReachabilityBarViewController *reachabilityBarViewController;
+@property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
 
 @property (strong, nonatomic) NSString *numberText;
-@property (nonatomic, strong) ReachabilityManager *reachabilityManager;
-@property (nonatomic, strong) NSString *lastCalledNumber;
+@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
+@property (strong, nonatomic) NSString *lastCalledNumber;
 
 @end
 
@@ -141,13 +141,6 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     return _sipCallingViewController;
 }
 
-- (TwoStepCallingViewController *)twoStepCallingViewController {
-    if (!_twoStepCallingViewController) {
-        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] initWithNibName:@"TwoStepCallingViewController" bundle:[NSBundle mainBundle]];
-    }
-    return _twoStepCallingViewController;
-}
-
 - (void)setLastCalledNumber:(NSString *)lastCalledNumber {
     _lastCalledNumber = lastCalledNumber;
     [self setupCallButton];
@@ -185,8 +178,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
             [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
         } else {
             [GAITracker setupOutgoingConnectABCallEvent];
-            [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-            [self.twoStepCallingViewController handlePhoneNumber:self.numberText];
+            [self performSegueWithIdentifier:DialerViewControllerTwoStepCallingSegue sender:self];
         }
     }
 }
@@ -199,6 +191,9 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
         npvc.delegate = self;
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         self.reachabilityBarViewController = (ReachabilityBarViewController *)segue.destinationViewController;
+    } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
+        [tscvc handlePhoneNumber:self.numberText];
     }
 }
 

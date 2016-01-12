@@ -26,6 +26,7 @@ static NSString * const RecentsViewControllerPropertyPhoneNumbers = @"phoneNumbe
 
 static NSString * const RecentViewControllerRecentCallCell = @"RecentCallCell";
 static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorText";
+static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 
 @interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,8 +34,7 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
-@property (strong, nonatomic) TwoStepCallingViewController *twoStepCallingViewController;
-
+@property (strong, nonatomic) NSString *phoneNumberToCall;
 @end
 
 @implementation RecentsViewController
@@ -97,13 +97,6 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
     return _sipCallingViewController;
 }
 
-- (TwoStepCallingViewController *)twoStepCallingViewController {
-    if (!_twoStepCallingViewController) {
-        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] init];
-    }
-    return _twoStepCallingViewController;
-}
-
 #pragma mark - actions
 
 - (IBAction)leftDrawerButtonPressed:(UIBarButtonItem *)sender {
@@ -149,6 +142,13 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
             });
         }];
     });
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
+        [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -224,7 +224,6 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
         }
         recent = [RecentCallManager defaultManager].missedRecentCalls[indexPath.row];
     }
-
     [self callPhoneNumber:recent.callerPhoneNumber];
 }
 
@@ -283,6 +282,7 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
 #pragma mark - utils
 
 - (void)callPhoneNumber:(NSString *)phoneNumber {
+    self.phoneNumberToCall = phoneNumber;
     // TODO: implement 4g calling
     if (false) {
         [GAITracker setupOutgoingSIPCallEvent];
@@ -290,8 +290,7 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
         [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
-        [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-        [self.twoStepCallingViewController handlePhoneNumber:phoneNumber];
+        [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
     }
 }
 
