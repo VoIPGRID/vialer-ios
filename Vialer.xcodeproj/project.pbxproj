@@ -39,13 +39,15 @@
 		C46183721BF9FB120075709B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
 		C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
 		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
+		C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
+		C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
 		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
 		C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48752711BF1F51900B8B42B /* ReachabilityManager.m */; };
 		C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */; };
 		C496A8EB1C2AB23B00C42619 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
-		C496A8ED1C2AB46900C42619 /* SideMenuTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuTableViewControllerTests.m */; };
+		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
 		C496A9031C2C7A7B00C42619 /* MockSystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A9021C2C7A7B00C42619 /* MockSystemUser.m */; };
@@ -65,7 +67,6 @@
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
-		C4DA5C981BFB64ED0043DED7 /* SideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C971BFB64ED0043DED7 /* SideMenuTableViewController.m */; };
 		C4E860161BF14D960051BFDE /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E8600E1BF14D960051BFDE /* DialerViewController.m */; };
 		C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860121BF14D960051BFDE /* NumberPadViewController.m */; };
 		C4E860191BF14D960051BFDE /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860141BF14D960051BFDE /* PasteableUILabel.m */; };
@@ -79,12 +80,8 @@
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
-		F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */; };
 		F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
-		F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */; };
 		F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */; };
-		F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811CB1B380A9400EA640F /* CellWithTextField.m */; };
-		F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811CC1B380A9400EA640F /* CellWithTextField.xib */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F9392ED81C04955C00286D27 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9392ED71C04955C00286D27 /* SipCallingButton.m */; };
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
@@ -253,6 +250,14 @@
 		C461837E1BFA24850075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CallingStoryboard.storyboard; sourceTree = "<group>"; };
 		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		C467430B1BF726AA0032D77B /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
+		C4675FF21C46A01F008820C8 /* ButtonWithBottomBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonWithBottomBorder.h; sourceTree = "<group>"; };
+		C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonWithBottomBorder.m; sourceTree = "<group>"; };
+		C4675FFB1C46DB78008820C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
+		C4675FFD1C46DB7B008820C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
+		C46760001C46EBBE008820C8 /* EditNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberViewController.h; sourceTree = "<group>"; };
+		C46760011C46EBBE008820C8 /* EditNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberViewController.m; sourceTree = "<group>"; };
+		C467600A1C46F98A008820C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C467600C1C46F98D008820C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
@@ -260,11 +265,7 @@
 		C48752701BF1F51900B8B42B /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
 		C48752711BF1F51900B8B42B /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewControllerTests.m; sourceTree = "<group>"; };
-		C496A8EC1C2AB46900C42619 /* SideMenuTableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewControllerTests.m; sourceTree = "<group>"; };
-		C496A8F01C2C2FAB00C42619 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
-		C496A8F61C2C69FF00C42619 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
-		C496A8FA1C2C6F3100C42619 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
-		C496A8FC1C2C6F3200C42619 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		C496A9011C2C7A7B00C42619 /* MockSystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockSystemUser.h; sourceTree = "<group>"; };
@@ -294,8 +295,6 @@
 		C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
 		C4DA5C891BFB4A5C0043DED7 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
-		C4DA5C961BFB64ED0043DED7 /* SideMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewController.h; sourceTree = "<group>"; };
-		C4DA5C971BFB64ED0043DED7 /* SideMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewController.m; sourceTree = "<group>"; };
 		C4E8600D1BF14D960051BFDE /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		C4E8600E1BF14D960051BFDE /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
 		C4E860111BF14D960051BFDE /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
@@ -319,15 +318,9 @@
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewFooterView.h; sourceTree = "<group>"; };
 		F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewFooterView.m; sourceTree = "<group>"; };
-		F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberTableViewController.h; sourceTree = "<group>"; };
-		F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberTableViewController.m; sourceTree = "<group>"; };
 		F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditNumberTableViewController.xib; sourceTree = "<group>"; };
-		F2E811CA1B380A9400EA640F /* CellWithTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWithTextField.h; sourceTree = "<group>"; };
-		F2E811CB1B380A9400EA640F /* CellWithTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithTextField.m; sourceTree = "<group>"; };
-		F2E811CC1B380A9400EA640F /* CellWithTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithTextField.xib; sourceTree = "<group>"; };
 		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewController.h; sourceTree = "<group>"; };
 		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityModel.h; sourceTree = "<group>"; };
@@ -556,6 +549,7 @@
 		C409F3A11C24B9D6007DCC4A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */,
 				C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */,
 			);
 			name = Models;
@@ -569,6 +563,22 @@
 				C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		C40CB3981C45129400248690 /* Calling */ = {
+			isa = PBXGroup;
+			children = (
+				C40CB3991C4512B000248690 /* TwoStep */,
+			);
+			name = Calling;
+			sourceTree = "<group>";
+		};
+		C40CB3991C4512B000248690 /* TwoStep */ = {
+			isa = PBXGroup;
+			children = (
+				C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */,
+			);
+			name = TwoStep;
 			sourceTree = "<group>";
 		};
 		C41926511BE3A67100436D92 /* TwoStep */ = {
@@ -639,6 +649,35 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		C4675FF11C469FE8008820C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C4675FF21C46A01F008820C8 /* ButtonWithBottomBorder.h */,
+				C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		C4675FFE1C46E656008820C8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */,
+				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
+				C46760001C46EBBE008820C8 /* EditNumberViewController.h */,
+				C46760011C46EBBE008820C8 /* EditNumberViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C4675FFF1C46E663008820C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */,
+				F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		C496A8E71C2AB1FE00C42619 /* Side Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,7 +690,7 @@
 			isa = PBXGroup;
 			children = (
 				C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */,
-				C496A8EC1C2AB46900C42619 /* SideMenuTableViewControllerTests.m */,
+				C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -679,8 +718,6 @@
 		C4C3EAEF1BFB7B9900AA4B2A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C4DA5C961BFB64ED0043DED7 /* SideMenuTableViewController.h */,
-				C4DA5C971BFB64ED0043DED7 /* SideMenuTableViewController.m */,
 				C4C3EAEA1BFB73B200AA4B2A /* VialerWebViewController.h */,
 				C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */,
 				C4DA5C891BFB4A5C0043DED7 /* SideMenuViewController.h */,
@@ -798,8 +835,7 @@
 				C496A8E71C2AB1FE00C42619 /* Side Menu */,
 				C409F3A11C24B9D6007DCC4A /* Models */,
 				C4A452511C24452700846591 /* Onboarding/Login */,
-				C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */,
-				F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */,
+				C40CB3981C45129400248690 /* Calling */,
 				C4F49F2B1BF0B45700C25159 /* Info.plist */,
 			);
 			path = VialerTests;
@@ -810,6 +846,7 @@
 			children = (
 				C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */,
 				C4C3EAEF1BFB7B9900AA4B2A /* Controllers */,
+				C4675FF11C469FE8008820C8 /* UI */,
 			);
 			name = "Side Menu";
 			sourceTree = "<group>";
@@ -826,17 +863,9 @@
 			isa = PBXGroup;
 			children = (
 				F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */,
-				F2E811CA1B380A9400EA640F /* CellWithTextField.h */,
-				F2E811CB1B380A9400EA640F /* CellWithTextField.m */,
-				F2E811CC1B380A9400EA640F /* CellWithTextField.xib */,
-				F2E811C51B38065C00EA640F /* EditNumberTableViewController.h */,
-				F2E811C61B38065C00EA640F /* EditNumberTableViewController.m */,
+				C4675FFE1C46E656008820C8 /* Controllers */,
+				C4675FFF1C46E663008820C8 /* UI */,
 				F2E811C71B38065C00EA640F /* EditNumberTableViewController.xib */,
-				F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */,
-				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
-				F2CD45F51B330ADA00CE9B1D /* SettingsViewController.xib */,
-				F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */,
-				F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1268,7 +1297,6 @@
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FBB854291A7FE67300121366 /* incoming.caf in Resources */,
-				F2CD45F71B330ADA00CE9B1D /* SettingsViewController.xib in Resources */,
 				F2E811C91B38065C00EA640F /* EditNumberTableViewController.xib in Resources */,
 				FB998C121A3F991B00B2CFC6 /* SIPCallingViewController.xib in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
@@ -1281,7 +1309,6 @@
 				F9CB0FA61C088241009AB89A /* SIPIncomingStoryboard.storyboard in Resources */,
 				FE3423EF1B822D59005020BA /* Vialer.xcassets in Resources */,
 				FBE0D8A21A6DBCC400818C9E /* SIPIncomingViewController.xib in Resources */,
-				F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1436,7 +1463,7 @@
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				C496A9081C2C83FA00C42619 /* VailerRootViewController.m in Sources */,
-				C496A8ED1C2AB46900C42619 /* SideMenuTableViewControllerTests.m in Sources */,
+				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				C4A452631C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
@@ -1467,14 +1494,11 @@
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
 				F9CB0F9A1C084C3D009AB89A /* SipCallingButtonViewController.m in Sources */,
 				FB998C111A3F991B00B2CFC6 /* SIPCallingViewController.m in Sources */,
-				F2E811C81B38065C00EA640F /* EditNumberTableViewController.m in Sources */,
 				C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				FE0E5C971BBE848800243577 /* GSNotifications.m in Sources */,
-				F2E811CD1B380A9400EA640F /* CellWithTextField.m in Sources */,
 				FE0E5C911BBE848800243577 /* GSAccountConfiguration.m in Sources */,
 				F9392ED81C04955C00286D27 /* SipCallingButton.m in Sources */,
-				C4DA5C981BFB64ED0043DED7 /* SideMenuTableViewController.m in Sources */,
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
 				FE0E5C941BBE848800243577 /* GSConfiguration.m in Sources */,
 				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
@@ -1498,6 +1522,7 @@
 				C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
 				C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */,
+				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
 				C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
@@ -1513,6 +1538,7 @@
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
+				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */,
@@ -1572,8 +1598,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C4C3EAF11BFB7C5E00AA4B2A /* Base */,
-				C496A8F01C2C2FAB00C42619 /* en */,
-				C496A8F61C2C69FF00C42619 /* nl */,
+				C4675FFB1C46DB78008820C8 /* en */,
+				C4675FFD1C46DB7B008820C8 /* nl */,
 			);
 			name = SideMenuStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1612,8 +1638,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F22362651C22EE6200D6F5FF /* Base */,
-				C496A8FA1C2C6F3100C42619 /* en */,
-				C496A8FC1C2C6F3200C42619 /* nl */,
+				C467600A1C46F98A008820C8 /* en */,
+				C467600C1C46F98D008820C8 /* nl */,
 			);
 			name = SettingsStoryboard.storyboard;
 			sourceTree = "<group>";

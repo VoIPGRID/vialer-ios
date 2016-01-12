@@ -1,6 +1,24 @@
 
+/* Class = "UILabel"; text = "Title"; ObjectID = "2ah-51-Icj"; */
+"2ah-51-Icj.text" = "Title";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "6ws-XF-rad"; */
+"6ws-XF-rad.title" = "Back";
+
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "AEn-Pr-vsG"; */
 "AEn-Pr-vsG.title" = "Back";
 
+/* Class = "UILabel"; text = "Title"; ObjectID = "JBf-ZM-LvJ"; */
+"JBf-ZM-LvJ.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "My Number"; ObjectID = "eds-KK-JDX"; */
+"eds-KK-JDX.title" = "My Number";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "gLc-Yz-Pcm"; */
+"gLc-Yz-Pcm.text" = "Detail";
+
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ggb-Qr-bn6"; */
 "ggb-Qr-bn6.title" = "Settings";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "x8D-Bj-sg8"; */
+"x8D-Bj-sg8.text" = "Detail";

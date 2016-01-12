@@ -1,33 +1,33 @@
 //
-//  SideMenuTableViewControllerTests.m
+//  SideMenuViewControllerTests.m
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "SideMenuTableViewController.h"
+#import "SideMenuViewController.h"
 #import "VialerWebViewController.h"
 
 #import <XCTest/XCTest.h>
 
-@interface SideMenuTableViewControllerTests : XCTestCase
-@property (nonatomic) SideMenuTableViewController *sideMenuTableViewController;
+@interface SideMenuViewControllerTests : XCTestCase
+@property (nonatomic) SideMenuViewController *sideMenuViewController;
 @end
 
-@implementation SideMenuTableViewControllerTests
+@implementation SideMenuViewControllerTests
 
 - (void)setUp {
     [super setUp];
-    self.sideMenuTableViewController = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"SideMenuTableViewController"];
+    self.sideMenuViewController = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateInitialViewController];
 }
 
 - (void)tearDown {
-    self.sideMenuTableViewController = nil;
+    self.sideMenuViewController = nil;
     [super tearDown];
 }
 
 - (void)testWebViewControllerForInformationSequeWillBePreparedWithoutNavigationToolbar {
     UINavigationController *navVC = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"WebviewNavigationController"];
-    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuTableViewControllerShowInformationSegue source:self.sideMenuTableViewController destination:navVC performHandler:^{}];
-    [self.sideMenuTableViewController prepareForSegue:segue sender:self];
+    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuViewControllerShowInformationSegue source:self.sideMenuViewController destination:navVC performHandler:^{}];
+    [self.sideMenuViewController prepareForSegue:segue sender:self];
 
     VialerWebViewController *webviewController = (VialerWebViewController *)navVC.viewControllers[0];
     XCTAssertFalse(webviewController.showsNavigationToolbar, @"Navigation toolbar should not be shown for this view.");
@@ -35,8 +35,8 @@
 
 - (void)testWebViewControllerForDialplanSequeWillBePreparedWithNavigationToolbar {
     UINavigationController *navVC = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"WebviewNavigationController"];
-    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuTableViewControllerShowDialPlanSegue source:self.sideMenuTableViewController destination:navVC performHandler:^{}];
-    [self.sideMenuTableViewController prepareForSegue:segue sender:self];
+    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuViewControllerShowDialPlanSegue source:self.sideMenuViewController destination:navVC performHandler:^{}];
+    [self.sideMenuViewController prepareForSegue:segue sender:self];
 
     VialerWebViewController *webviewController = (VialerWebViewController *)navVC.viewControllers[0];
     XCTAssertTrue(webviewController.showsNavigationToolbar, @"Navigation toolbar should not be shown for this view.");
@@ -44,8 +44,8 @@
 
 - (void)testWebViewControllerForStatisticsSequeWillBePreparedWithNavigationToolbar {
     UINavigationController *navVC = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"WebviewNavigationController"];
-    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuTableViewControllerShowStatisticsSegue source:self.sideMenuTableViewController destination:navVC performHandler:^{}];
-    [self.sideMenuTableViewController prepareForSegue:segue sender:self];
+    UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuViewControllerShowStatisticsSegue source:self.sideMenuViewController destination:navVC performHandler:^{}];
+    [self.sideMenuViewController prepareForSegue:segue sender:self];
 
     VialerWebViewController *webviewController = (VialerWebViewController *)navVC.viewControllers[0];
     XCTAssertTrue(webviewController.showsNavigationToolbar, @"Navigation toolbar should not be shown for this view.");
