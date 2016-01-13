@@ -25,51 +25,41 @@
 }
 
 + (void)trackScreenForControllerName:(NSString *)name {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:[name stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
-        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-    });
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:[name stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 + (void)acceptIncomingCallEvent {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Inbound"
-                                                               label:@"Accepted"
-                                                               value:nil] build]];
-    });
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Accepted"
+                                                           value:nil] build]];
 }
 
 + (void)declineIncomingCallEvent {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Inbound"
-                                                               label:@"Declined"
-                                                               value:nil] build]];
-    });
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Declined"
+                                                           value:nil] build]];
 }
 
 + (void)setupOutgoingSIPCallEvent {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Outbound"
-                                                               label:@"SIP"
-                                                               value:nil] build]];
-    });
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Outbound"
+                                                           label:@"SIP"
+                                                           value:nil] build]];
 }
 
 + (void)setupOutgoingConnectABCallEvent {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
-                                                              action:@"Outbound"
-                                                               label:@"ConnectAB"
-                                                               value:nil] build]];
-    });
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Outbound"
+                                                           label:@"ConnectAB"
+                                                           value:nil] build]];
 }
 
 @end
