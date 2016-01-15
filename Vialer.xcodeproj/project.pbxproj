@@ -87,6 +87,7 @@
 		F2E811CE1B380A9400EA640F /* CellWithTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E811CC1B380A9400EA640F /* CellWithTextField.xib */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
+		F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */; };
 		F99856951BDF85590005253B /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
@@ -329,6 +330,7 @@
 		F919B9E21BA856F60082AD79 /* AvailabilityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModel.m; sourceTree = "<group>"; };
 		F94F47CD1BCB9FF300F40737 /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
 		F94F47CE1BCB9FF300F40737 /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
+		F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtilsTests.m; sourceTree = "<group>"; };
 		F99856931BDF85590005253B /* ContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtils.h; sourceTree = "<group>"; };
 		F99856941BDF85590005253B /* ContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtils.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				F9906C261C3AA0C20044EA99 /* Contacts */,
 				C496A8F71C2C6EC500C42619 /* Settings */,
 				C496A8E71C2AB1FE00C42619 /* Side Menu */,
 				C409F3A11C24B9D6007DCC4A /* Models */,
@@ -875,6 +878,22 @@
 				C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F9906C261C3AA0C20044EA99 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				F9906C271C3AA0EA0044EA99 /* Utils */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		F9906C271C3AA0EA0044EA99 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		F99856921BDF85390005253B /* Utils */ = {
@@ -1394,6 +1413,7 @@
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
+				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				C496A9081C2C83FA00C42619 /* VailerRootViewController.m in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuTableViewControllerTests.m in Sources */,
