@@ -13,19 +13,6 @@
 #import "TwoStepCall.h"
 #import "VialerIconView.h"
 
-typedef NS_ENUM(NSInteger, CallingState) {
-    CallingStateIdle,
-    CallingStateFailedSetup,
-    CallingStateInvalidNumber,
-    CallingStateCallingA,
-    CallingStateConnectedA,
-    CallingStateConnectionFailedA,
-    CallingStateCallingB,
-    CallingStateConnectedB,
-    CallingStateConnectionFailedB,
-    CallingStateDisconnectedB,
-};
-
 static float const TwoStepCallingViewControllerGreyedOutAlpha = .5f;
 static float const TwoStepCallingViewControllerDismissTime = 3.0;
 static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
@@ -47,8 +34,8 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 @property (weak, nonatomic) IBOutlet UILabel *callStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UIView *infobarBackground;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (nonatomic) CallingState state;
 @property (nonatomic, strong) TwoStepCall *callManager;
 @property (nonatomic, strong) NSTimer *dismissTimer;
 @end
@@ -56,27 +43,21 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 @implementation TwoStepCallingViewController
 
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
-    if (!self.presentingViewController) {
-        [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:self animated:YES completion:nil];
-    }
-
     self.callManager = [[TwoStepCall alloc] initWithANumber:[SystemUser currentUser].mobileNumber andBNumber:phoneNumber];
+    [self setPhoneNumbers];
     [self.callManager addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:NULL];
     [self.callManager start];
     [self checkCallManagerStatus];
-
-    self.numberALabel.text = self.callManager.aNumber;
-    self.numberBLabel.text = self.callManager.bNumber;
-    self.outgoingNumberLabel.text = [SystemUser currentUser].outgoingNumber;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setup];
-    self.state = CallingStateIdle;
+    [self setupView];
+    [self setPhoneNumbers];
+    [self checkCallManagerStatus];
 }
 
-- (void)setup {
+- (void)setupView {
     // Setup colors & icons
     self.backgroundHeader.backgroundColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
     self.infobarBackground.backgroundColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
@@ -88,8 +69,12 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     self.bSide.icon = iconForAAndBSide;
     self.bubblingOne.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
     self.bubblingTwo.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
+}
 
-    [self checkCallManagerStatus];
+- (void)setPhoneNumbers {
+    self.numberALabel.text = self.callManager.aNumber;
+    self.numberBLabel.text = self.callManager.bNumber;
+    self.outgoingNumberLabel.text = [SystemUser currentUser].outgoingNumber;
 }
 
 # pragma mark - actions
@@ -101,60 +86,12 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void) checkCallManagerStatus {
+    self.errorASide.hidden = true;
+    self.errorBSide.hidden = true;
+    self.cancelButton.enabled = self.callManager.canCancel;
+
     switch (self.callManager.status) {
-        case TwoStepCallStatusUnknown:
-            self.state = CallingStateIdle;
-            break;
-        case TwoStepCallStatusDialing_a:
-            self.state = CallingStateCallingA;
-            break;
-        case TwoStepCallStatusConfirm:
-            self.state = CallingStateConnectedA;
-            break;
-        case TwoStepCallStatusDialing_b:
-            self.state = CallingStateCallingB;
-            break;
-        case TwoStepCallStatusConnected:
-            self.state = CallingStateConnectedB;
-            break;
-        case TwoStepCallStatusDisconnected:
-            self.state = CallingStateDisconnectedB;
-            [self prepareDismissView];
-            break;
-        case TwoStepCallStatusFailed_a:
-            self.state = CallingStateConnectionFailedA;
-            [self prepareDismissView];
-            break;
-        case TwoStepCallStatusFailed_b:
-            self.state = CallingStateConnectionFailedB;
-            [self prepareDismissView];
-            break;
-        case TwoStepCallStatusUnAuthorized:
-            self.state = CallingStateConnectionFailedB;
-            break;
-        case TwoStepCallStatusFailedSetup:
-            self.state = CallingStateFailedSetup;
-            [self prepareDismissView];
-            break;
-        case TwoStepCallStatusInvalidNumber:
-            self.state = CallingStateInvalidNumber;
-            [self prepareDismissView];
-            break;
-    }
-}
-
-- (void)prepareDismissView {
-    self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallingViewControllerDismissTime target:self selector:@selector(dismissTimerDone:) userInfo:nil repeats:NO];
-}
-
-- (void)dismissTimerDone:(NSTimer *)timer {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)setState:(CallingState)state {
-    _state = state;
-    switch (state) {
-        case CallingStateIdle: {
+        case TwoStepCallStatusUnknown: {
             self.callStatusLabel.text = NSLocalizedString(@"", nil);
             self.phoneNumberLabel.text = @"";
             self.bubblingOne.state = BubblingPointsStateIdle;
@@ -162,7 +99,15 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
             [self greyOutBSide];
             break;
         }
-        case CallingStateCallingA: {
+        case TwoStepCallStatusSetupCall: {
+            self.callStatusLabel.text = NSLocalizedString(@"Set up call", nil);
+            self.phoneNumberLabel.text = @"";
+            self.bubblingOne.state = BubblingPointsStateIdle;
+            [self greyoutASide];
+            [self greyOutBSide];
+            break;
+        }
+        case TwoStepCallStatusDialing_a: {
             self.callStatusLabel.text = NSLocalizedString(@"Calling your phone", nil);
             self.phoneNumberLabel.text = self.callManager.aNumber;
             self.bubblingOne.state = BubblingPointsStateConnecting;
@@ -170,7 +115,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
             [self greyOutBSide];
             break;
         }
-        case CallingStateConnectedA: {
+        case TwoStepCallStatusConfirm: {
             self.callStatusLabel.text = NSLocalizedString(@"Connected with your phone", nil);
             self.phoneNumberLabel.text = self.callManager.aNumber;
             self.bubblingOne.state = BubblingPointsStateConnected;
@@ -178,15 +123,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
             [self greyOutBSide];
             break;
         }
-        case CallingStateConnectionFailedA: {
-            self.callStatusLabel.text = NSLocalizedString(@"Couldn't connect with your phone", nil);
-            self.phoneNumberLabel.text = self.callManager.aNumber;
-            self.bubblingOne.state = BubblingPointsStateConnectionFailed;
-            [self activateASide];
-            [self greyOutBSide];
-            break;
-        }
-        case CallingStateCallingB: {
+        case TwoStepCallStatusDialing_b: {
             self.callStatusLabel.text = NSLocalizedString(@"Calling other party", nil);
             self.phoneNumberLabel.text = self.callManager.bNumber;
             self.bubblingOne.state = BubblingPointsStateConnected;
@@ -195,7 +132,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
             [self activeBSide];
             break;
         }
-        case CallingStateConnectedB: {
+        case TwoStepCallStatusConnected: {
             self.callStatusLabel.text = NSLocalizedString(@"Connected with other party", nil);
             self.phoneNumberLabel.text = self.callManager.bNumber;
             self.bubblingOne.state = BubblingPointsStateConnected;
@@ -204,54 +141,90 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
             [self activeBSide];
             break;
         }
-        case CallingStateConnectionFailedB: {
-            self.callStatusLabel.text = NSLocalizedString(@"Couldn't connect with other party", nil);
-            self.phoneNumberLabel.text = self.callManager.bNumber;
-            self.bubblingOne.state = BubblingPointsStateConnected;
-            self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
-            [self activateASide];
-            [self activeBSide];
-            break;
-        }
-        case CallingStateDisconnectedB: {
+        case TwoStepCallStatusDisconnected:{
             self.callStatusLabel.text = NSLocalizedString(@"Call ended", nil);
             self.phoneNumberLabel.text = @"";
             self.bubblingOne.state = BubblingPointsStateConnectionFailed;
             self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
             [self activateASide];
             [self activeBSide];
+            [self prepareDismissView];
             break;
         }
-        case CallingStateFailedSetup: {
+        case TwoStepCallStatusFailed_a: {
+            self.callStatusLabel.text = NSLocalizedString(@"Couldn't connect with your phone", nil);
+            self.phoneNumberLabel.text = self.callManager.aNumber;
+            self.bubblingOne.state = BubblingPointsStateConnectionFailed;
+            self.errorASide.hidden = NO;
+            [self activateASide];
+            [self greyOutBSide];
+            [self prepareDismissView];
+            break;
+        }
+        case TwoStepCallStatusFailed_b: {
+            self.callStatusLabel.text = NSLocalizedString(@"Couldn't connect with other party", nil);
+            self.phoneNumberLabel.text = self.callManager.bNumber;
+            self.bubblingOne.state = BubblingPointsStateConnected;
+            self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
+            self.errorBSide.hidden = NO;
+            [self activateASide];
+            [self activeBSide];
+            [self prepareDismissView];
+            break;
+        }
+        case TwoStepCallStatusUnAuthorized: {
+            self.callStatusLabel.text = NSLocalizedString(@"Couldn't connect with other party", nil);
+            self.phoneNumberLabel.text = self.callManager.bNumber;
+            self.bubblingOne.state = BubblingPointsStateConnected;
+            self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
+            [self activateASide];
+            [self activeBSide];
+            [self prepareDismissView];
+            break;
+        }
+        case TwoStepCallStatusFailedSetup: {
             self.callStatusLabel.text = NSLocalizedString(@"Failed to setup call", nil);
             self.phoneNumberLabel.text = @"";
             self.bubblingOne.state = BubblingPointsStateConnectionFailed;
             self.bubblingTwo.state = BubblingPointsStateIdle;
             [self activateASide];
             [self greyOutBSide];
+            [self prepareDismissView];
             break;
         }
-        case CallingStateInvalidNumber: {
+        case TwoStepCallStatusInvalidNumber: {
             self.callStatusLabel.text = NSLocalizedString(@"Phone number incorrect", nil);
             self.phoneNumberLabel.text = @"";
             self.bubblingOne.state = BubblingPointsStateIdle;
             self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
             [self activateASide];
             [self activeBSide];
+            [self prepareDismissView];
+            break;
+        }
+        case TwoStepCallStatusCanceled: {
+            self.callStatusLabel.text = NSLocalizedString(@"Call canceled", nil);
+            self.phoneNumberLabel.text = @"";
+            self.bubblingOne.state = BubblingPointsStateConnectionFailed;
+            self.bubblingTwo.state = BubblingPointsStateConnectionFailed;
+            [self activateASide];
+            [self activeBSide];
+            [self prepareDismissView];
             break;
         }
     }
-    [self showErrorMessagesForState:state];
 }
 
-- (void)showErrorMessagesForState:(CallingState)state {
-    self.errorASide.hidden = true;
-    self.errorBSide.hidden = true;
-    if (state == CallingStateConnectionFailedA) {
-        self.errorASide.hidden = false;
-    } else if (state == CallingStateConnectionFailedB) {
-        self.errorBSide.hidden = false;
-    }
+- (IBAction)cancelCall:(UIButton *)sender {
+    [self.callManager cancel];
+}
+
+- (void)prepareDismissView {
+    self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallingViewControllerDismissTime target:self selector:@selector(dismissTimerDone:) userInfo:nil repeats:NO];
+}
+
+- (void)dismissTimerDone:(NSTimer *)timer {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)greyOutBSide {
@@ -295,11 +268,11 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)dealloc {
-    [self.callManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
     [self stopUpdates];
 }
 
 - (void)stopUpdates {
+    [self.callManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
     self.callManager = nil;
     [self.dismissTimer invalidate];
 }

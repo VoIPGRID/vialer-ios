@@ -258,7 +258,6 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
     [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
 }
 
-
 - (void)pauseCall:(BOOL)pause {
     if (self.currentCall.paused != pause) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -274,7 +273,6 @@ NSString * const SIPCallStartedNotification = @"com.vialer.SIPCallStartedNotific
         });
     }
 }
-
 
 - (void)dismiss {
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;

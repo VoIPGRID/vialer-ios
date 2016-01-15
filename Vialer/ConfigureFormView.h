@@ -4,6 +4,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Configuration.h"
+#import "RoundedAndColoredUIButton.h"
 
 IB_DESIGNABLE
 @interface ConfigureFormView : UIView
@@ -12,7 +14,10 @@ IB_DESIGNABLE
 @property (nonatomic, weak) IBOutlet UITextField *phoneNumberField;
 @property (nonatomic, weak) IBOutlet UILabel *outgoingNumberDescriptionField;
 @property (nonatomic, weak) IBOutlet UILabel *outgoingNumberLabel;
-@property (nonatomic, weak) IBOutlet UIButton *continueButton;
+@property (nonatomic, weak) IBOutlet RoundedAndColoredUIButton *continueButton;
+
+/* Dependency Injection */
+@property (nonatomic) Configuration *configuration;
 
 // Keep track if the form is moved already
 @property (nonatomic) BOOL isMoved;

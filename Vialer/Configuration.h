@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 // Known tint color names
 extern NSString * const ConfigurationTabBarBackgroundColor;
@@ -28,11 +29,16 @@ extern NSString * const ConfigurationGradientViewGradientStart;
 extern NSString * const ConfigurationGradientViewGradientEnd;
 extern NSString * const ConfigurationGradientViewGradientAngle;
 extern NSString * const ConfigurationSideMenuTintColor;
+extern NSString * const ConfigurationSideMenuButtonPressedState;
 extern NSString * const ConfigurationRecentsSegmentedControlTintColor;
 extern NSString * const ConfigurationContactsTableSectionIndexColor;
 extern NSString * const ConfigurationNumberPadButtonTextColor;
 extern NSString * const ConfigurationNumberPadButtonPressedColor;
 extern NSString * const ConfigurationRecentsFilterControlTintColor;
+extern NSString * const ConfigurationLogInViewControllerButtonBorderColor;
+extern NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState;
+
+extern NSString * const ConfigurationPartnerURLKey;
 
 /** Generic class for accessing the Config.plist items, default the Config.plist from the main bundle is used.
  If you only need one value, you can access it by the static class functions e.g.
@@ -40,18 +46,21 @@ extern NSString * const ConfigurationRecentsFilterControlTintColor;
  `[Configuration tintColorForKey:AvailabilityTableViewTintColor];`
 
  Otherwise create an instance of the configuration and access the member functions.
- 
-     Configuration *config = [Configuration defaultConfiguration];
-     UIColor *tableColor = [config tintColorForKey:AvailabilityTableViewTintColor];
-     UIColor *messagecolor = [config tintColorForKey:ReachabilityBarBackGroundColor];
+
+ Configuration *config = [Configuration defaultConfiguration];
+ UIColor *tableColor = [config tintColorForKey:AvailabilityTableViewTintColor];
+ UIColor *messagecolor = [config tintColorForKey:ReachabilityBarBackGroundColor];
 
  */
 @interface Configuration : NSObject
 
+/* Dependency Injection */
+@property (strong, nonatomic) NSDictionary *dictionary;
+
 + (instancetype)defaultConfiguration;
 
 /** Generic method to get the UIColor for the specific key
- @param key NSString as the key for the NSArray containing the color configuration 
+ @param key NSString as the key for the NSArray containing the color configuration
  @result UIColor instance */
 - (UIColor *)tintColorForKey:(NSString *)key;
 

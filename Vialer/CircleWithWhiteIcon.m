@@ -35,6 +35,22 @@ static int const CircleWithWhiteIconBackgroundInset = 6;
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.iconView.frame = CGRectMake(self.bounds.size.width * CircleWithWhiteIconScale / 2,
+                                     self.bounds.size.width * CircleWithWhiteIconScale / 2,
+                                     self.bounds.size.width-self.bounds.size.width * CircleWithWhiteIconScale,
+                                     self.bounds.size.height-self.bounds.size.width * CircleWithWhiteIconScale);
+
+    self.background.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+
+    CGSize backgroundSize = CGSizeMake(self.bounds.size.width - CircleWithWhiteIconBackgroundInset, self.bounds.size.height - CircleWithWhiteIconBackgroundInset);
+    self.coloredCircle.frame = CGRectMake((self.bounds.size.width - backgroundSize.width) /2,
+                                          (self.bounds.size.height - backgroundSize.height) / 2,
+                                          backgroundSize.width,
+                                          backgroundSize.height);
+}
+
 - (void)setup {
     [self addSubview:self.background];
     [self addSubview:self.coloredCircle];
@@ -51,7 +67,7 @@ static int const CircleWithWhiteIconBackgroundInset = 6;
 
 - (CircleWithShadow *)background {
     if (!_background) {
-        _background = [[CircleWithShadow alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+        _background = [[CircleWithShadow alloc] initWithFrame:CGRectZero];
         _background.color = [UIColor whiteColor];
     }
     return _background;
@@ -59,12 +75,7 @@ static int const CircleWithWhiteIconBackgroundInset = 6;
 
 - (UIImageView *)iconView {
     if (!_iconView) {
-        CGRect iconViewRect = CGRectMake(self.bounds.size.width * CircleWithWhiteIconScale / 2,
-                                         self.bounds.size.width * CircleWithWhiteIconScale / 2,
-                                         self.bounds.size.width-self.bounds.size.width * CircleWithWhiteIconScale,
-                                         self.bounds.size.height-self.bounds.size.width * CircleWithWhiteIconScale);
-
-        _iconView = [[UIImageView alloc] initWithFrame:iconViewRect];
+        _iconView = [[UIImageView alloc] initWithFrame:CGRectZero];
     }
     return _iconView;
 }
@@ -75,12 +86,7 @@ static int const CircleWithWhiteIconBackgroundInset = 6;
 
 - (ColoredCircle *)coloredCircle {
     if (!_coloredCircle) {
-        CGSize backgroundSize = CGSizeMake(self.bounds.size.width - CircleWithWhiteIconBackgroundInset, self.bounds.size.height - CircleWithWhiteIconBackgroundInset);
-        CGRect coloredCircleRect = CGRectMake((self.bounds.size.width - backgroundSize.width) /2,
-                                           (self.bounds.size.height - backgroundSize.height) / 2,
-                                           backgroundSize.width,
-                                           backgroundSize.height);
-        _coloredCircle = [[ColoredCircle alloc] initWithFrame:coloredCircleRect];
+                _coloredCircle = [[ColoredCircle alloc] initWithFrame:CGRectZero];
     }
     return _coloredCircle;
 }

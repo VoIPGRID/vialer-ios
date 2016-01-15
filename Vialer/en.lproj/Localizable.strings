@@ -7,7 +7,7 @@
 "Accept" = "Accept";
 
 /* No comment provided by engineer. */
-"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a normal call using your business number when there is no 4G of wifi network available";
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a two-step call showing your business number";
 
 /* No comment provided by engineer. */
 "App is configuring" = "%@ is configuring";
@@ -22,7 +22,13 @@
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
 
 /* No comment provided by engineer. */
+"Back" = "Back";
+
+/* No comment provided by engineer. */
 "Business" = "Business";
+
+/* No comment provided by engineer. */
+"Call canceled" = "Call canceled";
 
 /* No comment provided by engineer. */
 "Call ended" = "Call ended";
@@ -61,6 +67,9 @@
 "Continue" = "Continue";
 
 /* No comment provided by engineer. */
+"Could not load your recent calls" = "Could not load your recent calls.";
+
+/* No comment provided by engineer. */
 "Couldn't connect with other party" = "Couldn't connect with other party";
 
 /* No comment provided by engineer. */
@@ -94,11 +103,10 @@
 "Error getting the availability options" = "Error getting the availability options.";
 
 /* No comment provided by engineer. */
-"Error while retrieving your outgoing number, make sure you are connected to the internet" = "Error while retrieving your outgoing number, make sure you are connected to the internet";
-"Retry" = "Retry";
+"Error updating user profile" = "Error updating user profile";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls." = "Failed to fetch your recent calls.";
+"Error while retrieving your outgoing number, make sure you are connected to the internet." = "Error while retrieving your outgoing number, make sure you are connected to the internet.";
 
 /* failed to load webpage with title */
 "Failed to load %@" = "Failed to load %@";
@@ -182,6 +190,12 @@
 "No login data" = "No login data";
 
 /* No comment provided by engineer. */
+"No missed calls" = "No missed calls";
+
+/* No comment provided by engineer. */
+"No recent calls" = "No recent calls";
+
+/* No comment provided by engineer. */
 "Not available" = "Not available";
 
 /* No comment provided by engineer. */
@@ -212,9 +226,6 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Recent Fetch error" = "Recent Fetch error";
-
-/* No comment provided by engineer. */
 "Recents" = "Recents";
 
 /* No comment provided by engineer. */
@@ -222,6 +233,9 @@
 
 /* No comment provided by engineer. */
 "Retrieving phone numbers..." = "Retrieving phone numbers...";
+
+/* No comment provided by engineer. */
+"Retry" = "Retry";
 
 /* No comment provided by engineer. */
 "Saving availability has failed" = "Saving availability has failed";
@@ -234,6 +248,9 @@
 
 /* No comment provided by engineer. */
 "Sending email..." = "Sending email...";
+
+/* No comment provided by engineer. */
+"Set up call" = "Set up call";
 
 /* No comment provided by engineer. */
 "Setting up connection..." = "Setting up connection...";
@@ -266,6 +283,9 @@
 "Top name matches" = "Top name matches";
 
 /* No comment provided by engineer. */
+"Two step call cancel failed" = "Two step call cancel failed";
+
+/* No comment provided by engineer. */
 "Two step call failed" = "Two step call failed";
 
 /* No comment provided by engineer. */
@@ -278,13 +298,13 @@
 "Unable to fetch availability" = "Unable to fetch availability";
 
 /* No comment provided by engineer. */
-"Unable to fetch you recent call list." = "Unable to fetch you recent call list.";
-
-/* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Unable to save \"My number\"";
 
 /* No comment provided by engineer. */
 "Unknown error, please check your internet connection." = "Unknown error, please check your internet connection.";
+
+/* No comment provided by engineer. */
+"user type not allowed" = "user type not allowed";
 
 /* No comment provided by engineer. */
 "VoIP Account" = "VoIP Account";
@@ -294,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "yesterday" = "yesterday";
+
+/* No comment provided by engineer. */
+"You are not allowed to view recent calls" = "You are not allowed to view recent calls";
 
 /* No comment provided by engineer. */
 "You must allow microphone access in Settings > Privacy > Microphone." = "You must allow microphone access in Settings > Privacy > Microphone.";

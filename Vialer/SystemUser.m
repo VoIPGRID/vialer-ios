@@ -40,12 +40,12 @@ static NSString * const SystemUserSuppressedKey = @"suppressed";
 
 @interface SystemUser ()
 
-@property (strong, nonatomic)NSString *user;
-@property (strong, nonatomic)NSString *sipAccount;
-@property (strong, nonatomic)NSString *mobileNumber;
-@property (strong, nonatomic)NSString *emailAddress;
-@property (strong, nonatomic)NSString *firstName;
-@property (strong, nonatomic)NSString *lastName;
+@property (strong, nonatomic) NSString *user;
+@property (strong, nonatomic) NSString *sipAccount;
+@property (strong, nonatomic) NSString *mobileNumber;
+@property (strong, nonatomic) NSString *emailAddress;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
 
 /** Quick check if a system user has logged in successfully */
 @property (nonatomic)BOOL loggedIn;
@@ -143,7 +143,9 @@ static NSString * const SystemUserSuppressedKey = @"suppressed";
 }
 
 -(NSString *)displayName {
-    if (self.emailAddress) {
+    if (self.firstName || self.lastName) {
+        return [[NSString stringWithFormat:@"%@ %@", self.firstName ?: @"", self.lastName ?: @""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    } else if (self.emailAddress) {
         return self.emailAddress;
     } else if (self.user) {
         return self.user;

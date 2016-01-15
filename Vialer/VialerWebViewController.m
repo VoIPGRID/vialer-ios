@@ -1,8 +1,5 @@
 //
 //  VialerWebViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 17/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -28,19 +25,25 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - properties
 
+- (Configuration *)configuration {
+    if (!_configuration) {
+        _configuration = [Configuration defaultConfiguration];
+    }
+    return _configuration;
+}
+
 - (void)setURL:(NSURL *)URL {
     [super setURL:URL];
-    [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), self.title]];
 }
 
 -(void)setNextUrl:(NSString *)nextUrl {
-    NSString *partnerBaseUrl = [Configuration UrlForKey:@"Partner"];
+    NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
 
     [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] autoLoginTokenWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -64,6 +67,11 @@
 
 #pragma mark - UIWebViewDelegate
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [super webViewDidStartLoad:webView];
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil), self.title]];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [super webViewDidFinishLoad:webView];
     [SVProgressHUD dismiss];
@@ -78,17 +86,14 @@
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    [SVProgressHUD dismiss];
 }
 
-
 #pragma mark - utils
-
-// Correctly encode according to RFC 3986
 - (NSString *)urlEncodedString:(NSString *)toEncode {
-    if (!toEncode) {
-        return @"";
-    }
-    return [toEncode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSMutableCharacterSet *URLQueryAllowedSetWithoutPlus = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+    [URLQueryAllowedSetWithoutPlus removeCharactersInString:@"+"];
+    return [toEncode stringByAddingPercentEncodingWithAllowedCharacters:URLQueryAllowedSetWithoutPlus];
 }
 
 @end

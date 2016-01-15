@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yxi-SJ-vi0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yxi-SJ-vi0">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
                                 <rect key="frame" x="524" y="58" width="56" height="54"/>
-                                <animations/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="J0y-Rp-1Bd"/>
@@ -36,7 +35,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
                                 <rect key="frame" x="171" y="525" width="258" height="55"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="UYt-1U-3jl"/>
                                     <constraint firstAttribute="width" constant="258" id="uaR-5j-nOs"/>
@@ -51,9 +49,8 @@
                                     <action selector="callButtonPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="quQ-nU-c62"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
                                 <rect key="frame" x="84" y="58" width="432" height="53"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="nT6-7N-5s3"/>
                                 </constraints>
@@ -61,13 +58,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi">
                                 <rect key="frame" x="20" y="58" width="56" height="53"/>
-                                <animations/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0">
                                 <rect key="frame" x="20" y="163" width="560" height="354"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="900" constant="350" id="lQY-Tq-1Qm"/>
                                 </constraints>
@@ -75,9 +70,8 @@
                                     <segue destination="NzT-M0-ktL" kind="embed" id="RFj-q2-x0c"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
                                 <rect key="frame" x="0.0" y="20" width="600" height="30"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="h5J-mQ-Y2V"/>
                                 </constraints>
@@ -86,7 +80,6 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <animations/>
                         <constraints>
                             <constraint firstItem="Krn-1p-wH9" firstAttribute="top" secondItem="fQq-Gl-ZNQ" secondAttribute="bottom" constant="20" id="3SI-1q-51E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hbs-mW-Umr" secondAttribute="trailing" id="3iy-Ia-CH6"/>
@@ -125,6 +118,7 @@
                         <outlet property="callButton" destination="fQq-Gl-ZNQ" id="q5t-qm-1k5"/>
                         <outlet property="deleteButton" destination="Hbs-mW-Umr" id="8uS-ZV-xLn"/>
                         <outlet property="numberLabel" destination="Z0R-4w-Bgg" id="9Dw-g0-ynO"/>
+                        <segue destination="I6t-6E-rmY" kind="presentation" identifier="TwoStepCallingSegue" id="Egf-gd-Oth"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zr4-97-iAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,8 +143,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-tv-0FO" customClass="NumberPadButton">
-                                <rect key="frame" x="239" y="90" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="239" y="91" width="83" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Xf1-tv-0FO" secondAttribute="height" multiplier="1:1" id="Tm8-Rg-4f9"/>
                                 </constraints>
@@ -163,8 +156,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-kg-Ni2" customClass="NumberPadButton">
-                                <rect key="frame" x="239" y="271" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="239" y="272" width="83" height="82"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QnY-kg-Ni2" secondAttribute="height" multiplier="1:1" id="1YF-gi-r1z"/>
@@ -179,8 +171,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo9-W5-GXA" customClass="NumberPadButton">
-                                <rect key="frame" x="352" y="271" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="352" y="272" width="82" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Mo9-W5-GXA" secondAttribute="height" multiplier="1:1" id="CXd-yi-Spk"/>
                                 </constraints>
@@ -192,8 +183,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-yO-ovH" customClass="NumberPadButton">
-                                <rect key="frame" x="352" y="90" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="352" y="91" width="82" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2Pi-yO-ovH" secondAttribute="height" multiplier="1:1" id="xz5-EK-tKg"/>
                                 </constraints>
@@ -206,8 +196,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-Ug-2q9" customClass="NumberPadButton">
-                                <rect key="frame" x="352" y="0.0" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="352" y="0.0" width="82" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LhT-Ug-2q9" secondAttribute="height" multiplier="1:1" id="Rx4-jK-Sc0"/>
                                 </constraints>
@@ -220,8 +209,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-VL-1YG" customClass="NumberPadButton">
-                                <rect key="frame" x="127" y="271" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="127" y="272" width="82" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yQ4-VL-1YG" secondAttribute="height" multiplier="1:1" id="q0E-T1-dhu"/>
                                 </constraints>
@@ -233,8 +221,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-gw-ERF" customClass="NumberPadButton">
-                                <rect key="frame" x="127" y="90" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="127" y="91" width="82" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5V0-gw-ERF" secondAttribute="height" multiplier="1:1" id="SVl-gv-adD"/>
                                 </constraints>
@@ -247,8 +234,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zid-vc-HTf" customClass="NumberPadButton">
-                                <rect key="frame" x="127" y="0.0" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="127" y="0.0" width="82" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Zid-vc-HTf" secondAttribute="height" multiplier="1:1" id="5x9-Cz-usa"/>
                                 </constraints>
@@ -261,7 +247,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkr-4Y-JuE" customClass="NumberPadButton">
                                 <rect key="frame" x="239" y="0.0" width="83" height="83"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Jkr-4Y-JuE" secondAttribute="height" multiplier="1:1" id="NYc-1T-bO9"/>
                                 </constraints>
@@ -275,7 +260,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipw-Ya-87A" customClass="NumberPadButton">
                                 <rect key="frame" x="239" y="181" width="83" height="83"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ipw-Ya-87A" secondAttribute="height" multiplier="1:1" id="T17-vk-Jsg"/>
                                 </constraints>
@@ -288,8 +272,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4A-Mw-yqa" customClass="NumberPadButton">
-                                <rect key="frame" x="127" y="181" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="127" y="181" width="82" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="z4A-Mw-yqa" secondAttribute="height" multiplier="1:1" id="LWR-s4-vhx"/>
                                 </constraints>
@@ -302,8 +285,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5o-gy-hak" customClass="NumberPadButton">
-                                <rect key="frame" x="352" y="181" width="83" height="83"/>
-                                <animations/>
+                                <rect key="frame" x="352" y="181" width="82" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="o5o-gy-hak" secondAttribute="height" multiplier="1:1" id="FZA-Pm-BV4"/>
                                 </constraints>
@@ -316,7 +298,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <constraints>
                             <constraint firstItem="QnY-kg-Ni2" firstAttribute="top" secondItem="ipw-Ya-87A" secondAttribute="bottom" constant="8" symbolic="YES" id="0kG-1n-Rph"/>
                             <constraint firstItem="5V0-gw-ERF" firstAttribute="top" secondItem="Xf1-tv-0FO" secondAttribute="top" id="7Po-he-v6s"/>
@@ -366,6 +347,14 @@
             </objects>
             <point key="canvasLocation" x="2171" y="487"/>
         </scene>
+        <!--TwoStepCallingStoryboard-->
+        <scene sceneID="qhr-g1-2FN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TwoStepCallingStoryboard" id="I6t-6E-rmY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YJ0-aB-S6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2022.5" y="793"/>
+        </scene>
         <!--Reachability Bar View Controller-->
         <scene sceneID="Sdr-k0-RwZ">
             <objects>
@@ -380,7 +369,6 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No connection, cannot call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYl-go-ZtO">
                                 <rect key="frame" x="20" y="4" width="530" height="21"/>
-                                <animations/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -388,7 +376,6 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poor connection, Two step calling enabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tG7-RZ-e0R">
                                 <rect key="frame" x="20" y="4" width="530" height="21"/>
-                                <animations/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -396,7 +383,6 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-EM-fHb">
                                 <rect key="frame" x="558" y="4" width="22" height="22"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="c6l-EM-fHb" secondAttribute="height" multiplier="1:1" id="snA-HU-raK"/>
                                 </constraints>
@@ -406,7 +392,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="c6l-EM-fHb" secondAttribute="trailing" id="JWI-i6-nJP"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eYl-go-ZtO" secondAttribute="leading" id="Pnq-MX-dkG"/>
@@ -443,7 +428,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="o9U-kD-7LI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

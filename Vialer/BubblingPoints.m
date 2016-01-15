@@ -25,16 +25,25 @@ static NSString * const BubblingPointsDisconnectedIcon = @"disconnectedIcon";
 @implementation BubblingPoints
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setup];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setup];
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGSize viewSize = CGSizeMake(self.bounds.size.width - BubblingPointsIconInset, self.bounds.size.width - BubblingPointsIconInset);
+    self.iconView.frame = CGRectMake((self.bounds.size.width - viewSize.width) / 2,
+                                     self.bounds.size.height / 2 - 0.5 * viewSize.height,
+                                     viewSize.width,
+                                     viewSize.height);
 }
 
 - (void)setup {
@@ -76,11 +85,7 @@ static NSString * const BubblingPointsDisconnectedIcon = @"disconnectedIcon";
 
 - (UIImageView *)iconView {
     if (!_iconView) {
-        CGSize viewSize = CGSizeMake(self.bounds.size.width - BubblingPointsIconInset, self.bounds.size.width - BubblingPointsIconInset);
-        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.bounds.size.width - viewSize.width) / 2,
-                                                                  self.bounds.size.height / 2 - 0.5 * viewSize.height,
-                                                                  viewSize.width,
-                                                                  viewSize.height)];
+        _iconView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_iconView];
     }
     return _iconView;

@@ -59,6 +59,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
+  - OCMock (3.2)
   - OHHTTPStubs (4.3.0):
     - OHHTTPStubs/Default (= 4.3.0)
   - OHHTTPStubs/Core (4.3.0)
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - Google/Analytics (~> 1.0.7)
   - HTCopyableLabel
   - MMDrawerController+Storyboard (from `https://github.com/TomSwift/MMDrawerController-Storyboard.git`)
+  - OCMock
   - OHHTTPStubs
   - PBWebViewController
   - Reachability
@@ -111,6 +113,7 @@ SPEC CHECKSUMS:
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
+  OCMock: 28def049ef47f996b515a8eeea958be7ccab2dbb
   OHHTTPStubs: 0aec5755528693a165bd616cb79f69387de306a8
   PBWebViewController: 909b1505da6ba7c5c82519a6457246027926061e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

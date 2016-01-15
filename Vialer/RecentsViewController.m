@@ -14,6 +14,7 @@
 #import "SIPCallingViewController.h"
 #import "TwoStepCallingViewController.h"
 
+#import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
 
 #import "ContactsUI/ContactsUI.h"
@@ -24,8 +25,8 @@ static NSString * const RecentsViewControllerLogoImageName = @"logo";
 static NSString * const RecentsViewControllerPropertyPhoneNumbers = @"phoneNumbers";
 
 static NSString * const RecentViewControllerRecentCallCell = @"RecentCallCell";
-static NSString * const RecentViewControllerNoRecentCallCell = @"NoRecentCallsCell";
-static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedRecentCallsCell";
+static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorText";
+static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 
 @interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,8 +34,7 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
-@property (strong, nonatomic) TwoStepCallingViewController *twoStepCallingViewController;
-
+@property (strong, nonatomic) NSString *phoneNumberToCall;
 @end
 
 @implementation RecentsViewController
@@ -97,13 +97,6 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
     return _sipCallingViewController;
 }
 
-- (TwoStepCallingViewController *)twoStepCallingViewController {
-    if (!_twoStepCallingViewController) {
-        _twoStepCallingViewController = [[TwoStepCallingViewController alloc] init];
-    }
-    return _twoStepCallingViewController;
-}
-
 #pragma mark - actions
 
 - (IBAction)leftDrawerButtonPressed:(UIBarButtonItem *)sender {
@@ -130,14 +123,32 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
                 [self.refreshControl endRefreshing];
                 [self.tableView reloadData];
                 if (error) {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Recent Fetch error", nil) message:NSLocalizedString(@"Unable to fetch you recent call list.", nil) preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
-                    [alert addAction:defaultAction];
+                    NSString *errorTitle;
+                    switch ([RecentCallManager defaultManager].recentsFetchErrorCode) {
+                        case RecentCallManagerFetchingUserNotAllowed:
+                            errorTitle = @"Not allowed";
+                            break;
+                        default:
+                            errorTitle = @"Error loading recent calls";
+                            break;
+                    }
+
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(errorTitle, nil)
+                                                                                   message:[error localizedDescription]
+                                                                      andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+
                     [self presentViewController:alert animated:YES completion:nil];
                 }
             });
         }];
     });
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
+        [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -151,20 +162,36 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     // Select correct recents
+    if ([RecentCallManager defaultManager].recentsFetchFailed) {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+        switch ([RecentCallManager defaultManager].recentsFetchErrorCode) {
+            case RecentCallManagerFetchingUserNotAllowed:
+                cell.textLabel.text = NSLocalizedString(@"You are not allowed to view recent calls", nil);
+                break;
+            default:
+                cell.textLabel.text = NSLocalizedString(@"Could not load your recent calls", nil);
+                break;
+        }
+        return cell;
+    }
+
     NSArray *recents;
     if (self.filterControl.selectedSegmentIndex == 0) {
         recents = [RecentCallManager defaultManager].recentCalls;
         // No recents, show other cell
         if ([recents count] == 0) {
-            return [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerNoRecentCallCell];
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+            cell.textLabel.text = NSLocalizedString(@"No recent calls", nil);
+            return cell;
         }
     } else {
         // No recents, show other cell
         recents = [RecentCallManager defaultManager].missedRecentCalls;
         if ([recents count] == 0) {
-            return [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerNoMissedRecentCallCell];
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+            cell.textLabel.text = NSLocalizedString(@"No missed calls", nil);
+            return cell;
         }
     }
     RecentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerRecentCallCell];
@@ -197,7 +224,6 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
         }
         recent = [RecentCallManager defaultManager].missedRecentCalls[indexPath.row];
     }
-
     [self callPhoneNumber:recent.callerPhoneNumber];
 }
 
@@ -256,6 +282,7 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
 #pragma mark - utils
 
 - (void)callPhoneNumber:(NSString *)phoneNumber {
+    self.phoneNumberToCall = phoneNumber;
     // TODO: implement 4g calling
     if (false) {
         [GAITracker setupOutgoingSIPCallEvent];
@@ -263,8 +290,7 @@ static NSString * const RecentViewControllerNoMissedRecentCallCell = @"NoMissedR
         [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
-        [self presentViewController:self.twoStepCallingViewController animated:YES completion:nil];
-        [self.twoStepCallingViewController handlePhoneNumber:phoneNumber];
+        [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
     }
 }
 

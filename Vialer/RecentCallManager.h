@@ -10,11 +10,23 @@
 
 @class RecentCall;
 
+typedef NS_ENUM(NSUInteger, RecentCallManagerErrors) {
+    RecentCallManagerFetchFailed = 1, //Unknown error, but fetch failed.
+    RecentCallManagerFetchingUserNotAllowed, //No permission
+    RecentCallManagerFetchingUserUserNotLoggedIn, //Not logged in
+};
+
 @interface RecentCallManager : NSObject
 
 @property (readonly, nonatomic) NSArray<RecentCall *> *recentCalls;
 @property (readonly, nonatomic) NSArray<RecentCall *> *missedRecentCalls;
 @property (readonly, nonatomic) BOOL reloading;
+
+/** When an error occurs this bool is set*/
+@property (readonly, nonatomic) BOOL recentsFetchFailed;
+/** When an error occurs, the error code is obtain by questioning this parameter*/
+@property (readonly, nonatomic) RecentCallManagerErrors recentsFetchErrorCode;
+
 
 + (RecentCallManager *)defaultManager;
 

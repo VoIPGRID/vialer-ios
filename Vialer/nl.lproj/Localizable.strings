@@ -7,7 +7,7 @@
 "Accept" = "Neem op";
 
 /* No comment provided by engineer. */
-"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een normaal gesprek op te zetten waarbij de beller het zakelijke nummer ziet als er geen 4G of wifi netwerk beschikbaar is";
+"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Je eigen nummer wordt gebruikt om een twee-staps-gesprek op te zetten waarbij jouw zakelijke nummer wordt getoond";
 
 /* No comment provided by engineer. */
 "App is configuring" = "%@ configureert";
@@ -22,7 +22,13 @@
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";
 
 /* No comment provided by engineer. */
+"Back" = "Terug";
+
+/* No comment provided by engineer. */
 "Business" = "Zakelijke";
+
+/* No comment provided by engineer. */
+"Call canceled" = "Gesprek geannuleerd";
 
 /* No comment provided by engineer. */
 "Call ended" = "Gesprek be\U00EBindigd";
@@ -61,6 +67,9 @@
 "Continue" = "Verder";
 
 /* No comment provided by engineer. */
+"Could not load your recent calls" = "Recente gesprekken konden niet worden opgehaald";
+
+/* No comment provided by engineer. */
 "Couldn't connect with other party" = "Kan niet verbinden met andere partij";
 
 /* No comment provided by engineer. */
@@ -94,11 +103,10 @@
 "Error getting the availability options" = "Fout bij het ophalen van de bereikbaarheid opties.";
 
 /* No comment provided by engineer. */
-"Error while retrieving your outgoing number, make sure you are connected to the internet" = "Er is een fout opgetreden bij het ophalen van uw uitgaande nummer, ben je verbonden met het internet?";
-"Retry" = "Opnieuw proberen";
+"Error updating user profile" = "Fout bij updaten van gebruikersprofiel";
 
 /* No comment provided by engineer. */
-"Failed to fetch your recent calls." = "Recente gesprekken konden niet worden opgehaald.";
+"Error while retrieving your outgoing number, make sure you are connected to the internet." = "Fout tijdens het ophalen van je uitgaande nummer, zorg ervoor dat je verbonden bent met internet.";
 
 /* failed to load webpage with title */
 "Failed to load %@" = "%@ kon niet worden geladen";
@@ -182,6 +190,12 @@
 "No login data" = "Geen inloggegevens";
 
 /* No comment provided by engineer. */
+"No missed calls" = "Geen gemiste gesprekken";
+
+/* No comment provided by engineer. */
+"No recent calls" = "Geen recente gesprekken";
+
+/* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
 
 /* No comment provided by engineer. */
@@ -212,9 +226,6 @@
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
-"Recent Fetch error" = "Recente Gesprekken ophalen mislukt";
-
-/* No comment provided by engineer. */
 "Recents" = "Recent";
 
 /* No comment provided by engineer. */
@@ -222,6 +233,9 @@
 
 /* No comment provided by engineer. */
 "Retrieving phone numbers..." = "Telefoonnummers ophalen...";
+
+/* No comment provided by engineer. */
+"Retry" = "Opnieuw proberen";
 
 /* No comment provided by engineer. */
 "Saving availability has failed" = "Opslaan bereikbaarheid mislukt";
@@ -234,6 +248,9 @@
 
 /* No comment provided by engineer. */
 "Sending email..." = "Versturen e-mail...";
+
+/* No comment provided by engineer. */
+"Set up call" = "Gesprek wordt opgezet";
 
 /* No comment provided by engineer. */
 "Setting up connection..." = "Maakt verbinding...";
@@ -266,6 +283,9 @@
 "Top name matches" = "Meest overeenkomende namen";
 
 /* No comment provided by engineer. */
+"Two step call cancel failed" = "Twee staps gesprek annuleren mislukt";
+
+/* No comment provided by engineer. */
 "Two step call failed" = "Het twee staps gesprek is mislukt";
 
 /* No comment provided by engineer. */
@@ -278,13 +298,13 @@
 "Unable to fetch availability" = "Niet mogelijk bereikbaarheid op te halen";
 
 /* No comment provided by engineer. */
-"Unable to fetch you recent call list." = "Ophalen van recente gesprekken mislukt.";
-
-/* No comment provided by engineer. */
 "Unable to save \"My number\"" = "Mijn nummer kan niet worden opgeslagen";
 
 /* No comment provided by engineer. */
 "Unknown error, please check your internet connection." = "Onbekende fout, controleer je internetverbinding.";
+
+/* No comment provided by engineer. */
+"user type not allowed" = "gebruikers type niet toegestaan";
 
 /* No comment provided by engineer. */
 "VoIP Account" = "VoIP account";
@@ -294,6 +314,9 @@
 
 /* No comment provided by engineer. */
 "yesterday" = "gisteren";
+
+/* No comment provided by engineer. */
+"You are not allowed to view recent calls" = "Je hebt geen toestemming om de recente gesprekken te bekijken";
 
 /* No comment provided by engineer. */
 "You must allow microphone access in Settings > Privacy > Microphone." = "De app heeft toegang nodig tot de microfoon via Instellingen > Privacy > Microfoon.";

@@ -8,7 +8,6 @@
 
 #import "VailerRootViewController.h"
 
-#import "LogInViewController.h"
 #import "SystemUser.h"
 #import "VialerDrawerViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -16,7 +15,6 @@
 static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
 
 @interface VailerRootViewController ()
-@property (strong, nonatomic) LogInViewController *loginViewController;
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
 @end
 
@@ -32,7 +30,9 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:LOGIN_FAILED_NOTIFICATION];
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:LOGIN_FAILED_NOTIFICATION];
+    }@catch(id exception) {}
 }
 
 - (void)viewDidLoad {
@@ -88,7 +88,9 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
 - (void)loginFailedNotification:(NSNotification *)notification {
     self.loginViewController.screenToShow = OnboardingScreenLogin;
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self dismissViewControllerAnimated:NO completion:nil];
+    if (![self.presentedViewController isEqual:self.loginViewController]) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
 }
 
 @end

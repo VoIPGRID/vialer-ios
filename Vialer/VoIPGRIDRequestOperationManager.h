@@ -20,6 +20,7 @@ typedef NS_ENUM (NSUInteger, VGTwoStepCallErrors) {
     VGTwoStepCallErrorStatusRequestFailed,
     VGTwoStepCallErrorStatusUnAuthorized,
     VGTwoStepCallInvalidNumber,
+    VGTwoStepCallErrorCancelFailed
 };
 
 @interface VoIPGRIDRequestOperationManager : AFHTTPRequestOperationManager
@@ -35,6 +36,7 @@ typedef NS_ENUM (NSUInteger, VGTwoStepCallErrors) {
 
 // User requests
 - (void)userDestinationWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 /**
  Make a request to the systemuser endpoint.
 
@@ -42,7 +44,6 @@ typedef NS_ENUM (NSUInteger, VGTwoStepCallErrors) {
  */
 - (void)userProfileWithCompletion:(void (^)(id responseObject, NSError *error))completion;
 - (void)phoneAccountWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-- (void)clickToDialStatusForCallId:(NSString *)callId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)cdrRecordWithLimit:(NSInteger)limit offset:(NSInteger)offset sourceNumber:(NSString *)sourceNumber callDateGte:(NSDate *)date success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)passwordResetWithEmail:(NSString *)email success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)autoLoginTokenWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
@@ -65,7 +66,16 @@ typedef NS_ENUM (NSUInteger, VGTwoStepCallErrors) {
  */
 - (void)twoStepCallStatusForCallId:(NSString *)callId withCompletion:(void (^)(NSString* callStatus, NSError *error))completion;
 
-/** 
+/**
+ Once an Call ID has been obtained through the -setupTwoStepCallWith... function the the call can be canceled
+ using this function
+
+ @param callID The Call ID of the call that needs to be canceled.
+ @param completion A block giving access to the success of the cancelation or an error.
+ */
+- (void)cancelTwoStepCallForCallId:(NSString *)callId withCompletion:(void (^)(BOOL success, NSError *error))completion;
+
+/**
  Pushes the user's mobile number to the server
 
  @param mobileNumber the mobile number to push

@@ -22,12 +22,13 @@
 
 NSString * const LoginViewControllerMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
-
+static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 @interface LogInViewController ()
 @property (assign, nonatomic) BOOL alertShown;
 @property (strong, nonatomic) NSString *user;
 @property (strong, nonatomic) VIAScene *scene;
+@property (strong, nonatomic) UITapGestureRecognizer *tapToUnlock;
 @end
 
 @implementation LogInViewController
@@ -43,6 +44,29 @@ static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - properties
+
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
+
+- (VIAScene *)scene {
+    if (!_scene) {
+        _scene = [[VIAScene alloc] initWithView:self.view];
+    }
+    return _scene;
+}
+
+- (UITapGestureRecognizer *)tapToUnlock {
+    if (!_tapToUnlock) {
+        _tapToUnlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
+    }
+    return _tapToUnlock;
 }
 
 /**
@@ -86,11 +110,10 @@ static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
  */
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-NSLog(@"%s", __PRETTY_FUNCTION__);
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
 
     //to be able/disable the enable the request password button
-    [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(forgotPasswordViewTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(checkIfEmailIsSetInEmailTextField) forControlEvents:UIControlEventEditingChanged];
 
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
@@ -100,7 +123,6 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self removeObservers];
 }
 
@@ -111,8 +133,8 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
         [textField resignFirstResponder];
         [self.loginFormView.passwordField becomeFirstResponder];
     } else if ([self.loginFormView.passwordField isEqual:textField]) {
-        NSString *username = [self.loginFormView.usernameField text];
-        NSString *password = [self.loginFormView.passwordField text];
+        NSString *username = self.loginFormView.usernameField.text;
+        NSString *password = self.loginFormView.passwordField.text;
         if ([username length] > 0 && [password length] > 0) {
             [self continueFromLoginFormViewToConfigureFormView];
             return YES;
@@ -171,10 +193,10 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
     [self continueFromLoginFormViewToConfigureFormView];
 }
 
-- (void)forgotPasswordViewTextFieldDidChange:(UITextField *)textField {
+- (void)checkIfEmailIsSetInEmailTextField {
     NSString *emailRegEx = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
     if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]
-         evaluateWithObject:textField.text])
+         evaluateWithObject:self.forgotPasswordView.emailTextfield.text])
         self.forgotPasswordView.requestPasswordButton.enabled = YES;
     else
         self.forgotPasswordView.requestPasswordButton.enabled = NO;
@@ -323,13 +345,12 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 #pragma mark - Navigation actions
 - (void)moveLogoOutOfScreen { /* Act one (1) */
     // Create an animation scenes that transitions to configure view.
-    // VIAScene uses view dimensions to calculate the positions of clouds, at this point the self.view is resized correctly from xib values.
-    self.scene = [[VIAScene alloc] initWithView:self.view];
 
-    void (^logoAnimations)(void) = ^{
-        [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
-    };
-    [UIView animateWithDuration:2.2 animations:logoAnimations];
+    if (CGRectGetMaxY(self.logoView.frame) > 0) {
+        [UIView animateWithDuration:2.2 animations:^{
+            [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];
+        }];
+    }
 
     switch (self.screenToShow) {
         case OnboardingScreenLogin:
@@ -346,7 +367,7 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
             break;
     }
 
-    void (^afterLogoAnimations)(void) = ^{
+    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         switch (self.screenToShow) {
             case OnboardingScreenLogin:
                 [self animateLoginViewToVisible:1.f delay:0.f]; // show
@@ -359,14 +380,13 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
                 [self.scene runActOne];
                 break;
         }
-    };
-    [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:afterLogoAnimations completion:nil];
+    } completion:nil];
 }
 
 - (IBAction)openForgotPassword:(id)sender {
     [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
-    self.forgotPasswordView.emailTextfield.text = nil;
+    self.forgotPasswordView.emailTextfield.text = self.loginFormView.usernameField.text;
 
     [self animateLoginViewToVisible:0.f delay:0.f];
     [self animateForgotPasswordViewToVisible:1.f delay:2.f];
@@ -398,13 +418,13 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
     NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
-    webViewController.showsNavigationToolbar = YES;
+    webViewController.showsNavigationToolbar = NO;
     webViewController.hidesBottomBarWhenPushed = YES;
-    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    webViewController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:LogInViewControllerLogoImageName]];
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeConfigurationInstructions)];
-    webViewController.navigationItem.rightBarButtonItem = cancelButton;
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStylePlain target:self action:@selector(closeConfigurationInstructions)];
+    webViewController.navigationItem.leftBarButtonItem = cancelButton;
 
     [self presentViewController:navController animated:YES completion:nil];
 }
@@ -415,9 +435,7 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    SystemUser *currentUser = [SystemUser currentUser];
-
-    [currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
+    [self.currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
         [SVProgressHUD dismiss];
         if (loggedin) {
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
@@ -428,6 +446,8 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
             if (success) {
                 success();
             }
+        } else {
+            self.loginFormView.passwordField.text = @"";
         }
     }];
 }
@@ -486,6 +506,10 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)animateForgotPasswordViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
+    if (![self.forgotPasswordView.emailTextfield.text length]) {
+        self.forgotPasswordView.emailTextfield.text = self.currentUser.user;
+    }
+    [self checkIfEmailIsSetInEmailTextField];
     void(^animations)(void) = ^{
         [self.closeButton setAlpha:alpha];
         [self.forgotPasswordView setAlpha:alpha];
@@ -527,9 +551,7 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
     void(^animations)(void) = ^{
         [self.unlockView setAlpha:alpha];
     };
-    // Add a tap to the view to close immediately.
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
-    [self.view addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:self.tapToUnlock];
 
     [UIView animateWithDuration:2.2f
                           delay:delay
@@ -555,12 +577,13 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
 - (void)unlockIt {
     // Put here what happens when it is unlocked
-    [self.scene clean];
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
         [self.unlockView setAlpha:0.f];
         [self.logoView setAlpha:1.f];
         [self.logoView setCenter:self.view.center];
     }];
+    // Remove tap
+    [self.view removeGestureRecognizer:self.tapToUnlock];
 }
 
 - (IBAction)mobileNumberInfoButtonPressed:(UIButton *)sender {
@@ -571,7 +594,6 @@ NSLog(@"%s", __PRETTY_FUNCTION__);
 
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
                                                        style:UIAlertActionStyleDefault handler:nil];
-
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }

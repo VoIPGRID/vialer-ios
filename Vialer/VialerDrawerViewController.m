@@ -8,15 +8,11 @@
 
 #import "VialerDrawerViewController.h"
 
-static float const VialerRootViewControllerMaximunDrawerWidth = 222.0;
+static float const VialerRootViewControllerMaximunDrawerWidth = 280.0f;
 static float const VialerRootViewControllerShadowRadius = 2.0f;
 static float const VialerRootViewControllerShadowOpacity = 0.5f;
 static NSString * const VialerDrawerViewControllerTabBarIdentifier = @"TabBarIdentifier";
 static NSString * const VialerDrawerViewControllerMenuIdentifier = @"MenuIdentifier";
-
-@interface VialerDrawerViewController ()
-
-@end
 
 @implementation VialerDrawerViewController
 

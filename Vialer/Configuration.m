@@ -28,18 +28,19 @@ NSString * const ConfigurationGradientViewGradientStart = @"GradientStart";
 NSString * const ConfigurationGradientViewGradientEnd = @"GradientEnd";
 NSString * const ConfigurationGradientViewGradientAngle = @"GradientAngle";
 NSString * const ConfigurationSideMenuTintColor = @"SideMenuTintColor";
+NSString * const ConfigurationSideMenuButtonPressedState = @"SideMenuButtonPressedState";
 NSString * const ConfigurationRecentsSegmentedControlTintColor = @"RecentsSegmentedControlTintColor";
 NSString * const ConfigurationContactsTableSectionIndexColor = @"ContactsTableSectionIndexColor";
 NSString * const ConfigurationNumberPadButtonTextColor = @"NumberPadButtonTextColor";
 NSString * const ConfigurationNumberPadButtonPressedColor = @"NumberPadButtonPressedColor";
 NSString * const ConfigurationRecentsFilterControlTintColor = @"RecentsFilterControlTintColor";
+NSString * const ConfigurationLogInViewControllerButtonBorderColor = @"LogInViewControllerButtonBorderColor";
+NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState = @"LogInViewControllerButtonBackgroundColorForPressedState";
+
+NSString * const ConfigurationPartnerURLKey = @"Partner";
 
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
-
-@interface Configuration ()
-@property (nonatomic, strong) NSDictionary *dictionary;
-@end
 
 @implementation Configuration
 
@@ -66,7 +67,7 @@ static NSString * const ConfigurationUrlsKey = @"URLS";
 
 - (UIColor *)tintColorForKey:(NSString *)key {
     NSArray *color = self.dictionary[ConfigurationColorsKey][key];
-    NSAssert(color != nil && color.count == 3, @"%@ - %@ not found in Config.plist!", ConfigurationColorsKey, key);
+    NSAssert(color != nil && color.count == 3 || color.count == 4, @"%@ - %@ not found in Config.plist!", ConfigurationColorsKey, key);
     return [[self class] colorFromArray:color];
 }
 
@@ -96,7 +97,11 @@ static NSString * const ConfigurationUrlsKey = @"URLS";
 }
 
 + (UIColor *)colorFromArray:(NSArray *)array {
-    return [UIColor colorWithRed:[array[0] intValue] / 255.f green:[array[1] intValue] / 255.f blue:[array[2] intValue] / 255.f alpha:1.f];
+    CGFloat alpha = 1.f;
+    if (array.count == 4) {
+        alpha = [array[3] doubleValue];
+    }
+    return [UIColor colorWithRed:[array[0] intValue] / 255.f green:[array[1] intValue] / 255.f blue:[array[2] intValue] / 255.f alpha:alpha];
 }
 
 @end

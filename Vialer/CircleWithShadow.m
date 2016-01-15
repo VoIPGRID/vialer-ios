@@ -29,6 +29,11 @@ static int const CircleWithShadowRadius = 1;
     return self;
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self setNeedsDisplay];
+}
+
 - (void)setup {
     self.opaque = FALSE;
     self.backgroundColor = nil;

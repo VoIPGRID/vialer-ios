@@ -2,11 +2,8 @@
 /* Class = "UIViewController"; title = "Recents"; ObjectID = "0f0-Ph-M40"; */
 "0f0-Ph-M40.title" = "Recents";
 
-/* Class = "UILabel"; text = "No recent calls"; ObjectID = "g0W-t5-b0b"; */
-"g0W-t5-b0b.text" = "No recent calls";
-
-/* Class = "UILabel"; text = "No missed calls"; ObjectID = "pk2-hb-LTS"; */
-"pk2-hb-LTS.text" = "No missed calls";
+/* Class = "UILabel"; text = "Cell With Error Text"; ObjectID = "g0W-t5-b0b"; */
+"g0W-t5-b0b.text" = "Cell With Error Text";
 
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[0] = "All"; ObjectID = "rDx-8g-SbK"; */
 "rDx-8g-SbK.segmentTitles[0]" = "All";
