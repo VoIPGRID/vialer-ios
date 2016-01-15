@@ -29,6 +29,7 @@ extern NSString * const ConfigurationGradientViewGradientStart;
 extern NSString * const ConfigurationGradientViewGradientEnd;
 extern NSString * const ConfigurationGradientViewGradientAngle;
 extern NSString * const ConfigurationSideMenuTintColor;
+extern NSString * const ConfigurationSideMenuButtonPressedState;
 extern NSString * const ConfigurationRecentsSegmentedControlTintColor;
 extern NSString * const ConfigurationContactsTableSectionIndexColor;
 extern NSString * const ConfigurationNumberPadButtonTextColor;

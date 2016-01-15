@@ -28,6 +28,7 @@ NSString * const ConfigurationGradientViewGradientStart = @"GradientStart";
 NSString * const ConfigurationGradientViewGradientEnd = @"GradientEnd";
 NSString * const ConfigurationGradientViewGradientAngle = @"GradientAngle";
 NSString * const ConfigurationSideMenuTintColor = @"SideMenuTintColor";
+NSString * const ConfigurationSideMenuButtonPressedState = @"SideMenuButtonPressedState";
 NSString * const ConfigurationRecentsSegmentedControlTintColor = @"RecentsSegmentedControlTintColor";
 NSString * const ConfigurationContactsTableSectionIndexColor = @"ContactsTableSectionIndexColor";
 NSString * const ConfigurationNumberPadButtonTextColor = @"NumberPadButtonTextColor";

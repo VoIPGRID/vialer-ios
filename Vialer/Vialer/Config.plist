@@ -65,6 +65,12 @@
 			<integer>126</integer>
 			<integer>58</integer>
 		</array>
+		<key>SideMenuButtonPressedState</key>
+		<array>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+		</array>
 		<key>NavigationBarBarTintColor</key>
 		<array>
 			<integer>248</integer>

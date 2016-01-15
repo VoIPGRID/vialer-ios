@@ -5,12 +5,24 @@
 
 #import "ButtonWithBottomBorder.h"
 
+#import "Configuration.h"
+
 @implementation ButtonWithBottomBorder
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self setNeedsDisplay];
 }
+
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+    if (highlighted) {
+        self.backgroundColor = [Configuration tintColorForKey:ConfigurationSideMenuButtonPressedState];
+    } else {
+        self.backgroundColor = nil;
+    }
+}
+
 - (void)setBorderColor:(UIColor *)borderColor {
     _borderColor = borderColor;
     [self setNeedsDisplay];
