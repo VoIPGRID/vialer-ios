@@ -81,7 +81,6 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 #pragma mark - setup
-
     
 - (void)setupLayout {
     self.numberText = @"";

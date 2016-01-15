@@ -118,6 +118,7 @@
                         <outlet property="callButton" destination="fQq-Gl-ZNQ" id="q5t-qm-1k5"/>
                         <outlet property="deleteButton" destination="Hbs-mW-Umr" id="8uS-ZV-xLn"/>
                         <outlet property="numberLabel" destination="Z0R-4w-Bgg" id="9Dw-g0-ynO"/>
+                        <segue destination="I6t-6E-rmY" kind="presentation" identifier="TwoStepCallingSegue" id="Egf-gd-Oth"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zr4-97-iAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -345,6 +346,14 @@
                 </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2171" y="487"/>
+        </scene>
+        <!--TwoStepCallingStoryboard-->
+        <scene sceneID="qhr-g1-2FN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TwoStepCallingStoryboard" id="I6t-6E-rmY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YJ0-aB-S6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2022.5" y="793"/>
         </scene>
         <!--Reachability Bar View Controller-->
         <scene sceneID="Sdr-k0-RwZ">
