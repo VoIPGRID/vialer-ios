@@ -14,4 +14,9 @@
 
 - (void)handleSipCall:(GSCall *)sipCall;
 
+/**
+ * @return YES when the app was started for the purpose of taking screenshots
+ */
++ (BOOL)isSnapshotScreenshotRun;
+
 @end

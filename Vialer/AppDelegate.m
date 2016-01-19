@@ -5,19 +5,16 @@
 
 #import "AppDelegate.h"
 
+#import "AFNetworkActivityLogger.h"
+#import "SDStatusBarManager.h"
+#import "SSKeychain.h"
+
 #import "ConnectionHandler.h"
 #import "GAITracker.h"
 #import "Gossip+Extra.h"
 #import "PZPushMiddleware.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
-
-#import <AVFoundation/AVFoundation.h>
-
-#import "AFNetworkActivityLogger.h"
-#import "AFNetworkReachabilityManager.h"
-#import "SSKeychain.h"
-
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
@@ -32,7 +29,19 @@
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-    [GAITracker setupGAITracker];
+    //Only when the app is run for screenshot purposes do the following:
+    if ([[self class] isSnapshotScreenshotRun]) {
+        [[SDStatusBarManager sharedInstance] setTimeString:@"09:41"];
+        [[SDStatusBarManager sharedInstance] enableOverrides];
+        [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
+
+        //Clear out the userdefaults
+        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    } else {
+        [GAITracker setupGAITracker];
+    }
+
     [self setupConnectivity];
 
     return YES;
@@ -70,8 +79,12 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
     // TODO: fix SIP
-//    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
-//    [[ConnectionHandler sharedConnectionHandler] start];
+    //    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
+    //    [[ConnectionHandler sharedConnectionHandler] start];
+}
+
++ (BOOL)isSnapshotScreenshotRun {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
 }
 
 #pragma mark - UIApplication notification delegate

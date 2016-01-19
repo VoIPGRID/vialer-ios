@@ -5,11 +5,18 @@
 
 #import "GAITracker.h"
 
-#import <Google/Analytics.h>
-
 @implementation GAITracker
 
 + (void)setupGAITracker {
+    BOOL dryRun = NO;
+#ifdef DEBUG
+    dryRun = YES;
+#endif
+    GAILogLevel logLevel = kGAILogLevelInfo;
+    [[self class] setupGAITrackerWithLogLevel:logLevel andDryRun:dryRun];
+}
+
++ (void)setupGAITrackerWithLogLevel:(GAILogLevel)logLevel andDryRun:(BOOL)dryRun {
     // Configure tracker from GoogleService-Info.plist.
     NSError *configureError;
     [[GGLContext sharedInstance] configureWithError:&configureError];
@@ -18,10 +25,8 @@
     // Optional: configure GAI options.
     GAI *gai = [GAI sharedInstance];
     gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
-#ifdef DEBUG
     gai.logger.logLevel = kGAILogLevelInfo;  // remove before app releaseAppDelegate.m
-    [gai setDryRun:YES];   // NOTE: Set to YES to disable tracking
-#endif
+    [gai setDryRun:dryRun];   // NOTE: Set to YES to disable tracking
 }
 
 + (void)trackScreenForControllerName:(NSString *)name {
