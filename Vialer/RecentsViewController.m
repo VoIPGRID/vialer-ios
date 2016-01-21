@@ -266,7 +266,17 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
     if ([property.key isEqualToString:RecentsViewControllerPropertyPhoneNumbers]) {
         CNPhoneNumber *phoneNumberProperty = property.value;
         NSString *phoneNumber = [phoneNumberProperty stringValue];
-        [self callPhoneNumber:phoneNumber];
+
+        /**
+         *  We need to return asap to prevent default action (calling with native dialer).
+         *  As a workaround, we put the presenting of the new viewcontroller via a separate queue,
+         *  which will immediately go back to the main thread.
+         */
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self callPhoneNumber:phoneNumber];
+            });
+        });
         return NO;
     }
     return YES;
