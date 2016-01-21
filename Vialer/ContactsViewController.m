@@ -215,15 +215,24 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
         CNPhoneNumber *phoneNumberProperty = property.value;
         self.phoneNumberToCall = [phoneNumberProperty stringValue];
 
-        // TODO: implement 4g calling
-        if (false) {
-            [GAITracker setupOutgoingSIPCallEvent];
-            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-            [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
-        } else {
-            [GAITracker setupOutgoingConnectABCallEvent];
-            [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
-        }
+        /**
+         *  We need to return asap to prevent default action (calling with native dialer).
+         *  As a workaround, we put the presenting of the new viewcontroller via a separate queue,
+         *  which will immediately go back to the main thread.
+         */
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // TODO: implement 4g calling
+                if (false) {
+                    [GAITracker setupOutgoingSIPCallEvent];
+                    [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+                    [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
+                } else {
+                    [GAITracker setupOutgoingConnectABCallEvent];
+                    [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
+                }
+            });
+        });
         return NO;
     }
     return YES;
