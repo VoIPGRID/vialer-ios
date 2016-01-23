@@ -1,5 +1,4 @@
 //
-//  AppDelegate.h
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -20,7 +19,7 @@ class SnapshotUITests: XCTestCase {
      * but this is corrected by prefixing with a number (01-05)
      * If the test fails without an apparent reason, try resetting the simulator. (Simulator -> Reset Content and Settings)
      */
-    func testExample() {
+    func testSnapshotScreenshotRun() {
         // This handler will tap OK on the iOS generated autorization alerts (Microphone, Contacts ...)
         addUIInterruptionMonitorWithDescription("Access contacts alert") {
             $0.buttons["OK"].tap()
@@ -30,7 +29,7 @@ class SnapshotUITests: XCTestCase {
         let app = XCUIApplication()
         let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
         waitForElementToBeHittable(usernameTextField)
-        usernameTextField.typeText(Constants.onboarding.username)
+        usernameTextField.typeText(Constants.username)
 
         // Snapshot of the Login screen dispalying a username.
         snapshot("01-LoginScreen")
@@ -38,7 +37,7 @@ class SnapshotUITests: XCTestCase {
         let passwordField = app.secureTextFields["onboarding.loginView.password.textfield"]
         waitForElementToBeHittable(passwordField)
         passwordField.tap()
-        passwordField.typeText(Constants.onboarding.password)
+        passwordField.typeText(Constants.password)
         app.buttons["onboarding.loginView.login.button"].tap()
 
         // Now we are in the 2nd onboarding screen where the mobile number can be entered.
@@ -49,7 +48,7 @@ class SnapshotUITests: XCTestCase {
         mobileNumberField.typeText("+31612345678") //enter mobile number
         let continueButton = app.buttons["onboarding.configureView.continue.button"]
 
-        // For iPhone 4. If the continue button does not exist, it is hidden below the keyboard.
+        // For iPhone 4(s). If the continue button does not exist, it is hidden below the keyboard.
         // Simulate a tap to make the keyboard dissapear.
         if (!continueButton.hittable) {
             app.tap()
@@ -73,16 +72,10 @@ class SnapshotUITests: XCTestCase {
         snapshot("04-SideMenuWithDailer")
 
         dialerTabBarButton.tap()
-        app.buttons["CallingStoryboard.dialer.button0"].tap()
-        app.buttons["CallingStoryboard.dialer.button5"].tap()
-        app.buttons["CallingStoryboard.dialer.button0"].tap()
-        app.buttons["CallingStoryboard.dialer.button1"].tap()
-        app.buttons["CallingStoryboard.dialer.button2"].tap()
-        app.buttons["CallingStoryboard.dialer.button3"].tap()
-        app.buttons["CallingStoryboard.dialer.button4"].tap()
-        app.buttons["CallingStoryboard.dialer.button5"].tap()
-        app.buttons["CallingStoryboard.dialer.button6"].tap()
-        app.buttons["CallingStoryboard.dialer.button7"].tap()
+
+        for number in Constants.numberToDail.characters {
+            app.buttons["CallingStoryboard.dialer.button\(number)"].tap()
+        }
 
         // Snapshot of the dialer view with a phone number entered.
         snapshot("02-DialerViewWithNumber")

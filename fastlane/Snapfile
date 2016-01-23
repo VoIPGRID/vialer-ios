@@ -11,7 +11,7 @@ devices([
 
 languages([
   "en-US",
-  "nl",
+  "nl-NL",
 ])
 
 # Arguments to pass to the app on launch. See https://github.com/fastlane/snapshot#launch_arguments
