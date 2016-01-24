@@ -23,7 +23,8 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
 #pragma mark - view life cycle
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
     }
     return self;

@@ -38,17 +38,12 @@
                BlueprintName = "VialerTests"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "TwoStepCallTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2B43E691C3B9E9B0089A387"
+               BlueprintIdentifier = "F2B43F0A1C3BEB3F0089A387"
                BuildableName = "SnapshotUITests.xctest"
                BlueprintName = "SnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">

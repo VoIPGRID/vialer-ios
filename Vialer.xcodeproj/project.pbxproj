@@ -30,6 +30,7 @@
 		C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C419263B1BE3A36600436D92 /* ColoredCircle.m */; };
 		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
 		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
+		C43863C31C5282070016182E /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		C4529E2F1C4542D10063F08B /* TwoStepCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */; };
 		C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -1530,6 +1531,7 @@
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				C4A4525C1C244F4400846591 /* LogInViewController.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
+				C43863C31C5282070016182E /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,

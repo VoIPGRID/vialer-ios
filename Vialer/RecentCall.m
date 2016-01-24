@@ -22,8 +22,9 @@ static NSString * const RecentCallCallerId = @"callerid";
 
 @implementation RecentCall
 
-- (id)initWithDictionary:(NSDictionary *)dict {
-    if (self = [super init]) {
+- (instancetype)initWithDictionary:(NSDictionary *)dict {
+    self = [super init];
+    if (self) {
         self.callerRecordId = -1;
         self.contactIdentifier = @"";
         self.callerPhoneType = NSLocalizedString(@"phone", nil);

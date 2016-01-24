@@ -46,9 +46,9 @@ static GSCall *lastNotifiedCall;
     return _sharedConnectionHandler;
 }
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
-    if (self != nil) {
+    if (self) {
         pj_activesock_enable_iphone_os_bg(PJ_TRUE);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }

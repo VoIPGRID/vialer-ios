@@ -137,8 +137,7 @@ static NSString * const SystemUserSuppressedKey = @"suppressed";
 
 // Private initialisation used to load the singleton
 - (instancetype)initPrivate {
-    if (self = [super init]) {
-    }
+    self = [super init];
     return self;
 }
 
