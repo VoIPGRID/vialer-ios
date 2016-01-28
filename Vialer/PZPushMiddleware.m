@@ -8,8 +8,6 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "SystemUser.h"
 
-#import "ConnectionHandler.h"
-
 #import <PushKit/PushKit.h>
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
@@ -43,42 +41,6 @@
     return _pzMiddleware;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pjConnectionStatusChangedNotification:) name:ConnectionStatusChangedNotification object:nil];
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ConnectionStatusChangedNotification object:nil];
-}
-
-- (void)pjConnectionStatusChangedNotification:(NSNotification *)notification {
-    ConnectionHandler *handler = [notification object];
-
-    if (handler.accountStatus == GSAccountStatusConnected)
-        [self sentCallStoredPayloads];
-}
-
-- (void)sentCallStoredPayloads {
-    if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
-        NSLog(@"%s GSAccountStatusConnected, sending #%@ stored payload(s)", __PRETTY_FUNCTION__, [NSNumber numberWithInteger:[self.storedCallPayloadsToSent count]]);
-        //TODO:we probably want to implement a queue and lock the array but the change of multiple simultatious calls is quite small
-        for (id storedPayload in self.storedCallPayloadsToSent)
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                // notify the PZ middleware that we registered, the PJSIP and are ready for calls using data from payload.
-                [self updateMiddleWareWithData:storedPayload];
-            });
-
-        self.storedCallPayloadsToSent = nil;
-    } else {
-        NSLog(@"%s. PJSIP not connected, not sending stored Payloads!", __PRETTY_FUNCTION__);
-    }
-}
-
-
 - (NSString*)baseLink {
     static NSString* baseLink;
     if (!baseLink) {
@@ -108,19 +70,6 @@
 
     if ([type isEqualToString:@"call"]) {
         // We only try to force a SIP reconnection when we don't have an active one.
-        if ([ConnectionHandler sharedConnectionHandler].accountStatus != GSAccountStatusConnected) {
-            [[ConnectionHandler sharedConnectionHandler] sipUpdateConnectionStatus];
-        }
-
-        //Check to see if we have a SIP connection, if so, update middleware directly, if not, store payload to sent when middleware becomes connected
-        if ([ConnectionHandler sharedConnectionHandler].accountStatus == GSAccountStatusConnected) {
-            NSLog(@"PJSIP connected with SIP Proxy, update middleware");
-            [self updateMiddleWareWithData:payload];
-        } else {
-            //Store the payload so it can be sent when PJSIP becomes connected
-            NSLog(@"PJSIP not connected, %s Storing Payload", __PRETTY_FUNCTION__);
-            [self.storedCallPayloadsToSent addObject:payload];
-        }
     } else if ([type isEqualToString:@"checkin"]) {
         [self doDeviceCheckinWithData:payload];
     } else if ([type isEqualToString:@"message"]) {

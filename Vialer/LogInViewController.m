@@ -7,7 +7,6 @@
 
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
-#import "ConnectionHandler.h"
 #import "GAITracker.h"
 #import "SystemUser.h"
 #import "UIView+RoundedStyle.h"

@@ -6,7 +6,6 @@
 #import "SystemUser.h"
 
 #import "AppDelegate.h"
-#import "ConnectionHandler.h"
 #import "LogInViewController.h"
 #import "PZPushMiddleware.h"
 #import "VoIPGRIDRequestOperationManager.h"

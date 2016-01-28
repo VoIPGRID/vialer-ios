@@ -11,7 +11,6 @@
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
-#import "SIPCallingViewController.h"
 #import "TwoStepCallingViewController.h"
 
 #import "UIAlertController+Vialer.h"
@@ -33,7 +32,6 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 @property (weak, nonatomic) IBOutlet UISegmentedControl *filterControl;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
 @end
 
@@ -88,13 +86,6 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
     _filterControl.tintColor = [Configuration tintColorForKey:ConfigurationRecentsFilterControlTintColor];
-}
-
-- (SIPCallingViewController *)sipCallingViewController {
-    if (!_sipCallingViewController) {
-        _sipCallingViewController = [[SIPCallingViewController alloc] init];
-    }
-    return _sipCallingViewController;
 }
 
 #pragma mark - actions
@@ -296,8 +287,8 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
     // TODO: implement 4g calling
     if (false) {
         [GAITracker setupOutgoingSIPCallEvent];
-        [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-        [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
+//        [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+//        [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];

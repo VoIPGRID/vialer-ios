@@ -9,9 +9,7 @@
 #import "SDStatusBarManager.h"
 #import "SSKeychain.h"
 
-#import "ConnectionHandler.h"
 #import "GAITracker.h"
-#import "Gossip+Extra.h"
 #import "PZPushMiddleware.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -57,17 +55,6 @@
     });
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // End all active calls when the app is terminated
-    for (GSCall *activeCall in [GSCall activeCalls]) {
-        [activeCall end];
-    }
-    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
-        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
-    }];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #pragma mark - setup helper methods
 
 - (void)setupConnectivity {
@@ -88,23 +75,15 @@
 }
 
 #pragma mark - UIApplication notification delegate
-//-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-//    completionHandler(UIBackgroundFetchResultNoData);
-//}
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
     if (application.applicationState != UIApplicationStateActive) {
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
-        if (completionHandler) {
-            completionHandler();
-        }
     }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     if (application.applicationState != UIApplicationStateActive) { //
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
     }
 }
 

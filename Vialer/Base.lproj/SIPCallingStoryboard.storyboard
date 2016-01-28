@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mMR-A6-3U9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TjX-jO-i64">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="N9r-J3-TxK">
-            <objects>
-                <navigationController id="mMR-A6-3U9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hbm-9S-oMt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="TjX-jO-i64" kind="relationship" relationship="rootViewController" id="6Qt-aO-Bhp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ufy-4x-Lg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-80" y="-237"/>
-        </scene>
-        <!--Sip Calling View Controller-->
+        <!--View Controller-->
         <scene sceneID="BIO-dx-7Au">
             <objects>
-                <viewController storyboardIdentifier="SipCallingStoryboard" id="TjX-jO-i64" customClass="SipCallingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SipCallingStoryboard" id="TjX-jO-i64" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xcv-fc-l3A"/>
                         <viewControllerLayoutGuide type="bottom" id="McG-fw-TZy"/>
@@ -35,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-cg-f4D" userLabel="end-call-button">
-                                <rect key="frame" x="273" y="523" width="55" height="55"/>
+                                <rect key="frame" x="273" y="525" width="55" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lgi-cg-f4D" secondAttribute="height" multiplier="1:1" id="ibD-qU-bLh"/>
                                     <constraint firstAttribute="width" constant="55" id="uyr-v3-sta"/>
@@ -43,19 +27,19 @@
                                 <state key="normal" image="decline-button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting up connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="cmj-4q-gAC">
-                                <rect key="frame" x="20" y="118" width="560" height="26"/>
+                                <rect key="frame" x="20" y="74" width="560" height="26"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrC-af-0nr">
-                                <rect key="frame" x="20" y="154" width="560" height="361"/>
+                                <rect key="frame" x="20" y="110" width="560" height="405"/>
                                 <connections>
                                     <segue destination="N42-3i-1zp" kind="embed" id="LD9-6R-5HH"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 (0) 50 123 45 67" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Yr4-KP-Ajk">
-                                <rect key="frame" x="20" y="72" width="560" height="34"/>
+                                <rect key="frame" x="20" y="30" width="560" height="34"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -94,35 +78,35 @@
                         <viewControllerLayoutGuide type="bottom" id="d6S-3Y-OPd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t2j-Kw-5pc">
-                        <rect key="frame" x="0.0" y="0.0" width="560" height="361"/>
+                        <rect key="frame" x="0.0" y="0.0" width="560" height="405"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sound off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEz-xA-Ugl">
-                                <rect key="frame" x="153" y="145" width="73" height="21"/>
+                                <rect key="frame" x="153" y="167" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speaker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1z-j8-ToU">
-                                <rect key="frame" x="159" y="255" width="61" height="21"/>
+                                <rect key="frame" x="159" y="277" width="61" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pause" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICv-Ww-4pb">
-                                <rect key="frame" x="346" y="145" width="47" height="21"/>
+                                <rect key="frame" x="346" y="167" width="47" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="numbers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FF6-2l-C2y">
-                                <rect key="frame" x="245" y="145" width="68" height="21"/>
+                                <rect key="frame" x="245" y="167" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBg-S2-JqM" userLabel="sound-off-button" customClass="SipCallingButton">
-                                <rect key="frame" x="157" y="75" width="65" height="65"/>
+                                <rect key="frame" x="157" y="97" width="65" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CBg-S2-JqM" secondAttribute="height" multiplier="1:1" id="0Sp-1H-1bg"/>
                                     <constraint firstAttribute="height" constant="65" id="8gn-2K-tEv"/>
@@ -138,26 +122,8 @@
                                     <action selector="soundOffButton:" destination="N42-3i-1zp" eventType="touchDown" id="sxL-AO-3kc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-xk-vdE" userLabel="numbers-button" customClass="SipCallingButton">
-                                <rect key="frame" x="247" y="75" width="65" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="BkU-m1-PKD"/>
-                                    <constraint firstAttribute="height" constant="65" id="DWG-xU-kw1"/>
-                                    <constraint firstAttribute="width" secondItem="s4c-xk-vdE" secondAttribute="height" multiplier="1:1" id="j56-1y-he8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="keypad-numbers"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numbersButton:" destination="N42-3i-1zp" eventType="touchDown" id="mMw-yg-6c8"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWY-j6-gyy" userLabel="pause-button" customClass="SipCallingButton">
-                                <rect key="frame" x="337" y="75" width="65" height="65"/>
+                                <rect key="frame" x="337" y="97" width="65" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HWY-j6-gyy" secondAttribute="height" multiplier="1:1" id="3Oy-a4-27d"/>
                                     <constraint firstAttribute="height" constant="65" id="h6x-Sn-E2g"/>
@@ -173,8 +139,8 @@
                                     <action selector="pauseButton:" destination="N42-3i-1zp" eventType="touchDown" id="7ah-gO-59Q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxT-GG-q5A" userLabel="speaker-button" customClass="SipCallingButton">
-                                <rect key="frame" x="157" y="182" width="65" height="65"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxT-GG-q5A" userLabel="speaker-button" customClass="SipCallingButton">
+                                <rect key="frame" x="157" y="207" width="65" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xxT-GG-q5A" secondAttribute="height" multiplier="1:1" id="Adx-kP-PNT"/>
                                     <constraint firstAttribute="height" constant="65" id="t8c-Wr-vVN"/>
@@ -188,6 +154,24 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="speakerButton:" destination="N42-3i-1zp" eventType="touchDown" id="IBX-Tk-Pgi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-xk-vdE" userLabel="numbers-button" customClass="SipCallingButton">
+                                <rect key="frame" x="247" y="97" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="BkU-m1-PKD"/>
+                                    <constraint firstAttribute="height" constant="65" id="DWG-xU-kw1"/>
+                                    <constraint firstAttribute="width" secondItem="s4c-xk-vdE" secondAttribute="height" multiplier="1:1" id="j56-1y-he8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="keypad-numbers"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="numbersButton:" destination="N42-3i-1zp" eventType="touchDown" id="mMw-yg-6c8"/>
                                 </connections>
                             </button>
                         </subviews>

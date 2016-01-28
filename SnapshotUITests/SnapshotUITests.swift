@@ -74,7 +74,7 @@ class SnapshotUITests: XCTestCase {
         dialerTabBarButton.tap()
 
         for number in Constants.numberToDail.characters {
-            app.buttons["CallingStoryboard.dialer.button\(number)"].tap()
+            app.buttons["DialerStoryboard.dialer.button\(number)"].tap()
         }
 
         // Snapshot of the dialer view with a phone number entered.
