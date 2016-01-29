@@ -40,7 +40,11 @@
         [GAITracker setupGAITracker];
     }
 
-    [self setupConnectivity];
+#ifdef DEBUG
+    // Network logging
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
+#endif
 
     return YES;
 }
@@ -56,19 +60,6 @@
 }
 
 #pragma mark - setup helper methods
-
-- (void)setupConnectivity {
-#ifdef DEBUG
-    // Network logging
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
-#endif
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-
-    // TODO: fix SIP
-    //    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
-    //    [[ConnectionHandler sharedConnectionHandler] start];
-}
 
 + (BOOL)isSnapshotScreenshotRun {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
