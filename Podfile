@@ -1,6 +1,7 @@
-# source 'https://github.com/CocoaPods/Specs.git'
-# Uncomment this line to define a global platform for your project
-platform :ios, '8.0'
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/VoIPGRID/PrivatePodSpecs-iOS.git'
+
+platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 # use_frameworks!
 
@@ -15,10 +16,21 @@ target 'Vialer' do
     pod 'SSKeychain'
     pod 'SimulatorStatusMagic'
     pod 'SVProgressHUD'
+    pod 'VialerSIPLib-iOS'
 end
 
 target 'VialerTests' do
     pod 'CocoaLumberjack'
     pod 'OCMock'
     pod 'OHHTTPStubs'
+end
+
+post_install do |installer_representation|
+    installer_representation.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
+            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'PJ_AUTOCONF=1'
+        end
+    end
 end
