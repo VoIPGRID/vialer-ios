@@ -96,7 +96,8 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
             }
 
             if (![[selectedDestination objectForKey:destinationType] isEqual:[NSNull null]]) {
-                if ([[userDestination objectForKey:AvailabilityModelSelectedUserDestinationIdKey] isEqualToString:[[selectedDestination objectForKey:destinationType] stringValue]]){
+                // Cast both values to strings. Because of old api code that sent an id as a number and the other as a string.
+                if ([[[userDestination objectForKey:AvailabilityModelSelectedUserDestinationIdKey] stringValue] isEqualToString:[[selectedDestination objectForKey:destinationType] stringValue]]){
                     availabilitySelected = @1;
                     [self storeNewAvialibityInSUD:@{AvailabilityModelPhoneNumberKey: phoneNumber, AvailabilityModelDescription:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
                 }
