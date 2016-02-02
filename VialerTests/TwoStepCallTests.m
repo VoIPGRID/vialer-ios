@@ -615,8 +615,18 @@
     OCMStub([mockCall callState]).andReturn(CTCallStateConnected);
     call.callCenter.callEventHandler(mockCall);
 
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should invalidate timer"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+
     // Check if timer is invalidated.
-    OCMVerify([mockTimer invalidate]);
+    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+        OCMVerify([mockTimer invalidate]);
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+    }];
 }
 
 - (void)testWhenCallIsDisConnectedRestartFetching {

@@ -123,9 +123,9 @@ class SnapshotUITests: XCTestCase {
         expectationForPredicate(existsPredicate,
             evaluatedWithObject: element, handler: nil)
 
-        waitForExpectationsWithTimeout(30) { (error) -> Void in
+        waitForExpectationsWithTimeout(60) { (error) -> Void in
             if (error != nil) {
-                let message = "Failed to find \(element) after 30 seconds."
+                let message = "Failed to find \(element) after 60 seconds."
                 self.recordFailureWithDescription(message,
                     inFile: file, atLine: line, expected: true)
             }

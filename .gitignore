@@ -1,12 +1,10 @@
 # Own additions to the .gitignore
 #####
 # Ignoring own private constant files
-SnapshotUITests/Snapshot-Constants.swift
+**/Snapshot-Constants.swift
 
-####
-# Ignoring PJSIP src
-#
-/pjsip/src
+# Local user specific env vars for fastlane
+fastlane/.env
 
 ####
 # fastlane specific as recommended at:
@@ -15,10 +13,11 @@ fastlane/report.xml
 
 # deliver temporary files
 fastlane/Preview.html
+Preview.html
 
 # snapshot generated screenshots
-fastlane/screenshots/**/*.png
-fastlane/screenshots/screenshots.html
+fastlane/**/screenshots/**/*.png
+fastlane/**/screenshots/screenshots.html
 
 # scan temporary files
 fastlane/test_output
