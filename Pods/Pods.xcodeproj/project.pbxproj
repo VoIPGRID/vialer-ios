@@ -73,6 +73,7 @@
 		43EC7FFED37B34D5EF117397DBF907E4 /* OCMRealObjectForwarder.h in Headers */ = {isa = PBXBuildFile; fileRef = C520E099FE0CA692E07F72A48E989FC7 /* OCMRealObjectForwarder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4487F191C41C8C80961A37EB13D42CA9 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B9F6E5239910E9A197F2386467B2C062 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		468A5389075E4764B3D2861FCED2A21A /* VSLEndpointConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 19B4197792FA20EF88BF7CBBD0425A88 /* VSLEndpointConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		473BF86C70EE2D5E85FC649099A6E578 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29A9377040D54D95EF38F645147C298 /* Foundation.framework */; };
 		481A9CE178395C6A9CB176EB7B4406D7 /* OCMFunctionsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6994EAAFD6C48415A73DCD4AD4066567 /* OCMFunctionsPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		492C9C508501318B609265594214B1CB /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 58C213670B7FC7E59561B0AAF8F9C72B /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A68F64D77AE19A38EA367A2A4C41B77 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B33335B0F636987463F490F8FD8A995 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,8 +82,9 @@
 		4CF19784FDA23029E26A95A63582E729 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578BD4DCA89CB094A7F209B2FAD26D9 /* SSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4D357C55539B1512CC0BAB0E00355033 /* SVIndefiniteAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1083B0BD7EA10C7C606B2D470E8A92BF /* SVIndefiniteAnimatedView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D9F8EF0D69A3AD7E8E5A6F0214FAC09 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F7FA30C2CDA97DCF0AC799B7B2CB9EF8 /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5029F6085E37287DD0DF1DE254CD67F2 /* Pods-Voys-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61413B3D52E172E2ABAF715BB67FF295 /* Pods-Voys-dummy.m */; };
 		5070431257208F41560B1CC09861A8F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29A9377040D54D95EF38F645147C298 /* Foundation.framework */; };
-		51A352EE3977EE2C8E7E36CAFE86F563 /* Pods-VialerTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F0F1D6D88943083AA61AE20128456E /* Pods-VialerTests-dummy.m */; };
+		51A352EE3977EE2C8E7E36CAFE86F563 /* Pods-VialerTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 355598FCC55C91F22020316746F89E9D /* Pods-VialerTests-dummy.m */; };
 		522CF347013288917EF69BC70E9BB84C /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 410C65AB64F1DE11EA45C870BDC88249 /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B0209F7EC103B0B6A3EFCC5684E22E /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C65A05A71B527D4E911EC11D508E9D /* CocoaLumberjack-dummy.m */; };
 		52D0F113CE3FB28F585E7D9816FF56C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29A9377040D54D95EF38F645147C298 /* Foundation.framework */; };
@@ -192,7 +194,7 @@
 		CB5659A9BBEECD39764EA287868D40D3 /* OCMFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE74D652CFBA6249BBE71179291FEC7 /* OCMFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBC85C16366382CFB4370A50DA69F41F /* OCMExpectationRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D2B192DC47135E6B1FBBE5C245FA4 /* OCMExpectationRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBFA1A2FE69442E200C97124E7B0DF0C /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 465BC47DD7159A72BCEF032416F174A3 /* AFNetworkActivityLogger.m */; };
-		CC147D43A1A58FBC065757498DBF568F /* Pods-Vialer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1DED9BB03E9BF336B9FF3340DF6865 /* Pods-Vialer-dummy.m */; };
+		CC147D43A1A58FBC065757498DBF568F /* Pods-Vialer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C66A82A1B373BEEF5E037023FF769 /* Pods-Vialer-dummy.m */; };
 		CCB58FD4BDA717BB872E99BA2EE2C504 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29A9377040D54D95EF38F645147C298 /* Foundation.framework */; };
 		CEA6CABECBD728007187FF1C774FFAFB /* VSLEndpointConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = C51C38B330962ECDB14F1888BBDC1664 /* VSLEndpointConfiguration.m */; };
 		CFAFAB5E38BA9521F301E6327D2E271B /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBAD434DEDD6FE49A4107029580EBCD /* MMDrawerVisualState.m */; };
@@ -255,6 +257,13 @@
 			remoteGlobalIDString = C4634FC2C919443F813FAFC3138296F0;
 			remoteInfo = MMDrawerController;
 		};
+		2867AC083022C437D7B5A91C28ED4539 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7D40DB462BD2C52F28E72B97B89FDC7;
+			remoteInfo = Reachability;
+		};
 		29D6C4CC6B018ADA60AD713C005A608F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -275,6 +284,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6F22BAD3B7190D3AB22B36CB3E05EB63;
 			remoteInfo = SVProgressHUD;
+		};
+		4652D987D9BE4338E575DF51193ADDEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A45FC0A76A1A7FD7296334885E3E85E6;
+			remoteInfo = CocoaLumberjack;
 		};
 		5419D42E667F638CC62DF38F5B742F78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -304,12 +320,33 @@
 			remoteGlobalIDString = 2374E2A85CDA1D4F5994D1901403DBBE;
 			remoteInfo = OCMock;
 		};
+		61FF9828E9AEA888B240B95CB7E2E855 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4634FC2C919443F813FAFC3138296F0;
+			remoteInfo = MMDrawerController;
+		};
+		6A3D85794B935A29B188C4526E710F1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 61B932A48D7DB7EF5730B2E9DC38D847;
+			remoteInfo = AFNetworking;
+		};
 		71A8365C70309DF57E07A5D8EDAF751B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A9F6450F93DB7FAE2B4B69F6426BBE23;
 			remoteInfo = "VialerSIPLib-iOS";
+		};
+		75572DBE6911E806EC6FEFC1006E3C43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E27E58303BA4B15F17724187A1932F4;
+			remoteInfo = PBWebViewController;
 		};
 		7EE33201E11F7C88B841CF14D262D4FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -319,6 +356,13 @@
 			remoteInfo = OHHTTPStubs;
 		};
 		7FEDBDE475257A7E2B8F937D7E3A8AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 57B73C97B722B369081156FF13F18978;
+			remoteInfo = SSKeychain;
+		};
+		85A42B43AC257F8BE5F437BEF6DEDAF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -374,12 +418,57 @@
 			remoteGlobalIDString = C4634FC2C919443F813FAFC3138296F0;
 			remoteInfo = MMDrawerController;
 		};
+		D07961CE0C64F30F49596CEBFC2470C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 714F3BE5665C8BD86693F4A1ECED4341;
+			remoteInfo = "MMDrawerController+Storyboard";
+		};
+		D2EE5C3B2600B4F3D3051E2248CADAB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F22BAD3B7190D3AB22B36CB3E05EB63;
+			remoteInfo = SVProgressHUD;
+		};
+		DA942C46E0871DFBC5500121C12B1431 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9F6450F93DB7FAE2B4B69F6426BBE23;
+			remoteInfo = "VialerSIPLib-iOS";
+		};
+		E8743A8B6D1C7283DCFD885AC5F26796 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 882E81464E4EFD7622AAECE6F10EE839;
+			remoteInfo = AFNetworkActivityLogger;
+		};
+		F79E1A305CA57F9820989B79DCBE18C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 387F991CACF8D64280E917507BC22B2A;
+			remoteInfo = HTCopyableLabel;
+		};
+		FA56C915E7A3231DC31D0B04E7E99B96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DFF1DA0A98B41D1760065D045E04FE1;
+			remoteInfo = SimulatorStatusMagic;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		01AAD65977FEED6028A5F71A0227B2F8 /* Reachability-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Reachability-dummy.m"; sourceTree = "<group>"; };
+		02CD0FA34E43800D8CCDC7E694A678CC /* libSSKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSSKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		037E1D8D93E45E398D2A343637921827 /* libPBWebViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPBWebViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		044DA21E290EB9DF7407F95AB8EB4D1F /* OCMIndirectReturnValueProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMIndirectReturnValueProvider.m; path = Source/OCMock/OCMIndirectReturnValueProvider.m; sourceTree = "<group>"; };
 		04AF13850E2CC3D0344DB8D0ADCE1F26 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		056944240EE6C33F4EB5AC9D86E339DD /* libHTCopyableLabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHTCopyableLabel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0578BD4DCA89CB094A7F209B2FAD26D9 /* SSKeychainQuery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = SSKeychain/SSKeychainQuery.m; sourceTree = "<group>"; };
 		05A677799179D6268A8632DACACF61AB /* OCMNotificationPoster.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMNotificationPoster.h; path = Source/OCMock/OCMNotificationPoster.h; sourceTree = "<group>"; };
 		06860E49FC6FFF914BCB1FCDFD0D8E4E /* OCMArgAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMArgAction.h; path = Source/OCMock/OCMArgAction.h; sourceTree = "<group>"; };
@@ -389,22 +478,25 @@
 		0AADE685E4C12CBE8333B796E1ACC332 /* libGTM_SystemVersion.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_SystemVersion.a; path = Libraries/libGTM_SystemVersion.a; sourceTree = "<group>"; };
 		0B33335B0F636987463F490F8FD8A995 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
 		0B8ECEB95C200391BF581E25AF074E22 /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
-		0BB87DD1E0071A8B029995CF68EAE5B6 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		0BE4459C1D77C7B15EA250D935B1C158 /* OCMInvocationStub.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMInvocationStub.h; path = Source/OCMock/OCMInvocationStub.h; sourceTree = "<group>"; };
 		0CB72C976596E20D8A833D829C19EA87 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
 		0DCFD70F065FF7B0425BDDCBC20008A3 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		0E0E05335FCB7816912822B2415739BA /* libVialerSIPLib-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVialerSIPLib-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E2BD04DE73157F299E785B82033CF6B /* OCPartialMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCPartialMockObject.h; path = Source/OCMock/OCPartialMockObject.h; sourceTree = "<group>"; };
 		0E2D7BA979AA4AAA9B8992CADEFF5B13 /* OHHTTPStubs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubs.m; path = OHHTTPStubs/Sources/OHHTTPStubs.m; sourceTree = "<group>"; };
 		0E55397946495064F4586F0557920B57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		0E7C7BF937D984DBA54A7F2B2F689E13 /* Pods-Vialer-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vialer-frameworks.sh"; sourceTree = "<group>"; };
 		0E8A924EC0E8BAC3E5B5F2DD0D1E8813 /* OCMMacroState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMMacroState.h; path = Source/OCMock/OCMMacroState.h; sourceTree = "<group>"; };
 		1083B0BD7EA10C7C606B2D470E8A92BF /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVIndefiniteAnimatedView.h; path = SVProgressHUD/SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		12CDAB0E30F6E60151DCDD203A4DD07F /* OCMExceptionReturnValueProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMExceptionReturnValueProvider.h; path = Source/OCMock/OCMExceptionReturnValueProvider.h; sourceTree = "<group>"; };
-		12F0F1D6D88943083AA61AE20128456E /* Pods-VialerTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VialerTests-dummy.m"; sourceTree = "<group>"; };
 		1377C85E6F43CB719430783D69D817B9 /* OCMPassByRefSetter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMPassByRefSetter.h; path = Source/OCMock/OCMPassByRefSetter.h; sourceTree = "<group>"; };
 		13DFD1D73904C51206B7241E263F4B57 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		13F3EC3B133AAC98FE950359CD71D043 /* libSimulatorStatusMagic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSimulatorStatusMagic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1466CA0E645D12AC01C7ADC38EEB3325 /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_UIFont+LineHeight.a"; path = "Libraries/libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
 		148D518A88FCB5FE248E70E203559D18 /* OCMInvocationExpectation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMInvocationExpectation.m; path = Source/OCMock/OCMInvocationExpectation.m; sourceTree = "<group>"; };
+		15FC960495CAE6D7831227656AD06416 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		160EF8F496830CF2D5CE5062F720C675 /* HTCopyableLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HTCopyableLabel.m; sourceTree = "<group>"; };
+		17018A892094285C4F61367E01E357BC /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
 		173074C8BA52BF57AE4180EA6B7123B1 /* VSLAccountConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VSLAccountConfiguration.h; path = Pod/Classes/Configurations/VSLAccountConfiguration.h; sourceTree = "<group>"; };
 		1794B539C19A413A86F485A746F5482D /* OCMLocation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMLocation.h; path = Source/OCMock/OCMLocation.h; sourceTree = "<group>"; };
 		179BA76CDD80F62D68E8C57CBF0607C3 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
@@ -415,6 +507,7 @@
 		1A392C1E8EAA72CF2AA3EC15438132E9 /* MMDrawerController+Storyboard.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Storyboard.h"; sourceTree = "<group>"; };
 		1B01EC4E26D46231E66AAB6115795763 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		1BB99135C71CF592FBE2D0E858F9E3C8 /* GGLContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLContext.h; path = Headers/GGLCore/Public/GGLContext.h; sourceTree = "<group>"; };
+		1BE8CAAA0468A63A369B46A0420F1260 /* Pods-Voys-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Voys-acknowledgements.plist"; sourceTree = "<group>"; };
 		1BFAEB619EF007D5B316768B4C4C2FA7 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
 		1D805D6AEA6CB44519ACBDDA6D02905E /* NSMethodSignature+OCMAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMethodSignature+OCMAdditions.h"; path = "Source/OCMock/NSMethodSignature+OCMAdditions.h"; sourceTree = "<group>"; };
 		1DB415EC93F685E737A38B84F8C4B1E0 /* OCMBoxedReturnValueProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMBoxedReturnValueProvider.m; path = Source/OCMock/OCMBoxedReturnValueProvider.m; sourceTree = "<group>"; };
@@ -431,7 +524,6 @@
 		2434E8F93D67C64666A90A9033B6D6F6 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AFNetworking.h"; path = "UIKit+AFNetworking/UIImage+AFNetworking.h"; sourceTree = "<group>"; };
 		25AEC476BED44A9DEDBADAB408086612 /* libGTM_Regex.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_Regex.a; path = Libraries/libGTM_Regex.a; sourceTree = "<group>"; };
 		25B7C98AC0CA76A9E6FFF1AC08824A82 /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
-		262E9FACCAAD64636A094AFD18CA9E2A /* Pods-Vialer-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vialer-frameworks.sh"; sourceTree = "<group>"; };
 		2799BFFFB4113BDCC41EADA06BE54C61 /* SVProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		27B7236B0DE54F8281D896B427F3DADF /* OCClassMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCClassMockObject.m; path = Source/OCMock/OCClassMockObject.m; sourceTree = "<group>"; };
 		27DA5F7C53FD1EE135134320AD350A43 /* OCMArg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMArg.h; path = Source/OCMock/OCMArg.h; sourceTree = "<group>"; };
@@ -440,19 +532,23 @@
 		2B5A331B61FECAD622EAC6E0C33F9CAD /* libGTMStackTrace.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMStackTrace.a; path = Libraries/libGTMStackTrace.a; sourceTree = "<group>"; };
 		2BA2CB3D4723EB108DCDF8EF16E4D2DC /* VialerSIPLib-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "VialerSIPLib-iOS.xcconfig"; sourceTree = "<group>"; };
 		2C17D0CCDD429CEABCE52B0F499ED2D4 /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+AFNetworking.h"; path = "UIKit+AFNetworking/UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
+		2C7A6208D6CC37B691CBEAA155E510D2 /* Pods-VialerTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VialerTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		2DC9EF4A904F27D236032F6D69CAC2B6 /* libGTM_NSDictionary+URLArguments.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSDictionary+URLArguments.a"; path = "Libraries/libGTM_NSDictionary+URLArguments.a"; sourceTree = "<group>"; };
 		2E0C3926526338BFED9D73BAB75E6F55 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		2E41A38776137A1397CE01EBD6286486 /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		3048D8A599184EC5CE38F7882C8F64B2 /* OCMConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMConstraint.m; path = Source/OCMock/OCMConstraint.m; sourceTree = "<group>"; };
 		321414A312A4EA58B7A11E812A03CB52 /* HTCopyableLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HTCopyableLabel.h; sourceTree = "<group>"; };
 		326B2CA50E3B5CE0C5DC8AB89131060C /* libGTM_GTMURLBuilder.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_GTMURLBuilder.a; path = Libraries/libGTM_GTMURLBuilder.a; sourceTree = "<group>"; };
 		334C176B660F6623C645329295706A8F /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubs+NSURLSessionConfiguration.m"; path = "OHHTTPStubs/Sources/NSURLSession/OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
 		33BC5DFE45D69ABA6C0D395F960160D6 /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_DebugUtils.a; path = Libraries/libGTM_DebugUtils.a; sourceTree = "<group>"; };
+		355598FCC55C91F22020316746F89E9D /* Pods-VialerTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VialerTests-dummy.m"; sourceTree = "<group>"; };
 		35DBE912518313564EEC1AF0F0B2C721 /* OCMArgAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMArgAction.m; path = Source/OCMock/OCMArgAction.m; sourceTree = "<group>"; };
 		360B8B99F346E8647CF3551DE9A0D105 /* libGTMSessionFetcher_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_core.a; path = Libraries/libGTMSessionFetcher_core.a; sourceTree = "<group>"; };
 		36580E59CA17A60158587C3AA3BEB2F6 /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
 		379E329E719CC7DDD3DE4D0623FF277D /* OCClassMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCClassMockObject.h; path = Source/OCMock/OCClassMockObject.h; sourceTree = "<group>"; };
 		38CE2EE9E8974E57B20A3C52CA809B09 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
-		3D6D16E2115893F0FE156854E55F709B /* libHTCopyableLabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHTCopyableLabel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		38F678F0762A753693495D77AA225A35 /* libOHHTTPStubs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOHHTTPStubs.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		398C15BD37D0801FA5DA4D73B2FFE5CC /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCCCE57EF0254F6EDA89EAD32AB9CEF /* SSKeychain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = SSKeychain/SSKeychain.h; sourceTree = "<group>"; };
 		3E1AC4CDD24225EDA3BF750895B4BCDC /* SDStatusBarOverrider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverrider.h; path = SDStatusBarManager/SDStatusBarOverrider.h; sourceTree = "<group>"; };
 		3F68B4A915689C2E391159BDABF4F1E7 /* libGTMSessionFetcher_full.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_full.a; path = Libraries/libGTMSessionFetcher_full.a; sourceTree = "<group>"; };
@@ -465,18 +561,17 @@
 		416018A460F3F29CF71EAB8CDA366C23 /* OCMStubRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMStubRecorder.m; path = Source/OCMock/OCMStubRecorder.m; sourceTree = "<group>"; };
 		429423759B7887D7B83A90C2AF96D8E8 /* libGTM_NSScannerJSON.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSScannerJSON.a; path = Libraries/libGTM_NSScannerJSON.a; sourceTree = "<group>"; };
 		42C0AC3E3224C8A829459C4D3669CF10 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		42E95A07738D09F02D069CF2A50845DC /* libSVProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EE5E92EF63F61DF940AE164EA60DE8 /* GGLConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLConfiguration.h; path = Headers/GGLCore/Public/GGLConfiguration.h; sourceTree = "<group>"; };
 		441EACF3810639A03C3228FECE36117E /* OCMock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMock.h; path = Source/OCMock/OCMock.h; sourceTree = "<group>"; };
+		451259C9F6673E9AEFB02FC20D603410 /* libOCMock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOCMock.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DCB55FD4EEE4C12763684EFBAB0EC6 /* NSString+PJString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+PJString.h"; path = "Pod/Classes/Categories/NSString+PJString.h"; sourceTree = "<group>"; };
-		45E05300F636BEDF378F0A90D2CD176E /* libPBWebViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPBWebViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		465BC47DD7159A72BCEF032416F174A3 /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityLogger.m; path = AFNetworkActivityLogger/AFNetworkActivityLogger.m; sourceTree = "<group>"; };
 		467556C727AB150ACD39EC77B103D64D /* OCMock.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OCMock.xcconfig; sourceTree = "<group>"; };
 		469E884088CD5AFB2586E66596C24E8A /* PBWebViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PBWebViewController.h; path = PBWebViewController/PBWebViewController.h; sourceTree = "<group>"; };
 		4793371A13B901CB11CE2DB016B0AAC2 /* OCMFunctions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMFunctions.m; path = Source/OCMock/OCMFunctions.m; sourceTree = "<group>"; };
 		47B177FF3ADC9C9F78B8340B479B0E68 /* AFNetworkActivityLogger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworkActivityLogger.xcconfig; sourceTree = "<group>"; };
 		4814024C0AE43C1B9739F10319FE0E66 /* VSLRingtone.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VSLRingtone.m; path = Pod/Classes/VSLRingtone.m; sourceTree = "<group>"; };
-		48C372123A01DA067B2C78F35397190B /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
-		49F1F54D87BF21EF65F8BCB388024AA3 /* Pods-Vialer-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vialer-resources.sh"; sourceTree = "<group>"; };
 		4AF45FA532F90F6317BAAA7B4753EF2C /* VSLTransportConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VSLTransportConfiguration.m; path = Pod/Classes/Configurations/VSLTransportConfiguration.m; sourceTree = "<group>"; };
 		4BB1606280FA43FD58315C369B61CC0B /* SSKeychain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = SSKeychain/SSKeychain.m; sourceTree = "<group>"; };
 		4BD3F56F68A240DD3C45F24F535C9795 /* VSLAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VSLAccount.h; path = Pod/Classes/VSLAccount.h; sourceTree = "<group>"; };
@@ -484,14 +579,16 @@
 		4D9ABF1CAA9835248FEC221F55EFE3FA /* NSValue+OCMAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSValue+OCMAdditions.m"; path = "Source/OCMock/NSValue+OCMAdditions.m"; sourceTree = "<group>"; };
 		4E5B8FEDF7B115691188D97F037AACB8 /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		4EB9107778FD99AF004D56A053BA7861 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		4F245325084869423872A7503FE27404 /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		4F2A3149D9581AA59CA6516A57B559B2 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommercePromotion.h; path = Headers/Public/GAIEcommercePromotion.h; sourceTree = "<group>"; };
 		4F7433C1A4471CEBBA05479708C1DC6C /* libGTM_NSData+zlib.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSData+zlib.a"; path = "Libraries/libGTM_NSData+zlib.a"; sourceTree = "<group>"; };
 		4FC34842089073B45CA5B8FC77294EF5 /* OCMExceptionReturnValueProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMExceptionReturnValueProvider.m; path = Source/OCMock/OCMExceptionReturnValueProvider.m; sourceTree = "<group>"; };
+		53292F7E7E74E36FC33EBA75A82711C1 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		53783384CD89C98BE7A4F87FB3F1DBF0 /* GAITrackedViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = Headers/Public/GAITrackedViewController.h; sourceTree = "<group>"; };
-		5383084FD4F51690B942A01050277962 /* libMMDrawerController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMMDrawerController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		546BC76215142270C2C7A1D640103A23 /* libSSKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSSKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		543A7D8EA16662A09F6146D798590054 /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5538E6B4E15FC059177D320F646DAF7E /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerBarButtonItem.h; path = MMDrawerController/MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		5637AC1F6930A215D0E3006639BF36E7 /* PBWebViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PBWebViewController.m; path = PBWebViewController/PBWebViewController.m; sourceTree = "<group>"; };
+		57A69E1361EDEE28CD6ED061C162E43A /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57F27FBFE91245E4344A91C1D3FAC72F /* OCObserverMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCObserverMockObject.m; path = Source/OCMock/OCObserverMockObject.m; sourceTree = "<group>"; };
 		58A0CCB974A09F0C0F2EA3C5601E636C /* VSLEndpoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VSLEndpoint.h; path = Pod/Classes/VSLEndpoint.h; sourceTree = "<group>"; };
 		58C213670B7FC7E59561B0AAF8F9C72B /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
@@ -502,12 +599,13 @@
 		5A97B9279F71047E412530B52FB8E065 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
 		5B3D8E87A8C6E9C1E4B56B36C1ECB8DF /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OHHTTPStubsResponse+JSON.h"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
 		5C07B0AE156269FC39912D85ADE98327 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
-		5C8FC9EEE29F3F43054382A962B596AE /* Pods-VialerTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VialerTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		5D73AEDD6569223F147EA60775CBA738 /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
 		5ED8C071BD907900F1864EA2B5F79B98 /* MMDrawerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController-prefix.pch"; sourceTree = "<group>"; };
 		5EEFF69504D587BD5AD5CBB5239BF975 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
 		5F4012CAC2A3EF9789585429A5A0C921 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperationManager.m; path = AFNetworking/AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		60E2A750AF2B7D10D261FE243D935529 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		60E5F0CDC88A4371E21B8EBF0F911262 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		61413B3D52E172E2ABAF715BB67FF295 /* Pods-Voys-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Voys-dummy.m"; sourceTree = "<group>"; };
 		61BB1D62EE3703DC4560BF61FF51C711 /* GGLErrorCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLErrorCode.h; path = Headers/GGLCore/Public/GGLErrorCode.h; sourceTree = "<group>"; };
 		631D0F81DDCED5A6E91A96EE4447C76A /* VialerSIPLib.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VialerSIPLib.m; path = Pod/Classes/VialerSIPLib.m; sourceTree = "<group>"; };
 		67026BCDEB44D8FD70E3C2E9A6E1B073 /* OCMObserverRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMObserverRecorder.m; path = Source/OCMock/OCMObserverRecorder.m; sourceTree = "<group>"; };
@@ -528,6 +626,7 @@
 		7089DCA82F824C8448C8D5EEC2A6E306 /* OHPathHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHPathHelpers.h; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.h; sourceTree = "<group>"; };
 		70D1C2292D2BFC041442E16B60604086 /* OCMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMockObject.h; path = Source/OCMock/OCMockObject.h; sourceTree = "<group>"; };
 		70ECC6726B55B0A13EE2B4576AC6A8B6 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		7186195A2EDCFEF2BAB745CB410EDDED /* Pods-Vialer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vialer-acknowledgements.markdown"; sourceTree = "<group>"; };
 		725851D6AB3BBDAE3FBF98C2AB9C1630 /* NSError+VSLError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSError+VSLError.h"; path = "Pod/Classes/Categories/NSError+VSLError.h"; sourceTree = "<group>"; };
 		7431A568B270C977B1321ABE6DDEE21C /* VSLCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VSLCall.h; path = Pod/Classes/VSLCall.h; sourceTree = "<group>"; };
 		74542EC872023D1611AA8E3D0CA621CC /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActivityIndicatorView+AFNetworking.m"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
@@ -535,27 +634,29 @@
 		76EC7EB82A79F34938F1D559DC45C614 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerBarButtonItem.m; path = MMDrawerController/MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		779C3987E2F1B6EFE090E49641F8AA07 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
 		78BA0E299BF50964818BBCB2A078AE66 /* MMDrawerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMDrawerController.xcconfig; sourceTree = "<group>"; };
+		7925D7E6FD19A3692256099BA6FFE591 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		796F674B747AB05F9473ADDAAE3C7C5F /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
+		79B453E2938051E28B5ABD64B0DF2001 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		79E3B23A7481314FAD135B860BB97184 /* VSLRingback.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VSLRingback.m; path = Pod/Classes/VSLRingback.m; sourceTree = "<group>"; };
 		7B06C658ED628C6132F3509BE8F9A1CC /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
 		7B698B3C9858F1ECBBD4DE619F0DECBA /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		7C6F85D09ABCCFACC48B3E338F261387 /* VialerSIPLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VialerSIPLib.h; path = Pod/Classes/VialerSIPLib.h; sourceTree = "<group>"; };
 		7CD204FC1B20B4301F36EE721C15F4BB /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
+		7E605F914329F4612CF1FB2A291F552F /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		7E608FF7DDE3B30B3E255849B719437F /* NSInvocation+OCMAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+OCMAdditions.m"; path = "Source/OCMock/NSInvocation+OCMAdditions.m"; sourceTree = "<group>"; };
 		7F843CB75C9F78F67F9D41D47A7461B6 /* VSLAccountConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VSLAccountConfiguration.m; path = Pod/Classes/Configurations/VSLAccountConfiguration.m; sourceTree = "<group>"; };
 		7FD4287EB711539CB6732497365B2131 /* libGTM_KVO.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_KVO.a; path = Libraries/libGTM_KVO.a; sourceTree = "<group>"; };
 		828C5A84245A114BF1488E79DD6BAA11 /* GAITracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = Headers/Public/GAITracker.h; sourceTree = "<group>"; };
-		83F4B5470725A5DAD866D887094FD9CC /* Pods-VialerTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VialerTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		8354E842E6DF2925E787982CB941E159 /* Pods-Voys-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Voys-frameworks.sh"; sourceTree = "<group>"; };
 		847843EDCBDAD7D20B82D2C79F6DECEB /* OCMBoxedReturnValueProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMBoxedReturnValueProvider.h; path = Source/OCMock/OCMBoxedReturnValueProvider.h; sourceTree = "<group>"; };
 		84B97AEE7D60FE647018D507CF7B6FD7 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceFields.h; path = Headers/Public/GAIEcommerceFields.h; sourceTree = "<group>"; };
 		855A58C243559D417014A4002B588945 /* libGTM_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_core.a; path = Libraries/libGTM_core.a; sourceTree = "<group>"; };
 		859D9BABDD3DF87FF06728F4DC296811 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		85F15DBFD91E3F6089C2FB4043966F04 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E2ECD3227981E1090683B0AD959DF1 /* OCMIndirectReturnValueProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMIndirectReturnValueProvider.h; path = Source/OCMock/OCMIndirectReturnValueProvider.h; sourceTree = "<group>"; };
 		86F8C17657BED5D47CCC0D29561BCEFD /* HTCopyableLabel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HTCopyableLabel-dummy.m"; sourceTree = "<group>"; };
-		874BA14F038A04EB57212D84746C1B47 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87900AED11A55072896F25936F577DA2 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		88AF7B1FD6A0D88D2CC42B7A2C3B81D7 /* OCMReturnValueProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMReturnValueProvider.m; path = Source/OCMock/OCMReturnValueProvider.m; sourceTree = "<group>"; };
+		88BE4393C152232C63AD05380DE2BE2A /* libAFNetworkActivityLogger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAFNetworkActivityLogger.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A49DDA2D0CE6DE180F42E85FA6B0226 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		8A4FB6A5C73D5770CBF2852DC1DC6669 /* OCMInvocationStub.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMInvocationStub.m; path = Source/OCMock/OCMInvocationStub.m; sourceTree = "<group>"; };
 		8B9525D5A36896B70B6FC7098A853DF8 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -566,6 +667,7 @@
 		8D45F71EAA475038CAAB0BCBF61A30D1 /* OCMArg.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMArg.m; path = Source/OCMock/OCMArg.m; sourceTree = "<group>"; };
 		8E22C878F3AA86F86C3D8E81A5B52E91 /* OCMBlockArgCaller.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMBlockArgCaller.h; path = Source/OCMock/OCMBlockArgCaller.h; sourceTree = "<group>"; };
 		8E459C815AB7DEF682126800B476D648 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = Headers/Public/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		8E6BF1B887BB9092B4F9F1491EB9A8F3 /* libReachability.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReachability.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F45CC5B97D8E11F53C578E45F40BE2D /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
 		8F775F178BE79F8C8B4678E174FADBF0 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
 		8F7E3CFF1AE57A82888A2AFB3F431FCD /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
@@ -575,11 +677,9 @@
 		9399C8B48221E7FAE7635E590712AA1C /* OCMRecorder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMRecorder.h; path = Source/OCMock/OCMRecorder.h; sourceTree = "<group>"; };
 		94D5D6886A0FC7692E0C6B02B99489C5 /* OCMBlockArgCaller.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMBlockArgCaller.m; path = Source/OCMock/OCMBlockArgCaller.m; sourceTree = "<group>"; };
 		9550C19C030ECE54F864F49ECB871ABD /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		95F92BA6D84EC1EF5174A1AFBF06116D /* libOHHTTPStubs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOHHTTPStubs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B715EB9F2E1A4CAAAB917DA21C21A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		96E3F5E3810C738F15A3074B8A35AD80 /* NSNotificationCenter+OCMAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNotificationCenter+OCMAdditions.m"; path = "Source/OCMock/NSNotificationCenter+OCMAdditions.m"; sourceTree = "<group>"; };
 		972BF45A0ED84DB3B047AF509FD74E39 /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_StringEncoding.a; path = Libraries/libGTM_StringEncoding.a; sourceTree = "<group>"; };
-		9766C48AAF9C0AA256635E667FEF7185 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		97756639A1DC86123037A425B7F1EE95 /* MMDrawerController+Storyboard.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMDrawerController+Storyboard.m"; sourceTree = "<group>"; };
 		97891FD78DF783CD3B9DD64A95DE4470 /* OHHTTPStubs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs-dummy.m"; sourceTree = "<group>"; };
 		9803CF39BEC7BF3F2ED3A68199270E5D /* GAI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = Headers/Public/GAI.h; sourceTree = "<group>"; };
@@ -587,35 +687,33 @@
 		993B2C5AB98B6CBB13AD537C81BF2DE3 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MMDrawerController+Subclass.h"; path = "MMDrawerController/MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
 		9A94E499AE38E13433864D306E4766FA /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
 		9ACD491941222D32E27AC65B74D5703E /* Reachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		9AEE9129728983379AEDD66CEED29200 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9B1DED9BB03E9BF336B9FF3340DF6865 /* Pods-Vialer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vialer-dummy.m"; sourceTree = "<group>"; };
 		9B2E55CECFCA4995FF520FA09D4430C9 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		9BABC8902A85763D6B06228BCB9B9F3E /* SSKeychain-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SSKeychain-dummy.m"; sourceTree = "<group>"; };
 		9C463E524E2BD6F5C7C0DDB4839E6826 /* MMDrawerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMDrawerController-dummy.m"; sourceTree = "<group>"; };
 		9CFFF626EBC3606D49624917AF223798 /* OCMInvocationExpectation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMInvocationExpectation.h; path = Source/OCMock/OCMInvocationExpectation.h; sourceTree = "<group>"; };
 		9F6EF99B103F1398987D9EFE0286441C /* MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerController.m; path = MMDrawerController/MMDrawerController.m; sourceTree = "<group>"; };
 		A0371F261450CA570F9E4FBAD595101F /* libGSDK_Overload.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGSDK_Overload.a; path = Libraries/libGSDK_Overload.a; sourceTree = "<group>"; };
-		A0DF81BD1A62991349A5B0651EFA39E2 /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		A1CA712584FB1EE4108BF1371E656036 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIKit+AFNetworking.h"; path = "UIKit+AFNetworking/UIKit+AFNetworking.h"; sourceTree = "<group>"; };
 		A29A9377040D54D95EF38F645147C298 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		A50C66A82A1B373BEEF5E037023FF769 /* Pods-Vialer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vialer-dummy.m"; sourceTree = "<group>"; };
 		A60EB9B31AA727953E1077CFCF438BCE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		A6453983E46986AA46E4CEC4AFD01974 /* VSLCall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VSLCall.m; path = Pod/Classes/VSLCall.m; sourceTree = "<group>"; };
-		A6CCCCAFA2ED43271A7E99758C1846B5 /* libMMDrawerController+Storyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMMDrawerController+Storyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A76E0A2F497FF4E88852F1005E9D3792 /* OCMInvocationMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMInvocationMatcher.m; path = Source/OCMock/OCMInvocationMatcher.m; sourceTree = "<group>"; };
 		A81D8AEF827591513C75C8F46A04C7B6 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
 		A8A31478E7096B5397C436C3AE19811D /* NSError+VSLError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSError+VSLError.m"; path = "Pod/Classes/Categories/NSError+VSLError.m"; sourceTree = "<group>"; };
 		A9A3694F6E2A4740849D4EA44C08AB11 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		AA2036550C943C5D8A2E58EF4F193D07 /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		AA40688F27C1B5064E83B9E13C16917E /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
 		AA49E0B11326422F5501A0E68D41D60E /* MMDrawerVisualState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerVisualState.h; path = MMDrawerController/MMDrawerVisualState.h; sourceTree = "<group>"; };
+		AB3D87E8AFE58D264C5766B9A2A0FF4E /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
 		AC728F3533422CA09BD2837624A4B649 /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
 		AD3A87EEEAEDBF00AD2A31EB901EDEBA /* OHPathHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHPathHelpers.m; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.m; sourceTree = "<group>"; };
+		AE142BB19CCFB2BAE63EC1EE80B96F8C /* Pods-Voys-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Voys-resources.sh"; sourceTree = "<group>"; };
 		AE3D2B192DC47135E6B1FBBE5C245FA4 /* OCMExpectationRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMExpectationRecorder.m; path = Source/OCMock/OCMExpectationRecorder.m; sourceTree = "<group>"; };
 		AF57A187E9D7956817BF0B55183D1428 /* SDStatusBarOverriderPost8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.m; sourceTree = "<group>"; };
 		B01DE1F5A0081E5ADE9A10741B140FA8 /* OCMPassByRefSetter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMPassByRefSetter.m; path = Source/OCMock/OCMPassByRefSetter.m; sourceTree = "<group>"; };
-		B178E99C7C49DE0C5D639D38B62F1D22 /* libOCMock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOCMock.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A9813B26B9EB98384D675A96D3C8F6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		B33D093320C695ACDC970597A886354D /* libGTM_NSStringHTML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringHTML.a; path = Libraries/libGTM_NSStringHTML.a; sourceTree = "<group>"; };
-		B49E9F1E741F7381FB11DB2DC94EDB45 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		B4B9829FF9A84F5715D2C8359D771610 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
 		B52CF04A3B2AF554B02E83E12B458155 /* OCObserverMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCObserverMockObject.h; path = Source/OCMock/OCObserverMockObject.h; sourceTree = "<group>"; };
 		B77FEC41EF52F3F7B3C370F42C8C8807 /* HTCopyableLabel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HTCopyableLabel-prefix.pch"; sourceTree = "<group>"; };
@@ -639,16 +737,15 @@
 		C34DB1246A56ACD89207AE9A55B87E59 /* OCMMacroState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMMacroState.m; path = Source/OCMock/OCMMacroState.m; sourceTree = "<group>"; };
 		C51C38B330962ECDB14F1888BBDC1664 /* VSLEndpointConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = VSLEndpointConfiguration.m; path = Pod/Classes/Configurations/VSLEndpointConfiguration.m; sourceTree = "<group>"; };
 		C520E099FE0CA692E07F72A48E989FC7 /* OCMRealObjectForwarder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMRealObjectForwarder.h; path = Source/OCMock/OCMRealObjectForwarder.h; sourceTree = "<group>"; };
-		C56A899ECE6665D88F41A1E2E0179C78 /* libSVProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C67C4E9AA080592B02D1EE625A3D6D98 /* Analytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Analytics.h; path = Headers/GGLAnalytics/Public/Analytics.h; sourceTree = "<group>"; };
 		C69D65DDB9B65FFF9E57510B7185592B /* Reachability-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Reachability-prefix.pch"; sourceTree = "<group>"; };
 		C7791747E2FBAC0CAFB8E6ABA748E35B /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProductAction.h; path = Headers/Public/GAIEcommerceProductAction.h; sourceTree = "<group>"; };
 		C8CA1DD4483B74CD057685334838DEB8 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		C92D3CF6A251DF9C1713A49239C5FE9E /* AFNetworkActivityLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworkActivityLogger-dummy.m"; sourceTree = "<group>"; };
-		C9DBF5E95B4F20A2FB476157BAD6CDDE /* libReachability.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReachability.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA660E72008608C14E93AB0A212CD11A /* GAILogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = Headers/Public/GAILogger.h; sourceTree = "<group>"; };
 		CB09E8EC85ADE00C9A45CE85EC23E84F /* OHHTTPStubs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OHHTTPStubs.xcconfig; sourceTree = "<group>"; };
 		CB451F1BDFDF032203ED08F3C33782C8 /* OCMock-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OCMock-dummy.m"; sourceTree = "<group>"; };
+		CC0578A846D41A634B35B91B928744FA /* Pods-Voys-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Voys-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CE1C930B70C40E0EBFAF8AE85DABA992 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		CE2749CDFD0279FE493586AAF0D88265 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		CE626C675A0123F6FEE1307DB56FD6FA /* OCMBlockCaller.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMBlockCaller.m; path = Source/OCMock/OCMBlockCaller.m; sourceTree = "<group>"; };
@@ -659,41 +756,39 @@
 		D4595B34300D707D6A4DB66BE564DB6D /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		D574E578CDB6310D3608C86CDF441BB5 /* Core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Core.h; path = Headers/GGLCore/Public/Core.h; sourceTree = "<group>"; };
 		D7367579E3D0ACC0E2E831786AB652C4 /* NSString+PJString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+PJString.m"; path = "Pod/Classes/Categories/NSString+PJString.m"; sourceTree = "<group>"; };
-		D7FD7ACFBB824F4DFDA2E1C91FFF3D4E /* libAFNetworkActivityLogger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAFNetworkActivityLogger.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7B35178A4B68711B950A74ED96BD7A5 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		D86FCD79190447357D8450364D27FEF1 /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
 		DA5F03F3BE4B123753ED43B59D1BDF62 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
 		DBFF8070B0C4958DFDC8280111519AD6 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
 		DC939BA41FF9DFE2BC08829091624020 /* OCProtocolMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCProtocolMockObject.m; path = Source/OCMock/OCProtocolMockObject.m; sourceTree = "<group>"; };
 		DCBAD434DEDD6FE49A4107029580EBCD /* MMDrawerVisualState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerVisualState.m; path = MMDrawerController/MMDrawerVisualState.m; sourceTree = "<group>"; };
-		DDF28669A0939F44FA189EC95DB0F74F /* libSimulatorStatusMagic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSimulatorStatusMagic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD50A1B4A22EAD8230340F7E11C2A403 /* libMMDrawerController+Storyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMMDrawerController+Storyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE812282F7D98DF2B3D2EA7DCDEBDFCA /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
 		DE8629EC415CE2A7C3AE7090AF1206C5 /* libGGLAnalytics.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLAnalytics.a; path = Libraries/libGGLAnalytics.a; sourceTree = "<group>"; };
 		DEA937FBD3B43DEB41F396AC028579F8 /* SVProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
 		DEBB92EB82CE2026DAB19DB60AE5EB63 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSNotificationCenter+OCMAdditions.h"; path = "Source/OCMock/NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
 		DF1E2FFC39CE787C3AF88EF4E97811F1 /* Reachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		E03BC0970AB33140421A1897AD5B87B6 /* libMMDrawerController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMMDrawerController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E152C089DD31CD69979FEE39961AABEE /* VialerSIPLib-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VialerSIPLib-iOS-dummy.m"; sourceTree = "<group>"; };
 		E19F569712C7B30D2683FF52DCB03993 /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
+		E1BEDF6158260ECD01E1E3289A5B8F7E /* Pods-VialerTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VialerTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E200BDE5AFE7B952AAEF633DABED8EFA /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
 		E3345D3C1B469AB3AC59A7C9B2D1A7D3 /* OCMRealObjectForwarder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMRealObjectForwarder.m; path = Source/OCMock/OCMRealObjectForwarder.m; sourceTree = "<group>"; };
-		E4119C970FD39DA2E797C265B9CAFC34 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
-		E57869123566620BFE2EE640952F9B87 /* libVialerSIPLib-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVialerSIPLib-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E638DD2ED86FB6B34B0919B2F1C817F4 /* Pods-Vialer-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vialer-resources.sh"; sourceTree = "<group>"; };
 		E6D008C2C77BA478FD16F9852B9D00F9 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
-		E8349DCEAE9B980A829B043E383E26DE /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
-		E8599C586863435409F465564FCE59A4 /* Pods-Vialer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vialer-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E8C65A05A71B527D4E911EC11D508E9D /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		E92265A80F451EED4A245E3F7A3EFDFB /* Pods-Vialer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vialer-acknowledgements.plist"; sourceTree = "<group>"; };
+		E97FBF3E20B944978F0A6F5AEA0BA296 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9F7B94F7C1BB56A23BE5B6476F4C05C /* OCPartialMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCPartialMockObject.m; path = Source/OCMock/OCPartialMockObject.m; sourceTree = "<group>"; };
 		EA5F2010ABDEC7B4FE27528CFCBEAFDD /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MMDrawerController.m"; path = "MMDrawerController/UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		EAAF20B4971882710536FAD3E65CB193 /* Pods-Vialer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vialer-acknowledgements.plist"; sourceTree = "<group>"; };
 		EC2975D16FC59AAB07CC63D2A311420D /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
 		EF2DCD6E0C9D2934BF10A34F96504C9F /* libGTM_NSStringXML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringXML.a; path = Libraries/libGTM_NSStringXML.a; sourceTree = "<group>"; };
 		F08B781EA433A4AB06501DB763F0EAC8 /* libGTM_AddressBook.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_AddressBook.a; path = Libraries/libGTM_AddressBook.a; sourceTree = "<group>"; };
 		F1179D3CD6286BF4B830134DE8760694 /* OCMNotificationPoster.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMNotificationPoster.m; path = Source/OCMock/OCMNotificationPoster.m; sourceTree = "<group>"; };
 		F23FC8614755D5DA4AA546B07DA34B99 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		F330C85F3637B674CED66662D007FE70 /* VSLRingtone.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VSLRingtone.h; path = Pod/Classes/VSLRingtone.h; sourceTree = "<group>"; };
-		F43217CAC01FE036CA51897BAC69A55A /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4375F5C15BAE535673AB29FC0894504 /* MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerController.h; path = MMDrawerController/MMDrawerController.h; sourceTree = "<group>"; };
 		F61E5C587FC52076ECA74290998948A8 /* MMDrawerController+Storyboard-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMDrawerController+Storyboard-dummy.m"; sourceTree = "<group>"; };
-		F713FDA6579DE19182BBD887AAC144C1 /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		F7B4FD2323D0E0E6CC8ADA13B0EB9642 /* OCMInvocationMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMInvocationMatcher.h; path = Source/OCMock/OCMInvocationMatcher.h; sourceTree = "<group>"; };
 		F7FA30C2CDA97DCF0AC799B7B2CB9EF8 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h"; sourceTree = "<group>"; };
 		FBFCCD5B3CCF2BA2003A2F3E59930600 /* VSLRingback.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VSLRingback.h; path = Pod/Classes/VSLRingback.h; sourceTree = "<group>"; };
@@ -721,6 +816,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				388F2AE2551CB2EFB45996781E98BF63 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A953EDE269B3FC35B4C3D21429F6AB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				473BF86C70EE2D5E85FC649099A6E578 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,44 +1021,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		15B27AFF0A19D7CED49A34CA0BF8A58F /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				EA368BA1EADC40C20D73CBEF96651E91 /* Pods-Vialer */,
-				27C378BA280775D13190D924B885D070 /* Pods-VialerTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
 		163B84429B2AAB9B342DBC23A2B8F01D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				5A657F121CB2362A441551E39BFF867B /* libGGLCore.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1E06987EA955B9599B0A78DCC32806E5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D7FD7ACFBB824F4DFDA2E1C91FFF3D4E /* libAFNetworkActivityLogger.a */,
-				F43217CAC01FE036CA51897BAC69A55A /* libAFNetworking.a */,
-				9766C48AAF9C0AA256635E667FEF7185 /* libCocoaLumberjack.a */,
-				3D6D16E2115893F0FE156854E55F709B /* libHTCopyableLabel.a */,
-				5383084FD4F51690B942A01050277962 /* libMMDrawerController.a */,
-				A6CCCCAFA2ED43271A7E99758C1846B5 /* libMMDrawerController+Storyboard.a */,
-				B178E99C7C49DE0C5D639D38B62F1D22 /* libOCMock.a */,
-				95F92BA6D84EC1EF5174A1AFBF06116D /* libOHHTTPStubs.a */,
-				45E05300F636BEDF378F0A90D2CD176E /* libPBWebViewController.a */,
-				85F15DBFD91E3F6089C2FB4043966F04 /* libPods-Vialer.a */,
-				874BA14F038A04EB57212D84746C1B47 /* libPods-VialerTests.a */,
-				C9DBF5E95B4F20A2FB476157BAD6CDDE /* libReachability.a */,
-				DDF28669A0939F44FA189EC95DB0F74F /* libSimulatorStatusMagic.a */,
-				546BC76215142270C2C7A1D640103A23 /* libSSKeychain.a */,
-				C56A899ECE6665D88F41A1E2E0179C78 /* libSVProgressHUD.a */,
-				E57869123566620BFE2EE640952F9B87 /* libVialerSIPLib-iOS.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		1FFAF00CB838352A8BDC36CB311071EF /* HTCopyableLabel */ = {
@@ -968,6 +1039,22 @@
 			path = HTCopyableLabel;
 			sourceTree = "<group>";
 		};
+		229BCE824D1EC9FCF8BA2B544EB92529 /* Pods-Vialer */ = {
+			isa = PBXGroup;
+			children = (
+				7186195A2EDCFEF2BAB745CB410EDDED /* Pods-Vialer-acknowledgements.markdown */,
+				EAAF20B4971882710536FAD3E65CB193 /* Pods-Vialer-acknowledgements.plist */,
+				A50C66A82A1B373BEEF5E037023FF769 /* Pods-Vialer-dummy.m */,
+				0E7C7BF937D984DBA54A7F2B2F689E13 /* Pods-Vialer-frameworks.sh */,
+				E638DD2ED86FB6B34B0919B2F1C817F4 /* Pods-Vialer-resources.sh */,
+				60E2A750AF2B7D10D261FE243D935529 /* Pods-Vialer.adhocdistribution.xcconfig */,
+				D7B35178A4B68711B950A74ED96BD7A5 /* Pods-Vialer.debug.xcconfig */,
+				15FC960495CAE6D7831227656AD06416 /* Pods-Vialer.release.xcconfig */,
+			);
+			name = "Pods-Vialer";
+			path = "Target Support Files/Pods-Vialer";
+			sourceTree = "<group>";
+		};
 		231B780A1BEC74BC882D56EF46F013B8 /* AFNetworkActivityLogger */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,22 +1063,6 @@
 				8C8EA71D1BD02AB46B9F2A3FCEC78452 /* Support Files */,
 			);
 			path = AFNetworkActivityLogger;
-			sourceTree = "<group>";
-		};
-		27C378BA280775D13190D924B885D070 /* Pods-VialerTests */ = {
-			isa = PBXGroup;
-			children = (
-				83F4B5470725A5DAD866D887094FD9CC /* Pods-VialerTests-acknowledgements.markdown */,
-				5C8FC9EEE29F3F43054382A962B596AE /* Pods-VialerTests-acknowledgements.plist */,
-				12F0F1D6D88943083AA61AE20128456E /* Pods-VialerTests-dummy.m */,
-				A0DF81BD1A62991349A5B0651EFA39E2 /* Pods-VialerTests-frameworks.sh */,
-				48C372123A01DA067B2C78F35397190B /* Pods-VialerTests-resources.sh */,
-				F713FDA6579DE19182BBD887AAC144C1 /* Pods-VialerTests.adhocdistribution.xcconfig */,
-				9AEE9129728983379AEDD66CEED29200 /* Pods-VialerTests.debug.xcconfig */,
-				0BB87DD1E0071A8B029995CF68EAE5B6 /* Pods-VialerTests.release.xcconfig */,
-			);
-			name = "Pods-VialerTests";
-			path = "Target Support Files/Pods-VialerTests";
 			sourceTree = "<group>";
 		};
 		2976194EDB95619DA6E5EE7611AFB92C /* Support Files */ = {
@@ -1081,6 +1152,16 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/PBWebViewController";
+			sourceTree = "<group>";
+		};
+		55AF3B3843068555C6FB15590C3B0547 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				229BCE824D1EC9FCF8BA2B544EB92529 /* Pods-Vialer */,
+				8B8DCCA51D94A5C5A636FEC669231924 /* Pods-VialerTests */,
+				A55CAC6B02C7BF8B05B5F0291F1795E8 /* Pods-Voys */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		59588A4C1ECCD80CBB8E7B600ECAC761 /* Support Files */ = {
@@ -1182,8 +1263,8 @@
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				785553737B06AFC3DA711DDEB7D56194 /* Frameworks */,
 				84A559BF038CA211BCC431095F0321CC /* Pods */,
-				1E06987EA955B9599B0A78DCC32806E5 /* Products */,
-				15B27AFF0A19D7CED49A34CA0BF8A58F /* Targets Support Files */,
+				A2596599746DA002478C4EBBCB15526A /* Products */,
+				55AF3B3843068555C6FB15590C3B0547 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1269,6 +1350,22 @@
 				4CA419B2B3009139F0D2F3DB4BEC64D3 /* Support Files */,
 			);
 			path = SimulatorStatusMagic;
+			sourceTree = "<group>";
+		};
+		8B8DCCA51D94A5C5A636FEC669231924 /* Pods-VialerTests */ = {
+			isa = PBXGroup;
+			children = (
+				E1BEDF6158260ECD01E1E3289A5B8F7E /* Pods-VialerTests-acknowledgements.markdown */,
+				2C7A6208D6CC37B691CBEAA155E510D2 /* Pods-VialerTests-acknowledgements.plist */,
+				355598FCC55C91F22020316746F89E9D /* Pods-VialerTests-dummy.m */,
+				2E41A38776137A1397CE01EBD6286486 /* Pods-VialerTests-frameworks.sh */,
+				AB3D87E8AFE58D264C5766B9A2A0FF4E /* Pods-VialerTests-resources.sh */,
+				AA2036550C943C5D8A2E58EF4F193D07 /* Pods-VialerTests.adhocdistribution.xcconfig */,
+				79B453E2938051E28B5ABD64B0DF2001 /* Pods-VialerTests.debug.xcconfig */,
+				E97FBF3E20B944978F0A6F5AEA0BA296 /* Pods-VialerTests.release.xcconfig */,
+			);
+			name = "Pods-VialerTests";
+			path = "Target Support Files/Pods-VialerTests";
 			sourceTree = "<group>";
 		};
 		8C8EA71D1BD02AB46B9F2A3FCEC78452 /* Support Files */ = {
@@ -1373,6 +1470,30 @@
 			path = GoogleNetworkingUtilities;
 			sourceTree = "<group>";
 		};
+		A2596599746DA002478C4EBBCB15526A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88BE4393C152232C63AD05380DE2BE2A /* libAFNetworkActivityLogger.a */,
+				398C15BD37D0801FA5DA4D73B2FFE5CC /* libAFNetworking.a */,
+				53292F7E7E74E36FC33EBA75A82711C1 /* libCocoaLumberjack.a */,
+				056944240EE6C33F4EB5AC9D86E339DD /* libHTCopyableLabel.a */,
+				E03BC0970AB33140421A1897AD5B87B6 /* libMMDrawerController.a */,
+				DD50A1B4A22EAD8230340F7E11C2A403 /* libMMDrawerController+Storyboard.a */,
+				451259C9F6673E9AEFB02FC20D603410 /* libOCMock.a */,
+				38F678F0762A753693495D77AA225A35 /* libOHHTTPStubs.a */,
+				037E1D8D93E45E398D2A343637921827 /* libPBWebViewController.a */,
+				57A69E1361EDEE28CD6ED061C162E43A /* libPods-Vialer.a */,
+				7925D7E6FD19A3692256099BA6FFE591 /* libPods-VialerTests.a */,
+				543A7D8EA16662A09F6146D798590054 /* libPods-Voys.a */,
+				8E6BF1B887BB9092B4F9F1491EB9A8F3 /* libReachability.a */,
+				13F3EC3B133AAC98FE950359CD71D043 /* libSimulatorStatusMagic.a */,
+				02CD0FA34E43800D8CCDC7E694A678CC /* libSSKeychain.a */,
+				42E95A07738D09F02D069CF2A50845DC /* libSVProgressHUD.a */,
+				0E0E05335FCB7816912822B2415739BA /* libVialerSIPLib-iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A33A1BBD37D75DA8D2AB1495DA65381A /* MMDrawerController+Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1381,6 +1502,22 @@
 				BE127BB36EDF36ED10B265874761CB8F /* Support Files */,
 			);
 			path = "MMDrawerController+Storyboard";
+			sourceTree = "<group>";
+		};
+		A55CAC6B02C7BF8B05B5F0291F1795E8 /* Pods-Voys */ = {
+			isa = PBXGroup;
+			children = (
+				CC0578A846D41A634B35B91B928744FA /* Pods-Voys-acknowledgements.markdown */,
+				1BE8CAAA0468A63A369B46A0420F1260 /* Pods-Voys-acknowledgements.plist */,
+				61413B3D52E172E2ABAF715BB67FF295 /* Pods-Voys-dummy.m */,
+				8354E842E6DF2925E787982CB941E159 /* Pods-Voys-frameworks.sh */,
+				AE142BB19CCFB2BAE63EC1EE80B96F8C /* Pods-Voys-resources.sh */,
+				4F245325084869423872A7503FE27404 /* Pods-Voys.adhocdistribution.xcconfig */,
+				7E605F914329F4612CF1FB2A291F552F /* Pods-Voys.debug.xcconfig */,
+				17018A892094285C4F61367E01E357BC /* Pods-Voys.release.xcconfig */,
+			);
+			name = "Pods-Voys";
+			path = "Target Support Files/Pods-Voys";
 			sourceTree = "<group>";
 		};
 		A650E49ED419513BAC92F84122A5FBEF /* Google */ = {
@@ -1598,22 +1735,6 @@
 				008E438870DA5686079B7C06FFC774F5 /* UIKit */,
 			);
 			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		EA368BA1EADC40C20D73CBEF96651E91 /* Pods-Vialer */ = {
-			isa = PBXGroup;
-			children = (
-				E8599C586863435409F465564FCE59A4 /* Pods-Vialer-acknowledgements.markdown */,
-				E92265A80F451EED4A245E3F7A3EFDFB /* Pods-Vialer-acknowledgements.plist */,
-				9B1DED9BB03E9BF336B9FF3340DF6865 /* Pods-Vialer-dummy.m */,
-				262E9FACCAAD64636A094AFD18CA9E2A /* Pods-Vialer-frameworks.sh */,
-				49F1F54D87BF21EF65F8BCB388024AA3 /* Pods-Vialer-resources.sh */,
-				E8349DCEAE9B980A829B043E383E26DE /* Pods-Vialer.adhocdistribution.xcconfig */,
-				B49E9F1E741F7381FB11DB2DC94EDB45 /* Pods-Vialer.debug.xcconfig */,
-				E4119C970FD39DA2E797C265B9CAFC34 /* Pods-Vialer.release.xcconfig */,
-			);
-			name = "Pods-Vialer";
-			path = "Target Support Files/Pods-Vialer";
 			sourceTree = "<group>";
 		};
 		F07E34489875BBD556F89F766C3F7237 /* Core */ = {
@@ -1949,7 +2070,7 @@
 			);
 			name = PBWebViewController;
 			productName = PBWebViewController;
-			productReference = 45E05300F636BEDF378F0A90D2CD176E /* libPBWebViewController.a */;
+			productReference = 037E1D8D93E45E398D2A343637921827 /* libPBWebViewController.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		2374E2A85CDA1D4F5994D1901403DBBE /* OCMock */ = {
@@ -1966,7 +2087,35 @@
 			);
 			name = OCMock;
 			productName = OCMock;
-			productReference = B178E99C7C49DE0C5D639D38B62F1D22 /* libOCMock.a */;
+			productReference = 451259C9F6673E9AEFB02FC20D603410 /* libOCMock.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		2DE3C809FB881839DE04F54414119EE7 /* Pods-Voys */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BDD4F1C9956511FF9B0A946ED06A7A2 /* Build configuration list for PBXNativeTarget "Pods-Voys" */;
+			buildPhases = (
+				CC8AEC98837847F080289F0107F313D1 /* Sources */,
+				3A953EDE269B3FC35B4C3D21429F6AB6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08904F238BB66A96293D43C2EF92AF76 /* PBXTargetDependency */,
+				FC1E562CE2686FF0C33A300626062B9F /* PBXTargetDependency */,
+				E5E4C427A692475D90AED0AE34D4271A /* PBXTargetDependency */,
+				B25F81D6EA66EAF9B5893D492ABC357E /* PBXTargetDependency */,
+				51C51D5E76B8F117F8215EC50FEBBA0F /* PBXTargetDependency */,
+				E8D28825F88E0647D099CA612A668A9A /* PBXTargetDependency */,
+				116348A35EC2942ED161388454695E2C /* PBXTargetDependency */,
+				F60BA63E46BA49A983A488FDC5693D18 /* PBXTargetDependency */,
+				84BF1BCFBA63CEEA311D01D4BEAAB1A7 /* PBXTargetDependency */,
+				56D23AA92FF0ACDF5734F117CD5223AC /* PBXTargetDependency */,
+				4176F54A0464D07DDA1CA37891560616 /* PBXTargetDependency */,
+				88E3A7D9062FC9F7A10E3A7D39FCDFE6 /* PBXTargetDependency */,
+			);
+			name = "Pods-Voys";
+			productName = "Pods-Voys";
+			productReference = 543A7D8EA16662A09F6146D798590054 /* libPods-Voys.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		387F991CACF8D64280E917507BC22B2A /* HTCopyableLabel */ = {
@@ -1983,7 +2132,7 @@
 			);
 			name = HTCopyableLabel;
 			productName = HTCopyableLabel;
-			productReference = 3D6D16E2115893F0FE156854E55F709B /* libHTCopyableLabel.a */;
+			productReference = 056944240EE6C33F4EB5AC9D86E339DD /* libHTCopyableLabel.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		4DFF1DA0A98B41D1760065D045E04FE1 /* SimulatorStatusMagic */ = {
@@ -2000,7 +2149,7 @@
 			);
 			name = SimulatorStatusMagic;
 			productName = SimulatorStatusMagic;
-			productReference = DDF28669A0939F44FA189EC95DB0F74F /* libSimulatorStatusMagic.a */;
+			productReference = 13F3EC3B133AAC98FE950359CD71D043 /* libSimulatorStatusMagic.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		57B73C97B722B369081156FF13F18978 /* SSKeychain */ = {
@@ -2017,7 +2166,7 @@
 			);
 			name = SSKeychain;
 			productName = SSKeychain;
-			productReference = 546BC76215142270C2C7A1D640103A23 /* libSSKeychain.a */;
+			productReference = 02CD0FA34E43800D8CCDC7E694A678CC /* libSSKeychain.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		61B932A48D7DB7EF5730B2E9DC38D847 /* AFNetworking */ = {
@@ -2034,7 +2183,7 @@
 			);
 			name = AFNetworking;
 			productName = AFNetworking;
-			productReference = F43217CAC01FE036CA51897BAC69A55A /* libAFNetworking.a */;
+			productReference = 398C15BD37D0801FA5DA4D73B2FFE5CC /* libAFNetworking.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		6F22BAD3B7190D3AB22B36CB3E05EB63 /* SVProgressHUD */ = {
@@ -2051,7 +2200,7 @@
 			);
 			name = SVProgressHUD;
 			productName = SVProgressHUD;
-			productReference = C56A899ECE6665D88F41A1E2E0179C78 /* libSVProgressHUD.a */;
+			productReference = 42E95A07738D09F02D069CF2A50845DC /* libSVProgressHUD.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		714F3BE5665C8BD86693F4A1ECED4341 /* MMDrawerController+Storyboard */ = {
@@ -2069,7 +2218,7 @@
 			);
 			name = "MMDrawerController+Storyboard";
 			productName = "MMDrawerController+Storyboard";
-			productReference = A6CCCCAFA2ED43271A7E99758C1846B5 /* libMMDrawerController+Storyboard.a */;
+			productReference = DD50A1B4A22EAD8230340F7E11C2A403 /* libMMDrawerController+Storyboard.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		78DC658D21BE531E81CB6BC8F6AAA563 /* Pods-VialerTests */ = {
@@ -2088,7 +2237,7 @@
 			);
 			name = "Pods-VialerTests";
 			productName = "Pods-VialerTests";
-			productReference = 874BA14F038A04EB57212D84746C1B47 /* libPods-VialerTests.a */;
+			productReference = 7925D7E6FD19A3692256099BA6FFE591 /* libPods-VialerTests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		882E81464E4EFD7622AAECE6F10EE839 /* AFNetworkActivityLogger */ = {
@@ -2106,7 +2255,7 @@
 			);
 			name = AFNetworkActivityLogger;
 			productName = AFNetworkActivityLogger;
-			productReference = D7FD7ACFBB824F4DFDA2E1C91FFF3D4E /* libAFNetworkActivityLogger.a */;
+			productReference = 88BE4393C152232C63AD05380DE2BE2A /* libAFNetworkActivityLogger.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		90BDC29DA40C2DC4AE5B656D7B794A3A /* Pods-Vialer */ = {
@@ -2134,7 +2283,7 @@
 			);
 			name = "Pods-Vialer";
 			productName = "Pods-Vialer";
-			productReference = 85F15DBFD91E3F6089C2FB4043966F04 /* libPods-Vialer.a */;
+			productReference = 57A69E1361EDEE28CD6ED061C162E43A /* libPods-Vialer.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A45FC0A76A1A7FD7296334885E3E85E6 /* CocoaLumberjack */ = {
@@ -2151,7 +2300,7 @@
 			);
 			name = CocoaLumberjack;
 			productName = CocoaLumberjack;
-			productReference = 9766C48AAF9C0AA256635E667FEF7185 /* libCocoaLumberjack.a */;
+			productReference = 53292F7E7E74E36FC33EBA75A82711C1 /* libCocoaLumberjack.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A9F6450F93DB7FAE2B4B69F6426BBE23 /* VialerSIPLib-iOS */ = {
@@ -2169,7 +2318,7 @@
 			);
 			name = "VialerSIPLib-iOS";
 			productName = "VialerSIPLib-iOS";
-			productReference = E57869123566620BFE2EE640952F9B87 /* libVialerSIPLib-iOS.a */;
+			productReference = 0E0E05335FCB7816912822B2415739BA /* libVialerSIPLib-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		C4634FC2C919443F813FAFC3138296F0 /* MMDrawerController */ = {
@@ -2186,7 +2335,7 @@
 			);
 			name = MMDrawerController;
 			productName = MMDrawerController;
-			productReference = 5383084FD4F51690B942A01050277962 /* libMMDrawerController.a */;
+			productReference = E03BC0970AB33140421A1897AD5B87B6 /* libMMDrawerController.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		C68FDE1AA6CA980E6A87B689049B58A2 /* OHHTTPStubs */ = {
@@ -2203,7 +2352,7 @@
 			);
 			name = OHHTTPStubs;
 			productName = OHHTTPStubs;
-			productReference = 95F92BA6D84EC1EF5174A1AFBF06116D /* libOHHTTPStubs.a */;
+			productReference = 38F678F0762A753693495D77AA225A35 /* libOHHTTPStubs.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D7D40DB462BD2C52F28E72B97B89FDC7 /* Reachability */ = {
@@ -2220,7 +2369,7 @@
 			);
 			name = Reachability;
 			productName = Reachability;
-			productReference = C9DBF5E95B4F20A2FB476157BAD6CDDE /* libReachability.a */;
+			productReference = 8E6BF1B887BB9092B4F9F1491EB9A8F3 /* libReachability.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -2240,7 +2389,7 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 1E06987EA955B9599B0A78DCC32806E5 /* Products */;
+			productRefGroup = A2596599746DA002478C4EBBCB15526A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -2255,6 +2404,7 @@
 				0E27E58303BA4B15F17724187A1932F4 /* PBWebViewController */,
 				90BDC29DA40C2DC4AE5B656D7B794A3A /* Pods-Vialer */,
 				78DC658D21BE531E81CB6BC8F6AAA563 /* Pods-VialerTests */,
+				2DE3C809FB881839DE04F54414119EE7 /* Pods-Voys */,
 				D7D40DB462BD2C52F28E72B97B89FDC7 /* Reachability */,
 				4DFF1DA0A98B41D1760065D045E04FE1 /* SimulatorStatusMagic */,
 				57B73C97B722B369081156FF13F18978 /* SSKeychain */,
@@ -2444,6 +2594,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC8AEC98837847F080289F0107F313D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5029F6085E37287DD0DF1DE254CD67F2 /* Pods-Voys-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D274BD821ED9326A523BCA92DF87C103 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2494,6 +2652,18 @@
 			target = 57B73C97B722B369081156FF13F18978 /* SSKeychain */;
 			targetProxy = 7FEDBDE475257A7E2B8F937D7E3A8AF7 /* PBXContainerItemProxy */;
 		};
+		08904F238BB66A96293D43C2EF92AF76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworkActivityLogger;
+			target = 882E81464E4EFD7622AAECE6F10EE839 /* AFNetworkActivityLogger */;
+			targetProxy = E8743A8B6D1C7283DCFD885AC5F26796 /* PBXContainerItemProxy */;
+		};
+		116348A35EC2942ED161388454695E2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PBWebViewController;
+			target = 0E27E58303BA4B15F17724187A1932F4 /* PBWebViewController */;
+			targetProxy = 75572DBE6911E806EC6FEFC1006E3C43 /* PBXContainerItemProxy */;
+		};
 		15CF38501CA1D042803466E52FE81585 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "VialerSIPLib-iOS";
@@ -2512,6 +2682,24 @@
 			target = 61B932A48D7DB7EF5730B2E9DC38D847 /* AFNetworking */;
 			targetProxy = 5419D42E667F638CC62DF38F5B742F78 /* PBXContainerItemProxy */;
 		};
+		4176F54A0464D07DDA1CA37891560616 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SimulatorStatusMagic;
+			target = 4DFF1DA0A98B41D1760065D045E04FE1 /* SimulatorStatusMagic */;
+			targetProxy = FA56C915E7A3231DC31D0B04E7E99B96 /* PBXContainerItemProxy */;
+		};
+		51C51D5E76B8F117F8215EC50FEBBA0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMDrawerController;
+			target = C4634FC2C919443F813FAFC3138296F0 /* MMDrawerController */;
+			targetProxy = 61FF9828E9AEA888B240B95CB7E2E855 /* PBXContainerItemProxy */;
+		};
+		56D23AA92FF0ACDF5734F117CD5223AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SVProgressHUD;
+			target = 6F22BAD3B7190D3AB22B36CB3E05EB63 /* SVProgressHUD */;
+			targetProxy = D2EE5C3B2600B4F3D3051E2248CADAB7 /* PBXContainerItemProxy */;
+		};
 		62939B0881AA635BF01C2909400FA902 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
@@ -2529,6 +2717,18 @@
 			name = AFNetworking;
 			target = 61B932A48D7DB7EF5730B2E9DC38D847 /* AFNetworking */;
 			targetProxy = 29D6C4CC6B018ADA60AD713C005A608F /* PBXContainerItemProxy */;
+		};
+		84BF1BCFBA63CEEA311D01D4BEAAB1A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSKeychain;
+			target = 57B73C97B722B369081156FF13F18978 /* SSKeychain */;
+			targetProxy = 85A42B43AC257F8BE5F437BEF6DEDAF8 /* PBXContainerItemProxy */;
+		};
+		88E3A7D9062FC9F7A10E3A7D39FCDFE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "VialerSIPLib-iOS";
+			target = A9F6450F93DB7FAE2B4B69F6426BBE23 /* VialerSIPLib-iOS */;
+			targetProxy = DA942C46E0871DFBC5500121C12B1431 /* PBXContainerItemProxy */;
 		};
 		8E9B067C7170AE30926CB1CBDF5AB4EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2572,6 +2772,12 @@
 			target = 387F991CACF8D64280E917507BC22B2A /* HTCopyableLabel */;
 			targetProxy = 55FC524F396EC6AA11C3A4497020C56D /* PBXContainerItemProxy */;
 		};
+		B25F81D6EA66EAF9B5893D492ABC357E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HTCopyableLabel;
+			target = 387F991CACF8D64280E917507BC22B2A /* HTCopyableLabel */;
+			targetProxy = F79E1A305CA57F9820989B79DCBE18C6 /* PBXContainerItemProxy */;
+		};
 		B7C8D918269DFAFBF70444ADD9F168B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AFNetworkActivityLogger;
@@ -2596,12 +2802,36 @@
 			target = C4634FC2C919443F813FAFC3138296F0 /* MMDrawerController */;
 			targetProxy = 07FF48F1B014131758B40155ECEE22DA /* PBXContainerItemProxy */;
 		};
+		E5E4C427A692475D90AED0AE34D4271A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaLumberjack;
+			target = A45FC0A76A1A7FD7296334885E3E85E6 /* CocoaLumberjack */;
+			targetProxy = 4652D987D9BE4338E575DF51193ADDEC /* PBXContainerItemProxy */;
+		};
+		E8D28825F88E0647D099CA612A668A9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MMDrawerController+Storyboard";
+			target = 714F3BE5665C8BD86693F4A1ECED4341 /* MMDrawerController+Storyboard */;
+			targetProxy = D07961CE0C64F30F49596CEBFC2470C1 /* PBXContainerItemProxy */;
+		};
+		F60BA63E46BA49A983A488FDC5693D18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Reachability;
+			target = D7D40DB462BD2C52F28E72B97B89FDC7 /* Reachability */;
+			targetProxy = 2867AC083022C437D7B5A91C28ED4539 /* PBXContainerItemProxy */;
+		};
+		FC1E562CE2686FF0C33A300626062B9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			target = 61B932A48D7DB7EF5730B2E9DC38D847 /* AFNetworking */;
+			targetProxy = 6A3D85794B935A29B188C4526E710F1B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		06900E72F0A4F715B5EF40512D30E107 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B49E9F1E741F7381FB11DB2DC94EDB45 /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = D7B35178A4B68711B950A74ED96BD7A5 /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2835,7 +3065,7 @@
 		};
 		2A4758F8475A5D7B1B7A9BF04196765E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BB87DD1E0071A8B029995CF68EAE5B6 /* Pods-VialerTests.release.xcconfig */;
+			baseConfigurationReference = E97FBF3E20B944978F0A6F5AEA0BA296 /* Pods-VialerTests.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2926,6 +3156,32 @@
 			};
 			name = Debug;
 		};
+		30F9B1AA6CEBA28A6525175AE5EE38F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E605F914329F4612CF1FB2A291F552F /* Pods-Voys.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"PJ_AUTOCONF=1",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 		3319692BD7856F389CD74A39F4FE42F2 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 467556C727AB150ACD39EC77B103D64D /* OCMock.xcconfig */;
@@ -2980,7 +3236,7 @@
 		};
 		46D416D78E21905666FEDF4C9D582BBE /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8349DCEAE9B980A829B043E383E26DE /* Pods-Vialer.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 60E2A750AF2B7D10D261FE243D935529 /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3029,6 +3285,32 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
+		};
+		4F2A9408E2FF54A3C9072C604D411CA6 /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F245325084869423872A7503FE27404 /* Pods-Voys.adhocdistribution.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"PJ_AUTOCONF=1",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = AdHocDistribution;
 		};
 		50D3D844AA2B85ABF72E94612FE5897B /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
@@ -3084,7 +3366,7 @@
 		};
 		567513B33A006411AA039C40976B39EE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4119C970FD39DA2E797C265B9CAFC34 /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = 15FC960495CAE6D7831227656AD06416 /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3458,7 +3740,7 @@
 		};
 		8D896246D05539940DEADF871D6DB9BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AEE9129728983379AEDD66CEED29200 /* Pods-VialerTests.debug.xcconfig */;
+			baseConfigurationReference = 79B453E2938051E28B5ABD64B0DF2001 /* Pods-VialerTests.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3614,7 +3896,7 @@
 		};
 		9C6062FAA8EF2E0EF7470F35B13CC4B0 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F713FDA6579DE19182BBD887AAC144C1 /* Pods-VialerTests.adhocdistribution.xcconfig */;
+			baseConfigurationReference = AA2036550C943C5D8A2E58EF4F193D07 /* Pods-VialerTests.adhocdistribution.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3763,6 +4045,32 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BF56968769C0049800C8EE350AC24D9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17018A892094285C4F61367E01E357BC /* Pods-Voys.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"PJ_AUTOCONF=1",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -4020,6 +4328,16 @@
 				5E07C26AD1EFE4A289FB0B72107F80A5 /* AdHocDistribution */,
 				2CE16AC72762C01C5DC595053F1F2EF4 /* Debug */,
 				C6544A1F1139551CE6C6C9B43404CFA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5BDD4F1C9956511FF9B0A946ED06A7A2 /* Build configuration list for PBXNativeTarget "Pods-Voys" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F2A9408E2FF54A3C9072C604D411CA6 /* AdHocDistribution */,
+				30F9B1AA6CEBA28A6525175AE5EE38F2 /* Debug */,
+				BF56968769C0049800C8EE350AC24D9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

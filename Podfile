@@ -5,7 +5,7 @@ platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 # use_frameworks!
 
-target 'Vialer' do
+def default_pods
     pod 'AFNetworkActivityLogger'
     pod 'AFNetworking'
     pod 'Google/Analytics', '~> 1.0.7'
@@ -14,9 +14,17 @@ target 'Vialer' do
     pod 'PBWebViewController'
     pod 'Reachability'
     pod 'SSKeychain'
-    pod 'SimulatorStatusMagic'
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SVProgressHUD'
     pod 'VialerSIPLib-iOS'
+end
+
+target 'Vialer' do
+    default_pods
+end
+
+target 'Voys' do
+    default_pods
 end
 
 target 'VialerTests' do

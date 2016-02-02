@@ -6,7 +6,9 @@
 #import "AppDelegate.h"
 
 #import "AFNetworkActivityLogger.h"
+#ifdef DEBUG
 #import "SDStatusBarManager.h"
+#endif
 #import "SSKeychain.h"
 
 #import "GAITracker.h"
@@ -29,8 +31,10 @@
 
     //Only when the app is run for screenshot purposes do the following:
     if ([[self class] isSnapshotScreenshotRun]) {
+#ifdef DEBUG
         [[SDStatusBarManager sharedInstance] setTimeString:@"09:41"];
         [[SDStatusBarManager sharedInstance] enableOverrides];
+#endif
         [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
 
         //Clear out the userdefaults
