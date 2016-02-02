@@ -94,6 +94,7 @@
 		F9CB0F9B1C0867D1009AB89A /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */; };
 		F9CB0FA61C088241009AB89A /* SIPIncomingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0FA51C088241009AB89A /* SIPIncomingStoryboard.storyboard */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
+		F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB10B11C1ABC18310074BB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
 		FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
@@ -329,6 +330,7 @@
 		F9CB0F9F1C0867D9009AB89A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
 		F9CB0FA11C0867DB009AB89A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
 		F9CB0FA51C088241009AB89A /* SIPIncomingStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SIPIncomingStoryboard.storyboard; sourceTree = "<group>"; };
+		F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModelTests.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
 		FB10B11A1ABC17900074BB78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -849,6 +851,7 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				F9EF27E91C60E2D70097E3AC /* Availabilty */,
 				F9906C261C3AA0C20044EA99 /* Contacts */,
 				C496A8F71C2C6EC500C42619 /* Settings */,
 				C496A8E71C2AB1FE00C42619 /* Side Menu */,
@@ -985,6 +988,22 @@
 				F99856941BDF85590005253B /* ContactUtils.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		F9EF27E91C60E2D70097E3AC /* Availabilty */ = {
+			isa = PBXGroup;
+			children = (
+				F9EF27EA1C60E2EC0097E3AC /* Models */,
+			);
+			name = Availabilty;
+			sourceTree = "<group>";
+		};
+		F9EF27EA1C60E2EC0097E3AC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		FB0CF33118226380002D4281 /* Api */ = {
@@ -1205,6 +1224,7 @@
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
 				716AE08EDAEE6CA299A5FCD8 /* Embed Pods Frameworks */,
 				55B271CB035B0DBD5149F70B /* Copy Pods Resources */,
+				5C3F6F6C102B2CAD0EEF41C4 /* Find unused imports */,
 			);
 			buildRules = (
 			);
@@ -1352,6 +1372,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5C3F6F6C102B2CAD0EEF41C4 /* Find unused imports */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Find unused imports";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"/Users/redmer/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/redmer/Projects/vialer-ios\"";
+		};
 		716AE08EDAEE6CA299A5FCD8 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1457,6 +1491,7 @@
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				C496A9081C2C83FA00C42619 /* VailerRootViewController.m in Sources */,
+				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				C4A452631C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
