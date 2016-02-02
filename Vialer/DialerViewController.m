@@ -12,7 +12,6 @@
 #import "PasteableUILabel.h"
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
-#import "SIPCallingViewController.h"
 #import "TwoStepCallingViewController.h"
 
 #import "UIViewController+MMDrawerController.h"
@@ -34,7 +33,6 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *callButton;
 @property (weak, nonatomic) ReachabilityBarViewController *reachabilityBarViewController;
-@property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
 
 @property (strong, nonatomic) NSString *numberText;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
@@ -132,14 +130,6 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     return _reachabilityManager;
 }
 
-- (SIPCallingViewController *)sipCallingViewController {
-    if (!_sipCallingViewController) {
-        _sipCallingViewController = [[SIPCallingViewController alloc] initWithNibName:@"SIPCallingViewController" bundle:[NSBundle mainBundle]];
-        _sipCallingViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    }
-    return _sipCallingViewController;
-}
-
 - (void)setLastCalledNumber:(NSString *)lastCalledNumber {
     _lastCalledNumber = lastCalledNumber;
     [self setupCallButton];
@@ -173,8 +163,8 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
         // TODO: implement 4g calling
         if (false) {
             [GAITracker setupOutgoingSIPCallEvent];
-            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-            [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+//            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+//            [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
         } else {
             [GAITracker setupOutgoingConnectABCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerTwoStepCallingSegue sender:self];

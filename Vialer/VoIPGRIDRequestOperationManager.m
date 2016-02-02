@@ -5,6 +5,7 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 
+#import "Configuration.h"
 #import "NSDate+RelativeDate.h"
 #import "SystemUser.h"
 
@@ -41,7 +42,7 @@ static NSString * const VoIPGRIDRequestOperationManagerTwoStepCallErrorPhoneNumb
     return _sharedRequestOperationManager;
 }
 
-- (id)initWithBaseURL:(NSURL *)url {
+- (instancetype)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
     if (self) {
         [self setRequestSerializer:[AFJSONRequestSerializer serializer]];

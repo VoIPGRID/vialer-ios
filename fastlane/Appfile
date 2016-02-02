@@ -1,0 +1,13 @@
+app_identifier ENV["APP_IDENTIFIER"] # The bundle identifier of your app
+
+# You can uncomment the lines below and add your own
+# team selection in case you're in multiple teams
+team_name ENV["APP_TEAM"]
+# team_id ""  # Developer Portal Team ID
+
+# To select a team for iTunes Connect use
+itc_team_name ENV["ITC_TEAM_NAME"]
+# itc_team_id ""
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://github.com/fastlane/fastlane/blob/master/docs/Appfile.md

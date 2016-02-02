@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -35,6 +35,16 @@
                BlueprintIdentifier = "C4F49F261BF0B45700C25159"
                BuildableName = "VialerTests.xctest"
                BlueprintName = "VialerTests"
+               ReferencedContainer = "container:Vialer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F2B43F0A1C3BEB3F0089A387"
+               BuildableName = "VialerSnapshotUITests.xctest"
+               BlueprintName = "VialerSnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </TestableReference>

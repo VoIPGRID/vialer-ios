@@ -13,7 +13,8 @@
 @implementation SettingsViewFooterView
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    self = [super initWithFrame:frame];
+    if (self) {
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectInset(frame, 10, 8)];
         self.textLabel.text = NSLocalizedString(@"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION", nil);
         self.textLabel.textColor = [UIColor darkGrayColor];

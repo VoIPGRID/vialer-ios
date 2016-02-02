@@ -5,19 +5,14 @@
 
 #import "AppDelegate.h"
 
-#import "ConnectionHandler.h"
+#import "AFNetworkActivityLogger.h"
+#import "SDStatusBarManager.h"
+#import "SSKeychain.h"
+
 #import "GAITracker.h"
-#import "Gossip+Extra.h"
 #import "PZPushMiddleware.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
-
-#import <AVFoundation/AVFoundation.h>
-
-#import "AFNetworkActivityLogger.h"
-#import "AFNetworkReachabilityManager.h"
-#import "SSKeychain.h"
-
 
 #define VOIP_TOKEN_STORAGE_KEY @"VOIP-TOKEN"
 
@@ -32,8 +27,24 @@
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-    [GAITracker setupGAITracker];
-    [self setupConnectivity];
+    //Only when the app is run for screenshot purposes do the following:
+    if ([[self class] isSnapshotScreenshotRun]) {
+        [[SDStatusBarManager sharedInstance] setTimeString:@"09:41"];
+        [[SDStatusBarManager sharedInstance] enableOverrides];
+        [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
+
+        //Clear out the userdefaults
+        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    } else {
+        [GAITracker setupGAITracker];
+    }
+
+#ifdef DEBUG
+    // Network logging
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
+#endif
 
     return YES;
 }
@@ -48,50 +59,22 @@
     });
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // End all active calls when the app is terminated
-    for (GSCall *activeCall in [GSCall activeCalls]) {
-        [activeCall end];
-    }
-    [[ConnectionHandler sharedConnectionHandler] sipDisconnect:^{
-        NSLog(@"%s SIP Disconnected", __PRETTY_FUNCTION__);
-    }];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #pragma mark - setup helper methods
 
-- (void)setupConnectivity {
-#ifdef DEBUG
-    // Network logging
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
-#endif
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-
-    // TODO: fix SIP
-//    [[PZPushMiddleware sharedInstance] registerForVoIPNotifications];
-//    [[ConnectionHandler sharedConnectionHandler] start];
++ (BOOL)isSnapshotScreenshotRun {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
 }
 
 #pragma mark - UIApplication notification delegate
-//-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-//    completionHandler(UIBackgroundFetchResultNoData);
-//}
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
     NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
     if (application.applicationState != UIApplicationStateActive) {
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:identifier];
-        if (completionHandler) {
-            completionHandler();
-        }
     }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     if (application.applicationState != UIApplicationStateActive) { //
-        [[ConnectionHandler sharedConnectionHandler] handleLocalNotification:notification withActionIdentifier:nil];
     }
 }
 

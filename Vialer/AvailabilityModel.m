@@ -32,12 +32,20 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 @interface AvailabilityModel()
 @property (nonatomic, strong) NSArray *availabilityOptions;
 @property (nonatomic, strong) NSString *availabilityResourceUri;
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *voipgridRequestOperationManager;
 @end
 
 @implementation AvailabilityModel
 
+- (VoIPGRIDRequestOperationManager *)voipgridRequestOperationManager {
+	if (!_voipgridRequestOperationManager) {
+		_voipgridRequestOperationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+	}
+	return _voipgridRequestOperationManager;
+}
+
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion {
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.voipgridRequestOperationManager userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *objecArray = [[NSArray alloc] initWithArray:[responseObject objectForKey:@"objects"]];
         NSDictionary *objectDict = [objecArray objectAtIndex:0];
         [self userDestinationsToArray: objectDict];
@@ -88,7 +96,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
         for (NSDictionary *userDestination in userDestinations){
             NSNumber *availabilitySelected = @0;
 
-            if (destinationType == AvailabilityModelSelectedUserDestinationFixedKey) {
+            if ([destinationType isEqualToString: AvailabilityModelSelectedUserDestinationFixedKey]) {
                 NSNumberFormatter *nsNumberFormatter = [[NSNumberFormatter alloc] init];
                 phoneNumber = [nsNumberFormatter numberFromString:[userDestination objectForKey:AvailabilityModelPhoneNumberKey]];
             }else{
@@ -96,7 +104,20 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
             }
 
             if (![[selectedDestination objectForKey:destinationType] isEqual:[NSNull null]]) {
-                if ([[userDestination objectForKey:AvailabilityModelSelectedUserDestinationIdKey] isEqualToString:[[selectedDestination objectForKey:destinationType] stringValue]]){
+                // Cast both values to strings. Because of old api code that sent an id as a number and the other as a string.
+                id availabilityDestinationId = [userDestination objectForKey: AvailabilityModelSelectedUserDestinationIdKey];
+                id selectedDestinationType = [selectedDestination objectForKey:destinationType];
+
+                if (![availabilityDestinationId isKindOfClass:[NSString class]]) {
+                    availabilityDestinationId = [availabilityDestinationId stringValue];
+                }
+
+                if (![selectedDestinationType isKindOfClass:[NSString class]]) {
+                    selectedDestinationType = [selectedDestinationType stringValue];
+                }
+
+                if ([availabilityDestinationId isEqualToString:selectedDestinationType]){
+
                     availabilitySelected = @1;
                     [self storeNewAvialibityInSUD:@{AvailabilityModelPhoneNumberKey: phoneNumber, AvailabilityModelDescription:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
                 }
@@ -131,7 +152,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                                AvailabilityModelSelectedUserDestinationFixedKey: fixedDestination,
                                };
 
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushSelectedUserDestination:self.availabilityResourceUri destinationDict:saveDict success:^{
+    [self.voipgridRequestOperationManager pushSelectedUserDestination:self.availabilityResourceUri destinationDict:saveDict success:^{
         [self storeNewAvialibityInSUD:selectedDict];
         if (completion) {
             completion(nil);

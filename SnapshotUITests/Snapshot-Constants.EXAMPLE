@@ -1,0 +1,16 @@
+//
+//  Copyright © 2015 VoIPGRID. All rights reserved.
+//
+
+import Foundation
+
+/**
+ * This is the structure of the Snapshot-Constants.swift file which is ignored by GIT (.gitignore)
+ * Please create your own by using this example file.
+ */
+
+struct Constants {
+    static let username = ""
+    static let password = ""
+    static let numberToDail = ""
+}

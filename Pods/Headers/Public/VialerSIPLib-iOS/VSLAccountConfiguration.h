@@ -1,0 +1,1 @@
+../../../VialerSIPLib-iOS/Pod/Classes/Configurations/VSLAccountConfiguration.h

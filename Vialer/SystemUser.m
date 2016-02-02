@@ -6,7 +6,6 @@
 #import "SystemUser.h"
 
 #import "AppDelegate.h"
-#import "ConnectionHandler.h"
 #import "LogInViewController.h"
 #import "PZPushMiddleware.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -137,8 +136,7 @@ static NSString * const SystemUserSuppressedKey = @"suppressed";
 
 // Private initialisation used to load the singleton
 - (instancetype)initPrivate {
-    if (self = [super init]) {
-    }
+    self = [super init];
     return self;
 }
 

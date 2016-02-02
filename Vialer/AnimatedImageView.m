@@ -11,7 +11,7 @@
     __weak NSMutableArray *_onStage;
 }
 
-- (id)initWithImage:(UIImage *)image {
+- (instancetype)initWithImage:(UIImage *)image {
     self = [super initWithImage:image];
     if (self) {
         animationPath = [NSMutableArray array];

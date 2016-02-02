@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="4344" y="-187"/>
         </scene>
-        <!--CallingStoryboard-->
+        <!--DialerStoryboard-->
         <scene sceneID="7Gw-9Q-bJb">
             <objects>
-                <viewControllerPlaceholder storyboardName="CallingStoryboard" id="7HG-I5-xKZ" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="DialerStoryboard" id="7HG-I5-xKZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Keys" image="tab-keypad" selectedImage="tab-keypad-active" id="qlY-ML-87C"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOG-2s-BfV" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,10 +7,11 @@
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
-#import "ConnectionHandler.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 static NSString * const TwoStepCallStatusKey = @"status";
+static int const TwoStepCallFetchInterval = 1.0;
+static int const TwoStepCallCancelTimeout = 3.0;
 
 @interface TwoStepCall()
 @property (nonatomic) TwoStepCallStatus status;
@@ -29,17 +30,20 @@ static NSString * const TwoStepCallStatusKey = @"status";
 @implementation TwoStepCall
 
 - (instancetype)initWithANumber:(NSString *)aNumber andBNumber:(NSString *)bNumber {
-    if (self = [super init]) {
+    self = [super init];
+    if (self) {
         self.aNumber = aNumber;
         self.bNumber = bNumber;
-        self.status = TwoStepCallStatusUnknown;
         self.fetching = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc {
     [self.statusTimer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Properties
@@ -59,6 +63,13 @@ static NSString * const TwoStepCallStatusKey = @"status";
     return _callCenter;
 }
 
+- (VoIPGRIDRequestOperationManager *)operationsManager {
+    if (!_operationsManager) {
+        _operationsManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+    }
+    return _operationsManager;
+}
+
 - (void)setStatus:(TwoStepCallStatus)status {
     // Don't change status after the call was canceled.
     if (_status == TwoStepCallStatusCanceled) {
@@ -71,7 +82,6 @@ static NSString * const TwoStepCallStatusKey = @"status";
         case TwoStepCallStatusUnknown:
         case TwoStepCallStatusSetupCall:
         case TwoStepCallStatusDialing_a:
-        case TwoStepCallStatusConfirm:
         case TwoStepCallStatusDialing_b:
         case TwoStepCallStatusConnected:
             self.canCancel = YES;
@@ -93,7 +103,7 @@ static NSString * const TwoStepCallStatusKey = @"status";
 - (void)start {
     self.status = TwoStepCallStatusSetupCall;
 
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] setupTwoStepCallWithANumber:self.aNumber bNumber:self.bNumber withCompletion:
+    [self.operationsManager setupTwoStepCallWithANumber:self.aNumber bNumber:self.bNumber withCompletion:
      ^(NSString *callID, NSError *error) {
          if (error) {
              self.error = error;
@@ -119,22 +129,34 @@ static NSString * const TwoStepCallStatusKey = @"status";
              self.status = TwoStepCallStatusDialing_a;
 
              //Start a timer which requests the status of this call every second.
-             self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
+             self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallFetchInterval target:self selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
 
              // When the user ends a call start dismissing the ConnectAB screen.
-             __weak typeof (self) weakSelf = self;
-             [self.callCenter setCallEventHandler:^(CTCall *call) {
-                 if (call.callState == CTCallStateDisconnected) {
-                     // Get the main queue so the status gets set on the correct thread.
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         weakSelf.status = TwoStepCallStatusDisconnected;
-                         // Invalidate the timer so there are no more api calls made.
-                         [weakSelf.statusTimer invalidate];
-                     });
-                 }
-             }];
+             [self setupCallCenter];
          }
      }];
+}
+
+- (void)setupCallCenter {
+    __weak typeof (self) weakSelf = self;
+    [self.callCenter setCallEventHandler:^(CTCall *call) {
+        if (call.callState == CTCallStateConnected) {
+            // Do one more fetch to get the last updated call status before pauze.
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TwoStepCallFetchInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.statusTimer invalidate];
+            });
+        } else if (call.callState == CTCallStateDisconnected) {
+            // Start up fetching again after call was ended.
+            weakSelf.statusTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallFetchInterval target:weakSelf selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
+            [weakSelf.statusTimer fire];
+            // If fetching failes, we should set the status to disconnected.
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TwoStepCallCancelTimeout * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                weakSelf.status = TwoStepCallStatusDisconnected;
+                // Invalidate the timer so there are no more api calls made.
+                [weakSelf.statusTimer invalidate];
+            });
+        }
+    }];
 }
 
 - (void)cancel {
@@ -152,7 +174,7 @@ static NSString * const TwoStepCallStatusKey = @"status";
 
     self.cancelingCall = YES;
     self.canCancel = NO;
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cancelTwoStepCallForCallId:self.callID withCompletion:^(BOOL success, NSError *error) {
+    [self.operationsManager cancelTwoStepCallForCallId:self.callID withCompletion:^(BOOL success, NSError *error) {
         if (success) {
             self.status = TwoStepCallStatusCanceled;
             [self.statusTimer invalidate];
@@ -170,17 +192,16 @@ static NSString * const TwoStepCallStatusKey = @"status";
     }
 
     self.fetching = YES;
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] twoStepCallStatusForCallId:self.callID withCompletion:
+    [self.operationsManager twoStepCallStatusForCallId:self.callID withCompletion:
      ^(NSString *callStatus, NSError *error) {
          self.fetching = NO;
+         self.status = [[self class] TwoStepCallStatusFromString:callStatus];
          if (error) {
              NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
              [timer invalidate];
-             self.status = [[self class] TwoStepCallStatusFromString:callStatus];
              self.error = error;
 
          } else {
-             self.status = [[self class] TwoStepCallStatusFromString:callStatus];
              //If the call status is one of the following, invalidate the timer so it will stop polling.
              if (self.status == TwoStepCallStatusDisconnected || self.status == TwoStepCallStatusFailed_a || self.status == TwoStepCallStatusFailed_b) {
                  NSLog(@"Call status changed to: %@ invalidating timer", [[self class] statusStringFromTwoStepCallStatus:self.status]);
@@ -190,13 +211,24 @@ static NSString * const TwoStepCallStatusKey = @"status";
      }];
 }
 
+#pragma mark - UIApplication background/foreground
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification {
+    [self.statusTimer invalidate];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallFetchInterval target:self selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
+    [self.statusTimer fire];
+}
+
 #pragma mark - TwoStepCallStatus enum to NSString en vice versa
 /**
- Given a String, this function returns the corresponding TwoStepCallStatus or TwoStepCallStatusUnknown if
- the status of an unknown string is requested.
-
- @param callStatus The string representation of a TwoStepCallStatus.
- @return TwoStepCallStatus corresponding to the given String or "TwoStepCallStatusUnknown".
+ *  Given a String, this function returns the corresponding TwoStepCallStatus
+ *
+ *  @param callStatus The string representation of a TwoStepCallStatus.
+ *
+ *  @return TwoStepCallStatus corresponding to the given String or "TwoStepCallStatusUnknown".
  */
 + (TwoStepCallStatus)TwoStepCallStatusFromString:(NSString *)callStatus {
     NSInteger indexOfString = [[self callStatusStringArray] indexOfObject:callStatus];
@@ -207,11 +239,11 @@ static NSString * const TwoStepCallStatusKey = @"status";
 }
 
 /**
- Given a TwoStepCallStatus this functions returns a String representation of that status or the string at
- position 0 if an invalid status is supplied.
-
- @param callStatus The call status of which you want the string representation.
- @return The string representation of the given TwoStepCallStatus or the status at array position 0
+ *  Given a TwoStepCallStatus this functions returns a String representation of that status
+ *
+ *  @param callStatus The call status of which you want the string representation.
+ *
+ *  @return The string representation of the given TwoStepCallStatus or the status at array position 0
  */
 + (NSString *)statusStringFromTwoStepCallStatus:(TwoStepCallStatus)callStatus {
     if (callStatus > [[[self class] callStatusStringArray] count]) {
@@ -222,37 +254,43 @@ static NSString * const TwoStepCallStatusKey = @"status";
 }
 
 /**
- A class function which initializes an array containing all String representations of the TwoStepCallStatus.
- @warning make sure that the order of the strings in the array corespond to the order of the TwoStepCallStatus enum.
+ *  This initializes an array containing all String representations of the TwoStepCallStatus.
+ *
+ *  @return Array with string representation of TwoStepCallStatus.
  */
 + (NSArray *)callStatusStringArray {
+    //  Warning make sure that the order of the strings in the array corespond to the order of the TwoStepCallStatus enum.
     static NSArray *callStatusStringArray;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        callStatusStringArray = @[@"unauthorized",
-                                  @"Unknown_Status",
+        callStatusStringArray = @[@"Unknown_Status",
+                                  @"setup",
                                   @"dialing_a",
-                                  @"confirm",
                                   @"dialing_b",
                                   @"connected",
                                   @"disconnected",
+                                  @"unauthorized",
                                   @"failed_a",
                                   @"failed_b",
                                   @"failed_setup",
                                   @"invalid_number",
+                                  @"canceled",
                                   ];
     });
     return callStatusStringArray;
 }
 
 /**
- Phonenumbers could have characters that we don't need and will break the api call.
-
- This will strip any character that cannot be parsed.
+ *  Clean phonenumbers so to remove unwanted characters for the api.
+ *
+ *  @param phonenumber dirty phonenumber
+ *
+ *  @return cleaned phonenumber
  */
 - (NSString *)cleanPhonenumber:(NSString *)phonenumber {
     phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    return [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+    phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+    return [phonenumber isEqualToString:@""] ? nil : phonenumber;
 }
 
 @end

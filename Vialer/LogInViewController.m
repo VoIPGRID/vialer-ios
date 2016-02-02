@@ -7,7 +7,6 @@
 
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
-#import "ConnectionHandler.h"
 #import "GAITracker.h"
 #import "SystemUser.h"
 #import "UIView+RoundedStyle.h"
@@ -136,7 +135,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
         NSString *username = self.loginFormView.usernameField.text;
         NSString *password = self.loginFormView.passwordField.text;
         if ([username length] > 0 && [password length] > 0) {
-            [self continueFromLoginFormViewToConfigureFormView];
+            [self continueFromLoginFormViewToConfigureFormViewWithUserName:username andPassword:password];
             return YES;
         } else {
             self.alertShown = YES;
@@ -190,7 +189,10 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 //Checks have been done to ensure the text fields have data, otherwise the button would not be clickable.
 - (IBAction)loginButtonPushed:(UIButton *)sender {
-    [self continueFromLoginFormViewToConfigureFormView];
+    NSString *username = self.loginFormView.usernameField.text;
+    NSString *password = self.loginFormView.passwordField.text;
+
+    [self continueFromLoginFormViewToConfigureFormViewWithUserName:username andPassword:password];
 }
 
 - (void)checkIfEmailIsSetInEmailTextField {
@@ -211,9 +213,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
     [self continueFromConfigureFormViewToUnlockView];
 }
 
-- (void)continueFromLoginFormViewToConfigureFormView {
-    NSString *username = self.loginFormView.usernameField.text;
-    NSString *password = self.loginFormView.passwordField.text;
+- (void)continueFromLoginFormViewToConfigureFormViewWithUserName:(NSString *)username andPassword:(NSString *)password {
     [self doLoginCheckWithUname:username password:password successBlock:^{
         [self retrievePhoneNumbersWithSuccessBlock:nil];
     }];

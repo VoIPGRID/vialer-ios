@@ -85,7 +85,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     }
 }
 
-- (void) checkCallManagerStatus {
+- (void)checkCallManagerStatus {
     self.errorASide.hidden = true;
     self.errorBSide.hidden = true;
     self.cancelButton.enabled = self.callManager.canCancel;
@@ -111,14 +111,6 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
             self.callStatusLabel.text = NSLocalizedString(@"Calling your phone", nil);
             self.phoneNumberLabel.text = self.callManager.aNumber;
             self.bubblingOne.state = BubblingPointsStateConnecting;
-            [self activateASide];
-            [self greyOutBSide];
-            break;
-        }
-        case TwoStepCallStatusConfirm: {
-            self.callStatusLabel.text = NSLocalizedString(@"Connected with your phone", nil);
-            self.phoneNumberLabel.text = self.callManager.aNumber;
-            self.bubblingOne.state = BubblingPointsStateConnected;
             [self activateASide];
             [self greyOutBSide];
             break;

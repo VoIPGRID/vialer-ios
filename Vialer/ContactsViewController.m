@@ -10,7 +10,6 @@
 #import "ContactModel.h"
 #import "ContactUtils.h"
 #import "GAITracker.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 
@@ -30,7 +29,6 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
-@property (strong, nonatomic) SIPCallingViewController *sipCallingViewController;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
 @end
 
@@ -86,13 +84,6 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     } else {
         self.warningMessageLabel.hidden = YES;
     }
-}
-
-- (SIPCallingViewController *)sipCallingViewController {
-    if (!_sipCallingViewController) {
-        _sipCallingViewController = [[SIPCallingViewController alloc] init];
-    }
-    return _sipCallingViewController;
 }
 
 - (void)setTableView:(UITableView *)tableView {
@@ -225,8 +216,8 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
                 // TODO: implement 4g calling
                 if (false) {
                     [GAITracker setupOutgoingSIPCallEvent];
-                    [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-                    [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
+//                    [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
+//                    [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
                 } else {
                     [GAITracker setupOutgoingConnectABCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
