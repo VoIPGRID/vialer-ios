@@ -4,7 +4,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <PushKit/PushKit.h>
 
 @class GSCall;
 
