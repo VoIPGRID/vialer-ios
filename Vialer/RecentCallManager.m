@@ -25,9 +25,13 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rat
 
 @property (nonatomic) BOOL recentsFetchFailed;
 @property (nonatomic) RecentCallManagerErrors recentsFetchErrorCode;
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+@property (strong, nonatomic) NSDateFormatter *callDateGTFormatter;
 @end
 
 @implementation RecentCallManager
+
+#pragma mark - Life Cycle
 
 + (RecentCallManager *)defaultManager {
     static RecentCallManager *_defaultManager;
@@ -43,21 +47,36 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rat
     if (self) {
         self.reloading = NO;
         self.recentsFetchFailed = NO;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification:) name:SystemUserLogoutNotification object:nil];
 
     }
     return self;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LOGIN_FAILED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserLogoutNotification object:nil];
+}
+
+#pragma mark - Properties
+
+- (VoIPGRIDRequestOperationManager *)operationManager {
+    if (!_operationManager) {
+        _operationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+    }
+    return _operationManager;
+}
+
+- (NSDateFormatter *)callDateGTFormatter {
+    if (! _callDateGTFormatter) {
+        _callDateGTFormatter = [[NSDateFormatter alloc] init];
+        [_callDateGTFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
+    return _callDateGTFormatter;
 }
 
 - (void)getLatestRecentCallsWithCompletion:(void(^)(NSError *error))completion {
-    // User must be loggedin
-    if (![SystemUser currentUser].isLoggedIn ||
-        // no fetch going on
-        self.reloading ||
+    // no fetch going on
+    if (self.reloading ||
         // rate limit fetching
         (self.previousRefresh && fabs([self.previousRefresh timeIntervalSinceNow]) < RecentCallManagerRefreshInterval)) {
         completion(nil);
@@ -69,37 +88,40 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rat
     [offsetComponents setMonth:RecentCallManagerOffsetMonths];
     NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
 
-    NSString *sourceNumber = nil;
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:@(RecentCallManagerNumberOfCalls) forKey:@"limit"];
+    [parameters setObject:@0 forKey:@"offset"];
+    [parameters setObject:[self.callDateGTFormatter stringFromDate:lastMonth] forKey:@"call_date__gt"];
 
     self.reloading = YES;
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:RecentCallManagerNumberOfCalls offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.operationManager cdrRecordsWithParameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        self.reloading = NO;
+
+        // Check if error happend.
+        if (error) {
+            self.recentsFetchFailed = YES;
+            self.recentCalls = nil;
+            self.missedRecentCalls = nil;
+
+            if ([operation.response statusCode] == VoIPGRIDHttpErrorForbidden) {
+                self.recentsFetchErrorCode = RecentCallManagerFetchingUserNotAllowed;
+                NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchingUserNotAllowed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"You are not allowed to view recent calls", nil)}];
+                completion(error);
+            } else {
+                self.recentsFetchErrorCode = RecentCallManagerFetchFailed;
+                NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Could not load your recent calls", nil)}];
+                completion(error);
+            }
+            return;
+        }
+
         // Register the time when we had a succesfull retrieval
         self.previousRefresh = [NSDate date];
         self.reloading = NO;
         self.recentsFetchFailed = NO;
-        self.recentCalls = [RecentCall recentCallsFromDictionary:responseObject];
+        self.recentCalls = [RecentCall recentCallsFromDictionary:responseData];
         self.missedRecentCalls = [self filterMissedRecents:self.recentCalls];
         completion(nil);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        self.reloading = NO;
-        self.recentsFetchFailed = YES;
-        self.recentCalls = nil;
-        self.missedRecentCalls = nil;
-
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
-            self.recentsFetchErrorCode = RecentCallManagerFetchingUserUserNotLoggedIn;
-            // No permissions
-            [[SystemUser currentUser] logout];
-            [self clearRecents];
-        } else if ([operation.response statusCode] == VoIPGRIDHttpErrorForbidden) {
-            self.recentsFetchErrorCode = RecentCallManagerFetchingUserNotAllowed;
-            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchingUserNotAllowed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"You are not allowed to view recent calls", nil)}];
-            completion(error);
-        } else {
-            self.recentsFetchErrorCode = RecentCallManagerFetchFailed;
-            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Could not load your recent calls", nil)}];
-            completion(error);
-        }
     }];
 }
 
@@ -115,7 +137,7 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rat
 
 #pragma mark - Notifications
 
-- (void)loginFailedNotification:(NSNotification *)notification {
+- (void)logoutNotification:(NSNotification *)notification {
     [self clearRecents];
 }
 @end

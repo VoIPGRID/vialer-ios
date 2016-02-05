@@ -10,6 +10,12 @@
 #import "VoIPGRIDRequestOperationManager.h"
 
 static NSString * const TwoStepCallStatusKey = @"status";
+static NSString * const TwoStepCallCallIDKey = @"callid";
+
+static NSString * const TwoStepCallErrorDomain = @"Vialer.TwoStepCall";
+
+static NSString * const TwoStepCallErrorPhoneNumber = @"Extensions or phonenumbers not valid";
+
 static int const TwoStepCallFetchInterval = 1.0;
 static int const TwoStepCallCancelTimeout = 3.0;
 
@@ -103,38 +109,60 @@ static int const TwoStepCallCancelTimeout = 3.0;
 - (void)start {
     self.status = TwoStepCallStatusSetupCall;
 
-    [self.operationsManager setupTwoStepCallWithANumber:self.aNumber bNumber:self.bNumber withCompletion:
-     ^(NSString *callID, NSError *error) {
-         if (error) {
-             self.error = error;
-             switch (error.code) {
-                 case VGTwoStepCallErrorStatusUnAuthorized:
-                     self.status = TwoStepCallStatusUnAuthorized;
-                     break;
-                 case VGTwoStepCallInvalidNumber:
-                     self.status = TwoStepCallStatusInvalidNumber;
-                     break;
-                 default:
-                     self.status = TwoStepCallStatusFailedSetup;
-                     break;
-             }
-         } else {
-             self.callID = callID;
-             if (self.cancelCallWhenPossible) {
-                 [self cancel];
-                 return;
-             }
-             // Set fetch status to NO, no API call happening on this moment.
-             self.fetching = NO;
-             self.status = TwoStepCallStatusDialing_a;
+    NSDictionary *parameters = @{@"a_number" : self.aNumber,
+                                 @"b_number" : self.bNumber,
+                                 @"a_cli" : @"default_number",
+                                 @"b_cli" : @"default_number",
+                                 };
 
-             //Start a timer which requests the status of this call every second.
-             self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallFetchInterval target:self selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
+    [self.operationsManager setupTwoStepCallWithParameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        // Check if error.
+        if (error) {
+            if (operation.response.statusCode == VoIPGRIDHttpErrorBadRequest) {
+                /**
+                 *  Request malfomed, the request returned the failure reason.
+                 *
+                 *  Possible reasons:
+                 *  - Extensions or phonenumbers not valid.
+                 *  - This number is not permitted.
+                 */
+                if (operation.responseString.length > 0) {
+                    if ([operation.responseString isEqualToString:TwoStepCallErrorPhoneNumber]) {
+                        self.status = TwoStepCallStatusInvalidNumber;
+                        self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Invalid number used to setup call", nil)}];
+                    } else {
+                        self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: operation.responseString}];
+                    }
+                }
+            } else {
+                self.status = TwoStepCallStatusFailedSetup;
+                self.error = error;
+            }
+            return;
+        }
 
-             // When the user ends a call start dismissing the ConnectAB screen.
-             [self setupCallCenter];
-         }
-     }];
+        // Success.
+        NSString *callID;
+        if ((callID = [self getObjectForKey:TwoStepCallCallIDKey fromResponseObject:responseData])) {
+            self.callID = callID;
+        } else {
+            self.error = [NSError errorWithDomain:VoIPGRIDRequestOperationManagerErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Two step call failed", nil)}];
+        }
+        if (self.cancelCallWhenPossible) {
+            [self cancel];
+            return;
+        }
+        // Set fetch status to NO, no API call happening on this moment.
+        self.fetching = NO;
+        self.status = TwoStepCallStatusDialing_a;
+
+        // Start a timer which requests the status of this call every second.
+        self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:TwoStepCallFetchInterval target:self selector:@selector(fetchCallStatus:) userInfo:nil repeats:YES];
+
+        // When the user ends a call start dismissing the ConnectAB screen.
+        [self setupCallCenter];
+
+    }];
 }
 
 - (void)setupCallCenter {
@@ -161,7 +189,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
 
 - (void)cancel {
 
-    // Don't cancel twice
+    // Don't cancel twice.
     if (self.cancelingCall) {
         return;
 
@@ -174,41 +202,52 @@ static int const TwoStepCallCancelTimeout = 3.0;
 
     self.cancelingCall = YES;
     self.canCancel = NO;
-    [self.operationsManager cancelTwoStepCallForCallId:self.callID withCompletion:^(BOOL success, NSError *error) {
-        if (success) {
-            self.status = TwoStepCallStatusCanceled;
-            [self.statusTimer invalidate];
-        }
+    [self.operationsManager cancelTwoStepCallForCallId:self.callID withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (error) {
-            self.error = error;
+            self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorCancelFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Two step call cancel failed", nil)}];
+            return;
         }
+
+        self.status = TwoStepCallStatusCanceled;
+        [self.statusTimer invalidate];
     }];
 }
 
 - (void)fetchCallStatus:(NSTimer *)timer {
-    // If there is an API call still going on, skip this update
+    // If there is an API call still going on, skip this update.
     if (self.fetching) {
         return;
     }
 
     self.fetching = YES;
-    [self.operationsManager twoStepCallStatusForCallId:self.callID withCompletion:
-     ^(NSString *callStatus, NSError *error) {
-         self.fetching = NO;
-         self.status = [[self class] TwoStepCallStatusFromString:callStatus];
-         if (error) {
-             NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
-             [timer invalidate];
-             self.error = error;
+    [self.operationsManager twoStepCallStatusForCallId:self.callID withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        self.fetching = NO;
+        if (error) {
+            self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorStatusRequestFailed userInfo:@{NSUnderlyingErrorKey: error,
+                                                                                                                             NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call failed", nil)
+                                                                                                                             }];
+            NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
+            [timer invalidate];
+            return;
+        }
 
-         } else {
-             //If the call status is one of the following, invalidate the timer so it will stop polling.
-             if (self.status == TwoStepCallStatusDisconnected || self.status == TwoStepCallStatusFailed_a || self.status == TwoStepCallStatusFailed_b) {
-                 NSLog(@"Call status changed to: %@ invalidating timer", [[self class] statusStringFromTwoStepCallStatus:self.status]);
-                 [timer invalidate];
-             }
-         }
-     }];
+        // Get the callStatus from the response.
+        NSString *callStatus = [self getObjectForKey:TwoStepCallStatusKey fromResponseObject:responseData];
+        if (!callStatus) {
+            self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorStatusRequestFailed userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call failed", nil)}];
+            NSLog(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
+            [timer invalidate];
+            return;
+        }
+
+        self.status = [[self class] TwoStepCallStatusFromString:callStatus];
+
+        // If the call status is one of the following, invalidate the timer so it will stop polling.
+        if (self.status == TwoStepCallStatusDisconnected || self.status == TwoStepCallStatusFailed_a || self.status == TwoStepCallStatusFailed_b) {
+            NSLog(@"Call status changed to: %@ invalidating timer", [[self class] statusStringFromTwoStepCallStatus:self.status]);
+            [timer invalidate];
+        }
+    }];
 }
 
 #pragma mark - UIApplication background/foreground
@@ -291,6 +330,20 @@ static int const TwoStepCallCancelTimeout = 3.0;
     phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
     return [phonenumber isEqualToString:@""] ? nil : phonenumber;
+}
+
+/**
+ * Return the Object for the given key from a response object
+ * @param key The key to search for in the respons object.
+ * @param responseObject The response object to query for the given key.
+ * @return The object found for the given key or nil.
+ */
+- (NSString *)getObjectForKey:(NSString *)key fromResponseObject:(id)responseObject {
+    NSString *callStatus = nil;
+    if ([[responseObject objectForKey:key] isKindOfClass:[NSString class]]) {
+        callStatus = [responseObject objectForKey:key];
+    }
+    return callStatus;
 }
 
 @end

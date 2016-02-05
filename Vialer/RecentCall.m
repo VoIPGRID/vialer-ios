@@ -6,9 +6,7 @@
 #import "RecentCall.h"
 
 #import "ContactModel.h"
-
 #import "ContactsUI/ContactsUI.h"
-
 #import "NSDate+RelativeDate.h"
 #import "NSString+Mobile.h"
 

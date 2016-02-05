@@ -61,6 +61,24 @@ typedef NS_ENUM(NSInteger, TwoStepCallStatus) {
     TwoStepCallStatusCanceled,
 };
 
+/**
+ *  The errors the TwoStepCall can have.
+ */
+typedef NS_ENUM(NSInteger, TwoStepCallErrors) {
+    /**
+     *  It was not possible to setup the call.
+     */
+    TwoStepCallErrorSetupFailed,
+    /**
+     *  It was not possible to fetch the call status.
+     */
+    TwoStepCallErrorStatusRequestFailed,
+    /**
+     *  It was not possible to cancel the call.
+     */
+    TwoStepCallErrorCancelFailed
+};
+
 @class VoIPGRIDRequestOperationManager;
 
 @interface TwoStepCall : NSObject

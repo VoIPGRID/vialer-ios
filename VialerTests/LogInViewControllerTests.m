@@ -4,7 +4,7 @@
 //
 
 #import "LogInViewController.h"
-#import "MockSystemUser.h"
+#import "SystemUser.h"
 
 #import <XCTest/XCTest.h>
 
@@ -13,6 +13,7 @@
 
 @interface LogInViewControllerTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;
+@property (nonatomic) id mockUser;
 @end
 
 @implementation LogInViewControllerTests
@@ -20,36 +21,35 @@
 - (void)setUp {
     [super setUp];
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:[NSBundle mainBundle]];
+
+    self.mockUser = OCMClassMock([SystemUser class]);
+    self.loginViewController.currentUser = self.mockUser;
 }
 
 - (void)tearDown {
-    self.loginViewController = nil;
+    [self.mockUser stopMocking];
     [super tearDown];
 }
 
 - (void)testLoginViewControllerHasCurrentSystemUserAsDependency {
     XCTAssertNotNil(self.loginViewController.currentUser, @"There should be a systemuser");
-    XCTAssertEqual(self.loginViewController.currentUser, [SystemUser currentUser], @"The current user should be de default user");
 }
 
 - (void)testLoginActionWillAskCurrentUserToLogin {
-    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
-    systemUser.returnSuccess = YES;
-    self.loginViewController.currentUser = systemUser;
     [self.loginViewController loadViewIfNeeded];
     self.loginViewController.loginFormView.usernameField.text = @"testUsername";
     self.loginViewController.loginFormView.passwordField.text = @"testPassword";
 
     [self.loginViewController loginButtonPushed:nil];
 
-    XCTAssertTrue([systemUser.enteredUsername isEqualToString:@"testUsername"], @"The correct username should have been passed along");
-    XCTAssertTrue([systemUser.enteredPassword isEqualToString:@"testPassword"], @"The correct password should have been passed along");
+    OCMVerify([self.mockUser loginWithUsername:[OCMArg isEqual:@"testUsername"] password:[OCMArg isEqual:@"testPassword"] completion:[OCMArg any]]);
 }
 
 - (void)testUnsuccessfulLoginActionWillKeepUsernameInFieldLogin {
-    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
-    systemUser.returnSuccess = NO;
-    self.loginViewController.currentUser = systemUser;
+    OCMStub([self.mockUser loginWithUsername:[OCMArg any] password:[OCMArg any] completion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL loggedin, NSError *error)) {
+        passedBlock(NO, nil);
+        return YES;
+    }]]);
     [self.loginViewController loadViewIfNeeded];
     self.loginViewController.loginFormView.usernameField.text = @"testUsername";
     self.loginViewController.loginFormView.passwordField.text = @"testPassword";
@@ -85,9 +85,8 @@
 }
 
 - (void)testForgotPasswordViewHasUsernamePrefilledWhenSystemUsernameHasDefaultUsername {
-    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
-    systemUser.returnUser = @"presetUser";
-    self.loginViewController.currentUser = systemUser;
+    OCMStub([self.mockUser username]).andReturn(@"presetUser");
+
     [self.loginViewController loadViewIfNeeded];
 
     [self.loginViewController openForgotPassword:nil];
@@ -118,13 +117,10 @@
 - (void)testForgotPasswordViewHasInActiveButtonWhenNoUsernameIsFilled {
     [self.loginViewController loadViewIfNeeded];
     [self.loginViewController viewDidAppear:NO];
-    MockSystemUser *systemUser = [[MockSystemUser alloc] initPrivate];
-    self.loginViewController.currentUser = systemUser;
 
     [self.loginViewController openForgotPassword:nil];
     
     XCTAssertFalse(self.loginViewController.forgotPasswordView.requestPasswordButton.enabled, @"The requestButton should be disabled when no emailadress is filled.");
 }
-
 
 @end

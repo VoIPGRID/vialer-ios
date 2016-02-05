@@ -45,18 +45,20 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 }
 
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion {
-    [self.voipgridRequestOperationManager userDestinationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *objecArray = [[NSArray alloc] initWithArray:[responseObject objectForKey:@"objects"]];
-        NSDictionary *objectDict = [objecArray objectAtIndex:0];
-        [self userDestinationsToArray: objectDict];
-        if (completion) {
-            completion(nil);
+    [self.voipgridRequestOperationManager userDestinationsWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        // Check if error happend.
+        if (error) {
+            NSString *localizedStringError = NSLocalizedString(@"Error getting the availability options", nil);
+            if (completion) {
+                completion(localizedStringError);
+            }
+            return;
         }
 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSString *localizedStringError = NSLocalizedString(@"Error getting the availability options", nil);
+        // Successful fetch of user destinations.
+        [self userDestinationsToArray: responseData[@"objects"][0]];
         if (completion) {
-            completion(localizedStringError);
+            completion(nil);
         }
     }];
 }
@@ -152,16 +154,20 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                                AvailabilityModelSelectedUserDestinationFixedKey: fixedDestination,
                                };
 
-    [self.voipgridRequestOperationManager pushSelectedUserDestination:self.availabilityResourceUri destinationDict:saveDict success:^{
+    [self.voipgridRequestOperationManager pushSelectedUserDestination:self.availabilityResourceUri
+                                                      destinationDict:saveDict
+                                                       withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        // Check if there was an error.
+        if (error) {
+            NSString *error = NSLocalizedString(@"Saving availability has failed", nil);
+            if (completion) {
+                completion(error);
+            }
+            return;
+        }
         [self storeNewAvialibityInSUD:selectedDict];
         if (completion) {
             completion(nil);
-        }
-
-    } failure:^(NSString *localizedErrorString) {
-        NSString *error = NSLocalizedString(@"Saving availability has failed", nil);
-        if (completion) {
-            completion(error);
         }
     }];
 }

@@ -46,7 +46,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
     switch (section) {
         case SettingsViewControllerVoIPAccountSection: {
             // Are we allowed to show anything?
-            if ([SystemUser currentUser].isAllowedToSip) {
+            if ([SystemUser currentUser].sipAllowed) {
                 // Do we show all fields?
                 if ([SystemUser currentUser].sipEnabled) {
                     // Sip is enabled, show all fields
@@ -105,7 +105,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
             cell.textLabel.text = NSLocalizedString(@"Email", nil);
             cell.detailTextLabel.minimumScaleFactor = 0.8f;
             cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-            cell.detailTextLabel.text = [SystemUser currentUser].user;
+            cell.detailTextLabel.text = [SystemUser currentUser].username;
         }
     }
     return cell;
@@ -114,7 +114,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     //Only the SettingsViewControllerVoIPAccountSection has gets a header.
     if (section == SettingsViewControllerVoIPAccountSection) {
-        if ([SystemUser currentUser].isAllowedToSip) {
+        if ([SystemUser currentUser].sipAllowed) {
             return 35;
         }
         // Returning 0 results in the default value (10), returning 1 to minimal
@@ -125,7 +125,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == SettingsViewControllerVoIPAccountSection) {
-        if ([SystemUser currentUser].isAllowedToSip) {
+        if ([SystemUser currentUser].sipAllowed) {
             return NSLocalizedString(@"VoIP Account", nil);
         }
         return nil;

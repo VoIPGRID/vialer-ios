@@ -12,8 +12,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const LoginViewControllerMigrationCompleted;
-
 typedef NS_ENUM(NSInteger, OnboardingScreens) {
     OnboardingScreenLogin      = 0,
     OnboardingScreenConfigure  = 1,

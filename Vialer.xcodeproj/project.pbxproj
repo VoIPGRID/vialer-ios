@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36D983B9413D435E0BB8A3C0 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B15C79E0DCB91B240A3AD7B3 /* libPods-Vialer.a */; };
 		36F2C0FB76EA9BFC5D105F4D /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F851D43AA21E327594E4672 /* libPods-VialerTests.a */; };
 		37014BCBC70F559C2208A135 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D78AAD514F9AADA983125EC3 /* libPods-Voys.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
@@ -166,7 +165,6 @@
 		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
-		C496A9031C2C7A7B00C42619 /* MockSystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A9021C2C7A7B00C42619 /* MockSystemUser.m */; };
 		C496A9081C2C83FA00C42619 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -410,8 +408,6 @@
 		C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
-		C496A9011C2C7A7B00C42619 /* MockSystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockSystemUser.h; sourceTree = "<group>"; };
-		C496A9021C2C7A7B00C42619 /* MockSystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockSystemUser.m; sourceTree = "<group>"; };
 		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
@@ -623,7 +619,6 @@
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
 				CCFF7FAC3BFD9973FB409B35 /* libPods-Vialer.a in Frameworks */,
-				36D983B9413D435E0BB8A3C0 /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,8 +950,6 @@
 				C409F3A71C24CFDB007DCC4A /* Forms */,
 				C439DBFD1C5A708000A15EAD /* UI */,
 				C439DBFC1C5A706F00A15EAD /* Controllers */,
-				C496A9011C2C7A7B00C42619 /* MockSystemUser.h */,
-				C496A9021C2C7A7B00C42619 /* MockSystemUser.m */,
 			);
 			name = Onboarding/Login;
 			sourceTree = "<group>";
@@ -1962,7 +1955,6 @@
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
 				C496A8EB1C2AB23B00C42619 /* VialerWebViewController.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
-				C496A9031C2C7A7B00C42619 /* MockSystemUser.m in Sources */,
 				C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */,
 				C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */,
 			);

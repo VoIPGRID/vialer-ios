@@ -13,7 +13,6 @@
 typedef NS_ENUM(NSUInteger, RecentCallManagerErrors) {
     RecentCallManagerFetchFailed = 1, //Unknown error, but fetch failed.
     RecentCallManagerFetchingUserNotAllowed, //No permission
-    RecentCallManagerFetchingUserUserNotLoggedIn, //Not logged in
 };
 
 @interface RecentCallManager : NSObject

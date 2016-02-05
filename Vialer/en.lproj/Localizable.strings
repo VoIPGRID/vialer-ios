@@ -4,9 +4,6 @@
 "%@\nis currently logged in." = "%@\nis currently logged in.";
 
 /* No comment provided by engineer. */
-"Accept" = "Accept";
-
-/* No comment provided by engineer. */
 "ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a two-step call showing your business number";
 
 /* No comment provided by engineer. */
@@ -55,12 +52,6 @@
 "Connected with other party" = "Connected with other party";
 
 /* No comment provided by engineer. */
-"Connected with your phone" = "Connected with your phone";
-
-/* No comment provided by engineer. */
-"Connection failed" = "Connection failed";
-
-/* No comment provided by engineer. */
 "Contacts" = "Contacts";
 
 /* No comment provided by engineer. */
@@ -74,12 +65,6 @@
 
 /* No comment provided by engineer. */
 "Couldn't connect with your phone" = "Couldn't connect with your phone";
-
-/* No comment provided by engineer. */
-"Couldn't login, authorization failed" = "Couldn't login, authorization failed";
-
-/* No comment provided by engineer. */
-"Decline" = "Decline";
 
 /* No comment provided by engineer. */
 "Dial plan" = "Dial plan";
@@ -103,7 +88,7 @@
 "Error getting the availability options" = "Error getting the availability options.";
 
 /* No comment provided by engineer. */
-"Error updating user profile" = "Error updating user profile";
+"Error saving number" = "Error saving number";
 
 /* No comment provided by engineer. */
 "Error while retrieving your outgoing number, make sure you are connected to the internet." = "Error while retrieving your outgoing number, make sure you are connected to the internet.";
@@ -127,13 +112,7 @@
 "Hello" = "Hello";
 
 /* No comment provided by engineer. */
-"Hide" = "Hide";
-
-/* No comment provided by engineer. */
 "HOW_DOES_APP_WORK_BUTTON_TEXT" = "How does %@ work?";
-
-/* No comment provided by engineer. */
-"Incoming call from %@" = "Incoming call from %@";
 
 /* No comment provided by engineer. */
 "Information" = "Information";
@@ -166,16 +145,10 @@
 "Microphone Access Denied" = "Microphone Access Denied";
 
 /* No comment provided by engineer. */
-"Mobile" = "Mobile";
-
-/* No comment provided by engineer. */
 "Mobile phone number" = "Mobile phone number";
 
 /* No comment provided by engineer. */
 "mobile_label" = "Mobile";
-
-/* No comment provided by engineer. */
-"MOBILE_NUMBER_SHOULD_START_WITH_COUNTRY_CODE_ERROR" = "Your mobile number should start with your country code e.g. +31 or 0031";
 
 /* No comment provided by engineer. */
 "My number" = "My number";
@@ -199,7 +172,7 @@
 "Not available" = "Not available";
 
 /* No comment provided by engineer. */
-"NUMBER_SAVED_SUCCESS" = "Number saved";
+"Number saved" = "Number saved";
 
 /* No comment provided by engineer. */
 "Ok" = "OK";
@@ -241,10 +214,10 @@
 "Saving availability has failed" = "Saving availability has failed";
 
 /* No comment provided by engineer. */
-"SAVING_AVAILABILITY..." = "Saving availability...";
+"Saving availability..." = "Saving availability...";
 
 /* No comment provided by engineer. */
-"SAVING_NUMBER..." = "Saving number...";
+"Saving number..." = "Saving number...";
 
 /* No comment provided by engineer. */
 "Sending email..." = "Sending email...";
@@ -253,13 +226,7 @@
 "Set up call" = "Set up call";
 
 /* No comment provided by engineer. */
-"Setting up connection..." = "Setting up connection...";
-
-/* No comment provided by engineer. */
 "SIP account" = "SIP account";
-
-/* Answer part of the text: Slide to answer */
-"slide_to_answer" = "answer";
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
@@ -267,11 +234,11 @@
 /* No comment provided by engineer. */
 "Statistics" = "Statistics";
 
-/* Localized outgoing number, catching/translating suppressed */
-"suppressed" = "Anonymous (suppressed)";
-
 /* No comment provided by engineer. */
 "Syncing addressbook." = "Syncing addressbook.";
+
+/* No comment provided by engineer. */
+"The number is to short" = "The number is to short";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "This user is not allowed to use the app";
@@ -298,12 +265,6 @@
 "Unable to fetch availability" = "Unable to fetch availability";
 
 /* No comment provided by engineer. */
-"Unable to save \"My number\"" = "Unable to save \"My number\"";
-
-/* No comment provided by engineer. */
-"Unknown error, please check your internet connection." = "Unknown error, please check your internet connection.";
-
-/* No comment provided by engineer. */
 "user type not allowed" = "user type not allowed";
 
 /* No comment provided by engineer. */
@@ -326,4 +287,7 @@
 
 /* No comment provided by engineer. */
 "Your email and/or password is incorrect." = "Your email and/or password is incorrect.";
+
+/* No comment provided by engineer. */
+"Your mobile number should start with your country code e.g. +31 or 0031" = "Your mobile number should start with your country code e.g. +31 or 0031";
 

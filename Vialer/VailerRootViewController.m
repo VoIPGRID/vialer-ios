@@ -25,14 +25,14 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification:) name:SystemUserLogoutNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc {
     @try {
-        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:LOGIN_FAILED_NOTIFICATION];
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:SystemUserLogoutNotification];
     }@catch(id exception) {}
 }
 
@@ -73,11 +73,11 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
     //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
     //v2.x and start onboarding at the "configure numbers view".
 
-    if (![SystemUser currentUser].isLoggedIn) {
+    if (![SystemUser currentUser].loggedIn) {
         //Not logged in, not v21.x, nor in v2.x
         self.loginViewController.screenToShow = OnboardingScreenLogin;
         return YES;
-    } else if (![[NSUserDefaults standardUserDefaults] boolForKey:LoginViewControllerMigrationCompleted]){
+    } else if (![SystemUser currentUser].migrationCompleted){
         //Also show the Mobile number onboarding screen
         self.loginViewController.screenToShow = OnboardingScreenConfigure;
         return YES;
@@ -85,13 +85,21 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
     return NO;
 }
 
-#pragma mark - Notification actions
-- (void)loginFailedNotification:(NSNotification *)notification {
+#pragma mark - actions
+
+- (void)showLoginScreen {
+    self.loginViewController = nil;
     self.loginViewController.screenToShow = OnboardingScreenLogin;
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     if (![self.presentedViewController isEqual:self.loginViewController]) {
         [self dismissViewControllerAnimated:NO completion:nil];
     }
+}
+
+#pragma mark - Notifications
+
+- (void)logoutNotification:(NSNotification *)notification {
+    [self showLoginScreen];
 }
 
 @end

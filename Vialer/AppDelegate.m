@@ -52,7 +52,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success) {
+        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success, NSError *error) {
             if (success) {
                 [[PZPushMiddleware sharedInstance] updateDeviceRecord];
             }
