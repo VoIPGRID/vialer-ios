@@ -12,7 +12,8 @@
 #import "VialerDrawerViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
-static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
+static NSString * const VialerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
+static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @"ShowSIPIncomingCallViewSegue";
 
 @interface VailerRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
@@ -46,7 +47,7 @@ static NSString * const VailerRootViewControllerShowVialerDrawerViewSegue = @"Sh
     if ([self shouldPresentLoginViewController]) {
         [self presentViewController:self.loginViewController animated:NO completion:nil];
     } else {
-        [self performSegueWithIdentifier:VailerRootViewControllerShowVialerDrawerViewSegue sender:nil];
+        [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:nil];
     }
 }
 

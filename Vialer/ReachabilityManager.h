@@ -20,5 +20,6 @@ typedef NS_ENUM(NSInteger, ReachabilityManagerStatusType) {
 
 - (void)startMonitoring;
 - (void)stopMonitoring;
+- (ReachabilityManagerStatusType)checkCurrentConnection;
 
 @end

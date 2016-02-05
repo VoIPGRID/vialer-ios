@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gU5-bE-K8d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gU5-bE-K8d">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Incoming View Controller-->
+        <!--Incoming Call View Controller-->
         <scene sceneID="Wvp-h7-xnb">
             <objects>
-                <viewController id="gU5-bE-K8d" customClass="SIPIncomingViewController" sceneMemberID="viewController">
+                <viewController id="gU5-bE-K8d" customClass="SIPIncomingCallViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NVt-sg-wgQ"/>
                         <viewControllerLayoutGuide type="bottom" id="yQ6-Qt-aAC"/>
@@ -28,6 +28,9 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="hcH-3O-l8F"/>
                                 </constraints>
                                 <state key="normal" image="accept-button"/>
+                                <connections>
+                                    <action selector="acceptCallButtonPressed:" destination="gU5-bE-K8d" eventType="touchUpInside" id="20x-KB-0II"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-JN-qTG" userLabel="decline-button">
                                 <rect key="frame" x="346" y="480" width="70" height="70"/>
@@ -39,11 +42,14 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="bhc-yo-Zdm"/>
                                 </constraints>
                                 <state key="normal" image="decline-button"/>
+                                <connections>
+                                    <action selector="declineCallButtonPressed:" destination="gU5-bE-K8d" eventType="touchUpInside" id="baa-U7-Ruc"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 (0) 50 12 34 567" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WNk-Js-erb">
                                 <rect key="frame" x="20" y="134" width="560" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -61,10 +67,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="whK-8p-dfZ"/>
+                    <connections>
+                        <segue destination="zNi-hP-2b3" kind="presentation" identifier="ShowSIPCallingStoryboard" id="zio-Qu-I6r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MD9-kx-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="285" y="666"/>
+        </scene>
+        <!--SIPCallingStoryboard-->
+        <scene sceneID="dwS-B1-ZaM">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="SIPCallingStoryboardID" storyboardName="SIPCallingStoryboard" id="zNi-hP-2b3" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0bf-Cc-9bm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285.5" y="1172"/>
         </scene>
     </scenes>
     <resources>

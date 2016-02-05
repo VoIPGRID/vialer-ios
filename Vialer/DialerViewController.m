@@ -13,6 +13,7 @@
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
 #import "TwoStepCallingViewController.h"
+#import "SIPCallingViewController.h"
 
 #import "UIViewController+MMDrawerController.h"
 
@@ -23,6 +24,7 @@ static NSString * const DialerViewControllerTabBarItemActiveImage = @"tab-keypad
 static NSString * const DialerViewControllerLogoImage = @"logo";
 static NSString * const DialerViewControllerLeftDrawerButtonImage = @"menu";
 static NSString * const DialerViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
+static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
 static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
@@ -160,11 +162,10 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
         // There is a number, let's call
     } else {
         self.lastCalledNumber = self.numberText;
-        // TODO: implement 4g calling
-        if (false) {
+
+        if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP) {
             [GAITracker setupOutgoingSIPCallEvent];
-//            [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-//            [self.sipCallingViewController handlePhoneNumber:self.numberText forContact:nil];
+            [self performSegueWithIdentifier:DialerViewControllerSIPCallingSegue sender:self];
         } else {
             [GAITracker setupOutgoingConnectABCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerTwoStepCallingSegue sender:self];
@@ -183,6 +184,9 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.numberText];
+    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingViewController handlePhoneNumber:self.numberText];
     }
 }
 

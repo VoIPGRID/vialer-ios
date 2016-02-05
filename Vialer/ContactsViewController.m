@@ -10,6 +10,8 @@
 #import "ContactModel.h"
 #import "ContactUtils.h"
 #import "GAITracker.h"
+#import "ReachabilityManager.h"
+#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 
@@ -19,7 +21,9 @@ static NSString * const ContactsViewControllerLogoImageName = @"logo";
 static NSString * const ContactsViewControllerTabContactImageName = @"tab-contact";
 static NSString * const ContactsViewControllerTabContactActiveImageName = @"tab-contact-active";
 static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
+static NSString * const ContactsViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
+static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
 
 @interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,6 +34,7 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
+@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @end
 
 @implementation ContactsViewController
@@ -54,9 +59,10 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
+
+# pragma mark - setup
 
 - (void)setupLayout {
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
@@ -102,6 +108,13 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     return _refreshControl;
 }
 
+- (ReachabilityManager *)reachabilityManager {
+    if (!_reachabilityManager) {
+        _reachabilityManager = [[ReachabilityManager alloc] init];
+    }
+    return _reachabilityManager;
+}
+
 #pragma mark - actions
 
 - (IBAction)leftDrawerButtonPressed:(UIBarButtonItem *)sender {
@@ -116,13 +129,15 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     contactViewController.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactViewController];
     [self presentViewController:nav animated:YES completion:nil];
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingViewController handlePhoneNumber:self.phoneNumberToCall];
     }
 }
 
@@ -205,7 +220,6 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     if ([property.key isEqualToString:CNContactPhoneNumbersKey]) {
         CNPhoneNumber *phoneNumberProperty = property.value;
         self.phoneNumberToCall = [phoneNumberProperty stringValue];
-
         /**
          *  We need to return asap to prevent default action (calling with native dialer).
          *  As a workaround, we put the presenting of the new viewcontroller via a separate queue,
@@ -213,11 +227,9 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                // TODO: implement 4g calling
-                if (false) {
+                if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP) {
                     [GAITracker setupOutgoingSIPCallEvent];
-//                    [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-//                    [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
+                    [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else {
                     [GAITracker setupOutgoingConnectABCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];

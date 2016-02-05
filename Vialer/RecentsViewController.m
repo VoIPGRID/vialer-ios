@@ -8,9 +8,11 @@
 #import "Configuration.h"
 #import "ContactModel.h"
 #import "GAITracker.h"
+#import "ReachabilityManager.h"
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
+#import "SIPCallingViewController.h"
 #import "TwoStepCallingViewController.h"
 
 #import "UIAlertController+Vialer.h"
@@ -26,6 +28,7 @@ static NSString * const RecentsViewControllerPropertyPhoneNumbers = @"phoneNumbe
 static NSString * const RecentViewControllerRecentCallCell = @"RecentCallCell";
 static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorText";
 static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
+static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
 @interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,6 +36,7 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
+@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @end
 
 @implementation RecentsViewController
@@ -81,6 +85,13 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
         [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
+}
+
+- (ReachabilityManager *)reachabilityManager {
+    if (!_reachabilityManager) {
+        _reachabilityManager = [[ReachabilityManager alloc] init];
+    }
+    return _reachabilityManager;
 }
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
@@ -139,6 +150,9 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
     if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingViewController handlePhoneNumber:self.phoneNumberToCall];
     }
 }
 
@@ -285,10 +299,9 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 - (void)callPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumberToCall = phoneNumber;
     // TODO: implement 4g calling
-    if (false) {
+    if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP) {
         [GAITracker setupOutgoingSIPCallEvent];
-//        [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-//        [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
+        [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];

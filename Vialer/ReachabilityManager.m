@@ -96,7 +96,6 @@ static NSString * const ReachabilityManagerStatusKey = @"status";
     } else {
         return [super automaticallyNotifiesObserversForKey:key];
     }
-
 }
 
 #pragma mark - update status
@@ -110,16 +109,28 @@ static NSString * const ReachabilityManagerStatusKey = @"status";
     self.onWifi = [self.reachabilityManager isReachableViaWiFi];
 }
 
+- (ReachabilityManagerStatusType)checkCurrentConnection {
+    [self check4gStatus];
+    [self checkInternetAccess];
+    [self setNewStatus];
+
+    return self.status;
+}
+
 - (void)updateStatus {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.on4g || self.onWifi) {
-            self.status = ReachabilityManagerStatusSIP;
-        } else if (self.hasInternet) {
-            self.status = ReachabilityManagerStatusTwoStep;
-        } else {
-            self.status = ReachabilityManagerStatusOffline;
-        }
+        [self setNewStatus];
     });
+}
+
+- (void)setNewStatus {
+    if (self.on4g || self.onWifi) {
+        self.status = ReachabilityManagerStatusSIP;
+    } else if (self.hasInternet) {
+        self.status = ReachabilityManagerStatusTwoStep;
+    } else {
+        self.status = ReachabilityManagerStatusOffline;
+    }
 }
 
 #pragma mark - notifications
