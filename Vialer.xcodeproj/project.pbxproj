@@ -193,6 +193,8 @@
 		F21ECCE61C47C84A00E9B276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
+		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2B43F0E1C3BEB3F0089A387 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F2B43F171C3BEB880089A387 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
@@ -454,6 +456,9 @@
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
+		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
+		F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandlerTests.m; sourceTree = "<group>"; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2B43F0B1C3BEB3F0089A387 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
@@ -1059,6 +1064,7 @@
 			isa = PBXGroup;
 			children = (
 				F9EF27E91C60E2D70097E3AC /* Availabilty */,
+				F275FDB01C608B7E006AEEA2 /* APNS */,
 				F9906C261C3AA0C20044EA99 /* Contacts */,
 				C496A8F71C2C6EC500C42619 /* Settings */,
 				C496A8E71C2AB1FE00C42619 /* Side Menu */,
@@ -1094,6 +1100,23 @@
 				B479875C3210120FC5EF733A /* Pods-Voys.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F275FDAC1C5FA253006AEEA2 /* APNS */ = {
+			isa = PBXGroup;
+			children = (
+				F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */,
+				F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */,
+			);
+			path = APNS;
+			sourceTree = "<group>";
+		};
+		F275FDB01C608B7E006AEEA2 /* APNS */ = {
+			isa = PBXGroup;
+			children = (
+				F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */,
+			);
+			name = APNS;
 			sourceTree = "<group>";
 		};
 		F2B43F0C1C3BEB3F0089A387 /* SnapshotUITests */ = {
@@ -1321,6 +1344,7 @@
 				F919B9D01BA812370082AD79 /* Availability */,
 				3D1A5E611AE543C000DBE64B /* Onboarding/Login */,
 				FB0CF33118226380002D4281 /* Api */,
+				F275FDAC1C5FA253006AEEA2 /* APNS */,
 				FB5D291A182BE407001DA8F2 /* Categories/Helpers */,
 				FBAFB3F81834250800848B2E /* Models */,
 				FB364D111836846A00932D6E /* Sounds */,
@@ -1923,6 +1947,7 @@
 			files = (
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				C4A4525C1C244F4400846591 /* LogInViewController.m in Sources */,
+				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C43863C31C5282070016182E /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
@@ -2010,6 +2035,7 @@
 				C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
+				F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */,
 				C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
