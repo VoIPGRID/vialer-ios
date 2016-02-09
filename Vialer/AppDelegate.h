@@ -11,6 +11,13 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+/**
+ *  Core Data Parent Managed Object Context.
+ *
+ *  Every other object context should be a child context from this context.
+ */
+@property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 - (void)handleSipCall:(GSCall *)sipCall;
 
 /**

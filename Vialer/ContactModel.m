@@ -150,7 +150,6 @@
 }
 
 - (CNContact *)getSelectedContactOnIdentifier:(NSString *)contactIdentifier {
-
     return [self.contactStore unifiedContactWithIdentifier:contactIdentifier keysToFetch:self.keysToFetch error:nil];
 }
 

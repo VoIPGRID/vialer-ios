@@ -1,33 +1,39 @@
 //
 //  RecentCall.h
-//  Copyright © 2015 VoIPGRID. All rights reserved.
+//  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-typedef NS_ENUM(NSInteger, CallDirection) {
-    CallDirectionInbound,
-    CallDirectionOutbound,
-};
+NS_ASSUME_NONNULL_BEGIN
 
-@interface RecentCall : NSObject
+@interface RecentCall : NSManagedObject
 
-@property (nonatomic) int32_t callerRecordId;   // Record id for Address Book (-1 means unknown)
-@property (strong, nonatomic) NSString *contactIdentifier;
-@property (strong, nonatomic) NSString *callerName;
-@property (strong, nonatomic) NSString *callerPhoneType;
-@property (strong, nonatomic) NSString *callerPhoneNumber;
-@property (nonatomic) CallDirection callDirection;
-@property (strong, nonatomic) NSString *callDate;
-@property (nonatomic) NSInteger atime;
-@property (strong, nonatomic) NSString *callerId;
+/**
+ *  Will return a user friendly name to display.
+ *
+ *  This could be in this order:
+ *  1. The callerName.
+ *  2. The name that is parsed from the callerID.
+ *  3. If the call is inbound the sourceNumber.
+ *  4. If the call is outbound the destinationNumber.
+ */
+@property (readonly, nonatomic) NSString *displayName;
 
-- (BOOL)isEqualToRecentCall:(RecentCall *)other;
-
-+ (void)clearCachedRecentCalls; // Clear cached results
-+ (NSArray *)cachedRecentCalls; // Cached results from last recentCalls invocation
-+ (NSArray *)recentCallsFromDictionary:(NSDictionary *)dict;
-
-+ (NSCharacterSet *)digitsCharacterSet;
+/**
+ *  This method will fetch the latest call stored in the given managedObjectContext.
+ *
+ *  The calls will be sorted by date and the newest will be returned.
+ *
+ *  @param managedObjectContext Context that needs to be searched.
+ *
+ *  @return RecentCall instance or none if no call could have been found.
+ */
++ (RecentCall *)latestCallInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "RecentCall+CoreDataProperties.h"

@@ -57,6 +57,66 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 + (VoIPGRIDRequestOperationManager *)sharedRequestOperationManager;
 
 /**
+ *  This method will do a HTTP GET request on the given url with given parameters.
+ *
+ *  When the request is completed, the completionblock will be called.
+ *
+ *  If the request was unauthorized, a VoIPGRIDRequestOperationManagerUnAuthorizedNotification will be posted.
+ *
+ *  @param url        The url that will be requested.
+ *  @param parameters The url parameters that should be sent with the request.
+ *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
+ *
+ *  @return The AFHTTPRequestOperation instance.
+ */
+- (AFHTTPRequestOperation *)GET:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+
+/**
+ *  This method will do a HTTP PUT request on the given url with given parameters.
+ *
+ *  When the request is completed, the completionblock will be called.
+ *
+ *  If the request was unauthorized, a VoIPGRIDRequestOperationManagerUnAuthorizedNotification will be posted.
+ *
+ *  @param url        The url that will be requested.
+ *  @param parameters The url parameters that should be sent with the request.
+ *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
+ *
+ *  @return The AFHTTPRequestOperation instance.
+ */
+- (AFHTTPRequestOperation *)PUT:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+
+/**
+ *  This method will do a HTTP POST request on the given url with given parameters.
+ *
+ *  When the request is completed, the completionblock will be called.
+ *
+ *  If the request was unauthorized, a VoIPGRIDRequestOperationManagerUnAuthorizedNotification will be posted.
+ *
+ *  @param url        The url that will be requested.
+ *  @param parameters The url parameters that should be sent with the request.
+ *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
+ *
+ *  @return The AFHTTPRequestOperation instance.
+ */
+- (AFHTTPRequestOperation *)POST:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+
+/**
+ *  This method will do a HTTP DELETE request on the given url with given parameters.
+ *
+ *  When the request is completed, the completionblock will be called.
+ *
+ *  If the request was unauthorized, a VoIPGRIDRequestOperationManagerUnAuthorizedNotification will be posted.
+ *
+ *  @param url        The url that will be requested.
+ *  @param parameters The url parameters that should be sent with the request.
+ *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
+ *
+ *  @return The AFHTTPRequestOperation instance.
+ */
+- (AFHTTPRequestOperation *)DELETE:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+
+/**
  *  This method will try to remotely login the user.
  *
  *  If login was successful, the credentials will be stored internally to authenticate the next requests.
@@ -120,14 +180,6 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param completion              A block that will be called after put attempt. It will return the response data if any or an error if any.
  */
 - (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
-
-/**
- *  This method will try to remotely fetch the last calls of the Client the currently authenticated user belongs to.
- *
- *  @param parameters A dictionary with parameters that are sent along with the request.
- *  @param completion A block that will be called after the fetch attempt. It will return the response data if any or an error if any.
- */
-- (void)cdrRecordsWithParameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
 
 /**
  *  This method will try to setup a TwoStep call remotely.

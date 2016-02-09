@@ -14,7 +14,6 @@ static NSString * const VoIPGRIDRequestOperationManagerURLSystemUserProfile = @"
 static NSString * const VoIPGRIDRequestOperationManagerURLUserDestination   = @"userdestination/";
 static NSString * const VoIPGRIDRequestOperationManagerURLPhoneAccount      = @"phoneaccount/phoneaccount/";
 static NSString * const VoIPGRIDRequestOperationManagerURLTwoStepCall       = @"mobileapp/";
-static NSString * const VoIPGRIDRequestOperationManagerURLCdrRecord         = @"cdr/record/";
 static NSString * const VoIPGRIDRequestOperationManagerURLPasswordReset     = @"permission/password_reset/";
 static NSString * const VoIPGRIDRequestOperationManagerURLAutoLoginToken    = @"autologin/token/";
 static NSString * const VoIPGRIDRequestOperationManagerURLMobileNumber      = @"permission/mobile_number/";
@@ -188,12 +187,6 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 
 - (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
     [self PUT:selectedUserResourceUri parameters:destinationDict withCompletion:completion];
-}
-
-#pragma mark - CDR
-
-- (void)cdrRecordsWithParameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
-    [self GET:VoIPGRIDRequestOperationManagerURLCdrRecord parameters:parameters withCompletion:completion];
 }
 
 #pragma mark - TwoStepCall

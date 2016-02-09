@@ -5,13 +5,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "RecentCall.h"
-
 @interface RecentTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *subtitle;
-@property (strong, nonatomic) NSString *date;
-@property (nonatomic) CallDirection callDirection;
+@property (strong, nonatomic) NSDate *date;
+@property (nonatomic) BOOL inbound;
 @property (nonatomic) BOOL answered;
 @end
