@@ -73,13 +73,13 @@ PODS:
   - OHHTTPStubs/NSURLSession (4.7.0):
     - OHHTTPStubs/Core
   - OHHTTPStubs/OHPathHelpers (4.7.0)
-  - PBWebViewController (0.3)
+  - PBWebViewController (0.4)
   - Reachability (3.2)
   - SimulatorStatusMagic (1.7)
   - SSKeychain (1.3.1)
   - SVProgressHUD (1.1.3)
   - Vialer-pjsip-iOS (0.0.6)
-  - VialerSIPLib-iOS (0.0.1):
+  - VialerSIPLib-iOS (0.0.3):
     - CocoaLumberjack (~> 2.2)
     - Vialer-pjsip-iOS
 
@@ -122,13 +122,13 @@ SPEC CHECKSUMS:
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
   OCMock: 18c9b7e67d4c2770e95bb77a9cc1ae0c91fe3835
   OHHTTPStubs: d2bf6a0f407620d67e75a1d3f12d86a2b1dd15c0
-  PBWebViewController: 909b1505da6ba7c5c82519a6457246027926061e
+  PBWebViewController: 2fd2356b36edeb644507b1d1f7632269fcd31e86
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SimulatorStatusMagic: 46c90a12f73abeda6d7c16876e1e0998b6ca5f4f
   SSKeychain: 04c4ec40f4c3deda524e269bc76e5f30e638a174
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   Vialer-pjsip-iOS: 63c7bb430ddbe564c5914e59018637bcf7cbe608
-  VialerSIPLib-iOS: dccf82c929901f7019e900ce4ca6b56648f5bae3
+  VialerSIPLib-iOS: 0f1c15a84bf6ae1d92e64d176e6794f3869ec6fc
 
 PODFILE CHECKSUM: 37b6c27ed1241a194a9181d35f444de72a1d9108
 

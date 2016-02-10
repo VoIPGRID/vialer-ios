@@ -391,6 +391,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     // If there is no SIP Account for the user, it is removed.
     if ([accountURL isKindOfClass:[NSNull class]]) {
         [self removeSIPCredentials];
+
         if (completion) {
             completion(YES, nil);
         }

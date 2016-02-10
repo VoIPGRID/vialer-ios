@@ -14,7 +14,10 @@
 #import "APNSHandler.h"
 #import "GAITracker.h"
 #import "PZPushMiddleware.h"
+#import "SIPUtils.h"
 #import "SystemUser.h"
+#import <VialerSIPLib-iOS/VialerSIPLib.h>
+
 
 @implementation AppDelegate
 
@@ -47,6 +50,12 @@
     [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
 #endif
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSIPCredentials:) name:SystemUserSIPCredentialsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
+    if ([SystemUser currentUser].sipAllowed) {
+        [self SIPCredentials:nil];
+    }
+
     return YES;
 }
 
@@ -60,24 +69,29 @@
     });
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - setup helper methods
 
 + (BOOL)isSnapshotScreenshotRun {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
 }
 
-#pragma mark - UIApplication notification delegate
+# pragma mark - Notifications
 
-//- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)()) completionHandler {
-//    NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8
-//    if (application.applicationState != UIApplicationStateActive) {
-//    }
-//}
-//
-//- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-//    if (application.applicationState != UIApplicationStateActive) { //
-//    }
-//}
+- (void)updatedSIPCredentials:(NSNotification *)notification {
+    if ([SystemUser currentUser].sipAccount) {
+        [SIPUtils setupSIPEndpoint];
+    } else {
+        [SIPUtils removeSIPEndpoint];
+    }
+}
+
+- (void)userLoggedOut:(NSNotification *)notification {
+    [SIPUtils removeSIPEndpoint];
+}
 
 #pragma mark - Handle person(s) & calls
 - (void)handleSipCall:(GSCall *)sipCall {
