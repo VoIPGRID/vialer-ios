@@ -203,8 +203,11 @@
 		F9379F2D1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
 		F9392ED81C04955C00286D27 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9392ED71C04955C00286D27 /* SipCallingButton.m */; };
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
+		F94F642E1C6B3A39003DBB63 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F642D1C6B3A39003DBB63 /* SIPUtils.m */; };
+		F94F642F1C6B3A39003DBB63 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F642D1C6B3A39003DBB63 /* SIPUtils.m */; };
 		F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */; };
 		F99856951BDF85590005253B /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
+		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
 		F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
 		F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
 		F9CB0F9A1C084C3D009AB89A /* SipCallingButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonViewController.m */; };
@@ -478,9 +481,12 @@
 		F9392ED71C04955C00286D27 /* SipCallingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButton.m; sourceTree = "<group>"; };
 		F94F47CD1BCB9FF300F40737 /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
 		F94F47CE1BCB9FF300F40737 /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
+		F94F642C1C6B3A39003DBB63 /* SIPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
+		F94F642D1C6B3A39003DBB63 /* SIPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
 		F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtilsTests.m; sourceTree = "<group>"; };
 		F99856931BDF85590005253B /* ContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtils.h; sourceTree = "<group>"; };
 		F99856941BDF85590005253B /* ContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtils.m; sourceTree = "<group>"; };
+		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
 		F9C710CA1C648F110079677C /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		F9C710CB1C648F110079677C /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
 		F9CB0F981C084C3D009AB89A /* SipCallingButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButtonViewController.h; sourceTree = "<group>"; };
@@ -701,6 +707,7 @@
 		C40CB3981C45129400248690 /* Calling */ = {
 			isa = PBXGroup;
 			children = (
+				F94F64301C6B3A45003DBB63 /* SIP */,
 				C40CB3991C4512B000248690 /* TwoStep */,
 			);
 			name = Calling;
@@ -1029,6 +1036,7 @@
 				F9CB0FA51C088241009AB89A /* SIPIncomingCallStoryboard.storyboard */,
 				C432A8691C58EF6600909F16 /* Controllers */,
 				C432A8681C58EF5700909F16 /* UI */,
+				F94F642B1C6B3A1E003DBB63 /* Utils */,
 			);
 			name = SIP;
 			sourceTree = "<group>";
@@ -1200,6 +1208,23 @@
 				C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F94F642B1C6B3A1E003DBB63 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F94F642C1C6B3A39003DBB63 /* SIPUtils.h */,
+				F94F642D1C6B3A39003DBB63 /* SIPUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		F94F64301C6B3A45003DBB63 /* SIP */ = {
+			isa = PBXGroup;
+			children = (
+				F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */,
+			);
+			name = SIP;
 			sourceTree = "<group>";
 		};
 		F9906C261C3AA0C20044EA99 /* Contacts */ = {
@@ -1906,6 +1931,7 @@
 				C41FD86F1C60A08400BBE6D7 /* Configuration.m in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8711C60A08400BBE6D7 /* ContactModel.m in Sources */,
+				F94F642F1C6B3A39003DBB63 /* SIPUtils.m in Sources */,
 				C41FD8721C60A08400BBE6D7 /* PZPushMiddleware.m in Sources */,
 				F9379F2D1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */,
 				C41FD8731C60A08400BBE6D7 /* CircleWithWhiteIcon.m in Sources */,
@@ -1966,6 +1992,7 @@
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				C4A452631C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
+				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
 				C496A8EB1C2AB23B00C42619 /* VialerWebViewController.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
@@ -2040,6 +2067,7 @@
 				C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
+				F94F642E1C6B3A39003DBB63 /* SIPUtils.m in Sources */,
 				C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
