@@ -5,11 +5,8 @@
 
 #import "SettingsViewController.h"
 
-#import "AvailabilityModel.h"
-#import "AvailabilityViewController.h"
 #import "EditNumberViewController.h"
 #import "GAITracker.h"
-#import "SettingsViewFooterView.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
@@ -24,9 +21,14 @@ static int const SettingsViewControllerMyNumberRow = 0;
 static int const SettingsViewControllerOutgoingNumberRow = 1;
 static int const SettingsViewControllerMyEmailRow = 2;
 
+static int const SettingsViewControllerUISwitchWidth = 60;
+static int const SettingsViewControllerUISwitchOriginOffsetX = 35;
+static int const SettingsViewControllerUISwitchOriginOffsetY = 15;
+
 static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNumberSegue";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
+@property (weak, nonatomic) SystemUser *systemUser;
 @end
 
 @implementation SettingsViewController
@@ -34,6 +36,15 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+}
+
+#pragma mark - Properties
+
+- (SystemUser *)systemUser {
+    if (!_systemUser) {
+        _systemUser = [SystemUser currentUser];
+    }
+    return _systemUser;
 }
 
 #pragma mark - Table view data source
@@ -46,9 +57,9 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
     switch (section) {
         case SettingsViewControllerVoIPAccountSection: {
             // Are we allowed to show anything?
-            if ([SystemUser currentUser].sipAllowed) {
+            if (self.systemUser.sipAllowed && self.systemUser.sipAccount) {
                 // Do we show all fields?
-                if ([SystemUser currentUser].sipEnabled) {
+                if (self.systemUser.sipEnabled) {
                     // Sip is enabled, show all fields
                     return 2;
                 }
@@ -70,82 +81,42 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableViewSettingsCell = @"SettingsCell";
     static NSString *tableViewSettingsWithAccessoryCell = @"SettingsWithAccessoryCell";
+    static NSString *tableViewSettingsWithSwitchCell = @"SettingsWithSwitchCell";
 
     UITableViewCell *cell;
 
-    //Specific config according to cell function
+    // Specific config according to cell function.
     if (indexPath.section == SettingsViewControllerVoIPAccountSection) {
         if (indexPath.row == SettingsViewControllerSipEnabledRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
-            cell.textLabel.text = NSLocalizedString(@"EnabledVOIPCalls", nil);
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-            cell.accessoryView = switchView;
-            [switchView setOn:[SystemUser currentUser].sipEnabled animated:NO];
-            [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
+                          withTag:1001
+                       defaultVal:self.systemUser.sipEnabled];
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
-            cell.textLabel.text = NSLocalizedString(@"SIP account", nil);
-            cell.detailTextLabel.text = [SystemUser currentUser].sipAccount;
+            cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
+            cell.detailTextLabel.text = self.systemUser.sipAccount;
         }
     } else if (indexPath.section == SettingsViewControllerNumbersSection) {
         if (indexPath.row == SettingsViewControllerMyNumberRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
             cell.textLabel.text = NSLocalizedString(@"My number", nil);
-            cell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
+            cell.detailTextLabel.text = self.systemUser.mobileNumber;
 
         } else if (indexPath.row == SettingsViewControllerOutgoingNumberRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
-            cell.detailTextLabel.text = [SystemUser currentUser].outgoingNumber;
+            cell.detailTextLabel.text = self.systemUser.outgoingNumber;
 
         } else if (indexPath.row == SettingsViewControllerMyEmailRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"Email", nil);
             cell.detailTextLabel.minimumScaleFactor = 0.8f;
             cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-            cell.detailTextLabel.text = [SystemUser currentUser].username;
+            cell.detailTextLabel.text = self.systemUser.username;
         }
     }
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    //Only the SettingsViewControllerVoIPAccountSection has gets a header.
-    if (section == SettingsViewControllerVoIPAccountSection) {
-        if ([SystemUser currentUser].sipAllowed) {
-            return 35;
-        }
-        // Returning 0 results in the default value (10), returning 1 to minimal
-        return 1;
-    }
-    return 0;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == SettingsViewControllerVoIPAccountSection) {
-        if ([SystemUser currentUser].sipAllowed) {
-            return NSLocalizedString(@"VoIP Account", nil);
-        }
-        return nil;
-    }
-    return nil;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    //The footer will be added to the last displayed section
-    if (section == SettingsViewControllerNumbersSection) {
-        CGRect frameOfLastRow = [tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:SettingsViewControllerOutgoingNumberRow inSection:SettingsViewControllerNumbersSection]];
-
-        //the empty space below the last cell is the complete height of the tableview minus
-        //the y position of the last row + the last rows height.
-        CGRect emptyFrameBelowLastRow = CGRectMake(0, 0, self.tableView.frame.size.width,
-                                                   self.tableView.frame.size.height - (frameOfLastRow.origin.y + frameOfLastRow.size.height));
-
-        return [[SettingsViewFooterView alloc] initWithFrame:emptyFrameBelowLastRow];
-    }
-    return nil;
 }
 
 #pragma mark - actions
@@ -157,7 +128,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:SettingsViewControllerShowEditNumberSegue]) {
         EditNumberViewController *editNumberController = (EditNumberViewController *)segue.destinationViewController;
-        editNumberController.numberToEdit = [SystemUser currentUser].mobileNumber;
+        editNumberController.numberToEdit = self.systemUser.mobileNumber;
         editNumberController.delegate = self;
     }
 }
@@ -173,18 +144,41 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 #pragma mark - EditNumberViewControllerDelegate delegate
 
 - (void)numberHasChanged:(NSString *)newNumber {
-    //Update the tableView Cell
-    UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SettingsViewControllerMyNumberRow inSection:SettingsViewControllerNumbersSection]];
-    myNumberCell.detailTextLabel.text = [SystemUser currentUser].mobileNumber;
+    // Update the tableView Cell.
+    NSIndexPath *rowAtIndexPath = [NSIndexPath indexPathForRow:SettingsViewControllerMyNumberRow
+                                                     inSection:SettingsViewControllerNumbersSection];
+    UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:rowAtIndexPath];
+    myNumberCell.detailTextLabel.text = self.systemUser.mobileNumber;
 }
 
+#pragma mark - Enable VoIP switch handler
 
-#pragma mark - SIP Enabled switch handler
+- (void)didChangeSwitch:(UISwitch *)switchview {
+    if (switchview.tag == 1001) {
+        self.systemUser.sipEnabled = switchview.on;
+        NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
+        [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
 
-- (void)switchChanged:(UISwitch *)switchview {
-    [SystemUser currentUser].sipEnabled = switchview.on;
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+#pragma mark - Helper function for switches in table
+
+- (void)createOnOffView:(UITableViewCell*)cell withTitle:(NSString*)title withTag:(int)tag defaultVal:(BOOL)defaultVal {
+    cell.textLabel.text = title;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    CGRect rect;
+    rect = cell.contentView.frame;
+    rect.origin.x = rect.size.width / 2 + SettingsViewControllerUISwitchOriginOffsetX;
+    rect.origin.y = rect.size.height / 2 - SettingsViewControllerUISwitchOriginOffsetY;
+    rect.size.width = SettingsViewControllerUISwitchWidth;
+
+    UISwitch *switchView = [[UISwitch alloc] initWithFrame:rect];
+    [switchView addTarget:self action:@selector(didChangeSwitch:) forControlEvents:UIControlEventValueChanged];
+    switchView.tag = tag;
+    [switchView setOn:defaultVal];
+
+    cell.accessoryView = switchView;
 }
 
 @end

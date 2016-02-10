@@ -76,7 +76,7 @@
 "Email sent successfully." = "E-mail verzonden.";
 
 /* No comment provided by engineer. */
-"EnabledVOIPCalls" = "Bellen via VoIP";
+"Enable VoIP" = "Schakel VoIP in";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
@@ -226,7 +226,7 @@
 "Set up call" = "Gesprek wordt opgezet";
 
 /* No comment provided by engineer. */
-"SIP account" = "SIP account";
+"VoIP account ID" = "VoIP-account ID";
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";

@@ -53,7 +53,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSIPCredentials:) name:SystemUserSIPCredentialsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     if ([SystemUser currentUser].sipAllowed) {
-        [self SIPCredentials:nil];
+        [self updatedSIPCredentials:nil];
     }
 
     return YES;
