@@ -22,3 +22,6 @@
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "x8D-Bj-sg8"; */
 "x8D-Bj-sg8.text" = "Detail";
+
+/* Class = "UILabel"; text = "Your own number will be used to setup a two-step call showing your business number"; ObjectID = "71I-xM-DAK"; */
+"71I-xM-DAK.text" = "Your own number will be used to setup a two-step call showing your business number.";

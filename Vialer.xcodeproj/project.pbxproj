@@ -75,7 +75,6 @@
 		C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C41FD8831C60A08400BBE6D7 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAFB3F61834250500848B2E /* RecentCall.m */; };
 		C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
-		C41FD8851C60A08400BBE6D7 /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
 		C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		C41FD8871C60A08400BBE6D7 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
 		C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
@@ -197,7 +196,6 @@
 		F2B43F0E1C3BEB3F0089A387 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F2B43F171C3BEB880089A387 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
-		F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F9379F2C1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
 		F9379F2D1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
@@ -469,8 +467,6 @@
 		F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewFooterView.h; sourceTree = "<group>"; };
-		F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewFooterView.m; sourceTree = "<group>"; };
 		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewController.h; sourceTree = "<group>"; };
 		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityModel.h; sourceTree = "<group>"; };
@@ -929,15 +925,6 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		C4675FFF1C46E663008820C8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				F2E811BC1B37E2E000EA640F /* SettingsViewFooterView.h */,
-				F2E811BD1B37E2E000EA640F /* SettingsViewFooterView.m */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
 		C496A8E71C2AB1FE00C42619 /* Side Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,7 +1135,6 @@
 			children = (
 				F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */,
 				C4675FFE1C46E656008820C8 /* Controllers */,
-				C4675FFF1C46E663008820C8 /* UI */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1550,6 +1536,9 @@
 		FB4226C5182261D200707349 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					voipAccountSwitch,
+				);
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = VoIPGRID;
@@ -1952,7 +1941,6 @@
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
 				C41FD8831C60A08400BBE6D7 /* RecentCall.m in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
-				C41FD8851C60A08400BBE6D7 /* SettingsViewFooterView.m in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
 				C41FD8871C60A08400BBE6D7 /* CircleWithShadow.m in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
@@ -2062,7 +2050,6 @@
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				FBAFB3F71834250500848B2E /* RecentCall.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
-				F2E811BE1B37E2E000EA640F /* SettingsViewFooterView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
