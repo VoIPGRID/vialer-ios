@@ -88,7 +88,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
-  - CocoaLumberjack
   - Google/Analytics (~> 1.0.7)
   - HDLumberjackLogFormatter (from `https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git`)
   - HTCopyableLabel
@@ -139,6 +138,6 @@ SPEC CHECKSUMS:
   Vialer-pjsip-iOS: 63c7bb430ddbe564c5914e59018637bcf7cbe608
   VialerSIPLib-iOS: c2af1e7a7b3d3b5fe2dd78ede10f04f9a99e1eb9
 
-PODFILE CHECKSUM: 78d232c47e8ce3f5be01c743a86492057b358896
+PODFILE CHECKSUM: 0d6aa534a25f8ab32a773767f05079ae9c9c4f96
 
 COCOAPODS: 1.0.0.beta.3

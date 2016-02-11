@@ -27,8 +27,6 @@ static NSString * const DialerViewControllerLeftDrawerButtonImage = @"menu";
 static NSString * const DialerViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
-static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
-
 @interface DialerViewController () <PasteableUILabelDelegate, NumberPadViewControllerDelegate>
 
 @property (strong, nonatomic) UIBarButtonItem *leftDrawerButton;
@@ -73,7 +71,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.reachabilityManager stopMonitoring];
+    [self teardownReachability];
     @try{
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIApplicationDidBecomeActiveNotification];
     }@catch(id anException){
@@ -89,14 +87,20 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 }
 
 - (void)setupReachability {
-    [self.reachabilityManager addObserver:self forKeyPath:DialerViewControllerReachabilityStatusKey options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [self.reachabilityManager addObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus)) options:0 context:nil];
     [self.reachabilityManager startMonitoring];
-    self.reachabilityBarViewController.status = self.reachabilityManager.status;
+    self.reachabilityBarViewController.status = [self.reachabilityManager currentReachabilityStatus];
+}
+
+- (void)teardownReachability {
+    [self.reachabilityManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus))];
+    self.reachabilityManager = nil;
 }
 
 - (void)setupCallButton {
-    if (self.reachabilityManager == ReachabilityManagerStatusOffline ||
+    if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusOffline ||
         (!self.lastCalledNumber.length && !self.numberText.length)) {
+
         self.callButton.enabled = NO;
     } else {
         self.callButton.enabled = YES;
@@ -164,7 +168,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     } else {
         self.lastCalledNumber = self.numberText;
 
-        if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP && [SystemUser currentUser].sipEnabled) {
+        if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             [GAITracker setupOutgoingSIPCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerSIPCallingSegue sender:self];
         } else {
@@ -176,7 +180,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
 
 #pragma mark - seques
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[NumberPadViewController class]]) {
         NumberPadViewController *npvc = (NumberPadViewController *)segue.destinationViewController;
         npvc.delegate = self;
@@ -209,13 +213,12 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     self.numberText = text;
 }
 
-#pragma mark - kvo
+#pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-
     // Keep track of connection status from reachabilityManager
-    if ([keyPath isEqualToString:@"status"] && change[@"new"] != change[@"old"]) {
-        self.reachabilityBarViewController.status = self.reachabilityManager.status;
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(reachabilityStatus))]) {
+        self.reachabilityBarViewController.status = self.reachabilityManager.reachabilityStatus;
         [self setupCallButton];
     }
 }

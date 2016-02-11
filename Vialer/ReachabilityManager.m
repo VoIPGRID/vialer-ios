@@ -1,8 +1,5 @@
 //
 //  ReachabilityManager.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 10/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -12,31 +9,28 @@
 
 #import "Reachability.h"
 
-static NSString * const ReachabilityManagerStatusKey = @"status";
+static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
 
 @interface ReachabilityManager()
-@property (nonatomic, strong) Reachability *reachabilityManager;
-@property (nonatomic, strong) CTTelephonyNetworkInfo *networkInfo;
-@property (nonatomic) BOOL on4g;
-@property (nonatomic) BOOL onWifi;
-@property (nonatomic) BOOL hasInternet;
+@property (strong, nonatomic) Reachability *reachabilityPodInstance;
+@property (strong, nonatomic) CTTelephonyNetworkInfo *networkInfo;
+
+@property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
 @end
 
 @implementation ReachabilityManager
 
 #pragma mark - lifecycle
-
 - (void)dealloc {
     [self stopMonitoring];
 }
 
 #pragma mark - properties
-
-- (Reachability *)reachabilityManager {
-    if (!_reachabilityManager) {
-        _reachabilityManager = [Reachability reachabilityForInternetConnection];
+- (Reachability *)reachabilityPodInstance {
+    if (!_reachabilityPodInstance) {
+        _reachabilityPodInstance = [Reachability reachabilityForInternetConnection];
     }
-    return _reachabilityManager;
+    return _reachabilityPodInstance;
 }
 
 - (CTTelephonyNetworkInfo *)networkInfo {
@@ -46,101 +40,81 @@ static NSString * const ReachabilityManagerStatusKey = @"status";
     return _networkInfo;
 }
 
-- (void)setOn4g:(BOOL)on4g {
-    _on4g = on4g;
-    [self updateStatus];
-}
-
-- (void)setOnWifi:(BOOL)onWifi {
-    _onWifi = onWifi;
-    [self updateStatus];
-}
-
-- (void)setHasInternet:(BOOL)hasInternet {
-    _hasInternet = hasInternet;
-    [self updateStatus];
-}
-
-/**
- Overridden setter for status to manually fire KVO notifications only when the status actually changes
- */
-- (void)setStatus:(ReachabilityManagerStatusType)status {
-    if (_status != status) {
+- (void)setReachabilityStatus:(ReachabilityManagerStatusType)reachabilityStatus {
+    if (reachabilityStatus != _reachabilityStatus) {
         [self willChangeValueForKey:ReachabilityManagerStatusKey];
-        _status = status;
+        _reachabilityStatus = reachabilityStatus;
         [self didChangeValueForKey:ReachabilityManagerStatusKey];
     }
 }
 
 #pragma mark - start/stop monitoring
-
 - (void)startMonitoring {
-    // Check connections before monitoring
-    [self check4gStatus];
-    [self checkInternetAccess];
+    [self currentReachabilityStatus];
 
-    // Start monitoring
-    [self.reachabilityManager startNotifier];
+    [self.reachabilityPodInstance startNotifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetConnectionChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(radioAccessChanged:) name:CTRadioAccessTechnologyDidChangeNotification object:nil];
 }
 
 - (void)stopMonitoring {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.reachabilityManager stopNotifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CTRadioAccessTechnologyDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [self.reachabilityPodInstance stopNotifier];
 }
 
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:ReachabilityManagerStatusKey]) {
-        return NO;
-    } else {
-        return [super automaticallyNotifiesObserversForKey:key];
-    }
+#pragma mark - Status logic
+/**
+ *  @return Returns Yes if connection is 4g, otherwise No.
+ */
+- (BOOL)on4g {
+    return [self.networkInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyLTE];;
 }
 
-#pragma mark - update status
-
-- (void)check4gStatus {
-    self.on4g = [self.networkInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyLTE];
+/**
+ *  @return Returns Yes if connection is Wifi, otherwise No.
+ */
+- (BOOL)onWifi {
+    return [self.reachabilityPodInstance isReachableViaWiFi];
 }
 
-- (void)checkInternetAccess {
-    self.hasInternet = [self.reachabilityManager isReachable];
-    self.onWifi = [self.reachabilityManager isReachableViaWiFi];
+/**
+ *  @return Returns Yes if the device has an internet connection, otherwise No.
+ */
+- (BOOL)hasInternet {
+    return [self.reachabilityPodInstance isReachable];
 }
 
-- (ReachabilityManagerStatusType)checkCurrentConnection {
-    [self check4gStatus];
-    [self checkInternetAccess];
-    [self setNewStatus];
-
-    return self.status;
-}
-
-- (void)updateStatus {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setNewStatus];
-    });
-}
-
-- (void)setNewStatus {
+/**
+ *  For internal use, the function has a side effect of updating the internal reachability status
+ *  which is used in a couple of functions inside this class.
+ *
+ *  @return The current up to date reability status.
+ */
+- (ReachabilityManagerStatusType)currentReachabilityStatus {
     if (self.on4g || self.onWifi) {
-        self.status = ReachabilityManagerStatusSIP;
+        self.reachabilityStatus = ReachabilityManagerStatusHighSpeed;
     } else if (self.hasInternet) {
-        self.status = ReachabilityManagerStatusTwoStep;
+        self.reachabilityStatus = ReachabilityManagerStatusLowSpeed;
     } else {
-        self.status = ReachabilityManagerStatusOffline;
+        self.reachabilityStatus = ReachabilityManagerStatusOffline;
     }
+    return self.reachabilityStatus;
 }
 
-#pragma mark - notifications
-
+#pragma mark - Callback functions
 - (void)internetConnectionChanged:(NSNotification *)notification {
-    [self checkInternetAccess];
+    [self currentReachabilityStatus];
 }
 
 - (void)radioAccessChanged:(NSNotification *)notification {
-    self.on4g = [(NSString *)notification.object isEqualToString:CTRadioAccessTechnologyLTE];
+    [self currentReachabilityStatus];
+}
+
+#pragma mark - KVO overrider
+// To override default KVO behaviour for the Reachability status property.
++ (BOOL)automaticallyNotifiesObserversOfReachabilityStatus {
+    return NO;
 }
 
 @end

@@ -48,7 +48,7 @@
             self.view.backgroundColor = [Configuration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
             break;
         }
-        case ReachabilityManagerStatusTwoStep: {
+        case ReachabilityManagerStatusLowSpeed: {
             if ([SystemUser currentUser].sipEnabled) {
                 self.twoStepLabel.hidden = NO;
                 self.twoStepInfoButton.hidden = NO;
@@ -56,7 +56,7 @@
             }
             break;
         }
-        case ReachabilityManagerStatusSIP: {
+        case ReachabilityManagerStatusHighSpeed: {
             break;
         }
     }
