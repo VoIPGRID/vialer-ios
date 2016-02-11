@@ -262,8 +262,16 @@
 
     [self.user logout];
 
-    OCMVerify([mockNotificationCenter postNotificationName:SystemUserLogoutNotification object:self.user]);
+    OCMVerify([mockNotificationCenter postNotificationName:SystemUserLogoutNotification object:[OCMArg isEqual:self.user] userInfo:[OCMArg any]]);
     [mockNotificationCenter stopMocking];
+}
+
+- (void)testUnAuthorizedNotificationWillLogoutUser {
+    self.user.loggedIn = YES;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:VoIPGRIDRequestOperationManagerUnAuthorizedNotification object:nil];
+
+    XCTAssertFalse(self.user.loggedIn, @"The user should be logged out.");
 }
 
 - (void)testUserWithAllowedToSipInDefaultsWillAllowSip {
@@ -285,12 +293,15 @@
 
 - (void)testUserHasSipAccountAndPasswordWhenInSUD {
     OCMStub([self.userDefaultsMock objectForKey:[OCMArg isEqual:@"SIPAccount"]]).andReturn(@"12340042");
-    OCMStub([SSKeychain passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
+    id keyChainMock = OCMClassMock([SSKeychain class]);
+    OCMStub([keyChainMock passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
 
     SystemUser *user = [[SystemUser alloc] initPrivate];
 
     XCTAssertEqualObjects(user.sipAccount, @"12340042", @"The correct sipAccount should have been retrieved.");
     XCTAssertEqualObjects(user.sipPassword, @"testPassword", @"The correct sip password should have been retrieved.");
+    
+    [keyChainMock stopMocking];
 }
 
 - (void)testUpdateSIPAccountInformationWhenAsked {
@@ -330,26 +341,6 @@
     [self waitForExpectationsWithTimeout:0.5 handler:^(NSError * _Nullable error) {
         NSLog(@"Error: %@", error);
     }];
-}
-
-- (void)testUserCanDoSIP {
-    SystemUser *user = [[SystemUser alloc] initPrivate];
-    user.sipAllowed = YES;
-    user.sipEnabled = YES;
-    user.sipAccount = @"42";
-
-    BOOL success = [user canDoSIP];
-    XCTAssertTrue(success, @"User should be able to do SIP");
-}
-
-- (void)testUserCannotDoSIP {
-    SystemUser *user = [[SystemUser alloc] initPrivate];
-    user.sipAllowed = YES;
-    user.sipEnabled = NO;
-    user.sipAccount = @"42";
-
-    BOOL success = [user canDoSIP];
-    XCTAssertFalse(success, @"User should not be able to do SIP");
 }
 
 @end

@@ -12,8 +12,10 @@
 
 NSString * const SystemUserErrorDomain = @"Vialer.Systemuser";
 
-NSString * const SystemUserLoginNotification = @"SystemUserLoginNotification";
-NSString * const SystemUserLogoutNotification = @"SystemUserLogoutNotification";
+NSString * const SystemUserLoginNotification                = @"SystemUserLoginNotification";
+NSString * const SystemUserLogoutNotification               = @"SystemUserLogoutNotification";
+NSString * const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogoutNotificationDisplayNameKey";
+NSString * const SystemUserLogoutNotificationErrorKey       = @"SystemUserLogoutNotificationErrorKey";
 
 NSString * const SystemUserSIPCredentialsChangedNotification = @"SystemUserSIPCredentialsChangedNotification";
 
@@ -266,8 +268,12 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)logout {
+    [self logoutWithUserInfo:nil];
+}
+
+- (void)logoutWithUserInfo:(NSDictionary *)userInfo {
     [self removeCurrentUser];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserLogoutNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserLogoutNotification object:self userInfo:userInfo];
 }
 
 - (void)removeCurrentUser {
@@ -361,7 +367,10 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
                 self.mobileNumber = mobileNumber;
                 completion(YES, nil);
             } else {
-                completion(NO, error);
+                NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
+                                           NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save the number, please update the number.", nil)
+                                           };
+                completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserFailedToSaveNumberRemote userInfo:userInfo]);
             }
         }];
     } else {
@@ -461,7 +470,11 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 # pragma mark - Notifications
 
 - (void)authorizationFailedNotification:(NSNotification *)notification {
-    [self logout];
+    NSDictionary *errorUserInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"You're not authorized", nil)};
+    NSDictionary *logoutUserInfo = @{SystemUserLogoutNotificationDisplayNameKey: [self.displayName copy],
+                                     SystemUserLogoutNotificationErrorKey: [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserUnAuthorized userInfo:errorUserInfo]
+                                     };
+    [self logoutWithUserInfo:logoutUserInfo];
 }
 
 # pragma mark - Debug help

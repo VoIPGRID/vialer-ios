@@ -39,6 +39,14 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      *  The mobile number has no prefix.
      */
     SystemUserErrorMobileNumberNoPrefix,
+    /**
+     *  The mobile number couldn't be stored remotely.
+     */
+    SystemUserFailedToSaveNumberRemote,
+    /**
+     *  The user is unauthorized.
+     */
+    SystemUserUnAuthorized,
 };
 
 /**
@@ -50,6 +58,16 @@ extern NSString * const SystemUserLoginNotification;
  *  Notification that can be listened to when the user does logout.
  */
 extern NSString * const SystemUserLogoutNotification;
+
+/**
+ *  Key where in the dictionary the display name in the logoutNotification is stored.
+ */
+extern NSString * const SystemUserLogoutNotificationDisplayNameKey;
+
+/**
+ *  Key where in the dictionary the error in the logoutNotification is stored.
+ */
+extern NSString * const SystemUserLogoutNotificationErrorKey;
 
 /**
  *  Notification that can be listened to when the user has changed SIP credentials.

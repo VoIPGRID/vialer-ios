@@ -9,6 +9,7 @@
 #import "VailerRootViewController.h"
 
 #import "SystemUser.h"
+#import "UIAlertController+Vialer.h"
 #import "VialerDrawerViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
@@ -100,7 +101,22 @@ static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @
 #pragma mark - Notifications
 
 - (void)logoutNotification:(NSNotification *)notification {
-    [self showLoginScreen];
+    if (notification.userInfo) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+        NSError *error = notification.userInfo[SystemUserLogoutNotificationErrorKey];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ is logged out.", nil), notification.userInfo[SystemUserLogoutNotificationDisplayNameKey]]
+                                                                       message:error.localizedDescription
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+            [self showLoginScreen];
+        }];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self showLoginScreen];
+    }
 }
 
 @end
