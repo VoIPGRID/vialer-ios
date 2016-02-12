@@ -22,7 +22,7 @@
 @property (strong, nonatomic)NSString *lastName;
 
 @property (nonatomic)BOOL loggedIn;
-@property (nonatomic)BOOL isSipAllowed;
+@property (readwrite, nonatomic) BOOL sipAllowed;
 
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager * operationsManager;
 @end
@@ -330,6 +330,26 @@
     [self waitForExpectationsWithTimeout:0.5 handler:^(NSError * _Nullable error) {
         NSLog(@"Error: %@", error);
     }];
+}
+
+- (void)testUserCanDoSIP {
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.sipAllowed = YES;
+    user.sipEnabled = YES;
+    user.sipAccount = @"42";
+
+    BOOL success = [user canDoSIP];
+    XCTAssertTrue(success, @"User should be able to do SIP");
+}
+
+- (void)testUserCannotDoSIP {
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.sipAllowed = YES;
+    user.sipEnabled = NO;
+    user.sipAccount = @"42";
+
+    BOOL success = [user canDoSIP];
+    XCTAssertFalse(success, @"User should not be able to do SIP");
 }
 
 @end

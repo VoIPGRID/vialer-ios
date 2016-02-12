@@ -76,6 +76,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
  *  SIP Properties
  */
 @property (strong, nonatomic) NSString *sipAccount;
+@property (strong, nonatomic) NSString *sipDomain;
 @property (readwrite, nonatomic) BOOL sipAllowed;
 
 /**
@@ -185,6 +186,14 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         return [SSKeychain passwordForService:self.serviceName account:self.sipAccount];
     }
     return nil;
+}
+
+- (NSString *)sipDomain {
+    return [[Configuration defaultConfiguration] UrlForKey:@"SIP domain"];
+}
+
+- (NSString *)sipProxy {
+    return self.sipDomain;
 }
 
 - (NSString *)serviceName {

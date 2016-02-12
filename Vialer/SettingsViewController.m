@@ -7,6 +7,7 @@
 
 #import "EditNumberViewController.h"
 #import "GAITracker.h"
+#import "SIPUtils.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
@@ -156,6 +157,9 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (void)didChangeSwitch:(UISwitch *)switchview {
     if (switchview.tag == 1001) {
         self.systemUser.sipEnabled = switchview.on;
+        if (switchview.on) {
+            [SIPUtils setupSIPEndpoint];
+        }
         NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
         [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
     }

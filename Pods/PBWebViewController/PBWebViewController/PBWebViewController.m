@@ -8,7 +8,7 @@
 
 #import "PBWebViewController.h"
 
-@interface PBWebViewController () <UIPopoverControllerDelegate>
+@interface PBWebViewController ()
 
 @property (strong, nonatomic) UIWebView *webView;
 
@@ -16,8 +16,6 @@
 @property (strong, nonatomic) UIBarButtonItem *reloadButton;
 @property (strong, nonatomic) UIBarButtonItem *backButton;
 @property (strong, nonatomic) UIBarButtonItem *forwardButton;
-
-@property (strong, nonatomic) UIPopoverController *activitiyPopoverController;
 
 @property (assign, nonatomic) BOOL toolbarPreviouslyHidden;
 
@@ -50,8 +48,7 @@
 
 - (void)load
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:self.URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:4.0];
-    [self.webView loadRequest:request];
+    [self.webView loadRequest:self.URLRequest];
     
     if (self.navigationController.toolbarHidden) {
         self.toolbarPreviouslyHidden = YES;
@@ -103,6 +100,16 @@
     }
 }
 
+#pragma mark - URL setter/getter
+
+- (void)setURL:(NSURL *)URL {
+    self.URLRequest = [NSURLRequest requestWithURL:URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
+}
+
+- (NSURL *)URL {
+    return self.URLRequest.URL;
+}
+
 #pragma mark - Helpers
 
 - (UIImage *)backButtonImage
@@ -143,13 +150,13 @@
         
         CGContextRef context = UIGraphicsGetCurrentContext();
         
-        CGFloat x_mid = size.width / 2.0;
-        CGFloat y_mid = size.height / 2.0;
+        CGFloat midX = size.width / 2.0;
+        CGFloat midY = size.height / 2.0;
         
-        CGContextTranslateCTM(context, x_mid, y_mid);
+        CGContextTranslateCTM(context, midX, midY);
         CGContextRotateCTM(context, M_PI);
         
-        [backButtonImage drawAtPoint:CGPointMake(-x_mid, -y_mid)];
+        [backButtonImage drawAtPoint:CGPointMake(-midX, -midY)];
         
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
@@ -160,39 +167,19 @@
 
 - (void)setupToolBarItems
 {
-    self.stopLoadingButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
-                                                                           target:self.webView
-                                                                           action:@selector(stopLoading)];
-    
-    self.reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                      target:self.webView
-                                                                      action:@selector(reload)];
-    
-    self.backButton = [[UIBarButtonItem alloc] initWithImage:[self backButtonImage]
-                                                       style:UIBarButtonItemStylePlain
-                                                      target:self.webView
-                                                      action:@selector(goBack)];
-    
-    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[self forwardButtonImage]
-                                                          style:UIBarButtonItemStylePlain
-                                                         target:self.webView
-                                                         action:@selector(goForward)];
+    self.stopLoadingButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self.webView action:@selector(stopLoading)];
+    self.reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self.webView action:@selector(reload)];
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:[self backButtonImage] style:UIBarButtonItemStylePlain target:self.webView action:@selector(goBack)];
+    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[self forwardButtonImage] style:UIBarButtonItemStylePlain target:self.webView action:@selector(goForward)];
     
     self.backButton.enabled = NO;
     self.forwardButton.enabled = NO;
     
-    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                  target:self
-                                                                                  action:@selector(action:)];
+    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(action:)];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *space_ = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
-    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                           target:nil
-                                                                           action:nil];
-    
-    UIBarButtonItem *space_ = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                            target:nil
-                                                                            action:nil];
-    space_.width = 60.0f;
+    space_.width = 60.0;
     
     self.toolbarItems = @[self.stopLoadingButton, space, self.backButton, space_, self.forwardButton, space, actionButton];
 }
@@ -203,11 +190,13 @@
     self.forwardButton.enabled = self.webView.canGoForward;
     
     NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
+    
     if (self.webView.loading) {
         toolbarItems[0] = self.stopLoadingButton;
     } else {
         toolbarItems[0] = self.reloadButton;
     }
+    
     self.toolbarItems = [toolbarItems copy];
 }
 
@@ -221,35 +210,16 @@
 
 - (void)action:(id)sender
 {
-    if (self.activitiyPopoverController.popoverVisible) {
-        [self.activitiyPopoverController dismissPopoverAnimated:YES];
-        return;
-    }
+    NSArray *activityItems = self.activityItems ? self.activityItems : @[self.URL];
     
-    NSArray *activityItems = @[self.URL];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:self.applicationActivities];
     
-    if (self.activityItems) {
-        activityItems = self.activityItems;
-    }
+    activityViewController.excludedActivityTypes = self.excludedActivityTypes;
     
-    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                                                     applicationActivities:self.applicationActivities];
-    vc.excludedActivityTypes = self.excludedActivityTypes;
+    activityViewController.modalPresentationStyle = UIModalPresentationPopover;
+    activityViewController.popoverPresentationController.barButtonItem = self.toolbarItems.lastObject;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:vc animated:YES completion:NULL];
-    } else {
-        if (!self.activitiyPopoverController) {
-            self.activitiyPopoverController = [[UIPopoverController alloc] initWithContentViewController:vc];
-        }
-        
-        self.activitiyPopoverController.delegate = self;
-        
-        UIBarButtonItem *barButtonItem = [self.toolbarItems lastObject];
-        [self.activitiyPopoverController presentPopoverFromBarButtonItem:barButtonItem
-                                                permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                                animated:YES];
-    }
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 #pragma mark - Web view delegate
@@ -270,13 +240,6 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [self finishLoad];
-}
-
-#pragma mark - Popover controller delegate
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    self.activitiyPopoverController = nil;
 }
 
 @end

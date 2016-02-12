@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VialerSIPLib-iOS/VialerSIPLib.h"
 
 @interface SIPUtils : NSObject
 
@@ -18,5 +19,21 @@
  *  Remove the SIP endpoint.
  */
 + (void)removeSIPEndpoint;
+
+/**
+ *  Add the sipAccount of the current SystemUser to the endpoint.
+ *
+ *  @return BOOL YES if the adding of the account was a success.
+ */
++ (VSLAccount * _Nullable)addSIPAccountToEndpoint;
+
+/**
+ *  Clean the phone number so it's usable to setup a SIP call.
+ *
+ *  @param phoneNumber the phonenumber to be cleaned.
+ *
+ *  @return NSString a cleaned phonennumber
+ */
++ (NSString * _Nonnull)cleanPhoneNumber:(NSString *_Nonnull)phoneNumber;
 
 @end

@@ -4,9 +4,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <VialerSIPLib-iOS/VialerSIPLib.h>
+
 
 @interface SIPCallingViewController : UIViewController
 
-- (void)handlePhoneNumber:(NSString *)phoneNumber;
+/**
+ *  This will setup a SIP call with the provided phonenumber.
+ *
+ *  @param phoneNumber the phonenumber to be displayed in the UI.
+ */
+- (void)handleOutgoingCallWithPhoneNumber:(NSString * _Nonnull)phoneNumber;
 
 @end

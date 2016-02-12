@@ -9,6 +9,7 @@ def default_pods
     pod 'AFNetworkActivityLogger'
     pod 'AFNetworking'
     pod 'Google/Analytics', '~> 1.0.7'
+    pod 'HDLumberjackLogFormatter', :git => 'https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git'
     pod 'HTCopyableLabel'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'

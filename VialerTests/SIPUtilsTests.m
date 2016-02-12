@@ -48,6 +48,7 @@
 
 - (void)testSetupSIPEndPointWithSystemUserIsAllowedToUseSIP {
     OCMStub([self.systemUserMock sipAllowed]).andReturn(YES);
+    OCMStub([self.systemUserMock sipEnabled]).andReturn(YES);
 
     id vialerSIPLibMock = OCMClassMock([VialerSIPLib class]);
     OCMStub([vialerSIPLibMock sharedInstance]).andReturn(vialerSIPLibMock);
