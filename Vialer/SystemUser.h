@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <VialerSIPLib-iOS/VialerSIPLib.h>
 
 /**
  *  Error Domain.
@@ -60,7 +61,7 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
  *
  *  Current the SystemUser class also represents a lot of information maintained/stored by the VoIPGRIDRequestOperationManager in the user defaults.
  */
-@interface SystemUser : NSObject
+@interface SystemUser : NSObject <SIPEnabledUser>
 
 /**
  *  BOOL that will indicate is the user is logged in.
@@ -121,6 +122,18 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
 @property (readonly, nonatomic) NSString *sipPassword;
 
 /**
+ *  The domain where the PBX can be found.
+ */
+@property (readonly, nonatomic) NSString *sipDomain;
+
+/**
+ *  The proxy address where to connect to.
+ */
+@property (readonly, nonatomic) NSString *sipProxy;
+
+@property (nonatomic) BOOL sipRegisterOnAdd;
+
+/**
  *  Is the user allowed to make SIP calls.
  */
 @property (readonly, nonatomic) BOOL sipAllowed;
@@ -138,7 +151,7 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
 + (instancetype)currentUser;
 
 /**
- *  This will login the user witht he given user and password.
+ *  This will login the user with the given user and password.
  *
  *  When login on remote was successful or failure, the completionblock will be called.
  *

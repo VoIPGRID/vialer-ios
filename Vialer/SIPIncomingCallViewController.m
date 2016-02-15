@@ -13,7 +13,7 @@ static NSString * const SIPIncomingCallViewControllerShowSIPCallingStoryboard = 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handlePhoneNumber:@"264"];
+//        [sipCallingViewController handleIncomingCallWithVSLCall:@"264"];
     }
 }
 

@@ -14,6 +14,7 @@
 #import "ReachabilityBarViewController.h"
 #import "TwoStepCallingViewController.h"
 #import "SIPCallingViewController.h"
+#import "SystemUser.h"
 
 #import "UIViewController+MMDrawerController.h"
 
@@ -163,7 +164,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
     } else {
         self.lastCalledNumber = self.numberText;
 
-        if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP) {
+        if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP && [SystemUser currentUser].sipEnabled) {
             [GAITracker setupOutgoingSIPCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerSIPCallingSegue sender:self];
         } else {
@@ -186,7 +187,7 @@ static NSString * const DialerViewControllerReachabilityStatusKey = @"status";
         [tscvc handlePhoneNumber:self.numberText];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handlePhoneNumber:self.numberText];
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.numberText];
     }
 }
 

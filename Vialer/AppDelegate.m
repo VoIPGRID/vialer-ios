@@ -6,12 +6,14 @@
 #import "AppDelegate.h"
 
 #import "AFNetworkActivityLogger.h"
+@import AVFoundation;
 #ifdef DEBUG
 #import "SDStatusBarManager.h"
 #endif
 #import "SSKeychain.h"
 
 #import "APNSHandler.h"
+#import "HDLumberjackLogFormatter.h"
 #import "GAITracker.h"
 #import "PZPushMiddleware.h"
 #import "SIPUtils.h"
@@ -28,6 +30,7 @@
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
+    [self setupCocoaLumberjackLogging];
 
     //Only when the app is run for screenshot purposes do the following:
     if ([[self class] isSnapshotScreenshotRun]) {
@@ -77,6 +80,24 @@
 
 + (BOOL)isSnapshotScreenshotRun {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
+}
+
+- (void)setupCocoaLumberjackLogging {
+    //Add the Terminal and TTY(XCode console) loggers to CocoaLumberjack (simulate the default NSLog behaviour)
+    HDLumberjackLogFormatter* logFormat = [[HDLumberjackLogFormatter alloc] init];
+
+    DDASLLogger *aslLogger = [DDASLLogger sharedInstance];
+    [aslLogger setLogFormatter: logFormat];
+    DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
+    [ttyLogger setLogFormatter:logFormat];
+    [ttyLogger setColorsEnabled:YES];
+
+    //Give INFO a color
+    UIColor *pink = [UIColor colorWithRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
+
+    [DDLog addLogger:aslLogger];
+    [DDLog addLogger:ttyLogger];
 }
 
 # pragma mark - Notifications

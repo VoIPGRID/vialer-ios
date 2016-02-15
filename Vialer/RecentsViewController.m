@@ -13,6 +13,7 @@
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
 #import "SIPCallingViewController.h"
+#import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 
 #import "UIAlertController+Vialer.h"
@@ -152,7 +153,7 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handlePhoneNumber:self.phoneNumberToCall];
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall];
     }
 }
 
@@ -298,8 +299,7 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (void)callPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumberToCall = phoneNumber;
-    // TODO: implement 4g calling
-    if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP) {
+    if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP && [SystemUser currentUser].sipEnabled) {
         [GAITracker setupOutgoingSIPCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
     } else {

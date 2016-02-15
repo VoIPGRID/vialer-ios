@@ -5,7 +5,6 @@
 
 #import "SIPUtils.h"
 #import "SystemUser.h"
-#import "VialerSIPLib-iOS/VialerSIPLib.h"
 
 @implementation SIPUtils
 
@@ -32,6 +31,22 @@
 
 + (void)removeSIPEndpoint {
     [[VialerSIPLib sharedInstance] removeEndpoint];
+}
+
++ (VSLAccount *)addSIPAccountToEndpoint {
+    NSError *error;
+    VSLAccount *account = [[VialerSIPLib sharedInstance] createAccountWithSipUser:[SystemUser currentUser] error:&error];
+
+    if (error) {
+        NSLog(@"Add SIP Account to Endpoint failed: %@", error);
+    }
+
+    return account;
+}
+
++ (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
+    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+    return [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
 }
 
 @end

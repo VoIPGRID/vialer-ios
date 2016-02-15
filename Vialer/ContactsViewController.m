@@ -137,7 +137,7 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handlePhoneNumber:self.phoneNumberToCall];
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall];
     }
 }
 
@@ -227,7 +227,7 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP) {
+                if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP && [SystemUser currentUser].sipEnabled) {
                     [GAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else {
