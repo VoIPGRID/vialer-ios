@@ -4,9 +4,6 @@
 "%@\nis currently logged in." = "%@\nis currently logged in.";
 
 /* No comment provided by engineer. */
-"ACCOUNT_FOOTER_OWN_NUMBER_DESCRIPTION" = "Your own number will be used to setup a two-step call showing your business number";
-
-/* No comment provided by engineer. */
 "App is configuring" = "%@ is configuring";
 
 /* No comment provided by engineer. */
@@ -97,6 +94,9 @@
 "Failed to load %@" = "Failed to load %@";
 
 /* No comment provided by engineer. */
+"Failed to load VoIP settings." = "Failed to load VoIP settings.";
+
+/* No comment provided by engineer. */
 "Failed to send email." = "Failed to send email.";
 
 /* No comment provided by engineer. */
@@ -128,6 +128,9 @@
 
 /* No comment provided by engineer. */
 "Loading availability options..." = "Loading availability options...";
+
+/* No comment provided by engineer. */
+"Loading VoIP settings..." = "Loading VoIP settings...";
 
 /* No comment provided by engineer. */
 "Log out" = "Log out";
@@ -167,6 +170,9 @@
 
 /* No comment provided by engineer. */
 "No recent calls" = "No recent calls";
+
+/* No comment provided by engineer. */
+"No VoIP settings found." = "No VoIP settings found.";
 
 /* No comment provided by engineer. */
 "Not available" = "Not available";
@@ -226,9 +232,6 @@
 "Set up call" = "Set up call";
 
 /* No comment provided by engineer. */
-"VoIP account ID" = "VoIP account ID";
-
-/* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
 
 /* No comment provided by engineer. */
@@ -239,6 +242,9 @@
 
 /* No comment provided by engineer. */
 "The number is to short" = "The number is to short";
+
+/* No comment provided by engineer. */
+"There is no VoIP account set for your user. Please set a VoIP Account on the platform." = "There is no VoIP account set for your user. Please set a VoIP Account on the platform.";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "This user is not allowed to use the app";
@@ -265,10 +271,13 @@
 "Unable to fetch availability" = "Unable to fetch availability";
 
 /* No comment provided by engineer. */
+"Unable to load your VoIP settings. Please try again." = "Unable to load your VoIP settings. Please try again.";
+
+/* No comment provided by engineer. */
 "user type not allowed" = "user type not allowed";
 
 /* No comment provided by engineer. */
-"VoIP Account" = "VoIP Account";
+"VoIP account ID" = "VoIP account ID";
 
 /* No comment provided by engineer. */
 "Yes" = "Yes";

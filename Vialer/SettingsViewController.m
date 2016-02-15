@@ -8,10 +8,11 @@
 #import "EditNumberViewController.h"
 #import "GAITracker.h"
 #import "SIPUtils.h"
+#import "SVProgressHUD.h"
 #import "SystemUser.h"
+#import "UIAlertController+Vialer.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
-#import "SVProgressHUD.h"
 
 static int const SettingsViewControllerVoIPAccountSection = 0;
 static int const SettingsViewControllerSipEnabledRow = 0;
@@ -29,7 +30,7 @@ static int const SettingsViewControllerUISwitchOriginOffsetY = 15;
 static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNumberSegue";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
-@property (weak, nonatomic) SystemUser *systemUser;
+@property (weak, nonatomic) SystemUser *currentUser;
 @end
 
 @implementation SettingsViewController
@@ -41,11 +42,11 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 
 #pragma mark - Properties
 
-- (SystemUser *)systemUser {
-    if (!_systemUser) {
-        _systemUser = [SystemUser currentUser];
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
     }
-    return _systemUser;
+    return _currentUser;
 }
 
 #pragma mark - Table view data source
@@ -58,9 +59,9 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
     switch (section) {
         case SettingsViewControllerVoIPAccountSection: {
             // Are we allowed to show anything?
-            if (self.systemUser.sipAllowed && self.systemUser.sipAccount) {
+            if (self.currentUser.sipAllowed) {
                 // Do we show all fields?
-                if (self.systemUser.sipEnabled) {
+                if (self.currentUser.sipEnabled) {
                     // Sip is enabled, show all fields
                     return 2;
                 }
@@ -92,29 +93,29 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
                           withTag:1001
-                       defaultVal:self.systemUser.sipEnabled];
+                       defaultVal:self.currentUser.sipEnabled];
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
-            cell.detailTextLabel.text = self.systemUser.sipAccount;
+            cell.detailTextLabel.text = self.currentUser.sipAccount;
         }
     } else if (indexPath.section == SettingsViewControllerNumbersSection) {
         if (indexPath.row == SettingsViewControllerMyNumberRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
             cell.textLabel.text = NSLocalizedString(@"My number", nil);
-            cell.detailTextLabel.text = self.systemUser.mobileNumber;
+            cell.detailTextLabel.text = self.currentUser.mobileNumber;
 
         } else if (indexPath.row == SettingsViewControllerOutgoingNumberRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"Outgoing number", nil);
-            cell.detailTextLabel.text = self.systemUser.outgoingNumber;
+            cell.detailTextLabel.text = self.currentUser.outgoingNumber;
 
         } else if (indexPath.row == SettingsViewControllerMyEmailRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"Email", nil);
             cell.detailTextLabel.minimumScaleFactor = 0.8f;
             cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-            cell.detailTextLabel.text = self.systemUser.username;
+            cell.detailTextLabel.text = self.currentUser.username;
         }
     }
     return cell;
@@ -129,7 +130,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:SettingsViewControllerShowEditNumberSegue]) {
         EditNumberViewController *editNumberController = (EditNumberViewController *)segue.destinationViewController;
-        editNumberController.numberToEdit = self.systemUser.mobileNumber;
+        editNumberController.numberToEdit = self.currentUser.mobileNumber;
         editNumberController.delegate = self;
     }
 }
@@ -149,22 +150,51 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
     NSIndexPath *rowAtIndexPath = [NSIndexPath indexPathForRow:SettingsViewControllerMyNumberRow
                                                      inSection:SettingsViewControllerNumbersSection];
     UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:rowAtIndexPath];
-    myNumberCell.detailTextLabel.text = self.systemUser.mobileNumber;
+    myNumberCell.detailTextLabel.text = self.currentUser.mobileNumber;
 }
 
 #pragma mark - Enable VoIP switch handler
 
-- (void)didChangeSwitch:(UISwitch *)switchview {
-    if (switchview.tag == 1001) {
-        self.systemUser.sipEnabled = switchview.on;
-        if (switchview.on) {
-            [SIPUtils setupSIPEndpoint];
+- (void)didChangeSwitch:(UISwitch *)sender {
+    if (sender.tag == 1001) {
+        if (sender.isOn) {
+            [self tryToEnableSIPWithSwitch:sender];
+        } else {
+            self.currentUser.sipEnabled = NO;
+            NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
+            [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-        NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
-        [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
+
+- (void)tryToEnableSIPWithSwitch:(UISwitch *)sender {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading VoIP settings...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [self.currentUser getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            // Fetching account failed.
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Failed to load VoIP settings.", nil)
+                                                                            message:NSLocalizedString(@"Unable to load your VoIP settings. Please try again.", nil)
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
+            sender.on = NO;
+        } else if (!success) {
+            // There is no account.
+            sender.on = NO;
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"No VoIP settings found.", nil)
+                                                                            message:NSLocalizedString(@"There is no VoIP account set for your user. Please set a VoIP Account on the platform.", nil)
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
+        } else {
+            // Account was retrieved, show VoIP Acount row.
+            NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
+            [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
+}
 #pragma mark - Helper function for switches in table
 
 - (void)createOnOffView:(UITableViewCell*)cell withTitle:(NSString*)title withTag:(int)tag defaultVal:(BOOL)defaultVal {

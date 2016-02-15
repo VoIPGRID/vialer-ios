@@ -57,6 +57,7 @@
     BOOL success = [SIPUtils setupSIPEndpoint];
 
     OCMVerify([self.systemUserMock sipAllowed]);
+    OCMVerify([self.systemUserMock sipEnabled]);
 
     XCTAssertTrue(success, @"The endpoint should be setup with the configuration.");
 

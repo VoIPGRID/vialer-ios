@@ -179,8 +179,17 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)setSipEnabled:(BOOL)sipEnabled {
-    _sipEnabled = sipEnabled;
-    [[NSUserDefaults standardUserDefaults] setBool:sipEnabled forKey:SystemUserSUDSIPEnabled];
+    // If sip is being enabled, check if there is an sipAccount and fire notification.
+    if (sipEnabled && !_sipEnabled && self.sipAccount) {
+        _sipEnabled = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+
+    // If sip is being disabled, fire a notification.
+    } else if (!sipEnabled && _sipEnabled) {
+        _sipEnabled = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:_sipEnabled forKey:SystemUserSUDSIPEnabled];
 }
 
 - (NSString *)sipPassword {
@@ -308,8 +317,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.sipEnabled = NO;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPAccount];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPEnabled];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
 }
 
 - (void)setOwnPropertiesFromUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
@@ -324,7 +331,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.lastName       = userDict[SystemUserApiKeyLastName];
 
     self.sipAllowed     = [userDict[SystemUserApiKeySIPAllowed] boolValue];
-
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.username forKey:SystemUserSUDUsername];
@@ -380,23 +386,40 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 #pragma mark - SIP Handling
 
-- (void)updateSIPAccountWithSuccess:(void (^)(BOOL success, NSError *error))completion {
-    if (self.loggedIn && self.sipEnabled) {
-        // Update the user profile.
-        [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
-            // This user is allowed to use SIP, check if the account is configured.
-            if  (!error) {
-                NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
-                [self updateSIPAccountWithURL:appAccountURL withCompletion:completion];
-            } else {
-                if (completion) {
-                    NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
-                    NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingUserProfile userInfo:userInfo];
-                    completion(NO, error);
-                }
+- (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
+    if (self.loggedIn) {
+        [self fetchSIPAcountFromRemoteWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                self.sipEnabled = YES;
+            }
+            if (completion) {
+                completion(success, error);
             }
         }];
     }
+}
+
+- (void)updateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
+    if (self.loggedIn && self.sipEnabled) {
+        [self fetchSIPAcountFromRemoteWithCompletion:completion];
+    }
+}
+
+- (void)fetchSIPAcountFromRemoteWithCompletion:(void (^)(BOOL success, NSError *error))completion {
+    // Update the user profile.
+    [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
+        // This user is allowed to use SIP, check if the account is configured.
+        if  (!error) {
+            NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
+            [self updateSIPAccountWithURL:appAccountURL withCompletion:completion];
+        } else {
+            if (completion) {
+                NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
+                NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingUserProfile userInfo:userInfo];
+                completion(NO, error);
+            }
+        }
+    }];
 }
 
 /**
@@ -411,7 +434,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         [self removeSIPCredentials];
 
         if (completion) {
-            completion(YES, nil);
+            completion(NO, nil);
         }
         return;
     }

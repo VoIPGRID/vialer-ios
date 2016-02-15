@@ -7,4 +7,6 @@
 
 @interface SettingsViewController : UITableViewController
 
+- (void)didChangeSwitch:(UISwitch *)sender;
+
 @end

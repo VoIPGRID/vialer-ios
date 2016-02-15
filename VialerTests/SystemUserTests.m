@@ -21,8 +21,8 @@
 @property (strong, nonatomic)NSString *firstName;
 @property (strong, nonatomic)NSString *lastName;
 
-@property (nonatomic)BOOL loggedIn;
-@property (readwrite, nonatomic) BOOL sipAllowed;
+@property (nonatomic) BOOL loggedIn;
+@property (nonatomic) BOOL sipAllowed;
 
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager * operationsManager;
 @end
@@ -282,9 +282,20 @@
     XCTAssertTrue(user.sipAllowed, @"It should be allowed to use sip if defaults says so.");
 }
 
-- (void)testUserCanEnableSIPWhenHeIsAllowed {
+- (void)testUserCannotEnableSIPWhenHeHasNoSipAccount {
     OCMStub([self.userDefaultsMock boolForKey:@"SIPAllowed"]).andReturn(YES);
     SystemUser *user = [[SystemUser alloc] initPrivate];
+
+    user.sipEnabled = YES;
+
+    XCTAssertFalse(user.sipEnabled, @"It should not be possible to enable sip.");
+    [[self.userDefaultsMock reject] setBool:YES forKey:@"SipEnabled"];
+}
+
+- (void)testUserCanEnableSIPWhenHeIsAllowedAndHasAccount {
+    OCMStub([self.userDefaultsMock boolForKey:@"SIPAllowed"]).andReturn(YES);
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.sipAccount = @"42";
 
     user.sipEnabled = YES;
 
@@ -300,7 +311,7 @@
 
     XCTAssertEqualObjects(user.sipAccount, @"12340042", @"The correct sipAccount should have been retrieved.");
     XCTAssertEqualObjects(user.sipPassword, @"testPassword", @"The correct sip password should have been retrieved.");
-    
+
     [keyChainMock stopMocking];
 }
 
@@ -308,6 +319,7 @@
     // Make sure we have a properly loggedin user.
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
+    user.sipAccount = @"42";
     user.sipEnabled = YES;
     user.loggedIn = YES;
 
@@ -330,7 +342,7 @@
     }]]);
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Expect status call from TwoStepCall."];
-    [user updateSIPAccountWithSuccess:^(BOOL success, NSError *error) {
+    [user updateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
         XCTAssertTrue(success, @"It should have been a success when updating the SIP account of the user.");
         XCTAssertNil(error, @"There should be no error");
         XCTAssertEqualObjects(user.sipAccount, @"12340044", @"The new account should have been set.");
@@ -343,4 +355,53 @@
     }];
 }
 
+- (void)testGetAndActivateSipAccountWillAskOperationManagerForProfile {
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.operationsManager = self.operationsMock;
+    user.sipAllowed = YES;
+    user.loggedIn = YES;
+    [user getAndActivateSIPAccountWithCompletion:nil];
+
+    OCMVerify([self.operationsMock userProfileWithCompletion:[OCMArg any]]);
+}
+
+- (void)testGetAndActivateSipAccountWillAskOperationManagerToFetchAccount {
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.operationsManager = self.operationsMock;
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil,  @{@"client": @"42",
+                            @"app_account": @"/account/12340044",
+                            }, nil);
+        return YES;
+    }]]);
+    user.loggedIn = YES;
+    [user getAndActivateSIPAccountWithCompletion:nil];
+
+    OCMVerify([self.operationsMock retrievePhoneAccountForUrl:[OCMArg isEqual:@"/account/12340044"] withCompletion:[OCMArg any]]);
+}
+
+- (void)testGetAndActivateSipAccountWillReturnYESOnSuccess {
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.operationsManager = self.operationsMock;
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil,  @{@"client": @"42",
+                            @"app_account": @"/account/12340044",
+                            }, nil);
+        return YES;
+    }]]);
+    OCMStub([self.operationsMock retrievePhoneAccountForUrl:[OCMArg isEqual:@"/account/12340044"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil,  @{@"account_id": @12340044,
+                            @"password": @"newTestPassword",
+                            }, nil);
+
+        return YES;
+    }]]);
+    user.sipAllowed = YES;
+    user.loggedIn = YES;
+
+    [user getAndActivateSIPAccountWithCompletion:nil];
+
+    XCTAssertTrue(user.sipEnabled, @"User should have sip enabled");
+    XCTAssertEqualObjects(user.sipAccount, @"12340044", @"User should have correct sip account");
+}
 @end

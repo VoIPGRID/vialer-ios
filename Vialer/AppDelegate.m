@@ -61,8 +61,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
-    if ([SystemUser currentUser].sipAllowed) {
-        [self updatedSIPCredentials:nil];
+    if ([SystemUser currentUser].sipEnabled) {
+        [SIPUtils setupSIPEndpoint];
     }
 
     return YES;
@@ -70,8 +70,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success, NSError *error) {
-            if (success) {
+        [[SystemUser currentUser] updateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
+            if (!error) {
                 //[[PZPushMiddleware sharedInstance] updateDeviceRecord];
             }
         }];
@@ -115,7 +115,7 @@
 # pragma mark - Notifications
 
 - (void)updatedSIPCredentials:(NSNotification *)notification {
-    if ([SystemUser currentUser].sipAccount) {
+    if ([SystemUser currentUser].sipEnabled) {
         [SIPUtils setupSIPEndpoint];
     } else {
         [SIPUtils removeSIPEndpoint];

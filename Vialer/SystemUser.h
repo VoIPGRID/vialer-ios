@@ -149,7 +149,10 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
  */
 @property (readonly, nonatomic) NSString *sipProxy;
 
-@property (nonatomic) BOOL sipRegisterOnAdd;
+/**
+ *  This will return if the sip account should register when the user is added to the endpoint.
+ */
+@property (readonly, nonatomic) BOOL sipRegisterOnAdd;
 
 /**
  *  Is the user allowed to make SIP calls.
@@ -200,11 +203,18 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
 - (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void(^)(BOOL success, NSError *error))completion;
 
 /**
- *  This will fetch the up to date information from the VoIPGRID platform.
+ *  This will fetch the up to date information from the VoIPGRID platform and on succes enables SIP.
  *
- *  @param success Block will be called after the fetch from the VoIPGRID platform. BOOL success will tell if update was successful, NSError will return an error if there was one set.
+ *  @param completion Block will be called after the fetch from the VoIPGRID platform. BOOL success will tell if fetch was successful, NSError will return an error if there was one set.
  */
-- (void)updateSIPAccountWithSuccess:(void (^)(BOOL success, NSError *error))completion;
+- (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion;
+
+/**
+ *  This will fetch the up to date information from the VoIPGRID platform if the user is loggedIn and has Sip enabled.
+ *
+ *  @param completion Block will be called after the fetch from the VoIPGRID platform. BOOL success will tell if update was successful, NSError will return an error if there was one set.
+ */
+- (void)updateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion;
 
 /**
  *  This will fetch up to date information from the VoIPGRID platform.
