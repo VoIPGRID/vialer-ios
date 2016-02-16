@@ -78,7 +78,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     return [self createRequestWithUrl:url andMethod:@"DELETE" parameters:parameters withCompletion:completion];
 }
 
-- (AFHTTPRequestOperation *)createRequestWithUrl:(NSString *)url andMethod:(NSString *)method  parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (AFHTTPRequestOperation *)createRequestWithUrl:(NSString *)url andMethod:(NSString *)method parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
     url = [[NSURL URLWithString:url relativeToURL:self.baseURL] absoluteString];
 
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:url parameters:parameters error:nil];

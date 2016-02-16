@@ -15,22 +15,20 @@
 #import "APNSHandler.h"
 #import "HDLumberjackLogFormatter.h"
 #import "GAITracker.h"
-#import "PZPushMiddleware.h"
 #import "SIPUtils.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
-
 
 @implementation AppDelegate
 
 #pragma mark - UIApplication delegate
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self setupCocoaLumberjackLogging];
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
-    [self setupCocoaLumberjackLogging];
 
     //Only when the app is run for screenshot purposes do the following:
     if ([[self class] isSnapshotScreenshotRun]) {
@@ -66,7 +64,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [[SystemUser currentUser] updateSIPAccountWithSuccess:^(BOOL success, NSError *error) {
             if (success) {
-                [[PZPushMiddleware sharedInstance] updateDeviceRecord];
+                //[[PZPushMiddleware sharedInstance] updateDeviceRecord];
             }
         }];
     });

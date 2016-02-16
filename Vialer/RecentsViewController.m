@@ -299,7 +299,7 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (void)callPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumberToCall = phoneNumber;
-    if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP && [SystemUser currentUser].sipEnabled) {
+    if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
         [GAITracker setupOutgoingSIPCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
     } else {

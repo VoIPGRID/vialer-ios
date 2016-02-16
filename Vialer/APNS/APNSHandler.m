@@ -6,17 +6,23 @@
 #import "APNSHandler.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "PZPushMiddleware.h"
+#import "ReachabilityManager.h"
 #import "SystemUser.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface APNSHandler ()
 @property (strong, nonatomic) PKPushRegistry *voipRegistry;
+@property (strong, nonatomic) ReachabilityManager *reachabilityManger;
 @end
 
 @implementation APNSHandler
 
 #pragma mark - Lifecycle
+- (void)dealloc {
+    self.reachabilityManger = nil;
+}
+
 + (instancetype)sharedHandler {
     static APNSHandler *sharedAPNSHandler = nil;
     static dispatch_once_t onceToken;
@@ -35,6 +41,13 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     return _voipRegistry;
 }
 
+- (ReachabilityManager *)reachabilityManger {
+    if (!_reachabilityManger) {
+        _reachabilityManger = [[ReachabilityManager alloc] init];
+    }
+    return _reachabilityManger;
+}
+
 #pragma mark - actions
 - (void)registerForVoIPNotifications {
     self.voipRegistry.delegate = self;
@@ -50,6 +63,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
     DDLogDebug(@"%s Incoming push notification of type: %@", __PRETTY_FUNCTION__, type);
+
+    if ([self.reachabilityManger currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed) {
+        // signal "Ok to accept Call" to middleware
+    } else {
+        // signal "could not accept call" to middleware
+    }
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {

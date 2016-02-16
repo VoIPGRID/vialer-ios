@@ -227,7 +227,7 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.reachabilityManager checkCurrentConnection] == ReachabilityManagerStatusSIP && [SystemUser currentUser].sipEnabled) {
+                if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
                     [GAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else {

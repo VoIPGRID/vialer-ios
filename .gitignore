@@ -22,6 +22,9 @@ fastlane/**/screenshots/screenshots.html
 # scan temporary files
 fastlane/test_output
 
+# rbenv ruby version file
+.ruby-version
+
 #########################
 # !! The .gitignore obtained from stackoverflow starts here.
 # !! When implementing an update, do not remove the lines above ^^.
