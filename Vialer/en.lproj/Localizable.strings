@@ -1,6 +1,9 @@
 /* Created with Localizable Strings Merge, the swiss-army knife for iOS and OS X localization. */
 
 /* No comment provided by engineer. */
+"%@ is logged out." = "%@ is logged out.";
+
+/* No comment provided by engineer. */
 "%@\nis currently logged in." = "%@\nis currently logged in.";
 
 /* No comment provided by engineer. */
@@ -74,6 +77,9 @@
 
 /* No comment provided by engineer. */
 "Enable VoIP" = "Enable VoIP";
+
+/* No comment provided by engineer. */
+"Ending call..." = "Ending call...";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Enter Your email address and password to login.";
@@ -175,6 +181,9 @@
 "No VoIP settings found." = "No VoIP settings found.";
 
 /* No comment provided by engineer. */
+"Not allowed" = "Not allowed";
+
+/* No comment provided by engineer. */
 "Not available" = "Not available";
 
 /* No comment provided by engineer. */
@@ -274,6 +283,9 @@
 "Unable to load your VoIP settings. Please try again." = "Unable to load your VoIP settings. Please try again.";
 
 /* No comment provided by engineer. */
+"Unable to save the number, please update the number." = "Unable to save the number, please update the number.";
+
+/* No comment provided by engineer. */
 "user type not allowed" = "user type not allowed";
 
 /* No comment provided by engineer. */
@@ -290,6 +302,9 @@
 
 /* No comment provided by engineer. */
 "You must allow microphone access in Settings > Privacy > Microphone." = "You must allow microphone access in Settings > Privacy > Microphone.";
+
+/* No comment provided by engineer. */
+"You're not authorized" = "You're not authorized";
 
 /* No comment provided by engineer. */
 "your account" = "your account";

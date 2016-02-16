@@ -404,4 +404,5 @@
     XCTAssertTrue(user.sipEnabled, @"User should have sip enabled");
     XCTAssertEqualObjects(user.sipAccount, @"12340044", @"User should have correct sip account");
 }
+
 @end

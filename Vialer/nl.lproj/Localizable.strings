@@ -1,6 +1,9 @@
 /* Created with Localizable Strings Merge, the swiss-army knife for iOS and OS X localization. */
 
 /* No comment provided by engineer. */
+"%@ is logged out." = "%@ is uitgelogd.";
+
+/* No comment provided by engineer. */
 "%@\nis currently logged in." = "%@\nis ingelogd.";
 
 /* No comment provided by engineer. */
@@ -74,6 +77,9 @@
 
 /* No comment provided by engineer. */
 "Enable VoIP" = "Schakel VoIP in";
+
+/* No comment provided by engineer. */
+"Ending call..." = "Gesprek aan het be\U00EBeindigen...";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
@@ -175,6 +181,9 @@
 "No VoIP settings found." = "Geen VoIP instellingen gevonden.";
 
 /* No comment provided by engineer. */
+"Not allowed" = "Niet toegestaan";
+
+/* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
 
 /* No comment provided by engineer. */
@@ -274,6 +283,9 @@
 "Unable to load your VoIP settings. Please try again." = "Laden van VoIP instellingen mislukt. Probeer het opnieuw.";
 
 /* No comment provided by engineer. */
+"Unable to save the number, please update the number." = "Het is niet mogelijk om het nummer op te slaan, verander het nummer.";
+
+/* No comment provided by engineer. */
 "user type not allowed" = "gebruikers type niet toegestaan";
 
 /* No comment provided by engineer. */
@@ -290,6 +302,9 @@
 
 /* No comment provided by engineer. */
 "You must allow microphone access in Settings > Privacy > Microphone." = "De app heeft toegang nodig tot de microfoon via Instellingen > Privacy > Microfoon.";
+
+/* No comment provided by engineer. */
+"You're not authorized" = "Je bent niet geautoriseerd";
 
 /* No comment provided by engineer. */
 "your account" = "je account";

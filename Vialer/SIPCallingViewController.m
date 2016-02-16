@@ -11,6 +11,7 @@
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 static NSString * const SIPCallingViewControllerCallState = @"callState";
 static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
+static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 
 @interface SIPCallingViewController()
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
@@ -74,45 +75,58 @@ static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
 # pragma mark - IBActions
 
 - (IBAction)endCallButtonPressed:(UIButton *)sender {
-    NSError *error;
-    [self.call hangup:&error];
-    if (error) {
-        DDLogError(@"Error hangup call: %@", error);
+    if (self.call.callState != VSLCallStateDisconnected) {
+        self.callStatusLabel.text = NSLocalizedString(@"Ending call...", nil);
+        NSError *error;
+        [self.call hangup:&error];
+        if (error) {
+            DDLogError(@"Error hangup call: %@", error);
+        }
     }
 }
 
 # pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-
     if (object == self.call) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.call.callState == VSLCallStateDisconnected) {
-                @try {
-                    [self.call removeObserver:self forKeyPath:SIPCallingViewControllerCallState];
-                } @catch (NSException *exception) {
-                    DDLogInfo(@"Observer for keyPath callState was already removed. %@", exception);
-                }
-
-                @try {
-                    [self.call removeObserver:self forKeyPath:SIPCallingViewControllerMediaState];
-                } @catch (NSException *exception) {
-                    DDLogInfo(@"Observer for keyPath mediaState was already removed. %@", exception);
-                }
-
-                [UIDevice currentDevice].proximityMonitoringEnabled = NO;
-
-                NSError *setAudioCategoryError;
-                [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
-                if (setAudioCategoryError) {
-                    DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
-                }
-                [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-
+                [self handleCallEnded];
             }
         });
     }
 }
 
+- (void)handleCallEnded {
+    DDLogInfo(@"Ending call");
+    self.callStatusLabel.text = NSLocalizedString(@"Call ended", nil);
+
+    // No need to observe the call anymore.
+    @try {
+        [self.call removeObserver:self forKeyPath:SIPCallingViewControllerCallState];
+    } @catch (NSException *exception) {
+        DDLogInfo(@"Observer for keyPath callState was already removed. %@", exception);
+    }
+
+    @try {
+        [self.call removeObserver:self forKeyPath:SIPCallingViewControllerMediaState];
+    } @catch (NSException *exception) {
+        DDLogInfo(@"Observer for keyPath mediaState was already removed. %@", exception);
+    }
+
+    [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+
+    // Restore the old AudioSessionCategory.
+    NSError *setAudioCategoryError;
+    [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
+    if (setAudioCategoryError) {
+        DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
+    }
+
+    // Wait a little while before dismissing the view.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SIPCallingViewControllerDismissTimeAfterHangup * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    });
+}
 
 @end

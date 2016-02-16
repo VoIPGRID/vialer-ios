@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
 
 
@@ -15,5 +16,7 @@
  *  @param phoneNumber the phonenumber to be displayed in the UI.
  */
 - (void)handleOutgoingCallWithPhoneNumber:(NSString * _Nonnull)phoneNumber;
+
+- (IBAction)endCallButtonPressed:(UIButton * _Nonnull)sender;
 
 @end
