@@ -37,6 +37,7 @@ extern NSString * const ConfigurationNumberPadButtonPressedColor;
 extern NSString * const ConfigurationRecentsFilterControlTintColor;
 extern NSString * const ConfigurationLogInViewControllerButtonBorderColor;
 extern NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState;
+extern NSString * const ConfigurationMiddleWareBaseURLString;
 
 extern NSString * const ConfigurationPartnerURLKey;
 
@@ -83,7 +84,6 @@ extern NSString * const ConfigurationPartnerURLKey;
 /**  Class method for easy access to a dictionary with colors
  */
 + (NSDictionary *)tintColorDictionaryForKey:(NSString *)key;
-
 
 /** Class method for easy access to an url
  @see -UrlForKey:
