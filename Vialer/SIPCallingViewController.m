@@ -94,6 +94,8 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
         [self.call hangup:&error];
         if (error) {
             DDLogError(@"Error hangup call: %@", error);
+        } else {
+            self.endCallButton.enabled = NO;
         }
     }
 }

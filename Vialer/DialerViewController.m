@@ -87,7 +87,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 }
 
 - (void)setupReachability {
-    [self.reachabilityManager addObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus)) options:0 context:nil];
+    [self.reachabilityManager addObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus)) options:0 context:NULL];
     [self.reachabilityManager startMonitoring];
     self.reachabilityBarViewController.status = [self.reachabilityManager currentReachabilityStatus];
 }

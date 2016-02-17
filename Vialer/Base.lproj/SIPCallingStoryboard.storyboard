@@ -70,6 +70,7 @@
                     <navigationItem key="navigationItem" id="Qap-IU-ktU"/>
                     <connections>
                         <outlet property="callStatusLabel" destination="cmj-4q-gAC" id="o6T-eG-Zed"/>
+                        <outlet property="endCallButton" destination="lgi-cg-f4D" id="BwG-Jp-tG1"/>
                         <outlet property="phoneNumberLabel" destination="Yr4-KP-Ajk" id="IYg-O9-mIL"/>
                     </connections>
                 </viewController>
@@ -161,7 +162,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="keypad-speaker"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="speakerButton:" destination="N42-3i-1zp" eventType="touchDown" id="IBX-Tk-Pgi"/>
+                                    <action selector="speakerButtonPressed:" destination="N42-3i-1zp" eventType="touchUpInside" id="iMB-gL-sYK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-xk-vdE" userLabel="numbers-button" customClass="SipCallingButton">
@@ -207,15 +208,11 @@
                         <outlet property="holdButton" destination="HWY-j6-gyy" id="4qp-rS-LaF"/>
                         <outlet property="muteButton" destination="CBg-S2-JqM" id="btx-Qt-VmF"/>
                         <outlet property="numbersButton" destination="s4c-xk-vdE" id="mhE-gu-xdE"/>
-                        <outlet property="speakerButton" destination="xxT-GG-q5A" id="kmT-iq-X6x"/>
+                        <outlet property="speakerButton" destination="xxT-GG-q5A" id="Tm0-Ko-Rwa"/>
                         <outletCollection property="sipCallingLabels" destination="R1z-j8-ToU" id="Taf-Hk-Q8N"/>
                         <outletCollection property="sipCallingLabels" destination="VEz-xA-Ugl" id="VOY-PZ-KRv"/>
                         <outletCollection property="sipCallingLabels" destination="ICv-Ww-4pb" id="80N-GD-bJG"/>
                         <outletCollection property="sipCallingLabels" destination="FF6-2l-C2y" id="shd-WT-4rA"/>
-                        <outletCollection property="sipCallingButtons" destination="CBg-S2-JqM" id="Yzq-sY-NZe"/>
-                        <outletCollection property="sipCallingButtons" destination="s4c-xk-vdE" id="Etl-q5-Gaf"/>
-                        <outletCollection property="sipCallingButtons" destination="HWY-j6-gyy" id="WQV-qY-mSp"/>
-                        <outletCollection property="sipCallingButtons" destination="xxT-GG-q5A" id="bXS-jx-4eG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YyY-iw-Xqd" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1068,6 +1068,23 @@
 			name = SIP;
 			sourceTree = "<group>";
 		};
+		C4C5CFF21C74C6CE000088C5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */,
+				C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C4C5CFF31C74C6DA000088C5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		C4CEAB3E1BCE794600A56FC2 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
@@ -1249,9 +1266,8 @@
 		F94F64301C6B3A45003DBB63 /* SIP */ = {
 			isa = PBXGroup;
 			children = (
-				F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */,
-				C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */,
-				C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */,
+				C4C5CFF31C74C6DA000088C5 /* Utils */,
+				C4C5CFF21C74C6CE000088C5 /* Controllers */,
 			);
 			name = SIP;
 			sourceTree = "<group>";

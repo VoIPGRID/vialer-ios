@@ -12,15 +12,13 @@
 
 static float const SipCallingButtonsPressedAlpha = 0.5;
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-static NSString * const SIPCallingButtonsViewControllerCallState = @"callState";
-static NSString * const SIPCallingButtonsViewControllerMediaState = @"mediaState";
+static NSString * const SIPCallingButtonsViewControllerCallState    = @"callState";
+static NSString * const SIPCallingButtonsViewControllerMediaState   = @"mediaState";
+static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker";
 
 @interface SipCallingButtonsViewController ()
-@property (strong, nonatomic) IBOutletCollection(SipCallingButton) NSArray *sipCallingButtons;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *sipCallingLabels;
-@property (weak, nonatomic) IBOutlet SipCallingButton *soundOffButton;
 @property (weak, nonatomic) IBOutlet SipCallingButton *numbersButton;
-@property (weak, nonatomic) IBOutlet SipCallingButton *speakerButton;
 @property (strong, nonatomic) UIColor *pressedColor;
 @property (strong, nonatomic) UIColor *textColor;
 @end
@@ -37,6 +35,7 @@ static NSString * const SIPCallingButtonsViewControllerMediaState = @"mediaState
 - (void)dealloc {
     [self.call removeObserver:self forKeyPath:SIPCallingButtonsViewControllerCallState];
     [self.call removeObserver:self forKeyPath:SIPCallingButtonsViewControllerMediaState];
+    [self.call removeObserver:self forKeyPath:SIPCallingButtonsViewControllerSpeaker];
 }
 
 #pragma mark - Properties
@@ -56,13 +55,15 @@ static NSString * const SIPCallingButtonsViewControllerMediaState = @"mediaState
 }
 
 - (void)setCall:(VSLCall *)call {
-    if (_call) {
+    if (_call && call) {
         [_call removeObserver:self forKeyPath:SIPCallingButtonsViewControllerCallState];
         [_call removeObserver:self forKeyPath:SIPCallingButtonsViewControllerMediaState];
+        [_call removeObserver:self forKeyPath:SIPCallingButtonsViewControllerSpeaker];
     }
     _call = call;
     [call addObserver:self forKeyPath:SIPCallingButtonsViewControllerCallState options:0 context:NULL];
     [call addObserver:self forKeyPath:SIPCallingButtonsViewControllerMediaState options:0 context:NULL];
+    [call addObserver:self forKeyPath:SIPCallingButtonsViewControllerSpeaker options:0 context:NULL];
     [self updateButtons];
 }
 
@@ -88,56 +89,66 @@ static NSString * const SIPCallingButtonsViewControllerMediaState = @"mediaState
     }
 }
 
+- (IBAction)speakerButtonPressed:(SipCallingButton *)sender {
+    [self.call toggleSpeaker];
+}
+
 - (IBAction)numbersButton:(SipCallingButton *)sender {
 
 }
 
-- (IBAction)speakerButton:(SipCallingButton *)sender {
-    [sender setSelected:!sender.isSelected];
-}
-
 - (void)updateButtons {
     dispatch_async(dispatch_get_main_queue(), ^{
-        DDLogInfo(@"callstate: %d", self.call.callState);
+        DDLogInfo(@"callstate: %ld", (long)self.call.callState);
+        DDLogInfo(@"mediastate: %ld", (long)self.call.mediaState);
+        DDLogInfo(@"speaker: %ld", (long)self.call.speaker);
         switch (self.call.callState) {
             case VSLCallStateNull: {
-                self.holdButton.enabled = NO;
-                self.muteButton.enabled = NO;
+                self.holdButton.enabled     = NO;
+                self.muteButton.enabled     = NO;
+                self.speakerButton.enabled  = NO;
                 break;
             }
             case VSLCallStateCalling: {
-                self.holdButton.enabled = NO;
-                self.muteButton.enabled = NO;
+                self.holdButton.enabled     = NO;
+                self.muteButton.enabled     = NO;
+                self.speakerButton.enabled  = NO;
                 break;
             }
             case VSLCallStateIncoming: {
-                self.holdButton.enabled = NO;
-                self.muteButton.enabled = NO;
+                self.holdButton.enabled     = NO;
+                self.muteButton.enabled     = NO;
+                self.speakerButton.enabled  = NO;
                 break;
             }
             case VSLCallEarlyState: {
-                self.holdButton.enabled = NO;
-                self.muteButton.enabled = NO;
+                self.holdButton.enabled     = NO;
+                self.muteButton.enabled     = NO;
+                self.speakerButton.enabled  = NO;
                 break;
             }
             case VSLCallStateConnecting: {
-                self.holdButton.enabled = NO;
-                self.muteButton.enabled = NO;
+                self.holdButton.enabled     = NO;
+                self.muteButton.enabled     = NO;
+                self.speakerButton.enabled  = NO;
                 break;
             }
             case VSLCallStateConfirmed: {
-                self.holdButton.enabled = YES;
-                self.muteButton.enabled = YES;
+                self.holdButton.enabled     = YES;
+                self.muteButton.enabled     = YES;
+                self.speakerButton.enabled  = YES;
                 break;
             }
             case VSLCallStateDisconnected: {
-                self.holdButton.enabled = NO;
-                self.muteButton.enabled = NO;
+                self.holdButton.enabled     = NO;
+                self.muteButton.enabled     = NO;
+                self.speakerButton.enabled  = NO;
                 break;
             }
         }
         self.holdButton.active = self.call.onHold;
         self.muteButton.active = self.call.muted;
+        self.speakerButton.active = self.call.speaker;
     });
 }
 

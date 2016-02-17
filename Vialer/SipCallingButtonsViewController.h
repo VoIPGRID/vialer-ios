@@ -26,6 +26,11 @@
 @property (weak, nonatomic) IBOutlet SipCallingButton *muteButton;
 
 /**
+ *  Button that can be pressed to toggle speaker mode.
+ */
+@property (weak, nonatomic) IBOutlet SipCallingButton *speakerButton;
+
+/**
  *  This method will toggle hold on the call.
  *
  *  @param sender SipCallingButton instance that is pressed.
@@ -38,5 +43,12 @@
  *  @param sender SipCallingButton instance that is pressed.
  */
 - (IBAction)muteButtonPressed:(SipCallingButton *)sender;
+
+/**
+ *  This method will toggle speaker mode on the call.
+ *
+ *  @param sender SipCallingButton instance that is pressed.
+ */
+- (IBAction)speakerButtonPressed:(SipCallingButton *)sender;
 
 @end
