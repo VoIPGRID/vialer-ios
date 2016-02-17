@@ -61,10 +61,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
-    if ([SystemUser currentUser].sipEnabled) {
-        [SIPUtils setupSIPEndpoint];
-    }
-
     return YES;
 }
 
@@ -115,11 +111,13 @@
 # pragma mark - Notifications
 
 - (void)updatedSIPCredentials:(NSNotification *)notification {
-    if ([SystemUser currentUser].sipEnabled) {
-        [SIPUtils setupSIPEndpoint];
-    } else {
-        [SIPUtils removeSIPEndpoint];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([SystemUser currentUser].sipEnabled) {
+            [SIPUtils setupSIPEndpoint];
+        } else {
+            [SIPUtils removeSIPEndpoint];
+        }
+    });
 }
 
 - (void)userLoggedOut:(NSNotification *)notification {

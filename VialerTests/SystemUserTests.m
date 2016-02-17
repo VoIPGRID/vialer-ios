@@ -155,6 +155,28 @@
     XCTAssertFalse(self.user.sipAllowed, @"On default, is should not be allowed to call sip.");
 }
 
+- (void)testSystemUserWithSipEnabledAndSipAccountWillSetSoOnInit {
+    OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
+    OCMStub([self.userDefaultsMock objectForKey:@"SIPAccount"]).andReturn(@"12340042");
+
+    SystemUser *newUser = [[SystemUser alloc] initPrivate];
+
+    XCTAssertTrue(newUser.sipEnabled, @"The user should be able to call SIP");
+}
+
+- (void)testSystemUserWithSipEnabledAndSipAccountWillPostNotification {
+    OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
+    OCMStub([self.userDefaultsMock objectForKey:@"SIPAccount"]).andReturn(@"12340042");
+    id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
+    OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
+
+    SystemUser *newUser = [[SystemUser alloc] initPrivate];
+
+    OCMVerify([mockNotificationCenter postNotificationName:[OCMArg isEqual:SystemUserSIPCredentialsChangedNotification] object:[OCMArg isEqual:newUser]]);
+
+    [mockNotificationCenter stopMocking];
+}
+
 - (void)testLoggingInWithUserWithSIPAllowedWillStoreSIPCredentialsInUserDefaults {
     NSDictionary *response = @{@"client": @"42",
                                @"allow_app_account": @"true"};

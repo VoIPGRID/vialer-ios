@@ -144,18 +144,18 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.migrationCompleted = [defaults boolForKey:SystemUserSUDMigrationCompleted];
 
     /**
-     *  SIP settings.
-     */
-    self.sipAllowed     = [defaults boolForKey:SystemUserSUDSipAllowed];
-    self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
-    self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
-
-    /**
      *  If there is a username, the user is supposed to be logged in.
      *
      *  Warning, this is not a check on the server if the user still has proper credentials.
      */
     self.loggedIn = self.username != nil;
+
+    /**
+     *  SIP settings.
+     */
+    self.sipAllowed     = [defaults boolForKey:SystemUserSUDSipAllowed];
+    self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
+    self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
 }
 
 #pragma mark - Properties
@@ -182,14 +182,18 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     // If sip is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
         _sipEnabled = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
     // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
     }
     [[NSUserDefaults standardUserDefaults] setBool:_sipEnabled forKey:SystemUserSUDSIPEnabled];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (NSString *)sipPassword {
@@ -229,6 +233,8 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         [SSKeychain deletePasswordForService:self.serviceName account:_sipAccount];
     }
     _sipAccount = sipAccount;
+    [[NSUserDefaults standardUserDefaults] setObject:_sipAccount forKey:SystemUserSUDSIPAccount];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Actions
@@ -464,9 +470,8 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         }
 
         // Only update settings if the credentials have changed.
-        if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || [self.sipPassword isEqualToString:sipPassword]) {
+        if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
             self.sipAccount = [sipAccount stringValue];
-            [[NSUserDefaults standardUserDefaults] setObject:self.sipAccount forKey:SystemUserSUDSIPAccount];
             [SSKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
 
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
