@@ -3,14 +3,17 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
+#import "SIPCallingViewController.h"
+
 #import <AVFoundation/AVFoundation.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
-#import "SIPCallingViewController.h"
+#import "SipCallingButtonsViewController.h"
 #import "SIPUtils.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 static NSString * const SIPCallingViewControllerCallState = @"callState";
 static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
+static NSString * const SIPCallingViewControllerSegueSIPCallingButtons = @"SipCallingButtonsSegue";
 static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 
 @interface SIPCallingViewController()
@@ -20,11 +23,19 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 @property (strong, nonatomic) VSLCall *call;
 @property (strong, nonatomic) AVAudioSession *avAudioSession;
 @property (strong, nonatomic) NSString *previousAVAudioSessionCategory;
+@property (weak, nonatomic) SipCallingButtonsViewController *sipCallingButtonsVC;
 @end
 
 @implementation SIPCallingViewController
 
-# pragma  mark - properties
+#pragma mark - View life cycle
+
+- (void)dealloc {
+    [self.call removeObserver:self forKeyPath:SIPCallingViewControllerCallState];
+    [self.call removeObserver:self forKeyPath:SIPCallingViewControllerMediaState];
+}
+
+#pragma mark - Properties
 
 - (AVAudioSession *)avAudioSession {
     if (!_avAudioSession) {
@@ -41,13 +52,15 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     _call = call;
     [call addObserver:self forKeyPath:SIPCallingViewControllerCallState options:0 context:NULL];
     [call addObserver:self forKeyPath:SIPCallingViewControllerMediaState options:0 context:NULL];
+
+    self.sipCallingButtonsVC.call = call;
 }
 
 - (void)setPhoneNumberLabel:(UILabel *)phoneNumberLabel {
     phoneNumberLabel.text = self.phoneNumber;
 }
 
-# pragma mark - actions
+#pragma mark - actions
 
 - (void)handleOutgoingCallWithPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumber = [SIPUtils cleanPhoneNumber:phoneNumber];
@@ -72,7 +85,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     }
 }
 
-# pragma mark - IBActions
+#pragma mark - IBActions
 
 - (IBAction)endCallButtonPressed:(UIButton *)sender {
     if (self.call.callState != VSLCallStateDisconnected) {
@@ -85,11 +98,20 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     }
 }
 
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:SIPCallingViewControllerSegueSIPCallingButtons]) {
+        self.sipCallingButtonsVC = segue.destinationViewController;
+        self.sipCallingButtonsVC.call = self.call;
+    }
+}
 # pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if (object == self.call) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateUI];
             if (self.call.callState == VSLCallStateDisconnected) {
                 [self handleCallEnded];
             }
@@ -97,23 +119,41 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     }
 }
 
+- (void)updateUI {
+    switch (self.call.callState) {
+        case VSLCallStateNull: {
+            self.callStatusLabel.text = nil;
+            break;
+        }
+        case VSLCallStateCalling: {
+            self.callStatusLabel.text = NSLocalizedString(@"Calling...", nil);
+            break;
+        }
+        case VSLCallStateIncoming: {
+            self.callStatusLabel.text = NSLocalizedString(@"Incoming call...", nil);
+            break;
+        }
+        case VSLCallEarlyState: {
+            self.callStatusLabel.text = NSLocalizedString(@"Calling...", nil);
+            break;
+        }
+        case VSLCallStateConnecting: {
+            self.callStatusLabel.text = NSLocalizedString(@"Connecting...", nil);
+            break;
+        }
+        case VSLCallStateConfirmed: {
+            self.callStatusLabel.text = NSLocalizedString(@"0:00", nil);
+            break;
+        }
+        case VSLCallStateDisconnected: {
+            self.callStatusLabel.text = NSLocalizedString(@"Call ended", nil);
+            break;
+        }
+    }
+}
+
 - (void)handleCallEnded {
     DDLogInfo(@"Ending call");
-    self.callStatusLabel.text = NSLocalizedString(@"Call ended", nil);
-
-    // No need to observe the call anymore.
-    @try {
-        [self.call removeObserver:self forKeyPath:SIPCallingViewControllerCallState];
-    } @catch (NSException *exception) {
-        DDLogInfo(@"Observer for keyPath callState was already removed. %@", exception);
-    }
-
-    @try {
-        [self.call removeObserver:self forKeyPath:SIPCallingViewControllerMediaState];
-    } @catch (NSException *exception) {
-        DDLogInfo(@"Observer for keyPath mediaState was already removed. %@", exception);
-    }
-
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;
 
     // Restore the old AudioSessionCategory.

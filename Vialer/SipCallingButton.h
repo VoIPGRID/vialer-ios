@@ -12,6 +12,13 @@ IB_DESIGNABLE
  The image that will be set inside the circle. This will be a 
  property in the storyboard.
  */
-@property (nonatomic, strong) IBInspectable NSString *buttonImage;
+@property (strong, nonatomic) IBInspectable NSString *buttonImage;
+
+/**
+ *  This will tell if the button is active.
+ *
+ *  Set this property to toggle the active state.
+ */
+@property (nonatomic) BOOL active;
 
 @end

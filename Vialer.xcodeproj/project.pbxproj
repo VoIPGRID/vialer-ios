@@ -48,7 +48,7 @@
 		C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		C41FD8611C60A08400BBE6D7 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48752711BF1F51900B8B42B /* ReachabilityManager.m */; };
 		C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
-		C41FD8631C60A08400BBE6D7 /* SipCallingButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonViewController.m */; };
+		C41FD8631C60A08400BBE6D7 /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */; };
 		C41FD8641C60A08400BBE6D7 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		C41FD8661C60A08400BBE6D7 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9392ED71C04955C00286D27 /* SipCallingButton.m */; };
@@ -177,6 +177,7 @@
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
+		C4C5CFF11C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */; };
 		C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C4CAC8A51C7377E000018A5A /* SIPCallingViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */; };
@@ -214,7 +215,7 @@
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
 		F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
 		F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
-		F9CB0F9A1C084C3D009AB89A /* SipCallingButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonViewController.m */; };
+		F9CB0F9A1C084C3D009AB89A /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */; };
 		F9CB0F9B1C0867D1009AB89A /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */; };
 		F9CB0FA61C088241009AB89A /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0FA51C088241009AB89A /* SIPIncomingCallStoryboard.storyboard */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
@@ -439,6 +440,7 @@
 		C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewController.m; sourceTree = "<group>"; };
 		C4C3EAF11BFB7C5E00AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SideMenuStoryboard.storyboard; sourceTree = "<group>"; };
 		C4C3EAF81BFB7C9900AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AvailabilityStoryboard.storyboard; sourceTree = "<group>"; };
+		C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingButtonsViewControllerTests.m; sourceTree = "<group>"; };
 		C4C6EA3C1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VoIPGRIDRequestOperationManager+Recents.h"; sourceTree = "<group>"; };
 		C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+Recents.m"; sourceTree = "<group>"; };
 		C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewControllerTests.m; sourceTree = "<group>"; };
@@ -502,8 +504,8 @@
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
 		F9C710CA1C648F110079677C /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		F9C710CB1C648F110079677C /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
-		F9CB0F981C084C3D009AB89A /* SipCallingButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButtonViewController.h; sourceTree = "<group>"; };
-		F9CB0F991C084C3D009AB89A /* SipCallingButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButtonViewController.m; sourceTree = "<group>"; };
+		F9CB0F981C084C3D009AB89A /* SipCallingButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButtonsViewController.h; sourceTree = "<group>"; };
+		F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButtonsViewController.m; sourceTree = "<group>"; };
 		F9CB0F9C1C0867D1009AB89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPCallingStoryboard.storyboard; sourceTree = "<group>"; };
 		F9CB0F9F1C0867D9009AB89A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
 		F9CB0FA11C0867DB009AB89A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
@@ -792,12 +794,12 @@
 		C432A8691C58EF6600909F16 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F9CB0F981C084C3D009AB89A /* SipCallingButtonViewController.h */,
-				F9CB0F991C084C3D009AB89A /* SipCallingButtonViewController.m */,
-				F9379F2A1C648876003B85D1 /* SIPIncomingCallViewController.h */,
-				F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */,
+				F9CB0F981C084C3D009AB89A /* SipCallingButtonsViewController.h */,
+				F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */,
 				F9C710CA1C648F110079677C /* SIPCallingViewController.h */,
 				F9C710CB1C648F110079677C /* SIPCallingViewController.m */,
+				F9379F2A1C648876003B85D1 /* SIPIncomingCallViewController.h */,
+				F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1249,6 +1251,7 @@
 			children = (
 				F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */,
 				C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */,
+				C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */,
 			);
 			name = SIP;
 			sourceTree = "<group>";
@@ -1948,7 +1951,7 @@
 				C41FD8611C60A08400BBE6D7 /* ReachabilityManager.m in Sources */,
 				F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
-				C41FD8631C60A08400BBE6D7 /* SipCallingButtonViewController.m in Sources */,
+				C41FD8631C60A08400BBE6D7 /* SipCallingButtonsViewController.m in Sources */,
 				C41FD8641C60A08400BBE6D7 /* NumberPadButton.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
 				C41FD8661C60A08400BBE6D7 /* SipCallingButton.m in Sources */,
@@ -2013,6 +2016,7 @@
 			files = (
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
+				C4C5CFF11C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
@@ -2059,7 +2063,7 @@
 				F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */,
 				C41B60101C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
-				F9CB0F9A1C084C3D009AB89A /* SipCallingButtonViewController.m in Sources */,
+				F9CB0F9A1C084C3D009AB89A /* SipCallingButtonsViewController.m in Sources */,
 				C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				F9392ED81C04955C00286D27 /* SipCallingButton.m in Sources */,

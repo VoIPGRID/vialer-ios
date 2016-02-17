@@ -18,10 +18,7 @@ static float const SipCallingButtonPressedAlpha = 0.5;
 
 @implementation SipCallingButton
 
-#pragma mark - properties
-- (NSString *)buttonImage {
-    return self.buttonImage;
-}
+#pragma mark - Properties
 
 - (void)setButtonImage:(NSString *)buttonImage {
     UIImage *image = [[UIImage imageNamed:buttonImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -52,19 +49,13 @@ static float const SipCallingButtonPressedAlpha = 0.5;
     return _pressedColor;
 }
 
-/**
- When the button is highlighted update the button.
- */
 - (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
     [self setNeedsDisplay];
 }
 
-/**
- When the button is enabled update the button.
- */
 - (void)setEnabled:(BOOL)enabled {
-    [super setHighlighted:enabled];
+    [super setEnabled:enabled];
     [self setNeedsDisplay];
 }
 
@@ -73,7 +64,12 @@ static float const SipCallingButtonPressedAlpha = 0.5;
     [self positionButtonImageView];
 }
 
-# pragma mark - position image
+- (void)setActive:(BOOL)active {
+    _active = active;
+    [self setNeedsDisplay];
+}
+
+# pragma mark - Position image
 
 - (void)positionButtonImageView {
     CGRect newFrame = CGRectMake(CGRectGetWidth(self.bounds)* 0.25,
@@ -83,26 +79,39 @@ static float const SipCallingButtonPressedAlpha = 0.5;
     self.buttonImageView.frame = newFrame;
 }
 
-# pragma mark - drawing
+# pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
     UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
     [circle addClip];
     [circle setLineWidth:1 * [UIScreen mainScreen].scale];
 
-    // If the button is pressed or disabled change the color of the circle.
-    // Also change the tint color of the image on the button.
-    if (self.highlighted || !self.enabled) {
-        UIColor *circleColor = self.pressedColor;
+    UIColor *circleColor;
+    // When highlighted or disabled, greyout the button.
+    if (self.highlighted || !self.isEnabled) {
+        circleColor = self.pressedColor;
         [circleColor setStroke];
-        [circle stroke];
         [circleColor setFill];
         self.buttonImageView.tintColor = self.pressedColor;
+
+    // When active, make the button filled and image greyed out.
+    } else if (self.active) {
+        self.buttonImageView.tintColor = self.pressedColor;
+        circleColor = self.textColor;
+        [circleColor setStroke];
+        [circleColor setFill];
+
+    // When the button is enabled but not active, no fill and filled image.
     } else {
         [self.textColor setStroke];
-        [circle stroke];
+        circleColor = [UIColor clearColor];
+        [circleColor setFill];
         self.buttonImageView.tintColor = self.textColor;
     }
+
+    // And actually do the stroke and fill
+    [circle stroke];
+    [circle fill];
 }
 
 @end

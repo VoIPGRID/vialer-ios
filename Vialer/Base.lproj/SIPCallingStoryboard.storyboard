@@ -39,7 +39,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrC-af-0nr">
                                 <rect key="frame" x="20" y="110" width="560" height="390"/>
                                 <connections>
-                                    <segue destination="N42-3i-1zp" kind="embed" id="LD9-6R-5HH"/>
+                                    <segue destination="N42-3i-1zp" kind="embed" identifier="SipCallingButtonsSegue" id="LD9-6R-5HH"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 (0) 50 123 45 67" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Yr4-KP-Ajk">
@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="730" y="-237"/>
         </scene>
-        <!--Sip Calling Button View Controller-->
+        <!--Sip Calling Buttons View Controller-->
         <scene sceneID="Ukk-7V-0pQ">
             <objects>
-                <viewController id="N42-3i-1zp" customClass="SipCallingButtonViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SipCallingButtonsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N42-3i-1zp" customClass="SipCallingButtonsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tHT-VY-2bA"/>
                         <viewControllerLayoutGuide type="bottom" id="d6S-3Y-OPd"/>
@@ -89,8 +89,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="560" height="390"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sound off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEz-xA-Ugl">
-                                <rect key="frame" x="153" y="160" width="73" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mute" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEz-xA-Ugl">
+                                <rect key="frame" x="170" y="160" width="39" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -101,8 +101,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pause" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICv-Ww-4pb">
-                                <rect key="frame" x="346" y="160" width="47" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICv-Ww-4pb">
+                                <rect key="frame" x="353" y="160" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="keypad-pause"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="pauseButton:" destination="N42-3i-1zp" eventType="touchDown" id="7ah-gO-59Q"/>
+                                    <action selector="holdButtonPressed:" destination="N42-3i-1zp" eventType="touchUpInside" id="tOI-T5-hyG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxT-GG-q5A" userLabel="speaker-button" customClass="SipCallingButton">
@@ -204,8 +204,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="holdButton" destination="HWY-j6-gyy" id="4qp-rS-LaF"/>
                         <outlet property="numbersButton" destination="s4c-xk-vdE" id="mhE-gu-xdE"/>
-                        <outlet property="pauseButton" destination="HWY-j6-gyy" id="cAv-Yt-vjB"/>
                         <outlet property="soundOffButton" destination="CBg-S2-JqM" id="3XW-AE-nKd"/>
                         <outlet property="speakerButton" destination="xxT-GG-q5A" id="kmT-iq-X6x"/>
                         <outletCollection property="sipCallingLabels" destination="R1z-j8-ToU" id="Taf-Hk-Q8N"/>
