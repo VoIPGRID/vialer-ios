@@ -440,7 +440,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         [self removeSIPCredentials];
 
         if (completion) {
-            completion(NO, nil);
+            completion(YES, nil);
         }
         return;
     }
