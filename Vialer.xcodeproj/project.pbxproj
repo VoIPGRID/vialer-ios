@@ -671,8 +671,8 @@
 		3D1A5E611AE543C000DBE64B /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
-				C439DBF91C5A700400A15EAD /* Controllers */,
 				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
+				C439DBF91C5A700400A15EAD /* Controllers */,
 				C439DBFA1C5A700B00A15EAD /* UI */,
 				3DE6EADF1AF24D0800C09935 /* Forms */,
 				3D4430401AEF8E290034156F /* Scene */,

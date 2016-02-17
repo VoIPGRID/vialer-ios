@@ -78,8 +78,14 @@ static NSString * const SIPCallingButtonsViewControllerMediaState = @"mediaState
     }
 }
 
-- (IBAction)soundOffButton:(SipCallingButton *)sender {
-    [sender setSelected:!sender.isSelected];
+- (IBAction)muteButtonPressed:(SipCallingButton *)sender {
+    NSError *error;
+    [self.call toggleMute:&error];
+    if (error) {
+        DDLogError(@"Error mute call: %@", error);
+    } else {
+        [self updateButtons];
+    }
 }
 
 - (IBAction)numbersButton:(SipCallingButton *)sender {
@@ -92,38 +98,46 @@ static NSString * const SIPCallingButtonsViewControllerMediaState = @"mediaState
 
 - (void)updateButtons {
     dispatch_async(dispatch_get_main_queue(), ^{
-        DDLogInfo(@"callstate: %ld", self.call.callState);
+        DDLogInfo(@"callstate: %d", self.call.callState);
         switch (self.call.callState) {
             case VSLCallStateNull: {
                 self.holdButton.enabled = NO;
+                self.muteButton.enabled = NO;
                 break;
             }
             case VSLCallStateCalling: {
                 self.holdButton.enabled = NO;
+                self.muteButton.enabled = NO;
                 break;
             }
             case VSLCallStateIncoming: {
                 self.holdButton.enabled = NO;
+                self.muteButton.enabled = NO;
                 break;
             }
             case VSLCallEarlyState: {
                 self.holdButton.enabled = NO;
+                self.muteButton.enabled = NO;
                 break;
             }
             case VSLCallStateConnecting: {
                 self.holdButton.enabled = NO;
+                self.muteButton.enabled = NO;
                 break;
             }
             case VSLCallStateConfirmed: {
                 self.holdButton.enabled = YES;
+                self.muteButton.enabled = YES;
                 break;
             }
             case VSLCallStateDisconnected: {
                 self.holdButton.enabled = NO;
+                self.muteButton.enabled = NO;
                 break;
             }
         }
         self.holdButton.active = self.call.onHold;
+        self.muteButton.active = self.call.muted;
     });
 }
 

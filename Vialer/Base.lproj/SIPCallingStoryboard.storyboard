@@ -127,7 +127,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="keypad-soundoff"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="soundOffButton:" destination="N42-3i-1zp" eventType="touchDown" id="sxL-AO-3kc"/>
+                                    <action selector="muteButtonPressed:" destination="N42-3i-1zp" eventType="touchUpInside" id="gga-bB-ZsE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWY-j6-gyy" userLabel="pause-button" customClass="SipCallingButton">
@@ -205,8 +205,8 @@
                     </view>
                     <connections>
                         <outlet property="holdButton" destination="HWY-j6-gyy" id="4qp-rS-LaF"/>
+                        <outlet property="muteButton" destination="CBg-S2-JqM" id="btx-Qt-VmF"/>
                         <outlet property="numbersButton" destination="s4c-xk-vdE" id="mhE-gu-xdE"/>
-                        <outlet property="soundOffButton" destination="CBg-S2-JqM" id="3XW-AE-nKd"/>
                         <outlet property="speakerButton" destination="xxT-GG-q5A" id="kmT-iq-X6x"/>
                         <outletCollection property="sipCallingLabels" destination="R1z-j8-ToU" id="Taf-Hk-Q8N"/>
                         <outletCollection property="sipCallingLabels" destination="VEz-xA-Ugl" id="VOY-PZ-KRv"/>

@@ -33,4 +33,17 @@
     OCMVerify([callMock toggleHold:[OCMArg anyObjectRef]]);
 }
 
+- (void)testViewControllerHasAMuteButton {
+    XCTAssertNotNil(self.sipCallingButtonsVC.muteButton, @"There should be a mute button");
+}
+
+- (void)testViewControllerPusMuteWillAskCallToHold {
+    id callMock = OCMClassMock([VSLCall class]);
+    self.sipCallingButtonsVC.call = callMock;
+
+    [self.sipCallingButtonsVC muteButtonPressed:nil];
+
+    OCMVerify([callMock toggleMute:[OCMArg anyObjectRef]]);
+}
+
 @end
