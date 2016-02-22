@@ -28,22 +28,6 @@ static float const NumberPadButtonPressedAlpha = 0.5;
 
 @implementation NumberPadButton
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setListeners];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setListeners];
-    }
-    return self;
-}
-
 #pragma mark - Properties
 
 - (NSString *)number {
@@ -105,14 +89,9 @@ static float const NumberPadButtonPressedAlpha = 0.5;
     return _pressedColor;
 }
 
-# pragma mark - event listening
-
-- (void)setListeners {
-    [self addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"highlighted"] && change[@"new"] != change[@"old"]) {
+- (void)setHighlighted:(BOOL)highlighted {
+    if (self.highlighted != highlighted) {
+        [super setHighlighted:highlighted];
         [self setNeedsDisplay];
     }
 }

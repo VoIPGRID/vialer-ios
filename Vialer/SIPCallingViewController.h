@@ -4,16 +4,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SipCallingButtonsViewController.h"
 #import <UIKit/UIKit.h>
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
 
 
-@interface SIPCallingViewController : UIViewController
+@interface SIPCallingViewController : UIViewController <SipCallingButtonsViewControllerDelegate>
 
 /**
  *  The end of call button.
  */
 @property (weak, nonatomic) IBOutlet UIButton *endCallButton;
+
+/**
+ *  The button for hiding the numberpad.
+ */
+@property (weak, nonatomic) IBOutlet UIButton *hideButton;
 
 /**
  *  This will setup a SIP call with the provided phonenumber.
@@ -28,5 +34,12 @@
  *  @param sender UIButton instance.
  */
 - (IBAction)endCallButtonPressed:(UIButton * _Nonnull)sender;
+
+/**
+ *  This method will ask the embedded keypad to hide.
+ *
+ *  @param sender UIButton instance.
+ */
+- (IBAction)hideNumberpad:(UIButton * _Nullable)sender;
 
 @end

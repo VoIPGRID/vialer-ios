@@ -5,12 +5,16 @@
 
 #import <OCMock/OCMock.h>
 #import "SIPCallingViewController.h"
+#import "SIPCallingButtonsViewController.h"
 #import <XCTest/XCTest.h>
 
 @interface SIPCallingViewController (PrivateImplementation)
+@property (weak, nonatomic) UILabel *phoneNumberLabel;
 @property (weak, nonatomic) UILabel *callStatusLabel;
-@property (strong, nonatomic) VSLCall *call;
 @property (weak, nonatomic) UIViewController *presentingViewController;
+@property (weak, nonatomic) SipCallingButtonsViewController *sipCallingButtonsVC;
+@property (strong, nonatomic) VSLCall *call;
+@property (strong, nonatomic) NSString *phoneNumber;
 @end
 
 @interface SIPCallingViewControllerTests : XCTestCase
@@ -24,6 +28,7 @@
 - (void)setUp {
     [super setUp];
     self.sipCallingVC = (SIPCallingViewController *)[[UIStoryboard storyboardWithName:@"SIPCallingStoryboard" bundle:nil] instantiateInitialViewController];
+    [self.sipCallingVC loadViewIfNeeded];
     self.mockCall = OCMClassMock([VSLCall class]);
 }
 
@@ -79,6 +84,48 @@
     [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
         OCMVerify([viewMock dismissViewControllerAnimated:YES completion:nil]);
     }];
+}
+
+- (void)testHideButtonIsHiddenOnDefault {
+    XCTAssertTrue(self.sipCallingVC.hideButton.hidden, @"The hide button is hidden on default");
+}
+
+- (void)testHideButtonIsShownWhenAsked {
+    [self.sipCallingVC keypadChangedVisibility:YES];
+    XCTAssertFalse(self.sipCallingVC.hideButton.hidden, @"The hide button should be shown when asked");
+}
+
+- (void)testButtonsVCIsAskedToHideButtons {
+    id mockButtonsVC = OCMClassMock([SipCallingButtonsViewController class]);
+    self.sipCallingVC.sipCallingButtonsVC = mockButtonsVC;
+
+    [self.sipCallingVC hideNumberpad:nil];
+
+    OCMVerify([mockButtonsVC hideNumberpad]);
+}
+
+- (void)testPhonenumberSetWillSetLabel {
+    self.sipCallingVC.phoneNumber = @"242";
+    XCTAssertEqualObjects(self.sipCallingVC.phoneNumberLabel.text, @"242", @"The phonenumber should be visible again");
+}
+
+- (void)testDTMFTonesWillSetLabel {
+    self.sipCallingVC.phoneNumber = @"242";
+
+    [self.sipCallingVC DTMFSend:@"1"];
+    [self.sipCallingVC DTMFSend:@"2"];
+    [self.sipCallingVC DTMFSend:@"3"];
+
+    XCTAssertEqualObjects(self.sipCallingVC.phoneNumberLabel.text, @"123", @"The dtmf characters should be visible in the phonenumber label.");
+}
+
+- (void)testPhonenumberLabelWillResetToPhonenumberAfterKeypadBecameInvisible {
+    self.sipCallingVC.phoneNumber = @"242";
+    self.sipCallingVC.phoneNumberLabel.text = @"123";
+
+    [self.sipCallingVC keypadChangedVisibility:NO];
+
+    XCTAssertEqualObjects(self.sipCallingVC.phoneNumberLabel.text, @"242", @"The phonenumber should be visible again");
 }
 
 @end

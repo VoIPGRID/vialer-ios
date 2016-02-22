@@ -18,7 +18,6 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
 
 @interface SipCallingButtonsViewController ()
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *sipCallingLabels;
-@property (weak, nonatomic) IBOutlet SipCallingButton *numbersButton;
 @property (strong, nonatomic) UIColor *pressedColor;
 @property (strong, nonatomic) UIColor *textColor;
 @end
@@ -93,41 +92,18 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
     [self.call toggleSpeaker];
 }
 
-- (IBAction)numbersButton:(SipCallingButton *)sender {
-
-}
-
 - (void)updateButtons {
     dispatch_async(dispatch_get_main_queue(), ^{
-        DDLogInfo(@"callstate: %ld", (long)self.call.callState);
-        DDLogInfo(@"mediastate: %ld", (long)self.call.mediaState);
-        DDLogInfo(@"speaker: %ld", (long)self.call.speaker);
+        DDLogDebug(@"callstate: %ld", (long)self.call.callState);
+        DDLogDebug(@"mediastate: %ld", (long)self.call.mediaState);
+        DDLogDebug(@"speaker: %ld", (long)self.call.speaker);
         switch (self.call.callState) {
-            case VSLCallStateNull: {
-                self.holdButton.enabled     = NO;
-                self.muteButton.enabled     = NO;
-                self.speakerButton.enabled  = NO;
-                break;
-            }
-            case VSLCallStateCalling: {
-                self.holdButton.enabled     = NO;
-                self.muteButton.enabled     = NO;
-                self.speakerButton.enabled  = NO;
-                break;
-            }
-            case VSLCallStateIncoming: {
-                self.holdButton.enabled     = NO;
-                self.muteButton.enabled     = NO;
-                self.speakerButton.enabled  = NO;
-                break;
-            }
-            case VSLCallEarlyState: {
-                self.holdButton.enabled     = NO;
-                self.muteButton.enabled     = NO;
-                self.speakerButton.enabled  = NO;
-                break;
-            }
-            case VSLCallStateConnecting: {
+            case VSLCallStateNull:
+            case VSLCallStateCalling:
+            case VSLCallStateIncoming:
+            case VSLCallEarlyState:
+            case VSLCallStateConnecting:
+            case VSLCallStateDisconnected: {
                 self.holdButton.enabled     = NO;
                 self.muteButton.enabled     = NO;
                 self.speakerButton.enabled  = NO;
@@ -139,24 +115,48 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
                 self.speakerButton.enabled  = YES;
                 break;
             }
-            case VSLCallStateDisconnected: {
-                self.holdButton.enabled     = NO;
-                self.muteButton.enabled     = NO;
-                self.speakerButton.enabled  = NO;
-                break;
-            }
         }
+        // If call is active and not on hold, enable the button.
+        self.keypadButton.enabled = !self.call.onHold && self.call.callState == VSLCallStateConfirmed;
+
         self.holdButton.active = self.call.onHold;
         self.muteButton.active = self.call.muted;
         self.speakerButton.active = self.call.speaker;
+
     });
 }
 
+- (void)hideNumberpad {
+    [self.delegate keypadChangedVisibility:NO];
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[NumberPadViewController class]]) {
+        NumberPadViewController *numberPadVC = segue.destinationViewController;
+        numberPadVC.delegate = self;
+        [self.delegate keypadChangedVisibility:YES];
+    }
+}
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if (object == self.call) {
         [self updateButtons];
+    }
+}
+
+#pragma mark - NumberPadViewControllerDelegate
+
+- (void)numberPadPressedWithCharacter:(NSString *)character {
+    NSError *error;
+    [self.call sendDTMF:character error:&error];
+    if (error) {
+        DDLogError(@"Error sending DTMF: %@", error);
+    } else {
+        [self.delegate DTMFSend:character];
     }
 }
 

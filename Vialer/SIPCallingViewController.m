@@ -7,7 +7,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
-#import "SipCallingButtonsViewController.h"
 #import "SIPUtils.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
@@ -29,6 +28,11 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 @implementation SIPCallingViewController
 
 #pragma mark - View life cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.phoneNumberLabel.text = self.phoneNumber;
+}
 
 - (void)dealloc {
     [self.call removeObserver:self forKeyPath:SIPCallingViewControllerCallState];
@@ -56,8 +60,9 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     self.sipCallingButtonsVC.call = call;
 }
 
-- (void)setPhoneNumberLabel:(UILabel *)phoneNumberLabel {
-    phoneNumberLabel.text = self.phoneNumber;
+- (void)setPhoneNumber:(NSString *)phoneNumber {
+    _phoneNumber = phoneNumber;
+    self.phoneNumberLabel.text = phoneNumber;
 }
 
 #pragma mark - actions
@@ -100,14 +105,20 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     }
 }
 
+- (IBAction)hideNumberpad:(UIButton *)sender {
+    [self.sipCallingButtonsVC hideNumberpad];
+}
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:SIPCallingViewControllerSegueSIPCallingButtons]) {
-        self.sipCallingButtonsVC = segue.destinationViewController;
+        self.sipCallingButtonsVC = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
         self.sipCallingButtonsVC.call = self.call;
+        self.sipCallingButtonsVC.delegate = self;
     }
 }
+
 # pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -169,6 +180,24 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SIPCallingViewControllerDismissTimeAfterHangup * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     });
+}
+
+#pragma mark - SipCallingButtonsViewControllerDelegate
+
+- (void)keypadChangedVisibility:(BOOL)visible {
+    self.hideButton.hidden = !visible;
+    if (!visible) {
+        self.phoneNumberLabel.text = self.phoneNumber;
+    }
+}
+
+- (void)DTMFSend:(NSString *)character {
+    // Check if this is the first character pressed.
+    if ([self.phoneNumberLabel.text isEqualToString:self.phoneNumber]) {
+        self.phoneNumberLabel.text = character;
+    } else {
+        self.phoneNumberLabel.text = [self.phoneNumberLabel.text stringByAppendingString:character];
+    }
 }
 
 @end
