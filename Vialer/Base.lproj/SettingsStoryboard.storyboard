@@ -122,11 +122,106 @@
                     </navigationItem>
                     <connections>
                         <segue destination="zEE-Ao-KU6" kind="show" identifier="ShowEditNumberSegue" id="x7r-DJ-ID7"/>
+                        <segue destination="YfQ-oy-Qzc" kind="show" identifier="ShowActivateSIPAccount" id="RKt-er-1hs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IaI-um-zII" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1443" y="374"/>
+            <point key="canvasLocation" x="1681" y="325"/>
+        </scene>
+        <!--VoIP account missing-->
+        <scene sceneID="IBH-6d-eFu">
+            <objects>
+                <viewController storyboardIdentifier="ActivateSIPAccountViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YfQ-oy-Qzc" customClass="ActivateSIPAccountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CeI-kl-nZG"/>
+                        <viewControllerLayoutGuide type="bottom" id="IYv-vw-46K"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cf1-Cu-DK1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cK0-5A-42D">
+                                <rect key="frame" x="20" y="116" width="560" height="82"/>
+                                <string key="text">To setup a phone call via the VoIP function, a VoIP account has to be set in your user profile.
+
+At this moment there is no VoIP account linked to your user.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2N-TO-yyL">
+                                <rect key="frame" x="276" y="334" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="YfQ-oy-Qzc" eventType="touchUpInside" id="nmM-IJ-aPq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-Z8-wIN" customClass="RoundedAndColoredUIButton">
+                                <rect key="frame" x="221" y="298" width="159" height="28"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
+                                <state key="normal" title="Set VoIP Account">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="HTX-Do-hmj" kind="show" id="r8a-MH-HhO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="cK0-5A-42D" secondAttribute="leading" id="BVA-bI-cdK"/>
+                            <constraint firstItem="YSV-Z8-wIN" firstAttribute="centerX" secondItem="cf1-Cu-DK1" secondAttribute="centerX" id="Crm-Rs-R8g"/>
+                            <constraint firstItem="V2N-TO-yyL" firstAttribute="top" secondItem="YSV-Z8-wIN" secondAttribute="bottom" constant="8" id="OzT-jt-6jR"/>
+                            <constraint firstItem="YSV-Z8-wIN" firstAttribute="top" secondItem="cK0-5A-42D" secondAttribute="bottom" constant="100" id="akv-7b-ofy"/>
+                            <constraint firstItem="cK0-5A-42D" firstAttribute="top" secondItem="CeI-kl-nZG" secondAttribute="bottom" constant="52" id="cTZ-P1-QzI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cK0-5A-42D" secondAttribute="trailing" id="er8-sO-DcB"/>
+                            <constraint firstItem="V2N-TO-yyL" firstAttribute="centerX" secondItem="cf1-Cu-DK1" secondAttribute="centerX" id="wUk-Io-QYn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="VoIP account missing" id="ud5-WK-eg1">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="NoL-4C-f96">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="YfQ-oy-Qzc" id="1eo-LH-jy7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="userProfileButton" destination="YSV-Z8-wIN" id="2Mv-j4-dQi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cc5-xn-uUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2468" y="-153"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="5ux-jn-ElB">
+            <objects>
+                <viewController storyboardIdentifier="UserProfileWebViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HTX-Do-hmj" customClass="UserProfileWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dcU-tF-5lk"/>
+                        <viewControllerLayoutGuide type="bottom" id="IWr-ip-6fr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DaK-W1-Ial">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="B9W-Z1-PWy">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Di9-Qh-WTo">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="HTX-Do-hmj" id="YBc-BH-e7R"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="piG-9z-3hc" kind="unwind" identifier="UnwindToSettingsSegue" unwindAction="unwindToSettingsViewController:" id="5dJ-Cx-avo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UaF-T9-X4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="piG-9z-3hc" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3362" y="-180"/>
         </scene>
         <!--My Number-->
         <scene sceneID="Dgo-gG-adH">
@@ -183,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVo-uT-7Db" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2482" y="210"/>
+            <point key="canvasLocation" x="2672" y="554"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OxG-fz-0Qy">

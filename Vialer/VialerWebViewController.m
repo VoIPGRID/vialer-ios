@@ -43,10 +43,6 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
     return _configuration;
 }
 
-- (void)setURL:(NSURL *)URL {
-    [super setURL:URL];
-}
-
 -(void)setNextUrl:(NSString *)nextUrl {
     [self.operationManager autoLoginTokenWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (error) {
@@ -55,7 +51,7 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
             return;
         }
         NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
-        NSString *user = [self urlEncodedString:[SystemUser currentUser].username];
+        NSString *user = [self urlEncodedString:self.currentUser.username];
         NSString *token = responseData[VialerWebViewControllerApiKeyToken];
         _nextUrl = [self urlEncodedString:nextUrl];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, _nextUrl]];
@@ -70,6 +66,13 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
         _operationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
     }
     return _operationManager;
+}
+
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
 }
 
 #pragma mark - UIWebViewDelegate
@@ -92,8 +95,8 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 #pragma mark - actions
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
-    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
     [SVProgressHUD dismiss];
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - utils

@@ -156,6 +156,12 @@
 		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
+		C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
+		C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
+		C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
+		C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
+		C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F100A1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m */; };
+		C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F100C1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m */; };
 		C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
@@ -365,6 +371,8 @@
 		C40C11DF1C3A7396008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C40C11E01C3ABA7A008CC1A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
 		C40C11E11C3ABA7D008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C418AA391C7E407800C8EB91 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C418AA3B1C7E41A500C8EB91 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
 		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
 		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
@@ -420,8 +428,12 @@
 		C4675FFD1C46DB7B008820C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		C46760001C46EBBE008820C8 /* EditNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberViewController.h; sourceTree = "<group>"; };
 		C46760011C46EBBE008820C8 /* EditNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberViewController.m; sourceTree = "<group>"; };
-		C467600A1C46F98A008820C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
-		C467600C1C46F98D008820C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C46F10021C7C668D007F30A6 /* ActivateSIPAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivateSIPAccountViewController.h; path = Settings/Controllers/ActivateSIPAccountViewController.h; sourceTree = "<group>"; };
+		C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivateSIPAccountViewController.m; path = Settings/Controllers/ActivateSIPAccountViewController.m; sourceTree = "<group>"; };
+		C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileWebViewController.h; sourceTree = "<group>"; };
+		C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileWebViewController.m; sourceTree = "<group>"; };
+		C46F100A1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivateSIPAccountViewControllerTests.m; path = Settings/Controllers/ActivateSIPAccountViewControllerTests.m; sourceTree = "<group>"; };
+		C46F100C1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileWebViewControllerTests.m; path = Settings/Controllers/UserProfileWebViewControllerTests.m; sourceTree = "<group>"; };
 		C46F100F1C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VoIPGRIDRequestOperationManager+ForgotPassword.h"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.h"; sourceTree = "<group>"; };
 		C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VoIPGRIDRequestOperationManager+ForgotPassword.m"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.m"; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
@@ -874,7 +886,9 @@
 		C439DBFB1C5A705800A15EAD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C46F100A1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m */,
 				C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */,
+				C46F100C1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -974,6 +988,10 @@
 				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
 				C46760001C46EBBE008820C8 /* EditNumberViewController.h */,
 				C46760011C46EBBE008820C8 /* EditNumberViewController.m */,
+				C46F10021C7C668D007F30A6 /* ActivateSIPAccountViewController.h */,
+				C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */,
+				C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */,
+				C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2030,6 +2048,7 @@
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
 				C41FD8631C60A08400BBE6D7 /* SipCallingButtonsViewController.m in Sources */,
 				C41FD8641C60A08400BBE6D7 /* NumberPadButton.m in Sources */,
+				C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
 				C41FD8661C60A08400BBE6D7 /* SipCallingButton.m in Sources */,
 				C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */,
@@ -2037,6 +2056,7 @@
 				C41B60111C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
 				C41FD8691C60A08400BBE6D7 /* VialerIconView.m in Sources */,
 				C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */,
+				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
 				C41FD86C1C60A08400BBE6D7 /* NSDate+RelativeDate.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
@@ -2095,6 +2115,8 @@
 			files = (
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
+				C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */,
+				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
 				C4C5CFF11C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
@@ -2135,6 +2157,7 @@
 				C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */,
 				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
 				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
+				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
 				C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */,
@@ -2180,6 +2203,7 @@
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				F2B40BED1C732C2300502769 /* ReachabilityManager.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
+				C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
@@ -2299,8 +2323,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F22362651C22EE6200D6F5FF /* Base */,
-				C467600A1C46F98A008820C8 /* en */,
-				C467600C1C46F98D008820C8 /* nl */,
+				C418AA391C7E407800C8EB91 /* nl */,
+				C418AA3B1C7E41A500C8EB91 /* en */,
 			);
 			name = SettingsStoryboard.storyboard;
 			sourceTree = "<group>";

@@ -398,9 +398,13 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (self.loggedIn) {
         [self fetchSIPAcountFromRemoteWithCompletion:^(BOOL success, NSError *error) {
-            if (success) {
+            // It is only an success if the request was success and there was an sipAcount set.
+            if (success && self.sipAccount) {
                 self.sipEnabled = YES;
+            } else {
+                success = NO;
             }
+
             if (completion) {
                 completion(success, error);
             }

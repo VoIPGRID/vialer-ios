@@ -28,6 +28,7 @@ static int const SettingsViewControllerUISwitchOriginOffsetX = 35;
 static int const SettingsViewControllerUISwitchOriginOffsetY = 15;
 
 static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNumberSegue";
+static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
@@ -38,6 +39,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Properties
@@ -135,6 +137,8 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
     }
 }
 
+- (void)unwindToSettingsViewController:(UIStoryboardSegue *)sender {}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,13 +191,9 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
                              completion:nil];
             sender.on = NO;
         } else if (!success) {
-            // There is no account.
+            // There is no account, show info page.
             sender.on = NO;
-            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"No VoIP settings found.", nil)
-                                                                            message:NSLocalizedString(@"There is no VoIP account set for your user. Please set a VoIP Account on the platform.", nil)
-                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
-                               animated:YES
-                             completion:nil];
+            [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
         } else {
             // Account was retrieved, show VoIP Acount row.
             NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
@@ -201,6 +201,7 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
         }
     }];
 }
+
 #pragma mark - Helper function for switches in table
 
 - (void)createOnOffView:(UITableViewCell*)cell withTitle:(NSString*)title withTag:(int)tag defaultVal:(BOOL)defaultVal {

@@ -87,7 +87,7 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
 @property (readonly, nonatomic) BOOL loggedIn;
 
 /**
- *  The username that is used to login
+ *  The username that is used to login.
  */
 @property (readonly, nonatomic) NSString *username;
 

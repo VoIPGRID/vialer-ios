@@ -46,6 +46,9 @@
 "Cancel" = "Annuleer";
 
 /* No comment provided by engineer. */
+"Checking VoIP account" = "VoIP account controleren";
+
+/* No comment provided by engineer. */
 "CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "Het telefoonnummer waarmee uitgebeld wordt is:";
 
 /* No comment provided by engineer. */
@@ -202,9 +205,6 @@
 "No recent calls" = "Geen recente gesprekken";
 
 /* No comment provided by engineer. */
-"No VoIP settings found." = "Geen VoIP instellingen gevonden.";
-
-/* No comment provided by engineer. */
 "Not allowed" = "Niet toegestaan";
 
 /* No comment provided by engineer. */
@@ -278,9 +278,6 @@
 
 /* No comment provided by engineer. */
 "The number is to short" = "Het nummer is te kort";
-
-/* No comment provided by engineer. */
-"There is no VoIP account set for your user. Please set a VoIP Account on the platform." = "Er is geen VoIP account ingesteld voor je gebruiker. Stel een VoIP Account in op het platform.";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";

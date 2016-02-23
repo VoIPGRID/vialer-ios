@@ -37,6 +37,8 @@ extern NSString * const ConfigurationNumberPadButtonPressedColor;
 extern NSString * const ConfigurationRecentsFilterControlTintColor;
 extern NSString * const ConfigurationLogInViewControllerButtonBorderColor;
 extern NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState;
+extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor;
+extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState;
 extern NSString * const ConfigurationMiddleWareBaseURLString;
 
 extern NSString * const ConfigurationPartnerURLKey;

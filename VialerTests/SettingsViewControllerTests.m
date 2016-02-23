@@ -139,8 +139,8 @@
         passedBlock(NO, nil);
         return YES;
     }]]);
-
     self.settingsViewController.currentUser = mockSystemUser;
+
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(YES);
     OCMStub([mockSwitch tag]).andReturn(1001);
@@ -148,6 +148,27 @@
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
     OCMVerify([mockSwitch setOn:NO]);
+}
+
+- (void)testSegueWillHappenIfAccountCouldNotBeFetched {
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    OCMStub([mockSystemUser getAndActivateSIPAccountWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL success, NSError *error)) {
+        passedBlock(NO, nil);
+        return YES;
+    }]]);
+    self.settingsViewController.currentUser = mockSystemUser;
+
+    id mockSettingsVC = OCMPartialMock(self.settingsViewController);
+
+    id mockSwitch = OCMClassMock([UISwitch class]);
+    OCMStub([mockSwitch isOn]).andReturn(YES);
+    OCMStub([mockSwitch tag]).andReturn(1001);
+
+    [self.settingsViewController didChangeSwitch:mockSwitch];
+
+    OCMVerify([mockSettingsVC performSegueWithIdentifier:@"ShowActivateSIPAccount" sender:[OCMArg any]]);
+
+    [mockSettingsVC stopMocking];
 }
 
 - (void)testWhenSipAccountIsFetchedReloadTable {

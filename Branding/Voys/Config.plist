@@ -23,6 +23,19 @@
 			<integer>255</integer>
 			<real>0.5</real>
 		</array>
+		<key>ActivateSIPAccountViewControllerButtonBorderColor</key>
+		<array>
+			<integer>0</integer>
+			<integer>122</integer>
+			<integer>255</integer>
+		</array>
+		<key>ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState</key>
+		<array>
+			<integer>0</integer>
+			<integer>122</integer>
+			<integer>255</integer>
+			<real>0.5</real>
+		</array>
 		<key>NumberPadButtonTextColor</key>
 		<array>
 			<integer>255</integer>
@@ -64,12 +77,6 @@
 			<integer>46</integer>
 			<integer>49</integer>
 			<integer>146</integer>
-		</array>
-		<key>SideMenuButtonPressedState</key>
-		<array>
-			<integer>247</integer>
-			<integer>247</integer>
-			<integer>247</integer>
 		</array>
 		<key>SideMenuButtonPressedState</key>
 		<array>

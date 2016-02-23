@@ -46,6 +46,9 @@
 "Cancel" = "Cancel";
 
 /* No comment provided by engineer. */
+"Checking VoIP account" = "Checking VoIP account";
+
+/* No comment provided by engineer. */
 "CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "The outgoing number which the app will display is:";
 
 /* No comment provided by engineer. */
@@ -202,9 +205,6 @@
 "No recent calls" = "No recent calls";
 
 /* No comment provided by engineer. */
-"No VoIP settings found." = "No VoIP settings found.";
-
-/* No comment provided by engineer. */
 "Not allowed" = "Not allowed";
 
 /* No comment provided by engineer. */
@@ -278,9 +278,6 @@
 
 /* No comment provided by engineer. */
 "The number is to short" = "The number is to short";
-
-/* No comment provided by engineer. */
-"There is no VoIP account set for your user. Please set a VoIP Account on the platform." = "There is no VoIP account set for your user. Please set a VoIP Account on the platform.";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "This user is not allowed to use the app";
