@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;
 - (IBAction)loginButtonPushed:(UIButton *)sender;
+- (IBAction)requestPasswordButtonPressed:(UIButton *)sender;
 
 - (IBAction)openConfigurationInstructions:(id)sender;
 

@@ -4,12 +4,16 @@
 //
 
 #import "LogInViewController.h"
-#import "SystemUser.h"
-
-#import <XCTest/XCTest.h>
-
 #import <OCMock/OCMock.h>
 #import "PBWebViewController.h"
+#import "SystemUser.h"
+#import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
+#import <XCTest/XCTest.h>
+
+@interface LogInViewController()
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+- (void)sendEmail:(NSString *)email;
+@end
 
 @interface LogInViewControllerTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;
@@ -121,6 +125,45 @@
     [self.loginViewController openForgotPassword:nil];
     
     XCTAssertFalse(self.loginViewController.forgotPasswordView.requestPasswordButton.enabled, @"The requestButton should be disabled when no emailadress is filled.");
+}
+
+- (void)testForgotPasswordButtonIsPressedAnAlertIsShown {
+    id mockLoginVC = OCMPartialMock(self.loginViewController);
+
+    [self.loginViewController requestPasswordButtonPressed:nil];
+
+    OCMVerify([mockLoginVC presentViewController:[OCMArg isKindOfClass:[UIAlertController class]] animated:YES completion:nil]);
+}
+
+- (void)testLoginForgetAlertOkActionWillAskUserToSentEmail {
+    id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
+    self.loginViewController.operationManager = mockOperationsManager;
+    [self.loginViewController sendEmail:@"test@test.com"];
+
+    OCMVerify([mockOperationsManager passwordResetWithEmail:[OCMArg isEqual:@"test@test.com"] withCompletion:[OCMArg any]]);
+}
+
+- (void)testLoginForgetAlertOkActionWillShowLoginForm {
+    [self.loginViewController loadViewIfNeeded];
+    id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
+    OCMStub([mockOperationsManager passwordResetWithEmail:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, nil, nil);
+        return YES;
+    }]]);
+    self.loginViewController.operationManager = mockOperationsManager;
+
+    [self.loginViewController sendEmail:@"test@test.com"];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch callStatus again"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:3.5 handler:^(NSError * _Nullable error) {
+        XCTAssertNotNil(self.loginViewController.loginFormView, @"there should be a form");
+        XCTAssertEqual(self.loginViewController.loginFormView.alpha, 1.0f);
+        XCTAssertEqual(self.loginViewController.forgotPasswordView.alpha, 0.0f);
+    }];
 }
 
 @end

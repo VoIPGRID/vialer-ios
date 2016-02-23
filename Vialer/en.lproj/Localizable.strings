@@ -7,6 +7,9 @@
 "%@\nis currently logged in." = "%@\nis currently logged in.";
 
 /* No comment provided by engineer. */
+"0:00" = "0:00";
+
+/* No comment provided by engineer. */
 "App is configuring" = "%@ is configuring";
 
 /* No comment provided by engineer. */
@@ -37,6 +40,9 @@
 "Calling your phone" = "Calling your phone";
 
 /* No comment provided by engineer. */
+"Calling..." = "Calling...";
+
+/* No comment provided by engineer. */
 "calls in the cloud" = "calls in the cloud";
 
 /* No comment provided by engineer. */
@@ -50,6 +56,9 @@
 
 /* No comment provided by engineer. */
 "Connected with other party" = "Connected with other party";
+
+/* No comment provided by engineer. */
+"Connecting..." = "Connecting...";
 
 /* No comment provided by engineer. */
 "Contacts" = "Contacts";
@@ -119,6 +128,12 @@
 
 /* No comment provided by engineer. */
 "HOW_DOES_APP_WORK_BUTTON_TEXT" = "How does %@ work?";
+
+/* No comment provided by engineer. */
+"If your email address is %@ we will send you an email with instructions to reset your password." = "If your email address is %@ we will send you an email with instructions to reset your password.";
+
+/* No comment provided by engineer. */
+"Incoming call..." = "Incoming call...";
 
 /* No comment provided by engineer. */
 "Information" = "Information";
@@ -233,6 +248,9 @@
 
 /* No comment provided by engineer. */
 "Saving number..." = "Saving number...";
+
+/* No comment provided by engineer. */
+"Send email?" = "Send email?";
 
 /* No comment provided by engineer. */
 "Sending email..." = "Sending email...";

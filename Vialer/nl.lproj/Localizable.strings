@@ -7,6 +7,9 @@
 "%@\nis currently logged in." = "%@\nis ingelogd.";
 
 /* No comment provided by engineer. */
+"0:00" = "0:00";
+
+/* No comment provided by engineer. */
 "App is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
@@ -37,6 +40,9 @@
 "Calling your phone" = "Je telefoon aan het bellen";
 
 /* No comment provided by engineer. */
+"Calling..." = "Bellen...";
+
+/* No comment provided by engineer. */
 "calls in the cloud" = "telefonie in de cloud";
 
 /* No comment provided by engineer. */
@@ -50,6 +56,9 @@
 
 /* No comment provided by engineer. */
 "Connected with other party" = "Verbonden met andere partij";
+
+/* No comment provided by engineer. */
+"Connecting..." = "Verbinden...";
 
 /* No comment provided by engineer. */
 "Contacts" = "Contacten";
@@ -119,6 +128,12 @@
 
 /* No comment provided by engineer. */
 "HOW_DOES_APP_WORK_BUTTON_TEXT" = "Hoe werkt bellen via %@";
+
+/* No comment provided by engineer. */
+"If your email address is %@ we will send you an email with instructions to reset your password." = "Als je emailadres %@ is, zullen we je een email sturen met instructies om je wachtwoord te resetten.";
+
+/* No comment provided by engineer. */
+"Incoming call..." = "Inkomend gesprek...";
 
 /* No comment provided by engineer. */
 "Information" = "Informatie";
@@ -233,6 +248,9 @@
 
 /* No comment provided by engineer. */
 "Saving number..." = "Nummer opslaan...";
+
+/* No comment provided by engineer. */
+"Send email?" = "E-mail versturen?";
 
 /* No comment provided by engineer. */
 "Sending email..." = "Versturen e-mail...";

@@ -12,7 +12,7 @@
 #import "UIAlertController+Vialer.h"
 #import "UIView+RoundedStyle.h"
 #import "VIAScene.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
@@ -70,7 +70,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (VoIPGRIDRequestOperationManager *)operationManager {
-    if (_operationManager) {
+    if (!_operationManager) {
         _operationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
     }
     return _operationManager;
@@ -400,7 +400,23 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)resetPasswordWithEmail:(NSString*)email {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Send email?", nil)
+                                                                   message:[NSString stringWithFormat:NSLocalizedString(@"If your email address is %@ we will send you an email with instructions to reset your password.", nil), email]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self sendEmail:email];
+    }];
+    [alert addAction:okAction];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)sendEmail:(NSString *)email {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
+
     [self.operationManager passwordResetWithEmail:email withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         // Check if there was an error.
         if (error) {

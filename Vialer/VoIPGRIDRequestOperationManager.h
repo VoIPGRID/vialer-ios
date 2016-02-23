@@ -143,14 +143,6 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 - (void)pushMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion;
 
 /**
- *  This method will try to request for a pasword reset email sent to given email address.
- *
- *  @param email      The email address where the password reset is asked for.
- *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.
- */
-- (void)passwordResetWithEmail:(NSString *)email withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
-
-/**
  *  This method will try to request for a login token for the currently authenticated user.
  *
  *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.

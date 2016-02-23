@@ -14,7 +14,6 @@ static NSString * const VoIPGRIDRequestOperationManagerURLSystemUserProfile = @"
 static NSString * const VoIPGRIDRequestOperationManagerURLUserDestination   = @"userdestination/";
 static NSString * const VoIPGRIDRequestOperationManagerURLPhoneAccount      = @"phoneaccount/phoneaccount/";
 static NSString * const VoIPGRIDRequestOperationManagerURLTwoStepCall       = @"mobileapp/";
-static NSString * const VoIPGRIDRequestOperationManagerURLPasswordReset     = @"permission/password_reset/";
 static NSString * const VoIPGRIDRequestOperationManagerURLAutoLoginToken    = @"autologin/token/";
 static NSString * const VoIPGRIDRequestOperationManagerURLMobileNumber      = @"permission/mobile_number/";
 
@@ -155,18 +154,6 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 }
 
 #pragma mark - Miscellaneous
-
-- (void)passwordResetWithEmail:(NSString *)email withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:self.baseURL];
-    [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-
-    [manager POST:VoIPGRIDRequestOperationManagerURLPasswordReset parameters:@{@"email": email} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        completion(operation, responseObject, nil);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completion(operation, nil, error);
-    }];
-}
 
 - (void)autoLoginTokenWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
     [self GET:VoIPGRIDRequestOperationManagerURLAutoLoginToken parameters:nil withCompletion:completion];

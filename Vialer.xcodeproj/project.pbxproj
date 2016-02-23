@@ -160,6 +160,8 @@
 		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
+		C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
+		C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
 		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
@@ -415,6 +417,8 @@
 		C46760011C46EBBE008820C8 /* EditNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberViewController.m; sourceTree = "<group>"; };
 		C467600A1C46F98A008820C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		C467600C1C46F98D008820C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		C46F100F1C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VoIPGRIDRequestOperationManager+ForgotPassword.h"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.h"; sourceTree = "<group>"; };
+		C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VoIPGRIDRequestOperationManager+ForgotPassword.m"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.m"; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
@@ -671,6 +675,7 @@
 		3D1A5E611AE543C000DBE64B /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
+				C46F100E1C7CB697007F30A6 /* Models */,
 				3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */,
 				C439DBF91C5A700400A15EAD /* Controllers */,
 				C439DBFA1C5A700B00A15EAD /* UI */,
@@ -955,6 +960,15 @@
 				C46760011C46EBBE008820C8 /* EditNumberViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C46F100E1C7CB697007F30A6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C46F100F1C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.h */,
+				C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		C48F5AC71C6E22E700A3D9AE /* Recents */ = {
@@ -2009,6 +2023,7 @@
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
 				C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */,
 				C41FD88A1C60A08400BBE6D7 /* ColoredCircle.m in Sources */,
+				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C41A73681C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
@@ -2073,6 +2088,7 @@
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
 				C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */,
 				C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */,
+				C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
 				C48752721BF1F51900B8B42B /* ReachabilityManager.m in Sources */,
