@@ -94,7 +94,7 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
 
 - (void)updateButtons {
     dispatch_async(dispatch_get_main_queue(), ^{
-        DDLogDebug(@"callstate: %ld", (long)self.call.callState);
+        DDLogInfo(@"callstate: %@", self.call.callStateText);
         DDLogDebug(@"mediastate: %ld", (long)self.call.mediaState);
         DDLogDebug(@"speaker: %ld", (long)self.call.speaker);
         switch (self.call.callState) {

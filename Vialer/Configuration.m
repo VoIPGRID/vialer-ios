@@ -36,6 +36,7 @@ NSString * const ConfigurationNumberPadButtonPressedColor = @"NumberPadButtonPre
 NSString * const ConfigurationRecentsFilterControlTintColor = @"RecentsFilterControlTintColor";
 NSString * const ConfigurationLogInViewControllerButtonBorderColor = @"LogInViewControllerButtonBorderColor";
 NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState = @"LogInViewControllerButtonBackgroundColorForPressedState";
+NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
 
 NSString * const ConfigurationPartnerURLKey = @"Partner";
 

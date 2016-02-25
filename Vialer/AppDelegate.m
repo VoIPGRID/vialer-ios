@@ -6,16 +6,15 @@
 #import "AppDelegate.h"
 
 #import "AFNetworkActivityLogger.h"
+#import "APNSHandler.h"
 @import AVFoundation;
+#import "GAITracker.h"
+#import "HDLumberjackLogFormatter.h"
 #ifdef DEBUG
 #import "SDStatusBarManager.h"
 #endif
-#import "SSKeychain.h"
-
-#import "APNSHandler.h"
-#import "HDLumberjackLogFormatter.h"
-#import "GAITracker.h"
 #import "SIPUtils.h"
+#import "SSKeychain.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
 
@@ -33,8 +32,6 @@
     [self setupCocoaLumberjackLogging];
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-
-    [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
     //Only when the app is run for screenshot purposes do the following:
     if ([[self class] isSnapshotScreenshotRun]) {
@@ -54,18 +51,20 @@
 #ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
 #endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSIPCredentials:) name:SystemUserSIPCredentialsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
+    [[APNSHandler sharedHandler] registerForVoIPNotifications];
     return YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        // This will fire a "SystemUserSIPCredentialsChangedNotification" when necessary.
         [[SystemUser currentUser] updateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
             if (!error) {
                 //[[PZPushMiddleware sharedInstance] updateDeviceRecord];
@@ -91,7 +90,7 @@
 }
 
 - (void)setupCocoaLumberjackLogging {
-    //Add the Terminal and TTY(XCode console) loggers to CocoaLumberjack (simulate the default NSLog behaviour)
+    // Add the Terminal and TTY(XCode console) loggers to CocoaLumberjack (simulate the default NSLog behaviour)
     HDLumberjackLogFormatter* logFormat = [[HDLumberjackLogFormatter alloc] init];
 
     DDASLLogger *aslLogger = [DDASLLogger sharedInstance];
@@ -100,7 +99,7 @@
     [ttyLogger setLogFormatter:logFormat];
     [ttyLogger setColorsEnabled:YES];
 
-    //Give INFO a color
+    // Give INFO a color
     UIColor *pink = [UIColor colorWithRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
 
@@ -114,6 +113,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([SystemUser currentUser].sipEnabled) {
             [SIPUtils setupSIPEndpoint];
+            [[APNSHandler sharedHandler] registerForVoIPNotifications];
         } else {
             [SIPUtils removeSIPEndpoint];
         }
