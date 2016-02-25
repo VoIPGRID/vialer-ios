@@ -5,13 +5,15 @@
 
 #import <XCTest/XCTest.h>
 
-#import "APNSHandler.h"
 #import "Middleware.h"
 #import <OCMock/OCMock.h>
 @import PushKit;
 
+#import "APNSHandler.h"
+#import "Middleware.h"
+
 @interface APNSHandler ()
-@property (strong, nonatomic) PKPushRegistry *voipRegistry;
+@property (strong, nonatomic)PKPushRegistry *voipRegistry;
 @property (weak, nonatomic) Middleware *middleware;
 
 - (NSString *)nsStringFromNSData:(NSData *)data;
@@ -19,7 +21,7 @@
 
 
 @interface APNSHandlerTests : XCTestCase
-@property (strong, nonatomic) APNSHandler *apnsHandler;
+@property (strong, nonatomic)APNSHandler *apnsHandler;
 @end
 
 @implementation APNSHandlerTests

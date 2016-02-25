@@ -134,7 +134,6 @@
 		C41FD8BF1C60A08400BBE6D7 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C41FD8C21C60A08400BBE6D7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
-		C41FD8C31C60A08400BBE6D7 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0FA51C088241009AB89A /* SIPIncomingCallStoryboard.storyboard */; };
 		C41FD8E61C60A55000BBE6D7 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E21C60A55000BBE6D7 /* Voys.xcassets */; };
 		C41FD8E81C60A55000BBE6D7 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E41C60A55000BBE6D7 /* Config.plist */; };
 		C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */; };
@@ -193,7 +192,6 @@
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F21ECCE61C47C84A00E9B276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
-		F22CEED21C7752FC0086B853 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22CEED11C7752FC0086B853 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */; };
 		F24F52C2C7002F2FBE7C8328 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E44E846FC4A9700ACEB5D5 /* libPods-VialerTests.a */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
@@ -216,14 +214,17 @@
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
 		F94F642E1C6B3A39003DBB63 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F642D1C6B3A39003DBB63 /* SIPUtils.m */; };
 		F94F642F1C6B3A39003DBB63 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F642D1C6B3A39003DBB63 /* SIPUtils.m */; };
+		F95AFD1E1C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95AFD211C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard */; };
+		F95AFD1F1C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95AFD211C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard */; };
+		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */; };
 		F99856951BDF85590005253B /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
+		F9AACDAF1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */; };
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
 		F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
 		F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
 		F9CB0F9A1C084C3D009AB89A /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */; };
 		F9CB0F9B1C0867D1009AB89A /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */; };
-		F9CB0FA61C088241009AB89A /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0FA51C088241009AB89A /* SIPIncomingCallStoryboard.storyboard */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
@@ -479,7 +480,6 @@
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
-		F22CEED11C7752FC0086B853 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+MiddlewareTests.m"; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
 		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
@@ -510,9 +510,14 @@
 		F94F47CE1BCB9FF300F40737 /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
 		F94F642C1C6B3A39003DBB63 /* SIPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		F94F642D1C6B3A39003DBB63 /* SIPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
+		F95AFD201C7E0951005FC8CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPIncomingCallStoryboard.storyboard; sourceTree = "<group>"; };
+		F95AFD231C7E095F005FC8CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SIPIncomingCallStoryboard.strings; sourceTree = "<group>"; };
+		F95AFD251C7E0961005FC8CD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPIncomingCallStoryboard.strings; sourceTree = "<group>"; };
+		F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewControllerTests.m; sourceTree = "<group>"; };
 		F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtilsTests.m; sourceTree = "<group>"; };
 		F99856931BDF85590005253B /* ContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtils.h; sourceTree = "<group>"; };
 		F99856941BDF85590005253B /* ContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtils.m; sourceTree = "<group>"; };
+		F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+MiddlewareTests.m"; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
 		F9C710CA1C648F110079677C /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		F9C710CB1C648F110079677C /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
@@ -521,7 +526,6 @@
 		F9CB0F9C1C0867D1009AB89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPCallingStoryboard.storyboard; sourceTree = "<group>"; };
 		F9CB0F9F1C0867D9009AB89A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
 		F9CB0FA11C0867DB009AB89A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
-		F9CB0FA51C088241009AB89A /* SIPIncomingCallStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SIPIncomingCallStoryboard.storyboard; sourceTree = "<group>"; };
 		F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModelTests.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
@@ -1082,7 +1086,7 @@
 			isa = PBXGroup;
 			children = (
 				F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */,
-				F9CB0FA51C088241009AB89A /* SIPIncomingCallStoryboard.storyboard */,
+				F95AFD211C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard */,
 				C432A8691C58EF6600909F16 /* Controllers */,
 				C432A8681C58EF5700909F16 /* UI */,
 				F94F642B1C6B3A1E003DBB63 /* Utils */,
@@ -1205,7 +1209,7 @@
 			isa = PBXGroup;
 			children = (
 				F2B40BE31C731F7500502769 /* MiddlewareTests.m */,
-				F22CEED11C7752FC0086B853 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */,
+				F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -1310,6 +1314,7 @@
 			children = (
 				C4C5CFF31C74C6DA000088C5 /* Utils */,
 				C4C5CFF21C74C6CE000088C5 /* Controllers */,
+				F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */,
 			);
 			name = SIP;
 			sourceTree = "<group>";
@@ -1734,7 +1739,7 @@
 				C41FD8BF1C60A08400BBE6D7 /* LogInViewController.xib in Resources */,
 				C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */,
 				C41FD8C21C60A08400BBE6D7 /* MainStoryboard.storyboard in Resources */,
-				C41FD8C31C60A08400BBE6D7 /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				F95AFD1F1C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1796,7 +1801,7 @@
 				C4EFCF801BF21E210000CC6F /* DialerStoryboard.storyboard in Resources */,
 				C4DA5C781BFB27580043DED7 /* MainStoryboard.storyboard in Resources */,
 				C41FD8EC1C60A57C00BBE6D7 /* Config.plist in Resources */,
-				F9CB0FA61C088241009AB89A /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				F95AFD1E1C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2087,7 +2092,6 @@
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
-				F22CEED21C7752FC0086B853 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */,
 				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
@@ -2096,6 +2100,8 @@
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
+				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
+				F9AACDAF1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
 				C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
@@ -2289,6 +2295,16 @@
 				C467600C1C46F98D008820C8 /* nl */,
 			);
 			name = SettingsStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		F95AFD211C7E0951005FC8CD /* SIPIncomingCallStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F95AFD201C7E0951005FC8CD /* Base */,
+				F95AFD231C7E095F005FC8CD /* en */,
+				F95AFD251C7E0961005FC8CD /* nl */,
+			);
+			name = SIPIncomingCallStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */ = {

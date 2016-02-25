@@ -5,7 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSCall;
+extern NSString * const AppDelegateIncomingCallNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,8 +17,6 @@
  *  Every other object context should be a child context from this context.
  */
 @property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
-
-- (void)handleSipCall:(GSCall *)sipCall;
 
 /**
  * @return YES when the app was started for the purpose of taking screenshots

@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "VialerSIPLib-iOS/VialerSIPLib.h"
+#import "VialerSIPLib-iOS/VSLRingtone.h"
 
 @interface SIPUtils : NSObject
 
@@ -35,5 +36,12 @@
  *  @return NSString a cleaned phonennumber
  */
 + (NSString * _Nonnull)cleanPhoneNumber:(NSString *_Nonnull)phoneNumber;
+
+/**
+ *  Register the sip account with the endpoint.
+ *
+ *  @return BOOL YES if the registration was a success.
+ */
++ (BOOL)registerSIPAccountWithEndpoint;
 
 @end

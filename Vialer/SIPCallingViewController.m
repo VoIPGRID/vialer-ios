@@ -13,6 +13,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 static NSString * const SIPCallingViewControllerCallState = @"callState";
 static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
 static NSString * const SIPCallingViewControllerSegueSIPCallingButtons = @"SipCallingButtonsSegue";
+static NSString * const SIPCallingViewControllerUnwindToVialerRootViewControllerSegue = @"UnwindToVialerRootViewControllerSegue";
 static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 
 @interface SIPCallingViewController()
@@ -90,6 +91,47 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
     }
 }
 
+- (void)handleIncomingCallWithVSLCall:(VSLCall *)call {
+    self.previousAVAudioSessionCategory = self.avAudioSession.category;
+    self.phoneNumber = call.remoteURI;
+    self.call = call;
+
+    NSError *error;
+    [self.call answer:&error];
+    if (error) {
+        DDLogError(@"Error accepting call: %@", error);
+        NSError *setAudioCategoryError;
+        [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
+        if (setAudioCategoryError) {
+            DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
+        }
+    }
+    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+}
+
+- (void)handleCallEnded {
+    DDLogInfo(@"Ending call");
+    [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+
+    // Restore the old AudioSessionCategory.
+    NSError *setAudioCategoryError;
+    [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
+    if (setAudioCategoryError) {
+        DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
+    }
+
+    self.endCallButton.enabled = NO;
+
+    // Wait a little while before dismissing the view.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SIPCallingViewControllerDismissTimeAfterHangup * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.call.incoming) {
+            [self performSegueWithIdentifier:SIPCallingViewControllerUnwindToVialerRootViewControllerSegue sender:self];
+        } else {
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+    });
+}
+
 #pragma mark - IBActions
 
 - (IBAction)endCallButtonPressed:(UIButton *)sender {
@@ -163,23 +205,6 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
             break;
         }
     }
-}
-
-- (void)handleCallEnded {
-    DDLogInfo(@"Ending call");
-    [UIDevice currentDevice].proximityMonitoringEnabled = NO;
-
-    // Restore the old AudioSessionCategory.
-    NSError *setAudioCategoryError;
-    [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
-    if (setAudioCategoryError) {
-        DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
-    }
-
-    // Wait a little while before dismissing the view.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SIPCallingViewControllerDismissTimeAfterHangup * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    });
 }
 
 #pragma mark - SipCallingButtonsViewControllerDelegate

@@ -7,7 +7,6 @@
 
 #import "AFNetworkActivityLogger.h"
 #import "APNSHandler.h"
-@import AVFoundation;
 #import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
 #ifdef DEBUG
@@ -24,12 +23,15 @@
 @property (readwrite, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @end
 
+NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
+
 @implementation AppDelegate
 
 #pragma mark - UIApplication delegate
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setupCocoaLumberjackLogging];
+
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
@@ -59,6 +61,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
+
+    [self setupCallbackForVoIPNotifications];
+
     return YES;
 }
 
@@ -130,9 +135,12 @@
     }];
 }
 
-#pragma mark - Handle person(s) & calls
-- (void)handleSipCall:(GSCall *)sipCall {
-    // TODO: fix sip call
+- (void)setupCallbackForVoIPNotifications {
+    [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+        });
+    };
 }
 
 #pragma mark - Core Data
