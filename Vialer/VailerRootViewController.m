@@ -8,6 +8,9 @@
 
 #import "VailerRootViewController.h"
 
+#import "AppDelegate.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "SIPIncomingCallViewController.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "VialerDrawerViewController.h"
@@ -16,8 +19,11 @@
 static NSString * const VialerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
 static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @"ShowSIPIncomingCallViewSegue";
 
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
 @interface VailerRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
+@property (nonatomic) BOOL presentSIPIncomingViewController;
 @end
 
 @implementation VailerRootViewController
@@ -35,20 +41,37 @@ static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @
 - (void)dealloc {
     @try {
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:SystemUserLogoutNotification];
-    }@catch(id exception) {}
+    }@catch(id exception) {
+        DDLogError(@"Error removing observer %@: %@", SystemUserLogoutNotification, exception);
+    }
+
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingCallNotification];
+    }
+    @catch (NSException *exception) {
+        DDLogError(@"Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLayout];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([self shouldPresentLoginViewController]) {
-        [self presentViewController:self.loginViewController animated:NO completion:nil];
+
+    // This is needed because when dismissing the view stack to display the sip incoming view controller
+    // the viewdidappear is loaded so this is not needed.
+    if (!self.presentSIPIncomingViewController) {
+        if ([self shouldPresentLoginViewController]) {
+            [self presentViewController:self.loginViewController animated:NO completion:nil];
+        } else {
+            [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:nil];
+        }
     } else {
-        [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:nil];
+        self.presentSIPIncomingViewController = NO;
     }
 }
 
@@ -118,5 +141,23 @@ static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @
         [self showLoginScreen];
     }
 }
+
+- (void)incomingCallNotification:(NSNotification *)notification {
+    self.presentSIPIncomingViewController = YES;
+    [self dismissViewControllerAnimated:NO completion:^(void){
+        [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:notification.object];
+    }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
+        SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
+        sipIncomingViewController.call = sender;
+    }
+}
+
+# pragma mark - Unwind segue
+
+- (IBAction)unwindVialerRootViewController:(UIStoryboardSegue *)segue { }
 
 @end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TjX-jO-i64">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TjX-jO-i64">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -84,9 +84,11 @@
                         <outlet property="endCallButton" destination="lgi-cg-f4D" id="BwG-Jp-tG1"/>
                         <outlet property="hideButton" destination="MHE-wO-JGO" id="4HW-sr-v3M"/>
                         <outlet property="phoneNumberLabel" destination="Yr4-KP-Ajk" id="IYg-O9-mIL"/>
+                        <segue destination="gEa-WI-6Z6" kind="unwind" identifier="UnwindToVialerRootViewControllerSegue" unwindAction="unwindVialerRootViewController:" id="BzH-UZ-SIu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q7H-Nt-RDr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gEa-WI-6Z6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="730" y="-237"/>
         </scene>

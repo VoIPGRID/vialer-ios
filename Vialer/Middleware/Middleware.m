@@ -8,6 +8,7 @@
 #import "APNSHandler.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "ReachabilityManager.h"
+#import "SIPUtils.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager+Middleware.h"
 
@@ -71,13 +72,26 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 #pragma mark - actions
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
+    DDLogDebug(@"%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
-        //Incoming call
-        if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed) {
-            // signal "Ok to accept Call" to middleware
+        // Incoming call/.
+        if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
+            // User has good enough connection and is SIP Enabled.
+            // Register the account with the endpoint.
+            BOOL success = [SIPUtils registerSIPAccountWithEndpoint];
+            if (success) {
+                // Registration with the endpoint is a success respond OK to the middleware.
+                DDLogInfo(@"Register is a success!");
+                [self respondToMiddleware:payload isAvailable:YES];
+            } else {
+                // Registration with the middleware has failed respond not available to the middleware.
+                [self respondToMiddleware:payload isAvailable:NO];
+            }
         } else {
-            // signal "could not accept call" to middleware
+            // User is not SIP enabled or the connection is not good enough.
+            // Sent not available to the middleware.
+            [self respondToMiddleware:payload isAvailable:NO];
         }
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
 
@@ -85,6 +99,17 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
     }
 }
+
+- (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available {
+    [self.middlewareRequestOperationManager sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            DDLogError(@"The middleware responded with an error: %@", error);
+        } else {
+            DDLogInfo(@"Middleware responded with an OK the account is availabe: %@", available ? @"YES" : @"NO");
+        }
+    }];
+}
+
 /**
  *  Invoked when the SystemUserSIPCredentialsChangedNotification is received.
  */

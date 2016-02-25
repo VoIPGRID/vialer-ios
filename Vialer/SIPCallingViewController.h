@@ -6,8 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "SipCallingButtonsViewController.h"
 #import <UIKit/UIKit.h>
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
-
+#import "VialerSIPLib-iOS/VialerSIPLib.h"
 
 @interface SIPCallingViewController : UIViewController <SipCallingButtonsViewControllerDelegate>
 
@@ -29,9 +28,16 @@
 - (void)handleOutgoingCallWithPhoneNumber:(NSString * _Nonnull)phoneNumber;
 
 /**
+ *  This will setup a incoming SIP call with the provided VSLCall object.
+ *
+ *  @param call VSLCall object.
+ */
+- (void)handleIncomingCallWithVSLCall:(VSLCall * _Nonnull)call;
+
+/**
  *  This method will try to end the current active call.
  *
- *  @param sender UIButton instance.
+ *  @param sender UIButton instance
  */
 - (IBAction)endCallButtonPressed:(UIButton * _Nonnull)sender;
 

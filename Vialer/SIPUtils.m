@@ -44,6 +44,18 @@
     return account;
 }
 
++ (BOOL)registerSIPAccountWithEndpoint {
+    NSError *error;
+    BOOL success = [[VialerSIPLib sharedInstance] registerAccount:[SystemUser currentUser] error:&error];
+
+    if (!success) {
+        if (error != NULL) {
+            NSLog(@"%@", error);
+        }
+    }
+    return success;
+}
+
 + (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
     phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     return [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];

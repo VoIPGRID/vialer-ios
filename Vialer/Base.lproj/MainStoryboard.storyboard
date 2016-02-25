@@ -32,9 +32,11 @@
                         <outlet property="launchImage" destination="TKx-Qn-Q5o" id="WdN-iC-xym"/>
                         <segue destination="i10-iY-7zz" kind="showDetail" identifier="ShowVialerDrawerViewSegue" customClass="NoAnimationSegue" id="jgD-42-JhD"/>
                         <segue destination="ZYs-HX-JeK" kind="presentation" identifier="ShowSIPIncomingCallViewSegue" id="18T-Qb-NXM"/>
+                        <segue destination="OBw-wl-6xF" kind="unwind" identifier="goToVialerRootViewControllerIdentifier" unwindAction="goToVialerRootViewController:" id="Hm1-9D-gHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iot-wT-SKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OBw-wl-6xF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2738" y="-584"/>
         </scene>

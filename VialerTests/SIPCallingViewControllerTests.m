@@ -18,7 +18,6 @@
 @end
 
 @interface SIPCallingViewControllerTests : XCTestCase
-
 @property (strong, nonatomic) SIPCallingViewController *sipCallingVC;
 @property (strong, nonatomic) id mockCall;
 @end
