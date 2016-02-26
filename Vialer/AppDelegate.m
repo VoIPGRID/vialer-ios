@@ -29,7 +29,7 @@ NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCall
 
 #pragma mark - UIApplication delegate
 
-- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setupCocoaLumberjackLogging];
 
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
@@ -53,14 +53,12 @@ NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCall
 #ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
 #endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSIPCredentials:) name:SystemUserSIPCredentialsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
-
-    [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
     [self setupCallbackForVoIPNotifications];
 

@@ -95,15 +95,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (BOOL)shouldPresentLoginViewController {
-    //Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
-    //v2.x and start onboarding at the "configure numbers view".
+    // Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
+    // v2.x and start onboarding at the "configure numbers view".
 
     if (![SystemUser currentUser].loggedIn) {
-        //Not logged in, not v21.x, nor in v2.x
+        // Not logged in, not v21.x, nor in v2.x
         self.loginViewController.screenToShow = OnboardingScreenLogin;
         return YES;
     } else if (![SystemUser currentUser].migrationCompleted){
-        //Also show the Mobile number onboarding screen
+        // Also show the Mobile number onboarding screen
         self.loginViewController.screenToShow = OnboardingScreenConfigure;
         return YES;
     }

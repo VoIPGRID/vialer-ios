@@ -17,15 +17,29 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @implementation APNSHandler
 
+// To make the singlton pattern testable.
+static APNSHandler *_sharedAPNSHandler = nil;
+static dispatch_once_t onceToken = 0;
+
 #pragma mark - Lifecycle
 + (instancetype)sharedHandler {
-    static APNSHandler *sharedAPNSHandler = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         DDLogVerbose(@"Creating shared APNS Handler");
-        sharedAPNSHandler = [[self alloc] init];
+        _sharedAPNSHandler = [[self alloc] init];
     });
-    return sharedAPNSHandler;
+    return _sharedAPNSHandler;
+}
+
++ (void)setSharedHandler:(APNSHandler *)sharedHandler {
+    if (_sharedAPNSHandler != sharedHandler) {
+        _sharedAPNSHandler = sharedHandler;
+
+        if (!_sharedAPNSHandler) {
+            onceToken = 0;
+        } else {
+            onceToken = -1;
+        }
+    }
 }
 
 #pragma mark - properties

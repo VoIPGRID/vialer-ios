@@ -25,17 +25,22 @@
 - (void)testCreateRecentCallsFromVoIPGRIDResponseDataWillAskForExistingRecentCall {
     id recentCallMock = OCMClassMock([RecentCall class]);
 
-    [RecentCall createRecentCallsFromVoIGPRIDResponseData:@{@"objects":@[@{@"testKey": @"testValue"}]} inManagedObjectContext:self.mockManagedObjectContext];
+    OCMExpect([recentCallMock createRecentCallFromVoIPGRIDDictionary:[OCMArg isEqual:@{@"testKey" : @"testValue"}] inManagedObjectContext:[OCMArg isEqual:self.mockManagedObjectContext]]);
 
-    OCMVerify([recentCallMock createRecentCallFromVoIPGRIDDictionary:[OCMArg isEqual:@{@"testKey" : @"testValue"}] inManagedObjectContext:[OCMArg isEqual:self.mockManagedObjectContext]]);
+    [RecentCall createRecentCallsFromVoIGPRIDResponseData:@{@"objects":@[@{@"testKey": @"testValue"}]} inManagedObjectContext:self.mockManagedObjectContext];
+    OCMVerifyAll(recentCallMock);
+
+    [recentCallMock stopMocking];
 }
 
 - (void)testCreateRecentCallsFromVoIPGRIDResponseDataWillAskForCreatingRecentCall {
     id recentCallMock = OCMClassMock([RecentCall class]);
 
+    OCMExpect([recentCallMock createRecentCallFromVoIPGRIDDictionary:[OCMArg isEqual:@{@"testKey" : @"testValue"}] inManagedObjectContext:[OCMArg isEqual:self.mockManagedObjectContext]]);
     [RecentCall createRecentCallsFromVoIGPRIDResponseData:@{@"objects":@[@{@"testKey": @"testValue"}]} inManagedObjectContext:self.mockManagedObjectContext];
 
-    OCMVerify([recentCallMock createRecentCallFromVoIPGRIDDictionary:[OCMArg isEqual:@{@"testKey" : @"testValue"}] inManagedObjectContext:[OCMArg isEqual:self.mockManagedObjectContext]]);
+    OCMVerifyAll(recentCallMock);
+    [recentCallMock stopMocking];
 }
 
 - (void)testReturningNewRecentCallsWillReturnRecentCall {

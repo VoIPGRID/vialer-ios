@@ -41,12 +41,19 @@
 
 - (void)testLoginActionWillAskCurrentUserToLogin {
     [self.loginViewController loadViewIfNeeded];
-    self.loginViewController.loginFormView.usernameField.text = @"testUsername";
-    self.loginViewController.loginFormView.passwordField.text = @"testPassword";
+
+    NSString *testUsername = @"testUsername";
+    NSString *testPassword = @"testPassword";
+
+    self.loginViewController.loginFormView.usernameField.text = testUsername;
+    self.loginViewController.loginFormView.passwordField.text = testPassword;
+
+    OCMExpect([self.mockUser loginWithUsername:[OCMArg checkWithSelector:@selector(isEqualToString:) onObject:testUsername]
+                                      password:[OCMArg checkWithSelector:@selector(isEqualToString:) onObject:testPassword]
+                                    completion:[OCMArg any]]);
 
     [self.loginViewController loginButtonPushed:nil];
-
-    OCMVerify([self.mockUser loginWithUsername:[OCMArg isEqual:@"testUsername"] password:[OCMArg isEqual:@"testPassword"] completion:[OCMArg any]]);
+    OCMVerifyAll(self.mockUser);
 }
 
 - (void)testUnsuccessfulLoginActionWillKeepUsernameInFieldLogin {
