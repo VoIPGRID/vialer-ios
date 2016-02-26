@@ -269,15 +269,15 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         }
 
         [self setOwnPropertiesFromUserDict:responseData withUsername:username andPassword:password];
-
-        if (self.sipAllowed) {
-            NSString *appAccountURL = [responseData objectForKey:SystemUserApiKeyAppAccountURL];
-            [self updateSIPAccountWithURL:appAccountURL withCompletion:completion];
-        } else {
+        [self updateSystemUserFromVGWithCompletion:^(NSError *error) {
             if (completion) {
-                completion(YES, nil);
+                if (!error) {
+                    completion(YES, nil);
+                } else {
+                    completion(NO, error);
+                }
             }
-        }
+        }];
         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserLoginNotification object:self];
     }];
 }
@@ -338,6 +338,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
     self.sipAllowed     = [userDict[SystemUserApiKeySIPAllowed] boolValue];
 
+    // Try to enable SIP for this user.
+    [self setSipEnabled:YES];
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.username forKey:SystemUserSUDUsername];
     [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
@@ -373,10 +376,10 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     }
 
     if (self.mobileNumber != mobileNumber || !self.migrationCompleted) {
-        self.migrationCompleted = YES;
         [self.operationsManager pushMobileNumber:mobileNumber withCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 self.mobileNumber = mobileNumber;
+                self.migrationCompleted = YES;
                 completion(YES, nil);
             } else {
                 NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
@@ -488,9 +491,22 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
         if (!error) {
             [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
-            completion(nil);
+
+            if (self.sipAllowed) {
+                NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
+                [self updateSIPAccountWithURL:appAccountURL withCompletion:^(BOOL success, NSError *error) {
+                    if (!error) {
+                        [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
+                        if (completion) completion(nil);
+                    } else {
+                        if (completion) completion(error);
+                    }
+                }];
+            } else {
+                if (completion) completion(nil);
+            }
         } else {
-            completion(error);
+            if (completion) completion(error);
         }
     }];
 }

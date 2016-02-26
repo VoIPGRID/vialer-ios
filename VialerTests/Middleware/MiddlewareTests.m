@@ -48,7 +48,7 @@
     XCTAssert([createdMiddlewareRequestOperationManager isKindOfClass:[VoIPGRIDRequestOperationManager class]]);
 
     NSString *baseURLFromConfig = [Configuration UrlForKey:ConfigurationMiddleWareBaseURLString];
-    XCTAssert([[createdMiddlewareRequestOperationManager.baseURL absoluteString] isEqualToString:baseURLFromConfig], @"Base URL of the API endpoint did not match");
+    XCTAssert([[createdMiddlewareRequestOperationManager.baseURL absoluteString] isEqualToString:baseURLFromConfig], @"Base URL of the API endpoint did not match %@ and %@", createdMiddlewareRequestOperationManager.baseURL.absoluteString, baseURLFromConfig);
 
     XCTAssert([createdMiddlewareRequestOperationManager.responseSerializer isKindOfClass:[AFHTTPResponseSerializer class]]);
 

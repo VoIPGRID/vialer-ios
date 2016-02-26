@@ -36,6 +36,8 @@
     self.forgotPasswordView = nil;
     self.loginViewController = nil;
     self.color = nil;
+
+    [self.configurationMock stopMocking];
     self.configurationMock = nil;
     [super tearDown];
 }

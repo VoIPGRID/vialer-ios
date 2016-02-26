@@ -12,11 +12,11 @@
 #import "VoIPGRIDRequestOperationManager+Middleware.h"
 
 @interface Middleware()
-- (VoIPGRIDRequestOperationManager *)middlewareAPI;
+- (VoIPGRIDRequestOperationManager *)middlewareRequestOperationManager;
 @end
 
 @interface VoIPGRIDRequestOperationManager_MiddlewareTests : XCTestCase
-@property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareAPI;
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;
 @property (strong, nonatomic) NSString *middlewareBaseURLAsString;
 @end
 
@@ -27,7 +27,7 @@
 
     //To ensure an equal middleware API setup as actually used by the middleware class.
     Middleware *aMiddlewareInstance = [[Middleware alloc] init];
-    self.middlewareAPI = [aMiddlewareInstance middlewareAPI];
+    self.middlewareRequestOperationManager = [aMiddlewareInstance middlewareRequestOperationManager];
 
     self.middlewareBaseURLAsString = [Configuration UrlForKey:ConfigurationMiddleWareBaseURLString];
 }
@@ -53,7 +53,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Creating device record"];
 
     //When
-    [self.middlewareAPI updateDeviceRecordWithAPNSToken:mockAPNSToken sipAccount:mockSIPAccount withCompletion:^(NSError *error) {
+    [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:mockAPNSToken sipAccount:mockSIPAccount withCompletion:^(NSError *error) {
         if (!error) {
             XCTFail(@"An error should occur.");
         } else {

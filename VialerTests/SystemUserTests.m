@@ -197,12 +197,18 @@
 }
 
 - (void)testLoggingInWithUserWithSIPEnabledWillFetchAppAccount {
+    NSString *appAccountURLString = @"/account/12340042";
     NSDictionary *response = @{@"client": @"42",
                                @"allow_app_account": @"true",
-                               @"app_account": @"/account/12340042",
+                               @"app_account": appAccountURLString,
                                };
     OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
+        return YES;
+    }]]);
+
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, response, nil);
         return YES;
     }]]);
 
@@ -227,6 +233,12 @@
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);
+
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, response, nil);
+        return YES;
+    }]]);
+
     OCMStub([SSKeychain passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
 
     [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
@@ -235,8 +247,13 @@
     OCMVerify([SSKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:@"12340042"]);
     XCTAssertEqualObjects(self.user.sipAccount, @"12340042", @"the correct sipaccount should have been set");
     XCTAssertEqualObjects(self.user.sipPassword, @"testPassword", @"the correct sipaccount should have been set");
-    XCTAssertFalse(self.user.sipEnabled, @"When sip settings are retrieved, sip isn't enabled on default.");
     XCTAssertTrue(self.user.sipAllowed, @"It should be possible for the user to use sip");
+
+    if (self.user.sipAccount && self.user.sipAllowed) {
+        XCTAssertTrue(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should have been enabled");
+    } else {
+        XCTAssertFalse(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should should NOT been enabled");
+    }
 }
 
 - (void)testLoggingInUserWithoutSIPEnabledWillPostLoginNotification {

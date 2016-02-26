@@ -16,9 +16,9 @@
 @property (strong, nonatomic)PKPushRegistry *voipRegistry;
 @property (weak, nonatomic) Middleware *middleware;
 
++ (void)setSharedHandler:(APNSHandler *)sharedHandler;
 - (NSString *)nsStringFromNSData:(NSData *)data;
 @end
-
 
 @interface APNSHandlerTests : XCTestCase
 @property (strong, nonatomic)APNSHandler *apnsHandler;
@@ -29,11 +29,27 @@
 - (void)setUp {
     [super setUp];
     self.apnsHandler = [[APNSHandler alloc] init];
+    // Set the created object as the SharedHandler, this is the singleton instance which will be returned.
+    [APNSHandler setSharedHandler:self.apnsHandler];
 }
 
 - (void)tearDown {
     self.apnsHandler = nil;
     [super tearDown];
+}
+
+- (void)testSetSharedHandler {
+    APNSHandler *testOverriddenSharedHandler = [[APNSHandler alloc] init];
+    [APNSHandler setSharedHandler:testOverriddenSharedHandler];
+
+    XCTAssertEqual(testOverriddenSharedHandler, [APNSHandler sharedHandler], @"SharedHandler returned object should match the one which was set");
+}
+
+- (void)testResettingOfSharedHandler {
+    APNSHandler *sharedHandler1 = [APNSHandler sharedHandler];
+    [APNSHandler setSharedHandler:nil];
+
+    XCTAssertNotEqual(sharedHandler1, [APNSHandler sharedHandler], @"A new SharedHandler instance should have been returned.");
 }
 
 - (void)testSharedHandlerCreation {
@@ -55,32 +71,34 @@
 }
 
 - (void)testDidSetPKPushRegistryDelegate {
-    //Given
+    // Given
     id pkPushRegistryMock = OCMClassMock([PKPushRegistry class]);
     self.apnsHandler.voipRegistry = pkPushRegistryMock;
 
-    //When
+    // When
     [self.apnsHandler registerForVoIPNotifications];
 
-    //Then
+    // Then
     OCMVerify([pkPushRegistryMock setDelegate:[OCMArg isEqual:self.apnsHandler]]);
+    [pkPushRegistryMock stopMocking];
 }
 
 - (void)testDidSetDesiredPushTypes {
-    //Given
+    // Given
     id pkPushRegistryMock = OCMClassMock([PKPushRegistry class]);
     self.apnsHandler.voipRegistry = pkPushRegistryMock;
     NSSet *desiredTestSet = [NSSet setWithObject:PKPushTypeVoIP];
 
-    //When
+    // When
     [self.apnsHandler registerForVoIPNotifications];
 
-    //Then
+    // Then
     OCMVerify([pkPushRegistryMock setDesiredPushTypes:[OCMArg isEqual:desiredTestSet]]);
+    [pkPushRegistryMock stopMocking];
 }
 
 - (void)testReceiptOfAPNSToken {
-    //Given
+    // Given
     NSString *tokenString = @"0000000011111111222222223333333344444444555555556666666677777777";
     NSData *mockToken = [self nsDataFromHexString:tokenString];
 
@@ -90,55 +108,60 @@
     id mockMiddleware = OCMClassMock([Middleware class]);
     self.apnsHandler.middleware = mockMiddleware;
 
-    //Then
+    // Then
     OCMExpect([mockMiddleware sentAPNSToken:[OCMArg checkWithSelector:@selector(isEqualToString:) onObject:tokenString]]);
 
-    //When
+    // When
     [self.apnsHandler pushRegistry:nil didUpdatePushCredentials:mockCredentials forType:PKPushTypeVoIP];
     OCMVerifyAll(mockMiddleware);
+
+    [mockCredentials stopMocking];
+    [mockMiddleware stopMocking];
 }
 
-- (void)testRetrievingStoredAPNSToken {
-    //Given
+- (void)testRetrievingStoredAPNSTokenClassFunction {
+    // Given
     NSString *givenToken = @"0000000011111111222222223333333344444444555555556666666677777777";
     NSData *mockToken = [self nsDataFromHexString:givenToken];
 
     id pkPushRegistryMock = OCMClassMock([PKPushRegistry class]);
     OCMStub([pkPushRegistryMock pushTokenForType:[OCMArg any]]).andReturn(mockToken);
 
-    //When
+    // When
     self.apnsHandler.voipRegistry = pkPushRegistryMock;
     NSString *storedToken = [APNSHandler storedAPNSToken];
 
-    //Then
+    // Then
     XCTAssert([givenToken isEqualToString:storedToken], @"Tokens did not match");
+    [pkPushRegistryMock stopMocking];
 }
 
 - (void)testRetrievingStoredAPNSTokenWhenNonSet {
-    //Given
+    // Given
     NSData *mockToken = nil;
 
     id pkPushRegistryMock = OCMClassMock([PKPushRegistry class]);
     OCMStub([pkPushRegistryMock pushTokenForType:[OCMArg any]]).andReturn(mockToken);
 
-    //When
+    // When
     self.apnsHandler.voipRegistry = pkPushRegistryMock;
     NSString *storedToken = [APNSHandler storedAPNSToken];
 
-    //Then
+    // Then
     XCTAssert(storedToken == nil, @"Tokens did not match");
+    [pkPushRegistryMock stopMocking];
 }
 
 - (void)testHexNSStringToNSDataAndBack {
-    //Given
+    // Given
     NSString *hexString = [[@"00001111 22223333 44445555 66667777 88889999 aaAAbbBB ccCCddDD eeEEffFF" stringByReplacingOccurrencesOfString:@" " withString:@""] lowercaseString];
 
-    //When
+    // When
     NSData *data = [self nsDataFromHexString:hexString];
     NSLog(@"%@", data);
     NSString *returnedString = [self.apnsHandler nsStringFromNSData:data];
 
-    //Then
+    // Then
     XCTAssert([hexString isEqualToString:returnedString], @"Conversion from NSString to NSData and back failed");
 }
 
