@@ -42,7 +42,7 @@
                                     <segue destination="Ooc-1j-hzw" kind="embed" identifier="SipCallingButtonsSegue" id="LD9-6R-5HH"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 (0) 50 123 45 67" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Yr4-KP-Ajk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 (0) 50 123 45 67" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Yr4-KP-Ajk">
                                 <rect key="frame" x="32" y="28" width="536" height="34"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -260,8 +260,8 @@
                                     <action selector="numberPressed:" destination="iNU-sz-sef" eventType="touchDown" id="921-1m-tfn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OiT-d5-ZG1" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="114" y="100" width="91" height="91"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OiT-d5-ZG1" userLabel="4-Button" customClass="NumberPadButton">
+                                <rect key="frame" x="113" y="100" width="91" height="91"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OiT-d5-ZG1" secondAttribute="height" multiplier="1:1" id="cZV-yQ-ipB"/>
@@ -275,7 +275,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEl-5a-RmR" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="235" y="100" width="92" height="91"/>
+                                <rect key="frame" x="234" y="100" width="92" height="91"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xEl-5a-RmR" secondAttribute="height" multiplier="1:1" id="5c6-yq-03H"/>
@@ -288,8 +288,8 @@
                                     <action selector="numberPressed:" destination="iNU-sz-sef" eventType="touchDown" id="2k9-rd-Utr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RX7-rJ-UoT" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="114" y="199" width="91" height="92"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RX7-rJ-UoT" userLabel="7-Button" customClass="NumberPadButton">
+                                <rect key="frame" x="113" y="199" width="91" height="92"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RX7-rJ-UoT" secondAttribute="height" multiplier="1:1" id="pLR-Oz-jDO"/>
@@ -303,7 +303,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKw-Ek-UBa" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="235" y="199" width="92" height="92"/>
+                                <rect key="frame" x="234" y="199" width="92" height="92"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eKw-Ek-UBa" secondAttribute="height" multiplier="1:1" id="c5u-0A-QVW"/>
@@ -316,8 +316,8 @@
                                     <action selector="numberPressed:" destination="iNU-sz-sef" eventType="touchDown" id="Lzm-7P-hzM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-IR-iAK" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="199" width="91" height="92"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-IR-iAK" userLabel="9-Button" customClass="NumberPadButton">
+                                <rect key="frame" x="356" y="199" width="91" height="92"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aZ5-IR-iAK" secondAttribute="height" multiplier="1:1" id="U3P-V1-njf"/>
@@ -330,8 +330,8 @@
                                     <action selector="numberPressed:" destination="iNU-sz-sef" eventType="touchDown" id="Zmv-Jg-ljR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5l-rl-ON7" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="114" y="299" width="91" height="91"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5l-rl-ON7" userLabel="*-Button" customClass="NumberPadButton">
+                                <rect key="frame" x="113" y="299" width="91" height="91"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="H5l-rl-ON7" secondAttribute="height" multiplier="1:1" id="Kaq-yD-AUd"/>
@@ -344,7 +344,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7y-za-mys" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="235" y="299" width="92" height="91"/>
+                                <rect key="frame" x="234" y="299" width="92" height="91"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -359,8 +359,8 @@
                                     <outletCollection property="gestureRecognizers" destination="gD6-NW-Kqq" appends="YES" id="Gp0-w6-T75"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pd-RE-RUB" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="299" width="91" height="91"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pd-RE-RUB" userLabel="#-Button" customClass="NumberPadButton">
+                                <rect key="frame" x="356" y="299" width="91" height="91"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8Pd-RE-RUB" secondAttribute="height" multiplier="1:1" id="bRb-RE-hWU"/>
@@ -372,8 +372,8 @@
                                     <action selector="numberPressed:" destination="iNU-sz-sef" eventType="touchDown" id="hF5-4b-lfs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWE-vF-vh8" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="357" y="100" width="91" height="91"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWE-vF-vh8" userLabel="6-Button" customClass="NumberPadButton">
+                                <rect key="frame" x="356" y="100" width="91" height="91"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xWE-vF-vh8" secondAttribute="height" multiplier="1:1" id="83E-1u-a25"/>

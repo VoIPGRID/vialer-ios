@@ -33,7 +33,7 @@
 /**
  *  Tells the middleware that the user is able to receive the call.
  *
- *  @param originalPayload The payload that is first received from the middleware.
+ *  @param originalPayload The payload that is first received from the middleware
  *  @param available       If the user is avaiable to receive the call.
  *  @param completion      Optional complection block giving access to an error object when one occurs.
  */

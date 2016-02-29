@@ -24,6 +24,10 @@
 @end
 
 NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
+NSString * const AppDelegateIncomingBackgroundCallNotification = @"AppDelegateIncomingBackgroundCallNotification";
+NSString * const AppDelegateLocalNotificationCategory = @"AppDelegateLocalNotificationCategory";
+NSString * const AppDelegateLocalNotificationAcceptCall = @"AppDelegateLocalNotificationAcceptCall";
+NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNotificationDeclineCall";
 
 @implementation AppDelegate
 
@@ -60,6 +64,8 @@ NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCall
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
+    [[APNSHandler sharedHandler] registerForVoIPNotifications];
+
     [self setupCallbackForVoIPNotifications];
 
     return YES;
@@ -86,10 +92,41 @@ NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCall
     [self saveContext];
 }
 
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    if ([identifier isEqualToString:AppDelegateLocalNotificationAcceptCall] || [identifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
+        [self handleIncomingLocalBackgroudNotifications:identifier forCallId:notification.userInfo[@"callId"]];
+    }
+    completionHandler();
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    if (notification.userInfo[@"callId"]) {
+        [self handleIncomingLocalBackgroudNotifications:nil forCallId:notification.userInfo[@"callId"]];
+    }
+}
+
 #pragma mark - setup helper methods
 
 + (BOOL)isSnapshotScreenshotRun {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
+}
+
+- (void)handleIncomingLocalBackgroudNotifications:(NSString *)notificationIdentifier forCallId:(NSString *)callId {
+    VSLCall *call = [SIPUtils getCallWithId:callId];
+
+    if (call.callState > VSLCallStateNull) {
+        if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
+            NSError *error;
+            [call hangup:&error];
+            if (error) {
+                NSLog(@"Error hanging up the call: %@", error);
+            }
+        } else if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationAcceptCall]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingBackgroundCallNotification object:call];
+        } else if (!notificationIdentifier) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+        }
+    }
 }
 
 - (void)setupCocoaLumberjackLogging {
@@ -117,10 +154,40 @@ NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCall
         if ([SystemUser currentUser].sipEnabled) {
             [SIPUtils setupSIPEndpoint];
             [[APNSHandler sharedHandler] registerForVoIPNotifications];
+            [self registerForLocalNotifications];
         } else {
             [SIPUtils removeSIPEndpoint];
         }
     });
+}
+
+- (void)registerForLocalNotifications {
+    UIMutableUserNotificationAction *acceptCall = [[UIMutableUserNotificationAction alloc] init];
+    [acceptCall setActivationMode:UIUserNotificationActivationModeForeground];
+    [acceptCall setTitle:@"Accept call"];
+    [acceptCall setIdentifier:AppDelegateLocalNotificationAcceptCall];
+    [acceptCall setDestructive:NO];
+    [acceptCall setAuthenticationRequired:NO];
+
+    UIMutableUserNotificationAction *declineCall = [[UIMutableUserNotificationAction alloc] init];
+    [declineCall setActivationMode:UIUserNotificationActivationModeBackground];
+    [declineCall setTitle:@"Decline call"];
+    [declineCall setIdentifier:AppDelegateLocalNotificationDeclineCall];
+    [declineCall setDestructive:NO];
+    [declineCall setAuthenticationRequired:NO];
+
+    UIMutableUserNotificationCategory *noticationCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [noticationCategory setIdentifier:AppDelegateLocalNotificationCategory];
+    [noticationCategory setActions:@[acceptCall, declineCall] forContext:UIUserNotificationActionContextDefault];
+
+    NSSet *categories = [NSSet setWithObjects:noticationCategory, nil];
+    UIUserNotificationType types = (UIUserNotificationTypeAlert|
+                                    UIUserNotificationTypeSound|
+                                    UIUserNotificationTypeBadge);
+
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
 }
 
 - (void)userLoggedOut:(NSNotification *)notification {
@@ -134,9 +201,24 @@ NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCall
 }
 
 - (void)setupCallbackForVoIPNotifications {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+            if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+                UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+                NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
+                localNotification.userInfo = myUserInfo;
+                localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
+                localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), [SIPUtils getCallName:call]];
+                localNotification.alertLaunchImage = @"AppIcon";
+                localNotification.soundName = @"ringtone.wav";
+                localNotification.category = AppDelegateLocalNotificationCategory;
+
+                [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+            } else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+            }
         });
     };
 }

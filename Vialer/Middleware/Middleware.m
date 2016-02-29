@@ -23,8 +23,8 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
 @interface Middleware ()
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;
-@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (weak, nonatomic) SystemUser *systemUser;
+@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @end
 
 @implementation Middleware
@@ -73,7 +73,6 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
     DDLogDebug(@"%@", payload);
-
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call/.
         if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {

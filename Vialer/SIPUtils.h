@@ -44,4 +44,22 @@
  */
 + (BOOL)registerSIPAccountWithEndpoint;
 
+/**
+ *  Get a VSLCall instance based on a callId.
+ *
+ *  @param callId NSString with the callId that needs the be found.
+ *
+ *  @return VSLCall instance or nil.
+ */
++ (VSLCall * _Nullable)getCallWithId:(NSString *_Nonnull)callId;
+
+/**
+ *  Get the name to display when a call is incoming.
+ *
+ *  @param call VSLCall instance.
+ *
+ *  @return NSString With the name that can be displayed.
+ */
++ (NSString * _Nonnull)getCallName:(VSLCall * _Nonnull)call;
+
 @end

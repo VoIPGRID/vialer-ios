@@ -33,6 +33,7 @@
                         <segue destination="i10-iY-7zz" kind="showDetail" identifier="ShowVialerDrawerViewSegue" customClass="NoAnimationSegue" id="jgD-42-JhD"/>
                         <segue destination="ZYs-HX-JeK" kind="presentation" identifier="ShowSIPIncomingCallViewSegue" id="18T-Qb-NXM"/>
                         <segue destination="OBw-wl-6xF" kind="unwind" identifier="goToVialerRootViewControllerIdentifier" unwindAction="goToVialerRootViewController:" id="Hm1-9D-gHw"/>
+                        <segue destination="gzv-u3-1Wl" kind="presentation" identifier="ShowSIPCallingViewSegue" id="tTg-fr-cKc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iot-wT-SKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -46,7 +47,15 @@
                 <viewControllerPlaceholder storyboardIdentifier="SIPCallingStoryboard" storyboardName="SIPIncomingCallStoryboard" id="ZYs-HX-JeK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWk-19-EZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2738.5" y="-96"/>
+            <point key="canvasLocation" x="2581.5" y="-96"/>
+        </scene>
+        <!--SIPCallingStoryboard-->
+        <scene sceneID="gNz-03-MyW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SIPCallingStoryboard" id="gzv-u3-1Wl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XQr-z9-jcB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2912.5" y="-96"/>
         </scene>
         <!--Vialer Drawer View Controller-->
         <scene sceneID="Olp-zU-Nr0">

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "SIPIncomingCallViewController.h"
+#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "VialerDrawerViewController.h"
@@ -18,12 +19,12 @@
 
 static NSString * const VialerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
 static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @"ShowSIPIncomingCallViewSegue";
-
+static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"ShowSIPCallingViewSegue";
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface VailerRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
-@property (nonatomic) BOOL presentSIPIncomingViewController;
+@property (nonatomic) BOOL presentSIPViewController;
 @end
 
 @implementation VailerRootViewController
@@ -51,27 +52,35 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     @catch (NSException *exception) {
         DDLogError(@"Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
     }
+
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingBackgroundCallNotification];
+    }
+    @catch (NSException *exception) {
+        DDLogError(@"Error removing observer %@: %@", AppDelegateIncomingBackgroundCallNotification, exception);
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLayout];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingBackgroundCallNotification:) name:AppDelegateIncomingBackgroundCallNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    // This is needed because when dismissing the view stack to display the sip incoming view controller
-    // the viewdidappear is loaded so this is not needed.
-    if (!self.presentSIPIncomingViewController) {
+    // This is needed because when dismissing the view stack to display the sip incoming view controller calls
+    // the viewdidappear function so it will try to differen segue when you want to present a sip view controller.
+    if (!self.presentSIPViewController) {
         if ([self shouldPresentLoginViewController]) {
             [self presentViewController:self.loginViewController animated:NO completion:nil];
         } else {
             [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:nil];
         }
     } else {
-        self.presentSIPIncomingViewController = NO;
+        self.presentSIPViewController = NO;
     }
 }
 
@@ -143,9 +152,16 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (void)incomingCallNotification:(NSNotification *)notification {
-    self.presentSIPIncomingViewController = YES;
+    self.presentSIPViewController = YES;
     [self dismissViewControllerAnimated:NO completion:^(void){
         [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:notification.object];
+    }];
+}
+
+- (void)incomingBackgroundCallNotification:(NSNotification *)notification {
+    self.presentSIPViewController = YES;
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:notification.object];
     }];
 }
 
@@ -153,6 +169,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
         SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
         sipIncomingViewController.call = sender;
+    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingViewController handleIncomingCallWithVSLCall:sender];
     }
 }
 

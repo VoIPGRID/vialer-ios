@@ -93,8 +93,8 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 
 - (void)handleIncomingCallWithVSLCall:(VSLCall *)call {
     self.previousAVAudioSessionCategory = self.avAudioSession.category;
-    self.phoneNumber = call.remoteURI;
     self.call = call;
+    self.phoneNumber = [SIPUtils getCallName:self.call];
 
     NSError *error;
     [self.call answer:&error];
@@ -208,14 +208,12 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 }
 
 #pragma mark - SipCallingButtonsViewControllerDelegate
-
 - (void)keypadChangedVisibility:(BOOL)visible {
     self.hideButton.hidden = !visible;
     if (!visible) {
         self.phoneNumberLabel.text = self.phoneNumber;
     }
 }
-
 - (void)DTMFSend:(NSString *)character {
     // Check if this is the first character pressed.
     if ([self.phoneNumberLabel.text isEqualToString:self.phoneNumber]) {
