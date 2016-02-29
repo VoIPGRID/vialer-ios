@@ -125,7 +125,6 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     return [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
 }
 
-
 - (NSString *)numberText {
     return self.numberLabel.text;
 }

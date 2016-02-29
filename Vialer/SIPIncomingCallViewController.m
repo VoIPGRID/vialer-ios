@@ -6,6 +6,7 @@
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "SIPCallingViewController.h"
 #import "SIPIncomingCallViewController.h"
+#import "SIPUtils.h"
 #import <VialerSIPLib-iOS/VSLRingtone.h>
 
 static NSString * const SIPIncomingCallViewControllerShowSIPCallingSegue = @"SIPCallingSegue";
@@ -32,18 +33,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSString *labelText;
-    if (self.call.callerName && self.call.callerNumber) {
-        labelText = [NSString stringWithFormat:@"%@\n%@", self.call.callerName, self.call.callerNumber];
-    } else if (self.call.callerName && !self.call.callerNumber) {
-        labelText = [NSString stringWithFormat:@"%@", self.call.callerName];
-    } else if (!self.call.callerName && self.call.callerNumber) {
-        labelText = [NSString stringWithFormat:@"%@", self.call.callerNumber];
-    } else {
-        labelText = [NSString stringWithFormat:@"%@", self.call.remoteURI];
-    }
-
-    self.incomingPhoneNumberLabel.text = labelText;
+    self.incomingPhoneNumberLabel.text = [SIPUtils getCallName:self.call];
     [self.ringtone start];
 }
 

@@ -33,18 +33,18 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 123 45 67 890" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WNk-Js-erb">
-                                <rect key="frame" x="56" y="66" width="488" height="78"/>
+                                <rect key="frame" x="68" y="66" width="464" height="79"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="WNk-Js-erb" secondAttribute="height" multiplier="16:1" constant="-752" id="t7z-Tt-PwI"/>
+                                    <constraint firstAttribute="width" secondItem="WNk-Js-erb" secondAttribute="height" multiplier="16:1" constant="-792" id="t7z-Tt-PwI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-Be-v8D" userLabel="status label">
-                                <rect key="frame" x="56" y="172" width="488" height="48"/>
+                                <rect key="frame" x="68" y="172" width="464" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="zEP-Be-v8D" secondAttribute="height" multiplier="16:1" constant="-288" id="aQO-5v-KRe"/>
+                                    <constraint firstAttribute="width" secondItem="zEP-Be-v8D" secondAttribute="height" multiplier="16:1" constant="-280" id="aQO-5v-KRe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,16 +80,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9kd-Lx-HHe" firstAttribute="centerX" secondItem="hkp-kf-uI8" secondAttribute="centerX" id="4os-Dc-K2I"/>
-                            <constraint firstItem="WNk-Js-erb" firstAttribute="leading" secondItem="Xcd-5K-y8o" secondAttribute="leadingMargin" constant="36" id="AbW-CU-sYQ"/>
-                            <constraint firstItem="zEP-Be-v8D" firstAttribute="top" secondItem="WNk-Js-erb" secondAttribute="bottom" constant="28" id="C64-aA-Gbq"/>
-                            <constraint firstItem="zEP-Be-v8D" firstAttribute="leading" secondItem="Xcd-5K-y8o" secondAttribute="leadingMargin" constant="36" id="FaP-Lw-Qrt"/>
-                            <constraint firstItem="WNk-Js-erb" firstAttribute="trailing" secondItem="Xcd-5K-y8o" secondAttribute="trailingMargin" constant="-36" id="ThU-U1-fUl"/>
+                            <constraint firstItem="WNk-Js-erb" firstAttribute="leading" secondItem="Xcd-5K-y8o" secondAttribute="leadingMargin" constant="48" id="AbW-CU-sYQ"/>
+                            <constraint firstItem="zEP-Be-v8D" firstAttribute="top" secondItem="WNk-Js-erb" secondAttribute="bottom" constant="27" id="C64-aA-Gbq"/>
+                            <constraint firstItem="zEP-Be-v8D" firstAttribute="leading" secondItem="Xcd-5K-y8o" secondAttribute="leadingMargin" constant="48" id="FaP-Lw-Qrt"/>
+                            <constraint firstItem="WNk-Js-erb" firstAttribute="trailing" secondItem="Xcd-5K-y8o" secondAttribute="trailingMargin" constant="-48" id="ThU-U1-fUl"/>
                             <constraint firstItem="5JN-KW-x5m" firstAttribute="centerY" secondItem="9kd-Lx-HHe" secondAttribute="centerY" id="VYh-bX-Z1X"/>
                             <constraint firstItem="5JN-KW-x5m" firstAttribute="centerX" secondItem="7dS-JN-qTG" secondAttribute="centerX" id="Xjt-Bg-RaC"/>
                             <constraint firstItem="yQ6-Qt-aAC" firstAttribute="top" secondItem="hkp-kf-uI8" secondAttribute="bottom" constant="60" id="XmR-4v-nE2"/>
                             <constraint firstItem="5JN-KW-x5m" firstAttribute="top" secondItem="7dS-JN-qTG" secondAttribute="bottom" constant="8" id="eC0-XX-Kwl"/>
                             <constraint firstItem="WNk-Js-erb" firstAttribute="top" secondItem="NVt-sg-wgQ" secondAttribute="bottom" constant="46" id="eI8-mt-Dda"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zEP-Be-v8D" secondAttribute="trailing" constant="36" id="eeZ-tf-70z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zEP-Be-v8D" secondAttribute="trailing" constant="48" id="eeZ-tf-70z"/>
                             <constraint firstItem="7dS-JN-qTG" firstAttribute="centerX" secondItem="Xcd-5K-y8o" secondAttribute="centerX" constant="-80" id="fit-CD-con"/>
                             <constraint firstItem="9kd-Lx-HHe" firstAttribute="top" secondItem="hkp-kf-uI8" secondAttribute="bottom" constant="8" id="hSO-cH-pdm"/>
                             <constraint firstItem="7dS-JN-qTG" firstAttribute="centerY" secondItem="hkp-kf-uI8" secondAttribute="centerY" id="kfD-7I-1Mg"/>

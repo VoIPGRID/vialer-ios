@@ -531,6 +531,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [desc appendFormat:@"\tmobileNumber: %@\n", self.mobileNumber];
     [desc appendFormat:@"\tsipAccount: %@\n", self.sipAccount];
     [desc appendFormat:@"\tsipPassword: %@\n", self.sipPassword];
+    [desc appendFormat:@"\tsipProxy: %@\n", self.sipProxy];
+    [desc appendFormat:@"\tsipDomain: %@\n", self.sipDomain];
+    [desc appendFormat:@"\tsipRegisterOnAdd: %@\n", self.sipRegisterOnAdd ? @"YES" : @"NO"];
     [desc appendFormat:@"\tfirstName: %@\n", self.firstName];
     [desc appendFormat:@"\tlastName: %@\n", self.lastName];
     [desc appendFormat:@"\tmigrationCompleted: %@\n", self.migrationCompleted ? @"YES" : @"NO"];
@@ -538,7 +541,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [desc appendFormat:@"\tisAllowedToSip: %@\n", self.sipAllowed ? @"YES" : @"NO"];
     [desc appendFormat:@"\tsipEnabled: %@\n", self.sipEnabled ? @"YES" : @"NO"];
     [desc appendFormat:@"\tloggedIn: %@", self.loggedIn ? @"YES" : @"NO"];
-    
+
     return desc;
 }
 

@@ -6,6 +6,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString * const AppDelegateIncomingCallNotification;
+extern NSString * const AppDelegateIncomingBackgroundCallNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

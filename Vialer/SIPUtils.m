@@ -3,8 +3,11 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
+#import "CocoaLumberjack/CocoaLumberjack.h"
 #import "SIPUtils.h"
 #import "SystemUser.h"
+
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @implementation SIPUtils
 
@@ -45,12 +48,19 @@
 }
 
 + (BOOL)registerSIPAccountWithEndpoint {
+    if (![VialerSIPLib sharedInstance].endpointAvailable) {
+        BOOL success = [SIPUtils setupSIPEndpoint];
+        if (!success) {
+            DDLogError(@"Error setting up endpoint");
+        }
+    }
+
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] registerAccount:[SystemUser currentUser] error:&error];
 
     if (!success) {
         if (error != NULL) {
-            NSLog(@"%@", error);
+            DDLogError(@"Error registering the account with the endpoint: %@", error);
         }
     }
     return success;
@@ -59,6 +69,31 @@
 + (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
     phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     return [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
+}
+
++ (VSLCall *)getCallWithId:(NSString *)callId {
+    if (!callId) {
+        return nil;
+    }
+
+    VSLCall *call = [[VialerSIPLib sharedInstance] getVSLCallWithId:callId andSipUser:[SystemUser currentUser]];
+
+    return call;
+}
+
++ (NSString *)getCallName:(VSLCall *)call {
+    NSString *callName;
+
+    if (call.callerName && call.callerNumber) {
+        callName = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
+    } else if (call.callerName && !call.callerNumber) {
+        callName = [NSString stringWithFormat:@"%@", call.callerName];
+    } else if (!call.callerName && call.callerNumber) {
+        callName = [NSString stringWithFormat:@"%@", call.callerNumber];
+    } else {
+        callName = [NSString stringWithFormat:@"%@", call.remoteURI];
+    }
+    return callName;
 }
 
 @end

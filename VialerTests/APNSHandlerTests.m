@@ -5,12 +5,10 @@
 
 #import <XCTest/XCTest.h>
 
+#import "APNSHandler.h"
 #import "Middleware.h"
 #import <OCMock/OCMock.h>
 @import PushKit;
-
-#import "APNSHandler.h"
-#import "Middleware.h"
 
 @interface APNSHandler ()
 @property (strong, nonatomic)PKPushRegistry *voipRegistry;
