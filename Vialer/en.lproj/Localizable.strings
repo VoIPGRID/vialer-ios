@@ -76,6 +76,9 @@
 "Couldn't connect with your phone" = "Couldn't connect with your phone";
 
 /* No comment provided by engineer. */
+"Declined call" = "Declined call";
+
+/* No comment provided by engineer. */
 "Dial plan" = "Dial plan";
 
 /* No comment provided by engineer. */
@@ -89,8 +92,6 @@
 
 /* No comment provided by engineer. */
 "Ending call..." = "Ending call...";
-
-"Declined call" = "Declined call";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Enter Your email address and password to login.";
@@ -133,6 +134,12 @@
 
 /* No comment provided by engineer. */
 "If your email address is %@ we will send you an email with instructions to reset your password." = "If your email address is %@ we will send you an email with instructions to reset your password.";
+
+/* No comment provided by engineer. */
+"Incoming call" = "Incoming call";
+
+/* No comment provided by engineer. */
+"Incoming call from: %@" = "Incoming call from: %@";
 
 /* No comment provided by engineer. */
 "Incoming call..." = "Incoming call...";

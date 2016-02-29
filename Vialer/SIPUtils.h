@@ -62,4 +62,12 @@
  */
 + (NSString * _Nonnull)getCallName:(VSLCall * _Nonnull)call;
 
+/**
+ *  Check if there is another call in progress.
+ *
+ *  @param receivedCall VSLCall instance of the call that is incoming.
+ *
+ *  @return BOOL YES if there is another call in progress.
+ */
++ (BOOL)anotherCallInProgress:(VSLCall * _Nonnull)receivedCall;
 @end
