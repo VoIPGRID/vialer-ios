@@ -7,6 +7,7 @@
 
 #import "AFNetworkActivityLogger.h"
 #import "APNSHandler.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
 #ifdef DEBUG
@@ -16,6 +17,8 @@
 #import "SSKeychain.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
+
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface AppDelegate()
 @property (readwrite, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -28,7 +31,6 @@ NSString * const AppDelegateIncomingBackgroundCallNotification = @"AppDelegateIn
 NSString * const AppDelegateLocalNotificationCategory = @"AppDelegateLocalNotificationCategory";
 NSString * const AppDelegateLocalNotificationAcceptCall = @"AppDelegateLocalNotificationAcceptCall";
 NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNotificationDeclineCall";
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @implementation AppDelegate
 
@@ -95,12 +97,16 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
     if ([identifier isEqualToString:AppDelegateLocalNotificationAcceptCall] || [identifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
+        DDLogVerbose(@"User accepted a local notification with Action Identifier: %@", identifier);
         [self handleIncomingLocalBackgroudNotifications:identifier forCallId:notification.userInfo[@"callId"]];
+    } else {
+        DDLogDebug(@"Unsupported action for local Notification: %@", identifier);
     }
     completionHandler();
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    DDLogVerbose(@"Notification clicked without \"Action Identifier\" : %@", notification);
     if (notification.userInfo[@"callId"]) {
         [self handleIncomingLocalBackgroudNotifications:nil forCallId:notification.userInfo[@"callId"]];
     }
@@ -120,7 +126,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
             NSError *error;
             [call hangup:&error];
             if (error) {
-                NSLog(@"Error hanging up the call: %@", error);
+                DDLogWarn(@"Error hanging up call: %@", error);
             }
         } else if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationAcceptCall]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingBackgroundCallNotification object:call];
@@ -144,6 +150,16 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     UIColor *pink = [UIColor colorWithRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
 
+#ifdef DEBUG
+    // File logging
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.maximumFileSize =(1024*1024*5); // Size in bytes
+    fileLogger.rollingFrequency = 0; // Set rollingFrequency to 0, only roll on file size.
+    [fileLogger logFileManager].maximumNumberOfLogFiles = 3;
+    fileLogger.logFormatter = logFormat;
+    [DDLog addLogger:fileLogger];
+#endif
+
     [DDLog addLogger:aslLogger];
     [DDLog addLogger:ttyLogger];
 }
@@ -151,6 +167,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 # pragma mark - Notifications
 
 - (void)updatedSIPCredentials:(NSNotification *)notification {
+    DDLogInfo(@"SIP Credentials have changed");
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([SystemUser currentUser].sipEnabled) {
             [SIPUtils setupSIPEndpoint];
@@ -228,6 +245,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
                     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
                 } else {
+                DDLogDebug(@"Call received with device in forground. Call: %ld", (long)call.callId);
                     [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
                 }
             }
@@ -240,7 +258,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (void)saveContext {
     NSError *error;
     if (self.managedObjectContext && [self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
-        NSLog(@"Unresolved error: %@", error);
+        DDLogWarn(@"Unresolved error while saving Context: %@", error);
         abort();
     }
 }
@@ -273,7 +291,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
             // For now, we will let the app crash and watch if this is happening during production. It doesn't break the app completely if the app crashes.recent
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            DDLogWarn(@"Could not create PersistentStoreCoordinator instance. Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }

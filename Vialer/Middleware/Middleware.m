@@ -72,24 +72,27 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 #pragma mark - actions
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
-    DDLogDebug(@"%@", payload);
+    DDLogDebug(@"Push message received from middleware.\nPayload: %@", payload);
+
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
-        // Incoming call/.
+        // Incoming call.
         if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             // User has good enough connection and is SIP Enabled.
             // Register the account with the endpoint.
             BOOL success = [SIPUtils registerSIPAccountWithEndpoint];
             if (success) {
                 // Registration with the endpoint is a success respond OK to the middleware.
-                DDLogInfo(@"Register is a success!");
+                DDLogDebug(@"SIP Endpoint registration success! Sending Available = YES to middleware");
                 [self respondToMiddleware:payload isAvailable:YES];
             } else {
-                // Registration with the middleware has failed respond not available to the middleware.
+                DDLogDebug(@"SIP Endpoint registration FAILED. Senting Available = NO to middleware");
+                // Endpoint registration has failed. Respond not available to the middleware.
                 [self respondToMiddleware:payload isAvailable:NO];
             }
         } else {
             // User is not SIP enabled or the connection is not good enough.
             // Sent not available to the middleware.
+            DDLogDebug(@"Not accepting call, connection quality insufficient or SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO];
         }
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
@@ -104,7 +107,7 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         if (error) {
             DDLogError(@"The middleware responded with an error: %@", error);
         } else {
-            DDLogInfo(@"Middleware responded with an OK the account is availabe: %@", available ? @"YES" : @"NO");
+            DDLogDebug(@"Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
         }
     }];
 }
@@ -131,7 +134,7 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
             if (error) {
                 DDLogError(@"Error deleting device record from middleware. %@", error);
             } else {
-                DDLogInfo(@"Middleware device record deleted successfully");
+                DDLogDebug(@"Middleware device record deleted successfully");
             }
         }];
     } else {
@@ -146,7 +149,7 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
             if (error) {
                 DDLogError(@"Device registration with Middleware failed. %@", error);
             } else {
-                DDLogInfo(@"Middelware registration successfull");
+                DDLogDebug(@"Middelware registration successfull");
             }
         }];
     }

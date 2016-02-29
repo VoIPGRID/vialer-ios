@@ -339,7 +339,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.sipAllowed     = [userDict[SystemUserApiKeySIPAllowed] boolValue];
 
     // Try to enable SIP for this user.
-    [self setSipEnabled:YES];
+    self.sipEnabled = YES;
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.username forKey:SystemUserSUDUsername];

@@ -17,14 +17,13 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @implementation APNSHandler
 
-// To make the singlton pattern testable.
+// To make the singleton pattern testable.
 static APNSHandler *_sharedAPNSHandler = nil;
 static dispatch_once_t onceToken = 0;
 
 #pragma mark - Lifecycle
 + (instancetype)sharedHandler {
     dispatch_once(&onceToken, ^{
-        DDLogVerbose(@"Creating shared APNS Handler");
         _sharedAPNSHandler = [[self alloc] init];
     });
     return _sharedAPNSHandler;
@@ -77,11 +76,11 @@ static dispatch_once_t onceToken = 0;
 
 #pragma mark - PKPushRegistray management
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
-    DDLogInfo(@"APNS Token became invalid");
+    DDLogWarn(@"APNS Token became invalid");
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
-    DDLogDebug(@"%s Incoming push notification of type: %@", __PRETTY_FUNCTION__, type);
+    DDLogDebug(@"Incoming push notification of type: %@", type);
     [self.middleware handleReceivedAPSNPayload:[payload dictionaryPayload]];
 }
 

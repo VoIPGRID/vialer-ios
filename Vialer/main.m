@@ -1,8 +1,5 @@
 //
 //  main.m
-//  Vialer
-//
-//  Created by Reinier Wieringa on 31/10/13.
 //  Copyright (c) 2014 VoIPGRID. All rights reserved.
 //
 
