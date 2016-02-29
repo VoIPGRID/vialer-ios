@@ -92,6 +92,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #pragma mark - IBActions
 
 - (IBAction)declineCallButtonPressed:(UIButton * _Nonnull)sender {
+    DDLogDebug(@"User pressed \"Decline call\" for call: %ld", (long)self.call.callId);
     NSError *error;
     [self.call hangup:&error];
     if (error) {
@@ -102,6 +103,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (IBAction)acceptCallButtonPressed:(UIButton * _Nonnull)sender {
+    DDLogDebug(@"User pressed \"Accept call\" for call: %ld", (long)self.call.callId);
     [self.ringtone stop];
     [self performSegueWithIdentifier:SIPIncomingCallViewControllerShowSIPCallingSegue sender:nil];
 }

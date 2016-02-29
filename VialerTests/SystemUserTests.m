@@ -249,11 +249,7 @@
     XCTAssertEqualObjects(self.user.sipPassword, @"testPassword", @"the correct sipaccount should have been set");
     XCTAssertTrue(self.user.sipAllowed, @"It should be possible for the user to use sip");
 
-    if (self.user.sipAccount && self.user.sipAllowed) {
-        XCTAssertTrue(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should have been enabled");
-    } else {
-        XCTAssertFalse(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should should NOT been enabled");
-    }
+    XCTAssertTrue(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should have been enabled");
 }
 
 - (void)testLoggingInUserWithoutSIPEnabledWillPostLoginNotification {
