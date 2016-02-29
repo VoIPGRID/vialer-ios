@@ -76,6 +76,9 @@
 "Couldn't connect with your phone" = "Kan niet verbinden met je telefoon";
 
 /* No comment provided by engineer. */
+"Declined call" = "Gesprek geweigerd";
+
+/* No comment provided by engineer. */
 "Dial plan" = "Belplan";
 
 /* No comment provided by engineer. */
@@ -131,6 +134,12 @@
 
 /* No comment provided by engineer. */
 "If your email address is %@ we will send you an email with instructions to reset your password." = "Als je emailadres %@ is, zullen we je een email sturen met instructies om je wachtwoord te resetten.";
+
+/* No comment provided by engineer. */
+"Incoming call" = "Binnenkomend gesprek";
+
+/* No comment provided by engineer. */
+"Incoming call from: %@" = "Binnenkomend gesprek van: %@";
 
 /* No comment provided by engineer. */
 "Incoming call..." = "Inkomend gesprek...";
@@ -332,8 +341,4 @@
 
 /* No comment provided by engineer. */
 "Your mobile number should start with your country code e.g. +31 or 0031" = "Het mobiele nummer moet beginnen met een landcode b.v. +31 of 0031";
-
-"Declined call" = "Gesprek geweigerd";
-
-"Declined call..." = "Gesprek geweigerd...";
 

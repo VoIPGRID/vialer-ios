@@ -28,6 +28,7 @@ NSString * const AppDelegateIncomingBackgroundCallNotification = @"AppDelegateIn
 NSString * const AppDelegateLocalNotificationCategory = @"AppDelegateLocalNotificationCategory";
 NSString * const AppDelegateLocalNotificationAcceptCall = @"AppDelegateLocalNotificationAcceptCall";
 NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNotificationDeclineCall";
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @implementation AppDelegate
 
@@ -205,19 +206,30 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-                UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-                NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
-                localNotification.userInfo = myUserInfo;
-                localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
-                localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), [SIPUtils getCallName:call]];
-                localNotification.alertLaunchImage = @"AppIcon";
-                localNotification.soundName = @"ringtone.wav";
-                localNotification.category = AppDelegateLocalNotificationCategory;
+            [SIPUtils anotherCallInProgress:call];
+            if ([SIPUtils anotherCallInProgress:call]) {
+                DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
 
-                [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+                NSError *error;
+                [call hangup:&error];
+                if (error) {
+                    DDLogError(@"Error declining call: %@", error);
+                }
             } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+                if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+                    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+                    NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
+                    localNotification.userInfo = myUserInfo;
+                    localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
+                    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), [SIPUtils getCallName:call]];
+                    localNotification.alertLaunchImage = @"AppIcon";
+                    localNotification.soundName = @"ringtone.wav";
+                    localNotification.category = AppDelegateLocalNotificationCategory;
+
+                    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+                } else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+                }
             }
         });
     };

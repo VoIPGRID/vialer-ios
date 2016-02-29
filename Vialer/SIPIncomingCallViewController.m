@@ -95,7 +95,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     NSError *error;
     [self.call hangup:&error];
     if (error) {
-        DDLogError(@"Error hangup call: %@", error);
+        DDLogError(@"Error declining call: %@", error);
     }
 
     self.incomingCallStatusLabel.text = NSLocalizedString(@"Declined call", nil);

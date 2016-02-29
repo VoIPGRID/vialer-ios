@@ -96,4 +96,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     return callName;
 }
 
++ (BOOL)anotherCallInProgress:(VSLCall *)receivedCall {
+    return [[VialerSIPLib sharedInstance] anotherCallInProgress:receivedCall];
+}
+
 @end
