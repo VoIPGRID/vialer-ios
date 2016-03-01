@@ -3,6 +3,7 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
+#import "DurationTimer.h"
 #import <OCMock/OCMock.h>
 #import "SIPCallingViewController.h"
 #import "SIPCallingButtonsViewController.h"
@@ -29,6 +30,12 @@
     self.sipCallingVC = (SIPCallingViewController *)[[UIStoryboard storyboardWithName:@"SIPCallingStoryboard" bundle:nil] instantiateInitialViewController];
     [self.sipCallingVC loadViewIfNeeded];
     self.mockCall = OCMClassMock([VSLCall class]);
+}
+
+- (void)tearDown {
+    self.mockCall = nil;
+    self.sipCallingVC = nil;
+    [super tearDown];
 }
 
 - (void)testControllerHangsUpWillDisplayMessage {
@@ -101,6 +108,8 @@
     [self.sipCallingVC hideNumberpad:nil];
 
     OCMVerify([mockButtonsVC hideNumberpad]);
+
+    [mockButtonsVC stopMocking];
 }
 
 - (void)testPhonenumberSetWillSetLabel {
@@ -125,6 +134,26 @@
     [self.sipCallingVC keypadChangedVisibility:NO];
 
     XCTAssertEqualObjects(self.sipCallingVC.phoneNumberLabel.text, @"242", @"The phonenumber should be visible again");
+}
+
+- (void)testCallConnectedDurationTimerIsRunning {
+    self.sipCallingVC.call = self.mockCall;
+    OCMStub([self.mockCall callState]).andReturn(VSLCallStateConfirmed);
+
+    [self.sipCallingVC observeValueForKeyPath:@"callState" ofObject:self.mockCall change:nil context:nil];
+
+    OCMVerify([[DurationTimer alloc] initAndStartDurationTimerWithTimeInterval:1.0 andDurationTimerStatusUpdateBlock:nil]);
+}
+
+- (void)testCallDisconnectedDurationTimerIsStopped {
+    DurationTimer *durationTimer = [[DurationTimer alloc] initAndStartDurationTimerWithTimeInterval:1.0 andDurationTimerStatusUpdateBlock:nil];
+
+    self.sipCallingVC.call = self.mockCall;
+    OCMStub([self.mockCall callState]).andReturn(VSLCallStateDisconnected);
+
+    [self.sipCallingVC observeValueForKeyPath:@"callState" ofObject:self.mockCall change:nil context:nil];
+
+    OCMVerify([durationTimer stop]);
 }
 
 @end
