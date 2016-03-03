@@ -75,6 +75,11 @@ extern NSString * const SystemUserLogoutNotificationErrorKey;
 extern NSString * const SystemUserSIPCredentialsChangedNotification;
 
 /**
+ *  Notification that can be listened to when the user has disabled SIP.
+ */
+extern NSString * const SystemUserSIPDisabledNotification;
+
+/**
  *  SystemUser class is representing the user information as available on the VoIPGRID platform.
  *
  *  Current the SystemUser class also represents a lot of information maintained/stored by the VoIPGRIDRequestOperationManager in the user defaults.
@@ -90,6 +95,11 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
  *  The username that is used to login.
  */
 @property (readonly, nonatomic) NSString *username;
+
+/**
+ *  The password of the user that is logged in.
+ */
+@property (readonly, nonatomic) NSString *password;
 
 /**
  *  The name of the user to display, this could be:

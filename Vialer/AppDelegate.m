@@ -64,6 +64,7 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 #endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSIPCredentials:) name:SystemUserSIPCredentialsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipDisabledNotification:) name:SystemUserSIPDisabledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
@@ -173,9 +174,14 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
             [SIPUtils setupSIPEndpoint];
             [[APNSHandler sharedHandler] registerForVoIPNotifications];
             [self registerForLocalNotifications];
-        } else {
-            [SIPUtils removeSIPEndpoint];
         }
+    });
+}
+
+- (void)sipDisabledNotification:(NSNotification *)notification {
+    DDLogInfo(@"SIP has been disabled");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SIPUtils removeSIPEndpoint];
     });
 }
 
