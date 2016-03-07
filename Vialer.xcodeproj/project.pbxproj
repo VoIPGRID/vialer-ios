@@ -220,6 +220,8 @@
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9AACDAF1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */; };
+		F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B825181C86F724003CBA92 /* DurationTimer.m */; };
+		F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B825181C86F724003CBA92 /* DurationTimer.m */; };
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
 		F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
 		F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
@@ -517,6 +519,8 @@
 		F9A71EC11C7F5F940083C8B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SIPIncomingCallStoryboard.strings; sourceTree = "<group>"; };
 		F9A71EC21C7F5F970083C8B4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPIncomingCallStoryboard.strings; sourceTree = "<group>"; };
 		F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+MiddlewareTests.m"; sourceTree = "<group>"; };
+		F9B825171C86F724003CBA92 /* DurationTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurationTimer.h; sourceTree = "<group>"; };
+		F9B825181C86F724003CBA92 /* DurationTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurationTimer.m; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
 		F9C710CA1C648F110079677C /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
 		F9C710CB1C648F110079677C /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
@@ -1503,6 +1507,8 @@
 				C4CEAB431BCE933000A56FC2 /* GAITracker.m */,
 				C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */,
 				C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */,
+				F9B825171C86F724003CBA92 /* DurationTimer.h */,
+				F9B825181C86F724003CBA92 /* DurationTimer.m */,
 			);
 			name = Categories/Helpers;
 			sourceTree = "<group>";
@@ -2053,6 +2059,7 @@
 				C41FD87D1C60A08400BBE6D7 /* PasteableUILabel.m in Sources */,
 				C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */,
 				C41FD87F1C60A08400BBE6D7 /* TwoStepCallingViewController.m in Sources */,
+				F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
 				C41FD8811C60A08400BBE6D7 /* SystemUser.m in Sources */,
 				C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
@@ -2174,6 +2181,7 @@
 				F2B40BED1C732C2300502769 /* ReachabilityManager.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
+				F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,

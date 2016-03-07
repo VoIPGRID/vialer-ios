@@ -7,6 +7,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
+#import "DurationTimer.h"
 #import "SIPUtils.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
@@ -24,6 +25,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 @property (strong, nonatomic) AVAudioSession *avAudioSession;
 @property (strong, nonatomic) NSString *previousAVAudioSessionCategory;
 @property (weak, nonatomic) SipCallingButtonsViewController *sipCallingButtonsVC;
+@property (strong, nonatomic) DurationTimer *durationTimer;
 @end
 
 @implementation SIPCallingViewController
@@ -197,11 +199,19 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
             break;
         }
         case VSLCallStateConfirmed: {
-            self.callStatusLabel.text = NSLocalizedString(@"0:00", nil);
+            if (self.durationTimer == nil) {
+                self.durationTimer = [[DurationTimer alloc] initAndStartDurationTimerWithTimeInterval:1.0 andDurationTimerStatusUpdateBlock:^(NSInteger durationTimer) {
+                    self.callStatusLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (durationTimer / 60), (durationTimer % 60)];
+                }];
+            }
             break;
         }
         case VSLCallStateDisconnected: {
             self.callStatusLabel.text = NSLocalizedString(@"Call ended", nil);
+            if  (self.durationTimer) {
+                [self.durationTimer stop];
+                self.durationTimer = nil;
+            }
             break;
         }
     }
@@ -210,6 +220,8 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
 #pragma mark - SipCallingButtonsViewControllerDelegate
 - (void)keypadChangedVisibility:(BOOL)visible {
     self.hideButton.hidden = !visible;
+    self.callStatusLabel.hidden = visible;
+
     if (!visible) {
         self.phoneNumberLabel.text = self.phoneNumber;
     }
