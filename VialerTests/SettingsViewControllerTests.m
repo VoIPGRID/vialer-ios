@@ -6,6 +6,7 @@
 #import "SettingsViewController.h"
 
 #import <OCMock/OCMock.h>
+#import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import <XCTest/XCTest.h>
 
@@ -42,7 +43,17 @@
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
-    OCMVerify([mockSystemUser setSipEnabled:NO]);
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch diable sip"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+        OCMVerify([mockSystemUser setSipEnabled:NO]);
+    }];
 }
 
 - (void)testChangeSwitchToOffWillReloadTable {
@@ -56,9 +67,43 @@
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
-    OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch disable sip"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+        OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
+    }];
 }
 
+- (void)testChangeSwitchToOffWillShowSpinner {
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    self.settingsViewController.currentUser = mockSystemUser;
+    id mockSwitch = OCMClassMock([UISwitch class]);
+    id progressMock = OCMClassMock([SVProgressHUD class]);
+    OCMStub([mockSwitch isOn]).andReturn(NO);
+    OCMStub([mockSwitch tag]).andReturn(1001);
+
+    [self.settingsViewController didChangeSwitch:mockSwitch];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch disable sip"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+        OCMVerify([progressMock showWithStatus:[OCMArg any] maskType:SVProgressHUDMaskTypeGradient]);
+    }];
+
+    [progressMock stopMocking];
+}
 - (void)testChangeSwitchToOnWillAskUserToGetSipAccount {
     id mockSystemUser = OCMClassMock([SystemUser class]);
     self.settingsViewController.currentUser = mockSystemUser;

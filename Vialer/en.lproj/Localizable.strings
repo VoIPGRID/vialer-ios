@@ -7,9 +7,6 @@
 "%@\nis currently logged in." = "%@\nis currently logged in.";
 
 /* No comment provided by engineer. */
-"0:00" = "0:00";
-
-/* No comment provided by engineer. */
 "App is configuring" = "%@ is configuring";
 
 /* No comment provided by engineer. */
@@ -80,6 +77,9 @@
 
 /* No comment provided by engineer. */
 "Dial plan" = "Dial plan";
+
+/* No comment provided by engineer. */
+"Disabling VoIP..." = "Disabling VoIP...";
 
 /* No comment provided by engineer. */
 "Email" = "Email address";

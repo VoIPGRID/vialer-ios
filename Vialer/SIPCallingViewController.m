@@ -201,7 +201,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
         case VSLCallStateConfirmed: {
             if (self.durationTimer == nil) {
                 self.durationTimer = [[DurationTimer alloc] initAndStartDurationTimerWithTimeInterval:1.0 andDurationTimerStatusUpdateBlock:^(NSInteger durationTimer) {
-                    self.callStatusLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (durationTimer / 60), (durationTimer % 60)];
+                    self.callStatusLabel.text = [NSString stringWithFormat:@"%02d:%02d", (int)(durationTimer / 60), (int)(durationTimer % 60)];
                 }];
             }
             break;

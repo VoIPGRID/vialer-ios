@@ -7,9 +7,6 @@
 "%@\nis currently logged in." = "%@\nis ingelogd.";
 
 /* No comment provided by engineer. */
-"0:00" = "0:00";
-
-/* No comment provided by engineer. */
 "App is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
@@ -80,6 +77,9 @@
 
 /* No comment provided by engineer. */
 "Dial plan" = "Belplan";
+
+/* No comment provided by engineer. */
+"Disabling VoIP..." = "VoIP aan het uitschakelen...";
 
 /* No comment provided by engineer. */
 "Email" = "E-mailadres";

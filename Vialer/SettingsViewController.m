@@ -160,9 +160,15 @@ static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNu
         if (sender.isOn) {
             [self tryToEnableSIPWithSwitch:sender];
         } else {
-            self.currentUser.sipEnabled = NO;
-            NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
-            [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"Disabling VoIP...", nil) maskType:SVProgressHUDMaskTypeGradient];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                self.currentUser.sipEnabled = NO;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                    NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
+                    [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+                });
+            });
         }
     }
 }
