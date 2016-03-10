@@ -124,9 +124,9 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
     if (call.callState > VSLCallStateNull) {
         if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
             NSError *error;
-            [call hangup:&error];
+            [call decline:&error];
             if (error) {
-                DDLogWarn(@"Error hanging up call: %@", error);
+                DDLogError(@"Error declining call: %@", error);
             }
         } else if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationAcceptCall]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingBackgroundCallNotification object:call];

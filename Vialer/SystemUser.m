@@ -80,6 +80,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 @property (strong, nonatomic) NSString *sipAccount;
 @property (strong, nonatomic) NSString *sipDomain;
 @property (readwrite, nonatomic) BOOL sipAllowed;
+@property (readwrite, nonatomic) BOOL sipRegisterOnAdd;
 
 /**
  *  Depenpency Injection.
@@ -121,6 +122,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     if (self) {
         [self readPropertyValuesFromUserDefaults];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authorizationFailedNotification:) name:VoIPGRIDRequestOperationManagerUnAuthorizedNotification object:nil];
+        self.sipRegisterOnAdd = YES;
     }
     return self;
 }

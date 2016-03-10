@@ -94,7 +94,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (IBAction)declineCallButtonPressed:(UIButton * _Nonnull)sender {
     DDLogDebug(@"User pressed \"Decline call\" for call: %ld", (long)self.call.callId);
     NSError *error;
-    [self.call hangup:&error];
+    [self.call decline:&error];
     if (error) {
         DDLogError(@"Error declining call: %@", error);
     }
