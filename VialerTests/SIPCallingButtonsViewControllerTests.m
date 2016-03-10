@@ -22,6 +22,11 @@
     [self.sipCallingButtonsVC loadViewIfNeeded];
 }
 
+- (void)tearDown {
+    self.sipCallingButtonsVC = nil;
+    [super tearDown];
+}
+
 - (void)testViewControllerHasAHoldButton {
     XCTAssertNotNil(self.sipCallingButtonsVC.holdButton, @"There should be a hold button");
 }
@@ -33,6 +38,7 @@
     [self.sipCallingButtonsVC holdButtonPressed:nil];
 
     OCMVerify([callMock toggleHold:[OCMArg anyObjectRef]]);
+    [callMock stopMocking];
 }
 
 - (void)testViewControllerHasAMuteButton {
@@ -46,6 +52,7 @@
     [self.sipCallingButtonsVC muteButtonPressed:nil];
 
     OCMVerify([callMock toggleMute:[OCMArg anyObjectRef]]);
+    [callMock stopMocking];
 }
 
 - (void)testViewControllerHasASpeakerButton {
@@ -59,6 +66,7 @@
     [self.sipCallingButtonsVC speakerButtonPressed:nil];
 
     OCMVerify([callMock toggleSpeaker]);
+    [callMock stopMocking];
 }
 
 - (void)testViewControllerHasAKeypadButton {
@@ -76,6 +84,7 @@
     [self.sipCallingButtonsVC numberPadPressedWithCharacter:@"1"];
 
     OCMVerify([callMock sendDTMF:[OCMArg isEqual:@"1"] error:[OCMArg anyObjectRef]]);
+    [callMock stopMocking];
 }
 
 - (void)testViewControllerWillSendDMFToDelegate {
@@ -87,6 +96,8 @@
     [self.sipCallingButtonsVC numberPadPressedWithCharacter:@"1"];
 
     OCMVerify([delegateMock DTMFSend:[OCMArg isEqual:@"1"]]);
+    [callMock stopMocking];
+    [delegateMock stopMocking];
 }
 
 - (void)testHideNumberpadWillTellDelegate {
@@ -96,6 +107,7 @@
     [self.sipCallingButtonsVC hideNumberpad];
 
     OCMVerify([delegateMock keypadChangedVisibility:NO]);
+    [delegateMock stopMocking];
 }
 
 @end

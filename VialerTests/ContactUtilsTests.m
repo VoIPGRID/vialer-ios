@@ -1,8 +1,5 @@
 //
 //  ContactUtilsTests.m
-//  Vialer
-//
-//  Created by Redmer Loen on 04-01-16.
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
@@ -22,11 +19,10 @@
 
     self.contact.givenName = @"John";
     self.contact.familyName = @"Appleseed";
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    self.contact = nil;
     [super tearDown];
 }
 

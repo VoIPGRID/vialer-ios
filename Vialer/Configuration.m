@@ -40,24 +40,43 @@ NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor 
 NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState = @"ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState";
 NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
 
-
 NSString * const ConfigurationPartnerURLKey = @"Partner";
 
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
 
+@interface Configuration ()
+@property (strong, nonatomic) NSDictionary *dictionary;
+@end
+
 @implementation Configuration
 
 #pragma mark - Initialization methods
 
+// To make the singleton pattern testable.
+static Configuration *_defaultConfiguration = nil;
+static dispatch_once_t onceToken = 0;
+
+#pragma mark - Lifecycle
 + (instancetype)defaultConfiguration {
-    static Configuration *configuration;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        configuration = [[Configuration alloc] init];
+        _defaultConfiguration = [[self alloc] init];
     });
-    return configuration;
+    return _defaultConfiguration;
 }
+
++ (void)setDefaultConfiguration:(Configuration *)defaultConfiguration {
+    if (_defaultConfiguration != defaultConfiguration) {
+        _defaultConfiguration = defaultConfiguration;
+
+        if (!_defaultConfiguration) {
+            onceToken = 0;
+        } else {
+            onceToken = -1;
+        }
+    }
+}
+
 
 - (NSDictionary *)dictionary {
     if (!_dictionary) {
@@ -87,18 +106,6 @@ static NSString * const ConfigurationUrlsKey = @"URLS";
 }
 
 #pragma mark - Public static methods
-
-+ (UIColor *)tintColorForKey:(NSString *)key {
-    return [[Configuration defaultConfiguration] tintColorForKey:key];
-}
-
-+ (NSDictionary *)tintColorDictionaryForKey:(NSString *)key {
-    return [[Configuration defaultConfiguration] tintColorDictionaryForKey:key];
-}
-
-+ (NSString *)UrlForKey:(NSString *)key {
-    return [[Configuration defaultConfiguration] UrlForKey:key];
-}
 
 + (UIColor *)colorFromArray:(NSArray *)array {
     CGFloat alpha = 1.f;

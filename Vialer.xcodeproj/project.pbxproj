@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1121F457A26B62D29452254C /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D16CC269D18BD7B216205831 /* libPods-Voys.a */; };
-		197273D413E22CC81566BB63 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9627BF2AC23712A5C2F15BCD /* libPods-Vialer.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -18,6 +16,8 @@
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
+		4B1B5016FA97F38C945063BA /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD935344027EAD28DF93F63D /* libPods-Vialer.a */; };
+		A565BDC6A4A023924B8AAAA4 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92061A60436976857F951791 /* libPods-Voys.a */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
 		C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */; };
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
@@ -195,8 +195,9 @@
 		C4EFCF801BF21E210000CC6F /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
-		EEA5A8FBC2DD72C644F189D3 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59BE05711275B8F21FCE3322 /* libPods-VialerTests.a */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
+		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
+		F2153E9D1C91C4BE009A5FD7 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
 		F21ECCE61C47C84A00E9B276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
@@ -213,6 +214,7 @@
 		F2B43F0E1C3BEB3F0089A387 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F2B43F171C3BEB880089A387 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
+		F674DD5B06C6E1B337BD656C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F9379F2C1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
 		F9379F2D1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
@@ -335,7 +337,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		05C7C5F9B0C01BE924936F5E /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		1328C0262168746A823EDDE7 /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
+		3C7A9CFC633851AC4DD08772 /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
 		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
@@ -346,21 +349,21 @@
 		3D44303E1AEF8E1B0034156F /* VIAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIAScene.m; sourceTree = "<group>"; };
 		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
+		3DBE92A428580ED09AF0EE89 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		3DE6EAD91AF0CB4800C09935 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
 		3DE6EADA1AF0CB4800C09935 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
 		3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
 		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		59BE05711275B8F21FCE3322 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6159EFE433396E61595C640C /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
-		71A9F4A23B9A1C9F14B23BE0 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
-		7C82D57913E923482BCBAEDE /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
-		90C418710C9D31A96D79D93C /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9627BF2AC23712A5C2F15BCD /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A40477D4B1A6F9C70FD235DA /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
-		A81C9E48B11148A3D5679FE6 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		54BF7D155F61B0DBE51CD475 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		82AA193C1723EAAEF6A8B77C /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		92061A60436976857F951791 /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BAF93BAD27B202E36276907 /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A15875AFAB0159B282447899 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
+		BD935344027EAD28DF93F63D /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
@@ -488,8 +491,8 @@
 		C4F49F361BF0C13400C25159 /* libPods-Vialer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Vialer.a"; path = "Pods/../build/Debug-iphoneos/libPods-Vialer.a"; sourceTree = "<group>"; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
-		D16CC269D18BD7B216205831 /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5ABC44580D38CCCEFA9A57C /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		D6319D916010D0355EDE8969 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
+		E6679434FF87C43B14DC007A /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -511,6 +514,7 @@
 		F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewController.h; sourceTree = "<group>"; };
 		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityModel.h; sourceTree = "<group>"; };
@@ -560,7 +564,6 @@
 		FB4226D2182261D200707349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB4226D4182261D200707349 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FB4226DC182261D200707349 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FB4226DE182261D200707349 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		FB4226DF182261D200707349 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB4226E0182261D200707349 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Mobile.h"; sourceTree = "<group>"; };
@@ -590,7 +593,6 @@
 		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
 		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
-		FE1E46F96B07475E2519DC3D /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
 		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Configuration.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -625,7 +627,7 @@
 				C41FD8A21C60A08400BBE6D7 /* UIKit.framework in Frameworks */,
 				C41FD8A31C60A08400BBE6D7 /* Foundation.framework in Frameworks */,
 				C41FD8A41C60A08400BBE6D7 /* CoreGraphics.framework in Frameworks */,
-				1121F457A26B62D29452254C /* libPods-Voys.a in Frameworks */,
+				A565BDC6A4A023924B8AAAA4 /* libPods-Voys.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +642,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEA5A8FBC2DD72C644F189D3 /* libPods-VialerTests.a in Frameworks */,
+				F674DD5B06C6E1B337BD656C /* libPods-VialerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,29 +679,13 @@
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
-				197273D413E22CC81566BB63 /* libPods-Vialer.a in Frameworks */,
+				4B1B5016FA97F38C945063BA /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		20EB8572338425CDE7C8C6F8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A81C9E48B11148A3D5679FE6 /* Pods-Vialer.debug.xcconfig */,
-				6159EFE433396E61595C640C /* Pods-Vialer.adhocdistribution.xcconfig */,
-				7C82D57913E923482BCBAEDE /* Pods-Vialer.release.xcconfig */,
-				90C418710C9D31A96D79D93C /* Pods-VialerTests.debug.xcconfig */,
-				D5ABC44580D38CCCEFA9A57C /* Pods-VialerTests.adhocdistribution.xcconfig */,
-				FE1E46F96B07475E2519DC3D /* Pods-VialerTests.release.xcconfig */,
-				71A9F4A23B9A1C9F14B23BE0 /* Pods-Voys.debug.xcconfig */,
-				05C7C5F9B0C01BE924936F5E /* Pods-Voys.adhocdistribution.xcconfig */,
-				A40477D4B1A6F9C70FD235DA /* Pods-Voys.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		3D1A5E611AE543C000DBE64B /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +731,22 @@
 				3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		75BC7643E9AF74274EB33B0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82AA193C1723EAAEF6A8B77C /* Pods-Vialer.debug.xcconfig */,
+				E6679434FF87C43B14DC007A /* Pods-Vialer.adhocdistribution.xcconfig */,
+				D6319D916010D0355EDE8969 /* Pods-Vialer.release.xcconfig */,
+				54BF7D155F61B0DBE51CD475 /* Pods-VialerTests.debug.xcconfig */,
+				3C7A9CFC633851AC4DD08772 /* Pods-VialerTests.adhocdistribution.xcconfig */,
+				3DBE92A428580ED09AF0EE89 /* Pods-VialerTests.release.xcconfig */,
+				A15875AFAB0159B282447899 /* Pods-Voys.debug.xcconfig */,
+				9BAF93BAD27B202E36276907 /* Pods-Voys.adhocdistribution.xcconfig */,
+				1328C0262168746A823EDDE7 /* Pods-Voys.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		C409F3A11C24B9D6007DCC4A /* Models */ = {
@@ -1422,7 +1424,7 @@
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
 				C41FD9011C60A89400BBE6D7 /* VialerSnapshotUITests copy-Info.plist */,
-				20EB8572338425CDE7C8C6F8 /* Pods */,
+				75BC7643E9AF74274EB33B0B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1465,9 +1467,9 @@
 				FB4226D0182261D200707349 /* UIKit.framework */,
 				FB4226D2182261D200707349 /* Foundation.framework */,
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
-				9627BF2AC23712A5C2F15BCD /* libPods-Vialer.a */,
-				59BE05711275B8F21FCE3322 /* libPods-VialerTests.a */,
-				D16CC269D18BD7B216205831 /* libPods-Voys.a */,
+				BD935344027EAD28DF93F63D /* libPods-Vialer.a */,
+				9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */,
+				92061A60436976857F951791 /* libPods-Voys.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1503,9 +1505,9 @@
 		FB4226D7182261D200707349 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */,
 				AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */,
 				FB4226DC182261D200707349 /* main.m */,
-				FB4226DE182261D200707349 /* Vialer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1519,8 +1521,8 @@
 				FB48BB401875B63700C0D5DB /* NSString+Mobile.m */,
 				FB5D2917182BE402001DA8F2 /* NSDate+RelativeDate.h */,
 				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
-				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
+				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C4CEAB421BCE933000A56FC2 /* GAITracker.h */,
 				C4CEAB431BCE933000A56FC2 /* GAITracker.m */,
 				C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */,
@@ -2080,6 +2082,7 @@
 				C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */,
 				C41FD87F1C60A08400BBE6D7 /* TwoStepCallingViewController.m in Sources */,
 				F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */,
+				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
 				C41FD8811C60A08400BBE6D7 /* SystemUser.m in Sources */,
 				C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
@@ -2095,6 +2098,7 @@
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
 				F27AA9B81C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
+				F2153E9D1C91C4BE009A5FD7 /* RecentCall.m in Sources */,
 				C41FD88D1C60A08400BBE6D7 /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2373,8 +2377,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2394,7 +2396,7 @@
 		};
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6159EFE433396E61595C640C /* Pods-Vialer.adhocdistribution.xcconfig */;
+			baseConfigurationReference = E6679434FF87C43B14DC007A /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2409,7 +2411,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Vialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -2419,7 +2421,6 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "de67894e-ed7a-44a6-bf32-5d48451fef13";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2427,7 +2428,7 @@
 		};
 		C41FD8CB1C60A08400BBE6D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71A9F4A23B9A1C9F14B23BE0 /* Pods-Voys.debug.xcconfig */;
+			baseConfigurationReference = A15875AFAB0159B282447899 /* Pods-Voys.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2435,7 +2436,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2443,7 +2443,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Vialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -2453,7 +2453,6 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2461,7 +2460,7 @@
 		};
 		C41FD8CC1C60A08400BBE6D7 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05C7C5F9B0C01BE924936F5E /* Pods-Voys.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 9BAF93BAD27B202E36276907 /* Pods-Voys.adhocdistribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2469,7 +2468,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2477,7 +2475,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Vialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -2487,7 +2485,6 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2495,7 +2492,7 @@
 		};
 		C41FD8CD1C60A08400BBE6D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A40477D4B1A6F9C70FD235DA /* Pods-Voys.release.xcconfig */;
+			baseConfigurationReference = 1328C0262168746A823EDDE7 /* Pods-Voys.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2503,7 +2500,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2511,7 +2507,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Vialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -2521,7 +2517,6 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = Release;
@@ -2562,7 +2557,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2592,7 +2586,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2616,7 +2609,7 @@
 		};
 		C4F49F2F1BF0B45700C25159 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90C418710C9D31A96D79D93C /* Pods-VialerTests.debug.xcconfig */;
+			baseConfigurationReference = 54BF7D155F61B0DBE51CD475 /* Pods-VialerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2645,7 +2638,7 @@
 		};
 		C4F49F301BF0B45700C25159 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5ABC44580D38CCCEFA9A57C /* Pods-VialerTests.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 3C7A9CFC633851AC4DD08772 /* Pods-VialerTests.adhocdistribution.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2653,7 +2646,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2677,7 +2669,7 @@
 		};
 		C4F49F311BF0B45700C25159 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE1E46F96B07475E2519DC3D /* Pods-VialerTests.release.xcconfig */;
+			baseConfigurationReference = 3DBE92A428580ED09AF0EE89 /* Pods-VialerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2685,7 +2677,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2743,7 +2734,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2773,7 +2763,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2807,8 +2796,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2840,8 +2827,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2856,7 +2841,7 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A81C9E48B11148A3D5679FE6 /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = 82AA193C1723EAAEF6A8B77C /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2871,7 +2856,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Vialer-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -2894,7 +2879,7 @@
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C82D57913E923482BCBAEDE /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = D6319D916010D0355EDE8969 /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2909,7 +2894,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vialer/Vialer-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Vialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

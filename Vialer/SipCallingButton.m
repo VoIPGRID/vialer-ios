@@ -14,11 +14,20 @@ static float const SipCallingButtonPressedAlpha = 0.5;
 @property (strong, nonatomic) UIImageView *buttonImageView;
 @property (strong, nonatomic) UIColor *textColor;
 @property (strong, nonatomic) UIColor *pressedColor;
+
+@property (weak, nonatomic) Configuration *defaultConfiguration;
 @end
 
 @implementation SipCallingButton
 
 #pragma mark - Properties
+
+- (Configuration *)defaultConfiguration {
+    if (!_defaultConfiguration) {
+        _defaultConfiguration = [Configuration defaultConfiguration];
+    }
+    return _defaultConfiguration;
+}
 
 - (void)setButtonImage:(NSString *)buttonImage {
     UIImage *image = [[UIImage imageNamed:buttonImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -37,14 +46,14 @@ static float const SipCallingButtonPressedAlpha = 0.5;
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [Configuration tintColorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonTextColor];
     }
     return _textColor;
 }
 
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[Configuration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonPressedAlpha];
+        _pressedColor = [[self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonPressedAlpha];
     }
     return _pressedColor;
 }

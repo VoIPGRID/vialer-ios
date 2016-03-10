@@ -32,7 +32,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     static VoIPGRIDRequestOperationManager *_sharedRequestOperationManager = nil;
 
     dispatch_once(&pred, ^{
-        _sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:[Configuration UrlForKey:@"API"]]];
+        _sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:[[Configuration defaultConfiguration] UrlForKey:@"API"]]];
     });
     return _sharedRequestOperationManager;
 }

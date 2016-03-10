@@ -3,26 +3,26 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-NSString * const MiddlewareURLDeviceRecordMutation = @"/api/apns-device/";
-NSString * const MiddlewareURLIncomingCallResponse = @"/api/call-response/";
-NSString * const MiddlewareResponseKeyMessageStartTime = @"message_start_time";
-NSString * const MiddlewareResponseKeyAvailable = @"available";
-NSString * const MiddlewareResponseKeyAvailableYES = @"True";
-NSString * const MiddlewareResponseKeyAvailableNO = @"False";
-NSString * const MiddlewareResponseKeyUniqueKey = @"unique_key";
-NSString * const MiddlewareResponseKeySIPUserId = @"sip_user_id";
-NSString * const MiddlewareResponseKeyToken = @"token";
-NSString * const MiddlewareResponseKeyApp = @"app";
-NSString * const MiddlewareMainBundleCFBundleVersion = @"CFBundleVersion";
-NSString * const MiddlewareMainBundleCFBundleShortVersionString = @"CFBundleShortVersionString";
-NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdentifier";
-
 #import "VoIPGRIDRequestOperationManager+Middleware.h"
+
+static NSString * const MiddlewareURLDeviceRecordMutation = @"/api/apns-device/";
+static NSString * const MiddlewareURLIncomingCallResponse = @"/api/call-response/";
+static NSString * const MiddlewareResponseKeyMessageStartTime = @"message_start_time";
+static NSString * const MiddlewareResponseKeyAvailable = @"available";
+static NSString * const MiddlewareResponseKeyAvailableYES = @"True";
+static NSString * const MiddlewareResponseKeyAvailableNO = @"False";
+static NSString * const MiddlewareResponseKeyUniqueKey = @"unique_key";
+static NSString * const MiddlewareResponseKeySIPUserId = @"sip_user_id";
+static NSString * const MiddlewareResponseKeyToken = @"token";
+static NSString * const MiddlewareResponseKeyApp = @"app";
+static NSString * const MiddlewareMainBundleCFBundleVersion = @"CFBundleVersion";
+static NSString * const MiddlewareMainBundleCFBundleShortVersionString = @"CFBundleShortVersionString";
+static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdentifier";
 
 @implementation VoIPGRIDRequestOperationManager (Middleware)
 
 - (void)updateDeviceRecordWithAPNSToken:(NSString *)apnsToken sipAccount:(NSString *)sipAccount withCompletion:(void (^)(NSError *error))completion {
-    //The Nullable and nonnull keywords are not enough, an empty string is also not acceptable
+    // The Nullable and nonnull keywords are not enough, an empty string is also not acceptable.
     NSAssert(sipAccount.length > 0, @"SIP Account was not set, could not update middleware.");
     NSAssert(apnsToken.length > 0, @"APNS Token was not provided, could not update middleware");
 

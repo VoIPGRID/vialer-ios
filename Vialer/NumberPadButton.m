@@ -24,11 +24,20 @@ static float const NumberPadButtonPressedAlpha = 0.5;
 
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIColor *pressedColor;
+
+@property (weak, nonatomic) Configuration *defaultConfiguration;
 @end
 
 @implementation NumberPadButton
 
 #pragma mark - Properties
+
+- (Configuration *)defaultConfiguration {
+    if (!_defaultConfiguration) {
+        _defaultConfiguration = [Configuration defaultConfiguration];
+    }
+    return _defaultConfiguration;
+}
 
 - (NSString *)number {
     return self.numberLabel.text;
@@ -77,14 +86,14 @@ static float const NumberPadButtonPressedAlpha = 0.5;
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [Configuration tintColorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonTextColor];
     }
     return _textColor;
 }
 
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[Configuration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:NumberPadButtonPressedAlpha];
+        _pressedColor = [[self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:NumberPadButtonPressedAlpha];
     }
     return _pressedColor;
 }

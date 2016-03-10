@@ -23,6 +23,14 @@
     OCMStub([self.mockEntityDescription entityForName:[OCMArg any] inManagedObjectContext:[OCMArg any]]).andReturn(self.mockEntityDescription);
 }
 
+- (void)tearDown {
+    [self.mockManagedObjectContext stopMocking];
+    self.mockManagedObjectContext = nil;
+    [self.mockEntityDescription stopMocking];
+    self.mockEntityDescription = nil;
+    [super tearDown];
+}
+
 - (void)testGetLatestCallWillTryToFetchFromManagedObjectContext {
     OCMExpect([self.mockManagedObjectContext executeFetchRequest:[OCMArg checkWithBlock:^BOOL(NSFetchRequest *fetchRequest) {
 
@@ -42,6 +50,9 @@
     OCMVerifyAll(self.mockManagedObjectContext);
 }
 
+// VIALI-3154
+// rewrite this test, and all other core data test to use a test specific "in memory" database instead of mocking the classes
+// For inspiration see: http://stackoverflow.com/a/23988116
 - (void)testGetLatestCallWillReturnTheCall {
     RecentCall *recent = [[RecentCall alloc] init];
     OCMStub([self.mockManagedObjectContext executeFetchRequest:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(@[recent]);

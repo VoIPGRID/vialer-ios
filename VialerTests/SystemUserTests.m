@@ -47,12 +47,15 @@
 }
 
 - (void)tearDown {
-    [super tearDown];
+    self.user = nil;
     [self.userDefaultsMock stopMocking];
+    self.userDefaultsMock = nil;
     [self.operationsMock stopMocking];
+    self.userDefaultsMock = nil;
     [self.keychainMock stopMocking];
+    self.keychainMock = nil;
+    [super tearDown];
 }
-
 
 - (void)testSystemUserHasNoDisplayNameOnDefault {
     OCMStub([self.userDefaultsMock objectForKey:[OCMArg any]]).andReturn(nil);
@@ -167,20 +170,17 @@
 - (void)testSystemUserWithSipEnabledAndSipAccountWillPostNotification {
     OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
     OCMStub([self.userDefaultsMock objectForKey:@"SIPAccount"]).andReturn(@"12340042");
-    id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
-    OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
-    SystemUser *newUser = [[SystemUser alloc] initPrivate];
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch callStatus again"];
-    OCMStub([mockNotificationCenter postNotificationName:[OCMArg any] object:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
-        [expectation fulfill];
-    });
-    
-    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
-        OCMVerify([mockNotificationCenter postNotificationName:[OCMArg isEqual:SystemUserSIPCredentialsChangedNotification] object:[OCMArg isEqual:newUser]]);
-    }];
+    SystemUser *newUser = [SystemUser alloc];
 
-    [mockNotificationCenter stopMocking];
+    id observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:SystemUserSIPCredentialsChangedNotification object:newUser];
+    [[observerMock expect] notificationWithName:SystemUserSIPCredentialsChangedNotification object:newUser];
+
+    newUser = [newUser initPrivate];
+
+    [observerMock verify];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
 }
 
 - (void)testLoggingInWithUserWithSIPAllowedWillStoreSIPCredentialsInUserDefaults {
@@ -391,7 +391,7 @@
         [expectation fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:0.5 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         NSLog(@"Error: %@", error);
     }];
 }

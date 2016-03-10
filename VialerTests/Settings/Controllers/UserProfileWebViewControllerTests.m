@@ -20,6 +20,11 @@
     [self.userProfileWVC loadViewIfNeeded];
 }
 
+- (void)tearDown {
+    self.userProfileWVC = nil;
+    [super tearDown];
+}
+
 - (void)testBackButtonPressedWillCheckSipStatus {
     id mockSystemUser = OCMClassMock([SystemUser class]);
     self.userProfileWVC.currentUser = mockSystemUser;
@@ -27,6 +32,7 @@
     [self.userProfileWVC cancelButtonPressed:nil];
 
     OCMVerify([mockSystemUser getAndActivateSIPAccountWithCompletion:[OCMArg any]]);
+    [mockSystemUser stopMocking];
 }
 
 - (void)testSipCheckFailWillPopViewController {
@@ -43,6 +49,9 @@
     [self.userProfileWVC cancelButtonPressed:nil];
 
     OCMVerify([mockNavigationController popViewControllerAnimated:YES]);
+    [mockSystemUser stopMocking];
+    [mockNavigationController stopMocking];
+    [mockUserProfileWVC stopMocking];
 }
 
 - (void)testBackgroundButtonWillSegueToRootViewController {
@@ -65,5 +74,7 @@
     [self.userProfileWVC cancelButtonPressed:nil];
 
     OCMVerify([mockUserProfileWVC performSegueWithIdentifier:@"UnwindToSettingsSegue" sender:[OCMArg any]]);
+    [mockSystemUser stopMocking];
+    [mockUserProfileWVC stopMocking];
 }
 @end

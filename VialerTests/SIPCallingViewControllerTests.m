@@ -33,6 +33,7 @@
 }
 
 - (void)tearDown {
+    [self.mockCall stopMocking];
     self.mockCall = nil;
     self.sipCallingVC = nil;
     [super tearDown];
@@ -47,6 +48,8 @@
     [self.sipCallingVC endCallButtonPressed:mockButton];
 
     OCMVerify([mockLabel setText:[OCMArg any]]);
+    [mockButton stopMocking];
+    [mockLabel stopMocking];
 }
 
 - (void)testWhenCallIsDisconnectedWillNotEndCallAgain {
@@ -61,6 +64,8 @@
     [[self.mockCall reject] hangup:[OCMArg anyObjectRef]];
 
     [self.sipCallingVC endCallButtonPressed:mockButton];
+    [mockButton stopMocking];
+    [mockLabel stopMocking];
 }
 
 - (void)testControllerHangsUpWillAskCallToEndCall {
@@ -70,6 +75,7 @@
     [self.sipCallingVC endCallButtonPressed:mockButton];
 
     OCMVerify([self.mockCall hangup:[OCMArg anyObjectRef]]);
+    [mockButton stopMocking];
 }
 
 - (void)testCallIsEndedWillDismissViewController {
@@ -87,8 +93,10 @@
     [self.sipCallingVC observeValueForKeyPath:@"callState" ofObject:self.mockCall change:nil context:nil];
 
     // Check if view is dismissed.
-    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         OCMVerify([viewMock dismissViewControllerAnimated:YES completion:nil]);
+        [sipMock stopMocking];
+        [viewMock stopMocking];
     }];
 }
 

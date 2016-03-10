@@ -29,11 +29,13 @@
     Middleware *aMiddlewareInstance = [[Middleware alloc] init];
     self.middlewareRequestOperationManager = [aMiddlewareInstance middlewareRequestOperationManager];
 
-    self.middlewareBaseURLAsString = [Configuration UrlForKey:ConfigurationMiddleWareBaseURLString];
+    self.middlewareBaseURLAsString = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
 }
 
 - (void)tearDown {
     [OHHTTPStubs removeAllStubs];
+    self.middlewareBaseURLAsString = nil;
+    self.middlewareRequestOperationManager = nil;
     [super tearDown];
 }
 

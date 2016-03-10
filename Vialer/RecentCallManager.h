@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 @class RecentCall;
+@class NSManagedObjectContext;
 
 /**
  *  Errors the RecentCallManager can have.

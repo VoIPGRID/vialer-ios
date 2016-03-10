@@ -47,11 +47,13 @@
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
-    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error: %@", error);
         }
         OCMVerify([mockSystemUser setSipEnabled:NO]);
+        [mockSystemUser stopMocking];
+        [mockSwitch stopMocking];
     }];
 }
 
@@ -70,11 +72,14 @@
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
-    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error: %@", error);
         }
         OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
+        [mockSystemUser stopMocking];
+        [mockTableView stopMocking];
+        [mockSwitch stopMocking];
     }];
 }
 
@@ -92,15 +97,18 @@
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
-    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error: %@", error);
         }
         OCMVerify([progressMock showWithStatus:[OCMArg any] maskType:SVProgressHUDMaskTypeGradient]);
-    }];
 
-    [progressMock stopMocking];
+        [progressMock stopMocking];
+        [mockSwitch stopMocking];
+        [mockSystemUser stopMocking];
+    }];
 }
+
 - (void)testChangeSwitchToOnWillAskUserToGetSipAccount {
     id mockSystemUser = OCMClassMock([SystemUser class]);
     self.settingsViewController.currentUser = mockSystemUser;
@@ -111,6 +119,8 @@
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
     OCMVerify([mockSystemUser getAndActivateSIPAccountWithCompletion:[OCMArg any]]);
+    [mockSystemUser stopMocking];
+    [mockSwitch stopMocking];
 }
 
 - (void)testSystemUserWillReturnErrorWhenFetchingSipAccount {
@@ -128,6 +138,8 @@
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
     OCMVerify([mockSwitch setOn:NO]);
+    [mockSystemUser stopMocking];
+    [mockSwitch stopMocking];
 }
 
 - (void)testSystemUserWillReturnNoSuccessWhenFetchingSipAccount {
@@ -145,6 +157,8 @@
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
     OCMVerify([mockSwitch setOn:NO]);
+    [mockSystemUser stopMocking];
+    [mockSwitch stopMocking];
 }
 
 - (void)testSegueWillHappenIfAccountCouldNotBeFetched {
@@ -166,6 +180,8 @@
     OCMVerify([mockSettingsVC performSegueWithIdentifier:@"ShowActivateSIPAccount" sender:[OCMArg any]]);
 
     [mockSettingsVC stopMocking];
+    [mockSystemUser stopMocking];
+    [mockSwitch stopMocking];
 }
 
 - (void)testWhenSipAccountIsFetchedReloadTable {
@@ -184,6 +200,9 @@
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
     OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
+    [mockSystemUser stopMocking];
+    [mockSwitch stopMocking];
+    [mockTableView stopMocking];
 }
 
 - (void)testNoSIPAccountFromLoginControllerSegueToActivateSIPAccount {

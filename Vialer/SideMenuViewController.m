@@ -32,7 +32,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 @property (strong, nonatomic) NSString *appVersionBuildString;
 @property (strong, nonatomic) UIColor *tintColor;
 @property (strong, nonatomic) AvailabilityModel *availabilityModel;
-
+@property (weak, nonatomic) Configuration *defaultConfiguration;
 @end
 
 @implementation SideMenuViewController
@@ -46,14 +46,21 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 #pragma mark - properties
 
+- (Configuration *)defaultConfiguration {
+    if (!_defaultConfiguration) {
+        _defaultConfiguration = [Configuration defaultConfiguration];
+    }
+    return _defaultConfiguration;
+}
+
 - (void)setUsernameLabel:(UILabel *)usernameLabel {
     _usernameLabel = usernameLabel;
-    _usernameLabel.textColor = [Configuration tintColorForKey:ConfigurationSideMenuTintColor];
+    _usernameLabel.textColor = [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setOutgoingNumberLabel:(UILabel *)outgoingNumberLabel {
     _outgoingNumberLabel = outgoingNumberLabel;
-    _outgoingNumberLabel.textColor = [Configuration tintColorForKey:ConfigurationSideMenuTintColor];
+    _outgoingNumberLabel.textColor = [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setBuildVersionLabel:(UILabel *)buildVersionLabel {
@@ -66,7 +73,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 }
 
 - (UIColor *)tintColor {
-    return [Configuration tintColorForKey:ConfigurationSideMenuTintColor];
+    return [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setAvailabilityIcon:(UIImageView *)availabilityIcon {
@@ -137,7 +144,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
-        NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+        NSString *onboardingUrl = [self.defaultConfiguration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
         webController.title = NSLocalizedString(@"Information", nil);
         webController.URL = [NSURL URLWithString:onboardingUrl];
         webController.showsNavigationToolbar = NO;
@@ -167,16 +174,19 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
         if ([additionalVersionString length] >0)
             [versionString appendFormat:@".%@", additionalVersionString];
-        NSString *version = [NSString stringWithFormat:@"%@ (%@)",
-                             versionString,
-                             [infoDict objectForKey:@"CFBundleVersion"]];
 
+        NSString *version;
 #if DEBUG
         version = [NSString stringWithFormat:@"%@ (%@) | %@",
                    versionString,
                    [infoDict objectForKey:@"CFBundleVersion"],
                    [infoDict objectForKey:@"Commit_Short_Hash"]];
+#else
+        version = [NSString stringWithFormat:@"%@ (%@)",
+                   versionString,
+                   [infoDict objectForKey:@"CFBundleVersion"]];
 #endif
+
         _appVersionBuildString = version;
     }
     return _appVersionBuildString;
