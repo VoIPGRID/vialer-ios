@@ -9,6 +9,7 @@
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "ReachabilityManager.h"
 #import "SIPUtils.h"
+#import "SSKeychain.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager+Middleware.h"
 
@@ -32,12 +33,14 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 #pragma mark - Lifecycle
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPCredentialsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAPNSTokenOnSIPCredentialsChange) name:SystemUserSIPCredentialsChangedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteSIPAccountFromMiddleware) name:SystemUserSIPDisabledNotification object:nil];
     }
     return self;
 }
@@ -58,6 +61,10 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
         //To have DELETE also put it's parameters into the request body: (Default on JSON Serializer is to put them in URI)
         _middlewareRequestOperationManager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
+    }
+
+    if (self.systemUser.username) {
+        [_middlewareRequestOperationManager.requestSerializer setAuthorizationHeaderFieldWithUsername:self.systemUser.username password:self.systemUser.password];
     }
     return _middlewareRequestOperationManager;
 }
@@ -119,10 +126,12 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     if (self.systemUser.sipEnabled) {
         DDLogInfo(@"Sip Credentials have changed, updating Middleware");
         [self sentAPNSToken:[APNSHandler storedAPNSToken]];
-    } else {
-        DDLogInfo(@"User disabled SIP, unregistering from middleware");
-        //TODO: VIALI-3111
     }
+}
+
+- (void)deleteSIPAccountFromMiddleware {
+    DDLogInfo(@"User disabled SIP, unregistering from middleware");
+    [self deleteDeviceRegistrationFromMiddleware];
 }
 
 - (void)deleteDeviceRegistrationFromMiddleware {

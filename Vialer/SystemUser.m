@@ -18,6 +18,7 @@ NSString * const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogout
 NSString * const SystemUserLogoutNotificationErrorKey       = @"SystemUserLogoutNotificationErrorKey";
 
 NSString * const SystemUserSIPCredentialsChangedNotification = @"SystemUserSIPCredentialsChangedNotification";
+NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDisabledNotification";
 
 /**
  *  Api Dictionary keys.
@@ -191,7 +192,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:self];
         });
     }
     [[NSUserDefaults standardUserDefaults] setBool:_sipEnabled forKey:SystemUserSUDSIPEnabled];
@@ -201,6 +202,13 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 - (NSString *)sipPassword {
     if (self.sipAccount) {
         return [SSKeychain passwordForService:self.serviceName account:self.sipAccount];
+    }
+    return nil;
+}
+
+- (NSString *)password {
+    if (self.username) {
+        return [SSKeychain passwordForService:self.serviceName account:self.username];
     }
     return nil;
 }
@@ -314,6 +322,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
     [self removeSIPCredentials];
     self.sipAllowed = NO;
+    self.sipAccount = nil;
+
+    [defaults removeObjectForKey:SystemUserSUDSIPAccount];
     [defaults removeObjectForKey:SystemUserSUDSipAllowed];
 
     [defaults synchronize];
@@ -321,8 +332,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 - (void)removeSIPCredentials {
     [SSKeychain deletePasswordForService:self.serviceName account:self.sipAccount];
-    self.sipAccount = nil;
     self.sipEnabled = NO;
+    self.sipAccount = nil;
+
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPAccount];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPEnabled];
 }
