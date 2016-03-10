@@ -25,14 +25,14 @@
 		</array>
 		<key>ActivateSIPAccountViewControllerButtonBorderColor</key>
 		<array>
-			<integer>0</integer>
-			<integer>122</integer>
+			<integer>255</integer>
+			<integer>255</integer>
 			<integer>255</integer>
 		</array>
 		<key>ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState</key>
 		<array>
-			<integer>0</integer>
-			<integer>122</integer>
+			<integer>255</integer>
+			<integer>255</integer>
 			<integer>255</integer>
 			<real>0.5</real>
 		</array>

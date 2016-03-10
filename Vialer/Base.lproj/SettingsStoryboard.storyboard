@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wbd-46-JZE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wbd-46-JZE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -129,6 +129,14 @@
             </objects>
             <point key="canvasLocation" x="1681" y="325"/>
         </scene>
+        <!--MainStoryboard-->
+        <scene sceneID="vJs-5V-sJd">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="VialerRootViewController" storyboardName="MainStoryboard" id="zpk-CN-EhK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nC7-TC-tLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2932" y="310"/>
+        </scene>
         <!--VoIP account missing-->
         <scene sceneID="IBH-6d-eFu">
             <objects>
@@ -137,7 +145,7 @@
                         <viewControllerLayoutGuide type="top" id="CeI-kl-nZG"/>
                         <viewControllerLayoutGuide type="bottom" id="IYv-vw-46K"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cf1-Cu-DK1">
+                    <view key="view" contentMode="scaleToFill" id="cf1-Cu-DK1" customClass="GradientView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -147,21 +155,23 @@
 
 At this moment there is no VoIP account linked to your user.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2N-TO-yyL">
                                 <rect key="frame" x="276" y="334" width="48" height="30"/>
-                                <state key="normal" title="Cancel"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="YfQ-oy-Qzc" eventType="touchUpInside" id="nmM-IJ-aPq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-Z8-wIN" customClass="RoundedAndColoredUIButton">
-                                <rect key="frame" x="221" y="298" width="159" height="28"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-Z8-wIN" customClass="RoundedAndColoredUIButton">
+                                <rect key="frame" x="20" y="298" width="560" height="28"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
                                 <state key="normal" title="Set VoIP Account">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="HTX-Do-hmj" kind="show" id="r8a-MH-HhO"/>
@@ -172,10 +182,12 @@ At this moment there is no VoIP account linked to your user.</string>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="cK0-5A-42D" secondAttribute="leading" id="BVA-bI-cdK"/>
                             <constraint firstItem="YSV-Z8-wIN" firstAttribute="centerX" secondItem="cf1-Cu-DK1" secondAttribute="centerX" id="Crm-Rs-R8g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YSV-Z8-wIN" secondAttribute="trailing" constant="12" id="KQG-uX-R2L"/>
                             <constraint firstItem="V2N-TO-yyL" firstAttribute="top" secondItem="YSV-Z8-wIN" secondAttribute="bottom" constant="8" id="OzT-jt-6jR"/>
                             <constraint firstItem="YSV-Z8-wIN" firstAttribute="top" secondItem="cK0-5A-42D" secondAttribute="bottom" constant="100" id="akv-7b-ofy"/>
                             <constraint firstItem="cK0-5A-42D" firstAttribute="top" secondItem="CeI-kl-nZG" secondAttribute="bottom" constant="52" id="cTZ-P1-QzI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cK0-5A-42D" secondAttribute="trailing" id="er8-sO-DcB"/>
+                            <constraint firstItem="YSV-Z8-wIN" firstAttribute="leading" secondItem="cf1-Cu-DK1" secondAttribute="leadingMargin" constant="12" id="g6o-Tg-DhB"/>
                             <constraint firstItem="V2N-TO-yyL" firstAttribute="centerX" secondItem="cf1-Cu-DK1" secondAttribute="centerX" id="wUk-Io-QYn"/>
                         </constraints>
                     </view>
@@ -188,6 +200,7 @@ At this moment there is no VoIP account linked to your user.</string>
                     </navigationItem>
                     <connections>
                         <outlet property="userProfileButton" destination="YSV-Z8-wIN" id="2Mv-j4-dQi"/>
+                        <segue destination="zpk-CN-EhK" kind="show" identifier="VialerRootViewControllerSegue" id="V0G-tN-IOn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cc5-xn-uUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,12 +229,13 @@ At this moment there is no VoIP account linked to your user.</string>
                     </navigationItem>
                     <connections>
                         <segue destination="piG-9z-3hc" kind="unwind" identifier="UnwindToSettingsSegue" unwindAction="unwindToSettingsViewController:" id="5dJ-Cx-avo"/>
+                        <segue destination="zpk-CN-EhK" kind="show" identifier="VialerRootViewControllerSegue" id="RzF-p1-YrF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UaF-T9-X4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="piG-9z-3hc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3362" y="-180"/>
+            <point key="canvasLocation" x="3355" y="-153"/>
         </scene>
         <!--My Number-->
         <scene sceneID="Dgo-gG-adH">
@@ -278,12 +292,12 @@ At this moment there is no VoIP account linked to your user.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVo-uT-7Db" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2672" y="554"/>
+            <point key="canvasLocation" x="2460" y="625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OxG-fz-0Qy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wbd-46-JZE" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsNavigationControllerStoryboard" automaticallyAdjustsScrollViewInsets="NO" id="Wbd-46-JZE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="roz-pE-TRe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -302,4 +316,7 @@ At this moment there is no VoIP account linked to your user.</string>
     <resources>
         <image name="logoBlackWhite" width="192" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="V0G-tN-IOn"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -7,7 +7,6 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SVProgressHUD.h"
-#import "SystemUser.h"
 
 static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 

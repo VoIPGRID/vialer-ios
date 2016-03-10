@@ -30,6 +30,13 @@
     OCMVerify([mockNavigationController popViewControllerAnimated:YES]);
 }
 
+- (void)testBackgroundButtonWillSegueToRootViewController {
+    self.activateSIPAccountVC.backButtonToRootViewController = YES;
+    [self.activateSIPAccountVC backButtonPressed:nil];
+
+    OCMVerify([self.activateSIPAccountVC performSegueWithIdentifier:@"VialerRootViewControllerSegue" sender:self]);
+}
+
 - (void)testPrepareForSegueWillSetNextURL {
     id mockUserProfileWVC = OCMClassMock([UserProfileWebViewController class]);
     id mockSegue = OCMClassMock([UIStoryboardSegue class]);

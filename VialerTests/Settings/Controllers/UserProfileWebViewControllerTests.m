@@ -45,6 +45,13 @@
     OCMVerify([mockNavigationController popViewControllerAnimated:YES]);
 }
 
+- (void)testBackgroundButtonWillSegueToRootViewController {
+    self.userProfileWVC.backButtonToRootViewController = YES;
+    [self.userProfileWVC cancelButtonPressed:nil];
+
+    OCMVerify([self.userProfileWVC performSegueWithIdentifier:@"VialerRootViewControllerSegue" sender:self]);
+}
+
 - (void)testSipCheckOkWillUnwindToSettings {
     id mockSystemUser = OCMClassMock([SystemUser class]);
     OCMStub([mockSystemUser sipAccount]).andReturn(@"123400042");

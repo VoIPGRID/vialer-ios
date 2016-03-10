@@ -6,6 +6,7 @@
 #import "LogInViewController.h"
 #import <OCMock/OCMock.h>
 #import "PBWebViewController.h"
+#import "SettingsViewController.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
 #import <XCTest/XCTest.h>
@@ -18,6 +19,15 @@
 @interface LogInViewControllerTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;
 @property (nonatomic) id mockUser;
+@end
+
+@interface SystemUser()
+@property (strong, nonatomic) NSString *sipAccount;
+@property (nonatomic) BOOL sipAllowed;
+@end
+
+@interface LogInViewController()
+- (void)unlockIt;
 @end
 
 @implementation LogInViewControllerTests
@@ -148,6 +158,21 @@
     [self.loginViewController sendEmail:@"test@test.com"];
 
     OCMVerify([mockOperationsManager passwordResetWithEmail:[OCMArg isEqual:@"test@test.com"] withCompletion:[OCMArg any]]);
+}
+
+- (void)testSIPAllowedNoSIPAccountSegueToActiveSIPAccount {
+    OCMStub([self.mockUser sipAccount]).andReturn(nil);
+    OCMStub([self.mockUser sipAllowed]).andReturn(YES);
+
+    id loginViewControllerMock = OCMPartialMock(self.loginViewController);
+    [loginViewControllerMock unlockIt];
+    OCMVerify([loginViewControllerMock presentViewController:[OCMArg checkWithBlock:^BOOL(id obj) {
+        XCTAssertTrue([obj isKindOfClass:[UINavigationController class]], @"There should be a navigationcontroller.");
+        UINavigationController *navController = (UINavigationController *)obj;
+        XCTAssertEqual(navController.viewControllers.count, 1, @"there should be one controller");
+        XCTAssertTrue([navController.viewControllers[0] isKindOfClass:[SettingsViewController class]], @"There should be the settings view controller visible");
+        return YES;
+    }] animated:NO completion:nil]);
 }
 
 - (void)testLoginForgetAlertOkActionWillShowLoginForm {

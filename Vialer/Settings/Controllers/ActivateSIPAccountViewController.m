@@ -10,6 +10,7 @@
 #import "UserProfileWebViewController.h"
 
 static NSString *ActivateSIPAccountViewControllerUserProfileURL = @"/user/change/";
+static NSString * ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
 static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 @interface ActivateSIPAccountViewController()
@@ -31,6 +32,10 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 - (void)setupUserProfileButton {
     self.userProfileButton.borderWidth = 1;
     self.userProfileButton.cornerRadius = ActivateSIPAccountViewControllerButtonRadius;
@@ -49,8 +54,13 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 #pragma mark - actions
 
-- (IBAction)backButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)backButtonPressed:(UIBarButtonItem *)sender {
+    if (self.backButtonToRootViewController) {
+        [self performSegueWithIdentifier:ActivateSIPAccountViewControllerVialerRootViewControllerSegue sender:self];
+        self.backButtonToRootViewController = NO;
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Segues
@@ -60,6 +70,7 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
         [GAITracker trackScreenForControllerName:@"UserProfileWebView"];
         UserProfileWebViewController *webVC = segue.destinationViewController;
         webVC.nextUrl = ActivateSIPAccountViewControllerUserProfileURL;
+        webVC.backButtonToRootViewController = self.backButtonToRootViewController;
     }
 }
 

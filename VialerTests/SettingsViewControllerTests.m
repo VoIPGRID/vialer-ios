@@ -189,4 +189,9 @@
     OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
 }
 
+- (void)testNoSIPAccountFromLoginControllerSegueToActivateSIPAccount {
+    self.settingsViewController.showSIPAccountWebview = YES;
+    OCMVerify([self.settingsViewController performSegueWithIdentifier:@"ShowActivateSIPAccount" sender:self]);
+}
+
 @end
