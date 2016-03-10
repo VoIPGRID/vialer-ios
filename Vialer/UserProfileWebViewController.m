@@ -8,8 +8,15 @@
 #import "UserProfileWebViewController.h"
 
 static NSString * const UserProfileWebViewControllerUnwindToSettingsSegue = @"UnwindToSettingsSegue";
+static NSString * const UserProfileWebViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
 
 @implementation UserProfileWebViewController
+
+#pragma mark - View life cycle
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
 
 #pragma mark - properties
 
@@ -23,7 +30,12 @@ static NSString * const UserProfileWebViewControllerUnwindToSettingsSegue = @"Un
 
         // If account was set, lets unwind to the settings.
         if (success && self.currentUser.sipAccount) {
-            [self performSegueWithIdentifier:UserProfileWebViewControllerUnwindToSettingsSegue sender:self];
+            if (self.backButtonToRootViewController) {
+                [self performSegueWithIdentifier:UserProfileWebViewControllerVialerRootViewControllerSegue sender:self];
+                self.backButtonToRootViewController = NO;
+            } else {
+                [self performSegueWithIdentifier:UserProfileWebViewControllerUnwindToSettingsSegue sender:self];
+            }
         } else {
             [self.navigationController popViewControllerAnimated:YES];
         }

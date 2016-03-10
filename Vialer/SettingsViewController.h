@@ -7,6 +7,12 @@
 
 @interface SettingsViewController : UITableViewController
 
+/**
+ *  If set to YES this will segue directly to the SIP Account activation view.
+ *  This is used in the LoginViewController.
+ */
+@property (nonatomic) BOOL showSIPAccountWebview;
+
 - (void)didChangeSwitch:(UISwitch *)sender;
 
 /**

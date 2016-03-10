@@ -29,7 +29,7 @@
 "V2N-TO-yyL.normalTitle" = "Annuleer";
 
 /* Class = "UIButton"; normalTitle = "Set VoIP Account"; ObjectID = "YSV-Z8-wIN"; */
-"YSV-Z8-wIN.normalTitle" = "Koppel VoIP Account";
+"YSV-Z8-wIN.normalTitle" = "Koppel VoIP-account";
 
 /* Class = "UILabel"; text = "To setup a phone call via the VoIP function, a VoIP account has to be set in your user profile.\n\nAt this moment there is no VoIP account linked to your user."; ObjectID = "cK0-5A-42D"; */
 "cK0-5A-42D.text" = "Om gebruik te kunnen maken van bellen via VoIP, moet er een VoIP-account gekoppeld zijn aan je gebruiker.\n\nOp dit moment is er geen VoIP-account gekoppeld aan deze gebruiker.";

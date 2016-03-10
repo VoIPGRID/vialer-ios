@@ -188,11 +188,11 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.numberText];
-        self.numberLabel.text = nil;
+        self.numberText = @"";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
         [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.numberText];
-        self.numberLabel.text = nil;
+        self.numberText = @"";
     }
 }
 

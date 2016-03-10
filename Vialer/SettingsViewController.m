@@ -5,6 +5,7 @@
 
 #import "SettingsViewController.h"
 
+#import "ActivateSIPAccountViewController.h"
 #import "EditNumberViewController.h"
 #import "GAITracker.h"
 #import "SIPUtils.h"
@@ -14,20 +15,20 @@
 #import "VoIPGRIDRequestOperationManager.h"
 
 
-static int const SettingsViewControllerVoIPAccountSection = 0;
-static int const SettingsViewControllerSipEnabledRow = 0;
-static int const SettingsViewControllerSipAccountRow = 1;
+static int const SettingsViewControllerVoIPAccountSection   = 0;
+static int const SettingsViewControllerSipEnabledRow        = 0;
+static int const SettingsViewControllerSipAccountRow        = 1;
 
-static int const SettingsViewControllerNumbersSection = 1;
-static int const SettingsViewControllerMyNumberRow = 0;
-static int const SettingsViewControllerOutgoingNumberRow = 1;
-static int const SettingsViewControllerMyEmailRow = 2;
+static int const SettingsViewControllerNumbersSection       = 1;
+static int const SettingsViewControllerMyNumberRow          = 0;
+static int const SettingsViewControllerOutgoingNumberRow    = 1;
+static int const SettingsViewControllerMyEmailRow           = 2;
 
-static int const SettingsViewControllerUISwitchWidth = 60;
-static int const SettingsViewControllerUISwitchOriginOffsetX = 35;
-static int const SettingsViewControllerUISwitchOriginOffsetY = 15;
+static int const SettingsViewControllerUISwitchWidth            = 60;
+static int const SettingsViewControllerUISwitchOriginOffsetX    = 35;
+static int const SettingsViewControllerUISwitchOriginOffsetY    = 15;
 
-static NSString * const SettingsViewControllerShowEditNumberSegue = @"ShowEditNumberSegue";
+static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
@@ -39,7 +40,12 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
-    [self.tableView reloadData];
+
+    if (self.showSIPAccountWebview) {
+        [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Properties
@@ -134,6 +140,12 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         EditNumberViewController *editNumberController = (EditNumberViewController *)segue.destinationViewController;
         editNumberController.numberToEdit = self.currentUser.mobileNumber;
         editNumberController.delegate = self;
+    } else if ([segue.identifier isEqualToString:SettingsViewControllerShowActivateSIPAccount]) {
+        ActivateSIPAccountViewController *activateSIPAccountViewController = (ActivateSIPAccountViewController *)segue.destinationViewController;
+        if (self.showSIPAccountWebview) {
+            activateSIPAccountViewController.backButtonToRootViewController = YES;
+            self.showSIPAccountWebview = NO;
+        }
     }
 }
 

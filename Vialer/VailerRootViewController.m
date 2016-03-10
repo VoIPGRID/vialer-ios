@@ -71,6 +71,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    // Customize NavigationBar
+    [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarTintColor];
+    [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarBarTintColor];
+
     // This is needed because when dismissing the view stack to display the sip incoming view controller calls
     // the viewdidappear function so it will try to differen segue when you want to present a sip view controller.
     if (!self.presentSIPViewController) {

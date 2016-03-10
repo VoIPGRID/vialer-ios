@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
 #import "GAITracker.h"
+#import "SettingsViewController.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "UIView+RoundedStyle.h"
@@ -22,6 +23,8 @@
 
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
 static NSString * const LogInViewControllerLogoImageName = @"logo";
+static NSString * const LoginViewControllerSettingsStoryboard = @"SettingsStoryboard";
+static NSString * const LoginViewControllerSettingsNavigationControllerStoryboard = @"SettingsNavigationControllerStoryboard";
 
 @interface LogInViewController ()
 @property (assign, nonatomic) BOOL alertShown;
@@ -266,7 +269,6 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
                     }
                 }];
             }
-
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error saving number", nil)
                                                                            message:error.localizedDescription
@@ -608,13 +610,22 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)unlockIt {
-    // Put here what happens when it is unlocked
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self.unlockView setAlpha:0.f];
-        [self.logoView setAlpha:1.f];
-        [self.logoView setCenter:self.view.center];
-    }];
-    // Remove tap
+    if (self.currentUser.sipAllowed && !self.currentUser.sipAccount) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:LoginViewControllerSettingsStoryboard bundle:nil];
+        UINavigationController *navigationController = [storyBoard instantiateViewControllerWithIdentifier:LoginViewControllerSettingsNavigationControllerStoryboard];
+        SettingsViewController *viewController = navigationController.viewControllers[0];
+        viewController.showSIPAccountWebview = YES;
+        [self presentViewController:navigationController animated:NO completion:nil];
+    } else {
+        // Put here what happens when it is unlocked.
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self.unlockView setAlpha:0.f];
+            [self.logoView setAlpha:1.f];
+            [self.logoView setCenter:self.view.center];
+
+        }];
+    }
+    // Remove tap.
     [self.view removeGestureRecognizer:self.tapToUnlock];
 }
 

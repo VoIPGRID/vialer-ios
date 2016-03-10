@@ -5,6 +5,7 @@
 
 #import "Configuration.h"
 #import <PBWebViewController/PBWebViewController.h>
+#import "SystemUser.h"
 
 
 @class SystemUser;
