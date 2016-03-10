@@ -19,9 +19,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
-    VSLTransportConfiguration *updTransportConfiguration = [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP];
+    VSLTransportConfiguration *udpTransportConfiguration = [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP];
 
-    endpointConfiguration.transportConfigurations = @[updTransportConfiguration];
+    endpointConfiguration.transportConfigurations = @[udpTransportConfiguration];
 
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] configureLibraryWithEndPointConfiguration:endpointConfiguration error:&error];
