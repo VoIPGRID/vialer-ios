@@ -15,7 +15,7 @@ static NSString * const SIPCallingViewControllerCallState = @"callState";
 static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
 static NSString * const SIPCallingViewControllerSegueSIPCallingButtons = @"SipCallingButtonsSegue";
 static NSString * const SIPCallingViewControllerUnwindToVialerRootViewControllerSegue = @"UnwindToVialerRootViewControllerSegue";
-static double const SIPCallingViewControllerDismissTimeAfterHangup = 3.0;
+static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 
 @interface SIPCallingViewController()
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;

@@ -33,16 +33,22 @@
 
     id mockSipIncomingCallVC = OCMPartialMock(self.sipIncomingCallVC);
 
+    OCMStub([self.mockCall callState]).andReturn(VSLCallStateDisconnected);
+
     XCTestExpectation *expectation = [self expectationWithDescription:@"Should wait before dismissing the view"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    OCMStub([mockSipIncomingCallVC dismissViewControllerAnimated:NO completion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
 
     id mockButton = OCMClassMock([UIButton class]);
     [self.sipIncomingCallVC declineCallButtonPressed:mockButton];
 
-    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+    [self.sipIncomingCallVC observeValueForKeyPath:@"callState" ofObject:self.mockCall change:nil context:nil];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         OCMVerify([mockSipIncomingCallVC dismissViewControllerAnimated:NO completion:[OCMArg any]]);
+        [mockButton stopMocking];
+        [mockSipIncomingCallVC stopMocking];
     }];
 }
 

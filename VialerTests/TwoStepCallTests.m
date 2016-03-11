@@ -608,15 +608,15 @@
     id mockTimer = OCMClassMock([NSTimer class]);
     call.statusTimer = mockTimer;
 
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should invalidate the timer"];
+    OCMStub([mockTimer invalidate]).andDo(^(NSInvocation *invocation) {
+        [expectation fulfill];
+    });
+
     // Mock incoming phonecall.
     CTCall *mockCall = OCMClassMock([CTCall class]);
     OCMStub([mockCall callState]).andReturn(CTCallStateConnected);
     call.callCenter.callEventHandler(mockCall);
-
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch callStatus again"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [expectation fulfill];
-    });
 
     // Check if timer is invalidated.
     [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {

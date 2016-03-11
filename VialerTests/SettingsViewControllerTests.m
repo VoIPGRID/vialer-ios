@@ -40,13 +40,12 @@
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(NO);
     OCMStub([mockSwitch tag]).andReturn(1001);
-
-    [self.settingsViewController didChangeSwitch:mockSwitch];
-
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch diable sip"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should disable sip"];
+    OCMStub([mockSystemUser setSipEnabled:NO]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
+
+    [self.settingsViewController didChangeSwitch:mockSwitch];
 
     [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
         if (error) {
@@ -64,13 +63,12 @@
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(NO);
     OCMStub([mockSwitch tag]).andReturn(1001);
-
-    [self.settingsViewController didChangeSwitch:mockSwitch];
-
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch disable sip"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should reload table"];
+    OCMStub([mockSystemUser setSipEnabled:NO]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
+
+    [self.settingsViewController didChangeSwitch:mockSwitch];
 
     [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
         if (error) {
@@ -87,13 +85,12 @@
     id progressMock = OCMClassMock([SVProgressHUD class]);
     OCMStub([mockSwitch isOn]).andReturn(NO);
     OCMStub([mockSwitch tag]).andReturn(1001);
-
-    [self.settingsViewController didChangeSwitch:mockSwitch];
-
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch disable sip"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should show progressHUD"];
+    OCMStub([mockSystemUser setSipEnabled:NO]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
+
+    [self.settingsViewController didChangeSwitch:mockSwitch];
 
     [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
         if (error) {

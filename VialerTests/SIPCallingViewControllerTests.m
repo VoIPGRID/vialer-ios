@@ -79,8 +79,8 @@
     id viewMock = OCMClassMock([UIViewController class]);
     OCMStub([sipMock presentingViewController]).andReturn(viewMock);
 
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch callStatus again"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should dismiss view"];
+    OCMStub([viewMock dismissViewControllerAnimated:YES completion:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
 

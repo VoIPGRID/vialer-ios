@@ -14,7 +14,7 @@ static NSString * const SIPIncomingCallViewControllerCallState = @"callState";
 static NSString * const SIPIncomingCallViewControllerMediaState = @"mediaState";
 static NSString * const SIPIncomingCallViewControllerRingtoneName = @"ringtone";
 static NSString * const SIPIncomingCallViewControllerRingtoneExtension = @"wav";
-static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 3.0;
+static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 

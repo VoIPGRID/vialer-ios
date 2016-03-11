@@ -178,18 +178,16 @@
 - (void)testLoginForgetAlertOkActionWillShowLoginForm {
     [self.loginViewController loadViewIfNeeded];
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should show the login form."];
     OCMStub([mockOperationsManager passwordResetWithEmail:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, nil, nil);
+        [expectation fulfill];
         return YES;
     }]]);
+
     self.loginViewController.operationManager = mockOperationsManager;
 
     [self.loginViewController sendEmail:@"test@test.com"];
-
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch callStatus again"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [expectation fulfill];
-    });
 
     [self waitForExpectationsWithTimeout:3.5 handler:^(NSError * _Nullable error) {
         XCTAssertNotNil(self.loginViewController.loginFormView, @"there should be a form");

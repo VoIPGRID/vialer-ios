@@ -172,10 +172,10 @@
 
     SystemUser *newUser = [[SystemUser alloc] initPrivate];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Should fetch callStatus again"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    OCMStub([mockNotificationCenter postNotificationName:[OCMArg any] object:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
-
+    
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
         OCMVerify([mockNotificationCenter postNotificationName:[OCMArg isEqual:SystemUserSIPCredentialsChangedNotification] object:[OCMArg isEqual:newUser]]);
     }];
