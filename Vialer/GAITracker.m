@@ -67,4 +67,33 @@
                                                            value:nil] build]];
 }
 
++ (void)acceptedPushNotificationEvent {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
+                                                          action:@"acceptance"
+                                                           label:@"accepted"
+                                                           value:nil] build]];
+}
+
++ (void)rejectedPushNotificationEvent {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
+                                                          action:@"acceptance"
+                                                           label:@"rejected"
+                                                           value:nil] build]];
+}
+
++ (void)regististrationFailedWithMiddleWareException {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createExceptionWithDescription:@"Failed middleware registration" withFatal:@NO] build]];
+}
+
++ (void)timeToRespondToIncomingPushNotification:(NSTimeInterval)responseTime {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createTimingWithCategory:@"middleware"
+                                                         interval:@((NSUInteger)(responseTime * 1000))
+                                                             name:@"response time"
+                                                            label:nil] build]];
+}
+
 @end

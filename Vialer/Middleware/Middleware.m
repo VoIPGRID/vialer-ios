@@ -7,6 +7,7 @@
 
 #import "APNSHandler.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
+#import "GAITracker.h"
 #import "ReachabilityManager.h"
 #import "SIPUtils.h"
 #import "SSKeychain.h"
@@ -26,6 +27,7 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;
 @property (weak, nonatomic) SystemUser *systemUser;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
+@property (strong, nonatomic) NSDate *responseTimer;
 @end
 
 @implementation Middleware
@@ -81,8 +83,12 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
     DDLogDebug(@"Push message received from middleware.\nPayload: %@", payload);
 
+    // Set current time to measure response time.
+    self.responseTimer = [NSDate date];
+
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
+
         if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             // User has good enough connection and is SIP Enabled.
             // Register the account with the endpoint.
@@ -110,7 +116,19 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 }
 
 - (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available {
+    // Track the response that is sent to the middleware.
+    if (available) {
+        [GAITracker acceptedPushNotificationEvent];
+    } else {
+        [GAITracker rejectedPushNotificationEvent];
+    }
+
     [self.middlewareRequestOperationManager sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
+
+        // Whole response cycle completed, log duration.
+        NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:self.responseTimer];
+        [GAITracker timeToRespondToIncomingPushNotification:responseTime];
+
         if (error) {
             DDLogError(@"The middleware responded with an error: %@", error);
         } else {
@@ -157,6 +175,10 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
                 DDLogError(@"Device registration with Middleware failed. %@", error);
+                // Disable SIP to give some feedback to the user.
+                self.systemUser.sipEnabled = NO;
+                // And log the problem to track failures.
+                [GAITracker regististrationFailedWithMiddleWareException];
             } else {
                 DDLogDebug(@"Middelware registration successfull");
             }
