@@ -4,9 +4,7 @@
 //
 
 #import "ReachabilityManager.h"
-
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
-
 #import "Reachability.h"
 
 static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
@@ -55,11 +53,13 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
     [self.reachabilityPodInstance startNotifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetConnectionChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(radioAccessChanged:) name:CTRadioAccessTechnologyDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)stopMonitoring {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CTRadioAccessTechnologyDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
     [self.reachabilityPodInstance stopNotifier];
 }
 
@@ -109,6 +109,19 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
 
 - (void)radioAccessChanged:(NSNotification *)notification {
     [self currentReachabilityStatus];
+}
+
+/**
+ *  This method will be called via a notification when the app enters the foreground.
+ *
+ *  @param notification NSNotification instance that is calling this method.
+ */
+- (void)appWillEnterForeground:(NSNotification *)notification {
+    /**
+     *  When the app returns from background, the CCTelephonyNetworkInfo doesn't return a currentRadioAccessTechnology.
+     *  To fix this, we recreate the instance.
+     */
+    self.networkInfo = [[CTTelephonyNetworkInfo alloc] init];
 }
 
 #pragma mark - KVO overrider
