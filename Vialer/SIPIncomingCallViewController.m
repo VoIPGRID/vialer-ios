@@ -38,6 +38,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 - (void)dealloc {
     [self.call removeObserver:self forKeyPath:SIPIncomingCallViewControllerCallState];
     [self.call removeObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState];
+    [self.ringtone stop];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

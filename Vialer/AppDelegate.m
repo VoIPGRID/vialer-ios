@@ -88,6 +88,10 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    VSLCall *call = [SIPUtils getFirstActiveCall];
+    if (call && call.callState == VSLCallStateIncoming) {
+        [self createLocalNotificationForCall:call];
+    }
     [self saveContext];
 }
 
@@ -228,34 +232,37 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 - (void)setupCallbackForVoIPNotifications {
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SIPUtils anotherCallInProgress:call];
             if ([SIPUtils anotherCallInProgress:call]) {
                 DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
 
                 NSError *error;
-                [call hangup:&error];
+                [call decline:&error];
                 if (error) {
                     DDLogError(@"Error declining call: %@", error);
                 }
             } else {
                 if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-                    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-                    NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
-                    localNotification.userInfo = myUserInfo;
-                    localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
-                    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), [SIPUtils getCallName:call]];
-                    localNotification.alertLaunchImage = @"AppIcon";
-                    localNotification.soundName = @"ringtone.wav";
-                    localNotification.category = AppDelegateLocalNotificationCategory;
-
-                    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+                    [self createLocalNotificationForCall:call];
                 } else {
-                DDLogDebug(@"Call received with device in forground. Call: %ld", (long)call.callId);
+                    DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
                     [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
                 }
             }
         });
     };
+}
+
+- (void)createLocalNotificationForCall:(VSLCall *)call {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
+    localNotification.userInfo = myUserInfo;
+    localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
+    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), [SIPUtils getCallName:call]];
+    localNotification.alertLaunchImage = @"AppIcon";
+    localNotification.soundName = @"ringtone.wav";
+    localNotification.category = AppDelegateLocalNotificationCategory;
+
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 
 #pragma mark - Core Data
