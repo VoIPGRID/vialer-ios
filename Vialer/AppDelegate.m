@@ -76,6 +76,8 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         // This will fire a "SystemUserSIPCredentialsChangedNotification" when necessary.
         [[SystemUser currentUser] updateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
@@ -83,6 +85,11 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
                 //[[PZPushMiddleware sharedInstance] updateDeviceRecord];
             }
         }];
+
+        VSLCall *call = [SIPUtils getFirstActiveCall];
+        if (call.callState == VSLCallStateIncoming) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+        }
     });
 }
 
@@ -225,8 +232,6 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)setupCallbackForVoIPNotifications {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [SIPUtils anotherCallInProgress:call];

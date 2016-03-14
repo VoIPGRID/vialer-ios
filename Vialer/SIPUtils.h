@@ -70,4 +70,11 @@
  *  @return BOOL YES if there is another call in progress.
  */
 + (BOOL)anotherCallInProgress:(VSLCall * _Nonnull)receivedCall;
+
+/**
+ *  Get the first active call.
+ *
+ *  @return A VSLCall instance or nil.
+ */
++ (VSLCall * _Nullable)getFirstActiveCall;
 @end
