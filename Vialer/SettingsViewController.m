@@ -37,6 +37,8 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 @implementation SettingsViewController
 
+#pragma mark - View Life Cycle
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
@@ -46,6 +48,15 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     } else {
         [self.tableView reloadData];
     }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserOutgoingNumberUpdatedNotification object:nil];
 }
 
 #pragma mark - Properties
@@ -232,6 +243,15 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     [switchView setOn:defaultVal];
 
     cell.accessoryView = switchView;
+}
+
+#pragma mark - Notifications
+
+- (void)outgoingNumberUpdated:(NSNotification *)noticiation {
+    NSIndexPath *rowAtIndexPath = [NSIndexPath indexPathForRow:SettingsViewControllerOutgoingNumberRow
+                                                     inSection:SettingsViewControllerNumbersSection];
+    UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:rowAtIndexPath];
+    myNumberCell.detailTextLabel.text = self.currentUser.outgoingNumber;
 }
 
 @end

@@ -35,6 +35,8 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
+
+@property (strong, nonatomic) SystemUser *currentUser;
 @end
 
 @implementation ContactsViewController
@@ -51,15 +53,24 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self checkContactsAccess];
-    [self setupLayout];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self checkContactsAccess];
+    [self setupLayout];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserOutgoingNumberUpdatedNotification object:nil];
 }
 
 # pragma mark - setup
@@ -74,14 +85,10 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
     self.searchBar.barTintColor = [Configuration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
 #pragma mark - properties
-
-- (void)setMyPhoneNumberLabel:(UILabel *)myPhoneNumberLabel {
-    _myPhoneNumberLabel = myPhoneNumberLabel;
-    _myPhoneNumberLabel.text = [SystemUser currentUser].outgoingNumber;
-}
 
 - (void)setWarningMessage:(NSString *)warningMessage {
     if (warningMessage.length) {
@@ -113,6 +120,13 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
         _reachabilityManager = [[ReachabilityManager alloc] init];
     }
     return _reachabilityManager;
+}
+
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
 }
 
 #pragma mark - actions
@@ -227,7 +241,7 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
+                if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
                     [GAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else {
@@ -293,6 +307,12 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
             });
         }
     });
+}
+
+#pragma mark - Notifications
+
+- (void)outgoingNumberUpdated:(NSNotification *)notification {
+    self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
 @end

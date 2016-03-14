@@ -36,17 +36,28 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 @property (weak, nonatomic) IBOutlet UIView *infobarBackground;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (nonatomic, strong) TwoStepCall *callManager;
-@property (nonatomic, strong) NSTimer *dismissTimer;
+@property (strong, nonatomic) TwoStepCall *callManager;
+@property (strong, nonatomic) NSTimer *dismissTimer;
+
+@property (strong, nonatomic) SystemUser *currentUser;
 @end
 
 @implementation TwoStepCallingViewController
 
+#pragma mark - View lifecycle
+
 - (void)handlePhoneNumber:(NSString *)phoneNumber {
-    self.callManager = [[TwoStepCall alloc] initWithANumber:[SystemUser currentUser].mobileNumber andBNumber:phoneNumber];
+    self.callManager = [[TwoStepCall alloc] initWithANumber:self.currentUser.mobileNumber andBNumber:phoneNumber];
     [self setPhoneNumbers];
     [self.callManager addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:NULL];
     [self.callManager start];
+    [self checkCallManagerStatus];
+    [self.currentUser updateSIPAccountWithCompletion:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self checkCallManagerStatus];
 }
 
@@ -55,6 +66,23 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     [self setupView];
     [self setPhoneNumbers];
     [self checkCallManagerStatus];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopUpdates];
+}
+
+- (void)dealloc {
+    [self stopUpdates];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
+- (void)stopUpdates {
+    [self.callManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
+    self.callManager = nil;
+    [self.dismissTimer invalidate];
 }
 
 - (void)setupView {
@@ -71,10 +99,19 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     self.bubblingTwo.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
 }
 
+# pragma mark - properties
+
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
+
 - (void)setPhoneNumbers {
     self.numberALabel.text = self.callManager.aNumber;
     self.numberBLabel.text = self.callManager.bNumber;
-    self.outgoingNumberLabel.text = [SystemUser currentUser].outgoingNumber;
+    self.outgoingNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
 # pragma mark - actions
@@ -246,27 +283,10 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     self.numberAHeaderLabel.alpha = 1.0;
 }
 
-#pragma mark - View lifecycle
+#pragma mark - Notifications
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
-    [self checkCallManagerStatus];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self stopUpdates];
-}
-
-- (void)dealloc {
-    [self stopUpdates];
-}
-
-- (void)stopUpdates {
-    [self.callManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
-    self.callManager = nil;
-    [self.dismissTimer invalidate];
+- (void)outgoingNumberUpdated:(NSNotification *)notification {
+    self.outgoingNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
 @end
