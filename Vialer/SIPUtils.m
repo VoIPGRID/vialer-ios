@@ -100,4 +100,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     return [[VialerSIPLib sharedInstance] anotherCallInProgress:receivedCall];
 }
 
++ (VSLCall *)getFirstActiveCall {
+    VSLAccount *account = [[VialerSIPLib sharedInstance] firstAccount];
+    VSLCall *call = [account firstActiveCall];
+    return call;
+}
+
 @end
