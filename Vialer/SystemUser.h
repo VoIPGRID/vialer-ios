@@ -80,6 +80,11 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
 extern NSString * const SystemUserSIPDisabledNotification;
 
 /**
+ *  Notifciation that can be listened to when the outgoing number has changed.
+ */
+extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
+
+/**
  *  SystemUser class is representing the user information as available on the VoIPGRID platform.
  *
  *  Current the SystemUser class also represents a lot of information maintained/stored by the VoIPGRIDRequestOperationManager in the user defaults.

@@ -20,6 +20,8 @@ NSString * const SystemUserLogoutNotificationErrorKey       = @"SystemUserLogout
 NSString * const SystemUserSIPCredentialsChangedNotification = @"SystemUserSIPCredentialsChangedNotification";
 NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDisabledNotification";
 
+NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
+
 /**
  *  Api Dictionary keys.
  *
@@ -170,7 +172,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     return _operationsManager;
 }
 
--(NSString *)displayName {
+- (NSString *)displayName {
     if (self.firstName || self.lastName) {
         return [[NSString stringWithFormat:@"%@ %@", self.firstName ?: @"", self.lastName ?: @""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if (self.emailAddress) {
@@ -188,11 +190,13 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
+
     // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:self];
+            [self fetchUserProfile];
         });
     }
     [[NSUserDefaults standardUserDefaults] setBool:_sipEnabled forKey:SystemUserSUDSIPEnabled];
@@ -228,6 +232,14 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 - (void)setMobileNumber:(NSString *)mobileNumber {
     _mobileNumber = mobileNumber;
     [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:SystemUserSUDMobileNumber];
+}
+
+- (void)setOutgoingNumber:(NSString *)outgoingNumber {
+    if (outgoingNumber != _outgoingNumber) {
+        _outgoingNumber = outgoingNumber;
+        [[NSUserDefaults standardUserDefaults] setObject:outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserOutgoingNumberUpdatedNotification object:self];
+    }
 }
 
 - (void)setMigrationCompleted:(BOOL)migrationCompleted {
@@ -369,6 +381,14 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.loggedIn = YES;
 }
 
+- (void)fetchUserProfile {
+    [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
+        if (!error) {
+            self.outgoingNumber = responseObject[SystemUserApiKeyOutgoingNumber];
+        }
+    }];
+}
+
 - (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void(^)(BOOL success, NSError *error))completion {
     if (![mobileNumber length] > 0) {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"The number is to short", nil)};
@@ -427,8 +447,12 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)updateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
-    if (self.loggedIn && self.sipEnabled) {
-        [self fetchSIPAcountFromRemoteWithCompletion:completion];
+    if (self.loggedIn) {
+        if (self.sipEnabled) {
+            [self fetchSIPAcountFromRemoteWithCompletion:completion];
+        } else {
+            [self fetchUserProfile];
+        }
     }
 }
 
@@ -437,6 +461,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
         // This user is allowed to use SIP, check if the account is configured.
         if  (!error) {
+            // Set the outgoing number when getting the SIP account.
+            self.outgoingNumber = responseObject[SystemUserApiKeyOutgoingNumber];
+
             NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
             [self updateSIPAccountWithURL:appAccountURL withCompletion:completion];
         } else {
