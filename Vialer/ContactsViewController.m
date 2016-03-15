@@ -81,10 +81,12 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
-    self.tableView.sectionIndexColor = [Configuration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
+    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
+
+    self.tableView.sectionIndexColor = [defaultConfiguration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    self.searchBar.barTintColor = [Configuration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.searchBar.barTintColor = [defaultConfiguration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 

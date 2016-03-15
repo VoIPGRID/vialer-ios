@@ -22,34 +22,12 @@ default_platform :ios
 
 platform :ios do
   before_all do
-	clear_derived_data
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-    # cocoapods
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
   end
 
-  desc "Runs all the tests"
-  lane :test do
-    scan
-  end
-
-  desc "Submit a new Beta Build to Apple TestFlight"
-  desc "This will also make sure the profile is up to date"
-  lane :beta do
-    # match(type: "appstore") # more information: https://codesigning.guide
-    gym(scheme: "Vialer") # Build your app - more options available
-    pilot
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here (run `fastlane actions`)
-  end
-
-  desc "Deploy a new version to the App Store"
-  lane :appstore do
-    # match(type: "appstore")
-    snapshot
-    gym(scheme: "Vialer") # Build your app - more options available
-    deliver(force: true)
-    # frameit
+  lane :prebuild do
+    clear_derived_data
+    cocoapods
   end
 
   desc "Create Screenshots"
@@ -72,28 +50,22 @@ platform :ios do
     )
   end
 
-
   # You can define as many lanes as you want
-
   after_all do |lane|
     clean_build_artifacts()
-
     # This block is called, only if the executed lane was successful
-
-    # slack(
+    #slack(
     #   message: "Successfully deployed new App Update."
-    # )
+    #)
   end
 
   error do |lane, exception|
-    # slack(
-    #  message: exception.message,
-    #  success: false
-    # )
+    slack(
+        message: exception.message,
+        success: false
+        )
   end
 end
-
-
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/docs/Platforms.md
 # All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md

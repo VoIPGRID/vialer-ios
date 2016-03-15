@@ -41,7 +41,9 @@
 }
 
 - (void)tearDown {
+    self.loginViewController = nil;
     [self.mockUser stopMocking];
+    self.mockUser = nil;
     [super tearDown];
 }
 
@@ -94,6 +96,7 @@
         XCTAssertFalse(webViewController.showsNavigationToolbar, @"There should be no navigationbar visible");
         return YES;
     }] animated:YES completion:[OCMArg any]]);
+    [loginViewControllerMock stopMocking];
 }
 
 - (void)testForgotPasswordViewHasUsernamePrefilledWhenUsernameIsFilled {
@@ -150,6 +153,7 @@
     [self.loginViewController requestPasswordButtonPressed:nil];
 
     OCMVerify([mockLoginVC presentViewController:[OCMArg isKindOfClass:[UIAlertController class]] animated:YES completion:nil]);
+    [mockLoginVC stopMocking];
 }
 
 - (void)testLoginForgetAlertOkActionWillAskUserToSentEmail {
@@ -158,6 +162,7 @@
     [self.loginViewController sendEmail:@"test@test.com"];
 
     OCMVerify([mockOperationsManager passwordResetWithEmail:[OCMArg isEqual:@"test@test.com"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testSIPAllowedNoSIPAccountSegueToActiveSIPAccount {
@@ -173,6 +178,8 @@
         XCTAssertTrue([navController.viewControllers[0] isKindOfClass:[SettingsViewController class]], @"There should be the settings view controller visible");
         return YES;
     }] animated:NO completion:nil]);
+
+    [loginViewControllerMock stopMocking];
 }
 
 - (void)testLoginForgetAlertOkActionWillShowLoginForm {
@@ -189,10 +196,12 @@
 
     [self.loginViewController sendEmail:@"test@test.com"];
 
-    [self waitForExpectationsWithTimeout:3.5 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         XCTAssertNotNil(self.loginViewController.loginFormView, @"there should be a form");
         XCTAssertEqual(self.loginViewController.loginFormView.alpha, 1.0f);
         XCTAssertEqual(self.loginViewController.forgotPasswordView.alpha, 0.0f);
+
+        [mockOperationsManager stopMocking];
     }];
 }
 

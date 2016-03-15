@@ -8,6 +8,7 @@
 #import "AFNetworkActivityLogger.h"
 #import "APNSHandler.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
+@import CoreData;
 #import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
 #ifdef DEBUG
@@ -79,12 +80,8 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        // This will fire a "SystemUserSIPCredentialsChangedNotification" when necessary.
-        [[SystemUser currentUser] updateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
-            if (!error) {
-                //[[PZPushMiddleware sharedInstance] updateDeviceRecord];
-            }
-        }];
+        [[SystemUser currentUser] updateSIPAccountWithCompletion:nil];
+        // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
 
         VSLCall *call = [SIPUtils getFirstActiveCall];
         if (call.callState == VSLCallStateIncoming) {

@@ -1,23 +1,12 @@
 //
-// Prefix header for all source files of the 'Vialer' target in the 'Vialer' project
+//  Vialer-Prefix.pch
+//  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <Availability.h>
+#ifndef Vialer_Prefix_pch
+#define Vialer_Prefix_pch
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
-#endif
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-    #import <CoreData/CoreData.h>
-
-    // Always have access to the configuration
-    #import "Configuration.h"
-#endif
-
-// Disable NSLog project wide when DEBUG is not defined
-#ifndef DEBUG
-#define NSLog(...) do {} while (0)
 #endif

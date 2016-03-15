@@ -26,7 +26,7 @@
 }
 
 - (void)initFromConfig {
-    NSDictionary *background = [Configuration tintColorDictionaryForKey:ConfigurationGradientBackgroundColors];
+    NSDictionary *background = [[Configuration defaultConfiguration] tintColorDictionaryForKey:ConfigurationGradientBackgroundColors];
 
     NSArray *gradientStartColor = [background objectForKey:ConfigurationGradientViewGradientStart];
     self.startColor = [Configuration colorFromArray:gradientStartColor];

@@ -6,6 +6,11 @@
 #import <XCTest/XCTest.h>
 #import "Configuration.h"
 
+@interface Configuration ()
+@property (strong, nonatomic) NSDictionary *dictionary;
++ (void)setDefaultConfiguration:(Configuration *)defaultConfiguration;
+@end
+
 @interface ConfigurationTests : XCTestCase
 @property (nonatomic) Configuration *configuration;
 @end
@@ -14,7 +19,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.configuration = [Configuration defaultConfiguration];
+    self.configuration = [[Configuration alloc] init];
 }
 
 - (void)tearDown {
@@ -23,7 +28,8 @@
 }
 
 - (void)testDefaultConfigurationCanBeInitialised {
-    XCTAssertNotNil(self.configuration, @"There should be a default configuration");
+    XCTAssert([[Configuration defaultConfiguration] isKindOfClass:[Configuration class]], @"There should be a default configuration");
+    [Configuration setDefaultConfiguration:nil];
 }
 
 

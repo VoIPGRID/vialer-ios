@@ -112,7 +112,7 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
-    _filterControl.tintColor = [Configuration tintColorForKey:ConfigurationRecentsFilterControlTintColor];
+    _filterControl.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationRecentsFilterControlTintColor];
 }
 
 - (RecentCallManager *)callManager {

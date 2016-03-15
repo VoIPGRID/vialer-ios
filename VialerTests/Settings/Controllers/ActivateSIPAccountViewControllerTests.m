@@ -20,6 +20,11 @@
     [self.activateSIPAccountVC loadViewIfNeeded];
 }
 
+- (void)tearDown {
+    self.activateSIPAccountVC = nil;
+    [super tearDown];
+}
+
 - (void)testBackButtonWillPopViewController {
     id mockActivateSIPAccountVC = OCMPartialMock(self.activateSIPAccountVC);
     id mockNavigationController = OCMClassMock([UINavigationController class]);
@@ -28,6 +33,9 @@
     [self.activateSIPAccountVC backButtonPressed:nil];
 
     OCMVerify([mockNavigationController popViewControllerAnimated:YES]);
+
+    [mockActivateSIPAccountVC stopMocking];
+    [mockNavigationController stopMocking];
 }
 
 - (void)testBackgroundButtonWillSegueToRootViewController {
@@ -45,6 +53,9 @@
     [self.activateSIPAccountVC prepareForSegue:mockSegue sender:nil];
 
     OCMVerify([mockUserProfileWVC setNextUrl:[OCMArg isEqual:@"/user/change/"]]);
+
+    [mockUserProfileWVC stopMocking];
+    [mockSegue stopMocking];
 }
 
 @end

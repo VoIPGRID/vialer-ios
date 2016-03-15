@@ -25,7 +25,15 @@
 - (void)setUp {
     [super setUp];
     self.sipIncomingCallVC = (SIPIncomingCallViewController *)[[UIStoryboard storyboardWithName:@"SIPIncomingCallStoryboard" bundle:nil] instantiateInitialViewController];
+    [self.sipIncomingCallVC loadViewIfNeeded];
     self.mockCall = OCMClassMock([VSLCall class]);
+}
+
+- (void)tearDown {
+    [self.mockCall stopMocking];
+    self.mockCall = nil;
+    self.sipIncomingCallVC = nil;
+    [super tearDown];
 }
 
 - (void)testCallIsDeclinedWillDismissViewController {
@@ -57,7 +65,8 @@
     id mockButton = OCMClassMock([UIButton class]);
 
     [self.sipIncomingCallVC declineCallButtonPressed:mockButton];
-    OCMVerify([self.mockCall hangup:[OCMArg anyObjectRef]]);
+    OCMVerify([self.mockCall decline:[OCMArg anyObjectRef]]);
+    [mockButton stopMocking];
 }
 
 - (void)testControllerDeclinesWillDisplayMessage {
@@ -68,6 +77,8 @@
     [self.sipIncomingCallVC declineCallButtonPressed:mockButton];
 
     OCMVerify([mockLabel setText:[OCMArg any]]);
+    [mockButton stopMocking];
+    [mockLabel stopMocking];
 }
 
 - (void)testAcceptCallButtonPressetMovesToSegue {
@@ -77,6 +88,8 @@
     [self.sipIncomingCallVC acceptCallButtonPressed:mockButton];
 
     OCMVerify([mockSipIncomingCallVC performSegueWithIdentifier:@"SIPCallingSegue" sender:[OCMArg any]]);
+    [mockButton stopMocking];
+    [mockSipIncomingCallVC stopMocking];
 }
 
 @end

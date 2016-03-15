@@ -3,7 +3,7 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 /**
  *  Enum indicating the quality of the current network connection.

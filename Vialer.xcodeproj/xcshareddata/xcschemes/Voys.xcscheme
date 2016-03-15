@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FB4226CC182261D200707349"
-               BuildableName = "Vialer.app"
-               BlueprintName = "Vialer"
+               BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+               BuildableName = "Voys.app"
+               BlueprintName = "Voys"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,31 +26,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C4F49F261BF0B45700C25159"
-               BuildableName = "VialerTests.xctest"
-               BlueprintName = "VialerTests"
-               ReferencedContainer = "container:Vialer.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "RecentCallTests/testGetLatestCallWillReturnTheCall">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB4226CC182261D200707349"
-            BuildableName = "Vialer.app"
-            BlueprintName = "Vialer"
+            BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+            BuildableName = "Voys.app"
+            BlueprintName = "Voys"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -71,19 +55,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB4226CC182261D200707349"
-            BuildableName = "Vialer.app"
-            BlueprintName = "Vialer"
+            BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+            BuildableName = "Voys.app"
+            BlueprintName = "Voys"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "XcodeColors"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -97,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB4226CC182261D200707349"
-            BuildableName = "Vialer.app"
-            BlueprintName = "Vialer"
+            BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+            BuildableName = "Voys.app"
+            BlueprintName = "Voys"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

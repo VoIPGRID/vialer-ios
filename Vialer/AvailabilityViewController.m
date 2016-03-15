@@ -6,6 +6,7 @@
 #import "AvailabilityViewController.h"
 
 #import "AvailabilityModel.h"
+#import "Configuration.h"
 #import "GAITracker.h"
 #import "UIAlertController+Vialer.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -27,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
+    self.tableView.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
 }
 
 - (UIRefreshControl *)refreshControl {

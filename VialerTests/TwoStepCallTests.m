@@ -62,6 +62,7 @@
     [call start];
 
     OCMVerify([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg invokeBlock]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testInvalidNumberWillSetCorrectStatusWhenStart {
@@ -82,6 +83,9 @@
     [call start];
 
     XCTAssertEqual(call.status, TwoStepCallStatusInvalidNumber, @"Status should be invalid number.");
+    [mockOperationsManager stopMocking];
+    [mockAFHTTPRequestOperation stopMocking];
+    [mockNSHTTPURLResponse stopMocking];
 }
 
 - (void)testUnknownErrorWillSetCorrectStatusWhenStart {
@@ -97,6 +101,7 @@
     [call start];
 
     XCTAssertEqual(call.status, TwoStepCallStatusFailedSetup, @"Status should be invalid number.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testSuccessfullStartShouldCallStatusForCorrectCallId {
@@ -121,10 +126,11 @@
     [call start];
 
     // Check if status is fetched.
-    [self waitForExpectationsWithTimeout:2.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error: %@", error);
         }
+        [mockOperationsManager stopMocking];
     }];
 }
 
@@ -165,6 +171,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusDialing_a, @"The status should be Dialing a.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusDailingBWillSetCorrectStatus {
@@ -184,6 +191,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusDialing_b, @"The status should be Dialing b.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusConnectedWillSetCorrectStatus {
@@ -203,6 +211,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusConnected, @"The status should be connected.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusDisconnetedWillSetCorrectStatus {
@@ -222,6 +231,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusDisconnected, @"The status should be disconnected.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedAWillSetCorrectStatus {
@@ -241,6 +251,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusFailed_a, @"The status should be failed_a.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedBWillSetCorrectStatus {
@@ -260,6 +271,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusFailed_b, @"The status should be failed_b.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusUnknownStatusBWillSetCorrectStatus {
@@ -279,6 +291,7 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusUnknown, @"The status should be unknown status.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusDisconnectedWIllInvalidateTimer {
@@ -301,6 +314,8 @@
     [call fetchCallStatus:mockTimer];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedAWIllInvalidateTimer {
@@ -323,6 +338,8 @@
     [call fetchCallStatus:mockTimer];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedBWIllInvalidateTimer {
@@ -345,6 +362,8 @@
     [call fetchCallStatus:mockTimer];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testCanCancelWhenStatusIsUknown {
@@ -445,6 +464,8 @@
     [call cancel];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testCancelCallWillCancelCallRemote {
@@ -457,6 +478,7 @@
     [call cancel];
 
     OCMExpect([mockOperationsManager cancelTwoStepCallForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testCancelCallWillNotCancelCallIfNoCallIdIsSet {
@@ -469,6 +491,7 @@
     [call cancel];
 
     [[mockOperationsManager reject] cancelTwoStepCallForCallId:[OCMArg any] withCompletion:[OCMArg any]];
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testCancelCallWillCancelCallWhenPossible {
@@ -486,6 +509,7 @@
     [call start];
 
     OCMExpect([mockOperationsManager cancelTwoStepCallForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testWhenCancelingCallCannotCancelTwice {
@@ -498,6 +522,7 @@
     call.cancelingCall = YES;
 
     [call cancel];
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testWhenFetchingCallStatusDoNotFetchTwice {
@@ -510,6 +535,7 @@
     call.fetching = YES;
 
     [call fetchCallStatus:nil];
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testNotificationObserverEnterBackgroundAddedWhenInitialised {
@@ -556,6 +582,7 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 
     OCMVerify([mockTimer invalidate]);
+    [mockTimer stopMocking];
 }
 
 - (void)testWhenAppBecameActiveTimerIsSetup {
@@ -589,6 +616,8 @@
     [call start];
 
     OCMVerify([mockCallCenter setCallEventHandler:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
+    [mockCallCenter stopMocking];
 }
 
 - (void)testWhenCallIsConnectedPauseStatusFetching {
@@ -614,16 +643,19 @@
     });
 
     // Mock incoming phonecall.
-    CTCall *mockCall = OCMClassMock([CTCall class]);
-    OCMStub([mockCall callState]).andReturn(CTCallStateConnected);
+    id mockCall = OCMClassMock([CTCall class]);
+    OCMStub([(CTCall *)mockCall callState]).andReturn(CTCallStateConnected);
     call.callCenter.callEventHandler(mockCall);
 
     // Check if timer is invalidated.
-    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         OCMVerify([mockTimer invalidate]);
         if (error) {
             NSLog(@"Error: %@", error);
         }
+        [mockOperationsManager stopMocking];
+        [mockTimer stopMocking];
+        [mockCall stopMocking];
     }];
 }
 
@@ -645,13 +677,15 @@
     call.statusTimer = nil;
 
     // Mock incoming phonecall.
-    CTCall *mockCall = OCMClassMock([CTCall class]);
-    OCMStub([mockCall callState]).andReturn(CTCallStateDisconnected);
+    id mockCall = OCMClassMock([CTCall class]);
+    OCMStub([(CTCall *)mockCall callState]).andReturn(CTCallStateDisconnected);
     call.callCenter.callEventHandler(mockCall);
 
     // Check if timer is invalidated.
     XCTAssertNotNil(call.statusTimer, @"There should be a new timer");
     OCMVerify([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
+    [mockCall stopMocking];
 }
 
 - (void)testWhenCallIsDisConnectedDisconnectedStateIsSetAfterThreeSeconds {
@@ -676,15 +710,18 @@
     call.statusTimer = nil;
 
     // Mock incoming phonecall.
-    CTCall *mockCall = OCMClassMock([CTCall class]);
-    OCMStub([mockCall callState]).andReturn(CTCallStateDisconnected);
+    id mockCall = OCMClassMock([CTCall class]);
+    OCMStub([(CTCall *)mockCall callState]).andReturn(CTCallStateDisconnected);
     call.callCenter.callEventHandler(mockCall);
 
-    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         XCTAssertEqual(call.status, TwoStepCallStatusDisconnected);
         if (error) {
             NSLog(@"Error: %@", error);
         }
+
+        [mockOperationsManager stopMocking];
+        [mockCall stopMocking];
     }];
 }
 

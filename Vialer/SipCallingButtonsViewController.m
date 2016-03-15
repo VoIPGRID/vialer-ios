@@ -20,6 +20,7 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *sipCallingLabels;
 @property (strong, nonatomic) UIColor *pressedColor;
 @property (strong, nonatomic) UIColor *textColor;
+@property (weak, nonatomic) Configuration *defaultConfiguration;
 @end
 
 @implementation SipCallingButtonsViewController
@@ -39,16 +40,23 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
 
 #pragma mark - Properties
 
+- (Configuration *)defaultConfiguration {
+    if (!_defaultConfiguration) {
+        _defaultConfiguration = [Configuration defaultConfiguration];
+    }
+    return _defaultConfiguration;
+}
+
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[Configuration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonsPressedAlpha];
+        _pressedColor = [[self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonsPressedAlpha];
     }
     return _pressedColor;
 }
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [Configuration tintColorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonTextColor];
     }
     return _textColor;
 }

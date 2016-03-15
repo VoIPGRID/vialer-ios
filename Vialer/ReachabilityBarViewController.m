@@ -42,17 +42,19 @@
     self.twoStepLabel.hidden = YES;
     self.twoStepInfoButton.hidden = YES;
     self.view.backgroundColor = nil;
+
+    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
     switch (self.status) {
         case ReachabilityManagerStatusOffline: {
             self.failedConnectionLabel.hidden = NO;
-            self.view.backgroundColor = [Configuration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
+            self.view.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
             break;
         }
         case ReachabilityManagerStatusLowSpeed: {
             if ([SystemUser currentUser].sipEnabled) {
                 self.twoStepLabel.hidden = NO;
                 self.twoStepInfoButton.hidden = NO;
-                self.view.backgroundColor = [Configuration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
+                self.view.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
             }
             break;
         }

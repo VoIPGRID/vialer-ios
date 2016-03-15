@@ -46,19 +46,15 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 
 #pragma mark - View lifecycle
 
-- (void)handlePhoneNumber:(NSString *)phoneNumber {
-    self.callManager = [[TwoStepCall alloc] initWithANumber:self.currentUser.mobileNumber andBNumber:phoneNumber];
-    [self setPhoneNumbers];
-    [self.callManager addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:NULL];
-    [self.callManager start];
-    [self checkCallManagerStatus];
-    [self.currentUser updateSIPAccountWithCompletion:nil];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     [self checkCallManagerStatus];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopUpdates];
 }
 
 - (void)viewDidLoad {
@@ -67,11 +63,6 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     [self setPhoneNumbers];
     [self checkCallManagerStatus];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self stopUpdates];
 }
 
 - (void)dealloc {
@@ -86,17 +77,18 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)setupView {
+    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
     // Setup colors & icons
-    self.backgroundHeader.backgroundColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
-    self.infobarBackground.backgroundColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
-    self.vialerIconView.iconColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenVialerIconColor];
-    self.aSide.innerCircleColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenSideAIconColor];
+    self.backgroundHeader.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
+    self.infobarBackground.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
+    self.vialerIconView.iconColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenVialerIconColor];
+    self.aSide.innerCircleColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenSideAIconColor];
     UIImage *iconForAAndBSide = [UIImage imageNamed:TwoStepCallingViewControllerAsideIcon];
     self.aSide.icon = iconForAAndBSide;
-    self.bSide.innerCircleColor = [Configuration tintColorForKey:ConfigurationTwoStepScreenSideBIconColor];
+    self.bSide.innerCircleColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenSideBIconColor];
     self.bSide.icon = iconForAAndBSide;
-    self.bubblingOne.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
-    self.bubblingTwo.color = [Configuration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
+    self.bubblingOne.color = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
+    self.bubblingTwo.color = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
 }
 
 # pragma mark - properties
@@ -107,6 +99,16 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     }
     return _currentUser;
 }
+
+- (void)handlePhoneNumber:(NSString *)phoneNumber {
+    self.callManager = [[TwoStepCall alloc] initWithANumber:[SystemUser currentUser].mobileNumber andBNumber:phoneNumber];
+    [self setPhoneNumbers];
+    [self.callManager addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:NULL];
+    [self.callManager start];
+    [self checkCallManagerStatus];
+}
+
+#pragma mark - properties
 
 - (void)setPhoneNumbers {
     self.numberALabel.text = self.callManager.aNumber;
@@ -288,5 +290,4 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 - (void)outgoingNumberUpdated:(NSNotification *)notification {
     self.outgoingNumberLabel.text = self.currentUser.outgoingNumber;
 }
-
 @end

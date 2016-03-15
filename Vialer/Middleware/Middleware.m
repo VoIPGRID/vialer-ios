@@ -8,6 +8,7 @@
 #import "APNSHandler.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "GAITracker.h"
+#import "Configuration.h"
 #import "ReachabilityManager.h"
 #import "SIPUtils.h"
 #import "SSKeychain.h"
@@ -57,7 +58,7 @@ NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
 - (VoIPGRIDRequestOperationManager *)middlewareRequestOperationManager {
     if (!_middlewareRequestOperationManager) {
-        NSURL *baseURL = [NSURL URLWithString: [Configuration UrlForKey:ConfigurationMiddleWareBaseURLString]];
+        NSURL *baseURL = [NSURL URLWithString: [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString]];
         _middlewareRequestOperationManager = [[VoIPGRIDRequestOperationManager alloc] initWithBaseURL:baseURL];
         _middlewareRequestOperationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
 

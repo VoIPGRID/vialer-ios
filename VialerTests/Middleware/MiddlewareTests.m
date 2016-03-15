@@ -47,7 +47,7 @@
 
     XCTAssert([createdMiddlewareRequestOperationManager isKindOfClass:[VoIPGRIDRequestOperationManager class]]);
 
-    NSString *baseURLFromConfig = [Configuration UrlForKey:ConfigurationMiddleWareBaseURLString];
+    NSString *baseURLFromConfig = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
     XCTAssert([[createdMiddlewareRequestOperationManager.baseURL absoluteString] isEqualToString:baseURLFromConfig], @"Base URL of the API endpoint did not match %@ and %@", createdMiddlewareRequestOperationManager.baseURL.absoluteString, baseURLFromConfig);
 
     XCTAssert([createdMiddlewareRequestOperationManager.responseSerializer isKindOfClass:[AFHTTPResponseSerializer class]]);
@@ -65,7 +65,7 @@
 - (void)testSentAPNSToken {
     //Given
     id mockMiddlewareRequestOperationManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
-    SystemUser *mockSystemUser = OCMClassMock([SystemUser class]);
+    id mockSystemUser = OCMClassMock([SystemUser class]);
     NSString *mockAPNSToken = @"0000000011111111222222223333333344444444555555556666666677777777";
     NSString *mockSIPAccount = @"012334456";
 
@@ -78,6 +78,8 @@
 
     //Then
     OCMVerify([mockMiddlewareRequestOperationManager updateDeviceRecordWithAPNSToken:[OCMArg isEqual:mockAPNSToken] sipAccount:[OCMArg isEqual:mockSIPAccount] withCompletion:[OCMArg any]]);
+    [mockMiddlewareRequestOperationManager stopMocking];
+    [mockSystemUser stopMocking];
 }
 
 @end

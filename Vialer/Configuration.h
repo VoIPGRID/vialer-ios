@@ -3,8 +3,7 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 // Known tint color names
 extern NSString * const ConfigurationTabBarBackgroundColor;
@@ -43,53 +42,52 @@ extern NSString * const ConfigurationMiddleWareBaseURLString;
 
 extern NSString * const ConfigurationPartnerURLKey;
 
-/** Generic class for accessing the Config.plist items, default the Config.plist from the main bundle is used.
- If you only need one value, you can access it by the static class functions e.g.
-
- `[Configuration tintColorForKey:AvailabilityTableViewTintColor];`
-
- Otherwise create an instance of the configuration and access the member functions.
-
- Configuration *config = [Configuration defaultConfiguration];
- UIColor *tableColor = [config tintColorForKey:AvailabilityTableViewTintColor];
- UIColor *messagecolor = [config tintColorForKey:ReachabilityBarBackGroundColor];
-
+/**
+ *  Class for accessing items from Config.plist. As a default the plist from the main bundle is used.
  */
 @interface Configuration : NSObject
 
-/* Dependency Injection */
-@property (strong, nonatomic) NSDictionary *dictionary;
-
+/**
+ * Obtain an instance to this class' Singleton.
+ *
+ * @return Configuration's singleton instance.
+ */
 + (instancetype)defaultConfiguration;
 
-/** Generic method to get the UIColor for the specific key
- @param key NSString as the key for the NSArray containing the color configuration
- @result UIColor instance */
-- (UIColor *)tintColorForKey:(NSString *)key;
-
-/** Generic method to create the UIColor from given array
- @param array NSArray as the array with 3 values for RGB colors
- @result UIColor instance */
-+ (UIColor *)colorFromArray:(NSArray *)array;
-
-/** Generic method to get the Url as NSString for the specific key
- @param key NSString as the key for the URLS Dictionary part
- @result Url NSString instance
+/**
+ *  Obtain an NSString containing an URL for the given key.
+ *
+ *  @param key The key for which to fetch the URL.
+ *
+ *  @return A NSString containing the URL value.
  */
 - (NSString *)UrlForKey:(NSString *)key;
 
-/**  Class method for easy access to a color
- @see -tintColorForKey:
+/**
+ *  Obtain an UIColor for the key specified.
+ *
+ *  @param key The key for which to fetch the color.
+ *
+ *  @return An instance to a UIColor.
  */
-+ (UIColor *)tintColorForKey:(NSString *)key;
+- (UIColor *)tintColorForKey:(NSString *)key;
 
-/**  Class method for easy access to a dictionary with colors
+/**
+ *  Obtain a dictionary containing UIColor objects for the specified key.
+ *
+ *  @param key The key for which to fetch the dictionary.
+ *
+ *  @return A dictionary containing UIColor instances.
  */
-+ (NSDictionary *)tintColorDictionaryForKey:(NSString *)key;
+- (NSDictionary *)tintColorDictionaryForKey:(NSString *)key;
 
-/** Class method for easy access to an url
- @see -UrlForKey:
+/**
+ *  Method to create an UIColor from the given array.
+ *
+ *  @param array A NSArray containing 3 elements representing RGB values.
+ *
+ *  @return An UIColor representing the given RBG color.
  */
-+ (NSString *)UrlForKey:(NSString *)key;
++ (UIColor *)colorFromArray:(NSArray *)array;
 
 @end
