@@ -110,7 +110,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
         // Not logged in, not v21.x, nor in v2.x
         self.loginViewController.screenToShow = OnboardingScreenLogin;
         return YES;
-    } else if (![SystemUser currentUser].migrationCompleted){
+    } else if (![SystemUser currentUser].migrationCompleted || ![SystemUser currentUser].mobileNumber){
         // Also show the Mobile number onboarding screen
         self.loginViewController.screenToShow = OnboardingScreenConfigure;
         return YES;

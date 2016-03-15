@@ -231,7 +231,11 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 - (void)setMobileNumber:(NSString *)mobileNumber {
     _mobileNumber = mobileNumber;
-    [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:SystemUserSUDMobileNumber];
+    if (mobileNumber) {
+        [[NSUserDefaults standardUserDefaults] setObject:mobileNumber forKey:SystemUserSUDMobileNumber];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDMobileNumber];
+    }
 }
 
 - (void)setOutgoingNumber:(NSString *)outgoingNumber {
@@ -357,7 +361,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         [SSKeychain setPassword:password forService:self.serviceName account:username];
     }
     self.outgoingNumber = userDict[SystemUserApiKeyOutgoingNumber];
-    self.mobileNumber   = userDict[SystemUserApiKeyMobileNumber];
+    if (![userDict[SystemUserApiKeyMobileNumber] isEqual:[NSNull null]]) {
+        self.mobileNumber   = userDict[SystemUserApiKeyMobileNumber];
+    }
     self.emailAddress   = userDict[SystemUserApiKeyEmailAddress];
     self.firstName      = userDict[SystemUserApiKeyFirstName];
     self.lastName       = userDict[SystemUserApiKeyLastName];

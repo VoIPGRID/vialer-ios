@@ -192,22 +192,22 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 
 - (void)registerForLocalNotifications {
     UIMutableUserNotificationAction *acceptCall = [[UIMutableUserNotificationAction alloc] init];
-    [acceptCall setActivationMode:UIUserNotificationActivationModeForeground];
-    [acceptCall setTitle:@"Accept call"];
-    [acceptCall setIdentifier:AppDelegateLocalNotificationAcceptCall];
-    [acceptCall setDestructive:NO];
-    [acceptCall setAuthenticationRequired:NO];
+    acceptCall.activationMode = UIUserNotificationActivationModeForeground;
+    acceptCall.title = NSLocalizedString(@"Accept", nil);
+    acceptCall.identifier = AppDelegateLocalNotificationAcceptCall;
+    acceptCall.destructive = NO;
+    acceptCall.authenticationRequired = NO;
 
     UIMutableUserNotificationAction *declineCall = [[UIMutableUserNotificationAction alloc] init];
-    [declineCall setActivationMode:UIUserNotificationActivationModeBackground];
-    [declineCall setTitle:@"Decline call"];
-    [declineCall setIdentifier:AppDelegateLocalNotificationDeclineCall];
-    [declineCall setDestructive:NO];
-    [declineCall setAuthenticationRequired:NO];
+    declineCall.activationMode = UIUserNotificationActivationModeBackground;
+    declineCall.title = NSLocalizedString(@"Decline", nil);
+    declineCall.identifier = AppDelegateLocalNotificationDeclineCall;
+    declineCall.destructive = NO;
+    declineCall.authenticationRequired = NO;
 
     UIMutableUserNotificationCategory *noticationCategory = [[UIMutableUserNotificationCategory alloc] init];
-    [noticationCategory setIdentifier:AppDelegateLocalNotificationCategory];
-    [noticationCategory setActions:@[acceptCall, declineCall] forContext:UIUserNotificationActionContextDefault];
+    noticationCategory.identifier = AppDelegateLocalNotificationCategory;
+    [noticationCategory setActions:@[acceptCall, declineCall] forContext: UIUserNotificationActionContextDefault];
 
     NSSet *categories = [NSSet setWithObjects:noticationCategory, nil];
     UIUserNotificationType types = (UIUserNotificationTypeAlert|

@@ -4,10 +4,12 @@
 "%@ is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
+
+/* No comment provided by engineer. */
 "%@ is logged out." = "%@ is uitgelogd.";
 
 /* No comment provided by engineer. */
-"%@\nis currently logged in." = "%@\nis ingelogd.";
+"Accept" = "Accepteer";
 
 /* No comment provided by engineer. */
 "Application denied access to 'Contacts'" = "App heeft geen toegang tot 'Contacten'";
@@ -68,6 +70,9 @@
 
 /* No comment provided by engineer. */
 "Couldn't connect with your phone" = "Kan niet verbinden met je telefoon";
+
+/* No comment provided by engineer. */
+"Decline" = "Weiger";
 
 /* No comment provided by engineer. */
 "Declined call" = "Gesprek geweigerd";
