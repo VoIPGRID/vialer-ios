@@ -144,7 +144,10 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
-        NSString *onboardingUrl = [self.defaultConfiguration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+
+        NSString *localizedOnboarding = [NSString stringWithFormat:@"onboarding-%@", [[NSBundle mainBundle] preferredLocalizations][0]];
+        NSString *onboardingUrl = [self.defaultConfiguration UrlForKey:localizedOnboarding];
+
         webController.title = NSLocalizedString(@"Information", nil);
         webController.URL = [NSURL URLWithString:onboardingUrl];
         webController.showsNavigationToolbar = NO;

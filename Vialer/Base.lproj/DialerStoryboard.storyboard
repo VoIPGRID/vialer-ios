@@ -35,13 +35,13 @@
                                     <action selector="callButtonPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="quQ-nU-c62"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi" userLabel="Left filler">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi" userLabel="Left filler">
                                 <rect key="frame" x="20" y="110" width="56" height="53"/>
                                 <variation key="heightClass=regular" ambiguous="YES">
                                     <rect key="frame" x="20" y="204" width="56" height="53"/>
                                 </variation>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0" userLabel="Numberpad container view">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0" userLabel="Numberpad container view">
                                 <rect key="frame" x="20" y="179" width="560" height="338"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="6dJ-1s-KJc"/>
@@ -63,19 +63,19 @@
                                     <segue destination="QFZ-Of-wQr" kind="embed" id="Egt-H7-SHk"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-Ze-S9X" userLabel="Filler top of number label">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-Ze-S9X" userLabel="Filler top of number label">
                                 <rect key="frame" x="20" y="102" width="560" height="0.0"/>
                                 <variation key="heightClass=regular" ambiguous="YES">
                                     <rect key="frame" x="20" y="102" width="560" height="94"/>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-zg-9Cj" userLabel="Filler bottom of number label">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-zg-9Cj" userLabel="Filler bottom of number label">
                                 <rect key="frame" x="20" y="171" width="560" height="0.0"/>
                                 <variation key="heightClass=regular" ambiguous="YES">
                                     <rect key="frame" x="20" y="265" width="560" height="94"/>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="center" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
                                 <rect key="frame" x="524" y="110" width="56" height="53"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -93,7 +93,7 @@
                                     <outletCollection property="gestureRecognizers" destination="gFY-xR-K1B" appends="YES" id="FCh-Eo-OYO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
                                 <rect key="frame" x="84" y="110" width="432" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="nT6-7N-5s3"/>

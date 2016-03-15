@@ -24,14 +24,14 @@ static CGFloat const ConfigureFormViewButtonRadius = 5.0;
 - (void)awakeFromNib {
     [super awakeFromNib];
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-    self.titleLable.text = [NSString stringWithFormat:NSLocalizedString(@"App is configuring", nil), appName];
+    self.titleLable.text = [NSString stringWithFormat:NSLocalizedString(@"%@ is configuring", nil), appName];
     self.subtitleLable.text = NSLocalizedString(@"your account", nil);
 
-    self.phoneNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT", nil);
-    self.phoneNumberField.placeholder = NSLocalizedString(@"mobile_label", nil);
+    self.phoneNumberDescriptionField.text = NSLocalizedString(@"Please enter your mobile number here.", nil);
+    self.phoneNumberField.placeholder = NSLocalizedString(@"Mobile", nil);
     [self.phoneNumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
 
-    self.outgoingNumberDescriptionField.text = NSLocalizedString(@"CONFIGURE_OUTGOING_DESCRIPTION_TEXT", nil);
+    self.outgoingNumberDescriptionField.text = NSLocalizedString(@"The outgoing number which the app will display is:", nil);
 
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
 

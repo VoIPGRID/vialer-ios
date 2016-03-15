@@ -1,13 +1,13 @@
 /* Created with Localizable Strings Merge, the swiss-army knife for iOS and OS X localization. */
 
 /* No comment provided by engineer. */
+"%@ is configuring" = "%@ configureert";
+
+/* No comment provided by engineer. */
 "%@ is logged out." = "%@ is uitgelogd.";
 
 /* No comment provided by engineer. */
 "%@\nis currently logged in." = "%@\nis ingelogd.";
-
-/* No comment provided by engineer. */
-"App is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
 "Application denied access to 'Contacts'" = "App heeft geen toegang tot 'Contacten'";
@@ -49,12 +49,6 @@
 "Checking VoIP account" = "VoIP account controleren";
 
 /* No comment provided by engineer. */
-"CONFIGURE_OUTGOING_DESCRIPTION_TEXT" = "Het telefoonnummer waarmee uitgebeld wordt is:";
-
-/* No comment provided by engineer. */
-"CONFIGURE_PHONENUMBER_DESCRIPTION_TEXT" = "Voer hier je mobiele telefoonnummer in.";
-
-/* No comment provided by engineer. */
 "Connected with other party" = "Verbonden met andere partij";
 
 /* No comment provided by engineer. */
@@ -85,7 +79,7 @@
 "Disabling VoIP..." = "VoIP aan het uitschakelen...";
 
 /* No comment provided by engineer. */
-"Email" = "E-mailadres";
+"Email address" = "E-mailadres";
 
 /* No comment provided by engineer. */
 "Email sent successfully." = "E-mail verzonden.";
@@ -133,7 +127,7 @@
 "Hello" = "Hallo";
 
 /* No comment provided by engineer. */
-"HOW_DOES_APP_WORK_BUTTON_TEXT" = "Hoe werkt bellen via %@";
+"How does %@ work?" = "Hoe werkt bellen via %@?";
 
 /* No comment provided by engineer. */
 "If your email address is %@ we will send you an email with instructions to reset your password." = "Als je emailadres %@ is, zullen we je een email sturen met instructies om je wachtwoord te resetten.";
@@ -181,10 +175,10 @@
 "Microphone Access Denied" = "Geen toegang tot microfoon";
 
 /* No comment provided by engineer. */
-"Mobile phone number" = "Mobiele telefoonnummer";
+"Mobile" = "Mobiele telefoonnummer";
 
 /* No comment provided by engineer. */
-"mobile_label" = "Mobiel";
+"Mobile phone number" = "Mobiele telefoonnummer";
 
 /* No comment provided by engineer. */
 "My number" = "Mijn nummer";
@@ -216,9 +210,6 @@
 /* No comment provided by engineer. */
 "Ok" = "OK";
 
-/* Reference to URL String in the config.plist to the localized onboarding information page */
-"onboarding" = "onboarding-nl";
-
 /* No comment provided by engineer. */
 "Outgoing number" = "Uitgaand nummer";
 
@@ -236,6 +227,9 @@
 
 /* No comment provided by engineer. */
 "Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
+
+/* No comment provided by engineer. */
+"Please enter your mobile number here." = "Voer hier je mobiele telefoonnummer in.";
 
 /* No comment provided by engineer. */
 "Recents" = "Recent";
@@ -278,6 +272,9 @@
 
 /* No comment provided by engineer. */
 "The number is to short" = "Het nummer is te kort";
+
+/* No comment provided by engineer. */
+"The outgoing number which the app will display is:" = "Het telefoonnummer waarmee uitgebeld wordt is:";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";

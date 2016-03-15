@@ -131,7 +131,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
         } else if (indexPath.row == SettingsViewControllerMyEmailRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
-            cell.textLabel.text = NSLocalizedString(@"Email", nil);
+            cell.textLabel.text = NSLocalizedString(@"Email address", nil);
             cell.detailTextLabel.minimumScaleFactor = 0.8f;
             cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
             cell.detailTextLabel.text = self.currentUser.username;
