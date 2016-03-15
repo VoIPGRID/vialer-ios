@@ -7,7 +7,6 @@
 
 #import "AFNetworkActivityLogger.h"
 #import "APNSHandler.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
 @import CoreData;
 #import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
@@ -18,8 +17,6 @@
 #import "SSKeychain.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
-
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface AppDelegate()
 @property (readwrite, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -158,7 +155,7 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 #ifdef DEBUG
     // File logging
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.maximumFileSize =(1024*1024*5); // Size in bytes
+    fileLogger.maximumFileSize = 1024 * 1024 * 5; // Size in bytes
     fileLogger.rollingFrequency = 0; // Set rollingFrequency to 0, only roll on file size.
     [fileLogger logFileManager].maximumNumberOfLogFiles = 3;
     fileLogger.logFormatter = logFormat;

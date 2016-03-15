@@ -5,13 +5,12 @@
 
 #import "SipCallingButtonsViewController.h"
 
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "Configuration.h"
 #import "SipCallingButton.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
 
 static float const SipCallingButtonsPressedAlpha = 0.5;
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
 static NSString * const SIPCallingButtonsViewControllerCallState    = @"callState";
 static NSString * const SIPCallingButtonsViewControllerMediaState   = @"mediaState";
 static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker";

@@ -4,9 +4,6 @@
 //
 
 #import "ContactModel.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
-
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface ContactModel()
 @property (nonatomic, strong) CNContactStore *contactStore;

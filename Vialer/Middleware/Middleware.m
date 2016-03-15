@@ -6,7 +6,6 @@
 #import "Middleware.h"
 
 #import "APNSHandler.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "GAITracker.h"
 #import "Configuration.h"
 #import "ReachabilityManager.h"
@@ -15,14 +14,12 @@
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager+Middleware.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-
 static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
 static NSString * const MiddlewareAPNSPayloadKeyCheckin    = @"checkin";
 static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
 
-NSString *const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
+static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
 @interface Middleware ()
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;

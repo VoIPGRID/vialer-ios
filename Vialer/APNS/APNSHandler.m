@@ -4,11 +4,8 @@
 //
 
 #import "APNSHandler.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "Middleware.h"
 #import "SystemUser.h"
-
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface APNSHandler ()
 @property (strong, nonatomic) PKPushRegistry *voipRegistry;

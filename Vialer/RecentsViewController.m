@@ -65,7 +65,7 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
     NSError *error;
     if(![self.fetchedResultController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
 }
@@ -163,7 +163,7 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
     NSError *error;
     [self.fetchedResultController performFetch:&error];
     if (error) {
-        NSLog(@"Error: %@", error);
+        DDLogError(@"Error: %@", error);
     }
     [self.tableView reloadData];
 }

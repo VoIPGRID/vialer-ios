@@ -6,11 +6,9 @@
 #import "SIPCallingViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "DurationTimer.h"
 #import "SIPUtils.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 static NSString * const SIPCallingViewControllerCallState = @"callState";
 static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
 static NSString * const SIPCallingViewControllerSegueSIPCallingButtons = @"SipCallingButtonsSegue";

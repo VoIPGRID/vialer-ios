@@ -71,7 +71,7 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
     // Save the calls to the ManagedObjectContext.
     NSError *error;
     if (![managedObjectContext save:&error]) {
-        NSLog(@"Error saving Recent call: %@", error);
+        DDLogError(@"Error saving Recent call: %@", error);
     }
 
     return recents;

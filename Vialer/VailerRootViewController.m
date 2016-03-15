@@ -1,15 +1,11 @@
 //
 //  VailerRootViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 18/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "VailerRootViewController.h"
 
 #import "AppDelegate.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "SIPIncomingCallViewController.h"
 #import "SIPCallingViewController.h"
 #import "SystemUser.h"
@@ -20,7 +16,6 @@
 static NSString * const VialerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
 static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @"ShowSIPIncomingCallViewSegue";
 static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"ShowSIPCallingViewSegue";
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface VailerRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;

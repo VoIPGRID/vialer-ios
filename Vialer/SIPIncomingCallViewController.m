@@ -3,9 +3,9 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <CocoaLumberjack/CocoaLumberjack.h>
-#import "SIPCallingViewController.h"
 #import "SIPIncomingCallViewController.h"
+
+#import "SIPCallingViewController.h"
 #import "SIPUtils.h"
 #import <VialerSIPLib-iOS/VSLRingtone.h>
 
@@ -15,8 +15,6 @@ static NSString * const SIPIncomingCallViewControllerMediaState = @"mediaState";
 static NSString * const SIPIncomingCallViewControllerRingtoneName = @"ringtone";
 static NSString * const SIPIncomingCallViewControllerRingtoneExtension = @"wav";
 static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
-
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface SIPIncomingCallViewController()
 @property (strong, nonatomic) VSLRingtone *ringtone;

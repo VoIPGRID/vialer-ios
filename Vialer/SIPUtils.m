@@ -3,11 +3,9 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import "CocoaLumberjack/CocoaLumberjack.h"
 #import "SIPUtils.h"
-#import "SystemUser.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#import "SystemUser.h"
 
 @implementation SIPUtils
 
@@ -26,7 +24,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] configureLibraryWithEndPointConfiguration:endpointConfiguration error:&error];
     if (!success || error) {
-        NSLog(@"Failed to startup VialerSIPLib: %@", error);
+        DDLogError(@"Failed to startup VialerSIPLib: %@", error);
     }
 
     return success;
@@ -41,7 +39,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     VSLAccount *account = [[VialerSIPLib sharedInstance] createAccountWithSipUser:[SystemUser currentUser] error:&error];
 
     if (error) {
-        NSLog(@"Add SIP Account to Endpoint failed: %@", error);
+        DDLogError(@"Add SIP Account to Endpoint failed: %@", error);
     }
 
     return account;
