@@ -1,13 +1,12 @@
 //
-//  VoIPGRIDRequestOperationManager+Middleware.h
+//  MiddlewareRequestOperationManager.h
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
 #import "VoIPGRIDRequestOperationManager.h"
-/**
- *  An category on VoIPGRIDRequestOperationManager responsible for communicating with the Middleware endpoint.
- */
-@interface VoIPGRIDRequestOperationManager (Middleware)
+
+@interface MiddlewareRequestOperationManager : VoIPGRIDRequestOperationManager
+
 /**
  *  Create or update a Middleware device record.
  *

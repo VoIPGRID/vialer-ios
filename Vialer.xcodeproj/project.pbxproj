@@ -170,6 +170,8 @@
 		C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */; };
 		C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */; };
 		C4947F8F1C983DB30065D7C1 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
+		C4947FD31C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
+		C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
 		C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */; };
 		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
@@ -204,8 +206,6 @@
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
-		F27AA9B71C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F27AA9B61C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m */; };
-		F27AA9B81C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F27AA9B61C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
@@ -441,6 +441,8 @@
 		C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewController.m; sourceTree = "<group>"; };
 		C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallTests.m; sourceTree = "<group>"; };
 		C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentCall+VoIPGRIDTests.m"; sourceTree = "<group>"; };
+		C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiddlewareRequestOperationManager.h; sourceTree = "<group>"; };
+		C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiddlewareRequestOperationManager.m; sourceTree = "<group>"; };
 		C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
@@ -493,8 +495,6 @@
 		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
 		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
 		F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandlerTests.m; sourceTree = "<group>"; };
-		F27AA9B51C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VoIPGRIDRequestOperationManager+Middleware.h"; sourceTree = "<group>"; };
-		F27AA9B61C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+Middleware.m"; sourceTree = "<group>"; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2B40BDA1C731F3E00502769 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
 		F2B40BDB1C731F3E00502769 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
@@ -1214,8 +1214,8 @@
 			children = (
 				F2B40BDA1C731F3E00502769 /* Middleware.h */,
 				F2B40BDB1C731F3E00502769 /* Middleware.m */,
-				F27AA9B51C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.h */,
-				F27AA9B61C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m */,
+				C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */,
+				C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -2053,6 +2053,7 @@
 				C41FD86C1C60A08400BBE6D7 /* NSDate+RelativeDate.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
+				C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				C41FD86F1C60A08400BBE6D7 /* Configuration.m in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8711C60A08400BBE6D7 /* ContactModel.m in Sources */,
@@ -2087,7 +2088,6 @@
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C41A73681C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
-				F27AA9B81C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
 				F2153E9D1C91C4BE009A5FD7 /* RecentCall.m in Sources */,
 				C41FD88D1C60A08400BBE6D7 /* ReachabilityBarViewController.m in Sources */,
@@ -2158,6 +2158,7 @@
 				C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */,
 				C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */,
 				C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				C4947FD31C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
 				F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */,
@@ -2212,7 +2213,6 @@
 				C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
-				F27AA9B71C736C1B00CF78FA /* VoIPGRIDRequestOperationManager+Middleware.m in Sources */,
 				F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */,
 				C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */,
 			);
