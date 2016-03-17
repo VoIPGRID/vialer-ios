@@ -19,8 +19,18 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
 @implementation ReachabilityManager
 
 #pragma mark - lifecycle
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    }
+    return self;
+}
+
 - (void)dealloc {
     [self stopMonitoring];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 #pragma mark - properties
@@ -53,13 +63,12 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
     [self.reachabilityPodInstance startNotifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetConnectionChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(radioAccessChanged:) name:CTRadioAccessTechnologyDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)stopMonitoring {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CTRadioAccessTechnologyDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+
     [self.reachabilityPodInstance stopNotifier];
 }
 
@@ -100,6 +109,11 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
         self.reachabilityStatus = ReachabilityManagerStatusOffline;
     }
     return self.reachabilityStatus;
+}
+
+- (ReachabilityManagerStatusType)resetAndGetCurrentReachabilityStatus {
+    self.networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    return [self currentReachabilityStatus];
 }
 
 #pragma mark - Callback functions

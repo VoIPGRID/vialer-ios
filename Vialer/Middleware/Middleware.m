@@ -79,7 +79,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
 
-        if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
+        if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             // User has good enough connection and is SIP Enabled.
             // Register the account with the endpoint.
             BOOL success = [SIPUtils registerSIPAccountWithEndpoint];

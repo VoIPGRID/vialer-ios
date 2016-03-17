@@ -17,9 +17,8 @@
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
-    VSLTransportConfiguration *udpTransportConfiguration = [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP];
-
-    endpointConfiguration.transportConfigurations = @[udpTransportConfiguration];
+    endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
+                                                      [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
 
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] configureLibraryWithEndPointConfiguration:endpointConfiguration error:&error];
