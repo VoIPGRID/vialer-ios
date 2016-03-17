@@ -12,7 +12,7 @@
 #import "SIPUtils.h"
 #import "SSKeychain.h"
 #import "SystemUser.h"
-#import "VoIPGRIDRequestOperationManager+Middleware.h"
+#import "MiddlewareRequestOperationManager.h"
 
 static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
@@ -22,7 +22,7 @@ static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
 static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
 @interface Middleware ()
-@property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;
+@property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
 @property (weak, nonatomic) SystemUser *systemUser;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (strong, nonatomic) NSDate *responseTimer;
@@ -53,18 +53,10 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     return _systemUser;
 }
 
-- (VoIPGRIDRequestOperationManager *)middlewareRequestOperationManager {
+- (MiddlewareRequestOperationManager *)middlewareRequestOperationManager {
     if (!_middlewareRequestOperationManager) {
         NSURL *baseURL = [NSURL URLWithString: [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString]];
-        _middlewareRequestOperationManager = [[VoIPGRIDRequestOperationManager alloc] initWithBaseURL:baseURL];
-        _middlewareRequestOperationManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-        //To have DELETE also put it's parameters into the request body: (Default on JSON Serializer is to put them in URI)
-        _middlewareRequestOperationManager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
-    }
-
-    if (self.systemUser.username) {
-        [_middlewareRequestOperationManager.requestSerializer setAuthorizationHeaderFieldWithUsername:self.systemUser.username password:self.systemUser.password];
+        _middlewareRequestOperationManager = [[MiddlewareRequestOperationManager alloc] initWithBaseURL:baseURL];
     }
     return _middlewareRequestOperationManager;
 }
@@ -87,7 +79,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
 
-        if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
+        if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             // User has good enough connection and is SIP Enabled.
             // Register the account with the endpoint.
             BOOL success = [SIPUtils registerSIPAccountWithEndpoint];
@@ -126,6 +118,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         // Whole response cycle completed, log duration.
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:self.responseTimer];
         [GAITracker timeToRespondToIncomingPushNotification:responseTime];
+        DDLogDebug(@"Middleware response time: [%f s]", responseTime);
 
         if (error) {
             DDLogError(@"The middleware responded with an error: %@", error);

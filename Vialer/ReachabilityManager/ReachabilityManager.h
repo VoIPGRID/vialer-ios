@@ -49,6 +49,13 @@ typedef NS_ENUM(NSInteger, ReachabilityManagerStatusType) {
 - (ReachabilityManagerStatusType)currentReachabilityStatus;
 
 /**
+ *  Resetting the CTTelephonyNetworkInfo instance and then getting the current reachability status
+ *
+ *  @return The current reachability of the manager.
+ */
+- (ReachabilityManagerStatusType)resetAndGetCurrentReachabilityStatus;
+
+/**
  *  Listner start function.
  *
  *  Start the periodic listener which updates the reachabilityStatus automatically.

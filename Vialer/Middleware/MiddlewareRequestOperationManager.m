@@ -1,9 +1,10 @@
 //
-//  VoIPGRIDRequestOperationManager+Middleware.m
+//  MiddlewareRequestOperationManager.m
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import "VoIPGRIDRequestOperationManager+Middleware.h"
+#import "MiddlewareRequestOperationManager.h"
+#import "SystemUser.h"
 
 static NSString * const MiddlewareURLDeviceRecordMutation = @"/api/apns-device/";
 static NSString * const MiddlewareURLIncomingCallResponse = @"/api/call-response/";
@@ -19,7 +20,20 @@ static NSString * const MiddlewareMainBundleCFBundleVersion = @"CFBundleVersion"
 static NSString * const MiddlewareMainBundleCFBundleShortVersionString = @"CFBundleShortVersionString";
 static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdentifier";
 
-@implementation VoIPGRIDRequestOperationManager (Middleware)
+@implementation MiddlewareRequestOperationManager
+
+-(instancetype)initWithBaseURL:(NSURL *)url {
+    self = [super initWithBaseURL:url];
+
+    if (self) {
+        self.responseSerializer = [AFHTTPResponseSerializer serializer];
+
+        //To have DELETE also put it's parameters into the request body: (Default on JSON Serializer is to put them in URI)
+        self.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginUserNotification:) name:SystemUserLoginNotification object:nil];
+    }
+    return self;
+}
 
 - (void)updateDeviceRecordWithAPNSToken:(NSString *)apnsToken sipAccount:(NSString *)sipAccount withCompletion:(void (^)(NSError *error))completion {
     // The Nullable and nonnull keywords are not enough, an empty string is also not acceptable.
@@ -108,5 +122,12 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
         }
     }];
 }
+
+#pragma mark - Notification handling
+
+- (void)loginUserNotification:(NSNotification *)notification {
+    [self.requestSerializer setAuthorizationHeaderFieldWithUsername:[SystemUser currentUser].username password:[SystemUser currentUser].password];
+}
+
 
 @end
