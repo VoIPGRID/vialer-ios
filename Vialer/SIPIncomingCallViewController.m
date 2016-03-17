@@ -32,7 +32,6 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.incomingPhoneNumberLabel.text = [SIPUtils getCallName:self.call];
-    [self.ringtone start];
 }
 
 - (void)dealloc {
@@ -67,6 +66,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
     _call = call;
     [call addObserver:self forKeyPath:SIPIncomingCallViewControllerCallState options:0 context:NULL];
     [call addObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState options:0 context:NULL];
+    [self.ringtone start];
 }
 
 #pragma mark - KVO

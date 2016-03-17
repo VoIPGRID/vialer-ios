@@ -19,7 +19,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
 @interface VailerRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
-@property (nonatomic) BOOL presentSIPViewController;
+@property (nonatomic) BOOL willPresentSIPViewController;
 @end
 
 @implementation VailerRootViewController
@@ -61,25 +61,22 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     [self setupLayout];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingBackgroundCallNotification:) name:AppDelegateIncomingBackgroundCallNotification object:nil];
+
+    // Customize NavigationBar
+    [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarTintColor];
+    [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarBarTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    // Customize NavigationBar
-    [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarTintColor];
-    [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarBarTintColor];
-
-    // This is needed because when dismissing the view stack to display the sip incoming view controller calls
-    // the viewdidappear function so it will try to differen segue when you want to present a sip view controller.
-    if (!self.presentSIPViewController) {
+    // Prevent segue if we are in the process of showing an incoming view controller.
+    if (!self.willPresentSIPViewController) {
         if ([self shouldPresentLoginViewController]) {
             [self presentViewController:self.loginViewController animated:NO completion:nil];
         } else {
             [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:nil];
         }
-    } else {
-        self.presentSIPViewController = NO;
     }
 }
 
@@ -151,20 +148,25 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)incomingCallNotification:(NSNotification *)notification {
-    self.presentSIPViewController = YES;
-    [self dismissViewControllerAnimated:NO completion:^(void){
-        [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:notification.object];
-    }];
+    if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
+        self.willPresentSIPViewController = YES;
+        [self dismissViewControllerAnimated:NO completion:^(void){
+            [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:notification.object];
+        }];
+    }
 }
 
 - (void)incomingBackgroundCallNotification:(NSNotification *)notification {
-    self.presentSIPViewController = YES;
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:notification.object];
-    }];
+    if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
+        self.willPresentSIPViewController = YES;
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:notification.object];
+        }];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.willPresentSIPViewController = NO;
     if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
         SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
         sipIncomingViewController.call = sender;
