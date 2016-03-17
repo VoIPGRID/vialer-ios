@@ -104,7 +104,6 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 }
 
 - (void)sentCallResponseToMiddleware:(NSDictionary *)originalPayload isAvailable:(BOOL)available withCompletion:(void (^)(NSError *error))completion {
-
     NSDictionary *params = @{
                              // Key that was given in the device push message as reference (required).
                              MiddlewareResponseKeyUniqueKey: originalPayload[MiddlewareResponseKeyUniqueKey],
@@ -129,5 +128,15 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:[SystemUser currentUser].username password:[SystemUser currentUser].password];
 }
 
+- (void)logoutUserNotification:(NSNotification *)notification {
+    [self.operationQueue waitUntilAllOperationsAreFinished];
+    [self.requestSerializer clearAuthorizationHeader];
+
+    // Clear cookies for web view
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
+}
 
 @end

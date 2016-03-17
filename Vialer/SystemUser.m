@@ -188,14 +188,16 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     // If sip is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
         _sipEnabled = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
 
     // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:self];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:[self.sipAccount copy]];
             [self fetchUserProfile];
         });
     }
