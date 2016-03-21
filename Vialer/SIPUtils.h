@@ -42,7 +42,7 @@
  *
  *  @return BOOL YES if the registration was a success.
  */
-+ (BOOL)registerSIPAccountWithEndpoint;
++ (void)registerSIPAccountWithEndpointWithCompletion:(void (^_Nonnull)(BOOL success))completion;
 
 /**
  *  Get a VSLCall instance based on a callId.

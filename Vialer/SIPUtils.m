@@ -44,23 +44,21 @@
     return account;
 }
 
-+ (BOOL)registerSIPAccountWithEndpoint {
++ (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL))completion {
     if (![VialerSIPLib sharedInstance].endpointAvailable) {
         BOOL success = [SIPUtils setupSIPEndpoint];
         if (!success) {
             DDLogError(@"Error setting up endpoint");
+            completion(NO);
         }
     }
 
-    NSError *error;
-    BOOL success = [[VialerSIPLib sharedInstance] registerAccount:[SystemUser currentUser] error:&error];
-
-    if (!success) {
-        if (error != NULL) {
-            DDLogError(@"Error registering the account with the endpoint: %@", error);
+    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser] withCompletion:^(BOOL success, VSLAccount *account) {
+        if (!success) {
+            DDLogError(@"Error registering the account with the endpoint");
         }
-    }
-    return success;
+        completion(success);
+    }];
 }
 
 + (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {

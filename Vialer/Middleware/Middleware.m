@@ -82,16 +82,14 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             // User has good enough connection and is SIP Enabled.
             // Register the account with the endpoint.
-            BOOL success = [SIPUtils registerSIPAccountWithEndpoint];
-            if (success) {
-                // Registration with the endpoint is a success respond OK to the middleware.
-                DDLogDebug(@"SIP Endpoint registration success! Sending Available = YES to middleware");
-                [self respondToMiddleware:payload isAvailable:YES];
-            } else {
-                DDLogDebug(@"SIP Endpoint registration FAILED. Senting Available = NO to middleware");
-                // Endpoint registration has failed. Respond not available to the middleware.
-                [self respondToMiddleware:payload isAvailable:NO];
-            }
+            [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success) {
+                if (success) {
+                    DDLogDebug(@"SIP Endpoint registration success! Sending Available = YES to middleware");
+                } else {
+                    DDLogDebug(@"SIP Endpoint registration FAILED. Senting Available = NO to middleware");
+                }
+                [self respondToMiddleware:payload isAvailable:success];
+            }];
         } else {
             // User is not SIP enabled or the connection is not good enough.
             // Sent not available to the middleware.
