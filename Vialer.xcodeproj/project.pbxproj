@@ -228,7 +228,7 @@
 		F99856951BDF85590005253B /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
-		F9AACDAF1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */; };
+		F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AACDAE1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m */; };
 		F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B825181C86F724003CBA92 /* DurationTimer.m */; };
 		F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B825181C86F724003CBA92 /* DurationTimer.m */; };
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
@@ -526,7 +526,7 @@
 		F99856941BDF85590005253B /* ContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtils.m; sourceTree = "<group>"; };
 		F9A71EBE1C7F5F360083C8B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPIncomingCallStoryboard.storyboard; sourceTree = "<group>"; };
 		F9A71EC21C7F5F970083C8B4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPIncomingCallStoryboard.strings; sourceTree = "<group>"; };
-		F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+MiddlewareTests.m"; sourceTree = "<group>"; };
+		F9AACDAE1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiddlewareRequestOperationManagerTests.m; sourceTree = "<group>"; };
 		F9B825171C86F724003CBA92 /* DurationTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurationTimer.h; sourceTree = "<group>"; };
 		F9B825181C86F724003CBA92 /* DurationTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurationTimer.m; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
@@ -1224,7 +1224,7 @@
 			isa = PBXGroup;
 			children = (
 				F2B40BE31C731F7500502769 /* MiddlewareTests.m */,
-				F9AACDAE1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m */,
+				F9AACDAE1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -2125,7 +2125,7 @@
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
 				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
-				F9AACDAF1C7C6CC4000A7593 /* VoIPGRIDRequestOperationManager+MiddlewareTests.m in Sources */,
+				F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
 				C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,

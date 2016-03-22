@@ -8,11 +8,11 @@
 #import "APNSHandler.h"
 #import "GAITracker.h"
 #import "Configuration.h"
+#import "MiddlewareRequestOperationManager.h"
 #import "ReachabilityManager.h"
 #import "SIPUtils.h"
 #import "SSKeychain.h"
 #import "SystemUser.h"
-#import "MiddlewareRequestOperationManager.h"
 
 static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
@@ -26,6 +26,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 @property (weak, nonatomic) SystemUser *systemUser;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (strong, nonatomic) NSDate *responseTimer;
+@property (nonatomic) int retryCount;
 @end
 
 @implementation Middleware
@@ -160,11 +161,30 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
                 DDLogError(@"Device registration with Middleware failed. %@", error);
-                // Disable SIP to give some feedback to the user.
-                self.systemUser.sipEnabled = NO;
-                // And log the problem to track failures.
-                [GAITracker regististrationFailedWithMiddleWareException];
+                if (error.code == NSURLErrorTimedOut && self.retryCount < 5) {
+                    // Update the retry count.
+                    self.retryCount++;
+
+                    // Log an error.
+                    DDLogError(@"Will try to resend the APNS token 5 times: Tried %d out of 5.", self.retryCount);
+
+                    // Retry to call the function.
+                    [self sentAPNSToken:apnsToken];
+                } else {
+                    // Reset the retry count back to 0.
+                    self.retryCount = 0;
+
+                    // Disable SIP to give some feedback to the user.
+                    self.systemUser.sipEnabled = NO;
+
+                    // And log the problem to track failures.
+                    [GAITracker regististrationFailedWithMiddleWareException];
+                }
             } else {
+                // Reset the retry count back to 0.
+                self.retryCount = 0;
+
+                // Display debug message the registration has been successfull.
                 DDLogDebug(@"Middelware registration successfull");
             }
         }];

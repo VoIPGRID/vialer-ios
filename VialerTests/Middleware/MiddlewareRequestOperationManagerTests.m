@@ -1,5 +1,5 @@
 //
-//  VoIPGRIDRequestOperationManager+MiddlewareTests.m
+//  MiddlewareRequestOperationManagerTests.m
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
@@ -7,20 +7,20 @@
 
 #import "Configuration.h"
 #import "Middleware.h"
+#import "MiddlewareRequestOperationManager.h"
 #import <OCMock/OCMock.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
-#import "VoIPGRIDRequestOperationManager+Middleware.h"
 
 @interface Middleware()
-- (VoIPGRIDRequestOperationManager *)middlewareRequestOperationManager;
+- (MiddlewareRequestOperationManager *)middlewareRequestOperationManager;
 @end
 
-@interface VoIPGRIDRequestOperationManager_MiddlewareTests : XCTestCase
-@property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;
+@interface MiddlewareRequestOperationManagerTests : XCTestCase
+@property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
 @property (strong, nonatomic) NSString *middlewareBaseURLAsString;
 @end
 
-@implementation VoIPGRIDRequestOperationManager_MiddlewareTests
+@implementation MiddlewareRequestOperationManagerTests
 
 - (void)setUp {
     [super setUp];
@@ -57,7 +57,7 @@
     //When
     [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:mockAPNSToken sipAccount:mockSIPAccount withCompletion:^(NSError *error) {
         if (!error) {
-            XCTFail(@"An error should occur.");
+            XCTFail(@"An error should have occurred.");
         } else {
             //Then
             XCTAssert([error.localizedDescription isEqualToString:@"Request failed: bad gateway (502)"],

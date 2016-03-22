@@ -8,13 +8,14 @@
 #import "APNSHandler.h"
 #import "Configuration.h"
 #import "Middleware.h"
+#import "MiddlewareRequestOperationManager.h"
 #import <OCMock/OCMock.h>
+#import <OHHTTPStubs/OHHTTPStubs.h>
 #import "ReachabilityManager.h"
 #import "SystemUser.h"
-#import "VoIPGRIDRequestOperationManager+Middleware.h"
 
 @interface Middleware()
-@property (strong, nonatomic) VoIPGRIDRequestOperationManager *middlewareRequestOperationManager;
+@property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (weak, nonatomic) SystemUser *systemUser;
 @end
@@ -43,9 +44,9 @@
 }
 
 - (void)testMiddlewareRequestOperationManagerPropertyCreation {
-    VoIPGRIDRequestOperationManager *createdMiddlewareRequestOperationManager = self.middleware.middlewareRequestOperationManager;
+    MiddlewareRequestOperationManager *createdMiddlewareRequestOperationManager = self.middleware.middlewareRequestOperationManager;
 
-    XCTAssert([createdMiddlewareRequestOperationManager isKindOfClass:[VoIPGRIDRequestOperationManager class]]);
+    XCTAssert([createdMiddlewareRequestOperationManager isKindOfClass:[MiddlewareRequestOperationManager class]]);
 
     NSString *baseURLFromConfig = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
     XCTAssert([[createdMiddlewareRequestOperationManager.baseURL absoluteString] isEqualToString:baseURLFromConfig], @"Base URL of the API endpoint did not match %@ and %@", createdMiddlewareRequestOperationManager.baseURL.absoluteString, baseURLFromConfig);
@@ -64,7 +65,7 @@
 
 - (void)testSentAPNSToken {
     //Given
-    id mockMiddlewareRequestOperationManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
+    id mockMiddlewareRequestOperationManager = OCMClassMock([MiddlewareRequestOperationManager class]);
     id mockSystemUser = OCMClassMock([SystemUser class]);
     NSString *mockAPNSToken = @"0000000011111111222222223333333344444444555555556666666677777777";
     NSString *mockSIPAccount = @"012334456";
