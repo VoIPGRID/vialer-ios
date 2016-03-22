@@ -40,7 +40,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAPNSTokenOnSIPCredentialsChange) name:SystemUserSIPCredentialsChangedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteSIPAccountFromMiddleware) name:SystemUserSIPDisabledNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteDeviceRegistrationFromMiddleware:) name:SystemUserSIPDisabledNotification object:nil];
     }
     return self;
 }
@@ -136,14 +136,10 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     }
 }
 
-- (void)deleteSIPAccountFromMiddleware {
-    DDLogInfo(@"User disabled SIP, unregistering from middleware");
-    [self deleteDeviceRegistrationFromMiddleware];
-}
-
-- (void)deleteDeviceRegistrationFromMiddleware {
+- (void)deleteDeviceRegistrationFromMiddleware:(NSNotification *)notification {
+    DDLogInfo(@"SIP Disabled, unregistering from middleware");
     NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
-    NSString *sipAccount = self.systemUser.sipAccount;
+    NSString *sipAccount = notification.object;
 
     if (sipAccount && storedAPNSToken) {
         [self.middlewareRequestOperationManager deleteDeviceRecordWithAPNSToken:storedAPNSToken sipAccount:sipAccount withCompletion:^(NSError *error) {

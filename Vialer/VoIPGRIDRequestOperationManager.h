@@ -128,6 +128,13 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password withCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion;
 
 /**
+ *  Logout the user notification for overriding in the subclass
+ *
+ *  @param notification NSNotification
+ */
+- (void)logoutUserNotification:(NSNotification *)notification;
+
+/**
  *  This method will try to fetch the profile of the currently authenticated user.
  *
  *  @param completion A block that will be called after the fetch attempt. It will return the response data if any or an error if any.
