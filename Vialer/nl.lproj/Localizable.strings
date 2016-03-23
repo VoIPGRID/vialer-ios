@@ -4,9 +4,10 @@
 "%@ is configuring" = "%@ configureert";
 
 /* No comment provided by engineer. */
+"%@ is logged out." = "%@ is uitgelogd.";
 
 /* No comment provided by engineer. */
-"%@ is logged out." = "%@ is uitgelogd.";
+"%@\nis currently logged in." = "%@\nis op dit moment ingelogd.";
 
 /* No comment provided by engineer. */
 "Accept" = "Accepteer";
@@ -192,6 +193,9 @@
 "No" = "Nee";
 
 /* No comment provided by engineer. */
+"No connection, cannot call." = "Geen verbinding, bellen niet mogelijk.";
+
+/* No comment provided by engineer. */
 "No email address configured" = "Geen emailadres ingesteld";
 
 /* No comment provided by engineer. */
@@ -235,6 +239,9 @@
 
 /* No comment provided by engineer. */
 "Please enter your mobile number here." = "Voer hier je mobiele telefoonnummer in.";
+
+/* No comment provided by engineer. */
+"Poor connection, Two step calling enabled." = "Slechte verbinding, Twee staps modus geactiveerd.";
 
 /* No comment provided by engineer. */
 "Recents" = "Recent";
@@ -316,6 +323,9 @@
 
 /* No comment provided by engineer. */
 "VoIP account ID" = "VoIP-account ID";
+
+/* No comment provided by engineer. */
+"VoIP not activated, Two step calling enabled." = "VoIP niet geactiveerd, Twee staps modus geactiveerd.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";

@@ -9,7 +9,7 @@
 #import "Configuration.h"
 #import "ContactModel.h"
 #import "GAITracker.h"
-#import "ReachabilityManager.h"
+#import "ReachabilityBarViewController.h"
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
@@ -32,16 +32,20 @@ static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorT
 static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
-@interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate, NSFetchedResultsControllerDelegate>
+static CGFloat const RecentsViewControllerReachabilityBarHeight = 30.0;
+static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuration = 0.3;
+
+@interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate, NSFetchedResultsControllerDelegate, ReachabilityBarViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *filterControl;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
-@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultController;
 @property (strong, nonatomic) RecentCallManager *callManager;
+@property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
 @end
 
 @implementation RecentsViewController
@@ -101,13 +105,6 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
         [_refreshControl addTarget:self action:@selector(refreshWithControl:) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
-}
-
-- (ReachabilityManager *)reachabilityManager {
-    if (!_reachabilityManager) {
-        _reachabilityManager = [[ReachabilityManager alloc] init];
-    }
-    return _reachabilityManager;
 }
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
@@ -200,6 +197,9 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
         [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall];
+    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
+        ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
+        rbvc.delegate = self;
     }
 }
 
@@ -341,11 +341,25 @@ static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue"
     [self refreshRecents];
 }
 
+#pragma mark - ReachabilityBarViewControllerDelegate
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {
+    self.reachabilityStatus = status;
+}
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {
+    [self.view layoutIfNeeded];
+    self.reachabilityBarHeigthConstraint.constant = visible ? RecentsViewControllerReachabilityBarHeight : 0.0;
+    [UIView animateWithDuration:RecentsViewControllerReachabilityBarAnimationDuration animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - utils
 
 - (void)callPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumberToCall = phoneNumber;
-    if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
+    if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
         [GAITracker setupOutgoingSIPCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
     } else {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QFZ-Of-wQr">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Reachability Bar View Controller-->
+        <scene sceneID="Sdr-k0-RwZ">
+            <objects>
+                <viewController id="QFZ-Of-wQr" customClass="ReachabilityBarViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZAR-ef-ZEN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Res-DM-6My"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9YK-wp-Ecu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYl-go-ZtO">
+                                <rect key="frame" x="20" y="4" width="530" height="21"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-EM-fHb">
+                                <rect key="frame" x="558" y="4" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="c6l-EM-fHb" secondAttribute="height" multiplier="1:1" id="snA-HU-raK"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="infobuttonPressed:" destination="QFZ-Of-wQr" eventType="touchUpInside" id="vnr-tr-qEg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="c6l-EM-fHb" secondAttribute="trailing" id="JWI-i6-nJP"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="eYl-go-ZtO" secondAttribute="leading" id="Pnq-MX-dkG"/>
+                            <constraint firstItem="Res-DM-6My" firstAttribute="top" secondItem="c6l-EM-fHb" secondAttribute="bottom" constant="4" id="cvR-FX-1GR"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qP2-PH-p7O"/>
+                            <constraint firstItem="eYl-go-ZtO" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qWb-l3-cGx"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="eYl-go-ZtO" secondAttribute="trailing" constant="8" id="qry-Cv-gJF"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="top" secondItem="ZAR-ef-ZEN" secondAttribute="bottom" constant="4" id="xkY-Jg-GcM"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <fixedSimulatedSizeMetrics key="simulatedDestinationMetrics">
+                        <size key="portraitSize" width="600" height="30"/>
+                        <size key="landscapeSize" width="30" height="600"/>
+                    </fixedSimulatedSizeMetrics>
+                    <connections>
+                        <outlet property="informationLabel" destination="eYl-go-ZtO" id="kae-n0-JT2"/>
+                        <outlet property="twoStepInfoButton" destination="c6l-EM-fHb" id="v4O-OO-gnF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sAT-kX-8ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2159" y="69"/>
+        </scene>
+    </scenes>
+</document>

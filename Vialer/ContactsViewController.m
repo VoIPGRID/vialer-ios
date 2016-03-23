@@ -10,7 +10,7 @@
 #import "ContactModel.h"
 #import "ContactUtils.h"
 #import "GAITracker.h"
-#import "ReachabilityManager.h"
+#import "ReachabilityBarViewController.h"
 #import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
@@ -23,20 +23,22 @@ static NSString * const ContactsViewControllerTabContactActiveImageName = @"tab-
 static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 static NSString * const ContactsViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
-static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
+static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
+static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate>
+@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate, ReachabilityBarViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
-@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 
 @property (strong, nonatomic) SystemUser *currentUser;
+@property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
 @end
 
 @implementation ContactsViewController
@@ -117,13 +119,6 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
     return _refreshControl;
 }
 
-- (ReachabilityManager *)reachabilityManager {
-    if (!_reachabilityManager) {
-        _reachabilityManager = [[ReachabilityManager alloc] init];
-    }
-    return _reachabilityManager;
-}
-
 - (SystemUser *)currentUser {
     if (!_currentUser) {
         _currentUser = [SystemUser currentUser];
@@ -154,6 +149,9 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
         [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall];
+    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
+        ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
+        rbvc.delegate = self;
     }
 }
 
@@ -243,7 +241,7 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.reachabilityManager currentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
+                if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
                     [GAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else {
@@ -315,6 +313,20 @@ static NSString * const ContactsViewControllerReachabilityStatusKey = @"status";
 
 - (void)outgoingNumberUpdated:(NSNotification *)notification {
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+}
+
+#pragma mark - ReachabilityBarViewControllerDelegate
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {
+    self.reachabilityStatus = status;
+}
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {
+    [self.view layoutIfNeeded];
+    self.reachabilityBarHeigthConstraint.constant = visible ? ContactsViewControllerReachabilityBarHeight : 0.0;
+    [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end

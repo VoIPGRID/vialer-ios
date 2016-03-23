@@ -1,8 +1,5 @@
 //
 //  ReachabilityBarViewController.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 10/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -12,9 +9,10 @@
 #import "SystemUser.h"
 
 @interface ReachabilityBarViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *failedConnectionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *twoStepLabel;
+@property (weak, nonatomic) IBOutlet UILabel *informationLabel;
 @property (weak, nonatomic) IBOutlet UIButton *twoStepInfoButton;
+@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
+@property (strong, nonatomic) SystemUser *currentUser;
 @end
 
 @implementation ReachabilityBarViewController
@@ -23,48 +21,83 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupReachability) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [self setupReachability];
     [self updateLayout];
+    [self.delegate reachabilityBar:self statusChanged:self.reachabilityManager.reachabilityStatus];
 }
 
-#pragma mark - properties
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    @try{
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIApplicationDidBecomeActiveNotification];
+    }@catch(id exception) {}
+    [self teardownReachability];
+}
 
-- (void)setStatus:(ReachabilityManagerStatusType)status {
-    if (_status != status) {
-        _status = status;
-        [self updateLayout];
+#pragma mark - Properties
+
+- (ReachabilityManager *)reachabilityManager {
+    if (!_reachabilityManager) {
+        _reachabilityManager = [[ReachabilityManager alloc] init];
     }
+    return _reachabilityManager;
 }
 
-#pragma mark - layout
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
+
+#pragma mark - Layout
 
 - (void)updateLayout {
-    self.failedConnectionLabel.hidden = YES;
-    self.twoStepLabel.hidden = YES;
-    self.twoStepInfoButton.hidden = YES;
-    self.view.backgroundColor = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL shouldBeVisible = NO;
+        self.twoStepInfoButton.hidden = YES;
 
-    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
-    switch (self.status) {
-        case ReachabilityManagerStatusOffline: {
-            self.failedConnectionLabel.hidden = NO;
-            self.view.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
-            break;
-        }
-        case ReachabilityManagerStatusLowSpeed: {
-            if ([SystemUser currentUser].sipEnabled) {
-                self.twoStepLabel.hidden = NO;
-                self.twoStepInfoButton.hidden = NO;
-                self.view.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
+        switch (self.reachabilityManager.reachabilityStatus) {
+            case ReachabilityManagerStatusOffline: {
+                self.informationLabel.text   = NSLocalizedString(@"No connection, cannot call.", nil);
+                shouldBeVisible = YES;
+                break;
             }
-            break;
+            case ReachabilityManagerStatusLowSpeed: {
+                if ([SystemUser currentUser].sipEnabled) {
+                    self.informationLabel.text = NSLocalizedString(@"Poor connection, Two step calling enabled.", nil);
+                    self.twoStepInfoButton.hidden = NO;
+                    shouldBeVisible = YES;
+                } else {
+                    self.informationLabel.text = @"";
+                }
+                break;
+            }
+            case ReachabilityManagerStatusHighSpeed: {
+                if (!self.currentUser.sipEnabled && self.currentUser.sipAllowed) {
+                    self.informationLabel.text = NSLocalizedString(@"VoIP not activated, Two step calling enabled.", nil);
+                    shouldBeVisible = YES;
+                } else {
+                    self.informationLabel.text = @"";
+                }
+                break;
+            }
         }
-        case ReachabilityManagerStatusHighSpeed: {
-            break;
+
+        if (shouldBeVisible) {
+            self.view.backgroundColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
+        } else {
+            self.view.backgroundColor = nil;
         }
-    }
+
+        if ([self.delegate respondsToSelector:@selector(reachabilityBar:shouldBeVisible:)]) {
+            [self.delegate reachabilityBar:self shouldBeVisible:shouldBeVisible];
+        }
+    });
 }
 
-#pragma mark - actions
+#pragma mark - Actions
 
 - (IBAction)infobuttonPressed:(UIButton *)sender {
     UIAlertController *alertController = [UIAlertController
@@ -80,5 +113,26 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark - Notificationcenter actions
+
+- (void)setupReachability {
+    [self.reachabilityManager addObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus)) options:0 context:NULL];
+    [self.reachabilityManager startMonitoring];
+}
+
+- (void)teardownReachability {
+    [self.reachabilityManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus))];
+    self.reachabilityManager = nil;
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    // Keep track of connection status from reachabilityManager.
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(reachabilityStatus))]) {
+        [self updateLayout];
+        [self.delegate reachabilityBar:self statusChanged:self.reachabilityManager.reachabilityStatus];
+    }
+}
 
 @end

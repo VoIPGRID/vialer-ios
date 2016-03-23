@@ -60,7 +60,7 @@
                                     <constraint firstAttribute="height" constant="30" id="h5J-mQ-Y2V"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="QFZ-Of-wQr" kind="embed" id="Egt-H7-SHk"/>
+                                    <segue destination="Ln5-cm-6au" kind="embed" id="Egt-H7-SHk"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-Ze-S9X" userLabel="Filler top of number label">
@@ -431,71 +431,6 @@
             </objects>
             <point key="canvasLocation" x="2006" y="868"/>
         </scene>
-        <!--Reachability Bar View Controller-->
-        <scene sceneID="Sdr-k0-RwZ">
-            <objects>
-                <viewController id="QFZ-Of-wQr" customClass="ReachabilityBarViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZAR-ef-ZEN"/>
-                        <viewControllerLayoutGuide type="bottom" id="Res-DM-6My"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9YK-wp-Ecu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No connection, cannot call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYl-go-ZtO">
-                                <rect key="frame" x="20" y="4" width="530" height="21"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poor connection, Two step calling enabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tG7-RZ-e0R">
-                                <rect key="frame" x="20" y="4" width="530" height="21"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-EM-fHb">
-                                <rect key="frame" x="558" y="4" width="22" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="c6l-EM-fHb" secondAttribute="height" multiplier="1:1" id="snA-HU-raK"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="infobuttonPressed:" destination="QFZ-Of-wQr" eventType="touchUpInside" id="vnr-tr-qEg"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="c6l-EM-fHb" secondAttribute="trailing" id="JWI-i6-nJP"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="eYl-go-ZtO" secondAttribute="leading" id="Pnq-MX-dkG"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="tG7-RZ-e0R" secondAttribute="trailing" constant="8" symbolic="YES" id="SAJ-sA-BWd"/>
-                            <constraint firstItem="tG7-RZ-e0R" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="ciN-ec-ypn"/>
-                            <constraint firstItem="Res-DM-6My" firstAttribute="top" secondItem="c6l-EM-fHb" secondAttribute="bottom" constant="4" id="cvR-FX-1GR"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="tG7-RZ-e0R" secondAttribute="leading" id="lLs-Kv-l4v"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qP2-PH-p7O"/>
-                            <constraint firstItem="eYl-go-ZtO" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qWb-l3-cGx"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="eYl-go-ZtO" secondAttribute="trailing" constant="8" id="qry-Cv-gJF"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="top" secondItem="ZAR-ef-ZEN" secondAttribute="bottom" constant="4" id="xkY-Jg-GcM"/>
-                        </constraints>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="SAJ-sA-BWd"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="failedConnectionLabel" destination="eYl-go-ZtO" id="jis-Qe-ybn"/>
-                        <outlet property="twoStepInfoButton" destination="c6l-EM-fHb" id="v4O-OO-gnF"/>
-                        <outlet property="twoStepLabel" destination="tG7-RZ-e0R" id="MjY-nZ-X3k"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sAT-kX-8ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2159" y="69"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="wPM-ku-ZcD">
             <objects>
@@ -513,6 +448,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="soa-v0-mzt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="545" y="562"/>
+        </scene>
+        <!--ReachabilityBarStoryboard-->
+        <scene sceneID="kLH-xq-RL9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ReachabilityBarStoryboard" id="Ln5-cm-6au" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cEZ-gA-8Dy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2159" y="69"/>
         </scene>
     </scenes>
     <resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="t16-Xz-giH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="t16-Xz-giH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wCx-cG-eqa">
-                                <rect key="frame" x="0.0" y="108" width="595" height="492"/>
+                                <rect key="frame" x="0.0" y="138" width="595" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" verticalHuggingPriority="249" id="fUq-Zd-hz9">
                                     <rect key="frame" x="0.0" y="64" width="595" height="62"/>
@@ -58,11 +58,11 @@
                                         <rect key="frame" x="0.0" y="154" width="595" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="76I-1d-Ia8" id="J3F-XJ-wvm">
-                                            <rect key="frame" x="0.0" y="0.0" width="595" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="595" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RTF-RC-BhL">
-                                                    <rect key="frame" x="15" y="0.0" width="565" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="565" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,23 +78,41 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="M8h-9A-CeY">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="94" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="0Ia-Zs-OfH" id="6N3-ui-s2X"/>
                                 </connections>
                             </searchBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9w-Ng-5VK">
+                                <rect key="frame" x="0.0" y="64" width="600" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Lbr-8g-i5M"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="MYK-u7-9i7" kind="embed" id="sC3-Cr-D0B"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="M8h-9A-CeY" firstAttribute="top" secondItem="o9w-Ng-5VK" secondAttribute="bottom" id="08l-qP-hjD"/>
+                            <constraint firstItem="o9w-Ng-5VK" firstAttribute="leading" secondItem="fPj-5F-OsW" secondAttribute="leadingMargin" constant="-20" id="Cjd-DW-OXr"/>
                             <constraint firstItem="M8h-9A-CeY" firstAttribute="top" secondItem="RQE-gy-XsQ" secondAttribute="bottom" id="DfF-hc-ccT"/>
                             <constraint firstItem="gJm-4E-MWs" firstAttribute="top" secondItem="wCx-cG-eqa" secondAttribute="bottom" id="RnB-HF-8yw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="M8h-9A-CeY" secondAttribute="trailing" constant="-20" id="SWS-kv-P1I"/>
                             <constraint firstItem="wCx-cG-eqa" firstAttribute="leading" secondItem="fPj-5F-OsW" secondAttribute="leadingMargin" constant="-20" id="T4Q-eh-Vyt"/>
                             <constraint firstItem="M8h-9A-CeY" firstAttribute="bottom" secondItem="wCx-cG-eqa" secondAttribute="top" id="h4H-jC-gkD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wCx-cG-eqa" secondAttribute="trailing" constant="-15" id="h7p-0H-z02"/>
+                            <constraint firstItem="o9w-Ng-5VK" firstAttribute="top" secondItem="RQE-gy-XsQ" secondAttribute="bottom" id="hMv-jV-vhM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o9w-Ng-5VK" secondAttribute="trailing" constant="-20" id="q2m-tc-t4r"/>
                             <constraint firstItem="M8h-9A-CeY" firstAttribute="leading" secondItem="wCx-cG-eqa" secondAttribute="leading" id="sr9-qi-aMS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DfF-hc-ccT"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="WNB-Uh-UGj">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="PNB-EM-6KD">
@@ -110,6 +128,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="myPhoneNumberLabel" destination="6nE-bA-fh5" id="cD5-UM-0Es"/>
+                        <outlet property="reachabilityBarHeigthConstraint" destination="Lbr-8g-i5M" id="EYN-Og-FYy"/>
                         <outlet property="searchBar" destination="M8h-9A-CeY" id="boH-le-e3P"/>
                         <outlet property="searchDisplayController" destination="YTY-Pe-Xze" id="A2D-kg-NAL"/>
                         <outlet property="tableView" destination="wCx-cG-eqa" id="YCb-1j-Ab2"/>
@@ -130,6 +149,14 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2849" y="130"/>
+        </scene>
+        <!--ReachabilityBarStoryboard-->
+        <scene sceneID="ciS-hA-5OI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ReachabilityBarStoryboard" id="MYK-u7-9i7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKd-YK-6Ju" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3364" y="-243"/>
         </scene>
         <!--TwoStepCallingStoryboard-->
         <scene sceneID="5cK-uH-hue">

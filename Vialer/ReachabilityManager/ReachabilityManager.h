@@ -10,17 +10,17 @@
  */
 typedef NS_ENUM(NSInteger, ReachabilityManagerStatusType) {
     /**
-     *  Offline, no network connection available.
-     */
-    ReachabilityManagerStatusOffline,
-    /**
-     *  Only a limited, low speed network connection available 3g or lower.
-     */
-    ReachabilityManagerStatusLowSpeed,
-    /**
      *  A high speed network connection is available, 4g or wifi.
      */
     ReachabilityManagerStatusHighSpeed,
+    /**
+     *  Only a limited, low speed network connection available, 3g or lower.
+     */
+    ReachabilityManagerStatusLowSpeed,
+    /**
+     *  Offline, no network connection available.
+     */
+    ReachabilityManagerStatusOffline,
 };
 
 /**

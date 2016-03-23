@@ -176,6 +176,8 @@
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
 		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
+		C49F90B61CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */; };
+		C49F90B71CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */; };
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
@@ -434,8 +436,8 @@
 		C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VoIPGRIDRequestOperationManager+ForgotPassword.m"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.m"; sourceTree = "<group>"; };
 		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
-		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
-		C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewController.m; sourceTree = "<group>"; };
+		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReachabilityBarViewController.h; path = ../ReachabilityBarViewController.h; sourceTree = "<group>"; };
+		C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReachabilityBarViewController.m; path = ../ReachabilityBarViewController.m; sourceTree = "<group>"; };
 		C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallTests.m; sourceTree = "<group>"; };
 		C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentCall+VoIPGRIDTests.m"; sourceTree = "<group>"; };
 		C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiddlewareRequestOperationManager.h; sourceTree = "<group>"; };
@@ -446,9 +448,11 @@
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
 		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
+		C49F90B81CA2D0070035CD1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
 		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
+		C4B91DFC1CA5313D005CD2DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ReachabilityBarStoryboard.strings; sourceTree = "<group>"; };
 		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		C4C3EAEA1BFB73B200AA4B2A /* VialerWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerWebViewController.h; sourceTree = "<group>"; };
@@ -475,7 +479,6 @@
 		C4E860121BF14D960051BFDE /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
 		C4E860131BF14D960051BFDE /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
 		C4E860141BF14D960051BFDE /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
-		C4EFCF861BF21E520000CC6F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
 		C4F49F271BF0B45700C25159 /* VialerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F49F2B1BF0B45700C25159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallTests.m; sourceTree = "<group>"; };
@@ -1036,6 +1039,24 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		C49F90B41CA2CFBD0035CD1E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2B40BEB1C732C2300502769 /* ReachabilityManager.h */,
+				F2B40BEC1C732C2300502769 /* ReachabilityManager.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C49F90B51CA2CFC50035CD1E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */,
+				C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		C4A452511C24452700846591 /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1087,8 +1108,6 @@
 				C4E8600E1BF14D960051BFDE /* DialerViewController.m */,
 				C4E860111BF14D960051BFDE /* NumberPadViewController.h */,
 				C4E860121BF14D960051BFDE /* NumberPadViewController.m */,
-				C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */,
-				C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1229,8 +1248,9 @@
 		F2B40BEA1C732C2300502769 /* ReachabilityManager */ = {
 			isa = PBXGroup;
 			children = (
-				F2B40BEB1C732C2300502769 /* ReachabilityManager.h */,
-				F2B40BEC1C732C2300502769 /* ReachabilityManager.m */,
+				C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */,
+				C49F90B51CA2CFC50035CD1E /* Controllers */,
+				C49F90B41CA2CFBD0035CD1E /* Model */,
 			);
 			path = ReachabilityManager;
 			sourceTree = "<group>";
@@ -1743,6 +1763,7 @@
 				C41FD8B81C60A08400BBE6D7 /* disconnected.wav in Resources */,
 				C41FD8B91C60A08400BBE6D7 /* dtmf-8.aif in Resources */,
 				C41FD8BA1C60A08400BBE6D7 /* SettingsStoryboard.storyboard in Resources */,
+				C49F90B71CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */,
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
 				C41FD8BC1C60A08400BBE6D7 /* dtmf-s.aif in Resources */,
 				C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */,
@@ -1806,6 +1827,7 @@
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
 				F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
+				C49F90B61CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
@@ -2265,6 +2287,15 @@
 			name = ContactsStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
+		C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C49F90B81CA2D0070035CD1E /* Base */,
+				C4B91DFC1CA5313D005CD2DC /* nl */,
+			);
+			name = ReachabilityBarStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2295,7 +2326,6 @@
 		C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C4EFCF861BF21E520000CC6F /* nl */,
 				C461837E1BFA24850075709B /* Base */,
 			);
 			name = DialerStoryboard.storyboard;
