@@ -19,6 +19,8 @@ static NSString * const VoIPGRIDRequestOperationManagerURLMobileNumber      = @"
 
 static NSString * const VoIPGRIDRequestOperationManagerApiKeyMobileNumber = @"mobile_nr";
 
+static int const VoIPGRIDRequestOperationManagerTimoutInterval = 15;
+
 NSString * const VoIPGRIDRequestOperationManagerErrorDomain = @"Vailer.VoIPGRIDRequestOperationManager";
 
 NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoIPGRIDRequestOperationManagerUnAuthorizedNotification";
@@ -42,6 +44,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     if (self) {
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [self.requestSerializer setTimeoutInterval:VoIPGRIDRequestOperationManagerTimoutInterval];
 
         // Set basic authentication if user is logged in
         NSString *user = [SystemUser currentUser].username;

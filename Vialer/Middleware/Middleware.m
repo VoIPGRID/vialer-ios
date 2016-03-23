@@ -161,7 +161,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
                 DDLogError(@"Device registration with Middleware failed. %@", error);
-                if (error.code == NSURLErrorTimedOut && self.retryCount < 5) {
+                if ((error.code == NSURLErrorTimedOut || error.code == NSURLErrorNotConnectedToInternet) && self.retryCount < 5) {
                     // Update the retry count.
                     self.retryCount++;
 
