@@ -16,7 +16,7 @@ static float const NumberPadButtonTitleHeigthFactor = .60;
 static float const NumberPadButtonSubtitleHeigthFactor = .25;
 static float const NumberPadButtonSubtitleYFactorOffset = 0.60;
 
-static float const NumberPadButtonPressedAlpha = 0.5;
+static float const NumberPadButtonPressedAlpha = 0.2;
 
 @interface NumberPadButton()
 @property (nonatomic, strong) UILabel *subtitleLabel;

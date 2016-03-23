@@ -6,9 +6,9 @@
 	<dict>
 		<key>NumberPadButtonPressedColor</key>
 		<array>
-			<integer>145</integer>
-			<integer>145</integer>
-			<integer>145</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
 		</array>
 		<key>LogInViewControllerButtonBorderColor</key>
 		<array>

@@ -200,7 +200,6 @@
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
-		F2153E9D1C91C4BE009A5FD7 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
 		F21ECCE61C47C84A00E9B276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
@@ -2089,7 +2088,6 @@
 				C41A73681C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
-				F2153E9D1C91C4BE009A5FD7 /* RecentCall.m in Sources */,
 				C41FD88D1C60A08400BBE6D7 /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

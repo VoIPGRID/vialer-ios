@@ -9,6 +9,7 @@
 
 
 static float const SipCallingButtonPressedAlpha = 0.5;
+static float const SipCallingButtonDisabledAlpha = 0.2;
 
 @interface SipCallingButton()
 @property (strong, nonatomic) UIImageView *buttonImageView;
@@ -66,6 +67,7 @@ static float const SipCallingButtonPressedAlpha = 0.5;
 - (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     [self setNeedsDisplay];
+    self.alpha = enabled ? 1.0 : SipCallingButtonDisabledAlpha;
 }
 
 - (void)setBounds:(CGRect)bounds {
@@ -95,27 +97,22 @@ static float const SipCallingButtonPressedAlpha = 0.5;
     [circle addClip];
     [circle setLineWidth:1 * [UIScreen mainScreen].scale];
 
-    UIColor *circleColor;
+    self.buttonImageView.tintColor = self.textColor;
+
     // When highlighted or disabled, greyout the button.
     if (self.highlighted || !self.isEnabled) {
-        circleColor = self.pressedColor;
-        [circleColor setStroke];
-        [circleColor setFill];
-        self.buttonImageView.tintColor = self.pressedColor;
+        [self.pressedColor setStroke];
+        [self.pressedColor setFill];
 
     // When active, make the button filled and image greyed out.
     } else if (self.active) {
-        self.buttonImageView.tintColor = self.pressedColor;
-        circleColor = self.textColor;
-        [circleColor setStroke];
-        [circleColor setFill];
+        [self.textColor setStroke];
+        [self.pressedColor setFill];
 
     // When the button is enabled but not active, no fill and filled image.
     } else {
         [self.textColor setStroke];
-        circleColor = [UIColor clearColor];
-        [circleColor setFill];
-        self.buttonImageView.tintColor = self.textColor;
+        [[UIColor clearColor] setFill];
     }
 
     // And actually do the stroke and fill
