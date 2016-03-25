@@ -3,8 +3,8 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "Configuration.h"
+@import XCTest;
 
 @interface Configuration ()
 @property (strong, nonatomic) NSDictionary *dictionary;

@@ -2,7 +2,6 @@
 //  TwoStepCallTests.m
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
-#import <XCTest/XCTest.h>
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
@@ -10,6 +9,7 @@
 #import "SystemUser.h"
 #import "TwoStepCall.h"
 #import "VoIPGRIDRequestOperationManager.h"
+@import XCTest;
 
 @interface TwoStepCall (TestImplementation)
 @property (strong, nonatomic) NSString *callID;

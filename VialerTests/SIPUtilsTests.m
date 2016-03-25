@@ -7,8 +7,7 @@
 #import "SystemUser.h"
 #import <OCMock/OCMock.h>
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
-#import <XCTest/XCTest.h>
-
+@import XCTest;
 
 @interface SIPUtilsTests : XCTestCase
 @property (strong, nonatomic) id systemUserMock;

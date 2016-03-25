@@ -71,7 +71,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
 
 - (VoIPGRIDRequestOperationManager *)operationsManager {
     if (!_operationsManager) {
-        _operationsManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+        _operationsManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
     }
     return _operationsManager;
 }

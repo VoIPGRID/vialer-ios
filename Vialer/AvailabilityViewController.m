@@ -103,7 +103,7 @@
     }
     self.lastSelected = indexPath;
 
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving availability...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving availability...", nil)];
     [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         if (localizedErrorString) {

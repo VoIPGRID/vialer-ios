@@ -3,12 +3,11 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "SettingsViewController.h"
-
 #import <OCMock/OCMock.h>
+#import "SettingsViewController.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface SettingsViewController ()
 @property (strong, nonatomic) SystemUser *currentUser;
@@ -101,7 +100,7 @@
         if (error) {
             NSLog(@"Error: %@", error);
         }
-        OCMVerify([progressMock showWithStatus:[OCMArg any] maskType:SVProgressHUDMaskTypeGradient]);
+        OCMVerify([progressMock showWithStatus:[OCMArg any]]);
 
         [progressMock stopMocking];
         [mockSwitch stopMocking];

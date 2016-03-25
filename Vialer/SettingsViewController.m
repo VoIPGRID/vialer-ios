@@ -187,7 +187,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         if (sender.isOn) {
             [self tryToEnableSIPWithSwitch:sender];
         } else {
-            [SVProgressHUD showWithStatus:NSLocalizedString(@"Disabling VoIP...", nil) maskType:SVProgressHUDMaskTypeGradient];
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"Disabling VoIP...", nil)];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 self.currentUser.sipEnabled = NO;
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -202,7 +202,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 
 - (void)tryToEnableSIPWithSwitch:(UISwitch *)sender {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading VoIP settings...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading VoIP settings...", nil)];
     [self.currentUser getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
         [SVProgressHUD dismiss];
         if (error) {

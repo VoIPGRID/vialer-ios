@@ -39,7 +39,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 
 - (VoIPGRIDRequestOperationManager *)voipgridRequestOperationManager {
 	if (!_voipgridRequestOperationManager) {
-		_voipgridRequestOperationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+		_voipgridRequestOperationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
 	}
 	return _voipgridRequestOperationManager;
 }

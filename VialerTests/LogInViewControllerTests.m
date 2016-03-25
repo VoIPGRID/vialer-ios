@@ -9,7 +9,7 @@
 #import "SettingsViewController.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface LogInViewController()
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;

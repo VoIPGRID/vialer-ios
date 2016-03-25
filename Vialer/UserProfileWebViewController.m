@@ -22,7 +22,7 @@ static NSString * const UserProfileWebViewControllerVialerRootViewControllerSegu
 
 - (void)cancelButtonPressed:(UIBarButtonItem *)sender {
     [SVProgressHUD dismiss];
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Checking VoIP account", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Checking VoIP account", nil)];
 
     // Check if the user has set an SIP account.
     [self.currentUser getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {

@@ -3,8 +3,6 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-
 #import "APNSHandler.h"
 #import "Configuration.h"
 #import "Middleware.h"
@@ -13,6 +11,7 @@
 #import <OHHTTPStubs/OHHTTPStubs.h>
 #import "ReachabilityManager.h"
 #import "SystemUser.h"
+@import XCTest;
 
 @interface Middleware()
 @property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;

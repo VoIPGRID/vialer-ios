@@ -62,7 +62,7 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 
 - (VoIPGRIDRequestOperationManager *)operationManager {
     if (!_operationManager) {
-        _operationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+        _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
     }
     return _operationManager;
 }

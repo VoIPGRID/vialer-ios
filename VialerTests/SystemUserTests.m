@@ -4,10 +4,10 @@
 //
 
 #import <OCMock/OCMock.h>
-#import <XCTest/XCTest.h>
 #import "SSKeychain.h"
 #import "SystemUser.h"
 #import "VoIPGRIDRequestOperationManager.h"
+@import XCTest;
 
 @interface SystemUser()
 + (void)persistObject:(id)object forKey:(id)key;
@@ -173,14 +173,20 @@
 
     SystemUser *newUser = [SystemUser alloc];
 
-    id observerMock = [OCMockObject observerMock];
-    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:SystemUserSIPCredentialsChangedNotification object:newUser];
-    [[observerMock expect] notificationWithName:SystemUserSIPCredentialsChangedNotification object:newUser];
+    [self expectationForNotification:SystemUserSIPCredentialsChangedNotification
+                              object:newUser
+                             handler:^BOOL(NSNotification * _Nonnull notification) {
+                                 NSLog(@"Notification observed");
+                                 return YES;
+                             }];
 
     newUser = [newUser initPrivate];
 
-    [observerMock verify];
-    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"expectation Timeout!");
+        }
+    }];
 }
 
 - (void)testLoggingInWithUserWithSIPAllowedWillStoreSIPCredentialsInUserDefaults {

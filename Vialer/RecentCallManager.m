@@ -13,6 +13,7 @@
 static int const RecentCallManagerOffsetMonths = -1;
 static int const RecentCallManagerNumberOfCalls = 50;
 static NSString * const RecentCallManagerErrorDomain = @"RecentCallManagerError";
+static NSTimeInterval const RecentCallManagerRequestTimeout = 30;
 static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rate not quicker than this amount of seconds.
 
 @interface RecentCallManager()
@@ -53,7 +54,7 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
 
 - (VoIPGRIDRequestOperationManager *)operationManager {
     if (!_operationManager) {
-        _operationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+        _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURLandRequestOperationTimeoutInterval:RecentCallManagerRequestTimeout];
     }
     return _operationManager;
 }
@@ -130,7 +131,6 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
 
         // Register the time when we had a succesfull retrieval
         self.previousRefresh = [NSDate date];
-        self.reloading = NO;
         self.recentsFetchFailed = NO;
         [self.privateManagedObjectContext performBlockAndWait:^{
             NSArray *newRecents = [RecentCall createRecentCallsFromVoIGPRIDResponseData:responseData inManagedObjectContext:self.privateManagedObjectContext];

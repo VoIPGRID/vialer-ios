@@ -9,7 +9,7 @@
 #import "AvailabilityModel.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import <OCMock/OCMock.h>
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface AvailabilityModelTests : XCTestCase
 @property (strong, nonatomic) AvailabilityModel *availabilityModel;
