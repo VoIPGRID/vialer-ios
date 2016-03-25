@@ -14,9 +14,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FB4226CC182261D200707349"
-               BuildableName = "Vialer.app"
-               BlueprintName = "Vialer"
+               BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+               BuildableName = "Voys.app"
+               BlueprintName = "Voys"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2B43F0A1C3BEB3F0089A387"
-               BuildableName = "VialerSnapshotUITests.xctest"
-               BlueprintName = "VialerSnapshotUITests"
+               BlueprintIdentifier = "C41FD8F21C60A89300BBE6D7"
+               BuildableName = "VoysSnapshotUITests.xctest"
+               BlueprintName = "VoysSnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2B43F0A1C3BEB3F0089A387"
-               BuildableName = "VialerSnapshotUITests.xctest"
-               BlueprintName = "VialerSnapshotUITests"
+               BlueprintIdentifier = "C41FD8F21C60A89300BBE6D7"
+               BuildableName = "VoysSnapshotUITests.xctest"
+               BlueprintName = "VoysSnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB4226CC182261D200707349"
-            BuildableName = "Vialer.app"
-            BlueprintName = "Vialer"
+            BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+            BuildableName = "Voys.app"
+            BlueprintName = "Voys"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -81,14 +81,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      showNonLocalizedStrings = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB4226CC182261D200707349"
-            BuildableName = "Vialer.app"
-            BlueprintName = "Vialer"
+            BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+            BuildableName = "Voys.app"
+            BlueprintName = "Voys"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -108,16 +109,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB4226CC182261D200707349"
-            BuildableName = "Vialer.app"
-            BlueprintName = "Vialer"
+            BlueprintIdentifier = "C41FD8551C60A08400BBE6D7"
+            BuildableName = "Voys.app"
+            BlueprintName = "Voys"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
