@@ -5,15 +5,15 @@ reinstall_app
 
 # A list of devices you want to take the screenshots from
 devices([
+   "iPhone 4s",
+   "iPhone 5",
    "iPhone 6",
    "iPhone 6 Plus",
-   "iPhone 5",
-   "iPhone 4s",
 ])
 
 languages([
-  "en-US",
-  "nl-NL",
+  "en",
+  "nl",
 ])
 
 # Arguments to pass to the app on launch. See https://github.com/fastlane/snapshot#launch_arguments

@@ -45,7 +45,7 @@ class SnapshotUITests: XCTestCase {
         waitForElementToBeHittable(mobileNumberField)
         clearUITextFieldText(mobileNumberField)
 
-        mobileNumberField.typeText("+31612345678") //enter mobile number
+        mobileNumberField.typeText(Constants.ownNumber) //enter mobile number
         let continueButton = app.buttons["onboarding.configureView.continue.button"]
 
         // For iPhone 4(s). If the continue button does not exist, it is hidden below the keyboard.
@@ -110,15 +110,23 @@ class SnapshotUITests: XCTestCase {
     // Function for localizing a string. Make sure the localizeble.strings file is added to
     // the "Copy bundle resources" build phase of the relevant target.
     func localizeString(key:String) -> String {
-        let localizationBundle = NSBundle(path: NSBundle(forClass: SnapshotUITests.self).pathForResource(deviceLanguage, ofType: "lproj")!)
-        return NSLocalizedString(key, bundle:localizationBundle!, comment: "")
+        // If the device language is equal to our base localization, just return the key.
+        if (deviceLanguage == "en") {
+            return key
+        } else {
+            let testBundle = NSBundle.init(forClass: SnapshotUITests.self)
+            let localizationBundlePath = testBundle.pathForResource(deviceLanguage, ofType: "lproj")
+            let localizationBundle = NSBundle.init(path: localizationBundlePath!)
+
+            return NSLocalizedString(key, bundle:localizationBundle!, comment: "")
+        }
     }
 
     /**
-     * Function waits for 30 second for the given XCUIElement to become hittable.
+     * Function waits for the given XCUIElement to become hittable or times out after 60 sec.
      * modified example from: http://masilotti.com/xctest-helpers/
      */
-    private func waitForElementToBeHittable(element: XCUIElement, file: String = __FILE__, line: UInt = __LINE__) {
+    private func waitForElementToBeHittable(element: XCUIElement, file: String = #file, line: UInt = #line) {
         let existsPredicate = NSPredicate(format: "hittable == true")
         expectationForPredicate(existsPredicate,
             evaluatedWithObject: element, handler: nil)

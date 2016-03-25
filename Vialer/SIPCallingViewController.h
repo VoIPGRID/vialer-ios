@@ -13,12 +13,12 @@
 /**
  *  The end of call button.
  */
-@property (weak, nonatomic) IBOutlet UIButton *endCallButton;
+@property (weak, nonatomic) IBOutlet UIButton * _Nullable endCallButton;
 
 /**
  *  The button for hiding the numberpad.
  */
-@property (weak, nonatomic) IBOutlet UIButton *hideButton;
+@property (weak, nonatomic) IBOutlet UIButton * _Nullable hideButton;
 
 /**
  *  This will setup a SIP call with the provided phonenumber.
