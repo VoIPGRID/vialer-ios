@@ -7,7 +7,7 @@
 #import <OCMock/OCMock.h>
 #import "SIPCallingViewController.h"
 #import "SIPCallingButtonsViewController.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface SIPCallingViewController (PrivateImplementation)
 @property (weak, nonatomic) UILabel *phoneNumberLabel;

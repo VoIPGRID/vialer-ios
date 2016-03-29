@@ -3,11 +3,10 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-
 #import <CoreData/CoreData.h>
 #import <OCMock/OCMock.h>
 #import "RecentCall.h"
+@import XCTest;
 
 @interface RecentCallTests : XCTestCase
 @property (strong, nonatomic) id mockManagedObjectContext;

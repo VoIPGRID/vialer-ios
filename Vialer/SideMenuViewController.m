@@ -180,10 +180,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
         NSString *version;
 #if DEBUG
-        version = [NSString stringWithFormat:@"%@ (%@) | %@",
-                   versionString,
-                   [infoDict objectForKey:@"CFBundleVersion"],
-                   [infoDict objectForKey:@"Commit_Short_Hash"]];
+        version = [NSString stringWithFormat:@"Commit: %@", [infoDict objectForKey:@"Commit_Short_Hash"]];
 #else
         version = [NSString stringWithFormat:@"%@ (%@)",
                    versionString,

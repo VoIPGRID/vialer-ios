@@ -74,7 +74,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (VoIPGRIDRequestOperationManager *)operationManager {
     if (!_operationManager) {
-        _operationManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+        _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
     }
     return _operationManager;
 }
@@ -233,7 +233,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)continueFromConfigureFormViewToUnlockView {
     NSString *newNumber = self.configureFormView.phoneNumberField.text;
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving number...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving number...", nil)];
 
     [[SystemUser currentUser] updateMobileNumber:newNumber withCompletion:^(BOOL success, NSError *error) {
         [SVProgressHUD dismiss];
@@ -417,7 +417,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)sendEmail:(NSString *)email {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil)];
 
     [self.operationManager passwordResetWithEmail:email withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         // Check if there was an error.
@@ -456,7 +456,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
     [self.currentUser loginWithUsername:username password:password completion:^(BOOL loggedin, NSError *error) {
         [SVProgressHUD dismiss];
         if (loggedin) {
@@ -488,7 +488,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)retrievePhoneNumbersWithSuccessBlock:(void (^)())success {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil)];
     [[SystemUser currentUser] updateSystemUserFromVGWithCompletion:^(NSError *error) {
         [SVProgressHUD dismiss];
 

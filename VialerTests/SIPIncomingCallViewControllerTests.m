@@ -1,14 +1,11 @@
 //
 //  SIPIncomingCallViewControllerTests.m
-//  Vialer
-//
-//  Created by Redmer Loen on 23-02-16.
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
 #import <OCMock/OCMock.h>
 #import "SIPIncomingCallViewController.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface SIPIncomingCallViewController (PrivateImplementation)
 @property (strong, nonatomic) VSLCall *call;

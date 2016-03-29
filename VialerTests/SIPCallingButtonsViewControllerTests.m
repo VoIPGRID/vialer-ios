@@ -3,12 +3,12 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <OCMock/OCMock.h>
 #import "NumberPadViewController.h"
+#import <OCMock/OCMock.h>
 #import "SIPCallingButtonsViewController.h"
 #import "SIPCallingViewController.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface SIPCallingButtonsViewControllerTests : XCTestCase
 @property (strong, nonatomic) SipCallingButtonsViewController *sipCallingButtonsVC;

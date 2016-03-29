@@ -3,13 +3,12 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-
 #import "Configuration.h"
 #import "Middleware.h"
 #import "MiddlewareRequestOperationManager.h"
 #import <OCMock/OCMock.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
+@import XCTest;
 
 @interface Middleware()
 - (MiddlewareRequestOperationManager *)middlewareRequestOperationManager;

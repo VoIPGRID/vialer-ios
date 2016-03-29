@@ -48,13 +48,22 @@ typedef NS_ENUM(NSInteger, VoIPGRIDHttpErrors) {
 extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 
 @interface VoIPGRIDRequestOperationManager : AFHTTPRequestOperationManager
+/**
+ *  Default initializer for this class.
+ *
+ *  @return A VoIPGRIDRequestOperationManager instance.
+ */
+- (instancetype)initWithDefaultBaseURL;
 
 /**
- *  Singleton instance of the Operation Manager.
+ *  Initializes a VoIPGRIDRequestOperationManager connection to the default Base URL
+ *  with a given request timeout interval.
  *
- *  @return VoIPGRIDRequestOperationManager instance.
+ *  @param requestTimeoutInterval The desired request timeout interval.
+ *
+ *  @return A VoIPGRIDRequestOperationManager instance with the given timeout interval.
  */
-+ (VoIPGRIDRequestOperationManager *)sharedRequestOperationManager;
+- (instancetype)initWithDefaultBaseURLandRequestOperationTimeoutInterval:(NSTimeInterval)requestTimeoutInterval;
 
 /**
  *  This method will do a HTTP GET request on the given url with given parameters.

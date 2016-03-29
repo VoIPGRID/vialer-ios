@@ -5,8 +5,7 @@
 
 #import "SideMenuViewController.h"
 #import "VialerWebViewController.h"
-
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface SideMenuViewControllerTests : XCTestCase
 @property (nonatomic) SideMenuViewController *sideMenuViewController;

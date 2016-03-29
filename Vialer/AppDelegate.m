@@ -15,6 +15,7 @@
 #endif
 #import "SIPUtils.h"
 #import "SSKeychain.h"
+#import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
 
@@ -39,6 +40,8 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
 
     //Only when the app is run for screenshot purposes do the following:
     if ([[self class] isSnapshotScreenshotRun]) {
@@ -163,7 +166,7 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 #ifdef DEBUG
     // File logging
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.maximumFileSize = 1024 * 1024 * 5; // Size in bytes
+    fileLogger.maximumFileSize = 1024 * 1024 * 1; // Size in bytes
     fileLogger.rollingFrequency = 0; // Set rollingFrequency to 0, only roll on file size.
     [fileLogger logFileManager].maximumNumberOfLogFiles = 3;
     fileLogger.logFormatter = logFormat;

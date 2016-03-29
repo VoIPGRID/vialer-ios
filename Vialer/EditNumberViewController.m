@@ -45,7 +45,7 @@
 
 - (IBAction)saveButtonPressed:(UIBarButtonItem *)sender {
     NSString *newNumber = self.numberTextField.text;
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving number...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving number...", nil)];
 
     [[SystemUser currentUser] updateMobileNumber:newNumber withCompletion:^(BOOL success, NSError *error) {
         [SVProgressHUD dismiss];

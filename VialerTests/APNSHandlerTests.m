@@ -3,12 +3,11 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-
 #import "APNSHandler.h"
 #import "Middleware.h"
 #import <OCMock/OCMock.h>
 @import PushKit;
+@import XCTest;
 
 @interface APNSHandler ()
 @property (strong, nonatomic)PKPushRegistry *voipRegistry;

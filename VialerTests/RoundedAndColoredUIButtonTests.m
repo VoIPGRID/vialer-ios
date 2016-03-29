@@ -3,8 +3,8 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "RoundedAndColoredUIButton.h"
+@import XCTest;
 
 @interface RoundedAndColoredUIButtonTests : XCTestCase
 @property (nonatomic) RoundedAndColoredUIButton *button;

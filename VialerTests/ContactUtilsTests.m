@@ -3,9 +3,9 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "ContactUtils.h"
 #import <OCMock/OCMock.h>
+@import XCTest;
 
 @interface ContactUtilsTests : XCTestCase
 @property (strong, nonatomic) CNMutableContact *contact;

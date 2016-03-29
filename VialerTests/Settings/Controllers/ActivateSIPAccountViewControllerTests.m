@@ -6,7 +6,7 @@
 #import "ActivateSIPAccountViewController.h"
 #import <OCMock/OCMock.h>
 #import "UserProfileWebViewController.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface ActivateSIPAccountViewControllerTests : XCTestCase
 @property (strong, nonatomic) ActivateSIPAccountViewController *activateSIPAccountVC;

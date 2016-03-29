@@ -168,7 +168,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 - (VoIPGRIDRequestOperationManager *)operationsManager {
     if (!_operationsManager) {
-        _operationsManager = [VoIPGRIDRequestOperationManager sharedRequestOperationManager];
+        _operationsManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
     }
     return _operationsManager;
 }
@@ -188,18 +188,17 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     // If sip is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
         _sipEnabled = YES;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-        });
+
+        NSNotification *notification = [NSNotification notificationWithName:SystemUserSIPCredentialsChangedNotification object:self];
+        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
 
     // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:[self.sipAccount copy]];
-            [self fetchUserProfile];
-        });
+        NSNotification *notification = [NSNotification notificationWithName:SystemUserSIPDisabledNotification object:[self.sipAccount copy]];
+        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
+        [self fetchUserProfile];
     }
     [[NSUserDefaults standardUserDefaults] setBool:_sipEnabled forKey:SystemUserSUDSIPEnabled];
     [[NSUserDefaults standardUserDefaults] synchronize];

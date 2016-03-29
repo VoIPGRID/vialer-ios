@@ -6,7 +6,7 @@
 #import <OCMock/OCMock.h>
 #import "SystemUser.h"
 #import "UserProfileWebViewController.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface UserProfileWebViewControllerTests : XCTestCase
 @property (strong, nonatomic) UserProfileWebViewController *userProfileWVC;

@@ -4,8 +4,7 @@
 //
 
 #import "VialerWebViewController.h"
-
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface VialerWebViewControllerTests : XCTestCase
 @property (nonatomic) VialerWebViewController *webViewController;

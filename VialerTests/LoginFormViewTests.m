@@ -6,11 +6,11 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 #import "Configuration.h"
 #import "LoginFormView.h"
 #import "LogInViewController.h"
+#import <OCMock/OCMock.h>
+@import XCTest;
 
 @interface LoginFormViewTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;

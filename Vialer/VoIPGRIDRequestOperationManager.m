@@ -29,22 +29,25 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 
 # pragma mark - Life cycle
 
-+ (VoIPGRIDRequestOperationManager *)sharedRequestOperationManager {
-    static dispatch_once_t pred;
-    static VoIPGRIDRequestOperationManager *_sharedRequestOperationManager = nil;
-
-    dispatch_once(&pred, ^{
-        _sharedRequestOperationManager = [[self alloc] initWithBaseURL:[NSURL URLWithString:[[Configuration defaultConfiguration] UrlForKey:@"API"]]];
-    });
-    return _sharedRequestOperationManager;
+- (instancetype)initWithBaseURL:(NSURL *)baseURL {
+    return [self initWithBaseURL:baseURL andRequestOperationTimeoutInterval:VoIPGRIDRequestOperationManagerTimoutInterval];
 }
 
-- (instancetype)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
+- (instancetype)initWithDefaultBaseURL {
+    NSURL *baseURL = [NSURL URLWithString:[[Configuration defaultConfiguration] UrlForKey:ConfigurationVoIPGRIDBaseURLString]];
+    return [self initWithBaseURL:baseURL andRequestOperationTimeoutInterval:VoIPGRIDRequestOperationManagerTimoutInterval];
+}
+
+- (instancetype)initWithDefaultBaseURLandRequestOperationTimeoutInterval:(NSTimeInterval)requestTimeoutInterval {
+    NSURL *baseURL = [NSURL URLWithString:[[Configuration defaultConfiguration] UrlForKey:ConfigurationVoIPGRIDBaseURLString]];
+    return [self initWithBaseURL:baseURL andRequestOperationTimeoutInterval:requestTimeoutInterval];}
+
+- (instancetype)initWithBaseURL:(NSURL *)baseURL andRequestOperationTimeoutInterval:(NSTimeInterval)requestTimeoutInterval {
+    self = [super initWithBaseURL:baseURL];
     if (self) {
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [self.requestSerializer setTimeoutInterval:VoIPGRIDRequestOperationManagerTimoutInterval];
+        self.requestSerializer.timeoutInterval = requestTimeoutInterval;
 
         // Set basic authentication if user is logged in
         NSString *user = [SystemUser currentUser].username;
