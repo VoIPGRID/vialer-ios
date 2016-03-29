@@ -3,7 +3,7 @@
 //  Copyright © 2016 voipgrid.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 @import PushKit;
 
 /**

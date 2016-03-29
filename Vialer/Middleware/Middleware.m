@@ -98,7 +98,9 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
             [self respondToMiddleware:payload isAvailable:NO];
         }
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
-
+        // Just for debugging
+        [self sentAPNSToken:[APNSHandler storedAPNSToken]];
+        // End debugging
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage]) {
 
     }
@@ -182,7 +184,32 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
     DDLogInfo(@"Trying to sent APNSToken to middleware. Application state: \"%@\". Background time remaining: %@", applicationState, backgroundTimeRemaining);
     // End debugging statements
+    
+    UIApplication *application = [UIApplication sharedApplication];
+    UIBackgroundTaskIdentifier __block backgroundtask = UIBackgroundTaskInvalid;
 
+    void (^backgroundTaskCleanupBlock)(void) = ^{
+        [application endBackgroundTask:backgroundtask];
+        backgroundtask = UIBackgroundTaskInvalid;
+    };
+
+    backgroundtask = [application beginBackgroundTaskWithExpirationHandler:^{
+        DDLogInfo(@"APNS token background task timed out.");
+        backgroundTaskCleanupBlock();
+    }];
+
+    [self sentAPNSToken:apnsToken withCompletion:^(NSError *error) {
+        NSMutableString *logString = [NSMutableString stringWithFormat:@"APNS token background task completed"];
+        if (application.applicationState == UIApplicationStateBackground) {
+            [logString appendFormat:@" with %.3f time remaining", application.backgroundTimeRemaining];
+        }
+
+        DDLogInfo(@"%@", logString);
+        backgroundTaskCleanupBlock();
+    }];
+}
+
+- (void)sentAPNSToken:(NSString *)apnsToken withCompletion:(void (^)(NSError *error))completion {
     if (self.systemUser.sipEnabled) {
         [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
@@ -194,7 +221,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
                     DDLogWarn(@"Device registration failed. Will retry 5 times. Currently tried %d out of 5.", self.retryCount);
 
                     // Retry to call the function.
-                    [self sentAPNSToken:apnsToken];
+                    [self sentAPNSToken:apnsToken withCompletion:completion];
                 } else {
                     // Reset the retry count back to 0.
                     self.retryCount = 0;
@@ -205,13 +232,20 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
                     // And log the problem to track failures.
                     [GAITracker regististrationFailedWithMiddleWareException];
                     DDLogError(@"Device registration with Middleware failed. %@", error);
+
+                    if (completion) {
+                        completion(error);
+                    }
                 }
             } else {
                 // Reset the retry count back to 0.
                 self.retryCount = 0;
 
                 // Display debug message the registration has been successfull.
-                DDLogDebug(@"Middelware registration successfull");
+                DDLogDebug(@"Middleware registration successfull");
+                if (completion) {
+                    completion(nil);
+                }
             }
         }];
     }
