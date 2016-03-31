@@ -8,6 +8,7 @@
 #import "NSString+Mobile.h"
 #import "ContactModel.h"
 #import "ContactsUI/ContactsUI.h"
+#import "PhoneNumberUtils.h"
 
 static NSString * const RecentCallVoIPGRIDObjectArray           = @"objects";
 static NSString * const RecentCallVoIPGRIDID                    = @"id";
@@ -36,26 +37,14 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
         return nil;
     }
 
-    NSArray *prefixes = [[self class] prefixes];
-
     // Loop trough every contact and check if one of the calls has a matching phonenumber.
     for (CNContact *contact in [ContactModel defaultContactModel].allContacts) {
         NSArray *phoneNumbers = contact.phoneNumbers;
         for (CNLabeledValue *phoneNumber in phoneNumbers) {
             CNPhoneNumber *cnPhoneNumber = phoneNumber.value;
             NSString *phoneNumberDigits = cnPhoneNumber.stringValue;
-            NSString *digits = [[phoneNumberDigits componentsSeparatedByCharactersInSet:[[self class] digitsCharacterSet]] componentsJoinedByString:@""];
+            NSString *digits = [PhoneNumberUtils removePrefixFromPhoneNumber:phoneNumberDigits];
             NSString *phoneNumberLabel = [CNLabeledValue localizedStringForLabel:phoneNumber.label];
-
-            if (prefixes) {
-                for (NSString *prefix in prefixes) {
-                    if ([digits hasPrefix:prefix]) {
-                        // Remove prefix.
-                        digits = [digits substringFromIndex:[prefix length]];
-                        break;
-                    }
-                }
-            }
 
             NSArray *filtered = [recents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.sourceNumber ENDSWITH[cd] %@ OR SELF.destinationNumber ENDSWITH[cd] %@", digits, digits]];
             if ([filtered count]) {
@@ -124,37 +113,6 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
         return result[0];
     }
     return nil;
-}
-
-#pragma mark - Utils
-
-/**
- *  This method will return a NSCharacterSet without Digits.
- *
- *  @return a NSCharacterSet without Digits
- */
-+ (NSCharacterSet *)digitsCharacterSet {
-    static NSCharacterSet *_digitsCharacterSet;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _digitsCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789+"] invertedSet];
-
-    });
-    return _digitsCharacterSet;
-}
-
-/**
- *  Calculate calling code prefixes (NOTE: Only works in some countries, like The Netherlands).
- *
- *  @return Array with possible prefixes.
- */
-+ (NSArray *)prefixes {
-    NSArray *prefixes = nil;
-    NSString *mobileCC = [NSString systemCallingCode];
-    if ([mobileCC length]) {
-        prefixes = @[mobileCC, [@"00" stringByAppendingString:[mobileCC stringByReplacingOccurrencesOfString:@"+" withString:@""]], @"0"];
-    }
-    return prefixes;
 }
 
 @end

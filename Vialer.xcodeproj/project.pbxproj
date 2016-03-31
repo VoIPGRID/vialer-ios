@@ -23,12 +23,6 @@
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
 		C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */; };
 		C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */; };
-		C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926351BE3A36600436D92 /* BubblingPoints.m */; };
-		C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
-		C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */; };
-		C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C419263B1BE3A36600436D92 /* ColoredCircle.m */; };
-		C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
-		C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
 		C41A73531C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C41A73511C6A7CF300482E3C /* VialerModel.xcdatamodeld */; };
 		C41A73541C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C41A73511C6A7CF300482E3C /* VialerModel.xcdatamodeld */; };
 		C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */ = {isa = PBXBuildFile; fileRef = C41A73661C6B2F1C00482E3C /* RecentCall+VoIPGRID.m */; };
@@ -41,18 +35,13 @@
 		C41FD85A1C60A08400BBE6D7 /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
 		C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
-		C41FD85D1C60A08400BBE6D7 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860121BF14D960051BFDE /* NumberPadViewController.m */; };
 		C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		C41FD85F1C60A08400BBE6D7 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
-		C41FD8631C60A08400BBE6D7 /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */; };
-		C41FD8641C60A08400BBE6D7 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
 		C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
-		C41FD8661C60A08400BBE6D7 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9392ED71C04955C00286D27 /* SipCallingButton.m */; };
 		C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C41FD8681C60A08400BBE6D7 /* RecentCallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C461836C1BF9D9500075709B /* RecentCallManager.m */; };
-		C41FD8691C60A08400BBE6D7 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926431BE3A36600436D92 /* VialerIconView.m */; };
 		C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
 		C41FD86C1C60A08400BBE6D7 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
@@ -61,31 +50,22 @@
 		C41FD86F1C60A08400BBE6D7 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C41FD8711C60A08400BBE6D7 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
-		C41FD8731C60A08400BBE6D7 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */; };
 		C41FD8741C60A08400BBE6D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
-		C41FD8751C60A08400BBE6D7 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926351BE3A36600436D92 /* BubblingPoints.m */; };
 		C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
-		C41FD8771C60A08400BBE6D7 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
 		C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		C41FD87A1C60A08400BBE6D7 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
 		C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
-		C41FD87C1C60A08400BBE6D7 /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E8600E1BF14D960051BFDE /* DialerViewController.m */; };
-		C41FD87D1C60A08400BBE6D7 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860141BF14D960051BFDE /* PasteableUILabel.m */; };
 		C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
-		C41FD87F1C60A08400BBE6D7 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */; };
 		C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		C41FD8811C60A08400BBE6D7 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48F1671BA7163000F57544 /* SystemUser.m */; };
 		C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
-		C41FD8871C60A08400BBE6D7 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41926371BE3A36600436D92 /* CircleWithShadow.m */; };
 		C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
 		C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
-		C41FD88A1C60A08400BBE6D7 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C419263B1BE3A36600436D92 /* ColoredCircle.m */; };
 		C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		C41FD88D1C60A08400BBE6D7 /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
 		C41FD88F1C60A08400BBE6D7 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		C41FD8901C60A08400BBE6D7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		C41FD8911C60A08400BBE6D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
@@ -164,8 +144,6 @@
 		C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
-		C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526B1BF1E00000B8B42B /* NumberPadButton.m */; };
-		C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */; };
 		C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */; };
 		C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */; };
 		C4947F8F1C983DB30065D7C1 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
@@ -175,7 +153,6 @@
 		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
-		C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */; };
 		C49F90B61CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */; };
 		C49F90B71CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */; };
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -193,9 +170,6 @@
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
-		C4E860161BF14D960051BFDE /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E8600E1BF14D960051BFDE /* DialerViewController.m */; };
-		C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860121BF14D960051BFDE /* NumberPadViewController.m */; };
-		C4E860191BF14D960051BFDE /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E860141BF14D960051BFDE /* PasteableUILabel.m */; };
 		C4EFCF801BF21E210000CC6F /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
@@ -217,12 +191,7 @@
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		F674DD5B06C6E1B337BD656C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
-		F9379F2C1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
-		F9379F2D1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */; };
-		F9392ED81C04955C00286D27 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9392ED71C04955C00286D27 /* SipCallingButton.m */; };
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
-		F94F642E1C6B3A39003DBB63 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F642D1C6B3A39003DBB63 /* SIPUtils.m */; };
-		F94F642F1C6B3A39003DBB63 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F642D1C6B3A39003DBB63 /* SIPUtils.m */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */; };
 		F99856951BDF85590005253B /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F99856941BDF85590005253B /* ContactUtils.m */; };
@@ -232,11 +201,46 @@
 		F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B825181C86F724003CBA92 /* DurationTimer.m */; };
 		F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B825181C86F724003CBA92 /* DurationTimer.m */; };
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
-		F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
-		F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C710CB1C648F110079677C /* SIPCallingViewController.m */; };
-		F9CB0F9A1C084C3D009AB89A /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */; };
 		F9CB0F9B1C0867D1009AB89A /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
+		F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
+		F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
+		F9EEC90A1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9061CA28608008FB612 /* TwoStepCallingViewController.m */; };
+		F9EEC90B1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9061CA28608008FB612 /* TwoStepCallingViewController.m */; };
+		F9EEC90C1CA28608008FB612 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9091CA28608008FB612 /* TwoStepCall.m */; };
+		F9EEC90D1CA28608008FB612 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9091CA28608008FB612 /* TwoStepCall.m */; };
+		F9EEC9191CA2865D008FB612 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9101CA2865D008FB612 /* BubblingPoints.m */; };
+		F9EEC91A1CA2865D008FB612 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9101CA2865D008FB612 /* BubblingPoints.m */; };
+		F9EEC91B1CA2865D008FB612 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9121CA2865D008FB612 /* CircleWithShadow.m */; };
+		F9EEC91C1CA2865D008FB612 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9121CA2865D008FB612 /* CircleWithShadow.m */; };
+		F9EEC91D1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */; };
+		F9EEC91E1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */; };
+		F9EEC91F1CA2865D008FB612 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9161CA2865D008FB612 /* ColoredCircle.m */; };
+		F9EEC9201CA2865D008FB612 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9161CA2865D008FB612 /* ColoredCircle.m */; };
+		F9EEC9211CA2865D008FB612 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9181CA2865D008FB612 /* VialerIconView.m */; };
+		F9EEC9221CA2865D008FB612 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9181CA2865D008FB612 /* VialerIconView.m */; };
+		F9EEC92F1CA2879C008FB612 /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9251CA2879C008FB612 /* DialerViewController.m */; };
+		F9EEC9301CA2879C008FB612 /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9251CA2879C008FB612 /* DialerViewController.m */; };
+		F9EEC9311CA2879C008FB612 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
+		F9EEC9321CA2879C008FB612 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
+		F9EEC9331CA2879C008FB612 /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9291CA2879C008FB612 /* ReachabilityBarViewController.m */; };
+		F9EEC9341CA2879C008FB612 /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9291CA2879C008FB612 /* ReachabilityBarViewController.m */; };
+		F9EEC9351CA2879C008FB612 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
+		F9EEC9361CA2879C008FB612 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
+		F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */; };
+		F9EEC9381CA2879C008FB612 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */; };
+		F9EEC9461CA2880E008FB612 /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC93B1CA2880E008FB612 /* SipCallingButtonsViewController.m */; };
+		F9EEC9471CA2880E008FB612 /* SipCallingButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC93B1CA2880E008FB612 /* SipCallingButtonsViewController.m */; };
+		F9EEC9481CA2880E008FB612 /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC93D1CA2880E008FB612 /* SIPCallingViewController.m */; };
+		F9EEC9491CA2880E008FB612 /* SIPCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC93D1CA2880E008FB612 /* SIPCallingViewController.m */; };
+		F9EEC94A1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC93F1CA2880E008FB612 /* SIPIncomingCallViewController.m */; };
+		F9EEC94B1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC93F1CA2880E008FB612 /* SIPIncomingCallViewController.m */; };
+		F9EEC94C1CA2880E008FB612 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9421CA2880E008FB612 /* SipCallingButton.m */; };
+		F9EEC94D1CA2880E008FB612 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9421CA2880E008FB612 /* SipCallingButton.m */; };
+		F9EEC94E1CA2880E008FB612 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9451CA2880E008FB612 /* SIPUtils.m */; };
+		F9EEC94F1CA2880E008FB612 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9451CA2880E008FB612 /* SIPUtils.m */; };
+		F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
+		F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB10B11C1ABC18310074BB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
@@ -374,18 +378,6 @@
 		C40C11DF1C3A7396008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C40C11E11C3ABA7D008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
 		C418AA391C7E407800C8EB91 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
-		C41926341BE3A36600436D92 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
-		C41926351BE3A36600436D92 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
-		C41926361BE3A36600436D92 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
-		C41926371BE3A36600436D92 /* CircleWithShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithShadow.m; sourceTree = "<group>"; };
-		C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithWhiteIcon.h; sourceTree = "<group>"; };
-		C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithWhiteIcon.m; sourceTree = "<group>"; };
-		C419263A1BE3A36600436D92 /* ColoredCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircle.h; sourceTree = "<group>"; };
-		C419263B1BE3A36600436D92 /* ColoredCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircle.m; sourceTree = "<group>"; };
-		C41926421BE3A36600436D92 /* VialerIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerIconView.h; sourceTree = "<group>"; };
-		C41926431BE3A36600436D92 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
-		C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
-		C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TwoStepCallingViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C41A73521C6A7CF300482E3C /* VialerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VialerModel.xcdatamodel; sourceTree = "<group>"; };
 		C41A73651C6B2F1C00482E3C /* RecentCall+VoIPGRID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentCall+VoIPGRID.h"; sourceTree = "<group>"; };
 		C41A73661C6B2F1C00482E3C /* RecentCall+VoIPGRID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentCall+VoIPGRID.m"; sourceTree = "<group>"; };
@@ -434,8 +426,6 @@
 		C46F100C1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileWebViewControllerTests.m; path = Settings/Controllers/UserProfileWebViewControllerTests.m; sourceTree = "<group>"; };
 		C46F100F1C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VoIPGRIDRequestOperationManager+ForgotPassword.h"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.h"; sourceTree = "<group>"; };
 		C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VoIPGRIDRequestOperationManager+ForgotPassword.m"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.m"; sourceTree = "<group>"; };
-		C487526A1BF1E00000B8B42B /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
-		C487526B1BF1E00000B8B42B /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		C487526D1BF1EAAD00B8B42B /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReachabilityBarViewController.h; path = ../ReachabilityBarViewController.h; sourceTree = "<group>"; };
 		C487526E1BF1EAAD00B8B42B /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReachabilityBarViewController.m; path = ../ReachabilityBarViewController.m; sourceTree = "<group>"; };
 		C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallTests.m; sourceTree = "<group>"; };
@@ -446,8 +436,6 @@
 		C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
-		C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = TwoStepCall/TwoStepCall.h; sourceTree = "<group>"; };
-		C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = TwoStepCall/TwoStepCall.m; sourceTree = "<group>"; };
 		C49F90B81CA2D0070035CD1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
@@ -473,12 +461,6 @@
 		C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
 		C4DA5C891BFB4A5C0043DED7 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
-		C4E8600D1BF14D960051BFDE /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
-		C4E8600E1BF14D960051BFDE /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
-		C4E860111BF14D960051BFDE /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
-		C4E860121BF14D960051BFDE /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
-		C4E860131BF14D960051BFDE /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
-		C4E860141BF14D960051BFDE /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
 		C4F49F271BF0B45700C25159 /* VialerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F49F2B1BF0B45700C25159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallTests.m; sourceTree = "<group>"; };
@@ -512,14 +494,8 @@
 		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityModel.h; sourceTree = "<group>"; };
 		F919B9E21BA856F60082AD79 /* AvailabilityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModel.m; sourceTree = "<group>"; };
-		F9379F2A1C648876003B85D1 /* SIPIncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingCallViewController.h; sourceTree = "<group>"; };
-		F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
-		F9392ED61C04955C00286D27 /* SipCallingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
-		F9392ED71C04955C00286D27 /* SipCallingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButton.m; sourceTree = "<group>"; };
 		F94F47CD1BCB9FF300F40737 /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
 		F94F47CE1BCB9FF300F40737 /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
-		F94F642C1C6B3A39003DBB63 /* SIPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
-		F94F642D1C6B3A39003DBB63 /* SIPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
 		F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewControllerTests.m; sourceTree = "<group>"; };
 		F9906C281C3AA1070044EA99 /* ContactUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtilsTests.m; sourceTree = "<group>"; };
 		F99856931BDF85590005253B /* ContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtils.h; sourceTree = "<group>"; };
@@ -530,12 +506,46 @@
 		F9B825171C86F724003CBA92 /* DurationTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurationTimer.h; sourceTree = "<group>"; };
 		F9B825181C86F724003CBA92 /* DurationTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurationTimer.m; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
-		F9C710CA1C648F110079677C /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
-		F9C710CB1C648F110079677C /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
-		F9CB0F981C084C3D009AB89A /* SipCallingButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButtonsViewController.h; sourceTree = "<group>"; };
-		F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButtonsViewController.m; sourceTree = "<group>"; };
 		F9CB0F9C1C0867D1009AB89A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPCallingStoryboard.storyboard; sourceTree = "<group>"; };
 		F9CB0FA11C0867DB009AB89A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
+		F9EEC9001CA285B1008FB612 /* PhoneNumberUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberUtils.h; sourceTree = "<group>"; };
+		F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberUtils.m; sourceTree = "<group>"; };
+		F9EEC9051CA28608008FB612 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
+		F9EEC9061CA28608008FB612 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallingViewController.m; sourceTree = "<group>"; };
+		F9EEC9081CA28608008FB612 /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCall.h; sourceTree = "<group>"; };
+		F9EEC9091CA28608008FB612 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCall.m; sourceTree = "<group>"; };
+		F9EEC90F1CA2865D008FB612 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
+		F9EEC9101CA2865D008FB612 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
+		F9EEC9111CA2865D008FB612 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
+		F9EEC9121CA2865D008FB612 /* CircleWithShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithShadow.m; sourceTree = "<group>"; };
+		F9EEC9131CA2865D008FB612 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithWhiteIcon.h; sourceTree = "<group>"; };
+		F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithWhiteIcon.m; sourceTree = "<group>"; };
+		F9EEC9151CA2865D008FB612 /* ColoredCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircle.h; sourceTree = "<group>"; };
+		F9EEC9161CA2865D008FB612 /* ColoredCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircle.m; sourceTree = "<group>"; };
+		F9EEC9171CA2865D008FB612 /* VialerIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerIconView.h; sourceTree = "<group>"; };
+		F9EEC9181CA2865D008FB612 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
+		F9EEC9241CA2879C008FB612 /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
+		F9EEC9251CA2879C008FB612 /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
+		F9EEC9261CA2879C008FB612 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
+		F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
+		F9EEC9281CA2879C008FB612 /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
+		F9EEC9291CA2879C008FB612 /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewController.m; sourceTree = "<group>"; };
+		F9EEC92B1CA2879C008FB612 /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
+		F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
+		F9EEC92D1CA2879C008FB612 /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
+		F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
+		F9EEC93A1CA2880E008FB612 /* SipCallingButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButtonsViewController.h; sourceTree = "<group>"; };
+		F9EEC93B1CA2880E008FB612 /* SipCallingButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButtonsViewController.m; sourceTree = "<group>"; };
+		F9EEC93C1CA2880E008FB612 /* SIPCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPCallingViewController.h; sourceTree = "<group>"; };
+		F9EEC93D1CA2880E008FB612 /* SIPCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewController.m; sourceTree = "<group>"; };
+		F9EEC93E1CA2880E008FB612 /* SIPIncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPIncomingCallViewController.h; sourceTree = "<group>"; };
+		F9EEC93F1CA2880E008FB612 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
+		F9EEC9411CA2880E008FB612 /* SipCallingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
+		F9EEC9421CA2880E008FB612 /* SipCallingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SipCallingButton.m; sourceTree = "<group>"; };
+		F9EEC9441CA2880E008FB612 /* SIPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
+		F9EEC9451CA2880E008FB612 /* SIPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
+		F9EEC9501CA288AA008FB612 /* PhoneNumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberModel.h; sourceTree = "<group>"; };
+		F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberModel.m; sourceTree = "<group>"; };
 		F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModelTests.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
@@ -779,9 +789,9 @@
 			isa = PBXGroup;
 			children = (
 				C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */,
-				C4675FEB1C463B0B008820C8 /* Controllers */,
-				C4675FEA1C463B00008820C8 /* Models */,
-				C4675FEC1C463B23008820C8 /* UI */,
+				F9EEC9041CA28608008FB612 /* Controllers */,
+				F9EEC9071CA28608008FB612 /* Models */,
+				F9EEC90E1CA2865D008FB612 /* UI */,
 			);
 			name = TwoStep;
 			sourceTree = "<group>";
@@ -807,34 +817,12 @@
 			name = Voys;
 			sourceTree = "<group>";
 		};
-		C432A8681C58EF5700909F16 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				F9392ED61C04955C00286D27 /* SipCallingButton.h */,
-				F9392ED71C04955C00286D27 /* SipCallingButton.m */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
-		C432A8691C58EF6600909F16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				F9CB0F981C084C3D009AB89A /* SipCallingButtonsViewController.h */,
-				F9CB0F991C084C3D009AB89A /* SipCallingButtonsViewController.m */,
-				F9C710CA1C648F110079677C /* SIPCallingViewController.h */,
-				F9C710CB1C648F110079677C /* SIPCallingViewController.m */,
-				F9379F2A1C648876003B85D1 /* SIPIncomingCallViewController.h */,
-				F9379F2B1C648876003B85D1 /* SIPIncomingCallViewController.m */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		C432A86A1C58EF8C00909F16 /* Dialer */ = {
 			isa = PBXGroup;
 			children = (
 				C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */,
-				C4C3EB041BFB889C00AA4B2A /* Controllers */,
-				C4675FED1C463B3F008820C8 /* UI */,
+				F9EEC9231CA2879C008FB612 /* Controllers */,
+				F9EEC92A1CA2879C008FB612 /* UI */,
 			);
 			name = Dialer;
 			sourceTree = "<group>";
@@ -916,52 +904,6 @@
 				C46183711BF9FB120075709B /* RecentsViewController.m */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		C4675FEA1C463B00008820C8 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C4981F9B1BF0AC45003A1B4D /* TwoStepCall.h */,
-				C4981F9C1BF0AC45003A1B4D /* TwoStepCall.m */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		C4675FEB1C463B0B008820C8 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C41926521BE3A6C100436D92 /* TwoStepCallingViewController.h */,
-				C41926531BE3A6C100436D92 /* TwoStepCallingViewController.m */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		C4675FEC1C463B23008820C8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				C41926341BE3A36600436D92 /* BubblingPoints.h */,
-				C41926351BE3A36600436D92 /* BubblingPoints.m */,
-				C41926361BE3A36600436D92 /* CircleWithShadow.h */,
-				C41926371BE3A36600436D92 /* CircleWithShadow.m */,
-				C41926381BE3A36600436D92 /* CircleWithWhiteIcon.h */,
-				C41926391BE3A36600436D92 /* CircleWithWhiteIcon.m */,
-				C419263A1BE3A36600436D92 /* ColoredCircle.h */,
-				C419263B1BE3A36600436D92 /* ColoredCircle.m */,
-				C41926421BE3A36600436D92 /* VialerIconView.h */,
-				C41926431BE3A36600436D92 /* VialerIconView.m */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
-		C4675FED1C463B3F008820C8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				C487526A1BF1E00000B8B42B /* NumberPadButton.h */,
-				C487526B1BF1E00000B8B42B /* NumberPadButton.m */,
-				C4E860131BF14D960051BFDE /* PasteableUILabel.h */,
-				C4E860141BF14D960051BFDE /* PasteableUILabel.m */,
-			);
-			name = UI;
 			sourceTree = "<group>";
 		};
 		C4675FF11C469FE8008820C8 /* UI */ = {
@@ -1101,25 +1043,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		C4C3EB041BFB889C00AA4B2A /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C4E8600D1BF14D960051BFDE /* DialerViewController.h */,
-				C4E8600E1BF14D960051BFDE /* DialerViewController.m */,
-				C4E860111BF14D960051BFDE /* NumberPadViewController.h */,
-				C4E860121BF14D960051BFDE /* NumberPadViewController.m */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		C4C3EB051BFB88B000AA4B2A /* SIP */ = {
 			isa = PBXGroup;
 			children = (
 				F9CB0F9D1C0867D1009AB89A /* SIPCallingStoryboard.storyboard */,
 				F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */,
-				C432A8691C58EF6600909F16 /* Controllers */,
-				C432A8681C58EF5700909F16 /* UI */,
-				F94F642B1C6B3A1E003DBB63 /* Utils */,
+				F9EEC9391CA2880E008FB612 /* Controllers */,
+				F9EEC9401CA2880E008FB612 /* UI */,
+				F9EEC9431CA2880E008FB612 /* Utils */,
 			);
 			name = SIP;
 			sourceTree = "<group>";
@@ -1332,15 +1263,6 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		F94F642B1C6B3A1E003DBB63 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				F94F642C1C6B3A39003DBB63 /* SIPUtils.h */,
-				F94F642D1C6B3A39003DBB63 /* SIPUtils.m */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 		F94F64301C6B3A45003DBB63 /* SIP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1373,6 +1295,131 @@
 				F99856941BDF85590005253B /* ContactUtils.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		F9EEC8FD1CA285B1008FB612 /* PhoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC8FE1CA285B1008FB612 /* Models */,
+				F9EEC8FF1CA285B1008FB612 /* Utils */,
+			);
+			path = PhoneNumber;
+			sourceTree = "<group>";
+		};
+		F9EEC8FE1CA285B1008FB612 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9501CA288AA008FB612 /* PhoneNumberModel.h */,
+				F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F9EEC8FF1CA285B1008FB612 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9001CA285B1008FB612 /* PhoneNumberUtils.h */,
+				F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F9EEC9041CA28608008FB612 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9051CA28608008FB612 /* TwoStepCallingViewController.h */,
+				F9EEC9061CA28608008FB612 /* TwoStepCallingViewController.m */,
+			);
+			name = Controllers;
+			path = TwoStepCall/Controllers;
+			sourceTree = "<group>";
+		};
+		F9EEC9071CA28608008FB612 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9081CA28608008FB612 /* TwoStepCall.h */,
+				F9EEC9091CA28608008FB612 /* TwoStepCall.m */,
+			);
+			name = Models;
+			path = TwoStepCall/Models;
+			sourceTree = "<group>";
+		};
+		F9EEC90E1CA2865D008FB612 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC90F1CA2865D008FB612 /* BubblingPoints.h */,
+				F9EEC9101CA2865D008FB612 /* BubblingPoints.m */,
+				F9EEC9111CA2865D008FB612 /* CircleWithShadow.h */,
+				F9EEC9121CA2865D008FB612 /* CircleWithShadow.m */,
+				F9EEC9131CA2865D008FB612 /* CircleWithWhiteIcon.h */,
+				F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */,
+				F9EEC9151CA2865D008FB612 /* ColoredCircle.h */,
+				F9EEC9161CA2865D008FB612 /* ColoredCircle.m */,
+				F9EEC9171CA2865D008FB612 /* VialerIconView.h */,
+				F9EEC9181CA2865D008FB612 /* VialerIconView.m */,
+			);
+			name = UI;
+			path = TwoStepCall/UI;
+			sourceTree = "<group>";
+		};
+		F9EEC9231CA2879C008FB612 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9241CA2879C008FB612 /* DialerViewController.h */,
+				F9EEC9251CA2879C008FB612 /* DialerViewController.m */,
+				F9EEC9261CA2879C008FB612 /* NumberPadViewController.h */,
+				F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */,
+				F9EEC9281CA2879C008FB612 /* ReachabilityBarViewController.h */,
+				F9EEC9291CA2879C008FB612 /* ReachabilityBarViewController.m */,
+			);
+			name = Controllers;
+			path = Dialer/Controllers;
+			sourceTree = "<group>";
+		};
+		F9EEC92A1CA2879C008FB612 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC92B1CA2879C008FB612 /* NumberPadButton.h */,
+				F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */,
+				F9EEC92D1CA2879C008FB612 /* PasteableUILabel.h */,
+				F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */,
+			);
+			name = UI;
+			path = Dialer/UI;
+			sourceTree = "<group>";
+		};
+		F9EEC9391CA2880E008FB612 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC93A1CA2880E008FB612 /* SipCallingButtonsViewController.h */,
+				F9EEC93B1CA2880E008FB612 /* SipCallingButtonsViewController.m */,
+				F9EEC93C1CA2880E008FB612 /* SIPCallingViewController.h */,
+				F9EEC93D1CA2880E008FB612 /* SIPCallingViewController.m */,
+				F9EEC93E1CA2880E008FB612 /* SIPIncomingCallViewController.h */,
+				F9EEC93F1CA2880E008FB612 /* SIPIncomingCallViewController.m */,
+			);
+			name = Controllers;
+			path = SIP/Controllers;
+			sourceTree = "<group>";
+		};
+		F9EEC9401CA2880E008FB612 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9411CA2880E008FB612 /* SipCallingButton.h */,
+				F9EEC9421CA2880E008FB612 /* SipCallingButton.m */,
+			);
+			name = UI;
+			path = SIP/UI;
+			sourceTree = "<group>";
+		};
+		F9EEC9431CA2880E008FB612 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEC9441CA2880E008FB612 /* SIPUtils.h */,
+				F9EEC9451CA2880E008FB612 /* SIPUtils.m */,
+			);
+			name = Utils;
+			path = SIP/Utils;
 			sourceTree = "<group>";
 		};
 		F9EF27E91C60E2D70097E3AC /* Availabilty */ = {
@@ -1496,6 +1543,7 @@
 				F2B40BD91C731F3E00502769 /* Middleware */,
 				FBAFB3F81834250800848B2E /* Models */,
 				3D1A5E611AE543C000DBE64B /* Onboarding/Login */,
+				F9EEC8FD1CA285B1008FB612 /* PhoneNumber */,
 				F2B40BEA1C732C2300502769 /* ReachabilityManager */,
 				C4CEAB3E1BCE794600A56FC2 /* Recents */,
 				F2E811BF1B37E2EB00EA640F /* Settings */,
@@ -2042,6 +2090,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */,
+				F9EEC91C1CA2865D008FB612 /* CircleWithShadow.m in Sources */,
 				F2B40BEE1C732C2300502769 /* ReachabilityManager.m in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
 				C41A73541C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */,
@@ -2049,64 +2098,65 @@
 				C41FD85A1C60A08400BBE6D7 /* ContactUtils.m in Sources */,
 				C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */,
 				C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */,
-				C41FD85D1C60A08400BBE6D7 /* NumberPadViewController.m in Sources */,
 				C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */,
 				C41FD85F1C60A08400BBE6D7 /* ForgotPasswordView.m in Sources */,
+				F9EEC9301CA2879C008FB612 /* DialerViewController.m in Sources */,
+				F9EEC94B1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */,
+				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
-				F9C710CD1C648F110079677C /* SIPCallingViewController.m in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
-				C41FD8631C60A08400BBE6D7 /* SipCallingButtonsViewController.m in Sources */,
-				C41FD8641C60A08400BBE6D7 /* NumberPadButton.m in Sources */,
 				C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
+				F9EEC9471CA2880E008FB612 /* SipCallingButtonsViewController.m in Sources */,
+				F9EEC94D1CA2880E008FB612 /* SipCallingButton.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
-				C41FD8661C60A08400BBE6D7 /* SipCallingButton.m in Sources */,
 				C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */,
+				F9EEC9341CA2879C008FB612 /* ReachabilityBarViewController.m in Sources */,
+				F9EEC90B1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C41FD8681C60A08400BBE6D7 /* RecentCallManager.m in Sources */,
 				C41B60111C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
-				C41FD8691C60A08400BBE6D7 /* VialerIconView.m in Sources */,
 				C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
+				F9EEC9201CA2865D008FB612 /* ColoredCircle.m in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
+				F9EEC9491CA2880E008FB612 /* SIPCallingViewController.m in Sources */,
 				C41FD86C1C60A08400BBE6D7 /* NSDate+RelativeDate.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
 				C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
+				F9EEC9361CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				C41FD86F1C60A08400BBE6D7 /* Configuration.m in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8711C60A08400BBE6D7 /* ContactModel.m in Sources */,
-				F94F642F1C6B3A39003DBB63 /* SIPUtils.m in Sources */,
-				F9379F2D1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */,
-				C41FD8731C60A08400BBE6D7 /* CircleWithWhiteIcon.m in Sources */,
 				C41FD8741C60A08400BBE6D7 /* main.m in Sources */,
-				C41FD8751C60A08400BBE6D7 /* BubblingPoints.m in Sources */,
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
-				C41FD8771C60A08400BBE6D7 /* TwoStepCall.m in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C41FD87A1C60A08400BBE6D7 /* GAITracker.m in Sources */,
 				C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */,
-				C41FD87C1C60A08400BBE6D7 /* DialerViewController.m in Sources */,
-				C41FD87D1C60A08400BBE6D7 /* PasteableUILabel.m in Sources */,
+				F9EEC91E1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */,
-				C41FD87F1C60A08400BBE6D7 /* TwoStepCallingViewController.m in Sources */,
 				F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */,
+				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
 				C41FD8811C60A08400BBE6D7 /* SystemUser.m in Sources */,
+				F9EEC9321CA2879C008FB612 /* NumberPadViewController.m in Sources */,
 				C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
+				F9EEC91A1CA2865D008FB612 /* BubblingPoints.m in Sources */,
+				F9EEC9381CA2879C008FB612 /* PasteableUILabel.m in Sources */,
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
-				C41FD8871C60A08400BBE6D7 /* CircleWithShadow.m in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
 				C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */,
-				C41FD88A1C60A08400BBE6D7 /* ColoredCircle.m in Sources */,
+				F9EEC94F1CA2880E008FB612 /* SIPUtils.m in Sources */,
+				F9EEC90D1CA28608008FB612 /* TwoStepCall.m in Sources */,
 				C4947F8F1C983DB30065D7C1 /* RecentCall.m in Sources */,
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C41A73681C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
+				F9EEC9221CA2865D008FB612 /* VialerIconView.m in Sources */,
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
-				C41FD88D1C60A08400BBE6D7 /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2166,71 +2216,73 @@
 			buildActionMask = 2147483647;
 			files = (
 				C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */,
+				F9EEC91B1CA2865D008FB612 /* CircleWithShadow.m in Sources */,
 				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
 				F99856951BDF85590005253B /* ContactUtils.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
-				C4E860181BF14D960051BFDE /* NumberPadViewController.m in Sources */,
 				C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */,
 				C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C4947FD31C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
+				F9EEC92F1CA2879C008FB612 /* DialerViewController.m in Sources */,
+				F9EEC94A1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */,
+				F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
-				F9C710CC1C648F110079677C /* SIPCallingViewController.m in Sources */,
 				C41B60101C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
-				F9CB0F9A1C084C3D009AB89A /* SipCallingButtonsViewController.m in Sources */,
-				C487526C1BF1E00000B8B42B /* NumberPadButton.m in Sources */,
+				F9EEC9461CA2880E008FB612 /* SipCallingButtonsViewController.m in Sources */,
+				F9EEC94C1CA2880E008FB612 /* SipCallingButton.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
-				F9392ED81C04955C00286D27 /* SipCallingButton.m in Sources */,
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
+				F9EEC9331CA2879C008FB612 /* ReachabilityBarViewController.m in Sources */,
+				F9EEC90A1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
-				C419264C1BE3A36600436D92 /* VialerIconView.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				C41A73531C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */,
+				F9EEC91F1CA2865D008FB612 /* ColoredCircle.m in Sources */,
 				FB5D2919182BE402001DA8F2 /* NSDate+RelativeDate.m in Sources */,
+				F9EEC9481CA2880E008FB612 /* SIPCallingViewController.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				C41B600D1C6B7DC800A0C7C7 /* RecentCall.m in Sources */,
 				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
+				F9EEC9351CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
 				F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */,
-				F9379F2C1C648876003B85D1 /* SIPIncomingCallViewController.m in Sources */,
-				C41926461BE3A36600436D92 /* CircleWithWhiteIcon.m in Sources */,
 				FB4226DD182261D200707349 /* main.m in Sources */,
-				C41926441BE3A36600436D92 /* BubblingPoints.m in Sources */,
 				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
-				C4981F9D1BF0AC45003A1B4D /* TwoStepCall.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
-				C4E860161BF14D960051BFDE /* DialerViewController.m in Sources */,
-				C4E860191BF14D960051BFDE /* PasteableUILabel.m in Sources */,
+				F9EEC91D1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
 				C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
-				C41926551BE3A6C100436D92 /* TwoStepCallingViewController.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				F2B40BED1C732C2300502769 /* ReachabilityManager.m in Sources */,
+				F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
+				F9EEC9311CA2879C008FB612 /* NumberPadViewController.m in Sources */,
 				F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */,
+				F9EEC9191CA2865D008FB612 /* BubblingPoints.m in Sources */,
+				F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
-				C41926451BE3A36600436D92 /* CircleWithShadow.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
+				F9EEC94E1CA2880E008FB612 /* SIPUtils.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
-				F94F642E1C6B3A39003DBB63 /* SIPUtils.m in Sources */,
-				C41926471BE3A36600436D92 /* ColoredCircle.m in Sources */,
+				F9EEC90C1CA28608008FB612 /* TwoStepCall.m in Sources */,
 				C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
+				F9EEC9211CA2865D008FB612 /* VialerIconView.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
 				F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */,
-				C487526F1BF1EAAD00B8B42B /* ReachabilityBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,7 +49,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         self.requestSerializer.timeoutInterval = requestTimeoutInterval;
 
-        // Set basic authentication if user is logged in
+        // Set basic authentication if user is logged in.
         NSString *user = [SystemUser currentUser].username;
         if (user) {
             NSString *password = [SSKeychain passwordForService:[[self class] serviceName] account:user];

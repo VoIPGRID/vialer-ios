@@ -186,7 +186,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     if (self.systemUser.sipEnabled) {
         [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
-                if ((error.code == NSURLErrorTimedOut || error.code == NSURLErrorNotConnectedToInternet) && self.retryCount < 5) {
+                if (error.code == NSURLErrorTimedOut && self.retryCount < 5) {
                     // Update the retry count.
                     self.retryCount++;
 

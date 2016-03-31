@@ -3,6 +3,7 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
+#import <ContactsUI/ContactsUI.h>
 #import <Foundation/Foundation.h>
 #import "SipCallingButtonsViewController.h"
 #import <UIKit/UIKit.h>
@@ -25,7 +26,7 @@
  *
  *  @param phoneNumber the phonenumber to be displayed in the UI.
  */
-- (void)handleOutgoingCallWithPhoneNumber:(NSString * _Nonnull)phoneNumber;
+- (void)handleOutgoingCallWithPhoneNumber:(NSString * _Nonnull)phoneNumber withContact:(CNContact * _Nullable)contact;
 
 /**
  *  This will setup a incoming SIP call with the provided VSLCall object.

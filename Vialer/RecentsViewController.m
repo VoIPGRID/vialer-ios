@@ -196,7 +196,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall];
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:nil];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
         rbvc.delegate = self;

@@ -7,6 +7,7 @@
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
+#import "PhoneNumberUtils.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 static NSString * const TwoStepCallStatusKey = @"status";
@@ -55,11 +56,11 @@ static int const TwoStepCallCancelTimeout = 3.0;
 #pragma mark - Properties
 
 - (void)setANumber:(NSString *)aNumber {
-    _aNumber = [self cleanPhonenumber:aNumber];
+    _aNumber = [PhoneNumberUtils cleanPhoneNumber:aNumber];
 }
 
 - (void)setBNumber:(NSString *)bNumber {
-    _bNumber = [self cleanPhonenumber:bNumber];
+    _bNumber = [PhoneNumberUtils cleanPhoneNumber:bNumber];
 }
 
 - (CTCallCenter *)callCenter {
@@ -317,19 +318,6 @@ static int const TwoStepCallCancelTimeout = 3.0;
                                   ];
     });
     return callStatusStringArray;
-}
-
-/**
- *  Clean phonenumbers so to remove unwanted characters for the api.
- *
- *  @param phonenumber dirty phonenumber
- *
- *  @return cleaned phonenumber
- */
-- (NSString *)cleanPhonenumber:(NSString *)phonenumber {
-    phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
-    return [phonenumber isEqualToString:@""] ? nil : phonenumber;
 }
 
 /**
