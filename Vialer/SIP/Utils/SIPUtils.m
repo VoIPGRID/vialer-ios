@@ -5,6 +5,7 @@
 
 #import "SIPUtils.h"
 
+#import "ContactUtils.h"
 #import "SystemUser.h"
 
 @implementation SIPUtils
@@ -61,11 +62,6 @@
     }];
 }
 
-+ (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
-    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    return [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
-}
-
 + (VSLCall *)getCallWithId:(NSString *)callId {
     if (!callId) {
         return nil;
@@ -74,21 +70,6 @@
     VSLCall *call = [[VialerSIPLib sharedInstance] getVSLCallWithId:callId andSipUser:[SystemUser currentUser]];
 
     return call;
-}
-
-+ (NSString *)getCallName:(VSLCall *)call {
-    NSString *callName;
-
-    if (call.callerName && call.callerNumber) {
-        callName = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
-    } else if (call.callerName && !call.callerNumber) {
-        callName = [NSString stringWithFormat:@"%@", call.callerName];
-    } else if (!call.callerName && call.callerNumber) {
-        callName = [NSString stringWithFormat:@"%@", call.callerNumber];
-    } else {
-        callName = [NSString stringWithFormat:@"%@", call.remoteURI];
-    }
-    return callName;
 }
 
 + (BOOL)anotherCallInProgress:(VSLCall *)receivedCall {

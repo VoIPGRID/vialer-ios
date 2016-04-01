@@ -397,11 +397,12 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void(^)(BOOL success, NSError *error))completion {
-    if (![mobileNumber length] > 0) {
+    if (!mobileNumber.length) {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"The number is to short", nil)};
         completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorMobileNumberToShort userInfo:userInfo]);
         return;
     }
+
     // Strip whitespaces.
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
 

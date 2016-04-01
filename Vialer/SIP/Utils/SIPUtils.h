@@ -29,15 +29,6 @@
 + (VSLAccount * _Nullable)addSIPAccountToEndpoint;
 
 /**
- *  Clean the phone number so it's usable to setup a SIP call.
- *
- *  @param phoneNumber the phonenumber to be cleaned.
- *
- *  @return NSString a cleaned phonennumber
- */
-+ (NSString * _Nonnull)cleanPhoneNumber:(NSString *_Nonnull)phoneNumber;
-
-/**
  *  Register the sip account with the endpoint.
  *
  *  @return BOOL YES if the registration was a success.
@@ -52,15 +43,6 @@
  *  @return VSLCall instance or nil.
  */
 + (VSLCall * _Nullable)getCallWithId:(NSString *_Nonnull)callId;
-
-/**
- *  Get the name to display when a call is incoming.
- *
- *  @param call VSLCall instance.
- *
- *  @return NSString With the name that can be displayed.
- */
-+ (NSString * _Nonnull)getCallName:(VSLCall * _Nonnull)call;
 
 /**
  *  Check if there is another call in progress.

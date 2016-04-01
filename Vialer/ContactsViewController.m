@@ -39,6 +39,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 @property (strong, nonatomic) SystemUser *currentUser;
 @property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
+@property (strong, nonatomic) CNContact *selectedContact;
 @end
 
 @implementation ContactsViewController
@@ -148,7 +149,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall];
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:self.selectedContact];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
         rbvc.delegate = self;
@@ -210,15 +211,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - tableview delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CNContact *contact;
-
     if ([tableView isEqual:self.tableView]) {
-        contact = [[ContactModel defaultContactModel] getContactsAtSection:indexPath.section andIndex:indexPath.row];
+        self.selectedContact = [[ContactModel defaultContactModel] getContactsAtSection:indexPath.section andIndex:indexPath.row];
     } else {
-        contact = [ContactModel defaultContactModel].searchResults[indexPath.row];
+        self.selectedContact = [ContactModel defaultContactModel].searchResults[indexPath.row];
     }
 
-    CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:contact];
+    CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
     contactViewController.contactStore = [[ContactModel defaultContactModel] getContactStore];
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;

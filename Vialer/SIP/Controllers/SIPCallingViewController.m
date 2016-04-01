@@ -6,7 +6,10 @@
 #import "SIPCallingViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "ContactUtils.h"
 #import "DurationTimer.h"
+#import "PhoneNumberModel.h"
+#import "PhoneNumberUtils.h"
 #import "SIPUtils.h"
 
 static NSString * const SIPCallingViewControllerCallState = @"callState";
@@ -32,7 +35,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.phoneNumberLabel.text = self.phoneNumber;
+    self.phoneNumberLabel.text = @"";
 }
 
 - (void)dealloc {
@@ -68,33 +71,40 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 
 #pragma mark - actions
 
-- (void)handleOutgoingCallWithPhoneNumber:(NSString *)phoneNumber {
-    self.phoneNumber = [SIPUtils cleanPhoneNumber:phoneNumber];
+- (void)handleOutgoingCallWithPhoneNumber:(NSString *)phoneNumber withContact:(CNContact *)contact {
+    NSString *cleanPhoneNumber = [PhoneNumberUtils cleanPhoneNumber:phoneNumber];
     self.previousAVAudioSessionCategory = self.avAudioSession.category;
+    self.phoneNumber = cleanPhoneNumber;
 
-    VSLAccount *account = [SIPUtils addSIPAccountToEndpoint];
-
-    if (account) {
-        [account callNumber:self.phoneNumber withCompletion:^(NSError *error, VSLCall *call) {
-            [UIDevice currentDevice].proximityMonitoringEnabled = YES;
-            if (error) {
-                DDLogError(@"%@", error);
-                NSError *setAudioCategoryError;
-                [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
-                if (setAudioCategoryError) {
-                    DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
-                }
-            } else {
-                self.call = call;
-            }
+    if (contact) {
+        [PhoneNumberModel getCallNameFromContact:contact andPhoneNumber:phoneNumber withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+            self.phoneNumberLabel.text = phoneNumberModel.callerInfo;
         }];
     }
+
+    VSLAccount *account = [SIPUtils addSIPAccountToEndpoint];
+    [account callNumber:cleanPhoneNumber withCompletion:^(NSError *error, VSLCall *call) {
+        [UIDevice currentDevice].proximityMonitoringEnabled = YES;
+        if (error) {
+            DDLogError(@"%@", error);
+            NSError *setAudioCategoryError;
+            [self.avAudioSession setCategory:self.previousAVAudioSessionCategory error:&setAudioCategoryError];
+            if (setAudioCategoryError) {
+                DDLogError(@"Error setting the audio session category: %@", setAudioCategoryError);
+            }
+        } else {
+            self.call = call;
+        }
+    }];
 }
 
 - (void)handleIncomingCallWithVSLCall:(VSLCall *)call {
     self.previousAVAudioSessionCategory = self.avAudioSession.category;
     self.call = call;
-    self.phoneNumber = [SIPUtils getCallName:self.call];
+
+    [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+        self.phoneNumberLabel.text = phoneNumberModel.callerInfo;
+    }];
 
     NSError *error;
     [self.call answer:&error];

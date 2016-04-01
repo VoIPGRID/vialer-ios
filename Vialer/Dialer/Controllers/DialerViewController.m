@@ -165,7 +165,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         self.numberText = @"";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.numberText];
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.numberText withContact:nil];
         self.numberText = @"";
     }
 }

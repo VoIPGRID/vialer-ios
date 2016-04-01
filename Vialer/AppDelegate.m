@@ -10,6 +10,7 @@
 @import CoreData;
 #import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
+#import "PhoneNumberModel.h"
 #ifdef DEBUG
 #import "SDStatusBarManager.h"
 #endif
@@ -260,16 +261,19 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)createLocalNotificationForCall:(VSLCall *)call {
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
-    localNotification.userInfo = myUserInfo;
-    localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
-    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), [SIPUtils getCallName:call]];
-    localNotification.alertLaunchImage = @"AppIcon";
-    localNotification.soundName = @"ringtone.wav";
-    localNotification.category = AppDelegateLocalNotificationCategory;
+    // The init of the local notification needs to be in the completion block of the callername.
+    [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
+        localNotification.userInfo = myUserInfo;
+        localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
+        localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), phoneNumberModel.callerInfo];
+        localNotification.alertLaunchImage = @"AppIcon";
+        localNotification.soundName = @"ringtone.wav";
+        localNotification.category = AppDelegateLocalNotificationCategory;
 
-    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    }];
 }
 
 #pragma mark - Core Data

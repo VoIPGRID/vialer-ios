@@ -5,6 +5,8 @@
 
 #import "SIPIncomingCallViewController.h"
 
+#import "ContactUtils.h"
+#import "PhoneNumberModel.h"
 #import "SIPCallingViewController.h"
 #import "SIPUtils.h"
 #import <VialerSIPLib-iOS/VSLRingtone.h>
@@ -31,7 +33,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.incomingPhoneNumberLabel.text = [SIPUtils getCallName:self.call];
+    self.incomingPhoneNumberLabel.text = self.phoneNumber;
 }
 
 - (void)dealloc {
@@ -67,12 +69,15 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
     [call addObserver:self forKeyPath:SIPIncomingCallViewControllerCallState options:0 context:NULL];
     [call addObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState options:0 context:NULL];
     [self.ringtone start];
+
+    [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+        self.incomingPhoneNumberLabel.text = phoneNumberModel.callerInfo;
+    }];
 }
 
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-
     if (object == self.call) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.call.callState == VSLCallStateDisconnected) {
