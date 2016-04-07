@@ -25,7 +25,6 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 @property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
 @property (weak, nonatomic) SystemUser *systemUser;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
-@property (strong, nonatomic) NSDate *responseTimer;
 @property (nonatomic) int retryCount;
 @end
 
@@ -71,11 +70,11 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
 #pragma mark - actions
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
+    // Set current time to measure response time.
+    NSDate *pushResponseTimeMeasurementStart = [NSDate date];
+
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
     DDLogDebug(@"Push message received from middleware.\nPayload: %@", payload);
-
-    // Set current time to measure response time.
-    self.responseTimer = [NSDate date];
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
@@ -89,13 +88,13 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
                 } else {
                     DDLogDebug(@"SIP Endpoint registration FAILED. Senting Available = NO to middleware");
                 }
-                [self respondToMiddleware:payload isAvailable:success];
+                [self respondToMiddleware:payload isAvailable:success pushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             }];
         } else {
             // User is not SIP enabled or the connection is not good enough.
             // Sent not available to the middleware.
             DDLogDebug(@"Not accepting call, connection quality insufficient or SIP Disabled, Sending Available = NO to middleware");
-            [self respondToMiddleware:payload isAvailable:NO];
+            [self respondToMiddleware:payload isAvailable:NO pushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
         }
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
 
@@ -104,18 +103,18 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     }
 }
 
-- (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available {
+- (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available pushResponseTimeMeasurementStart:(NSDate *)pushResponseTimeMeasurmentStart {
     // Track the response that is sent to the middleware.
+    int currentConnectionType = self.reachabilityManager.currentConnectionType;
     if (available) {
-        [GAITracker acceptedPushNotificationEvent];
+        [GAITracker acceptedPushNotificationEventWithConnectionValue:currentConnectionType];
     } else {
-        [GAITracker rejectedPushNotificationEvent];
+        [GAITracker rejectedPushNotificationEventWithConnectionValue:currentConnectionType];
     }
 
     [self.middlewareRequestOperationManager sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
-
         // Whole response cycle completed, log duration.
-        NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:self.responseTimer];
+        NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
         [GAITracker timeToRespondToIncomingPushNotification:responseTime];
         DDLogDebug(@"Middleware response time: [%f s]", responseTime);
 

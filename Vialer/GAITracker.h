@@ -17,13 +17,17 @@
 
 /**
  *  Incoming VoIPPush notification was responded with available to middleware.
+ *
+ *  @param an int indicating the current connection value (as described in the "Google Analytics events for all Mobile apps" document
  */
-+ (void)acceptedPushNotificationEvent;
++ (void)acceptedPushNotificationEventWithConnectionValue:(int)connectionValue;
 
 /**
  *  Incoming VoIPPush notification was responded with unavailable to middleware.
+ *
+ *  @param an int indicating the current connection value (as described in the "Google Analytics events for all Mobile apps" document
  */
-+ (void)rejectedPushNotificationEvent;
++ (void)rejectedPushNotificationEventWithConnectionValue:(int)connectionValue;
 
 /**
  *  Exception when the registration failed on the middleware.

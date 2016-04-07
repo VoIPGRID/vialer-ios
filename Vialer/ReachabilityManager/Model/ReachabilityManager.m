@@ -116,6 +116,16 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
     return [self currentReachabilityStatus];
 }
 
+- (ReachabilityManagerConnectionType)currentConnectionType {
+    if (self.onWifi) {
+        return ReachabilityManagerConnectionTypeWifi;
+    } else if (self.on4g) {
+        return ReachabilityManagerConnectionType4g;
+    } else {
+        return ReachabilityManagerConnectionTypeOther;
+    }
+}
+
 #pragma mark - Callback functions
 - (void)internetConnectionChanged:(NSNotification *)notification {
     [self currentReachabilityStatus];

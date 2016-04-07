@@ -82,7 +82,7 @@ PODS:
   - Reachability (3.2)
   - SimulatorStatusMagic (1.8)
   - SSKeychain (1.4.0)
-  - SVProgressHUD (2.0)
+  - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (0.0.6)
   - VialerSIPLib-iOS (0.0.18):
     - CocoaLumberjack (~> 2.2)
@@ -138,7 +138,7 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SimulatorStatusMagic: 4dbf0faa0208e9ac0d56cea06eaa5f7a5f3d02fb
   SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
-  SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 63c7bb430ddbe564c5914e59018637bcf7cbe608
   VialerSIPLib-iOS: 9c07c9f3405f7e190454eb6fd3e4fb16895f6a64
 
