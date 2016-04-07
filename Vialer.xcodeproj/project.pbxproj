@@ -153,8 +153,6 @@
 		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
-		C49F90B61CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */; };
-		C49F90B71CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */; };
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
@@ -191,6 +189,8 @@
 		F2DE21741CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
 		F2DE21781CB698A6007B5B4D /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		F2DE21791CB698A6007B5B4D /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
+		F2DE21831CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
+		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F674DD5B06C6E1B337BD656C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
@@ -434,11 +434,9 @@
 		C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
-		C49F90B81CA2D0070035CD1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
 		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
-		C4B91DFC1CA5313D005CD2DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ReachabilityBarStoryboard.strings; sourceTree = "<group>"; };
 		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		C4C3EAEA1BFB73B200AA4B2A /* VialerWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerWebViewController.h; sourceTree = "<group>"; };
@@ -489,6 +487,8 @@
 		F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewController.m; sourceTree = "<group>"; };
 		F2DE21761CB698A6007B5B4D /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
 		F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
+		F2DE21851CB69E7F007B5B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
+		F2DE21871CB69F9D007B5B4D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ReachabilityBarStoryboard.strings; sourceTree = "<group>"; };
 		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewController.h; sourceTree = "<group>"; };
 		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1159,7 +1159,7 @@
 		F2B40BEA1C732C2300502769 /* ReachabilityManager */ = {
 			isa = PBXGroup;
 			children = (
-				C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */,
+				F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */,
 				F2DE21701CB6986A007B5B4D /* Controllers */,
 				F2DE21751CB698A6007B5B4D /* Model */,
 			);
@@ -1794,6 +1794,7 @@
 				C41FD8AB1C60A08400BBE6D7 /* ContactsStoryboard.storyboard in Resources */,
 				F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				C41FD8AC1C60A08400BBE6D7 /* dtmf-1.aif in Resources */,
+				F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */,
 				C41FD8AD1C60A08400BBE6D7 /* SideMenuStoryboard.storyboard in Resources */,
 				C41FD8AE1C60A08400BBE6D7 /* dtmf-2.aif in Resources */,
 				C41FD8AF1C60A08400BBE6D7 /* RecentsStoryboard.storyboard in Resources */,
@@ -1807,7 +1808,6 @@
 				C41FD8B81C60A08400BBE6D7 /* disconnected.wav in Resources */,
 				C41FD8B91C60A08400BBE6D7 /* dtmf-8.aif in Resources */,
 				C41FD8BA1C60A08400BBE6D7 /* SettingsStoryboard.storyboard in Resources */,
-				C49F90B71CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */,
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
 				C41FD8BC1C60A08400BBE6D7 /* dtmf-s.aif in Resources */,
 				C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */,
@@ -1856,6 +1856,7 @@
 				FBB8541F1A7FE67300121366 /* dtmf-1.aif in Resources */,
 				C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */,
 				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
+				F2DE21831CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */,
 				C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
 				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
@@ -1871,7 +1872,6 @@
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
 				F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
-				C49F90B61CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard in Resources */,
 				FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
 				FB29D913189BA0FF00345976 /* Localizable.strings in Resources */,
@@ -2335,15 +2335,6 @@
 			name = ContactsStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
-		C49F90B91CA2D0070035CD1E /* ReachabilityBarStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C49F90B81CA2D0070035CD1E /* Base */,
-				C4B91DFC1CA5313D005CD2DC /* nl */,
-			);
-			name = ReachabilityBarStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
 		C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2386,6 +2377,16 @@
 				C418AA391C7E407800C8EB91 /* nl */,
 			);
 			name = SettingsStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2DE21851CB69E7F007B5B4D /* Base */,
+				F2DE21871CB69F9D007B5B4D /* nl */,
+			);
+			name = ReachabilityBarStoryboard.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */ = {
