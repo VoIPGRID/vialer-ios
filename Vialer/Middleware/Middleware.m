@@ -98,9 +98,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
             [self respondToMiddleware:payload isAvailable:NO];
         }
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
-        // Just for debugging
-        [self sentAPNSToken:[APNSHandler storedAPNSToken]];
-        // End debugging
+
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage]) {
 
     }
