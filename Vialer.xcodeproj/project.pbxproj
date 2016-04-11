@@ -377,6 +377,7 @@
 		C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		C40C11DF1C3A7396008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C40C11E11C3ABA7D008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
+		C410C9A61CBB86E200A65E84 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
 		C418AA391C7E407800C8EB91 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		C41A73521C6A7CF300482E3C /* VialerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VialerModel.xcdatamodel; sourceTree = "<group>"; };
 		C41A73651C6B2F1C00482E3C /* RecentCall+VoIPGRID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentCall+VoIPGRID.h"; sourceTree = "<group>"; };
@@ -2366,6 +2367,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C461837E1BFA24850075709B /* Base */,
+				C410C9A61CBB86E200A65E84 /* nl */,
 			);
 			name = DialerStoryboard.storyboard;
 			sourceTree = "<group>";

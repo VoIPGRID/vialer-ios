@@ -1,0 +1,42 @@
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button6"; ObjectID = "2Pi-yO-ovH"; */
+"2Pi-yO-ovH.accessibilityIdentifier" = "DialerStoryboard.dialer.button6";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button4"; ObjectID = "5V0-gw-ERF"; */
+"5V0-gw-ERF.accessibilityIdentifier" = "DialerStoryboard.dialer.button4";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button2"; ObjectID = "Jkr-4Y-JuE"; */
+"Jkr-4Y-JuE.accessibilityIdentifier" = "DialerStoryboard.dialer.button2";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button3"; ObjectID = "LhT-Ug-2q9"; */
+"LhT-Ug-2q9.accessibilityIdentifier" = "DialerStoryboard.dialer.button3";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button#"; ObjectID = "Mo9-W5-GXA"; */
+"Mo9-W5-GXA.accessibilityIdentifier" = "DialerStoryboard.dialer.button#";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button0"; ObjectID = "QnY-kg-Ni2"; */
+"QnY-kg-Ni2.accessibilityIdentifier" = "DialerStoryboard.dialer.button0";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button5"; ObjectID = "Xf1-tv-0FO"; */
+"Xf1-tv-0FO.accessibilityIdentifier" = "DialerStoryboard.dialer.button5";
+
+/* Class = "UILabel"; text = "8"; ObjectID = "Z0R-4w-Bgg"; */
+"Z0R-4w-Bgg.text" = "8";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button1"; ObjectID = "Zid-vc-HTf"; */
+"Zid-vc-HTf.accessibilityIdentifier" = "DialerStoryboard.dialer.button1";
+
+/* Class = "UIButton"; accessibilityIdentifier = "CallingStoryboard.CallButton"; ObjectID = "fQq-Gl-ZNQ"; */
+"fQq-Gl-ZNQ.accessibilityIdentifier" = "CallingStoryboard.CallButton";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button8"; ObjectID = "ipw-Ya-87A"; */
+"ipw-Ya-87A.accessibilityIdentifier" = "DialerStoryboard.dialer.button8";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button9"; ObjectID = "o5o-gy-hak"; */
+"o5o-gy-hak.accessibilityIdentifier" = "DialerStoryboard.dialer.button9";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button*"; ObjectID = "yQ4-VL-1YG"; */
+"yQ4-VL-1YG.accessibilityIdentifier" = "DialerStoryboard.dialer.button*";
+
+/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button7"; ObjectID = "z4A-Mw-yqa"; */
+"z4A-Mw-yqa.accessibilityIdentifier" = "DialerStoryboard.dialer.button7";

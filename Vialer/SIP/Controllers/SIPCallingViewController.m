@@ -21,7 +21,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 @interface SIPCallingViewController()
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *callStatusLabel;
-@property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSString *phoneNumberLabelText;
 @property (strong, nonatomic) VSLCall *call;
 @property (strong, nonatomic) AVAudioSession *avAudioSession;
 @property (strong, nonatomic) NSString *previousAVAudioSessionCategory;
@@ -35,7 +35,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.phoneNumberLabel.text = @"";
+    self.phoneNumberLabel.text = self.phoneNumberLabelText;
 }
 
 - (void)dealloc {
@@ -64,9 +64,9 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     self.sipCallingButtonsVC.call = call;
 }
 
-- (void)setPhoneNumber:(NSString *)phoneNumber {
-    _phoneNumber = phoneNumber;
-    self.phoneNumberLabel.text = phoneNumber;
+- (void)setPhoneNumberLabelText:(NSString *)phoneNumberLabelText {
+    _phoneNumberLabelText = phoneNumberLabelText;
+    self.phoneNumberLabel.text = phoneNumberLabelText;
 }
 
 #pragma mark - actions
@@ -74,11 +74,11 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 - (void)handleOutgoingCallWithPhoneNumber:(NSString *)phoneNumber withContact:(CNContact *)contact {
     NSString *cleanPhoneNumber = [PhoneNumberUtils cleanPhoneNumber:phoneNumber];
     self.previousAVAudioSessionCategory = self.avAudioSession.category;
-    self.phoneNumber = cleanPhoneNumber;
+    self.phoneNumberLabelText = cleanPhoneNumber;
 
     if (contact) {
         [PhoneNumberModel getCallNameFromContact:contact andPhoneNumber:phoneNumber withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-            self.phoneNumberLabel.text = phoneNumberModel.callerInfo;
+            self.phoneNumberLabelText = phoneNumberModel.callerInfo;
         }];
     }
 
@@ -103,7 +103,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     self.call = call;
 
     [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-        self.phoneNumberLabel.text = phoneNumberModel.callerInfo;
+        self.phoneNumberLabelText = phoneNumberModel.callerInfo;
     }];
 
     NSError *error;
@@ -231,12 +231,12 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     self.callStatusLabel.hidden = visible;
 
     if (!visible) {
-        self.phoneNumberLabel.text = self.phoneNumber;
+        self.phoneNumberLabel.text = self.phoneNumberLabelText;
     }
 }
 - (void)DTMFSend:(NSString *)character {
     // Check if this is the first character pressed.
-    if ([self.phoneNumberLabel.text isEqualToString:self.phoneNumber]) {
+    if ([self.phoneNumberLabel.text isEqualToString:self.phoneNumberLabelText]) {
         self.phoneNumberLabel.text = character;
     } else {
         self.phoneNumberLabel.text = [self.phoneNumberLabel.text stringByAppendingString:character];
