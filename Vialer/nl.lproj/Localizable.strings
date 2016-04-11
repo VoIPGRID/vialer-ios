@@ -154,6 +154,9 @@
 "Invalid number used to setup call" = "Foutief nummer gebruikt om gesprek op te zetten";
 
 /* No comment provided by engineer. */
+"It's not possible to setup a call. Make sure you have an internet connection." = "Gesprek kan niet opgezet worden. Zorg voor een internet verbinding en probeer het opnieuw.";
+
+/* No comment provided by engineer. */
 "Keypad" = "Toetsen";
 
 /* No comment provided by engineer. */
@@ -197,6 +200,9 @@
 
 /* No comment provided by engineer. */
 "No email address configured" = "Geen emailadres ingesteld";
+
+/* No comment provided by engineer. */
+"No internet connection" = "Geen internet verbinding";
 
 /* No comment provided by engineer. */
 "No login data" = "Geen inloggegevens";

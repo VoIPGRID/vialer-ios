@@ -14,7 +14,7 @@
 #import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
-
+#import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
 
 static NSString * const ContactsViewControllerLogoImageName = @"logo";
@@ -243,9 +243,14 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                 if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
                     [GAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
-                } else {
+                } else if (self.reachabilityStatus == ReachabilityManagerStatusLowSpeed) {
                     [GAITracker setupOutgoingConnectABCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
+                } else {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                                                   message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
+                                                                      andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
             });
         });

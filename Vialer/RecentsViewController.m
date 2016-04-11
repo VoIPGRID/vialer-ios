@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "Configuration.h"
 #import "ContactModel.h"
+#import "ContactsUI/ContactsUI.h"
 #import "GAITracker.h"
 #import "ReachabilityBarViewController.h"
 #import "RecentCall.h"
@@ -16,11 +17,8 @@
 #import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
-
 #import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
-
-#import "ContactsUI/ContactsUI.h"
 
 static NSString * const RecentsViewControllerTabContactImageName = @"tab-recent";
 static NSString * const RecentsViewControllerTabContactActiveImageName = @"tab-recent-active";
@@ -362,9 +360,14 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
     if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
         [GAITracker setupOutgoingSIPCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
-    } else {
+    } else if (self.reachabilityStatus == ReachabilityManagerStatusLowSpeed) {
         [GAITracker setupOutgoingConnectABCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                                       message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
+                                                          andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
