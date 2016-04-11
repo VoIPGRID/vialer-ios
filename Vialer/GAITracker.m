@@ -67,20 +67,20 @@
                                                            value:nil] build]];
 }
 
-+ (void)acceptedPushNotificationEvent {
++ (void)acceptedPushNotificationEventWithConnectionValue:(int)connectionValue {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
                                                           action:@"acceptance"
                                                            label:@"accepted"
-                                                           value:nil] build]];
+                                                           value:[NSNumber numberWithInt:connectionValue]] build]];
 }
 
-+ (void)rejectedPushNotificationEvent {
++ (void)rejectedPushNotificationEventWithConnectionValue:(int)connectionValue {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
                                                           action:@"acceptance"
                                                            label:@"rejected"
-                                                           value:nil] build]];
+                                                           value:[NSNumber numberWithInt:connectionValue]] build]];
 }
 
 + (void)regististrationFailedWithMiddleWareException {
