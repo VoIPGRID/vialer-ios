@@ -40,6 +40,10 @@ typedef NS_ENUM(NSInteger, VoIPGRIDHttpErrors) {
      *  Not found.
      */
     VoIPGRIDHttpErrorNotFound = 404,
+    /**
+     *  Request timeout.
+     */
+    VoIPGRIDHttpErrorRequestTimeout = 408,
 };
 
 /**

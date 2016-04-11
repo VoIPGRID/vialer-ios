@@ -189,16 +189,20 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
         _sipEnabled = YES;
 
-        NSNotification *notification = [NSNotification notificationWithName:SystemUserSIPCredentialsChangedNotification object:self];
-        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
+        // Post the notification async. Do not use NSNotificationQueue because when the app starts
+        // the app delegate does not pickup on the notification when posted using the NSNotificationQueue.
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
 
     // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
 
-        NSNotification *notification = [NSNotification notificationWithName:SystemUserSIPDisabledNotification object:[self.sipAccount copy]];
-        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
-        [self fetchUserProfile];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:[self.sipAccount copy]];
+            [self fetchUserProfile];
+        });
     }
     [[NSUserDefaults standardUserDefaults] setBool:_sipEnabled forKey:SystemUserSUDSIPEnabled];
     [[NSUserDefaults standardUserDefaults] synchronize];

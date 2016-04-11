@@ -33,7 +33,7 @@
  *
  *  @return BOOL YES if the registration was a success.
  */
-+ (void)registerSIPAccountWithEndpointWithCompletion:(void (^_Nonnull)(BOOL success))completion;
++ (void)registerSIPAccountWithEndpointWithCompletion:(void (^_Nonnull)(BOOL success, VSLAccount *_Nullable account))completion;
 
 /**
  *  Get a VSLCall instance based on a callId.

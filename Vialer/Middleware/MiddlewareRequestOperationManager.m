@@ -104,8 +104,8 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 }
 
 - (void)sentCallResponseToMiddleware:(NSDictionary *)originalPayload isAvailable:(BOOL)available withCompletion:(void (^)(NSError *error))completion {
-    NSDictionary *params = @{
-                             // Key that was given in the device push message as reference (required).
+    // We should respond to the URL specified in the payload see VIALI-3185.
+    NSDictionary *params = @{// Key that was given in the device push message as reference (required).
                              MiddlewareResponseKeyUniqueKey: originalPayload[MiddlewareResponseKeyUniqueKey],
                              // Time given in the device push message to time the roundtrip (optional).
                              MiddlewareResponseKeyMessageStartTime: originalPayload[MiddlewareResponseKeyMessageStartTime],
@@ -114,10 +114,12 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              };
 
     [self POST:MiddlewareURLIncomingCallResponse parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
-        if (!error) {
-            completion(nil);
-        } else {
-            completion(error);
+        if (completion) {
+            if (!error) {
+                completion(nil);
+            } else {
+                completion(error);
+            }
         }
     }];
 }

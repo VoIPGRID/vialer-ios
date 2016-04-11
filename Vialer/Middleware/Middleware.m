@@ -82,19 +82,19 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
             // User has good enough connection and is SIP Enabled.
             // Register the account with the endpoint.
-            [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success) {
+            [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
                 if (success) {
                     DDLogDebug(@"SIP Endpoint registration success! Sending Available = YES to middleware");
                 } else {
                     DDLogDebug(@"SIP Endpoint registration FAILED. Senting Available = NO to middleware");
                 }
-                [self respondToMiddleware:payload isAvailable:success pushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+                [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             }];
         } else {
             // User is not SIP enabled or the connection is not good enough.
             // Sent not available to the middleware.
             DDLogDebug(@"Not accepting call, connection quality insufficient or SIP Disabled, Sending Available = NO to middleware");
-            [self respondToMiddleware:payload isAvailable:NO pushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+            [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
         }
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
 
@@ -103,7 +103,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     }
 }
 
-- (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available pushResponseTimeMeasurementStart:(NSDate *)pushResponseTimeMeasurmentStart {
+- (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available withAccount:(VSLAccount *)account andPushResponseTimeMeasurementStart:(NSDate *)pushResponseTimeMeasurmentStart  {
     // Track the response that is sent to the middleware.
     int currentConnectionType = self.reachabilityManager.currentConnectionType;
     if (available) {
@@ -119,6 +119,8 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
         DDLogDebug(@"Middleware response time: [%f s]", responseTime);
 
         if (error) {
+            // Not only do we want to unregister upon a 408 but on every error.
+            [account unregisterAccount:nil];
             DDLogError(@"The middleware responded with an error: %@", error);
         } else {
             DDLogDebug(@"Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
@@ -210,7 +212,8 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     if (self.systemUser.sipEnabled) {
         [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
-                if (error.code == NSURLErrorTimedOut && self.retryCount < 5) {
+
+                if ((error.code == NSURLErrorTimedOut || error.code == NSURLErrorNotConnectedToInternet) && self.retryCount < 5) {
                     // Update the retry count.
                     self.retryCount++;
 
