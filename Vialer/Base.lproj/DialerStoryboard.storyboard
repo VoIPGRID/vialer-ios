@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
-                                <rect key="frame" x="171" y="542" width="258" height="50"/>
+                                <rect key="frame" x="171" y="537" width="258" height="55"/>
                                 <accessibility key="accessibilityConfiguration" identifier="CallingStoryboard.CallButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="UYt-1U-3jl"/>
@@ -171,8 +171,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="580" height="399"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r62-vw-btG">
-                                <rect key="frame" x="122" y="0.0" width="342" height="399"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r62-vw-btG">
+                                <rect key="frame" x="119" y="0.0" width="342" height="399"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W4f-bb-yCo">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="96"/>
@@ -231,9 +231,9 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G51-ma-gEQ">
                                         <rect key="frame" x="0.0" y="101" width="342" height="96"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-tv-0FO" userLabel="5-Button" customClass="NumberPadButton">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-tv-0FO" userLabel="4-Button" customClass="NumberPadButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Xf1-tv-0FO" secondAttribute="height" multiplier="1:1" id="Tm8-Rg-4f9"/>
                                                 </constraints>
@@ -245,9 +245,9 @@
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="2j4-xt-cGB"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-gw-ERF" userLabel="4-Button" customClass="NumberPadButton">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-gw-ERF" userLabel="5-Button" customClass="NumberPadButton">
                                                 <rect key="frame" x="123" y="0.0" width="96" height="96"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="5V0-gw-ERF" secondAttribute="height" multiplier="1:1" id="SVl-gv-adD"/>
                                                 </constraints>
@@ -341,9 +341,9 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MDi-n7-Djq">
                                         <rect key="frame" x="0.0" y="303" width="342" height="96"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-kg-Ni2" userLabel="0-Button" customClass="NumberPadButton">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-kg-Ni2" userLabel="*-Button" customClass="NumberPadButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="QnY-kg-Ni2" secondAttribute="height" multiplier="1:1" id="1YF-gi-r1z"/>
@@ -353,12 +353,12 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="Kp8-lx-eHv"/>
-                                                    <outletCollection property="gestureRecognizers" destination="ZSG-Xi-5oN" appends="YES" id="A0u-AU-4Cg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-VL-1YG" userLabel="*-Button" customClass="NumberPadButton">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-VL-1YG" userLabel="0-Button" customClass="NumberPadButton">
                                                 <rect key="frame" x="123" y="0.0" width="96" height="96"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="yQ4-VL-1YG" secondAttribute="height" multiplier="1:1" id="q0E-T1-dhu"/>
                                                 </constraints>
@@ -368,6 +368,7 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="QXX-TF-qba"/>
+                                                    <outletCollection property="gestureRecognizers" destination="ZSG-Xi-5oN" appends="YES" id="SVD-Mh-Rc3"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo9-W5-GXA" userLabel="#-Button" customClass="NumberPadButton">
