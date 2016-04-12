@@ -163,6 +163,7 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
     [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:DDLogFlagDebug];
     UIColor *red = [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:red backgroundColor:nil forFlag:DDLogFlagError];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor darkGrayColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
 
 #ifdef DEBUG
     // File logging
