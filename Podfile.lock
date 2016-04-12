@@ -84,7 +84,7 @@ PODS:
   - SSKeychain (1.4.0)
   - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (0.0.6)
-  - VialerSIPLib-iOS (0.0.20):
+  - VialerSIPLib-iOS (0.0.21):
     - CocoaLumberjack (~> 2.2)
     - Vialer-pjsip-iOS
 
@@ -140,7 +140,7 @@ SPEC CHECKSUMS:
   SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 63c7bb430ddbe564c5914e59018637bcf7cbe608
-  VialerSIPLib-iOS: 263707770340659d5159d9f2da994310a58dd707
+  VialerSIPLib-iOS: d07a7fea32716595959c3e3812b56aa58edd3012
 
 PODFILE CHECKSUM: 247588f3b8f20091659fe53fcd642a443b4e1860
 
