@@ -45,12 +45,12 @@
     return account;
 }
 
-+ (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL))completion {
++ (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL success, VSLAccount *account))completion {
     if (![VialerSIPLib sharedInstance].endpointAvailable) {
         BOOL success = [SIPUtils setupSIPEndpoint];
         if (!success) {
             DDLogError(@"Error setting up endpoint");
-            completion(NO);
+            completion(NO, nil);
         }
     }
 
@@ -58,7 +58,7 @@
         if (!success) {
             DDLogError(@"Error registering the account with the endpoint");
         }
-        completion(success);
+        completion(success, account);
     }];
 }
 

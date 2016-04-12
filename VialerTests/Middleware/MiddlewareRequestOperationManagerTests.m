@@ -27,7 +27,6 @@
     //To ensure an equal middleware API setup as actually used by the middleware class.
     Middleware *aMiddlewareInstance = [[Middleware alloc] init];
     self.middlewareRequestOperationManager = [aMiddlewareInstance middlewareRequestOperationManager];
-
     self.middlewareBaseURLAsString = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
 }
 
@@ -45,8 +44,9 @@
     int statusCodeToReturn = 502;
 
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        // Match the requested url with the url from the middleware as per configuration class/plist
         NSString *requestSchemeAndHost = [NSString stringWithFormat:@"%@://%@", request.URL.scheme, request.URL.host];
-        return [requestSchemeAndHost  isEqualToString:self.middlewareBaseURLAsString];
+        return [requestSchemeAndHost isEqualToString:self.middlewareBaseURLAsString];
     } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:statusCodeToReturn headers:nil];
     }];
@@ -59,8 +59,47 @@
             XCTFail(@"An error should have occurred.");
         } else {
             //Then
-            XCTAssert([error.localizedDescription isEqualToString:@"Request failed: bad gateway (502)"],
-                      @"Test should fail with \"Request failed: bad gateway (502)\"");
+            NSHTTPURLResponse *response = [[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey];
+            XCTAssert(response.statusCode == statusCodeToReturn,
+                      @"Unexpected HTTP status code returned, expected: %d, received: %ld", statusCodeToReturn, response.statusCode);
+        }
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            XCTFail(@"Expectation error");
+        }
+    }];
+}
+
+- (void)testSentCallResponseFailsWith408 {
+    //Given
+    NSDictionary *payload = @{@"unique_key": @1234,
+                              @"message_start_time" : @1234,
+                              };
+    int statusCodeToReturn = VoIPGRIDHttpErrorRequestTimeout;
+
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        // Match the requested url with the url from the middleware as per configuration class/plist
+        NSString *requestSchemeAndHost = [NSString stringWithFormat:@"%@://%@", request.URL.scheme, request.URL.host];
+        return [requestSchemeAndHost isEqualToString:self.middlewareBaseURLAsString];
+    } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithData:[NSData data] statusCode:statusCodeToReturn headers:nil];
+    }];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Call response to middleware"];
+
+    //When
+    [self.middlewareRequestOperationManager sentCallResponseToMiddleware:payload isAvailable:NO withCompletion:^(NSError *error) {
+        if (!error) {
+            XCTFail(@"An error should have occurred.");
+        } else {
+            //Then
+            NSHTTPURLResponse *response = [[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey];
+            XCTAssert(response.statusCode == statusCodeToReturn,
+                      @"Unexpected HTTP status code returned, expected: %d, received: %ld", statusCodeToReturn, response.statusCode);
+
         }
         [expectation fulfill];
     }];
