@@ -141,8 +141,8 @@
 /* No comment provided by engineer. */
 "Incoming call" = "Binnenkomend gesprek";
 
-/* No comment provided by engineer. */
-"Incoming call from: %@" = "Binnenkomend gesprek van: %@";
+/* Incoming call from: 'callerName', <'callerNumber'> */
+"Incoming call from: %1@ <%2@>" = "Binnenkomend gesprek van: %1$@ <%2$@>";
 
 /* No comment provided by engineer. */
 "Incoming call..." = "Inkomend gesprek...";

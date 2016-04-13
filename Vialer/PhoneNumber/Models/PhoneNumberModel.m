@@ -74,30 +74,26 @@
 
 + (void)getCallName:(VSLCall *)call withCompletion:(void (^ _Nullable)(PhoneNumberModel * _Nonnull))completion {
     PhoneNumberModel *model = [[[self class] alloc] init];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        BOOL success = [model getContactWithPhoneNumber:call.callerNumber];
+    BOOL success = [model getContactWithPhoneNumber:call.callerNumber];
 
-        if (success) {
-            model.callerInfo = model.displayName;
-            if (model.phoneNumberLabel) {
-                model.callerInfo = [model.callerInfo stringByAppendingString:[NSString stringWithFormat:@"\n%@", model.phoneNumberLabel]];
-            }
-        } else if (call.callerName && call.callerNumber) {
-            model.callerInfo = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
-        } else if (call.callerName && !call.callerNumber) {
-            model.callerInfo = [NSString stringWithFormat:@"%@", call.callerName];
-        } else if (!call.callerName && call.callerNumber) {
-            model.callerInfo = [NSString stringWithFormat:@"%@", call.callerNumber];
-        } else {
-            model.callerInfo = [NSString stringWithFormat:@"%@", call.remoteURI];
+    if (success) {
+        model.callerInfo = model.displayName;
+        if (model.phoneNumberLabel) {
+            model.callerInfo = [model.callerInfo stringByAppendingString:[NSString stringWithFormat:@"\n%@", model.phoneNumberLabel]];
         }
+    } else if (call.callerName && call.callerNumber) {
+        model.callerInfo = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
+    } else if (call.callerName && !call.callerNumber) {
+        model.callerInfo = [NSString stringWithFormat:@"%@", call.callerName];
+    } else if (!call.callerName && call.callerNumber) {
+        model.callerInfo = [NSString stringWithFormat:@"%@", call.callerNumber];
+    } else {
+        model.callerInfo = [NSString stringWithFormat:@"%@", call.remoteURI];
+    }
 
-        if (completion) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(model);
-            });
-        }
-    });
+    if (completion) {
+        completion(model);
+    }
 }
 
 @end

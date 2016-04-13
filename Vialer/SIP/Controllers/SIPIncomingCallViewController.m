@@ -70,9 +70,24 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
     [call addObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState options:0 context:NULL];
     [self.ringtone start];
 
-    [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-        self.incomingPhoneNumberLabel.text = phoneNumberModel.callerInfo;
-    }];
+    if (call.callerName) {
+        self.phoneNumber = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
+    } else {
+        self.phoneNumber = call.callerNumber;
+    }
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.phoneNumber = phoneNumberModel.callerInfo;
+            });
+        }];
+    });
+}
+
+- (void)setPhoneNumber:(NSString *)phoneNumber {
+    _phoneNumber = phoneNumber;
+    self.incomingPhoneNumberLabel.text = phoneNumber;
 }
 
 #pragma mark - KVO

@@ -604,6 +604,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41FD89B1C60A08400BBE6D7 /* AudioToolbox.framework in Frameworks */,
 				C41FD88F1C60A08400BBE6D7 /* PushKit.framework in Frameworks */,
 				C41FD8901C60A08400BBE6D7 /* libc++.dylib in Frameworks */,
 				C41FD8911C60A08400BBE6D7 /* SystemConfiguration.framework in Frameworks */,
@@ -616,7 +617,6 @@
 				C41FD8981C60A08400BBE6D7 /* CoreMedia.framework in Frameworks */,
 				C41FD8991C60A08400BBE6D7 /* CoreAudio.framework in Frameworks */,
 				C41FD89A1C60A08400BBE6D7 /* CFNetwork.framework in Frameworks */,
-				C41FD89B1C60A08400BBE6D7 /* AudioToolbox.framework in Frameworks */,
 				C41FD89C1C60A08400BBE6D7 /* libz.dylib in Frameworks */,
 				C41FD89D1C60A08400BBE6D7 /* CoreTelephony.framework in Frameworks */,
 				C41FD89E1C60A08400BBE6D7 /* QuartzCore.framework in Frameworks */,
@@ -656,6 +656,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
 				3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */,
 				F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */,
 				FBB088CA182284A20004FFD1 /* SystemConfiguration.framework in Frameworks */,
@@ -668,7 +669,6 @@
 				FB3820D81A1E51040033FF78 /* CoreMedia.framework in Frameworks */,
 				FB3820D41A1E50E30033FF78 /* CoreAudio.framework in Frameworks */,
 				FB3820D21A1E50D60033FF78 /* CFNetwork.framework in Frameworks */,
-				FB853166183986A5008A7EF1 /* AudioToolbox.framework in Frameworks */,
 				FB503173183527BE006FEBAA /* libz.dylib in Frameworks */,
 				FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */,
 				FBAD7F1A182AE98F002FC8FC /* QuartzCore.framework in Frameworks */,

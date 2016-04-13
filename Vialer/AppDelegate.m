@@ -7,6 +7,7 @@
 
 #import "AFNetworkActivityLogger.h"
 #import "APNSHandler.h"
+#import <AudioToolbox/AudioServices.h>
 @import CoreData;
 #import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
@@ -24,6 +25,8 @@
 @property (readwrite, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readwrite, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readwrite, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic) UIBackgroundTaskIdentifier vibratingTask;
+@property (nonatomic) BOOL stopVibrating;
 @end
 
 NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
@@ -31,6 +34,8 @@ NSString * const AppDelegateIncomingBackgroundCallNotification = @"AppDelegateIn
 NSString * const AppDelegateLocalNotificationCategory = @"AppDelegateLocalNotificationCategory";
 NSString * const AppDelegateLocalNotificationAcceptCall = @"AppDelegateLocalNotificationAcceptCall";
 NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNotificationDeclineCall";
+static NSTimeInterval const AppDelegateVibratingTimeInterval = 2.0f;
+static int const AppDelegateNumberOfVibrations = 5;
 
 @implementation AppDelegate
 
@@ -78,8 +83,6 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [[SystemUser currentUser] updateSIPAccountWithCompletion:nil];
         // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
@@ -89,6 +92,10 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
             [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
         }
     });
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [self stopVibratingInBackground];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -106,6 +113,7 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    [self stopVibratingInBackground];
     if ([identifier isEqualToString:AppDelegateLocalNotificationAcceptCall] || [identifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
         DDLogVerbose(@"User accepted a local notification with Action Identifier: %@", identifier);
         [self handleIncomingLocalBackgroudNotifications:identifier forCallId:notification.userInfo[@"callId"]];
@@ -252,6 +260,7 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
             } else {
                 if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
                     [self createLocalNotificationForCall:call];
+                    [self startVibratingInBackground];
                 } else {
                     DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
                     [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
@@ -262,19 +271,45 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 }
 
 - (void)createLocalNotificationForCall:(VSLCall *)call {
-    // The init of the local notification needs to be in the completion block of the callername.
-    [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
-        localNotification.userInfo = myUserInfo;
-        localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
-        localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %@", nil), phoneNumberModel.callerInfo];
-        localNotification.alertLaunchImage = @"AppIcon";
-        localNotification.soundName = @"ringtone.wav";
-        localNotification.category = AppDelegateLocalNotificationCategory;
+    // The notification
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
+    localNotification.userInfo = myUserInfo;
+    localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
+    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %1@ <%2@>", @"Incoming call from: 'callerName', <'callerNumber'>"), call.callerName, call.callerNumber];
+    localNotification.alertLaunchImage = @"AppIcon";
+    localNotification.soundName = @"ringtone.wav";
+    localNotification.category = AppDelegateLocalNotificationCategory;
 
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
+- (void)startVibratingInBackground {
+    UIApplication *application = [UIApplication sharedApplication];
+
+    // Vibrating
+    self.stopVibrating = NO;
+    self.vibratingTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        self.stopVibrating = YES;
+        [application endBackgroundTask:self.vibratingTask];
+        self.vibratingTask = UIBackgroundTaskInvalid;
     }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        for (int i = 0; i < AppDelegateNumberOfVibrations; i++) {
+            if (self.stopVibrating) {
+                break;
+            }
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            [NSThread sleepForTimeInterval:AppDelegateVibratingTimeInterval];
+        }
+        [application endBackgroundTask:self.vibratingTask];
+        self.vibratingTask = UIBackgroundTaskInvalid;
+    });
+}
+
+- (void)stopVibratingInBackground {
+    self.stopVibrating = YES;
+    [[UIApplication sharedApplication] endBackgroundTask:self.vibratingTask];
 }
 
 #pragma mark - Core Data

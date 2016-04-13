@@ -77,9 +77,13 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     self.phoneNumberLabelText = cleanPhoneNumber;
 
     if (contact) {
-        [PhoneNumberModel getCallNameFromContact:contact andPhoneNumber:phoneNumber withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-            self.phoneNumberLabelText = phoneNumberModel.callerInfo;
-        }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [PhoneNumberModel getCallNameFromContact:contact andPhoneNumber:phoneNumber withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.phoneNumberLabelText = phoneNumberModel.callerInfo;
+                });
+            }];
+        });
     }
 
     VSLAccount *account = [SIPUtils addSIPAccountToEndpoint];
@@ -102,9 +106,13 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     self.previousAVAudioSessionCategory = self.avAudioSession.category;
     self.call = call;
 
-    [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-        self.phoneNumberLabelText = phoneNumberModel.callerInfo;
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.phoneNumberLabelText = phoneNumberModel.callerInfo;
+            });
+        }];
+    });
 
     NSError *error;
     [self.call answer:&error];
