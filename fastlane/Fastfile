@@ -50,6 +50,39 @@ platform :ios do
     )
   end
 
+  desc "Match Development"
+  lane :match_development do
+    match(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      team_name: ENV['ITC_TEAM_NAME'],
+      git_url: ENV['GIT_URL_CERTIFICATES'],
+      type: 'development',
+      username: ENV['CERT_USERNAME'],
+    )
+  end
+
+  desc "Match Adhoc"
+  lane :match_adhoc do
+    match(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      team_name: ENV['ITC_TEAM_NAME'],
+      git_url: ENV['GIT_URL_CERTIFICATES'],
+      type: 'adhoc',
+      username: ENV['CERT_USERNAME'],
+    )
+  end
+
+  desc "Match Appstore"
+  lane :match_appstore do
+    match(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      team_name: ENV['ITC_TEAM_NAME'],
+      git_url: ENV['GIT_URL_CERTIFICATES'],
+      type: 'appstore',
+      username: ENV['CERT_USERNAME'],
+    )
+  end
+
   # You can define as many lanes as you want
   after_all do |lane|
     clean_build_artifacts()

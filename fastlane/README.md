@@ -21,6 +21,21 @@ Create Screenshots
 fastlane ios upload_screenshots
 ```
 Upload Screenshots
+### ios match_development
+```
+fastlane ios match_development
+```
+Match Development
+### ios match_adhoc
+```
+fastlane ios match_adhoc
+```
+Match Adhoc
+### ios match_appstore
+```
+fastlane ios match_appstore
+```
+Match Appstore
 
 ----
 
