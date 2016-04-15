@@ -435,6 +435,8 @@
 		C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewControllerTests.m; sourceTree = "<group>"; };
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
+		C49C0A3B1CC12936007AC30F /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		C49C0A3C1CC1293E007AC30F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
 		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
@@ -980,6 +982,15 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		C49C0A3A1CC128FB007AC30F /* Miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				C49C0A3B1CC12936007AC30F /* LICENSE.md */,
+				C49C0A3C1CC1293E007AC30F /* README.md */,
+			);
+			name = Miscellaneous;
+			sourceTree = "<group>";
+		};
 		C4A452511C24452700846591 /* Onboarding/Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1468,6 +1479,7 @@
 		FB4226C4182261D200707349 = {
 			isa = PBXGroup;
 			children = (
+				C49C0A3A1CC128FB007AC30F /* Miscellaneous */,
 				C41FD8D01C60A12500BBE6D7 /* Branding */,
 				FB4226D6182261D200707349 /* Vialer */,
 				C4F49F281BF0B45700C25159 /* VialerTests */,
