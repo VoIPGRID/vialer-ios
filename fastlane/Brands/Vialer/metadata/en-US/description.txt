@@ -1,0 +1,7 @@
+The Vialer enables you to dial out with your mobile phone using your main business phone number. You can also see the latest calls that have been made or received by the hosted PBX. Select an existing contact or use the numpad to dial the number client you want to call. 
+
+Calling via the app works by means of a so-called two-step conversation. The platform calls your mobile number first and then connects you to the contact you chose, showing him your business phone number.
+
+More on how the app works on https://www.vialerapp.com/
+
+P.S. an account on the hosted PBX is required to use this app.

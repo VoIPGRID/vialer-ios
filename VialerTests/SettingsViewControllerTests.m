@@ -57,6 +57,7 @@
 }
 
 - (void)testChangeSwitchToOffWillReloadTable {
+    [self.settingsViewController loadViewIfNeeded];
     id mockSystemUser = OCMClassMock([SystemUser class]);
     id mockTableView = OCMClassMock([UITableView class]);
     self.settingsViewController.currentUser = mockSystemUser;
@@ -64,8 +65,9 @@
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(NO);
     OCMStub([mockSwitch tag]).andReturn(1001);
+
     XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should reload table"];
-    OCMStub([mockSystemUser setSipEnabled:NO]).andDo(^(NSInvocation *invocation) {
+    OCMStub([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
 
@@ -76,8 +78,8 @@
             NSLog(@"Error: %@", error);
         }
         OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
-        [mockSystemUser stopMocking];
         [mockTableView stopMocking];
+        [mockSystemUser stopMocking];
         [mockSwitch stopMocking];
     }];
 }

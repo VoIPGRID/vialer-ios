@@ -1,0 +1,21 @@
+When you are a Voys customer, you can use this app to easily make phone calls with your company’s landline number.
+
+The advantages are: 
+
+- Use just one phone number for your business calls. Your clients see your office number and not your cell phone number.
+- Check the last calls received, made or missed, by your hosted PBX without logging in to Freedom, your Voys user interface.
+- No more mobile phone reimbursements for business calls. Everything is comfortably billed on one company invoice.
+- Benefit from Voys’ competitive international call rates and save big on international calls.
+- No need for VoIP phones, because all calls can be handled on your cell phone. 
+
+How does it work? 
+
+Setup
+Sign in with the username and password of your Voys account. Enter your personal cell phone number under the tab 'Settings'. The first time you log in, the App will ask for your permission to access the contact list on your cell phone.
+
+Phone calls with the App
+You can call any number by; simply clicking on it from the recent calls list, clicking on a contact or using the numpad to dial a number manually. 
+
+Two phone calls
+The app will set up a 2-way call; one from your business number to your cell phone and the other from your business number to the desired destination.
+The platform calls you within a second. Answer the call and it will connect you to the contact you chose to call, showing him/her your company’s phone number. Your company pays for both the incoming and the outgoing call. Standard call rates apply.

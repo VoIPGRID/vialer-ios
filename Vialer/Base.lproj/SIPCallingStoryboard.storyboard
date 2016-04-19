@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-cg-f4D" userLabel="end-call-button">
                                 <rect key="frame" x="265" y="510" width="70" height="70"/>
+                                <accessibility key="accessibilityConfiguration" identifier="SIPCallingStoryboard.CancelCall.button"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="XKn-25-rW6"/>
                                     <constraint firstAttribute="width" secondItem="lgi-cg-f4D" secondAttribute="height" multiplier="1:1" id="ibD-qU-bLh"/>
