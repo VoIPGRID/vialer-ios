@@ -8,6 +8,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ContactUtils.h"
 #import "DurationTimer.h"
+#import "GAITracker.h"
 #import "PhoneNumberModel.h"
 #import "PhoneNumberUtils.h"
 #import "SIPUtils.h"
@@ -36,6 +37,11 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.phoneNumberLabel.text = self.phoneNumberLabelText;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 
 - (void)dealloc {

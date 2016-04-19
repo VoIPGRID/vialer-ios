@@ -6,6 +6,7 @@
 #import "SIPIncomingCallViewController.h"
 
 #import "ContactUtils.h"
+#import "GAITracker.h"
 #import "PhoneNumberModel.h"
 #import "SIPCallingViewController.h"
 #import "SIPUtils.h"
@@ -33,6 +34,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
     self.incomingPhoneNumberLabel.text = self.phoneNumber;
 }
 
@@ -112,6 +114,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (IBAction)declineCallButtonPressed:(UIButton * _Nonnull)sender {
     DDLogDebug(@"User pressed \"Decline call\" for call: %ld", (long)self.call.callId);
+    [GAITracker declineIncomingCallEvent];
     NSError *error;
     [self.call decline:&error];
     if (error) {
@@ -123,6 +126,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (IBAction)acceptCallButtonPressed:(UIButton * _Nonnull)sender {
     DDLogDebug(@"User pressed \"Accept call\" for call: %ld", (long)self.call.callId);
+    [GAITracker acceptIncomingCallEvent];
     [self.ringtone stop];
     [self performSegueWithIdentifier:SIPIncomingCallViewControllerShowSIPCallingSegue sender:nil];
 }
