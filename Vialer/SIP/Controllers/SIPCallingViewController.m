@@ -5,6 +5,7 @@
 
 #import "SIPCallingViewController.h"
 
+#import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ContactUtils.h"
 #import "DurationTimer.h"
@@ -147,7 +148,14 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     self.endCallButton.enabled = NO;
 
     // Wait a little while before dismissing the view.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SIPCallingViewControllerDismissTimeAfterHangup * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    double timeToWaitBeforeDismissing = SIPCallingViewControllerDismissTimeAfterHangup;
+#ifdef DEBUG
+    // Increase the dismiss time so snapshot can take a proper screenshot
+    if ([AppDelegate isSnapshotScreenshotRun]) {
+        timeToWaitBeforeDismissing = 5.0;
+    }
+#endif
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeToWaitBeforeDismissing * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.call.incoming) {
             [self performSegueWithIdentifier:SIPCallingViewControllerUnwindToVialerRootViewControllerSegue sender:self];
         } else {
@@ -240,6 +248,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 }
 
 #pragma mark - SipCallingButtonsViewControllerDelegate
+
 - (void)keypadChangedVisibility:(BOOL)visible {
     self.hideButton.hidden = !visible;
     self.callStatusLabel.hidden = visible;
@@ -248,6 +257,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
         self.phoneNumberLabel.text = self.phoneNumberLabelText;
     }
 }
+
 - (void)DTMFSend:(NSString *)character {
     // Check if this is the first character pressed.
     if ([self.phoneNumberLabel.text isEqualToString:self.phoneNumberLabelText]) {

@@ -1,0 +1,5 @@
+# For more information about this configuration visit
+# https://github.com/fastlane/scan#scanfile
+
+scheme ENV["TEST_SCHEME"]
+clean true

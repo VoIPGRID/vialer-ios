@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25BBF40AF42BB5FB6D9046ED /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4FE451CC7C2D4829998FAA /* libPods-Vialer.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -16,8 +17,8 @@
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
-		4B1B5016FA97F38C945063BA /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD935344027EAD28DF93F63D /* libPods-Vialer.a */; };
-		A565BDC6A4A023924B8AAAA4 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92061A60436976857F951791 /* libPods-Voys.a */; };
+		86165FD1D221F55E50E07218 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EABE570A65E64F5773C4800E /* libPods-Voys.a */; };
+		C02FF0FE5A4C6A0E71131BEE /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E4D89A3BD74989A093A9057 /* libPods-VialerTests.a */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
 		C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */; };
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
@@ -121,10 +122,7 @@
 		C41FD8EC1C60A57C00BBE6D7 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8DC1C60A54000BBE6D7 /* Config.plist */; };
 		C41FD8ED1C60A57C00BBE6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8DD1C60A54000BBE6D7 /* GoogleService-Info.plist */; };
 		C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
-		C41FD8FB1C60A89300BBE6D7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
-		C41FD9041C60B35D00BBE6D7 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */; };
-		C4234D451C60ED13005710B7 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4234D441C60ED13005710B7 /* Snapshot-Constants.swift */; };
 		C4529E2F1C4542D10063F08B /* TwoStepCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */; };
 		C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -173,17 +171,16 @@
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
-		F21ECCE61C47C84A00E9B276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB29D911189BA0FF00345976 /* Localizable.strings */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
+		F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
+		F2B3C64F1CC9130200F8BF53 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4234D441C60ED13005710B7 /* Snapshot-Constants.swift */; };
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BE31C731F7500502769 /* MiddlewareTests.m */; };
-		F2B43F0E1C3BEB3F0089A387 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
-		F2B43F171C3BEB880089A387 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		F2DE21731CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
 		F2DE21741CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
@@ -191,7 +188,8 @@
 		F2DE21791CB698A6007B5B4D /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		F2DE21831CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
-		F674DD5B06C6E1B337BD656C /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */; };
+		F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
+		F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
@@ -288,13 +286,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C41FD8F41C60A89300BBE6D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FB4226C5182261D200707349 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FB4226CC182261D200707349;
-			remoteInfo = Vialer;
-		};
 		C41FD9021C60B28E00BBE6D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB4226C5182261D200707349 /* Project object */;
@@ -309,7 +300,7 @@
 			remoteGlobalIDString = FB4226CC182261D200707349;
 			remoteInfo = Vialer;
 		};
-		F2B43F101C3BEB3F0089A387 /* PBXContainerItemProxy */ = {
+		F22DE0AF1CC90D60001468B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB4226C5182261D200707349 /* Project object */;
 			proxyType = 1;
@@ -342,8 +333,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1328C0262168746A823EDDE7 /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
-		3C7A9CFC633851AC4DD08772 /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		00DFCE5CC2AFA1FB35CF7110 /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		2AB3DD2D88E3237A7066512E /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
+		2E4D89A3BD74989A093A9057 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
 		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
@@ -354,21 +346,17 @@
 		3D44303E1AEF8E1B0034156F /* VIAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIAScene.m; sourceTree = "<group>"; };
 		3D608B5F1AE67DC800FA02CE /* ConfigureFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureFormView.h; sourceTree = "<group>"; };
 		3D608B601AE67DC800FA02CE /* ConfigureFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormView.m; sourceTree = "<group>"; };
-		3DBE92A428580ED09AF0EE89 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		3DE6EAD91AF0CB4800C09935 /* UnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlockView.h; sourceTree = "<group>"; };
 		3DE6EADA1AF0CB4800C09935 /* UnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnlockView.m; sourceTree = "<group>"; };
 		3DE6EADC1AF24CF500C09935 /* ForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordView.h; sourceTree = "<group>"; };
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
 		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		54BF7D155F61B0DBE51CD475 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		82AA193C1723EAAEF6A8B77C /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
-		92061A60436976857F951791 /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BAF93BAD27B202E36276907 /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
-		9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A15875AFAB0159B282447899 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
+		4E10AF6261EA5AB98C5346BE /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		56754CC22B57CEDC9A576967 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D4FE451CC7C2D4829998FAA /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA03108D9D39C011A788435E /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
-		BD935344027EAD28DF93F63D /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
@@ -377,7 +365,6 @@
 		C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		C40C11DF1C3A7396008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		C40C11E11C3ABA7D008CC1A4 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
-		C410C9A61CBB86E200A65E84 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
 		C418AA391C7E407800C8EB91 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		C41A73521C6A7CF300482E3C /* VialerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VialerModel.xcdatamodel; sourceTree = "<group>"; };
 		C41A73651C6B2F1C00482E3C /* RecentCall+VoIPGRID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentCall+VoIPGRID.h"; sourceTree = "<group>"; };
@@ -419,6 +406,7 @@
 		C4675FFD1C46DB7B008820C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		C46760001C46EBBE008820C8 /* EditNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberViewController.h; sourceTree = "<group>"; };
 		C46760011C46EBBE008820C8 /* EditNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberViewController.m; sourceTree = "<group>"; };
+		C4692BBE1CC50E5400740818 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
 		C46F10021C7C668D007F30A6 /* ActivateSIPAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivateSIPAccountViewController.h; path = Settings/Controllers/ActivateSIPAccountViewController.h; sourceTree = "<group>"; };
 		C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivateSIPAccountViewController.m; path = Settings/Controllers/ActivateSIPAccountViewController.m; sourceTree = "<group>"; };
 		C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileWebViewController.h; sourceTree = "<group>"; };
@@ -467,20 +455,31 @@
 		C4F49F361BF0C13400C25159 /* libPods-Vialer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Vialer.a"; path = "Pods/../build/Debug-iphoneos/libPods-Vialer.a"; sourceTree = "<group>"; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
-		D6319D916010D0355EDE8969 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
-		E6679434FF87C43B14DC007A /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		E0C099694B529E1B0BE63875 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		EABE570A65E64F5773C4800E /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
 		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
 		F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandlerTests.m; sourceTree = "<group>"; };
+		F2872D911CC8CF6000D3ACB0 /* .env.vialer */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.vialer; sourceTree = "<group>"; };
+		F2872D921CC8CF6000D3ACB0 /* .env.voys */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.voys; sourceTree = "<group>"; };
+		F2872D941CC8CF6000D3ACB0 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		F2872E261CC8CF6000D3ACB0 /* Deliverfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Deliverfile; sourceTree = "<group>"; };
+		F2872E271CC8CF6000D3ACB0 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		F2872E281CC8CF6000D3ACB0 /* Matchfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Matchfile; sourceTree = "<group>"; };
+		F2872E2A1CC8CF6000D3ACB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F2872E2C1CC8CF6000D3ACB0 /* Scanfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Scanfile; sourceTree = "<group>"; };
+		F2872E2F1CC8CF6000D3ACB0 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2B40BDA1C731F3E00502769 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
 		F2B40BDB1C731F3E00502769 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
 		F2B40BE31C731F7500502769 /* MiddlewareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
-		F2B43F0B1C3BEB3F0089A387 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
 		F2B43F0F1C3BEB3F0089A387 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -594,6 +593,7 @@
 		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
 		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
+		FBDAA46C9701712C2F5A837E /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
 		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
 		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Configuration.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -628,7 +628,7 @@
 				C41FD8A21C60A08400BBE6D7 /* UIKit.framework in Frameworks */,
 				C41FD8A31C60A08400BBE6D7 /* Foundation.framework in Frameworks */,
 				C41FD8A41C60A08400BBE6D7 /* CoreGraphics.framework in Frameworks */,
-				A565BDC6A4A023924B8AAAA4 /* libPods-Voys.a in Frameworks */,
+				86165FD1D221F55E50E07218 /* libPods-Voys.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,11 +643,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F674DD5B06C6E1B337BD656C /* libPods-VialerTests.a in Frameworks */,
+				C02FF0FE5A4C6A0E71131BEE /* libPods-VialerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2B43F081C3BEB3F0089A387 /* Frameworks */ = {
+		F22DE0A61CC90D41001468B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -680,7 +680,7 @@
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
-				4B1B5016FA97F38C945063BA /* libPods-Vialer.a in Frameworks */,
+				25BBF40AF42BB5FB6D9046ED /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,18 +734,18 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		75BC7643E9AF74274EB33B0B /* Pods */ = {
+		3F1D387AE9794292FEEDC0AD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				82AA193C1723EAAEF6A8B77C /* Pods-Vialer.debug.xcconfig */,
-				E6679434FF87C43B14DC007A /* Pods-Vialer.adhocdistribution.xcconfig */,
-				D6319D916010D0355EDE8969 /* Pods-Vialer.release.xcconfig */,
-				54BF7D155F61B0DBE51CD475 /* Pods-VialerTests.debug.xcconfig */,
-				3C7A9CFC633851AC4DD08772 /* Pods-VialerTests.adhocdistribution.xcconfig */,
-				3DBE92A428580ED09AF0EE89 /* Pods-VialerTests.release.xcconfig */,
-				A15875AFAB0159B282447899 /* Pods-Voys.debug.xcconfig */,
-				9BAF93BAD27B202E36276907 /* Pods-Voys.adhocdistribution.xcconfig */,
-				1328C0262168746A823EDDE7 /* Pods-Voys.release.xcconfig */,
+				E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */,
+				E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */,
+				2AB3DD2D88E3237A7066512E /* Pods-Vialer.release.xcconfig */,
+				E0C099694B529E1B0BE63875 /* Pods-VialerTests.debug.xcconfig */,
+				00DFCE5CC2AFA1FB35CF7110 /* Pods-VialerTests.adhocdistribution.xcconfig */,
+				56754CC22B57CEDC9A576967 /* Pods-VialerTests.release.xcconfig */,
+				AA03108D9D39C011A788435E /* Pods-Voys.debug.xcconfig */,
+				4E10AF6261EA5AB98C5346BE /* Pods-Voys.adhocdistribution.xcconfig */,
+				FBDAA46C9701712C2F5A837E /* Pods-Voys.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1148,6 +1148,22 @@
 			name = APNS;
 			sourceTree = "<group>";
 		};
+		F2872D8F1CC8CF6000D3ACB0 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				F2872D911CC8CF6000D3ACB0 /* .env.vialer */,
+				F2872D921CC8CF6000D3ACB0 /* .env.voys */,
+				F2872D941CC8CF6000D3ACB0 /* Appfile */,
+				F2872E261CC8CF6000D3ACB0 /* Deliverfile */,
+				F2872E271CC8CF6000D3ACB0 /* Fastfile */,
+				F2872E281CC8CF6000D3ACB0 /* Matchfile */,
+				F2872E2C1CC8CF6000D3ACB0 /* Scanfile */,
+				F2872E2F1CC8CF6000D3ACB0 /* Snapfile */,
+				F2872E2A1CC8CF6000D3ACB0 /* README.md */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
 		F2B40BD91C731F3E00502769 /* Middleware */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,13 +1496,14 @@
 			isa = PBXGroup;
 			children = (
 				C49C0A3A1CC128FB007AC30F /* Miscellaneous */,
+				F2872D8F1CC8CF6000D3ACB0 /* fastlane */,
 				C41FD8D01C60A12500BBE6D7 /* Branding */,
 				FB4226D6182261D200707349 /* Vialer */,
 				C4F49F281BF0B45700C25159 /* VialerTests */,
 				F2B43F0C1C3BEB3F0089A387 /* SnapshotUITests */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
-				75BC7643E9AF74274EB33B0B /* Pods */,
+				3F1D387AE9794292FEEDC0AD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1495,9 +1512,9 @@
 			children = (
 				FB4226CD182261D200707349 /* Vialer.app */,
 				C4F49F271BF0B45700C25159 /* VialerTests.xctest */,
-				F2B43F0B1C3BEB3F0089A387 /* VialerSnapshotUITests.xctest */,
 				C41FD8CE1C60A08400BBE6D7 /* Voys.app */,
 				C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */,
+				F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1529,9 +1546,9 @@
 				FB4226D0182261D200707349 /* UIKit.framework */,
 				FB4226D2182261D200707349 /* Foundation.framework */,
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
-				BD935344027EAD28DF93F63D /* libPods-Vialer.a */,
-				9C0F911AA12BCBC3BBF9E4F2 /* libPods-VialerTests.a */,
-				92061A60436976857F951791 /* libPods-Voys.a */,
+				9D4FE451CC7C2D4829998FAA /* libPods-Vialer.a */,
+				2E4D89A3BD74989A093A9057 /* libPods-VialerTests.a */,
+				EABE570A65E64F5773C4800E /* libPods-Voys.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1656,7 +1673,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C41FD8F31C60A89300BBE6D7 /* PBXTargetDependency */,
 				C41FD9031C60B28E00BBE6D7 /* PBXTargetDependency */,
 			);
 			name = VoysSnapshotUITests;
@@ -1685,22 +1701,22 @@
 			productReference = C4F49F271BF0B45700C25159 /* VialerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F2B43F0A1C3BEB3F0089A387 /* VialerSnapshotUITests */ = {
+		F22DE09F1CC90D41001468B3 /* VialerSnapshotUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2B43F151C3BEB3F0089A387 /* Build configuration list for PBXNativeTarget "VialerSnapshotUITests" */;
+			buildConfigurationList = F22DE0A91CC90D41001468B3 /* Build configuration list for PBXNativeTarget "VialerSnapshotUITests" */;
 			buildPhases = (
-				F2B43F071C3BEB3F0089A387 /* Sources */,
-				F2B43F081C3BEB3F0089A387 /* Frameworks */,
-				F2B43F091C3BEB3F0089A387 /* Resources */,
+				F22DE0A21CC90D41001468B3 /* Sources */,
+				F22DE0A61CC90D41001468B3 /* Frameworks */,
+				F22DE0A71CC90D41001468B3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F2B43F111C3BEB3F0089A387 /* PBXTargetDependency */,
+				F22DE0B01CC90D60001468B3 /* PBXTargetDependency */,
 			);
 			name = VialerSnapshotUITests;
 			productName = SnapshotUITests;
-			productReference = F2B43F0B1C3BEB3F0089A387 /* VialerSnapshotUITests.xctest */;
+			productReference = F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		FB4226CC182261D200707349 /* Vialer */ = {
@@ -1754,8 +1770,7 @@
 						CreatedOnToolsVersion = 7.1;
 						TestTargetID = FB4226CC182261D200707349;
 					};
-					F2B43F0A1C3BEB3F0089A387 = {
-						CreatedOnToolsVersion = 7.2;
+					F22DE09F1CC90D41001468B3 = {
 						TestTargetID = FB4226CC182261D200707349;
 					};
 					FB4226CC182261D200707349 = {
@@ -1787,7 +1802,7 @@
 			targets = (
 				FB4226CC182261D200707349 /* Vialer */,
 				C4F49F261BF0B45700C25159 /* VialerTests */,
-				F2B43F0A1C3BEB3F0089A387 /* VialerSnapshotUITests */,
+				F22DE09F1CC90D41001468B3 /* VialerSnapshotUITests */,
 				C41FD8551C60A08400BBE6D7 /* Voys */,
 				C41FD8F21C60A89300BBE6D7 /* VoysSnapshotUITests */,
 			);
@@ -1837,7 +1852,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C41FD8FB1C60A89300BBE6D7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1849,11 +1863,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2B43F091C3BEB3F0089A387 /* Resources */ = {
+		F22DE0A71CC90D41001468B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F21ECCE61C47C84A00E9B276 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2174,7 +2187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */,
-				C41FD9041C60B35D00BBE6D7 /* SnapshotUITests.swift in Sources */,
+				F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */,
 				C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2210,13 +2223,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2B43F071C3BEB3F0089A387 /* Sources */ = {
+		F22DE0A21CC90D41001468B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4234D451C60ED13005710B7 /* Snapshot-Constants.swift in Sources */,
-				F2B43F0E1C3BEB3F0089A387 /* SnapshotUITests.swift in Sources */,
-				F2B43F171C3BEB880089A387 /* SnapshotHelper.swift in Sources */,
+				F2B3C64F1CC9130200F8BF53 /* Snapshot-Constants.swift in Sources */,
+				F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */,
+				F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2298,11 +2311,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C41FD8F31C60A89300BBE6D7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FB4226CC182261D200707349 /* Vialer */;
-			targetProxy = C41FD8F41C60A89300BBE6D7 /* PBXContainerItemProxy */;
-		};
 		C41FD9031C60B28E00BBE6D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C41FD8551C60A08400BBE6D7 /* Voys */;
@@ -2313,10 +2321,10 @@
 			target = FB4226CC182261D200707349 /* Vialer */;
 			targetProxy = C4E8600B1BF14C970051BFDE /* PBXContainerItemProxy */;
 		};
-		F2B43F111C3BEB3F0089A387 /* PBXTargetDependency */ = {
+		F22DE0B01CC90D60001468B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FB4226CC182261D200707349 /* Vialer */;
-			targetProxy = F2B43F101C3BEB3F0089A387 /* PBXContainerItemProxy */;
+			targetProxy = F22DE0AF1CC90D60001468B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2379,7 +2387,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C461837E1BFA24850075709B /* Base */,
-				C410C9A61CBB86E200A65E84 /* nl */,
+				C4692BBE1CC50E5400740818 /* nl */,
 			);
 			name = DialerStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -2463,7 +2471,7 @@
 		};
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6679434FF87C43B14DC007A /* Pods-Vialer.adhocdistribution.xcconfig */;
+			baseConfigurationReference = E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2495,7 +2503,7 @@
 		};
 		C41FD8CB1C60A08400BBE6D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A15875AFAB0159B282447899 /* Pods-Voys.debug.xcconfig */;
+			baseConfigurationReference = AA03108D9D39C011A788435E /* Pods-Voys.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2533,7 +2541,7 @@
 		};
 		C41FD8CC1C60A08400BBE6D7 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9BAF93BAD27B202E36276907 /* Pods-Voys.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 4E10AF6261EA5AB98C5346BE /* Pods-Voys.adhocdistribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2565,7 +2573,7 @@
 		};
 		C41FD8CD1C60A08400BBE6D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1328C0262168746A823EDDE7 /* Pods-Voys.release.xcconfig */;
+			baseConfigurationReference = FBDAA46C9701712C2F5A837E /* Pods-Voys.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2682,7 +2690,7 @@
 		};
 		C4F49F2F1BF0B45700C25159 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54BF7D155F61B0DBE51CD475 /* Pods-VialerTests.debug.xcconfig */;
+			baseConfigurationReference = E0C099694B529E1B0BE63875 /* Pods-VialerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2717,7 +2725,7 @@
 		};
 		C4F49F301BF0B45700C25159 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C7A9CFC633851AC4DD08772 /* Pods-VialerTests.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 00DFCE5CC2AFA1FB35CF7110 /* Pods-VialerTests.adhocdistribution.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2749,7 +2757,7 @@
 		};
 		C4F49F311BF0B45700C25159 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DBE92A428580ED09AF0EE89 /* Pods-VialerTests.release.xcconfig */;
+			baseConfigurationReference = 56754CC22B57CEDC9A576967 /* Pods-VialerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2779,7 +2787,7 @@
 			};
 			name = Release;
 		};
-		F2B43F121C3BEB3F0089A387 /* Debug */ = {
+		F22DE0AA1CC90D41001468B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -2799,15 +2807,15 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.SnapshotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = Vialer;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
 		};
-		F2B43F131C3BEB3F0089A387 /* AdHocDistribution */ = {
+		F22DE0AB1CC90D41001468B3 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -2829,14 +2837,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.SnapshotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Vialer;
 				USES_XCTRUNNER = YES;
 			};
 			name = AdHocDistribution;
 		};
-		F2B43F141C3BEB3F0089A387 /* Release */ = {
+		F22DE0AC1CC90D41001468B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -2858,8 +2866,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.SnapshotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Vialer;
 				USES_XCTRUNNER = YES;
 			};
@@ -2922,7 +2930,7 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82AA193C1723EAAEF6A8B77C /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2960,7 +2968,7 @@
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6319D916010D0355EDE8969 /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = 2AB3DD2D88E3237A7066512E /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -3022,12 +3030,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2B43F151C3BEB3F0089A387 /* Build configuration list for PBXNativeTarget "VialerSnapshotUITests" */ = {
+		F22DE0A91CC90D41001468B3 /* Build configuration list for PBXNativeTarget "VialerSnapshotUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F2B43F121C3BEB3F0089A387 /* Debug */,
-				F2B43F131C3BEB3F0089A387 /* AdHocDistribution */,
-				F2B43F141C3BEB3F0089A387 /* Release */,
+				F22DE0AA1CC90D41001468B3 /* Debug */,
+				F22DE0AB1CC90D41001468B3 /* AdHocDistribution */,
+				F22DE0AC1CC90D41001468B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -15,7 +15,7 @@
 @property (weak, nonatomic) UIViewController *presentingViewController;
 @property (weak, nonatomic) SipCallingButtonsViewController *sipCallingButtonsVC;
 @property (strong, nonatomic) VSLCall *call;
-@property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSString *phoneNumberLabelText;
 @end
 
 @interface SIPCallingViewControllerTests : XCTestCase
@@ -121,12 +121,12 @@
 }
 
 - (void)testPhonenumberSetWillSetLabel {
-    self.sipCallingVC.phoneNumber = @"242";
+    self.sipCallingVC.phoneNumberLabelText = @"242";
     XCTAssertEqualObjects(self.sipCallingVC.phoneNumberLabel.text, @"242", @"The phonenumber should be visible again");
 }
 
 - (void)testDTMFTonesWillSetLabel {
-    self.sipCallingVC.phoneNumber = @"242";
+    self.sipCallingVC.phoneNumberLabelText = @"242";
 
     [self.sipCallingVC DTMFSend:@"1"];
     [self.sipCallingVC DTMFSend:@"2"];
@@ -136,7 +136,7 @@
 }
 
 - (void)testPhonenumberLabelWillResetToPhonenumberAfterKeypadBecameInvisible {
-    self.sipCallingVC.phoneNumber = @"242";
+    self.sipCallingVC.phoneNumberLabelText = @"242";
     self.sipCallingVC.phoneNumberLabel.text = @"123";
 
     [self.sipCallingVC keypadChangedVisibility:NO];

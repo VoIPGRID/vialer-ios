@@ -1,7 +1,5 @@
-###################### More Options ######################
-# If you want to have even more control, check out the documentation
-# https://github.com/fastlane/deliver/blob/master/Deliverfile.md
-
-
-###################### Automatically generated ######################
-# Feel free to remove the following line if you use fastlane (which you should)
+app_identifier ENV["APP_IDENTIFIER"]
+team_name ENV['ITC_TEAM_NAME']
+username ENV['ITC_USERNAME']
+metadata_path "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/metadata"
+screenshots_path "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"

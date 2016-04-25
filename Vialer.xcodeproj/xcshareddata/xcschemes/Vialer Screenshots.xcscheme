@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2B43F0A1C3BEB3F0089A387"
+               BlueprintIdentifier = "F22DE09F1CC90D41001468B3"
                BuildableName = "VialerSnapshotUITests.xctest"
                BlueprintName = "VialerSnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">
@@ -37,7 +37,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2B43F0A1C3BEB3F0089A387"
+               BlueprintIdentifier = "F22DE09F1CC90D41001468B3"
                BuildableName = "VialerSnapshotUITests.xctest"
                BlueprintName = "VialerSnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">
@@ -62,13 +62,6 @@
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "FASTLANE_SNAPSHOT"
-            value = "YES"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -109,8 +102,7 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FB4226CC182261D200707349"
@@ -118,7 +110,7 @@
             BlueprintName = "Vialer"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

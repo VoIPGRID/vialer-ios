@@ -30,6 +30,14 @@ platform :ios do
     cocoapods
   end
 
+  desc "Deploy to iTunes Connect"
+  lane :deploy do
+    prebuild
+    scan
+    snapshot
+    deliver
+  end
+
   desc "Create Screenshots"
   lane :screenshot do
     snapshot(
@@ -41,11 +49,6 @@ platform :ios do
   desc "Upload Screenshots"
   lane :upload_screenshots do
     deliver(
-      app_identifier: ENV["APP_IDENTIFIER"],
-      team_name: ENV['ITC_TEAM_NAME'],
-      username: ENV['ITC_USERNAME'],
-      metadata_path: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/metadata",
-      screenshots_path: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots",
       skip_metadata: true
     )
   end
