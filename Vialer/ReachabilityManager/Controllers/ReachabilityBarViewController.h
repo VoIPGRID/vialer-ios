@@ -33,4 +33,9 @@
  *  Set this as the delegate of this controller to receive updates from the ReachabilityStatus.
  */
 @property (weak, nonatomic) id<ReachabilityBarViewControllerDelegate> delegate;
+
+/**
+ *  Readonly property indicating whether or not the bar should be displayed.
+ */
+@property (readonly) BOOL shouldBeVisible;
 @end
