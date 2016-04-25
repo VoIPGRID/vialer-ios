@@ -32,6 +32,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
+@property (weak, nonatomic) ReachabilityBarViewController *reachabilityBar;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
@@ -151,8 +152,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
         [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:self.selectedContact];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
-        ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
-        rbvc.delegate = self;
+        self.reachabilityBar = (ReachabilityBarViewController *)segue.destinationViewController;
+        self.reachabilityBar.delegate = self;
     }
 }
 
@@ -265,6 +266,15 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 #pragma mark - searchbar delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [self hideReachabilityBar];
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    [self showReachabilityBar];
+    return YES;
+}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [[ContactModel defaultContactModel] searchContacts:searchText];
@@ -320,6 +330,19 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 #pragma mark - ReachabilityBarViewControllerDelegate
+- (void)hideReachabilityBar {
+    self.reachabilityBarHeigthConstraint.constant = 0.0;
+    self.reachabilityBar.view.hidden = YES;
+    [self.view layoutIfNeeded];
+}
+
+- (void)showReachabilityBar {
+    if (self.reachabilityBar.shouldBeVisible) {
+        self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+        self.reachabilityBar.view.hidden = NO;
+        [self.view layoutIfNeeded];
+    }
+}
 
 - (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {
     self.reachabilityStatus = status;

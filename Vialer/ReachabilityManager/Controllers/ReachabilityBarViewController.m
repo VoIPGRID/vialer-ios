@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *twoStepInfoButton;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (strong, nonatomic) SystemUser *currentUser;
+@property (assign) BOOL shouldBeVisible;
 @end
 
 @implementation ReachabilityBarViewController
@@ -60,7 +61,7 @@
 
         switch (self.reachabilityManager.reachabilityStatus) {
             case ReachabilityManagerStatusOffline: {
-                self.informationLabel.text   = NSLocalizedString(@"No connection, cannot call.", nil);
+                self.informationLabel.text = NSLocalizedString(@"No connection, cannot call.", nil);
                 shouldBeVisible = YES;
                 break;
             }
@@ -76,7 +77,7 @@
             }
             case ReachabilityManagerStatusHighSpeed: {
                 if (!self.currentUser.sipEnabled && self.currentUser.sipAllowed) {
-                    self.informationLabel.text = NSLocalizedString(@"VoIP not activated, Two step calling enabled.", nil);
+                    self.informationLabel.text = NSLocalizedString(@"VoIP disabled, enable in settings", nil);
                     shouldBeVisible = YES;
                 } else {
                     self.informationLabel.text = @"";
@@ -92,6 +93,7 @@
         }
 
         if ([self.delegate respondsToSelector:@selector(reachabilityBar:shouldBeVisible:)]) {
+            self.shouldBeVisible = shouldBeVisible;
             [self.delegate reachabilityBar:self shouldBeVisible:shouldBeVisible];
         }
     });

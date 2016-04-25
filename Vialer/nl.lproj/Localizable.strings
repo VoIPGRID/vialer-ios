@@ -331,7 +331,7 @@
 "VoIP account ID" = "VoIP-account ID";
 
 /* No comment provided by engineer. */
-"VoIP not activated, Two step calling enabled." = "VoIP niet geactiveerd, Twee staps modus geactiveerd.";
+"VoIP disabled, enable in settings" = "VoIP inactief, activeer VoIP bij instellingen";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
