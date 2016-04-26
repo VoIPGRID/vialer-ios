@@ -27,6 +27,7 @@
 @property (readwrite, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic) UIBackgroundTaskIdentifier vibratingTask;
 @property (nonatomic) BOOL stopVibrating;
+@property (strong, nonatomic) UILocalNotification *incomingCallNotification;
 @end
 
 NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
@@ -74,6 +75,8 @@ static int const AppDelegateNumberOfVibrations = 5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipDisabledNotification:) name:SystemUserSIPDisabledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallConnectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallDisconnectedNotification object:nil];
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
@@ -272,16 +275,21 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 - (void)createLocalNotificationForCall:(VSLCall *)call {
     // The notification
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    self.incomingCallNotification = [[UILocalNotification alloc] init];
     NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
-    localNotification.userInfo = myUserInfo;
-    localNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
-    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %1@ <%2@>", @"Incoming call from: 'callerName', <'callerNumber'>"), call.callerName, call.callerNumber];
-    localNotification.alertLaunchImage = @"AppIcon";
-    localNotification.soundName = @"ringtone.wav";
-    localNotification.category = AppDelegateLocalNotificationCategory;
+    self.incomingCallNotification.userInfo = myUserInfo;
+    self.incomingCallNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
+    self.incomingCallNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %1@ <%2@>", @"Incoming call from: 'callerName', <'callerNumber'>"), call.callerName, call.callerNumber];
+    self.incomingCallNotification.alertLaunchImage = @"AppIcon";
+    self.incomingCallNotification.soundName = @"ringtone.wav";
+    self.incomingCallNotification.category = AppDelegateLocalNotificationCategory;
 
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    [[UIApplication sharedApplication] scheduleLocalNotification:self.incomingCallNotification];
+}
+
+- (void)removeLocalNotification:(UILocalNotification *)notification {
+    [[UIApplication sharedApplication] cancelLocalNotification:self.incomingCallNotification];
+    [self stopVibratingInBackground];
 }
 
 - (void)startVibratingInBackground {
