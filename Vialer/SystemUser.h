@@ -155,11 +155,6 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 @property (readonly, nonatomic) NSString *sipPassword;
 
 /**
- *  The domain where the PBX can be found.
- */
-@property (readonly, nonatomic) NSString *sipDomain;
-
-/**
  *  The proxy address where to connect to.
  */
 @property (readonly, nonatomic) NSString *sipProxy;

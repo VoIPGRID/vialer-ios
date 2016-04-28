@@ -40,7 +40,7 @@ extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorde
 extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState;
 extern NSString * const ConfigurationVoIPGRIDBaseURLString;
 extern NSString * const ConfigurationMiddleWareBaseURLString;
-
+extern NSString * const ConfigurationSIPDomain;
 extern NSString * const ConfigurationPartnerURLKey;
 
 /**
