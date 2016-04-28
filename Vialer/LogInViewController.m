@@ -242,8 +242,8 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
             [self.configureFormView.phoneNumberField resignFirstResponder];
             [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
-            [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
-            [self.scene runActThree];                     // Animate the clouds
+            [self animateUnlockViewToVisible:1.f delay:1.5f];   // Show
+            [self.scene runActThree];                           // Animate the clouds
 
             if ([SystemUser currentUser].sipEnabled) {
                 [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
@@ -618,6 +618,9 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         viewController.showSIPAccountWebview = YES;
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
+        // Enable SIP for this user after onboarding.
+        self.currentUser.sipEnabled = YES;
+
         // Put here what happens when it is unlocked.
         [self dismissViewControllerAnimated:NO completion:^{
             [self.unlockView setAlpha:0.f];

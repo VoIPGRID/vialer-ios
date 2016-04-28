@@ -39,6 +39,11 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 #pragma mark - View Life Cycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
@@ -48,11 +53,12 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     } else {
         [self.tableView reloadData];
     }
+    [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed)) options:0 context:NULL];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed))];
+    [super viewWillDisappear:animated];
 }
 
 - (void)dealloc {
@@ -245,13 +251,20 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     cell.accessoryView = switchView;
 }
 
-#pragma mark - Notifications
+#pragma mark - Notifications / KVO
 
 - (void)outgoingNumberUpdated:(NSNotification *)noticiation {
     NSIndexPath *rowAtIndexPath = [NSIndexPath indexPathForRow:SettingsViewControllerOutgoingNumberRow
                                                      inSection:SettingsViewControllerNumbersSection];
     UITableViewCell *myNumberCell = [self.tableView cellForRowAtIndexPath:rowAtIndexPath];
     myNumberCell.detailTextLabel.text = self.currentUser.outgoingNumber;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    // React to changes on the SipAllowed property of the SystemUser.
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))]) {
+        [self.tableView reloadData];
+    }
 }
 
 @end
