@@ -222,10 +222,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     return nil;
 }
 
-- (NSString *)sipDomain {
-    return [[Configuration defaultConfiguration] UrlForKey:@"SIP domain"];
-}
-
 - (NSString *)sipProxy {
     return self.sipDomain;
 }

@@ -61,6 +61,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     [super viewWillAppear:animated];
     [self checkContactsAccess];
     [self setupLayout];
+    [self showReachabilityBar];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 

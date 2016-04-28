@@ -4,6 +4,7 @@
 //
 
 #import "ReachabilityManager.h"
+#import "Configuration.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "Reachability.h"
 
@@ -36,7 +37,8 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
 #pragma mark - properties
 - (Reachability *)reachabilityPodInstance {
     if (!_reachabilityPodInstance) {
-        _reachabilityPodInstance = [Reachability reachabilityForInternetConnection];
+        NSString *sipProxy = [[Configuration defaultConfiguration] UrlForKey:ConfigurationSIPDomain];
+        _reachabilityPodInstance = [Reachability reachabilityWithHostName:sipProxy];
     }
     return _reachabilityPodInstance;
 }
@@ -101,9 +103,9 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
  *  @return The current up to date reability status.
  */
 - (ReachabilityManagerStatusType)currentReachabilityStatus {
-    if (self.on4g || self.onWifi) {
+    if ([self on4g] || [self onWifi]) {
         self.reachabilityStatus = ReachabilityManagerStatusHighSpeed;
-    } else if (self.hasInternet) {
+    } else if ([self hasInternet]) {
         self.reachabilityStatus = ReachabilityManagerStatusLowSpeed;
     } else {
         self.reachabilityStatus = ReachabilityManagerStatusOffline;

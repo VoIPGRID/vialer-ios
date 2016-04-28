@@ -40,7 +40,7 @@ NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor 
 NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState = @"ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState";
 NSString * const ConfigurationVoIPGRIDBaseURLString = @"API";
 NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
-
+NSString * const ConfigurationSIPDomain = @"SIP domain";
 NSString * const ConfigurationPartnerURLKey = @"Partner";
 
 static NSString * const ConfigurationColorsKey = @"Tint colors";

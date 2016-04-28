@@ -96,6 +96,8 @@
             self.shouldBeVisible = shouldBeVisible;
             [self.delegate reachabilityBar:self shouldBeVisible:shouldBeVisible];
         }
+
+        [self.delegate reachabilityBar:self statusChanged:self.reachabilityManager.reachabilityStatus];
     });
 }
 
@@ -133,7 +135,6 @@
     // Keep track of connection status from reachabilityManager.
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(reachabilityStatus))]) {
         [self updateLayout];
-        [self.delegate reachabilityBar:self statusChanged:self.reachabilityManager.reachabilityStatus];
     }
 }
 
