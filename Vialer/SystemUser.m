@@ -82,7 +82,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
  *  SIP Properties
  */
 @property (strong, nonatomic) NSString *sipAccount;
-@property (strong, nonatomic) NSString *sipDomain;
 @property (readwrite, nonatomic) BOOL sipAllowed;
 @property (readwrite, nonatomic) BOOL sipRegisterOnAdd;
 
@@ -220,6 +219,10 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         return [SSKeychain passwordForService:self.serviceName account:self.username];
     }
     return nil;
+}
+
+- (NSString *)sipDomain {
+    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationSIPDomain];
 }
 
 - (NSString *)sipProxy {
@@ -585,7 +588,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [desc appendFormat:@"\tsipAccount: %@\n", self.sipAccount];
     [desc appendFormat:@"\tsipPassword: %@\n", self.sipPassword];
     [desc appendFormat:@"\tsipProxy: %@\n", self.sipProxy];
-    [desc appendFormat:@"\tsipDomain: %@\n", self.sipDomain];
+    [desc appendFormat:@"\tsipDomain: %@\n", [self sipDomain]];
     [desc appendFormat:@"\tsipRegisterOnAdd: %@\n", self.sipRegisterOnAdd ? @"YES" : @"NO"];
     [desc appendFormat:@"\tfirstName: %@\n", self.firstName];
     [desc appendFormat:@"\tlastName: %@\n", self.lastName];
