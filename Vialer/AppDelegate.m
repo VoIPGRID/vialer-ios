@@ -14,6 +14,7 @@
 #import "PhoneNumberModel.h"
 #ifdef DEBUG
 #import "SDStatusBarManager.h"
+@import Contacts;
 #endif
 #import "SIPUtils.h"
 #import "SSKeychain.h"
@@ -50,15 +51,22 @@ static int const AppDelegateNumberOfVibrations = 5;
 
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
 
-    //Only when the app is run for screenshot purposes do the following:
+    // Only when the app is run for screenshot purposes do the following:
     if ([[self class] isSnapshotScreenshotRun]) {
 #ifdef DEBUG
         [[SDStatusBarManager sharedInstance] setTimeString:@"09:41"];
         [[SDStatusBarManager sharedInstance] enableOverrides];
+
+        // This is a fix for screenshot automation. It won't accept the "would like to access contacts" alert
+        // if it is presented at the normal point in the app.
+        CNContactStore *contactStore = [[CNContactStore alloc] init];
+        [contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            NSLog(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
+        }];
 #endif
         [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
 
-        //Clear out the userdefaults
+        // Clear out the userdefaults.
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     } else {

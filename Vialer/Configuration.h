@@ -38,6 +38,7 @@ extern NSString * const ConfigurationLogInViewControllerButtonBorderColor;
 extern NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState;
 extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor;
 extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState;
+extern NSString * const ConfigurationSideMenuHeaderBackgroundColor;
 extern NSString * const ConfigurationVoIPGRIDBaseURLString;
 extern NSString * const ConfigurationMiddleWareBaseURLString;
 extern NSString * const ConfigurationSIPDomain;

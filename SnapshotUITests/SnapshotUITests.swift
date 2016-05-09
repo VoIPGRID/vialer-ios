@@ -13,7 +13,7 @@ class SnapshotUITests: XCTestCase {
         super.setUp()
         app = XCUIApplication()
 
-        // This handler will tap OK on the iOS generated autorization alerts (Microphone, Contacts ...)
+        // This handler will tap OK on the iOS generated authorization alerts (Microphone, Contacts ...)
         self.interruptionHandler = addUIInterruptionMonitorWithDescription("Access privileges alert") {
             $0.buttons.elementBoundByIndex(1).tap()
             //$0.buttons["OK"].tap() // As an alternative option, need to evaluate which works better
@@ -67,7 +67,7 @@ class SnapshotUITests: XCTestCase {
 
         continueButton.tap()
 
-        // At this point, onboarding is finished, the contacts autorization is has been granted and the
+        // At this point, onboarding is finished, the contacts authorization has been granted and the
         // "Contacts" view is displayed.
         // Click on the Toolbar's "Contacts" button.
         let contactsTabBarButton = XCUIApplication().tabBars.buttons.elementBoundByIndex(1)
@@ -99,7 +99,6 @@ class SnapshotUITests: XCTestCase {
         // Snapshot of the sip call screen which is setting up the call.
         snapshot("03-SIPCallView")
     }
-
 
     // http://stackoverflow.com/questions/32821880/ui-test-deleting-text-in-text-field
     // Clears the given textfield of it's input.
