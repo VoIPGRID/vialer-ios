@@ -23,17 +23,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupReachability) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed)) options:0 context:NULL];
     [self setupReachability];
     [self updateLayout];
     [self.delegate reachabilityBar:self statusChanged:self.reachabilityManager.reachabilityStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     @try{
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIApplicationDidBecomeActiveNotification];
     }@catch(id exception) {}
+    [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed))];
     [self teardownReachability];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Properties
@@ -133,9 +135,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     // Keep track of connection status from reachabilityManager.
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(reachabilityStatus))]) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(reachabilityStatus))] ||
+        [keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))]) {
         [self updateLayout];
     }
 }
-
 @end

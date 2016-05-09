@@ -8,7 +8,6 @@
 #import "Middleware.h"
 #import "MiddlewareRequestOperationManager.h"
 #import <OCMock/OCMock.h>
-#import <OHHTTPStubs/OHHTTPStubs.h>
 #import "ReachabilityManager.h"
 #import "SystemUser.h"
 @import XCTest;

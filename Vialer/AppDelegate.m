@@ -87,7 +87,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[SystemUser currentUser] updateSIPAccountWithCompletion:nil];
+        [[SystemUser currentUser] updateSystemUserFromVGWithCompletion:nil];
         // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
 
         VSLCall *call = [SIPUtils getFirstActiveCall];

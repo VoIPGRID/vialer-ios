@@ -183,6 +183,21 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     return NSLocalizedString(@"No email address configured", nil);
 }
 
+- (void)setSipAllowed:(BOOL)sipAllowed {
+    if (_sipAllowed != sipAllowed) {
+        NSString *stringFromSipAllowedProperty = NSStringFromSelector(@selector(sipAllowed));
+        [self willChangeValueForKey:stringFromSipAllowedProperty];
+        _sipAllowed = sipAllowed;
+        [self didChangeValueForKey:stringFromSipAllowedProperty];
+
+        // If SIP Allowed is being set to NO, also set SIP enabled to NO
+        // to force a deregistration with the proxy and the middleware.
+        if (!_sipAllowed) {
+            self.sipEnabled = NO;
+        }
+    }
+}
+
 - (void)setSipEnabled:(BOOL)sipEnabled {
     // If sip is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
@@ -194,7 +209,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
 
-    // If sip is being disabled, fire a notification.
+        // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         _sipEnabled = NO;
 
@@ -374,10 +389,16 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
     self.sipAllowed     = [userDict[SystemUserApiKeySIPAllowed] boolValue];
 
-    // Try to enable SIP for this user.
-    self.sipEnabled = YES;
-
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    // If the defaults contains a value for SIP Enabled, use that value,
+    if ([defaults objectForKey:SystemUserSUDSIPEnabled]) {
+        self.sipEnabled = [defaults boolForKey:SystemUserSUDSIPEnabled];
+    } else {
+        // else set to YES which will try to enable SIP for this user.
+        self.sipEnabled = YES;
+    }
+
     [defaults setObject:self.username forKey:SystemUserSUDUsername];
     [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
     [defaults setObject:self.mobileNumber forKey:SystemUserSUDMobileNumber];
@@ -567,7 +588,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     }];
 }
 
-# pragma mark - Notifications
+# pragma mark - Notifications / KVO
 
 - (void)authorizationFailedNotification:(NSNotification *)notification {
     NSDictionary *errorUserInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"You're not authorized", nil)};
@@ -575,6 +596,11 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
                                      SystemUserLogoutNotificationErrorKey: [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserUnAuthorized userInfo:errorUserInfo]
                                      };
     [self logoutWithUserInfo:logoutUserInfo];
+}
+
+// Override default KVO behaviour for the SIP Allowed property.
++ (BOOL)automaticallyNotifiesObserversOfSipAllowed {
+    return NO;
 }
 
 # pragma mark - Debug help
