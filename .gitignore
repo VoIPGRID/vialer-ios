@@ -15,6 +15,9 @@ fastlane/report.xml
 fastlane/Preview.html
 Preview.html
 
+# fastlane temporary build directory
+fastlane/**/builds/
+
 # snapshot generated screenshots
 fastlane/**/screenshots/**/*.png
 fastlane/**/screenshots/screenshots.html

@@ -4,6 +4,12 @@
 <dict>
 	<key>Tint colors</key>
 	<dict>
+		<key>SideMenuHeaderBackgroundColor</key>
+		<array>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+		</array>
 		<key>NumberPadButtonPressedColor</key>
 		<array>
 			<integer>255</integer>

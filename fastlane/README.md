@@ -11,9 +11,9 @@ sudo gem install fastlane
 fastlane ios prebuild
 ```
 
-### ios deploy
+### ios upload_beta
 ```
-fastlane ios deploy
+fastlane ios upload_beta
 ```
 Deploy to iTunes Connect
 ### ios screenshot

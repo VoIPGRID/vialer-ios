@@ -37,6 +37,11 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 @implementation SideMenuViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.headerView.backgroundColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationSideMenuHeaderBackgroundColor];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.usernameLabel.text = [SystemUser currentUser].displayName;

@@ -65,6 +65,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     // Customize NavigationBar
     [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarTintColor];
     [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarBarTintColor];
+    [UINavigationBar appearance].translucent = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

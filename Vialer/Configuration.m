@@ -38,6 +38,7 @@ NSString * const ConfigurationLogInViewControllerButtonBorderColor = @"LogInView
 NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState = @"LogInViewControllerButtonBackgroundColorForPressedState";
 NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor = @"ActivateSIPAccountViewControllerButtonBorderColor";
 NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState = @"ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState";
+NSString * const ConfigurationSideMenuHeaderBackgroundColor = @"SideMenuHeaderBackgroundColor";
 NSString * const ConfigurationVoIPGRIDBaseURLString = @"API";
 NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
 NSString * const ConfigurationSIPDomain = @"SIP domain";

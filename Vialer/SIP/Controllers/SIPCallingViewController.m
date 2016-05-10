@@ -50,6 +50,10 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     [self.call removeObserver:self forKeyPath:SIPCallingViewControllerMediaState];
 }
 
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - Properties
 
 - (AVAudioSession *)avAudioSession {

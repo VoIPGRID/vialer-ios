@@ -70,6 +70,10 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserOutgoingNumberUpdatedNotification object:nil];
 }
 
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)stopUpdates {
     [self.callManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
     self.callManager = nil;

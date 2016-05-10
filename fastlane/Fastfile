@@ -22,7 +22,6 @@ default_platform :ios
 
 platform :ios do
   before_all do
-    #ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
   end
 
   lane :prebuild do
@@ -31,15 +30,33 @@ platform :ios do
   end
 
   desc "Deploy to iTunes Connect"
-  lane :deploy do
+  lane :upload_beta do
     prebuild
-    scan
-    snapshot
-    deliver
+    match_appstore
+    # Scan is disabled for now because of failing tests.
+    #scan
+    gym(
+        output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/builds",
+        scheme: ENV["BETA_SCHEME"],
+        configuration: 'Release',
+    )
+
+    # If deliver fails, try the parameter below.
+    # ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+    pilot(
+        username: ENV["ITC_USERNAME"],
+        team_name: ENV["APP_TEAM"],
+        skip_submission: true,
+    )
+
+    slack(
+        message: sh("git describe --abbrev=0") +" uploaded to ITC",
+    )
   end
 
   desc "Create Screenshots"
   lane :screenshot do
+    prebuild
     snapshot(
       stop_after_first_error: true,
       output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
@@ -48,6 +65,7 @@ platform :ios do
 
   desc "Upload Screenshots"
   lane :upload_screenshots do
+    screenshot
     deliver(
       skip_metadata: true
     )
@@ -77,16 +95,12 @@ platform :ios do
   # You can define as many lanes as you want
   after_all do |lane|
     clean_build_artifacts()
-    # This block is called, only if the executed lane was successful
-    #slack(
-    #   message: "Successfully deployed new App Update."
-    #)
   end
 
   error do |lane, exception|
     #slack(
     #    message: exception.message,
-    #    success: false
+    #    success: false,
     #    )
   end
 end

@@ -86,9 +86,15 @@
 		</array>
 		<key>NavigationBarBarTintColor</key>
 		<array>
-			<integer>248</integer>
-			<integer>248</integer>
-			<integer>248</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+		</array>
+		<key>SideMenuHeaderBackgroundColor</key>
+		<array>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
 		</array>
 		<key>AvailabilityTableViewTintColor</key>
 		<array>
