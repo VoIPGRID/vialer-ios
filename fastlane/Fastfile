@@ -40,8 +40,8 @@ platform :ios do
         configuration: 'Release',
     )
 
-    # If deliver fails, try the parameter below.
-    # ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+    # Set Deliver to use DAV to prevent "Unable to find content provider for username" failure
+    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
     pilot(
         username: ENV["ITC_USERNAME"],
         team_name: ENV["APP_TEAM"],
