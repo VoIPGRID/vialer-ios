@@ -4,7 +4,8 @@
 **/Snapshot-Constants.swift
 
 # Local user specific env vars for fastlane
-fastlane/.env
+fastlane/.env*
+!fastlane/.env.EXAMPLE
 
 ####
 # fastlane specific as recommended at:

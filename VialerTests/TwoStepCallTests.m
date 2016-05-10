@@ -564,10 +564,15 @@
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
-    TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
-    call = nil;
+    __weak TwoStepCall *weakCallRef;
+    @autoreleasepool {
+        TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
+        weakCallRef = call;
+        XCTAssertNotNil(weakCallRef);
+    }
 
     OCMVerify([mockNotificationCenter removeObserver:[OCMArg any]]);
+    XCTAssertNil(weakCallRef);
 
     [mockNotificationCenter stopMocking];
 }
