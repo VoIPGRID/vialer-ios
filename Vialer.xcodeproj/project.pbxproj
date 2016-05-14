@@ -176,6 +176,8 @@
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
+		F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */; };
+		F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2B3C64F1CC9130200F8BF53 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4234D441C60ED13005710B7 /* Snapshot-Constants.swift */; };
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
@@ -476,6 +478,9 @@
 		F2872E2A1CC8CF6000D3ACB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F2872E2C1CC8CF6000D3ACB0 /* Scanfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Scanfile; sourceTree = "<group>"; };
 		F2872E2F1CC8CF6000D3ACB0 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
+		F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewControllerTests.m; sourceTree = "<group>"; };
+		F2A7AEF61CF34E4900889DD8 /* TestReachabilityManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestReachabilityManagerDelegate.h; sourceTree = "<group>"; };
+		F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestReachabilityManagerDelegate.m; sourceTree = "<group>"; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2B40BDA1C731F3E00502769 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
 		F2B40BDB1C731F3E00502769 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
@@ -1110,6 +1115,7 @@
 				F275FDB01C608B7E006AEEA2 /* APNS */,
 				C40CB3981C45129400248690 /* Calling */,
 				F9906C261C3AA0C20044EA99 /* Contacts */,
+				F2A7AEF31CF3319F00889DD8 /* ReachabilityManager */,
 				C48F5AC71C6E22E700A3D9AE /* Recents */,
 				F2B40BE21C731F7500502769 /* Middleware */,
 				C409F3A11C24B9D6007DCC4A /* Models */,
@@ -1162,6 +1168,16 @@
 				F2872E2A1CC8CF6000D3ACB0 /* README.md */,
 			);
 			path = fastlane;
+			sourceTree = "<group>";
+		};
+		F2A7AEF31CF3319F00889DD8 /* ReachabilityManager */ = {
+			isa = PBXGroup;
+			children = (
+				F2A7AEF61CF34E4900889DD8 /* TestReachabilityManagerDelegate.h */,
+				F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */,
+				F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */,
+			);
+			name = ReachabilityManager;
 			sourceTree = "<group>";
 		};
 		F2B40BD91C731F3E00502769 /* Middleware */ = {
@@ -2197,6 +2213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
+				F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */,
 				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
 				C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */,
 				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
@@ -2206,6 +2223,7 @@
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
 				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
+				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				C4CAC8A51C7377E000018A5A /* SIPCallingViewControllerTests.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,

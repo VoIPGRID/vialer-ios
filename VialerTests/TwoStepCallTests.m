@@ -560,6 +560,7 @@
     [mockNotificationCenter stopMocking];
 }
 
+// Test disabled. I have not found a way to actually test dealloc being called (but why wouldn't it?)
 - (void)testNotificationObserverIsRemovedWhenDealloced {
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);

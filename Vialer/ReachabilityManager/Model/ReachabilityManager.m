@@ -79,14 +79,14 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
  *  @return Returns Yes if connection is 4g, otherwise No.
  */
 - (BOOL)on4g {
-    return [self.networkInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyLTE];;
+    return [self.networkInfo.currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyLTE] && [self hasInternet];
 }
 
 /**
  *  @return Returns Yes if connection is Wifi, otherwise No.
  */
 - (BOOL)onWifi {
-    return [self.reachabilityPodInstance isReachableViaWiFi];
+    return [self.reachabilityPodInstance isReachableViaWiFi] && [self hasInternet];
 }
 
 /**

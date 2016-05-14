@@ -142,6 +142,24 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     [self.operationQueue addOperation:operation];
 }
 
+// I'm leaving this here for testing purposes. It gives the ability to simulate the user "not allowed to SIP case" without
+// having to actually disable it in the portal (resulting in unlinking all app accounts for all users).
+// Uncomment all below, put a breakpoint on line: [possibleModifiedResponseData setObject:[NSNumber numberWithBool:allowAppAccount] forKey:@"allow_app_account"];
+// In the debug window you can change the value of allowAppAccount with "call allowAppAccount = YES/NO;"
+//BOOL allowAppAccount = YES;
+//- (void)userProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+//    [self GET:VoIPGRIDRequestOperationManagerURLSystemUserProfile parameters:nil withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+//        NSMutableDictionary *possibleModifiedResponseData = [responseData mutableCopy];
+//
+//        if ([responseData objectForKey:@"allow_app_account"]) {
+//            [possibleModifiedResponseData setObject:[NSNumber numberWithBool:allowAppAccount] forKey:@"allow_app_account"];
+//        }
+//        if (completion) {
+//            completion(operation, possibleModifiedResponseData, error);
+//        }
+//    }];
+//}
+
 - (void)userProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
     [self GET:VoIPGRIDRequestOperationManagerURLSystemUserProfile parameters:nil withCompletion:completion];
 }
