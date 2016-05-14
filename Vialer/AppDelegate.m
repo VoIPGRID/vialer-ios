@@ -154,6 +154,7 @@ static int const AppDelegateNumberOfVibrations = 5;
         if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
             NSError *error;
             [call decline:&error];
+            [GAITracker declineIncomingCallEvent];
             if (error) {
                 DDLogError(@"Error declining call: %@", error);
             }
@@ -259,12 +260,15 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 - (void)setupCallbackForVoIPNotifications {
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
+        [GAITracker incomingCallRingingEvent];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([SIPUtils anotherCallInProgress:call]) {
                 DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
 
                 NSError *error;
                 [call decline:&error];
+                [GAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
                 if (error) {
                     DDLogError(@"Error declining call: %@", error);
                 }

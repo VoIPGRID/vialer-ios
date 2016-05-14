@@ -35,6 +35,14 @@
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
++ (void)incomingCallRingingEvent {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Ringing"
+                                                           value:nil] build]];
+}
+
 + (void)acceptIncomingCallEvent {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
@@ -48,6 +56,14 @@
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
                                                           action:@"Inbound"
                                                            label:@"Declined"
+                                                           value:nil] build]];
+}
+
++ (void)declineIncomingCallBecauseAnotherCallInProgressEvent {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Declined - Another call in progress"
                                                            value:nil] build]];
 }
 
@@ -83,7 +99,7 @@
                                                            value:[NSNumber numberWithInt:connectionValue]] build]];
 }
 
-+ (void)regististrationFailedWithMiddleWareException {
++ (void)registrationFailedWithMiddleWareException {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createExceptionWithDescription:@"Failed middleware registration" withFatal:@NO] build]];
 }
