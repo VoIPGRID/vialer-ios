@@ -40,9 +40,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "RecentCallTests/testGetLatestCallWillReturnTheCall">
-               </Test>
-               <Test
                   Identifier = "TwoStepCallTests/testNotificationObserverIsRemovedWhenDealloced">
                </Test>
             </SkippedTests>

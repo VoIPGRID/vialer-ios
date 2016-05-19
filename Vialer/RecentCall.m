@@ -7,10 +7,13 @@
 
 @implementation RecentCall
 
-
 - (NSString *)displayName {
-    if (self.callerName) {
+    if ([self suppressed]) {
+        return NSLocalizedString(@"No Caller ID", nil);
+
+    } else if (self.callerName) {
         return self.callerName;
+
     } else if (self.callerID) {
         NSError *error;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\"(.*?)\"" options:NSRegularExpressionCaseInsensitive error:&error];
@@ -39,6 +42,13 @@
         call = lastCalls[0];
     }
     return call;
+}
+
+- (BOOL)suppressed {
+    if ([self.inbound boolValue]) {
+        return [self.sourceNumber rangeOfString:@"x"].location != NSNotFound;
+    }
+    return NO;
 }
 
 @end

@@ -9,73 +9,87 @@
 @import XCTest;
 
 @interface RecentCallTests : XCTestCase
-@property (strong, nonatomic) id mockManagedObjectContext;
-@property (strong, nonatomic) id mockEntityDescription;
+@property (strong, nonatomic) NSManagedObjectContext *moc;
 @end
 
 @implementation RecentCallTests
 
 - (void)setUp {
     [super setUp];
-    self.mockManagedObjectContext = OCMClassMock([NSManagedObjectContext class]);
-    self.mockEntityDescription = OCMClassMock([NSEntityDescription class]);
-    OCMStub([self.mockEntityDescription entityForName:[OCMArg any] inManagedObjectContext:[OCMArg any]]).andReturn(self.mockEntityDescription);
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"VialerModel" withExtension:@"momd"];
+    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    XCTAssertTrue([psc addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:NULL] ? YES : NO, @"Should be able to add in-memory store");
+    self.moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    self.moc.persistentStoreCoordinator = psc;
 }
 
 - (void)tearDown {
-    [self.mockManagedObjectContext stopMocking];
-    self.mockManagedObjectContext = nil;
-    [self.mockEntityDescription stopMocking];
-    self.mockEntityDescription = nil;
+    self.moc = nil;
     [super tearDown];
 }
 
-- (void)testGetLatestCallWillTryToFetchFromManagedObjectContext {
-    OCMExpect([self.mockManagedObjectContext executeFetchRequest:[OCMArg checkWithBlock:^BOOL(NSFetchRequest *fetchRequest) {
-
-        XCTAssertEqual(fetchRequest.sortDescriptors.count, 1, @"There should be one sort descriptor.");
-
-        NSSortDescriptor *sort = fetchRequest.sortDescriptors[0];
-        XCTAssertEqualObjects(sort.key, @"callDate", @"The sorting should take place on the callDate.");
-        XCTAssertFalse(sort.ascending, @"Sorting should be descending.");
-        XCTAssertEqual(fetchRequest.fetchLimit, 1, @"The fetch limit should be 1.");
-        return YES;
-    }] error:[OCMArg anyObjectRef]]);
-
-    [RecentCall latestCallInManagedObjectContext:self.mockManagedObjectContext];
-
-    OCMVerify([self.mockEntityDescription entityForName:[OCMArg isEqual:@"RecentCall"] inManagedObjectContext:[OCMArg isEqual:self.mockManagedObjectContext]]);
-
-    OCMVerifyAll(self.mockManagedObjectContext);
-}
-
-// VIALI-3154
-// rewrite this test, and all other core data test to use a test specific "in memory" database instead of mocking the classes
-// For inspiration see: http://stackoverflow.com/a/23988116
 - (void)testGetLatestCallWillReturnTheCall {
-    RecentCall *recent = [[RecentCall alloc] init];
-    OCMStub([self.mockManagedObjectContext executeFetchRequest:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(@[recent]);
+    // Given
+    RecentCall *recent = [NSEntityDescription insertNewObjectForEntityForName:@"RecentCall" inManagedObjectContext:self.moc];
 
-    RecentCall *fetchedRecent = [RecentCall latestCallInManagedObjectContext:self.mockManagedObjectContext];
+    // When
+    RecentCall *fetchedRecent = [RecentCall latestCallInManagedObjectContext:self.moc];
 
+    //Then
     XCTAssertEqualObjects(recent, fetchedRecent, @"The correct RecentCall should have been returned");
 }
 
-- (void)testGetLatestCallWillReturnNil {
-    OCMStub([self.mockManagedObjectContext executeFetchRequest:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(nil);
-
-    RecentCall *fetchedRecent = [RecentCall latestCallInManagedObjectContext:self.mockManagedObjectContext];
-
-    XCTAssertNil(fetchedRecent, @"The correct RecentCall should have been returned");
+- (void)testLatestCallReturnsNilWhenDatabaseEmpty {
+    RecentCall *fetchedRecent = [RecentCall latestCallInManagedObjectContext:self.moc];
+    XCTAssertNil(fetchedRecent, @"Database should have been empty, no object should have been returned");
 }
 
-- (void)testErrorFetchingWillReturnNil {
-    NSError *mockError = [NSError errorWithDomain:@"test" code:0 userInfo:nil];
-    OCMStub([self.mockManagedObjectContext executeFetchRequest:[OCMArg any] error:[OCMArg setTo:mockError]]).andReturn(nil);
+- (void)testRecentInboundCallIsSuppressed {
+    // Given
+    RecentCall *recent = [NSEntityDescription insertNewObjectForEntityForName:@"RecentCall" inManagedObjectContext:self.moc];
 
-    RecentCall *fetchedRecent = [RecentCall latestCallInManagedObjectContext:self.mockManagedObjectContext];
+    // When
+    recent.inbound = @YES;
+    recent.sourceNumber = @"+31222xxxxxx";
 
-    XCTAssertNil(fetchedRecent, @"The correct RecentCall should have been returned");
+    // Then
+    XCTAssertTrue([recent suppressed], @"The given inbound recent should have indicated that it is suppressed");
+}
+- (void)testRecentInboundCallButNotASuppressedNumber {
+    //Given
+    RecentCall *recent = [NSEntityDescription insertNewObjectForEntityForName:@"RecentCall" inManagedObjectContext:self.moc];
+
+    // When
+    recent.inbound = @YES;
+    recent.sourceNumber = @"+31222333333";
+
+    // Then
+    XCTAssertFalse([recent suppressed], @"The given inbound recent should NOT indicated as being suppressed");
+}
+
+- (void)testRecentOuboundCallCannotIndicateBeingSuppressed {
+    // Given
+    RecentCall *recent = [NSEntityDescription insertNewObjectForEntityForName:@"RecentCall" inManagedObjectContext:self.moc];
+
+    // When
+    recent.inbound = @NO;
+    recent.sourceNumber = @"+31222xxxxxx";
+
+    // Then
+    XCTAssertFalse([recent suppressed], @"An outbound call can never indicate as being suppressed.");
+}
+
+- (void)testRecentInboundCallIsNotSuppressed {
+    // Given
+    RecentCall *recent = [NSEntityDescription insertNewObjectForEntityForName:@"RecentCall" inManagedObjectContext:self.moc];
+
+    // When
+    recent.inbound = @NO;
+    recent.sourceNumber = @"+31222333333";
+
+    // Then
+    XCTAssertFalse([recent suppressed], @"The given recents should not indicate that it is suppressed");
 }
 
 @end
