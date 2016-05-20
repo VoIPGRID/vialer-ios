@@ -199,9 +199,12 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)setSipEnabled:(BOOL)sipEnabled {
+    NSString *stringFromSipEnabledProperty = NSStringFromSelector(@selector(sipEnabled));
     // If sip is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
+        [self willChangeValueForKey:stringFromSipEnabledProperty];
         _sipEnabled = YES;
+        [self didChangeValueForKey:stringFromSipEnabledProperty];
 
         // Post the notification async. Do not use NSNotificationQueue because when the app starts
         // the app delegate does not pickup on the notification when posted using the NSNotificationQueue.
@@ -211,7 +214,9 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
         // If sip is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
+        [self willChangeValueForKey:stringFromSipEnabledProperty];
         _sipEnabled = NO;
+        [self didChangeValueForKey:stringFromSipEnabledProperty];
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPDisabledNotification object:[self.sipAccount copy]];
@@ -598,9 +603,13 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [self logoutWithUserInfo:logoutUserInfo];
 }
 
-// Override default KVO behaviour for the SIP Allowed property.
-+ (BOOL)automaticallyNotifiesObserversOfSipAllowed {
-    return NO;
+// Override default KVO behaviour for automatic notificationing
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
+    if ([key isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
+        [key isEqualToString:NSStringFromSelector(@selector(sipEnabled))]) {
+        return NO;
+    }
+    return YES;
 }
 
 # pragma mark - Debug help

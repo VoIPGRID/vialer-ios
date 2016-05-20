@@ -32,10 +32,6 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
 - (void)setupUserProfileButton {
     self.userProfileButton.borderWidth = 1;
     self.userProfileButton.cornerRadius = ActivateSIPAccountViewControllerButtonRadius;

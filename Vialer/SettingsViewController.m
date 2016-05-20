@@ -54,10 +54,12 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         [self.tableView reloadData];
     }
     [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed)) options:0 context:NULL];
+    [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled)) options:0 context:NULL];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed))];
+    [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled))];
     [super viewWillDisappear:animated];
 }
 
@@ -262,7 +264,8 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     // React to changes on the SipAllowed property of the SystemUser.
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))]) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
+        [keyPath isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ) {
         [self.tableView reloadData];
     }
 }

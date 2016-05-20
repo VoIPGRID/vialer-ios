@@ -53,8 +53,8 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [self stopUpdates];
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidLoad {

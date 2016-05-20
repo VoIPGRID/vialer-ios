@@ -132,8 +132,8 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [self removeObservers];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - UITextField delegate methods

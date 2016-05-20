@@ -9,6 +9,13 @@
  * The Middleware class communicates with the Middleware server.
  */
 @interface Middleware : NSObject
+
+/**
+ *  Notification which will be posted when the middleware detects a registration
+ *  on another device.
+ */
+extern NSString * const _Nonnull MiddlewareRegistrationOnOtherDeviceNotification;
+
 /**
  *  Sent APNS token to Middleware.
  *

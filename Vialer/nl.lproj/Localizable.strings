@@ -331,7 +331,9 @@
 "VoIP account ID" = "VoIP-account ID";
 
 /* No comment provided by engineer. */
-"VoIP disabled, enable in settings" = "VoIP inactief, activeer VoIP bij instellingen";
+"VoIP disabled" = "VoIP gedeactiveerd";
+"VoIP disabled, enable in settings" = "VoIP gedeactiveerd, activeer VoIP bij instellingen";
+"Your VoIP account has been registered on another device. You can re-enable VoIP in Settings" = "Je VoIP account is geregistreerd op een ander apparaat. Je kunt VoIP weer activeren bij instellingen";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";

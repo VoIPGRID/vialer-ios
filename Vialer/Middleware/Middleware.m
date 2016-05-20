@@ -21,6 +21,8 @@ static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
 
 static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
+NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
+
 @interface Middleware ()
 @property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
 @property (weak, nonatomic) SystemUser *systemUser;
@@ -99,7 +101,11 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
 
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage]) {
-
+        if (self.systemUser.sipEnabled) {
+            self.systemUser.sipEnabled = NO;
+            NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
+            [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
+        }
     }
 }
 
@@ -162,18 +168,18 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
     // Inserted to debug VIALI-3176. Remove with VIALI-3178
     NSString *applicationState;
     switch ([UIApplication sharedApplication].applicationState) {
-        case UIApplicationStateActive: {
-            applicationState = @"UIApplicationStateActive";
-            break;
-        }
-        case UIApplicationStateInactive: {
-            applicationState = @"UIApplicationStateInactive";
-            break;
-        }
-        case UIApplicationStateBackground: {
-            applicationState = @"UIApplicationStateBackground";
-            break;
-        }
+            case UIApplicationStateActive: {
+                applicationState = @"UIApplicationStateActive";
+                break;
+            }
+            case UIApplicationStateInactive: {
+                applicationState = @"UIApplicationStateInactive";
+                break;
+            }
+            case UIApplicationStateBackground: {
+                applicationState = @"UIApplicationStateBackground";
+                break;
+            }
     }
 
     NSString *backgroundTimeRemaining = @"N/A";
@@ -183,7 +189,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 
     DDLogInfo(@"Trying to sent APNSToken to middleware. Application state: \"%@\". Background time remaining: %@", applicationState, backgroundTimeRemaining);
     // End debugging statements
-    
+
     UIApplication *application = [UIApplication sharedApplication];
     UIBackgroundTaskIdentifier __block backgroundtask = UIBackgroundTaskInvalid;
 
