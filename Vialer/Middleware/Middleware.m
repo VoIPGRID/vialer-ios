@@ -230,7 +230,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
                     self.systemUser.sipEnabled = NO;
 
                     // And log the problem to track failures.
-                    [GAITracker regististrationFailedWithMiddleWareException];
+                    [GAITracker registrationFailedWithMiddleWareException];
                     DDLogError(@"Device registration with Middleware failed. %@", error);
 
                     if (completion) {
