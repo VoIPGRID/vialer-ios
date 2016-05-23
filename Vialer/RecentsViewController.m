@@ -262,7 +262,9 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
     }
 
     RecentCall *recent = [self.fetchedResultController objectAtIndexPath:indexPath];
-    if ([recent.inbound boolValue]) {
+    if ([recent suppressed]) {
+        return;
+    } else if ([recent.inbound boolValue]) {
         [self callPhoneNumber:recent.sourceNumber];
     } else {
         [self callPhoneNumber:recent.destinationNumber];
@@ -279,7 +281,13 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
     CNContactViewController *contactViewController;
     CNContact *contact;
-    if (recent.callerRecordID) {
+    if ([recent suppressed]) {
+        CNMutableContact *unknownContact = [[CNMutableContact alloc] init];
+        unknownContact.givenName = [recent displayName];
+        contactViewController = [CNContactViewController viewControllerForContact:unknownContact];
+        contactViewController.allowsEditing = NO;
+
+    } else if (recent.callerRecordID) {
         contact = [[ContactModel defaultContactModel] getSelectedContactOnIdentifier:recent.callerRecordID];
         contactViewController = [CNContactViewController viewControllerForContact:contact];
         contactViewController.title = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
@@ -297,7 +305,6 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
     contactViewController.contactStore = [[ContactModel defaultContactModel] getContactStore];
     contactViewController.allowsActions = NO;
-    contactViewController.allowsEditing = YES;
     contactViewController.delegate = self;
 
     [self.navigationController pushViewController:contactViewController animated:YES];

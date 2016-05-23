@@ -32,6 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (RecentCall *)latestCallInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
+/**
+ *  Indicates if the this recent call was received from a suppressed number.
+ *
+ *  @return YES if the recent call has a suppressed number.
+ */
+- (BOOL)suppressed;
+
 @end
 
 NS_ASSUME_NONNULL_END
