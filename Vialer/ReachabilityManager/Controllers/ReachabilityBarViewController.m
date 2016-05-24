@@ -70,12 +70,15 @@
                 break;
             }
             case ReachabilityManagerStatusLowSpeed: {
-                if ([SystemUser currentUser].sipEnabled) {
+                if (!self.currentUser.sipAllowed) {
+                    self.informationLabel.text = @"";
+                } else if (self.currentUser.sipEnabled) {
                     self.informationLabel.text = NSLocalizedString(@"Poor connection, Two step calling enabled.", nil);
                     self.twoStepInfoButton.hidden = NO;
                     shouldBeVisible = YES;
                 } else {
-                    self.informationLabel.text = @"";
+                    self.informationLabel.text = NSLocalizedString(@"VoIP disabled, enable in settings", nil);
+                    shouldBeVisible = YES;
                 }
                 break;
             }
