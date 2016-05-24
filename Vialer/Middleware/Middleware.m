@@ -111,11 +111,11 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
 - (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available withAccount:(VSLAccount *)account andPushResponseTimeMeasurementStart:(NSDate *)pushResponseTimeMeasurmentStart  {
     // Track the response that is sent to the middleware.
-    int currentConnectionType = self.reachabilityManager.currentConnectionType;
+    NSString *connectionTypeString = [self.reachabilityManager currentConnectionTypeString];
     if (available) {
-        [GAITracker acceptedPushNotificationEventWithConnectionValue:currentConnectionType];
+        [GAITracker acceptedPushNotificationEventWithConnectionTypeAsString:connectionTypeString];
     } else {
-        [GAITracker rejectedPushNotificationEventWithConnectionValue:currentConnectionType];
+        [GAITracker rejectedPushNotificationEventWithConnectionTypeAsString:connectionTypeString];
     }
 
     [self.middlewareRequestOperationManager sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {

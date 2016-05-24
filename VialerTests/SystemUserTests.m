@@ -6,6 +6,7 @@
 #import <OCMock/OCMock.h>
 #import "SSKeychain.h"
 #import "SystemUser.h"
+#import "TestKVOObserverClass.h"
 #import "VoIPGRIDRequestOperationManager.h"
 @import XCTest;
 
@@ -20,6 +21,7 @@
 @property (strong, nonatomic)NSString *emailAddress;
 @property (strong, nonatomic)NSString *firstName;
 @property (strong, nonatomic)NSString *lastName;
+@property (strong, nonatomic)NSString *clientID;
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic) BOOL sipAllowed;
@@ -450,6 +452,190 @@
 
     XCTAssertTrue(user.sipEnabled, @"User should have sip enabled");
     XCTAssertEqualObjects(user.sipAccount, @"12340044", @"User should have correct sip account");
+}
+
+- (void)testClientIDSetterWithAURLStyledString {
+    // Given
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    NSString *plainClientID = @"12345";
+    NSString *clientID = [NSString stringWithFormat:@"client = \"/api/apprelation/client/%@/\"", plainClientID];
+
+    // When
+    user.clientID = clientID;
+
+    // Then
+    XCTAssert([user.clientID isEqualToString:plainClientID], @"Client ID should have been filtered from the given string");
+}
+
+- (void)testClientIDSetterWithAPlainUserIDString {
+    // Given
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    NSString *clientID = @"12345";
+
+    // When
+    user.clientID = clientID;
+
+    // Then
+    XCTAssert([user.clientID isEqualToString:clientID], @"Client ID should have been set unparsed.");
+}
+
+- (void)testClientIDSetterWithAnEmptyString {
+    // Given
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    NSString *clientID = @"";
+
+    // When
+    user.clientID = clientID;
+
+    // Then
+    XCTAssertNil(user.clientID, @"Client ID should have been nil");
+}
+
+- (void)testClientIDSetterWithANilString {
+    // Given
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    NSString *clientID = nil;
+
+    // When
+    user.clientID = clientID;
+
+    // Then
+    XCTAssertNil(user.clientID, @"Client ID should have been nil");
+}
+
+- (void)testKVONotificationFiresWhenClientIDChangesFromNilToValue {
+    // Given
+    NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.clientID = nil;
+
+    id kvoObserver = OCMClassMock([TestKVOObserverClass class]);
+    [user addObserver:kvoObserver forKeyPath:kvoKeypath options:0 context:NULL];
+
+    // When
+    NSString *newClientID = @"11111";
+    user.clientID = newClientID;
+
+    // Then
+    OCMVerify([kvoObserver observeValueForKeyPath:kvoKeypath
+                                         ofObject:[OCMArg checkWithBlock:^BOOL(id obj) {
+        XCTAssert([user.clientID isEqualToString:newClientID]);
+        return true;
+    }]
+                                           change:[OCMArg any]
+                                          context:NULL]);
+
+    OCMExpect([kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath]);
+    [kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath];
+    [kvoObserver stopMocking];
+}
+
+- (void)testKVONotificationFiresWhenClientIDChanges {
+    // Given
+    NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.clientID = @"11111";
+
+    id kvoObserver = OCMClassMock([TestKVOObserverClass class]);
+    [user addObserver:kvoObserver forKeyPath:kvoKeypath options:0 context:NULL];
+
+    // When
+    NSString *newClientID = @"22222";
+    user.clientID = newClientID;
+
+    // Then
+    OCMVerify([kvoObserver observeValueForKeyPath:kvoKeypath
+                                         ofObject:[OCMArg checkWithBlock:^BOOL(id obj) {
+        XCTAssert([user.clientID isEqualToString:newClientID]);
+        return true;
+    }]
+                                           change:[OCMArg any]
+                                          context:NULL]);
+
+    [kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath];
+    OCMVerify([kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath]);
+    [kvoObserver stopMocking];
+}
+
+- (void)testKVONotificationFiresWhenClientIDChangesFromValueToNil {
+    // Given
+    NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    user.clientID = @"11111";
+
+    id kvoObserver = OCMClassMock([TestKVOObserverClass class]);
+    [user addObserver:kvoObserver forKeyPath:kvoKeypath options:0 context:NULL];
+
+    // When
+    NSString *newClientID = nil;
+    user.clientID = newClientID;
+
+    // Then
+    OCMVerify([kvoObserver observeValueForKeyPath:kvoKeypath
+                                         ofObject:[OCMArg checkWithBlock:^BOOL(id obj) {
+        XCTAssertNil(user.clientID, @"Client ID should have been set to nil");
+        return true;
+    }]
+                                           change:[OCMArg any]
+                                          context:NULL]);
+
+    [kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath];
+    OCMVerify([kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath]);
+    [kvoObserver stopMocking];
+}
+
+- (void)testKVONotificationDoesNotFire {
+    // Given
+    NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    NSString *oldClientID = @"11111";
+    user.clientID = oldClientID;
+
+    id kvoObserver = OCMStrictClassMock([TestKVOObserverClass class]);
+    [user addObserver:kvoObserver forKeyPath:kvoKeypath options:0 context:NULL];
+
+    // When
+    NSString *newClientID = oldClientID;
+    user.clientID = newClientID;
+
+    // Then
+    // The "Then" part of the test is to see that a certain call does NOT happen.
+    // This can be done with a strict class mock. When a method is envoked on a
+    // strict mock which is not explicitly "Expected" or "Stubbed" the test
+    // will fail.
+    OCMVerifyAll(kvoObserver);
+
+    OCMExpect([kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath]);
+    [kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath];
+    OCMVerifyAll(kvoObserver);
+    [kvoObserver stopMocking];
+}
+
+- (void)testKVONotificationDoesNotFireNilCase {
+    // Given
+    NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+    NSString *oldClientID = nil;
+    user.clientID = oldClientID;
+
+    id kvoObserver = OCMStrictClassMock([TestKVOObserverClass class]);
+    [user addObserver:kvoObserver forKeyPath:kvoKeypath options:0 context:NULL];
+
+    // When
+    NSString *newClientID = oldClientID;
+    user.clientID = newClientID;
+
+    // Then
+    // The "Then" part of the test is to see that a certain call does NOT happen.
+    // This can be done with a strict class mock. When a method is envoked on a
+    // strict mock which is not explicitly "Expected" or "Stubbed" the test
+    // will fail.
+    OCMVerifyAll(kvoObserver);
+
+    OCMExpect([kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath]);
+    [kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath];
+    OCMVerifyAll(kvoObserver);
+    [kvoObserver stopMocking];
 }
 
 @end

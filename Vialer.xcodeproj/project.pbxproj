@@ -169,6 +169,8 @@
 		C4EFCF801BF21E210000CC6F /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
+		F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
+		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
@@ -177,6 +179,7 @@
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
 		F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */; };
+		F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */; };
 		F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */; };
 		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2B3C64F1CC9130200F8BF53 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4234D441C60ED13005710B7 /* Snapshot-Constants.swift */; };
@@ -461,6 +464,8 @@
 		E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		EABE570A65E64F5773C4800E /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
+		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -480,6 +485,8 @@
 		F2872E2F1CC8CF6000D3ACB0 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
 		F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewControllerTests.m; sourceTree = "<group>"; };
 		F2A7AEF61CF34E4900889DD8 /* TestReachabilityManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestReachabilityManagerDelegate.h; sourceTree = "<group>"; };
+		F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestKVOObserverClass.h; sourceTree = "<group>"; };
+		F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestKVOObserverClass.m; sourceTree = "<group>"; };
 		F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestReachabilityManagerDelegate.m; sourceTree = "<group>"; };
 		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2B40BDA1C731F3E00502769 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
@@ -1111,6 +1118,8 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */,
+				F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */,
 				F9EF27E91C60E2D70097E3AC /* Availabilty */,
 				F275FDB01C608B7E006AEEA2 /* APNS */,
 				C40CB3981C45129400248690 /* Calling */,
@@ -1625,6 +1634,8 @@
 				C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */,
 				F9B825171C86F724003CBA92 /* DurationTimer.h */,
 				F9B825181C86F724003CBA92 /* DurationTimer.m */,
+				F204B0641CFC968E00257E7D /* NSString+SubString.h */,
+				F204B0651CFC968E00257E7D /* NSString+SubString.m */,
 			);
 			name = Categories/Helpers;
 			sourceTree = "<group>";
@@ -2138,6 +2149,7 @@
 				C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */,
 				C41FD85F1C60A08400BBE6D7 /* ForgotPasswordView.m in Sources */,
 				F9EEC9301CA2879C008FB612 /* DialerViewController.m in Sources */,
+				F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */,
 				F9EEC94B1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */,
 				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
@@ -2225,6 +2237,7 @@
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
 				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
+				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
 				C4CAC8A51C7377E000018A5A /* SIPCallingViewControllerTests.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
@@ -2266,6 +2279,7 @@
 				C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C4947FD31C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
+				F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */,
 				F9EEC92F1CA2879C008FB612 /* DialerViewController.m in Sources */,
 				F9EEC94A1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */,
 				F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */,

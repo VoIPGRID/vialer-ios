@@ -7,6 +7,7 @@
 
 #import <AVFoundation/AVAudioSession.h>
 #import "Configuration.h"
+#import "NSString+SubString.h"
 #import "SSKeychain.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
@@ -54,6 +55,7 @@ static NSString * const SystemUserSUDMobileNumber       = @"MobileNumber";
 static NSString * const SystemUserSUDEmailAddress       = @"Email";
 static NSString * const SystemUserSUDFirstName          = @"FirstName";
 static NSString * const SystemUserSUDLastName           = @"LastName";
+static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
 static NSString * const SystemUserSUDSipAllowed         = @"SIPAllowed";
@@ -72,6 +74,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 @property (strong, nonatomic) NSString *emailAddress;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *clientID;
 
 /**
  *  This boolean will keep track if the migration from app version 1.x to 2.x already happend.
@@ -146,6 +149,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.emailAddress       = [defaults objectForKey:SystemUserSUDEmailAddress];
     self.firstName          = [defaults objectForKey:SystemUserSUDFirstName];
     self.lastName           = [defaults objectForKey:SystemUserSUDLastName];
+    self.clientID           = [defaults objectForKey:SystemUserSUDClientID];
     self.migrationCompleted = [defaults boolForKey:SystemUserSUDMigrationCompleted];
 
     /**
@@ -287,6 +291,17 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)setClientID:(NSString *)clientID {
+    NSString *newClientID = [self parseStringForClientID:clientID];
+    NSString *stringFromClientIDProperty = NSStringFromSelector(@selector(clientID));
+
+    if (_clientID != newClientID && ![_clientID isEqualToString:newClientID]) {
+        [self willChangeValueForKey:stringFromClientIDProperty];
+        _clientID = newClientID;
+        [self didChangeValueForKey:stringFromClientIDProperty];
+    }
+}
+
 #pragma mark - Actions
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void(^)(BOOL loggedin, NSError *error))completion {
@@ -351,6 +366,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.emailAddress = nil;
     self.firstName = nil;
     self.lastName = nil;
+    self.clientID = nil;
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:SystemUserSUDUsername];
@@ -359,6 +375,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [defaults removeObjectForKey:SystemUserSUDEmailAddress];
     [defaults removeObjectForKey:SystemUserSUDFirstName];
     [defaults removeObjectForKey:SystemUserSUDLastName];
+    [defaults removeObjectForKey:SystemUserApiKeyClient];
 
     [self removeSIPCredentials];
     self.sipAllowed = NO;
@@ -391,6 +408,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.emailAddress   = userDict[SystemUserApiKeyEmailAddress];
     self.firstName      = userDict[SystemUserApiKeyFirstName];
     self.lastName       = userDict[SystemUserApiKeyLastName];
+    self.clientID       = userDict[SystemUserApiKeyClient];
 
     self.sipAllowed     = [userDict[SystemUserApiKeySIPAllowed] boolValue];
 
@@ -410,6 +428,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [defaults setObject:self.emailAddress forKey:SystemUserSUDEmailAddress];
     [defaults setObject:self.firstName forKey:SystemUserSUDFirstName];
     [defaults setObject:self.lastName forKey:SystemUserSUDLastName];
+    [defaults setObject:self.clientID forKey:SystemUserApiKeyClient];
 
     [defaults setBool:self.sipAllowed forKey:SystemUserSUDSipAllowed];
 
@@ -606,13 +625,42 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 // Override default KVO behaviour for automatic notificationing
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
     if ([key isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
-        [key isEqualToString:NSStringFromSelector(@selector(sipEnabled))]) {
+        [key isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ||
+        [key isEqualToString:NSStringFromSelector(@selector(clientID))]) {
         return NO;
     }
     return YES;
 }
 
-# pragma mark - Debug help
+# pragma mark - helper functions
+
+/**
+ *  Given a string looking something like : client = "/api/apprelation/client/12345/"
+ *  or only the id 12345 will return the found client ID.
+ *
+ *  @param clientID A string containing a client ID
+ *
+ *  @return the plain clientID or nil.
+ */
+- (NSString *)parseStringForClientID:(NSString *) givenString {
+    NSString *clientIDPatternToSearch = @"/client/";
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+
+    if (!givenString || [givenString isEqualToString:@""]) {
+        return nil;
+
+    } else if ([givenString containsString:clientIDPatternToSearch]) {
+        return [givenString substringBetweenString:clientIDPatternToSearch andString:@"/"];
+
+    } else if ([givenString rangeOfCharacterFromSet:notDigits].location == NSNotFound) {
+        // The given string only contains numbers, return this as the Client ID.
+        return givenString;
+
+    } else {
+        DDLogWarn(@"Unable to find a Client ID in string:%@", givenString);
+        return nil;
+    }
+}
 
 - (NSString *)debugDescription {
     NSMutableString *desc = [[NSMutableString alloc] initWithFormat:@"%@\n", [self description]];
@@ -627,6 +675,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [desc appendFormat:@"\tsipRegisterOnAdd: %@\n", self.sipRegisterOnAdd ? @"YES" : @"NO"];
     [desc appendFormat:@"\tfirstName: %@\n", self.firstName];
     [desc appendFormat:@"\tlastName: %@\n", self.lastName];
+    [desc appendFormat:@"\tclient id: %@\n", self.clientID];
     [desc appendFormat:@"\tmigrationCompleted: %@\n", self.migrationCompleted ? @"YES" : @"NO"];
 
     [desc appendFormat:@"\tisAllowedToSip: %@\n", self.sipAllowed ? @"YES" : @"NO"];
@@ -635,5 +684,4 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
     return desc;
 }
-
 @end

@@ -24,9 +24,16 @@
 /**
  *  Tracks a screen with the given name. If the name contains "ViewController" this is removed.
  *
- *  @param name The screen name to track
+ *  @param name The screen name to track.
  */
 + (void)trackScreenForControllerName:(NSString *)name;
+
+/**
+ *  Set the client ID as a custom dimension.
+ *
+ *  @param clientID The client ID to set as custom dimension.
+ */
++ (void)setClientIDCustomDimension:(NSString *)clientID;
 
 /**
  *  Indication a call event is received from the SIP Proxy and the app is ringing.
@@ -61,16 +68,16 @@
 /**
  *  Incoming VoIPPush notification was responded with available to middleware.
  *
- *  @param an int indicating the current connection value (as described in the "Google Analytics events for all Mobile apps" document
+ *  @param A string indicating the current connection type, as described in the "Google Analytics events for all Mobile apps" document.
  */
-+ (void)acceptedPushNotificationEventWithConnectionValue:(int)connectionValue;
++ (void)acceptedPushNotificationEventWithConnectionTypeAsString:(NSString *)connectionTypeString;
 
 /**
  *  Incoming VoIPPush notification was responded with unavailable to middleware.
  *
- *  @param an int indicating the current connection value (as described in the "Google Analytics events for all Mobile apps" document
+ *  @param A string indicating the current connection type, as described in the "Google Analytics events for all Mobile apps" document.
  */
-+ (void)rejectedPushNotificationEventWithConnectionValue:(int)connectionValue;
++ (void)rejectedPushNotificationEventWithConnectionTypeAsString:(NSString *)connectionTypeString;
 
 /**
  *  Exception when the registration failed on the middleware.
