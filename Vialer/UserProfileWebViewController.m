@@ -12,12 +12,6 @@ static NSString * const UserProfileWebViewControllerVialerRootViewControllerSegu
 
 @implementation UserProfileWebViewController
 
-#pragma mark - View life cycle
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
 #pragma mark - properties
 
 - (void)cancelButtonPressed:(UIBarButtonItem *)sender {

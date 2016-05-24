@@ -6,6 +6,7 @@
 #import "VailerRootViewController.h"
 
 #import "AppDelegate.h"
+#import "Middleware.h"
 #import "SIPIncomingCallViewController.h"
 #import "SIPCallingViewController.h"
 #import "SystemUser.h"
@@ -54,6 +55,13 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     @catch (NSException *exception) {
         DDLogError(@"Error removing observer %@: %@", AppDelegateIncomingBackgroundCallNotification, exception);
     }
+
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:MiddlewareRegistrationOnOtherDeviceNotification];
+    }
+    @catch (NSException *exception) {
+        DDLogError(@"Error removing observer %@: %@", MiddlewareRegistrationOnOtherDeviceNotification, exception);
+    }
 }
 
 - (void)viewDidLoad {
@@ -61,6 +69,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     [self setupLayout];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingBackgroundCallNotification:) name:AppDelegateIncomingBackgroundCallNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voipWasDisabled:) name:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
 
     // Customize NavigationBar
     [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarTintColor];
@@ -139,8 +148,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
                                                                 style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * _Nonnull action) {
-            [self showLoginScreen];
-        }];
+                                                                  [self showLoginScreen];
+                                                              }];
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
@@ -166,6 +175,18 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     }
 }
 
+- (void)voipWasDisabled:(NSNotification *)notification {
+    NSString *localizedErrorString = NSLocalizedString(@"Your VoIP account has been registered on another device. You can re-enable VoIP in Settings", nil);
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"VoIP Disabled", nil)
+                                                                   message:localizedErrorString
+                                                      andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+    [[self topViewController] presentViewController:alert animated:YES completion:nil];
+}
+
+- (UIViewController *)topViewController{
+    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     self.willPresentSIPViewController = NO;
     if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
@@ -181,4 +202,20 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
 - (IBAction)unwindVialerRootViewController:(UIStoryboardSegue *)segue { }
 
+# pragma mark - ViewController stack navigation
+// Credit goes to: https://gist.github.com/snikch/3661188
+- (UIViewController *)topViewController:(UIViewController *)rootViewController {
+    if (rootViewController.presentedViewController == nil) {
+        return rootViewController;
+    }
+
+    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        return [self topViewController:lastViewController];
+    }
+
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    return [self topViewController:presentedViewController];
+}
 @end

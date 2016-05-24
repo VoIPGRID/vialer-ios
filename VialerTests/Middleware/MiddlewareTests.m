@@ -81,4 +81,64 @@
     [mockSystemUser stopMocking];
 }
 
+- (void)testRegistrationOnAnotherDeviceWithSystemUserSipEnabled {
+    // Given
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    OCMStub([mockSystemUser sipEnabled]).andReturn(YES);
+
+    // Should me equal to the constants devined in Middleware.m.
+    NSString * MiddlewareAPNSPayloadKeyType       = @"type";
+    NSString * MiddlewareAPNSPayloadKeyMessage    = @"message";
+    NSDictionary *mockDictionary = @{MiddlewareAPNSPayloadKeyType : MiddlewareAPNSPayloadKeyMessage};
+
+    self.middleware.systemUser = mockSystemUser;
+
+    XCTestExpectation *expectation = [self expectationForNotification:MiddlewareRegistrationOnOtherDeviceNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        // Then
+        OCMVerify([mockSystemUser setSipEnabled:NO]);
+        [expectation fulfill];
+        return YES;
+    }];
+
+    // When
+    [self.middleware handleReceivedAPSNPayload:mockDictionary];
+
+    // Cleanup
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        [mockSystemUser stopMocking];
+    }];
+}
+
+- (void)testRegistrationOnAnotherDeviceWithSystemUserSipDisabled {
+    // Given
+    // This is a strict class mock. It will cause the test to fail when a method is invoked
+    // which is not explicitly "stubed" or "expected".
+    id mockNSNotificationQueue = OCMStrictClassMock([NSNotificationQueue class]);
+    // Mock the NSNotificationQueue class method "defaultQueue to return the mock NotificationQueue.
+    OCMStub([mockNSNotificationQueue defaultQueue]).andReturn(mockNSNotificationQueue);
+
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    OCMStub([mockSystemUser sipEnabled]).andReturn(NO);
+    self.middleware.systemUser = mockSystemUser;
+
+    // Should me equal to the constants devined in Middleware.m.
+    NSString * MiddlewareAPNSPayloadKeyType       = @"type";
+    NSString * MiddlewareAPNSPayloadKeyMessage    = @"message";
+    NSDictionary *mockDictionary = @{MiddlewareAPNSPayloadKeyType : MiddlewareAPNSPayloadKeyMessage};
+
+    // When
+    [self.middleware handleReceivedAPSNPayload:mockDictionary];
+
+    // Then
+    // The middleware could call [NSNotificationQueue enqueueNotification....] but this method is not
+    // stubed. mockNSNotificationQueue being a strict mock will not allow enqueueNotification to be called.
+    // So, the test here is that enqueueNotification is not called.
+    [mockNSNotificationQueue verify];
+
+    // Cleanup
+    [mockSystemUser stopMocking];
+    [mockNSNotificationQueue stopMocking];
+}
+
+
 @end

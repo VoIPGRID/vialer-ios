@@ -54,7 +54,9 @@
             [self.delegate numberHasChanged:newNumber];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error saving number", nil) message:error.localizedDescription andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error saving number", nil)
+                                                                           message:error.localizedDescription
+                                                              andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }];
