@@ -155,7 +155,6 @@
 
     // When
     NSData *data = [self nsDataFromHexString:hexString];
-    NSLog(@"%@", data);
     NSString *returnedString = [self.apnsHandler nsStringFromNSData:data];
 
     // Then
