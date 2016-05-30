@@ -5,6 +5,10 @@
 
 #import "GAITracker.h"
 
+typedef NS_ENUM(NSInteger, CustomGoogleAnalyticsDimension) {
+    CustomGoogleAnalyticsDimensionClientID = 1,
+};
+
 @implementation GAITracker
 
 + (void)setupGAITracker {
@@ -33,6 +37,11 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:[name stringByReplacingOccurrencesOfString:@"ViewController" withString:@""]];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
+
++ (void)setClientIDCustomDimension:(NSString *)clientID {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:[GAIFields customDimensionForIndex:CustomGoogleAnalyticsDimensionClientID] value:clientID];
 }
 
 + (void)incomingCallRingingEvent {
@@ -83,20 +92,20 @@
                                                            value:nil] build]];
 }
 
-+ (void)acceptedPushNotificationEventWithConnectionValue:(int)connectionValue {
++ (void)acceptedPushNotificationEventWithConnectionTypeAsString:(NSString *)connectionTypeString {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
-                                                          action:@"acceptance"
-                                                           label:@"accepted"
-                                                           value:[NSNumber numberWithInt:connectionValue]] build]];
+                                                          action:@"accepted"
+                                                           label:connectionTypeString
+                                                           value:nil] build]];
 }
 
-+ (void)rejectedPushNotificationEventWithConnectionValue:(int)connectionValue {
++ (void)rejectedPushNotificationEventWithConnectionTypeAsString:(NSString *)connectionTypeString {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
-                                                          action:@"acceptance"
-                                                           label:@"rejected"
-                                                           value:[NSNumber numberWithInt:connectionValue]] build]];
+                                                          action:@"rejected"
+                                                           label:connectionTypeString
+                                                           value:nil] build]];
 }
 
 + (void)registrationFailedWithMiddleWareException {

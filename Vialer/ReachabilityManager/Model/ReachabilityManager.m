@@ -118,13 +118,13 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
     return [self currentReachabilityStatus];
 }
 
-- (ReachabilityManagerConnectionType)currentConnectionType {
+- (NSString *)currentConnectionTypeString {
     if (self.onWifi) {
-        return ReachabilityManagerConnectionTypeWifi;
+        return @"Wifi";
     } else if (self.on4g) {
-        return ReachabilityManagerConnectionType4g;
+        return @"4G";
     } else {
-        return ReachabilityManagerConnectionTypeOther;
+        return @"unknown";
     }
 }
 

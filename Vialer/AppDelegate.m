@@ -85,6 +85,7 @@ static int const AppDelegateNumberOfVibrations = 5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallConnectedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallDisconnectedNotification object:nil];
+    [[SystemUser currentUser] addObserver:self forKeyPath:NSStringFromSelector(@selector(clientID)) options:0 context:NULL];
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
@@ -118,7 +119,14 @@ static int const AppDelegateNumberOfVibrations = 5;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[SystemUser currentUser] removeObserver:self forKeyPath:NSStringFromSelector(@selector(clientID))];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallDisconnectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallConnectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserLogoutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPCredentialsChangedNotification object:nil];
+
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
@@ -200,6 +208,13 @@ static int const AppDelegateNumberOfVibrations = 5;
 }
 
 # pragma mark - Notifications
+
+// KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(clientID))]) {
+        [GAITracker setClientIDCustomDimension:[SystemUser currentUser].clientID];
+    }
+}
 
 - (void)updatedSIPCredentials:(NSNotification *)notification {
     DDLogInfo(@"SIP Credentials have changed");

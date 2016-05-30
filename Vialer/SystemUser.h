@@ -138,6 +138,11 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 @property (readonly, nonatomic) NSString *lastName;
 
 /**
+ *  The client ID for this User.
+ */
+@property (readonly, nonatomic) NSString *clientID;
+
+/**
  *  Indication if the user has done the migration from version 1.x to 2.x.
  */
 @property (readonly, nonatomic) BOOL migrationCompleted;

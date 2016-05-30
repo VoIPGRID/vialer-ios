@@ -24,27 +24,6 @@ typedef NS_ENUM(NSInteger, ReachabilityManagerStatusType) {
 };
 
 /**
- *  Enum indicating the type of the current connection as an int.
- *
- *  Is used by google Analytics and is aligned between the apps.
- *  See the "Google Analytics evetns for all Mobile apps" document.
- */
-typedef NS_ENUM(NSInteger, ReachabilityManagerConnectionType) {
-    /**
-     *  When non of the other types are valid.
-     */
-    ReachabilityManagerConnectionTypeOther = 0,
-    /**
-     *  Indicating a Wifi connection.
-     */
-    ReachabilityManagerConnectionTypeWifi,
-    /**
-     *  Indicating a 4G connection.
-     */
-    ReachabilityManagerConnectionType4g,
-};
-
-/**
  *  Manager for keeping track of the device's reachability.
  *
  *  The reachability manager can be used in 2 ways:
@@ -70,11 +49,12 @@ typedef NS_ENUM(NSInteger, ReachabilityManagerConnectionType) {
 - (ReachabilityManagerStatusType)currentReachabilityStatus;
 
 /**
- *  Indicates the current connection type by returning a value defined in ReachabilityManagerConnectionType.
+ *  Indicates the current connection type as a String.
+ *  Possible values: unknown, Wifi or 4G
  *
- *  @return An int indicating the current connection type.
+ *  @return A string stating the connection type.
  */
-- (ReachabilityManagerConnectionType)currentConnectionType;
+- (NSString *)currentConnectionTypeString;
 
 /**
  *  Resetting the CTTelephonyNetworkInfo instance and then getting the current reachability status
