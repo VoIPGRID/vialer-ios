@@ -61,7 +61,7 @@
             //Then
             NSHTTPURLResponse *response = [[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey];
             XCTAssert(response.statusCode == statusCodeToReturn,
-                      @"Unexpected HTTP status code returned, expected: %d, received: %ld", statusCodeToReturn, response.statusCode);
+                      @"Unexpected HTTP status code returned, expected: %d, received: %ld", statusCodeToReturn, (long)response.statusCode);
         }
         [expectation fulfill];
     }];
@@ -98,7 +98,7 @@
             //Then
             NSHTTPURLResponse *response = [[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey];
             XCTAssert(response.statusCode == statusCodeToReturn,
-                      @"Unexpected HTTP status code returned, expected: %d, received: %ld", statusCodeToReturn, response.statusCode);
+                      @"Unexpected HTTP status code returned, expected: %d, received: %ld", statusCodeToReturn, (long)response.statusCode);
 
         }
         [expectation fulfill];

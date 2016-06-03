@@ -23,11 +23,27 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "AdHocDistribution"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C4F49F261BF0B45700C25159"
+               BuildableName = "VialerTests.xctest"
+               BlueprintName = "VialerTests"
+               ReferencedContainer = "container:Vialer.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TwoStepCallTests/testNotificationObserverIsRemovedWhenDealloced">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -90,7 +106,7 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"

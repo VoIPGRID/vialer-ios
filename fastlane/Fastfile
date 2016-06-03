@@ -46,6 +46,7 @@ platform :ios do
         username: ENV["ITC_USERNAME"],
         team_name: ENV["APP_TEAM"],
         skip_submission: true,
+        skip_waiting_for_build_processing: true,
     )
 
     slack(
