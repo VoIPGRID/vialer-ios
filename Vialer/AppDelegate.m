@@ -61,7 +61,7 @@ static int const AppDelegateNumberOfVibrations = 5;
         // if it is presented at the normal point in the app.
         CNContactStore *contactStore = [[CNContactStore alloc] init];
         [contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            NSLog(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
+            DDLogDebug(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
         }];
 #endif
         [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
@@ -76,7 +76,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 #ifdef DEBUG
     // Network logging
     [[AFNetworkActivityLogger sharedLogger] startLogging];
-    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelInfo];
+    [[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelOff];
 #endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSIPCredentials:) name:SystemUserSIPCredentialsChangedNotification object:nil];
@@ -185,13 +185,23 @@ static int const AppDelegateNumberOfVibrations = 5;
     [ttyLogger setColorsEnabled:YES];
 
     // Give INFO a color
+    // Verbose
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor lightGrayColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
+
+    // Debug
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor darkGrayColor] backgroundColor:nil forFlag:DDLogFlagDebug];
+
+    // INFO
     UIColor *pink = [UIColor colorWithRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
-    UIColor *green = [UIColor colorWithRed:(0/255.0) green:(255/255.0) blue:(0/255.0) alpha:1.0];
-    [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:DDLogFlagDebug];
+
+    // Warning
+    // Default, so orange.
+
+    // Error
     UIColor *red = [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:red backgroundColor:nil forFlag:DDLogFlagError];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor darkGrayColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
+
 
 #ifdef DEBUG
     // File logging
