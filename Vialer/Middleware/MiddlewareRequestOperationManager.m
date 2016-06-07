@@ -22,7 +22,12 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 
 @implementation MiddlewareRequestOperationManager
 
--(instancetype)initWithBaseURL:(NSURL *)url {
+- (instancetype)initWithBaseURLasString:(NSString *)baseURLString {
+    NSURL *baseURL = [NSURL URLWithString: baseURLString];
+    return [self initWithBaseURL:baseURL];
+}
+
+- (instancetype)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
 
     if (self) {

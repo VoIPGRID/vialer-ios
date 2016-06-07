@@ -7,6 +7,16 @@
 
 @interface MiddlewareRequestOperationManager : VoIPGRIDRequestOperationManager
 
+
+/**
+ *  A convenience initializer to provide the base URL as an NSString.
+ *
+ *  @param baseURLString A NSString which represents the base URL.
+ *
+ *  @return a Middleware Request Operation Manager instance which talks to the given base URL.
+ */
+- (_Nullable instancetype)initWithBaseURLasString:(NSString * _Nonnull)baseURLString;
+
 /**
  *  Create or update a Middleware device record.
  *

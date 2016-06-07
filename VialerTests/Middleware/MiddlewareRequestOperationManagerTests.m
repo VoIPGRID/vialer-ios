@@ -11,7 +11,7 @@
 @import XCTest;
 
 @interface Middleware()
-- (MiddlewareRequestOperationManager *)middlewareRequestOperationManager;
+- (MiddlewareRequestOperationManager *)commonMiddlewareRequestOperationManager;
 @end
 
 @interface MiddlewareRequestOperationManagerTests : XCTestCase
@@ -26,7 +26,7 @@
 
     //To ensure an equal middleware API setup as actually used by the middleware class.
     Middleware *aMiddlewareInstance = [[Middleware alloc] init];
-    self.middlewareRequestOperationManager = [aMiddlewareInstance middlewareRequestOperationManager];
+    self.middlewareRequestOperationManager = [aMiddlewareInstance commonMiddlewareRequestOperationManager];
     self.middlewareBaseURLAsString = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
 }
 
