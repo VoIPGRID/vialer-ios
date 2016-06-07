@@ -367,14 +367,14 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
     if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
         [GAITracker setupOutgoingSIPCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
-    } else if (self.reachabilityStatus == ReachabilityManagerStatusLowSpeed) {
-        [GAITracker setupOutgoingConnectABCallEvent];
-        [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
-    } else {
+    } else if (self.reachabilityStatus == ReachabilityManagerStatusOffline) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
                                                                        message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
                                                           andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
         [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [GAITracker setupOutgoingConnectABCallEvent];
+        [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
     }
 }
 
