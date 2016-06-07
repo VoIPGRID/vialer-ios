@@ -24,7 +24,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
 
 @interface Middleware ()
-@property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
+@property (strong, nonatomic) MiddlewareRequestOperationManager *commonMiddlewareRequestOperationManager;
 @property (weak, nonatomic) SystemUser *systemUser;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (nonatomic) int retryCount;
@@ -55,12 +55,18 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     return _systemUser;
 }
 
-- (MiddlewareRequestOperationManager *)middlewareRequestOperationManager {
-    if (!_middlewareRequestOperationManager) {
-        NSURL *baseURL = [NSURL URLWithString: [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString]];
-        _middlewareRequestOperationManager = [[MiddlewareRequestOperationManager alloc] initWithBaseURL:baseURL];
+/**
+ *  There is one Common Middleware used for registering and unregistration of a device.
+ *  Responding to an incoming call is done to the middleware which is included in the push payload.
+ *
+ *  @return A Middleware instance representing the common middleware.
+ */
+- (MiddlewareRequestOperationManager *)commonMiddlewareRequestOperationManager {
+    if (!_commonMiddlewareRequestOperationManager) {
+        NSString *baseURLString = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
+        _commonMiddlewareRequestOperationManager = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:baseURLString];
     }
-    return _middlewareRequestOperationManager;
+    return _commonMiddlewareRequestOperationManager;
 }
 
 - (ReachabilityManager *)reachabilityManager {
@@ -76,7 +82,8 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
 
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
-    DDLogDebug(@"Push message received from middleware.\nPayload: %@", payload);
+    DDLogDebug(@"Push message received from middleware of type: %@", payloadType);
+    DDLogVerbose(@"Payload:\n%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
@@ -118,7 +125,11 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         [GAITracker rejectedPushNotificationEventWithConnectionTypeAsString:connectionTypeString];
     }
 
-    [self.middlewareRequestOperationManager sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
+    NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
+    DDLogDebug(@"Responding to Middleware with URL: %@", middlewareBaseURLString);
+    MiddlewareRequestOperationManager *middlewareToRespondTo = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:middlewareBaseURLString];
+
+    [middlewareToRespondTo sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
         // Whole response cycle completed, log duration.
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
         [GAITracker timeToRespondToIncomingPushNotification:responseTime];
@@ -150,7 +161,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     NSString *sipAccount = notification.object;
 
     if (sipAccount && storedAPNSToken) {
-        [self.middlewareRequestOperationManager deleteDeviceRecordWithAPNSToken:storedAPNSToken sipAccount:sipAccount withCompletion:^(NSError *error) {
+        [self.commonMiddlewareRequestOperationManager deleteDeviceRecordWithAPNSToken:storedAPNSToken sipAccount:sipAccount withCompletion:^(NSError *error) {
             if (error) {
                 DDLogError(@"Error deleting device record from middleware. %@", error);
             } else {
@@ -216,7 +227,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
 - (void)sentAPNSToken:(NSString *)apnsToken withCompletion:(void (^)(NSError *error))completion {
     if (self.systemUser.sipEnabled) {
-        [self.middlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
+        [self.commonMiddlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
 
                 if ((error.code == NSURLErrorTimedOut || error.code == NSURLErrorNotConnectedToInternet) && self.retryCount < 5) {

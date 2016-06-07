@@ -13,7 +13,7 @@
 @import XCTest;
 
 @interface Middleware()
-@property (strong, nonatomic) MiddlewareRequestOperationManager *middlewareRequestOperationManager;
+@property (strong, nonatomic) MiddlewareRequestOperationManager *commonMiddlewareRequestOperationManager;
 @property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (weak, nonatomic) SystemUser *systemUser;
 @end
@@ -42,7 +42,7 @@
 }
 
 - (void)testMiddlewareRequestOperationManagerPropertyCreation {
-    MiddlewareRequestOperationManager *createdMiddlewareRequestOperationManager = self.middleware.middlewareRequestOperationManager;
+    MiddlewareRequestOperationManager *createdMiddlewareRequestOperationManager = self.middleware.commonMiddlewareRequestOperationManager;
 
     XCTAssert([createdMiddlewareRequestOperationManager isKindOfClass:[MiddlewareRequestOperationManager class]]);
 
@@ -69,7 +69,7 @@
     NSString *mockSIPAccount = @"012334456";
 
     //When
-    self.middleware.middlewareRequestOperationManager = mockMiddlewareRequestOperationManager;
+    self.middleware.commonMiddlewareRequestOperationManager = mockMiddlewareRequestOperationManager;
     OCMStub([mockSystemUser sipEnabled]).andReturn(YES);
     OCMStub([mockSystemUser sipAccount]).andReturn(mockSIPAccount);
     self.middleware.systemUser = mockSystemUser;
@@ -121,10 +121,10 @@
     OCMStub([mockSystemUser sipEnabled]).andReturn(NO);
     self.middleware.systemUser = mockSystemUser;
 
-    // Should me equal to the constants devined in Middleware.m.
-    NSString * MiddlewareAPNSPayloadKeyType       = @"type";
-    NSString * MiddlewareAPNSPayloadKeyMessage    = @"message";
-    NSDictionary *mockDictionary = @{MiddlewareAPNSPayloadKeyType : MiddlewareAPNSPayloadKeyMessage};
+    // Should be equal to the constants defined in Middleware.m.
+    NSString *middlewareAPNSPayloadKeyType = @"type";
+    NSString *mockType = @"message";
+    NSDictionary *mockDictionary = @{middlewareAPNSPayloadKeyType : mockType};
 
     // When
     [self.middleware handleReceivedAPSNPayload:mockDictionary];
@@ -140,5 +140,44 @@
     [mockNSNotificationQueue stopMocking];
 }
 
+- (void)testAppRespondsToMiddlewareProvidedInPayload {
+    // Should be equal to the constants defined in Middleware.m.
+    NSString *middlewareAPNSPayloadKeyType = @"type";
+    NSString *mockType = @"call";
+
+    NSString *middlewareAPNSPayloadKeyResponseAPI = @"response_api";
+    NSString *mockResponseAPI = @"https://mock.response.api.nl/api/call-response/";
+
+    NSString *middlewareResponseKeyUniqueKey = @"unique_key";
+    NSString *mockUniqueKey = @"123456";
+
+    NSString *middlewareResponseKeyMessageStartTime = @"message_start_time";
+    NSString *mockMessageStartTime = @"1465292030.264119";
+
+    NSDictionary *mockDictionary = @{middlewareAPNSPayloadKeyType : mockType,
+                                     middlewareAPNSPayloadKeyResponseAPI : mockResponseAPI,
+                                     middlewareResponseKeyUniqueKey : mockUniqueKey,
+                                     middlewareResponseKeyMessageStartTime : mockMessageStartTime};
+
+    id mockMiddlewareRequestOperationManager = OCMClassMock([MiddlewareRequestOperationManager class]);
+    OCMStub([mockMiddlewareRequestOperationManager alloc]).andReturn(mockMiddlewareRequestOperationManager);
+
+    OCMStub([mockMiddlewareRequestOperationManager initWithBaseURL:[OCMArg checkWithBlock:^BOOL(id obj) {
+        NSURL *expectedURL = [[NSURL alloc] initWithString:mockResponseAPI];
+
+        XCTAssertTrue([obj isKindOfClass:[NSURL class]]);
+        XCTAssert([(NSURL *)obj isEqual:expectedURL]);
+
+        return YES;
+    }]]);
+
+    // When
+    [self.middleware handleReceivedAPSNPayload:mockDictionary];
+
+    // Then
+    OCMVerifyAll(mockMiddlewareRequestOperationManager);
+
+    [mockMiddlewareRequestOperationManager stopMocking];
+}
 
 @end
