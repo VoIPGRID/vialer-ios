@@ -9,6 +9,10 @@
 #import "SystemUser.h"
 @import XCTest;
 
+@interface SystemUser()
+@property (readwrite, nonatomic) BOOL sipAllowed;
+@end
+
 @interface SettingsViewController ()
 @property (strong, nonatomic) SystemUser *currentUser;
 @end
@@ -56,32 +60,36 @@
     }];
 }
 
-- (void)testChangeSwitchToOffWillReloadTable {
-    [self.settingsViewController loadViewIfNeeded];
-    id mockSystemUser = OCMClassMock([SystemUser class]);
+- (void)testSipEnabledObserverWillReloadTable {
     id mockTableView = OCMClassMock([UITableView class]);
-    self.settingsViewController.currentUser = mockSystemUser;
     self.settingsViewController.tableView = mockTableView;
-    id mockSwitch = OCMClassMock([UISwitch class]);
-    OCMStub([mockSwitch isOn]).andReturn(NO);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    self.settingsViewController.currentUser = mockSystemUser;
 
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should reload table"];
-    OCMStub([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]).andDo(^(NSInvocation *invocation) {
-        [expectation fulfill];
-    });
+    [self.settingsViewController viewWillAppear:NO];
 
-    [self.settingsViewController didChangeSwitch:mockSwitch];
+    ((SystemUser *)mockSystemUser).sipEnabled = NO;
 
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        }
-        OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
-        [mockTableView stopMocking];
-        [mockSystemUser stopMocking];
-        [mockSwitch stopMocking];
-    }];
+    OCMVerify([mockTableView reloadData]);
+
+    [mockTableView stopMocking];
+    [mockSystemUser stopMocking];
+}
+
+- (void)testSipAllowedObserverWillReloadTable {
+    id mockTableView = OCMClassMock([UITableView class]);
+    self.settingsViewController.tableView = mockTableView;
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    self.settingsViewController.currentUser = mockSystemUser;
+
+    [self.settingsViewController viewWillAppear:NO];
+
+    ((SystemUser *)mockSystemUser).sipAllowed = NO;
+
+    OCMVerify([mockTableView reloadData]);
+
+    [mockTableView stopMocking];
+    [mockSystemUser stopMocking];
 }
 
 - (void)testChangeSwitchToOffWillShowSpinner {

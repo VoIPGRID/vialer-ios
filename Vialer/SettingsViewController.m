@@ -198,11 +198,6 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
             [SVProgressHUD showWithStatus:NSLocalizedString(@"Disabling VoIP...", nil)];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 self.currentUser.sipEnabled = NO;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD dismiss];
-                    NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
-                    [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
-                });
             });
         }
     }
@@ -266,7 +261,10 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     // React to changes on the SipAllowed property of the SystemUser.
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
         [keyPath isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ) {
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [SVProgressHUD dismiss];
+        });
     }
 }
 
