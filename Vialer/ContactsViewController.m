@@ -10,26 +10,37 @@
 #import "ContactModel.h"
 #import "ContactUtils.h"
 #import "GAITracker.h"
+#import "ReachabilityBarViewController.h"
+#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
-
+#import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
 
 static NSString * const ContactsViewControllerLogoImageName = @"logo";
 static NSString * const ContactsViewControllerTabContactImageName = @"tab-contact";
 static NSString * const ContactsViewControllerTabContactActiveImageName = @"tab-contact-active";
 static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
+static NSString * const ContactsViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
+static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
+static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate>
+@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate, ReachabilityBarViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
+@property (weak, nonatomic) ReachabilityBarViewController *reachabilityBar;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
+
+@property (strong, nonatomic) SystemUser *currentUser;
+@property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
+@property (strong, nonatomic) CNContact *selectedContact;
 @end
 
 @implementation ContactsViewController
@@ -46,17 +57,28 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self checkContactsAccess];
-    [self setupLayout];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    [self checkContactsAccess];
+    [self setupLayout];
+    [self showReachabilityBar];
     [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
 }
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+}
+
+# pragma mark - setup
 
 - (void)setupLayout {
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
@@ -64,18 +86,16 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
-    self.tableView.sectionIndexColor = [Configuration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
+    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
+
+    self.tableView.sectionIndexColor = [defaultConfiguration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    self.searchBar.barTintColor = [Configuration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.searchBar.barTintColor = [defaultConfiguration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
 #pragma mark - properties
-
-- (void)setMyPhoneNumberLabel:(UILabel *)myPhoneNumberLabel {
-    _myPhoneNumberLabel = myPhoneNumberLabel;
-    _myPhoneNumberLabel.text = [SystemUser currentUser].outgoingNumber;
-}
 
 - (void)setWarningMessage:(NSString *)warningMessage {
     if (warningMessage.length) {
@@ -102,6 +122,13 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     return _refreshControl;
 }
 
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
+}
+
 #pragma mark - actions
 
 - (IBAction)leftDrawerButtonPressed:(UIBarButtonItem *)sender {
@@ -116,13 +143,18 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     contactViewController.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactViewController];
     [self presentViewController:nav animated:YES completion:nil];
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:self.selectedContact];
+    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
+        self.reachabilityBar = (ReachabilityBarViewController *)segue.destinationViewController;
+        self.reachabilityBar.delegate = self;
     }
 }
 
@@ -181,15 +213,13 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
 #pragma mark - tableview delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CNContact *contact;
-
     if ([tableView isEqual:self.tableView]) {
-        contact = [[ContactModel defaultContactModel] getContactsAtSection:indexPath.section andIndex:indexPath.row];
+        self.selectedContact = [[ContactModel defaultContactModel] getContactsAtSection:indexPath.section andIndex:indexPath.row];
     } else {
-        contact = [ContactModel defaultContactModel].searchResults[indexPath.row];
+        self.selectedContact = [ContactModel defaultContactModel].searchResults[indexPath.row];
     }
 
-    CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:contact];
+    CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
     contactViewController.contactStore = [[ContactModel defaultContactModel] getContactStore];
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
@@ -205,7 +235,6 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
     if ([property.key isEqualToString:CNContactPhoneNumbersKey]) {
         CNPhoneNumber *phoneNumberProperty = property.value;
         self.phoneNumberToCall = [phoneNumberProperty stringValue];
-
         /**
          *  We need to return asap to prevent default action (calling with native dialer).
          *  As a workaround, we put the presenting of the new viewcontroller via a separate queue,
@@ -213,14 +242,17 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                // TODO: implement 4g calling
-                if (false) {
+                if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
                     [GAITracker setupOutgoingSIPCallEvent];
-//                    [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-//                    [self.sipCallingViewController handlePhoneNumber:self.phoneNumberToCall forContact:nil];
-                } else {
+                    [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                } else if (self.reachabilityStatus == ReachabilityManagerStatusLowSpeed) {
                     [GAITracker setupOutgoingConnectABCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
+                } else {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                                                   message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
+                                                                      andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
             });
         });
@@ -235,6 +267,15 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
 }
 
 #pragma mark - searchbar delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [self hideReachabilityBar];
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    [self showReachabilityBar];
+    return YES;
+}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [[ContactModel defaultContactModel] searchContacts:searchText];
@@ -281,6 +322,39 @@ static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCal
             });
         }
     });
+}
+
+#pragma mark - Notifications
+
+- (void)outgoingNumberUpdated:(NSNotification *)notification {
+    self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+}
+
+#pragma mark - ReachabilityBarViewControllerDelegate
+- (void)hideReachabilityBar {
+    self.reachabilityBarHeigthConstraint.constant = 0.0;
+    self.reachabilityBar.view.hidden = YES;
+    [self.view layoutIfNeeded];
+}
+
+- (void)showReachabilityBar {
+    if (self.reachabilityBar.shouldBeVisible) {
+        self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+        self.reachabilityBar.view.hidden = NO;
+        [self.view layoutIfNeeded];
+    }
+}
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {
+    self.reachabilityStatus = status;
+}
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {
+    [self.view layoutIfNeeded];
+    self.reachabilityBarHeigthConstraint.constant = visible ? ContactsViewControllerReachabilityBarHeight : 0.0;
+    [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end

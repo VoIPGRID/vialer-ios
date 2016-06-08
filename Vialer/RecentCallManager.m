@@ -1,21 +1,20 @@
 //
 //  RecentCallManager.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 16/11/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
 #import "RecentCallManager.h"
 
-#import "RecentCall.h"
+#import "AppDelegate.h"
+#import "RecentCall+VoIPGRID.h"
 #import "SystemUser.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager+Recents.h"
 
 static int const RecentCallManagerOffsetMonths = -1;
 static int const RecentCallManagerNumberOfCalls = 50;
 static NSString * const RecentCallManagerErrorDomain = @"RecentCallManagerError";
-static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rate not quicker than this amount of seconds.
+static NSTimeInterval const RecentCallManagerRequestTimeout = 30;
+static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rate not quicker than this amount of seconds.
 
 @interface RecentCallManager()
 @property (strong, nonatomic) NSArray<RecentCall *> *recentCalls;
@@ -25,97 +24,165 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 60; // Update rat
 
 @property (nonatomic) BOOL recentsFetchFailed;
 @property (nonatomic) RecentCallManagerErrors recentsFetchErrorCode;
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+@property (strong, nonatomic) NSDateFormatter *callDateGTFormatter;
+
+@property (strong, nonatomic) NSManagedObjectContext *privateManagedObjectContext;
 @end
 
 @implementation RecentCallManager
 
-+ (RecentCallManager *)defaultManager {
-    static RecentCallManager *_defaultManager;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _defaultManager = [[RecentCallManager alloc] init];
-    });
-    return _defaultManager;
-}
+#pragma mark - Life Cycle
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.reloading = NO;
         self.recentsFetchFailed = NO;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedNotification:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification:) name:SystemUserLogoutNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LOGIN_FAILED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserLogoutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:nil];
 }
 
+#pragma mark - Properties
+
+- (VoIPGRIDRequestOperationManager *)operationManager {
+    if (!_operationManager) {
+        _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURLandRequestOperationTimeoutInterval:RecentCallManagerRequestTimeout];
+    }
+    return _operationManager;
+}
+
+- (NSDateFormatter *)callDateGTFormatter {
+    if (! _callDateGTFormatter) {
+        _callDateGTFormatter = [[NSDateFormatter alloc] init];
+        _callDateGTFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+    }
+    return _callDateGTFormatter;
+}
+
+- (void)setMainManagedObjectContext:(NSManagedObjectContext *)mainManagedObjectContext {
+    _mainManagedObjectContext = mainManagedObjectContext;
+    self.privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    self.privateManagedObjectContext.parentContext = mainManagedObjectContext;
+}
+
+#pragma mark - Actions
+
 - (void)getLatestRecentCallsWithCompletion:(void(^)(NSError *error))completion {
-    // User must be loggedin
-    if (![SystemUser currentUser].isLoggedIn ||
-        // no fetch going on
-        self.reloading ||
+    // no fetch going on
+    if (self.reloading ||
         // rate limit fetching
         (self.previousRefresh && fabs([self.previousRefresh timeIntervalSinceNow]) < RecentCallManagerRefreshInterval)) {
         completion(nil);
         return;
     }
 
-    // Retrieve recent calls from last month
-    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-    [offsetComponents setMonth:RecentCallManagerOffsetMonths];
-    NSDate *lastMonth = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
+    __block RecentCall *lastCall;
+    [self.privateManagedObjectContext performBlockAndWait:^{
+        lastCall = [RecentCall latestCallInManagedObjectContext:self.privateManagedObjectContext];
+    }];
 
-    NSString *sourceNumber = nil;
+    NSDate *lastDate;
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    if (lastCall) {
+        lastDate = lastCall.callDate;
+        offsetComponents.hour = -2;
+    } else {
+        // Retrieve recent calls from last month
+        lastDate = [NSDate date];
+        offsetComponents.month = RecentCallManagerOffsetMonths;
+
+    }
+    NSDate *fetchDate = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:lastDate options:0];
+
+    NSDictionary *parameters = @{@"limit": @(RecentCallManagerNumberOfCalls),
+                                 @"offset": @0,
+                                 @"call_date__gte": [self.callDateGTFormatter stringFromDate:fetchDate]
+                                 };
 
     self.reloading = YES;
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] cdrRecordWithLimit:RecentCallManagerNumberOfCalls offset:0 sourceNumber:sourceNumber callDateGte:lastMonth success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.operationManager cdrRecordsWithParameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        self.reloading = NO;
+
+        // Check if error happend.
+        if (error) {
+            self.recentsFetchFailed = YES;
+            self.recentCalls = nil;
+            self.missedRecentCalls = nil;
+
+            if ([operation.response statusCode] == VoIPGRIDHttpErrorForbidden) {
+                self.recentsFetchErrorCode = RecentCallManagerFetchingUserNotAllowed;
+                NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchingUserNotAllowed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"You are not allowed to view recent calls", nil)}];
+                completion(error);
+            } else {
+                self.recentsFetchErrorCode = RecentCallManagerFetchFailed;
+                NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Could not load your recent calls", nil)}];
+                completion(error);
+            }
+            return;
+        }
+
         // Register the time when we had a succesfull retrieval
         self.previousRefresh = [NSDate date];
-        self.reloading = NO;
         self.recentsFetchFailed = NO;
-        self.recentCalls = [RecentCall recentCallsFromDictionary:responseObject];
-        self.missedRecentCalls = [self filterMissedRecents:self.recentCalls];
+        [self.privateManagedObjectContext performBlockAndWait:^{
+            NSArray *newRecents = [RecentCall createRecentCallsFromVoIGPRIDResponseData:responseData inManagedObjectContext:self.privateManagedObjectContext];
+            [self clearOldRecentsIfRecent:lastCall isNotInNewSet:[NSSet setWithArray:newRecents]];
+        }];
         completion(nil);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        self.reloading = NO;
-        self.recentsFetchFailed = YES;
-        self.recentCalls = nil;
-        self.missedRecentCalls = nil;
+    }];
+}
 
-        if ([operation.response statusCode] == VoIPGRIDHttpErrorUnauthorized) {
-            self.recentsFetchErrorCode = RecentCallManagerFetchingUserUserNotLoggedIn;
-            // No permissions
-            [[SystemUser currentUser] logout];
-            [self clearRecents];
-        } else if ([operation.response statusCode] == VoIPGRIDHttpErrorForbidden) {
-            self.recentsFetchErrorCode = RecentCallManagerFetchingUserNotAllowed;
-            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchingUserNotAllowed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"You are not allowed to view recent calls", nil)}];
-            completion(error);
-        } else {
-            self.recentsFetchErrorCode = RecentCallManagerFetchFailed;
-            NSError *error = [NSError errorWithDomain:RecentCallManagerErrorDomain code:RecentCallManagerFetchFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Could not load your recent calls", nil)}];
-            completion(error);
+- (void)clearOldRecentsIfRecent:(RecentCall *)lastRecentCall isNotInNewSet:(NSSet *)newRecentCalls {
+    if (lastRecentCall && ![newRecentCalls containsObject:lastRecentCall]) {
+        [self.privateManagedObjectContext performBlockAndWait:^{
+            NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+            fetch.entity = [NSEntityDescription entityForName:@"RecentCall" inManagedObjectContext:self.privateManagedObjectContext];
+            fetch.predicate = [NSPredicate predicateWithFormat:@"callDate <= %@", lastRecentCall.callDate];
+            NSArray *result = [self.privateManagedObjectContext executeFetchRequest:fetch error:nil];
+            for (id recentCall in result) {
+                [self.privateManagedObjectContext deleteObject:recentCall];
+            }
+            NSError *error;
+            if (![self.privateManagedObjectContext save:&error]) {
+                DDLogError(@"Error saving Recent call: %@", error);
+            }
+        }];
+    }
+}
+
+- (void)clearRecents {
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    fetch.entity = [NSEntityDescription entityForName:@"RecentCall" inManagedObjectContext:self.privateManagedObjectContext];
+    [self.privateManagedObjectContext performBlockAndWait:^{
+        NSArray *result = [self.privateManagedObjectContext executeFetchRequest:fetch error:nil];
+        for (id recentCall in result) {
+            [self.privateManagedObjectContext deleteObject:recentCall];
+        }
+        NSError *error;
+        if (![self.privateManagedObjectContext save:&error]) {
+            DDLogError(@"Error saving Recent call: %@", error);
         }
     }];
 }
 
-- (NSArray *)filterMissedRecents:(NSArray *)recents {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(atime == 0) AND (callDirection == 0)"];
-    return [recents filteredArrayUsingPredicate:predicate];
-}
-
-- (void)clearRecents {
-    self.recentCalls = nil;
-    self.missedRecentCalls = nil;
-}
-
 #pragma mark - Notifications
 
-- (void)loginFailedNotification:(NSNotification *)notification {
+- (void)logoutNotification:(NSNotification *)notification {
     [self clearRecents];
 }
+
+- (void)managedObjectContextSaved:(NSNotification *)notification {
+    [self.privateManagedObjectContext performBlock:^{
+        [self.privateManagedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+    }];
+}
+
 @end

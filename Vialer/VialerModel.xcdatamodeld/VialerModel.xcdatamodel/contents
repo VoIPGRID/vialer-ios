@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="RecentCall" representedClassName="RecentCall" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="callDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="callerID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="callerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="callerRecordID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="callID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="destinationAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="destinationNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dialedNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="inbound" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="phoneType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RecentCall" positionX="-63" positionY="-18" width="128" height="253"/>
+    </elements>
+</model>

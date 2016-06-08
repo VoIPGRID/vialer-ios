@@ -1,0 +1,1 @@
+We hebben een kleine verbetering doorgevoerd voor het opvragen van de tweestapsgesprekken. Als de app niet op de voorgrond is, vragen we niet langer de status op van het gesprek.

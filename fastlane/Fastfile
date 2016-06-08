@@ -22,38 +22,41 @@ default_platform :ios
 
 platform :ios do
   before_all do
-	clear_derived_data
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-    # cocoapods
   end
 
-  desc "Runs all the tests"
-  lane :test do
+  lane :prebuild do
+    clear_derived_data
+    cocoapods
+  end
+
+  desc "Deploy to iTunes Connect"
+  lane :upload_beta do
+    prebuild
+    match_appstore
     scan
-  end
+    gym(
+        output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/builds",
+        scheme: ENV["BETA_SCHEME"],
+        configuration: 'Release',
+    )
 
-  desc "Submit a new Beta Build to Apple TestFlight"
-  desc "This will also make sure the profile is up to date"
-  lane :beta do
-    # match(type: "appstore") # more information: https://codesigning.guide
-    gym(scheme: "Vialer") # Build your app - more options available
-    pilot
+    # Set Deliver to use DAV to prevent "Unable to find content provider for username" failure
+    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+    pilot(
+        username: ENV["ITC_USERNAME"],
+        team_name: ENV["APP_TEAM"],
+        skip_submission: true,
+        skip_waiting_for_build_processing: true,
+    )
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here (run `fastlane actions`)
-  end
-
-  desc "Deploy a new version to the App Store"
-  lane :appstore do
-    # match(type: "appstore")
-    snapshot
-    gym(scheme: "Vialer") # Build your app - more options available
-    deliver(force: true)
-    # frameit
+    slack(
+        message: sh("git describe --abbrev=0") +" uploaded to ITC",
+    )
   end
 
   desc "Create Screenshots"
   lane :screenshot do
+    prebuild
     snapshot(
       stop_after_first_error: true,
       output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
@@ -62,38 +65,45 @@ platform :ios do
 
   desc "Upload Screenshots"
   lane :upload_screenshots do
+    screenshot
     deliver(
-      app_identifier: ENV["APP_IDENTIFIER"],
-      team_name: ENV['ITC_TEAM_NAME'],
-      username: ENV['ITC_USERNAME'],
-      metadata_path: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/metadata",
-      screenshots_path: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots",
       skip_metadata: true
     )
   end
 
+  desc "Match Development"
+  lane :match_development do
+    match(
+      type: 'development',
+    )
+  end
+
+  desc "Match Adhoc"
+  lane :match_adhoc do
+    match(
+      type: 'adhoc',
+    )
+  end
+
+  desc "Match Appstore"
+  lane :match_appstore do
+    match(
+      type: 'appstore',
+    )
+  end
 
   # You can define as many lanes as you want
-
   after_all do |lane|
     clean_build_artifacts()
-
-    # This block is called, only if the executed lane was successful
-
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
   end
 
   error do |lane, exception|
-    # slack(
-    #  message: exception.message,
-    #  success: false
-    # )
+    #slack(
+    #    message: exception.message,
+    #    success: false,
+    #    )
   end
 end
-
-
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/docs/Platforms.md
 # All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md

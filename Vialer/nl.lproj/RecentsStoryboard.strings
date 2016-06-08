@@ -6,7 +6,7 @@
 "g0W-t5-b0b.text" = "Cell With Error Text";
 
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[0] = "All"; ObjectID = "rDx-8g-SbK"; */
-"rDx-8g-SbK.segmentTitles[0]" = "Alle";
+"rDx-8g-SbK.segmentTitles[0]" = "Alles";
 
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[1] = "Missed"; ObjectID = "rDx-8g-SbK"; */
-"rDx-8g-SbK.segmentTitles[1]" = "Gemiste";
+"rDx-8g-SbK.segmentTitles[1]" = "Gemist";

@@ -9,7 +9,7 @@
 #import "AvailabilityModel.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import <OCMock/OCMock.h>
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface AvailabilityModelTests : XCTestCase
 @property (strong, nonatomic) AvailabilityModel *availabilityModel;
@@ -41,7 +41,6 @@ static NSString *const AvailabilityModelInternalNumbersKey = @"internal_number";
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 

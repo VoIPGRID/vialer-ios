@@ -5,18 +5,20 @@
 
 #import "RecentsViewController.h"
 
+#import "AppDelegate.h"
 #import "Configuration.h"
 #import "ContactModel.h"
+#import "ContactsUI/ContactsUI.h"
 #import "GAITracker.h"
+#import "ReachabilityBarViewController.h"
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
+#import "SIPCallingViewController.h"
+#import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
-
 #import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
-
-#import "ContactsUI/ContactsUI.h"
 
 static NSString * const RecentsViewControllerTabContactImageName = @"tab-recent";
 static NSString * const RecentsViewControllerTabContactActiveImageName = @"tab-recent-active";
@@ -26,13 +28,22 @@ static NSString * const RecentsViewControllerPropertyPhoneNumbers = @"phoneNumbe
 static NSString * const RecentViewControllerRecentCallCell = @"RecentCallCell";
 static NSString * const RecentViewControllerCellWithErrorText = @"CellWithErrorText";
 static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
+static NSString * const RecentViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
-@interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate>
+static CGFloat const RecentsViewControllerReachabilityBarHeight = 30.0;
+static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuration = 0.3;
+
+@interface RecentsViewController () <UITableViewDataSource, UITableViewDelegate, CNContactViewControllerDelegate, NSFetchedResultsControllerDelegate, ReachabilityBarViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *filterControl;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultController;
+@property (strong, nonatomic) RecentCallManager *callManager;
+@property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
 @end
 
 @implementation RecentsViewController
@@ -45,6 +56,7 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
         self.title = NSLocalizedString(@"Recents", nil);
         self.tabBarItem.image = [UIImage imageNamed:RecentsViewControllerTabContactImageName];
         self.tabBarItem.selectedImage = [UIImage imageNamed:RecentsViewControllerTabContactActiveImageName];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
     }
     return self;
 }
@@ -52,6 +64,12 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLayout];
+
+    NSError *error;
+    if(![self.fetchedResultController performFetch:&error]) {
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,6 +81,10 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 
 - (void)setupLayout {
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RecentsViewControllerLogoImageName]];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:nil];
 }
 
 #pragma mark - properties
@@ -85,7 +107,40 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
-    _filterControl.tintColor = [Configuration tintColorForKey:ConfigurationRecentsFilterControlTintColor];
+    _filterControl.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationRecentsFilterControlTintColor];
+}
+
+- (RecentCallManager *)callManager {
+    if (!_callManager) {
+        _callManager = [[RecentCallManager alloc] init];
+        _callManager.mainManagedObjectContext = self.managedObjectContext;
+    }
+    return _callManager;
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (!_managedObjectContext) {
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        _managedObjectContext.parentContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    }
+    return _managedObjectContext;
+}
+
+-(NSFetchedResultsController *)fetchedResultController {
+    if (!_fetchedResultController) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"RecentCall" inManagedObjectContext:self.managedObjectContext];
+        fetchRequest.entity = entity;
+
+        NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"callDate" ascending:NO];
+        fetchRequest.sortDescriptors = @[sort];
+
+        fetchRequest.fetchBatchSize = 20;
+
+        _fetchedResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultController.delegate = self;
+    }
+    return _fetchedResultController;
 }
 
 #pragma mark - actions
@@ -95,6 +150,16 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 }
 
 - (IBAction)filterControlTapped:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 1) {
+        self.fetchedResultController.fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == YES", @"duration", @(0), @"inbound"];
+    } else {
+        self.fetchedResultController.fetchRequest.predicate = nil;
+    }
+    NSError *error;
+    [self.fetchedResultController performFetch:&error];
+    if (error) {
+        DDLogError(@"Error: %@", error);
+    }
     [self.tableView reloadData];
 }
 
@@ -103,31 +168,19 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 }
 
 - (void)refreshRecents {
-    if ([RecentCallManager defaultManager].reloading) {
+    if (self.callManager.reloading) {
         [self.refreshControl endRefreshing];
         return;
     }
     [self.refreshControl beginRefreshing];
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-        [[RecentCallManager defaultManager] getLatestRecentCallsWithCompletion:^(NSError *error) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self.callManager getLatestRecentCallsWithCompletion:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.refreshControl endRefreshing];
-                [self.tableView reloadData];
-                if (error) {
-                    NSString *errorTitle;
-                    switch ([RecentCallManager defaultManager].recentsFetchErrorCode) {
-                        case RecentCallManagerFetchingUserNotAllowed:
-                            errorTitle = @"Not allowed";
-                            break;
-                        default:
-                            errorTitle = @"Error loading recent calls";
-                            break;
-                    }
-
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(errorTitle, nil)
+                if (error && self.callManager.recentsFetchErrorCode == RecentCallManagerFetchingUserNotAllowed) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Not allowed", nil)
                                                                                    message:[error localizedDescription]
                                                                       andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
-
                     [self presentViewController:alert animated:YES completion:nil];
                 }
             });
@@ -139,24 +192,26 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
     if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
+    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:nil];
+    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
+        ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
+        rbvc.delegate = self;
     }
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.filterControl.selectedSegmentIndex == 0) {
-        return MAX([[RecentCallManager defaultManager].recentCalls count], 1);
-    } else {
-        return MAX([[RecentCallManager defaultManager].missedRecentCalls count], 1);
-    }
+    return MAX([self.fetchedResultController.sections[section] numberOfObjects], 1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Select correct recents
-    if ([RecentCallManager defaultManager].recentsFetchFailed) {
+    if (self.callManager.recentsFetchFailed) {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
-        switch ([RecentCallManager defaultManager].recentsFetchErrorCode) {
+        switch (self.callManager.recentsFetchErrorCode) {
             case RecentCallManagerFetchingUserNotAllowed:
                 cell.textLabel.text = NSLocalizedString(@"You are not allowed to view recent calls", nil);
                 break;
@@ -167,31 +222,32 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
         return cell;
     }
 
-    NSArray *recents;
-    if (self.filterControl.selectedSegmentIndex == 0) {
-        recents = [RecentCallManager defaultManager].recentCalls;
-        // No recents, show other cell
-        if ([recents count] == 0) {
-            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
-            cell.textLabel.text = NSLocalizedString(@"No recent calls", nil);
-            return cell;
+    if (self.fetchedResultController.fetchedObjects.count == 0) {
+        NSString *noRecents;
+        if (self.filterControl.selectedSegmentIndex == 0) {
+            noRecents = NSLocalizedString(@"No recent calls", nil);
+        } else {
+            noRecents = NSLocalizedString(@"No missed calls", nil);
         }
-    } else {
-        // No recents, show other cell
-        recents = [RecentCallManager defaultManager].missedRecentCalls;
-        if ([recents count] == 0) {
-            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
-            cell.textLabel.text = NSLocalizedString(@"No missed calls", nil);
-            return cell;
-        }
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerCellWithErrorText];
+        cell.textLabel.text = noRecents;
+        return cell;
     }
+
     RecentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:RecentViewControllerRecentCallCell];
-    RecentCall *recent = [recents objectAtIndex:indexPath.row];
-    cell.callDirection = recent.callDirection;
-    cell.name = recent.callerName;
-    cell.subtitle = recent.callerPhoneType;
+
+    return [self configureCell:cell atIndexPath:indexPath];
+
+}
+
+- (RecentTableViewCell *)configureCell:(RecentTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    RecentCall *recent = (RecentCall *)[self.fetchedResultController objectAtIndexPath:indexPath];
+
+    cell.inbound = [recent.inbound boolValue];
+    cell.name = recent.displayName;
+    cell.subtitle = recent.phoneType;
     cell.date = recent.callDate;
-    cell.answered = !(recent.atime == 0 && recent.callDirection == CallDirectionInbound);
+    cell.answered = !([recent.duration isEqual:@(0)] && [recent.inbound boolValue]);
 
     return cell;
 }
@@ -201,54 +257,64 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    RecentCall *recent;
-    if (self.filterControl.selectedSegmentIndex == 0) {
-        // If there are no recent calls, do nothing
-        if ([[RecentCallManager defaultManager].recentCalls count] == 0) {
-            return;
-        }
-        recent = [RecentCallManager defaultManager].recentCalls[indexPath.row];
-    } else {
-        // If there are no missed recent calls, do nothing
-        if ([[RecentCallManager defaultManager].missedRecentCalls count] == 0) {
-            return;
-        }
-        recent = [RecentCallManager defaultManager].missedRecentCalls[indexPath.row];
+    if (self.fetchedResultController.fetchedObjects.count == 0) {
+        return;
     }
-    [self callPhoneNumber:recent.callerPhoneNumber];
+
+    RecentCall *recent = [self.fetchedResultController objectAtIndexPath:indexPath];
+    if ([recent suppressed]) {
+        return;
+    } else if ([recent.inbound boolValue]) {
+        [self callPhoneNumber:recent.sourceNumber];
+    } else {
+        [self callPhoneNumber:recent.destinationNumber];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
 
-    RecentCall *recent;
-    if (self.filterControl.selectedSegmentIndex == 0) {
-        recent = [RecentCallManager defaultManager].recentCalls[indexPath.row];
-    } else {
-        recent = [RecentCallManager defaultManager].missedRecentCalls[indexPath.row];
+    if (self.fetchedResultController.fetchedObjects.count == 0) {
+        return;
     }
 
+    RecentCall *recent = [self.fetchedResultController objectAtIndexPath:indexPath];
+
     CNContactViewController *contactViewController;
-    CNContact *contact = [[ContactModel defaultContactModel] getSelectedContactOnIdentifier:recent.contactIdentifier];
-    if (contact) {
+    CNContact *contact;
+    if ([recent suppressed]) {
+        CNMutableContact *unknownContact = [[CNMutableContact alloc] init];
+        unknownContact.givenName = [recent displayName];
+        contactViewController = [CNContactViewController viewControllerForContact:unknownContact];
+        contactViewController.allowsEditing = NO;
+
+    } else if (recent.callerRecordID) {
+        contact = [[ContactModel defaultContactModel] getSelectedContactOnIdentifier:recent.callerRecordID];
         contactViewController = [CNContactViewController viewControllerForContact:contact];
         contactViewController.title = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
     } else {
-        CNPhoneNumber *phoneNumber = [[CNPhoneNumber alloc] initWithStringValue:recent.callerPhoneNumber];
+        NSString *newPhoneNumber = [recent.inbound boolValue] ? recent.sourceNumber : recent.destinationNumber;
+        CNPhoneNumber *phoneNumber = [[CNPhoneNumber alloc] initWithStringValue:newPhoneNumber];
         CNLabeledValue *phoneNumbers = [[CNLabeledValue alloc] initWithLabel:CNLabelPhoneNumberMain value: phoneNumber];
         CNMutableContact *unknownContact = [[CNMutableContact alloc] init];
         unknownContact.phoneNumbers = @[phoneNumbers];
-        unknownContact.givenName = recent.callerId;
+        unknownContact.givenName = recent.callerName;
 
         contactViewController = [CNContactViewController viewControllerForUnknownContact:unknownContact];
-        contactViewController.title = recent.callerPhoneNumber;
+        contactViewController.title = newPhoneNumber;
     }
 
     contactViewController.contactStore = [[ContactModel defaultContactModel] getContactStore];
     contactViewController.allowsActions = NO;
-    contactViewController.allowsEditing = YES;
     contactViewController.delegate = self;
 
     [self.navigationController pushViewController:contactViewController animated:YES];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView reloadData];
 }
 
 #pragma mark - CNContactsViewControllerDelegate
@@ -280,19 +346,42 @@ static NSString * const RecentViewControllerTwoStepCallingSegue = @"TwoStepCalli
     [self refreshRecents];
 }
 
+#pragma mark - ReachabilityBarViewControllerDelegate
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {
+    self.reachabilityStatus = status;
+}
+
+- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {
+    [self.view layoutIfNeeded];
+    self.reachabilityBarHeigthConstraint.constant = visible ? RecentsViewControllerReachabilityBarHeight : 0.0;
+    [UIView animateWithDuration:RecentsViewControllerReachabilityBarAnimationDuration animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - utils
 
 - (void)callPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumberToCall = phoneNumber;
-    // TODO: implement 4g calling
-    if (false) {
+    if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
         [GAITracker setupOutgoingSIPCallEvent];
-//        [self presentViewController:self.sipCallingViewController animated:YES completion:nil];
-//        [self.sipCallingViewController handlePhoneNumber:phoneNumber forContact:nil];
+        [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
+    } else if (self.reachabilityStatus == ReachabilityManagerStatusOffline) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                                       message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
+                                                          andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+        [self presentViewController:alert animated:YES completion:nil];
     } else {
         [GAITracker setupOutgoingConnectABCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
     }
+}
+
+#pragma mark - Notifications
+
+- (void)managedObjectContextSaved:(NSNotification *)notification {
+    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
 }
 
 @end

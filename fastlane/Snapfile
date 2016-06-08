@@ -1,36 +1,33 @@
-scheme ENV["SCHEME"]
+scheme ENV["SNAPSHOT_SCHEME"]
 
 # Uncomment the lines below you want to change by removing the # in the beginning
-reinstall_app
+reinstall_app true
 
 # A list of devices you want to take the screenshots from
 devices([
+   "iPhone 4s",
+   "iPhone 5",
    "iPhone 6",
    "iPhone 6 Plus",
-   "iPhone 5",
-   "iPhone 4s",
 ])
 
 languages([
   "en-US",
-  "nl-NL",
+  "nl",
 ])
 
 # Arguments to pass to the app on launch. See https://github.com/fastlane/snapshot#launch_arguments
 # launch_arguments("-favColor red")
 
-# The name of the scheme which contains the UI Tests
-# scheme "Screenshots with Snapshot"
-
 # Where should the resulting screenshots be stored?
-# output_directory "./screenshots"
+output_directory "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
 
 # Clear all previously generated screenshots before creating new ones
-clear_previous_screenshots
+clear_previous_screenshots true
+
+number_of_retries 4
 
 # Choose which project/workspace to use
-# project "./Project.xcodeproj"
 workspace "./Vialer.xcworkspace"
 
-# For more information about all available options run
-# snapshot --help
+localize_simulator true

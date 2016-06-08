@@ -11,6 +11,4 @@
 
 @property (strong, nonatomic) LogInViewController *loginViewController;
 
-- (void)loginFailedNotification:(NSNotification *)notification;
-
 @end

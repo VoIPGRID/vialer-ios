@@ -93,7 +93,8 @@
     NSMutableDictionary *newContacts = [NSMutableDictionary dictionary];
     NSMutableArray *newAllContacts = [NSMutableArray array];
 
-    BOOL success = [self.contactStore enumerateContactsWithFetchRequest:self.fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+    NSError *error;
+    BOOL success = [self.contactStore enumerateContactsWithFetchRequest:self.fetchRequest error:&error usingBlock:^(CNContact *contact, BOOL *stop) {
         [newAllContacts addObject:contact];
         NSString *firstChar = [self getFirstChar:contact];
 
@@ -102,6 +103,10 @@
         }
         [newContacts[firstChar] addObject:contact];
     }];
+
+    if (error) {
+        DDLogError(@"Contact errors: %@", error);
+    }
 
     if (success) {
         self.allContacts = newAllContacts;
@@ -150,7 +155,6 @@
 }
 
 - (CNContact *)getSelectedContactOnIdentifier:(NSString *)contactIdentifier {
-
     return [self.contactStore unifiedContactWithIdentifier:contactIdentifier keysToFetch:self.keysToFetch error:nil];
 }
 

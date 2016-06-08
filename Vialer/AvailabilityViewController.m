@@ -6,6 +6,7 @@
 #import "AvailabilityViewController.h"
 
 #import "AvailabilityModel.h"
+#import "Configuration.h"
 #import "GAITracker.h"
 #import "UIAlertController+Vialer.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -27,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tintColor = [Configuration tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
+    self.tableView.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
 }
 
 - (UIRefreshControl *)refreshControl {
@@ -102,7 +103,7 @@
     }
     self.lastSelected = indexPath;
 
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_AVAILABILITY...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving availability...", nil)];
     [self.availabilityModel saveUserDestination:self.lastSelected.row withCompletion:^(NSString *localizedErrorString) {
         [SVProgressHUD dismiss];
         if (localizedErrorString) {

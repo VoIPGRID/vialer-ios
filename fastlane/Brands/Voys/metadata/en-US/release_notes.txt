@@ -1,0 +1,1 @@
+We made a small improvement to the status screen of the TwoStepCalling. We are no longer polling the status as long as the app is in the background.

@@ -7,6 +7,8 @@
 
 #import "GAITracker.h"
 #import "SVProgressHUD.h"
+#import "SystemUser.h"
+#import "UIAlertController+Vialer.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 @interface EditNumberViewController ()
@@ -43,26 +45,20 @@
 
 - (IBAction)saveButtonPressed:(UIBarButtonItem *)sender {
     NSString *newNumber = self.numberTextField.text;
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving number...", nil)];
 
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber forcePush:NO success:^{
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
-        [self.delegate numberHasChanged:newNumber];
-        [self.navigationController popViewControllerAnimated:YES];
-
-    } failure:^(NSString *localizedErrorString) {
+    [[SystemUser currentUser] updateMobileNumber:newNumber withCompletion:^(BOOL success, NSError *error) {
         [SVProgressHUD dismiss];
-        UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:NSLocalizedString(@"Error", nil)
-                                              message:localizedErrorString
-                                              preferredStyle:UIAlertControllerStyleAlert];
-
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        if (success) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Number saved", nil)];
+            [self.delegate numberHasChanged:newNumber];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error saving number", nil)
+                                                                           message:error.localizedDescription
+                                                              andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }];
 }
 

@@ -6,9 +6,13 @@
 #import "VialerWebViewController.h"
 
 #import "VoIPGRIDRequestOperationManager.h"
-#import "SystemUser.h"
-
 #import "SVProgressHUD.h"
+
+static NSString * const VialerWebViewControllerApiKeyToken = @"token";
+
+@interface VialerWebViewController()
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+@end
 
 @implementation VialerWebViewController
 
@@ -38,31 +42,36 @@
     return _configuration;
 }
 
-- (void)setURL:(NSURL *)URL {
-    [super setURL:URL];
+-(void)setNextUrl:(NSString *)nextUrl {
+    [self.operationManager autoLoginTokenWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (error) {
+            DDLogError(@"Error %@", [error localizedDescription]);
+            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", @"failed to load webpage with title"), self.title]];
+            return;
+        }
+        NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
+        NSString *user = [self urlEncodedString:self.currentUser.username];
+        NSString *token = responseData[VialerWebViewControllerApiKeyToken];
+        _nextUrl = [self urlEncodedString:nextUrl];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, _nextUrl]];
+        DDLogDebug(@"Go to url: %@", url);
+        self.URL = url;
+        [self load];
+    }];
 }
 
--(void)setNextUrl:(NSString *)nextUrl {
-    NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
+- (VoIPGRIDRequestOperationManager *)operationManager {
+    if (!_operationManager) {
+        _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
+    }
+    return _operationManager;
+}
 
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] autoLoginTokenWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSString *token = [responseObject objectForKey:@"token"];
-            if ([token isKindOfClass:[NSString class]]) {
-                // Encode the token and nextUrl, and also the user after retrieving it.
-                token = [self urlEncodedString:token];
-                _nextUrl = [self urlEncodedString:nextUrl];
-                NSString *user = [self urlEncodedString:[SystemUser currentUser].user];
-                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, nextUrl]];
-                NSLog(@"Go to url: %@", url);
-                self.URL = url;
-                [self load];
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error %@", [error localizedDescription]);
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", @"failed to load webpage with title"), self.title]];
-    }];
+- (SystemUser *)currentUser {
+    if (!_currentUser) {
+        _currentUser = [SystemUser currentUser];
+    }
+    return _currentUser;
 }
 
 #pragma mark - UIWebViewDelegate
@@ -85,8 +94,8 @@
 #pragma mark - actions
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
-    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
     [SVProgressHUD dismiss];
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - utils

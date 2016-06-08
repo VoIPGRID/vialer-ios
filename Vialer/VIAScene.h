@@ -3,7 +3,7 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 typedef NS_ENUM(NSInteger, VIASceneActs) {
     VIASceneActNone,

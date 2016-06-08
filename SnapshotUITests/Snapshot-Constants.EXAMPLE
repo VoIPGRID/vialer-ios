@@ -12,5 +12,6 @@ import Foundation
 struct Constants {
     static let username = ""
     static let password = ""
+    static let ownNumber = ""
     static let numberToDail = ""
 }

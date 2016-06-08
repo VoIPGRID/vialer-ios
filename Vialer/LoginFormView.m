@@ -22,17 +22,17 @@ static CGFloat const LoginFormViewButtonRadius = 5.0;
     //Localize elements of view
     self.businessLabel.text = NSLocalizedString(@"Business", nil);
     self.callsInTheCloudLabel.text = NSLocalizedString(@"calls in the cloud", nil);
-    
-    self.usernameField.placeholder = NSLocalizedString(@"Email", nil);
+
+    self.usernameField.placeholder = NSLocalizedString(@"Email address", nil);
     self.passwordField.placeholder = NSLocalizedString(@"Password", nil);
-    
+
     [self.usernameField cleanStyle];
     [self.passwordField cleanStyle];
-    
+
     [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     [self.forgotPasswordButton setTitle:NSLocalizedString(@"Forgot password?", nil) forState:UIControlStateNormal];
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-    [self.configurationInstructionsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"HOW_DOES_APP_WORK_BUTTON_TEXT", nil), appName] forState:UIControlStateNormal];
+    [self.configurationInstructionsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"How does %@ work?", nil), appName] forState:UIControlStateNormal];
 
     self.isMoved = NO;
 

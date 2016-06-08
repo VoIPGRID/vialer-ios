@@ -5,22 +5,30 @@ platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 # use_frameworks!
 
-target 'Vialer' do
+def default_pods
     pod 'AFNetworkActivityLogger'
     pod 'AFNetworking'
-    pod 'Google/Analytics', '~> 1.0.7'
+    pod 'Google/Analytics'
+    pod 'HDLumberjackLogFormatter', :git => 'https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git'
     pod 'HTCopyableLabel'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'
     pod 'Reachability'
     pod 'SSKeychain'
-    pod 'SimulatorStatusMagic'
+    pod 'SimulatorStatusMagic', :configurations => ['Debug', 'AdHocDistribution']
     pod 'SVProgressHUD'
     pod 'VialerSIPLib-iOS'
 end
 
+target 'Vialer' do
+    default_pods
+end
+
+target 'Voys' do
+    default_pods
+end
+
 target 'VialerTests' do
-    pod 'CocoaLumberjack'
     pod 'OCMock'
     pod 'OHHTTPStubs'
 end

@@ -5,6 +5,9 @@
 
 #import "ContactUtils.h"
 
+#import "ContactModel.h"
+#import "PhoneNumberUtils.h"
+
 @implementation ContactUtils
 
 + (NSMutableAttributedString *)getFormattedStyledContact:(CNContact *)contact {
@@ -13,10 +16,10 @@
 
     if (!fullName) {
         NSString *otherContext = @"";
-        NSArray *emailadresses = contact.emailAddresses;
+        NSArray *emailAdresses = contact.emailAddresses;
 
-        if ([emailadresses count]) {
-            for (CNLabeledValue  *emailadress in emailadresses) {
+        if ([emailAdresses count]) {
+            for (CNLabeledValue  *emailadress in emailAdresses) {
                 otherContext = emailadress.value;
                 break;
             }
@@ -48,6 +51,19 @@
                                value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]
                                range:boldedRange];
     return fullNameAttrString;
+}
+
++ (NSString *)getDisplayNameForContact:(CNContact *)contact {
+    NSString *fullName = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
+
+    if (fullName) {
+        return fullName;
+    }
+
+    for (CNLabeledValue  *emailadress in contact.emailAddresses) {
+        return emailadress.value;
+    }
+    return nil;
 }
 
 @end

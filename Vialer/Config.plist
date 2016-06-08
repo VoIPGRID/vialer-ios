@@ -6,9 +6,9 @@
 	<dict>
 		<key>NumberPadButtonPressedColor</key>
 		<array>
-			<integer>145</integer>
-			<integer>145</integer>
-			<integer>145</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
 		</array>
 		<key>LogInViewControllerButtonBorderColor</key>
 		<array>
@@ -17,6 +17,19 @@
 			<integer>255</integer>
 		</array>
 		<key>LogInViewControllerButtonBackgroundColorForPressedState</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+			<real>0.5</real>
+		</array>
+		<key>ActivateSIPAccountViewControllerButtonBorderColor</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+		</array>
+		<key>ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState</key>
 		<array>
 			<integer>255</integer>
 			<integer>255</integer>
@@ -73,9 +86,15 @@
 		</array>
 		<key>NavigationBarBarTintColor</key>
 		<array>
-			<integer>248</integer>
-			<integer>248</integer>
-			<integer>248</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+		</array>
+		<key>SideMenuHeaderBackgroundColor</key>
+		<array>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
 		</array>
 		<key>AvailabilityTableViewTintColor</key>
 		<array>

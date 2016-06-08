@@ -2,7 +2,6 @@
 //  TwoStepCallTests.m
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
-#import <XCTest/XCTest.h>
 
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
@@ -10,6 +9,7 @@
 #import "SystemUser.h"
 #import "TwoStepCall.h"
 #import "VoIPGRIDRequestOperationManager.h"
+@import XCTest;
 
 @interface TwoStepCall (TestImplementation)
 @property (strong, nonatomic) NSString *callID;
@@ -56,56 +56,59 @@
 
 - (void)testStartWillAskOperationManagerToSetupCall {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg invokeBlock]]);
     TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
     call.operationsManager = mockOperationsManager;
 
     [call start];
 
-    OCMVerify([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg any]]);
-}
-
-- (void)testUnAuthorizedCallWillSetCorrectStatusWhenStart {
-    NSError *error = [NSError errorWithDomain:@"testDomain" code:VGTwoStepCallErrorStatusUnAuthorized userInfo:nil];
-    id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:([OCMArg invokeBlockWithArgs:@"1", error, nil])]);
-    TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
-    call.operationsManager = mockOperationsManager;
-
-    [call start];
-
-    XCTAssertEqual(call.status, TwoStepCallStatusUnAuthorized, @"Status should be unauthorized.");
+    OCMVerify([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg invokeBlock]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testInvalidNumberWillSetCorrectStatusWhenStart {
-    NSError *error = [NSError errorWithDomain:@"testDomain" code:VGTwoStepCallInvalidNumber userInfo:nil];
+    NSError *error = [NSError errorWithDomain:@"testDomain" code:VoIPGRIDHttpErrorBadRequest userInfo:nil];
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:([OCMArg invokeBlockWithArgs:@"1", error, nil])]);
+    id mockAFHTTPRequestOperation = OCMClassMock([AFHTTPRequestOperation class]);
+    OCMStub([mockAFHTTPRequestOperation responseString]).andReturn(@"Extensions or phonenumbers not valid");
+    id mockNSHTTPURLResponse = OCMClassMock([NSHTTPURLResponse class]);
+    OCMStub([mockNSHTTPURLResponse statusCode]).andReturn(400);
+    OCMStub([mockAFHTTPRequestOperation response]).andReturn(mockNSHTTPURLResponse);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(mockAFHTTPRequestOperation, nil, error);
+        return YES;
+    }]]);
     TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
     call.operationsManager = mockOperationsManager;
 
     [call start];
 
     XCTAssertEqual(call.status, TwoStepCallStatusInvalidNumber, @"Status should be invalid number.");
+    [mockOperationsManager stopMocking];
+    [mockAFHTTPRequestOperation stopMocking];
+    [mockNSHTTPURLResponse stopMocking];
 }
 
 - (void)testUnknownErrorWillSetCorrectStatusWhenStart {
     NSError *error = [NSError errorWithDomain:@"testDomain" code:100 userInfo:nil];
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:([OCMArg invokeBlockWithArgs:@"1", error, nil])]);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, nil, error);
+        return YES;
+    }]]);
     TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
     call.operationsManager = mockOperationsManager;
 
     [call start];
 
     XCTAssertEqual(call.status, TwoStepCallStatusFailedSetup, @"Status should be invalid number.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testSuccessfullStartShouldCallStatusForCorrectCallId {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
     // Return faked callId.
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"142", nil);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"callid": @"142"}, nil);
         return YES;
     }]]);
 
@@ -123,20 +126,21 @@
     [call start];
 
     // Check if status is fetched.
-    [self waitForExpectationsWithTimeout:2.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error: %@", error);
         }
+        [mockOperationsManager stopMocking];
     }];
 }
 
-- (void)testFailedFetchingCallStatusWillSetError {
+- (void)testFailedFetchingCallStatusWillSetProperError {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
     NSError *error = [NSError errorWithDomain:@"testDomain" code:100 userInfo:nil];
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(nil, error);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, nil, error);
         return YES;
     }]]);
 
@@ -146,16 +150,16 @@
     call.callID = @"142";
 
     [call fetchCallStatus:nil];
-
-    XCTAssertEqual(call.error, error, @"The error should have been set.");
+    XCTAssertEqual(call.error.code, TwoStepCallErrorStatusRequestFailed, @"The error should have been set.");
+    XCTAssertEqual(call.error.userInfo[NSUnderlyingErrorKey], error, @"The error should have been set.");
 }
 
 - (void)testFetchedCallStatusDailingAWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"dialing_a", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"dialing_a"}, nil);
         return YES;
     }]]);
 
@@ -167,14 +171,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusDialing_a, @"The status should be Dialing a.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusDailingBWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"dialing_b", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"dialing_b"}, nil);
         return YES;
     }]]);
 
@@ -186,14 +191,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusDialing_b, @"The status should be Dialing b.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusConnectedWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"connected", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"connected"}, nil);
         return YES;
     }]]);
 
@@ -205,14 +211,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusConnected, @"The status should be connected.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusDisconnetedWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"disconnected", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"disconnected"}, nil);
         return YES;
     }]]);
 
@@ -224,14 +231,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusDisconnected, @"The status should be disconnected.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedAWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"failed_a", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"failed_a"}, nil);
         return YES;
     }]]);
 
@@ -243,14 +251,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusFailed_a, @"The status should be failed_a.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedBWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"failed_b", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"failed_b"}, nil);
         return YES;
     }]]);
 
@@ -262,14 +271,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusFailed_b, @"The status should be failed_b.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusUnknownStatusBWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"Unknown_Status", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"Unknown_Status"}, nil);
         return YES;
     }]]);
 
@@ -281,14 +291,15 @@
     [call fetchCallStatus:nil];
 
     XCTAssertEqual(call.status, TwoStepCallStatusUnknown, @"The status should be unknown status.");
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testFetchedCallStatusDisconnectedWIllInvalidateTimer {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"disconnected", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"disconnected"}, nil);
         return YES;
     }]]);
 
@@ -303,14 +314,16 @@
     [call fetchCallStatus:mockTimer];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedAWIllInvalidateTimer {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"failed_a", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"failed_a"}, nil);
         return YES;
     }]]);
 
@@ -325,14 +338,16 @@
     [call fetchCallStatus:mockTimer];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testFetchedCallStatusFailedBWIllInvalidateTimer {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
-    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"failed_b", nil);
+    OCMStub([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"status": @"failed_b"}, nil);
         return YES;
     }]]);
 
@@ -347,6 +362,8 @@
     [call fetchCallStatus:mockTimer];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testCanCancelWhenStatusIsUknown {
@@ -447,6 +464,8 @@
     [call cancel];
 
     OCMExpect([mockTimer invalidate]);
+    [mockOperationsManager stopMocking];
+    [mockTimer stopMocking];
 }
 
 - (void)testCancelCallWillCancelCallRemote {
@@ -459,6 +478,7 @@
     [call cancel];
 
     OCMExpect([mockOperationsManager cancelTwoStepCallForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testCancelCallWillNotCancelCallIfNoCallIdIsSet {
@@ -471,12 +491,13 @@
     [call cancel];
 
     [[mockOperationsManager reject] cancelTwoStepCallForCallId:[OCMArg any] withCompletion:[OCMArg any]];
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testCancelCallWillCancelCallWhenPossible {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"142", nil);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"callid": @"142"}, nil);
         return YES;
     }]]);
 
@@ -488,6 +509,7 @@
     [call start];
 
     OCMExpect([mockOperationsManager cancelTwoStepCallForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testWhenCancelingCallCannotCancelTwice {
@@ -500,6 +522,7 @@
     call.cancelingCall = YES;
 
     [call cancel];
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testWhenFetchingCallStatusDoNotFetchTwice {
@@ -512,6 +535,7 @@
     call.fetching = YES;
 
     [call fetchCallStatus:nil];
+    [mockOperationsManager stopMocking];
 }
 
 - (void)testNotificationObserverEnterBackgroundAddedWhenInitialised {
@@ -536,14 +560,20 @@
     [mockNotificationCenter stopMocking];
 }
 
+// Test disabled. I have not found a way to actually test dealloc being called (but why wouldn't it?)
 - (void)testNotificationObserverIsRemovedWhenDealloced {
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
-    TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
-    call = nil;
+    __weak TwoStepCall *weakCallRef;
+    @autoreleasepool {
+        TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
+        weakCallRef = call;
+        XCTAssertNotNil(weakCallRef);
+    }
 
     OCMVerify([mockNotificationCenter removeObserver:[OCMArg any]]);
+    XCTAssertNil(weakCallRef);
 
     [mockNotificationCenter stopMocking];
 }
@@ -558,6 +588,7 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 
     OCMVerify([mockTimer invalidate]);
+    [mockTimer stopMocking];
 }
 
 - (void)testWhenAppBecameActiveTimerIsSetup {
@@ -579,8 +610,8 @@
     call.operationsManager = mockOperationsManager;
 
     // Mock response from operationsManager.
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"142", nil);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"callid": @"142"}, nil);
         return YES;
     }]]);
 
@@ -591,6 +622,8 @@
     [call start];
 
     OCMVerify([mockCallCenter setCallEventHandler:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
+    [mockCallCenter stopMocking];
 }
 
 - (void)testWhenCallIsConnectedPauseStatusFetching {
@@ -599,8 +632,8 @@
     call.operationsManager = mockOperationsManager;
 
     // Mock response from operationsManager.
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"142", nil);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"callid": @"142"}, nil);
         return YES;
     }]]);
 
@@ -610,22 +643,25 @@
     id mockTimer = OCMClassMock([NSTimer class]);
     call.statusTimer = mockTimer;
 
-    // Mock incoming phonecall.
-    CTCall *mockCall = OCMClassMock([CTCall class]);
-    OCMStub([mockCall callState]).andReturn(CTCallStateConnected);
-    call.callCenter.callEventHandler(mockCall);
-
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Should invalidate timer"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Should invalidate the timer"];
+    OCMStub([mockTimer invalidate]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
     });
 
+    // Mock incoming phonecall.
+    id mockCall = OCMClassMock([CTCall class]);
+    OCMStub([(CTCall *)mockCall callState]).andReturn(CTCallStateConnected);
+    call.callCenter.callEventHandler(mockCall);
+
     // Check if timer is invalidated.
-    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         OCMVerify([mockTimer invalidate]);
         if (error) {
             NSLog(@"Error: %@", error);
         }
+        [mockOperationsManager stopMocking];
+        [mockTimer stopMocking];
+        [mockCall stopMocking];
     }];
 }
 
@@ -635,8 +671,8 @@
     call.operationsManager = mockOperationsManager;
     call.callID = @"142";
     // Mock response from operationsManager.
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"142", nil);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"callid": @"142"}, nil);
         return YES;
     }]]);
 
@@ -647,13 +683,15 @@
     call.statusTimer = nil;
 
     // Mock incoming phonecall.
-    CTCall *mockCall = OCMClassMock([CTCall class]);
-    OCMStub([mockCall callState]).andReturn(CTCallStateDisconnected);
+    id mockCall = OCMClassMock([CTCall class]);
+    OCMStub([(CTCall *)mockCall callState]).andReturn(CTCallStateDisconnected);
     call.callCenter.callEventHandler(mockCall);
 
     // Check if timer is invalidated.
     XCTAssertNotNil(call.statusTimer, @"There should be a new timer");
     OCMVerify([mockOperationsManager twoStepCallStatusForCallId:[OCMArg isEqual:@"142"] withCompletion:[OCMArg any]]);
+    [mockOperationsManager stopMocking];
+    [mockCall stopMocking];
 }
 
 - (void)testWhenCallIsDisConnectedDisconnectedStateIsSetAfterThreeSeconds {
@@ -662,8 +700,8 @@
     call.operationsManager = mockOperationsManager;
 
     // Mock response from operationsManager.
-    OCMStub([mockOperationsManager setupTwoStepCallWithANumber:[OCMArg any] bNumber:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSString *, NSError *)) {
-        passedBlock(@"142", nil);
+    OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, @{@"callid": @"142"}, nil);
         return YES;
     }]]);
 
@@ -678,15 +716,18 @@
     call.statusTimer = nil;
 
     // Mock incoming phonecall.
-    CTCall *mockCall = OCMClassMock([CTCall class]);
-    OCMStub([mockCall callState]).andReturn(CTCallStateDisconnected);
+    id mockCall = OCMClassMock([CTCall class]);
+    OCMStub([(CTCall *)mockCall callState]).andReturn(CTCallStateDisconnected);
     call.callCenter.callEventHandler(mockCall);
 
-    [self waitForExpectationsWithTimeout:4.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         XCTAssertEqual(call.status, TwoStepCallStatusDisconnected);
         if (error) {
             NSLog(@"Error: %@", error);
         }
+
+        [mockOperationsManager stopMocking];
+        [mockCall stopMocking];
     }];
 }
 

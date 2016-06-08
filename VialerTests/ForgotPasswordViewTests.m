@@ -1,16 +1,13 @@
 //
 //  ForgotPasswordViewTests.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 19/12/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 #import "Configuration.h"
 #import "ForgotPasswordView.h"
 #import "LogInViewController.h"
+#import <OCMock/OCMock.h>
+@import XCTest;
 
 @interface ForgotPasswordViewTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;
@@ -36,6 +33,8 @@
     self.forgotPasswordView = nil;
     self.loginViewController = nil;
     self.color = nil;
+
+    [self.configurationMock stopMocking];
     self.configurationMock = nil;
     [super tearDown];
 }

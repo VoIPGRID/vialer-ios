@@ -12,8 +12,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const LoginViewControllerMigrationCompleted;
-
 typedef NS_ENUM(NSInteger, OnboardingScreens) {
     OnboardingScreenLogin      = 0,
     OnboardingScreenConfigure  = 1,
@@ -45,6 +43,7 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;
 - (IBAction)loginButtonPushed:(UIButton *)sender;
+- (IBAction)requestPasswordButtonPressed:(UIButton *)sender;
 
 - (IBAction)openConfigurationInstructions:(id)sender;
 

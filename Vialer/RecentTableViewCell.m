@@ -24,12 +24,16 @@ static NSString * const RecentTableViewCellOutboundImageName = @"outbound";
 
 #pragma mark - properties
 
-- (void)setCallDirection:(CallDirection)callDirection {
-    if (callDirection == CallDirectionOutbound) {
-        self.iconImageView.image = [UIImage imageNamed:RecentTableViewCellOutboundImageName];
-    } else {
+- (void)setInbound:(BOOL)inbound {
+    if (inbound) {
         self.iconImageView.image = nil;
+    } else {
+        self.iconImageView.image = [UIImage imageNamed:RecentTableViewCellOutboundImageName];
     }
+}
+
+- (NSString *)name {
+    return self.nameLabel.text;
 }
 
 - (void)setName:(NSString *)name {
@@ -40,8 +44,8 @@ static NSString * const RecentTableViewCellOutboundImageName = @"outbound";
     self.subtitleLabel.text = subtitle;
 }
 
-- (void)setDate:(NSString *)date {
-    self.dateTimeLabel.text = [[NSDate dateFromString:date] relativeDayTimeString];
+- (void)setDate:(NSDate *)date {
+    self.dateTimeLabel.text = [date relativeDayTimeString];
 }
 
 - (void)setAnswered:(BOOL)answered {

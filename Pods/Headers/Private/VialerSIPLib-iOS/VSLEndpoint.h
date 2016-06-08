@@ -1,1 +1,0 @@
-../../../VialerSIPLib-iOS/Pod/Classes/VSLEndpoint.h

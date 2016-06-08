@@ -5,6 +5,10 @@
 
 #import "GAITracker.h"
 
+typedef NS_ENUM(NSInteger, CustomGoogleAnalyticsDimension) {
+    CustomGoogleAnalyticsDimensionClientID = 1,
+};
+
 @implementation GAITracker
 
 + (void)setupGAITracker {
@@ -35,6 +39,19 @@
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
++ (void)setClientIDCustomDimension:(NSString *)clientID {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:[GAIFields customDimensionForIndex:CustomGoogleAnalyticsDimensionClientID] value:clientID];
+}
+
++ (void)incomingCallRingingEvent {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Ringing"
+                                                           value:nil] build]];
+}
+
 + (void)acceptIncomingCallEvent {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
@@ -48,6 +65,14 @@
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
                                                           action:@"Inbound"
                                                            label:@"Declined"
+                                                           value:nil] build]];
+}
+
++ (void)declineIncomingCallBecauseAnotherCallInProgressEvent {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"call"
+                                                          action:@"Inbound"
+                                                           label:@"Declined - Another call in progress"
                                                            value:nil] build]];
 }
 
@@ -65,6 +90,35 @@
                                                           action:@"Outbound"
                                                            label:@"ConnectAB"
                                                            value:nil] build]];
+}
+
++ (void)acceptedPushNotificationEventWithConnectionTypeAsString:(NSString *)connectionTypeString {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
+                                                          action:@"accepted"
+                                                           label:connectionTypeString
+                                                           value:nil] build]];
+}
+
++ (void)rejectedPushNotificationEventWithConnectionTypeAsString:(NSString *)connectionTypeString {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"middleware"
+                                                          action:@"rejected"
+                                                           label:connectionTypeString
+                                                           value:nil] build]];
+}
+
++ (void)registrationFailedWithMiddleWareException {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createExceptionWithDescription:@"Failed middleware registration" withFatal:@NO] build]];
+}
+
++ (void)timeToRespondToIncomingPushNotification:(NSTimeInterval)responseTime {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createTimingWithCategory:@"middleware"
+                                                         interval:@((NSUInteger)(responseTime * 1000))
+                                                             name:@"response time"
+                                                            label:nil] build]];
 }
 
 @end

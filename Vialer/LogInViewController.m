@@ -8,10 +8,12 @@
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
 #import "GAITracker.h"
+#import "SettingsViewController.h"
 #import "SystemUser.h"
+#import "UIAlertController+Vialer.h"
 #import "UIView+RoundedStyle.h"
 #import "VIAScene.h"
-#import "VoIPGRIDRequestOperationManager.h"
+#import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
@@ -19,15 +21,17 @@
 #import "PBWebViewController.h"
 #import "SVProgressHUD.h"
 
-NSString * const LoginViewControllerMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
 static NSString * const LogInViewControllerLogoImageName = @"logo";
+static NSString * const LoginViewControllerSettingsStoryboard = @"SettingsStoryboard";
+static NSString * const LoginViewControllerSettingsNavigationControllerStoryboard = @"SettingsNavigationControllerStoryboard";
 
 @interface LogInViewController ()
 @property (assign, nonatomic) BOOL alertShown;
 @property (strong, nonatomic) NSString *user;
 @property (strong, nonatomic) VIAScene *scene;
 @property (strong, nonatomic) UITapGestureRecognizer *tapToUnlock;
+@property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
 @end
 
 @implementation LogInViewController
@@ -66,6 +70,13 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
         _tapToUnlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUnlockTap:)];
     }
     return _tapToUnlock;
+}
+
+- (VoIPGRIDRequestOperationManager *)operationManager {
+    if (!_operationManager) {
+        _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
+    }
+    return _operationManager;
 }
 
 /**
@@ -121,8 +132,8 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [self removeObservers];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - UITextField delegate methods
@@ -222,57 +233,48 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 - (void)continueFromConfigureFormViewToUnlockView {
     NSString *newNumber = self.configureFormView.phoneNumberField.text;
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"SAVING_NUMBER...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Saving number...", nil)];
 
-    //Force pushing the mobile number to the server. Covers the case where a user has set his mobile number in v1.x which was not pushed to server yet.
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] pushMobileNumber:newNumber forcePush:YES success:^{
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"NUMBER_SAVED_SUCCESS", nil)];
-
-        //Now that numbers have been saved, localy stored phone number and server side mobile number are in sync,
-        //Migration was completed succesfully
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LoginViewControllerMigrationCompleted];
-
-        [self.configureFormView.phoneNumberField resignFirstResponder];
-        [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
-        [self animateUnlockViewToVisible:1.f delay:1.5f];    // Show
-        [self.scene runActThree];                     // Animate the clouds
-        if ([SystemUser currentUser].sipEnabled) {
-            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-                if (!granted) {
-                    UIAlertController *alertController = [UIAlertController
-                                                          alertControllerWithTitle:NSLocalizedString(@"Microphone Access Denied", nil)
-                                                          message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil)
-                                                          preferredStyle:UIAlertControllerStyleAlert];
-
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
-                                                                           style:UIAlertActionStyleCancel
-                                                                         handler:nil];
-
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
-                                                                       style:UIAlertActionStyleDefault
-                                                                     handler:^(UIAlertAction *action) {
-                                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                                                     }];
-
-                    [alertController addAction:cancelAction];
-                    [alertController addAction:okAction];
-                    [self presentViewController:alertController animated:YES completion:nil];
-                }
-            }];
-        }
-    } failure:^(NSString *localizedErrorString) {
+    [[SystemUser currentUser] updateMobileNumber:newNumber withCompletion:^(BOOL success, NSError *error) {
         [SVProgressHUD dismiss];
-        UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:NSLocalizedString(@"Error", nil)
-                                              message:localizedErrorString
-                                              preferredStyle:UIAlertControllerStyleAlert];
+        if (success) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Number saved", nil)];
 
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
+            [self.configureFormView.phoneNumberField resignFirstResponder];
+            [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
+            [self animateUnlockViewToVisible:1.f delay:1.5f];   // Show
+            [self.scene runActThree];                           // Animate the clouds
 
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+            if ([SystemUser currentUser].sipEnabled) {
+                [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+                    if (!granted) {
+                        UIAlertController *alertController = [UIAlertController
+                                                              alertControllerWithTitle:NSLocalizedString(@"Microphone Access Denied", nil)
+                                                              message:NSLocalizedString(@"You must allow microphone access in Settings > Privacy > Microphone.", nil)
+                                                              preferredStyle:UIAlertControllerStyleAlert];
+
+                        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                                               style:UIAlertActionStyleCancel
+                                                                             handler:nil];
+
+                        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                                           style:UIAlertActionStyleDefault
+                                                                         handler:^(UIAlertAction *action) {
+                                                                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                                                         }];
+
+                        [alertController addAction:cancelAction];
+                        [alertController addAction:okAction];
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    }
+                }];
+            }
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error saving number", nil)
+                                                                           message:error.localizedDescription
+                                                              andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }];
 }
 
@@ -400,23 +402,43 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)resetPasswordWithEmail:(NSString*)email {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [[VoIPGRIDRequestOperationManager sharedRequestOperationManager] passwordResetWithEmail:email success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Send email?", nil)
+                                                                   message:[NSString stringWithFormat:NSLocalizedString(@"If your email address is %@ we will send you an email with instructions to reset your password.", nil), email]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self sendEmail:email];
+    }];
+    [alert addAction:okAction];
 
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)sendEmail:(NSString *)email {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil)];
+
+    [self.operationManager passwordResetWithEmail:email withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        // Check if there was an error.
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
+            [self animateLoginViewToVisible:1.f delay:0.8f];
+            [self animateForgotPasswordViewToVisible:0.f delay:0.8];
+            return;
+        }
+
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
         [self animateLoginViewToVisible:1.f delay:1.f];
         [self animateForgotPasswordViewToVisible:0.f delay:0.8f];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
-        [self animateLoginViewToVisible:1.f delay:0.8f];
-        [self animateForgotPasswordViewToVisible:0.f delay:0.8];
     }];
 }
 
 - (void)openConfigurationInstructions:(id)sender {
     PBWebViewController *webViewController = [[PBWebViewController alloc] init];
 
-    NSString *onboardingUrl = [Configuration UrlForKey:NSLocalizedString(@"onboarding", @"Reference to URL String in the config.plist to the localized onboarding information page")];
+    NSString *localizedOnboarding = [NSString stringWithFormat:@"onboarding-%@", [[NSBundle mainBundle] preferredLocalizations][0]];
+    NSString *onboardingUrl = [[Configuration defaultConfiguration] UrlForKey:localizedOnboarding];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
     webViewController.showsNavigationToolbar = NO;
     webViewController.hidesBottomBarWhenPushed = YES;
@@ -434,8 +456,8 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil) maskType:SVProgressHUDMaskTypeGradient];
-    [self.currentUser loginWithUser:username password:password completion:^(BOOL loggedin) {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
+    [self.currentUser loginWithUsername:username password:password completion:^(BOOL loggedin, NSError *error) {
         [SVProgressHUD dismiss];
         if (loggedin) {
             [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
@@ -446,14 +468,27 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
             if (success) {
                 success();
             }
+        } else if (error && error.code == SystemUserErrorUserTypeNotAllowed) {
+            self.loginFormView.passwordField.text = @"";
+            self.loginFormView.usernameField.text = @"";
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Login failed", nil)
+                                                                            message:NSLocalizedString(@"This user is not allowed to use the app", nil)
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
         } else {
             self.loginFormView.passwordField.text = @"";
+            [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Login failed", nil)
+                                                                            message:NSLocalizedString(@"Your email and/or password is incorrect.", nil)
+                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                               animated:YES
+                             completion:nil];
         }
     }];
 }
 
 - (void)retrievePhoneNumbersWithSuccessBlock:(void (^)())success {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil) maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil)];
     [[SystemUser currentUser] updateSystemUserFromVGWithCompletion:^(NSError *error) {
         [SVProgressHUD dismiss];
 
@@ -507,7 +542,7 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 
 - (void)animateForgotPasswordViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
     if (![self.forgotPasswordView.emailTextfield.text length]) {
-        self.forgotPasswordView.emailTextfield.text = self.currentUser.user;
+        self.forgotPasswordView.emailTextfield.text = self.currentUser.username;
     }
     [self checkIfEmailIsSetInEmailTextField];
     void(^animations)(void) = ^{
@@ -576,13 +611,25 @@ static NSString * const LogInViewControllerLogoImageName = @"logo";
 }
 
 - (void)unlockIt {
-    // Put here what happens when it is unlocked
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self.unlockView setAlpha:0.f];
-        [self.logoView setAlpha:1.f];
-        [self.logoView setCenter:self.view.center];
-    }];
-    // Remove tap
+    if (self.currentUser.sipAllowed && !self.currentUser.sipAccount) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:LoginViewControllerSettingsStoryboard bundle:nil];
+        UINavigationController *navigationController = [storyBoard instantiateViewControllerWithIdentifier:LoginViewControllerSettingsNavigationControllerStoryboard];
+        SettingsViewController *viewController = navigationController.viewControllers[0];
+        viewController.showSIPAccountWebview = YES;
+        [self presentViewController:navigationController animated:NO completion:nil];
+    } else {
+        // Enable SIP for this user after onboarding.
+        self.currentUser.sipEnabled = YES;
+
+        // Put here what happens when it is unlocked.
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self.unlockView setAlpha:0.f];
+            [self.logoView setAlpha:1.f];
+            [self.logoView setCenter:self.view.center];
+
+        }];
+    }
+    // Remove tap.
     [self.view removeGestureRecognizer:self.tapToUnlock];
 }
 

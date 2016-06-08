@@ -4,15 +4,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <PushKit/PushKit.h>
 
-@class GSCall;
+extern NSString * const AppDelegateIncomingCallNotification;
+extern NSString * const AppDelegateIncomingBackgroundCallNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)handleSipCall:(GSCall *)sipCall;
+/**
+ *  Core Data Parent Managed Object Context.
+ *
+ *  Every other object context should be a child context from this context.
+ */
+@property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 /**
  * @return YES when the app was started for the purpose of taking screenshots

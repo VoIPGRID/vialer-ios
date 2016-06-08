@@ -7,6 +7,7 @@
 //
 
 #import "MainTabBarViewController.h"
+#import "Configuration.h"
 
 @interface MainTabBarViewController ()
 
@@ -26,10 +27,6 @@
     [UITabBar appearance].tintColor = [config tintColorForKey:ConfigurationTabBarTintColor];
     [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIToolbar class]]] setTintColor:[config tintColorForKey:ConfigurationTabBarTintColor]];
     [UITabBar appearance].barTintColor = [config tintColorForKey:ConfigurationTabBarBackgroundColor];
-
-    // Customize NavigationBar
-    [UINavigationBar appearance].tintColor = [config tintColorForKey:ConfigurationNavigationBarTintColor];
-    [UINavigationBar appearance].barTintColor = [config tintColorForKey:ConfigurationNavigationBarBarTintColor];
 }
 
 @end
