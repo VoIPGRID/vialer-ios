@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25BBF40AF42BB5FB6D9046ED /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4FE451CC7C2D4829998FAA /* libPods-Vialer.a */; };
+		0F6D94FD57C09D889131FE30 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A91A14A6BDBE2A3F3BB684C1 /* libPods-Vialer.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -17,8 +17,8 @@
 		3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
-		86165FD1D221F55E50E07218 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EABE570A65E64F5773C4800E /* libPods-Voys.a */; };
-		C02FF0FE5A4C6A0E71131BEE /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E4D89A3BD74989A093A9057 /* libPods-VialerTests.a */; };
+		8591F96B05072AE56A4A4C04 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F580FEC1BA07F52C427924 /* libPods-Voys.a */; };
+		B8DAF69D3AAE1C1CF125DF4A /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F988C1E29C4D14B79A1E2A /* libPods-VialerTests.a */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
 		C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */; };
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
@@ -338,9 +338,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		00DFCE5CC2AFA1FB35CF7110 /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
-		2AB3DD2D88E3237A7066512E /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
-		2E4D89A3BD74989A093A9057 /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0884C2E474C9FB9C413FACC7 /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
+		09F580FEC1BA07F52C427924 /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A4E2B6B0E27101EFE2CBCC /* Pods-VialerTests.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		3D1A5E631AE5483700DBE64B /* LoginFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormView.h; sourceTree = "<group>"; };
 		3D1A5E641AE5483700DBE64B /* LoginFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormView.m; sourceTree = "<group>"; };
@@ -357,10 +357,11 @@
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordView.m; sourceTree = "<group>"; };
 		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		4E10AF6261EA5AB98C5346BE /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
-		56754CC22B57CEDC9A576967 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
-		9D4FE451CC7C2D4829998FAA /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA03108D9D39C011A788435E /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
+		71F988C1E29C4D14B79A1E2A /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		80FEDD3FD37DCFB14E3D73EF /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		825ED0F5334DD7D8866A0AB1 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
+		A54D1417CC705CE8BD97A56A /* Pods-Voys.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
+		A91A14A6BDBE2A3F3BB684C1 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AdHocDistribution-Info.plist"; sourceTree = "<group>"; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
@@ -460,10 +461,9 @@
 		C4F49F361BF0C13400C25159 /* libPods-Vialer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Vialer.a"; path = "Pods/../build/Debug-iphoneos/libPods-Vialer.a"; sourceTree = "<group>"; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
-		E0C099694B529E1B0BE63875 /* Pods-VialerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
-		E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
-		EABE570A65E64F5773C4800E /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6114BF7D37DC1A78C2D1E31 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
+		DF1851A15F1E5DD216BBBC31 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		EF38094C4F9346B9F3DFE8F3 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
 		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
 		F21077EA1B1C398D003C8109 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -504,6 +504,7 @@
 		F2DE21851CB69E7F007B5B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		F2DE21871CB69F9D007B5B4D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ReachabilityBarStoryboard.strings; sourceTree = "<group>"; };
 		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Vialer-Prefix.pch"; sourceTree = "<group>"; };
+		F3A28D7A1A08DB4F1000EDDE /* Pods-Vialer.adhocdistribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.adhocdistribution.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.adhocdistribution.xcconfig"; sourceTree = "<group>"; };
 		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewController.h; sourceTree = "<group>"; };
 		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityModel.h; sourceTree = "<group>"; };
@@ -605,7 +606,6 @@
 		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
 		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
-		FBDAA46C9701712C2F5A837E /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
 		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
 		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Configuration.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -640,7 +640,7 @@
 				C41FD8A21C60A08400BBE6D7 /* UIKit.framework in Frameworks */,
 				C41FD8A31C60A08400BBE6D7 /* Foundation.framework in Frameworks */,
 				C41FD8A41C60A08400BBE6D7 /* CoreGraphics.framework in Frameworks */,
-				86165FD1D221F55E50E07218 /* libPods-Voys.a in Frameworks */,
+				8591F96B05072AE56A4A4C04 /* libPods-Voys.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,7 +655,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C02FF0FE5A4C6A0E71131BEE /* libPods-VialerTests.a in Frameworks */,
+				B8DAF69D3AAE1C1CF125DF4A /* libPods-VialerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,7 +692,7 @@
 				FB4226D1182261D200707349 /* UIKit.framework in Frameworks */,
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
-				25BBF40AF42BB5FB6D9046ED /* libPods-Vialer.a in Frameworks */,
+				0F6D94FD57C09D889131FE30 /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,18 +746,18 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		3F1D387AE9794292FEEDC0AD /* Pods */ = {
+		7CEC61FEED55C4E3C1429D84 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */,
-				E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */,
-				2AB3DD2D88E3237A7066512E /* Pods-Vialer.release.xcconfig */,
-				E0C099694B529E1B0BE63875 /* Pods-VialerTests.debug.xcconfig */,
-				00DFCE5CC2AFA1FB35CF7110 /* Pods-VialerTests.adhocdistribution.xcconfig */,
-				56754CC22B57CEDC9A576967 /* Pods-VialerTests.release.xcconfig */,
-				AA03108D9D39C011A788435E /* Pods-Voys.debug.xcconfig */,
-				4E10AF6261EA5AB98C5346BE /* Pods-Voys.adhocdistribution.xcconfig */,
-				FBDAA46C9701712C2F5A837E /* Pods-Voys.release.xcconfig */,
+				DF1851A15F1E5DD216BBBC31 /* Pods-Vialer.debug.xcconfig */,
+				F3A28D7A1A08DB4F1000EDDE /* Pods-Vialer.adhocdistribution.xcconfig */,
+				825ED0F5334DD7D8866A0AB1 /* Pods-Vialer.release.xcconfig */,
+				80FEDD3FD37DCFB14E3D73EF /* Pods-VialerTests.debug.xcconfig */,
+				22A4E2B6B0E27101EFE2CBCC /* Pods-VialerTests.adhocdistribution.xcconfig */,
+				EF38094C4F9346B9F3DFE8F3 /* Pods-VialerTests.release.xcconfig */,
+				D6114BF7D37DC1A78C2D1E31 /* Pods-Voys.debug.xcconfig */,
+				A54D1417CC705CE8BD97A56A /* Pods-Voys.adhocdistribution.xcconfig */,
+				0884C2E474C9FB9C413FACC7 /* Pods-Voys.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1528,7 +1528,7 @@
 				F2B43F0C1C3BEB3F0089A387 /* SnapshotUITests */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
-				3F1D387AE9794292FEEDC0AD /* Pods */,
+				7CEC61FEED55C4E3C1429D84 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1571,9 +1571,9 @@
 				FB4226D0182261D200707349 /* UIKit.framework */,
 				FB4226D2182261D200707349 /* Foundation.framework */,
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
-				9D4FE451CC7C2D4829998FAA /* libPods-Vialer.a */,
-				2E4D89A3BD74989A093A9057 /* libPods-VialerTests.a */,
-				EABE570A65E64F5773C4800E /* libPods-Voys.a */,
+				A91A14A6BDBE2A3F3BB684C1 /* libPods-Vialer.a */,
+				71F988C1E29C4D14B79A1E2A /* libPods-VialerTests.a */,
+				09F580FEC1BA07F52C427924 /* libPods-Voys.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2503,7 +2503,7 @@
 		};
 		AAFB4AC71AC3F49B0086126A /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E43A646F5449C62E9608F5C4 /* Pods-Vialer.adhocdistribution.xcconfig */;
+			baseConfigurationReference = F3A28D7A1A08DB4F1000EDDE /* Pods-Vialer.adhocdistribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2535,7 +2535,7 @@
 		};
 		C41FD8CB1C60A08400BBE6D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA03108D9D39C011A788435E /* Pods-Voys.debug.xcconfig */;
+			baseConfigurationReference = D6114BF7D37DC1A78C2D1E31 /* Pods-Voys.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2573,7 +2573,7 @@
 		};
 		C41FD8CC1C60A08400BBE6D7 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E10AF6261EA5AB98C5346BE /* Pods-Voys.adhocdistribution.xcconfig */;
+			baseConfigurationReference = A54D1417CC705CE8BD97A56A /* Pods-Voys.adhocdistribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2605,7 +2605,7 @@
 		};
 		C41FD8CD1C60A08400BBE6D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBDAA46C9701712C2F5A837E /* Pods-Voys.release.xcconfig */;
+			baseConfigurationReference = 0884C2E474C9FB9C413FACC7 /* Pods-Voys.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2642,6 +2642,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2670,6 +2671,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2699,6 +2701,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2722,7 +2725,7 @@
 		};
 		C4F49F2F1BF0B45700C25159 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0C099694B529E1B0BE63875 /* Pods-VialerTests.debug.xcconfig */;
+			baseConfigurationReference = 80FEDD3FD37DCFB14E3D73EF /* Pods-VialerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2757,7 +2760,7 @@
 		};
 		C4F49F301BF0B45700C25159 /* AdHocDistribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 00DFCE5CC2AFA1FB35CF7110 /* Pods-VialerTests.adhocdistribution.xcconfig */;
+			baseConfigurationReference = 22A4E2B6B0E27101EFE2CBCC /* Pods-VialerTests.adhocdistribution.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2789,7 +2792,7 @@
 		};
 		C4F49F311BF0B45700C25159 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56754CC22B57CEDC9A576967 /* Pods-VialerTests.release.xcconfig */;
+			baseConfigurationReference = EF38094C4F9346B9F3DFE8F3 /* Pods-VialerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -2827,6 +2830,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2855,6 +2859,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2884,6 +2889,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2962,7 +2968,7 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4110EBDA81D936DEBDE5775 /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = DF1851A15F1E5DD216BBBC31 /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -2991,6 +2997,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/Vialer-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -3000,7 +3007,7 @@
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AB3DD2D88E3237A7066512E /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = 825ED0F5334DD7D8866A0AB1 /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -3023,6 +3030,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/Vialer-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
