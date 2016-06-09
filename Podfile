@@ -28,6 +28,10 @@ target 'Voys' do
     default_pods
 end
 
+target 'Verbonden' do
+    default_pods
+end
+
 target 'VialerTests' do
     pod 'OCMock'
     pod 'OHHTTPStubs'
