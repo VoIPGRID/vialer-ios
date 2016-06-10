@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationAvailabilityTableViewTintColor];
+    self.tableView.tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationAvailabilityTableViewTintColor];
 }
 
 - (UIRefreshControl *)refreshControl {

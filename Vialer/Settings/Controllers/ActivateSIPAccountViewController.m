@@ -35,8 +35,8 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 - (void)setupUserProfileButton {
     self.userProfileButton.borderWidth = 1;
     self.userProfileButton.cornerRadius = ActivateSIPAccountViewControllerButtonRadius;
-    self.userProfileButton.borderColor = [self.configuration tintColorForKey:ConfigurationActivateSIPAccountViewControllerButtonBorderColor];
-    self.userProfileButton.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState];
+    self.userProfileButton.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationActivateSIPAccountViewControllerButtonBorderColor];
+    self.userProfileButton.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState];
 }
 
 #pragma mark - Properties

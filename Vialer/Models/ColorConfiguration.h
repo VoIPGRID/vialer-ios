@@ -1,11 +1,10 @@
 //
-//  Configuration.h
-//  Copyright © 2015 VoIPGRID. All rights reserved.
+//  ColorConfiguration.h
+//  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-@import UIKit;
+#import <Foundation/Foundation.h>
 
-// Known tint color names
 extern NSString * const ConfigurationTabBarBackgroundColor;
 extern NSString * const ConfigurationTabBarTintColor;
 extern NSString * const ConfigurationNavigationBarTintColor;
@@ -23,10 +22,11 @@ extern NSString * const ConfigurationTwoStepScreenBubblingColor;
 extern NSString * const ConfigurationTwoStepScreenSideAIconColor;
 extern NSString * const ConfigurationTwoStepScreenSideBIconColor;
 extern NSString * const ConfigurationTwoStepScreenVialerIconColor;
-extern NSString * const ConfigurationGradientBackgroundColors;
-extern NSString * const ConfigurationGradientViewGradientStart;
-extern NSString * const ConfigurationGradientViewGradientEnd;
-extern NSString * const ConfigurationGradientViewGradientAngle;
+
+extern NSString * const ConfigurationBackgroundGradientStartColor;
+extern NSString * const ConfigurationBackgroundGradientEndColor;
+extern CGFloat const ConfigurationBackgroundGradientAngle;
+
 extern NSString * const ConfigurationSideMenuTintColor;
 extern NSString * const ConfigurationSideMenuButtonPressedState;
 extern NSString * const ConfigurationRecentsSegmentedControlTintColor;
@@ -39,31 +39,24 @@ extern NSString * const ConfigurationLogInViewControllerButtonBackgroundColorFor
 extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor;
 extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState;
 extern NSString * const ConfigurationSideMenuHeaderBackgroundColor;
-extern NSString * const ConfigurationVoIPGRIDBaseURLString;
-extern NSString * const ConfigurationMiddleWareBaseURLString;
-extern NSString * const ConfigurationSIPDomain;
-extern NSString * const ConfigurationPartnerURLKey;
 
 /**
- *  Class for accessing items from Config.plist. As a default the plist from the main bundle is used.
+ This class represents the color configuration as defined in the Config.plist.
  */
-@interface Configuration : NSObject
+@interface ColorConfiguration : NSObject
+/**
+ *  This initializer is not to be used.
+ */
+- (instancetype)init __attribute__((unavailable("init not available")));
 
 /**
- * Obtain an instance to this class' Singleton.
+ *  This is the designated initializer for this class. Do not use init.
  *
- * @return Configuration's singleton instance.
+ *  @param configPlist A NSDictionary representing the contents of the Config.plist file.
+ *
+ *  @return An ColorConfiguration instance.
  */
-+ (instancetype)defaultConfiguration;
-
-/**
- *  Obtain an NSString containing an URL for the given key.
- *
- *  @param key The key for which to fetch the URL.
- *
- *  @return A NSString containing the URL value.
- */
-- (NSString *)UrlForKey:(NSString *)key;
+- (instancetype)initWithConfigPlist:(NSDictionary *)configPlist NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Obtain an UIColor for the key specified.
@@ -72,24 +65,6 @@ extern NSString * const ConfigurationPartnerURLKey;
  *
  *  @return An instance to a UIColor.
  */
-- (UIColor *)tintColorForKey:(NSString *)key;
-
-/**
- *  Obtain a dictionary containing UIColor objects for the specified key.
- *
- *  @param key The key for which to fetch the dictionary.
- *
- *  @return A dictionary containing UIColor instances.
- */
-- (NSDictionary *)tintColorDictionaryForKey:(NSString *)key;
-
-/**
- *  Method to create an UIColor from the given array.
- *
- *  @param array A NSArray containing 3 elements representing RGB values.
- *
- *  @return An UIColor representing the given RBG color.
- */
-+ (UIColor *)colorFromArray:(NSArray *)array;
+- (UIColor *)colorForKey:(NSString *)key;
 
 @end

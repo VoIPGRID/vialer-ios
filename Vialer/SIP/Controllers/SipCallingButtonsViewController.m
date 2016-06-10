@@ -48,14 +48,14 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
 
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonsPressedAlpha];
+        _pressedColor = [[self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonsPressedAlpha];
     }
     return _pressedColor;
 }
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonTextColor];
     }
     return _textColor;
 }

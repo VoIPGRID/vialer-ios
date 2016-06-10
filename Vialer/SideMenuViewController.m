@@ -39,7 +39,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.headerView.backgroundColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationSideMenuHeaderBackgroundColor];
+    self.headerView.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuHeaderBackgroundColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,12 +60,12 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)setUsernameLabel:(UILabel *)usernameLabel {
     _usernameLabel = usernameLabel;
-    _usernameLabel.textColor = [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
+    _usernameLabel.textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setOutgoingNumberLabel:(UILabel *)outgoingNumberLabel {
     _outgoingNumberLabel = outgoingNumberLabel;
-    _outgoingNumberLabel.textColor = [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
+    _outgoingNumberLabel.textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setBuildVersionLabel:(UILabel *)buildVersionLabel {
@@ -78,7 +78,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 }
 
 - (UIColor *)tintColor {
-    return [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
+    return [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setAvailabilityIcon:(UIImageView *)availabilityIcon {

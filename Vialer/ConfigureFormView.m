@@ -39,8 +39,8 @@ static CGFloat const ConfigureFormViewButtonRadius = 5.0;
 
     self.continueButton.borderWidth = 1;
     self.continueButton.cornerRadius = ConfigureFormViewButtonRadius;
-    self.continueButton.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
-    self.continueButton.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
+    self.continueButton.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBorderColor];
+    self.continueButton.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
 }
 
 - (Configuration *)configuration {

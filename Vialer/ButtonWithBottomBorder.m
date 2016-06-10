@@ -17,7 +17,7 @@
 - (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
     if (highlighted) {
-        self.backgroundColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationSideMenuButtonPressedState];
+        self.backgroundColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationSideMenuButtonPressedState];
     } else {
         self.backgroundColor = nil;
     }
