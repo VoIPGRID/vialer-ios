@@ -103,7 +103,29 @@ platform :ios do
     #    success: false,
     #    )
   end
+
+  lane :add_device do
+    device_name = prompt(text: "Enter the device name: ")
+    device_udid = prompt(text: "Enter the device UDID: ")
+    device_hash = {}
+    device_hash[device_name] = device_udid
+    register_devices(
+        username: ENV["ITC_USERNAME"],
+        devices: device_hash
+    )
+    refresh_profiles
+  end
+
+  # A helper lane for refreshing provisioning profiles.
+  lane :refresh_profiles do
+    match(
+      username: ENV["ITC_USERNAME"],
+      team_name: ENV["APP_TEAM"],
+      force_for_new_devices: true
+    )
+  end
 end
+
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/docs/Platforms.md
 # All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md

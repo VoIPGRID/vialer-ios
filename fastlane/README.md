@@ -41,6 +41,16 @@ Match Adhoc
 fastlane ios match_appstore
 ```
 Match Appstore
+### ios add_device
+```
+fastlane ios add_device
+```
+
+### ios refresh_profiles
+```
+fastlane ios refresh_profiles
+```
+
 
 ----
 
