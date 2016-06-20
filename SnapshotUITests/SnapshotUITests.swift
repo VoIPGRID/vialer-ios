@@ -39,6 +39,7 @@ class SnapshotUITests: XCTestCase {
     func testSnapshotScreenshotRun() {
         let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
         waitForElementToBeHittable(usernameTextField)
+        usernameTextField.tap()
         usernameTextField.typeText(Constants.username)
 
         // Snapshot of the Login screen dispalying a username.

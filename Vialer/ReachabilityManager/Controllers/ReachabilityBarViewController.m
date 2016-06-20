@@ -23,6 +23,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupReachability) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teardownReachability) name:UIApplicationWillResignActiveNotification object:nil];
     [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed)) options:0 context:NULL];
     [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled)) options:0 context:NULL];
     [self setupReachability];
@@ -132,7 +133,10 @@
 }
 
 - (void)teardownReachability {
-    [self.reachabilityManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus))];
+    @try {
+        [self.reachabilityManager removeObserver:self forKeyPath:NSStringFromSelector(@selector(reachabilityStatus))];
+    } @catch (NSException *exception) {}
+    [self.reachabilityManager stopMonitoring];
     self.reachabilityManager = nil;
 }
 
