@@ -35,6 +35,7 @@ static NSString * const SystemUserApiKeyMobileNumber    = @"mobile_nr";
 static NSString * const SystemUserApiKeyOutgoingNumber  = @"outgoing_cli";
 static NSString * const SystemUserApiKeyEmailAddress    = @"email";
 static NSString * const SystemUserApiKeyFirstName       = @"first_name";
+static NSString * const SystemUserApiKeyPreposition     = @"preposition";
 static NSString * const SystemUserApiKeyLastName        = @"last_name";
 static NSString * const SystemUserApiKeySIPAllowed      = @"allow_app_account";
 static NSString * const SystemUserApiKeyAppAccountURL   = @"app_account";
@@ -54,6 +55,7 @@ static NSString * const SystemUserSUDOutgoingNumber     = @"OutgoingCLI";
 static NSString * const SystemUserSUDMobileNumber       = @"MobileNumber";
 static NSString * const SystemUserSUDEmailAddress       = @"Email";
 static NSString * const SystemUserSUDFirstName          = @"FirstName";
+static NSString * const SystemUserSUDPreposition        = @"Preposition";
 static NSString * const SystemUserSUDLastName           = @"LastName";
 static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
@@ -73,6 +75,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 @property (strong, nonatomic) NSString *mobileNumber;
 @property (strong, nonatomic) NSString *emailAddress;
 @property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *preposition;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *clientID;
 
@@ -148,6 +151,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.mobileNumber       = [defaults objectForKey:SystemUserSUDMobileNumber];
     self.emailAddress       = [defaults objectForKey:SystemUserSUDEmailAddress];
     self.firstName          = [defaults objectForKey:SystemUserSUDFirstName];
+    self.preposition        = [defaults objectForKey:SystemUserSUDPreposition];
     self.lastName           = [defaults objectForKey:SystemUserSUDLastName];
     self.clientID           = [defaults objectForKey:SystemUserSUDClientID];
     self.migrationCompleted = [defaults boolForKey:SystemUserSUDMigrationCompleted];
@@ -178,7 +182,8 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 - (NSString *)displayName {
     if (self.firstName || self.lastName) {
-        return [[NSString stringWithFormat:@"%@ %@", self.firstName ?: @"", self.lastName ?: @""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString *lastName = [[NSString stringWithFormat:@"%@ %@", self.preposition ?: @"", self.lastName ?: @""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        return [[NSString stringWithFormat:@"%@ %@", self.firstName ?: @"", lastName] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if (self.emailAddress) {
         return self.emailAddress;
     } else if (self.username) {
@@ -365,6 +370,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.mobileNumber = nil;
     self.emailAddress = nil;
     self.firstName = nil;
+    self.preposition = nil;
     self.lastName = nil;
     self.clientID = nil;
 
@@ -374,6 +380,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [defaults removeObjectForKey:SystemUserSUDMobileNumber];
     [defaults removeObjectForKey:SystemUserSUDEmailAddress];
     [defaults removeObjectForKey:SystemUserSUDFirstName];
+    [defaults removeObjectForKey:SystemUserSUDPreposition];
     [defaults removeObjectForKey:SystemUserSUDLastName];
     [defaults removeObjectForKey:SystemUserApiKeyClient];
 
@@ -407,6 +414,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     }
     self.emailAddress   = userDict[SystemUserApiKeyEmailAddress];
     self.firstName      = userDict[SystemUserApiKeyFirstName];
+    self.preposition    = userDict[SystemUserApiKeyPreposition];
     self.lastName       = userDict[SystemUserApiKeyLastName];
     self.clientID       = userDict[SystemUserApiKeyClient];
 
@@ -427,6 +435,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [defaults setObject:self.mobileNumber forKey:SystemUserSUDMobileNumber];
     [defaults setObject:self.emailAddress forKey:SystemUserSUDEmailAddress];
     [defaults setObject:self.firstName forKey:SystemUserSUDFirstName];
+    [defaults setObject:self.preposition forKey:SystemUserSUDPreposition];
     [defaults setObject:self.lastName forKey:SystemUserSUDLastName];
     [defaults setObject:self.clientID forKey:SystemUserApiKeyClient];
 

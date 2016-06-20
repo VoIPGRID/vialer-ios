@@ -15,13 +15,14 @@
 + (id)readObjectForKey:(id)key;
 - (instancetype) initPrivate;
 
-@property (strong, nonatomic)NSString *user;
-@property (strong, nonatomic)NSString *sipAccount;
-@property (strong, nonatomic)NSString *mobileNumber;
-@property (strong, nonatomic)NSString *emailAddress;
-@property (strong, nonatomic)NSString *firstName;
-@property (strong, nonatomic)NSString *lastName;
-@property (strong, nonatomic)NSString *clientID;
+@property (strong, nonatomic) NSString *user;
+@property (strong, nonatomic) NSString *sipAccount;
+@property (strong, nonatomic) NSString *mobileNumber;
+@property (strong, nonatomic) NSString *emailAddress;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *preposition;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *clientID;
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic) BOOL sipAllowed;
@@ -101,6 +102,17 @@
     XCTAssertEqualObjects(user.displayName, @"John Appleseed", @"The fullname should be displayed and not the user");
 }
 
+- (void)testSystemUserDisplaysFirstNamePrepositionAndLastName {
+    OCMStub([self.userDefaultsMock objectForKey:@"FirstName"]).andReturn(@"John");
+    OCMStub([self.userDefaultsMock objectForKey:@"Preposition"]).andReturn(@"of");
+    OCMStub([self.userDefaultsMock objectForKey:@"LastName"]).andReturn(@"Appleseed");
+    OCMStub([self.userDefaultsMock objectForKey:@"User"]).andReturn(@"john@apple.com");
+
+    SystemUser *user = [[SystemUser alloc] initPrivate];
+
+    XCTAssertEqualObjects(user.displayName, @"John of Appleseed", @"The fullname should be displayed and not the user");
+}
+
 - (void)testSystemUserDisplaysEmailAddress {
     OCMStub([self.userDefaultsMock objectForKey:@"Email"]).andReturn(@"john@apple.com");
     OCMStub([self.userDefaultsMock objectForKey:@"User"]).andReturn(@"steve@apple.com");
@@ -150,6 +162,22 @@
     [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
 
     XCTAssertEqualObjects(self.user.displayName, @"John Appleseed", @"The correct first and lastname should have been fetched.");
+}
+
+- (void)testFetchPropertiesFromRemoteWillSetAllPropertiesOnInstance {
+    NSDictionary *response  = @{@"client": @"42",
+                                @"first_name": @"John",
+                                @"preposition": @"of",
+                                @"last_name": @"Appleseed"
+                                };
+    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+
+    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
+
+    XCTAssertEqualObjects(self.user.displayName, @"John of Appleseed", @"The correct firstname, preposition and lastname should have been fetched.");
 }
 
 - (void)testSystemUserHasNoSipEnabledOnDefault {
