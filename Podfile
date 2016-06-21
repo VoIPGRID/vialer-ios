@@ -15,7 +15,7 @@ def default_pods
     pod 'PBWebViewController'
     pod 'Reachability'
     pod 'SSKeychain'
-    pod 'SimulatorStatusMagic', :configurations => ['Debug', 'AdHocDistribution']
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SVProgressHUD'
     pod 'VialerSIPLib-iOS'
 end
