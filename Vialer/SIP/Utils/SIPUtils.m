@@ -26,7 +26,7 @@
     if (!success || error) {
         DDLogError(@"Failed to startup VialerSIPLib: %@", error);
     }
-
+    [[VialerSIPLib sharedInstance] onlyUseIlbc:YES];
     return success;
 }
 
