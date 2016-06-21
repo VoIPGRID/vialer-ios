@@ -9,9 +9,9 @@
 #import "AvailabilityModel.h"
 #import "AvailabilityViewController.h"
 #import "Configuration.h"
-#import "GAITracker.h"
 #import "SystemUser.h"
 #import "VialerWebViewController.h"
+#import "Vialer-Swift.h"
 
 static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
@@ -138,14 +138,14 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:SideMenuViewControllerShowStatisticsSegue]) {
-        [GAITracker trackScreenForControllerName:@"StatisticsWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:@"StatisticsWebView"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.title = NSLocalizedString(@"Statistics", nil);
         webController.nextUrl = @"/stats/dashboard/";
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowInformationSegue]) {
-        [GAITracker trackScreenForControllerName:@"InformationWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:@"InformationWebView"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
@@ -158,7 +158,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         webController.showsNavigationToolbar = NO;
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowDialPlanSegue]) {
-        [GAITracker trackScreenForControllerName:@"DialplanWebview"];
+        [VialerGAITracker trackScreenForControllerWithName:@"DialplanWebview"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.title = NSLocalizedString(@"Dial plan", nil);
@@ -175,24 +175,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (NSString *)appVersionBuildString {
     if (!_appVersionBuildString) {
-        NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-        NSMutableString *versionString = [NSMutableString stringWithFormat:@"v:%@", [infoDict objectForKey:@"CFBundleShortVersionString"]];
-        //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
-        //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
-        NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
-        if ([additionalVersionString length] >0)
-            [versionString appendFormat:@".%@", additionalVersionString];
-
-        NSString *version;
-#if DEBUG
-        version = [NSString stringWithFormat:@"Commit: %@", [infoDict objectForKey:@"Commit_Short_Hash"]];
-#else
-        version = [NSString stringWithFormat:@"%@ (%@)",
-                   versionString,
-                   [infoDict objectForKey:@"CFBundleVersion"]];
-#endif
-
-        _appVersionBuildString = version;
+        _appVersionBuildString = [AppInfo currentAppVersion];
     }
     return _appVersionBuildString;
 }

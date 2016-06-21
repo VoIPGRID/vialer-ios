@@ -5,10 +5,10 @@
 
 #import "EditNumberViewController.h"
 
-#import "GAITracker.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
+#import "Vialer-Swift.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 @interface EditNumberViewController ()
@@ -25,7 +25,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     self.numberTextField.text = self.numberToEdit;
     [self.numberTextField becomeFirstResponder];
 }
