@@ -7,11 +7,10 @@
 
 #import "AvailabilityModel.h"
 #import "Configuration.h"
-#import "GAITracker.h"
-#import "UIAlertController+Vialer.h"
-#import "VoIPGRIDRequestOperationManager.h"
-
 #import "SVProgressHUD.h"
+#import "UIAlertController+Vialer.h"
+#import "Vialer-Swift.h"
+#import "VoIPGRIDRequestOperationManager.h"
 
 @interface AvailabilityViewController()
 @property (nonatomic, weak) NSIndexPath *lastSelected;
@@ -22,7 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [self loadUserDestinations];
 }
 

@@ -7,13 +7,12 @@
 
 #import "ActivateSIPAccountViewController.h"
 #import "EditNumberViewController.h"
-#import "GAITracker.h"
 #import "SIPUtils.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
+#import "Vialer-Swift.h"
 #import "VoIPGRIDRequestOperationManager.h"
-
 
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
@@ -46,7 +45,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 
     if (self.showSIPAccountWebview) {
         [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];

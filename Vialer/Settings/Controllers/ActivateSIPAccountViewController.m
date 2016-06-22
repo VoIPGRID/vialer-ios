@@ -5,9 +5,9 @@
 
 #import "ActivateSIPAccountViewController.h"
 #import "Configuration.h"
-#import "GAITracker.h"
 #import "RoundedAndColoredUIButton.h"
 #import "UserProfileWebViewController.h"
+#import "Vialer-Swift.h"
 
 static NSString *ActivateSIPAccountViewControllerUserProfileURL = @"/user/change/";
 static NSString * ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
@@ -29,7 +29,7 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 }
 
 - (void)setupUserProfileButton {
@@ -63,7 +63,7 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[UserProfileWebViewController class]]) {
-        [GAITracker trackScreenForControllerName:@"UserProfileWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:@"UserProfileWebView"];
         UserProfileWebViewController *webVC = segue.destinationViewController;
         webVC.nextUrl = ActivateSIPAccountViewControllerUserProfileURL;
         webVC.backButtonToRootViewController = self.backButtonToRootViewController;

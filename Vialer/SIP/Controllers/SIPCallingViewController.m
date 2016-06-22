@@ -9,10 +9,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ContactUtils.h"
 #import "DurationTimer.h"
-#import "GAITracker.h"
 #import "PhoneNumberModel.h"
 #import "PhoneNumberUtils.h"
 #import "SIPUtils.h"
+#import "Vialer-Swift.h"
 
 static NSString * const SIPCallingViewControllerCallState = @"callState";
 static NSString * const SIPCallingViewControllerMediaState = @"mediaState";
@@ -42,7 +42,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 }
 
 - (void)dealloc {

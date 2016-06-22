@@ -6,13 +6,13 @@
 #import "Middleware.h"
 
 #import "APNSHandler.h"
-#import "GAITracker.h"
 #import "Configuration.h"
 #import "MiddlewareRequestOperationManager.h"
 #import "ReachabilityManager.h"
 #import "SIPUtils.h"
 #import "SSKeychain.h"
 #import "SystemUser.h"
+#import "Vialer-Swift.h"
 
 static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
@@ -119,11 +119,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 - (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available withAccount:(VSLAccount *)account andPushResponseTimeMeasurementStart:(NSDate *)pushResponseTimeMeasurmentStart  {
     // Track the response that is sent to the middleware.
     NSString *connectionTypeString = [self.reachabilityManager currentConnectionTypeString];
-    if (available) {
-        [GAITracker acceptedPushNotificationEventWithConnectionTypeAsString:connectionTypeString];
-    } else {
-        [GAITracker rejectedPushNotificationEventWithConnectionTypeAsString:connectionTypeString];
-    }
+    [VialerGAITracker pushNotificationWithIsAccepted:available connectionType:connectionTypeString];
 
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
     DDLogDebug(@"Responding to Middleware with URL: %@", middlewareBaseURLString);
@@ -132,7 +128,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     [middlewareToRespondTo sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
         // Whole response cycle completed, log duration.
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
-        [GAITracker timeToRespondToIncomingPushNotification:responseTime];
+        [VialerGAITracker respondedToIncomingPushNotificationWithResponseTime:responseTime];
         DDLogDebug(@"Middleware response time: [%f s]", responseTime);
 
         if (error) {
@@ -247,7 +243,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                     self.systemUser.sipEnabled = NO;
 
                     // And log the problem to track failures.
-                    [GAITracker registrationFailedWithMiddleWareException];
+                    [VialerGAITracker registrationFailedWithMiddleWareException];
                     DDLogError(@"Device registration with Middleware failed. %@", error);
 
                     if (completion) {

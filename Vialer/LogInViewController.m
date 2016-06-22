@@ -7,19 +7,18 @@
 
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
-#import "GAITracker.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PBWebViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "SettingsViewController.h"
+#import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "UIView+RoundedStyle.h"
+#import "Vialer-Swift.h"
 #import "VIAScene.h"
 #import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
 
-#import <AVFoundation/AVFoundation.h>
-#import <QuartzCore/QuartzCore.h>
-
-#import "PBWebViewController.h"
-#import "SVProgressHUD.h"
 
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
 static NSString * const LogInViewControllerLogoImageName = @"logo";
@@ -104,7 +103,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [self clearAllTextFields];
     [self addObservers];
 

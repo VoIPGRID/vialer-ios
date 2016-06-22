@@ -56,7 +56,6 @@
 		C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
-		C41FD87A1C60A08400BBE6D7 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
 		C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
 		C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
@@ -187,7 +186,6 @@
 		C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
-		C490AD901D0863E3004A8F83 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
 		C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		C490AD921D0863E3004A8F83 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */; };
 		C490AD931D0863E3004A8F83 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
@@ -284,10 +282,15 @@
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
 		C4C5CFF11C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */; };
+		C4C675651D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
+		C4C675661D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
+		C4C675671D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
+		C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
+		C4C6756F1D19C04C0003A385 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
+		C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
 		C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C4CAC8A51C7377E000018A5A /* SIPCallingViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */; };
-		C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEAB431BCE933000A56FC2 /* GAITracker.m */; };
 		C4DA5C781BFB27580043DED7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
@@ -604,11 +607,12 @@
 		C4C3EAF11BFB7C5E00AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SideMenuStoryboard.storyboard; sourceTree = "<group>"; };
 		C4C3EAF81BFB7C9900AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AvailabilityStoryboard.storyboard; sourceTree = "<group>"; };
 		C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingButtonsViewControllerTests.m; sourceTree = "<group>"; };
+		C4C675611D19B5420003A385 /* Vialer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Bridging-Header.h"; sourceTree = "<group>"; };
+		C4C675641D19B5430003A385 /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppInfo.swift; path = "Categories-Helpers/AppInfo.swift"; sourceTree = "<group>"; };
+		C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerGAITracker.swift; path = "Categories-Helpers/VialerGAITracker.swift"; sourceTree = "<group>"; };
 		C4C6EA3C1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VoIPGRIDRequestOperationManager+Recents.h"; sourceTree = "<group>"; };
 		C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+Recents.m"; sourceTree = "<group>"; };
 		C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewControllerTests.m; sourceTree = "<group>"; };
-		C4CEAB421BCE933000A56FC2 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		C4CEAB431BCE933000A56FC2 /* GAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAITracker.m; sourceTree = "<group>"; };
 		C4DA5C791BFB27580043DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C4DA5C7E1BFB275C0043DED7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C4DA5C7F1BFB2E590043DED7 /* VialerDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerDrawerViewController.h; sourceTree = "<group>"; };
@@ -1832,6 +1836,7 @@
 		FB4226D7182261D200707349 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C4C675611D19B5420003A385 /* Vialer-Bridging-Header.h */,
 				F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */,
 				AAFB4AC81AC3F6C10086126A /* AdHocDistribution-Info.plist */,
 				FB4226DC182261D200707349 /* main.m */,
@@ -1842,6 +1847,8 @@
 		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C4C675641D19B5430003A385 /* AppInfo.swift */,
+				C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */,
 				3DE6EAE01AF3BFA600C09935 /* GradientView.h */,
 				3DE6EAE11AF3BFA600C09935 /* GradientView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
@@ -1850,8 +1857,6 @@
 				FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */,
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
 				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
-				C4CEAB421BCE933000A56FC2 /* GAITracker.h */,
-				C4CEAB431BCE933000A56FC2 /* GAITracker.m */,
 				C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */,
 				C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */,
 				F9B825171C86F724003CBA92 /* DurationTimer.h */,
@@ -2042,7 +2047,7 @@
 				KnownAssetTags = (
 					voipAccountSwitch,
 				);
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
@@ -2576,7 +2581,6 @@
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */,
-				C41FD87A1C60A08400BBE6D7 /* GAITracker.m in Sources */,
 				C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */,
 				F9EEC91E1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */,
@@ -2591,11 +2595,13 @@
 				F9EEC91A1CA2865D008FB612 /* BubblingPoints.m in Sources */,
 				F9EEC9381CA2879C008FB612 /* PasteableUILabel.m in Sources */,
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
+				C4C6756F1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
 				C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */,
 				F9EEC94F1CA2880E008FB612 /* SIPUtils.m in Sources */,
+				C4C675661D19B5430003A385 /* AppInfo.swift in Sources */,
 				F9EEC90D1CA28608008FB612 /* TwoStepCall.m in Sources */,
 				C4947F8F1C983DB30065D7C1 /* RecentCall.m in Sources */,
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
@@ -2662,7 +2668,6 @@
 				C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */,
 				C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */,
 				C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */,
-				C490AD901D0863E3004A8F83 /* GAITracker.m in Sources */,
 				C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */,
 				C490AD921D0863E3004A8F83 /* CircleWithWhiteIcon.m in Sources */,
 				C490AD931D0863E3004A8F83 /* AppDelegate.m in Sources */,
@@ -2677,11 +2682,13 @@
 				C490AD9C1D0863E3004A8F83 /* DurationTimer.m in Sources */,
 				C490AD9D1D0863E3004A8F83 /* BubblingPoints.m in Sources */,
 				C490AD9E1D0863E3004A8F83 /* PasteableUILabel.m in Sources */,
+				C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */,
 				C490ADA21D0863E3004A8F83 /* AnimatedImageView.m in Sources */,
 				C490ADA31D0863E3004A8F83 /* SIPUtils.m in Sources */,
+				C4C675671D19B5430003A385 /* AppInfo.swift in Sources */,
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
 				C490ADA51D0863E3004A8F83 /* TwoStepCall.m in Sources */,
 				C490ADA61D0863E3004A8F83 /* RecentCall+VoIPGRID.m in Sources */,
@@ -2792,7 +2799,6 @@
 				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
-				C4CEAB441BCE933000A56FC2 /* GAITracker.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
 				F9EEC91D1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
@@ -2807,11 +2813,13 @@
 				F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */,
 				F9EEC9191CA2865D008FB612 /* BubblingPoints.m in Sources */,
 				F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */,
+				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				F9EEC94E1CA2880E008FB612 /* SIPUtils.m in Sources */,
+				C4C675651D19B5430003A385 /* AppInfo.swift in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				F9EEC90C1CA28608008FB612 /* TwoStepCall.m in Sources */,
 				C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
@@ -2998,6 +3006,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -3030,6 +3040,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
 			};
 			name = Release;
 		};
@@ -3102,6 +3114,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3126,7 +3139,10 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -3141,6 +3157,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3159,7 +3176,10 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
 			};
 			name = Release;
 		};
@@ -3375,6 +3395,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3438,6 +3459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -3471,6 +3493,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 			};
 			name = Release;
 		};

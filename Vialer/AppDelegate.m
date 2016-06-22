@@ -9,7 +9,6 @@
 #import "APNSHandler.h"
 #import <AudioToolbox/AudioServices.h>
 @import CoreData;
-#import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
 #import "PhoneNumberModel.h"
 #ifdef DEBUG
@@ -21,6 +20,7 @@
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import "Vialer-Swift.h"
 
 @interface AppDelegate()
 @property (readwrite, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -64,13 +64,13 @@ static int const AppDelegateNumberOfVibrations = 5;
             DDLogDebug(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
         }];
 #endif
-        [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
+        [VialerGAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone isDryRun:YES];
 
         // Clear out the userdefaults.
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     } else {
-        [GAITracker setupGAITracker];
+        [VialerGAITracker setupGAITracker];
     }
 
 #ifdef DEBUG
@@ -162,7 +162,7 @@ static int const AppDelegateNumberOfVibrations = 5;
         if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
             NSError *error;
             [call decline:&error];
-            [GAITracker declineIncomingCallEvent];
+            [VialerGAITracker declineIncomingCallEvent];
             if (error) {
                 DDLogError(@"Error declining call: %@", error);
             }
@@ -222,7 +222,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 // KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(clientID))]) {
-        [GAITracker setClientIDCustomDimension:[SystemUser currentUser].clientID];
+        [VialerGAITracker setCustomDimensionWithClientID:[SystemUser currentUser].clientID];
     }
 }
 
@@ -285,7 +285,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 - (void)setupCallbackForVoIPNotifications {
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
-        [GAITracker incomingCallRingingEvent];
+        [VialerGAITracker incomingCallRingingEvent];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([SIPUtils anotherCallInProgress:call]) {
@@ -293,7 +293,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 
                 NSError *error;
                 [call decline:&error];
-                [GAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
+                [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
                 if (error) {
                     DDLogError(@"Error declining call: %@", error);
                 }

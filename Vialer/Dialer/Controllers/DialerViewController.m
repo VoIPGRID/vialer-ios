@@ -7,16 +7,15 @@
 
 #import "AppDelegate.h"
 #import "Configuration.h"
-#import "GAITracker.h"
 #import "NumberPadViewController.h"
 #import "PasteableUILabel.h"
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
-#import "TwoStepCallingViewController.h"
 #import "SIPCallingViewController.h"
 #import "SystemUser.h"
-
+#import "TwoStepCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
+#import "Vialer-Swift.h"
 
 #import <AVFoundation/AVAudioSession.h>
 
@@ -61,7 +60,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
     [self setupCallButton];
 }
@@ -141,10 +140,10 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         self.lastCalledNumber = self.numberText;
 
         if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
-            [GAITracker setupOutgoingSIPCallEvent];
+            [VialerGAITracker setupOutgoingSIPCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerSIPCallingSegue sender:self];
         } else {
-            [GAITracker setupOutgoingConnectABCallEvent];
+            [VialerGAITracker setupOutgoingConnectABCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerTwoStepCallingSegue sender:self];
         }
     }
