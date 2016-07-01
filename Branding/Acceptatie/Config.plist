@@ -8,13 +8,13 @@
 		<array>
 			<integer>232</integer>
 			<integer>126</integer>
-			<integer>58</integer>
+			<integer>158</integer>
 		</array>
 		<key>SecondaryBrandColor</key>
 		<array>
 			<integer>241</integer>
 			<integer>90</integer>
-			<integer>41</integer>
+			<integer>141</integer>
 		</array>
 		<key>BlackColor</key>
 		<array>
@@ -48,13 +48,13 @@
 		<array>
 			<integer>255</integer>
 			<integer>141</integer>
-			<integer>7</integer>
+			<integer>107</integer>
 		</array>
 		<key>BackgroundGradientEndColor</key>
 		<array>
 			<integer>255</integer>
 			<integer>116</integer>
-			<integer>47</integer>
+			<integer>147</integer>
 		</array>
 		<key>NumberPadButtonPressedColor</key>
 		<string>WhiteColor</string>
@@ -132,13 +132,13 @@
 	<key>URLS</key>
 	<dict>
 		<key>Middelware BaseLink</key>
-		<string>https://vialerpush.voipgrid.nl</string>
+		<string>https://vialerpush-acc.voipgrid.nl</string>
 		<key>API</key>
-		<string>https://api.voipgrid.nl/api</string>
+		<string>https://acceptatie.voipgrid.nl/api</string>
 		<key>Partner</key>
-		<string>https://partner.voipgrid.nl</string>
+		<string>https://acceptatie.voipgrid.nl</string>
 		<key>SIP domain</key>
-		<string>sipproxy.voipgrid.nl</string>
+		<string>sipproxy.acceptatie.voipgrid.nl</string>
 		<key>onboarding-nl</key>
 		<string>https://vialerapp.com/nl/app-info/</string>
 		<key>onboarding-en</key>
