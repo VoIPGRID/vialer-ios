@@ -50,8 +50,8 @@ static CGFloat const LoginFormViewButtonRadius = 5.0;
     for (RoundedAndColoredUIButton *button in buttons) {
         button.borderWidth = 1;
         button.cornerRadius = LoginFormViewButtonRadius;
-        button.borderColor = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBorderColor];
-        button.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
+        button.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBorderColor];
+        button.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
     }
 }
 

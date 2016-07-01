@@ -95,7 +95,7 @@
         }
 
         if (shouldBeVisible) {
-            self.view.backgroundColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationReachabilityBarBackgroundColor];
+            self.view.backgroundColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationReachabilityBarBackgroundColor];
         } else {
             self.view.backgroundColor = nil;
         }

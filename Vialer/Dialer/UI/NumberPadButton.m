@@ -86,14 +86,14 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonTextColor];
     }
     return _textColor;
 }
 
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[self.defaultConfiguration tintColorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:NumberPadButtonPressedAlpha];
+        _pressedColor = [[self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:NumberPadButtonPressedAlpha];
     }
     return _pressedColor;
 }

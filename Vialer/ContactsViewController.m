@@ -88,10 +88,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
     Configuration *defaultConfiguration = [Configuration defaultConfiguration];
 
-    self.tableView.sectionIndexColor = [defaultConfiguration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
+    self.tableView.sectionIndexColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactsTableSectionIndexColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    self.searchBar.barTintColor = [defaultConfiguration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.searchBar.barTintColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactSearchBarBarTintColor];
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 

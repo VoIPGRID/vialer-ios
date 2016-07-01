@@ -49,7 +49,6 @@
 		C41FD86C1C60A08400BBE6D7 /* NSDate+RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5D2918182BE402001DA8F2 /* NSDate+RelativeDate.m */; };
 		C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
-		C41FD86F1C60A08400BBE6D7 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C41FD8711C60A08400BBE6D7 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
 		C41FD8741C60A08400BBE6D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
@@ -59,7 +58,6 @@
 		C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
 		C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
-		C41FD8811C60A08400BBE6D7 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48F1671BA7163000F57544 /* SystemUser.m */; };
 		C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
@@ -178,7 +176,6 @@
 		C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		C490AD871D0863E3004A8F83 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
-		C490AD881D0863E3004A8F83 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		C490AD891D0863E3004A8F83 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
 		C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C490AD8B1D0863E3004A8F83 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F94F47CE1BCB9FF300F40737 /* ContactModel.m */; };
@@ -193,7 +190,6 @@
 		C490AD951D0863E3004A8F83 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		C490AD961D0863E3004A8F83 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
 		C490AD971D0863E3004A8F83 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
-		C490AD981D0863E3004A8F83 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48F1671BA7163000F57544 /* SystemUser.m */; };
 		C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C490AD9B1D0863E3004A8F83 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
@@ -304,6 +300,16 @@
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
+		F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
+		F22FF28C1D0ABF3800761C9A /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
+		F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
+		F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
+		F22FF28F1D0ABF3800761C9A /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
+		F22FF2901D0ABF3800761C9A /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
+		F22FF2931D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
+		F22FF2941D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
+		F22FF2951D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
+		F22FF2971D0ADB8E00761C9A /* ColorConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2961D0ADB8E00761C9A /* ColorConfigurationTests.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
@@ -414,8 +420,6 @@
 		FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
 		FBB854281A7FE67300121366 /* dtmf-s.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */; };
 		FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
-		FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48F1671BA7163000F57544 /* SystemUser.m */; };
-		FEE526981BA2CC42001906B5 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE526971BA2CC42001906B5 /* Configuration.m */; };
 		FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 /* End PBXBuildFile section */
 
@@ -636,6 +640,13 @@
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F22FF2871D0ABF3800761C9A /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		F22FF2881D0ABF3800761C9A /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		F22FF2891D0ABF3800761C9A /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
+		F22FF28A1D0ABF3800761C9A /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
+		F22FF2911D0ABF5E00761C9A /* ColorConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorConfiguration.h; sourceTree = "<group>"; };
+		F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConfiguration.m; sourceTree = "<group>"; };
+		F22FF2961D0ADB8E00761C9A /* ColorConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConfigurationTests.m; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
 		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
@@ -773,10 +784,6 @@
 		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
 		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
-		FE48F1661BA7163000F57544 /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
-		FE48F1671BA7163000F57544 /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
-		FEE526961BA2CC42001906B5 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Configuration.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		FEE526971BA2CC42001906B5 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Configuration.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnected.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -974,6 +981,7 @@
 			children = (
 				F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */,
 				C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */,
+				F22FF2961D0ADB8E00761C9A /* ColorConfigurationTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1029,12 +1037,12 @@
 		C41FD8D11C60A12E00BBE6D7 /* Voys */ = {
 			isa = PBXGroup;
 			children = (
-				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
+				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
 				C41FD8E21C60A55000BBE6D7 /* Voys.xcassets */,
-				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C41FD8E41C60A55000BBE6D7 /* Config.plist */,
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
+				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
 			);
 			name = Voys;
 			sourceTree = "<group>";
@@ -1181,11 +1189,11 @@
 		C490ADEF1D086458004A8F83 /* Verbonden */ = {
 			isa = PBXGroup;
 			children = (
+				C490ADF31D086458004A8F83 /* Verbonden-Info.plist */,
+				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
+				C490ADF41D086458004A8F83 /* Verbonden.xcassets */,
 				C490ADF01D086458004A8F83 /* Config.plist */,
 				C490ADF11D086458004A8F83 /* GoogleService-Info.plist */,
-				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
-				C490ADF31D086458004A8F83 /* Verbonden-Info.plist */,
-				C490ADF41D086458004A8F83 /* Verbonden.xcassets */,
 			);
 			name = Verbonden;
 			path = Branding/Verbonden;
@@ -1366,6 +1374,19 @@
 				C4675FF11C469FE8008820C8 /* UI */,
 			);
 			name = "Side Menu";
+			sourceTree = "<group>";
+		};
+		F22FF2861D0ABF3800761C9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F22FF2871D0ABF3800761C9A /* Configuration.h */,
+				F22FF2881D0ABF3800761C9A /* Configuration.m */,
+				F22FF2911D0ABF5E00761C9A /* ColorConfiguration.h */,
+				F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */,
+				F22FF2891D0ABF3800761C9A /* SystemUser.h */,
+				F22FF28A1D0ABF3800761C9A /* SystemUser.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F275FDAC1C5FA253006AEEA2 /* APNS */ = {
@@ -1818,7 +1839,7 @@
 				F94F47CA1BCB9F8400F40737 /* Contacts */,
 				C4C3EB011BFB882300AA4B2A /* Main */,
 				F2B40BD91C731F3E00502769 /* Middleware */,
-				FBAFB3F81834250800848B2E /* Models */,
+				F22FF2861D0ABF3800761C9A /* Models */,
 				3D1A5E611AE543C000DBE64B /* Onboarding/Login */,
 				F9EEC8FD1CA285B1008FB612 /* PhoneNumber */,
 				F2B40BEA1C732C2300502769 /* ReachabilityManager */,
@@ -1865,17 +1886,6 @@
 				F204B0651CFC968E00257E7D /* NSString+SubString.m */,
 			);
 			name = Categories/Helpers;
-			sourceTree = "<group>";
-		};
-		FBAFB3F81834250800848B2E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FEE526961BA2CC42001906B5 /* Configuration.h */,
-				FEE526971BA2CC42001906B5 /* Configuration.m */,
-				FE48F1661BA7163000F57544 /* SystemUser.h */,
-				FE48F1671BA7163000F57544 /* SystemUser.m */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		FE3423F01B822D6A005020BA /* Vialer */ = {
@@ -2563,6 +2573,7 @@
 				F9EEC90B1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C41FD8681C60A08400BBE6D7 /* RecentCallManager.m in Sources */,
 				C41B60111C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
+				F22FF28F1D0ABF3800761C9A /* SystemUser.m in Sources */,
 				C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				F2DE21741CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */,
@@ -2574,7 +2585,6 @@
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
 				C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				F9EEC9361CA2879C008FB612 /* NumberPadButton.m in Sources */,
-				C41FD86F1C60A08400BBE6D7 /* Configuration.m in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8711C60A08400BBE6D7 /* ContactModel.m in Sources */,
 				C41FD8741C60A08400BBE6D7 /* main.m in Sources */,
@@ -2584,16 +2594,17 @@
 				C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */,
 				F9EEC91E1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */,
+				F22FF2941D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				F9B8251A1C86F724003CBA92 /* DurationTimer.m in Sources */,
 				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				F2DE21791CB698A6007B5B4D /* ReachabilityManager.m in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
-				C41FD8811C60A08400BBE6D7 /* SystemUser.m in Sources */,
 				F9EEC9321CA2879C008FB612 /* NumberPadViewController.m in Sources */,
 				C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				F9EEC91A1CA2865D008FB612 /* BubblingPoints.m in Sources */,
 				F9EEC9381CA2879C008FB612 /* PasteableUILabel.m in Sources */,
+				F22FF28C1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
 				C4C6756F1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
@@ -2650,6 +2661,7 @@
 				C490AD7B1D0863E3004A8F83 /* VialerDrawerViewController.m in Sources */,
 				C490AD7C1D0863E3004A8F83 /* TwoStepCallingViewController.m in Sources */,
 				C490AD7D1D0863E3004A8F83 /* RecentCallManager.m in Sources */,
+				F22FF2901D0ABF3800761C9A /* SystemUser.m in Sources */,
 				C490AD7E1D0863E3004A8F83 /* GradientView.m in Sources */,
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				C490AD801D0863E3004A8F83 /* VialerModel.xcdatamodeld in Sources */,
@@ -2660,7 +2672,6 @@
 				C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */,
 				C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */,
 				C490AD871D0863E3004A8F83 /* RecentCall.m in Sources */,
-				C490AD881D0863E3004A8F83 /* Configuration.m in Sources */,
 				C490AD891D0863E3004A8F83 /* NumberPadButton.m in Sources */,
 				C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */,
 				C490AD8B1D0863E3004A8F83 /* ContactModel.m in Sources */,
@@ -2671,16 +2682,17 @@
 				C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */,
 				C490AD921D0863E3004A8F83 /* CircleWithWhiteIcon.m in Sources */,
 				C490AD931D0863E3004A8F83 /* AppDelegate.m in Sources */,
+				F22FF2951D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				C490AD941D0863E3004A8F83 /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				C490AD951D0863E3004A8F83 /* LoginFormView.m in Sources */,
 				C490AD961D0863E3004A8F83 /* PhoneNumberUtils.m in Sources */,
 				C490AD971D0863E3004A8F83 /* ReachabilityManager.m in Sources */,
-				C490AD981D0863E3004A8F83 /* SystemUser.m in Sources */,
 				C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */,
 				C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */,
 				C490AD9B1D0863E3004A8F83 /* NumberPadViewController.m in Sources */,
 				C490AD9C1D0863E3004A8F83 /* DurationTimer.m in Sources */,
 				C490AD9D1D0863E3004A8F83 /* BubblingPoints.m in Sources */,
+				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C490AD9E1D0863E3004A8F83 /* PasteableUILabel.m in Sources */,
 				C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
@@ -2731,6 +2743,7 @@
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
+				F22FF2971D0ADB8E00761C9A /* ColorConfigurationTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
 				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
 				F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */,
@@ -2781,6 +2794,7 @@
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
 				F9EEC90A1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
+				F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				C41A73531C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */,
@@ -2791,7 +2805,6 @@
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				C41B600D1C6B7DC800A0C7C7 /* RecentCall.m in Sources */,
-				FEE526981BA2CC42001906B5 /* Configuration.m in Sources */,
 				F9EEC9351CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
 				F94F47CF1BCB9FF300F40737 /* ContactModel.m in Sources */,
@@ -2802,16 +2815,17 @@
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
 				F9EEC91D1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
+				F22FF2931D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2DE21781CB698A6007B5B4D /* ReachabilityManager.m in Sources */,
-				FEB434CE1BAADB8E00DF16D7 /* SystemUser.m in Sources */,
 				C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				F9EEC9311CA2879C008FB612 /* NumberPadViewController.m in Sources */,
 				F9B825191C86F724003CBA92 /* DurationTimer.m in Sources */,
 				F9EEC9191CA2865D008FB612 /* BubblingPoints.m in Sources */,
+				F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */,
 				F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */,
 				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,

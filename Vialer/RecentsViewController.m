@@ -107,7 +107,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
-    _filterControl.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationRecentsFilterControlTintColor];
+    _filterControl.tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationRecentsFilterControlTintColor];
 }
 
 - (RecentCallManager *)callManager {
