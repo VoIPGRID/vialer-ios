@@ -5,7 +5,7 @@
 
 #import "RecentTableViewCell.h"
 
-#import "NSDate+RelativeDate.h"
+#import "Vialer-Swift.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -45,7 +45,8 @@ static NSString * const RecentTableViewCellOutboundImageName = @"outbound";
 }
 
 - (void)setDate:(NSDate *)date {
-    self.dateTimeLabel.text = [date relativeDayTimeString];
+    RecentsTimeConverter *timeConverter = [[RecentsTimeConverter alloc] init];
+    self.dateTimeLabel.text = [timeConverter relativeDayTimeStringFromDate:date];
 }
 
 - (void)setAnswered:(BOOL)answered {

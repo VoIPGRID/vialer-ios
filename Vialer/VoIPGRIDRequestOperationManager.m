@@ -6,7 +6,6 @@
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import "Configuration.h"
-#import "NSDate+RelativeDate.h"
 #import "SSKeychain.h"
 #import "SystemUser.h"
 
