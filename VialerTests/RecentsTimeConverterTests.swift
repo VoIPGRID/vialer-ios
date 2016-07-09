@@ -71,7 +71,7 @@ class RecentsTimeConverterTests: XCTestCase {
 
         // Then
         let expected24hAPIstring = "\(components.year)-\(components.month)-\(components.day)T\(components.hour):\(components.minute):\(components.second)"
-        XCTAssert(receivedAPIformatted24hCETstring = expected24hAPIstring)
+        XCTAssert(receivedAPIformatted24hCETstring == expected24hAPIstring)
     }
 
     /**
@@ -86,11 +86,11 @@ class RecentsTimeConverterTests: XCTestCase {
         let oneSecondAfterMidnightToday = calendar.dateFromComponents(components)
 
         // When
-        let receivedRelativeDateString = recentsTimeConverter.relativeDayTimeStringFrom(date: oneSecondPastMidnightToday!)
+        let receivedRelativeDateString = recentsTimeConverter.relativeDayTimeStringFrom(date: oneSecondAfterMidnightToday!)
 
         // Then
-        let expectedShortTimeString = usersLocalShortStyleTimeFormatter.stringFromDate(oneSecondPastMidnightToday!)
-        XCTAssert(receivedRelativeDateString = expectedShortTimeString)
+        let expectedShortTimeString = usersLocalShortStyleTimeFormatter.stringFromDate(oneSecondAfterMidnightToday!)
+        XCTAssert(receivedRelativeDateString == expectedShortTimeString)
     }
 
     /**
@@ -127,7 +127,7 @@ class RecentsTimeConverterTests: XCTestCase {
 
         // Then
         let expectedShortDateString = usersLocalShortStyleDateFormatter.stringFromDate(oneSecondBeforeMidnightOnTheDayBeforeYesterday!)
-         XCTAssert(recentsTimeConverter.relativeDayTimeStringFrom(date: oneSecondBeforeMidnightOnTheDayBeforeYesterday!) = expectedShortDateString)
+         XCTAssert(recentsTimeConverter.relativeDayTimeStringFrom(date: oneSecondBeforeMidnightOnTheDayBeforeYesterday!) == expectedShortDateString)
     }
 
     // MARK: Helper functions
