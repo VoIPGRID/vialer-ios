@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "RecentCall+VoIPGRID.h"
 #import "SystemUser.h"
+#import "Vialer-Swift.h"
 #import "VoIPGRIDRequestOperationManager+Recents.h"
 
 static int const RecentCallManagerOffsetMonths = -1;
@@ -25,7 +26,7 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
 @property (nonatomic) BOOL recentsFetchFailed;
 @property (nonatomic) RecentCallManagerErrors recentsFetchErrorCode;
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
-@property (strong, nonatomic) NSDateFormatter *callDateGTFormatter;
+@property (strong, nonatomic) RecentsTimeConverter *recentsTimeConverter;
 
 @property (strong, nonatomic) NSManagedObjectContext *privateManagedObjectContext;
 @end
@@ -59,12 +60,11 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
     return _operationManager;
 }
 
-- (NSDateFormatter *)callDateGTFormatter {
-    if (! _callDateGTFormatter) {
-        _callDateGTFormatter = [[NSDateFormatter alloc] init];
-        _callDateGTFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+- (RecentsTimeConverter *)recentsTimeConverter {
+    if (! _recentsTimeConverter) {
+        _recentsTimeConverter = [[RecentsTimeConverter alloc] init];
     }
-    return _callDateGTFormatter;
+    return _recentsTimeConverter;
 }
 
 - (void)setMainManagedObjectContext:(NSManagedObjectContext *)mainManagedObjectContext {
@@ -89,22 +89,21 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
         lastCall = [RecentCall latestCallInManagedObjectContext:self.privateManagedObjectContext];
     }];
 
-    NSDate *lastDate;
-    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    NSDate *fetchDate;
     if (lastCall) {
-        lastDate = lastCall.callDate;
-        offsetComponents.hour = -2;
+        fetchDate = lastCall.callDate;
     } else {
         // Retrieve recent calls from last month
-        lastDate = [NSDate date];
+        NSDate *now = [NSDate date];
+        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
         offsetComponents.month = RecentCallManagerOffsetMonths;
 
+        fetchDate = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:now options:0];
     }
-    NSDate *fetchDate = [[NSCalendar currentCalendar] dateByAddingComponents:offsetComponents toDate:lastDate options:0];
 
     NSDictionary *parameters = @{@"limit": @(RecentCallManagerNumberOfCalls),
                                  @"offset": @0,
-                                 @"call_date__gte": [self.callDateGTFormatter stringFromDate:fetchDate]
+                                 @"call_date__gte": [self.recentsTimeConverter apiFormatted24hCETstringFromDate:fetchDate],
                                  };
 
     self.reloading = YES;
@@ -132,6 +131,7 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
         // Register the time when we had a succesfull retrieval
         self.previousRefresh = [NSDate date];
         self.recentsFetchFailed = NO;
+
         [self.privateManagedObjectContext performBlockAndWait:^{
             NSArray *newRecents = [RecentCall createRecentCallsFromVoIGPRIDResponseData:responseData inManagedObjectContext:self.privateManagedObjectContext];
             [self clearOldRecentsIfRecent:lastCall isNotInNewSet:[NSSet setWithArray:newRecents]];

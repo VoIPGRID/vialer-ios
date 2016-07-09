@@ -9,6 +9,7 @@
 #import "ContactModel.h"
 #import "ContactsUI/ContactsUI.h"
 #import "PhoneNumberUtils.h"
+#import "Vialer-Swift.h"
 
 static NSString * const RecentCallVoIPGRIDObjectArray           = @"objects";
 static NSString * const RecentCallVoIPGRIDID                    = @"id";
@@ -25,6 +26,8 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
 + (NSArray *)createRecentCallsFromVoIGPRIDResponseData:(NSDictionary *)responseData inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     // Create or find the RecentCalls that are given in the responseData.
     NSArray *objects = responseData[RecentCallVoIPGRIDObjectArray];
+    DDLogVerbose(@"Fetched %@ new recent(s)", [NSNumber numberWithFloat:objects.count].stringValue);
+
     NSMutableArray *recents = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in objects) {
         RecentCall *newRecentCall = [RecentCall createRecentCallFromVoIPGRIDDictionary:dict inManagedObjectContext:managedObjectContext];
@@ -83,9 +86,8 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
     newRecentCall.duration = dictionary[RecentCallVoIPGRIDDuration];
     newRecentCall.inbound = @([dictionary[RecentCallVoIPGRIDDirection] isEqualToString:RecentCallVoIPGRIDInbound]);
 
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    format.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
-    newRecentCall.callDate = [format dateFromString:dictionary[RecentCallVoIPGRIDDate]];
+    RecentsTimeConverter *timeConverter = [[RecentsTimeConverter alloc] init];
+    newRecentCall.callDate = [timeConverter dateFrom24hCETWithTimeString:dictionary[RecentCallVoIPGRIDDate]];
 
     if ([newRecentCall.inbound boolValue]) {
         newRecentCall.callerID = dictionary[RecentCallVoIPGRIDCallerID];
