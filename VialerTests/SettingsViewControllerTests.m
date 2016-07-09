@@ -9,10 +9,6 @@
 #import "SystemUser.h"
 @import XCTest;
 
-@interface SystemUser()
-@property (readwrite, nonatomic) BOOL sipAllowed;
-@end
-
 @interface SettingsViewController ()
 @property (strong, nonatomic) SystemUser *currentUser;
 @end
@@ -69,22 +65,6 @@
     [self.settingsViewController viewWillAppear:NO];
 
     ((SystemUser *)mockSystemUser).sipEnabled = NO;
-
-    OCMVerify([mockTableView reloadData]);
-
-    [mockTableView stopMocking];
-    [mockSystemUser stopMocking];
-}
-
-- (void)testSipAllowedObserverWillReloadTable {
-    id mockTableView = OCMClassMock([UITableView class]);
-    self.settingsViewController.tableView = mockTableView;
-    id mockSystemUser = OCMClassMock([SystemUser class]);
-    self.settingsViewController.currentUser = mockSystemUser;
-
-    [self.settingsViewController viewWillAppear:NO];
-
-    ((SystemUser *)mockSystemUser).sipAllowed = NO;
 
     OCMVerify([mockTableView reloadData]);
 

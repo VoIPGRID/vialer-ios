@@ -175,11 +175,6 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 @property (readonly, nonatomic) BOOL sipRegisterOnAdd;
 
 /**
- *  Is the user allowed to make SIP calls.
- */
-@property (readonly, nonatomic) BOOL sipAllowed;
-
-/**
  *  Does the user want to use SIP.
  */
 @property (nonatomic) BOOL sipEnabled;

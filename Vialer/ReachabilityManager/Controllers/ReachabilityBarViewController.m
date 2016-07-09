@@ -24,7 +24,6 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupReachability) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teardownReachability) name:UIApplicationWillResignActiveNotification object:nil];
-    [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed)) options:0 context:NULL];
     [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled)) options:0 context:NULL];
     [self setupReachability];
     [self updateLayout];
@@ -35,7 +34,6 @@
     @try{
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIApplicationDidBecomeActiveNotification];
     }@catch(id exception) {}
-    [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed))];
     [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled))];
     [self teardownReachability];
     [super viewWillDisappear:animated];
@@ -71,9 +69,7 @@
                 break;
             }
             case ReachabilityManagerStatusLowSpeed: {
-                if (!self.currentUser.sipAllowed) {
-                    self.informationLabel.text = @"";
-                } else if (self.currentUser.sipEnabled) {
+                if (self.currentUser.sipEnabled) {
                     self.informationLabel.text = NSLocalizedString(@"Poor connection, Two step calling enabled.", nil);
                     self.twoStepInfoButton.hidden = NO;
                     shouldBeVisible = YES;
@@ -84,7 +80,7 @@
                 break;
             }
             case ReachabilityManagerStatusHighSpeed: {
-                if (!self.currentUser.sipEnabled && self.currentUser.sipAllowed) {
+                if (!self.currentUser.sipEnabled) {
                     self.informationLabel.text = NSLocalizedString(@"VoIP disabled, enable in settings", nil);
                     shouldBeVisible = YES;
                 } else {
@@ -145,7 +141,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     // Keep track of connection status from reachabilityManager.
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(reachabilityStatus))] ||
-        [keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
         [keyPath isEqualToString:NSStringFromSelector(@selector(sipEnabled))]) {
         [self updateLayout];
     }

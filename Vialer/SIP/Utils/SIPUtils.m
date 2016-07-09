@@ -14,7 +14,7 @@
 # pragma mark - Methods
 
 + (BOOL)setupSIPEndpoint {
-    if (![SystemUser currentUser].sipAllowed || ![SystemUser currentUser].sipEnabled) {
+    if (![SystemUser currentUser].sipEnabled) {
         return NO;
     }
 
