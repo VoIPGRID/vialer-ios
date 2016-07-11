@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QFZ-Of-wQr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QFZ-Of-wQr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -28,7 +27,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-EM-fHb">
                                 <rect key="frame" x="558" y="4" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="c6l-EM-fHb" secondAttribute="height" multiplier="1:1" id="snA-HU-raK"/>
+                                    <constraint firstAttribute="width" constant="22" id="HKh-Ne-iD4"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -36,14 +35,13 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="c6l-EM-fHb" secondAttribute="trailing" id="JWI-i6-nJP"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="eYl-go-ZtO" secondAttribute="leading" id="Pnq-MX-dkG"/>
-                            <constraint firstItem="Res-DM-6My" firstAttribute="top" secondItem="c6l-EM-fHb" secondAttribute="bottom" constant="4" id="cvR-FX-1GR"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qP2-PH-p7O"/>
-                            <constraint firstItem="eYl-go-ZtO" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="qWb-l3-cGx"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="eYl-go-ZtO" secondAttribute="trailing" constant="8" id="qry-Cv-gJF"/>
-                            <constraint firstItem="c6l-EM-fHb" firstAttribute="top" secondItem="ZAR-ef-ZEN" secondAttribute="bottom" constant="4" id="xkY-Jg-GcM"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="top" secondItem="eYl-go-ZtO" secondAttribute="top" id="1iS-2q-smt"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="eYl-go-ZtO" secondAttribute="leading" id="4Id-yn-sTk"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="leading" secondItem="eYl-go-ZtO" secondAttribute="trailing" constant="8" symbolic="YES" id="Aar-C3-Qho"/>
+                            <constraint firstItem="eYl-go-ZtO" firstAttribute="centerY" secondItem="9YK-wp-Ecu" secondAttribute="centerY" id="GwE-94-qB7"/>
+                            <constraint firstItem="c6l-EM-fHb" firstAttribute="trailing" secondItem="9YK-wp-Ecu" secondAttribute="trailingMargin" id="Nal-AL-e1M"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -58,7 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAT-kX-8ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2159" y="69"/>
+            <point key="canvasLocation" x="2038" y="33"/>
         </scene>
     </scenes>
 </document>

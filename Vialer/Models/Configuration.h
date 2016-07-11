@@ -17,7 +17,7 @@ extern NSString * const ConfigurationPartnerURLKey;
  */
 @interface Configuration : NSObject
 
-@property (readonly, nonatomic)ColorConfiguration *colorConfiguration;
+@property (readonly, nonatomic) ColorConfiguration *colorConfiguration;
 /**
  * Obtain an instance to this class' Singleton.
  *
