@@ -7,6 +7,7 @@
 
 #import "ContactUtils.h"
 #import "SystemUser.h"
+#import "Vialer-Swift.h"
 
 @implementation SIPUtils
 
@@ -18,6 +19,7 @@
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
+    endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
     endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                       [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
 
