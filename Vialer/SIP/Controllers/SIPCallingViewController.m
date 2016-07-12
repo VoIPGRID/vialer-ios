@@ -155,7 +155,8 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
     double timeToWaitBeforeDismissing = SIPCallingViewControllerDismissTimeAfterHangup;
 #ifdef DEBUG
     // Increase the dismiss time so snapshot can take a proper screenshot
-    if ([AppDelegate isSnapshotScreenshotRun]) {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (appDelegate.isScreenshotRun) {
         timeToWaitBeforeDismissing = 5.0;
     }
 #endif

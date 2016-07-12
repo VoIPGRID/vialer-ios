@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0F6D94FD57C09D889131FE30 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A91A14A6BDBE2A3F3BB684C1 /* libPods-Vialer.a */; };
-		1EF998EDDB0AEC72A83EB908 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A91A14A6BDBE2A3F3BB684C1 /* libPods-Vialer.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		3D1A5E6B1AE62F9600DBE64B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
@@ -1074,7 +1073,6 @@
 				FB4226D3182261D200707349 /* Foundation.framework in Frameworks */,
 				FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */,
 				0F6D94FD57C09D889131FE30 /* libPods-Vialer.a in Frameworks */,
-				1EF998EDDB0AEC72A83EB908 /* libPods-Vialer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

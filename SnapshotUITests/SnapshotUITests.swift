@@ -22,6 +22,7 @@ class SnapshotUITests: XCTestCase {
 
         continueAfterFailure = true
         setupSnapshot(app)
+        app.launchArguments = ["ScreenshotRun", "NoAnimations"]
         app.launch()
     }
 
@@ -123,8 +124,7 @@ class SnapshotUITests: XCTestCase {
      */
     private func waitForElementToBeHittable(element: XCUIElement, file: String = #file, line: UInt = #line) {
         let existsPredicate = NSPredicate(format: "hittable == true")
-        expectationForPredicate(existsPredicate,
-            evaluatedWithObject: element, handler: nil)
+        expectationForPredicate(existsPredicate, evaluatedWithObject: element, handler: nil)
 
         waitForExpectationsWithTimeout(60) { (error) -> Void in
             if (error != nil) {

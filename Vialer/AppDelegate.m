@@ -29,6 +29,7 @@
 @property (nonatomic) UIBackgroundTaskIdentifier vibratingTask;
 @property (nonatomic) BOOL stopVibrating;
 @property (strong, nonatomic) UILocalNotification *incomingCallNotification;
+@property (assign) BOOL isScreenshotRun;
 @end
 
 NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
@@ -39,11 +40,16 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 static NSTimeInterval const AppDelegateVibratingTimeInterval = 2.0f;
 static int const AppDelegateNumberOfVibrations = 5;
 
+// Launch Arguments
+static NSString * const AppLaunchArgumentScreenshotRun = @"ScreenshotRun";
+static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
+
 @implementation AppDelegate
 
 #pragma mark - UIApplication delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self interpretLaunchArguments];
     [self setupCocoaLumberjackLogging];
 
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
@@ -52,7 +58,7 @@ static int const AppDelegateNumberOfVibrations = 5;
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
 
     // Only when the app is run for screenshot purposes do the following:
-    if ([[self class] isSnapshotScreenshotRun]) {
+    if (self.isScreenshotRun) {
 #ifdef DEBUG
         [[SDStatusBarManager sharedInstance] setTimeString:@"09:41"];
         [[SDStatusBarManager sharedInstance] enableOverrides];
@@ -151,8 +157,14 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 #pragma mark - setup helper methods
 
-+ (BOOL)isSnapshotScreenshotRun {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
+- (void)interpretLaunchArguments {
+    NSArray *arguments = [NSProcessInfo processInfo].arguments;
+    if ([arguments containsObject:AppLaunchArgumentScreenshotRun]) {
+        self.isScreenshotRun = YES;
+    }
+    if ([arguments containsObject:AppLaunchArgumentNoAnimations]) {
+        [UIView setAnimationsEnabled:NO];
+    }
 }
 
 - (void)handleIncomingLocalBackgroudNotifications:(NSString *)notificationIdentifier forCallId:(NSString *)callId {
