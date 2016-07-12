@@ -418,7 +418,6 @@
 		F20851841D269DD300A17E71 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851801D269DD300A17E71 /* Config.plist */; };
 		F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851811D269DD300A17E71 /* GoogleService-Info.plist */; };
 		F20851871D269DD300A17E71 /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20851831D269DD300A17E71 /* Vialer.xcassets */; };
-		F20851891D269E1700A17E71 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
 		F21077EB1B1C398D003C8109 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21077EA1B1C398D003C8109 /* libc++.dylib */; };
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
@@ -449,6 +448,7 @@
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BE31C731F7500502769 /* MiddlewareTests.m */; };
+		F2C17B031D35231A00067B05 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		F2DE21731CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
 		F2DE21741CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
@@ -771,7 +771,6 @@
 		F208516A1D26935600A17E71 /* Acceptatie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Acceptatie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F208516E1D2693A300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F208516F1D2693A300A17E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F20851701D2693A300A17E71 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		F20851711D2693A300A17E71 /* Acceptatie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Info.plist"; sourceTree = "<group>"; };
 		F20851721D2693A300A17E71 /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		F20851801D269DD300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -1555,7 +1554,6 @@
 			isa = PBXGroup;
 			children = (
 				F20851711D2693A300A17E71 /* Acceptatie-Info.plist */,
-				F20851701D2693A300A17E71 /* Snapshot-Constants.swift */,
 				F20851721D2693A300A17E71 /* Vialer.xcassets */,
 				F208516E1D2693A300A17E71 /* Config.plist */,
 				F208516F1D2693A300A17E71 /* GoogleService-Info.plist */,
@@ -3163,6 +3161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2C17B031D35231A00067B05 /* Snapshot-Constants.swift in Sources */,
 				F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */,
 				F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */,
 			);
@@ -3241,7 +3240,6 @@
 				C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				F9EEC9211CA2865D008FB612 /* VialerIconView.m in Sources */,
-				F20851891D269E1700A17E71 /* Snapshot-Constants.swift in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
 				F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */,
 			);
