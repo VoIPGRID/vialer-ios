@@ -18,10 +18,8 @@ extern NSString * const AppDelegateIncomingBackgroundCallNotification;
  *  Every other object context should be a child context from this context.
  */
 @property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
-
 /**
- * @return YES when the app was started for the purpose of taking screenshots
+ *  YES if the app was started for the purpose of making screenshots
  */
-+ (BOOL)isSnapshotScreenshotRun;
-
+@property (readonly) BOOL isScreenshotRun;
 @end

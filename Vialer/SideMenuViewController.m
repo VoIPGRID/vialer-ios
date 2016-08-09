@@ -72,7 +72,8 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
     _buildVersionLabel = buildVersionLabel;
     _buildVersionLabel.text = self.appVersionBuildString;
 
-    if ([AppDelegate isSnapshotScreenshotRun]) {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (appDelegate.isScreenshotRun) {
         _buildVersionLabel.text = nil;
     }
 }
