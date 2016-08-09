@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-IB_DESIGNABLE
 @interface NumberPadButton : UIButton
 
 @property (nonatomic, strong) IBInspectable NSString *number;

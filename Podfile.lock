@@ -82,7 +82,7 @@ PODS:
   - PBWebViewController (0.5.0)
   - Reachability (3.2)
   - SAMKeychain (1.5.0)
-  - SimulatorStatusMagic (1.9)
+  - SimulatorStatusMagic (1.8)
   - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (1.0)
   - VialerSIPLib-iOS (0.0.37):
@@ -140,7 +140,7 @@ SPEC CHECKSUMS:
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1fc9ae02f576365395758b12888c84704eebc423
-  SimulatorStatusMagic: 4db65b11c095bbb3abd966a4ae8ee0f11789e8e0
+  SimulatorStatusMagic: 4dbf0faa0208e9ac0d56cea06eaa5f7a5f3d02fb
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
   VialerSIPLib-iOS: 8b328186cb1401600c966e9ea1800a268ab321a3

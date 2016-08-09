@@ -13,7 +13,6 @@
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 #import "UIAlertController+Vialer.h"
@@ -193,8 +192,8 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:nil];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall contact:nil];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
         rbvc.delegate = self;

@@ -30,7 +30,7 @@
 /* No comment provided by engineer. */
 "Call canceled" = "Gesprek geannuleerd";
 
-/* No comment provided by engineer. */
+/* Statuslabel state text .Disconnected */
 "Call ended" = "Gesprek be\U00EBindigd";
 
 /* No comment provided by engineer. */
@@ -39,7 +39,7 @@
 /* No comment provided by engineer. */
 "Calling your phone" = "Je telefoon aan het bellen";
 
-/* No comment provided by engineer. */
+/* Statuslabel state text .Calling */
 "Calling..." = "Bellen...";
 
 /* No comment provided by engineer. */
@@ -54,7 +54,7 @@
 /* No comment provided by engineer. */
 "Connected with other party" = "Verbonden met andere partij";
 
-/* No comment provided by engineer. */
+/* Statuslabel state text .Connecting */
 "Connecting..." = "Verbinden...";
 
 /* No comment provided by engineer. */
@@ -72,6 +72,9 @@
 /* No comment provided by engineer. */
 "Couldn't connect with your phone" = "Kan niet verbinden met je telefoon";
 
+/* Transfer failed */
+"Couldn't transfer call to" = "Kan niet doorverbinden naar";
+
 /* No comment provided by engineer. */
 "Decline" = "Weiger";
 
@@ -84,6 +87,9 @@
 /* No comment provided by engineer. */
 "Disabling VoIP..." = "VoIP aan het uitschakelen...";
 
+/* Disconnected phone state */
+"Disconnected" = "Be\U00EBindigd";
+
 /* No comment provided by engineer. */
 "Email address" = "E-mailadres";
 
@@ -93,7 +99,7 @@
 /* No comment provided by engineer. */
 "Enable VoIP" = "Schakel VoIP in";
 
-/* No comment provided by engineer. */
+/* Ending call... */
 "Ending call..." = "Gesprek aan het be\U00EBeindigen...";
 
 /* No comment provided by engineer. */
@@ -144,7 +150,7 @@
 /* Incoming call from: 'callerName', <'callerNumber'> */
 "Incoming call from: %1@ <%2@>" = "Binnenkomend gesprek van: %1$@ <%2$@>";
 
-/* No comment provided by engineer. */
+/* Statuslabel state text .Incoming */
 "Incoming call..." = "Inkomend gesprek...";
 
 /* No comment provided by engineer. */
@@ -196,6 +202,9 @@
 "No" = "Nee";
 
 /* No comment provided by engineer. */
+"No Caller ID" = "Anoniem";
+
+/* No comment provided by engineer. */
 "No connection, cannot call." = "Geen verbinding, bellen niet mogelijk.";
 
 /* No comment provided by engineer. */
@@ -224,6 +233,10 @@
 
 /* No comment provided by engineer. */
 "Ok" = "OK";
+
+/* On hold
+   On hold phone state */
+"ON HOLD" = "In de wacht";
 
 /* No comment provided by engineer. */
 "Outgoing number" = "Uitgaand nummer";
@@ -285,6 +298,9 @@
 /* No comment provided by engineer. */
 "Statistics" = "Statistieken";
 
+/* Successfully connected with */
+"Successfully connected with" = "Succesvol verbonden met";
+
 /* No comment provided by engineer. */
 "Syncing addressbook." = "Adresboek synchroniseren.";
 
@@ -302,6 +318,12 @@
 
 /* No comment provided by engineer. */
 "Top name matches" = "Meest overeenkomende namen";
+
+/* Transfer in progress to */
+"Transfer in progress to" = "Doorverbinden opgezet met";
+
+/* Transfer requested for */
+"Transfer requested for" = "Doorverbinden aangevraagd voor";
 
 /* No comment provided by engineer. */
 "Two step call cancel failed" = "Twee staps gesprek annuleren mislukt";
@@ -331,9 +353,10 @@
 "VoIP account ID" = "VoIP-account ID";
 
 /* No comment provided by engineer. */
-"VoIP disabled" = "VoIP gedeactiveerd";
+"VoIP Disabled" = "VoIP Gedeactiveerd";
+
+/* No comment provided by engineer. */
 "VoIP disabled, enable in settings" = "VoIP gedeactiveerd, activeer VoIP bij instellingen";
-"Your VoIP account has been registered on another device. You can re-enable VoIP in Settings" = "Je VoIP account is geregistreerd op een ander apparaat. Je kunt VoIP weer activeren bij instellingen";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
@@ -359,6 +382,7 @@
 /* No comment provided by engineer. */
 "Your mobile number should start with your country code e.g. +31 or 0031" = "Het mobiele nummer moet beginnen met een landcode b.v. +31 of 0031";
 
-"No Caller ID" = "Anoniem";
+/* No comment provided by engineer. */
+"Your VoIP account has been registered on another device. You can re-enable VoIP in Settings" = "Je VoIP account is geregistreerd op een ander apparaat. Je kunt VoIP weer activeren bij instellingen";
 
 "Add destination" = "Voeg eindbestemming toe";

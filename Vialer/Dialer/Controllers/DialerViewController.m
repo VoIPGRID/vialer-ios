@@ -11,7 +11,6 @@
 #import "PasteableUILabel.h"
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
@@ -163,8 +162,8 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         [tscvc handlePhoneNumber:self.numberText];
         self.numberText = @"";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.numberText withContact:nil];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.numberText contact:nil];
         self.numberText = @"";
     }
 }

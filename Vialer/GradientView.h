@@ -5,7 +5,6 @@
 
 #import <UIKit/UIKit.h>
 
-IB_DESIGNABLE
 @interface GradientView : UIView
 
 @property (nonatomic, strong) IBInspectable UIColor *startColor;

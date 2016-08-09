@@ -17,6 +17,7 @@ static int const CircleWithShadowRadius = 1;
 @implementation CircleWithShadow
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setup];
 }
 

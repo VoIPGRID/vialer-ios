@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yxi-SJ-vi0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yxi-SJ-vi0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -18,44 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
-                                <rect key="frame" x="171" y="537" width="258" height="55"/>
-                                <accessibility key="accessibilityConfiguration" identifier="CallingStoryboard.CallButton"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="UYt-1U-3jl"/>
-                                    <constraint firstAttribute="width" constant="258" id="uaR-5j-nOs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" backgroundImage="call-phone">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" backgroundImage="inactive-phone"/>
-                                <connections>
-                                    <action selector="callButtonPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="quQ-nU-c62"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi" userLabel="Left filler">
-                                <rect key="frame" x="10" y="97" width="56" height="40"/>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="20" y="204" width="56" height="53"/>
-                                </variation>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi" userLabel="Left filler">
+                                <rect key="frame" x="10" y="109" width="56" height="40"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0" userLabel="Numberpad container view">
-                                <rect key="frame" x="10" y="140" width="580" height="399"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-Jj-CH0" userLabel="Numberpad container view">
+                                <rect key="frame" x="10" y="164" width="580" height="350"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="6dJ-1s-KJc"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="350" id="lQY-Tq-1Qm"/>
                                 </constraints>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="20" y="367" width="560" height="350"/>
-                                </variation>
                                 <connections>
                                     <segue destination="NzT-M0-ktL" kind="embed" id="RFj-q2-x0c"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
-                                <rect key="frame" x="0.0" y="64" width="600" height="30"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
+                                <rect key="frame" x="-4" y="64" width="383" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="h5J-mQ-Y2V"/>
                                 </constraints>
@@ -63,46 +40,51 @@
                                     <segue destination="Ln5-cm-6au" kind="embed" id="Egt-H7-SHk"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-Ze-S9X" userLabel="Filler top of number label">
-                                <rect key="frame" x="10" y="97" width="580" height="0.0"/>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="20" y="102" width="560" height="94"/>
-                                </variation>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-Ze-S9X" userLabel="Filler top of number label">
+                                <rect key="frame" x="10" y="97" width="580" height="12"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-zg-9Cj" userLabel="Filler bottom of number label">
-                                <rect key="frame" x="10" y="137" width="580" height="0.0"/>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="20" y="265" width="560" height="94"/>
-                                </variation>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-zg-9Cj" userLabel="Filler bottom of number label">
+                                <rect key="frame" x="10" y="149" width="580" height="12"/>
                             </view>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
-                                <rect key="frame" x="69" y="97" width="462" height="40"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
+                                <rect key="frame" x="69" y="109" width="462" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nT6-7N-5s3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="84" y="204" width="432" height="53"/>
-                                </variation>
                             </label>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
-                                <rect key="frame" x="534" y="97" width="56" height="40"/>
+                            <button opaque="NO" contentMode="center" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
+                                <rect key="frame" x="534" y="109" width="56" height="40"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="J0y-Rp-1Bd"/>
                                 </constraints>
                                 <state key="normal" image="keypad-back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <state key="highlighted" image="keypad-back-highlighted"/>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="524" y="204" width="56" height="53"/>
-                                </variation>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="FYx-5X-82c" eventType="touchDown" id="qRB-tT-LsO"/>
                                     <outletCollection property="gestureRecognizers" destination="gFY-xR-K1B" appends="YES" id="FCh-Eo-OYO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
+                                <rect key="frame" x="153" y="589" width="70" height="70"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CallingStoryboard.CallButton"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fQq-Gl-ZNQ" secondAttribute="height" multiplier="1:1" id="LLL-Ct-Fbf"/>
+                                    <constraint firstAttribute="height" constant="70" id="UYt-1U-3jl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" backgroundImage="acceptButton">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="disabled" image="acceptButtonDisabled"/>
+                                <connections>
+                                    <action selector="callButtonPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="quQ-nU-c62"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -168,17 +150,17 @@
                         <viewControllerLayoutGuide type="bottom" id="brJ-2w-c1D"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FOs-p8-uzq">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="399"/>
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r62-vw-btG">
-                                <rect key="frame" x="119" y="0.0" width="342" height="399"/>
+                                <rect key="frame" x="140" y="0.0" width="300" height="350"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W4f-bb-yCo">
-                                        <rect key="frame" x="0.0" y="0.0" width="342" height="96"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="84"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zid-vc-HTf" userLabel="1-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Zid-vc-HTf" secondAttribute="height" multiplier="1:1" id="5x9-Cz-usa"/>
@@ -191,7 +173,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkr-4Y-JuE" userLabel="2-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="123" y="0.0" width="96" height="96"/>
+                                                <rect key="frame" x="108" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Jkr-4Y-JuE" secondAttribute="height" multiplier="1:1" id="NYc-1T-bO9"/>
@@ -204,8 +186,8 @@
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="vnH-dx-3gX"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-Ug-2q9" userLabel="3-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="246" y="0.0" width="96" height="96"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-Ug-2q9" userLabel="3-Button" customClass="NumberPadButton">
+                                                <rect key="frame" x="216" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="LhT-Ug-2q9" secondAttribute="height" multiplier="1:1" id="Rx4-jK-Sc0"/>
@@ -229,10 +211,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G51-ma-gEQ">
-                                        <rect key="frame" x="0.0" y="101" width="342" height="96"/>
+                                        <rect key="frame" x="0.0" y="89" width="300" height="84"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf1-tv-0FO" userLabel="4-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Xf1-tv-0FO" secondAttribute="height" multiplier="1:1" id="Tm8-Rg-4f9"/>
@@ -246,7 +228,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-gw-ERF" userLabel="5-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="123" y="0.0" width="96" height="96"/>
+                                                <rect key="frame" x="108" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="5V0-gw-ERF" secondAttribute="height" multiplier="1:1" id="SVl-gv-adD"/>
@@ -259,8 +241,8 @@
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="opx-Ie-Dt3"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-yO-ovH" userLabel="6-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="246" y="0.0" width="96" height="96"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-yO-ovH" userLabel="6-Button" customClass="NumberPadButton">
+                                                <rect key="frame" x="216" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="2Pi-yO-ovH" secondAttribute="height" multiplier="1:1" id="xz5-EK-tKg"/>
@@ -283,11 +265,11 @@
                                             <constraint firstItem="2Pi-yO-ovH" firstAttribute="top" secondItem="G51-ma-gEQ" secondAttribute="top" id="zhs-Ye-D7T"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wNy-KN-zSp">
-                                        <rect key="frame" x="0.0" y="202" width="342" height="96"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wNy-KN-zSp">
+                                        <rect key="frame" x="0.0" y="178" width="300" height="83"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4A-Mw-yqa" userLabel="7-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4A-Mw-yqa" userLabel="7-Button" customClass="NumberPadButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="83"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="z4A-Mw-yqa" secondAttribute="height" multiplier="1:1" id="LWR-s4-vhx"/>
@@ -300,8 +282,8 @@
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="GVo-D8-NJa"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipw-Ya-87A" userLabel="8-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="123" y="0.0" width="96" height="96"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipw-Ya-87A" userLabel="8-Button" customClass="NumberPadButton">
+                                                <rect key="frame" x="108" y="0.0" width="84" height="83"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="ipw-Ya-87A" secondAttribute="height" multiplier="1:1" id="T17-vk-Jsg"/>
@@ -314,8 +296,8 @@
                                                     <action selector="numberPressed:" destination="NzT-M0-ktL" eventType="touchDown" id="nzu-Zz-3do"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5o-gy-hak" userLabel="9-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="246" y="0.0" width="96" height="96"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5o-gy-hak" userLabel="9-Button" customClass="NumberPadButton">
+                                                <rect key="frame" x="216" y="0.0" width="84" height="83"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="o5o-gy-hak" secondAttribute="height" multiplier="1:1" id="FZA-Pm-BV4"/>
@@ -338,11 +320,11 @@
                                             <constraint firstItem="ipw-Ya-87A" firstAttribute="top" secondItem="wNy-KN-zSp" secondAttribute="top" id="uC7-cl-fzS"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MDi-n7-Djq">
-                                        <rect key="frame" x="0.0" y="303" width="342" height="96"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MDi-n7-Djq">
+                                        <rect key="frame" x="0.0" y="266" width="300" height="84"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-kg-Ni2" userLabel="*-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -356,7 +338,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-VL-1YG" userLabel="0-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="123" y="0.0" width="96" height="96"/>
+                                                <rect key="frame" x="108" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -371,8 +353,8 @@
                                                     <outletCollection property="gestureRecognizers" destination="ZSG-Xi-5oN" appends="YES" id="SVD-Mh-Rc3"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo9-W5-GXA" userLabel="#-Button" customClass="NumberPadButton">
-                                                <rect key="frame" x="246" y="0.0" width="96" height="96"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo9-W5-GXA" userLabel="#-Button" customClass="NumberPadButton">
+                                                <rect key="frame" x="216" y="0.0" width="84" height="84"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Mo9-W5-GXA" secondAttribute="height" multiplier="1:1" id="CXd-yi-Spk"/>
@@ -460,8 +442,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="call-phone" width="296" height="55"/>
-        <image name="inactive-phone" width="258" height="55"/>
+        <image name="acceptButton" width="73" height="73"/>
+        <image name="acceptButtonDisabled" width="72" height="73"/>
         <image name="keypad-back" width="23" height="16"/>
         <image name="keypad-back-highlighted" width="23" height="16"/>
         <image name="menu" width="25" height="20"/>

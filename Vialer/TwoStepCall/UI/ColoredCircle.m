@@ -8,6 +8,7 @@
 @implementation ColoredCircle
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setup];
 }
 

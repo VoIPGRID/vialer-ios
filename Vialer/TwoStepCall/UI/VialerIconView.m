@@ -21,6 +21,7 @@ static NSString * const VialerIconViewVialerIcon = @"wifi-phone";
 @implementation VialerIconView
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setup];
 }
 

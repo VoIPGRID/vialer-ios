@@ -10,7 +10,6 @@
 #import "ContactModel.h"
 #import "ContactUtils.h"
 #import "ReachabilityBarViewController.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 #import "UIAlertController+Vialer.h"
@@ -150,8 +149,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:self.selectedContact];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall contact:self.selectedContact];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         self.reachabilityBar = (ReachabilityBarViewController *)segue.destinationViewController;
         self.reachabilityBar.delegate = self;
