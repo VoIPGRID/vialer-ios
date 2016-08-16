@@ -21,6 +21,31 @@ import Foundation
         }
     }
 
+    struct TrackingNames {
+        static let statisticsWebView: String = "StatisticsWebView"
+        static let informationWebView: String = "InformationWebView"
+        static let dialplanWebview: String = "DialplanWebview"
+        static let userProfileWebView: String = "UserProfileWebView"
+        static let addFixedDestinationWebView: String = "AddFixedDestinationWebView"
+    }
+
+    // These constants should be turned into a Struct when the whole project is rewritten in Swift: VIALI-3255
+    class func GAStatisticsWebViewTrackingName() -> String {
+        return VialerGAITracker.TrackingNames.statisticsWebView
+    }
+    class func GAInformationWebViewTrackingName() -> String {
+        return VialerGAITracker.TrackingNames.informationWebView
+    }
+    class func GADialplanWebViewTrackingName() -> String {
+        return VialerGAITracker.TrackingNames.dialplanWebview
+    }
+    class func GAUserProfileWebViewTrackingName() -> String {
+        return VialerGAITracker.TrackingNames.userProfileWebView
+    }
+    class func GAAddFixedDestinationWebViewTrackingName() -> String {
+        return VialerGAITracker.TrackingNames.addFixedDestinationWebView
+    }
+
     /// The default Google Analytics Tracker.
     static var tracker: GAITracker {
         return GAI.sharedInstance().defaultTracker

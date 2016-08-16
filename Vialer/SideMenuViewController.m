@@ -14,6 +14,8 @@
 #import "Vialer-Swift.h"
 
 static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
+static NSString * const SideMenuViewControllerStatisticsPageURL = @"/stats/dashboard/";
+static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
 
 @interface SideMenuViewController() <AvailabilityViewControllerDelegate>
 
@@ -139,14 +141,15 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:SideMenuViewControllerShowStatisticsSegue]) {
-        [VialerGAITracker trackScreenForControllerWithName:@"StatisticsWebView"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
+
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GAStatisticsWebViewTrackingName]];
         webController.title = NSLocalizedString(@"Statistics", nil);
-        webController.nextUrl = @"/stats/dashboard/";
+        [webController nextUrl:SideMenuViewControllerStatisticsPageURL];
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowInformationSegue]) {
-        [VialerGAITracker trackScreenForControllerWithName:@"InformationWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GAInformationWebViewTrackingName]];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
@@ -159,11 +162,12 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         webController.showsNavigationToolbar = NO;
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowDialPlanSegue]) {
-        [VialerGAITracker trackScreenForControllerWithName:@"DialplanWebview"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
+
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GADialplanWebViewTrackingName]];
         webController.title = NSLocalizedString(@"Dial plan", nil);
-        webController.nextUrl = @"/dialplan/";
+        [webController nextUrl:SideMenuViewControllerDialplanPageURL];
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowAvailabilitySegue]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;

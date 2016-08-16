@@ -10,7 +10,7 @@
 #import "Vialer-Swift.h"
 
 static NSString *ActivateSIPAccountViewControllerUserProfileURL = @"/user/change/";
-static NSString * ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
+static NSString *ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
 static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 @interface ActivateSIPAccountViewController()
@@ -63,9 +63,9 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[UserProfileWebViewController class]]) {
-        [VialerGAITracker trackScreenForControllerWithName:@"UserProfileWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GAUserProfileWebViewTrackingName]];
         UserProfileWebViewController *webVC = segue.destinationViewController;
-        webVC.nextUrl = ActivateSIPAccountViewControllerUserProfileURL;
+        [webVC nextUrl:ActivateSIPAccountViewControllerUserProfileURL];
         webVC.backButtonToRootViewController = self.backButtonToRootViewController;
     }
 }

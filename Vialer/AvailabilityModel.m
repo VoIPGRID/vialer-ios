@@ -96,7 +96,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     NSMutableArray *destinations = [[NSMutableArray alloc] init];
     if ([userDestinations count]) {
         for (NSDictionary *userDestination in userDestinations){
-            NSNumber *availabilitySelected = @0;
+            NSNumber *availabilitySelected = [NSNumber numberWithBool:NO];
 
             if ([destinationType isEqualToString: AvailabilityModelSelectedUserDestinationFixedKey]) {
                 NSNumberFormatter *nsNumberFormatter = [[NSNumberFormatter alloc] init];
@@ -120,7 +120,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 
                 if ([availabilityDestinationId isEqualToString:selectedDestinationType]){
 
-                    availabilitySelected = @1;
+                    availabilitySelected = [NSNumber numberWithBool:YES];
                     [self storeNewAvialibityInSUD:@{AvailabilityModelPhoneNumberKey: phoneNumber, AvailabilityModelDescription:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
                 }
             }
