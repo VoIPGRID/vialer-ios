@@ -24,52 +24,15 @@
 
 @implementation ReachabilityBarViewControllerTests
 
-
-// User is "not allowed to SIP" in this case the App is in "two step mode":
-// 3g: no statusbar and no message shown.
-- (void)testSipNotAllowedLowSpeedConnection {
-    ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusLowSpeed;
-    BOOL sipAllowed = NO;
-    BOOL sipEnabled = NO;
-
-    BOOL statusBarVisible = NO;
-    NSString *expectedInformationLabelText = @"";
-
-    [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
-                                                     andCurrentUserSipEnabled:sipEnabled
-                                              andExpectedInformationLabelText:expectedInformationLabelText
-                                                           andShouldBeVisible:statusBarVisible];
-}
-
-// 4g: no statusbar and no message shown.
-// wifi: no statusbar no message shown.
-- (void)testSipNotAllowedHighSpeedConnection {
-    ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusHighSpeed;
-    BOOL sipAllowed = NO;
-    BOOL sipEnabled = NO;
-
-    BOOL statusBarVisible = NO;
-    NSString *expectedInformationLabelText = @"";
-
-    [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
-                                                     andCurrentUserSipEnabled:sipEnabled
-                                              andExpectedInformationLabelText:expectedInformationLabelText
-                                                           andShouldBeVisible:statusBarVisible];
-}
-
 // offline: statusbar displays: "no connection, cannot call".
 - (void)testSipNotAllowedOffline {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusOffline;
-    BOOL sipAllowed = NO;
     BOOL sipEnabled = NO;
 
     BOOL statusBarVisible = YES;
     NSString *expectedInformationLabelText = NSLocalizedString(@"No connection, cannot call.", nil);
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -79,14 +42,12 @@
 // 3g: statusbar displays: "VoIP disabled, enable in settings".
 - (void)testSipAllowedButDisabledLowSpeedConnection {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusLowSpeed;
-    BOOL sipAllowed = YES;
     BOOL sipEnabled = NO;
 
     BOOL statusBarVisible = YES;
     NSString *expectedInformationLabelText = NSLocalizedString(@"VoIP disabled, enable in settings", nil);
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -96,14 +57,12 @@
 // wifi: statusbar displays: "VoIP disabled, enable in settings".
 - (void)testSipAllowedButDisabledHighSpeedConnection {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusHighSpeed;
-    BOOL sipAllowed = YES;
     BOOL sipEnabled = NO;
 
     BOOL statusBarVisible = YES;
     NSString *expectedInformationLabelText = NSLocalizedString(@"VoIP disabled, enable in settings", nil);
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -112,14 +71,12 @@
 // offline: statusbar displays: "no connection, cannot call".
 - (void)testSipAllowedButDisabledButOffline {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusOffline;
-    BOOL sipAllowed = YES;
     BOOL sipEnabled = NO;
 
     BOOL statusBarVisible = YES;
     NSString *expectedInformationLabelText = NSLocalizedString(@"No connection, cannot call.", nil);
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -129,14 +86,12 @@
 // 3g: statusbar displays: "Poor connection, Two step calling enabled".
 - (void)testSipAllowedAndEnabledLowSpeedConnection {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusLowSpeed;
-    BOOL sipAllowed = YES;
     BOOL sipEnabled = YES;
 
     BOOL statusBarVisible = YES;
     NSString *expectedInformationLabelText = NSLocalizedString(@"Poor connection, Two step calling enabled.", nil);
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -146,14 +101,12 @@
 // wifi: no statusbar and no message shown.
 - (void)testSipAllowedAndEnabledHighSpeedConnection {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusHighSpeed;
-    BOOL sipAllowed = YES;
     BOOL sipEnabled = YES;
 
     BOOL statusBarVisible = NO;
     NSString *expectedInformationLabelText = @"";
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -162,14 +115,12 @@
 // offline: statusbar displays: "no connection, cannot call.
 - (void)testSipAllowedAndEnabledButOffline {
     ReachabilityManagerStatusType reachabilityManagerStatus = ReachabilityManagerStatusOffline;
-    BOOL sipAllowed = YES;
     BOOL sipEnabled = YES;
 
     BOOL statusBarVisible = YES;
     NSString *expectedInformationLabelText = NSLocalizedString(@"No connection, cannot call.", nil);
 
     [self performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:reachabilityManagerStatus
-                                                     andCurrentUserSipAllowed:sipAllowed
                                                      andCurrentUserSipEnabled:sipEnabled
                                               andExpectedInformationLabelText:expectedInformationLabelText
                                                            andShouldBeVisible:statusBarVisible];
@@ -188,14 +139,9 @@
  *  @param barShouldBeVisible       To test if the bar should be visible for the given input parameters
  */
 - (void)performReachabilityBarUpdateLayoutTestWithReachabilityManagerStatus:(ReachabilityManagerStatusType)reachabilityMangerStatus
-                                                   andCurrentUserSipAllowed:(BOOL)sipAllowed
                                                    andCurrentUserSipEnabled:(BOOL)sipEnabled
                                             andExpectedInformationLabelText:(NSString *)informationLabelText
                                                          andShouldBeVisible:(BOOL)barShouldBeVisible {
-    if (!sipAllowed) {
-        NSAssert(!sipEnabled, @"SIP cannot be enabled when SIP is not allowed");
-    }
-
     // Setup
     id mockReachabilityManager = OCMClassMock([ReachabilityManager class]);
 
@@ -213,7 +159,6 @@
 
     // Given
     OCMStub([mockReachabilityManager reachabilityStatus]).andReturn(reachabilityMangerStatus);
-    OCMStub([mockCurrentUser sipAllowed]).andReturn(sipAllowed);
     OCMStub([mockCurrentUser sipEnabled]).andReturn(sipEnabled);
 
     OCMExpect([mockInformationLabel setText:informationLabelText]);

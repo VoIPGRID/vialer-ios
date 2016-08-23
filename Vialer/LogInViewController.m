@@ -138,7 +138,6 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 #pragma mark - UITextField delegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([self.loginFormView.usernameField isEqual:textField]) {
-        // TODO: focus on password field
         [textField resignFirstResponder];
         [self.loginFormView.passwordField becomeFirstResponder];
     } else if ([self.loginFormView.passwordField isEqual:textField]) {
@@ -610,7 +609,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)unlockIt {
-    if (self.currentUser.sipAllowed && !self.currentUser.sipAccount) {
+    if (!self.currentUser.sipAccount) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:LoginViewControllerSettingsStoryboard bundle:nil];
         UINavigationController *navigationController = [storyBoard instantiateViewControllerWithIdentifier:LoginViewControllerSettingsNavigationControllerStoryboard];
         SettingsViewController *viewController = navigationController.viewControllers[0];

@@ -37,7 +37,6 @@ static NSString * const SystemUserApiKeyEmailAddress    = @"email";
 static NSString * const SystemUserApiKeyFirstName       = @"first_name";
 static NSString * const SystemUserApiKeyPreposition     = @"preposition";
 static NSString * const SystemUserApiKeyLastName        = @"last_name";
-static NSString * const SystemUserApiKeySIPAllowed      = @"allow_app_account";
 static NSString * const SystemUserApiKeyAppAccountURL   = @"app_account";
 static NSString * const SystemUserApiKeySIPAccount      = @"account_id";
 static NSString * const SystemUserApiKeySIPPassword     = @"password";
@@ -60,7 +59,6 @@ static NSString * const SystemUserSUDLastName           = @"LastName";
 static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
-static NSString * const SystemUserSUDSipAllowed         = @"SIPAllowed";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 
 
@@ -88,7 +86,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
  *  SIP Properties
  */
 @property (strong, nonatomic) NSString *sipAccount;
-@property (readwrite, nonatomic) BOOL sipAllowed;
 @property (readwrite, nonatomic) BOOL sipRegisterOnAdd;
 
 /**
@@ -166,7 +163,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     /**
      *  SIP settings.
      */
-    self.sipAllowed     = [defaults boolForKey:SystemUserSUDSipAllowed];
     self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
 }
@@ -190,21 +186,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         return self.username;
     }
     return NSLocalizedString(@"No email address configured", nil);
-}
-
-- (void)setSipAllowed:(BOOL)sipAllowed {
-    if (_sipAllowed != sipAllowed) {
-        NSString *stringFromSipAllowedProperty = NSStringFromSelector(@selector(sipAllowed));
-        [self willChangeValueForKey:stringFromSipAllowedProperty];
-        _sipAllowed = sipAllowed;
-        [self didChangeValueForKey:stringFromSipAllowedProperty];
-
-        // If SIP Allowed is being set to NO, also set SIP enabled to NO
-        // to force a deregistration with the proxy and the middleware.
-        if (!_sipAllowed) {
-            self.sipEnabled = NO;
-        }
-    }
 }
 
 - (void)setSipEnabled:(BOOL)sipEnabled {
@@ -385,12 +366,8 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [defaults removeObjectForKey:SystemUserApiKeyClient];
 
     [self removeSIPCredentials];
-    self.sipAllowed = NO;
-    self.sipAccount = nil;
 
     [defaults removeObjectForKey:SystemUserSUDSIPAccount];
-    [defaults removeObjectForKey:SystemUserSUDSipAllowed];
-
     [defaults synchronize];
 }
 
@@ -418,8 +395,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.lastName       = userDict[SystemUserApiKeyLastName];
     self.clientID       = userDict[SystemUserApiKeyClient];
 
-    self.sipAllowed     = [userDict[SystemUserApiKeySIPAllowed] boolValue];
-
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     // If the defaults contains a value for SIP Enabled, use that value,
@@ -438,8 +413,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [defaults setObject:self.preposition forKey:SystemUserSUDPreposition];
     [defaults setObject:self.lastName forKey:SystemUserSUDLastName];
     [defaults setObject:self.clientID forKey:SystemUserApiKeyClient];
-
-    [defaults setBool:self.sipAllowed forKey:SystemUserSUDSipAllowed];
 
     [defaults synchronize];
     self.loggedIn = YES;
@@ -586,7 +559,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
             self.sipAccount = [sipAccount stringValue];
             [SSKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
-
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         }
         if (completion) {
@@ -602,19 +574,15 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         if (!error) {
             [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
 
-            if (self.sipAllowed) {
-                NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
-                [self updateSIPAccountWithURL:appAccountURL withCompletion:^(BOOL success, NSError *error) {
-                    if (!error) {
-                        [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
-                        if (completion) completion(nil);
-                    } else {
-                        if (completion) completion(error);
-                    }
-                }];
-            } else {
-                if (completion) completion(nil);
-            }
+            NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
+            [self updateSIPAccountWithURL:appAccountURL withCompletion:^(BOOL success, NSError *error) {
+                if (!error) {
+                    [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
+                    if (completion) completion(nil);
+                } else {
+                    if (completion) completion(error);
+                }
+            }];
         } else {
             if (completion) completion(error);
         }
@@ -633,8 +601,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 // Override default KVO behaviour for automatic notificationing
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
-        [key isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ||
+    if ([key isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ||
         [key isEqualToString:NSStringFromSelector(@selector(clientID))]) {
         return NO;
     }
@@ -687,7 +654,6 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     [desc appendFormat:@"\tclient id: %@\n", self.clientID];
     [desc appendFormat:@"\tmigrationCompleted: %@\n", self.migrationCompleted ? @"YES" : @"NO"];
 
-    [desc appendFormat:@"\tisAllowedToSip: %@\n", self.sipAllowed ? @"YES" : @"NO"];
     [desc appendFormat:@"\tsipEnabled: %@\n", self.sipEnabled ? @"YES" : @"NO"];
     [desc appendFormat:@"\tloggedIn: %@", self.loggedIn ? @"YES" : @"NO"];
 

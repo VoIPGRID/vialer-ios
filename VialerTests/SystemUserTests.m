@@ -25,7 +25,6 @@
 @property (strong, nonatomic) NSString *clientID;
 
 @property (nonatomic) BOOL loggedIn;
-@property (nonatomic) BOOL sipAllowed;
 
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager * operationsManager;
 @end
@@ -184,10 +183,6 @@
     XCTAssertFalse(self.user.sipEnabled, @"On default, is should not be possible to call sip.");
 }
 
-- (void)testSystemUserHasNoSipAllowedOnDefault {
-    XCTAssertFalse(self.user.sipAllowed, @"On default, is should not be allowed to call sip.");
-}
-
 - (void)testSystemUserWithSipEnabledAndSipAccountWillSetSoOnInit {
     OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
     OCMStub([self.userDefaultsMock objectForKey:@"SIPAccount"]).andReturn(@"12340042");
@@ -219,23 +214,9 @@
     }];
 }
 
-- (void)testLoggingInWithUserWithSIPAllowedWillStoreSIPCredentialsInUserDefaults {
-    NSDictionary *response = @{@"client": @"42",
-                               @"allow_app_account": @"true"};
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
-        passedBlock(response, nil);
-        return YES;
-    }]]);
-
-    [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
-
-    OCMVerify([self.userDefaultsMock setBool:YES forKey:@"SIPAllowed"]);
-}
-
 - (void)testLoggingInWithUserWithSIPEnabledWillFetchAppAccount {
     NSString *appAccountURLString = @"/account/12340042";
     NSDictionary *response = @{@"client": @"42",
-                               @"allow_app_account": @"true",
                                @"app_account": appAccountURLString,
                                };
     OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
@@ -255,7 +236,6 @@
 
 - (void)testFetchingAppAccountWillSetProperCredentials {
     NSDictionary *response = @{@"client": @"42",
-                               @"allow_app_account": @"true",
                                @"app_account": @"/account/12340042",
                                };
     OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
@@ -283,7 +263,6 @@
     OCMVerify([SSKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:@"12340042"]);
     XCTAssertEqualObjects(self.user.sipAccount, @"12340042", @"the correct sipaccount should have been set");
     XCTAssertEqualObjects(self.user.sipPassword, @"testPassword", @"the correct sipaccount should have been set");
-    XCTAssertTrue(self.user.sipAllowed, @"It should be possible for the user to use sip");
 
     XCTAssertTrue(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should have been enabled");
 }
@@ -292,9 +271,7 @@
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
-    NSDictionary *response = @{@"client": @"42",
-                               @"allow_app_account": @"false",
-                               };
+    NSDictionary *response = @{@"client": @"42"};
     OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
@@ -311,9 +288,7 @@
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
-    NSDictionary *response = @{@"client": @"42",
-                               @"allow_app_account": @"true",
-                               };
+    NSDictionary *response = @{@"client": @"42"};
     OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
@@ -351,16 +326,7 @@
     XCTAssertFalse(self.user.loggedIn, @"The user should be logged out.");
 }
 
-- (void)testUserWithAllowedToSipInDefaultsWillAllowSip {
-    OCMStub([self.userDefaultsMock boolForKey:@"SIPAllowed"]).andReturn(YES);
-
-    SystemUser *user = [[SystemUser alloc] initPrivate];
-
-    XCTAssertTrue(user.sipAllowed, @"It should be allowed to use sip if defaults says so.");
-}
-
 - (void)testUserCannotEnableSIPWhenHeHasNoSipAccount {
-    OCMStub([self.userDefaultsMock boolForKey:@"SIPAllowed"]).andReturn(YES);
     SystemUser *user = [[SystemUser alloc] initPrivate];
 
     user.sipEnabled = YES;
@@ -435,7 +401,6 @@
 - (void)testGetAndActivateSipAccountWillAskOperationManagerForProfile {
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
-    user.sipAllowed = YES;
     user.loggedIn = YES;
     [user getAndActivateSIPAccountWithCompletion:nil];
 
@@ -473,7 +438,6 @@
 
         return YES;
     }]]);
-    user.sipAllowed = YES;
     user.loggedIn = YES;
 
     [user getAndActivateSIPAccountWithCompletion:nil];
