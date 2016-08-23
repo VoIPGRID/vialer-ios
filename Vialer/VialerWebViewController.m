@@ -5,6 +5,7 @@
 
 #import "VialerWebViewController.h"
 
+#import "Vialer-Swift.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SVProgressHUD.h"
 
@@ -42,7 +43,7 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
     return _configuration;
 }
 
--(void)setNextUrl:(NSString *)nextUrl {
+- (void)nextUrl:(NSString *)nextUrl {
     [self.operationManager autoLoginTokenWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (error) {
             DDLogError(@"Error %@", [error localizedDescription]);
@@ -52,8 +53,9 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
         NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
         NSString *user = [self urlEncodedString:self.currentUser.username];
         NSString *token = responseData[VialerWebViewControllerApiKeyToken];
-        _nextUrl = [self urlEncodedString:nextUrl];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, _nextUrl]];
+        NSString *encodedNextUrl = [self urlEncodedString:nextUrl];
+
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, encodedNextUrl]];
         DDLogDebug(@"Go to url: %@", url);
         self.URL = url;
         [self load];

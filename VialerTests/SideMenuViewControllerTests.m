@@ -23,7 +23,7 @@
     [super tearDown];
 }
 
-- (void)testWebViewControllerForInformationSequeWillBePreparedWithoutNavigationToolbar {
+- (void)testWebViewControllerForInformationSegueWillBePreparedWithoutNavigationToolbar {
     UINavigationController *navVC = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"WebviewNavigationController"];
     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuViewControllerShowInformationSegue source:self.sideMenuViewController destination:navVC performHandler:^{}];
     [self.sideMenuViewController prepareForSegue:segue sender:self];
@@ -32,7 +32,7 @@
     XCTAssertFalse(webviewController.showsNavigationToolbar, @"Navigation toolbar should not be shown for this view.");
 }
 
-- (void)testWebViewControllerForDialplanSequeWillBePreparedWithNavigationToolbar {
+- (void)testWebViewControllerForDialplanSegueWillBePreparedWithNavigationToolbar {
     UINavigationController *navVC = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"WebviewNavigationController"];
     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuViewControllerShowDialPlanSegue source:self.sideMenuViewController destination:navVC performHandler:^{}];
     [self.sideMenuViewController prepareForSegue:segue sender:self];
@@ -41,7 +41,7 @@
     XCTAssertTrue(webviewController.showsNavigationToolbar, @"Navigation toolbar should not be shown for this view.");
 }
 
-- (void)testWebViewControllerForStatisticsSequeWillBePreparedWithNavigationToolbar {
+- (void)testWebViewControllerForStatisticsSegueWillBePreparedWithNavigationToolbar {
     UINavigationController *navVC = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"WebviewNavigationController"];
     UIStoryboardSegue *segue = [UIStoryboardSegue segueWithIdentifier:SideMenuViewControllerShowStatisticsSegue source:self.sideMenuViewController destination:navVC performHandler:^{}];
     [self.sideMenuViewController prepareForSegue:segue sender:self];

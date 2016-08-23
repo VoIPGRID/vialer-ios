@@ -7,31 +7,33 @@
 #import <PBWebViewController/PBWebViewController.h>
 #import "SystemUser.h"
 
-
 @class SystemUser;
 
 @interface VialerWebViewController : PBWebViewController
 
 /**
- *  The url where the user should be redirected to after login.
- */
-@property (strong, nonatomic) NSString *nextUrl;
-
-/**
  *  The currently loaded configuration.
  */
-@property (strong, nonatomic) Configuration *configuration;
+@property (strong, nonatomic) Configuration * _Nonnull configuration;
 
 /**
  *  The currently logged in user.
  */
-@property (strong, nonatomic) SystemUser *currentUser;
+@property (strong, nonatomic) SystemUser * _Nonnull currentUser;
 
 /**
  *  This method will be called by the back button and will pop this viewcontroller.
  *
  *  @param sender UIBarButtonItem instance that is pressed.
  */
-- (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender;
+- (IBAction)cancelButtonPressed:(UIBarButtonItem * _Nonnull)sender;
+
+/**
+ *  The url where the user should be redirected to after login.
+ *
+ *  @param nextURL the url to show.
+ */
+- (void)nextUrl:(NSString * _Nonnull)nextUrl;
+
 
 @end

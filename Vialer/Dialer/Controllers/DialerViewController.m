@@ -149,7 +149,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     }
 }
 
-#pragma mark - seques
+#pragma mark - segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[NumberPadViewController class]]) {
