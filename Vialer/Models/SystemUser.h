@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
 
 /**
  *  Error Domain.

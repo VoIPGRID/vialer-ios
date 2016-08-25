@@ -5,14 +5,13 @@
 
 #import <UIKit/UIKit.h>
 
-IB_DESIGNABLE
 @interface SipCallingButton : UIButton
 
 /**
  The image that will be set inside the circle. This will be a 
  property in the storyboard.
  */
-@property (strong, nonatomic) IBInspectable NSString *buttonImage;
+@property (strong, nonatomic) NSString *buttonImage;
 
 /**
  *  This will tell if the button is active.

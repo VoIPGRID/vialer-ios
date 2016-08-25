@@ -8,7 +8,7 @@
 #import "ContactUtils.h"
 #import "PhoneNumberModel.h"
 #import "SIPUtils.h"
-#import <VialerSIPLib-iOS/VSLRingtone.h>
+#import <VialerSIPLib/VSLRingtone.h>
 #import "Vialer-Swift.h"
 
 static NSString * const SIPIncomingCallViewControllerShowSIPCallingSegue = @"SIPCallingSegue";

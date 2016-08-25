@@ -81,7 +81,13 @@ class TransferInProgressViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func backButtonPressed(sender: UIBarButtonItem) {
-        self.dismissView()
+        do {
+            try firstCall?.hangup()
+            try secondCall?.hangup()
+        } catch let error {
+            DDLogWrapper.logError("Error disconnecting call: \(error)")
+        }
+        dismissView()
     }
 
     // MARK: - Helper functions
@@ -129,6 +135,12 @@ class TransferInProgressViewController: UIViewController {
                 self?.updateUI()
 
                 if let call = object as? VSLCall where call.transferStatus == .Accepted || call.transferStatus == .Rejected {
+                    do {
+                        try self?.firstCall?.hangup()
+                        try self?.secondCall?.hangup()
+                    } catch let error {
+                        DDLogWrapper.logError("Error disconnecting call: \(error)")
+                    }
                     self?.prepareForDismissing()
                 }
             }

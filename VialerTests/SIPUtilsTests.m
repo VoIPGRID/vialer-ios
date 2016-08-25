@@ -6,7 +6,7 @@
 #import "SIPUtils.h"
 #import "SystemUser.h"
 #import <OCMock/OCMock.h>
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
 @import XCTest;
 
 @interface SIPUtilsTests : XCTestCase

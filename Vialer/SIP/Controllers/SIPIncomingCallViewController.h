@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
 
 @interface SIPIncomingCallViewController : UIViewController
 

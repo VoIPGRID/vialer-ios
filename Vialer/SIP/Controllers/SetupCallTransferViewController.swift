@@ -79,7 +79,12 @@ class SetupCallTransferViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func backButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier(Configuration.Segues.UnwindToFirstCall, sender: self)
+        do {
+            try newCall?.hangup()
+            performSegueWithIdentifier(Configuration.Segues.UnwindToFirstCall, sender: self)
+        } catch let error {
+            DDLogWrapper.logError("Could not hangup call: \(error)")
+        }
     }
 
     @IBAction func deleteButtonPressed(sender: UIButton) {

@@ -10,4 +10,4 @@
 #import "PhoneNumberUtils.h"
 #import "SIPUtils.h"
 #import "SipCallingButton.h"
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>

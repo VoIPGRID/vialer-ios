@@ -17,7 +17,7 @@ def default_pods
     pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib-iOS'
+    pod 'VialerSIPLib'
 end
 
 target 'Vialer' do

@@ -85,7 +85,7 @@ PODS:
   - SimulatorStatusMagic (1.8)
   - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (1.0)
-  - VialerSIPLib-iOS (0.0.37):
+  - VialerSIPLib (1.0.1):
     - CocoaLumberjack (~> 2.2)
     - Reachability
     - Vialer-pjsip-iOS
@@ -104,7 +104,7 @@ DEPENDENCIES:
   - SAMKeychain
   - SimulatorStatusMagic
   - SVProgressHUD
-  - VialerSIPLib-iOS
+  - VialerSIPLib
 
 EXTERNAL SOURCES:
   HDLumberjackLogFormatter:
@@ -143,8 +143,8 @@ SPEC CHECKSUMS:
   SimulatorStatusMagic: 4dbf0faa0208e9ac0d56cea06eaa5f7a5f3d02fb
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
-  VialerSIPLib-iOS: 8b328186cb1401600c966e9ea1800a268ab321a3
+  VialerSIPLib: 48b44381826eac9d9077014c04e210269dadeedb
 
-PODFILE CHECKSUM: 7fef9507c004ac16c108a3a720326fe4b869b282
+PODFILE CHECKSUM: fd22fe1a0bb5ff8f577af3f441ab2cd119c8638b
 
 COCOAPODS: 1.0.1

@@ -494,7 +494,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             SystemUser *systemUser = [SystemUser currentUser];
             self.configureFormView.outgoingNumberLabel.text = systemUser.outgoingNumber;
             self.configureFormView.phoneNumberField.text = systemUser.mobileNumber;
-            self.unlockView.greetingsLabel.text = [NSString stringWithFormat:@"%@ %@!", systemUser.firstName, systemUser.lastName];
+            self.unlockView.greetingsLabel.text = systemUser.displayName;
 
             //If a success block was provided, execute it
             if (success) {

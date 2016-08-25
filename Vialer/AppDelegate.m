@@ -19,7 +19,7 @@
 #import "SAMKeychain.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
 #import "Vialer-Swift.h"
 
 @interface AppDelegate()
