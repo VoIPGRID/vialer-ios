@@ -108,7 +108,7 @@ static NSString * const SIPCallingButtonsViewControllerSpeaker      = @"speaker"
             case VSLCallStateNull:
             case VSLCallStateCalling:
             case VSLCallStateIncoming:
-            case VSLCallEarlyState:
+            case VSLCallStateEarly:
             case VSLCallStateConnecting:
             case VSLCallStateDisconnected: {
                 self.holdButton.enabled     = NO;

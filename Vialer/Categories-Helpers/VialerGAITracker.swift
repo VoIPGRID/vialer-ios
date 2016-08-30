@@ -12,6 +12,9 @@ import Foundation
      *  Constants for this class.
      */
     struct Constants {
+        static let inbound: String = "Inbound"
+        static let outbound: String = "Outbound"
+
         /**
          *  Custom Dimensions that will be used for Google Analytics.
          */
@@ -19,31 +22,43 @@ import Foundation
             static let clientID: UInt = 1
             static let appVersion: UInt = 2
         }
-    }
 
-    struct TrackingNames {
-        static let statisticsWebView: String = "StatisticsWebView"
-        static let informationWebView: String = "InformationWebView"
-        static let dialplanWebview: String = "DialplanWebview"
-        static let userProfileWebView: String = "UserProfileWebView"
-        static let addFixedDestinationWebView: String = "AddFixedDestinationWebView"
+        /**
+         *  Categories used for Google Analytics.
+         */
+        struct Categories {
+            static let call: String = "call"
+            static let middleware: String = "middleware"
+            static let metrics: String = "metrics"
+        }
+
+        /**
+         *  Names use for tracking webviews.
+         */
+        struct TrackingNames {
+            static let statisticsWebView: String = "StatisticsWebView"
+            static let informationWebView: String = "InformationWebView"
+            static let dialplanWebview: String = "DialplanWebview"
+            static let userProfileWebView: String = "UserProfileWebView"
+            static let addFixedDestinationWebView: String = "AddFixedDestinationWebView"
+        }
     }
 
     // These constants should be turned into a Struct when the whole project is rewritten in Swift: VIALI-3255
     class func GAStatisticsWebViewTrackingName() -> String {
-        return VialerGAITracker.TrackingNames.statisticsWebView
+        return VialerGAITracker.Constants.TrackingNames.statisticsWebView
     }
     class func GAInformationWebViewTrackingName() -> String {
-        return VialerGAITracker.TrackingNames.informationWebView
+        return VialerGAITracker.Constants.TrackingNames.informationWebView
     }
     class func GADialplanWebViewTrackingName() -> String {
-        return VialerGAITracker.TrackingNames.dialplanWebview
+        return VialerGAITracker.Constants.TrackingNames.dialplanWebview
     }
     class func GAUserProfileWebViewTrackingName() -> String {
-        return VialerGAITracker.TrackingNames.userProfileWebView
+        return VialerGAITracker.Constants.TrackingNames.userProfileWebView
     }
     class func GAAddFixedDestinationWebViewTrackingName() -> String {
-        return VialerGAITracker.TrackingNames.addFixedDestinationWebView
+        return VialerGAITracker.Constants.TrackingNames.addFixedDestinationWebView
     }
 
     /// The default Google Analytics Tracker.
@@ -129,42 +144,42 @@ import Foundation
      Indication a call event is received from the SIP Proxy and the app is ringing.
      */
     static func incomingCallRingingEvent() {
-        sendEvent(withCategory: "call", action: "Inbound", label: "Ringing", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Ringing", value: nil)
     }
 
     /**
      The incoming call is accepted.
      */
     static func acceptIncomingCallEvent() {
-        sendEvent(withCategory: "call", action: "Inbound", label: "Accepted", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Accepted", value: nil)
     }
 
     /**
      The incoming call is rejected.
      */
     static func declineIncomingCallEvent() {
-        sendEvent(withCategory: "call", action: "Inbound", label: "Declined", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Declined", value: nil)
     }
 
     /**
      The incoming call is rejected because there is another call in progress.
      */
     static func declineIncomingCallBecauseAnotherCallInProgressEvent() {
-        sendEvent(withCategory: "call", action: "Inbound", label: "Declined - Another call in progress", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Declined - Another call in progress", value: nil)
     }
 
     /**
      Event to track an outbound SIP call.
      */
     static func setupOutgoingSIPCallEvent() {
-        sendEvent(withCategory: "call", action: "Outbound", label: "SIP", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.outbound, label: "SIP", value: nil)
     }
 
     /**
      Event to track an outbound ConnectAB (aka two step) call.
      */
     static func setupOutgoingConnectABCallEvent() {
-        sendEvent(withCategory: "call", action: "Outbound", label: "ConnectAB", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.outbound, label: "ConnectAB", value: nil)
     }
 
     /**
@@ -175,7 +190,7 @@ import Foundation
      */
     static func pushNotification(isAccepted isAccepted: Bool, connectionType: String ) {
         let action = isAccepted ? "accepted" : "rejected"
-        sendEvent(withCategory: "middleware", action: action, label: connectionType, value: nil)
+        sendEvent(withCategory: Constants.Categories.middleware, action: action, label: connectionType, value: nil)
     }
 
     // MARK: - Exceptions
@@ -196,7 +211,33 @@ import Foundation
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
     static func respondedToIncomingPushNotification(withResponseTime responseTime: NSTimeInterval) {
-        let timing = GAIDictionaryBuilder.createTimingWithCategory("middleware", interval: responseTime * 1000, name: "response", label: nil).build() as [NSObject: AnyObject]
+        let timing = GAIDictionaryBuilder.createTimingWithCategory(Constants.Categories.middleware, interval: responseTime * 1000, name: "response", label: nil).build() as [NSObject: AnyObject]
         tracker.send(timing)
+    }
+
+    /**
+     After a call is finished, sent call metrics to GA.
+
+     - parameter call: the call that was finished
+     */
+    static func callMetrics(finishedCall call: VSLCall) {
+        // Only sent call statistics when the call duration was longer than 10 seconds
+        // to prevent large rounding errors.
+        if (call.connectDuration > 10) {
+            let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
+
+            var labelString = "MOS:\(call.MOS)"
+            labelString += ",Bandwidth:\(mbPerMinute)"
+
+            //VIALI-3258: get the audio codec from the call.
+            labelString += ",AudioCodec:unknown"
+
+            let dict:NSDictionary = [kGAIHitType : "event",
+                                     kGAIEventCategory : Constants.Categories.metrics,
+                                     kGAIEventAction : "CallMetrics",
+                                     kGAIEventLabel : labelString]
+
+            tracker.send(dict as [NSObject : AnyObject])
+        }
     }
 }

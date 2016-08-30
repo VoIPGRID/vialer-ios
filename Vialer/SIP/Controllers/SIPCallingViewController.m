@@ -140,6 +140,8 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)handleCallEnded {
     DDLogInfo(@"Ending call");
+    [VialerGAITracker callMetricsWithFinishedCall:self.call];
+
     [UIDevice currentDevice].proximityMonitoringEnabled = NO;
 
     // Restore the old AudioSessionCategory.
@@ -225,7 +227,7 @@ static double const SIPCallingViewControllerDismissTimeAfterHangup = 1.0;
             self.callStatusLabel.text = NSLocalizedString(@"Incoming call...", nil);
             break;
         }
-        case VSLCallEarlyState: {
+        case VSLCallStateEarly: {
             self.callStatusLabel.text = NSLocalizedString(@"Calling...", nil);
             break;
         }
