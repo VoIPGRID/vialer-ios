@@ -26,7 +26,7 @@
  *
  *  @param sender UIBarButtonItem instance that is pressed.
  */
-- (IBAction)cancelButtonPressed:(UIBarButtonItem * _Nonnull)sender;
+- (IBAction)cancelButtonPressed:(UIBarButtonItem * _Nullable)sender;
 
 /**
  *  The url where the user should be redirected to after login.

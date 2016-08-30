@@ -10,7 +10,6 @@
 #import "MiddlewareRequestOperationManager.h"
 #import "ReachabilityManager.h"
 #import "SIPUtils.h"
-#import "SSKeychain.h"
 #import "SystemUser.h"
 #import "Vialer-Swift.h"
 

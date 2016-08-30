@@ -4,7 +4,7 @@
 //
 
 #import <OCMock/OCMock.h>
-#import "SSKeychain.h"
+#import "SAMKeychain.h"
 #import "SystemUser.h"
 #import "TestKVOObserverClass.h"
 #import "VoIPGRIDRequestOperationManager.h"
@@ -15,6 +15,7 @@
 + (id)readObjectForKey:(id)key;
 - (instancetype) initPrivate;
 
+@property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *user;
 @property (strong, nonatomic) NSString *sipAccount;
 @property (strong, nonatomic) NSString *mobileNumber;
@@ -45,7 +46,7 @@
     self.user = [[SystemUser alloc] initPrivate];
     self.operationsMock = OCMClassMock([VoIPGRIDRequestOperationManager class]);
     self.user.operationsManager = self.operationsMock;
-    self.keychainMock = OCMClassMock([SSKeychain class]);
+    self.keychainMock = OCMClassMock([SAMKeychain class]);
 }
 
 - (void)tearDown {
@@ -144,7 +145,7 @@
     }]]);
     [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
 
-    OCMVerify([SSKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]);
+    OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]);
     XCTAssertEqualObjects(self.user.username, @"testUsername", @"The correct username should have been set");
 }
 
@@ -255,12 +256,12 @@
         return YES;
     }]]);
 
-    OCMStub([SSKeychain passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
+    OCMStub([SAMKeychain passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
 
     [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
 
     OCMVerify([self.userDefaultsMock setObject:[OCMArg isEqual:@"12340042"] forKey:[OCMArg isEqual:@"SIPAccount"]]);
-    OCMVerify([SSKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:@"12340042"]);
+    OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:@"12340042"]);
     XCTAssertEqualObjects(self.user.sipAccount, @"12340042", @"the correct sipaccount should have been set");
     XCTAssertEqualObjects(self.user.sipPassword, @"testPassword", @"the correct sipaccount should have been set");
 
@@ -347,7 +348,7 @@
 
 - (void)testUserHasSipAccountAndPasswordWhenInSUD {
     OCMStub([self.userDefaultsMock objectForKey:[OCMArg isEqual:@"SIPAccount"]]).andReturn(@"12340042");
-    id keyChainMock = OCMClassMock([SSKeychain class]);
+    id keyChainMock = OCMClassMock([SAMKeychain class]);
     OCMStub([keyChainMock passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
 
     SystemUser *user = [[SystemUser alloc] initPrivate];
@@ -628,6 +629,22 @@
     [kvoObserver removeObserver:kvoObserver forKeyPath:kvoKeypath];
     OCMVerifyAll(kvoObserver);
     [kvoObserver stopMocking];
+}
+
+- (void)testGetPasswordNoUsernameSetReturnsNil {
+    self.user.username = nil;
+
+    XCTAssertNil(self.user.password, @"Password should have been Nil");
+}
+
+- (void)testGetPasswordReturnsCorrectPassword {
+    NSString *mockUsername = @"mockUsername";
+    NSString *mockPassword = @"mockPassword";
+    self.user.username = mockUsername;
+    OCMStub([self.keychainMock passwordForService:[OCMArg any] account:mockUsername]).andReturn(mockPassword);
+
+    XCTAssert([self.user.password isEqualToString:mockPassword], @"Passwords should have been equal");
+    OCMVerifyAll(self.keychainMock);
 }
 
 @end

@@ -6,7 +6,7 @@
 #import "VoIPGRIDRequestOperationManager.h"
 
 #import "Configuration.h"
-#import "SSKeychain.h"
+#import "SAMKeychain.h"
 #import "SystemUser.h"
 
 static NSString * const VoIPGRIDRequestOperationManagerURLSystemUserProfile = @"permission/systemuser/profile/";
@@ -51,7 +51,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
         // Set basic authentication if user is logged in.
         NSString *user = [SystemUser currentUser].username;
         if (user) {
-            NSString *password = [SSKeychain passwordForService:[[self class] serviceName] account:user];
+            NSString *password = [SAMKeychain passwordForService:[[self class] serviceName] account:user];
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutUserNotification:) name:SystemUserLogoutNotification object:nil];

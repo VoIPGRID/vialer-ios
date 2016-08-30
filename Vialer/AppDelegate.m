@@ -16,7 +16,7 @@
 @import Contacts;
 #endif
 #import "SIPUtils.h"
-#import "SSKeychain.h"
+#import "SAMKeychain.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import <VialerSIPLib-iOS/VialerSIPLib.h>
@@ -52,7 +52,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     [self interpretLaunchArguments];
     [self setupCocoaLumberjackLogging];
 
-    [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
+    [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
