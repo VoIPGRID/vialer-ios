@@ -14,7 +14,7 @@ def default_pods
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'
     pod 'Reachability'
-    pod 'SSKeychain'
+    pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SVProgressHUD'
     pod 'VialerSIPLib-iOS'

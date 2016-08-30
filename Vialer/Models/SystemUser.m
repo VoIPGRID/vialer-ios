@@ -8,7 +8,7 @@
 #import <AVFoundation/AVAudioSession.h>
 #import "Configuration.h"
 #import "NSString+SubString.h"
-#import "SSKeychain.h"
+#import "SAMKeychain.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 
@@ -219,14 +219,14 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 
 - (NSString *)sipPassword {
     if (self.sipAccount) {
-        return [SSKeychain passwordForService:self.serviceName account:self.sipAccount];
+        return [SAMKeychain passwordForService:self.serviceName account:self.sipAccount];
     }
     return nil;
 }
 
 - (NSString *)password {
     if (self.username) {
-        return [SSKeychain passwordForService:self.serviceName account:self.username];
+        return [SAMKeychain passwordForService:self.serviceName account:self.username];
     }
     return nil;
 }
@@ -270,7 +270,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
      *  Remove the password from the old sipAccount if the sipAccount has changed.
      */
     if (_sipAccount && _sipAccount != sipAccount) {
-        [SSKeychain deletePasswordForService:self.serviceName account:_sipAccount];
+        [SAMKeychain deletePasswordForService:self.serviceName account:_sipAccount];
     }
     _sipAccount = sipAccount;
     [[NSUserDefaults standardUserDefaults] setObject:_sipAccount forKey:SystemUserSUDSIPAccount];
@@ -343,7 +343,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)removeCurrentUser {
-    [SSKeychain deletePasswordForService:self.serviceName account:self.username];
+    [SAMKeychain deletePasswordForService:self.serviceName account:self.username];
 
     self.loggedIn = NO;
     self.username = nil;
@@ -372,7 +372,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 }
 
 - (void)removeSIPCredentials {
-    [SSKeychain deletePasswordForService:self.serviceName account:self.sipAccount];
+    [SAMKeychain deletePasswordForService:self.serviceName account:self.sipAccount];
     self.sipEnabled = NO;
     self.sipAccount = nil;
 
@@ -383,7 +383,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 - (void)setOwnPropertiesFromUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
     if (username && password) {
         self.username = username;
-        [SSKeychain setPassword:password forService:self.serviceName account:username];
+        [SAMKeychain setPassword:password forService:self.serviceName account:username];
     }
     self.outgoingNumber = userDict[SystemUserApiKeyOutgoingNumber];
     if (![userDict[SystemUserApiKeyMobileNumber] isEqual:[NSNull null]]) {
@@ -558,7 +558,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
         // Only update settings if the credentials have changed.
         if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
             self.sipAccount = [sipAccount stringValue];
-            [SSKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
+            [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         }
         if (completion) {
