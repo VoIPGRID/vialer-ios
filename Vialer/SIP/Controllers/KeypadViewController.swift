@@ -51,6 +51,7 @@ class KeypadViewController: UIViewController {
         updateUI()
 
         call?.addObserver(self, forKeyPath: "callState", options: .New, context: &myContext)
+        startConnectDurationTimer()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -84,14 +85,18 @@ class KeypadViewController: UIViewController {
     }
 
     @IBAction func hideButtonPressed(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+        if let navController = self.navigationController {
+            navController.popViewControllerAnimated(true)
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
     // MARK: - Helper functions
 
     func updateUI() {
 
-        numberLabel.text = phoneNumberLabelText
+        numberLabel.text = dtmfSent ?? phoneNumberLabelText
 
         guard let call = call else { return }
         switch call.callState {
@@ -129,7 +134,11 @@ class KeypadViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue()) { [weak self] in
                 self?.updateUI()
                 if call.callState == .Disconnected {
-                    self?.dismissViewControllerAnimated(true, completion: nil)
+                    if let navController = self?.navigationController {
+                        navController.popViewControllerAnimated(true)
+                    } else {
+                        self?.dismissViewControllerAnimated(true, completion: nil)
+                    }
                 }
             }
         } else {

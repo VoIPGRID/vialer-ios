@@ -23,20 +23,20 @@ class SetupCallTransferViewController: UIViewController {
 
     // Properties
 
-    var currentCall: VSLCall? {
+    var firstCall: VSLCall? {
         didSet {
             updateUI()
         }
     }
 
-    var phoneNumberLabelText: String? {
+    var firstCallPhoneNumberLabelText: String? {
         didSet {
             updateUI()
         }
     }
 
-    var newCall: VSLCall?
-    var newPhoneNumberLabelText: String?
+    var currentCall: VSLCall?
+    var currentCallPhoneNumberLabelText: String?
 
     var number: String {
         set {
@@ -56,17 +56,17 @@ class SetupCallTransferViewController: UIViewController {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
-        currentCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .New, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .New, context: &myContext)
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        currentCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
+        firstCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
     }
 
     // MARK: - Outlets
-    @IBOutlet weak var currentCallNumberLabel: UILabel!
-    @IBOutlet weak var currentCallStatusLabel: UILabel!
+    @IBOutlet weak var firstCallNumberLabel: UILabel!
+    @IBOutlet weak var firstCallStatusLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var numberToDialLabel: UILabel! {
@@ -79,7 +79,12 @@ class SetupCallTransferViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func backButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier(Configuration.Segues.UnwindToFirstCall, sender: self)
+        do {
+            try currentCall?.hangup()
+            performSegueWithIdentifier(Configuration.Segues.UnwindToFirstCall, sender: self)
+        } catch let error {
+            DDLogWrapper.logError("Could not hangup call: \(error)")
+        }
     }
 
     @IBAction func deleteButtonPressed(sender: UIButton) {
@@ -94,10 +99,10 @@ class SetupCallTransferViewController: UIViewController {
         callButton.enabled = false
         if let number = numberToDialLabel.text where number != "" {
             let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number)!
-            newPhoneNumberLabelText = cleanedPhoneNumber
-            currentCall?.account.callNumber(cleanedPhoneNumber) { (error, call) in
+            currentCallPhoneNumberLabelText = cleanedPhoneNumber
+            firstCall?.account.callNumber(cleanedPhoneNumber) { (error, call) in
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                    self?.newCall = call
+                    self?.currentCall = call
                     self?.performSegueWithIdentifier(Configuration.Segues.SecondCallActive, sender: nil)
                 }
             }
@@ -107,14 +112,14 @@ class SetupCallTransferViewController: UIViewController {
     // MARK: - Helper functions
 
     private func updateUI() {
-        currentCallNumberLabel?.text = phoneNumberLabelText
+        firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
 
-        guard let call = currentCall else { return }
+        guard let call = firstCall else { return }
 
         if call.callState == .Disconnected {
-            currentCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
+            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
         } else {
-            currentCallStatusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold phone state")
+            firstCallStatusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold phone state")
         }
     }
 
@@ -123,14 +128,14 @@ class SetupCallTransferViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // First check if the destinationVC is SecondCallVC, because SecondCallVC is also subtype of SIPCallingVC.
         if let secondCallVC = segue.destinationViewController as? SecondCallViewController {
-            secondCallVC.activeCall = newCall
-            secondCallVC.firstCall = currentCall
-            secondCallVC.phoneNumberLabelText = newPhoneNumberLabelText
-            secondCallVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            secondCallVC.activeCall = currentCall
+            secondCallVC.firstCall = firstCall
+            secondCallVC.phoneNumberLabelText = currentCallPhoneNumberLabelText
+            secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
         } else if let callVC = segue.destinationViewController as? SIPCallingViewController {
-            if let call = newCall where call.callState != .Null && call.callState != .Disconnected {
+            if let call = currentCall where call.callState != .Null && call.callState != .Disconnected {
                 callVC.activeCall = call
-            } else if let call = currentCall where call.callState != .Null && call.callState != .Disconnected {
+            } else if let call = firstCall where call.callState != .Null && call.callState != .Disconnected {
                 callVC.activeCall = call
             }
         }
@@ -142,7 +147,7 @@ class SetupCallTransferViewController: UIViewController {
         if context == &myContext {
             dispatch_async(dispatch_get_main_queue()) { [weak self] in
                 self?.updateUI()
-                if let call = self?.currentCall where call.callState == .Disconnected {
+                if let call = self?.firstCall where call.callState == .Disconnected {
                     self?.performSegueWithIdentifier(Configuration.Segues.UnwindToFirstCall, sender: nil)
                 }
             }

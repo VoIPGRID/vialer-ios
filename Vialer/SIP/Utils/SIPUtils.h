@@ -4,8 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VialerSIPLib-iOS/VialerSIPLib.h"
-#import "VialerSIPLib-iOS/VSLRingtone.h"
+#import "VialerSIPLib/VialerSIPLib.h"
+#import "VialerSIPLib/VSLRingtone.h"
 
 @interface SIPUtils : NSObject
 

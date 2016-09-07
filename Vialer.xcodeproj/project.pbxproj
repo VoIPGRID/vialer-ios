@@ -192,7 +192,6 @@
 		C490AD971D0863E3004A8F83 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
-		C490AD9B1D0863E3004A8F83 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
 		C490AD9D1D0863E3004A8F83 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9101CA2865D008FB612 /* BubblingPoints.m */; };
 		C490AD9E1D0863E3004A8F83 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */; };
 		C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
@@ -275,7 +274,6 @@
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
-		C4C5CFF11C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */; };
 		C4C675651D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
 		C4C675661D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
 		C4C675671D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
@@ -284,7 +282,6 @@
 		C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
 		C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
-		C4CAC8A51C7377E000018A5A /* SIPCallingViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */; };
 		C4DA5C781BFB27580043DED7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
@@ -358,7 +355,6 @@
 		F20851141D26935600A17E71 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
-		F20851171D26935600A17E71 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
 		F20851191D26935600A17E71 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9101CA2865D008FB612 /* BubblingPoints.m */; };
 		F208511A1D26935600A17E71 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
 		F208511B1D26935600A17E71 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */; };
@@ -496,8 +492,6 @@
 		F9EEC9221CA2865D008FB612 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9181CA2865D008FB612 /* VialerIconView.m */; };
 		F9EEC92F1CA2879C008FB612 /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9251CA2879C008FB612 /* DialerViewController.m */; };
 		F9EEC9301CA2879C008FB612 /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9251CA2879C008FB612 /* DialerViewController.m */; };
-		F9EEC9311CA2879C008FB612 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
-		F9EEC9321CA2879C008FB612 /* NumberPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */; };
 		F9EEC9351CA2879C008FB612 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
 		F9EEC9361CA2879C008FB612 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
 		F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92E1CA2879C008FB612 /* PasteableUILabel.m */; };
@@ -750,13 +744,11 @@
 		C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewController.m; sourceTree = "<group>"; };
 		C4C3EAF11BFB7C5E00AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SideMenuStoryboard.storyboard; sourceTree = "<group>"; };
 		C4C3EAF81BFB7C9900AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AvailabilityStoryboard.storyboard; sourceTree = "<group>"; };
-		C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingButtonsViewControllerTests.m; sourceTree = "<group>"; };
 		C4C675611D19B5420003A385 /* Vialer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Bridging-Header.h"; sourceTree = "<group>"; };
 		C4C675641D19B5430003A385 /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppInfo.swift; path = "Categories-Helpers/AppInfo.swift"; sourceTree = "<group>"; };
 		C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerGAITracker.swift; path = "Categories-Helpers/VialerGAITracker.swift"; sourceTree = "<group>"; };
 		C4C6EA3C1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VoIPGRIDRequestOperationManager+Recents.h"; sourceTree = "<group>"; };
 		C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VoIPGRIDRequestOperationManager+Recents.m"; sourceTree = "<group>"; };
-		C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPCallingViewControllerTests.m; sourceTree = "<group>"; };
 		C4DA5C791BFB27580043DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C4DA5C7E1BFB275C0043DED7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C4DA5C7F1BFB2E590043DED7 /* VialerDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerDrawerViewController.h; sourceTree = "<group>"; };
@@ -865,8 +857,6 @@
 		F9EEC9181CA2865D008FB612 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
 		F9EEC9241CA2879C008FB612 /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		F9EEC9251CA2879C008FB612 /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerViewController.m; sourceTree = "<group>"; };
-		F9EEC9261CA2879C008FB612 /* NumberPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadViewController.h; sourceTree = "<group>"; };
-		F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadViewController.m; sourceTree = "<group>"; };
 		F9EEC92B1CA2879C008FB612 /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberPadButton.m; sourceTree = "<group>"; };
 		F9EEC92D1CA2879C008FB612 /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasteableUILabel.h; sourceTree = "<group>"; };
@@ -1431,8 +1421,6 @@
 		C4C5CFF21C74C6CE000088C5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C4CAC8A41C7377E000018A5A /* SIPCallingViewControllerTests.m */,
-				C4C5CFF01C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m */,
 				F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */,
 			);
 			name = Controllers;
@@ -1844,8 +1832,6 @@
 			children = (
 				F9EEC9241CA2879C008FB612 /* DialerViewController.h */,
 				F9EEC9251CA2879C008FB612 /* DialerViewController.m */,
-				F9EEC9261CA2879C008FB612 /* NumberPadViewController.h */,
-				F9EEC9271CA2879C008FB612 /* NumberPadViewController.m */,
 			);
 			name = Controllers;
 			path = Dialer/Controllers;
@@ -2906,7 +2892,6 @@
 				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				F2DE21791CB698A6007B5B4D /* ReachabilityManager.m in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
-				F9EEC9321CA2879C008FB612 /* NumberPadViewController.m in Sources */,
 				C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				F9EEC91A1CA2865D008FB612 /* BubblingPoints.m in Sources */,
 				F9EEC9381CA2879C008FB612 /* PasteableUILabel.m in Sources */,
@@ -3000,7 +2985,6 @@
 				C490AD971D0863E3004A8F83 /* ReachabilityManager.m in Sources */,
 				C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */,
 				C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */,
-				C490AD9B1D0863E3004A8F83 /* NumberPadViewController.m in Sources */,
 				C490AD9D1D0863E3004A8F83 /* BubblingPoints.m in Sources */,
 				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C490AD9E1D0863E3004A8F83 /* PasteableUILabel.m in Sources */,
@@ -3041,7 +3025,6 @@
 				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
 				C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */,
 				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
-				C4C5CFF11C7479DC000088C5 /* SIPCallingButtonsViewControllerTests.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
@@ -3050,7 +3033,6 @@
 				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
-				C4CAC8A51C7377E000018A5A /* SIPCallingViewControllerTests.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
@@ -3126,7 +3108,6 @@
 				F20851141D26935600A17E71 /* ReachabilityManager.m in Sources */,
 				F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */,
 				F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */,
-				F20851171D26935600A17E71 /* NumberPadViewController.m in Sources */,
 				F20851191D26935600A17E71 /* BubblingPoints.m in Sources */,
 				C43EE05E1D5C74AD00F8C3C0 /* TransferInProgressViewController.swift in Sources */,
 				F208511A1D26935600A17E71 /* Configuration.m in Sources */,
@@ -3217,7 +3198,6 @@
 				F2DE21781CB698A6007B5B4D /* ReachabilityManager.m in Sources */,
 				C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
-				F9EEC9311CA2879C008FB612 /* NumberPadViewController.m in Sources */,
 				F9EEC9191CA2865D008FB612 /* BubblingPoints.m in Sources */,
 				F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C43EE05B1D5C749B00F8C3C0 /* TransferInProgressViewController.swift in Sources */,

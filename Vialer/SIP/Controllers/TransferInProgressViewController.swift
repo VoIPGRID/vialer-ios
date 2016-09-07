@@ -34,12 +34,12 @@ class TransferInProgressViewController: UIViewController {
         }
     }
 
-    var secondCall: VSLCall? {
+    var currentCall: VSLCall? {
         didSet {
             updateUI()
         }
     }
-    var secondCallPhoneNumberLabelText: String? {
+    var currentCallPhoneNumberLabelText: String? {
         didSet {
             updateUI()
         }
@@ -76,19 +76,25 @@ class TransferInProgressViewController: UIViewController {
     @IBOutlet weak var successFullImageView: UIImageView!
     @IBOutlet weak var firstNumberLabel: UILabel!
     @IBOutlet weak var transferStatusLabel: UILabel!
-    @IBOutlet weak var secondNumberLabel: UILabel!
+    @IBOutlet weak var currentCallNumberLabel: UILabel!
 
     // MARK: - Actions
 
     @IBAction func backButtonPressed(sender: UIBarButtonItem) {
-        self.dismissView()
+        do {
+            try firstCall?.hangup()
+            try currentCall?.hangup()
+        } catch let error {
+            DDLogWrapper.logError("Error disconnecting call: \(error)")
+        }
+        dismissView()
     }
 
     // MARK: - Helper functions
 
     private func updateUI() {
         firstNumberLabel?.text = firstCallPhoneNumberLabelText
-        secondNumberLabel?.text = secondCallPhoneNumberLabelText
+        currentCallNumberLabel?.text = currentCallPhoneNumberLabelText
 
         guard let call = firstCall else { return }
 
@@ -129,6 +135,12 @@ class TransferInProgressViewController: UIViewController {
                 self?.updateUI()
 
                 if let call = object as? VSLCall where call.transferStatus == .Accepted || call.transferStatus == .Rejected {
+                    do {
+                        try self?.firstCall?.hangup()
+                        try self?.currentCall?.hangup()
+                    } catch let error {
+                        DDLogWrapper.logError("Error disconnecting call: \(error)")
+                    }
                     self?.prepareForDismissing()
                 }
             }

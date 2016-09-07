@@ -5,7 +5,7 @@
 
 #import <ContactsUI/ContactsUI.h>
 #import <Foundation/Foundation.h>
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
 
 @interface PhoneNumberModel : NSObject
 
