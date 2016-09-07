@@ -316,8 +316,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             keypadVC.delegate = self
             keypadVC.phoneNumberLabelText = phoneNumberLabelText
         } else if let navVC = segue.destinationViewController as? UINavigationController, let setupCallTransferVC = navVC.viewControllers[0] as? SetupCallTransferViewController {
-            setupCallTransferVC.currentCall = activeCall
-            setupCallTransferVC.phoneNumberLabelText = phoneNumberLabelText
+            setupCallTransferVC.firstCall = activeCall
+            setupCallTransferVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
         }
     }
 

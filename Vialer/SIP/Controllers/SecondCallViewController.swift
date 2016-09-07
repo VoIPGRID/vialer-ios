@@ -104,8 +104,8 @@ class SecondCallViewController: SIPCallingViewController {
         if let transferInProgressVC = segue.destinationViewController as? TransferInProgressViewController {
             transferInProgressVC.firstCall = firstCall
             transferInProgressVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-            transferInProgressVC.secondCall = activeCall
-            transferInProgressVC.secondCallPhoneNumberLabelText = phoneNumberLabelText
+            transferInProgressVC.currentCall = activeCall
+            transferInProgressVC.currentCallPhoneNumberLabelText = phoneNumberLabelText
         } else if let firstCallVC = segue.destinationViewController as? SIPCallingViewController {
             if firstCall?.callState == .Disconnected {
                 firstCallVC.activeCall = activeCall
