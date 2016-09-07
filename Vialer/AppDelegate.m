@@ -9,7 +9,6 @@
 #import "APNSHandler.h"
 #import <AudioToolbox/AudioServices.h>
 @import CoreData;
-#import "GAITracker.h"
 #import "HDLumberjackLogFormatter.h"
 #import "PhoneNumberModel.h"
 #ifdef DEBUG
@@ -17,10 +16,11 @@
 @import Contacts;
 #endif
 #import "SIPUtils.h"
-#import "SSKeychain.h"
+#import "SAMKeychain.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
+#import "Vialer-Swift.h"
 
 @interface AppDelegate()
 @property (readwrite, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -29,6 +29,7 @@
 @property (nonatomic) UIBackgroundTaskIdentifier vibratingTask;
 @property (nonatomic) BOOL stopVibrating;
 @property (strong, nonatomic) UILocalNotification *incomingCallNotification;
+@property (assign) BOOL isScreenshotRun;
 @end
 
 NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
@@ -39,20 +40,25 @@ NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNot
 static NSTimeInterval const AppDelegateVibratingTimeInterval = 2.0f;
 static int const AppDelegateNumberOfVibrations = 5;
 
+// Launch Arguments
+static NSString * const AppLaunchArgumentScreenshotRun = @"ScreenshotRun";
+static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
+
 @implementation AppDelegate
 
 #pragma mark - UIApplication delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self interpretLaunchArguments];
     [self setupCocoaLumberjackLogging];
 
-    [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
+    [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
 
     // Only when the app is run for screenshot purposes do the following:
-    if ([[self class] isSnapshotScreenshotRun]) {
+    if (self.isScreenshotRun) {
 #ifdef DEBUG
         [[SDStatusBarManager sharedInstance] setTimeString:@"09:41"];
         [[SDStatusBarManager sharedInstance] enableOverrides];
@@ -64,13 +70,13 @@ static int const AppDelegateNumberOfVibrations = 5;
             DDLogDebug(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
         }];
 #endif
-        [GAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone andDryRun:YES];
+        [VialerGAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone isDryRun:YES];
 
         // Clear out the userdefaults.
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     } else {
-        [GAITracker setupGAITracker];
+        [VialerGAITracker setupGAITracker];
     }
 
 #ifdef DEBUG
@@ -151,8 +157,14 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 #pragma mark - setup helper methods
 
-+ (BOOL)isSnapshotScreenshotRun {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FASTLANE_SNAPSHOT"];
+- (void)interpretLaunchArguments {
+    NSArray *arguments = [NSProcessInfo processInfo].arguments;
+    if ([arguments containsObject:AppLaunchArgumentScreenshotRun]) {
+        self.isScreenshotRun = YES;
+    }
+    if ([arguments containsObject:AppLaunchArgumentNoAnimations]) {
+        [UIView setAnimationsEnabled:NO];
+    }
 }
 
 - (void)handleIncomingLocalBackgroudNotifications:(NSString *)notificationIdentifier forCallId:(NSString *)callId {
@@ -162,7 +174,7 @@ static int const AppDelegateNumberOfVibrations = 5;
         if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
             NSError *error;
             [call decline:&error];
-            [GAITracker declineIncomingCallEvent];
+            [VialerGAITracker declineIncomingCallEvent];
             if (error) {
                 DDLogError(@"Error declining call: %@", error);
             }
@@ -222,7 +234,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 // KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(clientID))]) {
-        [GAITracker setClientIDCustomDimension:[SystemUser currentUser].clientID];
+        [VialerGAITracker setCustomDimensionWithClientID:[SystemUser currentUser].clientID];
     }
 }
 
@@ -285,7 +297,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 
 - (void)setupCallbackForVoIPNotifications {
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
-        [GAITracker incomingCallRingingEvent];
+        [VialerGAITracker incomingCallRingingEvent];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([SIPUtils anotherCallInProgress:call]) {
@@ -293,7 +305,7 @@ static int const AppDelegateNumberOfVibrations = 5;
 
                 NSError *error;
                 [call decline:&error];
-                [GAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
+                [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
                 if (error) {
                     DDLogError(@"Error declining call: %@", error);
                 }

@@ -23,7 +23,6 @@
 
 @interface SystemUser()
 @property (strong, nonatomic) NSString *sipAccount;
-@property (nonatomic) BOOL sipAllowed;
 @end
 
 @interface LogInViewController()
@@ -167,7 +166,6 @@
 
 - (void)testSIPAllowedNoSIPAccountSegueToActiveSIPAccount {
     OCMStub([self.mockUser sipAccount]).andReturn(nil);
-    OCMStub([self.mockUser sipAllowed]).andReturn(YES);
 
     id loginViewControllerMock = OCMPartialMock(self.loginViewController);
     [loginViewControllerMock unlockIt];

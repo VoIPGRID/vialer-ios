@@ -9,13 +9,12 @@
 #import "ContactsUI/ContactsUI.h"
 #import "ContactModel.h"
 #import "ContactUtils.h"
-#import "GAITracker.h"
 #import "ReachabilityBarViewController.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 #import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
+#import "Vialer-Swift.h"
 
 static NSString * const ContactsViewControllerLogoImageName = @"logo";
 static NSString * const ContactsViewControllerTabContactImageName = @"tab-contact";
@@ -62,7 +61,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     [self checkContactsAccess];
     [self setupLayout];
     [self showReachabilityBar];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 }
 
 - (void)viewDidLoad {
@@ -88,10 +87,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
     Configuration *defaultConfiguration = [Configuration defaultConfiguration];
 
-    self.tableView.sectionIndexColor = [defaultConfiguration tintColorForKey:ConfigurationContactsTableSectionIndexColor];
+    self.tableView.sectionIndexColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactsTableSectionIndexColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    self.searchBar.barTintColor = [defaultConfiguration tintColorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.searchBar.barTintColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactSearchBarBarTintColor];
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
@@ -150,8 +149,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:self.selectedContact];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall contact:self.selectedContact];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         self.reachabilityBar = (ReachabilityBarViewController *)segue.destinationViewController;
         self.reachabilityBar.delegate = self;
@@ -243,7 +242,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
-                    [GAITracker setupOutgoingSIPCallEvent];
+                    [VialerGAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else if (self.reachabilityStatus == ReachabilityManagerStatusOffline) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
@@ -251,7 +250,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                                                                       andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
                     [self presentViewController:alert animated:YES completion:nil];
                 } else {
-                    [GAITracker setupOutgoingConnectABCallEvent];
+                    [VialerGAITracker setupOutgoingConnectABCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
                 }
             });

@@ -8,11 +8,11 @@
 #import "AppDelegate.h"
 #import "Middleware.h"
 #import "SIPIncomingCallViewController.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "VialerDrawerViewController.h"
 #import "VoIPGRIDRequestOperationManager.h"
+#import "Vialer-Swift.h"
 
 static NSString * const VialerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
 static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @"ShowSIPIncomingCallViewSegue";
@@ -72,8 +72,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voipWasDisabled:) name:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
 
     // Customize NavigationBar
-    [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarTintColor];
-    [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationNavigationBarBarTintColor];
+    [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationNavigationBarTintColor];
+    [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
     [UINavigationBar appearance].translucent = NO;
 }
 
@@ -193,14 +193,16 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
         SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
         sipIncomingViewController.call = sender;
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleIncomingCallWithVSLCall:sender];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleIncomingCall:sender];
     }
 }
 
 # pragma mark - Unwind segue
 
-- (IBAction)unwindVialerRootViewController:(UIStoryboardSegue *)segue { }
+- (IBAction)unwindVialerRootViewController:(UIStoryboardSegue *)segue {
+    [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+}
 
 # pragma mark - ViewController stack navigation
 // Credit goes to: https://gist.github.com/snikch/3661188

@@ -9,16 +9,15 @@
 #import "Configuration.h"
 #import "ContactModel.h"
 #import "ContactsUI/ContactsUI.h"
-#import "GAITracker.h"
 #import "ReachabilityBarViewController.h"
 #import "RecentCall.h"
 #import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 #import "UIAlertController+Vialer.h"
 #import "UIViewController+MMDrawerController.h"
+#import "Vialer-Swift.h"
 
 static NSString * const RecentsViewControllerTabContactImageName = @"tab-recent";
 static NSString * const RecentsViewControllerTabContactActiveImageName = @"tab-recent-active";
@@ -74,7 +73,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [self.tableView reloadData];
     [self refreshRecents];
 }
@@ -107,7 +106,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
-    _filterControl.tintColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationRecentsFilterControlTintColor];
+    _filterControl.tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationRecentsFilterControlTintColor];
 }
 
 - (RecentCallManager *)callManager {
@@ -193,8 +192,8 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall withContact:nil];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall contact:nil];
     } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
         rbvc.delegate = self;
@@ -365,7 +364,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 - (void)callPhoneNumber:(NSString *)phoneNumber {
     self.phoneNumberToCall = phoneNumber;
     if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
-        [GAITracker setupOutgoingSIPCallEvent];
+        [VialerGAITracker setupOutgoingSIPCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerSIPCallingSegue sender:self];
     } else if (self.reachabilityStatus == ReachabilityManagerStatusOffline) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
@@ -373,7 +372,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
                                                           andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
-        [GAITracker setupOutgoingConnectABCallEvent];
+        [VialerGAITracker setupOutgoingConnectABCallEvent];
         [self performSegueWithIdentifier:RecentViewControllerTwoStepCallingSegue sender:self];
     }
 }

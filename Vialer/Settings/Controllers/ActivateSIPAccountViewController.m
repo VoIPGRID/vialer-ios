@@ -5,12 +5,12 @@
 
 #import "ActivateSIPAccountViewController.h"
 #import "Configuration.h"
-#import "GAITracker.h"
 #import "RoundedAndColoredUIButton.h"
 #import "UserProfileWebViewController.h"
+#import "Vialer-Swift.h"
 
 static NSString *ActivateSIPAccountViewControllerUserProfileURL = @"/user/change/";
-static NSString * ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
+static NSString *ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
 static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 @interface ActivateSIPAccountViewController()
@@ -29,14 +29,14 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 }
 
 - (void)setupUserProfileButton {
     self.userProfileButton.borderWidth = 1;
     self.userProfileButton.cornerRadius = ActivateSIPAccountViewControllerButtonRadius;
-    self.userProfileButton.borderColor = [self.configuration tintColorForKey:ConfigurationActivateSIPAccountViewControllerButtonBorderColor];
-    self.userProfileButton.backgroundColorForPressedState = [self.configuration tintColorForKey:ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState];
+    self.userProfileButton.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationActivateSIPAccountViewControllerButtonBorderColor];
+    self.userProfileButton.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState];
 }
 
 #pragma mark - Properties
@@ -63,9 +63,9 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[UserProfileWebViewController class]]) {
-        [GAITracker trackScreenForControllerName:@"UserProfileWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GAUserProfileWebViewTrackingName]];
         UserProfileWebViewController *webVC = segue.destinationViewController;
-        webVC.nextUrl = ActivateSIPAccountViewControllerUserProfileURL;
+        [webVC nextUrl:ActivateSIPAccountViewControllerUserProfileURL];
         webVC.backButtonToRootViewController = self.backButtonToRootViewController;
     }
 }

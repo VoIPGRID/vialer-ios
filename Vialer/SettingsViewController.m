@@ -7,13 +7,12 @@
 
 #import "ActivateSIPAccountViewController.h"
 #import "EditNumberViewController.h"
-#import "GAITracker.h"
 #import "SIPUtils.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
+#import "Vialer-Swift.h"
 #import "VoIPGRIDRequestOperationManager.h"
-
 
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
@@ -46,19 +45,17 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 
     if (self.showSIPAccountWebview) {
         [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
     } else {
         [self.tableView reloadData];
     }
-    [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed)) options:0 context:NULL];
     [self.currentUser addObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled)) options:0 context:NULL];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipAllowed))];
     [self.currentUser removeObserver:self forKeyPath:NSStringFromSelector(@selector(sipEnabled))];
     [super viewWillDisappear:animated];
 }
@@ -84,27 +81,28 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case SettingsViewControllerVoIPAccountSection: {
-            // Are we allowed to show anything?
-            if (self.currentUser.sipAllowed) {
-                // Do we show all fields?
-                if (self.currentUser.sipEnabled) {
-                    // Sip is enabled, show all fields
-                    return 2;
-                }
-                // Only show the enable switch
+        case SettingsViewControllerVoIPAccountSection:
+            if (self.currentUser.sipEnabled) {
+                // Show the VoIP Switch and the account ID
+                return 2;
+            } else {
+                // Only show VoIP Switch
                 return 1;
             }
-            // Not allowed to sip, hide the content
-            return 0;
-        }
+            break;
+
         case SettingsViewControllerNumbersSection:
+            // Always 3
+            // - My number
+            // - Outgoing number
+            // - Email address
             return 3;
+            break;
+
         default:
+            return 0;
             break;
     }
-    // Unknown section, no items there
-    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -259,8 +257,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     // React to changes on the SipAllowed property of the SystemUser.
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(sipAllowed))] ||
-        [keyPath isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [SVProgressHUD dismiss];

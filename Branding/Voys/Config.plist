@@ -2,136 +2,102 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Primary colors</key>
+	<dict>
+		<key>PrimaryBrandColor</key>
+		<array>
+			<integer>46</integer>
+			<integer>49</integer>
+			<integer>146</integer>
+		</array>
+		<key>SecondaryBrandColor</key>
+		<array>
+			<integer>46</integer>
+			<integer>49</integer>
+			<integer>146</integer>
+		</array>
+		<key>BlackColor</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>AppleDefaultOffWhite</key>
+		<array>
+			<integer>247</integer>
+			<integer>247</integer>
+			<integer>247</integer>
+		</array>
+		<key>WhiteColor</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+		</array>
+		<key>WhiteColorWith05Alpha</key>
+		<array>
+			<integer>255</integer>
+			<integer>255</integer>
+			<integer>255</integer>
+			<real>0.5</real>
+		</array>
+	</dict>
 	<key>Tint colors</key>
 	<dict>
-		<key>SideMenuHeaderBackgroundColor</key>
+		<key>BackgroundGradientEndColor</key>
 		<array>
-			<integer>247</integer>
-			<integer>247</integer>
-			<integer>247</integer>
+			<integer>42</integer>
+			<integer>45</integer>
+			<integer>169</integer>
+		</array>
+		<key>BackgroundGradientStartColor</key>
+		<array>
+			<integer>46</integer>
+			<integer>49</integer>
+			<integer>146</integer>
 		</array>
 		<key>NumberPadButtonPressedColor</key>
-		<array>
-			<integer>255</integer>
-			<integer>255</integer>
-			<integer>255</integer>
-		</array>
+		<string>WhiteColor</string>
 		<key>LogInViewControllerButtonBorderColor</key>
-		<array>
-			<integer>255</integer>
-			<integer>255</integer>
-			<integer>255</integer>
-		</array>
+		<string>WhiteColor</string>
 		<key>LogInViewControllerButtonBackgroundColorForPressedState</key>
-		<array>
-			<integer>255</integer>
-			<integer>255</integer>
-			<integer>255</integer>
-			<real>0.5</real>
-		</array>
+		<string>WhiteColorWith05Alpha</string>
 		<key>ActivateSIPAccountViewControllerButtonBorderColor</key>
-		<array>
-			<integer>255</integer>
-			<integer>255</integer>
-			<integer>255</integer>
-		</array>
+		<string>WhiteColor</string>
 		<key>ActivateSIPAccountViewControllerButtonBackgroundColorForPressedState</key>
-		<array>
-			<integer>255</integer>
-			<integer>255</integer>
-			<integer>255</integer>
-			<real>0.5</real>
-		</array>
+		<string>WhiteColorWith05Alpha</string>
 		<key>NumberPadButtonTextColor</key>
-		<array>
-			<integer>255</integer>
-			<integer>255</integer>
-			<integer>255</integer>
-		</array>
+		<string>WhiteColor</string>
 		<key>TabBarBackgroundColor</key>
-		<array>
-			<integer>247</integer>
-			<integer>247</integer>
-			<integer>247</integer>
-		</array>
+		<string>AppleDefaultOffWhite</string>
 		<key>TabBarTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>NavigationBarTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>ContactsTableSectionIndexColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>RecentsSegmentedControlTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>SideMenuTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
+		<key>SideMenuHeaderBackgroundColor</key>
+		<string>AppleDefaultOffWhite</string>
 		<key>SideMenuButtonPressedState</key>
-		<array>
-			<integer>247</integer>
-			<integer>247</integer>
-			<integer>247</integer>
-		</array>
+		<string>AppleDefaultOffWhite</string>
 		<key>NavigationBarBarTintColor</key>
-		<array>
-			<integer>248</integer>
-			<integer>248</integer>
-			<integer>248</integer>
-		</array>
+		<string>AppleDefaultOffWhite</string>
 		<key>AvailabilityTableViewTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>RecentsTableViewTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>ContactSearchBarTintColor</key>
-		<array>
-			<integer>0</integer>
-			<integer>0</integer>
-			<integer>0</integer>
-		</array>
+		<string>BlackColor</string>
 		<key>ContactSearchBarBarTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>LeftDrawerButtonTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>RecentsFilterControlTintColor</key>
-		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>146</integer>
-		</array>
+		<string>PrimaryBrandColor</string>
 		<key>TwoStepScreenInfoBarBackgroundColor</key>
 		<array>
 			<string>229</string>
@@ -139,11 +105,7 @@
 			<string>229</string>
 		</array>
 		<key>TwoStepScreenVialerIconColor</key>
-		<array>
-			<string>46</string>
-			<string>49</string>
-			<string>146</string>
-		</array>
+		<string>SecondaryBrandColor</string>
 		<key>TwoStepScreenBubblingColor</key>
 		<array>
 			<string>61</string>
@@ -157,40 +119,15 @@
 			<string>84</string>
 		</array>
 		<key>TwoStepScreenSideBIconColor</key>
-		<array>
-			<string>46</string>
-			<string>49</string>
-			<string>146</string>
-		</array>
+		<string>SecondaryBrandColor</string>
 		<key>TwoStepScreenBackgroundHeaderColor</key>
-		<array>
-			<string>46</string>
-			<string>49</string>
-			<string>146</string>
-		</array>
+		<string>SecondaryBrandColor</string>
 		<key>ReachabilityBarBackgroundColor</key>
 		<array>
 			<integer>178</integer>
 			<integer>177</integer>
 			<integer>184</integer>
 		</array>
-		<key>GradientBackgroundColors</key>
-		<dict>
-			<key>GradientStart</key>
-			<array>
-				<integer>46</integer>
-				<integer>49</integer>
-				<integer>146</integer>
-			</array>
-			<key>GradientEnd</key>
-			<array>
-				<integer>42</integer>
-				<integer>45</integer>
-				<integer>169</integer>
-			</array>
-			<key>GradientAngle</key>
-			<integer>300</integer>
-		</dict>
 	</dict>
 	<key>URLS</key>
 	<dict>

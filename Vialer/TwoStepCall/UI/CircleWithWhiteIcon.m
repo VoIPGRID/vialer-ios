@@ -23,6 +23,7 @@ static int const CircleWithWhiteIconBackgroundInset = 6;
 @implementation CircleWithWhiteIcon
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setup];
 }
 

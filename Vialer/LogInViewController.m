@@ -7,19 +7,18 @@
 
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
-#import "GAITracker.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PBWebViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "SettingsViewController.h"
+#import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "UIView+RoundedStyle.h"
+#import "Vialer-Swift.h"
 #import "VIAScene.h"
 #import "VoIPGRIDRequestOperationManager+ForgotPassword.h"
 
-#import <AVFoundation/AVFoundation.h>
-#import <QuartzCore/QuartzCore.h>
-
-#import "PBWebViewController.h"
-#import "SVProgressHUD.h"
 
 static NSString * const LoginViewControllerMobileNumberKey = @"mobile_nr";
 static NSString * const LogInViewControllerLogoImageName = @"logo";
@@ -104,7 +103,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [self clearAllTextFields];
     [self addObservers];
 
@@ -139,7 +138,6 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 #pragma mark - UITextField delegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([self.loginFormView.usernameField isEqual:textField]) {
-        // TODO: focus on password field
         [textField resignFirstResponder];
         [self.loginFormView.passwordField becomeFirstResponder];
     } else if ([self.loginFormView.passwordField isEqual:textField]) {
@@ -496,7 +494,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             SystemUser *systemUser = [SystemUser currentUser];
             self.configureFormView.outgoingNumberLabel.text = systemUser.outgoingNumber;
             self.configureFormView.phoneNumberField.text = systemUser.mobileNumber;
-            self.unlockView.greetingsLabel.text = [NSString stringWithFormat:@"%@ %@!", systemUser.firstName, systemUser.lastName];
+            self.unlockView.greetingsLabel.text = systemUser.displayName;
 
             //If a success block was provided, execute it
             if (success) {
@@ -611,7 +609,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)unlockIt {
-    if (self.currentUser.sipAllowed && !self.currentUser.sipAccount) {
+    if (!self.currentUser.sipAccount) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:LoginViewControllerSettingsStoryboard bundle:nil];
         UINavigationController *navigationController = [storyBoard instantiateViewControllerWithIdentifier:LoginViewControllerSettingsNavigationControllerStoryboard];
         SettingsViewController *viewController = navigationController.viewControllers[0];

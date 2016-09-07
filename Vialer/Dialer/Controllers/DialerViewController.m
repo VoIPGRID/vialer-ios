@@ -6,17 +6,16 @@
 #import "DialerViewController.h"
 
 #import "AppDelegate.h"
+#import <AVFoundation/AVAudioPlayer.h>
 #import "Configuration.h"
-#import "GAITracker.h"
-#import "NumberPadViewController.h"
 #import "PasteableUILabel.h"
+#import "NumberPadButton.h"
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
-#import "TwoStepCallingViewController.h"
-#import "SIPCallingViewController.h"
 #import "SystemUser.h"
-
+#import "TwoStepCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
+#import "Vialer-Swift.h"
 
 #import <AVFoundation/AVAudioSession.h>
 
@@ -27,7 +26,7 @@ static NSString * const DialerViewControllerLeftDrawerButtonImage = @"menu";
 static NSString * const DialerViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
-@interface DialerViewController () <PasteableUILabelDelegate, NumberPadViewControllerDelegate, ReachabilityBarViewControllerDelegate>
+@interface DialerViewController () <PasteableUILabelDelegate, ReachabilityBarViewControllerDelegate>
 
 @property (strong, nonatomic) UIBarButtonItem *leftDrawerButton;
 @property (weak, nonatomic) IBOutlet PasteableUILabel *numberLabel;
@@ -37,6 +36,8 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 @property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
 @property (strong, nonatomic) NSString *numberText;
 @property (strong, nonatomic) NSString *lastCalledNumber;
+
+@property (nonatomic, strong) NSDictionary *sounds;
 
 @end
 
@@ -57,11 +58,12 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupLayout];
+    [self setupSounds];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
     [self setupCallButton];
 }
@@ -141,22 +143,62 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         self.lastCalledNumber = self.numberText;
 
         if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
-            [GAITracker setupOutgoingSIPCallEvent];
+            [VialerGAITracker setupOutgoingSIPCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerSIPCallingSegue sender:self];
         } else {
-            [GAITracker setupOutgoingConnectABCallEvent];
+            [VialerGAITracker setupOutgoingConnectABCallEvent];
             [self performSegueWithIdentifier:DialerViewControllerTwoStepCallingSegue sender:self];
         }
     }
 }
 
-#pragma mark - seques
+- (IBAction)numberPressed:(NumberPadButton *)sender {
+    [self numberPadPressedWithCharacter:sender.number];
+    [self playSoundForCharacter:sender.number];
+}
+
+- (IBAction)longPressZeroButton:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self playSoundForCharacter:@"0"];
+        [self numberPadPressedWithCharacter:@"+"];
+    }
+}
+
+- (void)setupSounds {
+    if (!self.sounds) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSMutableDictionary *sounds = [NSMutableDictionary dictionary];
+            for (NSString *sound in @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#"]) {
+                NSString *dtmfFile;
+                if ([sound isEqualToString:@"*"]) {
+                    dtmfFile = @"dtmf-s";
+                } else {
+                    dtmfFile = [NSString stringWithFormat:@"dtmf-%@", sound];
+                }
+                NSURL *dtmfUrl = [[NSBundle mainBundle] URLForResource:dtmfFile withExtension:@"aif"];
+                NSAssert(dtmfUrl, @"No sound available");
+                NSError *error;
+                AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:dtmfUrl error:&error];
+                if (!error) {
+                    [player prepareToPlay];
+                }
+                sounds[sound] = player;
+            }
+            self.sounds = [sounds copy];
+        });
+    }
+}
+
+- (void)playSoundForCharacter:(NSString *)character {
+    AVAudioPlayer *player = self.sounds[character];
+    [player setCurrentTime:0];
+    [player play];
+}
+
+#pragma mark - segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[NumberPadViewController class]]) {
-        NumberPadViewController *npvc = (NumberPadViewController *)segue.destinationViewController;
-        npvc.delegate = self;
-    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
         ReachabilityBarViewController *rbvc = (ReachabilityBarViewController *)segue.destinationViewController;
         rbvc.delegate = self;
     } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
@@ -164,8 +206,8 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         [tscvc handlePhoneNumber:self.numberText];
         self.numberText = @"";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleOutgoingCallWithPhoneNumber:self.numberText withContact:nil];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.numberText contact:nil];
         self.numberText = @"";
     }
 }

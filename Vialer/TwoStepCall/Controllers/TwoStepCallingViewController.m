@@ -8,10 +8,10 @@
 #import "BubblingPoints.h"
 #import "CircleWithWhiteIcon.h"
 #import "Configuration.h"
-#import "GAITracker.h"
 #import "SystemUser.h"
 #import "TwoStepCall.h"
 #import "VialerIconView.h"
+#import "Vialer-Swift.h"
 
 static float const TwoStepCallingViewControllerGreyedOutAlpha = .5f;
 static float const TwoStepCallingViewControllerDismissTime = 3.0;
@@ -48,7 +48,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [self checkCallManagerStatus];
 }
 
@@ -83,16 +83,16 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 - (void)setupView {
     Configuration *defaultConfiguration = [Configuration defaultConfiguration];
     // Setup colors & icons
-    self.backgroundHeader.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
-    self.infobarBackground.backgroundColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
-    self.vialerIconView.iconColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenVialerIconColor];
-    self.aSide.innerCircleColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenSideAIconColor];
+    self.backgroundHeader.backgroundColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
+    self.infobarBackground.backgroundColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
+    self.vialerIconView.iconColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenVialerIconColor];
+    self.aSide.innerCircleColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenSideAIconColor];
     UIImage *iconForAAndBSide = [UIImage imageNamed:TwoStepCallingViewControllerAsideIcon];
     self.aSide.icon = iconForAAndBSide;
-    self.bSide.innerCircleColor = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenSideBIconColor];
+    self.bSide.innerCircleColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenSideBIconColor];
     self.bSide.icon = iconForAAndBSide;
-    self.bubblingOne.color = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
-    self.bubblingTwo.color = [defaultConfiguration tintColorForKey:ConfigurationTwoStepScreenBubblingColor];
+    self.bubblingOne.color = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenBubblingColor];
+    self.bubblingTwo.color = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenBubblingColor];
 }
 
 # pragma mark - properties

@@ -24,9 +24,9 @@
     Configuration *config = [Configuration defaultConfiguration];
 
     // Customize TabBar
-    [UITabBar appearance].tintColor = [config tintColorForKey:ConfigurationTabBarTintColor];
-    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIToolbar class]]] setTintColor:[config tintColorForKey:ConfigurationTabBarTintColor]];
-    [UITabBar appearance].barTintColor = [config tintColorForKey:ConfigurationTabBarBackgroundColor];
+    [UITabBar appearance].tintColor = [config.colorConfiguration colorForKey:ConfigurationTabBarTintColor];
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIToolbar class]]] setTintColor:[config.colorConfiguration colorForKey:ConfigurationTabBarTintColor]];
+    [UITabBar appearance].barTintColor = [config.colorConfiguration colorForKey:ConfigurationTabBarBackgroundColor];
 }
 
 @end

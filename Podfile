@@ -14,10 +14,10 @@ def default_pods
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'
     pod 'Reachability'
-    pod 'SSKeychain'
-    pod 'SimulatorStatusMagic', :configurations => ['Debug', 'AdHocDistribution']
+    pod 'SAMKeychain'
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib-iOS'
+    pod 'VialerSIPLib'
 end
 
 target 'Vialer' do
@@ -29,6 +29,10 @@ target 'Voys' do
 end
 
 target 'Verbonden' do
+    default_pods
+end
+
+target 'Acceptatie' do
     default_pods
 end
 

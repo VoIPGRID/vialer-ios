@@ -6,7 +6,7 @@
 #import "SIPUtils.h"
 #import "SystemUser.h"
 #import <OCMock/OCMock.h>
-#import <VialerSIPLib-iOS/VialerSIPLib.h>
+#import <VialerSIPLib/VialerSIPLib.h>
 @import XCTest;
 
 @interface SIPUtilsTests : XCTestCase
@@ -35,18 +35,7 @@
     [super tearDown];
 }
 
-- (void)testSetupSIPEndPointUserIsNotAllowedToSip {
-    OCMStub([self.systemUserMock sipAllowed]).andReturn(NO);
-
-    BOOL success = [SIPUtils setupSIPEndpoint];
-
-    OCMVerify([self.systemUserMock sipAllowed]);
-
-    XCTAssertFalse(success, @"The user should not be allowed to setup the endpoint. Because the user is not allowed to SIP.");
-}
-
-- (void)testSetupSIPEndPointWithSystemUserIsAllowedToUseSIP {
-    OCMStub([self.systemUserMock sipAllowed]).andReturn(YES);
+- (void)testSetupSIPEndPointWithSystemUserHasSIPEnabled {
     OCMStub([self.systemUserMock sipEnabled]).andReturn(YES);
 
     id vialerSIPLibMock = OCMClassMock([VialerSIPLib class]);
@@ -55,7 +44,6 @@
 
     BOOL success = [SIPUtils setupSIPEndpoint];
 
-    OCMVerify([self.systemUserMock sipAllowed]);
     OCMVerify([self.systemUserMock sipEnabled]);
 
     XCTAssertTrue(success, @"The endpoint should be setup with the configuration.");

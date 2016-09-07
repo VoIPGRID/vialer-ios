@@ -26,16 +26,11 @@
 }
 
 - (void)initFromConfig {
-    NSDictionary *background = [[Configuration defaultConfiguration] tintColorDictionaryForKey:ConfigurationGradientBackgroundColors];
+    ColorConfiguration *colorConfig = [Configuration defaultConfiguration].colorConfiguration;
 
-    NSArray *gradientStartColor = [background objectForKey:ConfigurationGradientViewGradientStart];
-    self.startColor = [Configuration colorFromArray:gradientStartColor];
-
-    NSArray *gradientEndColor = [background objectForKey:ConfigurationGradientViewGradientEnd];
-    self.endColor = [Configuration colorFromArray:gradientEndColor];
-
-    NSNumber *gradientAngle = [background objectForKey:ConfigurationGradientViewGradientAngle];
-    self.angle = [gradientAngle floatValue];
+    self.startColor = [colorConfig colorForKey:ConfigurationBackgroundGradientStartColor];
+    self.endColor = [colorConfig colorForKey:ConfigurationBackgroundGradientEndColor];
+    self.angle = ConfigurationBackgroundGradientAngle;
 }
 
 - (void)drawRect:(CGRect)rect {

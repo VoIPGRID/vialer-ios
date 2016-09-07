@@ -10,7 +10,7 @@
 @import XCTest;
 
 @interface APNSHandler ()
-@property (strong, nonatomic)PKPushRegistry *voipRegistry;
+@property (strong, nonatomic) PKPushRegistry *voipRegistry;
 @property (weak, nonatomic) Middleware *middleware;
 
 + (void)setSharedHandler:(APNSHandler *)sharedHandler;
@@ -18,7 +18,7 @@
 @end
 
 @interface APNSHandlerTests : XCTestCase
-@property (strong, nonatomic)APNSHandler *apnsHandler;
+@property (strong, nonatomic) APNSHandler *apnsHandler;
 @end
 
 @implementation APNSHandlerTests

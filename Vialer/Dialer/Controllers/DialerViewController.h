@@ -5,7 +5,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "NumberPadViewController.h"
 
 @interface DialerViewController : UIViewController
 

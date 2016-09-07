@@ -15,7 +15,7 @@ Starting from Version 3.0 the app also acts as a VoIP softphone, enabling the us
 ## Technical implementation
 The features provided by the app until v3.0 use the platforms API.
 
-Starting with v3.0 the VoIP functionality is provided by using PJSIP. We have wrapped PJSIP into a [cocoapod](https://github.com/VoIPGRID/Vialer-pjsip-iOS) which in turn is used by a [pod](https://github.com/VoIPGRID/VialerSIPLib-iOS) which provides all the SIP functionality.
+Starting with v3.0 the VoIP functionality is provided by using PJSIP. We have wrapped PJSIP into a [cocoapod](https://github.com/VoIPGRID/Vialer-pjsip-iOS) which in turn is used by a [pod](https://github.com/VoIPGRID/VialerSIPLib) which provides all the SIP functionality.
 
 On an outgoing call the app registers it self with VoIPGRID's sip proxy and after the call has ended the registration is removed. We have deliberately chosen for this registering/deregistering process to avoid "dangling" registrations on the proxy when the phone goes out of proper internet coverage.
 

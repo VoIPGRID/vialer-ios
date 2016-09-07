@@ -9,11 +9,13 @@
 #import "AvailabilityModel.h"
 #import "AvailabilityViewController.h"
 #import "Configuration.h"
-#import "GAITracker.h"
 #import "SystemUser.h"
 #import "VialerWebViewController.h"
+#import "Vialer-Swift.h"
 
 static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
+static NSString * const SideMenuViewControllerStatisticsPageURL = @"/stats/dashboard/";
+static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
 
 @interface SideMenuViewController() <AvailabilityViewControllerDelegate>
 
@@ -39,7 +41,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.headerView.backgroundColor = [[Configuration defaultConfiguration] tintColorForKey:ConfigurationSideMenuHeaderBackgroundColor];
+    self.headerView.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuHeaderBackgroundColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,25 +62,26 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)setUsernameLabel:(UILabel *)usernameLabel {
     _usernameLabel = usernameLabel;
-    _usernameLabel.textColor = [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
+    _usernameLabel.textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setOutgoingNumberLabel:(UILabel *)outgoingNumberLabel {
     _outgoingNumberLabel = outgoingNumberLabel;
-    _outgoingNumberLabel.textColor = [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
+    _outgoingNumberLabel.textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setBuildVersionLabel:(UILabel *)buildVersionLabel {
     _buildVersionLabel = buildVersionLabel;
     _buildVersionLabel.text = self.appVersionBuildString;
 
-    if ([AppDelegate isSnapshotScreenshotRun]) {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (appDelegate.isScreenshotRun) {
         _buildVersionLabel.text = nil;
     }
 }
 
 - (UIColor *)tintColor {
-    return [self.defaultConfiguration tintColorForKey:ConfigurationSideMenuTintColor];
+    return [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
 }
 
 - (void)setAvailabilityIcon:(UIImageView *)availabilityIcon {
@@ -138,14 +141,15 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:SideMenuViewControllerShowStatisticsSegue]) {
-        [GAITracker trackScreenForControllerName:@"StatisticsWebView"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
+
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GAStatisticsWebViewTrackingName]];
         webController.title = NSLocalizedString(@"Statistics", nil);
-        webController.nextUrl = @"/stats/dashboard/";
+        [webController nextUrl:SideMenuViewControllerStatisticsPageURL];
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowInformationSegue]) {
-        [GAITracker trackScreenForControllerName:@"InformationWebView"];
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GAInformationWebViewTrackingName]];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
@@ -158,11 +162,12 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
         webController.showsNavigationToolbar = NO;
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowDialPlanSegue]) {
-        [GAITracker trackScreenForControllerName:@"DialplanWebview"];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         VialerWebViewController *webController = navController.viewControllers[0];
+
+        [VialerGAITracker trackScreenForControllerWithName:[VialerGAITracker GADialplanWebViewTrackingName]];
         webController.title = NSLocalizedString(@"Dial plan", nil);
-        webController.nextUrl = @"/dialplan/";
+        [webController nextUrl:SideMenuViewControllerDialplanPageURL];
 
     } else if ([segue.identifier isEqualToString:SideMenuViewControllerShowAvailabilitySegue]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
@@ -175,24 +180,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 
 - (NSString *)appVersionBuildString {
     if (!_appVersionBuildString) {
-        NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
-        NSMutableString *versionString = [NSMutableString stringWithFormat:@"v:%@", [infoDict objectForKey:@"CFBundleShortVersionString"]];
-        //We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
-        //the additional part of the tag is stored in de plist by the update_version_number script. If set, display
-        NSString *additionalVersionString = [infoDict objectForKey:@"Additional_Version_String"];
-        if ([additionalVersionString length] >0)
-            [versionString appendFormat:@".%@", additionalVersionString];
-
-        NSString *version;
-#if DEBUG
-        version = [NSString stringWithFormat:@"Commit: %@", [infoDict objectForKey:@"Commit_Short_Hash"]];
-#else
-        version = [NSString stringWithFormat:@"%@ (%@)",
-                   versionString,
-                   [infoDict objectForKey:@"CFBundleVersion"]];
-#endif
-
-        _appVersionBuildString = version;
+        _appVersionBuildString = [AppInfo currentAppVersion];
     }
     return _appVersionBuildString;
 }

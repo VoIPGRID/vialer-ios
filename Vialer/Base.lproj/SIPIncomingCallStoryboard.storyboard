@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gU5-bE-K8d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gU5-bE-K8d">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-JN-qTG" userLabel="decline-button">
-                                <rect key="frame" x="185" y="470" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-JN-qTG" userLabel="decline-button">
+                                <rect key="frame" x="73" y="537" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="1zY-5f-pIo"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="Dl5-nR-VkI"/>
@@ -27,31 +27,32 @@
                                     <constraint firstAttribute="width" secondItem="7dS-JN-qTG" secondAttribute="height" multiplier="1:1" id="OeC-YL-FVI"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="bhc-yo-Zdm"/>
                                 </constraints>
-                                <state key="normal" image="decline-button"/>
+                                <state key="normal" image="declineButton"/>
+                                <state key="disabled" image="declineButtonDisabled"/>
                                 <connections>
                                     <action selector="declineCallButtonPressed:" destination="gU5-bE-K8d" eventType="touchUpInside" id="wXN-sY-wiV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 123 45 67 890" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WNk-Js-erb">
-                                <rect key="frame" x="68" y="66" width="464" height="79"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="+31 123 45 67 890" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WNk-Js-erb">
+                                <rect key="frame" x="64" y="66" width="247" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WNk-Js-erb" secondAttribute="height" multiplier="16:1" constant="-792" id="t7z-Tt-PwI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-Be-v8D" userLabel="status label">
-                                <rect key="frame" x="68" y="172" width="464" height="46"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-Be-v8D" userLabel="status label">
+                                <rect key="frame" x="64" y="158" width="247" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zEP-Be-v8D" secondAttribute="height" multiplier="16:1" constant="-280" id="aQO-5v-KRe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkp-kf-uI8" userLabel="accept-button">
-                                <rect key="frame" x="345" y="470" width="70" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkp-kf-uI8" userLabel="accept-button">
+                                <rect key="frame" x="233" y="537" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hkp-kf-uI8" secondAttribute="height" multiplier="1:1" id="5JO-1Q-bwq"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="EUX-ok-A1p"/>
@@ -59,25 +60,26 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="ZdH-Dv-PRJ"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="hcH-3O-l8F"/>
                                 </constraints>
-                                <state key="normal" image="accept-button"/>
+                                <state key="normal" image="acceptButton"/>
+                                <state key="disabled" image="acceptButtonDisabled"/>
                                 <connections>
                                     <action selector="acceptCallButtonPressed:" destination="gU5-bE-K8d" eventType="touchUpInside" id="eOU-w6-lyK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JN-KW-x5m">
-                                <rect key="frame" x="196" y="548" width="49" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Decline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JN-KW-x5m">
+                                <rect key="frame" x="84" y="615" width="48" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-Lx-HHe">
-                                <rect key="frame" x="357" y="548" width="46" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Accept" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-Lx-HHe">
+                                <rect key="frame" x="245" y="615" width="46" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="9kd-Lx-HHe" firstAttribute="centerX" secondItem="hkp-kf-uI8" secondAttribute="centerX" id="4os-Dc-K2I"/>
                             <constraint firstItem="WNk-Js-erb" firstAttribute="leading" secondItem="Xcd-5K-y8o" secondAttribute="leadingMargin" constant="48" id="AbW-CU-sYQ"/>
@@ -105,7 +107,7 @@
                         <outlet property="declineCallButton" destination="7dS-JN-qTG" id="VoU-Ca-609"/>
                         <outlet property="incomingCallStatusLabel" destination="zEP-Be-v8D" id="qDe-S0-IuC"/>
                         <outlet property="incomingPhoneNumberLabel" destination="WNk-Js-erb" id="B0y-gc-62H"/>
-                        <segue destination="zNi-hP-2b3" kind="presentation" identifier="SIPCallingSegue" id="zio-Qu-I6r"/>
+                        <segue destination="BoK-Cn-9MQ" kind="presentation" identifier="SIPCallingSegue" id="Pt2-8p-aNn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MD9-kx-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,16 +115,18 @@
             <point key="canvasLocation" x="285" y="666"/>
         </scene>
         <!--SIPCallingStoryboard-->
-        <scene sceneID="dwS-B1-ZaM">
+        <scene sceneID="ObF-v4-h4U">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SIPCallingStoryboardSegue" storyboardName="SIPCallingStoryboard" id="zNi-hP-2b3" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0bf-Cc-9bm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="SIPCallingStoryboard" id="BoK-Cn-9MQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQ6-QE-XUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285.5" y="1172"/>
+            <point key="canvasLocation" x="285" y="1141"/>
         </scene>
     </scenes>
     <resources>
-        <image name="accept-button" width="70" height="70"/>
-        <image name="decline-button" width="70" height="70"/>
+        <image name="acceptButton" width="73" height="73"/>
+        <image name="acceptButtonDisabled" width="72" height="73"/>
+        <image name="declineButton" width="83" height="83"/>
+        <image name="declineButtonDisabled" width="83" height="83"/>
     </resources>
 </document>

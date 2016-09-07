@@ -1,8 +1,5 @@
 //
 //  LoginFormViewTests.m
-//  Vialer
-//
-//  Created by Bob Voorneveld on 19/12/15.
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
@@ -23,10 +20,15 @@
 
 - (void)setUp {
     [super setUp];
-    self.configurationMock = OCMClassMock([Configuration class]);
     self.color = [UIColor redColor];
-    OCMStub([self.configurationMock tintColorForKey:[OCMArg any]]).andReturn(self.color);
+
+    id colorConfigurationMock = OCMClassMock([ColorConfiguration class]);
+    OCMStub([colorConfigurationMock colorForKey:[OCMArg any]]).andReturn(self.color);
+
+    self.configurationMock = OCMClassMock([Configuration class]);
+    OCMStub([self.configurationMock colorConfiguration]).andReturn(colorConfigurationMock);
     OCMStub([self.configurationMock defaultConfiguration]).andReturn(self.configurationMock);
+
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
     [self.loginViewController loadViewIfNeeded];
     self.loginFormView = self.loginViewController.loginFormView;

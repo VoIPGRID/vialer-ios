@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 /** @property screenToShow
  *  The onboarding screen to show after the Logo animation
  **/
-@property (nonatomic)OnboardingScreens screenToShow;
+@property (nonatomic) OnboardingScreens screenToShow;
 
 - (IBAction)openForgotPassword:(id)sender;
 - (IBAction)closeButtonPressed:(UIButton *)sender;

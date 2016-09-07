@@ -6,11 +6,10 @@
 #import "SIPIncomingCallViewController.h"
 
 #import "ContactUtils.h"
-#import "GAITracker.h"
 #import "PhoneNumberModel.h"
-#import "SIPCallingViewController.h"
 #import "SIPUtils.h"
-#import <VialerSIPLib-iOS/VSLRingtone.h>
+#import <VialerSIPLib/VSLRingtone.h>
+#import "Vialer-Swift.h"
 
 static NSString * const SIPIncomingCallViewControllerShowSIPCallingSegue = @"SIPCallingSegue";
 static NSString * const SIPIncomingCallViewControllerCallState = @"callState";
@@ -34,11 +33,14 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GAITracker trackScreenForControllerName:NSStringFromClass([self class])];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     self.incomingPhoneNumberLabel.text = self.phoneNumber;
+    [self.call addObserver:self forKeyPath:SIPIncomingCallViewControllerCallState options:0 context:NULL];
+    [self.call addObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState options:0 context:NULL];
 }
 
-- (void)dealloc {
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self.call removeObserver:self forKeyPath:SIPIncomingCallViewControllerCallState];
     [self.call removeObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState];
     [self.ringtone stop];
@@ -46,8 +48,8 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingViewController = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingViewController handleIncomingCallWithVSLCall:self.call];
+        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        [sipCallingVC handleIncomingCall:self.call];
     }
 }
 
@@ -63,20 +65,16 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 }
 
 - (void)setCall:(VSLCall *)call {
-    if (_call) {
-        [_call removeObserver:self forKeyPath:SIPIncomingCallViewControllerCallState];
-        [_call removeObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState];
-    }
     _call = call;
-    [call addObserver:self forKeyPath:SIPIncomingCallViewControllerCallState options:0 context:NULL];
-    [call addObserver:self forKeyPath:SIPIncomingCallViewControllerMediaState options:0 context:NULL];
     [self.ringtone start];
 
-    if (call.callerName) {
-        self.phoneNumber = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
-    } else {
-        self.phoneNumber = call.callerNumber;
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (call.callerName) {
+            self.phoneNumber = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
+        } else {
+            self.phoneNumber = call.callerNumber;
+        }
+    });
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
@@ -114,7 +112,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (IBAction)declineCallButtonPressed:(UIButton * _Nonnull)sender {
     DDLogDebug(@"User pressed \"Decline call\" for call: %ld", (long)self.call.callId);
-    [GAITracker declineIncomingCallEvent];
+    [VialerGAITracker declineIncomingCallEvent];
     NSError *error;
     [self.call decline:&error];
     if (error) {
@@ -126,7 +124,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 
 - (IBAction)acceptCallButtonPressed:(UIButton * _Nonnull)sender {
     DDLogDebug(@"User pressed \"Accept call\" for call: %ld", (long)self.call.callId);
-    [GAITracker acceptIncomingCallEvent];
+    [VialerGAITracker acceptIncomingCallEvent];
     [self.ringtone stop];
     [self performSegueWithIdentifier:SIPIncomingCallViewControllerShowSIPCallingSegue sender:nil];
 }

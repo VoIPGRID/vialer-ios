@@ -52,7 +52,7 @@
 
     [self.activateSIPAccountVC prepareForSegue:mockSegue sender:nil];
 
-    OCMVerify([mockUserProfileWVC setNextUrl:[OCMArg isEqual:@"/user/change/"]]);
+    OCMVerify([mockUserProfileWVC nextUrl:[OCMArg isEqual:@"/user/change/"]]);
 
     [mockUserProfileWVC stopMocking];
     [mockSegue stopMocking];

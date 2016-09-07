@@ -7,17 +7,19 @@
 
 #import "ContactUtils.h"
 #import "SystemUser.h"
+#import "Vialer-Swift.h"
 
 @implementation SIPUtils
 
 # pragma mark - Methods
 
 + (BOOL)setupSIPEndpoint {
-    if (![SystemUser currentUser].sipAllowed || ![SystemUser currentUser].sipEnabled) {
+    if (![SystemUser currentUser].sipEnabled) {
         return NO;
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
+    endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
     endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                       [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
 
@@ -26,7 +28,7 @@
     if (!success || error) {
         DDLogError(@"Failed to startup VialerSIPLib: %@", error);
     }
-
+    [[VialerSIPLib sharedInstance] onlyUseIlbc:YES];
     return success;
 }
 
