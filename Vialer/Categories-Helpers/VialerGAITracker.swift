@@ -79,7 +79,7 @@ import Foundation
         let dryRun = false
         #endif
 
-        let logLevel = GAILogLevel.Info
+        let logLevel = GAILogLevel.info
 
         setupGAITracker(logLevel:logLevel, isDryRun:dryRun)
     }
@@ -90,18 +90,18 @@ import Foundation
      - parameter logLevel: The GA log level you want to configure the shared instance with.
      - parameter isDryRun: Boolean indicating GA to run in dry run mode or not.
      */
-    static func setupGAITracker(logLevel logLevel: GAILogLevel, isDryRun: Bool) {
+    static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         if let error = configureError {
             assertionFailure("Error configuring Google Services: \(error)")
         }
         let gai = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true
-        gai.logger.logLevel = logLevel
-        gai.dryRun = isDryRun
+        gai?.trackUncaughtExceptions = true
+        gai?.logger.logLevel = logLevel
+        gai?.dryRun = isDryRun
 
-        tracker.set(GAIFields.customDimensionForIndex(Constants.CustomDimensions.clientID), value: AppInfo.currentAppVersion()!)
+        tracker.set(GAIFields.customDimension(for: Constants.CustomDimensions.clientID), value: AppInfo.currentAppVersion()!)
     }
 
     /**
@@ -110,7 +110,7 @@ import Foundation
      - parameter clientID: The client ID to set as custom dimension.
      */
     static func setCustomDimension(withClientID clientID:String) {
-        tracker.set(GAIFields.customDimensionForIndex(Constants.CustomDimensions.appVersion), value: clientID)
+        tracker.set(GAIFields.customDimension(for: Constants.CustomDimensions.appVersion), value: clientID)
     }
 
     /**
@@ -120,9 +120,9 @@ import Foundation
 
      - parameter name: The name of the screen name to track.
      */
-    static func trackScreenForController(name name:String) {
-        tracker.set(kGAIScreenName, value: name.stringByReplacingOccurrencesOfString("ViewController", withString: ""))
-        tracker.send(GAIDictionaryBuilder.createScreenView().build() as [NSObject: AnyObject])
+    static func trackScreenForController(name:String) {
+        tracker.set(kGAIScreenName, value: name.replacingOccurrences(of: "ViewController", with: ""))
+        tracker.send(GAIDictionaryBuilder.createScreenView().build() as [NSObject : AnyObject])
     }
 
     // MARK: - Events
@@ -135,8 +135,8 @@ import Foundation
      - parameter label:    The Label of the Event
      - parameter value:    The value of the Event
      */
-    static func sendEvent(withCategory category: String, action: String, label: String, value: NSNumber?) {
-        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build() as [NSObject: AnyObject]
+    static func sendEvent(withCategory category: String, action: String, label: String, value: NSNumber!) {
+        let event = GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: value).build() as [NSObject : AnyObject]
         tracker.send(event)
     }
 
@@ -144,21 +144,21 @@ import Foundation
      Indication a call event is received from the SIP Proxy and the app is ringing.
      */
     static func incomingCallRingingEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Ringing", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Ringing", value: 0)
     }
 
     /**
      The incoming call is accepted.
      */
     static func acceptIncomingCallEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Accepted", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Accepted", value: 0)
     }
 
     /**
      The incoming call is rejected.
      */
     static func declineIncomingCallEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Declined", value: nil)
+        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Declined", value: 0)
     }
 
     /**
@@ -188,7 +188,7 @@ import Foundation
      - parameter connectionType: A string indicating the current connection type, as described in the "Google Analytics events for all Mobile apps" document.
      - parameter isAccepted:     Boolean indicating if we can accept the incoming VoIP call.
      */
-    static func pushNotification(isAccepted isAccepted: Bool, connectionType: String ) {
+    static func pushNotification(isAccepted: Bool, connectionType: String ) {
         let action = isAccepted ? "accepted" : "rejected"
         sendEvent(withCategory: Constants.Categories.middleware, action: action, label: connectionType, value: nil)
     }
@@ -199,7 +199,7 @@ import Foundation
      Exception when the registration failed on the middleware.
      */
     static func registrationFailedWithMiddleWareException() {
-        let exception = GAIDictionaryBuilder.createExceptionWithDescription("Failed middleware registration", withFatal: false).build() as [NSObject: AnyObject]
+        let exception = GAIDictionaryBuilder.createException(withDescription: "Failed middleware registration", withFatal: false).build() as [NSObject : AnyObject]
         tracker.send(exception)
     }
 
@@ -210,8 +210,8 @@ import Foundation
 
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
-    static func respondedToIncomingPushNotification(withResponseTime responseTime: NSTimeInterval) {
-        let timing = GAIDictionaryBuilder.createTimingWithCategory(Constants.Categories.middleware, interval: responseTime * 1000, name: "response", label: nil).build() as [NSObject: AnyObject]
+    static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
+        let timing = GAIDictionaryBuilder.createTiming(withCategory: Constants.Categories.middleware, interval: (responseTime * 1000) as NSNumber, name: "response", label: nil).build() as [NSObject : AnyObject]
         tracker.send(timing)
     }
 
@@ -226,7 +226,7 @@ import Foundation
         if (call.connectDuration > 10) {
             let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
 
-            var labelString = "MOS:\(call.MOS)"
+            var labelString = "MOS:\(call.mos)"
             labelString += ",Bandwidth:\(mbPerMinute)"
 
             //VIALI-3258: get the audio codec from the call.
@@ -237,7 +237,7 @@ import Foundation
                                      kGAIEventAction : "CallMetrics",
                                      kGAIEventLabel : labelString]
 
-            tracker.send(dict as [NSObject : AnyObject])
+            tracker.send(dict as! [AnyHashable: Any])
         }
     }
 }

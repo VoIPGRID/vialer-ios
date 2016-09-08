@@ -6,6 +6,6 @@
 extension UIViewController {
     /// Returns the controllerName without the bundle name prepended.
     var controllerName: String {
-        return NSStringFromClass(self.classForCoder).stringByReplacingOccurrencesOfString("\(NSBundle.mainBundle().infoDictionary!["CFBundleName"]! as! String).", withString: "")
+        return NSStringFromClass(self.classForCoder).replacingOccurrences(of: "\(Bundle.main.infoDictionary!["CFBundleName"]! as! String).", with: "")
     }
 }

@@ -9,30 +9,30 @@ import Foundation
 @objc class RecentsTimeConverter: NSObject {
 
     /// A ISO-8601 24h CET date formatter
-    private static var dateFormatter24hCET: NSDateFormatter {
-        let formatter = NSDateFormatter()
+    fileprivate static var dateFormatter24hCET: DateFormatter {
+        let formatter = DateFormatter()
 
         // The ISO-8601 format
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
 
         // If the device is setup to use AM/PM, the line below will convert
         // this to 24h. In a 24h setup it does nothing.
-        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        formatter.timeZone = NSTimeZone(name: "CET")
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "CET")
         return formatter
     }
 
-    private static var usersLocalShortStyleDateFormatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone.localTimeZone()
-        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+    fileprivate static var usersLocalShortStyleDateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.dateStyle = DateFormatter.Style.short
         return formatter
     }
 
-    private static var usersLocalShortStyleTimeFormatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone.localTimeZone()
-        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    fileprivate static var usersLocalShortStyleTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.timeStyle = DateFormatter.Style.short
         return formatter
     }
 
@@ -47,8 +47,8 @@ import Foundation
 
      - Returns: A NSDate or nil if the date could not be parsed
      */
-    func dateFrom24hCET(timeString timeString:String) -> NSDate? {
-        return RecentsTimeConverter.dateFormatter24hCET.dateFromString(timeString)
+    func dateFrom24hCET(timeString:String) -> Date? {
+        return RecentsTimeConverter.dateFormatter24hCET.date(from: timeString)
     }
 
     /**
@@ -59,8 +59,8 @@ import Foundation
 
      - returns: A API consumable string representing the given date in 24h CET
      */
-    func apiFormatted24hCETstringFrom(date date:NSDate) -> String {
-        return RecentsTimeConverter.dateFormatter24hCET.stringFromDate(date)
+    func apiFormatted24hCETstringFrom(date:Date) -> String {
+        return RecentsTimeConverter.dateFormatter24hCET.string(from: date)
     }
 
     /**
@@ -73,22 +73,22 @@ import Foundation
 
      - returns: A time, "yesterday" or a date
      */
-    func relativeDayTimeStringFrom(date date:NSDate) -> String {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let startOfToday = calendar.startOfDayForDate(now)
+    func relativeDayTimeStringFrom(date:Date) -> String {
+        let now = Date()
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: now)
 
-        let deltaSeconds = startOfToday.timeIntervalSinceDate(date)
+        let deltaSeconds = startOfToday.timeIntervalSince(date)
         let deltaDays:Int = Int(deltaSeconds / (60 * 60 * 24))
 
         if (deltaDays > 0 ) {
             // Return a short styled date
-            return RecentsTimeConverter.usersLocalShortStyleDateFormatter.stringFromDate(date)
+            return RecentsTimeConverter.usersLocalShortStyleDateFormatter.string(from: date)
         } else if (deltaSeconds > 0) {
             return NSLocalizedString("yesterday", comment: "")
         } else {
             // Return a time
-            return RecentsTimeConverter.usersLocalShortStyleTimeFormatter.stringFromDate(date)
+            return RecentsTimeConverter.usersLocalShortStyleTimeFormatter.string(from: date)
         }
     }
 }
