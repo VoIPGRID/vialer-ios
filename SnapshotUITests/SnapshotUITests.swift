@@ -49,6 +49,10 @@ class SnapshotUITests: XCTestCase {
         let passwordField = app.secureTextFields["onboarding.loginView.password.textfield"]
         waitForElementToBeHittable(passwordField)
         passwordField.tap()
+
+        // If the test fails on this line stating: "Neither element nor
+        // any descendant has keyboard focus". For the Simulator go to:
+        // "Hardware" -> "Keyboard" -> Deselect "Connect Hardware Keyboard"
         passwordField.typeText(Constants.password)
         app.buttons["onboarding.loginView.login.button"].tap()
 

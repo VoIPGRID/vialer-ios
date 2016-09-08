@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0041926B2753F4A68F02BF1E /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A8A1D6F1A8AA25D1ACBD51 /* libPods-VialerSnapshotUITests.a */; };
 		06E7E1769604D2C47037A4E4 /* libPods-Acceptatie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3C796D68A1219D14AB9D82 /* libPods-Acceptatie.a */; };
 		2CF54FBCFC6ACAE501200828 /* libPods-Verbonden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E60EF824B88C52236E5BA9 /* libPods-Verbonden.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
@@ -652,6 +653,8 @@
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		42CFB9E44632D509DE1E5643 /* Pods-Acceptatie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie/Pods-Acceptatie.debug.xcconfig"; sourceTree = "<group>"; };
 		4454FD7AEA1DE4445D5B56C6 /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC312CA6238356894B65E48 /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		66A8A1D6F1A8AA25D1ACBD51 /* libPods-VialerSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3C796D68A1219D14AB9D82 /* libPods-Acceptatie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Acceptatie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE79967C0BDA357BFE234D5 /* Pods-Acceptatie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie/Pods-Acceptatie.release.xcconfig"; sourceTree = "<group>"; };
 		8011FFFAC6F67494F575C94C /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
@@ -912,6 +915,7 @@
 		FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-9.aif"; sourceTree = "<group>"; };
 		FBB8541C1A7FE3CE00121366 /* dtmf-s.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dtmf-s.aif"; sourceTree = "<group>"; };
 		FBB8542C1A7FF15300121366 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
+		FBBC45A3AB46BD4FC892EA7C /* Pods-VialerSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnected.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1023,6 +1027,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0041926B2753F4A68F02BF1E /* libPods-VialerSnapshotUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1758,6 +1763,8 @@
 				0B47C4E89CC8CC265679342B /* Pods-VialerTests.release.xcconfig */,
 				086A240C5DDA03A22A3208E5 /* Pods-Voys.debug.xcconfig */,
 				C219D30057C73493B63416F1 /* Pods-Voys.release.xcconfig */,
+				5DC312CA6238356894B65E48 /* Pods-VialerSnapshotUITests.debug.xcconfig */,
+				FBBC45A3AB46BD4FC892EA7C /* Pods-VialerSnapshotUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1987,6 +1994,7 @@
 				B8AC43D4379FC259DA9AE7D0 /* libPods-Vialer.a */,
 				8C9EB9ABB4B0D9411EDCB35A /* libPods-VialerTests.a */,
 				4454FD7AEA1DE4445D5B56C6 /* libPods-Voys.a */,
+				66A8A1D6F1A8AA25D1ACBD51 /* libPods-VialerSnapshotUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2186,9 +2194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F22DE0A91CC90D41001468B3 /* Build configuration list for PBXNativeTarget "VialerSnapshotUITests" */;
 			buildPhases = (
+				2A2C188D4AA85EEB6E09203F /* [CP] Check Pods Manifest.lock */,
 				F22DE0A21CC90D41001468B3 /* Sources */,
 				F22DE0A61CC90D41001468B3 /* Frameworks */,
 				F22DE0A71CC90D41001468B3 /* Resources */,
+				303E897088E5B321A3D16EBE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2520,6 +2530,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2A2C188D4AA85EEB6E09203F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		303E897088E5B321A3D16EBE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		382BCA50B55F303F9D6BF46C /* [CP] Embed Pods Frameworks */ = {
@@ -3777,6 +3817,7 @@
 		};
 		F22DE0AA1CC90D41001468B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DC312CA6238356894B65E48 /* Pods-VialerSnapshotUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -3806,6 +3847,7 @@
 		};
 		F22DE0AC1CC90D41001468B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBBC45A3AB46BD4FC892EA7C /* Pods-VialerSnapshotUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
