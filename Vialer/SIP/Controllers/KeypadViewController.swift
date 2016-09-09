@@ -4,14 +4,14 @@
 //
 
 protocol KeypadViewControllerDelegate {
-    func dtmfSent(dtmfSent: String?)
+    func dtmfSent(_ dtmfSent: String?)
 }
 
 private var myContext = 0
 
 class KeypadViewController: UIViewController {
 
-    private struct Configuration {
+    fileprivate struct Configuration {
         struct Timing {
             static let ConnectDurationInterval = 1.0
         }
@@ -35,26 +35,26 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    private lazy var dateComponentsFormatter: NSDateComponentsFormatter = {
-        let dateComponentsFormatter = NSDateComponentsFormatter()
-        dateComponentsFormatter.zeroFormattingBehavior = .Pad
-        dateComponentsFormatter.allowedUnits = [.Minute, .Second]
+    fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
+        let dateComponentsFormatter = DateComponentsFormatter()
+        dateComponentsFormatter.zeroFormattingBehavior = .pad
+        dateComponentsFormatter.allowedUnits = [.minute, .second]
         return dateComponentsFormatter
     }()
-    private var connectDurationTimer: NSTimer?
+    fileprivate var connectDurationTimer: Timer?
 
     // MARK: - Lifecycle
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
 
-        call?.addObserver(self, forKeyPath: "callState", options: .New, context: &myContext)
+        call?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
         startConnectDurationTimer()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         call?.removeObserver(self, forKeyPath: "callState")
     }
 
@@ -65,8 +65,8 @@ class KeypadViewController: UIViewController {
 
     // MARK: - Actions
 
-    @IBAction func numberButtonPressed(sender: NumberPadButton) {
-        guard let call = call where call.callState != .Disconnected else { return }
+    @IBAction func numberButtonPressed(_ sender: NumberPadButton) {
+        guard let call = call, call.callState != .disconnected else { return }
         do {
             try call.sendDTMF(sender.number)
             dtmfSent = (dtmfSent ?? "") + sender.number
@@ -75,8 +75,8 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    @IBAction func endCallButtonPressed(sender: SipCallingButton) {
-        guard let call = call where call.callState != .Disconnected else { return }
+    @IBAction func endCallButtonPressed(_ sender: SipCallingButton) {
+        guard let call = call, call.callState != .disconnected else { return }
         do {
             try call.hangup()
         } catch let error {
@@ -84,11 +84,11 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    @IBAction func hideButtonPressed(sender: UIButton) {
+    @IBAction func hideButtonPressed(_ sender: UIButton) {
         if let navController = self.navigationController {
-            navController.popViewControllerAnimated(true)
+            navController.popViewController(animated: true)
         } else {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 
@@ -100,49 +100,49 @@ class KeypadViewController: UIViewController {
 
         guard let call = call else { return }
         switch call.callState {
-        case .Null:
+        case .null:
             statusLabel.text = ""
-        case .Calling: fallthrough
-        case .Early:
+        case .calling: fallthrough
+        case .early:
             statusLabel.text = NSLocalizedString("Calling...", comment: "Statuslabel state text .Calling")
-        case .Incoming:
+        case .incoming:
             statusLabel.text = NSLocalizedString("Incoming call...", comment: "Statuslabel state text .Incoming")
-        case .Connecting:
+        case .connecting:
             statusLabel.text = NSLocalizedString("Connecting...", comment: "Statuslabel state text .Connecting")
-        case .Confirmed:
+        case .confirmed:
             if call.onHold {
                 statusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold")
             } else {
-                statusLabel?.text = "\(dateComponentsFormatter.stringFromTimeInterval(call.connectDuration)!)"
+                statusLabel?.text = "\(dateComponentsFormatter.string(from: call.connectDuration)!)"
             }
-        case .Disconnected:
+        case .disconnected:
             statusLabel.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
         }
     }
 
-    private func startConnectDurationTimer() {
-        if connectDurationTimer == nil || !connectDurationTimer!.valid {
-            connectDurationTimer = NSTimer.scheduledTimerWithTimeInterval(Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+    fileprivate func startConnectDurationTimer() {
+        if connectDurationTimer == nil || !connectDurationTimer!.isValid {
+            connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }
     }
 
 
     // MARK: - KVO
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &myContext , let call = object as? VSLCall {
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
-                if call.callState == .Disconnected {
+                if call.callState == .disconnected {
                     if let navController = self?.navigationController {
-                        navController.popViewControllerAnimated(true)
+                        navController.popViewController(animated: true)
                     } else {
-                        self?.dismissViewControllerAnimated(true, completion: nil)
+                        self?.dismiss(animated: true, completion: nil)
                     }
                 }
             }
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 }

@@ -8,19 +8,19 @@ import XCTest
 class RecentsTimeConverterTests: XCTestCase {
 
     var recentsTimeConverter = RecentsTimeConverter()
-    var calendar = NSCalendar.currentCalendar()
+    var calendar = Calendar.current
 
-    var usersLocalShortStyleDateFormatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone.localTimeZone()
-        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+    var usersLocalShortStyleDateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.dateStyle = DateFormatter.Style.short
         return formatter
     }
 
-    var usersLocalShortStyleTimeFormatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone.localTimeZone()
-        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    var usersLocalShortStyleTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.timeStyle = DateFormatter.Style.short
         return formatter
     }
 
@@ -31,7 +31,7 @@ class RecentsTimeConverterTests: XCTestCase {
      */
     func test24hCETstringGivesCorrectDate() {
         // Given
-        let components = NSDateComponents()
+        var components = DateComponents()
         components.year = 2009
         components.month = 10
         components.day = 11
@@ -47,7 +47,7 @@ class RecentsTimeConverterTests: XCTestCase {
         let receivedDate = recentsTimeConverter.dateFrom24hCET(timeString: string24hCET)
 
         // Then
-        let expectedDate = calendar.dateFromComponents(components)!
+        let expectedDate = calendar.date(from: components)!
         XCTAssert(receivedDate == expectedDate)
     }
 
@@ -57,14 +57,14 @@ class RecentsTimeConverterTests: XCTestCase {
      */
     func testClassGivesAPI24hCETStringFromGivenDate() {
         // Given
-        let components = NSDateComponents()
+        var components = DateComponents()
         components.year = 2009
         components.month = 10
         components.day = 11
         components.hour = 12
         components.minute = 13
         components.second = 14
-        let dateToConvert = calendar.dateFromComponents(components)
+        let dateToConvert = calendar.date(from: components)
 
         // When
         let receivedAPIformatted24hCETstring = recentsTimeConverter.apiFormatted24hCETstringFrom(date: dateToConvert!)
@@ -80,16 +80,16 @@ class RecentsTimeConverterTests: XCTestCase {
      */
     func testRelativeDayTimeStringGivesTime() {
         // Given
-        let components = dayMonthYearComponentsFromNow()
+        var components = dayMonthYearComponentsFromNow()
 
         components.second = 1
-        let oneSecondAfterMidnightToday = calendar.dateFromComponents(components)
+        let oneSecondAfterMidnightToday = calendar.date(from: components)
 
         // When
         let receivedRelativeDateString = recentsTimeConverter.relativeDayTimeStringFrom(date: oneSecondAfterMidnightToday!)
 
         // Then
-        let expectedShortTimeString = usersLocalShortStyleTimeFormatter.stringFromDate(oneSecondAfterMidnightToday!)
+        let expectedShortTimeString = usersLocalShortStyleTimeFormatter.string(from: oneSecondAfterMidnightToday!)
         XCTAssert(receivedRelativeDateString == expectedShortTimeString)
     }
 
@@ -99,10 +99,10 @@ class RecentsTimeConverterTests: XCTestCase {
      */
     func testRelativeDayTimeStringGivesYesterday() {
         // Given
-        let components = dayMonthYearComponentsFromNow()
+        var components = dayMonthYearComponentsFromNow()
 
         components.second = -1
-        let oneSecondBeforeMidnightYesterday = calendar.dateFromComponents(components)
+        let oneSecondBeforeMidnightYesterday = calendar.date(from: components)
 
         // When
         let expectedRelativeDateString = NSLocalizedString("yesterday", comment: "")
@@ -112,28 +112,28 @@ class RecentsTimeConverterTests: XCTestCase {
     }
 
     /**
-     Passing a time one second BEFORE midnight yesterday, so a time before yesterday 
+     Passing a time one second BEFORE midnight yesterday, so a time before yesterday
      the test verifies that the relative Day/Time string returned is a date (dd:MM)
      */
     func testRelativeDayTimeStringGivesDateInPast() {
         // Given
-        let components = dayMonthYearComponentsFromNow()
+        var components = dayMonthYearComponentsFromNow()
 
         components.second = -1
-        components.day = components.day-1
+        components.day = components.day!-1
 
         // When
-        let oneSecondBeforeMidnightOnTheDayBeforeYesterday = calendar.dateFromComponents(components)
+        let oneSecondBeforeMidnightOnTheDayBeforeYesterday = calendar.date(from: components)
 
         // Then
-        let expectedShortDateString = usersLocalShortStyleDateFormatter.stringFromDate(oneSecondBeforeMidnightOnTheDayBeforeYesterday!)
+        let expectedShortDateString = usersLocalShortStyleDateFormatter.string(from: oneSecondBeforeMidnightOnTheDayBeforeYesterday!)
          XCTAssert(recentsTimeConverter.relativeDayTimeStringFrom(date: oneSecondBeforeMidnightOnTheDayBeforeYesterday!) == expectedShortDateString)
     }
 
     // MARK: Helper functions
-    func dayMonthYearComponentsFromNow() -> NSDateComponents {
-        let date = NSDate()
-        let unitFlags: NSCalendarUnit = [.Day, .Month, .Year]
-        return calendar.components(unitFlags, fromDate: date)
+    func dayMonthYearComponentsFromNow() -> DateComponents {
+        let date = Date()
+        let unitFlags: NSCalendar.Unit = [.day, .month, .year]
+        return (calendar as NSCalendar).components(unitFlags, from: date)
     }
 }
