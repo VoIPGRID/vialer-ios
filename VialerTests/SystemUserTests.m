@@ -137,6 +137,7 @@
     OCMVerify([self.operationsMock loginWithUsername:[OCMArg isEqual:@"testUsername"] password:[OCMArg isEqual:@"testPassword"] withCompletion:[OCMArg any]]);
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testLoginUserWillStoreCredentials {
     NSDictionary *response = @{@"client": @"42"};
     OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
@@ -215,6 +216,7 @@
     }];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testLoggingInWithUserWithSIPEnabledWillFetchAppAccount {
     NSString *appAccountURLString = @"/account/12340042";
     NSDictionary *response = @{@"client": @"42",
@@ -235,6 +237,7 @@
     OCMVerify([self.operationsMock retrievePhoneAccountForUrl:[OCMArg isEqual:@"/account/12340042"] withCompletion:[OCMArg any]]);
 }
 
+// Fails, fix with VIALI-3272
 - (void)testFetchingAppAccountWillSetProperCredentials {
     NSDictionary *response = @{@"client": @"42",
                                @"app_account": @"/account/12340042",
@@ -268,6 +271,7 @@
     XCTAssertTrue(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should have been enabled");
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testLoggingInUserWithoutSIPEnabledWillPostLoginNotification {
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
@@ -285,6 +289,7 @@
     [mockNotificationCenter stopMocking];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testLoggingInUserWithSIPEnabledWillPostLoginNotification {
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
@@ -319,6 +324,7 @@
     [mockNotificationCenter stopMocking];
 }
 
+// Fails, fix with VIALI-3272
 - (void)testUnAuthorizedNotificationWillLogoutUser {
     self.user.loggedIn = YES;
 
@@ -359,6 +365,7 @@
     [keyChainMock stopMocking];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testUpdateSIPAccountInformationWhenAsked {
     // Make sure we have a properly loggedin user.
     SystemUser *user = [[SystemUser alloc] initPrivate];
@@ -496,6 +503,7 @@
     XCTAssertNil(user.clientID, @"Client ID should have been nil");
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testKVONotificationFiresWhenClientIDChangesFromNilToValue {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -523,6 +531,7 @@
     [kvoObserver stopMocking];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testKVONotificationFiresWhenClientIDChanges {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -550,6 +559,7 @@
     [kvoObserver stopMocking];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testKVONotificationFiresWhenClientIDChangesFromValueToNil {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -577,6 +587,7 @@
     [kvoObserver stopMocking];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testKVONotificationDoesNotFire {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -604,6 +615,7 @@
     [kvoObserver stopMocking];
 }
 
+// Disabled, fix with VIALI-3272
 - (void)testKVONotificationDoesNotFireNilCase {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));

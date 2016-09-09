@@ -17,7 +17,6 @@
 #import "UIViewController+MMDrawerController.h"
 #import "Vialer-Swift.h"
 
-
 static NSString * const DialerViewControllerTabBarItemImage = @"tab-keypad";
 static NSString * const DialerViewControllerTabBarItemActiveImage = @"tab-keypad-active";
 static NSString * const DialerViewControllerLogoImage = @"logo";
