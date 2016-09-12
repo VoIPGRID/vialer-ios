@@ -59,6 +59,7 @@ class TransferInProgressViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        VialerGAITracker.trackScreenForController(name: controllerName)
         firstCall?.addObserver(self, forKeyPath: Configuration.KVO.FirstCall.transferStatus, options: .new, context: &myContext)
         updateUI()
         if let call = firstCall, call.transferStatus == .accepted || call.transferStatus == .rejected {
@@ -110,10 +111,12 @@ class TransferInProgressViewController: UIViewController {
             successFullImageView?.isHidden = false
             successFullImageView?.image = successfullImage
             transferStatusLabel?.text = NSLocalizedString("Successfully connected with", comment:"Successfully connected with")
+            VialerGAITracker.callTranferEvent(withSuccess: true)
         case .rejected:
             successFullImageView?.isHidden = false
             successFullImageView?.image = rejectedImage
             transferStatusLabel?.text = NSLocalizedString("Couldn't transfer call to", comment: "Transfer failed")
+            VialerGAITracker.callTranferEvent(withSuccess: false)
         }
     }
 

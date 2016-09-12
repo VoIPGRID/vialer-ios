@@ -11,8 +11,12 @@ NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
 NSString * const ConfigurationSIPDomain = @"SIP domain";
 NSString * const ConfigurationPartnerURLKey = @"Partner";
 
+NSString * const ConfigurationGADimensionClientIDIndex = @"Client ID index";
+NSString * const ConfigurationGADimensionBuildIndex = @"Build index";
+
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
+static NSString * const ConfigurationGACustomDimensionKey = @"GA Custom Dimensions";
 
 @interface Configuration ()
 @property (strong, nonatomic) NSDictionary *configPlist;
@@ -70,6 +74,13 @@ static dispatch_once_t onceToken = 0;
     NSString *urlString = self.configPlist[ConfigurationUrlsKey][key];
     NSAssert(urlString != nil, @"%@ - %@, not found in Config.plist!", ConfigurationUrlsKey, key);
     return urlString;
+}
+
+- (int)customDimensionIndexForKey:(NSString *)key {
+    id value = self.configPlist[ConfigurationGACustomDimensionKey][key];
+    NSAssert([value isKindOfClass:[NSNumber class]], @"Fetched key was not found or was not a NSNumber.");
+
+    return ((NSNumber *)value).intValue;
 }
 
 @end
