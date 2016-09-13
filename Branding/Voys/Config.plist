@@ -144,5 +144,12 @@
 		<key>onboarding-en</key>
 		<string>https://www.voys.nl/en/app-info</string>
 	</dict>
+	<key>GA Custom Dimensions</key>
+	<dict>
+		<key>Build index</key>
+		<integer>2</integer>
+		<key>Client ID index</key>
+		<integer>1</integer>
+	</dict>
 </dict>
 </plist>

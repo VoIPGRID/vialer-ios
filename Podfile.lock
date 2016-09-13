@@ -42,7 +42,7 @@ PODS:
     - GoogleAnalytics (~> 3.12)
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
-  - GoogleAnalytics (3.16.0)
+  - GoogleAnalytics (3.17.0)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleSymbolUtilities (1.1.1)
@@ -85,7 +85,7 @@ PODS:
   - SimulatorStatusMagic (1.9)
   - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (1.0)
-  - VialerSIPLib (1.0.4):
+  - VialerSIPLib (1.0.5):
     - CocoaLumberjack (~> 2.2)
     - Reachability
     - Vialer-pjsip-iOS
@@ -127,7 +127,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: d968d4d5f6aeb795cd64144337bcd233e530efc6
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
-  GoogleAnalytics: 3de986b2fa29012c69fa415566006a9c9cf25320
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
@@ -143,7 +143,7 @@ SPEC CHECKSUMS:
   SimulatorStatusMagic: 4db65b11c095bbb3abd966a4ae8ee0f11789e8e0
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
-  VialerSIPLib: 12a180ec7d17d93b881178e0dbc48765cd4ac789
+  VialerSIPLib: 35241a8affe9a31d139297cb7de32dceea40add9
 
 PODFILE CHECKSUM: 0403ca87305a6c93c6cb29bcdbbd7f3b45f64c22
 

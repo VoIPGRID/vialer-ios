@@ -12,6 +12,10 @@ extern NSString * const ConfigurationMiddleWareBaseURLString;
 extern NSString * const ConfigurationSIPDomain;
 extern NSString * const ConfigurationPartnerURLKey;
 
+// The Google Analytics custom dimension keys
+extern NSString * const ConfigurationGADimensionClientIDIndex;
+extern NSString * const ConfigurationGADimensionBuildIndex;
+
 /**
  *  Class for accessing items from Config.plist. As a default the plist from the main bundle is used.
  */
@@ -34,4 +38,12 @@ extern NSString * const ConfigurationPartnerURLKey;
  */
 - (NSString *)UrlForKey:(NSString *)key;
 
+/**
+ *  Obtain the Google Analytics custom dimension index for the given key.
+ *
+ *  @param key The key for which to fetch index.
+ *
+ *  @return An int representing the dimension index.
+ */
+- (int)customDimensionIndexForKey:(NSString *)key;
 @end

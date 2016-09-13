@@ -40,6 +40,7 @@ class SecondCallViewController: SIPCallingViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
         firstCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
     }
