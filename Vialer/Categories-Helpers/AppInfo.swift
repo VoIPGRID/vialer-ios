@@ -16,7 +16,7 @@ import Foundation
      - returns: A string that tells the current version of the app.
      */
     static func currentAppVersion() -> String? {
-        guard let infoDict = NSBundle.mainBundle().infoDictionary else {
+        guard let infoDict = Bundle.main.infoDictionary else {
             return nil
         }
 
@@ -24,7 +24,7 @@ import Foundation
 
         /// We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
         /// the additional part of the tag is stored in de plist by the update_version_number script. If set, display it.
-        if let additionalVersion = infoDict["Additional_Version_String"] as? String where !additionalVersion.isEmpty {
+        if let additionalVersion = infoDict["Additional_Version_String"] as? String, !additionalVersion.isEmpty {
             version = "\(version).\(additionalVersion)"
         }
         #if DEBUG

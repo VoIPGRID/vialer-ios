@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GA Custom Dimensions</key>
+	<dict>
+		<key>Build index</key>
+		<integer>2</integer>
+		<key>Client ID index</key>
+		<integer>1</integer>
+	</dict>
 	<key>Primary colors</key>
 	<dict>
 		<key>PrimaryBrandColor</key>

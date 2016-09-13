@@ -42,7 +42,7 @@ PODS:
     - GoogleAnalytics (~> 3.12)
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
-  - GoogleAnalytics (3.16.0)
+  - GoogleAnalytics (3.17.0)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleSymbolUtilities (1.1.1)
@@ -66,26 +66,26 @@ PODS:
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
   - OCMock (3.3.1)
-  - OHHTTPStubs (5.2.0):
-    - OHHTTPStubs/Default (= 5.2.0)
-  - OHHTTPStubs/Core (5.2.0)
-  - OHHTTPStubs/Default (5.2.0):
+  - OHHTTPStubs (5.2.1):
+    - OHHTTPStubs/Default (= 5.2.1)
+  - OHHTTPStubs/Core (5.2.1)
+  - OHHTTPStubs/Default (5.2.1):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.0):
+  - OHHTTPStubs/JSON (5.2.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.0):
+  - OHHTTPStubs/NSURLSession (5.2.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.0)
+  - OHHTTPStubs/OHPathHelpers (5.2.1)
   - PBWebViewController (0.5.0)
   - Reachability (3.2)
-  - SAMKeychain (1.5.0)
-  - SimulatorStatusMagic (1.8)
+  - SAMKeychain (1.5.1)
+  - SimulatorStatusMagic (1.9)
   - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (1.0)
-  - VialerSIPLib (1.0.1):
+  - VialerSIPLib (1.0.5):
     - CocoaLumberjack (~> 2.2)
     - Reachability
     - Vialer-pjsip-iOS
@@ -127,7 +127,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: d968d4d5f6aeb795cd64144337bcd233e530efc6
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
-  GoogleAnalytics: 3de986b2fa29012c69fa415566006a9c9cf25320
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
@@ -136,15 +136,15 @@ SPEC CHECKSUMS:
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
-  OHHTTPStubs: 29ae105797c3410112d10b217c8b7a55aab616b2
+  OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SAMKeychain: 1fc9ae02f576365395758b12888c84704eebc423
-  SimulatorStatusMagic: 4dbf0faa0208e9ac0d56cea06eaa5f7a5f3d02fb
+  SAMKeychain: 6b04852a20684167aea97bdf8ba12c95d3616376
+  SimulatorStatusMagic: 4db65b11c095bbb3abd966a4ae8ee0f11789e8e0
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
-  VialerSIPLib: 48b44381826eac9d9077014c04e210269dadeedb
+  VialerSIPLib: 35241a8affe9a31d139297cb7de32dceea40add9
 
-PODFILE CHECKSUM: fd22fe1a0bb5ff8f577af3f441ab2cd119c8638b
+PODFILE CHECKSUM: 0403ca87305a6c93c6cb29bcdbbd7f3b45f64c22
 
 COCOAPODS: 1.0.1

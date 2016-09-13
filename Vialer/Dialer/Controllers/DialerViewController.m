@@ -6,7 +6,7 @@
 #import "DialerViewController.h"
 
 #import "AppDelegate.h"
-#import <AVFoundation/AVAudioPlayer.h>
+@import AVFoundation;
 #import "Configuration.h"
 #import "PasteableUILabel.h"
 #import "NumberPadButton.h"
@@ -16,8 +16,6 @@
 #import "TwoStepCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "Vialer-Swift.h"
-
-#import <AVFoundation/AVAudioSession.h>
 
 static NSString * const DialerViewControllerTabBarItemImage = @"tab-keypad";
 static NSString * const DialerViewControllerTabBarItemActiveImage = @"tab-keypad-active";

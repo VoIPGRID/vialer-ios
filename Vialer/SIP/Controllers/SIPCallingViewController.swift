@@ -12,7 +12,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     // MARK: - Configuration
 
-    private struct Configuration {
+    fileprivate struct Configuration {
         struct Timing {
             static let WaitingTimeAfterDismissing = 1.0
             static let ConnectDurationInterval = 1.0
@@ -36,46 +36,46 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     var activeCall: VSLCall?
 
-    private var previousAVAudioSessionCategory: String?
+    fileprivate var previousAVAudioSessionCategory: String?
     var phoneNumberLabelText: String? {
         didSet {
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
             }
         }
     }
 
-    private var dtmfSent: String? {
+    fileprivate var dtmfSent: String? {
         didSet {
             numberLabel?.text = dtmfSent
         }
     }
 
-    private lazy var dateComponentsFormatter: NSDateComponentsFormatter = {
-        let dateComponentsFormatter = NSDateComponentsFormatter()
-        dateComponentsFormatter.zeroFormattingBehavior = .Pad
-        dateComponentsFormatter.allowedUnits = [.Minute, .Second]
+    fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
+        let dateComponentsFormatter = DateComponentsFormatter()
+        dateComponentsFormatter.zeroFormattingBehavior = .pad
+        dateComponentsFormatter.allowedUnits = [.minute, .second]
         return dateComponentsFormatter
     }()
-    private var connectDurationTimer: NSTimer?
+    fileprivate var connectDurationTimer: Timer?
 
     // MARK: - Lifecycle
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
 
-        if let call = activeCall where call.callState == .Disconnected {
+        if let call = activeCall, call.callState == .disconnected {
             handleCallEnded()
         }
 
-        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .New, context: &myContext)
-        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .New, context: &myContext)
+        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
+        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .new, context: &myContext)
         startConnectDurationTimer()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
         activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.mediaState)
         connectDurationTimer?.invalidate()
@@ -95,7 +95,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     // MARK: - Actions
 
-    @IBAction func muteButtonPressed(sender: SipCallingButton) {
+    @IBAction func muteButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall else { return }
         do {
             try call.toggleMute()
@@ -105,31 +105,31 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
-    @IBAction func keypadButtonPressed(sender: SipCallingButton) {
-        performSegueWithIdentifier(Configuration.Segues.ShowKeypad, sender: self)
+    @IBAction func keypadButtonPressed(_ sender: SipCallingButton) {
+        performSegue(withIdentifier: Configuration.Segues.ShowKeypad, sender: self)
     }
 
-    @IBAction func speakerButtonPressed(sender: SipCallingButton) {
+    @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall else { return }
         call.toggleSpeaker()
         updateUI()
     }
 
-    @IBAction func transferButtonPressed(sender: SipCallingButton) {
-        guard let call = activeCall where call.callState == .Confirmed else { return }
+    @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
+        guard let call = activeCall, call.callState == .confirmed else { return }
         if call.onHold {
-            performSegueWithIdentifier(Configuration.Segues.SetupTransfer, sender: self)
+            performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
         } else {
             do {
                 try call.toggleHold()
-                performSegueWithIdentifier(Configuration.Segues.SetupTransfer, sender: self)
+                performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
             } catch let error {
                 DDLogWrapper.logError("Error holding current call: \(error)")
             }
         }
     }
 
-    @IBAction func holdButtonPressed(sender: SipCallingButton) {
+    @IBAction func holdButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall else { return }
         do {
             try call.toggleHold()
@@ -139,28 +139,28 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
-    @IBAction func hangupButtonPressed(sender: UIButton) {
-        guard let call = activeCall where call.callState != .Disconnected else { return }
+    @IBAction func hangupButtonPressed(_ sender: UIButton) {
+        guard let call = activeCall, call.callState != .disconnected else { return }
 
         statusLabel.text = NSLocalizedString("Ending call...", comment: "Ending call...")
 
         do {
             try call.hangup()
-            hangupButton.enabled = false
+            hangupButton.isEnabled = false
         } catch let error {
             DDLogWrapper.logError("Error ending call: \(error)")
         }
     }
 
-    func handleOutgoingCall(phoneNumber phoneNumber: String, contact: CNContact?) {
+    func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
         let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
         previousAVAudioSessionCategory = avAudioSession.category
         phoneNumberLabelText = cleanedPhoneNumber
 
         if let contact = contact {
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
-                PhoneNumberModel.getCallNameFromContact(contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
-                    dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
+                    DispatchQueue.main.async { [weak self] in
                         self?.phoneNumberLabelText = phoneNumberModel.callerInfo
                     }
                 })
@@ -169,7 +169,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
         let account = SIPUtils.addSIPAccountToEndpoint()
         account?.callNumber(cleanedPhoneNumber) { (error, call) in
-            UIDevice.currentDevice().proximityMonitoringEnabled = true
+            UIDevice.current.isProximityMonitoringEnabled = true
             if let error = error, let category = self.previousAVAudioSessionCategory {
                 DDLogWrapper.logError("Error setting up call: \(error)")
                 do {
@@ -183,14 +183,14 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
-    func handleIncomingCall(call: VSLCall) {
+    func handleIncomingCall(_ call: VSLCall) {
         self.previousAVAudioSessionCategory = self.avAudioSession.category
         self.activeCall = call
         phoneNumberLabelText = call.callerNumber
 
         do {
             try call.answer()
-            UIDevice.currentDevice().proximityMonitoringEnabled = true
+            UIDevice.current.isProximityMonitoringEnabled = true
         } catch let error {
             DDLogWrapper.logError("Error answering call: \(error)")
             do {
@@ -200,7 +200,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             }
         }
 
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
             PhoneNumberModel.getCallName(call) { (phoneNumberModel) in
                 self.phoneNumberLabelText = phoneNumberModel.callerInfo
             }
@@ -214,32 +214,32 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         guard let call = activeCall else { return }
 
         switch call.callState {
-        case .Null: fallthrough
-        case .Calling: fallthrough
-        case .Incoming: fallthrough
-        case .Early: fallthrough
-        case .Connecting:
-            holdButton?.enabled = false
-            muteButton?.enabled = false
-            transferButton?.enabled = false
-            speakerButton?.enabled = true
-            hangupButton?.enabled = true
-        case .Confirmed:
-            holdButton?.enabled = true
-            muteButton?.enabled = true
-            transferButton?.enabled = true
-            speakerButton?.enabled = true
-            hangupButton?.enabled = true
-        case .Disconnected:
-            holdButton?.enabled = false
-            muteButton?.enabled = false
-            transferButton?.enabled = false
-            speakerButton?.enabled = false
-            hangupButton?.enabled = false
+        case .null: fallthrough
+        case .calling: fallthrough
+        case .incoming: fallthrough
+        case .early: fallthrough
+        case .connecting:
+            holdButton?.isEnabled = false
+            muteButton?.isEnabled = false
+            transferButton?.isEnabled = false
+            speakerButton?.isEnabled = true
+            hangupButton?.isEnabled = true
+        case .confirmed:
+            holdButton?.isEnabled = true
+            muteButton?.isEnabled = true
+            transferButton?.isEnabled = true
+            speakerButton?.isEnabled = true
+            hangupButton?.isEnabled = true
+        case .disconnected:
+            holdButton?.isEnabled = false
+            muteButton?.isEnabled = false
+            transferButton?.isEnabled = false
+            speakerButton?.isEnabled = false
+            hangupButton?.isEnabled = false
         }
 
         // If call is active and not on hold, enable the button.
-        keypadButton?.enabled = !call.onHold && call.callState == .Confirmed
+        keypadButton?.isEnabled = !call.onHold && call.callState == .confirmed
         holdButton?.active = call.onHold
         muteButton?.active = call.muted
         speakerButton?.active = call.speaker
@@ -252,28 +252,28 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
 
         switch call.callState {
-        case .Null:
+        case .null:
             statusLabel?.text = ""
-        case .Calling: fallthrough
-        case .Early:
+        case .calling: fallthrough
+        case .early:
             statusLabel?.text = NSLocalizedString("Calling...", comment: "Statuslabel state text .Calling")
-        case .Incoming:
+        case .incoming:
             statusLabel?.text = NSLocalizedString("Incoming call...", comment: "Statuslabel state text .Incoming")
-        case .Connecting:
+        case .connecting:
             statusLabel?.text = NSLocalizedString("Connecting...", comment: "Statuslabel state text .Connecting")
-        case .Confirmed:
+        case .confirmed:
             if call.onHold {
                 statusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold")
             } else {
-                statusLabel?.text = "\(dateComponentsFormatter.stringFromTimeInterval(call.connectDuration)!)"
+                statusLabel?.text = "\(dateComponentsFormatter.string(from: call.connectDuration)!)"
             }
-        case .Disconnected:
+        case .disconnected:
             statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
             connectDurationTimer?.invalidate()
         }
     }
 
-    private func handleCallEnded() {
+    fileprivate func handleCallEnded() {
         if let category = previousAVAudioSessionCategory {
             do {
                 try avAudioSession.setCategory(category)
@@ -282,67 +282,67 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             }
         }
 
-        hangupButton?.enabled = false
+        hangupButton?.isEnabled = false
 
         var timeToWaitBeforeDismissing = Configuration.Timing.WaitingTimeAfterDismissing
 
         #if DEBUG
-        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate where appDelegate.isScreenshotRun {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.isScreenshotRun {
             timeToWaitBeforeDismissing = 5.0
         }
         #endif
 
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(timeToWaitBeforeDismissing * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-            if self.activeCall!.incoming {
-                self.performSegueWithIdentifier(Configuration.Segues.UnwindToVialerRootViewController, sender: self)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(timeToWaitBeforeDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+            if self.activeCall!.isIncoming {
+                self.performSegue(withIdentifier: Configuration.Segues.UnwindToVialerRootViewController, sender: self)
             } else {
-                UIDevice.currentDevice().proximityMonitoringEnabled = false
-                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                UIDevice.current.isProximityMonitoringEnabled = false
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
             }
         }
     }
 
-    private func startConnectDurationTimer() {
-        if connectDurationTimer == nil || !connectDurationTimer!.valid {
-            connectDurationTimer = NSTimer.scheduledTimerWithTimeInterval(Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+    fileprivate func startConnectDurationTimer() {
+        if connectDurationTimer == nil || !connectDurationTimer!.isValid {
+            connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }
     }
 
     // MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let keypadVC = segue.destinationViewController as? KeypadViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let keypadVC = segue.destination as? KeypadViewController {
             keypadVC.call = activeCall
             keypadVC.delegate = self
             keypadVC.phoneNumberLabelText = phoneNumberLabelText
-        } else if let navVC = segue.destinationViewController as? UINavigationController, let setupCallTransferVC = navVC.viewControllers[0] as? SetupCallTransferViewController {
+        } else if let navVC = segue.destination as? UINavigationController, let setupCallTransferVC = navVC.viewControllers[0] as? SetupCallTransferViewController {
             setupCallTransferVC.firstCall = activeCall
             setupCallTransferVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
         }
     }
 
-    @IBAction func unwindToFirstCallSegue(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToFirstCallSegue(_ segue: UIStoryboardSegue) {}
 
     // MARK: - KVO
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &myContext {
             if let call = object as? VSLCall {
-                dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                DispatchQueue.main.async { [weak self] in
                     self?.updateUI()
-                    if call.callState == .Disconnected {
+                    if call.callState == .disconnected {
                         self?.handleCallEnded()
                     }
                 }
             }
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 
     // MARK: - KeypadViewControllerDelegate
 
-    func dtmfSent(dtmfSent: String?) {
+    func dtmfSent(_ dtmfSent: String?) {
         self.dtmfSent = dtmfSent
     }
 }

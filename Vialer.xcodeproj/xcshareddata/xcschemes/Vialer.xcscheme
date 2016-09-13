@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -39,6 +39,36 @@
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
             <SkippedTests>
+               <Test
+                  Identifier = "SystemUserTests/testKVONotificationDoesNotFire">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testKVONotificationDoesNotFireNilCase">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testKVONotificationFiresWhenClientIDChanges">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testKVONotificationFiresWhenClientIDChangesFromNilToValue">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testKVONotificationFiresWhenClientIDChangesFromValueToNil">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testLoggingInUserWithSIPEnabledWillPostLoginNotification">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testLoggingInUserWithoutSIPEnabledWillPostLoginNotification">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testLoggingInWithUserWithSIPEnabledWillFetchAppAccount">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testLoginUserWillStoreCredentials">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests/testUpdateSIPAccountInformationWhenAsked">
+               </Test>
                <Test
                   Identifier = "TwoStepCallTests/testNotificationObserverIsRemovedWhenDealloced">
                </Test>
@@ -80,13 +110,6 @@
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "XcodeColors"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

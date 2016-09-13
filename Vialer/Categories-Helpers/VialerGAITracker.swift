@@ -9,22 +9,23 @@ import Foundation
 @objc class VialerGAITracker: NSObject {
 
     /**
-     *  Constants for this class.
+     Constants for this class.
      */
-    struct Constants {
+    struct GAIConstants {
         static let inbound: String = "Inbound"
         static let outbound: String = "Outbound"
 
         /**
-         *  Custom Dimensions that will be used for Google Analytics.
+         Custom Dimensions that will be used for Google Analytics.
+         VIALI-3274: index of the dimension should be read from Config.plist.
          */
         struct CustomDimensions {
             static let clientID: UInt = 1
-            static let appVersion: UInt = 2
+            static let build: UInt = 2
         }
 
         /**
-         *  Categories used for Google Analytics.
+         Categories used for Google Analytics.
          */
         struct Categories {
             static let call: String = "call"
@@ -33,7 +34,14 @@ import Foundation
         }
 
         /**
-         *  Names use for tracking webviews.
+         Actions used for Google Analytics.
+         */
+        struct Actions {
+            static let callMetrics: String = "CallMetrics"
+        }
+
+        /**
+         Names use for tracking webviews.
          */
         struct TrackingNames {
             static let statisticsWebView: String = "StatisticsWebView"
@@ -46,19 +54,19 @@ import Foundation
 
     // These constants should be turned into a Struct when the whole project is rewritten in Swift: VIALI-3255
     class func GAStatisticsWebViewTrackingName() -> String {
-        return VialerGAITracker.Constants.TrackingNames.statisticsWebView
+        return VialerGAITracker.GAIConstants.TrackingNames.statisticsWebView
     }
     class func GAInformationWebViewTrackingName() -> String {
-        return VialerGAITracker.Constants.TrackingNames.informationWebView
+        return VialerGAITracker.GAIConstants.TrackingNames.informationWebView
     }
     class func GADialplanWebViewTrackingName() -> String {
-        return VialerGAITracker.Constants.TrackingNames.dialplanWebview
+        return VialerGAITracker.GAIConstants.TrackingNames.dialplanWebview
     }
     class func GAUserProfileWebViewTrackingName() -> String {
-        return VialerGAITracker.Constants.TrackingNames.userProfileWebView
+        return VialerGAITracker.GAIConstants.TrackingNames.userProfileWebView
     }
     class func GAAddFixedDestinationWebViewTrackingName() -> String {
-        return VialerGAITracker.Constants.TrackingNames.addFixedDestinationWebView
+        return VialerGAITracker.GAIConstants.TrackingNames.addFixedDestinationWebView
     }
 
     /// The default Google Analytics Tracker.
@@ -74,12 +82,12 @@ import Foundation
      */
     static func setupGAITracker() {
         #if DEBUG
-        let dryRun = true
+            let dryRun = true
         #else
-        let dryRun = false
+            let dryRun = false
         #endif
 
-        let logLevel = GAILogLevel.Info
+        let logLevel = GAILogLevel.info
 
         setupGAITracker(logLevel:logLevel, isDryRun:dryRun)
     }
@@ -90,18 +98,18 @@ import Foundation
      - parameter logLevel: The GA log level you want to configure the shared instance with.
      - parameter isDryRun: Boolean indicating GA to run in dry run mode or not.
      */
-    static func setupGAITracker(logLevel logLevel: GAILogLevel, isDryRun: Bool) {
+    static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         if let error = configureError {
             assertionFailure("Error configuring Google Services: \(error)")
         }
         let gai = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true
-        gai.logger.logLevel = logLevel
-        gai.dryRun = isDryRun
+        gai?.trackUncaughtExceptions = true
+        gai?.logger.logLevel = logLevel
+        gai?.dryRun = isDryRun
 
-        tracker.set(GAIFields.customDimensionForIndex(Constants.CustomDimensions.clientID), value: AppInfo.currentAppVersion()!)
+        tracker.set(GAIFields.customDimension(for: GAIConstants.CustomDimensions.build), value: AppInfo.currentAppVersion()!)
     }
 
     /**
@@ -110,7 +118,7 @@ import Foundation
      - parameter clientID: The client ID to set as custom dimension.
      */
     static func setCustomDimension(withClientID clientID:String) {
-        tracker.set(GAIFields.customDimensionForIndex(Constants.CustomDimensions.appVersion), value: clientID)
+        tracker.set(GAIFields.customDimension(for: GAIConstants.CustomDimensions.clientID), value: clientID)
     }
 
     /**
@@ -120,9 +128,9 @@ import Foundation
 
      - parameter name: The name of the screen name to track.
      */
-    static func trackScreenForController(name name:String) {
-        tracker.set(kGAIScreenName, value: name.stringByReplacingOccurrencesOfString("ViewController", withString: ""))
-        tracker.send(GAIDictionaryBuilder.createScreenView().build() as [NSObject: AnyObject])
+    static func trackScreenForController(name:String) {
+        tracker.set(kGAIScreenName, value: name.replacingOccurrences(of: "ViewController", with: ""))
+        tracker.send(GAIDictionaryBuilder.createScreenView().build() as [NSObject : AnyObject])
     }
 
     // MARK: - Events
@@ -135,8 +143,8 @@ import Foundation
      - parameter label:    The Label of the Event
      - parameter value:    The value of the Event
      */
-    static func sendEvent(withCategory category: String, action: String, label: String, value: NSNumber?) {
-        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build() as [NSObject: AnyObject]
+    static func sendEvent(withCategory category: String, action: String, label: String, value: NSNumber!) {
+        let event = GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: value).build() as [NSObject : AnyObject]
         tracker.send(event)
     }
 
@@ -144,42 +152,42 @@ import Foundation
      Indication a call event is received from the SIP Proxy and the app is ringing.
      */
     static func incomingCallRingingEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Ringing", value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Ringing", value: 0)
     }
 
     /**
      The incoming call is accepted.
      */
     static func acceptIncomingCallEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Accepted", value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Accepted", value: 0)
     }
 
     /**
      The incoming call is rejected.
      */
     static func declineIncomingCallEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Declined", value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Declined", value: 0)
     }
 
     /**
      The incoming call is rejected because there is another call in progress.
      */
     static func declineIncomingCallBecauseAnotherCallInProgressEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.inbound, label: "Declined - Another call in progress", value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Declined - Another call in progress", value: nil)
     }
 
     /**
      Event to track an outbound SIP call.
      */
     static func setupOutgoingSIPCallEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.outbound, label: "SIP", value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.outbound, label: "SIP", value: nil)
     }
 
     /**
      Event to track an outbound ConnectAB (aka two step) call.
      */
     static func setupOutgoingConnectABCallEvent() {
-        sendEvent(withCategory: Constants.Categories.call, action: Constants.outbound, label: "ConnectAB", value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.outbound, label: "ConnectAB", value: nil)
     }
 
     /**
@@ -188,9 +196,17 @@ import Foundation
      - parameter connectionType: A string indicating the current connection type, as described in the "Google Analytics events for all Mobile apps" document.
      - parameter isAccepted:     Boolean indicating if we can accept the incoming VoIP call.
      */
-    static func pushNotification(isAccepted isAccepted: Bool, connectionType: String ) {
+    static func pushNotification(isAccepted: Bool, connectionType: String ) {
         let action = isAccepted ? "accepted" : "rejected"
-        sendEvent(withCategory: Constants.Categories.middleware, action: action, label: connectionType, value: nil)
+        sendEvent(withCategory: GAIConstants.Categories.middleware, action: action, label: connectionType, value: nil)
+    }
+
+    /**
+     Event to be sent when a call tranfer was successfull.
+     */
+    static func callTranferEvent(withSuccess success:Bool) {
+        let labelString = success ? "Success" : "Fail";
+        sendEvent(withCategory: GAIConstants.Categories.call, action: "Transfer", label: labelString, value: nil)
     }
 
     // MARK: - Exceptions
@@ -199,7 +215,7 @@ import Foundation
      Exception when the registration failed on the middleware.
      */
     static func registrationFailedWithMiddleWareException() {
-        let exception = GAIDictionaryBuilder.createExceptionWithDescription("Failed middleware registration", withFatal: false).build() as [NSObject: AnyObject]
+        let exception = GAIDictionaryBuilder.createException(withDescription: "Failed middleware registration", withFatal: false).build() as [NSObject : AnyObject]
         tracker.send(exception)
     }
 
@@ -210,10 +226,12 @@ import Foundation
 
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
-    static func respondedToIncomingPushNotification(withResponseTime responseTime: NSTimeInterval) {
-        let timing = GAIDictionaryBuilder.createTimingWithCategory(Constants.Categories.middleware, interval: responseTime * 1000, name: "response", label: nil).build() as [NSObject: AnyObject]
+    static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
+        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware, interval: (responseTime * 1000) as NSNumber, name: "response", label: nil).build() as [NSObject : AnyObject]
         tracker.send(timing)
     }
+
+    // MARK: - After call Metrics
 
     /**
      After a call is finished, sent call metrics to GA.
@@ -224,20 +242,34 @@ import Foundation
         // Only sent call statistics when the call duration was longer than 10 seconds
         // to prevent large rounding errors.
         if (call.connectDuration > 10) {
-            let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
-
-            var labelString = "MOS:\(call.MOS)"
-            labelString += ",Bandwidth:\(mbPerMinute)"
-
             //VIALI-3258: get the audio codec from the call.
-            labelString += ",AudioCodec:unknown"
+            let audioCodec = "AudioCodec:unknown"
+            self.sendMOSValue(mos: call.mos, forCodec: audioCodec)
 
-            let dict:NSDictionary = [kGAIHitType : "event",
-                                     kGAIEventCategory : Constants.Categories.metrics,
-                                     kGAIEventAction : "CallMetrics",
-                                     kGAIEventLabel : labelString]
-
-            tracker.send(dict as [NSObject : AnyObject])
+            let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
+            self.sendBandwidthPerMinute(bandwidth: mbPerMinute, forCodec: audioCodec)
         }
+    }
+
+    /**
+     Helper function for sending the MOS value for a call.
+
+     - parameter mos:   The MOS value of the call
+     - parameter codec: The Codec used for the call
+     */
+    private static func sendMOSValue(mos: Float, forCodec codec:String) {
+        let labelString = "MOS for \(codec)"
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: mos as NSNumber!)
+    }
+
+    /**
+     Helper function for sending the Bandwidth used for a call.
+
+     - parameter bandwitdth: The bandwidth in megabytes per second
+     - parameter codec:      The Codec used for the call
+     */
+    private static func sendBandwidthPerMinute(bandwidth: Float, forCodec codec:String) {
+        let labelString = "Bandwidth for \(codec)"
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: bandwidth as NSNumber!)
     }
 }

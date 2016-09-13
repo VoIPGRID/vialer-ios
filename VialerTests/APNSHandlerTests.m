@@ -105,11 +105,13 @@
     id mockMiddleware = OCMClassMock([Middleware class]);
     self.apnsHandler.middleware = mockMiddleware;
 
+    id mockPushRegistry = OCMClassMock([PKPushRegistry class]);
+
     // Then
     OCMExpect([mockMiddleware sentAPNSToken:[OCMArg checkWithSelector:@selector(isEqualToString:) onObject:tokenString]]);
 
     // When
-    [self.apnsHandler pushRegistry:nil didUpdatePushCredentials:mockCredentials forType:PKPushTypeVoIP];
+    [self.apnsHandler pushRegistry:mockPushRegistry didUpdatePushCredentials:mockCredentials forType:PKPushTypeVoIP];
     OCMVerifyAll(mockMiddleware);
 
     [mockCredentials stopMocking];

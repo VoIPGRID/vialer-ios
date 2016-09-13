@@ -9,7 +9,7 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Configuration
 
-    private struct Configuration {
+    fileprivate struct Configuration {
         struct Segues {
             static let UnwindToFirstCallViewController = "UnwindToFirstCallViewControllerSegue"
         }
@@ -57,16 +57,17 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firstCall?.addObserver(self, forKeyPath: Configuration.KVO.FirstCall.transferStatus, options: .New, context: &myContext)
+        VialerGAITracker.trackScreenForController(name: controllerName)
+        firstCall?.addObserver(self, forKeyPath: Configuration.KVO.FirstCall.transferStatus, options: .new, context: &myContext)
         updateUI()
-        if let call = firstCall where call.transferStatus == .Accepted || call.transferStatus == .Rejected {
+        if let call = firstCall, call.transferStatus == .accepted || call.transferStatus == .rejected {
             self.prepareForDismissing()
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         firstCall?.removeObserver(self, forKeyPath: Configuration.KVO.FirstCall.transferStatus)
     }
@@ -80,7 +81,7 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Actions
 
-    @IBAction func backButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         do {
             try firstCall?.hangup()
             try currentCall?.hangup()
@@ -92,49 +93,51 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Helper functions
 
-    private func updateUI() {
+    fileprivate func updateUI() {
         firstNumberLabel?.text = firstCallPhoneNumberLabelText
         currentCallNumberLabel?.text = currentCallPhoneNumberLabelText
 
         guard let call = firstCall else { return }
 
         switch call.transferStatus {
-        case .Unkown: fallthrough
-        case .Initialized:
-            successFullImageView?.hidden = true
+        case .unkown: fallthrough
+        case .initialized:
+            successFullImageView?.isHidden = true
             transferStatusLabel?.text = NSLocalizedString("Transfer requested for", comment:"Transfer requested for")
-        case .Trying:
-            successFullImageView?.hidden = true
+        case .trying:
+            successFullImageView?.isHidden = true
             transferStatusLabel?.text = NSLocalizedString("Transfer in progress to", comment:"Transfer in progress to")
-        case .Accepted:
-            successFullImageView?.hidden = false
+        case .accepted:
+            successFullImageView?.isHidden = false
             successFullImageView?.image = successfullImage
             transferStatusLabel?.text = NSLocalizedString("Successfully connected with", comment:"Successfully connected with")
-        case .Rejected:
-            successFullImageView?.hidden = false
+            VialerGAITracker.callTranferEvent(withSuccess: true)
+        case .rejected:
+            successFullImageView?.isHidden = false
             successFullImageView?.image = rejectedImage
             transferStatusLabel?.text = NSLocalizedString("Couldn't transfer call to", comment: "Transfer failed")
+            VialerGAITracker.callTranferEvent(withSuccess: false)
         }
     }
 
-    private func prepareForDismissing() {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Configuration.UnwindTiming * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+    fileprivate func prepareForDismissing() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(Configuration.UnwindTiming * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.dismissView()
         }
     }
 
-    private func dismissView() {
-        self.performSegueWithIdentifier(Configuration.Segues.UnwindToFirstCallViewController, sender: nil)
+    fileprivate func dismissView() {
+        self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCallViewController, sender: nil)
     }
 
     // MARK: - KVO
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &myContext {
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
 
-                if let call = object as? VSLCall where call.transferStatus == .Accepted || call.transferStatus == .Rejected {
+                if let call = object as? VSLCall, call.transferStatus == .accepted || call.transferStatus == .rejected {
                     do {
                         try self?.firstCall?.hangup()
                         try self?.currentCall?.hangup()
@@ -145,7 +148,7 @@ class TransferInProgressViewController: UIViewController {
                 }
             }
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 
