@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n1v-MQ-FjB">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Keypad View Controller-->
@@ -16,11 +17,10 @@
                         <viewControllerLayoutGuide type="bottom" id="51B-d5-ps1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kif-jA-29n" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-TQ-W7d" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="160" width="65.5" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="height" multiplier="1:1" id="gDZ-ad-KP9"/>
@@ -34,7 +34,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKK-AY-hTQ" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="233.5" width="65.5" height="65"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
@@ -45,7 +44,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE4-tc-maO" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="267.5" y="233.5" width="65" height="65"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
@@ -56,7 +54,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uc-x1-38o" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="306.5" width="65.5" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
@@ -67,7 +64,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7x-tQ-8oz" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="267.5" y="306.5" width="65" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
@@ -78,7 +74,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b74-9M-nGe" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="362.5" y="306.5" width="65.5" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
@@ -89,7 +84,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t85-kN-Xse" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="380" width="65.5" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
@@ -99,7 +93,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ic-sX-vrf" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="267.5" y="380" width="65" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
@@ -111,7 +104,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-7e-hQf" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="362.5" y="380" width="65.5" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
@@ -121,7 +113,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9H-bV-hy5" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="362.5" y="233.5" width="65.5" height="65"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
@@ -132,7 +123,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHB-re-dgx" userLabel="3-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="362.5" y="160" width="65.5" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
@@ -143,7 +133,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uC2-Oy-Ewy" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="267.5" y="160" width="65" height="65.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
@@ -154,36 +143,32 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJr-5Z-ZPU">
-                                <rect key="frame" x="20" y="72" width="560" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="IAq-q7-cx9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDw-A4-HXZ">
-                                <rect key="frame" x="20" y="116" width="560" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="r4U-vQ-I1K"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HO9-77-XoX">
-                                <rect key="frame" x="362.5" y="527" width="65.5" height="33"/>
                                 <state key="normal" title="hide">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="hideButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="k0y-bj-w0U"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNN-s3-SDa" userLabel="hangup-button">
-                                <rect key="frame" x="267.5" y="453.5" width="65" height="65.5"/>
                                 <state key="normal" image="declineButton">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <state key="disabled" image="declineButtonDisabled"/>
                                 <userDefinedRuntimeAttributes>
@@ -194,7 +179,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="t85-kN-Xse" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="0Vf-ZD-52d"/>
                             <constraint firstItem="AHB-re-dgx" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="0Vo-C7-de6"/>
@@ -281,44 +266,39 @@
                         <viewControllerLayoutGuide type="bottom" id="z1c-mm-Aw5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y12-1W-nLk" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y26-mH-1lE">
-                                <rect key="frame" x="165" y="238" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y26-mH-1lE">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="X8a-t9-a0C"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speaker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhb-cu-5yP">
-                                <rect key="frame" x="365" y="238" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speaker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vhb-cu-5yP">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFf-51-ebq">
-                                <rect key="frame" x="315" y="354" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZFf-51-ebq">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keypad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCG-iz-H4L">
-                                <rect key="frame" x="265" y="238" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keypad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RCG-iz-H4L">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUA-4r-y3D" userLabel="sound-off-button" customClass="SipCallingButton">
-                                <rect key="frame" x="165" y="163" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Jdj-Cb-Odo"/>
                                     <constraint firstAttribute="width" secondItem="YUA-4r-y3D" secondAttribute="height" multiplier="1:1" id="yR9-Bg-uRB"/>
                                 </constraints>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonMute"/>
@@ -328,9 +308,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spy-AJ-mvn" userLabel="pause-button" customClass="SipCallingButton">
-                                <rect key="frame" x="315" y="279" width="70" height="70"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonHold"/>
@@ -340,9 +319,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A04-N3-2YO" userLabel="speaker-button" customClass="SipCallingButton">
-                                <rect key="frame" x="365" y="163" width="70" height="70"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonSpeaker"/>
@@ -351,16 +329,14 @@
                                     <action selector="speakerButtonPressed:" destination="n1v-MQ-FjB" eventType="touchUpInside" id="1AB-m4-NCv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYz-Wv-igq">
-                                <rect key="frame" x="215" y="354" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sYz-Wv-igq">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-Ll-8UO" userLabel="speaker-button" customClass="SipCallingButton">
-                                <rect key="frame" x="215" y="279" width="70" height="70"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonTransfer"/>
@@ -370,10 +346,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA0-SL-OtY" userLabel="numbers-button" customClass="SipCallingButton">
-                                <rect key="frame" x="265" y="163" width="70" height="70"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonKeypad"/>
@@ -383,7 +358,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoA-T9-ZRw" userLabel="hangup-button">
-                                <rect key="frame" x="265" y="460" width="70" height="70"/>
                                 <state key="normal" image="declineButton"/>
                                 <state key="disabled" image="declineButtonDisabled"/>
                                 <connections>
@@ -391,26 +365,23 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mc-Od-Pb6">
-                                <rect key="frame" x="20" y="63" width="560" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="mWf-hL-nbO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmp-RO-FFl">
-                                <rect key="frame" x="20" y="119" width="560" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="gwr-Xc-kXt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-16-38S">
-                                <rect key="frame" x="285" y="279" width="30" height="70"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-16-38S">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
@@ -418,50 +389,63 @@
                                     <constraint firstAttribute="width" constant="30" id="pb5-mF-Wo8"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNb-hA-2Hs">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="HVw-Cp-AOq"/>
+                                    <constraint firstAttribute="height" constant="20" id="RIP-nt-KBh"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HgM-16-38S" firstAttribute="centerX" secondItem="Y12-1W-nLk" secondAttribute="centerX" id="1jp-xW-C2t"/>
                             <constraint firstItem="A04-N3-2YO" firstAttribute="centerY" secondItem="gA0-SL-OtY" secondAttribute="centerY" id="3Yh-d9-EbQ"/>
-                            <constraint firstItem="y26-mH-1lE" firstAttribute="leading" secondItem="YUA-4r-y3D" secondAttribute="leading" id="3cz-i4-ETj"/>
-                            <constraint firstItem="RCG-iz-H4L" firstAttribute="leading" secondItem="gA0-SL-OtY" secondAttribute="leading" id="3wk-lN-tma"/>
+                            <constraint firstItem="y26-mH-1lE" firstAttribute="leading" secondItem="YUA-4r-y3D" secondAttribute="leading" constant="-12" id="3cz-i4-ETj"/>
+                            <constraint firstItem="RCG-iz-H4L" firstAttribute="leading" secondItem="gA0-SL-OtY" secondAttribute="leading" constant="-12" id="3wk-lN-tma"/>
                             <constraint firstItem="z1c-mm-Aw5" firstAttribute="top" secondItem="hoA-T9-ZRw" secondAttribute="bottom" constant="70" id="4rL-Ly-SM6"/>
                             <constraint firstItem="7mc-Od-Pb6" firstAttribute="top" secondItem="Kdc-JO-wUM" secondAttribute="bottom" constant="43" id="62F-Ii-aeM"/>
-                            <constraint firstItem="Vhb-cu-5yP" firstAttribute="trailing" secondItem="A04-N3-2YO" secondAttribute="trailing" id="6Bi-xc-iPF"/>
+                            <constraint firstItem="Vhb-cu-5yP" firstAttribute="trailing" secondItem="A04-N3-2YO" secondAttribute="trailing" constant="12" id="6Bi-xc-iPF"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="height" secondItem="dCO-Ll-8UO" secondAttribute="height" id="6Kr-Sc-rVK"/>
-                            <constraint firstItem="sYz-Wv-igq" firstAttribute="leading" secondItem="dCO-Ll-8UO" secondAttribute="leading" id="8i6-C3-mkL"/>
-                            <constraint firstItem="Vhb-cu-5yP" firstAttribute="leading" secondItem="A04-N3-2YO" secondAttribute="leading" id="92E-gU-gCV"/>
+                            <constraint firstItem="sYz-Wv-igq" firstAttribute="leading" secondItem="dCO-Ll-8UO" secondAttribute="leading" constant="-12" id="8i6-C3-mkL"/>
+                            <constraint firstItem="Vhb-cu-5yP" firstAttribute="leading" secondItem="A04-N3-2YO" secondAttribute="leading" constant="-12" id="92E-gU-gCV"/>
                             <constraint firstItem="7mc-Od-Pb6" firstAttribute="leading" secondItem="Y12-1W-nLk" secondAttribute="leadingMargin" id="95s-da-pNL"/>
                             <constraint firstItem="ZFf-51-ebq" firstAttribute="top" secondItem="spy-AJ-mvn" secondAttribute="bottom" constant="5" id="9DJ-IF-5SE"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="height" secondItem="A04-N3-2YO" secondAttribute="height" id="9wR-9w-ket"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="height" secondItem="spy-AJ-mvn" secondAttribute="height" id="9zO-Vv-QHu"/>
                             <constraint firstItem="gA0-SL-OtY" firstAttribute="leading" secondItem="YUA-4r-y3D" secondAttribute="trailing" constant="30" id="A9e-iZ-jyK"/>
-                            <constraint firstItem="dCO-Ll-8UO" firstAttribute="top" secondItem="y26-mH-1lE" secondAttribute="bottom" constant="20" id="BT8-IM-S1W"/>
-                            <constraint firstItem="sYz-Wv-igq" firstAttribute="trailing" secondItem="dCO-Ll-8UO" secondAttribute="trailing" id="C88-Ms-szW"/>
+                            <constraint firstItem="sYz-Wv-igq" firstAttribute="trailing" secondItem="dCO-Ll-8UO" secondAttribute="trailing" constant="12" id="C88-Ms-szW"/>
                             <constraint firstItem="y26-mH-1lE" firstAttribute="height" secondItem="ZFf-51-ebq" secondAttribute="height" id="FVS-QQ-rgX"/>
                             <constraint firstItem="Xmp-RO-FFl" firstAttribute="leading" secondItem="7mc-Od-Pb6" secondAttribute="leading" id="Ftq-aI-i9X"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="width" secondItem="dCO-Ll-8UO" secondAttribute="width" id="IKF-Fh-ZCR"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="height" secondItem="hoA-T9-ZRw" secondAttribute="height" id="Ive-1v-o5q"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="width" secondItem="gA0-SL-OtY" secondAttribute="width" id="KVU-aS-5N8"/>
-                            <constraint firstItem="ZFf-51-ebq" firstAttribute="trailing" secondItem="spy-AJ-mvn" secondAttribute="trailing" id="Ku3-98-VAf"/>
+                            <constraint firstItem="ZFf-51-ebq" firstAttribute="trailing" secondItem="spy-AJ-mvn" secondAttribute="trailing" constant="12" id="Ku3-98-VAf"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="width" secondItem="A04-N3-2YO" secondAttribute="width" id="LfL-Qn-Egd"/>
+                            <constraint firstItem="rNb-hA-2Hs" firstAttribute="top" secondItem="y26-mH-1lE" secondAttribute="bottom" id="PI1-hb-v3D"/>
                             <constraint firstItem="hoA-T9-ZRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sYz-Wv-igq" secondAttribute="bottom" constant="40" id="Pda-ng-J5D"/>
                             <constraint firstItem="RCG-iz-H4L" firstAttribute="top" secondItem="gA0-SL-OtY" secondAttribute="bottom" constant="5" id="RN9-D8-eKB"/>
                             <constraint firstItem="Xmp-RO-FFl" firstAttribute="trailing" secondItem="7mc-Od-Pb6" secondAttribute="trailing" id="S1r-4T-o73"/>
+                            <constraint firstItem="dCO-Ll-8UO" firstAttribute="top" secondItem="rNb-hA-2Hs" secondAttribute="bottom" id="S4v-p7-nQr"/>
                             <constraint firstItem="y26-mH-1lE" firstAttribute="height" secondItem="sYz-Wv-igq" secondAttribute="height" id="SBx-9S-DpB"/>
                             <constraint firstItem="sYz-Wv-igq" firstAttribute="top" secondItem="dCO-Ll-8UO" secondAttribute="bottom" constant="5" id="TN1-uo-7df"/>
                             <constraint firstItem="HgM-16-38S" firstAttribute="height" secondItem="spy-AJ-mvn" secondAttribute="height" id="TS4-jC-TaN"/>
+                            <constraint firstItem="rNb-hA-2Hs" firstAttribute="centerY" secondItem="Y12-1W-nLk" secondAttribute="centerY" id="Umg-XB-vNi"/>
                             <constraint firstItem="gA0-SL-OtY" firstAttribute="centerX" secondItem="Y12-1W-nLk" secondAttribute="centerX" id="Vje-RY-e4t"/>
                             <constraint firstItem="spy-AJ-mvn" firstAttribute="leading" secondItem="HgM-16-38S" secondAttribute="trailing" id="WbX-a3-hLv"/>
                             <constraint firstItem="Vhb-cu-5yP" firstAttribute="height" secondItem="y26-mH-1lE" secondAttribute="height" id="Wg8-Kt-QGO"/>
                             <constraint firstItem="y26-mH-1lE" firstAttribute="height" secondItem="RCG-iz-H4L" secondAttribute="height" id="ax8-l0-nxd"/>
                             <constraint firstItem="A04-N3-2YO" firstAttribute="leading" secondItem="gA0-SL-OtY" secondAttribute="trailing" constant="30" id="bVl-6y-nYj"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="height" secondItem="gA0-SL-OtY" secondAttribute="height" id="byx-hA-nGY"/>
-                            <constraint firstItem="ZFf-51-ebq" firstAttribute="leading" secondItem="spy-AJ-mvn" secondAttribute="leading" id="cuw-1I-KaW"/>
+                            <constraint firstItem="ZFf-51-ebq" firstAttribute="leading" secondItem="spy-AJ-mvn" secondAttribute="leading" constant="-12" id="cuw-1I-KaW"/>
                             <constraint firstItem="HgM-16-38S" firstAttribute="leading" secondItem="dCO-Ll-8UO" secondAttribute="trailing" id="ejf-BR-w1s"/>
                             <constraint firstItem="HgM-16-38S" firstAttribute="centerY" secondItem="spy-AJ-mvn" secondAttribute="centerY" id="ekb-SZ-UQu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7mc-Od-Pb6" secondAttribute="trailing" id="fmc-HR-4yg"/>
-                            <constraint firstItem="RCG-iz-H4L" firstAttribute="trailing" secondItem="gA0-SL-OtY" secondAttribute="trailing" id="ifw-LD-Y3A"/>
+                            <constraint firstItem="RCG-iz-H4L" firstAttribute="trailing" secondItem="gA0-SL-OtY" secondAttribute="trailing" constant="12" id="ifw-LD-Y3A"/>
+                            <constraint firstItem="rNb-hA-2Hs" firstAttribute="leading" secondItem="dCO-Ll-8UO" secondAttribute="leading" id="ijf-Lw-mUm"/>
                             <constraint firstItem="Vhb-cu-5yP" firstAttribute="top" secondItem="A04-N3-2YO" secondAttribute="bottom" constant="5" id="iuc-KA-uru"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Y12-1W-nLk" secondAttribute="leadingMargin" id="jgP-kx-hH3"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="A04-N3-2YO" secondAttribute="trailing" id="klx-zq-glx"/>
@@ -469,8 +453,7 @@
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="width" secondItem="spy-AJ-mvn" secondAttribute="width" id="qNM-2K-50A"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="width" secondItem="hoA-T9-ZRw" secondAttribute="width" id="qgV-8m-wCT"/>
                             <constraint firstItem="dCO-Ll-8UO" firstAttribute="centerY" secondItem="spy-AJ-mvn" secondAttribute="centerY" id="rw0-dS-oBu"/>
-                            <constraint firstItem="gA0-SL-OtY" firstAttribute="top" secondItem="Xmp-RO-FFl" secondAttribute="bottom" constant="20" id="sX4-2x-yGq"/>
-                            <constraint firstItem="y26-mH-1lE" firstAttribute="trailing" secondItem="YUA-4r-y3D" secondAttribute="trailing" id="vpE-7R-DzT"/>
+                            <constraint firstItem="y26-mH-1lE" firstAttribute="trailing" secondItem="YUA-4r-y3D" secondAttribute="trailing" constant="12" id="vpE-7R-DzT"/>
                             <constraint firstItem="y26-mH-1lE" firstAttribute="top" secondItem="YUA-4r-y3D" secondAttribute="bottom" constant="5" id="ywX-w4-3EQ"/>
                             <constraint firstItem="YUA-4r-y3D" firstAttribute="centerY" secondItem="gA0-SL-OtY" secondAttribute="centerY" id="zD4-nR-RdL"/>
                             <constraint firstItem="Xmp-RO-FFl" firstAttribute="top" secondItem="7mc-Od-Pb6" secondAttribute="bottom" constant="20" id="zNv-dQ-xkI"/>
@@ -493,7 +476,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ud2-F1-SSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fpx-WN-oDc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="626" y="-1007"/>
+            <point key="canvasLocation" x="624.79999999999995" y="-1007.0464767616193"/>
         </scene>
         <!--Call Transfer-->
         <scene sceneID="dzA-vc-gwf">
@@ -504,26 +487,23 @@
                         <viewControllerLayoutGuide type="bottom" id="cBN-Ff-T6S"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Q3T-G4-7cy" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-4p-BmQ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upb-YF-eAJ">
-                                        <rect key="frame" x="8" y="15" width="164" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-jc-nmv">
-                                        <rect key="frame" x="440" y="15" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HpX-iP-0J6"/>
                                     <constraint firstAttribute="trailing" secondItem="I6Q-jc-nmv" secondAttribute="trailing" constant="8" id="Z2H-jk-NZo"/>
@@ -532,26 +512,22 @@
                                     <constraint firstItem="upb-YF-eAJ" firstAttribute="leading" secondItem="e7f-4p-BmQ" secondAttribute="leading" constant="8" id="oHc-PV-Qhy"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="re1-Gc-q4V" userLabel="Left filler">
-                                <rect key="frame" x="20" y="122" width="56" height="40"/>
-                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="re1-Gc-q4V" userLabel="Left filler"/>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NumberToDialLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5gZ-PC-qXQ">
-                                <rect key="frame" x="79" y="122" width="442" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="KB0-Ov-C8m"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xz-P9-kDV">
-                                <rect key="frame" x="524" y="122" width="56" height="40"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="Jf0-NV-aIv"/>
                                 </constraints>
                                 <state key="normal" image="keypad-back">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <state key="highlighted" image="keypad-back-highlighted"/>
                                 <connections>
@@ -559,7 +535,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBs-up-y6F" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="165" y="198" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="height" multiplier="1:1" id="Un1-uy-hhI"/>
@@ -573,7 +548,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-gx-bL3" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="165" y="276" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
@@ -584,7 +558,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEP-Bk-KAS" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="265" y="276" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
@@ -595,7 +568,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-HO-t65" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="165" y="354" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
@@ -606,7 +578,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Bv-OIF" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="265" y="354" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
@@ -617,7 +588,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkA-Mj-NDd" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="365" y="354" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
@@ -628,7 +598,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VN4-PJ-HuA" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="165" y="432" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
@@ -638,7 +607,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3i-XW-znd" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="265" y="432" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
@@ -650,7 +618,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-sN-XvB" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="365" y="276" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
@@ -661,7 +628,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofT-FE-Anc" userLabel="3-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="365" y="198" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
@@ -672,9 +638,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-fS-OHu" userLabel="hangup-button">
-                                <rect key="frame" x="265" y="510" width="70" height="70"/>
                                 <state key="normal" image="acceptButton">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <state key="disabled" image="acceptButtonDisabled"/>
                                 <connections>
@@ -682,7 +647,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-Fl-Qu5" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="265" y="198" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
@@ -693,7 +657,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-Qk-6PL" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="365" y="432" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
@@ -803,26 +766,23 @@
                         <viewControllerLayoutGuide type="bottom" id="IKT-zP-YhF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EX7-zD-4eF" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0z-sc-Nby">
-                                <rect key="frame" x="0.0" y="64" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-El-Y0k">
-                                        <rect key="frame" x="8" y="15" width="189" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMr-4h-sSq">
-                                        <rect key="frame" x="415" y="15" width="177" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Yok-El-Y0k" firstAttribute="centerY" secondItem="p0z-sc-Nby" secondAttribute="centerY" id="26p-H3-OeZ"/>
                                     <constraint firstAttribute="trailing" secondItem="GMr-4h-sSq" secondAttribute="trailing" constant="8" id="BUB-m4-Na4"/>
@@ -831,41 +791,36 @@
                                     <constraint firstAttribute="height" constant="50" id="XDg-9I-cIJ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-pi-U1s">
-                                <rect key="frame" x="165" y="297" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-pi-U1s">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bkK-lC-xP9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speaker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd7-O4-f23">
-                                <rect key="frame" x="365" y="297" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speaker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xd7-O4-f23">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-hC-udf">
-                                <rect key="frame" x="315" y="413" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-hC-udf">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keypad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRl-h7-hor">
-                                <rect key="frame" x="265" y="297" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keypad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HRl-h7-hor">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1W-JG-6F0" userLabel="sound-off-button" customClass="SipCallingButton">
-                                <rect key="frame" x="165" y="222" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Uta-Sq-ycc"/>
                                     <constraint firstAttribute="width" secondItem="B1W-JG-6F0" secondAttribute="height" multiplier="1:1" id="fAm-mA-kcu"/>
                                 </constraints>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonMute"/>
@@ -875,9 +830,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKa-1e-Ezb" userLabel="speaker-button" customClass="SipCallingButton">
-                                <rect key="frame" x="365" y="222" width="70" height="70"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonSpeaker"/>
@@ -887,16 +841,14 @@
                                     <action selector="speakerButtonPressed:" destination="9vo-dM-YYf" eventType="touchUpInside" id="ed5-Cl-eRG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jL8-gK-ccx">
-                                <rect key="frame" x="215" y="413" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jL8-gK-ccx">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHd-ZH-aTP" userLabel="speaker-button" customClass="SipCallingButton">
-                                <rect key="frame" x="215" y="338" width="70" height="70"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonTransfer"/>
@@ -907,10 +859,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wI-Vj-STz" userLabel="numbers-button" customClass="SipCallingButton">
-                                <rect key="frame" x="265" y="222" width="70" height="70"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonKeypad"/>
@@ -921,7 +872,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huE-Pb-Xit" userLabel="hangup-button">
-                                <rect key="frame" x="265" y="510" width="70" height="70"/>
                                 <state key="normal" image="declineButton"/>
                                 <state key="disabled" image="declineButtonDisabled"/>
                                 <connections>
@@ -930,17 +880,15 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SA5-ky-WbU">
-                                <rect key="frame" x="20" y="178" width="560" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="v5f-Um-uXC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ceh-dY-eWj">
-                                <rect key="frame" x="285" y="338" width="30" height="70"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
@@ -949,18 +897,16 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXJ-58-omV">
-                                <rect key="frame" x="20" y="122" width="560" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="VFM-0G-FRX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DRS-h6-wLi" userLabel="pause-button" customClass="SipCallingButton">
-                                <rect key="frame" x="315" y="338" width="70" height="70"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonHold"/>
@@ -970,19 +916,29 @@
                                     <action selector="holdButtonPressed:" destination="n1v-MQ-FjB" eventType="touchUpInside" id="rcU-dD-hME"/>
                                 </connections>
                             </button>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EJ-jJ-zeF">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="8cO-TX-ses"/>
+                                    <constraint firstAttribute="height" constant="20" id="cdL-yb-4BU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1wI-Vj-STz" firstAttribute="leading" secondItem="B1W-JG-6F0" secondAttribute="trailing" constant="30" id="039-8g-uGl"/>
                             <constraint firstItem="qKa-1e-Ezb" firstAttribute="leading" secondItem="1wI-Vj-STz" secondAttribute="trailing" constant="30" id="1hX-Za-ite"/>
-                            <constraint firstItem="Sha-hC-udf" firstAttribute="leading" secondItem="DRS-h6-wLi" secondAttribute="leading" id="5IN-Jl-IBn"/>
-                            <constraint firstItem="jL8-gK-ccx" firstAttribute="leading" secondItem="QHd-ZH-aTP" secondAttribute="leading" id="5Tp-Tk-Iin"/>
+                            <constraint firstItem="Sha-hC-udf" firstAttribute="leading" secondItem="DRS-h6-wLi" secondAttribute="leading" constant="-12" id="5IN-Jl-IBn"/>
+                            <constraint firstItem="jL8-gK-ccx" firstAttribute="leading" secondItem="QHd-ZH-aTP" secondAttribute="leading" constant="-12" id="5Tp-Tk-Iin"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="height" secondItem="DRS-h6-wLi" secondAttribute="height" id="75k-43-wVB"/>
                             <constraint firstItem="HRl-h7-hor" firstAttribute="top" secondItem="1wI-Vj-STz" secondAttribute="bottom" constant="5" id="7io-N5-lWA"/>
                             <constraint firstItem="Ceh-dY-eWj" firstAttribute="centerY" secondItem="DRS-h6-wLi" secondAttribute="centerY" id="7xw-SV-HP8"/>
                             <constraint firstItem="SA5-ky-WbU" firstAttribute="trailing" secondItem="IXJ-58-omV" secondAttribute="trailing" id="8TL-Ls-UNg"/>
                             <constraint firstItem="qKa-1e-Ezb" firstAttribute="centerY" secondItem="1wI-Vj-STz" secondAttribute="centerY" id="8pP-8S-rTq"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="width" secondItem="1wI-Vj-STz" secondAttribute="width" id="9Z0-rG-6NX"/>
-                            <constraint firstItem="u6z-pi-U1s" firstAttribute="leading" secondItem="B1W-JG-6F0" secondAttribute="leading" id="C0p-Lk-85r"/>
+                            <constraint firstItem="u6z-pi-U1s" firstAttribute="leading" secondItem="B1W-JG-6F0" secondAttribute="leading" constant="-12" id="C0p-Lk-85r"/>
                             <constraint firstItem="jL8-gK-ccx" firstAttribute="top" secondItem="QHd-ZH-aTP" secondAttribute="bottom" constant="5" id="D5c-HS-RGy"/>
                             <constraint firstItem="Ceh-dY-eWj" firstAttribute="centerX" secondItem="EX7-zD-4eF" secondAttribute="centerX" id="EkJ-gt-bgz"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="width" secondItem="qKa-1e-Ezb" secondAttribute="width" id="F2f-Lk-2Vw"/>
@@ -991,36 +947,38 @@
                             <constraint firstItem="Xd7-O4-f23" firstAttribute="top" secondItem="qKa-1e-Ezb" secondAttribute="bottom" constant="5" id="GlF-zB-fYl"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="centerY" secondItem="1wI-Vj-STz" secondAttribute="centerY" id="HM1-Ra-zF3"/>
                             <constraint firstAttribute="leadingMargin" secondItem="IXJ-58-omV" secondAttribute="leading" id="KOf-yq-Kb4"/>
+                            <constraint firstItem="2EJ-jJ-zeF" firstAttribute="top" secondItem="u6z-pi-U1s" secondAttribute="bottom" id="KpZ-5Q-1Op"/>
                             <constraint firstItem="DRS-h6-wLi" firstAttribute="leading" secondItem="Ceh-dY-eWj" secondAttribute="trailing" id="Lrv-07-q9o"/>
                             <constraint firstItem="Ceh-dY-eWj" firstAttribute="leading" secondItem="QHd-ZH-aTP" secondAttribute="trailing" id="Nha-ST-KWU"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="width" secondItem="DRS-h6-wLi" secondAttribute="width" id="OTP-GT-tIK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="p0z-sc-Nby" secondAttribute="trailing" constant="-20" id="Pka-VR-uwi"/>
-                            <constraint firstItem="HRl-h7-hor" firstAttribute="trailing" secondItem="1wI-Vj-STz" secondAttribute="trailing" id="Qo9-WP-rYI"/>
+                            <constraint firstItem="HRl-h7-hor" firstAttribute="trailing" secondItem="1wI-Vj-STz" secondAttribute="trailing" constant="12" id="Qo9-WP-rYI"/>
                             <constraint firstItem="Sha-hC-udf" firstAttribute="top" secondItem="DRS-h6-wLi" secondAttribute="bottom" constant="5" id="SOH-o9-eco"/>
                             <constraint firstItem="1wI-Vj-STz" firstAttribute="centerX" secondItem="EX7-zD-4eF" secondAttribute="centerX" id="UIX-yv-hln"/>
+                            <constraint firstItem="2EJ-jJ-zeF" firstAttribute="centerY" secondItem="EX7-zD-4eF" secondAttribute="centerY" id="VkD-Td-bmg"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="height" secondItem="QHd-ZH-aTP" secondAttribute="height" id="Vyn-PY-Cew"/>
                             <constraint firstItem="p0z-sc-Nby" firstAttribute="leading" secondItem="EX7-zD-4eF" secondAttribute="leadingMargin" constant="-20" id="W0p-MD-jaF"/>
-                            <constraint firstItem="u6z-pi-U1s" firstAttribute="trailing" secondItem="B1W-JG-6F0" secondAttribute="trailing" id="X9n-Tw-WsN"/>
+                            <constraint firstItem="u6z-pi-U1s" firstAttribute="trailing" secondItem="B1W-JG-6F0" secondAttribute="trailing" constant="12" id="X9n-Tw-WsN"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="width" secondItem="QHd-ZH-aTP" secondAttribute="width" id="aSN-3k-Iaz"/>
-                            <constraint firstItem="1wI-Vj-STz" firstAttribute="top" secondItem="SA5-ky-WbU" secondAttribute="bottom" constant="20" id="blH-pa-arR"/>
                             <constraint firstItem="Xd7-O4-f23" firstAttribute="height" secondItem="u6z-pi-U1s" secondAttribute="height" id="cEM-P0-WAy"/>
                             <constraint firstItem="QHd-ZH-aTP" firstAttribute="centerY" secondItem="DRS-h6-wLi" secondAttribute="centerY" id="cKt-7F-Ws9"/>
-                            <constraint firstItem="jL8-gK-ccx" firstAttribute="trailing" secondItem="QHd-ZH-aTP" secondAttribute="trailing" id="dj7-JO-fN4"/>
-                            <constraint firstItem="QHd-ZH-aTP" firstAttribute="top" secondItem="u6z-pi-U1s" secondAttribute="bottom" constant="20" id="dzj-o4-HVl"/>
+                            <constraint firstItem="jL8-gK-ccx" firstAttribute="trailing" secondItem="QHd-ZH-aTP" secondAttribute="trailing" constant="12" id="dj7-JO-fN4"/>
                             <constraint firstItem="p0z-sc-Nby" firstAttribute="top" secondItem="Nwe-Ug-vDD" secondAttribute="bottom" id="eDj-qm-IGe"/>
-                            <constraint firstItem="Xd7-O4-f23" firstAttribute="leading" secondItem="qKa-1e-Ezb" secondAttribute="leading" id="g1A-wB-8ab"/>
+                            <constraint firstItem="Xd7-O4-f23" firstAttribute="leading" secondItem="qKa-1e-Ezb" secondAttribute="leading" constant="-12" id="g1A-wB-8ab"/>
                             <constraint firstItem="huE-Pb-Xit" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jL8-gK-ccx" secondAttribute="bottom" constant="40" id="hQX-ah-x6j"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="height" secondItem="qKa-1e-Ezb" secondAttribute="height" id="hhY-Lm-B6D"/>
+                            <constraint firstItem="QHd-ZH-aTP" firstAttribute="top" secondItem="2EJ-jJ-zeF" secondAttribute="bottom" id="iwJ-CG-by2"/>
                             <constraint firstItem="u6z-pi-U1s" firstAttribute="height" secondItem="Sha-hC-udf" secondAttribute="height" id="jyf-G2-1k5"/>
-                            <constraint firstItem="Sha-hC-udf" firstAttribute="trailing" secondItem="DRS-h6-wLi" secondAttribute="trailing" id="kPC-qO-yfN"/>
+                            <constraint firstItem="Sha-hC-udf" firstAttribute="trailing" secondItem="DRS-h6-wLi" secondAttribute="trailing" constant="12" id="kPC-qO-yfN"/>
                             <constraint firstItem="u6z-pi-U1s" firstAttribute="height" secondItem="HRl-h7-hor" secondAttribute="height" id="kPy-40-kuF"/>
                             <constraint firstItem="Ceh-dY-eWj" firstAttribute="height" secondItem="DRS-h6-wLi" secondAttribute="height" id="lge-UA-Eri"/>
+                            <constraint firstItem="2EJ-jJ-zeF" firstAttribute="leading" secondItem="QHd-ZH-aTP" secondAttribute="leading" id="lnL-D0-CHp"/>
                             <constraint firstItem="u6z-pi-U1s" firstAttribute="top" secondItem="B1W-JG-6F0" secondAttribute="bottom" constant="5" id="oYc-Oi-anN"/>
-                            <constraint firstItem="HRl-h7-hor" firstAttribute="leading" secondItem="1wI-Vj-STz" secondAttribute="leading" id="pLJ-Q9-r7V"/>
+                            <constraint firstItem="HRl-h7-hor" firstAttribute="leading" secondItem="1wI-Vj-STz" secondAttribute="leading" constant="-12" id="pLJ-Q9-r7V"/>
                             <constraint firstItem="IXJ-58-omV" firstAttribute="top" secondItem="p0z-sc-Nby" secondAttribute="bottom" constant="8" id="qLM-Iq-sYh"/>
                             <constraint firstItem="SA5-ky-WbU" firstAttribute="leading" secondItem="IXJ-58-omV" secondAttribute="leading" id="t1R-Br-VCx"/>
                             <constraint firstItem="IKT-zP-YhF" firstAttribute="top" secondItem="huE-Pb-Xit" secondAttribute="bottom" constant="20" id="tXB-cg-d8a"/>
-                            <constraint firstItem="Xd7-O4-f23" firstAttribute="trailing" secondItem="qKa-1e-Ezb" secondAttribute="trailing" id="uM9-zB-8rK"/>
+                            <constraint firstItem="Xd7-O4-f23" firstAttribute="trailing" secondItem="qKa-1e-Ezb" secondAttribute="trailing" constant="12" id="uM9-zB-8rK"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="height" secondItem="1wI-Vj-STz" secondAttribute="height" id="x4u-aK-LRz"/>
                             <constraint firstItem="B1W-JG-6F0" firstAttribute="width" secondItem="B1W-JG-6F0" secondAttribute="height" multiplier="1:1" id="xwp-dz-Ezk"/>
                             <constraint firstItem="u6z-pi-U1s" firstAttribute="height" secondItem="jL8-gK-ccx" secondAttribute="height" id="ycQ-Ns-qGu"/>
@@ -1056,7 +1014,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzf-VT-iVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="10U-cZ-ZuY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3187" y="-1007"/>
+            <point key="canvasLocation" x="3186.4000000000001" y="-1007.0464767616193"/>
         </scene>
         <!--Call Transfer-->
         <scene sceneID="Bfn-Bi-DfE">
@@ -1067,43 +1025,37 @@
                         <viewControllerLayoutGuide type="bottom" id="aqX-RA-5Sl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YaM-wy-9D5" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="successfullTransfer" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Oa-YQV">
-                                <rect key="frame" x="120" y="86" width="360" height="360"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Kbt-Oa-YQV" secondAttribute="height" multiplier="1:1" id="rrU-Ia-MFG"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Numberlabel currentCall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOE-ZZ-MDl">
-                                <rect key="frame" x="20" y="542" width="560" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="Transfer status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cdl-Ba-h64">
-                                <rect key="frame" x="20" y="510" width="560" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="NumberLabel firstCall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgC-ID-R8a">
-                                <rect key="frame" x="20" y="466" width="560" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnF-VJ-yjH" userLabel="Filler view">
-                                <rect key="frame" x="20" y="578" width="560" height="22"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C31-C4-4us" userLabel="Filler view">
-                                <rect key="frame" x="20" y="64" width="560" height="22"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wgC-ID-R8a" firstAttribute="top" secondItem="Kbt-Oa-YQV" secondAttribute="bottom" constant="20" id="1DQ-7b-g7X"/>
                             <constraint firstItem="bnF-VJ-yjH" firstAttribute="leading" secondItem="YaM-wy-9D5" secondAttribute="leadingMargin" id="4kr-1w-gtu"/>
