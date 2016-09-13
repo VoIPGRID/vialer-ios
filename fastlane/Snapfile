@@ -5,10 +5,10 @@ reinstall_app true
 
 # A list of devices you want to take the screenshots from
 devices([
-   "iPhone 4s",
-   "iPhone 5",
-   "iPhone 6",
-   "iPhone 6 Plus",
+  "iPhone 4s",
+  "iPhone 5",
+  "iPhone 6",
+  "iPhone 6 Plus",
 ])
 
 languages([
@@ -23,7 +23,7 @@ languages([
 output_directory "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
 
 # Clear all previously generated screenshots before creating new ones
-clear_previous_screenshots true
+clear_previous_screenshots false
 
 number_of_retries 4
 
