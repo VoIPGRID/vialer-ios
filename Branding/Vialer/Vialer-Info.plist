@@ -66,8 +66,10 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>NSContactsUsageDescription</key>
-	<string>Contacts access placeholder text: VIALI-3271</string>
+	<string>Vialer needs access to your contacts to make calling to your contacts possible</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Vialer needs access to your microphone to make calling possible</string>
 </dict>
 </plist>

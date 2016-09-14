@@ -68,6 +68,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
-	<string>Contacts access placeholder text: VIALI-3271</string>
+	<string>Verbonden needs access to your contacts to make calling to your contacts possible</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Verbonden needs access to your microphone to make calling possible</string>
 </dict>
 </plist>

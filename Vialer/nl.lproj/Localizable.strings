@@ -13,6 +13,9 @@
 "Accept" = "Accepteer";
 
 /* No comment provided by engineer. */
+"Add destination" = "Voeg eindbestemming toe";
+
+/* No comment provided by engineer. */
 "Application denied access to 'Contacts'" = "App heeft geen toegang tot 'Contacten'";
 
 /* No comment provided by engineer. */
@@ -385,4 +388,3 @@
 /* No comment provided by engineer. */
 "Your VoIP account has been registered on another device. You can re-enable VoIP in Settings" = "Je VoIP account is geregistreerd op een ander apparaat. Je kunt VoIP weer activeren bij instellingen";
 
-"Add destination" = "Voeg eindbestemming toe";

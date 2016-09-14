@@ -1,0 +1,2 @@
+NSContactsUsageDescription = "Voys needs access to your contacts to make calling to your contacts possible";
+NSMicrophoneUsageDescription = "Voys needs access to your microphone to make calling possible";
