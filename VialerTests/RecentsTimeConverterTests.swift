@@ -41,7 +41,7 @@ class RecentsTimeConverterTests: XCTestCase {
 
         // Constructs a 24h CET time string as expected by the API in the format
         // yyyy-MM-dd'T'HH:mm:ss (this seems to be ISO-8601)
-        let string24hCET = "\(components.year)-\(components.month)-\(components.day)T\(components.hour):\(components.minute):\(components.second)"
+        let string24hCET = "\(components.year!)-\(components.month!)-\(components.day!)T\(components.hour!):\(components.minute!):\(components.second!)"
 
         // When
         let receivedDate = recentsTimeConverter.dateFrom24hCET(timeString: string24hCET)
@@ -70,7 +70,7 @@ class RecentsTimeConverterTests: XCTestCase {
         let receivedAPIformatted24hCETstring = recentsTimeConverter.apiFormatted24hCETstringFrom(date: dateToConvert!)
 
         // Then
-        let expected24hAPIstring = "\(components.year)-\(components.month)-\(components.day)T\(components.hour):\(components.minute):\(components.second)"
+        let expected24hAPIstring = "\(components.year!)-\(components.month!)-\(components.day!)T\(components.hour!):\(components.minute!):\(components.second!)"
         XCTAssert(receivedAPIformatted24hCETstring == expected24hAPIstring)
     }
 
