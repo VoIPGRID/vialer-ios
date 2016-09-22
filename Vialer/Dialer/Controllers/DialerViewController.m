@@ -96,8 +96,14 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (void)setNumberText:(NSString *)numberText {
     self.numberLabel.text = [self cleanPhonenumber:numberText];
-    self.deleteButton.hidden = self.numberText.length == 0;
     [self setupCallButton];
+}
+
+- (void)toggleDeleteButton {
+    self.deleteButton.enabled = !(self.numberText.length == 0);
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.deleteButton.alpha = (self.numberText.length == 0) ? 0.0 : 1.0;
+    } completion:nil];
 }
 
 - (NSString *)cleanPhonenumber:(NSString *)phonenumber {
@@ -122,6 +128,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
     self.numberText = [self.numberText substringToIndex:self.numberText.length - 1];
+    [self toggleDeleteButton];
 }
 
 
@@ -136,7 +143,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     if (![self.numberText length]) {
         self.numberText = self.lastCalledNumber;
 
-    // There is a number, let's call
+        // There is a number, let's call
     } else {
         self.lastCalledNumber = self.numberText;
 
@@ -153,6 +160,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 - (IBAction)numberPressed:(NumberPadButton *)sender {
     [self numberPadPressedWithCharacter:sender.number];
     [self playSoundForCharacter:sender.number];
+    [self toggleDeleteButton];
 }
 
 - (IBAction)longPressZeroButton:(UILongPressGestureRecognizer *)sender {
