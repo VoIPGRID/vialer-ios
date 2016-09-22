@@ -274,6 +274,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }
 
     fileprivate func handleCallEnded() {
+        VialerGAITracker.callMetrics(finishedCall: self.activeCall!)
         if let category = previousAVAudioSessionCategory {
             do {
                 try avAudioSession.setCategory(category)
