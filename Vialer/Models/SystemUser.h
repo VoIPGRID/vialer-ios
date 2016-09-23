@@ -180,6 +180,11 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 @property (nonatomic) BOOL sipEnabled;
 
 /**
+ *  The users current availability.
+ */
+@property (strong, nonatomic) NSDictionary* currentAvailability;
+
+/**
  *  Singleton instance of the current user.
  *
  *  @return SystemUser singleton instance.
