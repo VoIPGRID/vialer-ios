@@ -41,8 +41,7 @@ class SetupCallTransferViewController: UIViewController {
     var number: String {
         set {
             numberToDialLabel?.text = newValue
-            callButton?.isEnabled = newValue != ""
-            deleteButton?.isEnabled = newValue != ""
+            updateUI()
         }
         get {
             return numberToDialLabel.text!
@@ -114,6 +113,10 @@ class SetupCallTransferViewController: UIViewController {
     fileprivate func updateUI() {
         firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
 
+        callButton?.isEnabled = number != ""
+        deleteButton?.isEnabled = number != ""
+        toggleDeleteButton()
+
         guard let call = firstCall else { return }
 
         if call.callState == .disconnected {
@@ -121,6 +124,12 @@ class SetupCallTransferViewController: UIViewController {
         } else {
             firstCallStatusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold phone state")
         }
+    }
+
+    fileprivate func toggleDeleteButton () {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.deleteButton?.alpha = self.number.characters.count == 0 ? 0.0 : 1.0
+        }, completion:nil)
     }
 
     // MARK: - Segues
