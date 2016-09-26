@@ -40,6 +40,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "SettingsViewControllerTests/testSipEnabledObserverWillReloadTable">
+               </Test>
+               <Test
                   Identifier = "SystemUserTests/testKVONotificationDoesNotFire">
                </Test>
                <Test
