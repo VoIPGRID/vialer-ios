@@ -64,6 +64,10 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
     [self setupCallButton];
+
+    // Set initial state of deletebutton, hidden and disabled.
+    self.deleteButton.alpha = 0;
+    self.deleteButton.enabled = false;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -127,8 +131,10 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 }
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
-    self.numberText = [self.numberText substringToIndex:self.numberText.length - 1];
-    [self toggleDeleteButton];
+    if (self.numberText.length > 0) {
+        self.numberText = [self.numberText substringToIndex:self.numberText.length - 1];
+        [self toggleDeleteButton];
+    }
 }
 
 
