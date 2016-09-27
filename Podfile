@@ -20,30 +20,37 @@ def default_pods
     pod 'VialerSIPLib'
 end
 
+
 target 'Vialer' do
     default_pods
 end
-
 target 'Voys' do
     default_pods
 end
-
 target 'Verbonden' do
     default_pods
 end
-
 target 'Acceptatie' do
     default_pods
 end
+
 
 target 'VialerTests' do
     pod 'OCMock'
     pod 'OHHTTPStubs'
 end
 
+
 target 'VialerSnapshotUITests' do
     default_pods
 end
+target 'VoysSnapshotUITests' do
+    default_pods
+end
+target 'VerbondenSnapshotUITests' do
+    default_pods
+end
+
 
 post_install do |installer_representation|
     installer_representation.pods_project.targets.each do |target|

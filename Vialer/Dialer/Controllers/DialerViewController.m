@@ -213,7 +213,13 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         self.numberText = @"";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.numberText contact:nil];
+
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if (appDelegate.isScreenshotRun) {
+            [sipCallingVC handleOutgoingCallForScreenshotWithPhoneNumber:self.numberText];
+        } else {
+            [sipCallingVC handleOutgoingCallWithPhoneNumber:self.numberText contact:nil];
+        }
         self.numberText = @"";
     }
 }

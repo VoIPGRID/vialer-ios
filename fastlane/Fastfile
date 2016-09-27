@@ -58,8 +58,8 @@ platform :ios do
   lane :screenshot do
     prebuild
     snapshot(
-      stop_after_first_error: true,
-      output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
+        stop_after_first_error: true,
+        output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
     )
   end
 
