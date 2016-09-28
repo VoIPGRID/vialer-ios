@@ -64,6 +64,10 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
     [self setupCallButton];
+
+    // Set initial state of deletebutton, hidden and disabled.
+    self.deleteButton.alpha = 0;
+    self.deleteButton.enabled = false;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -96,8 +100,14 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 
 - (void)setNumberText:(NSString *)numberText {
     self.numberLabel.text = [self cleanPhonenumber:numberText];
-    self.deleteButton.hidden = self.numberText.length == 0;
     [self setupCallButton];
+}
+
+- (void)toggleDeleteButton {
+    self.deleteButton.enabled = !(self.numberText.length == 0);
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.deleteButton.alpha = (self.numberText.length == 0) ? 0.0 : 1.0;
+    } completion:nil];
 }
 
 - (NSString *)cleanPhonenumber:(NSString *)phonenumber {
@@ -121,7 +131,10 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 }
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
-    self.numberText = [self.numberText substringToIndex:self.numberText.length - 1];
+    if (self.numberText.length > 0) {
+        self.numberText = [self.numberText substringToIndex:self.numberText.length - 1];
+        [self toggleDeleteButton];
+    }
 }
 
 
@@ -136,7 +149,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     if (![self.numberText length]) {
         self.numberText = self.lastCalledNumber;
 
-    // There is a number, let's call
+        // There is a number, let's call
     } else {
         self.lastCalledNumber = self.numberText;
 
@@ -153,6 +166,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 - (IBAction)numberPressed:(NumberPadButton *)sender {
     [self numberPadPressedWithCharacter:sender.number];
     [self playSoundForCharacter:sender.number];
+    [self toggleDeleteButton];
 }
 
 - (IBAction)longPressZeroButton:(UILongPressGestureRecognizer *)sender {
@@ -205,7 +219,13 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
         self.numberText = @"";
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingVC handleOutgoingCallWithPhoneNumber:self.numberText contact:nil];
+
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if (appDelegate.isScreenshotRun) {
+            [sipCallingVC handleOutgoingCallForScreenshotWithPhoneNumber:self.numberText];
+        } else {
+            [sipCallingVC handleOutgoingCallWithPhoneNumber:self.numberText contact:nil];
+        }
         self.numberText = @"";
     }
 }

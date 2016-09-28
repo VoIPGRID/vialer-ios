@@ -23,15 +23,15 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (2.3.0):
-    - CocoaLumberjack/Default (= 2.3.0)
-    - CocoaLumberjack/Extensions (= 2.3.0)
-  - CocoaLumberjack/Core (2.3.0)
-  - CocoaLumberjack/Default (2.3.0):
+  - CocoaLumberjack (2.4.0):
+    - CocoaLumberjack/Default (= 2.4.0)
+    - CocoaLumberjack/Extensions (= 2.4.0)
+  - CocoaLumberjack/Core (2.4.0)
+  - CocoaLumberjack/Default (2.4.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.3.0):
+  - CocoaLumberjack/Extensions (2.4.0):
     - CocoaLumberjack/Default
-  - FirebaseAnalytics (3.3.1):
+  - FirebaseAnalytics (3.4.2):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
@@ -81,11 +81,11 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (5.2.1)
   - PBWebViewController (0.5.0)
   - Reachability (3.2)
-  - SAMKeychain (1.5.1)
-  - SimulatorStatusMagic (1.9)
+  - SAMKeychain (1.5.2)
+  - SimulatorStatusMagic (1.9.1)
   - SVProgressHUD (2.0.3)
   - Vialer-pjsip-iOS (1.0)
-  - VialerSIPLib (1.0.5):
+  - VialerSIPLib (1.0.6):
     - CocoaLumberjack (~> 2.2)
     - Reachability
     - Vialer-pjsip-iOS
@@ -123,8 +123,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  FirebaseAnalytics: d968d4d5f6aeb795cd64144337bcd233e530efc6
+  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
@@ -139,12 +139,12 @@ SPEC CHECKSUMS:
   OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SAMKeychain: 6b04852a20684167aea97bdf8ba12c95d3616376
-  SimulatorStatusMagic: 4db65b11c095bbb3abd966a4ae8ee0f11789e8e0
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
+  SimulatorStatusMagic: 0dcd69449f292fa12ab33d39bc3348b4a156da9a
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
-  VialerSIPLib: 35241a8affe9a31d139297cb7de32dceea40add9
+  VialerSIPLib: 3d0c15a987089bd2140a807d98cabe312775c418
 
-PODFILE CHECKSUM: 0403ca87305a6c93c6cb29bcdbbd7f3b45f64c22
+PODFILE CHECKSUM: 987ca33f9e41f3669ac73b5da31eb8e898244d75
 
 COCOAPODS: 1.0.1

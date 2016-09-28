@@ -160,3 +160,6 @@
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "yQi-zQ-RoI"; */
 "yQi-zQ-RoI.title" = "Terug";
+
+/* Class = "UILabel"; text = "merge calls"; ObjectID = "jL8-gK-ccx"; */
+"jL8-gK-ccx.text" = "voeg samen";

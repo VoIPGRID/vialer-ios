@@ -28,9 +28,9 @@ import Foundation
          Categories used for Google Analytics.
          */
         struct Categories {
-            static let call: String = "call"
-            static let middleware: String = "middleware"
-            static let metrics: String = "metrics"
+            static let call: String = "Call"
+            static let middleware: String = "Middleware"
+            static let metrics: String = "Metrics"
         }
 
         /**
@@ -197,7 +197,7 @@ import Foundation
      - parameter isAccepted:     Boolean indicating if we can accept the incoming VoIP call.
      */
     static func pushNotification(isAccepted: Bool, connectionType: String ) {
-        let action = isAccepted ? "accepted" : "rejected"
+        let action = isAccepted ? "Accepted" : "Rejected"
         sendEvent(withCategory: GAIConstants.Categories.middleware, action: action, label: connectionType, value: nil)
     }
 
@@ -227,7 +227,7 @@ import Foundation
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
     static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
-        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware, interval: (responseTime * 1000) as NSNumber, name: "response", label: nil).build() as [NSObject : AnyObject]
+        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware, interval: (responseTime * 1000) as NSNumber, name: "Response Time", label: nil).build() as [NSObject : AnyObject]
         tracker.send(timing)
     }
 

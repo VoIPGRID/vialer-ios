@@ -40,6 +40,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "SettingsViewControllerTests/testSipEnabledObserverWillReloadTable">
+               </Test>
+               <Test
                   Identifier = "SystemUserTests/testKVONotificationDoesNotFire">
                </Test>
                <Test
@@ -85,6 +88,11 @@
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
+         <AdditionalOption
+            key = "NSZombieEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction

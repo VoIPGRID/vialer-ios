@@ -183,6 +183,10 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
+    func handleOutgoingCallForScreenshot(phoneNumber: String){
+        phoneNumberLabelText = phoneNumber
+    }
+
     func handleIncomingCall(_ call: VSLCall) {
         self.previousAVAudioSessionCategory = self.avAudioSession.category
         self.activeCall = call
@@ -210,6 +214,18 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     // MARK: - Helper functions
 
     func updateUI() {
+        #if DEBUG
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.isScreenshotRun {
+                holdButton?.isEnabled = true
+                muteButton?.isEnabled = true
+                transferButton?.isEnabled = true
+                speakerButton?.isEnabled = true
+                hangupButton?.isEnabled = true
+                statusLabel?.text = "09:41"
+                numberLabel?.text = phoneNumberLabelText
+                return
+            }
+        #endif
 
         guard let call = activeCall else { return }
 
@@ -274,6 +290,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }
 
     fileprivate func handleCallEnded() {
+        VialerGAITracker.callMetrics(finishedCall: self.activeCall!)
         if let category = previousAVAudioSessionCategory {
             do {
                 try avAudioSession.setCategory(category)
@@ -283,16 +300,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
 
         hangupButton?.isEnabled = false
-
-        var timeToWaitBeforeDismissing = Configuration.Timing.WaitingTimeAfterDismissing
-
-        #if DEBUG
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.isScreenshotRun {
-            timeToWaitBeforeDismissing = 5.0
-        }
-        #endif
-
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(timeToWaitBeforeDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+        let waitingTimeAfterDismissing = Configuration.Timing.WaitingTimeAfterDismissing
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             if self.activeCall!.isIncoming {
                 self.performSegue(withIdentifier: Configuration.Segues.UnwindToVialerRootViewController, sender: self)
             } else {

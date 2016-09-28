@@ -132,6 +132,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeObservers];
+    [SVProgressHUD dismiss];
     [super viewWillDisappear:animated];
 }
 
