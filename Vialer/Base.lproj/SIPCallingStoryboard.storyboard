@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="bottom" id="51B-d5-ps1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kif-jA-29n" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-TQ-W7d" userLabel="1-Button" customClass="NumberPadButton">
@@ -267,7 +267,7 @@
                         <viewControllerLayoutGuide type="bottom" id="z1c-mm-Aw5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y12-1W-nLk" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y26-mH-1lE">
@@ -489,7 +489,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cBN-Ff-T6S"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Q3T-G4-7cy" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-4p-BmQ">
@@ -768,7 +768,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IKT-zP-YhF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EX7-zD-4eF" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0z-sc-Nby">
@@ -843,17 +843,17 @@
                                     <action selector="speakerButtonPressed:" destination="9vo-dM-YYf" eventType="touchUpInside" id="ed5-Cl-eRG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jL8-gK-ccx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="merge calls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jL8-gK-ccx">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHd-ZH-aTP" userLabel="speaker-button" customClass="SipCallingButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHd-ZH-aTP" userLabel="mergecalls-button" customClass="SipCallingButton">
                                 <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonTransfer"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonMergeCalls"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="transferButtonPressed:" destination="9vo-dM-YYf" eventType="touchUpInside" id="8Kz-WB-0t2"/>
@@ -1028,7 +1028,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aqX-RA-5Sl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YaM-wy-9D5" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="successfullTransfer" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Oa-YQV">
