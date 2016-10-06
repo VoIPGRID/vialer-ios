@@ -4,6 +4,7 @@
 //
 
 #import "AvailabilityModel.h"
+#import "SystemUser.h"
 
 #import "VoIPGRIDRequestOperationManager.h"
 
@@ -24,7 +25,6 @@ static NSString *const AvailabilityModelSelectedUserDestinationPhoneaccountKey =
 static NSString *const AvailabilityModelSelectedUserDestinationFixedKey = @"fixeddestination";
 static NSString *const AvailabilityModelSelectedUserDestinationIdKey = @"id";
 
-static NSString * const AvailabilityModelSUDKey = @"AvailabilityModelSUDKey";
 static NSString * const AvailabilityModelLastFetchKey = @"AvailabilityModelLastFetchKey";
 static NSString * const AvailabilityModelAvailabilityKey = @"AvailabilityModelAvailabilityKey";
 static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of seconds between fetching of availability
@@ -173,7 +173,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 }
 
 - (void)getCurrentAvailabilityWithBlock:(void (^)(NSString *currentAvailability, NSString *localizedError))completionBlock {
-    NSDictionary *currentAvailability = [[NSUserDefaults standardUserDefaults] objectForKey:AvailabilityModelSUDKey];
+    NSDictionary *currentAvailability = [SystemUser currentUser].currentAvailability;
 
     // Check no avialability.
     if (!currentAvailability[AvailabilityModelLastFetchKey] ||
@@ -216,7 +216,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                             AvailabilityModelLastFetchKey:[NSDate date],
                             AvailabilityModelAvailabilityKey:newAvialabilityString,
                             };
-    [[NSUserDefaults standardUserDefaults] setObject:currentAvailability forKey:AvailabilityModelSUDKey];
+    [SystemUser currentUser].currentAvailability = currentAvailability;
     return newAvialabilityString;
 }
 
