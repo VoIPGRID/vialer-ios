@@ -259,7 +259,9 @@ import Foundation
      */
     private static func sendMOSValue(mos: Float, forCodec codec:String) {
         let labelString = "MOS for \(codec)"
-        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: mos as NSNumber!)
+        let value = NSNumber(value:Int(mos*100.0))
+
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value:value )
     }
 
     /**
@@ -270,6 +272,8 @@ import Foundation
      */
     private static func sendBandwidthPerMinute(bandwidth: Float, forCodec codec:String) {
         let labelString = "Bandwidth for \(codec)"
-        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: bandwidth as NSNumber!)
+        let value = NSNumber(value:Int(bandwidth*1024.0))
+        
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: value)
     }
 }
