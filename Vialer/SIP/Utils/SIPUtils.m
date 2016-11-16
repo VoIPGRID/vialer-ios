@@ -19,6 +19,7 @@
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
+    endpointConfiguration.logLevel = 3;
     endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
     endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                       [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
@@ -62,16 +63,6 @@
         }
         completion(success, account);
     }];
-}
-
-+ (VSLCall *)getCallWithId:(NSString *)callId {
-    if (!callId) {
-        return nil;
-    }
-
-    VSLCall *call = [[VialerSIPLib sharedInstance] getVSLCallWithId:callId andSipUser:[SystemUser currentUser]];
-
-    return call;
 }
 
 + (BOOL)anotherCallInProgress:(VSLCall *)receivedCall {

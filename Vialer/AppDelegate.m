@@ -9,7 +9,8 @@
 #import "APNSHandler.h"
 #import <AudioToolbox/AudioServices.h>
 @import CoreData;
-#import "HDLumberjackLogFormatter.h"
+#import "DDLogWrapper.h"
+#import <VialerSIPLib/CallKitProviderDelegate.h>
 #import "PhoneNumberModel.h"
 #ifdef DEBUG
 #import "SDStatusBarManager.h"
@@ -30,13 +31,16 @@
 @property (nonatomic) BOOL stopVibrating;
 @property (strong, nonatomic) UILocalNotification *incomingCallNotification;
 @property (assign) BOOL isScreenshotRun;
+@property (strong, nonatomic) CallKitProviderDelegate *callKitProviderDelegate;
+@property (weak, nonatomic) VSLCallManager *callManager;
 @end
 
 NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
-NSString * const AppDelegateIncomingBackgroundCallNotification = @"AppDelegateIncomingBackgroundCallNotification";
+NSString * const AppDelegateIncomingBackgroundCallAcceptedNotification = @"AppDelegateIncomingBackgroundCallAcceptedNotification";
 NSString * const AppDelegateLocalNotificationCategory = @"AppDelegateLocalNotificationCategory";
 NSString * const AppDelegateLocalNotificationAcceptCall = @"AppDelegateLocalNotificationAcceptCall";
 NSString * const AppDelegateLocalNotificationDeclineCall = @"AppDelegateLocalNotificationDeclineCall";
+NSString * const AppDelegateLocalNotificationCallIdKey = @"AppDelegateLocalNotificationCallIdKey";
 static NSTimeInterval const AppDelegateVibratingTimeInterval = 2.0f;
 static int const AppDelegateNumberOfVibrations = 5;
 
@@ -50,7 +54,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self interpretLaunchArguments];
-    [self setupCocoaLumberjackLogging];
+    [DDLogWrapper setup];
 
     [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
@@ -89,8 +93,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sipDisabledNotification:) name:SystemUserSIPDisabledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextSaved:) name:NSManagedObjectContextDidSaveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallConnectedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallDisconnectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeLocalNotification:) name:VSLCallStateChangedNotification object:nil];
     [[SystemUser currentUser] addObserver:self forKeyPath:NSStringFromSelector(@selector(clientID)) options:0 context:NULL];
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
@@ -107,7 +110,10 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 
         VSLCall *call = [SIPUtils getFirstActiveCall];
         if (call.callState == VSLCallStateIncoming) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+            NSDictionary *notificationInfo = @{VSLNotificationUserInfoCallKey : call};
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification
+                                                                object:self
+                                                              userInfo:notificationInfo];
         }
     });
 }
@@ -126,8 +132,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[SystemUser currentUser] removeObserver:self forKeyPath:NSStringFromSelector(@selector(clientID))];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallDisconnectedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallConnectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallStateChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];
@@ -140,8 +145,10 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
     [self stopVibratingInBackground];
     if ([identifier isEqualToString:AppDelegateLocalNotificationAcceptCall] || [identifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
-        DDLogVerbose(@"User accepted a local notification with Action Identifier: %@", identifier);
-        [self handleIncomingLocalBackgroudNotifications:identifier forCallId:notification.userInfo[@"callId"]];
+        NSInteger callId = [(NSNumber *)notification.userInfo[AppDelegateLocalNotificationCallIdKey] integerValue];
+
+        DDLogVerbose(@"User accepted a local notification with Action Identifier: %@ for callId:%ld", identifier, (long)callId);
+        [self handleIncomingLocalBackgroudNotifications:identifier forCallId:callId];
     } else {
         DDLogDebug(@"Unsupported action for local Notification: %@", identifier);
     }
@@ -150,12 +157,26 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     DDLogVerbose(@"Notification clicked without \"Action Identifier\" : %@", notification);
-    if (notification.userInfo[@"callId"]) {
-        [self handleIncomingLocalBackgroudNotifications:nil forCallId:notification.userInfo[@"callId"]];
-    }
+    NSInteger callId = [(NSNumber *)notification.userInfo[AppDelegateLocalNotificationCallIdKey] integerValue];;
+
+    [self handleIncomingLocalBackgroudNotifications:nil forCallId:callId];
 }
 
 #pragma mark - setup helper methods
+
+- (CallKitProviderDelegate *)callKitProviderDelegate {
+    if (!_callKitProviderDelegate) {
+        _callKitProviderDelegate = [[CallKitProviderDelegate alloc] initWithCallManager:self.callManager];
+    }
+    return _callKitProviderDelegate;
+}
+
+- (VSLCallManager *)callManager {
+    if (!_callManager) {
+        _callManager = [VialerSIPLib sharedInstance].callManager;
+    }
+    return _callManager;
+}
 
 - (void)interpretLaunchArguments {
     NSArray *arguments = [NSProcessInfo processInfo].arguments;
@@ -167,10 +188,13 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     }
 }
 
-- (void)handleIncomingLocalBackgroudNotifications:(NSString *)notificationIdentifier forCallId:(NSString *)callId {
-    VSLCall *call = [SIPUtils getCallWithId:callId];
+- (void)handleIncomingLocalBackgroudNotifications:(NSString *)notificationIdentifier forCallId:(NSInteger)callId {
+    VSLCall *call = [self.callManager callWithCallId:callId];
 
     if (call.callState > VSLCallStateNull) {
+        NSDictionary *notificationInfo = @{VSLNotificationUserInfoCallKey : call};
+
+        // Call is declined through the button on the local notification.
         if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
             NSError *error;
             [call decline:&error];
@@ -178,55 +202,20 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
             if (error) {
                 DDLogError(@"Error declining call: %@", error);
             }
+
         } else if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationAcceptCall]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingBackgroundCallNotification object:call];
+            // Call is accepted through the button on the local notification.
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingBackgroundCallAcceptedNotification
+                                                                object:self
+                                                              userInfo:notificationInfo];
+
         } else if (!notificationIdentifier) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+            // The local notification was just tapped, not declined, not answerd.
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification
+                                                                object:self
+                                                              userInfo:notificationInfo];
         }
     }
-}
-
-- (void)setupCocoaLumberjackLogging {
-    // Add the Terminal and TTY(XCode console) loggers to CocoaLumberjack (simulate the default NSLog behaviour)
-    HDLumberjackLogFormatter* logFormat = [[HDLumberjackLogFormatter alloc] init];
-
-    DDASLLogger *aslLogger = [DDASLLogger sharedInstance];
-    [aslLogger setLogFormatter: logFormat];
-    DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
-    [ttyLogger setLogFormatter:logFormat];
-    [ttyLogger setColorsEnabled:YES];
-
-    // Give INFO a color
-    // Verbose
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor lightGrayColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
-
-    // Debug
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor darkGrayColor] backgroundColor:nil forFlag:DDLogFlagDebug];
-
-    // INFO
-    UIColor *pink = [UIColor colorWithRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
-    [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
-
-    // Warning
-    // Default, so orange.
-
-    // Error
-    UIColor *red = [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1.0];
-    [[DDTTYLogger sharedInstance] setForegroundColor:red backgroundColor:nil forFlag:DDLogFlagError];
-
-
-#ifdef DEBUG
-    // File logging
-    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.maximumFileSize = 1024 * 1024 * 1; // Size in bytes
-    fileLogger.rollingFrequency = 0; // Set rollingFrequency to 0, only roll on file size.
-    [fileLogger logFileManager].maximumNumberOfLogFiles = 3;
-    fileLogger.logFormatter = logFormat;
-    [DDLog addLogger:fileLogger];
-#endif
-
-    [DDLog addLogger:aslLogger];
-    [DDLog addLogger:ttyLogger];
 }
 
 # pragma mark - Notifications
@@ -244,7 +233,10 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
         if ([SystemUser currentUser].sipEnabled) {
             [SIPUtils setupSIPEndpoint];
             [[APNSHandler sharedHandler] registerForVoIPNotifications];
-            [self registerForLocalNotifications];
+
+            if (![VialerSIPLib  callKitAvailable]) {
+                [self registerForLocalNotifications];
+            }
         }
     });
 }
@@ -299,34 +291,44 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         [VialerGAITracker incomingCallRingingEvent];
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([SIPUtils anotherCallInProgress:call]) {
-                DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
+        if ([VialerSIPLib  callKitAvailable]) {
+            DDLogInfo(@"Incoming call block invoked, routing through CallKit.");
+            [self.callKitProviderDelegate reportIncomingCall:call];
+        } else {
+            DDLogInfo(@"Incoming call block invoked, using own app presentation.");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                __weak AppDelegate *weakSelf = self;
 
-                NSError *error;
-                [call decline:&error];
-                [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
-                if (error) {
-                    DDLogError(@"Error declining call: %@", error);
-                }
-            } else {
-                if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-                    [self createLocalNotificationForCall:call];
-                    [self startVibratingInBackground];
+                if ([SIPUtils anotherCallInProgress:call]) {
+                    DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
+
+                    NSError *error;
+                    [call decline:&error];
+                    [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
+                    if (error) {
+                        DDLogError(@"Error declining call: %@", error);
+                    }
                 } else {
-                    DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
-                    [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification object:call];
+                    if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+                        [weakSelf createLocalNotificationForCall:call];
+                        [weakSelf startVibratingInBackground];
+                    } else {
+                        DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
+                        NSDictionary *notificationInfo = @{VSLNotificationUserInfoCallKey : call};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification
+                                                                            object:self
+                                                                          userInfo:notificationInfo];
+                    }
                 }
-            }
-        });
+            });
+        }
     };
 }
 
 - (void)createLocalNotificationForCall:(VSLCall *)call {
     // The notification
     self.incomingCallNotification = [[UILocalNotification alloc] init];
-    NSDictionary *myUserInfo = @{@"callId": [NSString stringWithFormat:@"%ld", (long)call.callId]};
-    self.incomingCallNotification.userInfo = myUserInfo;
+    self.incomingCallNotification.userInfo = @{AppDelegateLocalNotificationCallIdKey: [NSNumber numberWithInteger:call.callId]};
     self.incomingCallNotification.alertTitle = NSLocalizedString(@"Incoming call", nil);
     self.incomingCallNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Incoming call from: %1@ <%2@>", @"Incoming call from: 'callerName', <'callerNumber'>"), call.callerName, call.callerNumber];
     self.incomingCallNotification.alertLaunchImage = @"AppIcon";
@@ -337,8 +339,11 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 }
 
 - (void)removeLocalNotification:(UILocalNotification *)notification {
-    [[UIApplication sharedApplication] cancelLocalNotification:self.incomingCallNotification];
-    [self stopVibratingInBackground];
+    VSLCall *call = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
+    if (call.callState == VSLCallStateConnecting || call.callState == VSLCallStateDisconnected) {
+        [[UIApplication sharedApplication] cancelLocalNotification:self.incomingCallNotification];
+        [self stopVibratingInBackground];
+    }
 }
 
 - (void)startVibratingInBackground {

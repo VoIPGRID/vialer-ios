@@ -5,24 +5,33 @@
 
 #import "DDLogWrapper.h"
 
+@import UIKit;
 #import <CocoaLumberjack/CocoaLumberjack.h>
+#import "SPLumberjackLogFormatter.h"
 
 @implementation DDLogWrapper
 
 + (void)setup {
+    SPLumberjackLogFormatter *logFormatter = [[SPLumberjackLogFormatter alloc] init];
+
     //Add the Terminal and TTY(XCode console) loggers to CocoaLumberjack (simulate the default NSLog behaviour)
     DDASLLogger *aslLogger = [DDASLLogger sharedInstance];
-    [DDLog addLogger:aslLogger];
-
+    [aslLogger setLogFormatter: logFormatter];
     DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
-    ttyLogger.colorsEnabled = YES;
+    [ttyLogger setLogFormatter:logFormatter];
 
-    //Give INFO a color
-    UIColor *pink = [UIColor colorWithRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
-    [ttyLogger setForegroundColor:[UIColor lightGrayColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
-    [ttyLogger setForegroundColor:[UIColor darkGrayColor] backgroundColor:nil forFlag:DDLogFlagDebug];
-    [ttyLogger setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
+    [DDLog addLogger:aslLogger];
     [DDLog addLogger:ttyLogger];
+
+#ifdef DEBUG
+    // File logging
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.maximumFileSize = 1024 * 1024 * 1; // Size in bytes
+    fileLogger.rollingFrequency = 0; // Set rollingFrequency to 0, only roll on file size.
+    [fileLogger logFileManager].maximumNumberOfLogFiles = 3;
+    fileLogger.logFormatter = logFormatter;
+    [DDLog addLogger:fileLogger];
+#endif
 }
 
 + (void)logVerbose:(NSString *)message {
