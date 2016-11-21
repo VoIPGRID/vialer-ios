@@ -95,17 +95,17 @@ class SetupCallTransferViewController: UIViewController {
     }
 
     @IBAction func callButtonPressed(_ sender: UIButton) {
-        callButton.isEnabled = false
-        if let number = numberToDialLabel.text, number != "" {
-            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number)!
-            currentCallPhoneNumberLabelText = cleanedPhoneNumber
-            firstCall?.account.callNumber(cleanedPhoneNumber) { (error, call) in
-                DispatchQueue.main.async { [weak self] in
-                    self?.currentCall = call
-                    self?.performSegue(withIdentifier: Configuration.Segues.SecondCallActive, sender: nil)
-                }
-            }
-        }
+//        callButton.isEnabled = false
+//        if let number = numberToDialLabel.text, number != "" {
+//            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number)!
+//            currentCallPhoneNumberLabelText = cleanedPhoneNumber
+//            firstCall?.account.callNumber(cleanedPhoneNumber) { (error, call) in
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.currentCall = call
+//                    self?.performSegue(withIdentifier: Configuration.Segues.SecondCallActive, sender: nil)
+//                }
+//            }
+//        }
     }
 
     // MARK: - Helper functions

@@ -35,6 +35,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     let avAudioSession = AVAudioSession.sharedInstance()
 
     var activeCall: VSLCall?
+    var callManager: VSLCallManager!
 
     fileprivate var previousAVAudioSessionCategory: String?
     var phoneNumberLabelText: String? {
@@ -60,6 +61,10 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     fileprivate var connectDurationTimer: Timer?
 
     // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        callManager = VialerSIPLib.sharedInstance().callManager
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,12 +101,14 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     // MARK: - Actions
 
     @IBAction func muteButtonPressed(_ sender: SipCallingButton) {
-        guard let call = activeCall else { return }
-        do {
-            try call.toggleMute()
-            updateUI()
-        } catch let error {
-            DDLogWrapper.logError("Error muting call: \(error)")
+        guard let call = activeCall, call.callState != .disconnected else { return }
+
+        callManager.toggleMute(for: call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error muting call: \(error)")
+            } else {
+                self.updateUI()
+            }
         }
     }
 
@@ -134,6 +141,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         do {
             try call.toggleHold()
             updateUI()
+
         } catch let error {
             DDLogWrapper.logError("Error holding call: \(error)")
         }
@@ -141,46 +149,47 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     @IBAction func hangupButtonPressed(_ sender: UIButton) {
         guard let call = activeCall, call.callState != .disconnected else { return }
-
         statusLabel.text = NSLocalizedString("Ending call...", comment: "Ending call...")
 
-        do {
-            try call.hangup()
-            hangupButton.isEnabled = false
-        } catch let error {
-            DDLogWrapper.logError("Error ending call: \(error)")
+        callManager.end(call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error ending call: \(error)")
+
+            } else {
+                self.hangupButton.isEnabled = false
+            }
         }
     }
 
     func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
-        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
-        previousAVAudioSessionCategory = avAudioSession.category
-        phoneNumberLabelText = cleanedPhoneNumber
-
-        if let contact = contact {
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
-                    DispatchQueue.main.async { [weak self] in
-                        self?.phoneNumberLabelText = phoneNumberModel.callerInfo
-                    }
-                })
-            }
-        }
-
-        let account = SIPUtils.addSIPAccountToEndpoint()
-        account?.callNumber(cleanedPhoneNumber) { (error, call) in
-            UIDevice.current.isProximityMonitoringEnabled = true
-            if let error = error, let category = self.previousAVAudioSessionCategory {
-                DDLogWrapper.logError("Error setting up call: \(error)")
-                do {
-                    try self.avAudioSession.setCategory(category)
-                } catch let error {
-                    DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-                }
-            } else if let call = call {
-                self.activeCall = call
-            }
-        }
+        //        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        //        previousAVAudioSessionCategory = avAudioSession.category
+        //        phoneNumberLabelText = cleanedPhoneNumber
+        //
+        //        if let contact = contact {
+        //            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+        //                PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
+        //                    DispatchQueue.main.async { [weak self] in
+        //                        self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+        //                    }
+        //                })
+        //            }
+        //        }
+        //
+        //        let account = SIPUtils.addSIPAccountToEndpoint()
+        //        account?.callNumber(cleanedPhoneNumber) { (error, call) in
+        //            UIDevice.current.isProximityMonitoringEnabled = true
+        //            if let error = error, let category = self.previousAVAudioSessionCategory {
+        //                DDLogWrapper.logError("Error setting up call: \(error)")
+        //                do {
+        //                    try self.avAudioSession.setCategory(category)
+        //                } catch let error {
+        //                    DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
+        //                }
+        //            } else if let call = call {
+        //                self.activeCall = call
+        //            }
+        //        }
     }
 
     func handleOutgoingCallForScreenshot(phoneNumber: String){
@@ -188,27 +197,33 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }
 
     func handleIncomingCall(_ call: VSLCall) {
-        self.previousAVAudioSessionCategory = self.avAudioSession.category
-        self.activeCall = call
+        callManager = VialerSIPLib.sharedInstance().callManager
+        //        self.previousAVAudioSessionCategory = self.avAudioSession.category
+        activeCall = call
         phoneNumberLabelText = call.callerNumber
 
-        do {
-            try call.answer()
-            UIDevice.current.isProximityMonitoringEnabled = true
-        } catch let error {
-            DDLogWrapper.logError("Error answering call: \(error)")
-            do {
-                try self.avAudioSession.setCategory(self.previousAVAudioSessionCategory!)
-            } catch let error {
-                DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
+        callManager.answer(call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error answering call: \(error)")
+            }
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                PhoneNumberModel.getCallName(call) { (phoneNumberModel) in
+                    self.phoneNumberLabelText = phoneNumberModel.callerInfo
+                }
             }
         }
 
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-            PhoneNumberModel.getCallName(call) { (phoneNumberModel) in
-                self.phoneNumberLabelText = phoneNumberModel.callerInfo
-            }
-        }
+        //        do {
+        //        } catch let error {
+        //            DDLogWrapper.logError("Error answering call: \(error)")
+        //            do {
+        //                try self.avAudioSession.setCategory(self.previousAVAudioSessionCategory!)
+        //            } catch let error {
+        //                DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
+        //            }
+        //        }
+        //
+
     }
 
     // MARK: - Helper functions
