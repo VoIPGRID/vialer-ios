@@ -72,27 +72,20 @@
 }
 
 - (NSArray *)sectionTitles {
-    __block NSArray *titles;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        if ([self.contactsSections count]) {
-            NSMutableArray *sortedSectionTitles =[[[self.contactsSections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
-            // If there is a pound character, move it to last position
-            if ([sortedSectionTitles[0] isEqualToString:@"#"]) {
-                [sortedSectionTitles addObject:sortedSectionTitles[0]];
-                [sortedSectionTitles removeObjectAtIndex:0];
-            }
-            titles = [sortedSectionTitles copy];
-        }
-    });
-    return titles;
+    if (![self.contactsSections count]) {
+        return nil;
+    }
+    NSMutableArray *sortedSectionTitles =[[[self.contactsSections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
+    // If there is a pound character, move it to last position
+    if ([sortedSectionTitles[0] isEqualToString:@"#"]) {
+        [sortedSectionTitles addObject:sortedSectionTitles[0]];
+        [sortedSectionTitles removeObjectAtIndex:0];
+    }
+    return sortedSectionTitles;
 }
 
 - (NSArray *)searchResults {
-    __block NSArray *results;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        results = [self.contactsSearchResult copy];
-    });
-    return results;
+    return self.contactsSearchResult;
 }
 
 # pragma mark - Lifecycle
@@ -137,23 +130,19 @@
 }
 
 - (BOOL)searchContacts:(NSString *)searchText {
-    __block BOOL success;
-    dispatch_barrier_sync(self.concurrentContactQueue, ^{
-        [self.contactsSearchResult removeAllObjects];
+    [self.contactsSearchResult removeAllObjects];
 
-        if (!searchText) {
-            success = NO;
-        } else {
-            CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:self.keysToFetch];
-            fetchRequest.sortOrder = CNContactSortOrderUserDefault;
-            fetchRequest.predicate = [CNContact predicateForContactsMatchingName:searchText];
+    if (!searchText) {
+        return NO;
+    }
 
-            success = [self.contactStore enumerateContactsWithFetchRequest:fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-                [self.contactsSearchResult addObject:contact];
-            }];
-        }
-    });
-    return success;
+    CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:self.keysToFetch];
+    fetchRequest.sortOrder = CNContactSortOrderUserDefault;
+    fetchRequest.predicate = [CNContact predicateForContactsMatchingName:searchText];
+
+    return [self.contactStore enumerateContactsWithFetchRequest:fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+        [self.contactsSearchResult addObject:contact];
+    }];
 }
 
 - (NSString *)getFirstChar:(CNContact *)contact {
@@ -178,51 +167,27 @@
 }
 
 - (CNContact *)getSelectedContactOnIdentifier:(NSString *)contactIdentifier {
-    __block CNContact *contact;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        contact = [self.contactStore unifiedContactWithIdentifier:contactIdentifier keysToFetch:self.keysToFetch error:nil];
-    });
-    return contact;
+    return [self.contactStore unifiedContactWithIdentifier:contactIdentifier keysToFetch:self.keysToFetch error:nil];
 }
 
 - (NSArray *)getContactsAtSection:(NSInteger)sectionIndex {
-    __block NSArray *contactsAtSection;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        contactsAtSection = self.contactsSections[self.sectionTitles[sectionIndex]];
-    });
-    return contactsAtSection;
+    return self.contactsSections[self.sectionTitles[sectionIndex]];
 }
 
 - (CNContact *)getContactsAtSection:(NSInteger)section andIndex:(NSInteger)index {
-    __block CNContact *contact;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        contact = [[self.contactsSections objectForKey:self.sectionTitles[section]] objectAtIndex:index];
-    });
-    return contact;
+    return [[self.contactsSections objectForKey:self.sectionTitles[section]] objectAtIndex:index];
 }
 
 - (NSInteger)countSearchContacts {
-    __block NSInteger count;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        count = [self.contactsSearchResult count];
-    });
-    return count;
+    return [self.contactsSearchResult count];
 }
 
 - (CNContact *)getSearchContactAtIndex:(NSInteger)index {
-    __block CNContact *contact;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        contact = [self.contactsSearchResult objectAtIndex:index];
-    });
-    return contact;
+    return [self.contactsSearchResult objectAtIndex:index];
 }
 
 - (CNContactStore *)getContactStore {
-    __block CNContactStore *store;
-    dispatch_sync(self.concurrentContactQueue, ^{
-        store = self.contactStore;
-    });
-    return store;
+    return self.contactStore;
 }
 
 @end
