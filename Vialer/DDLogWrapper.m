@@ -14,13 +14,9 @@
 + (void)setup {
     SPLumberjackLogFormatter *logFormatter = [[SPLumberjackLogFormatter alloc] init];
 
-    //Add the Terminal and TTY(XCode console) loggers to CocoaLumberjack (simulate the default NSLog behaviour)
-    DDASLLogger *aslLogger = [DDASLLogger sharedInstance];
-    [aslLogger setLogFormatter: logFormatter];
     DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
     [ttyLogger setLogFormatter:logFormatter];
 
-    [DDLog addLogger:aslLogger];
     [DDLog addLogger:ttyLogger];
 
 #ifdef DEBUG

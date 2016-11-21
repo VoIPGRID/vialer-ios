@@ -34,10 +34,28 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     let avAudioSession = AVAudioSession.sharedInstance()
 
-    var activeCall: VSLCall?
-    var callManager: VSLCallManager!
+    var activeCall: VSLCall? {
+        didSet {
+            var numberToClean: String
+            if activeCall!.isIncoming {
+                numberToClean = activeCall!.callerNumber!
+            } else {
+                numberToClean = activeCall!.numberToCall
+            }
+            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean)!
+            phoneNumberLabelText = cleanedPhoneNumber
 
-    fileprivate var previousAVAudioSessionCategory: String?
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUI()
+            }
+        }
+    }
+    var callManager: VSLCallManager {
+        get {
+            return VialerSIPLib.sharedInstance().callManager
+        }
+    }
+
     var phoneNumberLabelText: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -60,10 +78,11 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }()
     fileprivate var connectDurationTimer: Timer?
 
+    private var observingCall = false
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        callManager = VialerSIPLib.sharedInstance().callManager
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -75,14 +94,20 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             handleCallEnded()
         }
 
-        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
-        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .new, context: &myContext)
+        if !observingCall {
+            activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
+            activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .new, context: &myContext)
+            observingCall = true
+        }
         startConnectDurationTimer()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
-        activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.mediaState)
+        if observingCall {
+            activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
+            activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.mediaState)
+            observingCall = false
+        }
         connectDurationTimer?.invalidate()
     }
 
@@ -162,68 +187,31 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }
 
     func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
-        //        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
-        //        previousAVAudioSessionCategory = avAudioSession.category
-        //        phoneNumberLabelText = cleanedPhoneNumber
-        //
-        //        if let contact = contact {
-        //            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-        //                PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
-        //                    DispatchQueue.main.async { [weak self] in
-        //                        self?.phoneNumberLabelText = phoneNumberModel.callerInfo
-        //                    }
-        //                })
-        //            }
-        //        }
-        //
-        //        let account = SIPUtils.addSIPAccountToEndpoint()
-        //        account?.callNumber(cleanedPhoneNumber) { (error, call) in
-        //            UIDevice.current.isProximityMonitoringEnabled = true
-        //            if let error = error, let category = self.previousAVAudioSessionCategory {
-        //                DDLogWrapper.logError("Error setting up call: \(error)")
-        //                do {
-        //                    try self.avAudioSession.setCategory(category)
-        //                } catch let error {
-        //                    DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-        //                }
-        //            } else if let call = call {
-        //                self.activeCall = call
-        //            }
-        //        }
+        if let contact = contact {
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                    }
+                })
+            }
+        }
+
+        guard let account = SIPUtils.addSIPAccountToEndpoint() else {
+            return
+        }
+
+        callManager.startCall(toNumber: phoneNumber, for: account) { (call, error) in
+            if error != nil {
+                DDLogWrapper.logError("Error setting up call: \(error)")
+            } else if let call = call {
+                self.activeCall = call
+            }
+        }
     }
 
     func handleOutgoingCallForScreenshot(phoneNumber: String){
         phoneNumberLabelText = phoneNumber
-    }
-
-    func handleIncomingCall(_ call: VSLCall) {
-        callManager = VialerSIPLib.sharedInstance().callManager
-        //        self.previousAVAudioSessionCategory = self.avAudioSession.category
-        activeCall = call
-        phoneNumberLabelText = call.callerNumber
-
-        callManager.answer(call) { error in
-            if error != nil {
-                DDLogWrapper.logError("Error answering call: \(error)")
-            }
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                PhoneNumberModel.getCallName(call) { (phoneNumberModel) in
-                    self.phoneNumberLabelText = phoneNumberModel.callerInfo
-                }
-            }
-        }
-
-        //        do {
-        //        } catch let error {
-        //            DDLogWrapper.logError("Error answering call: \(error)")
-        //            do {
-        //                try self.avAudioSession.setCategory(self.previousAVAudioSessionCategory!)
-        //            } catch let error {
-        //                DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-        //            }
-        //        }
-        //
-
     }
 
     // MARK: - Helper functions
@@ -306,13 +294,6 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     fileprivate func handleCallEnded() {
         VialerGAITracker.callMetrics(finishedCall: self.activeCall!)
-        if let category = previousAVAudioSessionCategory {
-            do {
-                try avAudioSession.setCategory(category)
-            } catch let error {
-                DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-            }
-        }
 
         hangupButton?.isEnabled = false
         let waitingTimeAfterDismissing = Configuration.Timing.WaitingTimeAfterDismissing

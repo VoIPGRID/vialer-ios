@@ -98,6 +98,9 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 
     [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
+    if ([VialerSIPLib callKitAvailable]) {
+        self.callKitProviderDelegate = [[CallKitProviderDelegate alloc] initWithCallManager:self.callManager];
+    }
     [self setupCallbackForVoIPNotifications];
 
     return YES;
@@ -116,6 +119,25 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
                                                               userInfo:notificationInfo];
         }
     });
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
+    if (![VialerSIPLib callKitAvailable]) {
+        return NO;
+    }
+
+    NSString *handle = userActivity.startCallHandle;
+    if (handle == nil) {
+        return NO;
+    }
+
+    VSLAccount *account = [SIPUtils addSIPAccountToEndpoint];
+    [[[VialerSIPLib sharedInstance] callManager] startCallToNumber:handle forAccount:account completion:^(VSLCall *call, NSError *error) {
+        if (error) {
+            DDLogWarn(@"Error starting call through User activity. Error: %@", error);
+        }
+    }];
+    return YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -163,13 +185,6 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 }
 
 #pragma mark - setup helper methods
-
-- (CallKitProviderDelegate *)callKitProviderDelegate {
-    if (!_callKitProviderDelegate) {
-        _callKitProviderDelegate = [[CallKitProviderDelegate alloc] initWithCallManager:self.callManager];
-    }
-    return _callKitProviderDelegate;
-}
 
 - (VSLCallManager *)callManager {
     if (!_callManager) {
@@ -291,7 +306,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         [VialerGAITracker incomingCallRingingEvent];
 
-        if ([VialerSIPLib  callKitAvailable]) {
+        if ([VialerSIPLib callKitAvailable]) {
             DDLogInfo(@"Incoming call block invoked, routing through CallKit.");
             [self.callKitProviderDelegate reportIncomingCall:call];
         } else {

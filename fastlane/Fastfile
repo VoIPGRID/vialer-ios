@@ -12,11 +12,14 @@
 opt_out_usage
 
 # If you want to automatically update fastlane if a new version is available:
-# update_fastlane
+update_fastlane
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
 fastlane_version "1.53.0"
+
+# Set Deliver to use DAV to prevent "Unable to find content provider for username" failure
+ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
 
 default_platform :ios
 
@@ -40,8 +43,6 @@ platform :ios do
         configuration: 'Release',
     )
 
-    # Set Deliver to use DAV to prevent "Unable to find content provider for username" failure
-    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
     pilot(
         username: ENV["ITC_USERNAME"],
         team_name: ENV["APP_TEAM"],

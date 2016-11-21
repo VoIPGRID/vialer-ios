@@ -14,6 +14,7 @@
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
 #import "SystemUser.h"
+#import "SIPUtils.h"
 #import "TwoStepCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "Vialer-Swift.h"
@@ -112,7 +113,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 }
 
 - (NSString *)numberText {
-    return self.numberLabel.text;
+    return self.numberLabel.text ?: @"";
 }
 
 - (void)setLastCalledNumber:(NSString *)lastCalledNumber {

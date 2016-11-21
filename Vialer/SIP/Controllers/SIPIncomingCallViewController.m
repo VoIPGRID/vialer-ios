@@ -48,7 +48,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingVC handleIncomingCall:self.call];
+        sipCallingVC.activeCall = self.call;
     }
 }
 

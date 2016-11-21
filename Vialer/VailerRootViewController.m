@@ -50,6 +50,12 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
             DDLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
         }
 
+        @try {
+            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStarted];
+        } @catch (NSException *exception) {
+            DDLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
+        }
+
     } else {
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingCallNotification];
@@ -78,7 +84,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     [super viewDidLoad];
     [self setupLayout];
     if ([VialerSIPLib callKitAvailable]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptedIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAccepted object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateInboundCallAccepted object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateOutboundCallStarted object:nil];
 
     } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
@@ -183,8 +190,10 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     }
 }
 
-- (void)acceptedIncomingCallNotification:(NSNotification *)notification {
-    if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
+- (void)showSipCallingView:(NSNotification *)notification {
+    if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]] &&
+        ![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
+        ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
         self.willPresentSIPViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^{
             self.activeCall = [[notification userInfo]objectForKey:VSLNotificationUserInfoCallKey];
@@ -223,7 +232,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
-        [sipCallingVC handleIncomingCall:self.activeCall];
+        sipCallingVC.activeCall = self.activeCall;
     }
 }
 
