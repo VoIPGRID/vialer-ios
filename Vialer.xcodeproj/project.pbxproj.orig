@@ -3234,7 +3234,11 @@
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
 				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
+<<<<<<< HEAD
+				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
 				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
+=======
+>>>>>>> cfc69bb... Refactor of contacts in model & views
 				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,

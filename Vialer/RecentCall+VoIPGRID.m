@@ -6,7 +6,6 @@
 #import "RecentCall+VoIPGRID.h"
 
 #import "NSString+Mobile.h"
-#import "ContactModel.h"
 #import "ContactsUI/ContactsUI.h"
 #import "PhoneNumberUtils.h"
 #import "Vialer-Swift.h"
@@ -41,7 +40,7 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
     }
 
     // Loop trough every contact and check if one of the calls has a matching phonenumber.
-    for (CNContact *contact in [ContactModel defaultContactModel].allContacts) {
+    for (CNContact *contact in [ContactModel defaultModel].allContacts) {
         NSArray *phoneNumbers = contact.phoneNumbers;
         for (CNLabeledValue *phoneNumber in phoneNumbers) {
             CNPhoneNumber *cnPhoneNumber = phoneNumber.value;

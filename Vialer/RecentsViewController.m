@@ -7,7 +7,6 @@
 
 #import "AppDelegate.h"
 #import "Configuration.h"
-#import "ContactModel.h"
 #import "ContactsUI/ContactsUI.h"
 #import "ReachabilityBarViewController.h"
 #import "RecentCall.h"
@@ -43,6 +42,9 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 @property (strong, nonatomic) RecentCallManager *callManager;
 @property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
+@property (weak, nonatomic) ContactModel *contactModel;
+@property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (nonatomic) BOOL showTitleImage;
 @end
 
 @implementation RecentsViewController
@@ -62,6 +64,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.showTitleImage = YES;
     [self setupLayout];
 
     NSError *error;
@@ -79,7 +82,12 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 }
 
 - (void)setupLayout {
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RecentsViewControllerLogoImageName]];
+    if (self.showTitleImage) {
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RecentsViewControllerLogoImageName]];
+    } else {
+        self.showTitleImage = YES;
+    }
+    self.navigationController.view.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
 }
 
 - (void)dealloc {
@@ -106,7 +114,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
 - (void)setFilterControl:(UISegmentedControl *)filterControl {
     _filterControl = filterControl;
-    _filterControl.tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationRecentsFilterControlTintColor];
+    _filterControl.tintColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationRecentsFilterControlTintColor];
 }
 
 - (RecentCallManager *)callManager {
@@ -140,6 +148,20 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
         _fetchedResultController.delegate = self;
     }
     return _fetchedResultController;
+}
+
+- (ContactModel *)contactModel {
+    if(!_contactModel) {
+        _contactModel = [ContactModel defaultModel];
+    }
+    return _contactModel;
+}
+
+- (Configuration *)defaultConfiguration {
+    if(!_defaultConfiguration) {
+        _defaultConfiguration = [Configuration defaultConfiguration];
+    }
+    return _defaultConfiguration;
 }
 
 #pragma mark - actions
@@ -287,7 +309,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
         contactViewController.allowsEditing = NO;
 
     } else if (recent.callerRecordID) {
-        contact = [[ContactModel defaultContactModel] getSelectedContactOnIdentifier:recent.callerRecordID];
+        contact = [self.contactModel getContactFor:recent.callerRecordID];
         contactViewController = [CNContactViewController viewControllerForContact:contact];
         contactViewController.title = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
     } else {
@@ -302,10 +324,10 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
         contactViewController.title = newPhoneNumber;
     }
 
-    contactViewController.contactStore = [[ContactModel defaultContactModel] getContactStore];
+    contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
-
+    self.showTitleImage = NO;
     [self.navigationController pushViewController:contactViewController animated:YES];
 }
 

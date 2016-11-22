@@ -7,8 +7,6 @@
 
 #import "Configuration.h"
 #import "ContactsUI/ContactsUI.h"
-#import "ContactModel.h"
-#import "ContactUtils.h"
 #import "ReachabilityBarViewController.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
@@ -22,6 +20,9 @@ static NSString * const ContactsViewControllerTabContactActiveImageName = @"tab-
 static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 static NSString * const ContactsViewControllerSIPCallingSegue = @"SIPCallingSegue";
 
+static NSString * const ContactsTableViewMyNumberCell = @"ContactsTableViewMyNumberCell";
+static NSString * const ContactsTableViewCell = @"ContactsTableViewCell";
+
 static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
 static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
@@ -33,13 +34,18 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
 @property (weak, nonatomic) ReachabilityBarViewController *reachabilityBar;
 
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
 
 @property (strong, nonatomic) SystemUser *currentUser;
 @property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
 @property (strong, nonatomic) CNContact *selectedContact;
+
+@property (weak, nonatomic) ContactModel *contactModel;
+@property (weak, nonatomic) Configuration *defaultConfiguration;
+
+@property (nonatomic) BOOL showTitleImage;
+
 @end
 
 @implementation ContactsViewController
@@ -56,20 +62,37 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self checkContactsAccess];
-    [self setupLayout];
-    [self showReachabilityBar];
-    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
+    self.showTitleImage = YES;
+    [self setupLayout];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self checkContactsAccess];
+    [self showReachabilityBar];
+    [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ContactModel.ContactsUpdated" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+    if (self.showTitleImage) {
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
+    } else {
+        self.showTitleImage = YES;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ContactModel.ContactsUpdated" object:nil];
     [super viewWillDisappear:animated];
 }
 
@@ -80,18 +103,16 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 # pragma mark - setup
 
 - (void)setupLayout {
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
-
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
-    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
-
-    self.tableView.sectionIndexColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactsTableSectionIndexColor];
+    self.tableView.sectionIndexColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactsTableSectionIndexColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    self.searchBar.barTintColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.searchBar.barTintColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactSearchBarBarTintColor];
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+
+    self.navigationController.view.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
 }
 
 #pragma mark - properties
@@ -109,16 +130,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     _tableView = tableView;
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    [_tableView addSubview:self.refreshControl];
-}
-
-- (UIRefreshControl *)refreshControl {
-    if (!_refreshControl) {
-        _refreshControl = [[UIRefreshControl alloc] init];
-        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Syncing addressbook.", nil) attributes:nil];
-        [_refreshControl addTarget:self action:@selector(loadContacts) forControlEvents:UIControlEventValueChanged];
-    }
-    return _refreshControl;
 }
 
 - (SystemUser *)currentUser {
@@ -126,6 +137,20 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         _currentUser = [SystemUser currentUser];
     }
     return _currentUser;
+}
+
+- (ContactModel *)contactModel {
+    if (!_contactModel) {
+        _contactModel = [ContactModel defaultModel];
+    }
+    return _contactModel;
+}
+
+- (Configuration *)defaultConfiguration {
+    if (!_defaultConfiguration) {
+        _defaultConfiguration = [Configuration defaultConfiguration];
+    }
+    return _defaultConfiguration;
 }
 
 #pragma mark - actions
@@ -141,6 +166,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactViewController];
+    nav.view.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -161,16 +187,19 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([tableView isEqual:self.tableView]) {
-        return [[ContactModel defaultContactModel].sectionTitles count];
+        return self.contactModel.sectionTitles.count + 1;
     }
     return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if ([tableView isEqual:self.tableView]) {
-        return [ContactModel defaultContactModel].sectionTitles[section];
+        if (section == 0) {
+            return @"";
+        }
+        return self.contactModel.sectionTitles[section - 1];
     } else {
-        if ([[ContactModel defaultContactModel].searchResults count]) {
+        if (self.contactModel.searchResult.count) {
             return NSLocalizedString(@"Top name matches", nil);
         }
     }
@@ -179,52 +208,74 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([tableView isEqual:self.tableView]) {
-        return [[[ContactModel defaultContactModel] getContactsAtSection:section] count];
+        if (section == 0) {
+            return 1;
+        }
+        return [self.contactModel contactsAtSection:section - 1].count;
     }
 
-    return [[ContactModel defaultContactModel].searchResults count];
+    return self.contactModel.searchResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"ContactsTableViewCell";
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (indexPath.section == 0 && [tableView isEqual:self.tableView]) {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewMyNumberCell];
+        NSString *myNumber = NSLocalizedString(@"My Number: ", nil);
+        myNumber = [myNumber stringByAppendingString:self.currentUser.outgoingNumber];
+        cell.textLabel.text = myNumber;
+        return cell;
+    }
+
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewCell];
 
     CNContact *contact;
 
     if ([tableView isEqual:self.tableView]) {
-        contact = [[ContactModel defaultContactModel] getContactsAtSection:indexPath.section andIndex:indexPath.row];
+        contact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
     } else {
-        contact = [ContactModel defaultContactModel].searchResults[indexPath.row];
+        contact = self.contactModel.searchResult[indexPath.row];
     }
 
-    cell.textLabel.attributedText = [ContactUtils getFormattedStyledContact:contact];
-
+    cell.textLabel.attributedText = [self.contactModel attributedStringFor:contact];
     return cell;
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     if ([tableView isEqual:self.tableView]) {
-        return [ContactModel defaultContactModel].sectionTitles;
+        return self.contactModel.sectionTitles;
     }
     return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0 && [tableView isEqual:self.tableView]) {
+        return 1.0f;
+    }
+    return 32.0f;
 }
 
 #pragma mark - tableview delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([tableView isEqual:self.tableView]) {
-        self.selectedContact = [[ContactModel defaultContactModel] getContactsAtSection:indexPath.section andIndex:indexPath.row];
+        if (indexPath.section == 0) {
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+            return;
+        }
+        self.selectedContact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
     } else {
-        self.selectedContact = [ContactModel defaultContactModel].searchResults[indexPath.row];
+        self.selectedContact = self.contactModel.searchResult[indexPath.row];
     }
 
     CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
-    contactViewController.contactStore = [[ContactModel defaultContactModel] getContactStore];
+    contactViewController.title = [CNContactFormatter stringFromContact:self.selectedContact style:CNContactFormatterStyleFullName];
+    contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
 
+    self.navigationItem.titleView = nil;
+    self.showTitleImage = NO;
     [self.navigationController pushViewController:contactViewController animated:YES];
-
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
@@ -261,11 +312,11 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(CNContact *)contact {
-    [self loadContacts];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - searchbar delegate
+
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     [self hideReachabilityBar];
     return YES;
@@ -277,55 +328,34 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [[ContactModel defaultContactModel] searchContacts:searchText];
+    [self.contactModel searchContactsFor:searchText];
 }
 
 #pragma mark - utils
 
 - (void)checkContactsAccess {
-    CNAuthorizationStatus authorizationStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    if (![self.contactModel hasContactAccess]) {
+        [self.contactModel requestContactAccess];
+    }
 
-    switch (authorizationStatus) {
-        case CNAuthorizationStatusAuthorized: {
-            [self loadContacts];
+    switch (self.contactModel.authorizationStatus) {
+        case CNAuthorizationStatusAuthorized:
             break;
-        }
-        case CNAuthorizationStatusNotDetermined: {
-            CNContactStore *contactStore = [[CNContactStore alloc] init];
-            [contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
-                if (granted == YES) {
-                    [self loadContacts];
-                } else {
-                    self.warningMessage = NSLocalizedString(@"Application denied access to 'Contacts'", nil);
-                }
-            }];
-            break;
+        case CNAuthorizationStatusNotDetermined:
+        case CNAuthorizationStatusRestricted: {
+            self.warningMessage = NSLocalizedString(@"Application not authorized to access 'Contacts'", nil);
         }
         case CNAuthorizationStatusDenied: {
             self.warningMessage = NSLocalizedString(@"Application denied access to 'Contacts'", nil);
             break;
         }
-        case CNAuthorizationStatusRestricted: {
-            self.warningMessage = NSLocalizedString(@"Application not authorized to access 'Contacts'", nil);
-        }
     }
-}
-
-- (void)loadContacts {
-    [self.refreshControl beginRefreshing];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if ([[ContactModel defaultContactModel] refreshAllContacts]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.refreshControl endRefreshing];
-                [self.tableView reloadData];
-            });
-        }
-    });
 }
 
 #pragma mark - Notifications
 
 - (void)outgoingNumberUpdated:(NSNotification *)notification {
+    [self.tableView reloadData];
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 

@@ -5,7 +5,6 @@
 
 #import "SIPIncomingCallViewController.h"
 
-#import "ContactUtils.h"
 #import "PhoneNumberModel.h"
 #import "SIPUtils.h"
 #import <VialerSIPLib/VSLRingtone.h>
