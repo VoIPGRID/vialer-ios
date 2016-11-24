@@ -282,6 +282,7 @@
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
+		C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C50F971DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift */; };
 		C4C675651D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
 		C4C675661D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
 		C4C675671D19B5430003A385 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
@@ -762,6 +763,7 @@
 		C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerWebViewController.m; sourceTree = "<group>"; };
 		C4C3EAF11BFB7C5E00AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SideMenuStoryboard.storyboard; sourceTree = "<group>"; };
 		C4C3EAF81BFB7C9900AA4B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AvailabilityStoryboard.storyboard; sourceTree = "<group>"; };
+		C4C50F971DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberUtilsTestCase.swift; sourceTree = "<group>"; };
 		C4C675611D19B5420003A385 /* Vialer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vialer-Bridging-Header.h"; sourceTree = "<group>"; };
 		C4C675641D19B5430003A385 /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppInfo.swift; path = "Categories-Helpers/AppInfo.swift"; sourceTree = "<group>"; };
 		C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerGAITracker.swift; path = "Categories-Helpers/VialerGAITracker.swift"; sourceTree = "<group>"; };
@@ -1472,6 +1474,22 @@
 			name = SIP;
 			sourceTree = "<group>";
 		};
+		C4C50F951DE6E05100B632FA /* PhoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				C4C50F961DE6E05B00B632FA /* Models */,
+			);
+			name = PhoneNumber;
+			sourceTree = "<group>";
+		};
+		C4C50F961DE6E05B00B632FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4C50F971DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		C4C5CFF21C74C6CE000088C5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1530,6 +1548,7 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				C4C50F951DE6E05100B632FA /* PhoneNumber */,
 				F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */,
 				F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */,
 				F9EF27E91C60E2D70097E3AC /* Availabilty */,
@@ -3235,6 +3254,7 @@
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
 				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
 				F9906C291C3AA1070044EA99 /* ContactUtilsTests.m in Sources */,
+				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
 				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,

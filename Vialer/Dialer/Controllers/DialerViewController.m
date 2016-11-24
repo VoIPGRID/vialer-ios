@@ -9,6 +9,7 @@
 @import AVFoundation;
 #import "Configuration.h"
 #import "PasteableUILabel.h"
+#import "PhoneNumberUtils.h"
 #import "NumberPadButton.h"
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
@@ -99,7 +100,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 }
 
 - (void)setNumberText:(NSString *)numberText {
-    self.numberLabel.text = [self cleanPhonenumber:numberText];
+    self.numberLabel.text = [PhoneNumberUtils cleanPhoneNumber:numberText];
     [self setupCallButton];
 }
 
@@ -108,11 +109,6 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.deleteButton.alpha = (self.numberText.length == 0) ? 0.0 : 1.0;
     } completion:nil];
-}
-
-- (NSString *)cleanPhonenumber:(NSString *)phonenumber {
-    phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    return [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
 }
 
 - (NSString *)numberText {
