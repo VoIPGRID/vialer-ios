@@ -30,8 +30,14 @@
 	<string>Updated on build</string>
 	<key>Commit_Short_Hash</key>
 	<string>Updated on build</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+	<string>Verbonden needs access to your contacts to make calling to your contacts possible</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Verbonden needs access to your microphone to make calling possible</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -63,13 +69,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSContactsUsageDescription</key>
-	<string>Verbonden needs access to your contacts to make calling to your contacts possible</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Verbonden needs access to your microphone to make calling possible</string>
 </dict>
 </plist>

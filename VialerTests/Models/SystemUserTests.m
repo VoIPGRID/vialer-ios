@@ -216,6 +216,24 @@
     }];
 }
 
+- (void)testSystemUserHasNoWifiNotificationDisabledOnDefault {
+    XCTAssertFalse(self.user.noWiFiNotification, @"On default, is should not be possible to call sip.");
+}
+
+- (void)testSystemUserHasWithNoWifiNotificationWhenInSUD {
+    OCMStub([self.userDefaultsMock boolForKey:@"NoWiFiNotification"]).andReturn(YES);
+
+    SystemUser *newUser = [[SystemUser alloc] initPrivate];
+
+    XCTAssertTrue(newUser.noWiFiNotification, @"NoWifiNotification should be YES");
+}
+
+- (void)testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD {
+
+    self.user.noWiFiNotification = YES;
+    OCMVerify([self.userDefaultsMock setBool:YES forKey:@"NoWiFiNotification"]);
+}
+
 // Disabled, fix with VIALI-3272
 - (void)testLoggingInWithUserWithSIPEnabledWillFetchAppAccount {
     NSString *appAccountURLString = @"/account/12340042";

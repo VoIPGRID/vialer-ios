@@ -22,7 +22,6 @@
 		63ACE8A2B86F687B930AEEB4 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C17A9CEA0260038F370CAB /* libPods-Vialer.a */; };
 		77EA26BE1DB76B29D0348E02 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7791AA53795C553F244A61E4 /* libPods-VoysSnapshotUITests.a */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */; };
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
 		C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */; };
 		C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */; };
@@ -277,6 +276,9 @@
 		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
 		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
+		C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */; };
+		C4A0B46F1DE8499B00AB4E26 /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */; };
+		C4A0B4701DE8499B00AB4E26 /* ColorConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */; };
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
@@ -447,14 +449,12 @@
 		F22FF2931D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
 		F22FF2941D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
 		F22FF2951D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
-		F22FF2971D0ADB8E00761C9A /* ColorConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2961D0ADB8E00761C9A /* ColorConfigurationTests.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
 		F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */; };
 		F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */; };
 		F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */; };
-		F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */; };
 		F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		F2A958BA1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		F2A958BB1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -697,7 +697,6 @@
 		B33B08AE8024A15971EF123D /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
-		C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
 		C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormViewTests.m; sourceTree = "<group>"; };
 		C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormViewTests.m; sourceTree = "<group>"; };
 		C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
@@ -779,6 +778,9 @@
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		C49C0A3B1CC12936007AC30F /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		C49C0A3C1CC1293E007AC30F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationTests.m; path = Models/ConfigurationTests.m; sourceTree = "<group>"; };
+		C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUserTests.m; path = Models/SystemUserTests.m; sourceTree = "<group>"; };
+		C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorConfigurationTests.m; path = Models/ColorConfigurationTests.m; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
 		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
@@ -841,7 +843,6 @@
 		F22FF28A1D0ABF3800761C9A /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		F22FF2911D0ABF5E00761C9A /* ColorConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorConfiguration.h; sourceTree = "<group>"; };
 		F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConfiguration.m; sourceTree = "<group>"; };
-		F22FF2961D0ADB8E00761C9A /* ColorConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConfigurationTests.m; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
 		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
@@ -860,7 +861,6 @@
 		F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestReachabilityManagerDelegate.m; sourceTree = "<group>"; };
 		F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestKVOObserverClass.h; sourceTree = "<group>"; };
 		F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestKVOObserverClass.m; sourceTree = "<group>"; };
-		F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUserTests.m; sourceTree = "<group>"; };
 		F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsTimeConverter.swift; sourceTree = "<group>"; };
 		F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsTimeConverterTests.swift; sourceTree = "<group>"; };
 		F2B40BDA1C731F3E00502769 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
@@ -1193,9 +1193,9 @@
 		C409F3A11C24B9D6007DCC4A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F2A7DAC01BF4A14A0078B35D /* SystemUserTests.m */,
-				C409F3A21C24B9FB007DCC4A /* ConfigurationTests.m */,
-				F22FF2961D0ADB8E00761C9A /* ColorConfigurationTests.m */,
+				C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */,
+				C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */,
+				C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -3321,16 +3321,16 @@
 				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
+				C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */,
 				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
-				C409F3A31C24B9FB007DCC4A /* ConfigurationTests.m in Sources */,
 				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
 				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
-				F2A7DAC11BF4A14A0078B35D /* SystemUserTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
+				C4A0B4701DE8499B00AB4E26 /* ColorConfigurationTests.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
+				C4A0B46F1DE8499B00AB4E26 /* SystemUserTests.m in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
-				F22FF2971D0ADB8E00761C9A /* ColorConfigurationTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
 				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
 				F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */,

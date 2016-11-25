@@ -77,4 +77,14 @@ typedef NS_ENUM(NSInteger, ReachabilityManagerStatusType) {
  */
 - (void)stopMonitoring;
 
+/**
+ * Is the phone on a WiFi connection.
+ */
+- (BOOL)onWiFi;
+
+/**
+ * Is the phone on a 4g connection.
+ */
+- (BOOL)on4g;
+
 @end

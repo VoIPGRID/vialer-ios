@@ -9,7 +9,7 @@ class SecondCallViewController: SIPCallingViewController {
 
     // MARK: - Configuration
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Segues {
             static let TransferInProgress = "TransferInProgressSegue"
             static let UnwindToFirstCall = "UnwindToFirstCallSegue"

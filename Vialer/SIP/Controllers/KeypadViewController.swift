@@ -11,7 +11,7 @@ private var myContext = 0
 
 class KeypadViewController: UIViewController {
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Timing {
             static let ConnectDurationInterval = 1.0
         }
@@ -35,13 +35,13 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
+    private lazy var dateComponentsFormatter: DateComponentsFormatter = {
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.zeroFormattingBehavior = .pad
         dateComponentsFormatter.allowedUnits = [.minute, .second]
         return dateComponentsFormatter
     }()
-    fileprivate var connectDurationTimer: Timer?
+    private var connectDurationTimer: Timer?
 
     // MARK: - Lifecycle
 
@@ -120,7 +120,7 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    fileprivate func startConnectDurationTimer() {
+    private func startConnectDurationTimer() {
         if connectDurationTimer == nil || !connectDurationTimer!.isValid {
             connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }

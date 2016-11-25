@@ -9,7 +9,7 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Configuration
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Segues {
             static let UnwindToFirstCallViewController = "UnwindToFirstCallViewControllerSegue"
         }
@@ -93,7 +93,7 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Helper functions
 
-    fileprivate func updateUI() {
+    private func updateUI() {
         firstNumberLabel?.text = firstCallPhoneNumberLabelText
         currentCallNumberLabel?.text = currentCallPhoneNumberLabelText
 
@@ -120,13 +120,13 @@ class TransferInProgressViewController: UIViewController {
         }
     }
 
-    fileprivate func prepareForDismissing() {
+    private func prepareForDismissing() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(Configuration.UnwindTiming * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.dismissView()
         }
     }
 
-    fileprivate func dismissView() {
+    private func dismissView() {
         self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCallViewController, sender: nil)
     }
 

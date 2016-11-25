@@ -85,7 +85,7 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
 /**
  *  @return Returns Yes if connection is Wifi, otherwise No.
  */
-- (BOOL)onWifi {
+- (BOOL)onWiFi {
     return [self.reachabilityPodInstance isReachableViaWiFi] && [self hasInternet];
 }
 
@@ -103,7 +103,7 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
  *  @return The current up to date reability status.
  */
 - (ReachabilityManagerStatusType)currentReachabilityStatus {
-    if ([self on4g] || [self onWifi]) {
+    if ([self on4g] || [self onWiFi]) {
         self.reachabilityStatus = ReachabilityManagerStatusHighSpeed;
     } else if ([self hasInternet]) {
         self.reachabilityStatus = ReachabilityManagerStatusLowSpeed;
@@ -119,7 +119,7 @@ static NSString * const ReachabilityManagerStatusKey = @"reachabilityStatus";
 }
 
 - (NSString *)currentConnectionTypeString {
-    if (self.onWifi) {
+    if (self.onWiFi) {
         return @"Wifi";
     } else if (self.on4g) {
         return @"4G";

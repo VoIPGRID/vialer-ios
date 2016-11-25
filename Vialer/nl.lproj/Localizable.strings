@@ -36,6 +36,9 @@
 /* Statuslabel state text .Disconnected */
 "Call ended" = "Gesprek be\U00EBindigd";
 
+/* Call has Ended, enable WiFi? */
+"Call has Ended, enable WiFi?" = "Gesprek is be\U00EBindigd, WiFi weer inschakelen?";
+
 /* No comment provided by engineer. */
 "Calling other party" = "Andere partij aan het bellen";
 
@@ -51,6 +54,9 @@
 /* No comment provided by engineer. */
 "Cancel" = "Annuleer";
 
+/* Cancel call */
+"Cancel call" = "Annuleer gesprek";
+
 /* No comment provided by engineer. */
 "Checking VoIP account" = "VoIP account controleren";
 
@@ -65,6 +71,9 @@
 
 /* No comment provided by engineer. */
 "Continue" = "Verder";
+
+/* Continue calling */
+"Continue calling" = "Start gesprek";
 
 /* No comment provided by engineer. */
 "Could not load your recent calls" = "Recente gesprekken konden niet worden opgehaald";
@@ -101,6 +110,9 @@
 
 /* No comment provided by engineer. */
 "Enable VoIP" = "Schakel VoIP in";
+
+/* No comment provided by engineer. */
+"Enable WiFi notification" = "Schakel WiFi notificatie in";
 
 /* Ending call... */
 "Ending call..." = "Gesprek aan het be\U00EBeindigen...";
@@ -201,7 +213,7 @@
 /* No comment provided by engineer. */
 "My number" = "Mijn nummer";
 
-/* No comment provided by engineer. */
+/* No */
 "No" = "Nee";
 
 /* No comment provided by engineer. */
@@ -295,8 +307,14 @@
 /* No comment provided by engineer. */
 "Set up call" = "Gesprek wordt opgezet";
 
+/* Settings */
+"Settings" = "Instellingen";
+
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
+
+/* Start calling */
+"Start calling" = "Start gesprek";
 
 /* No comment provided by engineer. */
 "Statistics" = "Statistieken";
@@ -315,6 +333,9 @@
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
+
+/* Tip: Disable WiFi for better audio */
+"Tip: Disable WiFi for better audio" = "Tip: Schakel WiFi uit voor betere audio";
 
 /* No comment provided by engineer. */
 "To make Two step calling possible, we need to have your mobile phone number." = "Om Twee stap bellen mogelijk te maken, hebben we je mobiele nummer nodig.";
@@ -360,6 +381,9 @@
 
 /* No comment provided by engineer. */
 "VoIP disabled, enable in settings" = "VoIP gedeactiveerd, activeer VoIP bij instellingen";
+
+/* With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi? */
+"With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?" = "Met mobiel internet (4G) is de verbinding stabieler en daarmee de geluidskwaliteit hoger.\n\n WiFi uitschakelen?";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";

@@ -59,6 +59,7 @@ static NSString * const SystemUserSUDLastName           = @"LastName";
 static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
+static NSString * const SystemUserSUDNoWiFiNotification = @"NoWiFiNotification";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
@@ -166,6 +167,8 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
      */
     self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
+
+    self.noWiFiNotification = [defaults boolForKey:SystemUserSUDNoWiFiNotification];
 }
 
 #pragma mark - Properties
@@ -295,6 +298,11 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 
 - (void)setCurrentAvailability:(NSDictionary *)currentAvailability {
     [[NSUserDefaults standardUserDefaults] setObject:currentAvailability forKey:SystemUserCurrentAvailabilitySUDKey];
+}
+
+- (void)setNoWiFiNotification:(BOOL)noWiFiNotification {
+    _noWiFiNotification = noWiFiNotification;
+    [[NSUserDefaults standardUserDefaults] setBool:noWiFiNotification forKey:SystemUserSUDNoWiFiNotification];
 }
 
 #pragma mark - Actions

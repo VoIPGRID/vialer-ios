@@ -109,7 +109,7 @@ class SnapshotUITests: XCTestCase {
 
     // http://stackoverflow.com/questions/32821880/ui-test-deleting-text-in-text-field
     // Clears the given textfield of it's input.
-    fileprivate func clearUITextFieldText(_ element: XCUIElement) {
+    private func clearUITextFieldText(_ element: XCUIElement) {
         waitForElementToBeHittable(element, andHit: true)
         guard let stringValue = element.value as? String else {
             XCTFail("Tried to clear into a non string value")
@@ -138,7 +138,7 @@ class SnapshotUITests: XCTestCase {
      * Function waits for the given XCUIElement to become hittable or times out after 60 sec.
      * modified example from: http://masilotti.com/xctest-helpers/
      */
-    fileprivate func waitForElementToBeHittable(_ element: XCUIElement, file: String = #file, line: UInt = #line, andHit: Bool)  {
+    private func waitForElementToBeHittable(_ element: XCUIElement, file: String = #file, line: UInt = #line, andHit: Bool)  {
         let existsPredicate = NSPredicate(format: "hittable == true")
         expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 

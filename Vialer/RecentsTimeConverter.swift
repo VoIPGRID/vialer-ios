@@ -9,7 +9,7 @@ import Foundation
 @objc class RecentsTimeConverter: NSObject {
 
     /// A ISO-8601 24h CET date formatter
-    fileprivate static var dateFormatter24hCET: DateFormatter {
+    private static var dateFormatter24hCET: DateFormatter {
         let formatter = DateFormatter()
 
         // The ISO-8601 format
@@ -22,14 +22,14 @@ import Foundation
         return formatter
     }
 
-    fileprivate static var usersLocalShortStyleDateFormatter: DateFormatter {
+    private static var usersLocalShortStyleDateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.autoupdatingCurrent
         formatter.dateStyle = DateFormatter.Style.short
         return formatter
     }
 
-    fileprivate static var usersLocalShortStyleTimeFormatter: DateFormatter {
+    private static var usersLocalShortStyleTimeFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.autoupdatingCurrent
         formatter.timeStyle = DateFormatter.Style.short

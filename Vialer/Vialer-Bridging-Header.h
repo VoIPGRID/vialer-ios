@@ -11,4 +11,6 @@
 #import "PhoneNumberUtils.h"
 #import "SIPUtils.h"
 #import "SipCallingButton.h"
+#import "SystemUser.h"
+#import "ReachabilityManager.h"
 #import <VialerSIPLib/VialerSIPLib.h>

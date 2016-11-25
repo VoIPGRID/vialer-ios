@@ -9,7 +9,7 @@ class SetupCallTransferViewController: UIViewController {
 
     // MARK: - Configuration
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Segues {
             static let UnwindToFirstCall = "UnwindToFirstCallSegue"
             static let SecondCallActive = "SecondCallActiveSegue"
@@ -110,7 +110,7 @@ class SetupCallTransferViewController: UIViewController {
 
     // MARK: - Helper functions
 
-    fileprivate func updateUI() {
+    private func updateUI() {
         firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
 
         callButton?.isEnabled = number != ""
@@ -126,7 +126,7 @@ class SetupCallTransferViewController: UIViewController {
         }
     }
 
-    fileprivate func toggleDeleteButton () {
+    private func toggleDeleteButton () {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.deleteButton?.alpha = self.number.characters.count == 0 ? 0.0 : 1.0
         }, completion:nil)
