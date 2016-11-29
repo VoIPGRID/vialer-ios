@@ -7,6 +7,7 @@
 
 extern NSString *const AvailabilityModelDescription;
 extern NSString *const AvailabilityModelPhoneNumber;
+extern NSString *const AvailabilityModelPhoneNumberKey;
 extern NSString *const AvailabilityModelSelected;
 extern NSString *const AvailabilityModelDestinationType;
 

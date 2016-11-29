@@ -72,24 +72,26 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *DefaultCellIdentifier = @"AvailabilityTableViewDefaultCell";
-    static NSString *SubtitleCellIdentifier = @"AvailabilityTableViewSubtitleCell";
     NSDictionary *availabilityDict = self.availabilityModel.availabilityOptions[indexPath.row];
 
-    UITableViewCell *cell;
-    if ([[availabilityDict objectForKey:AvailabilityModelPhoneNumber] isEqualToNumber:@0]){
-        cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
+    if ([availabilityDict[AvailabilityModelPhoneNumberKey] isEqualToNumber:@0]){
+        cell.textLabel.text = availabilityDict[AvailabilityModelDescription];
     } else {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:SubtitleCellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
-        cell.detailTextLabel.text = [[availabilityDict objectForKey:AvailabilityModelPhoneNumber] stringValue];
+        NSString *phoneNumber = [availabilityDict[AvailabilityModelPhoneNumberKey] stringValue];
+        if (phoneNumber.length > 5) {
+            phoneNumber = [@"+" stringByAppendingString:phoneNumber];
+        }
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ / %@",  phoneNumber, availabilityDict[AvailabilityModelDescription]];
     }
-    cell.accessoryType = UITableViewCellAccessoryNone;
 
-    if ([[availabilityDict objectForKey:AvailabilityModelSelected] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+    if ([availabilityDict[AvailabilityModelSelected] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.lastSelected = indexPath;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
+
     return cell;
 }
 
