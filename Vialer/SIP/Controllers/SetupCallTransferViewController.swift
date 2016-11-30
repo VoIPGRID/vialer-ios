@@ -36,6 +36,11 @@ class SetupCallTransferViewController: UIViewController {
     }
 
     var currentCall: VSLCall?
+    var callManager: VSLCallManager {
+        get {
+            return VialerSIPLib.sharedInstance().callManager
+        }
+    }
     var currentCallPhoneNumberLabelText: String?
 
     var number: String {
@@ -78,11 +83,17 @@ class SetupCallTransferViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func backButtonPressed(_ sender: AnyObject) {
-        do {
-            try currentCall?.hangup()
+        guard let call = currentCall else {
             performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: self)
-        } catch let error {
-            DDLogWrapper.logError("Could not hangup call: \(error)")
+            return
+        }
+        callManager.end(call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Could not hangup call: \(error)")
+            } else {
+                self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: self)
+            }
+
         }
     }
 
@@ -95,17 +106,19 @@ class SetupCallTransferViewController: UIViewController {
     }
 
     @IBAction func callButtonPressed(_ sender: UIButton) {
-//        callButton.isEnabled = false
-//        if let number = numberToDialLabel.text, number != "" {
-//            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number)!
-//            currentCallPhoneNumberLabelText = cleanedPhoneNumber
-//            firstCall?.account.callNumber(cleanedPhoneNumber) { (error, call) in
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.currentCall = call
-//                    self?.performSegue(withIdentifier: Configuration.Segues.SecondCallActive, sender: nil)
-//                }
-//            }
-//        }
+        callButton.isEnabled = false
+        guard let number = numberToDialLabel.text, number != "" else {
+            callButton.isEnabled = true
+            return
+        }
+        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number)!
+        currentCallPhoneNumberLabelText = cleanedPhoneNumber
+        callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
+            DispatchQueue.main.async { [weak self] in
+                self?.currentCall = call
+                self?.performSegue(withIdentifier: Configuration.Segues.SecondCallActive, sender: nil)
+            }
+        }
     }
 
     // MARK: - Helper functions

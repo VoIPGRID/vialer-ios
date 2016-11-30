@@ -21,6 +21,11 @@ class KeypadViewController: UIViewController {
 
     var call: VSLCall?
     var delegate: KeypadViewControllerDelegate?
+    var callManager: VSLCallManager {
+        get {
+            return VialerSIPLib.sharedInstance().callManager
+        }
+    }
 
     var phoneNumberLabelText: String? {
         didSet {
@@ -67,20 +72,21 @@ class KeypadViewController: UIViewController {
 
     @IBAction func numberButtonPressed(_ sender: NumberPadButton) {
         guard let call = call, call.callState != .disconnected else { return }
-        do {
-            try call.sendDTMF(sender.number)
-            dtmfSent = (dtmfSent ?? "") + sender.number
-        } catch let error {
-            DDLogWrapper.logError("Error sending DTMF: \(error)")
+        callManager.sendDTMF(for: call, character: sender.number) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error sending DTMF: \(error)")
+            } else {
+                self.dtmfSent = (self.dtmfSent ?? "") + sender.number
+            }
         }
     }
 
     @IBAction func endCallButtonPressed(_ sender: SipCallingButton) {
         guard let call = call, call.callState != .disconnected else { return }
-        do {
-            try call.hangup()
-        } catch let error {
-            DDLogWrapper.logError("Error ending call: \(error)")
+        callManager.end(call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error ending call: \(error)")
+            }
         }
     }
 

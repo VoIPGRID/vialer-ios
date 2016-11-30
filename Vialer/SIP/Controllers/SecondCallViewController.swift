@@ -67,17 +67,18 @@ class SecondCallViewController: SIPCallingViewController {
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        guard let activeCall = activeCall, activeCall.callState != .disconnected else {
+            performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
+            return
+        }
         // If current call is not disconnected, hangup the call.
-        if let activeCall = activeCall, activeCall.callState != .disconnected {
-            do {
-                try activeCall.hangup()
-            } catch let error {
+        callManager.end(activeCall) { error in
+            if error != nil {
                 DDLogWrapper.logError("Error hanging up call: \(error)")
+            } else {
+                self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
             }
         }
-
-        // Unwind to first call.
-        performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
     }
 
     // MARK: - Helper functions

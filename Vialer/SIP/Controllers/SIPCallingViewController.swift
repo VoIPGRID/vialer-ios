@@ -162,12 +162,13 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         guard let call = activeCall, call.callState == .confirmed else { return }
         if call.onHold {
             performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
-        } else {
-            do {
-                try call.toggleHold()
-                performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
-            } catch let error {
+            return
+        }
+        callManager.toggleHold(for: call) { error in
+            if error != nil {
                 DDLogWrapper.logError("Error holding current call: \(error)")
+            } else {
+                self.performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
             }
         }
     }

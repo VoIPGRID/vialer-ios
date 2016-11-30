@@ -88,7 +88,7 @@ PODS:
     - CocoaLumberjack
   - SVProgressHUD (2.0.4)
   - Vialer-pjsip-iOS (1.0)
-  - VialerSIPLib (2.0.0-beta.01):
+  - VialerSIPLib (2.0.0-beta.02):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -107,7 +107,7 @@ DEPENDENCIES:
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
   - SVProgressHUD
-  - VialerSIPLib (= 2.0.0-beta.01)
+  - VialerSIPLib (= 2.0.0-beta.02)
 
 EXTERNAL SOURCES:
   MMDrawerController+Storyboard:
@@ -147,8 +147,8 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
   Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
-  VialerSIPLib: 0c3a33568ddcb2a7ca6fcc65a3cc9422313e9bd6
+  VialerSIPLib: 6ccadbafa8d0e5f468fc3e64cf12c957b0e05815
 
-PODFILE CHECKSUM: a9f7335f69aa8371cddc8da1c41db353728d90dd
+PODFILE CHECKSUM: 76d4dc489bfbf2b7fed7b1d1774911d8d64717cd
 
 COCOAPODS: 1.2.0.beta.1
