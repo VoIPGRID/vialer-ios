@@ -3,7 +3,6 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-import AVFoundation
 import Contacts
 
 private var myContext = 0
@@ -31,8 +30,6 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }
 
     // MARK: - Properties
-
-    let avAudioSession = AVAudioSession.sharedInstance()
 
     var activeCall: VSLCall? {
         didSet {

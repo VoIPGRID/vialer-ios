@@ -12,16 +12,17 @@
 #import "DDLogWrapper.h"
 #import <VialerSIPLib/CallKitProviderDelegate.h>
 #import "PhoneNumberModel.h"
-#ifdef DEBUG
-#import "SDStatusBarManager.h"
-@import Contacts;
-#endif
 #import "SIPUtils.h"
 #import "SAMKeychain.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import <VialerSIPLib/VialerSIPLib.h>
 #import "Vialer-Swift.h"
+
+#ifdef DEBUG
+@import Contacts;
+#import "SDStatusBarManager.h"
+#endif
 
 @interface AppDelegate()
 @property (readwrite, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -311,33 +312,37 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
             [self.callKitProviderDelegate reportIncomingCall:call];
         } else {
             DDLogInfo(@"Incoming call block invoked, using own app presentation.");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                __weak AppDelegate *weakSelf = self;
-
-                if ([SIPUtils anotherCallInProgress:call]) {
-                    DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
-
-                    NSError *error;
-                    [call decline:&error];
-                    [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
-                    if (error) {
-                        DDLogError(@"Error declining call: %@", error);
-                    }
-                } else {
-                    if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-                        [weakSelf createLocalNotificationForCall:call];
-                        [weakSelf startVibratingInBackground];
-                    } else {
-                        DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
-                        NSDictionary *notificationInfo = @{VSLNotificationUserInfoCallKey : call};
-                        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification
-                                                                            object:self
-                                                                          userInfo:notificationInfo];
-                    }
-                }
-            });
+            [self incomingCallForNonCallKitWithCall:call];
         }
     };
+}
+
+- (void)incomingCallForNonCallKitWithCall:(VSLCall *)call {
+    __weak AppDelegate *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        if ([SIPUtils anotherCallInProgress:call]) {
+            DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
+
+            NSError *error;
+            [call decline:&error];
+            [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
+            if (error) {
+                DDLogError(@"Error declining call: %@", error);
+            }
+        } else {
+            if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+                [weakSelf createLocalNotificationForCall:call];
+                [weakSelf startVibratingInBackground];
+            } else {
+                DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
+                NSDictionary *notificationInfo = @{VSLNotificationUserInfoCallKey : call};
+                [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification
+                                                                    object:self
+                                                                  userInfo:notificationInfo];
+            }
+        }
+    });
 }
 
 - (void)createLocalNotificationForCall:(VSLCall *)call {
