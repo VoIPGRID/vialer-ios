@@ -41,12 +41,14 @@ class SecondCallViewController: SIPCallingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
+        UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
         firstCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        UIDevice.current.isProximityMonitoringEnabled = false
         firstCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
     }
 
