@@ -62,6 +62,17 @@ class SecondCallViewController: SIPCallingViewController {
             let secondCall = activeCall, firstCall.callState == .confirmed else { return }
 
         if firstCall.transfer(to: secondCall) {
+            callManager.end(firstCall) { error in
+                if error != nil {
+                    DDLogWrapper.logError("Error hanging up call: \(error)")
+                }
+            }
+            callManager.end(secondCall) { error in
+                if error != nil {
+                    DDLogWrapper.logError("Error hanging up call: \(error)")
+                }
+            }
+
             performSegue(withIdentifier: Configuration.Segues.TransferInProgress, sender: nil)
         }
     }
