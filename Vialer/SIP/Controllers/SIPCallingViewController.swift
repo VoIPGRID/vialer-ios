@@ -99,6 +99,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIDevice.current.isProximityMonitoringEnabled = true
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
 
@@ -115,6 +116,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         connectDurationTimer?.invalidate()
+        UIDevice.current.isProximityMonitoringEnabled = false
     }
 
     deinit {
