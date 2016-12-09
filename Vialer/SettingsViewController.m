@@ -16,7 +16,8 @@
 
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
-static int const SettingsViewControllerSipAccountRow        = 1;
+static int const SettingsViewControllerWifiNotificationRow  = 1;
+static int const SettingsViewControllerSipAccountRow        = 2;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -84,10 +85,10 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         case SettingsViewControllerVoIPAccountSection:
             if (self.currentUser.sipEnabled) {
                 // Show the VoIP Switch and the account ID
-                return 2;
+                return 3;
             } else {
                 // Only show VoIP Switch
-                return 1;
+                return 2;
             }
             break;
 
@@ -119,6 +120,11 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
                           withTag:1001
                        defaultVal:self.currentUser.sipEnabled];
+        } else if (indexPath.row == SettingsViewControllerWifiNotificationRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
+                          withTag:1002
+                       defaultVal:!self.currentUser.noWiFiNotification];
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
@@ -198,6 +204,8 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
                 self.currentUser.sipEnabled = NO;
             });
         }
+    } else if (sender.tag == 1002) {
+        self.currentUser.noWiFiNotification = !sender.isOn;
     }
 }
 

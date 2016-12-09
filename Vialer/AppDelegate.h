@@ -6,7 +6,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString * const AppDelegateIncomingCallNotification;
-extern NSString * const AppDelegateIncomingBackgroundCallNotification;
+extern NSString * const AppDelegateIncomingBackgroundCallAcceptedNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,8 +18,10 @@ extern NSString * const AppDelegateIncomingBackgroundCallNotification;
  *  Every other object context should be a child context from this context.
  */
 @property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 /**
  *  YES if the app was started for the purpose of making screenshots
  */
 @property (readonly) BOOL isScreenshotRun;
+
 @end

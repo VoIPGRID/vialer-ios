@@ -7,7 +7,6 @@
 
 #import "AppDelegate.h"
 #import "AnimatedImageView.h"
-#import <AVFoundation/AVFoundation.h>
 #import "PBWebViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SettingsViewController.h"

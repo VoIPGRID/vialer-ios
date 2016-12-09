@@ -9,7 +9,7 @@ class TransferInProgressViewController: UIViewController {
 
     // MARK: - Configuration
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Segues {
             static let UnwindToFirstCallViewController = "UnwindToFirstCallViewControllerSegue"
         }
@@ -28,6 +28,13 @@ class TransferInProgressViewController: UIViewController {
             updateUI()
         }
     }
+
+    var callManager: VSLCallManager {
+        get {
+            return VialerSIPLib.sharedInstance().callManager
+        }
+    }
+
     var firstCallPhoneNumberLabelText: String? {
         didSet {
             updateUI()
@@ -82,18 +89,22 @@ class TransferInProgressViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
-        do {
-            try firstCall?.hangup()
-            try currentCall?.hangup()
-        } catch let error {
-            DDLogWrapper.logError("Error disconnecting call: \(error)")
+        callManager.end(firstCall!) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error disconnecting call: \(error)")
+            }
+        }
+        callManager.end(currentCall!) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error disconnecting call: \(error)")
+            }
         }
         dismissView()
     }
 
     // MARK: - Helper functions
 
-    fileprivate func updateUI() {
+    private func updateUI() {
         firstNumberLabel?.text = firstCallPhoneNumberLabelText
         currentCallNumberLabel?.text = currentCallPhoneNumberLabelText
 
@@ -120,13 +131,13 @@ class TransferInProgressViewController: UIViewController {
         }
     }
 
-    fileprivate func prepareForDismissing() {
+    private func prepareForDismissing() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(Configuration.UnwindTiming * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.dismissView()
         }
     }
 
-    fileprivate func dismissView() {
+    private func dismissView() {
         self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCallViewController, sender: nil)
     }
 
@@ -138,11 +149,15 @@ class TransferInProgressViewController: UIViewController {
                 self?.updateUI()
 
                 if let call = object as? VSLCall, call.transferStatus == .accepted || call.transferStatus == .rejected {
-                    do {
-                        try self?.firstCall?.hangup()
-                        try self?.currentCall?.hangup()
-                    } catch let error {
-                        DDLogWrapper.logError("Error disconnecting call: \(error)")
+                    self?.callManager.end(self!.firstCall!) { error in
+                        if error != nil {
+                            DDLogWrapper.logError("Error disconnecting call: \(error)")
+                        }
+                    }
+                    self?.callManager.end(self!.currentCall!) { error in
+                        if error != nil {
+                            DDLogWrapper.logError("Error disconnecting call: \(error)")
+                        }
                     }
                     self?.prepareForDismissing()
                 }
@@ -151,5 +166,4 @@ class TransferInProgressViewController: UIViewController {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-
 }

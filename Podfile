@@ -9,13 +9,13 @@ def default_pods
     pod 'AFNetworkActivityLogger'
     pod 'AFNetworking'
     pod 'Google/Analytics'
-    pod 'HDLumberjackLogFormatter', :git => 'https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git'
     pod 'HTCopyableLabel'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'
     pod 'Reachability'
     pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
+    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git'
     pod 'SVProgressHUD'
     pod 'VialerSIPLib'
 end

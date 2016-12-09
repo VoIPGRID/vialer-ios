@@ -180,6 +180,16 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 @property (nonatomic) BOOL sipEnabled;
 
 /**
+ *  Does the user want a WiFi Notification when setting up a call.
+ */
+@property (nonatomic) BOOL noWiFiNotification;
+
+/**
+ *  The users current availability.
+ */
+@property (strong, nonatomic) NSDictionary* currentAvailability;
+
+/**
  *  Singleton instance of the current user.
  *
  *  @return SystemUser singleton instance.

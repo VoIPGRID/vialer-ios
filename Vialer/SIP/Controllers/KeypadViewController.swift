@@ -11,7 +11,7 @@ private var myContext = 0
 
 class KeypadViewController: UIViewController {
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Timing {
             static let ConnectDurationInterval = 1.0
         }
@@ -21,6 +21,11 @@ class KeypadViewController: UIViewController {
 
     var call: VSLCall?
     var delegate: KeypadViewControllerDelegate?
+    var callManager: VSLCallManager {
+        get {
+            return VialerSIPLib.sharedInstance().callManager
+        }
+    }
 
     var phoneNumberLabelText: String? {
         didSet {
@@ -35,13 +40,13 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
+    private lazy var dateComponentsFormatter: DateComponentsFormatter = {
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.zeroFormattingBehavior = .pad
         dateComponentsFormatter.allowedUnits = [.minute, .second]
         return dateComponentsFormatter
     }()
-    fileprivate var connectDurationTimer: Timer?
+    private var connectDurationTimer: Timer?
 
     // MARK: - Lifecycle
 
@@ -67,20 +72,21 @@ class KeypadViewController: UIViewController {
 
     @IBAction func numberButtonPressed(_ sender: NumberPadButton) {
         guard let call = call, call.callState != .disconnected else { return }
-        do {
-            try call.sendDTMF(sender.number)
-            dtmfSent = (dtmfSent ?? "") + sender.number
-        } catch let error {
-            DDLogWrapper.logError("Error sending DTMF: \(error)")
+        callManager.sendDTMF(for: call, character: sender.number) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error sending DTMF: \(error)")
+            } else {
+                self.dtmfSent = (self.dtmfSent ?? "") + sender.number
+            }
         }
     }
 
     @IBAction func endCallButtonPressed(_ sender: SipCallingButton) {
         guard let call = call, call.callState != .disconnected else { return }
-        do {
-            try call.hangup()
-        } catch let error {
-            DDLogWrapper.logError("Error ending call: \(error)")
+        callManager.end(call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error ending call: \(error)")
+            }
         }
     }
 
@@ -120,7 +126,7 @@ class KeypadViewController: UIViewController {
         }
     }
 
-    fileprivate func startConnectDurationTimer() {
+    private func startConnectDurationTimer() {
         if connectDurationTimer == nil || !connectDurationTimer!.isValid {
             connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }

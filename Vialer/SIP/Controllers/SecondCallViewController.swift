@@ -9,7 +9,7 @@ class SecondCallViewController: SIPCallingViewController {
 
     // MARK: - Configuration
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Segues {
             static let TransferInProgress = "TransferInProgressSegue"
             static let UnwindToFirstCall = "UnwindToFirstCallSegue"
@@ -41,12 +41,14 @@ class SecondCallViewController: SIPCallingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
+        UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
         firstCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        UIDevice.current.isProximityMonitoringEnabled = false
         firstCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
     }
 
@@ -62,22 +64,34 @@ class SecondCallViewController: SIPCallingViewController {
             let secondCall = activeCall, firstCall.callState == .confirmed else { return }
 
         if firstCall.transfer(to: secondCall) {
+            callManager.end(firstCall) { error in
+                if error != nil {
+                    DDLogWrapper.logError("Error hanging up call: \(error)")
+                }
+            }
+            callManager.end(secondCall) { error in
+                if error != nil {
+                    DDLogWrapper.logError("Error hanging up call: \(error)")
+                }
+            }
+
             performSegue(withIdentifier: Configuration.Segues.TransferInProgress, sender: nil)
         }
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        guard let activeCall = activeCall, activeCall.callState != .disconnected else {
+            performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
+            return
+        }
         // If current call is not disconnected, hangup the call.
-        if let activeCall = activeCall, activeCall.callState != .disconnected {
-            do {
-                try activeCall.hangup()
-            } catch let error {
+        callManager.end(activeCall) { error in
+            if error != nil {
                 DDLogWrapper.logError("Error hanging up call: \(error)")
+            } else {
+                self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
             }
         }
-
-        // Unwind to first call.
-        performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
     }
 
     // MARK: - Helper functions

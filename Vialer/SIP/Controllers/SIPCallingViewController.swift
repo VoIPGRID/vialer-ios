@@ -3,7 +3,6 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-import AVFoundation
 import Contacts
 
 private var myContext = 0
@@ -12,7 +11,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     // MARK: - Configuration
 
-    fileprivate struct Configuration {
+    private struct Configuration {
         struct Timing {
             static let WaitingTimeAfterDismissing = 1.0
             static let ConnectDurationInterval = 1.0
@@ -32,11 +31,42 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     // MARK: - Properties
 
-    let avAudioSession = AVAudioSession.sharedInstance()
+    var activeCall: VSLCall? {
+        didSet {
+            var numberToClean: String
+            if activeCall!.isIncoming {
+                numberToClean = activeCall!.callerNumber!
+            } else {
+                numberToClean = activeCall!.numberToCall
+            }
+            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean)!
+            phoneNumberLabelText = cleanedPhoneNumber
 
-    var activeCall: VSLCall?
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUI()
+            }
+            activeCall!.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
+            activeCall!.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .new, context: &myContext)
+        }
+    }
+    var callManager: VSLCallManager {
+        get {
+            return VialerSIPLib.sharedInstance().callManager
+        }
+    }
 
-    fileprivate var previousAVAudioSessionCategory: String?
+    let currentUser = SystemUser.current()!
+
+    // ReachabilityManager, needed for showing notifications.
+    let reachabilityManager = ReachabilityManager()
+
+    // Keep track if there are notification needed for disabling/enabling WiFi.
+    var shouldPresentWiFiNotification = false
+    var didOpenSettings = false
+
+    // The cleaned number that need to be called.
+    var cleanedPhoneNumber: String?
+
     var phoneNumberLabelText: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -45,24 +75,28 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
-    fileprivate var dtmfSent: String? {
+    private var dtmfSent: String? {
         didSet {
             numberLabel?.text = dtmfSent
         }
     }
 
-    fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
+    private lazy var dateComponentsFormatter: DateComponentsFormatter = {
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.zeroFormattingBehavior = .pad
         dateComponentsFormatter.allowedUnits = [.minute, .second]
         return dateComponentsFormatter
     }()
-    fileprivate var connectDurationTimer: Timer?
+    private var connectDurationTimer: Timer?
 
     // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIDevice.current.isProximityMonitoringEnabled = true
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
 
@@ -70,15 +104,21 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             handleCallEnded()
         }
 
-        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
-        activeCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .new, context: &myContext)
         startConnectDurationTimer()
+
+        if shouldPresentWiFiNotification {
+            presentWiFiNotification()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        connectDurationTimer?.invalidate()
+        UIDevice.current.isProximityMonitoringEnabled = false
+    }
+
+    deinit {
         activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
         activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.mediaState)
-        connectDurationTimer?.invalidate()
     }
 
     // MARK: - Outlets
@@ -96,12 +136,14 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     // MARK: - Actions
 
     @IBAction func muteButtonPressed(_ sender: SipCallingButton) {
-        guard let call = activeCall else { return }
-        do {
-            try call.toggleMute()
-            updateUI()
-        } catch let error {
-            DDLogWrapper.logError("Error muting call: \(error)")
+        guard let call = activeCall, call.callState != .disconnected else { return }
+
+        callManager.toggleMute(for: call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error muting call: \(error)")
+            } else {
+                self.updateUI()
+            }
         }
     }
 
@@ -119,12 +161,13 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         guard let call = activeCall, call.callState == .confirmed else { return }
         if call.onHold {
             performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
-        } else {
-            do {
-                try call.toggleHold()
-                performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
-            } catch let error {
+            return
+        }
+        callManager.toggleHold(for: call) { error in
+            if error != nil {
                 DDLogWrapper.logError("Error holding current call: \(error)")
+            } else {
+                self.performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
             }
         }
     }
@@ -134,6 +177,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         do {
             try call.toggleHold()
             updateUI()
+
         } catch let error {
             DDLogWrapper.logError("Error holding call: \(error)")
         }
@@ -141,22 +185,21 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     @IBAction func hangupButtonPressed(_ sender: UIButton) {
         guard let call = activeCall, call.callState != .disconnected else { return }
-
         statusLabel.text = NSLocalizedString("Ending call...", comment: "Ending call...")
 
-        do {
-            try call.hangup()
-            hangupButton.isEnabled = false
-        } catch let error {
-            DDLogWrapper.logError("Error ending call: \(error)")
+        callManager.end(call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error ending call: \(error)")
+
+            } else {
+                self.hangupButton.isEnabled = false
+            }
         }
     }
 
     func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
-        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
-        previousAVAudioSessionCategory = avAudioSession.category
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
         phoneNumberLabelText = cleanedPhoneNumber
-
         if let contact = contact {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
                 PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
@@ -167,48 +210,16 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             }
         }
 
-        let account = SIPUtils.addSIPAccountToEndpoint()
-        account?.callNumber(cleanedPhoneNumber) { (error, call) in
-            UIDevice.current.isProximityMonitoringEnabled = true
-            if let error = error, let category = self.previousAVAudioSessionCategory {
-                DDLogWrapper.logError("Error setting up call: \(error)")
-                do {
-                    try self.avAudioSession.setCategory(category)
-                } catch let error {
-                    DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-                }
-            } else if let call = call {
-                self.activeCall = call
-            }
+        updateUI()
+        if !currentUser.noWiFiNotification && reachabilityManager.onWiFi() && reachabilityManager.on4g() {
+            shouldPresentWiFiNotification = true
+        } else {
+            setupCall()
         }
     }
 
     func handleOutgoingCallForScreenshot(phoneNumber: String){
         phoneNumberLabelText = phoneNumber
-    }
-
-    func handleIncomingCall(_ call: VSLCall) {
-        self.previousAVAudioSessionCategory = self.avAudioSession.category
-        self.activeCall = call
-        phoneNumberLabelText = call.callerNumber
-
-        do {
-            try call.answer()
-            UIDevice.current.isProximityMonitoringEnabled = true
-        } catch let error {
-            DDLogWrapper.logError("Error answering call: \(error)")
-            do {
-                try self.avAudioSession.setCategory(self.previousAVAudioSessionCategory!)
-            } catch let error {
-                DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-            }
-        }
-
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-            PhoneNumberModel.getCallName(call) { (phoneNumberModel) in
-                self.phoneNumberLabelText = phoneNumberModel.callerInfo
-            }
-        }
     }
 
     // MARK: - Helper functions
@@ -227,7 +238,11 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             }
         #endif
 
-        guard let call = activeCall else { return }
+        guard let call = activeCall else {
+            numberLabel?.text = cleanedPhoneNumber
+            statusLabel?.text = ""
+            return
+        }
 
         switch call.callState {
         case .null: fallthrough
@@ -289,17 +304,98 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
-    fileprivate func handleCallEnded() {
+    private func handleCallEnded() {
         VialerGAITracker.callMetrics(finishedCall: self.activeCall!)
-        if let category = previousAVAudioSessionCategory {
-            do {
-                try avAudioSession.setCategory(category)
-            } catch let error {
-                DDLogWrapper.logError("Error restoring previous AudioSession: \(error)")
-            }
-        }
 
         hangupButton?.isEnabled = false
+
+        if didOpenSettings && !self.reachabilityManager.onWiFi() {
+            presentEnableWifiAlert()
+        } else {
+            dismissView()
+        }
+    }
+
+    private func startConnectDurationTimer() {
+        if connectDurationTimer == nil || !connectDurationTimer!.isValid {
+            connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+        }
+    }
+
+    /**
+     Show alert to user if the user is on WiFi and has 4G connection.
+    */
+    private func presentWiFiNotification() {
+        shouldPresentWiFiNotification = false
+        let alertController = UIAlertController(title: NSLocalizedString("Tip: Disable WiFi for better audio", comment: "Tip: Disable WiFi for better audio"),
+                                                message: NSLocalizedString("With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?",
+                                                                           comment: "With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?"),
+                                                preferredStyle: .alert)
+
+        // User wants to use the WiFi connection.
+        let noAction = UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default) { action in
+            self.setupCall()
+        }
+        alertController.addAction(noAction)
+
+        // User wants to open the settings to disable WiFi.
+        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
+            self.presentSettingsAndContinueCallingAlert()
+        }
+        alertController.addAction(settingsAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    /**
+     Show the settings from the phone and make sure there is a notification to continue calling.
+    */
+    private func presentSettingsAndContinueCallingAlert() {
+        let alertController = UIAlertController(title: NSLocalizedString("Continue calling", comment: "Continue calling"), message: nil, preferredStyle: .alert)
+
+        // Make it possible to cancel the call
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .default) { action in
+            self.performSegue(withIdentifier: Configuration.Segues.UnwindToVialerRootViewController, sender: self)
+        }
+        alertController.addAction(cancelAction)
+
+        // Continue the call
+        let continueAction = UIAlertAction(title: NSLocalizedString("Start calling", comment: "Start calling"), style: .default) { action in
+            self.setupCall()
+        }
+        alertController.addAction(continueAction)
+
+        present(alertController, animated: true, completion: nil)
+
+        // Open the settings. Opening the WiFi settings is not longer possible, settings open on Vialer settings.
+        didOpenSettings = true
+        UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
+    }
+
+    private func presentEnableWifiAlert() {
+        didOpenSettings = false
+        let alertController = UIAlertController(title: NSLocalizedString("Call has Ended, enable WiFi?", comment: "Call has Ended, enable WiFi?"), message: nil, preferredStyle: .alert)
+
+        let noAction = UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default) { action in
+            self.dismissView()
+        }
+        alertController.addAction(noAction)
+
+        // User wants to open the settings to disable WiFi.
+        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
+            DispatchQueue.global().async {
+                DispatchQueue.main.async {
+                    UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
+                }
+            }
+            self.dismissView()
+        }
+        alertController.addAction(settingsAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func dismissView() {
         let waitingTimeAfterDismissing = Configuration.Timing.WaitingTimeAfterDismissing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             if self.activeCall!.isIncoming {
@@ -311,9 +407,17 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
     }
 
-    fileprivate func startConnectDurationTimer() {
-        if connectDurationTimer == nil || !connectDurationTimer!.isValid {
-            connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+    private func setupCall() {
+        guard let account = SIPUtils.addSIPAccountToEndpoint() else {
+            return
+        }
+
+        callManager.startCall(toNumber: cleanedPhoneNumber!, for: account) { (call, error) in
+            if error != nil {
+                DDLogWrapper.logError("Error setting up call: \(error)")
+            } else if let call = call {
+                self.activeCall = call
+            }
         }
     }
 

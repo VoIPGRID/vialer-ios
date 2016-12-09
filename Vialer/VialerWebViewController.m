@@ -5,7 +5,6 @@
 
 #import "VialerWebViewController.h"
 
-#import "Vialer-Swift.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SVProgressHUD.h"
 

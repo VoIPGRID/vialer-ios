@@ -23,25 +23,23 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
 
 @implementation AvailabilityViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+     self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"Loading availability options...", nil)];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
-    [self loadUserDestinations];
+
+    [self.refreshControl beginRefreshing];
+    [self.tableView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
+    [self loadUserDestinationsWithRefreshControl:self.refreshControl];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationAvailabilityTableViewTintColor];
-}
-
-- (UIRefreshControl *)refreshControl {
-    UIRefreshControl *refreshControl = [super refreshControl];
-    if (!refreshControl) {
-        self.refreshControl = [[UIRefreshControl alloc] init];
-        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"Loading availability options...", nil)];
-        [self.refreshControl addTarget:self action:@selector(loadUserDestinations) forControlEvents:UIControlEventValueChanged];
-    }
-    return [super refreshControl];
 }
 
 - (AvailabilityModel *)availabilityModel {
@@ -51,15 +49,8 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
     return _availabilityModel;
 }
 
-- (void)loadUserDestinations {
-    [self.refreshControl beginRefreshing];
-    // A bug in RefreshControl on a tableview within a navigation controller
-    // http://stackoverflow.com/a/14719658
-    [self.tableView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
-
+- (IBAction)loadUserDestinationsWithRefreshControl:(UIRefreshControl *)sender {
     [self.availabilityModel getUserDestinations:^(NSString *localizedErrorString) {
-        [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
-        [self.refreshControl endRefreshing];
         if (localizedErrorString) {
             [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
                                                                             message:localizedErrorString
@@ -69,6 +60,7 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
         }else{
             [self.tableView reloadData];
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -80,24 +72,26 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *DefaultCellIdentifier = @"AvailabilityTableViewDefaultCell";
-    static NSString *SubtitleCellIdentifier = @"AvailabilityTableViewSubtitleCell";
     NSDictionary *availabilityDict = self.availabilityModel.availabilityOptions[indexPath.row];
 
-    UITableViewCell *cell;
-    if ([[availabilityDict objectForKey:AvailabilityModelPhoneNumber] isEqualToNumber:@0]){
-        cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
+    if ([availabilityDict[AvailabilityModelPhoneNumberKey] isEqualToNumber:@0]){
+        cell.textLabel.text = availabilityDict[AvailabilityModelDescription];
     } else {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:SubtitleCellIdentifier];
-        cell.textLabel.text = [availabilityDict objectForKey:AvailabilityModelDescription];
-        cell.detailTextLabel.text = [[availabilityDict objectForKey:AvailabilityModelPhoneNumber] stringValue];
+        NSString *phoneNumber = [availabilityDict[AvailabilityModelPhoneNumberKey] stringValue];
+        if (phoneNumber.length > 5) {
+            phoneNumber = [@"+" stringByAppendingString:phoneNumber];
+        }
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ / %@",  phoneNumber, availabilityDict[AvailabilityModelDescription]];
     }
-    cell.accessoryType = UITableViewCellAccessoryNone;
 
-    if ([[availabilityDict objectForKey:AvailabilityModelSelected] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+    if ([availabilityDict[AvailabilityModelSelected] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.lastSelected = indexPath;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
+
     return cell;
 }
 

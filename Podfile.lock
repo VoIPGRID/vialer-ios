@@ -23,19 +23,23 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (2.4.0):
-    - CocoaLumberjack/Default (= 2.4.0)
-    - CocoaLumberjack/Extensions (= 2.4.0)
-  - CocoaLumberjack/Core (2.4.0)
-  - CocoaLumberjack/Default (2.4.0):
+  - CocoaLumberjack (3.0.0):
+    - CocoaLumberjack/Default (= 3.0.0)
+    - CocoaLumberjack/Extensions (= 3.0.0)
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.4.0):
+  - CocoaLumberjack/Extensions (3.0.0):
     - CocoaLumberjack/Default
-  - FirebaseAnalytics (3.4.2):
+  - FirebaseAnalytics (3.6.0):
+    - FirebaseCore (~> 3.4)
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
-    - GoogleUtilities (~> 1.2)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.4.5):
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.8)
   - Google/Analytics (3.0.3):
     - Google/Core
@@ -43,13 +47,12 @@ PODS:
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
   - GoogleAnalytics (3.17.0)
-  - GoogleInterchangeUtilities (1.2.1):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleSymbolUtilities (1.1.1)
-  - GoogleUtilities (1.3.1):
-    - GoogleSymbolUtilities (~> 1.0)
-  - HDLumberjackLogFormatter (2.0.0):
-    - CocoaLumberjack
+  - GoogleInterchangeUtilities (1.2.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleSymbolUtilities (1.1.2)
+  - GoogleToolboxForMac/Defines (2.1.0)
+  - GoogleToolboxForMac/NSData+zlib (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
   - HTCopyableLabel (0.0.7)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
@@ -66,27 +69,29 @@ PODS:
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
   - OCMock (3.3.1)
-  - OHHTTPStubs (5.2.1):
-    - OHHTTPStubs/Default (= 5.2.1)
-  - OHHTTPStubs/Core (5.2.1)
-  - OHHTTPStubs/Default (5.2.1):
+  - OHHTTPStubs (5.2.3):
+    - OHHTTPStubs/Default (= 5.2.3)
+  - OHHTTPStubs/Core (5.2.3)
+  - OHHTTPStubs/Default (5.2.3):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.1):
+  - OHHTTPStubs/JSON (5.2.3):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.1):
+  - OHHTTPStubs/NSURLSession (5.2.3):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.1)
+  - OHHTTPStubs/OHPathHelpers (5.2.3)
   - PBWebViewController (0.5.0)
   - Reachability (3.2)
   - SAMKeychain (1.5.2)
-  - SimulatorStatusMagic (1.9.1)
-  - SVProgressHUD (2.0.3)
-  - Vialer-pjsip-iOS (1.0)
-  - VialerSIPLib (1.0.6):
-    - CocoaLumberjack (~> 2.2)
+  - SimulatorStatusMagic (1.9.2)
+  - SPLumberjackLogFormatter (0.0.1):
+    - CocoaLumberjack
+  - SVProgressHUD (2.1.2)
+  - Vialer-pjsip-iOS (1.1.0)
+  - VialerSIPLib (2.0.1):
+    - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
 
@@ -94,7 +99,6 @@ DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking
   - Google/Analytics
-  - HDLumberjackLogFormatter (from `https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git`)
   - HTCopyableLabel
   - MMDrawerController+Storyboard (from `https://github.com/TomSwift/MMDrawerController-Storyboard.git`)
   - OCMock
@@ -103,48 +107,50 @@ DEPENDENCIES:
   - Reachability
   - SAMKeychain
   - SimulatorStatusMagic
+  - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
   - SVProgressHUD
   - VialerSIPLib
 
 EXTERNAL SOURCES:
-  HDLumberjackLogFormatter:
-    :git: https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git
   MMDrawerController+Storyboard:
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
+  SPLumberjackLogFormatter:
+    :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
 CHECKOUT OPTIONS:
-  HDLumberjackLogFormatter:
-    :commit: b182a2d5054831870dfb301450a14aadb3cd5cd4
-    :git: https://hd-apps@bitbucket.org/hd-apps/hdlumberjacklogformatter.git
   MMDrawerController+Storyboard:
     :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
+  SPLumberjackLogFormatter:
+    :commit: c0155bfd953746f13e94c84b8b2c13908242e3e4
+    :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
-  FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
+  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
-  GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
-  GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
-  GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
-  HDLumberjackLogFormatter: c8d6015a1041ced2ff4720dbb0b8991bccb9f1ab
+  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
+  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
+  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
-  OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
+  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
-  SimulatorStatusMagic: 0dcd69449f292fa12ab33d39bc3348b4a156da9a
-  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
-  Vialer-pjsip-iOS: 7313b19c4c2fa228a419f697a95aff1c17e649f3
-  VialerSIPLib: 3d0c15a987089bd2140a807d98cabe312775c418
+  SimulatorStatusMagic: f6cf062b0e5a2df6f000bb0f98d1ae6977c8dbc1
+  SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  Vialer-pjsip-iOS: ced3608a20ffdcdf4afdc84a8e381c57525f8f25
+  VialerSIPLib: b06eb9e5a3ded1f856bbac59311289dd8ef97959
 
-PODFILE CHECKSUM: 987ca33f9e41f3669ac73b5da31eb8e898244d75
+PODFILE CHECKSUM: 6a71a2280ded73135a46da78ebd6aa7e5ef71db0
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0.beta.1

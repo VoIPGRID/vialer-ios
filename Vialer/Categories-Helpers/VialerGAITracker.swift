@@ -243,7 +243,7 @@ import Foundation
         // to prevent large rounding errors.
         if (call.connectDuration > 10) {
             //VIALI-3258: get the audio codec from the call.
-            let audioCodec = "AudioCodec:unknown"
+            let audioCodec = "AudioCodec:iLBC"
             self.sendMOSValue(mos: call.mos, forCodec: audioCodec)
 
             let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
@@ -259,7 +259,9 @@ import Foundation
      */
     private static func sendMOSValue(mos: Float, forCodec codec:String) {
         let labelString = "MOS for \(codec)"
-        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: mos as NSNumber!)
+        let value = NSNumber(value:Int(mos*100.0))
+
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value:value )
     }
 
     /**
@@ -270,6 +272,8 @@ import Foundation
      */
     private static func sendBandwidthPerMinute(bandwidth: Float, forCodec codec:String) {
         let labelString = "Bandwidth for \(codec)"
-        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: bandwidth as NSNumber!)
+        let value = NSNumber(value:Int(bandwidth*1024.0))
+
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: value)
     }
 }

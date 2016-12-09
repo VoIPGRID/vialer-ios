@@ -5,7 +5,6 @@
 
 #import "SystemUser.h"
 
-@import AVFoundation;
 #import "Configuration.h"
 #import "NSString+SubString.h"
 #import "SAMKeychain.h"
@@ -59,7 +58,9 @@ static NSString * const SystemUserSUDLastName           = @"LastName";
 static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
+static NSString * const SystemUserSUDNoWiFiNotification = @"NoWiFiNotification";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
+static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
 
 @interface SystemUser ()
@@ -165,6 +166,8 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
      */
     self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
+
+    self.noWiFiNotification = [defaults boolForKey:SystemUserSUDNoWiFiNotification];
 }
 
 #pragma mark - Properties
@@ -288,6 +291,19 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     }
 }
 
+- (NSDictionary *)currentAvailability {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:SystemUserCurrentAvailabilitySUDKey];
+}
+
+- (void)setCurrentAvailability:(NSDictionary *)currentAvailability {
+    [[NSUserDefaults standardUserDefaults] setObject:currentAvailability forKey:SystemUserCurrentAvailabilitySUDKey];
+}
+
+- (void)setNoWiFiNotification:(BOOL)noWiFiNotification {
+    _noWiFiNotification = noWiFiNotification;
+    [[NSUserDefaults standardUserDefaults] setBool:noWiFiNotification forKey:SystemUserSUDNoWiFiNotification];
+}
+
 #pragma mark - Actions
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void(^)(BOOL loggedin, NSError *error))completion {
@@ -355,19 +371,12 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
     self.lastName = nil;
     self.clientID = nil;
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:SystemUserSUDUsername];
-    [defaults removeObjectForKey:SystemUserSUDOutgoingNumber];
-    [defaults removeObjectForKey:SystemUserSUDMobileNumber];
-    [defaults removeObjectForKey:SystemUserSUDEmailAddress];
-    [defaults removeObjectForKey:SystemUserSUDFirstName];
-    [defaults removeObjectForKey:SystemUserSUDPreposition];
-    [defaults removeObjectForKey:SystemUserSUDLastName];
-    [defaults removeObjectForKey:SystemUserApiKeyClient];
-
     [self removeSIPCredentials];
 
-    [defaults removeObjectForKey:SystemUserSUDSIPAccount];
+    // Clear out the userdefaults.
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removePersistentDomainForName:appDomain];
     [defaults synchronize];
 }
 

@@ -9,10 +9,12 @@
 @import AVFoundation;
 #import "Configuration.h"
 #import "PasteableUILabel.h"
+#import "PhoneNumberUtils.h"
 #import "NumberPadButton.h"
 #import "ReachabilityManager.h"
 #import "ReachabilityBarViewController.h"
 #import "SystemUser.h"
+#import "SIPUtils.h"
 #import "TwoStepCallingViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "Vialer-Swift.h"
@@ -99,7 +101,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 }
 
 - (void)setNumberText:(NSString *)numberText {
-    self.numberLabel.text = [self cleanPhonenumber:numberText];
+    self.numberLabel.text = [PhoneNumberUtils cleanPhoneNumber:numberText];
     [self setupCallButton];
 }
 
@@ -110,13 +112,8 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
     } completion:nil];
 }
 
-- (NSString *)cleanPhonenumber:(NSString *)phonenumber {
-    phonenumber = [[phonenumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
-    return [[phonenumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
-}
-
 - (NSString *)numberText {
-    return self.numberLabel.text;
+    return self.numberLabel.text ?: @"";
 }
 
 - (void)setLastCalledNumber:(NSString *)lastCalledNumber {

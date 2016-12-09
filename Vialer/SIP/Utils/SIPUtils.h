@@ -42,7 +42,7 @@
  *
  *  @return VSLCall instance or nil.
  */
-+ (VSLCall * _Nullable)getCallWithId:(NSString *_Nonnull)callId;
++ (VSLCall * _Nullable)getCallWithId:(NSString *_Nonnull)callId __attribute__((unavailable("Deprecated, use VSLCallManager -callWithCallId: instead")));
 
 /**
  *  Check if there is another call in progress.
