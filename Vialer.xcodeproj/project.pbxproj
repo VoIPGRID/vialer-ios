@@ -118,6 +118,10 @@
 		C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */; };
 		C42FAD3D1D198D34004D9D00 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = C42FAD3C1D198D34004D9D00 /* ringtone.wav */; };
+		C43172311DFE85B3005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
+		C431723B1DFE85F8005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
+		C43172431DFE8669005FF8EA /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C43172471DFE8673005FF8EA /* VerbondenIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C43EE05B1D5C749B00F8C3C0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */; };
 		C43EE05C1D5C74AC00F8C3C0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */; };
 		C43EE05D1D5C74AC00F8C3C0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */; };
@@ -570,6 +574,20 @@
 			remoteGlobalIDString = C41FD8551C60A08400BBE6D7;
 			remoteInfo = Voys;
 		};
+		C43172441DFE8669005FF8EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C431722F1DFE85B3005FF8EA;
+			remoteInfo = VoysIntentsExtension;
+		};
+		C43172481DFE8673005FF8EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C43172391DFE85F8005FF8EA;
+			remoteInfo = VerbondenIntentsExtension;
+		};
 		C490ADFC1D088535004A8F83 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB4226C5182261D200707349 /* Project object */;
@@ -626,6 +644,28 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C43172461DFE8669005FF8EA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C43172431DFE8669005FF8EA /* VoysIntentsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C431724A1DFE8673005FF8EA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C43172471DFE8673005FF8EA /* VerbondenIntentsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C490ADE51D0863E3004A8F83 /* Embed Frameworks */ = {
@@ -724,6 +764,10 @@
 		C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoysSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Branding/Voys/Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		C42FAD3C1D198D34004D9D00 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringtone.wav; path = Branding/Voys/ringtone.wav; sourceTree = "<group>"; };
+		C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VoysIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C43172381DFE85B3005FF8EA /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VoysIntentsExtension.plist"; sourceTree = "<absolute>"; };
+		C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VerbondenIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C43172421DFE85F8005FF8EA /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VerbondenIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VerbondenIntentsExtension.plist"; sourceTree = "<absolute>"; };
 		C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
 		C4529E301C4542D10063F08B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TwoStepCallingStoryboard.storyboard; sourceTree = "<group>"; };
 		C4529E351C4542DA0063F08B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/TwoStepCallingStoryboard.strings; sourceTree = "<group>"; };
@@ -871,7 +915,7 @@
 		F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VialerIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		F2C44A661DE40EDD00F7CF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2C44A661DE40EDD00F7CF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../VialerIntentsExtension/Info.plist; sourceTree = "<group>"; };
 		F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+StartCallConvertible.swift"; sourceTree = "<group>"; };
 		F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCallConvertible.swift; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -1002,6 +1046,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				F09076784BDB47E1ADAC08F3 /* libPods-VoysSnapshotUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C43172321DFE85B3005FF8EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C431723C1DFE85F8005FF8EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1237,6 +1295,7 @@
 		C41FD8D11C60A12E00BBE6D7 /* Voys */ = {
 			isa = PBXGroup;
 			children = (
+				C43172381DFE85B3005FF8EA /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C48947931D8925E5004A0EE5 /* InfoPlist.strings */,
 				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
@@ -1391,6 +1450,7 @@
 		C490ADEF1D086458004A8F83 /* Verbonden */ = {
 			isa = PBXGroup;
 			children = (
+				C43172421DFE85F8005FF8EA /* VerbondenIntentsExtension.plist */,
 				C490ADF31D086458004A8F83 /* Verbonden-Info.plist */,
 				C489479D1D892605004A0EE5 /* InfoPlist.strings */,
 				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
@@ -1634,6 +1694,7 @@
 			isa = PBXGroup;
 			children = (
 				C4FE25E11D819A8B002BE230 /* Vialer.entitlements */,
+				F2C44A661DE40EDD00F7CF50 /* Info.plist */,
 				F20851821D269DD300A17E71 /* Vialer-Info.plist */,
 				C48947971D8925F2004A0EE5 /* InfoPlist.strings */,
 				F20851881D269E1700A17E71 /* Snapshot-Constants.swift */,
@@ -1747,7 +1808,6 @@
 			isa = PBXGroup;
 			children = (
 				F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */,
-				F2C44A661DE40EDD00F7CF50 /* Info.plist */,
 			);
 			path = VialerIntentsExtension;
 			sourceTree = "<group>";
@@ -2047,6 +2107,8 @@
 				C490AE071D088535004A8F83 /* VerbondenSnapshotUITests.xctest */,
 				F208516A1D26935600A17E71 /* Acceptatie.app */,
 				F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */,
+				C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */,
+				C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2164,10 +2226,12 @@
 				C41FD8C71C60A08400BBE6D7 /* Embed Frameworks */,
 				91D5BC964F031B9BDE5F3453 /* [CP] Embed Pods Frameworks */,
 				0C1D1E565C789F1D77DD45CA /* [CP] Copy Pods Resources */,
+				C43172461DFE8669005FF8EA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C43172451DFE8669005FF8EA /* PBXTargetDependency */,
 			);
 			name = Voys;
 			productName = Vialer;
@@ -2195,6 +2259,41 @@
 			productReference = C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C431722F1DFE85B3005FF8EA /* VoysIntentsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C43172341DFE85B3005FF8EA /* Build configuration list for PBXNativeTarget "VoysIntentsExtension" */;
+			buildPhases = (
+				C43172301DFE85B3005FF8EA /* Sources */,
+				C43172321DFE85B3005FF8EA /* Frameworks */,
+				C43172331DFE85B3005FF8EA /* Resources */,
+				C431724B1DFE86CD005FF8EA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VoysIntentsExtension;
+			productName = VialerIntentsExtension;
+			productReference = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C431723E1DFE85F8005FF8EA /* Build configuration list for PBXNativeTarget "VerbondenIntentsExtension" */;
+			buildPhases = (
+				C431723A1DFE85F8005FF8EA /* Sources */,
+				C431723C1DFE85F8005FF8EA /* Frameworks */,
+				C431723D1DFE85F8005FF8EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VerbondenIntentsExtension;
+			productName = VialerIntentsExtension;
+			productReference = C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C490AD631D0863E3004A8F83 /* Verbonden */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C490ADE81D0863E3004A8F83 /* Build configuration list for PBXNativeTarget "Verbonden" */;
@@ -2208,10 +2307,12 @@
 				C490ADE51D0863E3004A8F83 /* Embed Frameworks */,
 				E6B41DC7B80307F323DE980A /* [CP] Embed Pods Frameworks */,
 				1F0A72BC4CA2C33496972852 /* [CP] Copy Pods Resources */,
+				C431724A1DFE8673005FF8EA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C43172491DFE8673005FF8EA /* PBXTargetDependency */,
 			);
 			name = Verbonden;
 			productName = Vialer;
@@ -2373,6 +2474,9 @@
 						DevelopmentTeam = AM8JDXQ3L4;
 						TestTargetID = C41FD8551C60A08400BBE6D7;
 					};
+					C431722F1DFE85B3005FF8EA = {
+						DevelopmentTeam = AM8JDXQ3L4;
+					};
 					C490AD631D0863E3004A8F83 = {
 						DevelopmentTeam = LG97ZGSAVA;
 						ProvisioningStyle = Automatic;
@@ -2437,14 +2541,16 @@
 			projectRoot = "";
 			targets = (
 				FB4226CC182261D200707349 /* Vialer */,
+				F2C44A611DE40EDD00F7CF50 /* VialerIntentsExtension */,
 				C4F49F261BF0B45700C25159 /* VialerTests */,
 				F22DE09F1CC90D41001468B3 /* VialerSnapshotUITests */,
 				F20850E01D26935600A17E71 /* Acceptatie */,
 				C41FD8551C60A08400BBE6D7 /* Voys */,
+				C431722F1DFE85B3005FF8EA /* VoysIntentsExtension */,
 				C41FD8F21C60A89300BBE6D7 /* VoysSnapshotUITests */,
 				C490AD631D0863E3004A8F83 /* Verbonden */,
 				C490ADFA1D088535004A8F83 /* VerbondenSnapshotUITests */,
-				F2C44A611DE40EDD00F7CF50 /* VialerIntentsExtension */,
+				C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2490,6 +2596,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C41FD8FA1C60A89300BBE6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C43172331DFE85B3005FF8EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C431723D1DFE85F8005FF8EA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2944,6 +3064,20 @@
 			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
 			showEnvVarsInLog = 0;
 		};
+		C431724B1DFE86CD005FF8EA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			showEnvVarsInLog = 0;
+		};
 		C482977DB31E4635A00D3E16 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3213,6 +3347,22 @@
 				C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */,
 				F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */,
 				C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C43172301DFE85B3005FF8EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C43172311DFE85B3005FF8EA /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C431723A1DFE85F8005FF8EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C431723B1DFE85F8005FF8EA /* IntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3534,6 +3684,16 @@
 			target = C41FD8551C60A08400BBE6D7 /* Voys */;
 			targetProxy = C41FD9021C60B28E00BBE6D7 /* PBXContainerItemProxy */;
 		};
+		C43172451DFE8669005FF8EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C431722F1DFE85B3005FF8EA /* VoysIntentsExtension */;
+			targetProxy = C43172441DFE8669005FF8EA /* PBXContainerItemProxy */;
+		};
+		C43172491DFE8673005FF8EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */;
+			targetProxy = C43172481DFE8673005FF8EA /* PBXContainerItemProxy */;
+		};
 		C490ADFB1D088535004A8F83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C41FD8551C60A08400BBE6D7 /* Voys */;
@@ -3705,6 +3865,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 94CA74AB0A5BC77D7DB5FC8D /* Pods-Voys.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3749,6 +3910,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 11B855B376242D6E5AEA91E2 /* Pods-Voys.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3845,10 +4007,131 @@
 			};
 			name = Release;
 		};
+		C43172351DFE85B3005FF8EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = AM8JDXQ3L4;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "VialerIntentsExtension copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		C43172361DFE85B3005FF8EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = AM8JDXQ3L4;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "VialerIntentsExtension copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		C431723F1DFE85F8005FF8EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "VialerIntentsExtension copy2-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app.VerbondenIntentsExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		C43172401DFE85F8005FF8EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "VialerIntentsExtension copy2-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app.VerbondenIntentsExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		C490ADE91D0863E3004A8F83 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 347F4CA4BDD2DB6C82293D48 /* Pods-Verbonden.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3894,6 +4177,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41DBD4AB47401D3A86935903 /* Pods-Verbonden.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4219,7 +4503,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E2Q9UE8HM6;
+				DEVELOPMENT_TEAM = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = VialerIntentsExtension/Info.plist;
@@ -4227,6 +4511,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.VialerIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -4248,7 +4534,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = E2Q9UE8HM6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -4257,6 +4543,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.VialerIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
@@ -4448,6 +4736,24 @@
 			buildConfigurations = (
 				C41FD8FD1C60A89300BBE6D7 /* Debug */,
 				C41FD8FF1C60A89300BBE6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C43172341DFE85B3005FF8EA /* Build configuration list for PBXNativeTarget "VoysIntentsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C43172351DFE85B3005FF8EA /* Debug */,
+				C43172361DFE85B3005FF8EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C431723E1DFE85F8005FF8EA /* Build configuration list for PBXNativeTarget "VerbondenIntentsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C431723F1DFE85F8005FF8EA /* Debug */,
+				C43172401DFE85F8005FF8EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

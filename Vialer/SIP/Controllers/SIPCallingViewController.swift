@@ -142,7 +142,9 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             if error != nil {
                 DDLogWrapper.logError("Error muting call: \(error)")
             } else {
-                self.updateUI()
+                DispatchQueue.main.async {
+                    self.updateUI()
+                }
             }
         }
     }
@@ -174,12 +176,14 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
     @IBAction func holdButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall else { return }
-        do {
-            try call.toggleHold()
-            updateUI()
-
-        } catch let error {
-            DDLogWrapper.logError("Error holding call: \(error)")
+        callManager.toggleHold(for: call) { error in
+            if error != nil {
+                DDLogWrapper.logError("Error holding current call: \(error)")
+            } else {
+                DispatchQueue.main.async {
+                    self.updateUI()
+                }
+            }
         }
     }
 
@@ -190,9 +194,10 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         callManager.end(call) { error in
             if error != nil {
                 DDLogWrapper.logError("Error ending call: \(error)")
-
             } else {
-                self.hangupButton.isEnabled = false
+                DispatchQueue.main.async {
+                    self.hangupButton.isEnabled = false
+                }
             }
         }
     }
