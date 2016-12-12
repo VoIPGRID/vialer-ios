@@ -2266,7 +2266,6 @@
 				C43172301DFE85B3005FF8EA /* Sources */,
 				C43172321DFE85B3005FF8EA /* Frameworks */,
 				C43172331DFE85B3005FF8EA /* Resources */,
-				C431724B1DFE86CD005FF8EA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3057,20 +3056,6 @@
 			inputPaths = (
 			);
 			name = "Update Build number";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
-			showEnvVarsInLog = 0;
-		};
-		C431724B1DFE86CD005FF8EA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4022,7 +4007,7 @@
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "VialerIntentsExtension copy-Info.plist";
+				INFOPLIST_FILE = VoysIntentsExtension.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
@@ -4054,7 +4039,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "VialerIntentsExtension copy-Info.plist";
+				INFOPLIST_FILE = VoysIntentsExtension.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
@@ -4082,7 +4067,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "VialerIntentsExtension copy2-Info.plist";
+				INFOPLIST_FILE = VerbondenIntentsExtension.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app.VerbondenIntentsExtension;
@@ -4114,7 +4099,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "VialerIntentsExtension copy2-Info.plist";
+				INFOPLIST_FILE = VerbondenIntentsExtension.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app.VerbondenIntentsExtension;
