@@ -103,6 +103,7 @@ static NSString * const DialerViewControllerSIPCallingSegue = @"SIPCallingSegue"
 - (void)setNumberText:(NSString *)numberText {
     self.numberLabel.text = [PhoneNumberUtils cleanPhoneNumber:numberText];
     [self setupCallButton];
+    [self toggleDeleteButton];
 }
 
 - (void)toggleDeleteButton {
