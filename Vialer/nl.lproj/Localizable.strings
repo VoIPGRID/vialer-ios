@@ -213,6 +213,9 @@
 /* No comment provided by engineer. */
 "My number" = "Mijn nummer";
 
+/* No comment provided by engineer. */
+"My Number: " = "Mijn Nummer: ";
+
 /* No */
 "No" = "Nee";
 
@@ -321,9 +324,6 @@
 
 /* Successfully connected with */
 "Successfully connected with" = "Succesvol verbonden met";
-
-/* No comment provided by engineer. */
-"Syncing addressbook." = "Adresboek synchroniseren.";
 
 /* No comment provided by engineer. */
 "The number is to short" = "Het nummer is te kort";
