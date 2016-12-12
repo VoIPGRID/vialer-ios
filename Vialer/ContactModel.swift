@@ -305,7 +305,7 @@ import Foundation
                     firstChar = char
                 } else if let char = contact.familyName.uppercased().replacingOccurrences(of: "(", with: "").characters.first {
                     firstChar = char
-                } else if let char = contact.emailAddresses[0].value.uppercased.characters.first {
+                } else if let char = contact.emailAddresses.first?.value.uppercased.characters.first {
                     firstChar = char
                 }
             }
