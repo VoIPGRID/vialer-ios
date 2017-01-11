@@ -37,7 +37,7 @@ PODS:
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.4.5):
+  - FirebaseCore (3.4.6):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.8)
@@ -68,7 +68,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - OCMock (3.3.1)
+  - OCMock (3.4)
   - OHHTTPStubs (5.2.3):
     - OHHTTPStubs/Default (= 5.2.3)
   - OHHTTPStubs/Core (5.2.3)
@@ -90,7 +90,7 @@ PODS:
     - CocoaLumberjack
   - SVProgressHUD (2.1.2)
   - Vialer-pjsip-iOS (1.1.0)
-  - VialerSIPLib (2.0.1):
+  - VialerSIPLib (2.1.0):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -130,7 +130,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
-  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
+  FirebaseCore: 03da1cb32615569bbc2830a22f9ad753d9a02ef5
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
@@ -140,7 +140,7 @@ SPEC CHECKSUMS:
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
-  OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
+  OCMock: 35ae71d6a8fcc1b59434d561d1520b9dd4f15765
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -149,7 +149,7 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   Vialer-pjsip-iOS: ced3608a20ffdcdf4afdc84a8e381c57525f8f25
-  VialerSIPLib: b06eb9e5a3ded1f856bbac59311289dd8ef97959
+  VialerSIPLib: 6ce890d4a4804c3baeaeee53d556ecbae781229c
 
 PODFILE CHECKSUM: 6a71a2280ded73135a46da78ebd6aa7e5ef71db0
 

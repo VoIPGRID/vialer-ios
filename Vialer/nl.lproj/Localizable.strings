@@ -24,6 +24,9 @@
 /* No comment provided by engineer. */
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";
 
+/* audio */
+"audio" = "audio";
+
 /* No comment provided by engineer. */
 "Back" = "Terug";
 
@@ -315,6 +318,9 @@
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
+
+/* speaker */
+"speaker" = "luidspreker";
 
 /* Start calling */
 "Start calling" = "Start gesprek";

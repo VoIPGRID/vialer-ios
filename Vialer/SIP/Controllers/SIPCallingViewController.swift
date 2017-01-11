@@ -4,6 +4,7 @@
 //
 
 import Contacts
+import MediaPlayer
 
 private var myContext = 0
 
@@ -126,6 +127,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     @IBOutlet weak var muteButton: SipCallingButton!
     @IBOutlet weak var keypadButton: SipCallingButton!
     @IBOutlet weak var speakerButton: SipCallingButton!
+    @IBOutlet weak var speakerLabel: UILabel!
     @IBOutlet weak var transferButton: SipCallingButton!
     @IBOutlet weak var holdButton: SipCallingButton!
     @IBOutlet weak var hangupButton: UIButton!
@@ -154,9 +156,21 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     }
 
     @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
-        guard let call = activeCall else { return }
-        call.toggleSpeaker()
-        updateUI()
+        guard activeCall != nil else { return }
+        if callManager.audioController.hasBluetooth {
+            // We add the MPVolumeView to the view without any size, we just need it so we can push the button in code.
+            let volumeView = MPVolumeView(frame: CGRect.zero)
+            volumeView.alpha = 0.0
+            view.addSubview(volumeView)
+            for view in volumeView.subviews {
+                if let button = view as? UIButton {
+                    button.sendActions(for: .touchUpInside)
+                }
+            }
+        } else {
+            callManager.audioController.output = callManager.audioController.output == .speaker ? .other : .speaker
+            updateUI()
+        }
     }
 
     @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
@@ -243,6 +257,14 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             }
         #endif
 
+        if callManager.audioController.hasBluetooth {
+            speakerButton?.buttonImage = "CallButtonBluetooth"
+            speakerLabel?.text = NSLocalizedString("audio", comment: "audio")
+        } else {
+            speakerButton?.buttonImage = "CallButtonSpeaker"
+            speakerLabel?.text = NSLocalizedString("speaker", comment: "speaker")
+        }
+
         guard let call = activeCall else {
             numberLabel?.text = cleanedPhoneNumber
             statusLabel?.text = ""
@@ -278,7 +300,6 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         keypadButton?.isEnabled = !call.onHold && call.callState == .confirmed
         holdButton?.active = call.onHold
         muteButton?.active = call.muted
-        speakerButton?.active = call.speaker
 
         // When dtmf is sent, use that as text, otherwise phone number.
         if let dtmf = dtmfSent {
