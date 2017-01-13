@@ -20,8 +20,13 @@
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
     endpointConfiguration.logLevel = 3;
     endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
+
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseTCPConnection"]) {
     endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                       [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
+    } else {
+        endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
+    }
 
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] configureLibraryWithEndPointConfiguration:endpointConfiguration error:&error];

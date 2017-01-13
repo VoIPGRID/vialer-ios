@@ -18,6 +18,7 @@ static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
 static int const SettingsViewControllerSipAccountRow        = 2;
+static int const SettingsViewControllerTCPRow               = 3;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -31,8 +32,11 @@ static int const SettingsViewControllerUISwitchOriginOffsetY    = 15;
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
 
+static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConnection";
+
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
+@property (nonatomic) BOOL useTCP;
 @end
 
 @implementation SettingsViewController
@@ -74,6 +78,15 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     return _currentUser;
 }
 
+- (BOOL)useTCP {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SettingsViewControllerUseTCPConnectionKey];
+}
+
+- (void)setUseTCP:(BOOL)useTCP {
+    [[NSUserDefaults standardUserDefaults] setBool:useTCP forKey:SettingsViewControllerUseTCPConnectionKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -85,7 +98,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         case SettingsViewControllerVoIPAccountSection:
             if (self.currentUser.sipEnabled) {
                 // Show the VoIP Switch and the account ID
-                return 3;
+                return 4;
             } else {
                 // Only show VoIP Switch
                 return 2;
@@ -129,6 +142,11 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
             cell.detailTextLabel.text = self.currentUser.sipAccount;
+        } else if (indexPath.row == SettingsViewControllerTCPRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable TCP connection", nil)
+                          withTag:1003
+                       defaultVal:self.useTCP];
         }
     } else if (indexPath.section == SettingsViewControllerNumbersSection) {
         if (indexPath.row == SettingsViewControllerMyNumberRow) {
@@ -206,6 +224,14 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         }
     } else if (sender.tag == 1002) {
         self.currentUser.noWiFiNotification = !sender.isOn;
+    } else if (sender.tag == 1003) {
+        self.useTCP = sender.isOn;
+        // Remove and initiate the endpoint again to make sure the new transport is loaded.
+        DDLogVerbose(@"Remove Endpoint for new connection configurations.");
+        [SIPUtils removeSIPEndpoint];
+        DDLogVerbose(@"Removed Endpoint, restarting.");
+        [SIPUtils setupSIPEndpoint];
+        DDLogVerbose(@"Endpoint restarted.");
     }
 }
 

@@ -250,7 +250,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
             [SIPUtils setupSIPEndpoint];
             [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
-            if (![VialerSIPLib  callKitAvailable]) {
+            if (![VialerSIPLib callKitAvailable]) {
                 [self registerForLocalNotifications];
             }
         }

@@ -50,9 +50,9 @@ PODS:
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleSymbolUtilities (1.1.2)
-  - GoogleToolboxForMac/Defines (2.1.0)
-  - GoogleToolboxForMac/NSData+zlib (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - HTCopyableLabel (0.0.7)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
@@ -90,7 +90,7 @@ PODS:
     - CocoaLumberjack
   - SVProgressHUD (2.1.2)
   - Vialer-pjsip-iOS (1.1.0)
-  - VialerSIPLib (2.1.0):
+  - VialerSIPLib (2.2.0):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -136,7 +136,7 @@ SPEC CHECKSUMS:
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
@@ -149,7 +149,7 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   Vialer-pjsip-iOS: ced3608a20ffdcdf4afdc84a8e381c57525f8f25
-  VialerSIPLib: 6ce890d4a4804c3baeaeee53d556ecbae781229c
+  VialerSIPLib: 0f5c476dfbd6b0eadb84e07a761c273c7ddd321c
 
 PODFILE CHECKSUM: 6a71a2280ded73135a46da78ebd6aa7e5ef71db0
 
