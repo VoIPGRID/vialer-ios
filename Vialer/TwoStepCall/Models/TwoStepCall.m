@@ -227,7 +227,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
             self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorStatusRequestFailed userInfo:@{NSUnderlyingErrorKey: error,
                                                                                                                              NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call failed", nil)
                                                                                                                              }];
-            DDLogError(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
+            VialerLogError(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
             [timer invalidate];
             return;
         }
@@ -236,7 +236,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
         NSString *callStatus = [self getObjectForKey:TwoStepCallStatusKey fromResponseObject:responseData];
         if (!callStatus) {
             self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorStatusRequestFailed userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Two step call failed", nil)}];
-            DDLogError(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
+            VialerLogError(@"Error Requesting Status for Call ID: %@ Error:%@", self.callID, error);
             [timer invalidate];
             return;
         }
@@ -245,7 +245,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
 
         // If the call status is one of the following, invalidate the timer so it will stop polling.
         if (self.status == TwoStepCallStatusDisconnected || self.status == TwoStepCallStatusFailed_a || self.status == TwoStepCallStatusFailed_b) {
-            DDLogError(@"Call status changed to: %@ invalidating timer", [[self class] statusStringFromTwoStepCallStatus:self.status]);
+            VialerLogError(@"Call status changed to: %@ invalidating timer", [[self class] statusStringFromTwoStepCallStatus:self.status]);
             [timer invalidate];
         }
     }];

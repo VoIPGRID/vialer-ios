@@ -17,6 +17,7 @@ NSString * const ConfigurationGADimensionBuildIndex = @"Build index";
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
 static NSString * const ConfigurationGACustomDimensionKey = @"GA Custom Dimensions";
+static NSString * const ConfigurationLogEntriesToken = @"LogEntries Token";
 
 @interface Configuration ()
 @property (strong, nonatomic) NSDictionary *configPlist;
@@ -81,6 +82,10 @@ static dispatch_once_t onceToken = 0;
     NSAssert([value isKindOfClass:[NSNumber class]], @"Fetched key was not found or was not a NSNumber.");
 
     return ((NSNumber *)value).intValue;
+}
+
+- (NSString *)logEntriesToken {
+    return self.configPlist[ConfigurationLogEntriesToken];
 }
 
 @end

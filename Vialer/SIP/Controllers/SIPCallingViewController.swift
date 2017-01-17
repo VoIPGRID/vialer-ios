@@ -142,7 +142,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
         callManager.toggleMute(for: call) { error in
             if error != nil {
-                DDLogWrapper.logError("Error muting call: \(error)")
+                VialerLogError("Error muting call: \(error)")
             } else {
                 DispatchQueue.main.async {
                     self.updateUI()
@@ -181,7 +181,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         }
         callManager.toggleHold(for: call) { error in
             if error != nil {
-                DDLogWrapper.logError("Error holding current call: \(error)")
+                VialerLogError("Error holding current call: \(error)")
             } else {
                 self.performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
             }
@@ -192,7 +192,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
         guard let call = activeCall else { return }
         callManager.toggleHold(for: call) { error in
             if error != nil {
-                DDLogWrapper.logError("Error holding current call: \(error)")
+                VialerLogError("Error holding current call: \(error)")
             } else {
                 DispatchQueue.main.async {
                     self.updateUI()
@@ -207,7 +207,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
         callManager.end(call) { error in
             if error != nil {
-                DDLogWrapper.logError("Error ending call: \(error)")
+                VialerLogError("Error ending call: \(error)")
             } else {
                 DispatchQueue.main.async {
                     self.hangupButton.isEnabled = false
@@ -440,7 +440,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
 
         callManager.startCall(toNumber: cleanedPhoneNumber!, for: account) { (call, error) in
             if error != nil {
-                DDLogWrapper.logError("Error setting up call: \(error)")
+                VialerLogError("Error setting up call: \(error)")
             } else if let call = call {
                 self.activeCall = call
             }

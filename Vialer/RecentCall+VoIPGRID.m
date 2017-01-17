@@ -25,7 +25,7 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
 + (NSArray *)createRecentCallsFromVoIGPRIDResponseData:(NSDictionary *)responseData inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     // Create or find the RecentCalls that are given in the responseData.
     NSArray *objects = responseData[RecentCallVoIPGRIDObjectArray];
-    DDLogVerbose(@"Fetched %@ new recent(s)", [NSNumber numberWithFloat:objects.count].stringValue);
+    VialerLogVerbose(@"Fetched %@ new recent(s)", [NSNumber numberWithFloat:objects.count].stringValue);
 
     NSMutableArray *recents = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in objects) {
@@ -62,7 +62,7 @@ static NSString * const RecentCallVoIPGRIDDestinationNumber     = @"dst_number";
     // Save the calls to the ManagedObjectContext.
     NSError *error;
     if (![managedObjectContext save:&error]) {
-        DDLogError(@"Error saving Recent call: %@", error);
+        VialerLogError(@"Error saving Recent call: %@", error);
     }
 
     return recents;

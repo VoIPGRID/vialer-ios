@@ -112,6 +112,9 @@
 "Email sent successfully." = "E-mail verzonden.";
 
 /* No comment provided by engineer. */
+"Enable TCP connection" = "Activeer TCP verbinding";
+
+/* No comment provided by engineer. */
 "Enable VoIP" = "Schakel VoIP in";
 
 /* No comment provided by engineer. */
@@ -194,6 +197,9 @@
 
 /* No comment provided by engineer. */
 "Log out" = "Uitloggen";
+
+/* No comment provided by engineer. */
+"Logging identifier" = "Identificatie nummer";
 
 /* No comment provided by engineer. */
 "Logging in..." = "Inloggen...";
@@ -285,6 +291,9 @@
 
 /* No comment provided by engineer. */
 "Recents" = "Recent";
+
+/* No comment provided by engineer. */
+"Remote Logging" = "Remote Logging";
 
 /* No comment provided by engineer. */
 "Request password" = "Wachtwoord opvragen";

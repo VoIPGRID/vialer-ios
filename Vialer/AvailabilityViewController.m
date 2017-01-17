@@ -134,7 +134,7 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
             [webController nextUrl:nextURL];
 
         } else {
-            DDLogWarn(@"Could not segue, destinationViewController is not a \"VialerWebViewController\"");
+            VialerLogWarning(@"Could not segue, destinationViewController is not a \"VialerWebViewController\"");
         }
     }
 }

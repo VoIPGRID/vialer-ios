@@ -40,20 +40,20 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     @try {
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:SystemUserLogoutNotification];
     }@catch(id exception) {
-        DDLogError(@"Error removing observer %@: %@", SystemUserLogoutNotification, exception);
+        VialerLogError(@"Error removing observer %@: %@", SystemUserLogoutNotification, exception);
     }
 
     if ([VialerSIPLib callKitAvailable]) {
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAccepted];
         } @catch (NSException *exception) {
-            DDLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
+            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
         }
 
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStarted];
         } @catch (NSException *exception) {
-            DDLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
+            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
         }
 
     } else {
@@ -61,14 +61,14 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingCallNotification];
         }
         @catch (NSException *exception) {
-            DDLogError(@"Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
+            VialerLogError(@"Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
         }
 
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingBackgroundCallAcceptedNotification];
         }
         @catch (NSException *exception) {
-            DDLogError(@"Error removing observer %@: %@", AppDelegateIncomingBackgroundCallAcceptedNotification, exception);
+            VialerLogError(@"Error removing observer %@: %@", AppDelegateIncomingBackgroundCallAcceptedNotification, exception);
         }
     }
 
@@ -76,7 +76,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:MiddlewareRegistrationOnOtherDeviceNotification];
     }
     @catch (NSException *exception) {
-        DDLogError(@"Error removing observer %@: %@", MiddlewareRegistrationOnOtherDeviceNotification, exception);
+        VialerLogError(@"Error removing observer %@: %@", MiddlewareRegistrationOnOtherDeviceNotification, exception);
     }
 }
 

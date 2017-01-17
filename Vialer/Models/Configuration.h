@@ -46,4 +46,13 @@ extern NSString * const ConfigurationGADimensionBuildIndex;
  *  @return An int representing the dimension index.
  */
 - (int)customDimensionIndexForKey:(NSString *)key;
+
+
+/**
+ The logEntries token.
+
+ @return NSString with the token.
+ */
+- (NSString *)logEntriesToken;
+
 @end

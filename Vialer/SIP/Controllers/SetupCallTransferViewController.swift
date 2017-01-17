@@ -89,7 +89,8 @@ class SetupCallTransferViewController: UIViewController {
         }
         callManager.end(call) { error in
             if error != nil {
-                DDLogWrapper.logError("Could not hangup call: \(error)")
+                
+                VialerLogError("Could not hangup call: \(error)")
             } else {
                 self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: self)
             }

@@ -151,5 +151,7 @@
 		<key>onboarding-en</key>
 		<string>https://verbonden.nl/app/app-info</string>
 	</dict>
+	<key>LogEntries Token</key>
+	<string>712c6c73-82d2-4be5-af08-84e18386e1e0</string>
 </dict>
 </plist>

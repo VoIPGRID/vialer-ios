@@ -21,6 +21,10 @@
 		522D9F849BBCD63F6428F18B /* libPods-Acceptatie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB782C1FE64A7677BE29D52E /* libPods-Acceptatie.a */; };
 		869E7151D10B399329804FE7 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEF4C5E8001C9FEA72001F6 /* libPods-VoysSnapshotUITests.a */; };
 		8A71E9006A01AA0D98D9FCCA /* libPods-VerbondenSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D32577371AB1643925DAD826 /* libPods-VerbondenSnapshotUITests.a */; };
+		C4052E561E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
+		C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
+		C4052E581E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
+		C4052E591E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
 		C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */; };
@@ -36,9 +40,9 @@
 		C41C42F31D5A6A7D00813B66 /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F11D5A6A7D00813B66 /* SIPCallingViewController.swift */; };
 		C41C42F41D5A6A7D00813B66 /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F11D5A6A7D00813B66 /* SIPCallingViewController.swift */; };
 		C41C42F51D5A6A7D00813B66 /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F11D5A6A7D00813B66 /* SIPCallingViewController.swift */; };
-		C41C42F81D5A742100813B66 /* DDLogWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* DDLogWrapper.m */; };
-		C41C42F91D5A742100813B66 /* DDLogWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* DDLogWrapper.m */; };
-		C41C42FA1D5A742100813B66 /* DDLogWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* DDLogWrapper.m */; };
+		C41C42F81D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
+		C41C42F91D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
+		C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		C41D3A721DE728DC00AEA929 /* ContactModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */; };
 		C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		C41FD8591C60A08400BBE6D7 /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
@@ -123,6 +127,10 @@
 		C431723B1DFE85F8005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		C43172431DFE8669005FF8EA /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C43172471DFE8673005FF8EA /* VerbondenIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		C43B6E271E2E524400942F9B /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		C43B6E281E2E524400942F9B /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		C43B6E291E2E524400942F9B /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
 		C43EE05B1D5C749B00F8C3C0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */; };
 		C43EE05C1D5C74AC00F8C3C0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */; };
 		C43EE05D1D5C74AC00F8C3C0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */; };
@@ -148,7 +156,7 @@
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
 		C48931D21D80925C00C5633C /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EBEF691D5B1EBC00883DD7 /* KeypadViewController.swift */; };
 		C48931D31D8092E300C5633C /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
-		C48931D41D80935F00C5633C /* DDLogWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* DDLogWrapper.m */; };
+		C48931D41D80935F00C5633C /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		C48947951D8925F2004A0EE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C48947971D8925F2004A0EE5 /* InfoPlist.strings */; };
 		C489479B1D892605004A0EE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C489479D1D892605004A0EE5 /* InfoPlist.strings */; };
 		C48947A01D89297E004A0EE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C48947931D8925E5004A0EE5 /* InfoPlist.strings */; };
@@ -734,6 +742,7 @@
 		A96D9F664A3A0C129A344416 /* Pods-VialerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests.release.xcconfig"; sourceTree = "<group>"; };
 		B008D9B1D7BD1F10D1DEEB46 /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA2B6C4A3DEA13D29F26B427 /* Pods-Acceptatie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie/Pods-Acceptatie.release.xcconfig"; sourceTree = "<group>"; };
+		C4052E551E2F64FE00F45B9C /* String+regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+regex.swift"; sourceTree = "<group>"; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormViewTests.m; sourceTree = "<group>"; };
@@ -750,8 +759,8 @@
 		C41B600E1C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentCall+CoreDataProperties.h"; sourceTree = "<group>"; };
 		C41B600F1C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentCall+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C41C42F11D5A6A7D00813B66 /* SIPCallingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIPCallingViewController.swift; sourceTree = "<group>"; };
-		C41C42F61D5A742100813B66 /* DDLogWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogWrapper.h; sourceTree = "<group>"; };
-		C41C42F71D5A742100813B66 /* DDLogWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogWrapper.m; sourceTree = "<group>"; };
+		C41C42F61D5A742100813B66 /* VialerLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerLogger.h; sourceTree = "<group>"; };
+		C41C42F71D5A742100813B66 /* VialerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerLogger.m; sourceTree = "<group>"; };
 		C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactModelTestCase.swift; path = Contacts/Models/ContactModelTestCase.swift; sourceTree = "<group>"; };
 		C41FD8CE1C60A08400BBE6D7 /* Voys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C41FD8E21C60A55000BBE6D7 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Voys.xcassets; path = Branding/Voys/Voys.xcassets; sourceTree = "<group>"; };
@@ -765,6 +774,7 @@
 		C43172381DFE85B3005FF8EA /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VoysIntentsExtension.plist"; sourceTree = "<absolute>"; };
 		C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VerbondenIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43172421DFE85F8005FF8EA /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VerbondenIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VerbondenIntentsExtension.plist"; sourceTree = "<absolute>"; };
+		C43B6E251E2E524400942F9B /* VialerLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerLogger.swift; path = "Categories-Helpers/VialerLogger.swift"; sourceTree = "<group>"; };
 		C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
 		C4529E301C4542D10063F08B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TwoStepCallingStoryboard.storyboard; sourceTree = "<group>"; };
 		C4529E351C4542DA0063F08B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/TwoStepCallingStoryboard.strings; sourceTree = "<group>"; };
@@ -2189,14 +2199,16 @@
 		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C41C42F61D5A742100813B66 /* DDLogWrapper.h */,
-				C41C42F71D5A742100813B66 /* DDLogWrapper.m */,
+				C41C42F61D5A742100813B66 /* VialerLogger.h */,
+				C41C42F71D5A742100813B66 /* VialerLogger.m */,
+				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
 				C4C675641D19B5430003A385 /* AppInfo.swift */,
 				C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */,
 				3DE6EAE01AF3BFA600C09935 /* GradientView.h */,
 				3DE6EAE11AF3BFA600C09935 /* GradientView.m */,
 				FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */,
 				FB48BB401875B63700C0D5DB /* NSString+Mobile.m */,
+				C4052E551E2F64FE00F45B9C /* String+regex.swift */,
 				C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */,
 				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */,
@@ -2836,7 +2848,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2594EB00F78AB439BC228BDF /* [CP] Check Pods Manifest.lock */ = {
@@ -2851,7 +2863,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		29E97CDD70F5138033FA2092 /* [CP] Embed Pods Frameworks */ = {
@@ -2881,7 +2893,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2B09BDEAE83ACA2FEB8ECDCD /* [CP] Embed Pods Frameworks */ = {
@@ -2911,7 +2923,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		65DE3A4C26F5F18964CBABDE /* [CP] Copy Pods Resources */ = {
@@ -2941,7 +2953,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		74DB75B729F3A6CFC606C4C6 /* [CP] Copy Pods Resources */ = {
@@ -3031,7 +3043,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B89A855C29CDF3F7FAD5FE89 /* [CP] Embed Pods Frameworks */ = {
@@ -3119,7 +3131,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CE15CE20304381B878B68B54 /* [CP] Copy Pods Resources */ = {
@@ -3237,7 +3249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3256,6 +3268,7 @@
 				C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */,
 				F2A958BA1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */,
+				C4052E581E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				C41FD85F1C60A08400BBE6D7 /* ForgotPasswordView.m in Sources */,
 				F9EEC9301CA2879C008FB612 /* DialerViewController.m in Sources */,
 				F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */,
@@ -3271,7 +3284,7 @@
 				F9EEC90B1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C41FD8681C60A08400BBE6D7 /* RecentCallManager.m in Sources */,
 				C41B60111C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
-				C41C42F91D5A742100813B66 /* DDLogWrapper.m in Sources */,
+				C41C42F91D5A742100813B66 /* VialerLogger.m in Sources */,
 				F22FF28F1D0ABF3800761C9A /* SystemUser.m in Sources */,
 				C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
@@ -3315,6 +3328,7 @@
 				C4EBEF6B1D5B1EBC00883DD7 /* KeypadViewController.swift in Sources */,
 				F9EEC90D1CA28608008FB612 /* TwoStepCall.m in Sources */,
 				C4EBEF731D5B47BC00883DD7 /* SetupCallTransferViewController.swift in Sources */,
+				C43B6E281E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78161DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4947F8F1C983DB30065D7C1 /* RecentCall.m in Sources */,
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
@@ -3364,6 +3378,7 @@
 				C490AD6D1D0863E3004A8F83 /* MainTabBarViewController.m in Sources */,
 				F2A958BB1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				C43EE05D1D5C74AC00F8C3C0 /* TransferInProgressViewController.swift in Sources */,
+				C4052E591E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				C48931D21D80925C00C5633C /* KeypadViewController.swift in Sources */,
 				C490AD6E1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C490AD6F1D0863E3004A8F83 /* MiddlewareRequestOperationManager.m in Sources */,
@@ -3419,10 +3434,11 @@
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */,
 				C490ADA21D0863E3004A8F83 /* AnimatedImageView.m in Sources */,
-				C48931D41D80935F00C5633C /* DDLogWrapper.m in Sources */,
+				C48931D41D80935F00C5633C /* VialerLogger.m in Sources */,
 				C490ADA31D0863E3004A8F83 /* SIPUtils.m in Sources */,
 				C4C675671D19B5430003A385 /* AppInfo.swift in Sources */,
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
+				C43B6E291E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78171DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C490ADA51D0863E3004A8F83 /* TwoStepCall.m in Sources */,
 				C490ADA61D0863E3004A8F83 /* RecentCall+VoIPGRID.m in Sources */,
@@ -3492,6 +3508,7 @@
 				F20850EA1D26935600A17E71 /* MainTabBarViewController.m in Sources */,
 				F2A958BC1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				F20850EB1D26935600A17E71 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				F20850EC1D26935600A17E71 /* MiddlewareRequestOperationManager.m in Sources */,
 				F20850ED1D26935600A17E71 /* ForgotPasswordView.m in Sources */,
 				F20850EE1D26935600A17E71 /* NSString+SubString.m in Sources */,
@@ -3507,7 +3524,7 @@
 				F20850F81D26935600A17E71 /* VialerDrawerViewController.m in Sources */,
 				F20850F91D26935600A17E71 /* TwoStepCallingViewController.m in Sources */,
 				F20850FA1D26935600A17E71 /* RecentCallManager.m in Sources */,
-				C41C42FA1D5A742100813B66 /* DDLogWrapper.m in Sources */,
+				C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */,
 				F20850FB1D26935600A17E71 /* SystemUser.m in Sources */,
 				F20850FC1D26935600A17E71 /* GradientView.m in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
@@ -3551,6 +3568,7 @@
 				C4EBEF6C1D5B1EBC00883DD7 /* KeypadViewController.swift in Sources */,
 				F20851231D26935600A17E71 /* NSString+Mobile.m in Sources */,
 				C4EBEF741D5B47BC00883DD7 /* SetupCallTransferViewController.swift in Sources */,
+				C43B6E271E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78151DE309B000B17BCF /* ContactModel.swift in Sources */,
 				F20851241D26935600A17E71 /* TwoStepCall.m in Sources */,
 				F20851251D26935600A17E71 /* RecentCall+VoIPGRID.m in Sources */,
@@ -3592,6 +3610,7 @@
 				C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */,
 				C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C4947FD31C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
+				C4052E561E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */,
 				F9EEC92F1CA2879C008FB612 /* DialerViewController.m in Sources */,
@@ -3607,7 +3626,7 @@
 				F9EEC90A1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
 				F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */,
-				C41C42F81D5A742100813B66 /* DDLogWrapper.m in Sources */,
+				C41C42F81D5A742100813B66 /* VialerLogger.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				C41A73531C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */,
@@ -3651,6 +3670,7 @@
 				C4EBEF6A1D5B1EBC00883DD7 /* KeypadViewController.swift in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				C4EBEF721D5B47BC00883DD7 /* SetupCallTransferViewController.swift in Sources */,
+				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78141DE309B000B17BCF /* ContactModel.swift in Sources */,
 				F9EEC90C1CA28608008FB612 /* TwoStepCall.m in Sources */,
 				C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */,

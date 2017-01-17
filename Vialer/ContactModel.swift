@@ -218,7 +218,7 @@ import Foundation
                 self.searchResult.append(contact)
             }
         } catch let error {
-            DDLogWrapper.logError("Contact search error: \(error)")
+            VialerLogError("Contact search error: \(error)")
             return false
         }
         return true
@@ -270,7 +270,7 @@ import Foundation
                 NotificationCenter.default.post(name: ContactModel.ContactsUpdated, object: nil)
             }
         } catch let error {
-            DDLogWrapper.logError("Contact refresh error: \(error)")
+            VialerLogError("Contact refresh error: \(error)")
         }
     }
 

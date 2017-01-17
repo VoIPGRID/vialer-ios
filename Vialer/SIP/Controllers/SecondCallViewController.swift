@@ -66,12 +66,12 @@ class SecondCallViewController: SIPCallingViewController {
         if firstCall.transfer(to: secondCall) {
             callManager.end(firstCall) { error in
                 if error != nil {
-                    DDLogWrapper.logError("Error hanging up call: \(error)")
+                    VialerLogError("Error hanging up call: \(error)")
                 }
             }
             callManager.end(secondCall) { error in
                 if error != nil {
-                    DDLogWrapper.logError("Error hanging up call: \(error)")
+                    VialerLogError("Error hanging up call: \(error)")
                 }
             }
 
@@ -87,7 +87,7 @@ class SecondCallViewController: SIPCallingViewController {
         // If current call is not disconnected, hangup the call.
         callManager.end(activeCall) { error in
             if error != nil {
-                DDLogWrapper.logError("Error hanging up call: \(error)")
+                VialerLogError("Error hanging up call: \(error)")
             } else {
                 self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
             }

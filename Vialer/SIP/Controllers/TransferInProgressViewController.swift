@@ -91,12 +91,12 @@ class TransferInProgressViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         callManager.end(firstCall!) { error in
             if error != nil {
-                DDLogWrapper.logError("Error disconnecting call: \(error)")
+                VialerLogError("Error disconnecting call: \(error)")
             }
         }
         callManager.end(currentCall!) { error in
             if error != nil {
-                DDLogWrapper.logError("Error disconnecting call: \(error)")
+                VialerLogError("Error disconnecting call: \(error)")
             }
         }
         dismissView()
@@ -151,12 +151,12 @@ class TransferInProgressViewController: UIViewController {
                 if let call = object as? VSLCall, call.transferStatus == .accepted || call.transferStatus == .rejected {
                     self?.callManager.end(self!.firstCall!) { error in
                         if error != nil {
-                            DDLogWrapper.logError("Error disconnecting call: \(error)")
+                            VialerLogError("Error disconnecting call: \(error)")
                         }
                     }
                     self?.callManager.end(self!.currentCall!) { error in
                         if error != nil {
-                            DDLogWrapper.logError("Error disconnecting call: \(error)")
+                            VialerLogError("Error disconnecting call: \(error)")
                         }
                     }
                     self?.prepareForDismissing()
