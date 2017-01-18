@@ -243,7 +243,7 @@ import Foundation
         // to prevent large rounding errors.
         if (call.connectDuration > 10) {
             //VIALI-3258: get the audio codec from the call.
-            let audioCodec = "AudioCodec:iLBC"
+            let audioCodec = "AudioCodec:\(call.activeCodec)"
             self.sendMOSValue(mos: call.mos, forCodec: audioCodec)
 
             let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
