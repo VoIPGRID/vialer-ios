@@ -69,7 +69,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
 
     NSError *error;
     if(![self.fetchedResultController performFetch:&error]) {
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        VialerLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
 }
@@ -179,7 +179,7 @@ static NSTimeInterval const RecentsViewControllerReachabilityBarAnimationDuratio
     NSError *error;
     [self.fetchedResultController performFetch:&error];
     if (error) {
-        DDLogError(@"Error: %@", error);
+        VialerLogError(@"Error: %@", error);
     }
     [self.tableView reloadData];
 }

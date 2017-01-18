@@ -10,6 +10,7 @@ def default_pods
     pod 'AFNetworking'
     pod 'Google/Analytics'
     pod 'HTCopyableLabel'
+    pod 'le', :git => 'https://github.com/LogentriesCommunity/le_ios.git'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'
     pod 'Reachability'

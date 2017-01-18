@@ -18,21 +18,35 @@ static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
 static int const SettingsViewControllerSipAccountRow        = 2;
+static int const SettingsViewControllerTCPRow               = 3;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
 static int const SettingsViewControllerOutgoingNumberRow    = 1;
 static int const SettingsViewControllerMyEmailRow           = 2;
 
+static int const SettingsViewControllerLoggingSection       = 2;
+static int const SettingsViewControllerLoggingEnabeldRow    = 0;
+static int const SettingsViewControllerLoggingIDRow         = 1;
+
+
 static int const SettingsViewControllerUISwitchWidth            = 60;
 static int const SettingsViewControllerUISwitchOriginOffsetX    = 35;
 static int const SettingsViewControllerUISwitchOriginOffsetY    = 15;
 
+static int const SettingsViewControllerSwitchVoIP               = 1001;
+static int const SettingsViewControllerSwitchWifiNotification   = 1002;
+static int const SettingsViewControllerSwitchTCP                = 1003;
+static int const SettingsViewControllerSwitchLogging            = 1004;
+
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
 
+static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConnection";
+
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
+@property (nonatomic) BOOL useTCP;
 @end
 
 @implementation SettingsViewController
@@ -74,21 +88,33 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     return _currentUser;
 }
 
+- (BOOL)useTCP {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SettingsViewControllerUseTCPConnectionKey];
+}
+
+- (void)setUseTCP:(BOOL)useTCP {
+    [[NSUserDefaults standardUserDefaults] setBool:useTCP forKey:SettingsViewControllerUseTCPConnectionKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case SettingsViewControllerVoIPAccountSection:
             if (self.currentUser.sipEnabled) {
-                // Show the VoIP Switch and the account ID
-                return 3;
+                // The VoIP Switch
+                // WiFi notification
+                // account ID
+                // TCP connection
+                return 4;
             } else {
                 // Only show VoIP Switch
-                return 2;
+                return 1;
             }
             break;
 
@@ -98,6 +124,11 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
             // - Outgoing number
             // - Email address
             return 3;
+            break;
+
+        case SettingsViewControllerLoggingSection:
+            // Show switch and optional the ID
+            return [VialerLogger remoteLoggingEnabled] ? 2 : 1;
             break;
 
         default:
@@ -118,17 +149,22 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
         if (indexPath.row == SettingsViewControllerSipEnabledRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
-                          withTag:1001
+                          withTag:SettingsViewControllerSwitchVoIP
                        defaultVal:self.currentUser.sipEnabled];
         } else if (indexPath.row == SettingsViewControllerWifiNotificationRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
-                          withTag:1002
+                          withTag:SettingsViewControllerSwitchWifiNotification
                        defaultVal:!self.currentUser.noWiFiNotification];
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
             cell.detailTextLabel.text = self.currentUser.sipAccount;
+        } else if (indexPath.row == SettingsViewControllerTCPRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable TCP connection", nil)
+                          withTag:SettingsViewControllerSwitchTCP
+                       defaultVal:self.useTCP];
         }
     } else if (indexPath.section == SettingsViewControllerNumbersSection) {
         if (indexPath.row == SettingsViewControllerMyNumberRow) {
@@ -147,6 +183,17 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
             cell.detailTextLabel.minimumScaleFactor = 0.8f;
             cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
             cell.detailTextLabel.text = self.currentUser.username;
+        }
+    } else if (indexPath.section == SettingsViewControllerLoggingSection) {
+        if (indexPath.row == SettingsViewControllerLoggingEnabeldRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Remote Logging", nil)
+                          withTag:SettingsViewControllerSwitchLogging
+                       defaultVal:[VialerLogger remoteLoggingEnabled]];
+        } else if (indexPath.row == SettingsViewControllerLoggingIDRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
+            cell.textLabel.text = NSLocalizedString(@"Logging identifier", nil);
+            cell.detailTextLabel.text = [VialerLogger remoteIdentifier];
         }
     }
     return cell;
@@ -195,7 +242,7 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 #pragma mark - Enable VoIP switch handler
 
 - (void)didChangeSwitch:(UISwitch *)sender {
-    if (sender.tag == 1001) {
+    if (sender.tag == SettingsViewControllerSwitchVoIP) {
         if (sender.isOn) {
             [self tryToEnableSIPWithSwitch:sender];
         } else {
@@ -204,8 +251,20 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
                 self.currentUser.sipEnabled = NO;
             });
         }
-    } else if (sender.tag == 1002) {
+    } else if (sender.tag == SettingsViewControllerSwitchWifiNotification) {
         self.currentUser.noWiFiNotification = !sender.isOn;
+    } else if (sender.tag == SettingsViewControllerSwitchTCP) {
+        self.useTCP = sender.isOn;
+        // Remove and initiate the endpoint again to make sure the new transport is loaded.
+        VialerLogVerbose(@"Remove Endpoint for new connection configurations.");
+        [SIPUtils removeSIPEndpoint];
+        VialerLogVerbose(@"Removed Endpoint, restarting.");
+        [SIPUtils setupSIPEndpoint];
+        VialerLogVerbose(@"Endpoint restarted.");
+    } else if (sender.tag == SettingsViewControllerSwitchLogging) {
+        [VialerLogger setRemoteLoggingEnabled:sender.isOn];
+        VialerLogVerbose(sender.isOn ? @"Remote logging enabled" : @"Remote logging disabled");
+        [self.tableView reloadData];
     }
 }
 

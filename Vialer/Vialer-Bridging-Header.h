@@ -4,7 +4,7 @@
 
 #import "AppDelegate.h"
 #import "Configuration.h"
-#import "DDLogWrapper.h"
+#import "VialerLogger.h"
 #import <Google/Analytics.h>
 #import "NumberPadButton.h"
 #import "PhoneNumberModel.h"

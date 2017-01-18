@@ -24,6 +24,9 @@
 /* No comment provided by engineer. */
 "Are you sure you want to log out?" = "Weet je zeker dat je uit wilt loggen?";
 
+/* audio */
+"audio" = "audio";
+
 /* No comment provided by engineer. */
 "Back" = "Terug";
 
@@ -109,6 +112,9 @@
 "Email sent successfully." = "E-mail verzonden.";
 
 /* No comment provided by engineer. */
+"Enable TCP connection" = "Activeer TCP verbinding";
+
+/* No comment provided by engineer. */
 "Enable VoIP" = "Schakel VoIP in";
 
 /* No comment provided by engineer. */
@@ -191,6 +197,9 @@
 
 /* No comment provided by engineer. */
 "Log out" = "Uitloggen";
+
+/* No comment provided by engineer. */
+"Logging identifier" = "Identificatie nummer";
 
 /* No comment provided by engineer. */
 "Logging in..." = "Inloggen...";
@@ -284,6 +293,9 @@
 "Recents" = "Recent";
 
 /* No comment provided by engineer. */
+"Remote Logging" = "Remote Logging";
+
+/* No comment provided by engineer. */
 "Request password" = "Wachtwoord opvragen";
 
 /* No comment provided by engineer. */
@@ -315,6 +327,9 @@
 
 /* No comment provided by engineer. */
 "Sorry!" = "Sorry!";
+
+/* speaker */
+"speaker" = "luidspreker";
 
 /* Start calling */
 "Start calling" = "Start gesprek";

@@ -152,7 +152,7 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
             }
             NSError *error;
             if (![self.privateManagedObjectContext save:&error]) {
-                DDLogError(@"Error saving Recent call: %@", error);
+                VialerLogError(@"Error saving Recent call: %@", error);
             }
         }];
     }
@@ -168,7 +168,7 @@ static NSTimeInterval const RecentCallManagerRefreshInterval = 30; // Update rat
         }
         NSError *error;
         if (![self.privateManagedObjectContext save:&error]) {
-            DDLogError(@"Error saving Recent call: %@", error);
+            VialerLogError(@"Error saving Recent call: %@", error);
         }
     }];
 }

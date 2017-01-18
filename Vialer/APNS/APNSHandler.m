@@ -60,7 +60,7 @@ static dispatch_once_t onceToken = 0;
     if (!self.voipRegistry.delegate) {
         self.voipRegistry.delegate = self;
 
-        DDLogVerbose(@"Initiating VoIP push registration");
+        VialerLogVerbose(@"Initiating VoIP push registration");
         self.voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
     }
 }
@@ -73,16 +73,16 @@ static dispatch_once_t onceToken = 0;
 
 #pragma mark - PKPushRegistray management
 - (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type {
-    DDLogWarn(@"APNS Token became invalid");
+    VialerLogWarning(@"APNS Token became invalid");
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
-    DDLogDebug(@"Incoming push notification of type: %@", type);
+    VialerLogDebug(@"Incoming push notification of type: %@", type);
     [self.middleware handleReceivedAPSNPayload:[payload dictionaryPayload]];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
-    DDLogInfo(@"Type:%@. APNS registration successful. Token: %@", type, credentials.token);
+    VialerLogInfo(@"Type:%@. APNS registration successful. Token: %@", type, credentials.token);
     [self.middleware sentAPNSToken:[self nsStringFromNSData:credentials.token]];
 }
 

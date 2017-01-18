@@ -110,19 +110,19 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
 #pragma mark - IBActions
 
 - (IBAction)declineCallButtonPressed:(UIButton * _Nonnull)sender {
-    DDLogDebug(@"User pressed \"Decline call\" for call: %ld", (long)self.call.callId);
+    VialerLogDebug(@"User pressed \"Decline call\" for call: %ld", (long)self.call.callId);
     [VialerGAITracker declineIncomingCallEvent];
     NSError *error;
     [self.call decline:&error];
     if (error) {
-        DDLogError(@"Error declining call: %@", error);
+        VialerLogError(@"Error declining call: %@", error);
     }
 
     self.incomingCallStatusLabel.text = NSLocalizedString(@"Declined call", nil);
 }
 
 - (IBAction)acceptCallButtonPressed:(UIButton * _Nonnull)sender {
-    DDLogDebug(@"User pressed \"Accept call\" for call: %ld", (long)self.call.callId);
+    VialerLogDebug(@"User pressed \"Accept call\" for call: %ld", (long)self.call.callId);
     [VialerGAITracker acceptIncomingCallEvent];
     [self.ringtone stop];
     [self performSegueWithIdentifier:SIPIncomingCallViewControllerShowSIPCallingSegue sender:nil];

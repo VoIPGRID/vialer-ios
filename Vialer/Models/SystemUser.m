@@ -642,7 +642,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         return givenString;
 
     } else {
-        DDLogWarn(@"Unable to find a Client ID in string:%@", givenString);
+        VialerLogWarning(@"Unable to find a Client ID in string:%@", givenString);
         return nil;
     }
 }

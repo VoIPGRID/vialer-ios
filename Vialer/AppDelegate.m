@@ -9,7 +9,6 @@
 #import "APNSHandler.h"
 #import <AudioToolbox/AudioServices.h>
 @import CoreData;
-#import "DDLogWrapper.h"
 #import <VialerSIPLib/CallKitProviderDelegate.h>
 #import "PhoneNumberModel.h"
 #import "SIPUtils.h"
@@ -55,7 +54,10 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self interpretLaunchArguments];
-    [DDLogWrapper setup];
+    [VialerLogger setup];
+    [VialerSIPLib sharedInstance].logCallBackBlock = ^(DDLogMessage *_Nonnull message) {
+        [VialerLogger logWithDDLogMessage:message];
+    };
 
     [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
@@ -72,7 +74,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
         // if it is presented at the normal point in the app.
         CNContactStore *contactStore = [[CNContactStore alloc] init];
         [contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            DDLogDebug(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
+            VialerLogDebug(@"Contacts access granted: %@", granted ? @"YES" : @"NO");
         }];
 #endif
         [VialerGAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone isDryRun:YES];
@@ -133,9 +135,10 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     }
 
     VSLAccount *account = [SIPUtils addSIPAccountToEndpoint];
+    [VialerGAITracker setupOutgoingSIPCallEvent];
     [[[VialerSIPLib sharedInstance] callManager] startCallToNumber:handle forAccount:account completion:^(VSLCall *call, NSError *error) {
         if (error) {
-            DDLogWarn(@"Error starting call through User activity. Error: %@", error);
+            VialerLogWarning(@"Error starting call through User activity. Error: %@", error);
         }
     }];
     return YES;
@@ -170,16 +173,16 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     if ([identifier isEqualToString:AppDelegateLocalNotificationAcceptCall] || [identifier isEqualToString:AppDelegateLocalNotificationDeclineCall]) {
         NSInteger callId = [(NSNumber *)notification.userInfo[AppDelegateLocalNotificationCallIdKey] integerValue];
 
-        DDLogVerbose(@"User accepted a local notification with Action Identifier: %@ for callId:%ld", identifier, (long)callId);
+        VialerLogVerbose(@"User accepted a local notification with Action Identifier: %@ for callId:%ld", identifier, (long)callId);
         [self handleIncomingLocalBackgroudNotifications:identifier forCallId:callId];
     } else {
-        DDLogDebug(@"Unsupported action for local Notification: %@", identifier);
+        VialerLogDebug(@"Unsupported action for local Notification: %@", identifier);
     }
     completionHandler();
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    DDLogVerbose(@"Notification clicked without \"Action Identifier\" : %@", notification);
+    VialerLogVerbose(@"Notification clicked without \"Action Identifier\" : %@", notification);
     NSInteger callId = [(NSNumber *)notification.userInfo[AppDelegateLocalNotificationCallIdKey] integerValue];;
 
     [self handleIncomingLocalBackgroudNotifications:nil forCallId:callId];
@@ -216,7 +219,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
             [call decline:&error];
             [VialerGAITracker declineIncomingCallEvent];
             if (error) {
-                DDLogError(@"Error declining call: %@", error);
+                VialerLogError(@"Error declining call: %@", error);
             }
 
         } else if ([notificationIdentifier isEqualToString:AppDelegateLocalNotificationAcceptCall]) {
@@ -244,13 +247,13 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 }
 
 - (void)updatedSIPCredentials:(NSNotification *)notification {
-    DDLogInfo(@"SIP Credentials have changed");
+    VialerLogInfo(@"SIP Credentials have changed");
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([SystemUser currentUser].sipEnabled) {
             [SIPUtils setupSIPEndpoint];
             [[APNSHandler sharedHandler] registerForVoIPNotifications];
 
-            if (![VialerSIPLib  callKitAvailable]) {
+            if (![VialerSIPLib callKitAvailable]) {
                 [self registerForLocalNotifications];
             }
         }
@@ -258,7 +261,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 }
 
 - (void)sipDisabledNotification:(NSNotification *)notification {
-    DDLogInfo(@"SIP has been disabled");
+    VialerLogInfo(@"SIP has been disabled");
     dispatch_async(dispatch_get_main_queue(), ^{
         [SIPUtils removeSIPEndpoint];
     });
@@ -306,14 +309,15 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 - (void)setupCallbackForVoIPNotifications {
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         [VialerGAITracker incomingCallRingingEvent];
-
-        if ([VialerSIPLib callKitAvailable]) {
-            DDLogInfo(@"Incoming call block invoked, routing through CallKit.");
-            [self.callKitProviderDelegate reportIncomingCall:call];
-        } else {
-            DDLogInfo(@"Incoming call block invoked, using own app presentation.");
-            [self incomingCallForNonCallKitWithCall:call];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([VialerSIPLib callKitAvailable]) {
+                VialerLogInfo(@"Incoming call block invoked, routing through CallKit.");
+                [self.callKitProviderDelegate reportIncomingCall:call];
+            } else {
+                VialerLogInfo(@"Incoming call block invoked, using own app presentation.");
+                [self incomingCallForNonCallKitWithCall:call];
+            }
+        });
     };
 }
 
@@ -322,20 +326,20 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     dispatch_async(dispatch_get_main_queue(), ^{
 
         if ([SIPUtils anotherCallInProgress:call]) {
-            DDLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
+            VialerLogInfo(@"There is another call in progress. For now declining the call that is incoming.");
 
             NSError *error;
             [call decline:&error];
             [VialerGAITracker declineIncomingCallBecauseAnotherCallInProgressEvent];
             if (error) {
-                DDLogError(@"Error declining call: %@", error);
+                VialerLogError(@"Error declining call: %@", error);
             }
         } else {
             if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
                 [weakSelf createLocalNotificationForCall:call];
                 [weakSelf startVibratingInBackground];
             } else {
-                DDLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
+                VialerLogDebug(@"Call received with device in foreground. Call: %ld", (long)call.callId);
                 NSDictionary *notificationInfo = @{VSLNotificationUserInfoCallKey : call};
                 [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateIncomingCallNotification
                                                                     object:self
@@ -399,7 +403,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 - (void)saveContext {
     NSError *error;
     if (self.managedObjectContext && [self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
-        DDLogWarn(@"Unresolved error while saving Context: %@", error);
+        VialerLogWarning(@"Unresolved error while saving Context: %@", error);
         abort();
     }
 }
@@ -432,7 +436,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
             // For now, we will let the app crash and watch if this is happening during production. It doesn't break the app completely if the app crashes.recent
-            DDLogWarn(@"Could not create PersistentStoreCoordinator instance. Unresolved error %@, %@", error, [error userInfo]);
+            VialerLogWarning(@"Could not create PersistentStoreCoordinator instance. Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }

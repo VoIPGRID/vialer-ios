@@ -37,8 +37,9 @@ PODS:
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.4.5):
+  - FirebaseCore (3.4.7):
     - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.8)
   - Google/Analytics (3.0.3):
@@ -50,10 +51,11 @@ PODS:
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleSymbolUtilities (1.1.2)
-  - GoogleToolboxForMac/Defines (2.1.0)
-  - GoogleToolboxForMac/NSData+zlib (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - HTCopyableLabel (0.0.7)
+  - le (1.2)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -68,7 +70,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - OCMock (3.3.1)
+  - OCMock (3.4)
   - OHHTTPStubs (5.2.3):
     - OHHTTPStubs/Default (= 5.2.3)
   - OHHTTPStubs/Core (5.2.3)
@@ -90,7 +92,7 @@ PODS:
     - CocoaLumberjack
   - SVProgressHUD (2.1.2)
   - Vialer-pjsip-iOS (1.1.0)
-  - VialerSIPLib (2.0.1):
+  - VialerSIPLib (2.4.0):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -100,6 +102,7 @@ DEPENDENCIES:
   - AFNetworking
   - Google/Analytics
   - HTCopyableLabel
+  - le (from `https://github.com/LogentriesCommunity/le_ios.git`)
   - MMDrawerController+Storyboard (from `https://github.com/TomSwift/MMDrawerController-Storyboard.git`)
   - OCMock
   - OHHTTPStubs
@@ -112,12 +115,17 @@ DEPENDENCIES:
   - VialerSIPLib
 
 EXTERNAL SOURCES:
+  le:
+    :git: https://github.com/LogentriesCommunity/le_ios.git
   MMDrawerController+Storyboard:
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
 CHECKOUT OPTIONS:
+  le:
+    :commit: 425e8357802d4834f3d4ce64204dcfd1347bf02f
+    :git: https://github.com/LogentriesCommunity/le_ios.git
   MMDrawerController+Storyboard:
     :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
@@ -130,17 +138,18 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
-  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
+  FirebaseCore: 46afaf2c2e0419ea7d3acfb08cf26a461a75fe85
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
+  le: bf3cacea7b4208b2bcda82b0c1c224603f5651a9
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
-  OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
+  OCMock: 35ae71d6a8fcc1b59434d561d1520b9dd4f15765
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -149,8 +158,8 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   Vialer-pjsip-iOS: ced3608a20ffdcdf4afdc84a8e381c57525f8f25
-  VialerSIPLib: b06eb9e5a3ded1f856bbac59311289dd8ef97959
+  VialerSIPLib: 85bc7d6e0122c8efd6268a589157c757b88cd16a
 
-PODFILE CHECKSUM: 6a71a2280ded73135a46da78ebd6aa7e5ef71db0
+PODFILE CHECKSUM: 467f636fb378ab3a53ccfe6ef4ed6408fa31eb1b
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.1.1

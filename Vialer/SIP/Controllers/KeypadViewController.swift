@@ -74,7 +74,7 @@ class KeypadViewController: UIViewController {
         guard let call = call, call.callState != .disconnected else { return }
         callManager.sendDTMF(for: call, character: sender.number) { error in
             if error != nil {
-                DDLogWrapper.logError("Error sending DTMF: \(error)")
+                VialerLogError("Error sending DTMF: \(error)")
             } else {
                 self.dtmfSent = (self.dtmfSent ?? "") + sender.number
             }
@@ -85,7 +85,7 @@ class KeypadViewController: UIViewController {
         guard let call = call, call.callState != .disconnected else { return }
         callManager.end(call) { error in
             if error != nil {
-                DDLogWrapper.logError("Error ending call: \(error)")
+                VialerLogError("Error ending call: \(error)")
             }
         }
     }

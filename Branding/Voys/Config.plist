@@ -151,5 +151,7 @@
 		<key>Client ID index</key>
 		<integer>1</integer>
 	</dict>
+	<key>LogEntries Token</key>
+	<string>abb25255-136c-4443-b0dd-0d7f4db33069</string>
 </dict>
 </plist>
