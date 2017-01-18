@@ -133,6 +133,7 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
     }
 
     VSLAccount *account = [SIPUtils addSIPAccountToEndpoint];
+    [VialerGAITracker setupOutgoingSIPCallEvent];
     [[[VialerSIPLib sharedInstance] callManager] startCallToNumber:handle forAccount:account completion:^(VSLCall *call, NSError *error) {
         if (error) {
             DDLogWarn(@"Error starting call through User activity. Error: %@", error);
@@ -306,14 +307,15 @@ static NSString * const AppLaunchArgumentNoAnimations = @"NoAnimations";
 - (void)setupCallbackForVoIPNotifications {
     [VialerSIPLib sharedInstance].incomingCallBlock = ^(VSLCall * _Nonnull call) {
         [VialerGAITracker incomingCallRingingEvent];
-
-        if ([VialerSIPLib callKitAvailable]) {
-            DDLogInfo(@"Incoming call block invoked, routing through CallKit.");
-            [self.callKitProviderDelegate reportIncomingCall:call];
-        } else {
-            DDLogInfo(@"Incoming call block invoked, using own app presentation.");
-            [self incomingCallForNonCallKitWithCall:call];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([VialerSIPLib callKitAvailable]) {
+                DDLogInfo(@"Incoming call block invoked, routing through CallKit.");
+                [self.callKitProviderDelegate reportIncomingCall:call];
+            } else {
+                DDLogInfo(@"Incoming call block invoked, using own app presentation.");
+                [self incomingCallForNonCallKitWithCall:call];
+            }
+        });
     };
 }
 
