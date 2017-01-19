@@ -87,31 +87,45 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
 
-        if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed && [SystemUser currentUser].sipEnabled) {
-            // User has good enough connection and is SIP Enabled.
-            // Register the account with the endpoint.
-            [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
-                if (success) {
-                    VialerLogDebug(@"SIP Endpoint registration success! Sending Available = YES to middleware");
-                } else {
-                    VialerLogDebug(@"SIP Endpoint registration FAILED. Senting Available = NO to middleware");
-                }
-                [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
-            }];
-        } else {
-            // User is not SIP enabled or the connection is not good enough.
+        if (![SystemUser currentUser].sipEnabled) {
+            // User is not SIP enabled.
             // Sent not available to the middleware.
-            VialerLogDebug(@"Not accepting call, connection quality insufficient or SIP Disabled, Sending Available = NO to middleware");
+            VialerLogDebug(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+            return;
         }
-    } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
 
-    } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage]) {
-        if (self.systemUser.sipEnabled) {
-            self.systemUser.sipEnabled = NO;
-            NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
-            [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
-        }
+        // Register the account with the endpoint. This should trigger correct internet connection.
+        [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
+            // Check if register was success.
+            if (!success) {
+                VialerLogDebug(@"SIP Endpoint registration FAILED. Sending Available = NO to middleware");
+                [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+                [SIPUtils removeSIPEndpoint];
+                return;
+            }
+
+            // Now check the network connection.
+            if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed) {
+                // Highspeed, let's respond to the middleware with a success.
+                [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+            } else {
+                // Connection is not good enough.
+                // Sent not available to the middleware.
+                VialerLogDebug(@"Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
+                [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+                [SIPUtils removeSIPEndpoint];
+
+            }
+        }];
+
+    } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
+        VialerLogDebug(@"Checking payload:\n %@", payload);
+    } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage] && self.systemUser.sipEnabled) {
+        VialerLogDebug(@"Another device took over the SIP account, disabling account.");
+        self.systemUser.sipEnabled = NO;
+        NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
+        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
     }
 }
 
