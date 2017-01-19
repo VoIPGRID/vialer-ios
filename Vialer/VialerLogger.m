@@ -5,9 +5,9 @@
 
 #import "VialerLogger.h"
 
-@import UIKit;
 #import "lelib.h"
 #import "SPLumberjackLogFormatter.h"
+@import UIKit;
 #import "Vialer-Swift.h"
 
 
@@ -17,6 +17,10 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 @implementation VialerLogger
 
 + (void)setup {
+    le_init();
+    le_handle_crashes();
+    le_set_token([[[Configuration defaultConfiguration] logEntriesToken] UTF8String]);
+
     SPLumberjackLogFormatter *logFormatter = [[SPLumberjackLogFormatter alloc] init];
 
     DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
@@ -37,6 +41,17 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     fileLogger.logFormatter = logFormatter;
     [DDLog addLogger:fileLogger];
 #endif
+
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (appDelegate.isScreenshotRun) {
+        [VialerGAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone isDryRun:YES];
+    } else {
+        [VialerGAITracker setupGAITracker];
+    }
+
+    [VialerSIPLib sharedInstance].logCallBackBlock = ^(DDLogMessage *_Nonnull message) {
+        [VialerLogger logWithDDLogMessage:message];
+    };
 }
 
 + (void)logWithFlag:(DDLogFlag)flag file:(const char*)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format, ... {

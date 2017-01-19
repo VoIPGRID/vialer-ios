@@ -5,7 +5,6 @@
 
 #import "SideMenuViewController.h"
 
-#import "AppDelegate.h"
 #import "AvailabilityModel.h"
 #import "AvailabilityViewController.h"
 #import "Configuration.h"

@@ -5,7 +5,6 @@
 
 #import "LogInViewController.h"
 
-#import "AppDelegate.h"
 #import "AnimatedImageView.h"
 #import "PBWebViewController.h"
 #import <QuartzCore/QuartzCore.h>

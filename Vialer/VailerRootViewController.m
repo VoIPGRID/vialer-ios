@@ -5,8 +5,8 @@
 
 #import "VailerRootViewController.h"
 
-#import "AppDelegate.h"
 #import "Middleware.h"
+#import "Notifications-Bridging-Header.h"
 #import "SIPIncomingCallViewController.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
