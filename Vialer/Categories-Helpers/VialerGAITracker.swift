@@ -87,7 +87,7 @@ import Foundation
             let dryRun = false
         #endif
 
-        let logLevel = GAILogLevel.info
+        let logLevel = GAILogLevel.warning
 
         setupGAITracker(logLevel:logLevel, isDryRun:dryRun)
     }
@@ -264,9 +264,9 @@ import Foundation
         let currentConnection = reachabilityManager.currentConnectionTypeString()
         
         let labelString = "MOS for \(codec) on Networktype: \(currentConnection)"
-        let value = NSNumber(value:Int(mos*100.0))
+        let value = mos * 100.0 as NSNumber
 
-        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value:value )
+        sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: value)
     }
 
     /**

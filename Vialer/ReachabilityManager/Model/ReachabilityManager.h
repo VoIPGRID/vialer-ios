@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, ReachabilityManagerStatusType) {
  *
  *  @return A string stating the connection type.
  */
-- (NSString *)currentConnectionTypeString;
+- (NSString * _Nonnull)currentConnectionTypeString;
 
 /**
  *  Resetting the CTTelephonyNetworkInfo instance and then getting the current reachability status
