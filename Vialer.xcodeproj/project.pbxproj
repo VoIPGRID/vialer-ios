@@ -835,6 +835,10 @@
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		C49C0A3B1CC12936007AC30F /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		C49C0A3C1CC1293E007AC30F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C49EDAE81E35FD460053F68C /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		C49EDAE91E35FD6C0053F68C /* CONTRIBUTORS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTORS.md; sourceTree = "<group>"; };
+		C49EDAEA1E35FE570053F68C /* ISSUE_TEMPLATE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = ISSUE_TEMPLATE.md; path = .github/ISSUE_TEMPLATE.md; sourceTree = "<group>"; };
+		C49EDAEC1E35FE9A0053F68C /* PULL_REQUEST_TEMPLATE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PULL_REQUEST_TEMPLATE.md; path = .github/PULL_REQUEST_TEMPLATE.md; sourceTree = "<group>"; };
 		C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationTests.m; path = Models/ConfigurationTests.m; sourceTree = "<group>"; };
 		C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUserTests.m; path = Models/SystemUserTests.m; sourceTree = "<group>"; };
 		C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorConfigurationTests.m; path = Models/ColorConfigurationTests.m; sourceTree = "<group>"; };
@@ -1525,6 +1529,10 @@
 			children = (
 				C49C0A3B1CC12936007AC30F /* LICENSE.md */,
 				C49C0A3C1CC1293E007AC30F /* README.md */,
+				C49EDAE81E35FD460053F68C /* CONTRIBUTING.md */,
+				C49EDAE91E35FD6C0053F68C /* CONTRIBUTORS.md */,
+				C49EDAEA1E35FE570053F68C /* ISSUE_TEMPLATE.md */,
+				C49EDAEC1E35FE9A0053F68C /* PULL_REQUEST_TEMPLATE.md */,
 			);
 			name = Miscellaneous;
 			sourceTree = "<group>";
