@@ -45,15 +45,15 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
     if ([VialerSIPLib callKitAvailable]) {
         @try {
-            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAccepted];
+            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAcceptedNotification];
         } @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
+            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
         }
 
         @try {
-            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStarted];
+            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStartedNotification];
         } @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStarted, exception);
+            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
         }
 
     } else {
@@ -84,8 +84,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     [super viewDidLoad];
     [self setupLayout];
     if ([VialerSIPLib callKitAvailable]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateInboundCallAccepted object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateOutboundCallStarted object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
 
     } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(incomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];

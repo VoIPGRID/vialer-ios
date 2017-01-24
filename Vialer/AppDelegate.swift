@@ -176,6 +176,8 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
     }
@@ -225,6 +227,14 @@ extension AppDelegate {
 
         let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: Set([notificationCategory]))
         UIApplication.shared.registerUserNotificationSettings(settings)
+    }
+
+    @objc fileprivate func callKitCallWasHandled(_ notification: NSNotification) {
+        if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallAccepted {
+            VialerGAITracker.acceptIncomingCallEvent()
+        } else if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallRejected {
+            VialerGAITracker.declineIncomingCallEvent()
+        }
     }
 }
 
