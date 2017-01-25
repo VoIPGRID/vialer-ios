@@ -60,12 +60,10 @@
 		C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
-		C41FD8741C60A08400BBE6D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
 		C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
-		C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
 		C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
@@ -122,6 +120,14 @@
 		C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */; };
 		C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */; };
+		C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		C420AEC71E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		C42FAD3D1D198D34004D9D00 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = C42FAD3C1D198D34004D9D00 /* ringtone.wav */; };
 		C43172311DFE85B3005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		C431723B1DFE85F8005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
@@ -199,13 +205,11 @@
 		C490AD871D0863E3004A8F83 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
 		C490AD891D0863E3004A8F83 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
 		C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
-		C490AD8C1D0863E3004A8F83 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
 		C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		C490AD921D0863E3004A8F83 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */; };
-		C490AD931D0863E3004A8F83 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
 		C490AD941D0863E3004A8F83 /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C490AD951D0863E3004A8F83 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		C490AD961D0863E3004A8F83 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
@@ -365,13 +369,11 @@
 		F20851051D26935600A17E71 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
 		F20851061D26935600A17E71 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC92C1CA2879C008FB612 /* NumberPadButton.m */; };
 		F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
-		F20851091D26935600A17E71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
 		F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		F208510C1D26935600A17E71 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		F208510D1D26935600A17E71 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		F208510E1D26935600A17E71 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9141CA2865D008FB612 /* CircleWithWhiteIcon.m */; };
-		F208510F1D26935600A17E71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
 		F20851101D26935600A17E71 /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
 		F20851111D26935600A17E71 /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		F20851121D26935600A17E71 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
@@ -548,8 +550,6 @@
 		FB4226D1182261D200707349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
 		FB4226D3182261D200707349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
 		FB4226D5182261D200707349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
-		FB4226DD182261D200707349 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226DC182261D200707349 /* main.m */; };
-		FB4226E1182261D200707349 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4226E0182261D200707349 /* AppDelegate.m */; };
 		FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
 		FB5D2916182BCB1F001DA8F2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
 		FB643140182281C500E1BF17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
@@ -769,11 +769,14 @@
 		C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Voys/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoysSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Branding/Voys/Snapshot-Constants.swift"; sourceTree = "<group>"; };
+		C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		C42FAD3C1D198D34004D9D00 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringtone.wav; path = Branding/Voys/ringtone.wav; sourceTree = "<group>"; };
 		C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VoysIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43172381DFE85B3005FF8EA /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VoysIntentsExtension.plist"; sourceTree = "<absolute>"; };
 		C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VerbondenIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43172421DFE85F8005FF8EA /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VerbondenIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VerbondenIntentsExtension.plist"; sourceTree = "<absolute>"; };
+		C4378A9E1E32014D0079C57B /* Notifications-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Notifications-Bridging-Header.h"; path = "Supporting Files/Notifications-Bridging-Header.h"; sourceTree = "<group>"; };
 		C43B6E251E2E524400942F9B /* VialerLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerLogger.swift; path = "Categories-Helpers/VialerLogger.swift"; sourceTree = "<group>"; };
 		C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
 		C4529E301C4542D10063F08B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TwoStepCallingStoryboard.storyboard; sourceTree = "<group>"; };
@@ -807,6 +810,7 @@
 		C46F100C1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileWebViewControllerTests.m; path = Settings/Controllers/UserProfileWebViewControllerTests.m; sourceTree = "<group>"; };
 		C46F100F1C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VoIPGRIDRequestOperationManager+ForgotPassword.h"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.h"; sourceTree = "<group>"; };
 		C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VoIPGRIDRequestOperationManager+ForgotPassword.m"; path = "OnboardingLogin/Models/VoIPGRIDRequestOperationManager+ForgotPassword.m"; sourceTree = "<group>"; };
+		C46F21BF1E38F17E0031CBF4 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		C48947921D8925E5004A0EE5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C48947941D8925E9004A0EE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C48947991D8925F5004A0EE5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -832,6 +836,10 @@
 		C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		C49C0A3B1CC12936007AC30F /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		C49C0A3C1CC1293E007AC30F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C49EDAE81E35FD460053F68C /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		C49EDAE91E35FD6C0053F68C /* CONTRIBUTORS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTORS.md; sourceTree = "<group>"; };
+		C49EDAEA1E35FE570053F68C /* ISSUE_TEMPLATE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = ISSUE_TEMPLATE.md; path = .github/ISSUE_TEMPLATE.md; sourceTree = "<group>"; };
+		C49EDAEC1E35FE9A0053F68C /* PULL_REQUEST_TEMPLATE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PULL_REQUEST_TEMPLATE.md; path = .github/PULL_REQUEST_TEMPLATE.md; sourceTree = "<group>"; };
 		C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationTests.m; path = Models/ConfigurationTests.m; sourceTree = "<group>"; };
 		C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUserTests.m; path = Models/SystemUserTests.m; sourceTree = "<group>"; };
 		C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorConfigurationTests.m; path = Models/ColorConfigurationTests.m; sourceTree = "<group>"; };
@@ -993,9 +1001,6 @@
 		FB4226D0182261D200707349 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FB4226D2182261D200707349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB4226D4182261D200707349 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		FB4226DC182261D200707349 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FB4226DF182261D200707349 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		FB4226E0182261D200707349 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FB48BB3F1875B63700C0D5DB /* NSString+Mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Mobile.h"; sourceTree = "<group>"; };
 		FB48BB401875B63700C0D5DB /* NSString+Mobile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Mobile.m"; sourceTree = "<group>"; };
 		FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -1523,8 +1528,13 @@
 		C49C0A3A1CC128FB007AC30F /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
+				C46F21BF1E38F17E0031CBF4 /* CHANGELOG.md */,
 				C49C0A3B1CC12936007AC30F /* LICENSE.md */,
 				C49C0A3C1CC1293E007AC30F /* README.md */,
+				C49EDAE81E35FD460053F68C /* CONTRIBUTING.md */,
+				C49EDAE91E35FD6C0053F68C /* CONTRIBUTORS.md */,
+				C49EDAEA1E35FE570053F68C /* ISSUE_TEMPLATE.md */,
+				C49EDAEC1E35FE9A0053F68C /* PULL_REQUEST_TEMPLATE.md */,
 			);
 			name = Miscellaneous;
 			sourceTree = "<group>";
@@ -2160,8 +2170,7 @@
 		FB4226D6182261D200707349 /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
-				FB4226DF182261D200707349 /* AppDelegate.h */,
-				FB4226E0182261D200707349 /* AppDelegate.m */,
+				C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */,
 				C41A73511C6A7CF300482E3C /* VialerModel.xcdatamodeld */,
 				FB0CF33118226380002D4281 /* Api */,
 				F275FDAC1C5FA253006AEEA2 /* APNS */,
@@ -2191,7 +2200,7 @@
 			children = (
 				C4C675611D19B5420003A385 /* Vialer-Bridging-Header.h */,
 				F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */,
-				FB4226DC182261D200707349 /* main.m */,
+				C4378A9E1E32014D0079C57B /* Notifications-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2199,6 +2208,7 @@
 		FB5D291A182BE407001DA8F2 /* Categories/Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */,
 				C41C42F61D5A742100813B66 /* VialerLogger.h */,
 				C41C42F71D5A742100813B66 /* VialerLogger.m */,
 				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
@@ -2474,7 +2484,7 @@
 				TargetAttributes = {
 					C41FD8551C60A08400BBE6D7 = {
 						DevelopmentTeam = AM8JDXQ3L4;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2487,6 +2497,7 @@
 					};
 					C431722F1DFE85B3005FF8EA = {
 						DevelopmentTeam = AM8JDXQ3L4;
+						ProvisioningStyle = Manual;
 					};
 					C490AD631D0863E3004A8F83 = {
 						DevelopmentTeam = LG97ZGSAVA;
@@ -2525,7 +2536,7 @@
 					FB4226CC182261D200707349 = {
 						DevelopmentTeam = E2Q9UE8HM6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3261,6 +3272,7 @@
 			files = (
 				F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */,
 				F9EEC91C1CA2865D008FB612 /* CircleWithShadow.m in Sources */,
+				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
 				C41A73541C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */,
 				C41FD8591C60A08400BBE6D7 /* RecentsViewController.m in Sources */,
@@ -3298,14 +3310,12 @@
 				F2C44A761DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				F9EEC9361CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
-				C41FD8741C60A08400BBE6D7 /* main.m in Sources */,
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
 				C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */,
 				F9EEC91E1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
-				C41FD87E1C60A08400BBE6D7 /* AppDelegate.m in Sources */,
 				F22FF2941D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
@@ -3319,6 +3329,7 @@
 				F22FF28C1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
 				C4C6756F1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
+				C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
@@ -3371,6 +3382,7 @@
 			files = (
 				C490AD661D0863E3004A8F83 /* NoAnimationSegue.m in Sources */,
 				C490AD671D0863E3004A8F83 /* CircleWithShadow.m in Sources */,
+				C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				C490AD681D0863E3004A8F83 /* RecentsViewController.m in Sources */,
 				C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */,
 				C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */,
@@ -3408,7 +3420,6 @@
 				F2C44A771DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				C490AD891D0863E3004A8F83 /* NumberPadButton.m in Sources */,
 				C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */,
-				C490AD8C1D0863E3004A8F83 /* main.m in Sources */,
 				C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */,
 				C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */,
 				C4F385A21D5B808B005D8146 /* SecondCallViewController.swift in Sources */,
@@ -3416,7 +3427,6 @@
 				C4F385991D5B749D005D8146 /* SetupCallTransferViewController.swift in Sources */,
 				C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */,
 				C490AD921D0863E3004A8F83 /* CircleWithWhiteIcon.m in Sources */,
-				C490AD931D0863E3004A8F83 /* AppDelegate.m in Sources */,
 				F22FF2951D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				C490AD941D0863E3004A8F83 /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				F2C44A731DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
@@ -3429,6 +3439,7 @@
 				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C48931D31D8092E300C5633C /* UIViewControllerExtensions.swift in Sources */,
 				C490AD9E1D0863E3004A8F83 /* PasteableUILabel.m in Sources */,
+				C420AEC71E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
@@ -3501,6 +3512,7 @@
 			files = (
 				F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */,
 				F20850E41D26935600A17E71 /* CircleWithShadow.m in Sources */,
+				C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				F20850E51D26935600A17E71 /* RecentsViewController.m in Sources */,
 				F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */,
 				F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */,
@@ -3538,14 +3550,12 @@
 				F2C44A751DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				F20851061D26935600A17E71 /* NumberPadButton.m in Sources */,
 				F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */,
-				F20851091D26935600A17E71 /* main.m in Sources */,
 				F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */,
 				C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */,
 				F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */,
 				F208510C1D26935600A17E71 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				F208510D1D26935600A17E71 /* ConfigureFormView.m in Sources */,
 				F208510E1D26935600A17E71 /* CircleWithWhiteIcon.m in Sources */,
-				F208510F1D26935600A17E71 /* AppDelegate.m in Sources */,
 				F20851101D26935600A17E71 /* ColorConfiguration.m in Sources */,
 				F20851111D26935600A17E71 /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				F20851121D26935600A17E71 /* LoginFormView.m in Sources */,
@@ -3559,6 +3569,7 @@
 				F208511A1D26935600A17E71 /* Configuration.m in Sources */,
 				F208511B1D26935600A17E71 /* PasteableUILabel.m in Sources */,
 				F208511C1D26935600A17E71 /* VialerGAITracker.swift in Sources */,
+				C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F208511D1D26935600A17E71 /* Middleware.m in Sources */,
 				F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */,
 				F208511F1D26935600A17E71 /* UnlockView.m in Sources */,
@@ -3603,6 +3614,7 @@
 			files = (
 				C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */,
 				F9EEC91B1CA2865D008FB612 /* CircleWithShadow.m in Sources */,
+				C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
@@ -3639,14 +3651,12 @@
 				F9EEC9351CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				F2C44A741DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
-				FB4226DD182261D200707349 /* main.m in Sources */,
 				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
 				C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
 				F9EEC91D1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
-				FB4226E1182261D200707349 /* AppDelegate.m in Sources */,
 				F22FF2931D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
@@ -3661,6 +3671,7 @@
 				F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */,
 				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
+				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
@@ -3877,8 +3888,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3902,8 +3913,8 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "37ccc301-f080-4ec4-be51-fe9d0daf5f0f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -3922,8 +3933,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3941,8 +3952,8 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "37ccc301-f080-4ec4-be51-fe9d0daf5f0f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -4022,7 +4033,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -4032,8 +4043,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ae487c80-cfa2-4aa4-8fe9-36706d2344b4";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app.VoysIntentsExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -4052,7 +4063,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
@@ -4064,8 +4075,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ae487c80-cfa2-4aa4-8fe9-36706d2344b4";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app.VoysIntentsExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
@@ -4651,7 +4662,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E2Q9UE8HM6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4677,8 +4688,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4bdd897b-6f68-42b1-8016-f44966a7a29f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4696,7 +4707,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E2Q9UE8HM6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4716,8 +4727,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4bdd897b-6f68-42b1-8016-f44966a7a29f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

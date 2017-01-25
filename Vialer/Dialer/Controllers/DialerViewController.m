@@ -5,7 +5,6 @@
 
 #import "DialerViewController.h"
 
-#import "AppDelegate.h"
 @import AVFoundation;
 #import "Configuration.h"
 #import "PasteableUILabel.h"

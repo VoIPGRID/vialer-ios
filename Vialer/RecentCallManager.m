@@ -5,7 +5,6 @@
 
 #import "RecentCallManager.h"
 
-#import "AppDelegate.h"
 #import "RecentCall+VoIPGRID.h"
 #import "SystemUser.h"
 #import "Vialer-Swift.h"

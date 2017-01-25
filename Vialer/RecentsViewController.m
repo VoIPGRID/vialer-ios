@@ -5,7 +5,6 @@
 
 #import "RecentsViewController.h"
 
-#import "AppDelegate.h"
 #import "Configuration.h"
 #import "ContactsUI/ContactsUI.h"
 #import "ReachabilityBarViewController.h"

@@ -1,4 +1,4 @@
-app_identifier ENV["APP_IDENTIFIER"]
+app_identifier ENV["MATCH_APP_IDENTIFIER"]
 team_name ENV['ITC_TEAM_NAME']
 git_url ENV['GIT_URL_CERTIFICATES']
 username ENV['ITC_USERNAME']

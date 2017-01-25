@@ -1,5 +1,5 @@
-Vialer
-======
+# Vialer
+
 Vialer is a VoIP client which utilizes the [VoIPGRID](https://voipgrid.nl) VoIPGRID platform. Up until version 3.0 it's main purpose is to provide an easy interface for the "Two step Calling" function of the platform. This feature enables the user of the app to dial a phone number as if you were "at the office". The receiver sees the "office" number as the calling number (CLI). Using the app, the user can also:
 - Adjust it's availability
 - See call statistics
@@ -7,12 +7,6 @@ Vialer is a VoIP client which utilizes the [VoIPGRID](https://voipgrid.nl) VoIPG
 
 Starting from Version 3.0 the app also acts as a VoIP softphone, enabling the user to make and receive phone calls using SIP but only when connected to Wi-Fi of 4G.
 
-## Usage
-1. Clone the [project's source](https://github.com/VoIPGRID/vialer-ios)
-2. Use [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) to install the required libraries
-3. Run XCode and start one of the targets
-
-## Technical implementation
 The features provided by the app until v3.0 use the platforms API.
 
 Starting with v3.0 the VoIP functionality is provided by using PJSIP. We have wrapped PJSIP into a [cocoapod](https://github.com/VoIPGRID/Vialer-pjsip-iOS) which in turn is used by a [pod](https://github.com/VoIPGRID/VialerSIPLib) which provides all the SIP functionality.
@@ -23,10 +17,17 @@ On an incoming call, the phone is notified through a silent push notification(AP
 
 To be able to sent the push notifications a piece of "middleware" software has been developed. This middleware is responsible for storing APNS tokens sent to it through a registration process initiated by the app. On an incoming call, the VoIPGRID platform contacts the middleware which will sent the push notification to the correct phone/app. When the conditions for accepting a call have been met, the app responds to the middleware which in turn gives the "OK" back to the VoIPGRID platform. This triggers the sip proxy to contact the app.
 
-## Prerequisites
-To be able to use the application you will need an account from one of the VoIPGRID partners
+## Status
 
-## USED LIBRARIES
+In active development
+
+## Usage
+
+### Requirements
+
+- Cocoapods
+- iOS 9.0 or greater
+
 The app uses the following 3th party libraries:
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 - [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack)
@@ -37,3 +38,51 @@ The app uses the following 3th party libraries:
 - [Reachability](https://github.com/tonymillion/Reachability)
 - [SSKeychain](https://github.com/soffes/SSKeychain)
 - [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD)
+
+
+### Installation
+
+- Clone the [project's source](https://github.com/VoIPGRID/vialer-ios)
+- Use [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) to install the required libraries
+
+### Running
+
+- Run XCode and start one of the targets
+
+To run the app as is, you will need an account from one of the VoIPGRID partners.
+
+## Contributing
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file on how to contribute to this project.
+
+## Contributors
+
+See the [CONTRIBUTORS.md](CONTRIBUTORS.md) file for a list of contributors to the project.
+
+## Roadmap
+
+### Changelog
+
+The changelog can be found in the [CHANGELOG.md](CHANGELOG.md) file.
+
+### In progress
+
+- Stability for incoming phonecalls
+- Overall stability in the app
+- Keep track of rejected incoming calls
+- Refactor to Swift here code is touched
+
+### Future
+
+- Secure calling
+- Videocalling
+
+## Get in touch with a developer
+
+If you want to report an issue see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more info.
+
+We will be happy to answer your other questions at opensource@wearespindle.com or insert alias.
+
+## License
+
+Vialer is made available under the GNU General Public License v3.0 license. See the [LICENSE file](LICENSE.md) for more info.
