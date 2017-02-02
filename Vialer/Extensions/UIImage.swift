@@ -10,6 +10,10 @@ extension UIImage {
         case logo = "logo"
         case tabKeypad = "tab-keypad"
         case tabKeypadActive = "tab-keypad-active"
+
+        // Recents
+        case tabRecent = "tab-recent"
+        case tabRecentActive = "tab-recent-active"
     }
 
     convenience init(asset: Asset) {

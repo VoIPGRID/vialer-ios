@@ -9,8 +9,8 @@ protocol SegueHandler {
     associatedtype SegueIdentifier: RawRepresentable
 }
 
-extension SegueHandler where Self: UIViewController, SegueIdentifier.RawValue == String {
-    func performSegue(segueIdentifier: SegueIdentifier, sender: Any?) {
+extension SegueHandler where Self : UIViewController, SegueIdentifier.RawValue == String {
+    func performSegue(segueIdentifier: SegueIdentifier, sender: Any? = nil) {
         performSegue(withIdentifier: segueIdentifier.rawValue, sender: sender)
     }
 

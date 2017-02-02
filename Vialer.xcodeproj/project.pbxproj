@@ -65,7 +65,6 @@
 		C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		C41D3A721DE728DC00AEA929 /* ContactModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */; };
 		C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
-		C41FD8591C60A08400BBE6D7 /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
 		C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
@@ -166,11 +165,14 @@
 		C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C461836C1BF9D9500075709B /* RecentCallManager.m */; };
-		C46183721BF9FB120075709B /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
 		C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
 		C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
+		C46A1A5D1E5349F400547B88 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A1A5C1E5349F400547B88 /* UITableView.swift */; };
+		C46A1A5E1E5349F400547B88 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A1A5C1E5349F400547B88 /* UITableView.swift */; };
+		C46A1A5F1E5349F400547B88 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A1A5C1E5349F400547B88 /* UITableView.swift */; };
+		C46A1A601E5349F400547B88 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A1A5C1E5349F400547B88 /* UITableView.swift */; };
 		C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
@@ -195,7 +197,6 @@
 		C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */; };
 		C490AD661D0863E3004A8F83 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		C490AD671D0863E3004A8F83 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9121CA2865D008FB612 /* CircleWithShadow.m */; };
-		C490AD681D0863E3004A8F83 /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
 		C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
 		C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		C490AD6C1D0863E3004A8F83 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
@@ -317,6 +318,10 @@
 		C4A4525B1C244F3C00846591 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A5E6A1AE62F9600DBE64B /* LogInViewController.xib */; };
 		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
+		C4BB80A21E4324D500D7F5EC /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB80A11E4324D500D7F5EC /* RecentsViewController.swift */; };
+		C4BB80A31E4324D500D7F5EC /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB80A11E4324D500D7F5EC /* RecentsViewController.swift */; };
+		C4BB80A41E4324D500D7F5EC /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB80A11E4324D500D7F5EC /* RecentsViewController.swift */; };
+		C4BB80A51E4324D500D7F5EC /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB80A11E4324D500D7F5EC /* RecentsViewController.swift */; };
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
@@ -369,7 +374,6 @@
 		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		F20850E41D26935600A17E71 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9121CA2865D008FB612 /* CircleWithShadow.m */; };
-		F20850E51D26935600A17E71 /* RecentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46183711BF9FB120075709B /* RecentsViewController.m */; };
 		F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
 		F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F20850E91D26935600A17E71 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
@@ -823,8 +827,6 @@
 		C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Vialer.m"; sourceTree = "<group>"; };
 		C461836B1BF9D9500075709B /* RecentCallManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCallManager.h; sourceTree = "<group>"; };
 		C461836C1BF9D9500075709B /* RecentCallManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallManager.m; sourceTree = "<group>"; };
-		C46183701BF9FB120075709B /* RecentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsViewController.h; sourceTree = "<group>"; };
-		C46183711BF9FB120075709B /* RecentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsViewController.m; sourceTree = "<group>"; };
 		C461837C1BFA24660075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RecentsStoryboard.storyboard; sourceTree = "<group>"; };
 		C461837E1BFA24850075709B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DialerStoryboard.storyboard; sourceTree = "<group>"; };
 		C467430A1BF726AA0032D77B /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 		C46760001C46EBBE008820C8 /* EditNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNumberViewController.h; sourceTree = "<group>"; };
 		C46760011C46EBBE008820C8 /* EditNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNumberViewController.m; sourceTree = "<group>"; };
 		C4692BBE1CC50E5400740818 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
+		C46A1A5C1E5349F400547B88 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = Extensions/UITableView.swift; sourceTree = "<group>"; };
 		C46F10021C7C668D007F30A6 /* ActivateSIPAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivateSIPAccountViewController.h; path = Settings/Controllers/ActivateSIPAccountViewController.h; sourceTree = "<group>"; };
 		C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivateSIPAccountViewController.m; path = Settings/Controllers/ActivateSIPAccountViewController.m; sourceTree = "<group>"; };
 		C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileWebViewController.h; sourceTree = "<group>"; };
@@ -879,6 +882,7 @@
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
 		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
+		C4BB80A11E4324D500D7F5EC /* RecentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsViewController.swift; path = Recents/Controllers/RecentsViewController.swift; sourceTree = "<group>"; };
 		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		C4C2A94D1D9BF72E008581C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
@@ -1462,8 +1466,7 @@
 		C46743141BF726DC0032D77B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C46183701BF9FB120075709B /* RecentsViewController.h */,
-				C46183711BF9FB120075709B /* RecentsViewController.m */,
+				C4BB80A11E4324D500D7F5EC /* RecentsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1706,6 +1709,7 @@
 			children = (
 				C4F0D8E11E4E3D4B00DF823F /* UIImage.swift */,
 				C4F0D8EB1E4E409A00DF823F /* UIViewController.swift */,
+				C46A1A5C1E5349F400547B88 /* UITableView.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -3323,7 +3327,6 @@
 				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
 				C41A73541C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */,
-				C41FD8591C60A08400BBE6D7 /* RecentsViewController.m in Sources */,
 				C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */,
 				C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */,
 				F2A958BA1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
@@ -3368,6 +3371,7 @@
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				C41FD8791C60A08400BBE6D7 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */,
+				C4BB80A41E4324D500D7F5EC /* RecentsViewController.swift in Sources */,
 				F9EEC91E1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
 				F22FF2941D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
@@ -3380,6 +3384,7 @@
 				F9EEC9381CA2879C008FB612 /* PasteableUILabel.m in Sources */,
 				C43EE05C1D5C74AC00F8C3C0 /* TransferInProgressViewController.swift in Sources */,
 				F22FF28C1D0ABF3800761C9A /* Configuration.m in Sources */,
+				C46A1A5F1E5349F400547B88 /* UITableView.swift in Sources */,
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
 				C4C6756F1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
@@ -3438,7 +3443,6 @@
 				C490AD661D0863E3004A8F83 /* NoAnimationSegue.m in Sources */,
 				C490AD671D0863E3004A8F83 /* CircleWithShadow.m in Sources */,
 				C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
-				C490AD681D0863E3004A8F83 /* RecentsViewController.m in Sources */,
 				C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */,
 				C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */,
 				C490AD6C1D0863E3004A8F83 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3485,6 +3489,7 @@
 				C4F385A21D5B808B005D8146 /* SecondCallViewController.swift in Sources */,
 				C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4F385991D5B749D005D8146 /* SetupCallTransferViewController.swift in Sources */,
+				C4BB80A51E4324D500D7F5EC /* RecentsViewController.swift in Sources */,
 				C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */,
 				C490AD921D0863E3004A8F83 /* CircleWithWhiteIcon.m in Sources */,
 				F22FF2951D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
@@ -3497,6 +3502,7 @@
 				C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */,
 				C490AD9D1D0863E3004A8F83 /* BubblingPoints.m in Sources */,
 				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
+				C46A1A601E5349F400547B88 /* UITableView.swift in Sources */,
 				C48931D31D8092E300C5633C /* UIViewControllerExtensions.swift in Sources */,
 				C490AD9E1D0863E3004A8F83 /* PasteableUILabel.m in Sources */,
 				C420AEC71E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
@@ -3575,7 +3581,6 @@
 				F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */,
 				F20850E41D26935600A17E71 /* CircleWithShadow.m in Sources */,
 				C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
-				F20850E51D26935600A17E71 /* RecentsViewController.m in Sources */,
 				F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */,
 				F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */,
 				F20850E91D26935600A17E71 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3622,6 +3627,7 @@
 				F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */,
 				F208510C1D26935600A17E71 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				F208510D1D26935600A17E71 /* ConfigureFormView.m in Sources */,
+				C4BB80A31E4324D500D7F5EC /* RecentsViewController.swift in Sources */,
 				F208510E1D26935600A17E71 /* CircleWithWhiteIcon.m in Sources */,
 				F20851101D26935600A17E71 /* ColorConfiguration.m in Sources */,
 				F20851111D26935600A17E71 /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
@@ -3634,6 +3640,7 @@
 				F20851191D26935600A17E71 /* BubblingPoints.m in Sources */,
 				C43EE05E1D5C74AD00F8C3C0 /* TransferInProgressViewController.swift in Sources */,
 				F208511A1D26935600A17E71 /* Configuration.m in Sources */,
+				C46A1A5E1E5349F400547B88 /* UITableView.swift in Sources */,
 				F208511B1D26935600A17E71 /* PasteableUILabel.m in Sources */,
 				F208511C1D26935600A17E71 /* VialerGAITracker.swift in Sources */,
 				C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
@@ -3684,7 +3691,6 @@
 				C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */,
 				F9EEC91B1CA2865D008FB612 /* CircleWithShadow.m in Sources */,
 				C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
-				C46183721BF9FB120075709B /* RecentsViewController.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3731,6 +3737,7 @@
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,
 				F9EEC91D1CA2865D008FB612 /* CircleWithWhiteIcon.m in Sources */,
+				C4BB80A21E4324D500D7F5EC /* RecentsViewController.swift in Sources */,
 				F22FF2931D0ABF5E00761C9A /* ColorConfiguration.m in Sources */,
 				C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */,
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
@@ -3743,6 +3750,7 @@
 				F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C43EE05B1D5C749B00F8C3C0 /* TransferInProgressViewController.swift in Sources */,
 				F9EEC9371CA2879C008FB612 /* PasteableUILabel.m in Sources */,
+				C46A1A5D1E5349F400547B88 /* UITableView.swift in Sources */,
 				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
