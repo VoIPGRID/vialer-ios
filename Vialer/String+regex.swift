@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  String+regex.swift
 //  Copyright © 2017 VoIPGRID. All rights reserved.
 //
 

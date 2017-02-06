@@ -33,6 +33,26 @@
 		C41A73541C6A7CF300482E3C /* VialerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C41A73511C6A7CF300482E3C /* VialerModel.xcdatamodeld */; };
 		C41A73671C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */ = {isa = PBXBuildFile; fileRef = C41A73661C6B2F1C00482E3C /* RecentCall+VoIPGRID.m */; };
 		C41A73681C6B2F1C00482E3C /* RecentCall+VoIPGRID.m in Sources */ = {isa = PBXBuildFile; fileRef = C41A73661C6B2F1C00482E3C /* RecentCall+VoIPGRID.m */; };
+		C41A8ED71E48682E0002A092 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8ED61E48682E0002A092 /* Webservice.swift */; };
+		C41A8ED81E48682E0002A092 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8ED61E48682E0002A092 /* Webservice.swift */; };
+		C41A8ED91E48682E0002A092 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8ED61E48682E0002A092 /* Webservice.swift */; };
+		C41A8EDA1E48682E0002A092 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8ED61E48682E0002A092 /* Webservice.swift */; };
+		C41A8EDC1E4868400002A092 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EDB1E4868400002A092 /* Resource.swift */; };
+		C41A8EDD1E4868400002A092 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EDB1E4868400002A092 /* Resource.swift */; };
+		C41A8EDE1E4868400002A092 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EDB1E4868400002A092 /* Resource.swift */; };
+		C41A8EDF1E4868400002A092 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EDB1E4868400002A092 /* Resource.swift */; };
+		C41A8EE61E4869880002A092 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EE51E4869880002A092 /* Call.swift */; };
+		C41A8EE71E4869880002A092 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EE51E4869880002A092 /* Call.swift */; };
+		C41A8EE81E4869880002A092 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EE51E4869880002A092 /* Call.swift */; };
+		C41A8EE91E4869880002A092 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EE51E4869880002A092 /* Call.swift */; };
+		C41A8EEB1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEA1E486E6B0002A092 /* URLRequestExtensions.swift */; };
+		C41A8EEC1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEA1E486E6B0002A092 /* URLRequestExtensions.swift */; };
+		C41A8EED1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEA1E486E6B0002A092 /* URLRequestExtensions.swift */; };
+		C41A8EEE1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEA1E486E6B0002A092 /* URLRequestExtensions.swift */; };
+		C41A8EF01E4871160002A092 /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEF1E4871160002A092 /* WebserviceAuthentication.swift */; };
+		C41A8EF11E4871160002A092 /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEF1E4871160002A092 /* WebserviceAuthentication.swift */; };
+		C41A8EF21E4871160002A092 /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEF1E4871160002A092 /* WebserviceAuthentication.swift */; };
+		C41A8EF31E4871160002A092 /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A8EEF1E4871160002A092 /* WebserviceAuthentication.swift */; };
 		C41B600D1C6B7DC800A0C7C7 /* RecentCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */; };
 		C41B60101C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600F1C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m */; };
 		C41B60111C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C41B600F1C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m */; };
@@ -754,6 +774,11 @@
 		C41A73521C6A7CF300482E3C /* VialerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VialerModel.xcdatamodel; sourceTree = "<group>"; };
 		C41A73651C6B2F1C00482E3C /* RecentCall+VoIPGRID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentCall+VoIPGRID.h"; sourceTree = "<group>"; };
 		C41A73661C6B2F1C00482E3C /* RecentCall+VoIPGRID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentCall+VoIPGRID.m"; sourceTree = "<group>"; };
+		C41A8ED61E48682E0002A092 /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Webservice.swift; path = Api/Webservice.swift; sourceTree = "<group>"; };
+		C41A8EDB1E4868400002A092 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = Api/Resource.swift; sourceTree = "<group>"; };
+		C41A8EE51E4869880002A092 /* Call.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Call.swift; path = Recents/Models/Call.swift; sourceTree = "<group>"; };
+		C41A8EEA1E486E6B0002A092 /* URLRequestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestExtensions.swift; sourceTree = "<group>"; };
+		C41A8EEF1E4871160002A092 /* WebserviceAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebserviceAuthentication.swift; path = Api/WebserviceAuthentication.swift; sourceTree = "<group>"; };
 		C41B600A1C6B7DC800A0C7C7 /* RecentCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCall.h; sourceTree = "<group>"; };
 		C41B600B1C6B7DC800A0C7C7 /* RecentCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCall.m; sourceTree = "<group>"; };
 		C41B600E1C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentCall+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -1662,6 +1687,7 @@
 				C4C6EA3C1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.h */,
 				C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */,
 				F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */,
+				C41A8EE51E4869880002A092 /* Call.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2074,6 +2100,10 @@
 			children = (
 				FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */,
 				FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */,
+				C41A8ED61E48682E0002A092 /* Webservice.swift */,
+				C41A8EDB1E4868400002A092 /* Resource.swift */,
+				C41A8EEA1E486E6B0002A092 /* URLRequestExtensions.swift */,
+				C41A8EEF1E4871160002A092 /* WebserviceAuthentication.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -2536,7 +2566,7 @@
 					FB4226CC182261D200707349 = {
 						DevelopmentTeam = E2Q9UE8HM6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3287,12 +3317,15 @@
 				F9EEC94B1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */,
 				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
+				C41A8EE81E4869880002A092 /* Call.swift in Sources */,
 				C4F385A11D5B808B005D8146 /* SecondCallViewController.swift in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
 				C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F9EEC94D1CA2880E008FB612 /* SipCallingButton.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
 				C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */,
+				C41A8EF21E4871160002A092 /* WebserviceAuthentication.swift in Sources */,
+				C41A8EDE1E4868400002A092 /* Resource.swift in Sources */,
 				F9EEC90B1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C41FD8681C60A08400BBE6D7 /* RecentCallManager.m in Sources */,
 				C41B60111C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
@@ -3308,6 +3341,7 @@
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
 				C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				F2C44A761DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
+				C41A8EED1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */,
 				F9EEC9361CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
@@ -3332,6 +3366,7 @@
 				C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
+				C41A8ED91E48682E0002A092 /* Webservice.swift in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
 				C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */,
 				F9EEC94F1CA2880E008FB612 /* SIPUtils.m in Sources */,
@@ -3397,12 +3432,15 @@
 				C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */,
 				C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */,
 				C490AD721D0863E3004A8F83 /* DialerViewController.m in Sources */,
+				C41A8EE91E4869880002A092 /* Call.swift in Sources */,
 				C490AD731D0863E3004A8F83 /* SIPIncomingCallViewController.m in Sources */,
 				C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */,
 				C490AD751D0863E3004A8F83 /* SideMenuViewController.m in Sources */,
 				C490AD761D0863E3004A8F83 /* RecentCall+CoreDataProperties.m in Sources */,
 				C490AD771D0863E3004A8F83 /* VailerRootViewController.m in Sources */,
 				C490AD791D0863E3004A8F83 /* SipCallingButton.m in Sources */,
+				C41A8EF31E4871160002A092 /* WebserviceAuthentication.swift in Sources */,
+				C41A8EDF1E4868400002A092 /* Resource.swift in Sources */,
 				C490AD7A1D0863E3004A8F83 /* SettingsViewController.m in Sources */,
 				C490AD7B1D0863E3004A8F83 /* VialerDrawerViewController.m in Sources */,
 				C490AD7C1D0863E3004A8F83 /* TwoStepCallingViewController.m in Sources */,
@@ -3418,6 +3456,7 @@
 				C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */,
 				C490AD871D0863E3004A8F83 /* RecentCall.m in Sources */,
 				F2C44A771DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
+				C41A8EEE1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */,
 				C490AD891D0863E3004A8F83 /* NumberPadButton.m in Sources */,
 				C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */,
 				C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */,
@@ -3442,6 +3481,7 @@
 				C420AEC71E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
+				C41A8EDA1E48682E0002A092 /* Webservice.swift in Sources */,
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */,
 				C490ADA21D0863E3004A8F83 /* AnimatedImageView.m in Sources */,
@@ -3527,12 +3567,15 @@
 				F20850EF1D26935600A17E71 /* DialerViewController.m in Sources */,
 				F20850F01D26935600A17E71 /* SIPIncomingCallViewController.m in Sources */,
 				F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */,
+				C41A8EE71E4869880002A092 /* Call.swift in Sources */,
 				C4F385A31D5B808B005D8146 /* SecondCallViewController.swift in Sources */,
 				F20850F21D26935600A17E71 /* SideMenuViewController.m in Sources */,
 				F20850F31D26935600A17E71 /* RecentCall+CoreDataProperties.m in Sources */,
 				F20850F41D26935600A17E71 /* VailerRootViewController.m in Sources */,
 				F20850F61D26935600A17E71 /* SipCallingButton.m in Sources */,
 				F20850F71D26935600A17E71 /* SettingsViewController.m in Sources */,
+				C41A8EF11E4871160002A092 /* WebserviceAuthentication.swift in Sources */,
+				C41A8EDD1E4868400002A092 /* Resource.swift in Sources */,
 				F20850F81D26935600A17E71 /* VialerDrawerViewController.m in Sources */,
 				F20850F91D26935600A17E71 /* TwoStepCallingViewController.m in Sources */,
 				F20850FA1D26935600A17E71 /* RecentCallManager.m in Sources */,
@@ -3548,6 +3591,7 @@
 				F20851041D26935600A17E71 /* LogInViewController.m in Sources */,
 				F20851051D26935600A17E71 /* RecentCall.m in Sources */,
 				F2C44A751DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
+				C41A8EEC1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */,
 				F20851061D26935600A17E71 /* NumberPadButton.m in Sources */,
 				F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */,
 				F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */,
@@ -3572,6 +3616,7 @@
 				C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F208511D1D26935600A17E71 /* Middleware.m in Sources */,
 				F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */,
+				C41A8ED81E48682E0002A092 /* Webservice.swift in Sources */,
 				F208511F1D26935600A17E71 /* UnlockView.m in Sources */,
 				F20851201D26935600A17E71 /* AnimatedImageView.m in Sources */,
 				F20851211D26935600A17E71 /* SIPUtils.m in Sources */,
@@ -3629,12 +3674,15 @@
 				F9EEC94A1CA2880E008FB612 /* SIPIncomingCallViewController.m in Sources */,
 				F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
+				C41A8EE61E4869880002A092 /* Call.swift in Sources */,
 				C4F385A01D5B808B005D8146 /* SecondCallViewController.swift in Sources */,
 				C41B60101C6B80C800A0C7C7 /* RecentCall+CoreDataProperties.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
 				F9EEC94C1CA2880E008FB612 /* SipCallingButton.m in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
+				C41A8EF01E4871160002A092 /* WebserviceAuthentication.swift in Sources */,
+				C41A8EDC1E4868400002A092 /* Resource.swift in Sources */,
 				F9EEC90A1CA28608008FB612 /* TwoStepCallingViewController.m in Sources */,
 				C461836D1BF9D9500075709B /* RecentCallManager.m in Sources */,
 				F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */,
@@ -3650,6 +3698,7 @@
 				C41B600D1C6B7DC800A0C7C7 /* RecentCall.m in Sources */,
 				F9EEC9351CA2879C008FB612 /* NumberPadButton.m in Sources */,
 				F2C44A741DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
+				C41A8EEB1E486E6B0002A092 /* URLRequestExtensions.swift in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
 				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
@@ -3674,6 +3723,7 @@
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
+				C41A8ED71E48682E0002A092 /* Webservice.swift in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				F9EEC94E1CA2880E008FB612 /* SIPUtils.m in Sources */,
@@ -4662,8 +4712,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = E2Q9UE8HM6;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4688,8 +4738,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "4bdd897b-6f68-42b1-8016-f44966a7a29f";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4707,8 +4757,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = E2Q9UE8HM6;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4727,8 +4777,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "4bdd897b-6f68-42b1-8016-f44966a7a29f";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

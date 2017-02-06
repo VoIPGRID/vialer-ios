@@ -92,3 +92,31 @@ import Foundation
         }
     }
 }
+
+extension DateFormatter {
+    /// Dateformatter that can translate API dates back an forth.
+    static var api: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+        // If the device is setup to use AM/PM, the line below will convert
+        // this to 24h. In a 24h setup it does nothing.
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "CET")
+        return formatter
+    }
+}
+
+extension String {
+    /// Create a Date object from a string returned by the API.
+    var date: Date? {
+        return DateFormatter.api.date(from: self)
+    }
+}
+
+extension Date {
+    // Create a String from a date, formatted for the API.
+    var apiFormatted24hCET: String {
+        return DateFormatter.api.string(from: self)
+    }
+}
