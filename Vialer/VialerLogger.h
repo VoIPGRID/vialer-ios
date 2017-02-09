@@ -45,6 +45,21 @@
  @param file The file where the log was dispatched
  @param function The function where the log was dispatched
  @param line The line where the log was dispatched
+ @param message Formatted string, various arguments will be added to the string
+ */
++ (void)logWithFlag:(DDLogFlag)flag
+               file:(const char *_Nonnull)file
+           function:(const char *_Nonnull)function
+               line:(NSUInteger)line
+             message:(NSString *_Nonnull)message NS_SWIFT_NAME(log(flag:file:function:line:message:));
+
+/**
+ Log a message to the console, optionally also to remote
+
+ @param flag Log level
+ @param file The file where the log was dispatched
+ @param function The function where the log was dispatched
+ @param line The line where the log was dispatched
  @param format Formatted string, 
  @param arguments will be added to the string
  */
@@ -53,8 +68,7 @@
            function:(const char *_Nonnull)function
                line:(NSUInteger)line
              format:(NSString *_Nonnull)format
-          arguments:(va_list _Nullable)arguments NS_SWIFT_NAME(log(flag:file:function:line:format:arguments:));
-
+          arguments:(va_list)arguments NS_SWIFT_NAME(log(flag:file:function:line:format:arguments:));
 
 /**
  Log a Lumberjack message

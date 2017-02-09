@@ -17,7 +17,7 @@ import Foundation
 ///   - line: Line that dispatched the message
 ///   - message: Message that will be logged
 func VialerLog(flag: DDLogFlag, file: String, function: String, line: UInt, _ message: String) {
-    VialerLogger.log(flag: flag, file: file, function: function, line: line, format: message, arguments: nil)
+    VialerLogger.log(flag: flag, file: file, function: function, line: line, message: message)
 }
 
 /// Verbose logging

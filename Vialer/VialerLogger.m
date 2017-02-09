@@ -61,7 +61,11 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     va_end(args);
 }
 
-+ (void)logWithFlag:(DDLogFlag)flag file:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format arguments:(va_list _Nullable)arguments {
++ (void)logWithFlag:(DDLogFlag)flag file:(const char*)file function:(const char *)function line:(NSUInteger)line message:(NSString *)message {
+    [self logWithFlag:flag file:file function:function line:line format:message arguments:nil];
+}
+
++ (void)logWithFlag:(DDLogFlag)flag file:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format arguments:(va_list)arguments {
     NSString *message = [[NSString alloc] initWithFormat:format arguments:arguments];
     NSString *logFile = [NSString stringWithFormat:@"%s", file];
     NSString *logFunction = [NSString stringWithFormat:@"%s", function];

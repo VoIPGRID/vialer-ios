@@ -81,6 +81,8 @@
 - (void)testAcceptCallButtonPressetMovesToSegue {
     id mockSipIncomingCallVC = OCMPartialMock(self.sipIncomingCallVC);
 
+    OCMStub([mockSipIncomingCallVC performSegueWithIdentifier:[OCMArg any] sender:[OCMArg any]]).andDo(nil);
+
     id mockButton = OCMClassMock([UIButton class]);
     [self.sipIncomingCallVC acceptCallButtonPressed:mockButton];
 

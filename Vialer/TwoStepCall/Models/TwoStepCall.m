@@ -49,6 +49,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
 }
 
 - (void)dealloc {
+    VialerLogDebug(@"Testing dealloc");
     [self.statusTimer invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

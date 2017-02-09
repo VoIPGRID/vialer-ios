@@ -38,7 +38,7 @@
     self.settingsViewController.currentUser = mockSystemUser;
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(NO);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should disable sip"];
     OCMStub([mockSystemUser setSipEnabled:NO]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
@@ -78,7 +78,7 @@
     id mockSwitch = OCMClassMock([UISwitch class]);
     id progressMock = OCMClassMock([SVProgressHUD class]);
     OCMStub([mockSwitch isOn]).andReturn(NO);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Switch should show progressHUD"];
     OCMStub([mockSystemUser setSipEnabled:NO]).andDo(^(NSInvocation *invocation) {
         [expectation fulfill];
@@ -103,7 +103,7 @@
     self.settingsViewController.currentUser = mockSystemUser;
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(YES);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
@@ -122,7 +122,7 @@
     self.settingsViewController.currentUser = mockSystemUser;
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(YES);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
@@ -141,7 +141,7 @@
 
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(YES);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
@@ -162,7 +162,7 @@
 
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(YES);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
@@ -184,7 +184,7 @@
     self.settingsViewController.tableView = mockTableView;
     id mockSwitch = OCMClassMock([UISwitch class]);
     OCMStub([mockSwitch isOn]).andReturn(YES);
-    OCMStub([mockSwitch tag]).andReturn(1001);
+    OCMStub([(UISwitch *)mockSwitch tag]).andReturn(1001);
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 

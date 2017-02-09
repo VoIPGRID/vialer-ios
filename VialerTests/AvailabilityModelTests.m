@@ -1,8 +1,5 @@
 //
 //  AvailabilityModelTests.m
-//  Vialer
-//
-//  Created by Redmer Loen on 02-02-16.
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
@@ -27,12 +24,11 @@ NSString * const AvailabilityModelSelected = @"availabilitySelected";
 NSString * const AvailabilityModelDestinationType = @"availabilityType";
 NSString * const AvailabilityModelId = @"availabilityId";
 
-static NSString *const AvailabilityModelPhoneNumberKey = @"phonenumber";
-static NSString *const AvailabilityModelSelectedUserDestinationFixedKey = @"fixeddestination";
-static NSString *const AvailabilityModelSelectedUserDestinationPhoneaccountKey = @"phoneaccount";
-static NSString *const AvailabilityModelDescriptionKey = @"description";
-static NSString *const AvailabilityModelSelectedUserDestinationIdKey = @"id";
-static NSString *const AvailabilityModelInternalNumbersKey = @"internal_number";
+static NSString * const AvailabilityModelSelectedUserDestinationFixedKey = @"fixeddestination";
+static NSString * const AvailabilityModelSelectedUserDestinationPhoneaccountKey = @"phoneaccount";
+static NSString * const AvailabilityModelDescriptionKey = @"description";
+static NSString * const AvailabilityModelSelectedUserDestinationIdKey = @"id";
+static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number";
 
 @implementation AvailabilityModelTests
 
