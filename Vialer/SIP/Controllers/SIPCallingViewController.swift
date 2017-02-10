@@ -8,25 +8,19 @@ import MediaPlayer
 
 private var myContext = 0
 
-class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
+class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, SegueHandler {
 
     // MARK: - Configuration
+    enum SegueIdentifier : String {
+        case unwindToVialerRootViewController = "UnwindToVialerRootViewControllerSegue"
+        case showKeypad = "ShowKeypadSegue"
+        case setupTransfer = "SetupTransferSegue"
+    }
 
-    fileprivate struct Configuration {
+    fileprivate struct Config {
         struct Timing {
-            static let WaitingTimeAfterDismissing = 1.0
-            static let ConnectDurationInterval = 1.0
-        }
-        struct Segues {
-            static let UnwindToVialerRootViewController = "UnwindToVialerRootViewControllerSegue"
-            static let ShowKeypad = "ShowKeypadSegue"
-            static let SetupTransfer = "SetupTransferSegue"
-        }
-        struct KVO {
-            struct Call {
-                static let callState = "callState"
-                static let mediaState = "mediaState"
-            }
+            static let waitingTimeAfterDismissing = 1.0
+            static let connectDurationInterval = 1.0
         }
         static let wiFiSettingsURL = URL(string:"App-Prefs:root=WIFI")!
     }
@@ -47,27 +41,18 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
             }
-            activeCall!.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
-            activeCall!.addObserver(self, forKeyPath: Configuration.KVO.Call.mediaState, options: .new, context: &myContext)
+            addObserver(self, forKeyPath: #keyPath(activeCall.callState), options: .new, context: &myContext)
+            addObserver(self, forKeyPath: #keyPath(activeCall.mediaState), options: .new, context: &myContext)
         }
     }
-    var callManager: VSLCallManager {
-        get {
-            return VialerSIPLib.sharedInstance().callManager
-        }
-    }
-
+    var callManager = VialerSIPLib.sharedInstance().callManager
     let currentUser = SystemUser.current()!
-
     // ReachabilityManager, needed for showing notifications.
     let reachabilityManager = ReachabilityManager()
-
     // Keep track if there are notifications needed for disabling/enabling WiFi.
     var didOpenSettings = false
-
     // The cleaned number that need to be called.
     var cleanedPhoneNumber: String?
-
     var phoneNumberLabelText: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -75,13 +60,11 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
             }
         }
     }
-
     fileprivate var dtmfSent: String? {
         didSet {
             numberLabel?.text = dtmfSent
         }
     }
-
     fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.zeroFormattingBehavior = .pad
@@ -102,8 +85,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate {
     @IBOutlet weak var statusLabel: UILabel!
 
     deinit {
-        activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
-        activeCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.mediaState)
+        removeObserver(self, forKeyPath: #keyPath(activeCall.callState))
+        removeObserver(self, forKeyPath: #keyPath(activeCall.mediaState))
     }
 }
 
@@ -115,10 +98,15 @@ extension SIPCallingViewController {
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
 
-        if let call = activeCall, call.callState == .disconnected {
+        startConnectDurationTimer()
+
+        guard let call = activeCall else {
+            setupCall()
+            return
+        }
+        if call.callState == .disconnected {
             handleCallEnded()
         }
-        setupCall()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -144,7 +132,7 @@ extension SIPCallingViewController {
     }
 
     @IBAction func keypadButtonPressed(_ sender: SipCallingButton) {
-        performSegue(withIdentifier: Configuration.Segues.ShowKeypad, sender: self)
+        performSegue(segueIdentifier: .showKeypad)
     }
 
     @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
@@ -168,14 +156,14 @@ extension SIPCallingViewController {
     @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall, call.callState == .confirmed else { return }
         if call.onHold {
-            performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
+            performSegue(segueIdentifier: .setupTransfer)
             return
         }
         callManager.toggleHold(for: call) { error in
             if error != nil {
                 VialerLogError("Error holding current call: \(error)")
             } else {
-                self.performSegue(withIdentifier: Configuration.Segues.SetupTransfer, sender: self)
+                self.performSegue(segueIdentifier: .setupTransfer)
             }
         }
     }
@@ -223,14 +211,12 @@ extension SIPCallingViewController {
                 })
             }
         }
-
         updateUI()
     }
 
     func handleOutgoingCallForScreenshot(phoneNumber: String){
         phoneNumberLabelText = phoneNumber
     }
-
 
     /// Check 2 things before setting up a call:
     ///
@@ -270,13 +256,13 @@ extension SIPCallingViewController {
     }
 
     fileprivate func dismissView() {
-        let waitingTimeAfterDismissing = Configuration.Timing.WaitingTimeAfterDismissing
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-            if self.activeCall!.isIncoming {
-                self.performSegue(withIdentifier: Configuration.Segues.UnwindToVialerRootViewController, sender: self)
+        let waitingTimeAfterDismissing = Config.Timing.waitingTimeAfterDismissing
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [weak self] in
+            if self?.activeCall?.isIncoming ?? false {
+                self?.performSegue(segueIdentifier: .unwindToVialerRootViewController)
             } else {
                 UIDevice.current.isProximityMonitoringEnabled = false
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
+                self?.presentingViewController?.dismiss(animated: false, completion: nil)
             }
         }
     }
@@ -383,16 +369,16 @@ extension SIPCallingViewController {
         }
     }
 
-    fileprivate func startConnectDurationTimer() {
+    func startConnectDurationTimer() {
         if connectDurationTimer == nil || !connectDurationTimer!.isValid {
-            connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+            connectDurationTimer = Timer.scheduledTimer(timeInterval: Config.Timing.connectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }
     }
 }
 
 // MARK: - WiFi notification
 extension SIPCallingViewController {
-    fileprivate func shouldPresentWiFiNotification() -> Bool {
+    func shouldPresentWiFiNotification() -> Bool {
         return !currentUser.noWiFiNotification && reachabilityManager.onWiFi() && reachabilityManager.on4g()
     }
 
@@ -416,7 +402,7 @@ extension SIPCallingViewController {
             self.presentContinueCallingAlert()
             // Open the WiFi settings.
             self.didOpenSettings = true
-            UIApplication.shared.openURL(Configuration.wiFiSettingsURL)
+            UIApplication.shared.openURL(Config.wiFiSettingsURL)
         }
         alertController.addAction(settingsAction)
 
@@ -436,7 +422,7 @@ extension SIPCallingViewController {
         let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
             DispatchQueue.global().async {
                 DispatchQueue.main.async {
-                    UIApplication.shared.openURL(Configuration.wiFiSettingsURL)
+                    UIApplication.shared.openURL(Config.wiFiSettingsURL)
                 }
             }
             self.dismissView()
@@ -454,7 +440,7 @@ extension SIPCallingViewController {
 
         // Make it possible to cancel the call
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            self.performSegue(withIdentifier: Configuration.Segues.UnwindToVialerRootViewController, sender: self)
+            self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
         }
         alertController.addAction(cancelAction)
 
@@ -492,7 +478,7 @@ extension SIPCallingViewController {
 
         // Cancel the call, without audio, calling isn't possible.
         let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            self.performSegue(withIdentifier: Configuration.Segues.UnwindToVialerRootViewController, sender: nil)
+            self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
         }
         alertController.addAction(noAction)
 
@@ -509,13 +495,19 @@ extension SIPCallingViewController {
 // MARK: - Segues
  extension SIPCallingViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let keypadVC = segue.destination as? KeypadViewController {
+        switch segueIdentifier(segue: segue) {
+        case .showKeypad:
+            let keypadVC = segue.destination as! KeypadViewController
             keypadVC.call = activeCall
             keypadVC.delegate = self
             keypadVC.phoneNumberLabelText = phoneNumberLabelText
-        } else if let navVC = segue.destination as? UINavigationController, let setupCallTransferVC = navVC.viewControllers[0] as? SetupCallTransferViewController {
+        case .setupTransfer:
+            let navVC = segue.destination as! UINavigationController
+            let setupCallTransferVC = navVC.viewControllers[0] as! SetupCallTransferViewController
             setupCallTransferVC.firstCall = activeCall
             setupCallTransferVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+        case .unwindToVialerRootViewController:
+            break
         }
     }
 

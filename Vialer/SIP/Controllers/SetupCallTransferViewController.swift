@@ -5,44 +5,28 @@
 
 private var myContext = 0
 
-class SetupCallTransferViewController: UIViewController {
+class SetupCallTransferViewController: UIViewController, SegueHandler {
 
     // MARK: - Configuration
-
-    private struct Configuration {
-        struct Segues {
-            static let UnwindToFirstCall = "UnwindToFirstCallSegue"
-            static let SecondCallActive = "SecondCallActiveSegue"
-        }
-        struct KVO {
-            struct Call {
-                static let callState = "callState"
-            }
-        }
+    enum SegueIdentifier : String {
+        case unwindToFirstCall = "UnwindToFirstCallSegue"
+        case secondCallActive = "SecondCallActiveSegue"
     }
 
     // Properties
-
     var firstCall: VSLCall? {
         didSet {
             updateUI()
         }
     }
-
     var firstCallPhoneNumberLabelText: String? {
         didSet {
             updateUI()
         }
     }
-
     var currentCall: VSLCall?
-    var callManager: VSLCallManager {
-        get {
-            return VialerSIPLib.sharedInstance().callManager
-        }
-    }
+    var callManager = VialerSIPLib.sharedInstance().callManager
     var currentCallPhoneNumberLabelText: String?
-
     var number: String {
         set {
             numberToDialLabel?.text = newValue
@@ -51,21 +35,6 @@ class SetupCallTransferViewController: UIViewController {
         get {
             return numberToDialLabel.text!
         }
-
-    }
-
-    // MARK: - Lifecycle
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        VialerGAITracker.trackScreenForController(name: controllerName)
-        updateUI()
-        firstCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        firstCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
     }
 
     // MARK: - Outlets
@@ -78,21 +47,34 @@ class SetupCallTransferViewController: UIViewController {
             numberToDialLabel.text = ""
         }
     }
+}
 
+// MARK: - Lifecycle
+extension SetupCallTransferViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        VialerGAITracker.trackScreenForController(name: controllerName)
+        updateUI()
+        addObserver(self, forKeyPath: #keyPath(firstCall.callState), options: .new, context: &myContext)
+    }
 
-    // MARK: - Actions
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+}
 
+// MARK: - Actions
+extension SetupCallTransferViewController {
     @IBAction func backButtonPressed(_ sender: AnyObject) {
         guard let call = currentCall else {
-            performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: self)
+            performSegue(segueIdentifier: .unwindToFirstCall)
             return
         }
         callManager.end(call) { error in
             if error != nil {
-                
                 VialerLogError("Could not hangup call: \(error)")
             } else {
-                self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: self)
+                self.performSegue(segueIdentifier: .unwindToFirstCall)
             }
 
         }
@@ -117,14 +99,15 @@ class SetupCallTransferViewController: UIViewController {
         callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
             DispatchQueue.main.async { [weak self] in
                 self?.currentCall = call
-                self?.performSegue(withIdentifier: Configuration.Segues.SecondCallActive, sender: nil)
+                self?.performSegue(segueIdentifier: .secondCallActive)
             }
         }
     }
+}
 
-    // MARK: - Helper functions
-
-    private func updateUI() {
+// MARK: - Helper functions
+extension SetupCallTransferViewController {
+    fileprivate func updateUI() {
         firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
 
         callButton?.isEnabled = number != ""
@@ -145,17 +128,21 @@ class SetupCallTransferViewController: UIViewController {
             self.deleteButton?.alpha = self.number.characters.count == 0 ? 0.0 : 1.0
         }, completion:nil)
     }
+}
 
-    // MARK: - Segues
-
+// MARK: - Segues
+extension SetupCallTransferViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // First check if the destinationVC is SecondCallVC, because SecondCallVC is also subtype of SIPCallingVC.
-        if let secondCallVC = segue.destination as? SecondCallViewController {
+        switch segueIdentifier(segue: segue) {
+        case .secondCallActive:
+            let secondCallVC = segue.destination as! SecondCallViewController
             secondCallVC.activeCall = currentCall
             secondCallVC.firstCall = firstCall
             secondCallVC.phoneNumberLabelText = currentCallPhoneNumberLabelText
             secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-        } else if let callVC = segue.destination as? SIPCallingViewController {
+        case .unwindToFirstCall:
+            let callVC = segue.destination as! SIPCallingViewController
             if let call = currentCall, call.callState != .null && call.callState != .disconnected {
                 callVC.activeCall = call
             } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
@@ -163,15 +150,16 @@ class SetupCallTransferViewController: UIViewController {
             }
         }
     }
+}
 
-    // MARK: - KVO
-
+// MARK: - KVO
+extension SetupCallTransferViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &myContext {
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
                 if let call = self?.firstCall, call.callState == .disconnected {
-                    self?.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
+                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
                 }
             }
         } else {

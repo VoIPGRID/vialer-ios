@@ -8,8 +8,12 @@ import Foundation
 extension UIImage {
     enum Asset: String {
         case logo = "logo"
+
+        // Calling
         case tabKeypad = "tab-keypad"
         case tabKeypadActive = "tab-keypad-active"
+        case successfullTransfer = "successfullTransfer"
+        case rejectedTransfer = "rejectedTransfer"
 
         // Recents
         case tabRecent = "tab-recent"

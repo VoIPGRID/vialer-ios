@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1084,7 +1084,6 @@
                         <segue destination="10U-cZ-ZuY" kind="unwind" identifier="UnwindToFirstCallSegue" unwindAction="unwindToFirstCallSegue:" id="3Q0-da-GNb"/>
                         <segue destination="Lfl-9a-GUJ" kind="show" identifier="TransferInProgressSegue" id="IJh-Ii-oBO"/>
                         <segue destination="gkX-qY-AIB" kind="show" identifier="ShowKeypadSegue" id="NbJ-Zx-YRq"/>
-                        <segue destination="10U-cZ-ZuY" kind="unwind" identifier="UnwindToVialerRootViewControllerSegue" unwindAction="unwindVialerRootViewController:" id="6j4-Fx-6zi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzf-VT-iVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1171,13 +1170,11 @@
                     <connections>
                         <outlet property="currentCallNumberLabel" destination="AOE-ZZ-MDl" id="2Wv-bz-FKc"/>
                         <outlet property="firstNumberLabel" destination="wgC-ID-R8a" id="sPP-qW-zt7"/>
-                        <outlet property="successFullImageView" destination="Kbt-Oa-YQV" id="700-15-bsy"/>
+                        <outlet property="successfullImageView" destination="Kbt-Oa-YQV" id="GSa-yK-zB9"/>
                         <outlet property="transferStatusLabel" destination="Cdl-Ba-h64" id="54G-zi-477"/>
-                        <segue destination="F0I-rm-Ua3" kind="unwind" identifier="UnwindToFirstCallViewControllerSegue" unwindAction="unwindToFirstCallSegue:" id="x0y-XO-xkn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9T-Dx-5Hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="F0I-rm-Ua3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4160" y="-1007"/>
         </scene>

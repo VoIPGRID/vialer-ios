@@ -8,57 +8,47 @@ private var myContext = 0
 class SecondCallViewController: SIPCallingViewController {
 
     // MARK: - Configuration
-
-    private struct Configuration {
-        struct Segues {
-            static let TransferInProgress = "TransferInProgressSegue"
-            static let UnwindToFirstCall = "UnwindToFirstCallSegue"
-            static let UnwindToVialerRootViewController = "UnwindToVialerRootViewControllerSegue"
-        }
-        struct KVO {
-            struct Call {
-                static let callState = "callState"
-            }
-        }
+    enum SecondCallVCSegue : String { // TODO: find a way to handle subclassed ViewControllers with SegueHandler.
+        case transferInProgress = "TransferInProgressSegue"
+        case unwindToFirstCall = "UnwindToFirstCallSegue"
     }
 
     // MARK: - Properties
-
     var firstCall: VSLCall? {
         didSet {
             updateUI()
         }
     }
-
     var firstCallPhoneNumberLabelText: String? {
         didSet {
             updateUI()
         }
     }
 
-    // MARK: - Lifecycle
+    // MARK: - Outlets
+    @IBOutlet weak var firstCallNumberLabel: UILabel!
+    @IBOutlet weak var firstCallStatusLabel: UILabel!
+}
 
+// MARK: - Lifecycle
+extension SecondCallViewController{
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
-        firstCall?.addObserver(self, forKeyPath: Configuration.KVO.Call.callState, options: .new, context: &myContext)
+        startConnectDurationTimer()
+        addObserver(self, forKeyPath: #keyPath(firstCall.callState), options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIDevice.current.isProximityMonitoringEnabled = false
-        firstCall?.removeObserver(self, forKeyPath: Configuration.KVO.Call.callState)
+        removeObserver(self, forKeyPath: #keyPath(firstCall.callState))
     }
+}
 
-    // MARK: - Outlets
-
-    @IBOutlet weak var firstCallNumberLabel: UILabel!
-    @IBOutlet weak var firstCallStatusLabel: UILabel!
-
-    // MARK: - Actions
-
+// MARK: - Actions
+extension SecondCallViewController {
     override func transferButtonPressed(_ sender: SipCallingButton) {
         guard let firstCall = firstCall, firstCall.callState == .confirmed,
             let secondCall = activeCall, firstCall.callState == .confirmed else { return }
@@ -74,14 +64,13 @@ class SecondCallViewController: SIPCallingViewController {
                     VialerLogError("Error hanging up call: \(error)")
                 }
             }
-
-            performSegue(withIdentifier: Configuration.Segues.TransferInProgress, sender: nil)
+            performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
         }
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         guard let activeCall = activeCall, activeCall.callState != .disconnected else {
-            performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
+            performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
             return
         }
         // If current call is not disconnected, hangup the call.
@@ -89,19 +78,19 @@ class SecondCallViewController: SIPCallingViewController {
             if error != nil {
                 VialerLogError("Error hanging up call: \(error)")
             } else {
-                self.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
+                self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
             }
         }
     }
+}
 
-    // MARK: - Helper functions
-
+// MARK: - Helper functions
+extension SecondCallViewController {
     override func updateUI() {
         super.updateUI()
 
         // Only enable transferButton if both calls are confirmed.
         transferButton?.isEnabled = activeCall?.callState == .confirmed && firstCall?.callState == .confirmed
-
         firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
 
         guard let call = firstCall else { return }
@@ -113,15 +102,24 @@ class SecondCallViewController: SIPCallingViewController {
         }
     }
 
-    // MARK: - Segues
+    // Don't present wifi notification on second call.
+    override func shouldPresentWiFiNotification() -> Bool {
+        return false
+    }
+}
 
+// MARK: - Segues
+extension SecondCallViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let transferInProgressVC = segue.destination as? TransferInProgressViewController {
+        switch SecondCallVCSegue(rawValue: segue.identifier!)! {
+        case .transferInProgress:
+            let transferInProgressVC = segue.destination as! TransferInProgressViewController
             transferInProgressVC.firstCall = firstCall
             transferInProgressVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
             transferInProgressVC.currentCall = activeCall
             transferInProgressVC.currentCallPhoneNumberLabelText = phoneNumberLabelText
-        } else if let firstCallVC = segue.destination as? SIPCallingViewController {
+        case .unwindToFirstCall:
+            let firstCallVC = segue.destination as! SIPCallingViewController
             if firstCall?.callState == .disconnected {
                 firstCallVC.activeCall = activeCall
                 firstCallVC.phoneNumberLabelText = phoneNumberLabelText
@@ -129,13 +127,12 @@ class SecondCallViewController: SIPCallingViewController {
                 firstCallVC.activeCall = firstCall
                 firstCallVC.phoneNumberLabelText = firstCallPhoneNumberLabelText
             }
-        } else {
-            super.prepare(for: segue, sender: sender)
         }
     }
+}
 
-    // MARK: - KVO
-
+// MARK: - KVO
+extension SecondCallViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 
         // If the first call is disconnected and the second call is in progress, unwind to CallViewController.
@@ -143,16 +140,16 @@ class SecondCallViewController: SIPCallingViewController {
         if let call = object as? VSLCall, call == firstCall && call.callState == .disconnected && call.transferStatus == .unkown,
             let activeCall = activeCall, activeCall.callState != .null {
             DispatchQueue.main.async { [weak self] in
-                self?.performSegue(withIdentifier: Configuration.Segues.UnwindToFirstCall, sender: nil)
+                self?.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
             }
             return
         }
 
         if context == &myContext {
             DispatchQueue.main.async { [weak self] in
-                if let call = self?.activeCall, keyPath == Configuration.KVO.Call.callState &&  call.callState == .disconnected && self?.firstCall?.transferStatus != .unkown  {
+                if let call = self?.activeCall, keyPath == #keyPath(activeCall.callState) &&  call.callState == .disconnected && self?.firstCall?.transferStatus != .unkown  {
                     // If the transfer is in progress, the active call will be Disconnected. Perform the segue.
-                    self?.performSegue(withIdentifier: Configuration.Segues.TransferInProgress, sender: nil)
+                    self?.performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
                 }
                 self?.updateUI()
             }

@@ -93,10 +93,10 @@ extension DialerViewController {
 
         if reachabilityStatus == .highSpeed && user.sipEnabled {
             VialerGAITracker.setupOutgoingSIPCallEvent()
-            performSegue(segueIdentifier: .sipCalling, sender: nil)
+            performSegue(segueIdentifier: .sipCalling)
         } else {
             VialerGAITracker.setupOutgoingConnectABCallEvent()
-            performSegue(segueIdentifier: .twoStepCalling, sender: nil)
+            performSegue(segueIdentifier: .twoStepCalling)
         }
     }
 
@@ -118,16 +118,16 @@ extension DialerViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(segue: segue) {
         case .sipCalling:
-            let twoStepCallingVC = segue.destination as! TwoStepCallingViewController
-            twoStepCallingVC.handlePhoneNumber(numberText!)
-            numberText = nil
-        case .twoStepCalling:
             let sipCallingVC = segue.destination as! SIPCallingViewController
             if (UIApplication.shared.delegate as! AppDelegate).isScreenshotRun {
                 sipCallingVC.handleOutgoingCallForScreenshot(phoneNumber: numberText!)
             } else {
                 sipCallingVC.handleOutgoingCall(phoneNumber: numberText!, contact: nil)
             }
+            numberText = nil
+        case .twoStepCalling:
+            let twoStepCallingVC = segue.destination as! TwoStepCallingViewController
+            twoStepCallingVC.handlePhoneNumber(numberText!)
             numberText = nil
         case .reachabilityBar:
             let reachabilityBarVC = segue.destination as! ReachabilityBarViewController
