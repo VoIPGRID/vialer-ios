@@ -7,6 +7,7 @@
 
 #import "PhoneNumberModel.h"
 #import "SIPUtils.h"
+#import <VialerSIPLib/VialerSIPLib.h>
 #import <VialerSIPLib/VSLRingtone.h>
 #import "Vialer-Swift.h"
 
@@ -125,7 +126,11 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
     VialerLogDebug(@"User pressed \"Accept call\" for call: %ld", (long)self.call.callId);
     [VialerGAITracker acceptIncomingCallEvent];
     [self.ringtone stop];
-    [self performSegueWithIdentifier:SIPIncomingCallViewControllerShowSIPCallingSegue sender:nil];
+    [[VialerSIPLib sharedInstance].callManager answerCall:self.call completion:^(NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:SIPIncomingCallViewControllerShowSIPCallingSegue sender:nil];
+        });
+    }];
 }
 
 @end
