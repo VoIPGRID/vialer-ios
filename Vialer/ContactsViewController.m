@@ -71,14 +71,9 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self checkContactsAccess];
     [self showReachabilityBar];
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"ContactModel.ContactsUpdated" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+    
     if (self.showTitleImage) {
         self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
     } else {
@@ -89,6 +84,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
+    [self checkContactsAccess];
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ContactModel.ContactsUpdated" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
