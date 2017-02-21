@@ -51,8 +51,8 @@ import Foundation
     var allContacts: [CNContact] {
         get {
             var allContacts = [CNContact]()
-            for (_, contacts) in contacts {
-                allContacts += contacts
+            for (_, contact) in contacts {
+                allContacts += contact
             }
             return allContacts
         }
