@@ -773,9 +773,7 @@
 		C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		C42FAD3C1D198D34004D9D00 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringtone.wav; path = Branding/Voys/ringtone.wav; sourceTree = "<group>"; };
 		C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VoysIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C43172381DFE85B3005FF8EA /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VoysIntentsExtension.plist"; sourceTree = "<absolute>"; };
 		C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VerbondenIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C43172421DFE85F8005FF8EA /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VerbondenIntentsExtension.plist; path = "/Users/bob/Projects/ios/vialer-ios/VerbondenIntentsExtension.plist"; sourceTree = "<absolute>"; };
 		C4378A9E1E32014D0079C57B /* Notifications-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Notifications-Bridging-Header.h"; path = "Supporting Files/Notifications-Bridging-Header.h"; sourceTree = "<group>"; };
 		C43B6E251E2E524400942F9B /* VialerLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerLogger.swift; path = "Categories-Helpers/VialerLogger.swift"; sourceTree = "<group>"; };
 		C43EE05A1D5C749B00F8C3C0 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
@@ -882,6 +880,12 @@
 		DBA89A444631A954C6990FF7 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1C8A429C38FFD1F3398583 /* Pods-VerbondenSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		ECEF4C5E8001C9FEA72001F6 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBB573A1E5D67DD0018BD1D /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		EEBB573C1E5D67DD0018BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
+		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = "<group>"; };
+		EEBB574B1E5DD4F00018BD1D /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		EEBB574D1E5DD4F00018BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
 		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
 		F208516A1D26935600A17E71 /* Acceptatie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Acceptatie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1333,7 +1337,7 @@
 		C41FD8D11C60A12E00BBE6D7 /* Voys */ = {
 			isa = PBXGroup;
 			children = (
-				C43172381DFE85B3005FF8EA /* VoysIntentsExtension.plist */,
+				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C48947931D8925E5004A0EE5 /* InfoPlist.strings */,
 				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
@@ -1488,7 +1492,7 @@
 		C490ADEF1D086458004A8F83 /* Verbonden */ = {
 			isa = PBXGroup;
 			children = (
-				C43172421DFE85F8005FF8EA /* VerbondenIntentsExtension.plist */,
+				EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */,
 				C490ADF31D086458004A8F83 /* Verbonden-Info.plist */,
 				C489479D1D892605004A0EE5 /* InfoPlist.strings */,
 				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
@@ -1696,6 +1700,24 @@
 				C4675FF11C469FE8008820C8 /* UI */,
 			);
 			name = "Side Menu";
+			sourceTree = "<group>";
+		};
+		EEBB57391E5D67DD0018BD1D /* test */ = {
+			isa = PBXGroup;
+			children = (
+				EEBB573A1E5D67DD0018BD1D /* CallDirectoryHandler.swift */,
+				EEBB573C1E5D67DD0018BD1D /* Info.plist */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		EEBB574A1E5DD4F00018BD1D /* callkist-test */ = {
+			isa = PBXGroup;
+			children = (
+				EEBB574B1E5DD4F00018BD1D /* CallDirectoryHandler.swift */,
+				EEBB574D1E5DD4F00018BD1D /* Info.plist */,
+			);
+			path = "callkist-test";
 			sourceTree = "<group>";
 		};
 		F208516D1D2693A300A17E71 /* Acceptatie */ = {
@@ -2109,6 +2131,8 @@
 				C4F49F281BF0B45700C25159 /* VialerTests */,
 				F2B43F0C1C3BEB3F0089A387 /* SnapshotUITests */,
 				F2C44A631DE40EDD00F7CF50 /* VialerIntentsExtension */,
+				EEBB57391E5D67DD0018BD1D /* test */,
+				EEBB574A1E5DD4F00018BD1D /* callkist-test */,
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
 				6BF7CB1CC68764AE6D41FF6A /* Pods */,
@@ -2478,7 +2502,7 @@
 				KnownAssetTags = (
 					voipAccountSwitch,
 				);
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
@@ -4042,7 +4066,7 @@
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = VoysIntentsExtension.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Voys/VoysIntentsExtension.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -4075,7 +4099,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = VoysIntentsExtension.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Voys/VoysIntentsExtension.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -4104,7 +4128,7 @@
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = VerbondenIntentsExtension.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Verbonden/VerbondenIntentsExtension.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -4137,7 +4161,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = VerbondenIntentsExtension.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Verbonden/VerbondenIntentsExtension.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -4666,6 +4690,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8EDCCFBE1CF6B8059D142FE8 /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -4711,6 +4736,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0CE2DBE844C5B82A1500BAB0 /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
