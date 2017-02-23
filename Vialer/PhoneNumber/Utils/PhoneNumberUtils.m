@@ -43,6 +43,10 @@
 }
 
 + (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
+    if ([phoneNumber isEqual: @"anonymous"]) {
+        return @"Anonymous";
+    }
+    
     phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"(0)" withString:@""];
     phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
     phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789*#"] invertedSet]] componentsJoinedByString:@""];
