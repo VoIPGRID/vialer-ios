@@ -2517,6 +2517,7 @@
 					};
 					C41FD8F21C60A89300BBE6D7 = {
 						DevelopmentTeam = AM8JDXQ3L4;
+						ProvisioningStyle = Automatic;
 						TestTargetID = C41FD8551C60A08400BBE6D7;
 					};
 					C431722F1DFE85B3005FF8EA = {
@@ -3998,6 +3999,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4029,6 +4031,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
