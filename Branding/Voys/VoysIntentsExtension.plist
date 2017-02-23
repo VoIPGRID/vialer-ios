@@ -22,15 +22,8 @@
 	<string>1</string>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionAttributes</key>
-		<dict>
-			<key>IntentsSupported</key>
-			<array>
-				<string>INStartAudioCallIntent</string>
-			</array>
-		</dict>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.intents-service</string>
+		<string>com.apple.callkit.call-directory</string>
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).IntentHandler</string>
 	</dict>
