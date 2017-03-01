@@ -148,7 +148,9 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     logMessage = [logMessage replaceRegexWithPattern:@"Contact:(.+?)>" with:@" <SIP_ANONYMIZED"];
     logMessage = [logMessage replaceRegexWithPattern:@"sip:(.+?)@" with:@"SIP_USER_ID"];
     logMessage = [logMessage replaceRegexWithPattern:@"Digest username=\"(.+?)\"" with:@"SIP_USERNAME"];
-    logMessage = [logMessage replaceRegexWithPattern: @"nonce=\"(.+?)\"" with:@"NONCE"];
+    logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
+    logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
+    logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
     NSString *log = [NSString stringWithFormat:@"%@ %@ - %@", level, [VialerLogger remoteIdentifier], logMessage];
     [[LELog sharedInstance] log:log];
 }

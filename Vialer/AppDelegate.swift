@@ -346,8 +346,11 @@ extension AppDelegate {
             VialerLogError("Couldn't add account to endpoint, not setting up call to: \(phoneNumber)")
             return false
         }
+        VialerGAITracker.setupOutgoingSIPCallEvent()
         vialerSIPLib.callManager.startCall(toNumber: phoneNumber, for: account) { _, error in
-            VialerLogError("Error starting call through User activity. Error: \(error)")
+            if error != nil {
+                VialerLogError("Error starting call through User activity. Error: \(error)")
+            }
         }
         return true
     }
