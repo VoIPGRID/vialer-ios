@@ -241,30 +241,30 @@ import Foundation
     static func callMetrics(finishedCall call: VSLCall) {
         // Only sent call statistics when the call duration was longer than 10 seconds
         // to prevent large rounding errors.
-        if (call.connectDuration > 10) {
-            //VIALI-3258: get the audio codec from the call.
-            let audioCodec = "AudioCodec:\(call.activeCodec)"
-            self.sendMOSValue(mos: call.mos, forCodec: audioCodec)
-
-            let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
-            self.sendBandwidthPerMinute(bandwidth: mbPerMinute, forCodec: audioCodec)
+        guard call.connectDuration > 10 else {
+            VialerLogInfo("Not sending metrics")
+            return
         }
+        VialerLogInfo("Sending metrics")
+        let audioCodec = "AudioCodec:\(call.activeCodec)"
+        sendMOSValue(call: call, forCodec: audioCodec)
+        sendBandwidth(call: call, forCodec: audioCodec)
     }
 
     /**
      Helper function for sending the MOS value for a call.
 
-     - parameter mos:   The MOS value of the call
+     - parameter call: The call
      - parameter codec: The Codec used for the call
      */
-    private static func sendMOSValue(mos: Float, forCodec codec:String) {
+    private static func sendMOSValue(call: VSLCall, forCodec codec:String) {
         // Get the current connection type for the call.
         let reachabilityManager = ReachabilityManager()
         reachabilityManager.resetAndGetCurrentReachabilityStatus()
         let currentConnection = reachabilityManager.currentConnectionTypeString()
-        
+
         let labelString = "MOS for \(codec) on Networktype: \(currentConnection)"
-        let value = mos * 100.0 as NSNumber
+        let value = Int(call.mos * 100.0) as NSNumber
 
         sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: value)
     }
@@ -272,12 +272,13 @@ import Foundation
     /**
      Helper function for sending the Bandwidth used for a call.
 
-     - parameter bandwitdth: The bandwidth in megabytes per second
-     - parameter codec:      The Codec used for the call
+     - parameter call: The call
+     - parameter codec: The Codec used for the call
      */
-    private static func sendBandwidthPerMinute(bandwidth: Float, forCodec codec:String) {
+    private static func sendBandwidth(call: VSLCall, forCodec codec:String) {
+        let mbPerMinute = call.totalMBsUsed / (Float)(call.connectDuration / 60)
+        let value = Int(mbPerMinute * 1024.0) as NSNumber
         let labelString = "Bandwidth for \(codec)"
-        let value = NSNumber(value:Int(bandwidth*1024.0))
 
         sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: value)
     }

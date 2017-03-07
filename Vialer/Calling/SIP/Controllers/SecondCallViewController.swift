@@ -37,13 +37,13 @@ extension SecondCallViewController{
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
         startConnectDurationTimer()
-        addObserver(self, forKeyPath: #keyPath(firstCall.callState), options: .new, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIDevice.current.isProximityMonitoringEnabled = false
-        removeObserver(self, forKeyPath: #keyPath(firstCall.callState))
+        firstCall?.removeObserver(self, forKeyPath: "callState")
     }
 }
 

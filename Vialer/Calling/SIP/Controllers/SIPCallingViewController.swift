@@ -41,8 +41,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
             }
-            addObserver(self, forKeyPath: #keyPath(activeCall.callState), options: .new, context: &myContext)
-            addObserver(self, forKeyPath: #keyPath(activeCall.mediaState), options: .new, context: &myContext)
+            activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+            activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
         }
     }
     var callManager = VialerSIPLib.sharedInstance().callManager
@@ -85,8 +85,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     @IBOutlet weak var statusLabel: UILabel!
 
     deinit {
-        removeObserver(self, forKeyPath: #keyPath(activeCall.callState))
-        removeObserver(self, forKeyPath: #keyPath(activeCall.mediaState))
+        activeCall?.removeObserver(self, forKeyPath: "callState")
+        activeCall?.removeObserver(self, forKeyPath: "mediaState")
     }
 }
 

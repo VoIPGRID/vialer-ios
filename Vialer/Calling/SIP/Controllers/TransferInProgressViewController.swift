@@ -44,13 +44,13 @@ extension TransferInProgressViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
-        addObserver(self, forKeyPath: #keyPath(firstCall.transferStatus), options: .new, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
         updateUI()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        removeObserver(self, forKeyPath: #keyPath(firstCall.transferStatus))
+        firstCall?.removeObserver(self, forKeyPath: "callState")
     }
 
 }

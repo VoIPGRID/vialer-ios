@@ -55,11 +55,12 @@ extension SetupCallTransferViewController {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
-        addObserver(self, forKeyPath: #keyPath(firstCall.callState), options: .new, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        firstCall?.removeObserver(self, forKeyPath: "callState")
     }
 }
 
