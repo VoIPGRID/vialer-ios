@@ -391,6 +391,7 @@
 		C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
 		C4C6EA3E1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
 		C4C6EA3F1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */; };
+		C4D2704D1E70179E00B1637B /* VialerIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */; };
 		C4DA5C781BFB27580043DED7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
@@ -926,6 +927,7 @@
 		C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerGAITracker.swift; path = Helpers/VialerGAITracker.swift; sourceTree = "<group>"; };
 		C4C6EA3C1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VoIPGRIDRequestOperationManager+Recents.h"; path = "Recents/Models/VoIPGRIDRequestOperationManager+Recents.h"; sourceTree = "<group>"; };
 		C4C6EA3D1C6C9B5000108DEF /* VoIPGRIDRequestOperationManager+Recents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VoIPGRIDRequestOperationManager+Recents.m"; path = "Recents/Models/VoIPGRIDRequestOperationManager+Recents.m"; sourceTree = "<group>"; };
+		C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VialerIntentsExtension.plist; sourceTree = "<group>"; };
 		C4DA5C791BFB27580043DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C4DA5C7E1BFB275C0043DED7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C4DA5C7F1BFB2E590043DED7 /* VialerDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VialerDrawerViewController.h; path = Main/Controllers/VialerDrawerViewController.h; sourceTree = "<group>"; };
@@ -997,7 +999,6 @@
 		F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VialerIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		F2C44A661DE40EDD00F7CF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../VialerIntentsExtension/Info.plist; sourceTree = "<group>"; };
 		F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+StartCallConvertible.swift"; sourceTree = "<group>"; };
 		F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartCallConvertible.swift; path = Helpers/StartCallConvertible.swift; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Settings/Controllers/SettingsViewController.h; sourceTree = "<group>"; };
@@ -1773,7 +1774,7 @@
 			isa = PBXGroup;
 			children = (
 				C4FE25E11D819A8B002BE230 /* Vialer.entitlements */,
-				F2C44A661DE40EDD00F7CF50 /* Info.plist */,
+				C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */,
 				F20851821D269DD300A17E71 /* Vialer-Info.plist */,
 				C48947971D8925F2004A0EE5 /* InfoPlist.strings */,
 				F20851881D269E1700A17E71 /* Snapshot-Constants.swift */,
@@ -2340,6 +2341,8 @@
 				C43172301DFE85B3005FF8EA /* Sources */,
 				C43172321DFE85B3005FF8EA /* Frameworks */,
 				C43172331DFE85B3005FF8EA /* Resources */,
+				C4D2704E1E7017C400B1637B /* Update Version number */,
+				C4D2704F1E7017C900B1637B /* Update Build number */,
 			);
 			buildRules = (
 			);
@@ -2357,6 +2360,8 @@
 				C431723A1DFE85F8005FF8EA /* Sources */,
 				C431723C1DFE85F8005FF8EA /* Frameworks */,
 				C431723D1DFE85F8005FF8EA /* Resources */,
+				C4D270501E7017CF00B1637B /* Update Version number */,
+				C4D270511E7017D100B1637B /* Update Build number */,
 			);
 			buildRules = (
 			);
@@ -2487,6 +2492,8 @@
 				F2C44A5E1DE40EDD00F7CF50 /* Sources */,
 				F2C44A5F1DE40EDD00F7CF50 /* Frameworks */,
 				F2C44A601DE40EDD00F7CF50 /* Resources */,
+				C4E97AD21E700A55006ECDE3 /* Update Version number */,
+				C4E97AD31E700D73006ECDE3 /* Update Build number */,
 			);
 			buildRules = (
 			);
@@ -2829,6 +2836,7 @@
 				FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */,
 				F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				C4F385951D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
+				C4D2704D1E70179E00B1637B /* VialerIntentsExtension.plist in Resources */,
 				FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */,
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
 				F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */,
@@ -3200,6 +3208,91 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C4D2704E1E7017C400B1637B /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		C4D2704F1E7017C900B1637B /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+		};
+		C4D270501E7017CF00B1637B /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		C4D270511E7017D100B1637B /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+		};
+		C4E97AD21E700A55006ECDE3 /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		C4E97AD31E700D73006ECDE3 /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		CE15CE20304381B878B68B54 /* [CP] Copy Pods Resources */ = {
@@ -4621,7 +4714,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = VialerIntentsExtension/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/VialerIntentsExtension.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -4654,7 +4747,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = VialerIntentsExtension/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/VialerIntentsExtension.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
