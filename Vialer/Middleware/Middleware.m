@@ -19,7 +19,7 @@ static NSString * const MiddlewareAPNSPayloadKeyCheckin    = @"checkin";
 static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
 
 static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
-
+static float const MiddlewareResendTimeInterval = 10.0;
 NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
 
 @interface Middleware ()
@@ -247,13 +247,12 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                     VialerLogWarning(@"Device registration failed. Will retry 5 times. Currently tried %d out of 5.", self.retryCount);
 
                     // Retry to call the function.
-                    [self sentAPNSToken:apnsToken withCompletion:completion];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MiddlewareResendTimeInterval * self.retryCount * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self sentAPNSToken:apnsToken withCompletion:completion];
+                    });
                 } else {
                     // Reset the retry count back to 0.
                     self.retryCount = 0;
-
-                    // Disable SIP to give some feedback to the user.
-                    self.systemUser.sipEnabled = NO;
 
                     // And log the problem to track failures.
                     [VialerGAITracker registrationFailedWithMiddleWareException];
