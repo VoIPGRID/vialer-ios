@@ -354,6 +354,7 @@ extension SIPCallingViewController {
         keypadButton?.isEnabled = !call.onHold && call.callState == .confirmed
         holdButton?.active = call.onHold
         muteButton?.active = call.muted
+        speakerButton?.active = callManager.audioController.output == .bluetooth || callManager.audioController.output == .speaker
 
         // When dtmf is sent, use that as text, otherwise phone number.
         if let dtmf = dtmfSent {
