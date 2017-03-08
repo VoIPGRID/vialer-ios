@@ -38,6 +38,11 @@
                BlueprintName = "VialerTests"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SIPIncomingCallViewControllerTests/testAcceptCallButtonPressetMovesToSegue">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

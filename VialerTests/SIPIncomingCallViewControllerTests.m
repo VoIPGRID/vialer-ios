@@ -78,6 +78,7 @@
     [mockLabel stopMocking];
 }
 
+// Test disabled, need to mock out the callManager
 - (void)testAcceptCallButtonPressetMovesToSegue {
     id mockSipIncomingCallVC = OCMPartialMock(self.sipIncomingCallVC);
 

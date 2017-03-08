@@ -4709,7 +4709,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -4746,7 +4746,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;

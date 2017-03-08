@@ -107,6 +107,21 @@ extension SIPCallingViewController {
         if call.callState == .disconnected {
             handleCallEnded()
         }
+
+        // If there is no callerName, lookup the name in contact info.
+        if call.callerName == nil || call.callerName == "" {
+            // Set phonenumber first.
+            phoneNumberLabelText = call.callerNumber
+            // Search contact info.
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async { [weak self] in
+                PhoneNumberModel.getCallName(call) { phoneNumberModel in
+                    self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                }
+            }
+        } else {
+            // Set callerName.
+            phoneNumberLabelText = call.callerName
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
