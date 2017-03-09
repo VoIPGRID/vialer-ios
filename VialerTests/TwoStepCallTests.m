@@ -560,24 +560,6 @@
     [mockNotificationCenter stopMocking];
 }
 
-// Test disabled. I have not found a way to actually test dealloc being called (but why wouldn't it?)
-- (void)testNotificationObserverIsRemovedWhenDealloced {
-    id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
-    OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
-
-    __weak TwoStepCall *weakCallRef;
-    @autoreleasepool {
-        TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
-        weakCallRef = call;
-        XCTAssertNotNil(weakCallRef);
-    }
-
-    OCMVerify([mockNotificationCenter removeObserver:[OCMArg any]]);
-    XCTAssertNil(weakCallRef);
-
-    [mockNotificationCenter stopMocking];
-}
-
 - (void)testWhenAppWentInBackgroundTimerIsInvalidated {
     id mockTimer = OCMClassMock([NSTimer class]);
     TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];

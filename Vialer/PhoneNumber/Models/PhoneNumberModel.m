@@ -89,14 +89,14 @@
         if (model.phoneNumberLabel) {
             model.callerInfo = [model.callerInfo stringByAppendingString:[NSString stringWithFormat:@"\n%@", model.phoneNumberLabel]];
         }
-    } else if (call.callerName && call.callerNumber) {
+    } else if (![call.callerName isEqualToString:@""] && call.callerNumber) {
         model.callerInfo = [NSString stringWithFormat:@"%@\n%@", call.callerName, call.callerNumber];
-    } else if (call.callerName && !call.callerNumber) {
-        model.callerInfo = [NSString stringWithFormat:@"%@", call.callerName];
-    } else if (!call.callerName && call.callerNumber) {
-        model.callerInfo = [NSString stringWithFormat:@"%@", call.callerNumber];
+    } else if (![call.callerName isEqualToString:@""] && !call.callerNumber) {
+        model.callerInfo =call.callerName;
+    } else if ([call.callerName isEqualToString:@""] && call.callerNumber) {
+        model.callerInfo = call.callerNumber;
     } else {
-        model.callerInfo = [NSString stringWithFormat:@"%@", call.remoteURI];
+        model.callerInfo = call.remoteURI;
     }
 
     if (completion) {

@@ -9,8 +9,11 @@
 /* No comment provided by engineer. */
 "%@\nis currently logged in." = "%@\nis op dit moment ingelogd.";
 
-/* No comment provided by engineer. */
+/* Accept */
 "Accept" = "Accepteer";
+
+/* Access to microphone denied */
+"Access to microphone denied" = "Toegang tot microfoon geweigerd";
 
 /* No comment provided by engineer. */
 "Add destination" = "Voeg eindbestemming toe";
@@ -90,7 +93,7 @@
 /* Transfer failed */
 "Couldn't transfer call to" = "Kan niet doorverbinden naar";
 
-/* No comment provided by engineer. */
+/* Decline */
 "Decline" = "Weiger";
 
 /* No comment provided by engineer. */
@@ -156,6 +159,9 @@
 /* No comment provided by engineer. */
 "Forgot password?" = "Wachtwoord vergeten?";
 
+/* Give permission to use your microphone.\nGo to */
+"Give permission to use your microphone.\nGo to" = "Geef toestemming om de microfoon te gebruiken.\nGa naar";
+
 /* No comment provided by engineer. */
 "Hello" = "Hallo";
 
@@ -165,11 +171,11 @@
 /* No comment provided by engineer. */
 "If your email address is %@ we will send you an email with instructions to reset your password." = "Als je emailadres %@ is, zullen we je een email sturen met instructies om je wachtwoord te resetten.";
 
-/* No comment provided by engineer. */
+/* Incoming call */
 "Incoming call" = "Binnenkomend gesprek";
 
-/* Incoming call from: 'callerName', <'callerNumber'> */
-"Incoming call from: %1@ <%2@>" = "Binnenkomend gesprek van: %1$@ <%2$@>";
+/* Incoming call from: \(call.callerName) \(call.callerNumber) */
+"Incoming call from: \(call.callerName) \(call.callerNumber)" = "Inkomend gesprek van: \(call.callerName) \(call.callerNumber)";
 
 /* Statuslabel state text .Incoming */
 "Incoming call..." = "Inkomend gesprek...";
@@ -183,7 +189,7 @@
 /* No comment provided by engineer. */
 "It's not possible to setup a call. Make sure you have an internet connection." = "Gesprek kan niet opgezet worden. Zorg voor een internet verbinding en probeer het opnieuw.";
 
-/* No comment provided by engineer. */
+/* Keypad */
 "Keypad" = "Toetsen";
 
 /* No comment provided by engineer. */

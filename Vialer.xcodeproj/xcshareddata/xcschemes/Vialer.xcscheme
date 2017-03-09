@@ -40,40 +40,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "SettingsViewControllerTests/testSipEnabledObserverWillReloadTable">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testKVONotificationDoesNotFire">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testKVONotificationDoesNotFireNilCase">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testKVONotificationFiresWhenClientIDChanges">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testKVONotificationFiresWhenClientIDChangesFromNilToValue">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testKVONotificationFiresWhenClientIDChangesFromValueToNil">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testLoggingInUserWithSIPEnabledWillPostLoginNotification">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testLoggingInUserWithoutSIPEnabledWillPostLoginNotification">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testLoggingInWithUserWithSIPEnabledWillFetchAppAccount">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testLoginUserWillStoreCredentials">
-               </Test>
-               <Test
-                  Identifier = "SystemUserTests/testUpdateSIPAccountInformationWhenAsked">
-               </Test>
-               <Test
-                  Identifier = "TwoStepCallTests/testNotificationObserverIsRemovedWhenDealloced">
+                  Identifier = "SIPIncomingCallViewControllerTests/testAcceptCallButtonPressetMovesToSegue">
                </Test>
             </SkippedTests>
          </TestableReference>
