@@ -101,7 +101,9 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             if (!success) {
                 VialerLogDebug(@"SIP Endpoint registration FAILED. Sending Available = NO to middleware");
                 [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
-                [SIPUtils removeSIPEndpoint];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SIPUtils removeSIPEndpoint];
+                });
                 return;
             }
 
@@ -114,8 +116,9 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                 // Sent not available to the middleware.
                 VialerLogDebug(@"Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
                 [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
-                [SIPUtils removeSIPEndpoint];
-
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SIPUtils removeSIPEndpoint];
+                });
             }
         }];
 
