@@ -43,30 +43,15 @@ class AppDelegate: UIResponder {
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
 
     // Core Data
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        context.persistentStoreCoordinator = self.persistentStoreCoordinator
-        return context
+    lazy var coreDataStack: CoreDataStack = {
+        return CoreDataStack(modelNamed: "Vialer")
     }()
 
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        let storeURL = FileManager.documentsDir.appendingPathComponent("Vialer.sqlite")
-
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        do {
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
-        } catch let error as NSError {
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            VialerLogError("Could not create PersistentStoreCoordinator instance. Unresolved error:\(error) \(error.userInfo)")
-            abort()
+    var managedObjectContext: NSManagedObjectContext {
+        get {
+            return coreDataStack.mainContext
         }
-        return coordinator
-    }()
-
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = Bundle.main.url(forResource: "VialerModel", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOf: modelURL)!
-    }()
+    }
 }
 
 // MARK: - UIApplicationDelegate

@@ -58,6 +58,9 @@ import Foundation
         }
     }
 
+    /// Dictionary with phone numbers as keys and info about phonenumbers as value.
+    var phoneNumbersToContacts = [String: PhoneNumber]()
+
     /**
      The sort order of the users contacts.
     */
@@ -241,6 +244,9 @@ import Foundation
             return
         }
 
+        // Clear current dictionary
+        phoneNumbersToContacts = [String: PhoneNumber]()
+
         var newContacts = [String: [CNContact]]()
         do {
             let request = CNContactFetchRequest(keysToFetch: keysToFetch)
@@ -257,6 +263,12 @@ import Foundation
                 }
                 contactList.append(contact)
                 newContacts[firstChar] = contactList
+
+                // Add every phone number to search dictionary.
+                for number in contact.phoneNumbers {
+                    let newNumber = PhoneNumber(number: number, contact: contact)
+                    self.phoneNumbersToContacts[newNumber.phoneNumber] = newNumber
+                }
             }
 
             contacts = newContacts

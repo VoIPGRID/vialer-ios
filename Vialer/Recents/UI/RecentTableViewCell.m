@@ -49,11 +49,11 @@ static NSString * const RecentTableViewCellOutboundImageName = @"outbound";
     self.dateTimeLabel.text = [timeConverter relativeDayTimeStringFromDate:date];
 }
 
-- (void)setAnswered:(BOOL)answered {
-    if (answered) {
-        self.nameLabel.textColor = [UIColor blackColor];
-    } else {
+- (void)setMissed:(BOOL)missed {
+    if (missed) {
         self.nameLabel.textColor = [UIColor redColor];
+    } else {
+        self.nameLabel.textColor = [UIColor blackColor];
     }
 }
 

@@ -29,26 +29,27 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     var currentUser = SystemUser.current()!
     var defaultConfiguration = Configuration.default()
     var contactModel = ContactModel.defaultModel
-    private lazy var managedObjectContext: NSManagedObjectContext = {
+
+    private lazy var mainContext: NSManagedObjectContext = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.managedObjectContext
+        return appDelegate.coreDataStack.mainContext
+    }()
+
+    private lazy var syncContext: NSManagedObjectContext = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.coreDataStack.syncContext
     }()
 
     fileprivate lazy var callManager: RecentCallManager = {
-        let manager = RecentCallManager()
-        manager.mainManagedObjectContext = self.managedObjectContext
+        let manager = RecentCallManager(managedContext: self.syncContext)
         return manager
     }()
 
     // MARK: - Properties
     fileprivate lazy var fetchedResultController: NSFetchedResultsController<RecentCall> = {
-        let fetchRequest = NSFetchRequest<RecentCall>()
-        let entity = NSEntityDescription.entity(forEntityName: "RecentCall", in: self.managedObjectContext)
-        fetchRequest.entity = entity
-        let sort = NSSortDescriptor(key: "callDate", ascending: false)
-        fetchRequest.sortDescriptors = [sort]
+        let fetchRequest = RecentCall.sortedFetchRequest
         fetchRequest.fetchBatchSize = 20
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self
         return controller
     }()
@@ -182,9 +183,9 @@ extension RecentsViewController {
     fileprivate func showContactViewController(forRecent recent: RecentCall) {
         let contactViewController: CNContactViewController
         let contact: CNContact
-        if recent.suppressed() {
+        if recent.suppressed {
             let unknownContact = CNMutableContact()
-            unknownContact.givenName = recent.displayName
+            unknownContact.givenName = recent.displayName ?? ""
             contactViewController = CNContactViewController(forUnknownContact: unknownContact)
             contactViewController.allowsEditing = false
         } else if let recordID = recent.callerRecordID {
@@ -192,12 +193,12 @@ extension RecentsViewController {
             contactViewController = CNContactViewController(for: contact)
             contactViewController.title = CNContactFormatter.string(from: contact, style: .fullName)
         } else {
-            let newPhoneNumber = recent.inbound!.boolValue ? recent.sourceNumber! : recent.destinationNumber!
+            let newPhoneNumber = recent.inbound ? recent.sourceNumber! : recent.destinationNumber!
             let phoneNumber = CNPhoneNumber(stringValue: newPhoneNumber)
             let phoneNumbers = CNLabeledValue<CNPhoneNumber>(label: CNLabelPhoneNumberMain, value: phoneNumber)
             let unknownContact = CNMutableContact()
             unknownContact.phoneNumbers = [phoneNumbers]
-            unknownContact.givenName = recent.displayName
+            unknownContact.givenName = recent.displayName ?? ""
             contactViewController = CNContactViewController(forUnknownContact: unknownContact)
             contactViewController.title = newPhoneNumber
         }
@@ -221,7 +222,7 @@ extension RecentsViewController {
             self.callManager.getLatestRecentCalls { fetchError in
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
-                    if let error = fetchError, self.callManager.recentsFetchErrorCode == .fetchingUserNotAllowed {
+                    if let error = fetchError, error == .fetchNotAllowed {
                         let alert = UIAlertController(title: NSLocalizedString("Not allowed", comment: "Not allowed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -260,8 +261,8 @@ extension RecentsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         guard fetchedResultController.fetchedObjects?.count != 0 else { return }
         let recent = fetchedResultController.object(at: indexPath)
-        guard !recent.suppressed() else { return }
-        if recent.inbound!.boolValue {
+        guard !recent.suppressed else { return }
+        if recent.inbound {
             call(recent.sourceNumber!)
         } else {
             call(recent.destinationNumber!)
@@ -278,6 +279,7 @@ extension RecentsViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension RecentsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard callManager.recentsFetchErrorCode == nil else { return 1 }
         return max(fetchedResultController.sections?[section].numberOfObjects ?? 1, 1)
     }
 
@@ -308,8 +310,35 @@ extension RecentsViewController: ReachabilityBarViewControllerDelegate {
 
 // MARK: - NSFetchedResultsControllerDelegate
 extension RecentsViewController : NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        // If we're showing 1 cell because of error, we need to reload the complete table.
+        guard tableView(tableView, numberOfRowsInSection: 0) > 1 else { return }
+        tableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        // If we're showing 1 cell because of error, we need to reload the complete table.
+        guard tableView(tableView, numberOfRowsInSection: 0) > 1 else { return }
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .update:
+            _ = recentCell(indexPath: indexPath!)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        }
+    }
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.reloadData()
+        // If we're showing 1 cell because of error, we need to reload the complete table.
+        if tableView(tableView, numberOfRowsInSection: 0) == 1 {
+            tableView.reloadData()
+        } else {
+            tableView.endUpdates()
+        }
     }
 }
 
@@ -317,8 +346,8 @@ extension RecentsViewController : NSFetchedResultsControllerDelegate {
 extension RecentsViewController {
     fileprivate func failedLoadingRecentsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(cellIdentifier: .errorText, for: indexPath)
-        switch callManager.recentsFetchErrorCode {
-        case .fetchingUserNotAllowed:
+        switch callManager.recentsFetchErrorCode! {
+        case .fetchNotAllowed:
             cell.textLabel?.text = NSLocalizedString("You are not allowed to view recent calls", comment: "You are not allowed to view recent calls")
         default:
             cell.textLabel?.text = NSLocalizedString("Could not load your recent calls", comment: "Could not load your recent calls")
@@ -341,11 +370,11 @@ extension RecentsViewController {
     fileprivate func recentCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(cellIdentifier: .recentCall, for: indexPath) as! RecentTableViewCell
         let recent = fetchedResultController.object(at: indexPath)
-        cell.inbound = recent.inbound!.boolValue
+        cell.inbound = recent.inbound
         cell.name = recent.displayName
         cell.subtitle = recent.phoneType
         cell.date = recent.callDate
-        cell.answered = recent.duration != 0 && recent.inbound!.boolValue
+        cell.missed = recent.inbound && recent.duration == 0
         return cell
     }
 }

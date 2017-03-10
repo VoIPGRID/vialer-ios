@@ -12,8 +12,6 @@
 #import "PhoneNumberUtils.h"
 #import "ReachabilityBarViewController.h"
 #import "ReachabilityManager.h"
-#import "RecentCall.h"
-#import "RecentCallManager.h"
 #import "RecentTableViewCell.h"
 #import "SAMKeychain.h"
 #import "SDStatusBarManager.h"

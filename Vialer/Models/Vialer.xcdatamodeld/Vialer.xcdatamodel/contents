@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="RecentCall" representedClassName=".RecentCall" syncable="YES">
+        <attribute name="callDate" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="callerRecordID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="callID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="destinationNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dialedNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="inbound" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="phoneType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RecentCall" positionX="-63" positionY="-18" width="128" height="195"/>
+    </elements>
+</model>

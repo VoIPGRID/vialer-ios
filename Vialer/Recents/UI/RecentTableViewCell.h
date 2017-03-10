@@ -11,5 +11,5 @@
 @property (strong, nonatomic) NSString *subtitle;
 @property (strong, nonatomic) NSDate *date;
 @property (nonatomic) BOOL inbound;
-@property (nonatomic) BOOL answered;
+@property (nonatomic) BOOL missed;
 @end
