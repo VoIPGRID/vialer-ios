@@ -60,12 +60,12 @@ extension TransferInProgressViewController {
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         callManager.end(firstCall!) { error in
             if error != nil {
-                VialerLogError("Error disconnecting call: \(error)")
+                VialerLogError("Error disconnecting call: \(error!)")
             }
         }
         callManager.end(currentCall!) { error in
             if error != nil {
-                VialerLogError("Error disconnecting call: \(error)")
+                VialerLogError("Error disconnecting call: \(error!)")
             }
         }
     }

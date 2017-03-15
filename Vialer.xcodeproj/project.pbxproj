@@ -156,6 +156,12 @@
 		C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		C42B048B1E7925E600280381 /* RecentCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048A1E7925E600280381 /* RecentCallTests.swift */; };
+		C42B048D1E79354700280381 /* RecentCallManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048C1E79354700280381 /* RecentCallManagerTests.swift */; };
+		C42B048F1E7936FD00280381 /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
+		C42B04901E7936FD00280381 /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
+		C42B04911E7936FD00280381 /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
+		C42B04921E7936FD00280381 /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
 		C42FAD3D1D198D34004D9D00 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = C42FAD3C1D198D34004D9D00 /* ringtone.wav */; };
 		C43172311DFE85B3005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		C431723B1DFE85F8005FF8EA /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
@@ -244,8 +250,6 @@
 		C48B78151DE309B000B17BCF /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
 		C48B78161DE309B000B17BCF /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
 		C48B78171DE309B000B17BCF /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
-		C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */; };
-		C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */; };
 		C490AD661D0863E3004A8F83 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
 		C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
@@ -826,6 +830,9 @@
 		C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Branding/Voys/Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		C42B048A1E7925E600280381 /* RecentCallTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentCallTests.swift; path = Recents/Models/RecentCallTests.swift; sourceTree = "<group>"; };
+		C42B048C1E79354700280381 /* RecentCallManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentCallManagerTests.swift; path = Recents/Models/RecentCallManagerTests.swift; sourceTree = "<group>"; };
+		C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebserviceProtocol.swift; path = Api/WebserviceProtocol.swift; sourceTree = "<group>"; };
 		C42FAD3C1D198D34004D9D00 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringtone.wav; path = Branding/Voys/ringtone.wav; sourceTree = "<group>"; };
 		C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VoysIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VerbondenIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -881,8 +888,6 @@
 		C489479C1D892605004A0EE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C489479E1D892607004A0EE5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C48B78131DE309B000B17BCF /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactModel.swift; path = Contacts/Models/ContactModel.swift; sourceTree = "<group>"; };
-		C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallTests.m; sourceTree = "<group>"; };
-		C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentCall+VoIPGRIDTests.m"; sourceTree = "<group>"; };
 		C490ADEC1D0863E3004A8F83 /* Verbonden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verbonden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C490ADF01D086458004A8F83 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		C490ADF11D086458004A8F83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1530,9 +1535,9 @@
 		C48F5AC81C6E230A00A3D9AE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C48F5AC91C6E233000A3D9AE /* RecentCallTests.m */,
-				C48F5ACB1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m */,
 				F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */,
+				C42B048A1E7925E600280381 /* RecentCallTests.swift */,
+				C42B048C1E79354700280381 /* RecentCallManagerTests.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2147,6 +2152,7 @@
 				FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */,
 				C4AEB24F1E6D954400550E0C /* Webservice.swift */,
 				C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */,
+				C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -3490,6 +3496,7 @@
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
 				C4AEB2571E6D954400550E0C /* Webservice.swift in Sources */,
 				C41506AE1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
+				C42B04911E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
 				C41506A81E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */,
 				F22FF28C1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41FD8821C60A08400BBE6D7 /* RecentTableViewCell.m in Sources */,
@@ -3609,6 +3616,7 @@
 				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41506AF1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
 				C41506A91E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */,
+				C42B04921E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
 				C48931D31D8092E300C5633C /* UIViewControllerExtensions.swift in Sources */,
 				C420AEC71E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
@@ -3653,16 +3661,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
+				C42B048D1E79354700280381 /* RecentCallManagerTests.swift in Sources */,
 				F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */,
 				C41D3A721DE728DC00AEA929 /* ContactModelTestCase.swift in Sources */,
 				F2A958C51D2BA24B00C1D854 /* RecentsTimeConverter.swift in Sources */,
 				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
 				C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */,
+				C42B048B1E7925E600280381 /* RecentCallTests.swift in Sources */,
 				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
 				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
 				C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */,
-				C48F5ACA1C6E233000A3D9AE /* RecentCallTests.m in Sources */,
 				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
 				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
@@ -3675,7 +3684,6 @@
 				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
 				F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
-				C48F5ACC1C6E342200A3D9AE /* RecentCall+VoIPGRIDTests.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
 				F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */,
 				C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */,
@@ -3748,6 +3756,7 @@
 				F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */,
 				C41506AD1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
 				C41506A71E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */,
+				C42B04901E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
 				C4AEB2561E6D954400550E0C /* Webservice.swift in Sources */,
 				F208511A1D26935600A17E71 /* Configuration.m in Sources */,
 				F208511C1D26935600A17E71 /* VialerGAITracker.swift in Sources */,
@@ -3859,6 +3868,7 @@
 				F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41506AC1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
 				C41506A61E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */,
+				C42B048F1E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
 				C4AEB2551E6D954400550E0C /* Webservice.swift in Sources */,
 				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,

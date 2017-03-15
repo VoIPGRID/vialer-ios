@@ -17,7 +17,7 @@ enum Result<A> {
     case failure(Error)
 }
 
-final class Webservice {
+final class Webservice: WebserviceProtocol {
     private let basicAuth: String
 
     /// Default initializer

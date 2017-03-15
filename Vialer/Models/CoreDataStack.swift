@@ -12,9 +12,11 @@ class CoreDataStack {
 
     /// The name of the model for Core Data.
     private let modelNamed: String
+    private let inMemory: Bool
 
-    init(modelNamed: String) {
+    init(modelNamed: String, inMemory: Bool? = false) {
         self.modelNamed = modelNamed
+        self.inMemory = inMemory!
     }
 
     // Save the main UI if there are changes.
@@ -27,14 +29,14 @@ class CoreDataStack {
         }
     }
 
-    /// - Main Context on main queue for UI.
+    /// Main Context on main queue for UI.
     lazy var mainContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = self.storeCoordinator
         return context
     }()
 
-    /// - Sync Context on private queue for a sync processes (merged into Main context on save).
+    /// Sync Context on private queue for a sync processes (merged into Main context on save).
     lazy var syncContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         context.persistentStoreCoordinator = self.storeCoordinator
@@ -51,13 +53,14 @@ class CoreDataStack {
     private lazy var storeCoordinator: NSPersistentStoreCoordinator = {
         let storeURL = FileManager.documentsDir.appendingPathComponent("\(self.modelNamed).sqlite")
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        let storeType = self.inMemory ? NSInMemoryStoreType : NSSQLiteStoreType
         do {
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: storeURL, options: nil)
         } catch let error as NSError {
             // Store has changed, delete old and try to open again.
             self.resetStore()
             do {
-                try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+                try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: storeURL, options: nil)
             } catch let error as NSError {
                 // abort() causes the application to generate a crash log and terminate.
                 VialerLogError("Could not create PersistentStoreCoordinator instance. Unresolved error:\(error) \(error.userInfo)")

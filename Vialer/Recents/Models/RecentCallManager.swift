@@ -43,11 +43,14 @@ class RecentCallManager {
     /// observer that listens to logout actions
     private var userLogout: NotificationToken
 
+    private var webservice: WebserviceProtocol!
+
     /// Initializer
     ///
     /// - Parameter managedContext: Context that is used to fetch and store RecentCalls in.
-    required init(managedContext: NSManagedObjectContext) {
+    required init(managedContext: NSManagedObjectContext, webservice: WebserviceProtocol? = nil) {
         self.managedContext = managedContext
+        self.webservice = webservice ?? Webservice(authentication: SystemUser.current())
 
         // When users does a logout, remove all calls.
         userLogout = NotificationCenter.default.addObserver(descriptor: SystemUser.logoutNotification) { _ in
@@ -79,18 +82,18 @@ class RecentCallManager {
         reloading = true
 
         // Fetch calls from remote.
-        Webservice(authentication: SystemUser.current()).load(resource: RecentCall.allSince(date: fetchDate)) { result in
+        webservice.load(resource: RecentCall.allSince(date: fetchDate)) { result in
+            defer {
+                completion(self.recentsFetchErrorCode)
+            }
             self.reloading = false
             switch result {
             case .failure(WebserviceError.forbidden):
                 self.recentsFetchErrorCode = .fetchNotAllowed
-                completion(.fetchNotAllowed)
             case .failure:
                 self.recentsFetchErrorCode = .fetchFailed
-                completion(.fetchFailed)
             case let .success(calls):
                 guard let calls = calls else {
-                    completion(nil)
                     return
                 }
                 // Set last fetch date to now.
@@ -98,12 +101,11 @@ class RecentCallManager {
                 self.recentsFetchErrorCode = nil
 
                 // Create and store the calls in the context.
-                self.managedContext.perform {
+                self.managedContext.performAndWait {
                     for call in calls {
                         _ = RecentCall.findOrCreate(for: call, in: self.managedContext)
                         try? self.managedContext.save()
                     }
-                    completion(nil)
                 }
             }
         }
