@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="PushedCall" representedClassName=".PushedCall" syncable="YES">
+        <attribute name="accepted" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="callDate" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="connectionType" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceNumber" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueKey" attributeType="String" indexed="YES" syncable="YES"/>
+    </entity>
     <entity name="RecentCall" representedClassName=".RecentCall" syncable="YES">
         <attribute name="callDate" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="callerRecordID" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +21,7 @@
         <attribute name="sourceNumber" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="PushedCall" positionX="-63" positionY="54" width="128" height="135"/>
         <element name="RecentCall" positionX="-63" positionY="-18" width="128" height="195"/>
     </elements>
 </model>

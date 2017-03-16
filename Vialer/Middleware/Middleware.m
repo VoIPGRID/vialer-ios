@@ -7,6 +7,7 @@
 
 #import "APNSHandler.h"
 #import "Configuration.h"
+@import CoreData;
 #import "MiddlewareRequestOperationManager.h"
 #import "SIPUtils.h"
 #import "SystemUser.h"
@@ -26,6 +27,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 @property (weak, nonatomic) SystemUser *systemUser;
 @property (nonatomic) int retryCount;
 @property (strong, nonatomic) Reachability *reachability;
+@property (strong, nonatomic) NSManagedObjectContext* context;
 @end
 
 @implementation Middleware
@@ -74,6 +76,13 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         _commonMiddlewareRequestOperationManager = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:baseURLString];
     }
     return _commonMiddlewareRequestOperationManager;
+}
+
+- (NSManagedObjectContext *)context {
+    if (!_context) {
+        _context = ((AppDelegate *)[UIApplication sharedApplication].delegate).syncContext;
+    }
+    return _context;
 }
 
 #pragma mark - actions
@@ -137,6 +146,10 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     // Track the response that is sent to the middleware.
     NSString *connectionTypeString = self.reachability.statusString;
     [VialerGAITracker pushNotificationWithIsAccepted:available connectionType:connectionTypeString];
+
+    // Track the pushed call in Core Data.
+    [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
+    [self.context save:nil];
 
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
     VialerLogDebug(@"Responding to Middleware with URL: %@", middlewareBaseURLString);

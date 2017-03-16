@@ -52,6 +52,12 @@ class AppDelegate: UIResponder {
             return coreDataStack.mainContext
         }
     }
+
+    var syncContext: NSManagedObjectContext {
+        get {
+            return coreDataStack.syncContext
+        }
+    }
     
     var reachability: Reachability!
 }

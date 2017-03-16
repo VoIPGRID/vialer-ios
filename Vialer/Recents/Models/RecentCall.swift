@@ -109,9 +109,8 @@ extension RecentCall {
     }
 }
 
-
 // MARK: - Managed
-extension RecentCall : Managed {
+extension RecentCall: Managed {
     public static var entityName: String {
         return "RecentCall"
     }
@@ -121,7 +120,6 @@ extension RecentCall : Managed {
         return [NSSortDescriptor(key: "callDate", ascending: false)]
     }
 }
-
 
 // MARK: - Resource
 extension RecentCall {
