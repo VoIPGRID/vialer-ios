@@ -266,7 +266,6 @@
 		C490AD7B1D0863E3004A8F83 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C490AD7E1D0863E3004A8F83 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		C490AD811D0863E3004A8F83 /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
 		C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
@@ -276,7 +275,6 @@
 		C490AD911D0863E3004A8F83 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
 		C490AD951D0863E3004A8F83 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		C490AD961D0863E3004A8F83 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
-		C490AD971D0863E3004A8F83 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
@@ -399,6 +397,14 @@
 		C4AEB25F1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
 		C4AEB2601E6D95D600550E0C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
 		C4AEB2611E6D95D600550E0C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
+		C4B407581E7A869900F5FC31 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		C4B407591E7A869900F5FC31 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		C4B4075A1E7A869900F5FC31 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		C4B4075B1E7A869900F5FC31 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		C4B4075D1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		C4B4075E1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		C4B4075F1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		C4B407601E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
 		C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
 		C4C3EAF01BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
 		C4C3EAF71BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
@@ -442,7 +448,6 @@
 		F20850FB1D26935600A17E71 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		F20850FC1D26935600A17E71 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		F20850FD1D26935600A17E71 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		F20850FF1D26935600A17E71 /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
 		F20851031D26935600A17E71 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		F20851041D26935600A17E71 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
@@ -453,7 +458,6 @@
 		F20851101D26935600A17E71 /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
 		F20851121D26935600A17E71 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
 		F20851131D26935600A17E71 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
-		F20851141D26935600A17E71 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		F208511A1D26935600A17E71 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
@@ -556,10 +560,6 @@
 		F2C44A761DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */; };
 		F2C44A771DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */; };
 		F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
-		F2DE21731CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
-		F2DE21741CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */; };
-		F2DE21781CB698A6007B5B4D /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
-		F2DE21791CB698A6007B5B4D /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */; };
 		F2DE21831CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
@@ -926,6 +926,8 @@
 		C4AEB24F1E6D954400550E0C /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Webservice.swift; path = Api/Webservice.swift; sourceTree = "<group>"; };
 		C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebserviceAuthentication.swift; path = Api/WebserviceAuthentication.swift; sourceTree = "<group>"; };
 		C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLRequestExtensions.swift; path = Api/URLRequestExtensions.swift; sourceTree = "<group>"; };
+		C4B407571E7A869900F5FC31 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityBarViewController.swift; sourceTree = "<group>"; };
 		C4BF69ED1BFA2C6F00AA81AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ContactsStoryboard.storyboard; sourceTree = "<group>"; };
 		C4BF69F71BFA2D8D00AA81AD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		C4C2A94D1D9BF72E008581C6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SIPCallingStoryboard.strings; sourceTree = "<group>"; };
@@ -1013,10 +1015,6 @@
 		F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartCallConvertible.swift; path = Helpers/StartCallConvertible.swift; sourceTree = "<group>"; };
 		F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Settings/Controllers/SettingsViewController.h; sourceTree = "<group>"; };
 		F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Settings/Controllers/SettingsViewController.m; sourceTree = "<group>"; };
-		F2DE21711CB6986A007B5B4D /* ReachabilityBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityBarViewController.h; sourceTree = "<group>"; };
-		F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewController.m; sourceTree = "<group>"; };
-		F2DE21761CB698A6007B5B4D /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
-		F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		F2DE21851CB69E7F007B5B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		F2DE21871CB69F9D007B5B4D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ReachabilityBarStoryboard.strings; sourceTree = "<group>"; };
 		F2E5EF131D09736100F7C699 /* .env.verbonden */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.verbonden; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -1909,8 +1907,7 @@
 		F2DE21701CB6986A007B5B4D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F2DE21711CB6986A007B5B4D /* ReachabilityBarViewController.h */,
-				F2DE21721CB6986A007B5B4D /* ReachabilityBarViewController.m */,
+				C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1918,8 +1915,7 @@
 		F2DE21751CB698A6007B5B4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F2DE21761CB698A6007B5B4D /* ReachabilityManager.h */,
-				F2DE21771CB698A6007B5B4D /* ReachabilityManager.m */,
+				C4B407571E7A869900F5FC31 /* Reachability.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3466,7 +3462,6 @@
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C41506CC1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
 				C41506D81E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
-				F2DE21741CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
@@ -3481,6 +3476,7 @@
 				C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				C41506BA1E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
+				C4B4075F1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				C46E71AF1E6E9D150084A579 /* SIPIncomingCallViewController.m in Sources */,
 				C46E71B31E6E9D150084A579 /* TransferInProgressViewController.swift in Sources */,
 				C43F06CD1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
@@ -3492,7 +3488,7 @@
 				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				F2C44A721DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
-				F2DE21791CB698A6007B5B4D /* ReachabilityManager.m in Sources */,
+				C4B4075A1E7A869900F5FC31 /* Reachability.swift in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
 				C4AEB2571E6D954400550E0C /* Webservice.swift in Sources */,
 				C41506AE1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
@@ -3586,7 +3582,6 @@
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				C41506CD1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
 				C41506D91E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
-				C490AD811D0863E3004A8F83 /* ReachabilityBarViewController.m in Sources */,
 				C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */,
 				C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */,
 				C41506C11E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
@@ -3600,6 +3595,7 @@
 				C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4AEB2541E6D954400550E0C /* Resource.swift in Sources */,
 				C41506BB1E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
+				C4B407601E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				C46E71B01E6E9D150084A579 /* SIPIncomingCallViewController.m in Sources */,
 				C46E71B41E6E9D150084A579 /* TransferInProgressViewController.swift in Sources */,
 				C46E71A01E6E9D150084A579 /* KeypadViewController.swift in Sources */,
@@ -3609,9 +3605,9 @@
 				F2C44A731DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
 				C490AD951D0863E3004A8F83 /* LoginFormView.m in Sources */,
 				C490AD961D0863E3004A8F83 /* PhoneNumberUtils.m in Sources */,
-				C490AD971D0863E3004A8F83 /* ReachabilityManager.m in Sources */,
 				C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */,
 				C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */,
+				C4B4075B1E7A869900F5FC31 /* Reachability.swift in Sources */,
 				C4AEB2581E6D954400550E0C /* Webservice.swift in Sources */,
 				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41506AF1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
@@ -3727,7 +3723,6 @@
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
 				C41506CB1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
 				C41506D71E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
-				F20850FF1D26935600A17E71 /* ReachabilityBarViewController.m in Sources */,
 				F20851031D26935600A17E71 /* AvailabilityViewController.m in Sources */,
 				F20851041D26935600A17E71 /* LogInViewController.m in Sources */,
 				C41506BF1E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
@@ -3740,6 +3735,7 @@
 				C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */,
 				F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */,
 				C41506B91E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
+				C4B4075E1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				C46E71AE1E6E9D150084A579 /* SIPIncomingCallViewController.m in Sources */,
 				C46E71B21E6E9D150084A579 /* TransferInProgressViewController.swift in Sources */,
 				C46E719E1E6E9D150084A579 /* KeypadViewController.swift in Sources */,
@@ -3751,7 +3747,7 @@
 				F20851121D26935600A17E71 /* LoginFormView.m in Sources */,
 				F2C44A711DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
 				F20851131D26935600A17E71 /* PhoneNumberUtils.m in Sources */,
-				F20851141D26935600A17E71 /* ReachabilityManager.m in Sources */,
+				C4B407591E7A869900F5FC31 /* Reachability.swift in Sources */,
 				F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */,
 				F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */,
 				C41506AD1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
@@ -3838,7 +3834,6 @@
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				C41506CA1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
 				C41506D61E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
-				F2DE21731CB6986A007B5B4D /* ReachabilityBarViewController.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				C41506BE1E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
@@ -3852,6 +3847,7 @@
 				C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C41506B81E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
+				C4B4075D1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				C46E71AD1E6E9D150084A579 /* SIPIncomingCallViewController.m in Sources */,
 				C46E71B11E6E9D150084A579 /* TransferInProgressViewController.swift in Sources */,
 				C46E719D1E6E9D150084A579 /* KeypadViewController.swift in Sources */,
@@ -3862,8 +3858,8 @@
 				3D1A5E651AE5483700DBE64B /* LoginFormView.m in Sources */,
 				F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2C44A701DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
-				F2DE21781CB698A6007B5B4D /* ReachabilityManager.m in Sources */,
 				C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
+				C4B407581E7A869900F5FC31 /* Reachability.swift in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41506AC1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,

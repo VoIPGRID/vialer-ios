@@ -26,8 +26,14 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     }
 
     // MARK: - Dependency Injection
-    var currentUser = SystemUser.current()!
+    var user = SystemUser.current()!
     var defaultConfiguration = Configuration.default()
+    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate var notificationCenter = NotificationCenter.default
+    fileprivate var reachabilityChanged: NotificationToken?
+    fileprivate var sipDisabled: NotificationToken?
+    fileprivate var sipChanged: NotificationToken?
+
     var contactModel = ContactModel.defaultModel
 
     private lazy var mainContext: NSManagedObjectContext = {
@@ -61,7 +67,6 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     }()
 
     // MARK: - Internal state
-    var reachabilityStatus: ReachabilityManagerStatusType = .highSpeed
     var showTitleImage = false
     var phoneNumberToCall: String!
 
@@ -93,6 +98,16 @@ extension RecentsViewController {
         super.viewDidLoad()
         showTitleImage = true
         setupLayout()
+        reachabilityChanged = notificationCenter.addObserver(descriptor: Reachability.changed) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
+        sipDisabled = notificationCenter.addObserver(descriptor: SystemUser.sipDisabledNotification) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
+        sipChanged = notificationCenter.addObserver(descriptor: SystemUser.sipChangedNotification) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
+        updateReachabilityBar()
         do {
             try fetchedResultController.performFetch()
         } catch let error as NSError {
@@ -106,6 +121,7 @@ extension RecentsViewController {
         VialerGAITracker.trackScreenForController(name: controllerName)
         tableView.reloadData()
         refreshRecents()
+        updateReachabilityBar()
     }
 }
 
@@ -142,8 +158,7 @@ extension RecentsViewController {
             let sipCallingVC = segue.destination as! SIPCallingViewController
             sipCallingVC.handleOutgoingCall(phoneNumber: phoneNumberToCall, contact: nil)
         case .reachabilityBar:
-            let reachabilityBarVC = segue.destination as! ReachabilityBarViewController
-            reachabilityBarVC.delegate = self
+            break
         }
     }
 }
@@ -168,10 +183,10 @@ extension RecentsViewController {
 
     fileprivate func call(_ number: String) {
         phoneNumberToCall = number
-        if reachabilityStatus == .highSpeed && currentUser.sipEnabled {
+        if user.sipEnabled && reachability.hasHighSpeed {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
-        } else if reachabilityStatus == .offline {
+        } else if reachability.status == .notReachable {
             let alert = UIAlertController(title: NSLocalizedString("No internet connection", comment: "No internet connection"), message: NSLocalizedString("It's not possible to setup a call. Make sure you have an internet connection", comment: "It's not possible to setup a call. Make sure you have an internet connection"), andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
             present(alert, animated: true, completion: nil)
         } else {
@@ -227,6 +242,19 @@ extension RecentsViewController {
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
+            }
+        }
+    }
+
+    fileprivate func updateReachabilityBar() {
+        DispatchQueue.main.async {
+            if !self.reachability.hasHighSpeed || !self.user.sipEnabled {
+                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
+            } else {
+                self.reachabilityBarHeigthConstraint.constant = 0
+            }
+            UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -290,20 +318,6 @@ extension RecentsViewController : UITableViewDataSource {
             return noRecentsCell(indexPath: indexPath)
         } else {
             return recentCell(indexPath: indexPath)
-        }
-    }
-}
-
-// MARK: - ReachabilityBarViewControllerDelegate
-extension RecentsViewController: ReachabilityBarViewControllerDelegate {
-    func reachabilityBar(_ reachabilityBar: ReachabilityBarViewController!, statusChanged status: ReachabilityManagerStatusType) {
-        reachabilityStatus = status
-    }
-    func reachabilityBar(_ reachabilityBar: ReachabilityBarViewController!, shouldBeVisible visible: Bool) {
-        view.layoutIfNeeded()
-        reachabilityBarHeigthConstraint.constant = visible ? Config.ReachabilityBar.height : 0.0
-        UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
-            self.view.layoutIfNeeded()
         }
     }
 }

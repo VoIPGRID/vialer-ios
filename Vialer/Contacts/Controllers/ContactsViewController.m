@@ -7,7 +7,7 @@
 
 #import "Configuration.h"
 #import "ContactsUI/ContactsUI.h"
-#import "ReachabilityBarViewController.h"
+#import "Notifications-Bridging-Header.h"
 #import "SystemUser.h"
 #import "TwoStepCallingViewController.h"
 #import "UIAlertController+Vialer.h"
@@ -26,23 +26,22 @@ static NSString * const ContactsTableViewCell = @"ContactsTableViewCell";
 static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
 static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate, ReachabilityBarViewControllerDelegate>
+@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
-@property (weak, nonatomic) ReachabilityBarViewController *reachabilityBar;
 
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
 
 @property (strong, nonatomic) SystemUser *currentUser;
-@property (nonatomic) ReachabilityManagerStatusType reachabilityStatus;
 @property (strong, nonatomic) CNContact *selectedContact;
 
 @property (weak, nonatomic) ContactModel *contactModel;
 @property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (strong, nonatomic) Reachability *reachability;
 
 @property (nonatomic) BOOL showTitleImage;
 
@@ -67,11 +66,14 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     self.showTitleImage = YES;
     [self setupLayout];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:ReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPDisabledNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPCredentialsChangedNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self showReachabilityBar];
+    [self updateReachabilityBar];
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     
     if (self.showTitleImage) {
@@ -115,6 +117,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 
     self.navigationController.view.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
+    [self updateReachabilityBar];
 }
 
 #pragma mark - properties
@@ -155,6 +158,14 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     return _defaultConfiguration;
 }
 
+- (Reachability *)reachability {
+    if (!_reachability) {
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        _reachability = delegate.reachability;
+    }
+    return _reachability;
+}
+
 #pragma mark - actions
 
 - (IBAction)leftDrawerButtonPressed:(UIBarButtonItem *)sender {
@@ -179,9 +190,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
         [sipCallingVC handleOutgoingCallWithPhoneNumber:self.phoneNumberToCall contact:self.selectedContact];
-    } else if ([segue.destinationViewController isKindOfClass:[ReachabilityBarViewController class]]) {
-        self.reachabilityBar = (ReachabilityBarViewController *)segue.destinationViewController;
-        self.reachabilityBar.delegate = self;
     }
 }
 
@@ -294,10 +302,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.reachabilityStatus == ReachabilityManagerStatusHighSpeed && self.currentUser.sipEnabled) {
+                if (self.reachability.hasHighSpeed && self.currentUser.sipEnabled) {
                     [VialerGAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
-                } else if (self.reachabilityStatus == ReachabilityManagerStatusOffline) {
+                } else if (!self.reachability.isReachable) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
                                                                                    message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
                                                                       andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
@@ -325,7 +333,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    [self showReachabilityBar];
+    [self updateReachabilityBar];
     return YES;
 }
 
@@ -361,31 +369,22 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 }
 
-#pragma mark - ReachabilityBarViewControllerDelegate
 - (void)hideReachabilityBar {
-    self.reachabilityBarHeigthConstraint.constant = 0.0;
-    self.reachabilityBar.view.hidden = YES;
+    self.reachabilityBarHeigthConstraint.constant = 0;
     [self.view layoutIfNeeded];
 }
 
-- (void)showReachabilityBar {
-    if (self.reachabilityBar.shouldBeVisible) {
-        self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
-        self.reachabilityBar.view.hidden = NO;
-        [self.view layoutIfNeeded];
-    }
-}
-
-- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {
-    self.reachabilityStatus = status;
-}
-
-- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {
-    [self.view layoutIfNeeded];
-    self.reachabilityBarHeigthConstraint.constant = visible ? ContactsViewControllerReachabilityBarHeight : 0.0;
-    [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
-        [self.view layoutIfNeeded];
-    }];
+- (void)updateReachabilityBar {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.reachability.hasHighSpeed || !self.currentUser.sipEnabled) {
+            self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+        } else {
+            self.reachabilityBarHeigthConstraint.constant = 0;
+        }
+        [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    });
 }
 
 @end

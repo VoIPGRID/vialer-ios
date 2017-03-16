@@ -259,11 +259,9 @@ import Foundation
      */
     private static func sendMOSValue(call: VSLCall, forCodec codec:String) {
         // Get the current connection type for the call.
-        let reachabilityManager = ReachabilityManager()
-        reachabilityManager.resetAndGetCurrentReachabilityStatus()
-        let currentConnection = reachabilityManager.currentConnectionTypeString()
+        let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
 
-        let labelString = "MOS for \(codec) on Networktype: \(currentConnection)"
+        let labelString = "MOS for \(codec) on Networktype: \(reachability.status)"
         let value = Int(call.mos * 100.0) as NSNumber
 
         sendEvent(withCategory: GAIConstants.Categories.metrics, action: GAIConstants.Actions.callMetrics, label: labelString, value: value)

@@ -289,6 +289,7 @@
                         <outlet property="callButton" destination="fQq-Gl-ZNQ" id="geK-9S-6J1"/>
                         <outlet property="deleteButton" destination="Hbs-mW-Umr" id="VC1-iA-3v3"/>
                         <outlet property="numberLabel" destination="Z0R-4w-Bgg" id="OdF-Hn-kQE"/>
+                        <outlet property="reachabilityBarHeigthConstraint" destination="h5J-mQ-Y2V" id="uol-oE-AEg"/>
                         <segue destination="I6t-6E-rmY" kind="presentation" identifier="TwoStepCallingSegue" id="Egf-gd-Oth"/>
                         <segue destination="NIS-ex-bVD" kind="presentation" identifier="SIPCallingSegue" id="w2h-zt-b48"/>
                     </connections>

@@ -8,7 +8,6 @@
 #import "APNSHandler.h"
 #import "Configuration.h"
 #import "MiddlewareRequestOperationManager.h"
-#import "ReachabilityManager.h"
 #import "SIPUtils.h"
 #import "SystemUser.h"
 #import "Vialer-Swift.h"
@@ -25,8 +24,8 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 @interface Middleware ()
 @property (strong, nonatomic) MiddlewareRequestOperationManager *commonMiddlewareRequestOperationManager;
 @property (weak, nonatomic) SystemUser *systemUser;
-@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
 @property (nonatomic) int retryCount;
+@property (strong, nonatomic) Reachability *reachability;
 @end
 
 @implementation Middleware
@@ -54,6 +53,15 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     return _systemUser;
 }
 
+- (Reachability *)reachability {
+    if (!_reachability) {
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        _reachability = delegate.reachability;
+    }
+    return _reachability;
+}
+
+
 /**
  *  There is one Common Middleware used for registering and unregistration of a device.
  *  Responding to an incoming call is done to the middleware which is included in the push payload.
@@ -66,13 +74,6 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         _commonMiddlewareRequestOperationManager = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:baseURLString];
     }
     return _commonMiddlewareRequestOperationManager;
-}
-
-- (ReachabilityManager *)reachabilityManager {
-    if (!_reachabilityManager) {
-        _reachabilityManager = [[ReachabilityManager alloc] init];
-    }
-    return _reachabilityManager;
 }
 
 #pragma mark - actions
@@ -108,7 +109,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             }
 
             // Now check the network connection.
-            if ([self.reachabilityManager resetAndGetCurrentReachabilityStatus] == ReachabilityManagerStatusHighSpeed) {
+            if (self.reachability.hasHighSpeed) {
                 // Highspeed, let's respond to the middleware with a success.
                 [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             } else {
@@ -134,7 +135,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
 - (void)respondToMiddleware:(NSDictionary *)payload isAvailable:(BOOL)available withAccount:(VSLAccount *)account andPushResponseTimeMeasurementStart:(NSDate *)pushResponseTimeMeasurmentStart  {
     // Track the response that is sent to the middleware.
-    NSString *connectionTypeString = [self.reachabilityManager currentConnectionTypeString];
+    NSString *connectionTypeString = self.reachability.statusString;
     [VialerGAITracker pushNotificationWithIsAccepted:available connectionType:connectionTypeString];
 
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];

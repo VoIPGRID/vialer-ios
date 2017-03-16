@@ -70,6 +70,10 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     NSString *logFile = [NSString stringWithFormat:@"%s", file];
     NSString *logFunction = [NSString stringWithFormat:@"%s", function];
 
+    // Add in the Connection type.
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    message = [NSString stringWithFormat:@"[%@] %@", delegate.reachability.statusString, message];
+
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message
                                                                level:LOG_LEVEL_DEF
                                                                 flag:flag
@@ -84,7 +88,11 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     [[DDLog sharedInstance] log:LOG_ASYNC_ENABLED message:logMessage];
     [self logMessageToLogEntriesWitMessage:logMessage];
 }
+
 + (void)logWithDDLogMessage:(DDLogMessage *)message {
+    // Add in the Connection type.
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    message->_message = [NSString stringWithFormat:@"[%@] %@", delegate.reachability.statusString, message.message];
     [[DDLog sharedInstance] log:LOG_ASYNC_ENABLED message:message];
     [self logMessageToLogEntriesWitMessage:message];
 }

@@ -52,6 +52,8 @@ class AppDelegate: UIResponder {
             return coreDataStack.mainContext
         }
     }
+    
+    var reachability: Reachability!
 }
 
 // MARK: - UIApplicationDelegate
@@ -165,6 +167,9 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
+
+        reachability = Reachability()
+        try! reachability.startNotifier()
     }
 
     /// Remove the observers that the AppDelegate is listening to

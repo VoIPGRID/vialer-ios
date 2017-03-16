@@ -48,7 +48,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     var callManager = VialerSIPLib.sharedInstance().callManager
     let currentUser = SystemUser.current()!
     // ReachabilityManager, needed for showing notifications.
-    let reachabilityManager = ReachabilityManager()
+    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
     // Keep track if there are notifications needed for disabling/enabling WiFi.
     var didOpenSettings = false
     // The cleaned number that need to be called.
@@ -287,7 +287,7 @@ extension SIPCallingViewController {
 
         hangupButton?.isEnabled = false
 
-        if didOpenSettings && !self.reachabilityManager.onWiFi() {
+        if didOpenSettings && reachability.status != .reachableViaWiFi {
             presentEnableWifiAlert()
         } else {
             dismissView()
@@ -395,7 +395,7 @@ extension SIPCallingViewController {
 // MARK: - WiFi notification
 extension SIPCallingViewController {
     func shouldPresentWiFiNotification() -> Bool {
-        return !currentUser.noWiFiNotification && reachabilityManager.onWiFi() && reachabilityManager.on4g()
+        return !currentUser.noWiFiNotification && reachability.status == .reachableViaWiFi && reachability.radioStatus == .reachableVia4G
     }
 
     /**

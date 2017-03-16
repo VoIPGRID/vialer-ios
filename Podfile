@@ -13,7 +13,6 @@ def default_pods
     pod 'le', :git => 'https://github.com/LogentriesCommunity/le_ios.git'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'
     pod 'PBWebViewController'
-    pod 'Reachability'
     pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git'

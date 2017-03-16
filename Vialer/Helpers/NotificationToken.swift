@@ -38,16 +38,21 @@ extension NotificationCenter {
     ///   - queue: The queue used when getting the callback.
     ///   - block: The block that is called when notification is fired.
     /// - Returns: NotificationToken instance. As long there is a reference to this intance, the observer will be active. When dereferenced, the observer is removed.
-    func addObserver<A>(descriptor: NotificationDescriptor<A>, queue: OperationQueue? = nil, using block: @escaping (A) -> ()) -> NotificationToken {
+    func addObserver<A>(descriptor: NotificationDescriptor<A>, queue: OperationQueue? = nil, using block: @escaping (A?) -> ()) -> NotificationToken {
         let token = addObserver(forName: descriptor.name, object: nil, queue: queue) { note in
-            block(note.object as! A)
+            block(note.object as? A)
         }
         return NotificationToken(token: token, center: self)
+    }
+
+    func post<A>(descriptor: NotificationDescriptor<A>, object: A) {
+        post(name: descriptor.name, object: object)
     }
 }
 
 extension SystemUser {
 
-    /// Logout Notification Descriptor.
     static var logoutNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserLogout)
+    static var sipChangedNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPDisabled)
+    static var sipDisabledNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPCredentialsChanged)
 }

@@ -33,7 +33,7 @@ PODS:
     - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.5.1):
+  - FirebaseCore (3.5.2):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.9)
   - Google/Analytics (3.0.3):
@@ -98,7 +98,6 @@ DEPENDENCIES:
   - OCMock
   - OHHTTPStubs
   - PBWebViewController
-  - Reachability
   - SAMKeychain
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
@@ -129,7 +128,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
+  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
@@ -149,6 +148,6 @@ SPEC CHECKSUMS:
   Vialer-pjsip-iOS: 8f9073448404525d53f3aa4b9517e3b2b9aae2c7
   VialerSIPLib: dafb8b08b1c91a63b1cdc2148b435bc6d3754a8f
 
-PODFILE CHECKSUM: 467f636fb378ab3a53ccfe6ef4ed6408fa31eb1b
+PODFILE CHECKSUM: a144932ddb26b9ac72e6d1bb4a4cc0633e6aad51
 
 COCOAPODS: 1.2.0

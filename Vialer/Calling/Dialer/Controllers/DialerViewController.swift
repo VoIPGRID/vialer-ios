@@ -13,6 +13,13 @@ class DialerViewController: UIViewController, SegueHandler {
         case reachabilityBar = "ReachabilityBarSegue"
     }
 
+    fileprivate struct Config {
+        struct ReachabilityBar {
+            static let animationDuration = 0.3
+            static let height: CGFloat = 30.0
+        }
+    }
+
     // MARK: - Properties
     var numberText: String? {
         didSet {
@@ -24,13 +31,17 @@ class DialerViewController: UIViewController, SegueHandler {
         }
     }
     var sounds = [String: AVAudioPlayer]()
-    var reachabilityStatus: ReachabilityManagerStatusType = .highSpeed
     var lastCalledNumber: String? {
         didSet {
             setupButtons()
         }
     }
     var user = SystemUser.current()!
+    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate var notificationCenter = NotificationCenter.default
+    fileprivate var reachabilityChanged: NotificationToken?
+    fileprivate var sipDisabled: NotificationToken?
+    fileprivate var sipChanged: NotificationToken?
 
     // MARK: - Outlets
     @IBOutlet weak var leftDrawerButton: UIBarButtonItem!
@@ -41,6 +52,8 @@ class DialerViewController: UIViewController, SegueHandler {
     }
     @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var reachabilityBarHeigthConstraint: NSLayoutConstraint!
+
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -54,6 +67,15 @@ extension DialerViewController {
         super.viewDidLoad()
         setupLayout()
         setupSounds()
+        reachabilityChanged = notificationCenter.addObserver(descriptor: Reachability.changed) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
+        sipDisabled = notificationCenter.addObserver(descriptor: SystemUser.sipDisabledNotification) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
+        sipChanged = notificationCenter.addObserver(descriptor: SystemUser.sipChangedNotification) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +83,7 @@ extension DialerViewController {
         VialerGAITracker.trackScreenForController(name: controllerName)
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
         setupButtons()
+        updateReachabilityBar()
     }
 }
 
@@ -91,7 +114,7 @@ extension DialerViewController {
 
         lastCalledNumber = numberText
 
-        if reachabilityStatus == .highSpeed && user.sipEnabled {
+        if user.sipEnabled && reachability.hasHighSpeed {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else {
@@ -130,8 +153,7 @@ extension DialerViewController {
             twoStepCallingVC.handlePhoneNumber(numberText!)
             numberText = nil
         case .reachabilityBar:
-            let reachabilityBarVC = segue.destination as! ReachabilityBarViewController
-            reachabilityBarVC.delegate = self
+            break
         }
     }
 }
@@ -140,13 +162,6 @@ extension DialerViewController {
 extension DialerViewController : PasteableUILabelDelegate {
     func pasteableUILabel(_ label: UILabel!, didReceivePastedText text: String!) {
         numberText = text
-    }
-}
-
-// MARK: - ReachabilityBarViewControllerDelegate
-extension DialerViewController : ReachabilityBarViewControllerDelegate {
-    func reachabilityBar(_ reachabilityBar: ReachabilityBarViewController!, statusChanged status: ReachabilityManagerStatusType) {
-        reachabilityStatus = status
     }
 }
 
@@ -160,6 +175,7 @@ extension DialerViewController {
 
     fileprivate func setupLayout() {
         navigationItem.titleView = UIImageView(image: UIImage(asset: .logo))
+        updateReachabilityBar()
     }
 
     fileprivate func setupSounds() {
@@ -186,7 +202,7 @@ extension DialerViewController {
         // - status isn't offline or 
         // - there is a number in memory or 
         // - there is a number to be called
-        if reachabilityStatus == .offline || (lastCalledNumber == nil && numberText == nil) {
+        if reachability.status == .notReachable || (lastCalledNumber == nil && numberText == nil) {
             callButton.isEnabled = false
         } else {
             callButton.isEnabled = true
@@ -217,5 +233,19 @@ extension DialerViewController {
         let player = sounds[character]!
         player.currentTime = 0
         player.play()
+    }
+
+    fileprivate func updateReachabilityBar() {
+        DispatchQueue.main.async {
+            self.setupButtons()
+            if !self.reachability.hasHighSpeed || !self.user.sipEnabled {
+                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
+            } else {
+                self.reachabilityBarHeigthConstraint.constant = 0
+            }
+            UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }
