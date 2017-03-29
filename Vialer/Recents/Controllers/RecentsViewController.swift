@@ -187,7 +187,7 @@ extension RecentsViewController {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else if reachability.status == .notReachable {
-            let alert = UIAlertController(title: NSLocalizedString("No internet connection", comment: "No internet connection"), message: NSLocalizedString("It's not possible to setup a call. Make sure you have an internet connection", comment: "It's not possible to setup a call. Make sure you have an internet connection"), andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
+            let alert = UIAlertController(title: NSLocalizedString("No internet connection", comment: "No internet connection"), message: NSLocalizedString("It's not possible to setup a call. Make sure you have an internet connection.", comment: "It's not possible to setup a call. Make sure you have an internet connection."), andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
             present(alert, animated: true, completion: nil)
         } else {
             VialerGAITracker.setupOutgoingConnectABCallEvent()

@@ -81,7 +81,7 @@
 /* Continue calling */
 "Continue calling" = "Start gesprek";
 
-/* No comment provided by engineer. */
+/* Could not load your recent calls */
 "Could not load your recent calls" = "Recente gesprekken konden niet worden opgehaald";
 
 /* No comment provided by engineer. */
@@ -153,7 +153,7 @@
 /* No comment provided by engineer. */
 "Failed to setup call" = "Opzetten van gesprek mislukt";
 
-/* No comment provided by engineer. */
+/* Fetching the latest recent calls from the server. */
 "Fetching the latest recent calls from the server." = "Meest recente gesprekken worden van de server gehaald.";
 
 /* No comment provided by engineer. */
@@ -186,7 +186,7 @@
 /* No comment provided by engineer. */
 "Invalid number used to setup call" = "Foutief nummer gebruikt om gesprek op te zetten";
 
-/* No comment provided by engineer. */
+/* It's not possible to setup a call. Make sure you have an internet connection. */
 "It's not possible to setup a call. Make sure you have an internet connection." = "Gesprek kan niet opgezet worden. Zorg voor een internet verbinding en probeer het opnieuw.";
 
 /* Keypad */
@@ -234,28 +234,28 @@
 /* No */
 "No" = "Nee";
 
-/* No comment provided by engineer. */
+/* No Caller ID */
 "No Caller ID" = "Anoniem";
 
-/* No comment provided by engineer. */
+/* No connection, cannot call. */
 "No connection, cannot call." = "Geen verbinding, bellen niet mogelijk.";
 
 /* No comment provided by engineer. */
 "No email address configured" = "Geen emailadres ingesteld";
 
-/* No comment provided by engineer. */
+/* No internet connection */
 "No internet connection" = "Geen internet verbinding";
 
 /* No comment provided by engineer. */
 "No login data" = "Geen inloggegevens";
 
-/* No comment provided by engineer. */
+/* No missed calls */
 "No missed calls" = "Geen gemiste gesprekken";
 
-/* No comment provided by engineer. */
+/* No recent calls */
 "No recent calls" = "Geen recente gesprekken";
 
-/* No comment provided by engineer. */
+/* Not allowed */
 "Not allowed" = "Niet toegestaan";
 
 /* No comment provided by engineer. */
@@ -264,7 +264,7 @@
 /* No comment provided by engineer. */
 "Number saved" = "Nummer opgeslagen";
 
-/* No comment provided by engineer. */
+/* Ok */
 "Ok" = "OK";
 
 /* On hold
@@ -278,9 +278,6 @@
 "Password" = "Wachtwoord";
 
 /* No comment provided by engineer. */
-"phone" = "vast";
-
-/* No comment provided by engineer. */
 "Phone number incorrect" = "Telefoonnummer incorrect";
 
 /* No comment provided by engineer. */
@@ -292,10 +289,10 @@
 /* No comment provided by engineer. */
 "Please enter your mobile number here." = "Voer hier je mobiele telefoonnummer in.";
 
-/* No comment provided by engineer. */
+/* Poor connection, Two step calling enabled. */
 "Poor connection, Two step calling enabled." = "Slechte verbinding, Twee staps modus geactiveerd.";
 
-/* No comment provided by engineer. */
+/* Recents */
 "Recents" = "Recent";
 
 /* No comment provided by engineer. */
@@ -376,10 +373,10 @@
 /* No comment provided by engineer. */
 "Two step call failed" = "Het twee staps gesprek is mislukt";
 
-/* No comment provided by engineer. */
+/* Two step modus */
 "Two step modus" = "Twee staps modus";
 
-/* No comment provided by engineer. */
+/* Two step modus will setup a call to your phone first and will call the other party when you answer the call. */
 "Two step modus will setup a call to your phone first and will call the other party when you answer the call." = "Twee staps modus zal een gesprek opzetten naar je telefoon en zal na beantwooring het gesprek opzetten naar de andere partij.";
 
 /* No comment provided by engineer. */
@@ -400,7 +397,7 @@
 /* No comment provided by engineer. */
 "VoIP Disabled" = "VoIP Gedeactiveerd";
 
-/* No comment provided by engineer. */
+/* VoIP disabled, enable in settings */
 "VoIP disabled, enable in settings" = "VoIP gedeactiveerd, activeer VoIP bij instellingen";
 
 /* With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi? */
@@ -412,7 +409,7 @@
 /* No comment provided by engineer. */
 "yesterday" = "gisteren";
 
-/* No comment provided by engineer. */
+/* You are not allowed to view recent calls */
 "You are not allowed to view recent calls" = "Je hebt geen toestemming om de recente gesprekken te bekijken";
 
 /* No comment provided by engineer. */
