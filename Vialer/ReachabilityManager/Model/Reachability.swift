@@ -339,7 +339,7 @@ extension Reachability {
             networkInfo = CTTelephonyNetworkInfo()
             currentRadio = networkInfo?.currentRadioAccessTechnology
         }
-        return currentRadio!
+        return currentRadio
     }
 }
 

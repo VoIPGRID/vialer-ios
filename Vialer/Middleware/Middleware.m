@@ -32,7 +32,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
 @implementation Middleware
 
-#pragma mark - Lifecycle
+ #pragma mark - Lifecycle
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPCredentialsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];

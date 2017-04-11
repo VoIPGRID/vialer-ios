@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Vialer requires access to your phone’s location to notify you when you enter or leave a geofence</string>
 	<key>Additional_Version_String</key>
 	<string>Updated on build</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -42,6 +44,7 @@
 	<array>
 		<string>audio</string>
 		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
