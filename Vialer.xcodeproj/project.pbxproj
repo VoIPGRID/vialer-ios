@@ -428,6 +428,10 @@
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		E4DF33678809E46BE9EB4C81 /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA89A444631A954C6990FF7 /* libPods-Vialer.a */; };
+		EE5F1E691E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
+		EE5F1E6A1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
+		EE5F1E6B1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
+		EE5F1E6C1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		EF77009B63ABD8F9C31C1131 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90106BF894F5BB6C2AA8F82C /* libPods-VialerSnapshotUITests.a */; };
 		F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
@@ -960,6 +964,7 @@
 		DBA89A444631A954C6990FF7 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1C8A429C38FFD1F3398583 /* Pods-VerbondenSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		ECEF4C5E8001C9FEA72001F6 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushedCall.swift; sourceTree = "<group>"; };
 		EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
 		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
@@ -1862,6 +1867,7 @@
 				F2B40BDB1C731F3E00502769 /* Middleware.m */,
 				C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */,
 				C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */,
+				EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -2936,7 +2942,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2594EB00F78AB439BC228BDF /* [CP] Check Pods Manifest.lock */ = {
@@ -2951,7 +2957,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		29E97CDD70F5138033FA2092 /* [CP] Embed Pods Frameworks */ = {
@@ -2981,7 +2987,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2B09BDEAE83ACA2FEB8ECDCD /* [CP] Embed Pods Frameworks */ = {
@@ -3011,7 +3017,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		65DE3A4C26F5F18964CBABDE /* [CP] Copy Pods Resources */ = {
@@ -3041,7 +3047,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		74DB75B729F3A6CFC606C4C6 /* [CP] Copy Pods Resources */ = {
@@ -3131,7 +3137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B89A855C29CDF3F7FAD5FE89 /* [CP] Embed Pods Frameworks */ = {
@@ -3219,7 +3225,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C4D2704E1E7017C400B1637B /* Update Version number */ = {
@@ -3422,7 +3428,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3488,6 +3494,7 @@
 				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
 				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				F2C44A721DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
+				EE5F1E6B1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				C4B4075A1E7A869900F5FC31 /* Reachability.swift in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
 				C4AEB2571E6D954400550E0C /* Webservice.swift in Sources */,
@@ -3608,6 +3615,7 @@
 				C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */,
 				C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */,
 				C4B4075B1E7A869900F5FC31 /* Reachability.swift in Sources */,
+				EE5F1E6C1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				C4AEB2581E6D954400550E0C /* Webservice.swift in Sources */,
 				F22FF28D1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41506AF1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
@@ -3748,6 +3756,7 @@
 				F2C44A711DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
 				F20851131D26935600A17E71 /* PhoneNumberUtils.m in Sources */,
 				C4B407591E7A869900F5FC31 /* Reachability.swift in Sources */,
+				EE5F1E6A1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */,
 				F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */,
 				C41506AD1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
@@ -3860,6 +3869,7 @@
 				F2C44A701DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
 				C46F10041C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				C4B407581E7A869900F5FC31 /* Reachability.swift in Sources */,
+				EE5F1E691E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */,
 				C41506AC1E6EAFC30086D0B7 /* SipCallingButton.m in Sources */,
