@@ -78,6 +78,7 @@ class HandOffViewController : UIViewController {
     
     func updateHandOffsCount() {
         title = "Handoffs (\(handoffs.count))"
+        navigationItem.rightBarButtonItem?.isEnabled = (handoffs.count < 20)
     }
     
     func addRadiusOverlay(forHandOff handOff: HandOffs) {
@@ -97,14 +98,14 @@ class HandOffViewController : UIViewController {
     }
     
     func region(withHandOff handoff: HandOffs) -> CLCircularRegion {
-        let region = CLCircularRegion(center: handoff.center, radius: handoff.radius, identifier: handoff.identifier)
+        let region = CLCircularRegion(center: handoff.coordinate, radius: handoff.radius, identifier: handoff.identifier)
         region.notifyOnEntry = (handoff.eventType == .onEntry)
         region.notifyOnExit = !region.notifyOnEntry
         return region
     }
     
-    func startMonitoring(handOff: HandOffs) {
-        if !CLLocationManager.isMonitoringAvailable(for: CLCircular.class) {
+    func startMonitoring(handoff: HandOffs) {
+        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             showAlert(withTitle: "Error", message: "Geofencing is not supported on this device")
         }
         
@@ -113,12 +114,12 @@ class HandOffViewController : UIViewController {
         }
         
         let region = self.region(withHandOff: handoff)
-        locationManager.startMonitoring(for: handoff)
+        locationManager.startMonitoring(for: region)
     }
     
-    func stopMonitoring(handOff: HandOffs) {
+    func stopMonitoring(handoff: HandOffs) {
         for region in locationManager.monitoredRegions {
-            guard let circularRegion = region as? CLCicrularRegion, circularRegion.identifier == handoff.identifier else { continue }
+            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == handoff.identifier else { continue }
             locationManager.stopMonitoring(for: circularRegion)
         }
     }
@@ -132,8 +133,10 @@ class HandOffViewController : UIViewController {
 extension HandOffViewController: HandOffAddPointViewControllerDelegate {
     func handOffAddPointViewController(controller: HandOffAddPointViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String, note: String, eventType: EventType) {
         controller.dismiss(animated: true, completion: nil)
-        let handOff = HandOffs(coordinate: coordinate, radius: radius, identifier: identifier, note: note, eventType: eventType)
+        let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance)
+        let handOff = HandOffs(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
         add(handOff: handOff)
+        startMonitoring(handoff: handOff)
         saveAllHandoffs()
     }
 }
@@ -141,6 +144,14 @@ extension HandOffViewController: HandOffAddPointViewControllerDelegate {
 extension HandOffViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         mapView.showsUserLocation = (status == .authorizedAlways)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Manager failed with the following error: \(error)")
     }
 }
 
@@ -150,13 +161,15 @@ extension HandOffViewController: MKMapViewDelegate {
         if annotation is HandOffs {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
             if annotationView == nil {
+                print("annotation is nil!")
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 let removeButton = UIButton(type: .custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
-                removeButton.setImage(UIImage(named: "DeleteGeotification")!, for: .normal)
+                removeButton.setImage(UIImage(named: "delete-geofence")!, for: .normal)
                 annotationView?.leftCalloutAccessoryView = removeButton
             } else {
+                print("annotation available")
                 annotationView?.annotation = annotation
             }
             return annotationView
@@ -175,8 +188,9 @@ extension HandOffViewController: MKMapViewDelegate {
         return MKOverlayRenderer(overlay: overlay)
     }
     
-    func mapView(_ mapView: MKMapView, annotation view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let handOff = view.annotation as! HandOffs
+        stopMonitoring(handoff: handOff)
         remove(handOff: handOff)
         saveAllHandoffs()
     }

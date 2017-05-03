@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Os0-m3-4Xu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Os0-m3-4Xu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +13,7 @@
         <!--Handoff-->
         <scene sceneID="3uS-XT-wte">
             <objects>
-                <viewController id="x4E-iB-eiD" customClass="HandOffViewController" sceneMemberID="viewController">
+                <viewController id="x4E-iB-eiD" customClass="HandOffViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mvs-tu-hYh"/>
                         <viewControllerLayoutGuide type="bottom" id="fix-UD-DpA"/>
@@ -23,7 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aWI-qL-eD5">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <outlet property="delegate" destination="x4E-iB-eiD" id="DnP-an-7IU"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,7 +38,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Handoff" id="aar-KN-EvW">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="qSy-z6-ARo"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="qSy-z6-ARo">
+                            <connections>
+                                <segue destination="MFK-Vb-big" kind="unwind" unwindAction="unwindVialerRootViewController:" id="Y3H-8s-2Uc"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Add" id="DQv-X5-Sxt">
                                 <connections>
@@ -54,6 +61,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gwg-2P-NMW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="MFK-Vb-big" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="888.79999999999995" y="184.85757121439281"/>
         </scene>
@@ -78,7 +86,7 @@
         <!--Hand Off Add Point View Controller-->
         <scene sceneID="R1o-oF-YqF">
             <objects>
-                <tableViewController id="GUT-N1-6U9" customClass="HandOffAddPointViewController" sceneMemberID="viewController">
+                <tableViewController id="GUT-N1-6U9" customClass="HandOffAddPointViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SZ1-b5-ZOK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,6 +113,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="255" id="4KP-No-X1N"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="SZ1-b5-ZOK" id="YJf-oH-4ik"/>
+                                                    </connections>
                                                 </mapView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddPin" translatesAutoresizingMaskIntoConstraints="NO" id="2Vd-9U-0P8">
                                                     <rect key="frame" x="150" y="134" width="75" height="75"/>
@@ -165,6 +176,9 @@
                                                     <rect key="frame" x="73.5" y="13" width="191.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <action selector="textFieldEditingChanged:" destination="GUT-N1-6U9" eventType="editingDidEnd" id="pe3-Mh-ysE"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wip-L2-V3f">
                                                     <rect key="frame" x="13" y="13.5" width="35.5" height="18"/>
@@ -240,13 +254,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xTh-NB-S6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="185"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="2P5-02-XOu">
-            <objects>
-                <viewControllerPlaceholder id="XKG-Vm-kwz" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="p3G-cM-Ncm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

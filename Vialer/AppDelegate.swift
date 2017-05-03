@@ -4,6 +4,7 @@
 //
 
 import CoreData
+import CoreLocation
 import UIKit
 
 @UIApplicationMain
@@ -76,6 +77,7 @@ extension AppDelegate: UIApplicationDelegate {
         setupUI()
         setupObservers()
         setupVoIP()
+        setupLocationManager()
 
         return true
     }
@@ -233,6 +235,53 @@ extension AppDelegate {
         }
     }
 }
+
+// MARK: - LocationManager
+extension AppDelegate {
+    
+    fileprivate func setupLocationManager() {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
+        UIApplication.shared.cancelAllLocalNotifications()
+    }
+    
+    func handleEvent(forRegion region: CLRegion!) {
+        guard let message = note(fromRegionIdentifier: region.identifier) else { return }
+        if (UIApplication.shared.applicationState == .active) {
+            window?.rootViewController?.showAlert(withTitle: nil, message: message)
+        } else {
+            let notification = UILocalNotification()
+            notification.alertBody = message
+            notification.soundName = "Default"
+            UIApplication.shared.presentLocalNotificationNow(notification)
+        }
+    }
+    
+    func note(fromRegionIdentifier identifier: String) -> String? {
+        let savedItems = UserDefaults.standard.array(forKey: PreferencesKeys.savedItems) as? [NSData]
+        let handoffs = savedItems?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? HandOffs }
+        let index = handoffs?.index { $0?.identifier == identifier }
+        return index != nil ? handoffs?[index!]?.note : nil
+    }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+    
+}
+
 
 // MARK: - VoIP
 extension AppDelegate {
