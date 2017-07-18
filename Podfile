@@ -8,7 +8,7 @@ platform :ios, '9.0'
 def default_pods
     pod 'AFNetworkActivityLogger'
     pod 'AFNetworking'
-    pod 'Google/Analytics'
+    pod 'GoogleAnalytics'
     pod 'HTCopyableLabel'
     pod 'le', :git => 'https://github.com/LogentriesCommunity/le_ios.git'
     pod 'MMDrawerController+Storyboard', :git => 'https://github.com/TomSwift/MMDrawerController-Storyboard.git'

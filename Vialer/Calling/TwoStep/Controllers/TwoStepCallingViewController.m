@@ -135,7 +135,7 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 
     switch (self.callManager.status) {
         case TwoStepCallStatusUnknown: {
-            self.callStatusLabel.text = NSLocalizedString(@"", nil);
+            self.callStatusLabel.text = @"";
             self.phoneNumberLabel.text = @"";
             self.bubblingOne.state = BubblingPointsStateIdle;
             [self greyoutASide];

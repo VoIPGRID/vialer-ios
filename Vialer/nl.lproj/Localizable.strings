@@ -40,10 +40,10 @@
 "Call canceled" = "Gesprek geannuleerd";
 
 /* Statuslabel state text .Disconnected */
-"Call ended" = "Gesprek be\U00EBindigd";
+"Call ended" = "Gesprek beëindigd";
 
 /* Call has Ended, enable WiFi? */
-"Call has Ended, enable WiFi?" = "Gesprek is be\U00EBindigd, WiFi weer inschakelen?";
+"Call has Ended, enable WiFi?" = "Gesprek is beëindigd, WiFi weer inschakelen?";
 
 /* No comment provided by engineer. */
 "Calling other party" = "Andere partij aan het bellen";
@@ -106,7 +106,7 @@
 "Disabling VoIP..." = "VoIP aan het uitschakelen...";
 
 /* Disconnected phone state */
-"Disconnected" = "Be\U00EBindigd";
+"Disconnected" = "Beëindigd";
 
 /* No comment provided by engineer. */
 "Email address" = "E-mailadres";
@@ -124,7 +124,7 @@
 "Enable WiFi notification" = "Schakel WiFi notificatie in";
 
 /* Ending call... */
-"Ending call..." = "Gesprek aan het be\U00EBeindigen...";
+"Ending call..." = "Gesprek aan het beëindigen...";
 
 /* No comment provided by engineer. */
 "Enter Your email address and password to login." = "Voer je e-mailadres en wachtwoord in om in te loggen.";
@@ -267,9 +267,8 @@
 /* Ok */
 "Ok" = "OK";
 
-/* On hold
-   On hold phone state */
-"ON HOLD" = "In de wacht";
+/* No comment provided by engineer. */
+"On hold" = "In de wacht";
 
 /* No comment provided by engineer. */
 "Outgoing number" = "Uitgaand nummer";

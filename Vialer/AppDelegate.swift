@@ -246,6 +246,7 @@ extension AppDelegate {
             updatedSIPCredentials()
         }
         setupIncomingCallBack()
+        setupMissedCallBack()
     }
 
     /// Register a callback to the sip library so that the app can handle incoming calls
@@ -254,12 +255,29 @@ extension AppDelegate {
             VialerGAITracker.incomingCallRingingEvent()
             DispatchQueue.main.async {
                 if VialerSIPLib.callKitAvailable() {
-                    VialerLogInfo("Incoming call block invoked, routing through CallKit.");
+                    VialerLogInfo("Incoming call block invoked, routing through CallKit.")
                     self.callKitProviderDelegate.reportIncomingCall(call)
                 } else {
-                    VialerLogInfo("Incoming call block invoked, using own app presentation.");
+                    VialerLogInfo("Incoming call block invoked, using own app presentation.")
                     self.reportIncomingCallForNonCallKit(withCall: call)
                 }
+            }
+        }
+    }
+
+    /// Register a callback to the sip library so that the app can handle missed calls
+    private func setupMissedCallBack() {
+        VialerLogError("setupMissedCallback()")
+        vialerSIPLib.setMissedCall { (call) in
+            switch call.terminateReason {
+            case .callCompletedElsewhere:
+                VialerLogDebug("Call completed elsewhere")
+                VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
+            case .originatorCancel:
+                VialerLogDebug("Originator cancelled")
+                VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
+            case .unknown:
+                break
             }
         }
     }
@@ -268,7 +286,7 @@ extension AppDelegate {
     ///
     /// This function is only used for non CallKit app users.
     ///
-    /// - Parameter call: VSL call instance of the incoming call
+    /// - Pa rameter call: VSL call instance of the incoming call
     private func reportIncomingCallForNonCallKit(withCall call: VSLCall) {
         DispatchQueue.main.async { [unowned self] in
             if SIPUtils.anotherCall(inProgress: call) {
@@ -363,10 +381,14 @@ extension AppDelegate {
     ///
     /// - Parameter call: VSLCall instance
     private func createLocalNotification(forCall call: VSLCall) {
+        let callerName = call.callerName!
+        let callerNumber = call.callerNumber!
+
         let notification = UILocalNotification()
         notification.userInfo = [Configuration.Notifications.incomingCallIDKey: call.callId]
         notification.alertTitle = NSLocalizedString("Incoming call", comment: "Incoming call")
-        notification.alertBody = NSLocalizedString("Incoming call from: \(call.callerName) \(call.callerNumber)", comment: "Incoming call from: \(call.callerName) \(call.callerNumber)")
+        notification.alertBody = NSLocalizedString("Incoming call from: \(callerName) \(callerNumber)",
+            comment: "Incoming call from: \(callerName) \(callerNumber)")
         notification.alertLaunchImage = "AppIcon"
         notification.soundName = "ringtone.wav"
         notification.category = Configuration.Notifications.Identifiers.category

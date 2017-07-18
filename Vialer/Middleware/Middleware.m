@@ -148,7 +148,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     [VialerGAITracker pushNotificationWithIsAccepted:available connectionType:connectionTypeString];
 
     // Track the pushed call in Core Data.
-    [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
+    PushedCall *pushedCall = [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
     [self.context save:nil];
 
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];

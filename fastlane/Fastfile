@@ -113,6 +113,7 @@ platform :ios do
     device_hash[device_name] = device_udid
     register_devices(
         username: ENV["ITC_USERNAME"],
+        team_name: ENV["APP_TEAM"],
         devices: device_hash
     )
     refresh_profiles

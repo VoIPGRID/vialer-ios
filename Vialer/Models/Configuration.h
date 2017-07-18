@@ -49,10 +49,17 @@ extern NSString * const ConfigurationGADimensionBuildIndex;
 
 
 /**
- The logEntries token.
-
- @return NSString with the token.
+ * The logEntries token.
+ *
+ * @return NSString with the token.
  */
 - (NSString *)logEntriesToken;
+
+/**
+ * The Google tracking Id.
+ *
+ * return NSString Google tracking id.
+ */
+- (NSString *)googleTrackingId;
 
 @end
