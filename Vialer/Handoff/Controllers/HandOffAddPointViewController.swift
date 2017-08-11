@@ -37,7 +37,6 @@ class HandOffAddPointViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func onAdd(_ sender: Any) {
         let coordinate = mapView.centerCoordinate
         let radius = Double(radiusTextField.text!) ?? 0

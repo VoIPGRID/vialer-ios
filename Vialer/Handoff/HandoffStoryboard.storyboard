@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Os0-m3-4Xu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Os0-m3-4Xu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aWI-qL-eD5">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <outlet property="delegate" destination="x4E-iB-eiD" id="DnP-an-7IU"/>
                                 </connections>
@@ -230,7 +230,7 @@
                         <outlet property="mapView" destination="OML-PZ-Etn" id="pEy-by-2vS"/>
                         <outlet property="noteTextField" destination="fdy-Rv-dPw" id="ecW-Qb-gjw"/>
                         <outlet property="radiusTextField" destination="av1-rM-qEk" id="EZ7-yz-XY9"/>
-                        <outlet property="zoomButton" destination="G36-Al-jmO" id="Ddl-Hn-H5S"/>
+                        <outlet property="zoomButton" destination="G36-Al-jmO" id="RKg-42-Stg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kYc-Vj-rov" userLabel="First Responder" sceneMemberID="firstResponder"/>
