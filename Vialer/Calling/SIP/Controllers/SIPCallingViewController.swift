@@ -375,7 +375,7 @@ extension SIPCallingViewController {
             statusLabel?.text = NSLocalizedString("Connecting...", comment: "Statuslabel state text .Connecting")
         case .confirmed:
             if call.onHold {
-                statusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold")
+                statusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
             } else {
                 statusLabel?.text = "\(dateComponentsFormatter.string(from: call.connectDuration)!)"
             }

@@ -120,7 +120,7 @@ extension SetupCallTransferViewController {
         if call.callState == .disconnected {
             firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
         } else {
-            firstCallStatusLabel?.text = NSLocalizedString("ON HOLD", comment: "On hold phone state")
+            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
         }
     }
 

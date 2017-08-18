@@ -83,11 +83,11 @@ import Foundation
     static func setupGAITracker() {
         #if DEBUG
             let dryRun = true
+            let logLevel = GAILogLevel.verbose
         #else
             let dryRun = false
+            let logLevel = GAILogLevel.warning
         #endif
-
-        let logLevel = GAILogLevel.warning
 
         setupGAITracker(logLevel:logLevel, isDryRun:dryRun)
     }
@@ -99,15 +99,13 @@ import Foundation
      - parameter isDryRun: Boolean indicating GA to run in dry run mode or not.
      */
     static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) {
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        if let error = configureError {
-            assertionFailure("Error configuring Google Services: \(error)")
+        guard let gai = GAI.sharedInstance() else {
+            assert(false, "Google Analytics not configured correctly")
         }
-        let gai = GAI.sharedInstance()
-        gai?.trackUncaughtExceptions = true
-        gai?.logger.logLevel = logLevel
-        gai?.dryRun = isDryRun
+        gai.tracker(withTrackingId: Configuration.default().googleTrackingId());
+        gai.trackUncaughtExceptions = true
+        gai.logger.logLevel = logLevel
+        gai.dryRun = isDryRun
 
         tracker.set(GAIFields.customDimension(for: GAIConstants.CustomDimensions.build), value: AppInfo.currentAppVersion()!)
     }
@@ -169,6 +167,14 @@ import Foundation
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Declined", value: 0)
     }
 
+    static func missedIncomingCallCompletedElsewhereEvent() {
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Missed - Call completed elsewhere", value: 0)
+    }
+
+    static func missedIncomingCallOriginatorCancelledEvent() {
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Missed - Originator cancel", value: 0)
+    }
+
     /**
      The incoming call is rejected because there is another call in progress.
      */
@@ -227,7 +233,10 @@ import Foundation
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
     static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
-        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware, interval: (responseTime * 1000) as NSNumber, name: "Response Time", label: nil).build() as [NSObject : AnyObject]
+        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware,
+                                                       interval: Int(round(responseTime * 1000)) as NSInteger as NSNumber,
+                                                       name: "Response Time", label: nil)
+            .build() as [NSObject : AnyObject]
         tracker.send(timing)
     }
 
