@@ -338,6 +338,9 @@ extension Reachability {
         if currentRadio == nil {
             networkInfo = CTTelephonyNetworkInfo()
             currentRadio = networkInfo?.currentRadioAccessTechnology
+            if (currentRadio == nil) {
+                currentRadio = ""
+            }
         }
         return currentRadio!
     }

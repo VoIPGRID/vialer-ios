@@ -36,7 +36,11 @@ class KeypadViewController: UIViewController {
     var dtmfSent: String? {
         didSet {
             delegate?.dtmfSent(dtmfSent)
-            numberLabel.text = dtmfSent
+            DispatchQueue.global().async {
+                DispatchQueue.main.async { [weak self] in
+                    self?.numberLabel?.text = self?.dtmfSent
+                }
+            }
         }
     }
 
@@ -74,9 +78,10 @@ class KeypadViewController: UIViewController {
         guard let call = call, call.callState != .disconnected else { return }
         callManager.sendDTMF(for: call, character: sender.number) { error in
             if error != nil {
-                VialerLogError("Error sending DTMF: \(error)")
+                VialerLogError("Error sending DTMF: \(String(describing: error))")
             } else {
                 self.dtmfSent = (self.dtmfSent ?? "") + sender.number
+                self.playDtmTone(sender.number)
             }
         }
     }
@@ -85,7 +90,7 @@ class KeypadViewController: UIViewController {
         guard let call = call, call.callState != .disconnected else { return }
         callManager.end(call) { error in
             if error != nil {
-                VialerLogError("Error ending call: \(error)")
+                VialerLogError("Error ending call: \(String(describing: error))")
             }
         }
     }
@@ -101,8 +106,12 @@ class KeypadViewController: UIViewController {
     // MARK: - Helper functions
 
     func updateUI() {
-
-        numberLabel.text = dtmfSent ?? phoneNumberLabelText
+        
+        DispatchQueue.global().async {
+            DispatchQueue.main.async { [weak self] in
+                self?.numberLabel?.text = self?.dtmfSent ?? self?.phoneNumberLabelText
+            }
+        }
 
         guard let call = call else { return }
         switch call.callState {
@@ -149,6 +158,29 @@ class KeypadViewController: UIViewController {
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
+    private func playDtmTone(_ dtmf: String!) {
+        VialerLogInfo("Play DTMF Tone: \(dtmf!)")
+
+        let soundFileName = "dtmf-\(dtmf!)"
+        let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: "aif")
+        
+        assert(soundURL != nil, "No sound available")
+
+        VialerLogInfo("soundFile: \(soundFileName)")
+        VialerLogInfo("soundUrl: \(String(describing: soundURL))")
+        
+        do {
+//            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+//            try AVAudioSession.sharedInstance().setActive(true)
+            
+            let player = try AVAudioPlayer(contentsOf: soundURL!)
+            
+            player.play()
+        } catch let error {
+            VialerLogError("Couldn't load sound: \(error)")
         }
     }
 }

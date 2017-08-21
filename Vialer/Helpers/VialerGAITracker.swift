@@ -82,7 +82,7 @@ import Foundation
      */
     static func setupGAITracker() {
         #if DEBUG
-            let dryRun = true
+            let dryRun = false
             let logLevel = GAILogLevel.verbose
         #else
             let dryRun = false
@@ -233,9 +233,12 @@ import Foundation
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
     static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
+        let interval = Double(responseTime * 10000).rounded() as NSNumber
+        VialerLogDebug("Response time to the middleware: \(interval)")
         let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware,
-                                                       interval: Int(round(responseTime * 1000)) as NSInteger as NSNumber,
-                                                       name: "Response Time", label: nil)
+                                                       interval: interval,
+                                                       name: "Response Time",
+                                                       label: nil)
             .build() as [NSObject : AnyObject]
         tracker.send(timing)
     }
