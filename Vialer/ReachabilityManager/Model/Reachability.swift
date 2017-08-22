@@ -46,12 +46,14 @@ public enum ReachabilityError: Error {
         case reachableViaWiFi
         case reachableVia2G
         case reachableVia3G
+        case reachableVia3GPlus
         case reachableVia4G
 
         public var description: String {
             switch self {
             case .reachableVia2G: return "2G"
             case .reachableVia3G: return "3G"
+            case .reachableVia3GPlus: return "3G+"
             case .reachableVia4G: return "4G"
             case .reachableViaWiFi: return "Wifi"
             case .notReachable: return "No Connection"
@@ -66,6 +68,10 @@ public enum ReachabilityError: Error {
     public var onWWAN: Bool
     public var hasHighSpeed: Bool {
         return status == .reachableViaWiFi || status == .reachableVia4G
+    }
+    
+    public var hasHighSpeedWith3GPlus: Bool {
+        return hasHighSpeed || status == .reachableVia3GPlus
     }
 
     public var statusString: String {
@@ -97,6 +103,8 @@ public enum ReachabilityError: Error {
         }
         if fastInternet.contains(currentRadio) {
             return .reachableVia4G
+        } else if mediumFastInternet.contains(currentRadio) {
+            return .reachableVia3GPlus
         } else if mediumInternet.contains(currentRadio) {
             return .reachableVia3G
         }
@@ -128,21 +136,24 @@ public enum ReachabilityError: Error {
 
     // MARK: - Radioquality sets.
     // 2G.
-    fileprivate let slowInternet: Set<String> = [   CTRadioAccessTechnologyGPRS,
-                                                    CTRadioAccessTechnologyEdge,
-                                                    CTRadioAccessTechnologyCDMA1x
+    fileprivate let slowInternet: Set<String> = [ CTRadioAccessTechnologyGPRS,
+                                                  CTRadioAccessTechnologyEdge,
+                                                  CTRadioAccessTechnologyCDMA1x
     ]
     // 3G.
     fileprivate let mediumInternet: Set<String> = [ CTRadioAccessTechnologyWCDMA,
-                                                    CTRadioAccessTechnologyHSDPA,
-                                                    CTRadioAccessTechnologyHSUPA,
                                                     CTRadioAccessTechnologyCDMAEVDORev0,
                                                     CTRadioAccessTechnologyCDMAEVDORevA,
-                                                    CTRadioAccessTechnologyCDMAEVDORevB,
-                                                    CTRadioAccessTechnologyeHRPD
+                                                    CTRadioAccessTechnologyCDMAEVDORevB
     ]
+    
+    fileprivate let mediumFastInternet: Set<String> = [ CTRadioAccessTechnologyHSDPA, // 3.5  G
+                                                        CTRadioAccessTechnologyHSUPA, // 3.75 G
+                                                        CTRadioAccessTechnologyeHRPD, // 3    G++
+    ]
+    
     // 4G.
-    fileprivate let fastInternet: Set<String> = [   CTRadioAccessTechnologyLTE
+    fileprivate let fastInternet: Set<String> = [ CTRadioAccessTechnologyLTE
     ]
 
 

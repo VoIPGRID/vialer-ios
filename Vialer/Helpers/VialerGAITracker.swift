@@ -82,7 +82,7 @@ import Foundation
      */
     static func setupGAITracker() {
         #if DEBUG
-            let dryRun = true
+            let dryRun = false
             let logLevel = GAILogLevel.verbose
         #else
             let dryRun = false

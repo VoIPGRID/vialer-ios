@@ -16,6 +16,7 @@ class ReachabilityBarViewController: UIViewController {
     fileprivate var userLogout: NotificationToken?
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
+    fileprivate var use3GPlusChanged: NotificationToken?
 
     @IBOutlet weak var twoStepButton: UIButton!
     @IBOutlet weak var informationLabel: UILabel!
@@ -35,6 +36,9 @@ extension ReachabilityBarViewController {
             self?.updateLayout()
         }
         sipChanged = notificationCenter.addObserver(descriptor: SystemUser.sipChangedNotification) { [weak self] _ in
+            self?.updateLayout()
+        }
+        use3GPlusChanged = notificationCenter.addObserver(descriptor: SystemUser.use3GPlusNotification) { [weak self] _ in
             self?.updateLayout()
         }
         updateLayout()
@@ -60,11 +64,21 @@ extension ReachabilityBarViewController {
                 } else {
                     weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
                 }
+            case .reachableVia3GPlus:
+                if !weakSelf.currentUser.sipEnabled && weakSelf.currentUser.use3GPlus {
+                    weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
+                } else if weakSelf.currentUser.sipEnabled && !weakSelf.currentUser.use3GPlus {
+                    weakSelf.informationLabel.text = NSLocalizedString("Poor connection, Two step calling enabled.", comment: "Poor connection, Two step calling enabled.")
+                    weakSelf.twoStepButton.isHidden = false
+                } else {
+                    weakSelf.informationLabel.text = ""
+                    shouldBeVisible = false;
+                }
             case .reachableVia4G: fallthrough
             case .reachableViaWiFi:
                 if !weakSelf.currentUser.sipEnabled {
                     weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
-                } else {
+                }  else {
                     weakSelf.informationLabel.text = ""
                     shouldBeVisible = false
                 }
@@ -85,7 +99,7 @@ extension ReachabilityBarViewController {
 extension ReachabilityBarViewController {
     @IBAction func infoButtonPressed(_ sender: UIButton) {
         let alert = UIAlertController(title: NSLocalizedString("Two step modus", comment:"Two step modus"),
-                                      message: NSLocalizedString("Two step modus will setup a call to your phone first and will call the other party when you answer the call.", comment: "Two step modus will setup a call to your phone first and will call the other party when you answer the call."),
+                                    message: NSLocalizedString("Only 3g+ is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose.", comment: "Only 3g+ is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose."),
                                       andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
         present(alert, animated: true)
     }

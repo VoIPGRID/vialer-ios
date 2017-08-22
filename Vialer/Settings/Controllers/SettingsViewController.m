@@ -17,8 +17,9 @@
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
-static int const SettingsViewControllerSipAccountRow        = 2;
-static int const SettingsViewControllerTCPRow               = 3;
+static int const SettingsViewController3GPlus               = 2;
+static int const SettingsViewControllerSipAccountRow        = 3;
+static int const SettingsViewControllerTCPRow               = 4;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -38,6 +39,7 @@ static int const SettingsViewControllerSwitchVoIP               = 1001;
 static int const SettingsViewControllerSwitchWifiNotification   = 1002;
 static int const SettingsViewControllerSwitchTCP                = 1003;
 static int const SettingsViewControllerSwitchLogging            = 1004;
+static int const SettingsViewControllerSwitch3GPlus             = 1005;
 
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
@@ -109,9 +111,10 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             if (self.currentUser.sipEnabled) {
                 // The VoIP Switch
                 // WiFi notification
+                // 3G+
                 // account ID
                 // TCP connection
-                return 4;
+                return 5;
             } else {
                 // Only show VoIP Switch
                 return 1;
@@ -156,6 +159,12 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
                           withTag:SettingsViewControllerSwitchWifiNotification
                        defaultVal:!self.currentUser.noWiFiNotification];
+        } else if (indexPath.row == SettingsViewController3GPlus) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell
+                        withTitle:NSLocalizedString(@"Use 3G+ for calls", @"Use 3G+ for calls")
+                          withTag:SettingsViewControllerSwitch3GPlus
+                       defaultVal:self.currentUser.use3GPlus];
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
@@ -253,6 +262,8 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
         }
     } else if (sender.tag == SettingsViewControllerSwitchWifiNotification) {
         self.currentUser.noWiFiNotification = !sender.isOn;
+    } else if (sender.tag == SettingsViewControllerSwitch3GPlus) {
+        self.currentUser.use3GPlus = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchTCP) {
         self.useTCP = sender.isOn;
         // Remove and initiate the endpoint again to make sure the new transport is loaded.
