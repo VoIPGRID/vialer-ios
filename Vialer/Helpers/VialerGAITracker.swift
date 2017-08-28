@@ -233,9 +233,10 @@ class VialerGAITracker: NSObject {
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
     @objc static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
-        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware,
+        let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.metrics,
                                                        interval: Int(round(responseTime * 1000)) as NSInteger as NSNumber,
-                                                       name: "Response Time", label: nil)
+                                                       name: GAIConstants.Categories.middleware,
+                                                       label: "Response Time")
             .build() as [NSObject : AnyObject]
         tracker.send(timing)
     }
