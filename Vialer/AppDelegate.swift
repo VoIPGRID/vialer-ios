@@ -68,11 +68,12 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         interpretLaunchArguments()
         VialerLogger.setup()
-
+        
         SAMKeychain.setAccessibilityType(kSecAttrAccessibleAfterFirstUnlock)
 
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
+        VialerLogVerbose("didFinishLaunching");
         setupUI()
         setupObservers()
         setupVoIP()
@@ -81,6 +82,7 @@ extension AppDelegate: UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        VialerLogVerbose("applicationDidBecomeActive")
         DispatchQueue.global(qos: .background).async {
             // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
             self.user.updateFromVG(completion: nil)
@@ -91,19 +93,26 @@ extension AppDelegate: UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        VialerLogVerbose("application with userActivity")
         return didStartCallFor(userActivity: userActivity)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        VialerLogVerbose("applicationWillEnterForeground")
+
         stopVibratingInBackground()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        VialerLogVerbose("applicationDidEnterBackground")
+
         saveContext()
         reportCallWhenAppEntersBackground()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        VialerLogVerbose("applicationWillTerminate")
+
         removeObservers()
 
         // Saves changes in the application's managed object context before the application terminates.
@@ -117,12 +126,14 @@ extension AppDelegate: UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
+        VialerLogVerbose("Notification clicked with \"Action Identifier\" : \(notification)")
+
         stopVibratingInBackground()
         if identifier == Configuration.Notifications.Identifiers.accept || identifier == Configuration.Notifications.Identifiers.decline {
             guard let callID = notification.userInfo?[Configuration.Notifications.incomingCallIDKey] as? Int else { return }
             handleIncomingBackgroundNotification(identifier: identifier, callID: callID)
         } else {
-            VialerLogError("Unsupported action for local Notification: \(identifier)")
+            VialerLogError("Unsupported action for local Notification: \(String(describing: identifier))")
         }
         completionHandler()
     }
@@ -203,6 +214,7 @@ extension AppDelegate {
 
     /// We need to setup the local notification settings for pre CallKit app users
     fileprivate func registerForLocalNotifications() {
+        VialerLogDebug("..registerForLocalNotifications");
         let acceptCallAction = UIMutableUserNotificationAction()
         acceptCallAction.activationMode = .foreground
         acceptCallAction.title = NSLocalizedString("Accept", comment: "Accept")
@@ -239,8 +251,10 @@ extension AppDelegate {
 
     /// Make sure the VoIP parts are up and running
     fileprivate func setupVoIP() {
+        VialerLogVerbose("setupVoIP");
         if VialerSIPLib.callKitAvailable() {
             callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
+            VialerLogVerbose(".callKitAvailable");
         }
         if user.sipEnabled {
             updatedSIPCredentials()
@@ -251,14 +265,15 @@ extension AppDelegate {
 
     /// Register a callback to the sip library so that the app can handle incoming calls
     private func setupIncomingCallBack() {
+        VialerLogVerbose(".setupIncomingCallBack")
         vialerSIPLib.setIncomingCall { call in
             VialerGAITracker.incomingCallRingingEvent()
             DispatchQueue.main.async {
                 if VialerSIPLib.callKitAvailable() {
-                    VialerLogInfo("Incoming call block invoked, routing through CallKit.")
+                    VialerLogInfo("..Incoming call block invoked, routing through CallKit.")
                     self.callKitProviderDelegate.reportIncomingCall(call)
                 } else {
-                    VialerLogInfo("Incoming call block invoked, using own app presentation.")
+                    VialerLogInfo("..Incoming call block invoked, using own app presentation.")
                     self.reportIncomingCallForNonCallKit(withCall: call)
                 }
             }
@@ -267,14 +282,14 @@ extension AppDelegate {
 
     /// Register a callback to the sip library so that the app can handle missed calls
     private func setupMissedCallBack() {
-        VialerLogError("setupMissedCallback()")
+        VialerLogError(".setupMissedCallback()")
         vialerSIPLib.setMissedCall { (call) in
             switch call.terminateReason {
             case .callCompletedElsewhere:
-                VialerLogDebug("Call completed elsewhere")
+                VialerLogDebug("..Call completed elsewhere")
                 VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
             case .originatorCancel:
-                VialerLogDebug("Originator cancelled")
+                VialerLogDebug("..Originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
             case .unknown:
                 break
@@ -288,21 +303,23 @@ extension AppDelegate {
     ///
     /// - Pa rameter call: VSL call instance of the incoming call
     private func reportIncomingCallForNonCallKit(withCall call: VSLCall) {
+        VialerLogVerbose("..reportIncomingCallForNonCallKit")
         DispatchQueue.main.async { [unowned self] in
             if SIPUtils.anotherCall(inProgress: call) {
-                VialerLogInfo("There is another call in progress. For now declining the call that is incoming.")
+                VialerLogInfo("...There is another call in progress. For now declining the call that is incoming.")
                 do {
                     try call.decline()
                     VialerGAITracker.declineIncomingCallBecauseAnotherCallInProgressEvent()
                 } catch let error {
-                    VialerLogError("Error declining call: \(error)")
+                    VialerLogError("...Error declining call: \(error)")
                 }
             } else {
                 if UIApplication.shared.applicationState == .background {
+                    VialerLogDebug("...Call received with device in background: Call: \(call.callId)")
                     self.createLocalNotification(forCall: call)
                     self.startVibratingInBackground()
                 } else {
-                    VialerLogDebug("Call received with device in foreground. Call: \(call.callId)")
+                    VialerLogDebug("...Call received with device in foreground. Call: \(call.callId)")
                     let notificationInfo = [VSLNotificationUserInfoCallKey: call]
                     NotificationCenter.default.post(name: Configuration.Notifications.incomingCall, object: self, userInfo: notificationInfo)
                 }
@@ -312,7 +329,7 @@ extension AppDelegate {
 
     /// Setup the endpoint if user has SIP enabled
     @objc fileprivate func updatedSIPCredentials() {
-        VialerLogInfo("SIP Credentials have changed")
+        VialerLogInfo("..SIP Credentials have changed")
         if !user.sipEnabled { return }
 
         DispatchQueue.main.async {
@@ -353,17 +370,19 @@ extension AppDelegate {
         if !VialerSIPLib.callKitAvailable() {
             return false
         }
+        
+        VialerLogDebug(".Did start call from iOS Recents or Addressbook")
 
         guard #available(iOS 10.0, *), let phoneNumber = userActivity.startCallHandle else { return false }
 
         guard let account = SIPUtils.addSIPAccountToEndpoint() else {
-            VialerLogError("Couldn't add account to endpoint, not setting up call to: \(phoneNumber)")
+            VialerLogError("..Couldn't add account to endpoint, not setting up call to: \(phoneNumber)")
             return false
         }
         VialerGAITracker.setupOutgoingSIPCallEvent()
         vialerSIPLib.callManager.startCall(toNumber: phoneNumber, for: account) { _, error in
             if error != nil {
-                VialerLogError("Error starting call through User activity. Error: \(error)")
+                VialerLogError("..Error starting call through User activity. Error: \(String(describing: error))")
             }
         }
         return true
@@ -371,6 +390,7 @@ extension AppDelegate {
 
     /// When the app leave foreground and the call is still ringing, we create a local notification for that call
     fileprivate func reportCallWhenAppEntersBackground() {
+        VialerLogVerbose("..reportCallWhenAppEntersBackground")
         guard let call = SIPUtils.getFirstActiveCall(), call.callState == .incoming else { return }
         createLocalNotification(forCall: call)
     }
@@ -381,6 +401,7 @@ extension AppDelegate {
     ///
     /// - Parameter call: VSLCall instance
     private func createLocalNotification(forCall call: VSLCall) {
+        VialerLogDebug("...createLocalNotification")
         let callerName = call.callerName!
         let callerNumber = call.callerNumber!
 
@@ -406,28 +427,35 @@ extension AppDelegate {
     ///   - identifier: String with the user action on the local notification
     ///   - callID: Int with the callID of the VSLCall
     fileprivate func handleIncomingBackgroundNotification(identifier: String?, callID: Int) {
+        VialerLogVerbose(".handleIncomingBackgroundNotification")
         guard let call = vialerSIPLib.callManager.call(withCallId: callID), call.callState != .null else { return }
 
         let notificationInfo = [VSLNotificationUserInfoCallKey: call]
         if identifier == Configuration.Notifications.Identifiers.decline {
+            VialerLogVerbose("..decline call");
+
             // Call is declined through the button on the local notification.
             do {
                 try call.decline()
                 VialerGAITracker.declineIncomingCallEvent()
             } catch let error {
-                VialerLogError("Error declining call: \(error)")
+                VialerLogError("..Error declining call: \(error)")
             }
         } else if identifier == Configuration.Notifications.Identifiers.accept {
+            VialerLogVerbose("..accept call");
             // Call is accepted through the button on the local notification.
             NotificationCenter.default.post(name: Configuration.Notifications.incomingCallAccepted, object: self, userInfo: notificationInfo)
         } else {
-            // The local notification was just tapped, not declined, not answerd.
+            VialerLogVerbose("..ringing call");
+
+            // The local notification was just tapped, not declined, not answered.
             NotificationCenter.default.post(name: Configuration.Notifications.incomingCall, object: self, userInfo: notificationInfo)
         }
     }
 
     /// Create a background task that will vibrate the phone.
     private func startVibratingInBackground() {
+        VialerLogDebug("...startVibratingInBackground")
         let application = UIApplication.shared
 
         stopVibrating = false
@@ -456,6 +484,7 @@ extension AppDelegate {
 
     /// Stop the vibrations
     fileprivate func stopVibratingInBackground() {
+        VialerLogVerbose(".stopVibratingInBackground")
         stopVibrating = true
         guard let task = vibratingTask else { return }
         UIApplication.shared.endBackgroundTask(task)

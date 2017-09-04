@@ -54,6 +54,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        VialerLogVerbose(@"..initWithCoder");
         self.title = NSLocalizedString(@"Contacts", nil);
         self.tabBarItem.image = [UIImage imageNamed:ContactsViewControllerTabContactImageName];
         self.tabBarItem.selectedImage = [UIImage imageNamed:ContactsViewControllerTabContactActiveImageName];
@@ -63,6 +64,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    VialerLogVerbose(@"..viewDidLoad");
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     self.showTitleImage = YES;
     [self setupLayout];
@@ -73,6 +75,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    VialerLogVerbose(@"..viewWillAppear");
+
     [self updateReachabilityBar];
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     
@@ -85,6 +89,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    VialerLogVerbose(@"..viewDidAppear");
+
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
     [self checkContactsAccess];
 
@@ -101,12 +107,14 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)dealloc {
+    VialerLogVerbose(@"..dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserOutgoingNumberUpdatedNotification object:nil];
 }
 
 # pragma mark - setup
 
 - (void)setupLayout {
+    VialerLogVerbose(@"...setupLayout");
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
@@ -344,6 +352,9 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - utils
 
 - (void)checkContactsAccess {
+    VialerLogVerbose(@"...checkContactAccess");
+
+    
     if (![self.contactModel hasContactAccess]) {
         [self.contactModel requestContactAccess];
     }
@@ -375,6 +386,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)updateReachabilityBar {
+    VialerLogVerbose(@"...updateReachabilityBar");
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!self.reachability.hasHighSpeed || !self.currentUser.sipEnabled) {
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;

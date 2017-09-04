@@ -34,6 +34,6 @@ extern NSString * const _Nonnull MiddlewareRegistrationOnOtherDeviceNotification
  *
  *  @param payload The payload received through an APNS message.
  */
-- (void)handleReceivedAPSNPayload:(NSDictionary * _Nonnull) payload;
+- (void)handleReceivedAPNSPayload:(NSDictionary * _Nonnull) payload;
 
 @end

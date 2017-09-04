@@ -57,6 +57,7 @@ class DialerViewController: UIViewController, SegueHandler {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        VialerLogVerbose("..init")
         setupUI()
     }
 }
@@ -65,6 +66,8 @@ class DialerViewController: UIViewController, SegueHandler {
 extension DialerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        VialerLogVerbose("..viewDidLoad")
+
         setupLayout()
         setupSounds()
         reachabilityChanged = notificationCenter.addObserver(descriptor: Reachability.changed) { [weak self] _ in
@@ -80,6 +83,8 @@ extension DialerViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        VialerLogVerbose("..viewWillAppear")
+
         VialerGAITracker.trackScreenForController(name: controllerName)
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
         setupButtons()
@@ -168,17 +173,21 @@ extension DialerViewController : PasteableUILabelDelegate {
 // MARK: - Helper functions layout
 extension DialerViewController {
     fileprivate func setupUI() {
+        VialerLogVerbose("...setupUI")
         title = NSLocalizedString("Keypad", comment: "Keypad")
         tabBarItem.image = UIImage(asset: .tabKeypad)
         tabBarItem.selectedImage = UIImage(asset: .tabKeypadActive)
     }
 
     fileprivate func setupLayout() {
+        VialerLogVerbose("...setupLayout")
         navigationItem.titleView = UIImageView(image: UIImage(asset: .logo))
         updateReachabilityBar()
     }
 
     fileprivate func setupSounds() {
+        VialerLogVerbose("...setupSounds")
+
         DispatchQueue.global(qos: .userInteractive).async {
             var sounds = [String: AVAudioPlayer]()
             for soundNumber in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "#", "*"] {
@@ -236,6 +245,7 @@ extension DialerViewController {
     }
 
     fileprivate func updateReachabilityBar() {
+        VialerLogVerbose("...updateReachabilityBar")
         DispatchQueue.main.async {
             self.setupButtons()
             if !self.reachability.hasHighSpeed || !self.user.sipEnabled {

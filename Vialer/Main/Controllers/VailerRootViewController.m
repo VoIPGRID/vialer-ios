@@ -31,29 +31,31 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        VialerLogVerbose(@".initWithCoder");
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification:) name:SystemUserLogoutNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc {
+    VialerLogVerbose(@".dealloc");
     @try {
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:SystemUserLogoutNotification];
     }@catch(id exception) {
-        VialerLogError(@"Error removing observer %@: %@", SystemUserLogoutNotification, exception);
+        VialerLogError(@"..Error removing observer %@: %@", SystemUserLogoutNotification, exception);
     }
 
     if ([VialerSIPLib callKitAvailable]) {
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAcceptedNotification];
         } @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
+            VialerLogError(@"..Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
         }
 
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStartedNotification];
         } @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
+            VialerLogError(@"..Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
         }
 
     } else {
@@ -61,14 +63,14 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingCallNotification];
         }
         @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
+            VialerLogError(@"..Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
         }
 
         @try {
             [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingBackgroundCallAcceptedNotification];
         }
         @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", AppDelegateIncomingBackgroundCallAcceptedNotification, exception);
+            VialerLogError(@"..Error removing observer %@: %@", AppDelegateIncomingBackgroundCallAcceptedNotification, exception);
         }
     }
 
@@ -76,12 +78,13 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:MiddlewareRegistrationOnOtherDeviceNotification];
     }
     @catch (NSException *exception) {
-        VialerLogError(@"Error removing observer %@: %@", MiddlewareRegistrationOnOtherDeviceNotification, exception);
+        VialerLogError(@"..Error removing observer %@: %@", MiddlewareRegistrationOnOtherDeviceNotification, exception);
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    VialerLogVerbose(@".viewDidLoad");
     [self setupLayout];
     if ([VialerSIPLib callKitAvailable]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingView:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
@@ -102,6 +105,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    VialerLogVerbose(@".viewDidAppear");
 
     // Prevent segue if we are in the process of showing an incoming view controller.
     if (!self.willPresentSIPViewController) {
@@ -114,6 +118,9 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)setupLayout {
+    
+    VialerLogVerbose(@"..setupLayout");
+    
     NSString *launchImage;
     if  ([UIScreen mainScreen].bounds.size.height > 480.0f) {
         launchImage = @"LaunchImage-700-568h";
@@ -135,7 +142,9 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 - (BOOL)shouldPresentLoginViewController {
     // Everybody, upgraders and new users, will see the onboarding. If you were logged in at v1.x, you will be logged in on
     // v2.x and start onboarding at the "configure numbers view".
-
+    
+    VialerLogVerbose(@"..shouldPresentLoginViewController");
+    
     if (![SystemUser currentUser].loggedIn) {
         // Not logged in, not v21.x, nor in v2.x
         self.loginViewController.screenToShow = OnboardingScreenLogin;
@@ -151,6 +160,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 #pragma mark - actions
 
 - (void)showLoginScreen {
+    VialerLogVerbose(@"...showLoginScreen");
     self.loginViewController = nil;
     self.loginViewController.screenToShow = OnboardingScreenLogin;
     self.loginViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -162,6 +172,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 #pragma mark - Notifications
 
 - (void)logoutNotification:(NSNotification *)notification {
+    VialerLogVerbose(@"..logoutNotification");
     if (notification.userInfo) {
         [self dismissViewControllerAnimated:NO completion:nil];
         NSError *error = notification.userInfo[SystemUserLogoutNotificationErrorKey];
@@ -181,6 +192,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)incomingCallNotification:(NSNotification *)notification {
+    VialerLogVerbose(@"..incomingCallNotification");
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
         self.willPresentSIPViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^(void){
@@ -191,6 +203,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)showSipCallingView:(NSNotification *)notification {
+    VialerLogVerbose(@"..showSipCallingView");
+
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]] &&
         ![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
         ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
@@ -203,6 +217,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)incomingBackgroundCallAcceptedNotification:(NSNotification *)notification {
+    VialerLogVerbose(@"..incomingBackgroundCallAcceptedNotification");
+
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
         self.willPresentSIPViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^{
@@ -213,6 +229,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)voipWasDisabled:(NSNotification *)notification {
+    VialerLogVerbose(@"..voipWasDisabled");
+
     NSString *localizedErrorString = NSLocalizedString(@"Your VoIP account has been registered on another device. You can re-enable VoIP in Settings", nil);
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"VoIP Disabled", nil)
                                                                    message:localizedErrorString

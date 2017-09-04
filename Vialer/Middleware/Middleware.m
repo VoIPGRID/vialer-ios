@@ -36,6 +36,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPCredentialsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];
+    VialerLogVerbose(@"dealloc");
 }
 
 - (instancetype)init {
@@ -43,6 +44,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAPNSTokenOnSIPCredentialsChange) name:SystemUserSIPCredentialsChangedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteDeviceRegistrationFromMiddleware:) name:SystemUserSIPDisabledNotification object:nil];
+        VialerLogVerbose(@"init");
     }
     return self;
 }
@@ -86,13 +88,15 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 }
 
 #pragma mark - actions
-- (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
+- (void)handleReceivedAPNSPayload:(NSDictionary *)payload {
+    VialerLogVerbose(@".handleReceivedAPNSPayload");
+    
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
 
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
-    VialerLogDebug(@"Push message received from middleware of type: %@", payloadType);
-    VialerLogVerbose(@"Payload:\n%@", payload);
+    VialerLogDebug(@"..Push message received from middleware of type: %@", payloadType);
+    VialerLogVerbose(@"..Payload:\n%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
@@ -100,7 +104,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         if (![SystemUser currentUser].sipEnabled) {
             // User is not SIP enabled.
             // Sent not available to the middleware.
-            VialerLogDebug(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
+            VialerLogDebug(@"..Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             return;
         }
@@ -109,7 +113,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was success.
             if (!success) {
-                VialerLogDebug(@"SIP Endpoint registration FAILED. Sending Available = NO to middleware");
+                VialerLogDebug(@"..SIP Endpoint registration FAILED. Sending Available = NO to middleware");
                 [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [SIPUtils removeSIPEndpoint];
@@ -124,7 +128,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             } else {
                 // Connection is not good enough.
                 // Sent not available to the middleware.
-                VialerLogDebug(@"Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
+                VialerLogDebug(@"..Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
                 [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [SIPUtils removeSIPEndpoint];
@@ -133,9 +137,9 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         }];
 
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
-        VialerLogDebug(@"Checking payload:\n %@", payload);
+        VialerLogDebug(@"..Checking payload:\n %@", payload);
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage] && self.systemUser.sipEnabled) {
-        VialerLogDebug(@"Another device took over the SIP account, disabling account.");
+        VialerLogDebug(@"..Another device took over the SIP account, disabling account.");
         self.systemUser.sipEnabled = NO;
         NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
         [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
@@ -152,21 +156,21 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     [self.context save:nil];
 
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
-    VialerLogDebug(@"Responding to Middleware with URL: %@", middlewareBaseURLString);
+    VialerLogDebug(@"...Responding to Middleware with URL: %@", middlewareBaseURLString);
     MiddlewareRequestOperationManager *middlewareToRespondTo = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:middlewareBaseURLString];
 
     [middlewareToRespondTo sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
         // Whole response cycle completed, log duration.
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
         [VialerGAITracker respondedToIncomingPushNotificationWithResponseTime:responseTime];
-        VialerLogDebug(@"Middleware response time: [%f s]", responseTime);
+        VialerLogDebug(@"....Middleware response time: [%f s]", responseTime);
 
         if (error) {
             // Not only do we want to unregister upon a 408 but on every error.
             [account unregisterAccount:nil];
-            VialerLogError(@"The middleware responded with an error: %@", error);
+            VialerLogError(@"....The middleware responded with an error: %@", error);
         } else {
-            VialerLogDebug(@"Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
+            VialerLogDebug(@"....Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
         }
     }];
 }
@@ -224,7 +228,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         backgroundTimeRemaining = [NSString stringWithFormat:@"%.4f", [UIApplication sharedApplication].backgroundTimeRemaining];
     }
 
-    VialerLogInfo(@"Trying to sent APNSToken to middleware. Application state: \"%@\". Background time remaining: %@", applicationState, backgroundTimeRemaining);
+    VialerLogInfo(@".Trying to sent APNSToken to middleware. Application state: \"%@\". Background time remaining: %@", applicationState, backgroundTimeRemaining);
     // End debugging statements
 
     UIApplication *application = [UIApplication sharedApplication];
@@ -236,7 +240,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     };
 
     backgroundtask = [application beginBackgroundTaskWithExpirationHandler:^{
-        VialerLogInfo(@"APNS token background task timed out.");
+        VialerLogInfo(@"..APNS token background task timed out.");
         backgroundTaskCleanupBlock();
     }];
 
@@ -246,13 +250,14 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             [logString appendFormat:@" with %.3f time remaining", application.backgroundTimeRemaining];
         }
 
-        VialerLogInfo(@"%@", logString);
+        VialerLogInfo(@"..%@", logString);
         backgroundTaskCleanupBlock();
     }];
 }
 
 - (void)sentAPNSToken:(NSString *)apnsToken withCompletion:(void (^)(NSError *error))completion {
     if (self.systemUser.sipEnabled) {
+        VialerLogVerbose(@"....sentAPNSToken");
         [self.commonMiddlewareRequestOperationManager updateDeviceRecordWithAPNSToken:apnsToken sipAccount:self.systemUser.sipAccount withCompletion:^(NSError *error) {
             if (error) {
 
@@ -261,7 +266,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                     self.retryCount++;
 
                     // Log an error.
-                    VialerLogWarning(@"Device registration failed. Will retry 5 times. Currently tried %d out of 5.", self.retryCount);
+                    VialerLogWarning(@".....Device registration failed. Will retry 5 times. Currently tried %d out of 5.", self.retryCount);
 
                     // Retry to call the function.
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MiddlewareResendTimeInterval * self.retryCount * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -273,7 +278,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
                     // And log the problem to track failures.
                     [VialerGAITracker registrationFailedWithMiddleWareException];
-                    VialerLogError(@"Device registration with Middleware failed. %@", error);
+                    VialerLogError(@".....Device registration with Middleware failed. %@", error);
 
                     if (completion) {
                         completion(error);
@@ -284,7 +289,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                 self.retryCount = 0;
 
                 // Display debug message the registration has been successfull.
-                VialerLogDebug(@"Middleware registration successfull");
+                VialerLogDebug(@".....Middleware registration successfull");
                 if (completion) {
                     completion(nil);
                 }

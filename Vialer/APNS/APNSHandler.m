@@ -78,7 +78,7 @@ static dispatch_once_t onceToken = 0;
 
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
     VialerLogDebug(@"Incoming push notification of type: %@", type);
-    [self.middleware handleReceivedAPSNPayload:[payload dictionaryPayload]];
+    [self.middleware handleReceivedAPNSPayload:[payload dictionaryPayload]];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {

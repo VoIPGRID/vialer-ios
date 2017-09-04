@@ -94,6 +94,9 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
 extension SIPCallingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        VialerLogVerbose("....viewWillAppear");
+        
         UIDevice.current.isProximityMonitoringEnabled = true
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
@@ -134,10 +137,11 @@ extension SIPCallingViewController {
 extension SIPCallingViewController {
     @IBAction func muteButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall, call.callState != .disconnected else { return }
+        VialerLogVerbose(".....muteButtonPressed");
 
         callManager.toggleMute(for: call) { error in
             if error != nil {
-                VialerLogError("Error muting call: \(error)")
+                VialerLogError(".....Error muting call: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
                     self.updateUI()
@@ -147,11 +151,14 @@ extension SIPCallingViewController {
     }
 
     @IBAction func keypadButtonPressed(_ sender: SipCallingButton) {
+        VialerLogVerbose(".....keyButtonPressed");
+
         performSegue(segueIdentifier: .showKeypad)
     }
 
     @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
         guard activeCall != nil else { return }
+        VialerLogVerbose(".....speakerButtonPressed");
         if callManager.audioController.hasBluetooth {
             // We add the MPVolumeView to the view without any size, we just need it so we can push the button in code.
             let volumeView = MPVolumeView(frame: CGRect.zero)
@@ -170,13 +177,14 @@ extension SIPCallingViewController {
 
     @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall, call.callState == .confirmed else { return }
+        VialerLogVerbose(".....transferButtonPressed");
         if call.onHold {
             performSegue(segueIdentifier: .setupTransfer)
             return
         }
         callManager.toggleHold(for: call) { error in
             if error != nil {
-                VialerLogError("Error holding current call: \(error)")
+                VialerLogError("......Error holding current call: \(String(describing: error))")
             } else {
                 self.performSegue(segueIdentifier: .setupTransfer)
             }
@@ -185,9 +193,10 @@ extension SIPCallingViewController {
 
     @IBAction func holdButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall else { return }
+        VialerLogVerbose(".....holdButtonPressed");
         callManager.toggleHold(for: call) { error in
             if error != nil {
-                VialerLogError("Error holding current call: \(error)")
+                VialerLogError("......Error holding current call: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
                     self.updateUI()
@@ -198,11 +207,14 @@ extension SIPCallingViewController {
 
     @IBAction func hangupButtonPressed(_ sender: UIButton) {
         guard let call = activeCall, call.callState != .disconnected else { return }
+        
+        VialerLogVerbose(".....hangupButtonPressed");
+        
         statusLabel.text = NSLocalizedString("Ending call...", comment: "Ending call...")
 
         callManager.end(call) { error in
             if error != nil {
-                VialerLogError("Error ending call: \(error)")
+                VialerLogError("......Error ending call: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
                     self.hangupButton.isEnabled = false
@@ -215,6 +227,7 @@ extension SIPCallingViewController {
 // MARK: - Call setup
 extension SIPCallingViewController {
     func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
+        VialerLogVerbose(".....handleOutgoingCall");
         cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
         phoneNumberLabelText = cleanedPhoneNumber
         if let contact = contact {
@@ -238,6 +251,7 @@ extension SIPCallingViewController {
     /// - Microphone permission
     /// - WiFi Notification
     fileprivate func setupCall() {
+        VialerLogVerbose(".....setupCall");
         // Check microphone
         checkMicrophonePermission { startCalling in
             if startCalling {
@@ -255,6 +269,7 @@ extension SIPCallingViewController {
     }
 
     fileprivate func startCalling() {
+        VialerLogVerbose("......startCalling")
         guard let account = SIPUtils.addSIPAccountToEndpoint() else {
             return
         }
@@ -263,7 +278,7 @@ extension SIPCallingViewController {
 
         callManager.startCall(toNumber: cleanedPhoneNumber!, for: account) { (call, error) in
             if error != nil {
-                VialerLogError("Error setting up call: \(error)")
+                VialerLogError("......Error setting up call: \(String(describing: error))")
             } else if let call = call {
                 self.activeCall = call
             }
@@ -271,6 +286,7 @@ extension SIPCallingViewController {
     }
 
     fileprivate func dismissView() {
+        VialerLogVerbose("....dismissView");
         let waitingTimeAfterDismissing = Config.Timing.waitingTimeAfterDismissing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [weak self] in
             if self?.activeCall?.isIncoming ?? false {
@@ -283,6 +299,7 @@ extension SIPCallingViewController {
     }
 
     fileprivate func handleCallEnded() {
+        VialerLogVerbose(".....handleCallEnded")
         VialerGAITracker.callMetrics(finishedCall: self.activeCall!)
 
         hangupButton?.isEnabled = false
@@ -386,6 +403,7 @@ extension SIPCallingViewController {
     }
 
     func startConnectDurationTimer() {
+        VialerLogVerbose(".....startConnectDurationTimer")
         if connectDurationTimer == nil || !connectDurationTimer!.isValid {
             connectDurationTimer = Timer.scheduledTimer(timeInterval: Config.Timing.connectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }
@@ -395,6 +413,7 @@ extension SIPCallingViewController {
 // MARK: - WiFi notification
 extension SIPCallingViewController {
     func shouldPresentWiFiNotification() -> Bool {
+        VialerLogVerbose("......shouldPresentWiFiNotification")
         return !currentUser.noWiFiNotification && reachability.status == .reachableViaWiFi && reachability.radioStatus == .reachableVia4G
     }
 
@@ -402,6 +421,7 @@ extension SIPCallingViewController {
      Show alert to user if the user is on WiFi and has 4G connection.
     */
     fileprivate func presentWiFiNotification() {
+        VialerLogVerbose("......shouldPresentWiFiNotification")
         let alertController = UIAlertController(title: NSLocalizedString("Tip: Disable WiFi for better audio", comment: "Tip: Disable WiFi for better audio"),
                                                 message: NSLocalizedString("With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?",
                                                                            comment: "With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?"),
@@ -487,6 +507,7 @@ extension SIPCallingViewController {
     ///
     /// Activating the microphone permission will terminate the app.
     fileprivate func presentEnableMicrophoneAlert() {
+        VialerLogVerbose("......presentEnableMicrophoneAlert")
         let alertController = UIAlertController(title: NSLocalizedString("Access to microphone denied", comment: "Access to microphone denied"),
                                                 message: NSLocalizedString("Give permission to use your microphone.\nGo to",
                                                                            comment: "Give permission to use your microphone.\nGo to"),

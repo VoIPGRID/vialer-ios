@@ -101,7 +101,7 @@
     }];
 
     // When
-    [self.middleware handleReceivedAPSNPayload:mockDictionary];
+    [self.middleware handleReceivedAPNSPayload:mockDictionary];
 
     // Cleanup
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
@@ -127,7 +127,7 @@
     NSDictionary *mockDictionary = @{middlewareAPNSPayloadKeyType : mockType};
 
     // When
-    [self.middleware handleReceivedAPSNPayload:mockDictionary];
+    [self.middleware handleReceivedAPNSPayload:mockDictionary];
 
     // Then
     // The middleware could call [NSNotificationQueue enqueueNotification....] but this method is not
@@ -172,7 +172,7 @@
     }]]);
 
     // When
-    [self.middleware handleReceivedAPSNPayload:mockDictionary];
+    [self.middleware handleReceivedAPNSPayload:mockDictionary];
 
     // Then
     OCMVerifyAll(mockMiddlewareRequestOperationManager);
