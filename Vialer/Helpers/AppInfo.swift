@@ -15,7 +15,7 @@ import Foundation
 
      - returns: A string that tells the current version of the app.
      */
-    static func currentAppVersion() -> String? {
+    @objc static func currentAppVersion() -> String? {
         guard let infoDict = Bundle.main.infoDictionary else {
             return nil
         }

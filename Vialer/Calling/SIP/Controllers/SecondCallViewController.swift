@@ -56,12 +56,12 @@ extension SecondCallViewController {
         if firstCall.transfer(to: secondCall) {
             callManager.end(firstCall) { error in
                 if error != nil {
-                    VialerLogError("Error hanging up call: \(error)")
+                    VialerLogError("Error hanging up call: \(String(describing: error))")
                 }
             }
             callManager.end(secondCall) { error in
                 if error != nil {
-                    VialerLogError("Error hanging up call: \(error)")
+                    VialerLogError("Error hanging up call: \(String(describing: error))")
                 }
             }
             performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
@@ -76,7 +76,7 @@ extension SecondCallViewController {
         // If current call is not disconnected, hangup the call.
         callManager.end(activeCall) { error in
             if error != nil {
-                VialerLogError("Error hanging up call: \(error)")
+                VialerLogError("Error hanging up call: \(String(describing: error))")
             } else {
                 self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
             }
@@ -147,7 +147,7 @@ extension SecondCallViewController {
 
         if context == &myContext {
             DispatchQueue.main.async { [weak self] in
-                if let call = self?.activeCall, keyPath == #keyPath(activeCall.callState) &&  call.callState == .disconnected && self?.firstCall?.transferStatus != .unkown  {
+                if let call = self?.activeCall, keyPath == #keyPath(activeCall.callState) && call.callState == .disconnected && self?.firstCall?.transferStatus != .unkown  {
                     // If the transfer is in progress, the active call will be Disconnected. Perform the segue.
                     self?.performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
                 }

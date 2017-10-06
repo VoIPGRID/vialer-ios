@@ -105,6 +105,10 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             return;
         }
 
+        // Check for network connection before registering the account at pjsip.
+        if (self.reachability.)
+        
+        
         // Register the account with the endpoint. This should trigger correct internet connection.
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was success.

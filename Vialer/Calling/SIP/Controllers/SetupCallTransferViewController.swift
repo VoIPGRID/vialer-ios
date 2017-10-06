@@ -73,7 +73,7 @@ extension SetupCallTransferViewController {
         }
         callManager.end(call) { error in
             if error != nil {
-                VialerLogError("Could not hangup call: \(error)")
+                VialerLogError("Could not hangup call: \(String(describing: error))")
             } else {
                 self.performSegue(segueIdentifier: .unwindToFirstCall)
             }

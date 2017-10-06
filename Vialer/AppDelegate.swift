@@ -32,7 +32,7 @@ class AppDelegate: UIResponder {
 
     var window: UIWindow?
 
-    var isScreenshotRun = false
+    @objc var isScreenshotRun = false
 
     var incomingCallNotification: UILocalNotification?
     var stopVibrating = false
@@ -53,13 +53,13 @@ class AppDelegate: UIResponder {
         }
     }
 
-    var syncContext: NSManagedObjectContext {
+    @objc var syncContext: NSManagedObjectContext {
         get {
             return coreDataStack.syncContext
         }
     }
     
-    var reachability: Reachability!
+    @objc var reachability: Reachability!
 }
 
 // MARK: - UIApplicationDelegate
@@ -122,7 +122,7 @@ extension AppDelegate: UIApplicationDelegate {
             guard let callID = notification.userInfo?[Configuration.Notifications.incomingCallIDKey] as? Int else { return }
             handleIncomingBackgroundNotification(identifier: identifier, callID: callID)
         } else {
-            VialerLogError("Unsupported action for local Notification: \(identifier)")
+            VialerLogError("Unsupported action for local Notification: \(String(describing: identifier))")
         }
         completionHandler()
     }
@@ -174,7 +174,7 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
 
-        reachability = Reachability()
+        reachability = Reachability(true)
         try! reachability.startNotifier()
     }
 
@@ -363,7 +363,7 @@ extension AppDelegate {
         VialerGAITracker.setupOutgoingSIPCallEvent()
         vialerSIPLib.callManager.startCall(toNumber: phoneNumber, for: account) { _, error in
             if error != nil {
-                VialerLogError("Error starting call through User activity. Error: \(error)")
+                VialerLogError("Error starting call through User activity. Error: \(String(describing: error))")
             }
         }
         return true

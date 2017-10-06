@@ -66,7 +66,7 @@ public enum ReachabilityError: Error {
     public var whenConnectionChanged: NetworkChanged?
 
     public var onWWAN: Bool
-    public var hasHighSpeed: Bool {
+    @objc public var hasHighSpeed: Bool {
         return status == .reachableViaWiFi || status == .reachableVia4G
     }
     
@@ -74,7 +74,7 @@ public enum ReachabilityError: Error {
         return hasHighSpeed || status == .reachableVia3GPlus
     }
 
-    public var statusString: String {
+    @objc public var statusString: String {
         return "\(status)"
     }
 
@@ -169,7 +169,7 @@ public enum ReachabilityError: Error {
         self.init(reachabilityRef: ref)
     }
 
-    public convenience init?(_: Void) {
+    public convenience init?(_: Bool) {
         var zeroAddress = sockaddr()
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
         zeroAddress.sa_family = sa_family_t(AF_INET)
@@ -259,7 +259,7 @@ public extension Reachability {
 extension Reachability {
 
     /// Is there a network connection?
-    var isReachable: Bool {
+    @objc var isReachable: Bool {
 
         guard isReachableFlagSet else { return false }
         if isConnectionRequiredAndTransientFlagSet {

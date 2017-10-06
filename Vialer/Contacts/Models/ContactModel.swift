@@ -5,7 +5,7 @@
 
 import Foundation
 
-@objc class ContactModel: NSObject {
+class ContactModel: NSObject {
 
     /**
      Notification that is posted when reloading contacts is done.
@@ -17,7 +17,7 @@ import Foundation
     /**
      Singleton instance of ContactModel.
     */
-    static let defaultModel: ContactModel = {
+    @objc static let defaultModel: ContactModel = {
         let model = ContactModel()
         DispatchQueue.global(qos: .userInteractive).async {
             model.refreshContacts()
@@ -28,27 +28,27 @@ import Foundation
     /**
      The section titles of all contacts.
     */
-    var sectionTitles: [String]?
+    @objc var sectionTitles: [String]?
 
     /**
      Current status of the access rights to the Contacts of the user.
     */
-    var authorizationStatus: CNAuthorizationStatus = .notDetermined
+    @objc var authorizationStatus: CNAuthorizationStatus = .notDetermined
 
     /**
      The contact store that is used within this model.
     */
-    let contactStore = CNContactStore()
+    @objc let contactStore = CNContactStore()
 
     /**
      The search results in one Array.
     */
-    var searchResult = [CNContact]()
+    @objc var searchResult = [CNContact]()
 
     /**
      All the contacts fetched from the Store.
     */
-    var allContacts: [CNContact] {
+    @objc var allContacts: [CNContact] {
         get {
             var allContacts = [CNContact]()
             for (_, contact) in contacts {
@@ -113,14 +113,14 @@ import Foundation
     /**
      Return all the contacts at a section.
     */
-    func contactsAt(section: Int) -> [CNContact] {
+    @objc func contactsAt(section: Int) -> [CNContact] {
         return contacts[sectionTitles![section]]!
     }
 
     /**
      Return the contact given the section and index.
     */
-    func contactAt(section: Int, index: Int) -> CNContact {
+    @objc func contactAt(section: Int, index: Int) -> CNContact {
         return contactsAt(section: section)[index]
     }
 
@@ -129,7 +129,7 @@ import Foundation
 
      Will store the status in `authorizationStatus`.
     */
-    func hasContactAccess() -> Bool {
+    @objc func hasContactAccess() -> Bool {
         authorizationStatus = CNContactStore.authorizationStatus(for: .contacts)
         switch authorizationStatus {
         case .authorized:
@@ -146,7 +146,7 @@ import Foundation
     /**
      Will request contact access if not given and will load the contacts when given.
     */
-    func requestContactAccess() {
+    @objc func requestContactAccess() {
         contactStore.requestAccess(for: .contacts) { granted, error in
             if granted {
                 DispatchQueue.global().async {
@@ -165,7 +165,7 @@ import Foundation
         - for: CNContact
      - returns: NSAttributed string with bolded name
     */
-    func attributedString(for contact: CNContact) -> NSAttributedString? {
+    @objc func attributedString(for contact: CNContact) -> NSAttributedString? {
 
         guard let attributedName = CNContactFormatter.attributedString(from: contact, style: .fullName, defaultAttributes: nil) else {
             if let fullName = CNContactFormatter.string(from: contact, style: .fullName) {
@@ -187,21 +187,21 @@ import Foundation
         let highlightedName = attributedName.mutableCopy() as! NSMutableAttributedString
 
         highlightedName.enumerateAttributes(in: NSMakeRange(0, highlightedName.length), options: [], using: { (attrs, range, stop) in
-            if let property = attrs[CNContactPropertyAttribute] as? String, property == keyToHighlight {
-                let boldAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17)]
+            if let property = attrs[NSAttributedStringKey.init(CNContactPropertyAttribute)] as? String, property == keyToHighlight {
+                let boldAttributes = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17)]
                 highlightedName.addAttributes(boldAttributes, range: range)
             }
         })
         return highlightedName
     }
 
-    func displayName(for contact: CNContact) -> String? {
+    @objc func displayName(for contact: CNContact) -> String? {
         return attributedString(for: contact)?.string
     }
 
     // MARK: - Search
 
-    func searchContacts(for searchText: String) -> Bool {
+    @objc func searchContacts(for searchText: String) -> Bool {
         searchResult.removeAll()
 
         if searchText == "" {
