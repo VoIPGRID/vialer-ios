@@ -302,7 +302,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.reachability.hasHighSpeed && self.currentUser.sipEnabled) {
+                if ((self.reachability.hasHighSpeed || (self.reachability.hasHighSpeedWith3GPlus && self.currentUser.use3GPlus)) && self.currentUser.sipEnabled) {
                     [VialerGAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else if (!self.reachability.isReachable) {
@@ -376,11 +376,22 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)updateReachabilityBar {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.reachability.hasHighSpeed || !self.currentUser.sipEnabled) {
+
+        // SIP is disabled, show the VoIP disabled message
+        if (!self.currentUser.sipEnabled) {
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+        } else if (!self.reachability.hasHighSpeed) {
+            // There is no highspeed connection (4G or WiFi)
+            // Check if there is 3G+ connection and the call with 3G+ is enabled.
+            if (!self.reachability.hasHighSpeedWith3GPlus || !self.currentUser.use3GPlus) {
+                self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+            } else {
+                self.reachabilityBarHeigthConstraint.constant = 0;
+            }
         } else {
             self.reachabilityBarHeigthConstraint.constant = 0;
         }
+        
         [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
             [self.view layoutIfNeeded];
         }];

@@ -85,6 +85,11 @@ extern NSString * const SystemUserSIPDisabledNotification;
 extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 
 /**
+ * Notification that can be listened to when the use 3G plus for calling has changed.
+ */
+extern NSString * const SystemUserUse3GPlusNotification;
+
+/**
  *  SystemUser class is representing the user information as available on the VoIPGRID platform.
  *
  *  Current the SystemUser class also represents a lot of information maintained/stored by the VoIPGRIDRequestOperationManager in the user defaults.
@@ -183,6 +188,11 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
  *  Does the user want a WiFi Notification when setting up a call.
  */
 @property (nonatomic) BOOL noWiFiNotification;
+
+/**
+ * Use 3G+ to make VoIP calls.
+ */
+@property (nonatomic) BOOL use3GPlus;
 
 /**
  *  The users current availability.

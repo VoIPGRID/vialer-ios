@@ -118,7 +118,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             }
 
             // Now check the network connection.
-            if (self.reachability.hasHighSpeed) {
+            if ((self.reachability.hasHighSpeed || (self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) && [[SystemUser currentUser] sipEnabled]) {
                 // Highspeed, let's respond to the middleware with a success.
                 [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             } else {

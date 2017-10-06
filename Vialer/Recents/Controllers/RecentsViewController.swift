@@ -183,7 +183,7 @@ extension RecentsViewController {
 
     fileprivate func call(_ number: String) {
         phoneNumberToCall = number
-        if user.sipEnabled && reachability.hasHighSpeed {
+        if user.sipEnabled && (reachability.hasHighSpeed || (reachability.hasHighSpeedWith3GPlus && user.use3GPlus)) {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else if reachability.status == .notReachable {
@@ -248,8 +248,16 @@ extension RecentsViewController {
 
     fileprivate func updateReachabilityBar() {
         DispatchQueue.main.async {
-            if !self.reachability.hasHighSpeed || !self.user.sipEnabled {
+            if (!self.user.sipEnabled) {
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
+            } else if (!self.reachability.hasHighSpeed) {
+                // There is no highspeed connection (4G or WiFi)
+                // Check if there is 3G+ connection and the call with 3G+ is enabled.
+                if (!self.reachability.hasHighSpeedWith3GPlus || !self.user.use3GPlus) {
+                    self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
+                } else {
+                    self.reachabilityBarHeigthConstraint.constant = 0
+                }
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0
             }

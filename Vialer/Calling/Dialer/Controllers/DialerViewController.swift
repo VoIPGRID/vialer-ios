@@ -114,7 +114,7 @@ extension DialerViewController {
 
         lastCalledNumber = numberText
 
-        if user.sipEnabled && reachability.hasHighSpeed {
+        if user.sipEnabled && ((user.use3GPlus && reachability.hasHighSpeedWith3GPlus) || reachability.hasHighSpeed) {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else {
@@ -238,8 +238,16 @@ extension DialerViewController {
     fileprivate func updateReachabilityBar() {
         DispatchQueue.main.async {
             self.setupButtons()
-            if !self.reachability.hasHighSpeed || !self.user.sipEnabled {
+            if (!self.user.sipEnabled) {
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
+            } else if (!self.reachability.hasHighSpeed) {
+                // There is no highspeed connection (4G or WiFi)
+                // Check if there is 3G+ connection and the call with 3G+ is enabled.
+                if (!self.reachability.hasHighSpeedWith3GPlus || !self.user.use3GPlus) {
+                    self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
+                } else {
+                    self.reachabilityBarHeigthConstraint.constant = 0
+                }
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0
             }

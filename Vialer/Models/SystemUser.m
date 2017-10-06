@@ -23,6 +23,8 @@ NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDi
 
 NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
 
+NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
+
 /**
  *  Api Dictionary keys.
  *
@@ -59,6 +61,7 @@ static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
 static NSString * const SystemUserSUDNoWiFiNotification = @"NoWiFiNotification";
+static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
@@ -246,6 +249,15 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     return [[NSBundle mainBundle] bundleIdentifier];
 }
 
+- (BOOL)use3GPlus {
+    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
+    if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUse3GPlus]){
+        self.use3GPlus = YES;
+    }
+    return [defaults boolForKey:SystemUserSUDUse3GPlus];
+}
+
 - (void)setMobileNumber:(NSString *)mobileNumber {
     _mobileNumber = mobileNumber;
     if (mobileNumber) {
@@ -302,6 +314,15 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)setNoWiFiNotification:(BOOL)noWiFiNotification {
     _noWiFiNotification = noWiFiNotification;
     [[NSUserDefaults standardUserDefaults] setBool:noWiFiNotification forKey:SystemUserSUDNoWiFiNotification];
+}
+
+- (void)setUse3GPlus:(BOOL)use3GPlus {
+    use3GPlus = use3GPlus;
+    [[NSUserDefaults standardUserDefaults] setBool:use3GPlus forKey:SystemUserSUDUse3GPlus];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserUse3GPlusNotification object:self];
+    });
 }
 
 #pragma mark - Actions
