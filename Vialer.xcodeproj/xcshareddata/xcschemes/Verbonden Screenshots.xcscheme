@@ -20,20 +20,6 @@
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C41FD8F21C60A89300BBE6D7"
-               BuildableName = "VoysSnapshotUITests.xctest"
-               BlueprintName = "VoysSnapshotUITests"
-               ReferencedContainer = "container:Vialer.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

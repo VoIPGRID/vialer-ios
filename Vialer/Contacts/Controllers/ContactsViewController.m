@@ -160,8 +160,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (Reachability *)reachability {
     if (!_reachability) {
-        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        _reachability = delegate.reachability;
+        _reachability = [ReachabilityHelper sharedInstance].reachability;
     }
     return _reachability;
 }

@@ -48,7 +48,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     var callManager = VialerSIPLib.sharedInstance().callManager
     let currentUser = SystemUser.current()!
     // ReachabilityManager, needed for showing notifications.
-    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate let reachability = ReachabilityHelper.instance.reachability!
     // Keep track if there are notifications needed for disabling/enabling WiFi.
     var didOpenSettings = false
     // The cleaned number that need to be called.

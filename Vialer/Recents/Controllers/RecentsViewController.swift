@@ -28,7 +28,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     // MARK: - Dependency Injection
     var user = SystemUser.current()!
     var defaultConfiguration = Configuration.default()
-    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate let reachability = ReachabilityHelper.instance.reachability!
     fileprivate var notificationCenter = NotificationCenter.default
     fileprivate var reachabilityChanged: NotificationToken?
     fileprivate var sipDisabled: NotificationToken?
@@ -37,13 +37,13 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     var contactModel = ContactModel.defaultModel
 
     private lazy var mainContext: NSManagedObjectContext = {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.coreDataStack.mainContext
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return CoreDataStackHelper.instance.coreDataStack.mainContext
     }()
 
     private lazy var syncContext: NSManagedObjectContext = {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.coreDataStack.syncContext
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return CoreDataStackHelper.instance.coreDataStack.syncContext
     }()
 
     fileprivate lazy var callManager: RecentCallManager = {

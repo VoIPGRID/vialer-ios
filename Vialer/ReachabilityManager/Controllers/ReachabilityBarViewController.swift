@@ -10,7 +10,7 @@ class ReachabilityBarViewController: UIViewController {
     fileprivate let notificationCenter = NotificationCenter.default
     fileprivate let currentUser = SystemUser.current()!
     fileprivate let configuration = Configuration.default()!
-    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate let reachability = ReachabilityHelper.instance.reachability!
 
     fileprivate var reachabilityChanged: NotificationToken?
     fileprivate var userLogout: NotificationToken?

@@ -68,7 +68,7 @@ static dispatch_once_t onceToken = 0;
 + (NSString *)storedAPNSToken {
     APNSHandler *sharedHandler = [[self class] sharedHandler];
     NSData *token = [sharedHandler.voipRegistry pushTokenForType:PKPushTypeVoIP];
-    return [sharedHandler nsStringFromNSData:token];
+    return [sharedHandler NSStringFromNSData:token];
 }
 
 #pragma mark - PKPushRegistray management
@@ -83,7 +83,7 @@ static dispatch_once_t onceToken = 0;
 
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
     VialerLogInfo(@"Type:%@. APNS registration successful. Token: %@", type, credentials.token);
-    [self.middleware sentAPNSToken:[self nsStringFromNSData:credentials.token]];
+    [self.middleware sentAPNSToken:[self NSStringFromNSData:credentials.token]];
 }
 
 #pragma mark - token conversion
@@ -91,7 +91,7 @@ static dispatch_once_t onceToken = 0;
  * Returns hexadecimal string of NSData. Empty string if data is empty.
  * http://stackoverflow.com/questions/1305225/best-way-to-serialize-a-nsdata-into-an-hexadeximal-string
  */
-- (NSString *)nsStringFromNSData:(NSData *)data {
+- (NSString *)NSStringFromNSData:(NSData *)data {
     const unsigned char *dataBuffer = (const unsigned char *)[data bytes];
     if (!dataBuffer)
         return nil;

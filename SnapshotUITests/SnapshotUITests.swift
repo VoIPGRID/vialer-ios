@@ -146,7 +146,7 @@ class SnapshotUITests: XCTestCase {
             if (error != nil) {
                 let message = "Failed to find \(element) after 10 seconds."
                 self.recordFailure(withDescription: message,
-                    inFile: file, atLine: line, expected: true)
+                                   inFile: file, atLine: Int(line), expected: true)
             }
         }
         if (andHit) {

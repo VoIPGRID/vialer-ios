@@ -268,7 +268,7 @@ class VialerGAITracker: NSObject {
      */
     private static func sendMOSValue(call: VSLCall, forCodec codec:String) {
         // Get the current connection type for the call.
-        let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+        let reachability = ReachabilityHelper.instance.reachability!
 
         let labelString = "MOS for \(codec) on Networktype: \(reachability.status)"
         let value = Int(call.mos * 100.0) as NSNumber

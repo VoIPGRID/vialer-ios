@@ -10,7 +10,6 @@
 @import UIKit;
 #import "Vialer-Swift.h"
 
-
 static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperShouldUseRemoteLogging";
 
 
@@ -66,15 +65,11 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 }
 
 + (void)logWithFlag:(DDLogFlag)flag file:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format arguments:(va_list)arguments {
-    __block NSString *message = [[NSString alloc] initWithFormat:format arguments:arguments];
+    NSString *message = [[NSString alloc] initWithFormat:format arguments:arguments];
     NSString *logFile = [NSString stringWithFormat:@"%s", file];
     NSString *logFunction = [NSString stringWithFormat:@"%s", function];
 
     // Add in the Connection type.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        message = [NSString stringWithFormat:@"[%@] %@", delegate.reachability.statusString, message];
-    });
 
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message
                                                                level:LOG_LEVEL_DEF
@@ -91,12 +86,9 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     [self logMessageToLogEntriesWitMessage:logMessage];
 }
 
-+ (void)logWithDDLogMessage:(DDLogMessage *)message {
-    // Add in the Connection type.
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    message->_message = [NSString stringWithFormat:@"[%@] %@", delegate.reachability.statusString, message.message];
-    [[DDLog sharedInstance] log:LOG_ASYNC_ENABLED message:message];
-    [self logMessageToLogEntriesWitMessage:message];
++ (void)logWithDDLogMessage:(DDLogMessage *)ddLogMessage {
+    [[DDLog sharedInstance] log:LOG_ASYNC_ENABLED message:ddLogMessage];
+    [self logMessageToLogEntriesWitMessage:ddLogMessage];
 }
 
 + (BOOL)remoteLoggingEnabled {
@@ -161,7 +153,17 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
     logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
     logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
-    NSString *log = [NSString stringWithFormat:@"%@ %@ - %@", level, [VialerLogger remoteIdentifier], logMessage];
+
+    Reachability *reachability = [ReachabilityHelper sharedInstance].reachability;
+
+    NSString *modelName = [UIDevice currentDevice].modelName;
+    NSString *currentConnection = reachability.statusString;
+
+    if (![currentConnection isEqualToString:@"Wifi"] && ![currentConnection isEqualToString:@"No Connection"]) {
+        currentConnection = [NSString stringWithFormat:@"%@ (%@)", currentConnection, reachability.carrierName];
+    }
+
+    NSString *log = [NSString stringWithFormat:@"%@ %@ [ %@ - %@ ] - %@", level, [VialerLogger remoteIdentifier], modelName, currentConnection, logMessage];
     [[LELog sharedInstance] log:log];
 }
 

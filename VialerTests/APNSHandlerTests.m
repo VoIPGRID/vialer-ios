@@ -14,7 +14,7 @@
 @property (weak, nonatomic) Middleware *middleware;
 
 + (void)setSharedHandler:(APNSHandler *)sharedHandler;
-- (NSString *)nsStringFromNSData:(NSData *)data;
+- (NSString *)NSStringFromNSData:(NSData *)data;
 @end
 
 @interface APNSHandlerTests : XCTestCase
@@ -157,7 +157,7 @@
 
     // When
     NSData *data = [self nsDataFromHexString:hexString];
-    NSString *returnedString = [self.apnsHandler nsStringFromNSData:data];
+    NSString *returnedString = [self.apnsHandler NSStringFromNSData:data];
 
     // Then
     XCTAssert([hexString isEqualToString:returnedString], @"Conversion from NSString to NSData and back failed");

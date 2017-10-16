@@ -82,7 +82,13 @@ extension SetupCallTransferViewController {
     }
 
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
-        number = number.substring(to: number.characters.index(number.endIndex, offsetBy: -1))
+        number = String(number.dropLast())
+    }
+
+    @IBAction func deleteButtonLongPress(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            number = ""
+        }
     }
 
     @IBAction func keypadButtonPressed(_ sender: NumberPadButton) {
@@ -102,6 +108,12 @@ extension SetupCallTransferViewController {
                 self?.currentCall = call
                 self?.performSegue(segueIdentifier: .secondCallActive)
             }
+        }
+    }
+
+    @IBAction func zeroButtonLongPress(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            number = number + "+"
         }
     }
 }

@@ -37,7 +37,7 @@ class DialerViewController: UIViewController, SegueHandler {
         }
     }
     var user = SystemUser.current()!
-    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate let reachability = ReachabilityHelper.instance.reachability!
     fileprivate var notificationCenter = NotificationCenter.default
     fileprivate var reachabilityChanged: NotificationToken?
     fileprivate var sipDisabled: NotificationToken?
@@ -95,7 +95,7 @@ extension DialerViewController {
 
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         if let number = numberText {
-            numberText = number.substring(to: number.index(before: number.endIndex))
+            numberText = String(number.dropLast())
             setupButtons()
         }
     }

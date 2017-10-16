@@ -36,7 +36,7 @@ public enum ReachabilityError: Error {
     case UnableToSetDispatchQueue
 }
 
-@objc public class Reachability: NSObject {
+public class Reachability: NSObject {
 
     // MARK: - Public properties.
 
@@ -70,12 +70,27 @@ public enum ReachabilityError: Error {
         return status == .reachableViaWiFi || status == .reachableVia4G
     }
     
-    public var hasHighSpeedWith3GPlus: Bool {
+    @objc public var hasHighSpeedWith3GPlus: Bool {
         return hasHighSpeed || status == .reachableVia3GPlus
     }
 
     @objc public var statusString: String {
         return "\(status)"
+    }
+
+    @objc public var carrierName: String? {
+        var carrier = networkInfo?.subscriberCellularProvider
+        if carrier == nil {
+            networkInfo = CTTelephonyNetworkInfo()
+            carrier = networkInfo?.subscriberCellularProvider
+        }
+
+        if carrier != nil {
+            return carrier!.carrierName
+        } else {
+            return ""
+        }
+
     }
 
     // Current internetconnection type.
@@ -350,7 +365,11 @@ extension Reachability {
             networkInfo = CTTelephonyNetworkInfo()
             currentRadio = networkInfo?.currentRadioAccessTechnology
         }
-        return currentRadio!
+        if currentRadio == nil {
+            return ""
+        } else {
+            return currentRadio!
+        }
     }
 }
 
