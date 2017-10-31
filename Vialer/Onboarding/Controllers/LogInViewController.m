@@ -452,7 +452,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)())success {
+- (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)(void))success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
     [self.currentUser loginWithUsername:username password:password completion:^(BOOL loggedin, NSError *error) {
         [SVProgressHUD dismiss];
@@ -484,7 +484,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     }];
 }
 
-- (void)retrievePhoneNumbersWithSuccessBlock:(void (^)())success {
+- (void)retrievePhoneNumbersWithSuccessBlock:(void (^)(void))success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil)];
     [[SystemUser currentUser] updateSystemUserFromVGWithCompletion:^(NSError *error) {
         [SVProgressHUD dismiss];

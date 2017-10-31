@@ -16,7 +16,7 @@ final class PushedCall: NSManagedObject {
 }
 
 extension PushedCall {
-    static func findOrCreate(for dictionary: JSONDictionary, accepted: Bool, connectionType: String, in context: NSManagedObjectContext) -> PushedCall? {
+    @objc static func findOrCreate(for dictionary: JSONDictionary, accepted: Bool, connectionType: String, in context: NSManagedObjectContext) -> PushedCall? {
         guard let key = dictionary["unique_key"] as? String,
             let number = dictionary["phonenumber"] as? String,
             let name = dictionary["caller_id"] as? String

@@ -6,7 +6,7 @@
 import Foundation
 
 /// Wrapper class that makes tracking within the app easy.
-@objc class VialerGAITracker: NSObject {
+class VialerGAITracker: NSObject {
 
     /**
      Constants for this class.
@@ -53,19 +53,19 @@ import Foundation
     }
 
     // These constants should be turned into a Struct when the whole project is rewritten in Swift: VIALI-3255
-    class func GAStatisticsWebViewTrackingName() -> String {
+    @objc class func GAStatisticsWebViewTrackingName() -> String {
         return VialerGAITracker.GAIConstants.TrackingNames.statisticsWebView
     }
-    class func GAInformationWebViewTrackingName() -> String {
+    @objc class func GAInformationWebViewTrackingName() -> String {
         return VialerGAITracker.GAIConstants.TrackingNames.informationWebView
     }
-    class func GADialplanWebViewTrackingName() -> String {
+    @objc class func GADialplanWebViewTrackingName() -> String {
         return VialerGAITracker.GAIConstants.TrackingNames.dialplanWebview
     }
-    class func GAUserProfileWebViewTrackingName() -> String {
+    @objc class func GAUserProfileWebViewTrackingName() -> String {
         return VialerGAITracker.GAIConstants.TrackingNames.userProfileWebView
     }
-    class func GAAddFixedDestinationWebViewTrackingName() -> String {
+    @objc class func GAAddFixedDestinationWebViewTrackingName() -> String {
         return VialerGAITracker.GAIConstants.TrackingNames.addFixedDestinationWebView
     }
 
@@ -80,7 +80,7 @@ import Foundation
      Configures the shared GA Tracker instance with the default info log level
      and sets dry run according to DEBUG being set or not.
      */
-    static func setupGAITracker() {
+    @objc static func setupGAITracker() {
         #if DEBUG
             let dryRun = false
             let logLevel = GAILogLevel.verbose
@@ -98,7 +98,7 @@ import Foundation
      - parameter logLevel: The GA log level you want to configure the shared instance with.
      - parameter isDryRun: Boolean indicating GA to run in dry run mode or not.
      */
-    static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) {
+    @objc static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) {
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")
         }
@@ -126,7 +126,7 @@ import Foundation
 
      - parameter name: The name of the screen name to track.
      */
-    static func trackScreenForController(name:String) {
+    @objc static func trackScreenForController(name:String) {
         tracker.set(kGAIScreenName, value: name.replacingOccurrences(of: "ViewController", with: ""))
         tracker.send(GAIDictionaryBuilder.createScreenView().build() as [NSObject : AnyObject])
     }
@@ -149,21 +149,21 @@ import Foundation
     /**
      Indication a call event is received from the SIP Proxy and the app is ringing.
      */
-    static func incomingCallRingingEvent() {
+    @objc static func incomingCallRingingEvent() {
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Ringing", value: 0)
     }
 
     /**
      The incoming call is accepted.
      */
-    static func acceptIncomingCallEvent() {
+    @objc static func acceptIncomingCallEvent() {
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Accepted", value: 0)
     }
 
     /**
      The incoming call is rejected.
      */
-    static func declineIncomingCallEvent() {
+    @objc static func declineIncomingCallEvent() {
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Declined", value: 0)
     }
 
@@ -185,14 +185,14 @@ import Foundation
     /**
      Event to track an outbound SIP call.
      */
-    static func setupOutgoingSIPCallEvent() {
+    @objc static func setupOutgoingSIPCallEvent() {
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.outbound, label: "SIP", value: nil)
     }
 
     /**
      Event to track an outbound ConnectAB (aka two step) call.
      */
-    static func setupOutgoingConnectABCallEvent() {
+    @objc static func setupOutgoingConnectABCallEvent() {
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.outbound, label: "ConnectAB", value: nil)
     }
 
@@ -202,7 +202,7 @@ import Foundation
      - parameter connectionType: A string indicating the current connection type, as described in the "Google Analytics events for all Mobile apps" document.
      - parameter isAccepted:     Boolean indicating if we can accept the incoming VoIP call.
      */
-    static func pushNotification(isAccepted: Bool, connectionType: String ) {
+    @objc static func pushNotification(isAccepted: Bool, connectionType: String ) {
         let action = isAccepted ? "Accepted" : "Rejected"
         sendEvent(withCategory: GAIConstants.Categories.middleware, action: action, label: connectionType, value: nil)
     }
@@ -220,7 +220,7 @@ import Foundation
     /**
      Exception when the registration failed on the middleware.
      */
-    static func registrationFailedWithMiddleWareException() {
+    @objc static func registrationFailedWithMiddleWareException() {
         let exception = GAIDictionaryBuilder.createException(withDescription: "Failed middleware registration", withFatal: false).build() as [NSObject : AnyObject]
         tracker.send(exception)
     }
@@ -232,7 +232,7 @@ import Foundation
 
      - parameter responseTime: NSTimeInterval with the time it took to respond.
      */
-    static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
+    @objc static func respondedToIncomingPushNotification(withResponseTime responseTime: TimeInterval) {
         let timing = GAIDictionaryBuilder.createTiming(withCategory: GAIConstants.Categories.middleware,
                                                        interval: Int(round(responseTime * 1000)) as NSInteger as NSNumber,
                                                        name: "Response Time", label: nil)
@@ -247,7 +247,7 @@ import Foundation
 
      - parameter call: the call that was finished
      */
-    static func callMetrics(finishedCall call: VSLCall) {
+    @objc static func callMetrics(finishedCall call: VSLCall) {
         // Only sent call statistics when the call duration was longer than 10 seconds
         // to prevent large rounding errors.
         guard call.connectDuration > 10 else {
@@ -268,7 +268,7 @@ import Foundation
      */
     private static func sendMOSValue(call: VSLCall, forCodec codec:String) {
         // Get the current connection type for the call.
-        let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+        let reachability = ReachabilityHelper.instance.reachability!
 
         let labelString = "MOS for \(codec) on Networktype: \(reachability.status)"
         let value = Int(call.mos * 100.0) as NSNumber

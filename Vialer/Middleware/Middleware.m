@@ -12,6 +12,7 @@
 #import "SIPUtils.h"
 #import "SystemUser.h"
 #import "Vialer-Swift.h"
+#import "VialerSIPLib.h"
 
 static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
@@ -28,6 +29,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 @property (nonatomic) int retryCount;
 @property (strong, nonatomic) Reachability *reachability;
 @property (strong, nonatomic) NSManagedObjectContext* context;
+@property (strong, nonatomic) NSString *pushNotificationProcessing;
 @end
 
 @implementation Middleware
@@ -36,6 +38,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPCredentialsChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallStateChangedNotification object: nil];
 }
 
 - (instancetype)init {
@@ -43,6 +46,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAPNSTokenOnSIPCredentialsChange) name:SystemUserSIPCredentialsChangedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteDeviceRegistrationFromMiddleware:) name:SystemUserSIPDisabledNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callStateChanged:) name:VSLCallStateChangedNotification object:nil];
     }
     return self;
 }
@@ -57,12 +61,10 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
 - (Reachability *)reachability {
     if (!_reachability) {
-        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        _reachability = delegate.reachability;
+        _reachability = [ReachabilityHelper sharedInstance].reachability;
     }
     return _reachability;
 }
-
 
 /**
  *  There is one Common Middleware used for registering and unregistration of a device.
@@ -80,7 +82,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
 - (NSManagedObjectContext *)context {
     if (!_context) {
-        _context = ((AppDelegate *)[UIApplication sharedApplication].delegate).syncContext;
+        _context = [CoreDataStackHelper sharedInstance].syncContext;
     }
     return _context;
 }
@@ -96,12 +98,26 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Incoming call.
-
         if (![SystemUser currentUser].sipEnabled) {
             // User is not SIP enabled.
             // Sent not available to the middleware.
             VialerLogDebug(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+            return;
+        }
+
+        NSString *keyToProcess = payload[@"unique_key"];
+
+        // Check for network connection before registering the account at pjsip.
+        if (!self.reachability.hasHighSpeed || !(self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
+            VialerLogInfo(@"Wait for the next push! We currently don't have a network connection");
+            return;
+        }
+
+        VialerLogDebug(@"Middleware key: %@, Processing notificiation key: %@", keyToProcess, self.pushNotificationProcessing);
+
+        if ([self.pushNotificationProcessing isEqualToString:keyToProcess]) {
+            VialerLogInfo(@"Already processings a push notification with key: %@", keyToProcess);
             return;
         }
 
@@ -118,8 +134,9 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             }
 
             // Now check the network connection.
-            if ((self.reachability.hasHighSpeed || (self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) && [[SystemUser currentUser] sipEnabled]) {
+            if (self.reachability.hasHighSpeed || (self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
                 // Highspeed, let's respond to the middleware with a success.
+                self.pushNotificationProcessing = keyToProcess;
                 [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             } else {
                 // Connection is not good enough.
@@ -163,7 +180,6 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
         if (error) {
             // Not only do we want to unregister upon a 408 but on every error.
-            [account unregisterAccount:nil];
             VialerLogError(@"The middleware responded with an error: %@", error);
         } else {
             VialerLogDebug(@"Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
@@ -290,6 +306,15 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                 }
             }
         }];
+    }
+}
+
+- (void)callStateChanged:(NSNotification *)notification {
+    VSLCall *call = notification.userInfo[VSLNotificationUserInfoCallKey];
+    
+    if (call.callState == VSLCallStateDisconnected) {
+        VialerLogDebug(@"Call disconnected: Stop processing the notification");
+        self.pushNotificationProcessing = @"";
     }
 }
 

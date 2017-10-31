@@ -27,7 +27,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
 
     // MARK: - Properties
 
-    var activeCall: VSLCall? {
+    @objc var activeCall: VSLCall? {
         didSet {
             var numberToClean: String
             if activeCall!.isIncoming {
@@ -48,7 +48,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     var callManager = VialerSIPLib.sharedInstance().callManager
     let currentUser = SystemUser.current()!
     // ReachabilityManager, needed for showing notifications.
-    fileprivate let reachability = (UIApplication.shared.delegate as! AppDelegate).reachability!
+    fileprivate let reachability = ReachabilityHelper.instance.reachability!
     // Keep track if there are notifications needed for disabling/enabling WiFi.
     var didOpenSettings = false
     // The cleaned number that need to be called.
@@ -137,7 +137,7 @@ extension SIPCallingViewController {
 
         callManager.toggleMute(for: call) { error in
             if error != nil {
-                VialerLogError("Error muting call: \(error)")
+                VialerLogError("Error muting call: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
                     self.updateUI()
@@ -176,7 +176,7 @@ extension SIPCallingViewController {
         }
         callManager.toggleHold(for: call) { error in
             if error != nil {
-                VialerLogError("Error holding current call: \(error)")
+                VialerLogError("Error holding current call: \(String(describing: error))")
             } else {
                 self.performSegue(segueIdentifier: .setupTransfer)
             }
@@ -187,7 +187,7 @@ extension SIPCallingViewController {
         guard let call = activeCall else { return }
         callManager.toggleHold(for: call) { error in
             if error != nil {
-                VialerLogError("Error holding current call: \(error)")
+                VialerLogError("Error holding current call: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
                     self.updateUI()
@@ -202,7 +202,7 @@ extension SIPCallingViewController {
 
         callManager.end(call) { error in
             if error != nil {
-                VialerLogError("Error ending call: \(error)")
+                VialerLogError("Error ending call: \(String(describing: error))")
             } else {
                 DispatchQueue.main.async {
                     self.hangupButton.isEnabled = false
@@ -214,7 +214,7 @@ extension SIPCallingViewController {
 
 // MARK: - Call setup
 extension SIPCallingViewController {
-    func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
+    @objc func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
         cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
         phoneNumberLabelText = cleanedPhoneNumber
         if let contact = contact {
@@ -263,7 +263,7 @@ extension SIPCallingViewController {
 
         callManager.startCall(toNumber: cleanedPhoneNumber!, for: account) { (call, error) in
             if error != nil {
-                VialerLogError("Error setting up call: \(error)")
+                VialerLogError("Error setting up call: \(String(describing: error))")
             } else if let call = call {
                 self.activeCall = call
             }
@@ -297,7 +297,7 @@ extension SIPCallingViewController {
 
 // MARK: - Helper functions
 extension SIPCallingViewController {
-    func updateUI() {
+    @objc func updateUI() {
         #if DEBUG
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.isScreenshotRun {
                 holdButton?.isEnabled = true
@@ -394,7 +394,7 @@ extension SIPCallingViewController {
 
 // MARK: - WiFi notification
 extension SIPCallingViewController {
-    func shouldPresentWiFiNotification() -> Bool {
+    @objc func shouldPresentWiFiNotification() -> Bool {
         return !currentUser.noWiFiNotification && reachability.status == .reachableViaWiFi && reachability.radioStatus == .reachableVia4G
     }
 

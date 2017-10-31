@@ -32,7 +32,7 @@ class AppDelegate: UIResponder {
 
     var window: UIWindow?
 
-    var isScreenshotRun = false
+    @objc var isScreenshotRun = false
 
     var incomingCallNotification: UILocalNotification?
     var stopVibrating = false
@@ -41,25 +41,6 @@ class AppDelegate: UIResponder {
 
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
-
-    // Core Data
-    lazy var coreDataStack: CoreDataStack = {
-        return CoreDataStack(modelNamed: "Vialer")
-    }()
-
-    var managedObjectContext: NSManagedObjectContext {
-        get {
-            return coreDataStack.mainContext
-        }
-    }
-
-    var syncContext: NSManagedObjectContext {
-        get {
-            return coreDataStack.syncContext
-        }
-    }
-    
-    var reachability: Reachability!
 }
 
 // MARK: - UIApplicationDelegate
@@ -122,7 +103,7 @@ extension AppDelegate: UIApplicationDelegate {
             guard let callID = notification.userInfo?[Configuration.Notifications.incomingCallIDKey] as? Int else { return }
             handleIncomingBackgroundNotification(identifier: identifier, callID: callID)
         } else {
-            VialerLogError("Unsupported action for local Notification: \(identifier)")
+            VialerLogError("Unsupported action for local Notification: \(String(describing: identifier))")
         }
         completionHandler()
     }
@@ -174,8 +155,7 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
 
-        reachability = Reachability()
-        try! reachability.startNotifier()
+        _ = ReachabilityHelper.instance
     }
 
     /// Remove the observers that the AppDelegate is listening to
@@ -267,7 +247,6 @@ extension AppDelegate {
 
     /// Register a callback to the sip library so that the app can handle missed calls
     private func setupMissedCallBack() {
-        VialerLogError("setupMissedCallback()")
         vialerSIPLib.setMissedCall { (call) in
             switch call.terminateReason {
             case .callCompletedElsewhere:
@@ -363,7 +342,7 @@ extension AppDelegate {
         VialerGAITracker.setupOutgoingSIPCallEvent()
         vialerSIPLib.callManager.startCall(toNumber: phoneNumber, for: account) { _, error in
             if error != nil {
-                VialerLogError("Error starting call through User activity. Error: \(error)")
+                VialerLogError("Error starting call through User activity. Error: \(String(describing: error))")
             }
         }
         return true
@@ -465,9 +444,9 @@ extension AppDelegate {
 // MARK: - Core Data
 extension AppDelegate {
     fileprivate func saveContext() {
-        guard managedObjectContext.hasChanges else { return }
+        guard CoreDataStackHelper.instance.managedObjectContext.hasChanges else { return }
         do {
-            try managedObjectContext.save()
+            try CoreDataStackHelper.instance.managedObjectContext.save()
         } catch let error {
             VialerLogWarning("Unresolved error while saving Context: \(error)");
             abort()
@@ -475,8 +454,8 @@ extension AppDelegate {
     }
 
     @objc fileprivate func managedObjectContextSaved(_ notification: Notification) {
-        managedObjectContext.perform {
-            self.managedObjectContext.mergeChanges(fromContextDidSave: notification)
+        CoreDataStackHelper.instance.managedObjectContext.perform {
+            CoreDataStackHelper.instance.managedObjectContext.mergeChanges(fromContextDidSave: notification)
         }
     }
 }

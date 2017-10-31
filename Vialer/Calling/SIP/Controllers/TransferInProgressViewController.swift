@@ -112,12 +112,12 @@ extension TransferInProgressViewController {
                 guard let call = object as? VSLCall, call.transferStatus == .accepted || call.transferStatus == .rejected else { return }
                 strongSelf.callManager.end(self!.firstCall!) { error in
                     if error != nil {
-                        VialerLogError("Error disconnecting call: \(error)")
+                        VialerLogError("Error disconnecting call: \(String(describing: error))")
                     }
                 }
                 strongSelf.callManager.end(self!.currentCall!) { error in
                     if error != nil {
-                        VialerLogError("Error disconnecting call: \(error)")
+                        VialerLogError("Error disconnecting call: \(String(describing: error))")
                     }
                 }
             }

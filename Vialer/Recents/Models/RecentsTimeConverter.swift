@@ -73,7 +73,7 @@ import Foundation
 
      - returns: A time, "yesterday" or a date
      */
-    func relativeDayTimeStringFrom(date:Date) -> String {
+    @objc func relativeDayTimeStringFrom(date:Date) -> String {
         let now = Date()
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: now)

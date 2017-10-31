@@ -36,7 +36,7 @@ public enum ReachabilityError: Error {
     case UnableToSetDispatchQueue
 }
 
-@objc public class Reachability: NSObject {
+public class Reachability: NSObject {
 
     // MARK: - Public properties.
 
@@ -66,16 +66,31 @@ public enum ReachabilityError: Error {
     public var whenConnectionChanged: NetworkChanged?
 
     public var onWWAN: Bool
-    public var hasHighSpeed: Bool {
+    @objc public var hasHighSpeed: Bool {
         return status == .reachableViaWiFi || status == .reachableVia4G
     }
     
-    public var hasHighSpeedWith3GPlus: Bool {
+    @objc public var hasHighSpeedWith3GPlus: Bool {
         return hasHighSpeed || status == .reachableVia3GPlus
     }
 
-    public var statusString: String {
+    @objc public var statusString: String {
         return "\(status)"
+    }
+
+    @objc public var carrierName: String? {
+        var carrier = networkInfo?.subscriberCellularProvider
+        if carrier == nil {
+            networkInfo = CTTelephonyNetworkInfo()
+            carrier = networkInfo?.subscriberCellularProvider
+        }
+
+        if carrier != nil {
+            return carrier!.carrierName
+        } else {
+            return ""
+        }
+
     }
 
     // Current internetconnection type.
@@ -169,7 +184,7 @@ public enum ReachabilityError: Error {
         self.init(reachabilityRef: ref)
     }
 
-    public convenience init?(_: Void) {
+    public convenience init?(_: Bool) {
         var zeroAddress = sockaddr()
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
         zeroAddress.sa_family = sa_family_t(AF_INET)
@@ -259,7 +274,7 @@ public extension Reachability {
 extension Reachability {
 
     /// Is there a network connection?
-    var isReachable: Bool {
+    @objc var isReachable: Bool {
 
         guard isReachableFlagSet else { return false }
         if isConnectionRequiredAndTransientFlagSet {
@@ -350,7 +365,11 @@ extension Reachability {
             networkInfo = CTTelephonyNetworkInfo()
             currentRadio = networkInfo?.currentRadioAccessTechnology
         }
-        return currentRadio!
+        if currentRadio == nil {
+            return ""
+        } else {
+            return currentRadio!
+        }
     }
 }
 
