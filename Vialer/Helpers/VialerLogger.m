@@ -8,6 +8,7 @@
 #import "lelib.h"
 #import "SPLumberjackLogFormatter.h"
 @import UIKit;
+
 #import "Vialer-Swift.h"
 
 static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperShouldUseRemoteLogging";
@@ -68,8 +69,6 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     NSString *message = [[NSString alloc] initWithFormat:format arguments:arguments];
     NSString *logFile = [NSString stringWithFormat:@"%s", file];
     NSString *logFunction = [NSString stringWithFormat:@"%s", function];
-
-    // Add in the Connection type.
 
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message
                                                                level:LOG_LEVEL_DEF
