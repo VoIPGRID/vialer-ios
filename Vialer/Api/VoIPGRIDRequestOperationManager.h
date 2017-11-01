@@ -163,6 +163,20 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 - (void)pushMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion;
 
 /**
+ *  Enables secure calling for the users connected VoIP Account.
+ *
+ *  @param completion   A block that will be called after the push attempt. It will return the response data if any or an error if any.
+ */
+- (void)pushUseEncryptionWithCompletion:(void(^)(BOOL success, NSError *error))completion;
+
+/**
+ *  This method will try to fetch the mobile profile of the currently authenticated user.
+ *
+ *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.
+ */
+- (void)getMobileProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+
+/**
  *  This method will try to request for a login token for the currently authenticated user.
  *
  *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.

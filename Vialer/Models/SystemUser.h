@@ -44,6 +44,10 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      */
     SystemUserFailedToSaveNumberRemote,
     /**
+     *
+     */
+    SystemUserFailedToSaveEncryptionToRemote,
+    /**
      *  The user is unauthorized.
      */
     SystemUserUnAuthorized,
@@ -175,6 +179,16 @@ extern NSString * const SystemUserUse3GPlusNotification;
 @property (readonly, nonatomic) NSString *sipProxy;
 
 /**
+ *  Specify how Contact update will be done with the registration.
+ */
+@property (readonly, nonatomic) BOOL sipContactRewriteMethodAlwaysUpdate;
+
+/**
+ *  Set the flags of what needs to happen when the ip address changes.
+ */
+@property (readonly, nonatomic) VSLReinviteFlags ipAddressChangeReinviteFlags;
+
+/**
  *  This will return if the sip account should register when the user is added to the endpoint.
  */
 @property (readonly, nonatomic) BOOL sipRegisterOnAdd;
@@ -183,6 +197,8 @@ extern NSString * const SystemUserUse3GPlusNotification;
  *  Does the user want to use SIP.
  */
 @property (nonatomic) BOOL sipEnabled;
+
+@property (readonly, nonatomic) BOOL sipUseEncryption;
 
 /**
  *  Does the user want a WiFi Notification when setting up a call.
@@ -243,13 +259,6 @@ extern NSString * const SystemUserUse3GPlusNotification;
  *  @param completion Block will be called after the fetch from the VoIPGRID platform. BOOL success will tell if fetch was successful, NSError will return an error if there was one set.
  */
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion;
-
-/**
- *  This will fetch the up to date information from the VoIPGRID platform if the user is loggedIn and has Sip enabled.
- *
- *  @param completion Block will be called after the fetch from the VoIPGRID platform. BOOL success will tell if update was successful, NSError will return an error if there was one set.
- */
-- (void)updateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion;
 
 /**
  *  This will fetch up to date information from the VoIPGRID platform.

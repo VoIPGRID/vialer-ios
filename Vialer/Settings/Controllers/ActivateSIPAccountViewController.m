@@ -16,6 +16,7 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 @interface ActivateSIPAccountViewController()
 @property (weak, nonatomic) IBOutlet RoundedAndColoredUIButton *userProfileButton;
 @property (strong, nonatomic) Configuration *configuration;
+@property (strong, nonatomic) SystemUser *user;
 @end
 
 @implementation ActivateSIPAccountViewController
@@ -48,9 +49,18 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
     return _configuration;
 }
 
+- (SystemUser *)user {
+    if (!_user) {
+        _user = [SystemUser currentUser];
+    }
+    return _user;
+}
+
 #pragma mark - actions
 
 - (IBAction)backButtonPressed:(UIBarButtonItem *)sender {
+    [self.user updateSystemUserFromVGWithCompletion:nil];
+
     if (self.backButtonToRootViewController) {
         [self performSegueWithIdentifier:ActivateSIPAccountViewControllerVialerRootViewControllerSegue sender:self];
         self.backButtonToRootViewController = NO;
