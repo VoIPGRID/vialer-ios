@@ -89,7 +89,7 @@ class VialerGAITracker: NSObject {
             let logLevel = GAILogLevel.warning
         #endif
 
-        setupGAITracker(logLevel:logLevel, isDryRun:dryRun)
+        _ = setupGAITracker(logLevel:logLevel, isDryRun:dryRun)
     }
 
     /**
@@ -98,9 +98,10 @@ class VialerGAITracker: NSObject {
      - parameter logLevel: The GA log level you want to configure the shared instance with.
      - parameter isDryRun: Boolean indicating GA to run in dry run mode or not.
      */
-    @objc static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) {
+    @objc static func setupGAITracker(logLevel: GAILogLevel, isDryRun: Bool) -> Bool {
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")
+            return false
         }
         gai.tracker(withTrackingId: Configuration.default().googleTrackingId());
         gai.trackUncaughtExceptions = true
@@ -108,6 +109,7 @@ class VialerGAITracker: NSObject {
         gai.dryRun = isDryRun
 
         tracker.set(GAIFields.customDimension(for: GAIConstants.CustomDimensions.build), value: AppInfo.currentAppVersion()!)
+        return true
     }
 
     /**

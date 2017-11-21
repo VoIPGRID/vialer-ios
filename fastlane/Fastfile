@@ -41,7 +41,6 @@ platform :ios do
         output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/builds",
         scheme: ENV["BETA_SCHEME"],
         configuration: 'Release',
-        use_legacy_build_api: true,
     )
 
     pilot(
