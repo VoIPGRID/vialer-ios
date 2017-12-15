@@ -83,7 +83,7 @@ class VialerGAITracker: NSObject {
     @objc static func setupGAITracker() {
         #if DEBUG
             let dryRun = false
-            let logLevel = GAILogLevel.verbose
+            let logLevel = GAILogLevel.warning
         #else
             let dryRun = false
             let logLevel = GAILogLevel.warning
