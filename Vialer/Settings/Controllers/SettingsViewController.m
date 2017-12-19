@@ -158,7 +158,7 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
                           withTag:SettingsViewControllerSwitchWifiNotification
-                       defaultVal:!self.currentUser.noWiFiNotification];
+                       defaultVal:self.currentUser.showWiFiNotification];
         } else if (indexPath.row == SettingsViewController3GPlus) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell
@@ -261,7 +261,7 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             });
         }
     } else if (sender.tag == SettingsViewControllerSwitchWifiNotification) {
-        self.currentUser.noWiFiNotification = !sender.isOn;
+        self.currentUser.showWiFiNotification = !sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitch3GPlus) {
         self.currentUser.use3GPlus = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchTCP) {

@@ -395,7 +395,7 @@ extension SIPCallingViewController {
 // MARK: - WiFi notification
 extension SIPCallingViewController {
     @objc func shouldPresentWiFiNotification() -> Bool {
-        return !currentUser.noWiFiNotification && reachability.status == .reachableViaWiFi && reachability.radioStatus == .reachableVia4G
+        return currentUser.showWiFiNotification && reachability.status == .reachableViaWiFi && reachability.radioStatus == .reachableVia4G
     }
 
     /**

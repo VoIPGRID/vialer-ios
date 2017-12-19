@@ -60,7 +60,7 @@ static NSString * const SystemUserSUDLastName           = @"LastName";
 static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
-static NSString * const SystemUserSUDNoWiFiNotification = @"NoWiFiNotification";
+static NSString * const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
 static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
@@ -170,7 +170,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
 
-    self.noWiFiNotification = [defaults boolForKey:SystemUserSUDNoWiFiNotification];
+    self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 }
 
 #pragma mark - Properties
@@ -258,6 +258,16 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     return [defaults boolForKey:SystemUserSUDUse3GPlus];
 }
 
+- (BOOL)showWiFiNotification {
+    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
+    if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]){
+        self.use3GPlus = YES;
+    }
+    return [defaults boolForKey:SystemUserSUDUse3GPlus];
+}
+
+
 - (void)setMobileNumber:(NSString *)mobileNumber {
     _mobileNumber = mobileNumber;
     if (mobileNumber) {
@@ -311,9 +321,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     [[NSUserDefaults standardUserDefaults] setObject:currentAvailability forKey:SystemUserCurrentAvailabilitySUDKey];
 }
 
-- (void)setNoWiFiNotification:(BOOL)noWiFiNotification {
-    _noWiFiNotification = noWiFiNotification;
-    [[NSUserDefaults standardUserDefaults] setBool:noWiFiNotification forKey:SystemUserSUDNoWiFiNotification];
+- (void)setShowWiFiNotification:(BOOL)showWiFiNotification {
+    showWiFiNotification = showWiFiNotification;
+    [[NSUserDefaults standardUserDefaults] setBool:showWiFiNotification forKey:SystemUserSUDShowWiFiNotification];
 }
 
 - (void)setUse3GPlus:(BOOL)use3GPlus {

@@ -109,7 +109,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         NSString *keyToProcess = payload[@"unique_key"];
 
         // Check for network connection before registering the account at pjsip.
-        if (!self.reachability.hasHighSpeed || !(self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
+        if (!self.reachability.hasHighSpeed && !(self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
             VialerLogInfo(@"Wait for the next push! We currently don't have a network connection");
             return;
         }

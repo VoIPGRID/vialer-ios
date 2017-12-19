@@ -217,7 +217,7 @@
 }
 
 - (void)testSystemUserHasNoWifiNotificationDisabledOnDefault {
-    XCTAssertFalse(self.user.noWiFiNotification, @"On default, is should not be possible to call sip.");
+    XCTAssertFalse(self.user.showWiFiNotification, @"On default, is should not be possible to call sip.");
 }
 
 - (void)testSystemUserHasWithNoWifiNotificationWhenInSUD {
@@ -225,12 +225,12 @@
 
     SystemUser *newUser = [[SystemUser alloc] initPrivate];
 
-    XCTAssertTrue(newUser.noWiFiNotification, @"NoWifiNotification should be YES");
+    XCTAssertTrue(newUser.showWiFiNotification, @"NoWifiNotification should be YES");
 }
 
 - (void)testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD {
 
-    self.user.noWiFiNotification = YES;
+    self.user.showWiFiNotification = YES;
     OCMVerify([self.userDefaultsMock setBool:YES forKey:@"NoWiFiNotification"]);
 }
 

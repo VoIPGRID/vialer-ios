@@ -187,7 +187,7 @@ extern NSString * const SystemUserUse3GPlusNotification;
 /**
  *  Does the user want a WiFi Notification when setting up a call.
  */
-@property (nonatomic) BOOL noWiFiNotification;
+@property (nonatomic) BOOL showWiFiNotification;
 
 /**
  * Use 3G+ to make VoIP calls.
