@@ -131,6 +131,8 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Encrypted SIP Domain</key>
+		<string>staging.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush-acc.voipgrid.nl</string>
 		<key>API</key>
@@ -138,7 +140,7 @@
 		<key>Partner</key>
 		<string>https://acceptatie.voipgrid.nl</string>
 		<key>SIP domain</key>
-		<string>proxy0-acc.voipgrid.nl</string>
+		<string>sipproxy.acceptatie.voipgrid.nl</string>
 		<key>onboarding-nl</key>
 		<string>https://vialerapp.com/nl/app-info/</string>
 		<key>onboarding-en</key>

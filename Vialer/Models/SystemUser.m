@@ -242,7 +242,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (NSString *)sipDomain {
-    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationSIPDomain];
+    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationEncryptedSIPDomain];
 }
 
 - (NSString *)sipProxy {

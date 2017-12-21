@@ -9,6 +9,7 @@
 NSString * const ConfigurationVoIPGRIDBaseURLString = @"API";
 NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
 NSString * const ConfigurationSIPDomain = @"SIP domain";
+NSString * const ConfigurationEncryptedSIPDomain = @"Encrypted SIP Domain";
 NSString * const ConfigurationPartnerURLKey = @"Partner";
 
 NSString * const ConfigurationGADimensionClientIDIndex = @"Client ID index";

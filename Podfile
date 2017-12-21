@@ -15,7 +15,6 @@ def default_pods
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git'
     pod 'SVProgressHUD'
     pod 'VialerSIPLib', :path => '../VialerSIPLib/'
-    pod 'Vialer-pjsip-iOS'
 end
 
 
