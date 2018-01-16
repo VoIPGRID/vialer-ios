@@ -115,10 +115,18 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
 - (void)setupLayout {
     NSString *launchImage;
-    if  ([UIScreen mainScreen].bounds.size.height > 480.0f) {
-        launchImage = @"LaunchImage-700-568h";
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+
+    if(screenHeight > 667.0f) {
+        launchImage = @"LaunchImage-800-Portrait-736h"; // iphone6 plus
+    }
+    else if(screenHeight > 568.0f) {
+        launchImage = @"LaunchImage-800-667h"; // iphone6
+    }
+    else if(screenHeight > 480.0f){
+        launchImage = @"LaunchImage-700-568h";// iphone5/5plus
     } else {
-        launchImage = @"LaunchImage-700";
+        launchImage = @"LaunchImage-700"; // iphone4 or below
     }
     self.launchImage.image = [UIImage imageNamed:launchImage];
 }
