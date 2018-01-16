@@ -261,7 +261,7 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             });
         }
     } else if (sender.tag == SettingsViewControllerSwitchWifiNotification) {
-        self.currentUser.showWiFiNotification = !sender.isOn;
+        self.currentUser.showWiFiNotification = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitch3GPlus) {
         self.currentUser.use3GPlus = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchTCP) {
