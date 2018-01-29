@@ -570,8 +570,6 @@
 		EE61F4841F1DDDE4006E890F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		EE61F4A31F1DDF31006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4921F1DDE7D006E890F /* Config.plist */; };
 		EE61F4A41F1DDF31006E890F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */; };
-		EE61F4A51F1DDF31006E890F /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4941F1DDE7D006E890F /* Vialer.xcassets */; };
-		EE61F4B61F1DE0EA006E890F /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49D1F1DDF1E006E890F /* Voys.xcassets */; };
 		EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */; };
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1149,10 +1147,8 @@
 		EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Info.plist"; sourceTree = "<group>"; };
 		EE61F4921F1DDE7D006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EE61F4941F1DDE7D006E890F /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		EE61F49B1F1DDF1E006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EE61F49D1F1DDF1E006E890F /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Voys.xcassets; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
@@ -2027,7 +2023,6 @@
 				EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */,
 				EE61F4921F1DDE7D006E890F /* Config.plist */,
 				EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */,
-				EE61F4941F1DDE7D006E890F /* Vialer.xcassets */,
 			);
 			path = Vialer;
 			sourceTree = "<group>";
@@ -2038,7 +2033,6 @@
 				EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */,
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
-				EE61F49D1F1DDF1E006E890F /* Voys.xcassets */,
 			);
 			path = Voys;
 			sourceTree = "<group>";
@@ -3086,7 +3080,6 @@
 			files = (
 				EE61F4B81F1DE36C006E890F /* Config.plist in Resources */,
 				EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */,
-				EE61F4B61F1DE0EA006E890F /* Voys.xcassets in Resources */,
 				EE61F4661F1DDDE4006E890F /* dtmf-#.aif in Resources */,
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
 				EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */,
@@ -3152,7 +3145,6 @@
 				EE61F4A31F1DDF31006E890F /* Config.plist in Resources */,
 				F20851591D26935600A17E71 /* SettingsStoryboard.storyboard in Resources */,
 				F208515A1D26935600A17E71 /* dtmf-9.aif in Resources */,
-				EE61F4A51F1DDF31006E890F /* Vialer.xcassets in Resources */,
 				F208515F1D26935600A17E71 /* DialerStoryboard.storyboard in Resources */,
 				F20851601D26935600A17E71 /* MainStoryboard.storyboard in Resources */,
 			);
