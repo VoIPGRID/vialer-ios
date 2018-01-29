@@ -266,9 +266,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
     // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
     if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]){
-        self.use3GPlus = YES;
+        self.showWiFiNotification = YES;
     }
-    return [defaults boolForKey:SystemUserSUDUse3GPlus];
+    return [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 }
 
 
