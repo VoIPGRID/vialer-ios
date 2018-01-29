@@ -131,6 +131,8 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Encrypted SIP Domain</key>
+		<string>staging.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush-acc.voipgrid.nl</string>
 		<key>API</key>
