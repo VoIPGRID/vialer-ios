@@ -131,10 +131,12 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Encrypted SIP Domain</key>
+		<string>sip.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush.voipgrid.nl</string>
 		<key>API</key>
-		<string>https://api.voipgrid.nl/api</string>
+		<string>https://partner.voipgrid.nl/api</string>
 		<key>Partner</key>
 		<string>https://freedom.voys.nl</string>
 		<key>SIP domain</key>

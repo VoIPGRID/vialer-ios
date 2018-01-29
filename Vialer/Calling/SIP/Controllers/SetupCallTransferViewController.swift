@@ -138,7 +138,7 @@ extension SetupCallTransferViewController {
 
     private func toggleDeleteButton () {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.deleteButton?.alpha = self.number.characters.count == 0 ? 0.0 : 1.0
+            self.deleteButton?.alpha = self.number.count == 0 ? 0.0 : 1.0
         }, completion:nil)
     }
 }

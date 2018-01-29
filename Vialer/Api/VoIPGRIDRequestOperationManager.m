@@ -15,8 +15,10 @@ static NSString * const VoIPGRIDRequestOperationManagerURLPhoneAccount      = @"
 static NSString * const VoIPGRIDRequestOperationManagerURLTwoStepCall       = @"mobileapp/";
 static NSString * const VoIPGRIDRequestOperationManagerURLAutoLoginToken    = @"autologin/token/";
 static NSString * const VoIPGRIDRequestOperationManagerURLMobileNumber      = @"permission/mobile_number/";
+static NSString * const VoIPGRIDRequestOperationManagerURLMobileProfile     = @"mobile/profile/";
 
-static NSString * const VoIPGRIDRequestOperationManagerApiKeyMobileNumber = @"mobile_nr";
+static NSString * const VoIPGRIDRequestOperationManagerApiKeyMobileNumber               = @"mobile_nr";
+static NSString * const VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption    = @"appaccount_use_encryption";
 
 static int const VoIPGRIDRequestOperationManagerTimoutInterval = 15;
 
@@ -141,6 +143,10 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     [self.operationQueue addOperation:operation];
 }
 
+- (void)getMobileProfileWithCompletion:(void(^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) completion {
+    [self GET:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:nil withCompletion: completion];
+}
+
 // I'm leaving this here for testing purposes. It gives the ability to simulate the user "not allowed to SIP case" without
 // having to actually disable it in the portal (resulting in unlinking all app accounts for all users).
 // Uncomment all below, put a breakpoint on line: [possibleModifiedResponseData setObject:[NSNumber numberWithBool:allowAppAccount] forKey:@"allow_app_account"];
@@ -166,6 +172,20 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 - (void)pushMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion {
     NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyMobileNumber : mobileNumber};
     [self PUT:VoIPGRIDRequestOperationManagerURLMobileNumber parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (completion) {
+            if (error) {
+                completion(NO, error);
+            } else {
+                completion(YES, nil);
+            }
+        }
+    }];
+}
+
+- (void)pushUseEncryptionWithCompletion:(void (^)(BOOL, NSError *))completion {
+    NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption : @YES};
+    
+    [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (error) {
                 completion(NO, error);

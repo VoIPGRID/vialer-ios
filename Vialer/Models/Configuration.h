@@ -10,6 +10,7 @@
 extern NSString * const ConfigurationVoIPGRIDBaseURLString;
 extern NSString * const ConfigurationMiddleWareBaseURLString;
 extern NSString * const ConfigurationSIPDomain;
+extern NSString * const ConfigurationEncryptedSIPDomain;
 extern NSString * const ConfigurationPartnerURLKey;
 
 // The Google Analytics custom dimension keys
