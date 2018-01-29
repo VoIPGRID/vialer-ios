@@ -18,7 +18,9 @@ NSString * const ConfigurationGADimensionBuildIndex = @"Build index";
 static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
 static NSString * const ConfigurationGACustomDimensionKey = @"GA Custom Dimensions";
-static NSString * const ConfigurationLogEntriesToken = @"LogEntries Token";
+static NSString * const ConfigurationLogEntries = @"Log Entries";
+static NSString * const ConfigurationLogEntriesMainToken = @"Main";
+static NSString * const ConfigurationLogEntriesPartnerToken = @"Partner";
 static NSString * const ConfigurationGoogleTrackingId = @"TRACKING_ID";
 
 @interface Configuration ()
@@ -95,8 +97,16 @@ static dispatch_once_t onceToken = 0;
     return ((NSNumber *)value).intValue;
 }
 
+- (NSDictionary *)logEntriesDictionairy {
+    return self.configPlist[ConfigurationLogEntries];
+}
+
 - (NSString *)logEntriesToken {
-    return self.configPlist[ConfigurationLogEntriesToken];
+    return [self logEntriesDictionairy][ConfigurationLogEntriesMainToken];
+}
+
+- (NSString *)logEntriesPartnerToken {
+    return [self logEntriesDictionairy][ConfigurationLogEntriesPartnerToken];
 }
 
 - (NSString *)googleTrackingId {
