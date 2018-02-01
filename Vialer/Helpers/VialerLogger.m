@@ -17,20 +17,12 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 @implementation VialerLogger
 
 + (void)setup {
-    le_init();
-    le_handle_crashes();
-    le_set_token([[[Configuration defaultConfiguration] logEntriesToken] UTF8String]);
-
     SPLumberjackLogFormatter *logFormatter = [[SPLumberjackLogFormatter alloc] init];
 
     DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
     [ttyLogger setLogFormatter:logFormatter];
 
     [DDLog addLogger:ttyLogger];
-
-    // LogEntries
-    LELog* logger = [LELog sharedInstance];
-    logger.debugLogs = NO;
 
 #ifdef DEBUG
     // File logging
@@ -163,7 +155,20 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     }
 
     NSString *log = [NSString stringWithFormat:@"%@ %@ [ %@ - %@ ] - %@", level, [VialerLogger remoteIdentifier], modelName, currentConnection, logMessage];
-    [[LELog sharedInstance] log:log];
+
+
+    NSString * mainLogEntriesToken = [[Configuration defaultConfiguration] logEntriesToken];
+
+    LELog* logger = [LELog sessionWithToken:mainLogEntriesToken];
+    logger.debugLogs = NO;
+    [logger log: log];
+
+    NSString * partnerLogEntriesToken = [[Configuration defaultConfiguration] logEntriesPartnerToken];
+    if ([partnerLogEntriesToken length] > 0) {
+        LELog* logger = [LELog sessionWithToken:partnerLogEntriesToken];
+        logger.debugLogs = NO;
+        [logger log: log];
+    }
 }
 
 @end

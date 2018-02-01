@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Log Entries</key>
+	<dict>
+		<key>Main</key>
+		<string>abb25255-136c-4443-b0dd-0d7f4db33069</string>
+		<key>Partner</key>
+		<string>31466f78-0bce-4bc7-b6ad-8df36ad2fc9c</string>
+	</dict>
 	<key>Primary colors</key>
 	<dict>
 		<key>PrimaryBrandColor</key>
@@ -153,7 +160,5 @@
 		<key>Client ID index</key>
 		<integer>1</integer>
 	</dict>
-	<key>LogEntries Token</key>
-	<string>abb25255-136c-4443-b0dd-0d7f4db33069</string>
 </dict>
 </plist>
