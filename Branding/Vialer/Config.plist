@@ -143,6 +143,10 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Stun Servers</key>
+		<array>
+			<string>stun.voipgrid.nl</string>
+		</array>
 		<key>Encrypted SIP Domain</key>
 		<string>sip.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>

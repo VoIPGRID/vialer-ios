@@ -19,7 +19,6 @@ static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
 static int const SettingsViewController3GPlus               = 2;
 static int const SettingsViewControllerSipAccountRow        = 3;
-static int const SettingsViewControllerTCPRow               = 4;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -113,8 +112,7 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
                 // WiFi notification
                 // 3G+
                 // account ID
-                // TCP connection
-                return 5;
+                return 4;
             } else {
                 // Only show VoIP Switch
                 return 1;
@@ -169,11 +167,6 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
             cell.detailTextLabel.text = self.currentUser.sipAccount;
-        } else if (indexPath.row == SettingsViewControllerTCPRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
-            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable TCP connection", nil)
-                          withTag:SettingsViewControllerSwitchTCP
-                       defaultVal:self.useTCP];
         }
     } else if (indexPath.section == SettingsViewControllerNumbersSection) {
         if (indexPath.row == SettingsViewControllerMyNumberRow) {

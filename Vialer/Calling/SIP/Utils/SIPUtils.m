@@ -20,12 +20,25 @@
     if ([VialerSIPLib sharedInstance].endpointAvailable) {
         [SIPUtils removeSIPEndpoint];
     }
-    
+
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
     endpointConfiguration.logLevel = 4;
     endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
     endpointConfiguration.disableVideoSupport = YES;
     endpointConfiguration.unregisterAfterCall = YES;
+
+    VSLIpChangeConfiguration * ipChangeConfiguration = [[VSLIpChangeConfiguration alloc] init];
+    ipChangeConfiguration.ipChangeCallsUpdate = VSLIpChangeConfigurationIpChangeCallsUpdate;
+    ipChangeConfiguration.ipAddressChangeReinviteFlags = VSLReinviteFlagsReinitMedia | VSLReinviteFlagsUpdateVia | VSLReinviteFlagsUpdateContact;
+
+    endpointConfiguration.ipChangeConfiguration = ipChangeConfiguration;
+
+    NSArray *stunServers = [Configuration defaultConfiguration].stunServers;
+    if (stunServers.count > 0) {
+        VSLStunConfiguration *stunConfiguration = [[VSLStunConfiguration alloc] init];
+        stunConfiguration.stunServers = stunServers;
+        endpointConfiguration.stunConfiguration = stunConfiguration;
+    }
 
     if ([SystemUser currentUser].sipUseEncryption) {
         endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTLS]];

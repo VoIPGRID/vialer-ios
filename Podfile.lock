@@ -2,13 +2,6 @@ PODS:
   - AFNetworkActivityLogger (2.0.4):
     - AFNetworking/NSURLConnection (~> 2.0)
     - AFNetworking/NSURLSession (~> 2.0)
-  - AFNetworking (2.6.3):
-    - AFNetworking/NSURLConnection (= 2.6.3)
-    - AFNetworking/NSURLSession (= 2.6.3)
-    - AFNetworking/Reachability (= 2.6.3)
-    - AFNetworking/Security (= 2.6.3)
-    - AFNetworking/Serialization (= 2.6.3)
-    - AFNetworking/UIKit (= 2.6.3)
   - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -20,9 +13,6 @@ PODS:
   - AFNetworking/Reachability (2.6.3)
   - AFNetworking/Security (2.6.3)
   - AFNetworking/Serialization (2.6.3)
-  - AFNetworking/UIKit (2.6.3):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
   - CocoaLumberjack (3.4.1):
     - CocoaLumberjack/Default (= 3.4.1)
     - CocoaLumberjack/Extensions (= 3.4.1)
@@ -66,7 +56,7 @@ PODS:
   - SimulatorStatusMagic (2.1)
   - SPLumberjackLogFormatter (0.0.1):
     - CocoaLumberjack
-  - SVProgressHUD (2.2.2)
+  - SVProgressHUD (2.2.3)
   - Vialer-pjsip-iOS (3.3.1)
   - VialerSIPLib (3.0.0):
     - CocoaLumberjack
@@ -75,7 +65,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworkActivityLogger
-  - AFNetworking
+  - AFNetworking/NSURLSession
   - GoogleAnalytics
   - HTCopyableLabel
   - le (from `https://github.com/LogentriesCommunity/le_ios.git`)
@@ -87,7 +77,7 @@ DEPENDENCIES:
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
   - SVProgressHUD
-  - VialerSIPLib
+  - VialerSIPLib (from `../VialerSIPLib/`)
 
 EXTERNAL SOURCES:
   le:
@@ -96,6 +86,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
+  VialerSIPLib:
+    :path: ../VialerSIPLib/
 
 CHECKOUT OPTIONS:
   le:
@@ -124,10 +116,10 @@ SPEC CHECKSUMS:
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
-  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  SVProgressHUD: a5eaeff664a82dda89809c409ace40183ce91523
   Vialer-pjsip-iOS: 682de71852150ed5d1827f064062755c1363f36e
-  VialerSIPLib: c6cf2ea64df7d5b0d97d01602b36e9fcee5e1d11
+  VialerSIPLib: 3627633a13ba2a68edb4dd7ae0de0bad7b343887
 
-PODFILE CHECKSUM: 0de7cbfceb8472266654f0d8fe12563502cfefe9
+PODFILE CHECKSUM: 45f04d63ce45b79fd50252fe63fe415d06fd9f57
 
 COCOAPODS: 1.4.0
