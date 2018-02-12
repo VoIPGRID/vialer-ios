@@ -18,6 +18,7 @@ static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
 static NSString * const MiddlewareAPNSPayloadKeyCheckin    = @"checkin";
 static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
+static NSString * const MiddlewareAPNSPayloadKeyUniqueKey  = @"unique_key";
 
 static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 static float const MiddlewareResendTimeInterval = 10.0;
@@ -97,6 +98,9 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     VialerLogVerbose(@"Payload:\n%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
+        // Separate VialerLog for the push notification that will be posted to LogEntries
+        VialerLogPushNotification(@"UniqueKey: %@", payload[MiddlewareAPNSPayloadKeyUniqueKey]);
+
         // Incoming call.
         if (![SystemUser currentUser].sipEnabled) {
             // User is not SIP enabled.
@@ -106,7 +110,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             return;
         }
 
-        NSString *keyToProcess = payload[@"unique_key"];
+        NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
 
         // Check for network connection before registering the account at pjsip.
         if (!self.reachability.hasHighSpeed && !(self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {

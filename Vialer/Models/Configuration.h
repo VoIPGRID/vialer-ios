@@ -64,10 +64,17 @@ extern NSString * const ConfigurationGADimensionBuildIndex;
 - (NSString * _Nullable)logEntriesPartnerToken;
 
 /**
+ * The logEntries token for the push notifications log.
+ *
+ * @return NSString with the token or nil.
+ */
+- (NSString * _Nullable)logEntriesPushNotificationsToken;
+
+/**
  * The Google tracking Id.
  *
  * return NSString Google tracking id.
  */
-- (NSString *)googleTrackingId;
+- (NSString * _Nonnull)googleTrackingId;
 
 @end
