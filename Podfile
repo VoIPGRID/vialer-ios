@@ -12,7 +12,7 @@ def default_pods
     pod 'PBWebViewController'
     pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
-    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git'
+    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true 
     pod 'SVProgressHUD'
     pod 'VialerSIPLib'
 end

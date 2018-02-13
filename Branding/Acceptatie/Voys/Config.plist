@@ -140,11 +140,11 @@
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush-acc.voipgrid.nl</string>
 		<key>API</key>
-		<string>https://acceptatie.voipgrid.nl/api</string>
+		<string>https://staging.voipgrid.nl/api</string>
 		<key>Partner</key>
-		<string>https://acceptatie.voipgrid.nl</string>
+		<string>https://staging.voipgrid.nl</string>
 		<key>SIP domain</key>
-		<string>sipproxy.acceptatie.voipgrid.nl</string>
+		<string>sipproxy-staging.voipgrid.nl</string>
 		<key>onboarding-nl</key>
 		<string>https://www.voys.nl/app-info</string>
 		<key>onboarding-en</key>

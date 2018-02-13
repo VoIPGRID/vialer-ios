@@ -36,7 +36,9 @@ class KeypadViewController: UIViewController {
     var dtmfSent: String? {
         didSet {
             delegate?.dtmfSent(dtmfSent)
-            numberLabel.text = dtmfSent
+            DispatchQueue.main.async { [weak self] in
+                self?.numberLabel.text = self?.dtmfSent
+            }
         }
     }
 
@@ -61,6 +63,9 @@ class KeypadViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         call?.removeObserver(self, forKeyPath: "callState")
+
+        dtmfSent = nil
+        self.updateUI()
     }
 
     // MARK: - Outlets
@@ -131,7 +136,6 @@ class KeypadViewController: UIViewController {
             connectDurationTimer = Timer.scheduledTimer(timeInterval: Configuration.Timing.ConnectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         }
     }
-
 
     // MARK: - KVO
 

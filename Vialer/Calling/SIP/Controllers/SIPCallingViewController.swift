@@ -62,7 +62,9 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     }
     fileprivate var dtmfSent: String? {
         didSet {
-            numberLabel?.text = dtmfSent
+            DispatchQueue.main.async { [weak self] in
+                self?.numberLabel?.text = self?.dtmfSent
+            }
         }
     }
     fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
@@ -104,6 +106,7 @@ extension SIPCallingViewController {
             setupCall()
             return
         }
+
         if call.callState == .disconnected {
             handleCallEnded()
         }

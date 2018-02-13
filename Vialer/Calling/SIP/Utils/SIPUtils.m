@@ -105,5 +105,4 @@
     VSLCall *call = [account firstActiveCall];
     return call;
 }
-
 @end

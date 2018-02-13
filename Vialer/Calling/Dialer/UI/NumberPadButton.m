@@ -26,6 +26,7 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 @property (nonatomic, strong) UIColor *pressedColor;
 
 @property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (weak, nonatomic) NSString *numberText;
 @end
 
 @implementation NumberPadButton
@@ -40,11 +41,12 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 }
 
 - (NSString *)number {
-    return self.numberLabel.text;
+    return self.numberText;
 }
 
 - (void)setNumber:(NSString *)number {
     self.numberLabel.text = number;
+    self.numberText = number;
 }
 
 - (NSString *)subtitle {
