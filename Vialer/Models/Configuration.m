@@ -21,6 +21,7 @@ static NSString * const ConfigurationGACustomDimensionKey = @"GA Custom Dimensio
 static NSString * const ConfigurationLogEntries = @"Log Entries";
 static NSString * const ConfigurationLogEntriesMainToken = @"Main";
 static NSString * const ConfigurationLogEntriesPartnerToken = @"Partner";
+static NSString * const ConfigurationLogEntriesPushNotificationsToken = @"Push Notifications";
 static NSString * const ConfigurationGoogleTrackingId = @"TRACKING_ID";
 
 @interface Configuration ()
@@ -107,6 +108,10 @@ static dispatch_once_t onceToken = 0;
 
 - (NSString *)logEntriesPartnerToken {
     return [self logEntriesDictionairy][ConfigurationLogEntriesPartnerToken];
+}
+
+- (NSString *)logEntriesPushNotificationsToken {
+    return [self logEntriesDictionairy][ConfigurationLogEntriesPushNotificationsToken];
 }
 
 - (NSString *)googleTrackingId {

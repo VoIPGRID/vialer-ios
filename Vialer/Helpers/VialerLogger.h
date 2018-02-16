@@ -23,6 +23,9 @@
 #define VialerLogWarning(frmt, ...) VialerLog(DDLogFlagWarning, __PRETTY_FUNCTION__, frmt, ## __VA_ARGS__)
 #define VialerLogError(frmt, ...)   VialerLog(DDLogFlagError,   __PRETTY_FUNCTION__, frmt, ## __VA_ARGS__)
 
+#define VialerLogPushNotification(frmt, ...) \
+[VialerLogger logPushNotification:__FILE__ function:__PRETTY_FUNCTION__ line:__LINE__ format:(frmt), ## __VA_ARGS__]
+
 /**
  Log a message to the console, optionally also to remote
 
@@ -53,6 +56,20 @@
                line:(NSUInteger)line
              message:(NSString *_Nonnull)message NS_SWIFT_NAME(log(flag:file:function:line:message:));
 
+
+/**
+ This is used to push directly to "Push" logs of LogEntries"
+
+ @param file The file where the log was dispatched
+ @param function The function where the log was dispatched
+ @param line The line where the log was dispatched
+ @param format Formatted string,
+ */
++ (void)logPushNotification:(const char *_Nonnull)file
+                   function:(const char *_Nonnull)function
+                       line:(NSUInteger)line
+                     format:(NSString *_Nonnull)format, ... NS_FORMAT_FUNCTION(4,5);
+
 /**
  Log a message to the console, optionally also to remote
 
@@ -68,7 +85,8 @@
            function:(const char *_Nonnull)function
                line:(NSUInteger)line
              format:(NSString *_Nonnull)format
-          arguments:(va_list)arguments NS_SWIFT_NAME(log(flag:file:function:line:format:arguments:));
+          arguments:(va_list)arguments
+        forceRemote:(BOOL)forceRemote NS_SWIFT_NAME(log(flag:file:function:line:format:arguments:force:));
 
 /**
  Log a Lumberjack message
