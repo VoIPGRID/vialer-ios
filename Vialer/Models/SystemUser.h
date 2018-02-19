@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      */
     SystemUserFailedToSaveNumberRemote,
     /**
-     *
+     *  When the encryption setting couldn't be stored remotely.
      */
     SystemUserFailedToSaveEncryptionToRemote,
     /**
@@ -184,11 +184,6 @@ extern NSString * const SystemUserUse3GPlusNotification;
 @property (readonly, nonatomic) BOOL sipContactRewriteMethodAlwaysUpdate;
 
 /**
- *  Set the flags of what needs to happen when the ip address changes.
- */
-@property (readonly, nonatomic) VSLReinviteFlags ipAddressChangeReinviteFlags;
-
-/**
  *  This will return if the sip account should register when the user is added to the endpoint.
  */
 @property (readonly, nonatomic) BOOL sipRegisterOnAdd;
@@ -198,6 +193,9 @@ extern NSString * const SystemUserUse3GPlusNotification;
  */
 @property (nonatomic) BOOL sipEnabled;
 
+/**
+ * If SIP needs to be using encryption.
+ */
 @property (readonly, nonatomic) BOOL sipUseEncryption;
 
 /**

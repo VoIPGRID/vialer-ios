@@ -230,8 +230,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     if (indexPath.section == 0 && [tableView isEqual:self.tableView]) {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewMyNumberCell];
         NSString *myNumber = NSLocalizedString(@"My Number: ", nil);
-        myNumber = [myNumber stringByAppendingString:self.currentUser.outgoingNumber];
-        cell.textLabel.text = myNumber;
+        if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+            myNumber = [myNumber stringByAppendingString:self.currentUser.outgoingNumber];
+            cell.textLabel.text = myNumber;
+        }
         return cell;
     }
 
@@ -364,8 +366,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - Notifications
 
 - (void)outgoingNumberUpdated:(NSNotification *)notification {
-    [self.tableView reloadData];
-    self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+    if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+        [self.tableView reloadData];
+        self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+    }
 }
 
 - (void)hideReachabilityBar {

@@ -37,12 +37,10 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     var contactModel = ContactModel.defaultModel
 
     private lazy var mainContext: NSManagedObjectContext = {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return CoreDataStackHelper.instance.coreDataStack.mainContext
     }()
 
     private lazy var syncContext: NSManagedObjectContext = {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return CoreDataStackHelper.instance.coreDataStack.syncContext
     }()
 
@@ -86,7 +84,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     }
     @IBOutlet weak var filterControl: UISegmentedControl! {
         didSet {
-            filterControl.tintColor = defaultConfiguration?.colorConfiguration.color(forKey: ConfigurationRecentsFilterControlTintColor)
+            filterControl.tintColor = defaultConfiguration.colorConfiguration.color(forKey: ConfigurationRecentsFilterControlTintColor)
         }
     }
     @IBOutlet weak var reachabilityBarHeigthConstraint: NSLayoutConstraint!
@@ -178,7 +176,7 @@ extension RecentsViewController {
             showTitleImage = true
         }
         reachabilityBarHeigthConstraint.constant = 0.0
-        navigationController?.view.backgroundColor = defaultConfiguration?.colorConfiguration.color(forKey: ConfigurationNavigationBarBarTintColor)
+        navigationController?.view.backgroundColor = defaultConfiguration.colorConfiguration.color(forKey: ConfigurationNavigationBarBarTintColor)
     }
 
     fileprivate func call(_ number: String) {

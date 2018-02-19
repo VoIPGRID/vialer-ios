@@ -19,6 +19,7 @@ static NSString * const ConfigurationColorsKey = @"Tint colors";
 static NSString * const ConfigurationUrlsKey = @"URLS";
 static NSString * const ConfigurationGACustomDimensionKey = @"GA Custom Dimensions";
 static NSString * const ConfigurationLogEntries = @"Log Entries";
+static NSString * const ConfigurationStunServers = @"Stun Servers";
 static NSString * const ConfigurationLogEntriesMainToken = @"Main";
 static NSString * const ConfigurationLogEntriesPartnerToken = @"Partner";
 static NSString * const ConfigurationLogEntriesPushNotificationsToken = @"Push Notifications";
@@ -116,6 +117,13 @@ static dispatch_once_t onceToken = 0;
 
 - (NSString *)googleTrackingId {
     return self.googleConfigPlist[ConfigurationGoogleTrackingId];
+}
+
+- (NSArray<NSString *> *)stunServers {
+    if (self.configPlist[ConfigurationUrlsKey][ConfigurationStunServers]) {
+        return self.configPlist[ConfigurationUrlsKey][ConfigurationStunServers];
+    }
+    return [NSArray new];
 }
 
 @end

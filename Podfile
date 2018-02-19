@@ -4,7 +4,7 @@ platform :ios, '9.0'
 
 def default_pods
     pod 'AFNetworkActivityLogger'
-    pod 'AFNetworking'
+    pod 'AFNetworking/NSURLSession'
     pod 'GoogleAnalytics'
     pod 'HTCopyableLabel'
     pod 'le', :git => 'https://github.com/LogentriesCommunity/le_ios.git'
@@ -14,7 +14,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git'
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib'
+    pod 'VialerSIPLib', :path => '../VialerSIPLib/'
 end
 
 
