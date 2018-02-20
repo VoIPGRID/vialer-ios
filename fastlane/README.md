@@ -8,71 +8,47 @@ Make sure you have the latest version of the Xcode command line tools installed:
 xcode-select --install
 ```
 
-## Choose your installation method:
-
-<table width="100%" >
-<tr>
-<th width="33%"><a href="http://brew.sh">Homebrew</a></th>
-<th width="33%">Installer Script</th>
-<th width="33%">RubyGems</th>
-</tr>
-<tr>
-<td width="33%" align="center">macOS</td>
-<td width="33%" align="center">macOS</td>
-<td width="33%" align="center">macOS or Linux with Ruby 2.0.0 or above</td>
-</tr>
-<tr>
-<td width="33%"><code>brew cask install fastlane</code></td>
-<td width="33%"><a href="https://download.fastlane.tools">Download the zip file</a>. Then double click on the <code>install</code> script (or run it in a terminal window).</td>
-<td width="33%"><code>sudo gem install fastlane -NV</code></td>
-</tr>
-</table>
+Install _fastlane_ using
+```
+[sudo] gem install fastlane -NV
+```
+or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios prebuild
+### ios beta
 ```
-fastlane ios prebuild
+fastlane ios beta
 ```
-
-### ios upload_beta
-```
-fastlane ios upload_beta
-```
-Deploy to iTunes Connect
+Upload beta to Testflight
 ### ios screenshot
 ```
 fastlane ios screenshot
 ```
-Create Screenshots
+Create Screenshots without uploading
 ### ios upload_screenshots
 ```
 fastlane ios upload_screenshots
 ```
-Upload Screenshots
-### ios match_development
+Upload Screenshots to the iTunes Connect store
+### ios sync_development_certs
 ```
-fastlane ios match_development
+fastlane ios sync_development_certs
 ```
-Match Development
-### ios match_adhoc
+Synchronize DEVELOPMENT certificates with itunes connect
+### ios sync_adhoc_certs
 ```
-fastlane ios match_adhoc
+fastlane ios sync_adhoc_certs
 ```
-Match Adhoc
-### ios match_appstore
+Synchronize ADHOC certificates with itunes connect
+### ios sync_appstore_certs
 ```
-fastlane ios match_appstore
+fastlane ios sync_appstore_certs
 ```
-Match Appstore
+Synchronize APPSTORE certificates with itunes connect
 ### ios add_device
 ```
 fastlane ios add_device
-```
-
-### ios refresh_profiles
-```
-fastlane ios refresh_profiles
 ```
 
 

@@ -92,7 +92,7 @@ class SnapshotUITests: XCTestCase {
 
         waitForElementToBeHittable(dialerTabBarButton, andHit: true)
 
-        for number in Constants.numberToDail.characters {
+        for number in Constants.numberToDail {
             waitForElementToBeHittable(app.buttons["DialerStoryboard.dialer.button\(number)"], andHit: true)
         }
 
@@ -116,8 +116,8 @@ class SnapshotUITests: XCTestCase {
             return
         }
 
-        let deleteString: String = stringValue.characters.map { _ in "\u{8}" }.joined(separator: "")
-        if deleteString.characters.count == 0 {
+        let deleteString: String = stringValue.map { _ in "\u{8}" }.joined(separator: "")
+        if deleteString.isEmpty {
             XCTFail("No deleting!!")
         }
 
@@ -127,8 +127,12 @@ class SnapshotUITests: XCTestCase {
             return
         }
 
-        if (newStringValue.characters.count > 0) {
-            print("Textfield empty. count:\(stringValue.characters.count)")
+        if (newStringValue == "Mobile" || newStringValue == "Mobiele telefoonnummer") {
+            return
+        }
+
+        if (!newStringValue.isEmpty) {
+            print("Textfield empty. count:\(stringValue.count)")
             sleep(2)
             self.clearUITextFieldText(element);
         }
