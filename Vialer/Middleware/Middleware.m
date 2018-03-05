@@ -99,7 +99,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Separate VialerLog for the push notification that will be posted to LogEntries
-        VialerLogPushNotification(@"UniqueKey: %@", payload[MiddlewareAPNSPayloadKeyUniqueKey]);
+        VialerLogPushNotification(@"iOS : %@\n", payload);
 
         // Incoming call.
         if (![SystemUser currentUser].sipEnabled) {

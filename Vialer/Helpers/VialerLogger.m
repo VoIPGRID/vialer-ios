@@ -107,6 +107,22 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 
 #pragma mark - Helper Functions
 
++ (NSString *) anominyzeWithLogmessage:(NSString *)logMessage {
+    logMessage = [logMessage replaceRegexWithPattern:@"Token: <(.*)>" with:@"TOKEN"];
+    logMessage = [logMessage replaceRegexWithPattern:@"\"caller_id\" = (.+?);" with:@"<CALLER_ID>"];
+    logMessage = [logMessage replaceRegexWithPattern:@"phonenumber = (.+?);" with:@"<PHONE_NUMBER>"];
+    logMessage = [logMessage replaceRegexWithPattern:@"To:(.+?)>" with:@" <SIP_ANONYMIZED"];
+    logMessage = [logMessage replaceRegexWithPattern:@"From:(.+?)>" with:@" <SIP_ANONYMIZED"];
+    logMessage = [logMessage replaceRegexWithPattern:@"Contact:(.+?)>" with:@" <SIP_ANONYMIZED"];
+    logMessage = [logMessage replaceRegexWithPattern:@"sip:(.+?)@" with:@"SIP_USER_ID"];
+    logMessage = [logMessage replaceRegexWithPattern:@"Digest username=\"(.+?)\"" with:@"SIP_USERNAME"];
+    logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
+    logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
+    logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
+
+    return logMessage;
+}
+
 /**
  Log to LogEntries if user has enabled.
 
@@ -143,17 +159,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     }
 
     // Clean the message from privacy information.
-    logMessage = [logMessage replaceRegexWithPattern:@"Token: <(.*)>" with:@"TOKEN"];
-    logMessage = [logMessage replaceRegexWithPattern:@"\"caller_id\" = (.+?);" with:@"<CALLER_ID>"];
-    logMessage = [logMessage replaceRegexWithPattern:@"phonenumber = (.+?);" with:@"<PHONE_NUMBER>"];
-    logMessage = [logMessage replaceRegexWithPattern:@"To:(.+?)>" with:@" <SIP_ANONYMIZED"];
-    logMessage = [logMessage replaceRegexWithPattern:@"From:(.+?)>" with:@" <SIP_ANONYMIZED"];
-    logMessage = [logMessage replaceRegexWithPattern:@"Contact:(.+?)>" with:@" <SIP_ANONYMIZED"];
-    logMessage = [logMessage replaceRegexWithPattern:@"sip:(.+?)@" with:@"SIP_USER_ID"];
-    logMessage = [logMessage replaceRegexWithPattern:@"Digest username=\"(.+?)\"" with:@"SIP_USERNAME"];
-    logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
-    logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
-    logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
+    logMessage = [VialerLogger anominyzeWithLogmessage:logMessage];
 
     Reachability *reachability = [ReachabilityHelper sharedInstance].reachability;
 
