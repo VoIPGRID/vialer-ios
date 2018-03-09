@@ -29,7 +29,7 @@ import Foundation
         }
         #if DEBUG
             if let commitNumber = infoDict["Commit_Short_Hash"] {
-                version = "Commit: \(commitNumber)"
+                version = "Dev: \(version) (\(commitNumber))"
             }
         #else
             if let bundleVersion = infoDict["CFBundleVersion"] {

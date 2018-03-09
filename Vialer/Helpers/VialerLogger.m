@@ -165,12 +165,15 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 
     NSString *modelName = [UIDevice currentDevice].modelName;
     NSString *currentConnection = reachability.statusString;
+    NSString *currentAppVersion = AppInfo.currentAppVersion;
 
     if (![currentConnection isEqualToString:@"Wifi"] && ![currentConnection isEqualToString:@"No Connection"]) {
         currentConnection = [NSString stringWithFormat:@"%@ (%@)", currentConnection, reachability.carrierName];
     }
 
-    NSString *log = [NSString stringWithFormat:@"%@ %@ [ %@ - %@ ] - %@", level, [VialerLogger remoteIdentifier], modelName, currentConnection, logMessage];
+    NSString *deviceInfo = [NSString stringWithFormat:@"[ %@ - %@ - %@ ]", modelName, currentAppVersion, currentConnection];
+
+    NSString *log = [NSString stringWithFormat:@"%@ %@ %@ - %@", level, [VialerLogger remoteIdentifier], deviceInfo, logMessage];
 
     if (forceRemote) {
         NSString *logEntriesPushNotificationsToken = [[Configuration defaultConfiguration] logEntriesPushNotificationsToken];
