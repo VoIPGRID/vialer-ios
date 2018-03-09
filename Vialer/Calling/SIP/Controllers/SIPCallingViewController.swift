@@ -230,7 +230,8 @@ extension SIPCallingViewController {
     }
 
     func handleOutgoingCallForScreenshot(phoneNumber: String){
-        phoneNumberLabelText = phoneNumber
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        phoneNumberLabelText = cleanedPhoneNumber
     }
 
     /// Check 2 things before setting up a call:
@@ -238,6 +239,10 @@ extension SIPCallingViewController {
     /// - Microphone permission
     /// - WiFi Notification
     fileprivate func setupCall() {
+        guard !(UIApplication.shared.delegate as! AppDelegate).isScreenshotRun else {
+            return
+        }
+
         // Check microphone
         checkMicrophonePermission { startCalling in
             if startCalling {

@@ -1,23 +1,23 @@
+# The scheme you want to use, this must be the scheme for the UI Tests
 scheme ENV["SNAPSHOT_SCHEME"]
 
-# Uncomment the lines below you want to change by removing the # in the beginning
+# Reinstall app for screenshot run
 reinstall_app true
 
 # A list of devices you want to take the screenshots from
 devices([
-  "iPhone 4s",
-  "iPhone 5",
-  "iPhone 6",
-  "iPhone 6 Plus",
+  # "iPhone 4s",
+  "iPhone SE",
+  "iPhone 8",
+  "iPhone 8 Plus",
+  "iPhone X",
 ])
 
+# A list of languages which should be used
 languages([
-  "en-US",
-  "nl-NL",
+  "en-US", # English locale
+  "nl-NL", # Dutch locale
 ])
-
-# Arguments to pass to the app on launch. See https://github.com/fastlane/snapshot#launch_arguments
-# launch_arguments("-favColor red")
 
 # Where should the resulting screenshots be stored?
 output_directory "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
@@ -25,9 +25,24 @@ output_directory "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
 # Clear all previously generated screenshots before creating new ones
 clear_previous_screenshots false
 
+# The number of times a test can fail before snapshot should stop retrying
 number_of_retries 4
 
 # Choose which project/workspace to use
 workspace "./Vialer.xcworkspace"
 
+# Configure the system language of the simulator
 localize_simulator true
+
+# Run on multiple simulators at once
+concurrent_simulators true
+
+erase_simulator true
+
+clean false
+
+derived_data_path "./fastlane/DerivedData"
+
+app_identifier ENV['APP_IDENTIFIER']
+stop_after_first_error true
+output_simulator_logs true
