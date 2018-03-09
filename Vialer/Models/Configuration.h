@@ -7,27 +7,28 @@
 #import "ColorConfiguration.h"
 
 // Known tint color names
-extern NSString * const ConfigurationVoIPGRIDBaseURLString;
-extern NSString * const ConfigurationMiddleWareBaseURLString;
-extern NSString * const ConfigurationSIPDomain;
-extern NSString * const ConfigurationPartnerURLKey;
+extern NSString * const _Nonnull ConfigurationVoIPGRIDBaseURLString;
+extern NSString * const _Nonnull ConfigurationMiddleWareBaseURLString;
+extern NSString * const _Nonnull ConfigurationSIPDomain;
+extern NSString * const _Nonnull ConfigurationEncryptedSIPDomain;
+extern NSString * const _Nonnull ConfigurationPartnerURLKey;
 
 // The Google Analytics custom dimension keys
-extern NSString * const ConfigurationGADimensionClientIDIndex;
-extern NSString * const ConfigurationGADimensionBuildIndex;
+extern NSString * const _Nonnull ConfigurationGADimensionClientIDIndex;
+extern NSString * const _Nonnull ConfigurationGADimensionBuildIndex;
 
 /**
  *  Class for accessing items from Config.plist. As a default the plist from the main bundle is used.
  */
 @interface Configuration : NSObject
 
-@property (readonly, nonatomic) ColorConfiguration *colorConfiguration;
+@property (readonly, nonatomic) ColorConfiguration * _Nonnull colorConfiguration;
 /**
  * Obtain an instance to this class' Singleton.
  *
  * @return Configuration's singleton instance.
  */
-+ (instancetype)defaultConfiguration;
++ (instancetype _Nonnull)defaultConfiguration;
 
 /**
  *  Obtain an NSString containing an URL for the given key.
@@ -36,7 +37,7 @@ extern NSString * const ConfigurationGADimensionBuildIndex;
  *
  *  @return A NSString containing the URL value.
  */
-- (NSString *)UrlForKey:(NSString *)key;
+- (NSString * _Nonnull)UrlForKey:(NSString * _Nonnull)key;
 
 /**
  *  Obtain the Google Analytics custom dimension index for the given key.
@@ -45,21 +46,41 @@ extern NSString * const ConfigurationGADimensionBuildIndex;
  *
  *  @return An int representing the dimension index.
  */
-- (int)customDimensionIndexForKey:(NSString *)key;
-
+- (int)customDimensionIndexForKey:(NSString * _Nonnull)key;
 
 /**
  * The logEntries token.
  *
  * @return NSString with the token.
  */
-- (NSString *)logEntriesToken;
+- (NSString * _Nonnull)logEntriesToken;
+
+/**
+ * The logEntries token for a partner.
+ *
+ * @return NSString with the token or nil.
+ */
+- (NSString * _Nullable)logEntriesPartnerToken;
+
+/**
+ * The logEntries token for the push notifications log.
+ *
+ * @return NSString with the token or nil.
+ */
+- (NSString * _Nullable)logEntriesPushNotificationsToken;
 
 /**
  * The Google tracking Id.
  *
- * return NSString Google tracking id.
+ * @return NSString Google tracking id.
  */
-- (NSString *)googleTrackingId;
+- (NSString * _Nonnull)googleTrackingId;
+
+/**
+ * Get a list of available stun servers for SIP
+ *
+ * @return NSArray with Strings of stun servers or empty NSArray
+ */
+- (NSArray<NSString *> * _Nullable)stunServers;
 
 @end

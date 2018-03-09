@@ -5,40 +5,40 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const ConfigurationTabBarBackgroundColor;
-extern NSString * const ConfigurationTabBarTintColor;
-extern NSString * const ConfigurationNavigationBarTintColor;
-extern NSString * const ConfigurationNavigationBarBarTintColor;
-extern NSString * const ConfigurationConfigTextFieldBorderColor;
-extern NSString * const ConfigurationAvailabilityTableViewTintColor;
-extern NSString * const ConfigurationReachabilityBarBackgroundColor;
-extern NSString * const ConfigurationRecentsTableViewTintColor;
-extern NSString * const ConfigurationContactSearchBarBarTintColor;
-extern NSString * const ConfigurationContactSearchBarTintColor;
-extern NSString * const ConfigurationLeftDrawerButtonTintColor;
-extern NSString * const ConfigurationTwoStepScreenBackgroundHeaderColor;
-extern NSString * const ConfigurationTwoStepScreenInfoBarBackgroundColor;
-extern NSString * const ConfigurationTwoStepScreenBubblingColor;
-extern NSString * const ConfigurationTwoStepScreenSideAIconColor;
-extern NSString * const ConfigurationTwoStepScreenSideBIconColor;
-extern NSString * const ConfigurationTwoStepScreenVialerIconColor;
+extern NSString * const _Nonnull ConfigurationTabBarBackgroundColor;
+extern NSString * const _Nonnull ConfigurationTabBarTintColor;
+extern NSString * const _Nonnull ConfigurationNavigationBarTintColor;
+extern NSString * const _Nonnull ConfigurationNavigationBarBarTintColor;
+extern NSString * const _Nonnull ConfigurationConfigTextFieldBorderColor;
+extern NSString * const _Nonnull ConfigurationAvailabilityTableViewTintColor;
+extern NSString * const _Nonnull ConfigurationReachabilityBarBackgroundColor;
+extern NSString * const _Nonnull ConfigurationRecentsTableViewTintColor;
+extern NSString * const _Nonnull ConfigurationContactSearchBarBarTintColor;
+extern NSString * const _Nonnull ConfigurationContactSearchBarTintColor;
+extern NSString * const _Nonnull ConfigurationLeftDrawerButtonTintColor;
+extern NSString * const _Nonnull ConfigurationTwoStepScreenBackgroundHeaderColor;
+extern NSString * const _Nonnull ConfigurationTwoStepScreenInfoBarBackgroundColor;
+extern NSString * const _Nonnull ConfigurationTwoStepScreenBubblingColor;
+extern NSString * const _Nonnull ConfigurationTwoStepScreenSideAIconColor;
+extern NSString * const _Nonnull ConfigurationTwoStepScreenSideBIconColor;
+extern NSString * const _Nonnull ConfigurationTwoStepScreenVialerIconColor;
 
-extern NSString * const ConfigurationBackgroundGradientStartColor;
-extern NSString * const ConfigurationBackgroundGradientEndColor;
+extern NSString * const _Nonnull ConfigurationBackgroundGradientStartColor;
+extern NSString * const _Nonnull ConfigurationBackgroundGradientEndColor;
 extern CGFloat const ConfigurationBackgroundGradientAngle;
 
-extern NSString * const ConfigurationSideMenuTintColor;
-extern NSString * const ConfigurationSideMenuButtonPressedState;
-extern NSString * const ConfigurationRecentsSegmentedControlTintColor;
-extern NSString * const ConfigurationContactsTableSectionIndexColor;
-extern NSString * const ConfigurationNumberPadButtonTextColor;
-extern NSString * const ConfigurationNumberPadButtonPressedColor;
-extern NSString * const ConfigurationRecentsFilterControlTintColor;
-extern NSString * const ConfigurationLogInViewControllerButtonBorderColor;
-extern NSString * const ConfigurationLogInViewControllerButtonBackgroundColorForPressedState;
-extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBorderColor;
-extern NSString * const ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState;
-extern NSString * const ConfigurationSideMenuHeaderBackgroundColor;
+extern NSString * const _Nonnull ConfigurationSideMenuTintColor;
+extern NSString * const _Nonnull ConfigurationSideMenuButtonPressedState;
+extern NSString * const _Nonnull ConfigurationRecentsSegmentedControlTintColor;
+extern NSString * const _Nonnull ConfigurationContactsTableSectionIndexColor;
+extern NSString * const _Nonnull ConfigurationNumberPadButtonTextColor;
+extern NSString * const _Nonnull ConfigurationNumberPadButtonPressedColor;
+extern NSString * const _Nonnull ConfigurationRecentsFilterControlTintColor;
+extern NSString * const _Nonnull ConfigurationLogInViewControllerButtonBorderColor;
+extern NSString * const _Nonnull ConfigurationLogInViewControllerButtonBackgroundColorForPressedState;
+extern NSString * const _Nonnull ConfigurationActivateSIPAccountViewControllerButtonBorderColor;
+extern NSString * const _Nonnull ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState;
+extern NSString * const _Nonnull ConfigurationSideMenuHeaderBackgroundColor;
 
 /**
  This class represents the color configuration as defined in the Config.plist.
@@ -47,7 +47,7 @@ extern NSString * const ConfigurationSideMenuHeaderBackgroundColor;
 /**
  *  This initializer is not to be used.
  */
-- (instancetype)init __attribute__((unavailable("init not available")));
+- (instancetype _Nonnull)init __attribute__((unavailable("init not available")));
 
 /**
  *  This is the designated initializer for this class. Do not use init.
@@ -56,7 +56,7 @@ extern NSString * const ConfigurationSideMenuHeaderBackgroundColor;
  *
  *  @return An ColorConfiguration instance.
  */
-- (instancetype)initWithConfigPlist:(NSDictionary *)configPlist NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nonnull)initWithConfigPlist:(NSDictionary * _Nonnull)configPlist NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Obtain an UIColor for the key specified.
@@ -65,6 +65,6 @@ extern NSString * const ConfigurationSideMenuHeaderBackgroundColor;
  *
  *  @return An instance to a UIColor.
  */
-- (UIColor *)colorForKey:(NSString *)key;
+- (UIColor * _Nullable)colorForKey:(NSString * _Nonnull)key;
 
 @end

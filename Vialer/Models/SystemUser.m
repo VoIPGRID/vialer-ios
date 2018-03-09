@@ -39,8 +39,9 @@ static NSString * const SystemUserApiKeyFirstName       = @"first_name";
 static NSString * const SystemUserApiKeyPreposition     = @"preposition";
 static NSString * const SystemUserApiKeyLastName        = @"last_name";
 static NSString * const SystemUserApiKeyAppAccountURL   = @"app_account";
-static NSString * const SystemUserApiKeySIPAccount      = @"account_id";
-static NSString * const SystemUserApiKeySIPPassword     = @"password";
+static NSString * const SystemUserApiKeySIPAccount      = @"appaccount_account_id";
+static NSString * const SystemUserApiKeySIPPassword     = @"appaccount_password";
+static NSString * const SystemUserApiKeyUseEncryption   = @"appaccount_use_encryption";
 
 // Constant for "suppressed" key as supplied by api for outgoingNumber
 static NSString * const SystemUserSuppressedKey = @"suppressed";
@@ -61,6 +62,7 @@ static NSString * const SystemUserSUDClientID           = @"ClientID";
 static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
 static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
 static NSString * const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
+static NSString * const SystemUserSUDSIPUseEncryption   = @"SIPUseEncryption";
 static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
@@ -91,6 +93,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
  */
 @property (strong, nonatomic) NSString *sipAccount;
 @property (readwrite, nonatomic) BOOL sipRegisterOnAdd;
+@property (readwrite, nonatomic) BOOL sipUseEncryption;
 
 /**
  *  Depenpency Injection.
@@ -167,8 +170,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     /**
      *  SIP settings.
      */
-    self.sipAccount     = [defaults objectForKey:SystemUserSUDSIPAccount];
-    self.sipEnabled     = [defaults boolForKey:SystemUserSUDSIPEnabled];
+    self.sipAccount         = [defaults objectForKey:SystemUserSUDSIPAccount];
+    self.sipEnabled         = [defaults boolForKey:SystemUserSUDSIPEnabled];
+    self.sipUseEncryption   = [defaults boolForKey:SystemUserApiKeyUseEncryption];
 
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 }
@@ -238,7 +242,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (NSString *)sipDomain {
-    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationSIPDomain];
+    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationEncryptedSIPDomain];
 }
 
 - (NSString *)sipProxy {
@@ -262,9 +266,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
     // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
     if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]){
-        self.use3GPlus = YES;
+        self.showWiFiNotification = YES;
     }
-    return [defaults boolForKey:SystemUserSUDUse3GPlus];
+    return [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 }
 
 
@@ -275,6 +279,11 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDMobileNumber];
     }
+}
+
+- (void)setSipUseEncryption:(BOOL)sipUseEncryption {
+    _sipUseEncryption = sipUseEncryption;
+    [[NSUserDefaults standardUserDefaults] setBool:sipUseEncryption forKey:SystemUserSUDSIPUseEncryption];
 }
 
 - (void)setOutgoingNumber:(NSString *)outgoingNumber {
@@ -415,9 +424,11 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     [SAMKeychain deletePasswordForService:self.serviceName account:self.sipAccount];
     self.sipEnabled = NO;
     self.sipAccount = nil;
+    self.sipUseEncryption = NO;
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPAccount];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPEnabled];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPUseEncryption];
 }
 
 - (void)setOwnPropertiesFromUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
@@ -425,16 +436,18 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         self.username = username;
         [SAMKeychain setPassword:password forService:self.serviceName account:username];
     }
-    self.outgoingNumber = userDict[SystemUserApiKeyOutgoingNumber];
-    if (![userDict[SystemUserApiKeyMobileNumber] isEqual:[NSNull null]]) {
-        self.mobileNumber   = userDict[SystemUserApiKeyMobileNumber];
-    }
+
     self.emailAddress   = userDict[SystemUserApiKeyEmailAddress];
+
     self.firstName      = userDict[SystemUserApiKeyFirstName];
     self.preposition    = userDict[SystemUserApiKeyPreposition];
     self.lastName       = userDict[SystemUserApiKeyLastName];
     self.clientID       = userDict[SystemUserApiKeyClient];
 
+    if (![userDict[SystemUserApiKeyMobileNumber] isEqual:[NSNull null]]) {
+        self.mobileNumber = userDict[SystemUserApiKeyMobileNumber];
+    }
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     // If the defaults contains a value for SIP Enabled, use that value,
@@ -446,16 +459,27 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     }
 
     [defaults setObject:self.username forKey:SystemUserSUDUsername];
-    [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
-    [defaults setObject:self.mobileNumber forKey:SystemUserSUDMobileNumber];
     [defaults setObject:self.emailAddress forKey:SystemUserSUDEmailAddress];
+
     [defaults setObject:self.firstName forKey:SystemUserSUDFirstName];
     [defaults setObject:self.preposition forKey:SystemUserSUDPreposition];
     [defaults setObject:self.lastName forKey:SystemUserSUDLastName];
     [defaults setObject:self.clientID forKey:SystemUserApiKeyClient];
 
+    [defaults setObject:self.mobileNumber forKey:SystemUserSUDMobileNumber];
+    
     [defaults synchronize];
     self.loggedIn = YES;
+}
+
+- (void)setMobileProfileFromUserDict:(NSDictionary *)profileDict {
+    self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+
+    [defaults synchronize];
 }
 
 - (void)fetchUserProfile {
@@ -505,11 +529,24 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     }
 }
 
+- (void)updateUseEncryptionWithCompletion:(void(^)(BOOL success, NSError *error))completion {
+    [self.operationsManager pushUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            completion(YES, nil);
+        } else {
+            NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
+                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save to use encryption.", nil)
+                                       };
+            completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserFailedToSaveEncryptionToRemote userInfo:userInfo]);
+        }
+    }];
+}
+
 #pragma mark - SIP Handling
 
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (self.loggedIn) {
-        [self fetchSIPAcountFromRemoteWithCompletion:^(BOOL success, NSError *error) {
+        [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
             // It is only an success if the request was success and there was an sipAcount set.
             if (success && self.sipAccount) {
                 self.sipEnabled = YES;
@@ -524,85 +561,58 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     }
 }
 
-- (void)updateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
-    if (self.loggedIn) {
-        if (self.sipEnabled) {
-            [self fetchSIPAcountFromRemoteWithCompletion:completion];
+- (void)fetchMobileProfileFromRemoteWithCompletion:(void(^)(BOOL success, NSError *error))completion {
+    [self.operationsManager getMobileProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (!error) {
+            
+            [self setMobileProfileFromUserDict:responseData];
+            
+            id sipAccount = responseData[SystemUserApiKeySIPAccount];
+            id sipPassword = responseData[SystemUserApiKeySIPPassword];
+            id useEncryption = responseData[SystemUserApiKeyUseEncryption];
+            
+            if ([sipAccount isKindOfClass:[NSNull class]] || [sipPassword isKindOfClass:[NSNull class]]) {
+                [self removeSIPCredentials];
+                
+                if (completion) {
+                    completion(YES, nil);
+                }
+                return;
+            }
+            
+            if (![sipAccount isKindOfClass:[NSNumber class]] || ![sipPassword isKindOfClass:[NSString class]]) {
+                [self removeSIPCredentials];
+                if (completion) {
+                    NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingSIPAccount userInfo:nil];
+                    completion(NO, error);
+                }
+                return;
+            }
+            
+            if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
+                self.sipAccount = [sipAccount stringValue];
+                [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+            }
+            
+            // Encryption is turned off for this account. Make an api call and enable it.
+            if ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption) {
+                [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
+                    if (success) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+                        self.sipUseEncryption = YES;
+                    } else {
+                        if (completion) {
+                            completion(NO, error);
+                        }
+                        return;
+                    }
+                }];
+            }
+
+            if (completion) completion(YES, nil);
         } else {
-            [self fetchUserProfile];
-        }
-    }
-}
-
-- (void)fetchSIPAcountFromRemoteWithCompletion:(void (^)(BOOL success, NSError *error))completion {
-    // Update the user profile.
-    [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
-        // This user is allowed to use SIP, check if the account is configured.
-        if  (!error) {
-            // Set the outgoing number when getting the SIP account.
-            self.outgoingNumber = responseObject[SystemUserApiKeyOutgoingNumber];
-
-            NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
-            [self updateSIPAccountWithURL:appAccountURL withCompletion:completion];
-        } else {
-            if (completion) {
-                NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
-                NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingUserProfile userInfo:userInfo];
-                completion(NO, error);
-            }
-        }
-    }];
-}
-
-/**
- *  Private helper to retrieve the SIP Account credentials from the supplied accountURL.
- *
- *  @param accountURL string with the url to the sip account
- *  @param completion A block that will be called with a success or failure of retrieving the sip credentials.
- */
-- (void)updateSIPAccountWithURL:(NSString *)accountURL withCompletion:(void(^)(BOOL success, NSError *error))completion {
-    // If there is no SIP Account for the user, it is removed.
-    if ([accountURL isKindOfClass:[NSNull class]]) {
-        [self removeSIPCredentials];
-
-        if (completion) {
-            completion(YES, nil);
-        }
-        return;
-    }
-
-    // Fetch the credentials.
-    [self.operationsManager retrievePhoneAccountForUrl:accountURL withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
-
-        // Couldn't fetch the credentials.
-        if (error) {
-            if (completion) {
-                NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
-                NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingSIPAccount userInfo:userInfo];
-                completion(NO, error);
-            }
-            return;
-        }
-
-        id sipAccount = responseData[SystemUserApiKeySIPAccount];
-        id sipPassword = responseData[SystemUserApiKeySIPPassword];
-        // Check if the values returned are proper values.
-        if (![sipAccount isKindOfClass:[NSNumber class]] || ![sipPassword isKindOfClass:[NSString class]]) {
-            if (completion) {
-                NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingSIPAccount userInfo:nil];
-                completion(NO, error);
-            }
-            return;
-        }
-
-        // Only update settings if the credentials have changed.
-        if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
-            self.sipAccount = [sipAccount stringValue];
-            [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-        }
-        if (completion) {
-            completion(YES, nil);
+            if (completion) completion(NO, error);
         }
     }];
 }
@@ -613,14 +623,14 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
         if (!error) {
             [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
-
-            NSString *appAccountURL = [responseObject objectForKey:SystemUserApiKeyAppAccountURL];
-            [self updateSIPAccountWithURL:appAccountURL withCompletion:^(BOOL success, NSError *error) {
-                if (!error) {
-                    [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
-                    if (completion) completion(nil);
-                } else {
-                    if (completion) completion(error);
+            
+            [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
+                if (completion) {
+                    if (success) {
+                        completion(nil);
+                    } else {
+                        completion(error);
+                    }
                 }
             }];
         } else {

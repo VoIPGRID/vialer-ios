@@ -17,20 +17,12 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 @implementation VialerLogger
 
 + (void)setup {
-    le_init();
-    le_handle_crashes();
-    le_set_token([[[Configuration defaultConfiguration] logEntriesToken] UTF8String]);
-
     SPLumberjackLogFormatter *logFormatter = [[SPLumberjackLogFormatter alloc] init];
 
     DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
     [ttyLogger setLogFormatter:logFormatter];
 
     [DDLog addLogger:ttyLogger];
-
-    // LogEntries
-    LELog* logger = [LELog sharedInstance];
-    logger.debugLogs = NO;
 
 #ifdef DEBUG
     // File logging
@@ -44,7 +36,10 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (appDelegate.isScreenshotRun) {
-        [VialerGAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone isDryRun:YES];
+        BOOL gaiDone = [VialerGAITracker setupGAITrackerWithLogLevel:kGAILogLevelNone isDryRun:YES];
+        if (!gaiDone) {
+            NSLog(@"Failed to setup google analytics");
+        }
     } else {
         [VialerGAITracker setupGAITracker];
     }
@@ -57,15 +52,15 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 + (void)logWithFlag:(DDLogFlag)flag file:(const char*)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format, ... {
     va_list args;
     va_start(args, format);
-    [self logWithFlag:flag file:file function:function line:line format:format arguments:args];
+    [self logWithFlag:flag file:file function:function line:line format:format arguments:args forceRemote:NO];
     va_end(args);
 }
 
 + (void)logWithFlag:(DDLogFlag)flag file:(const char*)file function:(const char *)function line:(NSUInteger)line message:(NSString *)message {
-    [self logWithFlag:flag file:file function:function line:line format:message arguments:nil];
+    [self logWithFlag:flag file:file function:function line:line format:message arguments:nil forceRemote:NO];
 }
 
-+ (void)logWithFlag:(DDLogFlag)flag file:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format arguments:(va_list)arguments {
++ (void)logWithFlag:(DDLogFlag)flag file:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format arguments:(va_list)arguments forceRemote:(BOOL)forceRemote {
     NSString *message = [[NSString alloc] initWithFormat:format arguments:arguments];
     NSString *logFile = [NSString stringWithFormat:@"%s", file];
     NSString *logFunction = [NSString stringWithFormat:@"%s", function];
@@ -82,12 +77,19 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
                                                            timestamp:nil];
 
     [[DDLog sharedInstance] log:LOG_ASYNC_ENABLED message:logMessage];
-    [self logMessageToLogEntriesWitMessage:logMessage];
+    [self logMessageToLogEntriesWitMessage:logMessage forceRemote:forceRemote];
+}
+
++ (void) logPushNotification:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format, ... {
+    va_list args;
+    va_start(args, format);
+    [self logWithFlag:DDLogFlagInfo file:file function:function line:line format:format arguments:args forceRemote:YES];
+    va_end(args);
 }
 
 + (void)logWithDDLogMessage:(DDLogMessage *)ddLogMessage {
     [[DDLog sharedInstance] log:LOG_ASYNC_ENABLED message:ddLogMessage];
-    [self logMessageToLogEntriesWitMessage:ddLogMessage];
+    [self logMessageToLogEntriesWitMessage:ddLogMessage forceRemote:NO];
 }
 
 + (BOOL)remoteLoggingEnabled {
@@ -105,15 +107,31 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 
 #pragma mark - Helper Functions
 
++ (NSString *) anominyzeWithLogmessage:(NSString *)logMessage {
+    logMessage = [logMessage replaceRegexWithPattern:@"Token: <(.*)>" with:@"TOKEN"];
+    logMessage = [logMessage replaceRegexWithPattern:@"\"caller_id\" = (.+?);" with:@"<CALLER_ID>"];
+    logMessage = [logMessage replaceRegexWithPattern:@"phonenumber = (.+?);" with:@"<PHONE_NUMBER>"];
+    logMessage = [logMessage replaceRegexWithPattern:@"To:(.+?)>" with:@" <SIP_ANONYMIZED"];
+    logMessage = [logMessage replaceRegexWithPattern:@"From:(.+?)>" with:@" <SIP_ANONYMIZED"];
+    logMessage = [logMessage replaceRegexWithPattern:@"Contact:(.+?)>" with:@" <SIP_ANONYMIZED"];
+    logMessage = [logMessage replaceRegexWithPattern:@"sip:(.+?)@" with:@"SIP_USER_ID"];
+    logMessage = [logMessage replaceRegexWithPattern:@"Digest username=\"(.+?)\"" with:@"SIP_USERNAME"];
+    logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
+    logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
+    logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
+
+    return logMessage;
+}
+
 /**
  Log to LogEntries if user has enabled.
 
  @param flag LogLevel
  @param message NSString to sent to LogEntries
  */
-+ (void)logMessageToLogEntriesWitMessage:(DDLogMessage *)message {
++ (void)logMessageToLogEntriesWitMessage:(DDLogMessage *)message forceRemote:(BOOL)forceRemote {
     // Check if remote logging is enabled
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:DDLogWrapperShouldUseRemoteLoggingKey]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:DDLogWrapperShouldUseRemoteLoggingKey] && !forceRemote) {
         return;
     }
 
@@ -141,17 +159,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     }
 
     // Clean the message from privacy information.
-    logMessage = [logMessage replaceRegexWithPattern:@"Token: <(.*)>" with:@"TOKEN"];
-    logMessage = [logMessage replaceRegexWithPattern:@"\"caller_id\" = (.+?);" with:@"<CALLER_ID>"];
-    logMessage = [logMessage replaceRegexWithPattern:@"phonenumber = (.+?);" with:@"<PHONE_NUMBER>"];
-    logMessage = [logMessage replaceRegexWithPattern:@"To:(.+?)>" with:@" <SIP_ANONYMIZED"];
-    logMessage = [logMessage replaceRegexWithPattern:@"From:(.+?)>" with:@" <SIP_ANONYMIZED"];
-    logMessage = [logMessage replaceRegexWithPattern:@"Contact:(.+?)>" with:@" <SIP_ANONYMIZED"];
-    logMessage = [logMessage replaceRegexWithPattern:@"sip:(.+?)@" with:@"SIP_USER_ID"];
-    logMessage = [logMessage replaceRegexWithPattern:@"Digest username=\"(.+?)\"" with:@"SIP_USERNAME"];
-    logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
-    logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
-    logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
+    logMessage = [VialerLogger anominyzeWithLogmessage:logMessage];
 
     Reachability *reachability = [ReachabilityHelper sharedInstance].reachability;
 
@@ -163,7 +171,29 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     }
 
     NSString *log = [NSString stringWithFormat:@"%@ %@ [ %@ - %@ ] - %@", level, [VialerLogger remoteIdentifier], modelName, currentConnection, logMessage];
-    [[LELog sharedInstance] log:log];
+
+    if (forceRemote) {
+        NSString *logEntriesPushNotificationsToken = [[Configuration defaultConfiguration] logEntriesPushNotificationsToken];
+
+        if ([logEntriesPushNotificationsToken length] > 0) {
+            LELog* logger = [LELog sessionWithToken:logEntriesPushNotificationsToken];
+            logger.debugLogs = NO;
+            [logger log: log];
+        }
+    } else {
+        NSString * mainLogEntriesToken = [[Configuration defaultConfiguration] logEntriesToken];
+
+        LELog* logger = [LELog sessionWithToken:mainLogEntriesToken];
+        logger.debugLogs = NO;
+        [logger log: log];
+
+        NSString * partnerLogEntriesToken = [[Configuration defaultConfiguration] logEntriesPartnerToken];
+        if ([partnerLogEntriesToken length] > 0) {
+            LELog* logger = [LELog sessionWithToken:partnerLogEntriesToken];
+            logger.debugLogs = NO;
+            [logger log: log];
+        }
+    }
 }
 
 @end

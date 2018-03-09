@@ -299,7 +299,7 @@ class ContactModel: NSObject {
         var firstChar: Character?
         switch contact.contactType {
         case .organization:
-            if let char = contact.organizationName.uppercased().replacingOccurrences(of: "(", with: "").characters.first {
+            if let char = contact.organizationName.uppercased().replacingOccurrences(of: "(", with: "").first {
                 firstChar = char
             } else {
                 fallthrough
@@ -307,17 +307,17 @@ class ContactModel: NSObject {
         case .person:
             switch sortOrder {
             case .familyName:
-                if let char = contact.familyName.uppercased().replacingOccurrences(of: "(", with: "").characters.first {
+                if let char = contact.familyName.uppercased().replacingOccurrences(of: "(", with: "").first {
                     firstChar = char
                 } else {
                     fallthrough
                 }
             default:
-                if let char = contact.givenName.uppercased().replacingOccurrences(of: "(", with: "").characters.first {
+                if let char = contact.givenName.uppercased().replacingOccurrences(of: "(", with: "").first {
                     firstChar = char
-                } else if let char = contact.familyName.uppercased().replacingOccurrences(of: "(", with: "").characters.first {
+                } else if let char = contact.familyName.uppercased().replacingOccurrences(of: "(", with: "").first {
                     firstChar = char
-                } else if let char = contact.emailAddresses.first?.value.uppercased.characters.first {
+                } else if let char = contact.emailAddresses.first?.value.uppercased.first {
                     firstChar = char
                 }
             }

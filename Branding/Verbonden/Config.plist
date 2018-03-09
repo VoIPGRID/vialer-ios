@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Log Entries</key>
+	<dict>
+		<key>Main</key>
+		<string>712c6c73-82d2-4be5-af08-84e18386e1e0</string>
+		<key>Push Notifications</key>
+		<string>07c8e655-a758-4590-aafe-682627d50904</string>
+	</dict>
 	<key>GA Custom Dimensions</key>
 	<dict>
 		<key>Build index</key>
@@ -138,10 +145,16 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Stun Servers</key>
+		<array>
+			<string>stun.voipgrid.nl</string>
+		</array>
+		<key>Encrypted SIP Domain</key>
+		<string>sip.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush.voipgrid.nl</string>
 		<key>API</key>
-		<string>https://api.voipgrid.nl/api</string>
+		<string>https://partner.voipgrid.nl/api</string>
 		<key>Partner</key>
 		<string>https://mijn.verbonden.nl</string>
 		<key>SIP domain</key>
@@ -151,7 +164,5 @@
 		<key>onboarding-en</key>
 		<string>https://verbonden.nl/app/app-info</string>
 	</dict>
-	<key>LogEntries Token</key>
-	<string>712c6c73-82d2-4be5-af08-84e18386e1e0</string>
 </dict>
 </plist>

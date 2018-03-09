@@ -131,6 +131,12 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Stun Servers</key>
+		<array>
+			<string>stun.voipgrid.nl</string>
+		</array>
+		<key>Encrypted SIP Domain</key>
+		<string>staging.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush-acc.voipgrid.nl</string>
 		<key>API</key>

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -141,7 +141,6 @@
 		C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C41FD8C21C60A08400BBE6D7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
-		C41FD8E61C60A55000BBE6D7 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E21C60A55000BBE6D7 /* Voys.xcassets */; };
 		C41FD8E81C60A55000BBE6D7 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E41C60A55000BBE6D7 /* Config.plist */; };
 		C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */; };
 		C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
@@ -432,6 +431,8 @@
 		EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
+		EE3D8675201F113900CEFDC6 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D8674201F113800CEFDC6 /* Voys.xcassets */; };
+		EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D8674201F113800CEFDC6 /* Voys.xcassets */; };
 		EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
@@ -569,8 +570,6 @@
 		EE61F4841F1DDDE4006E890F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		EE61F4A31F1DDF31006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4921F1DDE7D006E890F /* Config.plist */; };
 		EE61F4A41F1DDF31006E890F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */; };
-		EE61F4A51F1DDF31006E890F /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4941F1DDE7D006E890F /* Vialer.xcassets */; };
-		EE61F4B61F1DE0EA006E890F /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49D1F1DDF1E006E890F /* Voys.xcassets */; };
 		EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */; };
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -587,6 +586,8 @@
 		EEA3C2721F90919200423F96 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
 		EEA3C2741F90919200423F96 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
 		EEA3C2751F90919200423F96 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
+		EEA9ADB4200DEDD5007727EB /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */; };
+		EEA9ADB5200DEDD5007727EB /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */; };
 		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
 		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
@@ -684,7 +685,6 @@
 		F208517A1D2695FE00A17E71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		F20851841D269DD300A17E71 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851801D269DD300A17E71 /* Config.plist */; };
 		F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851811D269DD300A17E71 /* GoogleService-Info.plist */; };
-		F20851871D269DD300A17E71 /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20851831D269DD300A17E71 /* Vialer.xcassets */; };
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
@@ -1012,7 +1012,6 @@
 		C41C42F71D5A742100813B66 /* VialerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VialerLogger.m; path = Helpers/VialerLogger.m; sourceTree = "<group>"; };
 		C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactModelTestCase.swift; path = Contacts/Models/ContactModelTestCase.swift; sourceTree = "<group>"; };
 		C41FD8CE1C60A08400BBE6D7 /* Voys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voys.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C41FD8E21C60A55000BBE6D7 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Voys.xcassets; path = Branding/Voys/Voys.xcassets; sourceTree = "<group>"; };
 		C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Voys-Info.plist"; path = "Branding/Voys/Voys-Info.plist"; sourceTree = "<group>"; };
 		C41FD8E41C60A55000BBE6D7 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Branding/Voys/Config.plist; sourceTree = "<group>"; };
 		C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Voys/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1130,6 +1129,7 @@
 		EE1C7B7A1F87774F00708D96 /* SipCallingButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
+		EE3D8674201F113800CEFDC6 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Voys.xcassets; path = Branding/Voys/Voys.xcassets; sourceTree = "<group>"; };
 		EE5A1F171F94A7B200F07536 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
 		EE5C221F1F46EDA200AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
@@ -1147,14 +1147,13 @@
 		EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Info.plist"; sourceTree = "<group>"; };
 		EE61F4921F1DDE7D006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EE61F4941F1DDE7D006E890F /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		EE61F49B1F1DDF1E006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EE61F49D1F1DDF1E006E890F /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Voys.xcassets; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
+		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
 		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = "<group>"; };
 		EEDFABF91F876628002F0679 /* KeypadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewController.swift; sourceTree = "<group>"; };
@@ -1179,7 +1178,6 @@
 		F20851801D269DD300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F20851811D269DD300A17E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
-		F20851831D269DD300A17E71 /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		F20851881D269E1700A17E71 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -1613,11 +1611,11 @@
 		C41FD8D11C60A12E00BBE6D7 /* Voys */ = {
 			isa = PBXGroup;
 			children = (
+				EE3D8674201F113800CEFDC6 /* Voys.xcassets */,
 				EEEF16081F470C4400AEFA83 /* InfoPlist.strings */,
 				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
-				C41FD8E21C60A55000BBE6D7 /* Voys.xcassets */,
 				C41FD8E41C60A55000BBE6D7 /* Config.plist */,
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
 				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
@@ -2025,7 +2023,6 @@
 				EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */,
 				EE61F4921F1DDE7D006E890F /* Config.plist */,
 				EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */,
-				EE61F4941F1DDE7D006E890F /* Vialer.xcassets */,
 			);
 			path = Vialer;
 			sourceTree = "<group>";
@@ -2036,7 +2033,6 @@
 				EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */,
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
-				EE61F49D1F1DDF1E006E890F /* Voys.xcassets */,
 			);
 			path = Voys;
 			sourceTree = "<group>";
@@ -2083,9 +2079,9 @@
 				C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */,
 				F20851821D269DD300A17E71 /* Vialer-Info.plist */,
 				F20851881D269E1700A17E71 /* Snapshot-Constants.swift */,
-				F20851831D269DD300A17E71 /* Vialer.xcassets */,
 				F20851801D269DD300A17E71 /* Config.plist */,
 				F20851811D269DD300A17E71 /* GoogleService-Info.plist */,
+				EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */,
 			);
 			name = Vialer;
 			path = Branding/Vialer;
@@ -2933,7 +2929,7 @@
 				};
 			};
 			buildConfigurationList = FB4226C8182261D200707349 /* Build configuration list for PBXProject "Vialer" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -2972,6 +2968,7 @@
 				C41FD8A81C60A08400BBE6D7 /* dtmf-0.aif in Resources */,
 				C41FD8A91C60A08400BBE6D7 /* AvailabilityStoryboard.storyboard in Resources */,
 				C41FD8E81C60A55000BBE6D7 /* Config.plist in Resources */,
+				EE3D8675201F113900CEFDC6 /* Voys.xcassets in Resources */,
 				C41FD8AA1C60A08400BBE6D7 /* TwoStepCallingStoryboard.storyboard in Resources */,
 				C41FD8AB1C60A08400BBE6D7 /* ContactsStoryboard.storyboard in Resources */,
 				EEEF160C1F470C4A00AEFA83 /* VoysIntentsExtension.plist in Resources */,
@@ -2997,7 +2994,6 @@
 				C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */,
 				C42FAD3D1D198D34004D9D00 /* ringtone.wav in Resources */,
 				C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */,
-				C41FD8E61C60A55000BBE6D7 /* Voys.xcassets in Resources */,
 				C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */,
 				C41FD8C21C60A08400BBE6D7 /* MainStoryboard.storyboard in Resources */,
 			);
@@ -3084,9 +3080,9 @@
 			files = (
 				EE61F4B81F1DE36C006E890F /* Config.plist in Resources */,
 				EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */,
-				EE61F4B61F1DE0EA006E890F /* Voys.xcassets in Resources */,
 				EE61F4661F1DDDE4006E890F /* dtmf-#.aif in Resources */,
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
+				EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */,
 				EE61F4681F1DDDE4006E890F /* AvailabilityStoryboard.storyboard in Resources */,
 				EE61F4691F1DDDE4006E890F /* TwoStepCallingStoryboard.storyboard in Resources */,
 				EE61F46A1F1DDDE4006E890F /* ContactsStoryboard.storyboard in Resources */,
@@ -3134,6 +3130,7 @@
 				F208514D1D26935600A17E71 /* ringtone.wav in Resources */,
 				F208514E1D26935600A17E71 /* dtmf-3.aif in Resources */,
 				F208517A1D2695FE00A17E71 /* Images.xcassets in Resources */,
+				EEA9ADB5200DEDD5007727EB /* Vialer.xcassets in Resources */,
 				C49B0EE91E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
 				F20851501D26935600A17E71 /* dtmf-4.aif in Resources */,
 				EEEF16101F470C8200AEFA83 /* Localizable.strings in Resources */,
@@ -3148,7 +3145,6 @@
 				EE61F4A31F1DDF31006E890F /* Config.plist in Resources */,
 				F20851591D26935600A17E71 /* SettingsStoryboard.storyboard in Resources */,
 				F208515A1D26935600A17E71 /* dtmf-9.aif in Resources */,
-				EE61F4A51F1DDF31006E890F /* Vialer.xcassets in Resources */,
 				F208515F1D26935600A17E71 /* DialerStoryboard.storyboard in Resources */,
 				F20851601D26935600A17E71 /* MainStoryboard.storyboard in Resources */,
 			);
@@ -3186,9 +3182,9 @@
 				C49A46AC1E6829DD0097E808 /* dtmf-*.aif in Resources */,
 				C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */,
 				EEEF160F1F470C8200AEFA83 /* Localizable.strings in Resources */,
+				EEA9ADB4200DEDD5007727EB /* Vialer.xcassets in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
 				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
-				F20851871D269DD300A17E71 /* Vialer.xcassets in Resources */,
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
 				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
 				C49B0EE81E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
@@ -3219,11 +3215,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Acceptatie/Pods-Acceptatie-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3239,11 +3237,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3310,11 +3310,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3330,11 +3332,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Voys/Pods-Voys-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3365,11 +3369,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3385,11 +3391,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3435,11 +3443,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3473,11 +3483,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Acceptatie Voys/Pods-Acceptatie Voys-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

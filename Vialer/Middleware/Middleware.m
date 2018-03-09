@@ -18,6 +18,7 @@ static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
 static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
 static NSString * const MiddlewareAPNSPayloadKeyCheckin    = @"checkin";
 static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
+static NSString * const MiddlewareAPNSPayloadKeyUniqueKey  = @"unique_key";
 
 static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 static float const MiddlewareResendTimeInterval = 10.0;
@@ -94,19 +95,22 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
     VialerLogDebug(@"Push message received from middleware of type: %@", payloadType);
-    VialerLogVerbose(@"Payload:\n%@", payload);
+    VialerLogDebug(@"Payload:\n%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
+        // Separate VialerLog for the push notification that will be posted to LogEntries
+        VialerLogPushNotification(@"iOS : %@\n", payload);
+
         // Incoming call.
         if (![SystemUser currentUser].sipEnabled) {
             // User is not SIP enabled.
             // Sent not available to the middleware.
-            VialerLogDebug(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
+            VialerLogWarning(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             return;
         }
 
-        NSString *keyToProcess = payload[@"unique_key"];
+        NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
 
         // Check for network connection before registering the account at pjsip.
         if (!self.reachability.hasHighSpeed && !(self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
@@ -125,7 +129,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was success.
             if (!success) {
-                VialerLogDebug(@"SIP Endpoint registration FAILED. Sending Available = NO to middleware");
+                VialerLogWarning(@"SIP Endpoint registration FAILED. Sending Available = NO to middleware");
                 [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [SIPUtils removeSIPEndpoint];
@@ -141,7 +145,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             } else {
                 // Connection is not good enough.
                 // Sent not available to the middleware.
-                VialerLogDebug(@"Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
+                VialerLogWarning(@"Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
                 [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [SIPUtils removeSIPEndpoint];
@@ -152,7 +156,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
         VialerLogDebug(@"Checking payload:\n %@", payload);
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage] && self.systemUser.sipEnabled) {
-        VialerLogDebug(@"Another device took over the SIP account, disabling account.");
+        VialerLogWarning(@"Another device took over the SIP account, disabling account.");
         self.systemUser.sipEnabled = NO;
         NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
         [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
@@ -217,31 +221,31 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 }
 
 - (void)sentAPNSToken:(NSString *)apnsToken {
-    // This is for debuging, can be removed in the future
-    // Inserted to debug VIALI-3176. Remove with VIALI-3178
-    NSString *applicationState;
-    switch ([UIApplication sharedApplication].applicationState) {
-            case UIApplicationStateActive: {
-                applicationState = @"UIApplicationStateActive";
-                break;
-            }
-            case UIApplicationStateInactive: {
-                applicationState = @"UIApplicationStateInactive";
-                break;
-            }
-            case UIApplicationStateBackground: {
-                applicationState = @"UIApplicationStateBackground";
-                break;
-            }
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *applicationStateString;
+        NSInteger applicationState = [UIApplication sharedApplication].applicationState;
+        switch (applicationState) {
+                case UIApplicationStateActive: {
+                    applicationStateString = @"UIApplicationStateActive";
+                    break;
+                }
+                case UIApplicationStateInactive: {
+                    applicationStateString = @"UIApplicationStateInactive";
+                    break;
+                }
+                case UIApplicationStateBackground: {
+                    applicationStateString = @"UIApplicationStateBackground";
+                    break;
+                }
+        }
 
-    NSString *backgroundTimeRemaining = @"N/A";
-    if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-        backgroundTimeRemaining = [NSString stringWithFormat:@"%.4f", [UIApplication sharedApplication].backgroundTimeRemaining];
-    }
+        NSString *backgroundTimeRemaining = @"N/A";
+        if (applicationState == UIApplicationStateBackground) {
+            backgroundTimeRemaining = [NSString stringWithFormat:@"%.4f", [UIApplication sharedApplication].backgroundTimeRemaining];
+        }
 
-    VialerLogInfo(@"Trying to sent APNSToken to middleware. Application state: \"%@\". Background time remaining: %@", applicationState, backgroundTimeRemaining);
-    // End debugging statements
+        VialerLogInfo(@"Trying to sent APNSToken to middleware. Application state: \"%@\". Background time remaining: %@", applicationStateString, backgroundTimeRemaining);
+    });
 
     UIApplication *application = [UIApplication sharedApplication];
     UIBackgroundTaskIdentifier __block backgroundtask = UIBackgroundTaskInvalid;

@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Log Entries</key>
+	<dict>
+		<key>Main</key>
+		<string>abb25255-136c-4443-b0dd-0d7f4db33069</string>
+		<key>Partner</key>
+		<string>31466f78-0bce-4bc7-b6ad-8df36ad2fc9c</string>
+		<key>Push Notifications</key>
+		<string>07c8e655-a758-4590-aafe-682627d50904</string>
+	</dict>
 	<key>Primary colors</key>
 	<dict>
 		<key>PrimaryBrandColor</key>
@@ -131,10 +140,16 @@
 	</dict>
 	<key>URLS</key>
 	<dict>
+		<key>Stun Servers</key>
+		<array>
+			<string>stun.voipgrid.nl</string>
+		</array>
+		<key>Encrypted SIP Domain</key>
+		<string>sip.encryptedsip.com</string>
 		<key>Middelware BaseLink</key>
 		<string>https://vialerpush.voipgrid.nl</string>
 		<key>API</key>
-		<string>https://api.voipgrid.nl/api</string>
+		<string>https://partner.voipgrid.nl/api</string>
 		<key>Partner</key>
 		<string>https://freedom.voys.nl</string>
 		<key>SIP domain</key>
@@ -151,7 +166,5 @@
 		<key>Client ID index</key>
 		<integer>1</integer>
 	</dict>
-	<key>LogEntries Token</key>
-	<string>abb25255-136c-4443-b0dd-0d7f4db33069</string>
 </dict>
 </plist>
