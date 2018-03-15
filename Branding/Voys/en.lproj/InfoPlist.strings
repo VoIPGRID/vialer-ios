@@ -1,3 +1,3 @@
-NSContactsUsageDescription = "Voys needs access to your contacts to make calling to your contacts possible";
+NSContactsUsageDescription = "Voys needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.";
 NSMicrophoneUsageDescription = "Voys needs access to your microphone to make calling possible";
 NSCameraUsageDescription = "Voys needs access to your camera to make video calls";

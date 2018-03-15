@@ -1,3 +1,3 @@
-NSContactsUsageDescription = "Vialer heeft toegang nodig tot je contacten om bellen naar je contacten mogelijk te maken";
+NSContactsUsageDescription = "Vialer heeft toegang tot uw contacten nodig om bellen mogelijk te maken. Uw contacten worden niet door ons gebruikt or ergens anders bewaard. Alleen het telefoonnummer en de naam worden gebruikt om een gesprek op te zetten.";
 NSMicrophoneUsageDescription = "Vialer heeft toegang nodig tot je microfoon om bellen mogelijk te maken";
 NSCameraUsageDescription = "Vialer heeft toegang nodig tot je camera om video bellen mogelijk te maken";
