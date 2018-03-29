@@ -35,7 +35,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
-	<string>Vialer needs access to your contacts to make calling to your contacts possible</string>
+	<string>Vialer needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Vialer needs access to your microphone to make calling possible</string>
 	<key>UIBackgroundModes</key>
