@@ -16,49 +16,39 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios prebuild
+### ios beta
 ```
-fastlane ios prebuild
+fastlane ios beta
 ```
-
-### ios upload_beta
-```
-fastlane ios upload_beta
-```
-Deploy to iTunes Connect
+Upload beta to Testflight
 ### ios screenshot
 ```
 fastlane ios screenshot
 ```
-Create Screenshots
+Create Screenshots without uploading
 ### ios upload_screenshots
 ```
 fastlane ios upload_screenshots
 ```
-Upload Screenshots
-### ios match_development
+Upload Screenshots to the iTunes Connect store
+### ios sync_development_certs
 ```
-fastlane ios match_development
+fastlane ios sync_development_certs
 ```
-Match Development
-### ios match_adhoc
+Synchronize DEVELOPMENT certificates with itunes connect
+### ios sync_adhoc_certs
 ```
-fastlane ios match_adhoc
+fastlane ios sync_adhoc_certs
 ```
-Match Adhoc
-### ios match_appstore
+Synchronize ADHOC certificates with itunes connect
+### ios sync_appstore_certs
 ```
-fastlane ios match_appstore
+fastlane ios sync_appstore_certs
 ```
-Match Appstore
+Synchronize APPSTORE certificates with itunes connect
 ### ios add_device
 ```
 fastlane ios add_device
-```
-
-### ios refresh_profiles
-```
-fastlane ios refresh_profiles
 ```
 
 

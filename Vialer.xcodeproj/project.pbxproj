@@ -798,13 +798,6 @@
 			remoteGlobalIDString = C43172391DFE85F8005FF8EA;
 			remoteInfo = VerbondenIntentsExtension;
 		};
-		C490ADFC1D088535004A8F83 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FB4226C5182261D200707349 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C41FD8551C60A08400BBE6D7;
-			remoteInfo = Voys;
-		};
 		C490AE091D088543004A8F83 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB4226C5182261D200707349 /* Project object */;
@@ -2686,7 +2679,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C490ADFB1D088535004A8F83 /* PBXTargetDependency */,
 				C490AE0A1D088543004A8F83 /* PBXTargetDependency */,
 			);
 			name = VerbondenSnapshotUITests;
@@ -2840,7 +2832,6 @@
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					C41FD8551C60A08400BBE6D7 = {
-						DevelopmentTeam = AM8JDXQ3L4;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -2855,17 +2846,14 @@
 						TestTargetID = C41FD8551C60A08400BBE6D7;
 					};
 					C431722F1DFE85B3005FF8EA = {
-						DevelopmentTeam = AM8JDXQ3L4;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
 					C43172391DFE85F8005FF8EA = {
-						DevelopmentTeam = LG97ZGSAVA;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
 					C490AD631D0863E3004A8F83 = {
-						DevelopmentTeam = LG97ZGSAVA;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -2889,10 +2877,9 @@
 					EE61F3F11F1DDDE4006E890F = {
 						DevelopmentTeam = AM8JDXQ3L4;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					F20850E01D26935600A17E71 = {
-						DevelopmentTeam = E2Q9UE8HM6;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -2909,12 +2896,10 @@
 					};
 					F2C44A611DE40EDD00F7CF50 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = E2Q9UE8HM6;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
 					FB4226CC182261D200707349 = {
-						DevelopmentTeam = E2Q9UE8HM6;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -4528,11 +4513,6 @@
 			target = C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */;
 			targetProxy = C43172481DFE8673005FF8EA /* PBXContainerItemProxy */;
 		};
-		C490ADFB1D088535004A8F83 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C41FD8551C60A08400BBE6D7 /* Voys */;
-			targetProxy = C490ADFC1D088535004A8F83 /* PBXContainerItemProxy */;
-		};
 		C490AE0A1D088543004A8F83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C490AD631D0863E3004A8F83 /* Verbonden */;
@@ -4806,7 +4786,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4844,7 +4824,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AM8JDXQ3L4;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -4945,6 +4925,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -4977,6 +4958,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
@@ -5010,6 +4992,7 @@
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5035,7 +5018,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "359720cd-0a1a-430d-a6bc-abe4858681d9";
+				PROVISIONING_PROFILE = "ff6bedf2-eddc-454b-9bb6-d310e86f406e";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.verbonden.app";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
@@ -5058,6 +5041,7 @@
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5100,7 +5084,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LG97ZGSAVA;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5137,7 +5121,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LG97ZGSAVA;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -5252,8 +5236,8 @@
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = AM8JDXQ3L4;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5278,8 +5262,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23c488eb-9903-4e82-aed1-9eb29767ff30";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -5300,9 +5284,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = AM8JDXQ3L4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5321,8 +5305,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30052e94-5b8b-447b-a175-642a528142d9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -5368,7 +5352,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2059ff21-05de-49a8-88a8-f2f0d52e1865";
+				PROVISIONING_PROFILE = "fa51bd40-63e2-48fc-80d8-999d891b3844";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
@@ -5410,7 +5394,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "999761f6-d538-49a7-9a0b-cdd030989276";
+				PROVISIONING_PROFILE = "929e2459-18b1-45a5-a9ac-40f158072ed2";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
@@ -5552,7 +5536,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.VialerIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c748e1a-116f-4325-8abd-9ad8de46662d";
+				PROVISIONING_PROFILE = "59c45713-6144-4d98-a879-0914ea78cadb";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer.VialerIntentsExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -5699,7 +5683,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "2059ff21-05de-49a8-88a8-f2f0d52e1865";
+				PROVISIONING_PROFILE = "e89848ba-aedd-4b1a-951f-f543af196054";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
@@ -5742,7 +5726,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = Vialer;
-				PROVISIONING_PROFILE = "999761f6-d538-49a7-9a0b-cdd030989276";
+				PROVISIONING_PROFILE = "bfbe0e19-17d2-44a2-a902-8e0c785bf020";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";

@@ -24,47 +24,68 @@ ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
 default_platform :ios
 
 platform :ios do
-  before_all do
-  end
-
-  lane :prebuild do
+  # Internal lane to pre build the app
+  private_lane :prebuild do
     clear_derived_data
     cocoapods
   end
 
-  desc "Deploy to iTunes Connect"
-  lane :upload_beta do
-    prebuild
-    match_appstore
-    #scan
-    gym(
-        output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/builds",
-        scheme: ENV["BETA_SCHEME"],
-        configuration: 'Release',
+  private_lane :build do
+    build_app(
+      clean: true,
+      output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/builds",
+      scheme: ENV["SCHEME"],
+      export_method: "app-store",
+      configuration: "Release",
+      export_options: {
+        provisioningProfiles: { 
+          ENV["APP_IDENTIFIER"] => ENV["APP_MATCH_PROFILE"],
+          ENV["APP_INTENT_IDENTIFIER"] => ENV["APP_INTENT_MATCH_PROFILE"]
+        }
+      },
+      skip_profile_detection: true
     )
+  end
 
-    pilot(
-        username: ENV["ITC_USERNAME"],
-        team_name: ENV["APP_TEAM"],
-        skip_submission: true,
-        skip_waiting_for_build_processing: true,
+  private_lane :upload_beta do
+    upload_to_testflight(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      username: ENV["ITC_USERNAME"],
+      team_name: ENV["TEAM_NAME"],
+      skip_submission: true,
+      skip_waiting_for_build_processing: true
     )
-    
+  end
+
+  private_lane :sync_certs do |options|
+    sync_code_signing(
+      app_identifier: [
+        ENV["APP_IDENTIFIER"], 
+        ENV["APP_INTENT_IDENTIFIER"]
+      ],
+      type: options[:type],
+      force_for_new_devices: true
+    )
+  end
+
+  desc "Upload beta to Testflight"
+  lane :beta do
+    prebuild
+    sync_appstore_certs
+    build
+    upload_beta
     slack(
-        message: sh("git describe --abbrev=0") +" uploaded to ITC",
+      message: sh("git describe --abbrev=0") + " uploaded to ITC",
     )
   end
 
-  desc "Create Screenshots"
+  desc "Create Screenshots without uploading"
   lane :screenshot do
-    prebuild
-    snapshot(
-        stop_after_first_error: true,
-        output_directory: "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
-    )
+    cocoapods
+    capture_screenshots
   end
 
-  desc "Upload Screenshots"
+  desc "Upload Screenshots to the iTunes Connect store"
   lane :upload_screenshots do
     screenshot
     deliver(
@@ -72,37 +93,19 @@ platform :ios do
     )
   end
 
-  desc "Match Development"
-  lane :match_development do
-    match(
-      type: 'development',
-    )
+  desc "Synchronize DEVELOPMENT certificates with itunes connect"
+  lane :sync_development_certs do
+    sync_certs(type: "development")
   end
 
-  desc "Match Adhoc"
-  lane :match_adhoc do
-    match(
-      type: 'adhoc',
-    )
+  desc "Synchronize ADHOC certificates with itunes connect"
+  lane :sync_adhoc_certs do
+    sync_certs(type: "adhoc")
   end
 
-  desc "Match Appstore"
-  lane :match_appstore do
-    match(
-      type: 'appstore',
-    )
-  end
-
-  # You can define as many lanes as you want
-  after_all do |lane|
-    clean_build_artifacts()
-  end
-
-  error do |lane, exception|
-    #slack(
-    #    message: exception.message,
-    #    success: false,
-    #    )
+  desc "Synchronize APPSTORE certificates with itunes connect"
+  lane :sync_appstore_certs do
+    sync_certs(type: "appstore")
   end
 
   lane :add_device do
@@ -112,22 +115,16 @@ platform :ios do
     device_hash[device_name] = device_udid
     register_devices(
         username: ENV["ITC_USERNAME"],
-        team_name: ENV["APP_TEAM"],
-        devices: device_hash
+        team_name: ENV["TEAM_NAME"],
+        devices: device_hash,
     )
-    refresh_profiles
+    sync_development_certs
+    sync_appstore_certs
   end
 
-  # A helper lane for refreshing provisioning profiles.
-  lane :refresh_profiles do
-    match(
-      username: ENV["ITC_USERNAME"],
-      team_name: ENV["APP_TEAM"],
-      force_for_new_devices: true
-    )
+  # You can define as many lanes as you want
+  after_all do |lane|
+    clean_build_artifacts()
   end
+
 end
-
-
-# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/docs/Platforms.md
-# All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md

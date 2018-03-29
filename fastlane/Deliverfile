@@ -1,5 +1,4 @@
-app_identifier ENV["APP_IDENTIFIER"]
-team_name ENV['ITC_TEAM_NAME']
+team_name ENV['TEAM_NAME']
 username ENV['ITC_USERNAME']
 metadata_path "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/metadata"
 screenshots_path "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
