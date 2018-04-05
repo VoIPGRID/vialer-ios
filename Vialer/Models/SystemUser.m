@@ -93,7 +93,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
  */
 @property (strong, nonatomic) NSString *sipAccount;
 @property (readwrite, nonatomic) BOOL sipRegisterOnAdd;
-@property (readwrite, nonatomic) BOOL sipUseEncryption;
 
 /**
  *  Depenpency Injection.
@@ -172,7 +171,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
      */
     self.sipAccount         = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled         = [defaults boolForKey:SystemUserSUDSIPEnabled];
-    self.sipUseEncryption   = [defaults boolForKey:SystemUserApiKeyUseEncryption];
+    self.sipUseEncryption   = self.sipUseEncryption;
 
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 }
@@ -262,9 +261,16 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     return [defaults boolForKey:SystemUserSUDUse3GPlus];
 }
 
+-(BOOL)sipUseEncryption {
+    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDSIPUseEncryption]){
+        self.sipUseEncryption = YES;
+    }
+    return [defaults boolForKey:SystemUserSUDSIPUseEncryption];
+}
+
 - (BOOL)showWiFiNotification {
     NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
-    // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
     if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]){
         self.showWiFiNotification = YES;
     }
@@ -282,7 +288,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)setSipUseEncryption:(BOOL)sipUseEncryption {
-    _sipUseEncryption = sipUseEncryption;
     [[NSUserDefaults standardUserDefaults] setBool:sipUseEncryption forKey:SystemUserSUDSIPUseEncryption];
 }
 
@@ -394,6 +399,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)logoutWithUserInfo:(NSDictionary *)userInfo {
+    VialerLogDebug(@"Logout!");
     [self removeCurrentUser];
     [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserLogoutNotification object:self userInfo:userInfo];
 }
@@ -421,6 +427,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)removeSIPCredentials {
+    VialerLogError(@"removeSIPCredentials");
     [SAMKeychain deletePasswordForService:self.serviceName account:self.sipAccount];
     self.sipEnabled = NO;
     self.sipAccount = nil;
@@ -594,7 +601,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
                 [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
                 [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
             }
-            
+
             // Encryption is turned off for this account. Make an api call and enable it.
             if ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption) {
                 [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
