@@ -21,6 +21,12 @@
         [SIPUtils removeSIPEndpoint];
     }
 
+    VialerLogError(@"Use encryption: %@", [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO");
+
+    if (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption) {
+        [SIPUtils removeSIPEndpoint];
+    }
+
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
     endpointConfiguration.logLevel = 4;
     endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
@@ -74,7 +80,7 @@
 }
 
 + (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL success, VSLAccount *account))completion {
-    if (![VialerSIPLib sharedInstance].endpointAvailable) {
+    if (![VialerSIPLib sharedInstance].endpointAvailable || (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption)) {
         BOOL success = [SIPUtils setupSIPEndpoint];
         if (!success) {
             VialerLogError(@"Error setting up endpoint");
