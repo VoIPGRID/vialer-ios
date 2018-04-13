@@ -9,6 +9,9 @@
 #pragma mark - AppDelegate
 static NSString * const AppDelegateIncomingCallNotification = @"AppDelegateIncomingCallNotification";
 static NSString * const AppDelegateIncomingBackgroundCallAcceptedNotification = @"AppDelegateIncomingBackgroundCallAcceptedNotification";
+static NSString * const AppDelegateStartConnectABCallNotification = @"AppDelegateStartConnectABCallNotification";
+static NSString * const AppDelegateStartConnectABCallUserInfoKey = @"PhoneNumber";
 static NSString * const ReachabilityChangedNotification = @"ReachabilityChangedNotification";
+
 
 #endif /* Notifications_Bridging_Header_h */

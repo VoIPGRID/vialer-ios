@@ -23,6 +23,8 @@ class AppDelegate: UIResponder {
             static let incomingCall = Notification.Name(rawValue: AppDelegateIncomingCallNotification)
             static let incomingCallAccepted = Notification.Name(rawValue: AppDelegateIncomingBackgroundCallAcceptedNotification)
             static let incomingCallIDKey = "CallID"
+            static let startConnectABCall = Notification.Name(rawValue: AppDelegateStartConnectABCallNotification)
+            static let connectABPhoneNumberUserInfoKey = Notification.Name(rawValue: AppDelegateStartConnectABCallUserInfoKey)
         }
         struct Vibrations {
             static let count = 5
@@ -334,6 +336,13 @@ extension AppDelegate {
         }
 
         guard #available(iOS 10.0, *), let phoneNumber = userActivity.startCallHandle else { return false }
+
+        if !user.sipEnabled {
+            let notificationInfo = [Configuration.Notifications.connectABPhoneNumberUserInfoKey: phoneNumber]
+            NotificationCenter.default.post(name: Configuration.Notifications.startConnectABCall, object: self, userInfo: notificationInfo)
+
+            return true;
+        }
 
         guard let account = SIPUtils.addSIPAccountToEndpoint() else {
             VialerLogError("Couldn't add account to endpoint, not setting up call to: \(phoneNumber)")
