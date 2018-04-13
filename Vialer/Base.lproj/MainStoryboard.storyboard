@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,6 +37,7 @@
                         <segue destination="ZYs-HX-JeK" kind="presentation" identifier="ShowSIPIncomingCallViewSegue" animates="NO" id="18T-Qb-NXM"/>
                         <segue destination="OBw-wl-6xF" kind="unwind" identifier="goToVialerRootViewControllerIdentifier" unwindAction="goToVialerRootViewController:" id="Hm1-9D-gHw"/>
                         <segue destination="gzv-u3-1Wl" kind="presentation" identifier="ShowSIPCallingViewSegue" animates="NO" id="tTg-fr-cKc"/>
+                        <segue destination="paX-8q-yxG" kind="presentation" identifier="ShowTwoStepCallingViewSegue" id="7O8-Bx-vjj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iot-wT-SKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -50,7 +51,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="SIPCallingStoryboard" storyboardName="SIPIncomingCallStoryboard" id="ZYs-HX-JeK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWk-19-EZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2581.5" y="-96"/>
+            <point key="canvasLocation" x="2737" y="-152"/>
         </scene>
         <!--SIPCallingStoryboard-->
         <scene sceneID="gNz-03-MyW">
@@ -58,7 +59,15 @@
                 <viewControllerPlaceholder storyboardName="SIPCallingStoryboard" id="gzv-u3-1Wl" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQr-z9-jcB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2912.5" y="-96"/>
+            <point key="canvasLocation" x="3077" y="-152"/>
+        </scene>
+        <!--TwoStepCallingStoryboard-->
+        <scene sceneID="yXb-dx-33g">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TwoStepCallingStoryboard" id="paX-8q-yxG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dVP-my-F1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2372" y="-152"/>
         </scene>
         <!--Vialer Drawer View Controller-->
         <scene sceneID="Olp-zU-Nr0">

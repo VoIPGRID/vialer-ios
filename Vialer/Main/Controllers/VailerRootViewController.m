@@ -17,11 +17,13 @@
 static NSString * const VialerRootViewControllerShowVialerDrawerViewSegue = @"ShowVialerDrawerViewSegue";
 static NSString * const VialerRootViewControllerShowSIPIncomingCallViewSegue = @"ShowSIPIncomingCallViewSegue";
 static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"ShowSIPCallingViewSegue";
+static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"ShowTwoStepCallingViewSegue";
 
 @interface VailerRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *launchImage;
-@property (nonatomic) BOOL willPresentSIPViewController;
+@property (nonatomic) BOOL willPresentCallingViewController;
 @property (weak, nonatomic) VSLCall *activeCall;
+@property(weak, nonatomic) NSString *twoStepNumberToCall;
 @end
 
 @implementation VailerRootViewController
@@ -78,6 +80,13 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     @catch (NSException *exception) {
         VialerLogError(@"Error removing observer %@: %@", MiddlewareRegistrationOnOtherDeviceNotification, exception);
     }
+
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateStartConnectABCallNotification];
+    }
+    @catch(NSException *exception){
+        VialerLogError(@"Error removing observer %@: %@", AppDelegateStartConnectABCallNotification, exception);
+    }
 }
 
 - (void)viewDidLoad {
@@ -94,6 +103,8 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voipWasDisabled:) name:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startConnectABCall:) name:AppDelegateStartConnectABCallNotification object:nil];
+
     // Customize NavigationBar
     [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationNavigationBarTintColor];
     [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
@@ -104,7 +115,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     [super viewDidAppear:animated];
 
     // Prevent segue if we are in the process of showing an incoming view controller.
-    if (!self.willPresentSIPViewController) {
+    if (!self.willPresentCallingViewController) {
         if ([self shouldPresentLoginViewController]) {
             [self presentViewController:self.loginViewController animated:NO completion:nil];
         } else {
@@ -190,9 +201,9 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
 - (void)incomingCallNotification:(NSNotification *)notification {
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
-        self.willPresentSIPViewController = YES;
+        self.willPresentCallingViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^(void){
-            self.activeCall = [[notification userInfo]objectForKey:VSLNotificationUserInfoCallKey];
+            self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
             [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:self];
         }];
     }
@@ -202,9 +213,9 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]] &&
         ![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
         ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
-        self.willPresentSIPViewController = YES;
+        self.willPresentCallingViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^{
-            self.activeCall = [[notification userInfo]objectForKey:VSLNotificationUserInfoCallKey];
+            self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
             [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
         }];
     }
@@ -212,10 +223,21 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 
 - (void)incomingBackgroundCallAcceptedNotification:(NSNotification *)notification {
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
-        self.willPresentSIPViewController = YES;
+        self.willPresentCallingViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^{
-            self.activeCall = [[notification userInfo]objectForKey:VSLNotificationUserInfoCallKey];
+            self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
             [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
+        }];
+    }
+}
+
+- (void)startConnectABCall:(NSNotification *)notification {
+    if (![self.presentedViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+        self.willPresentCallingViewController = YES;
+        [self dismissViewControllerAnimated:NO completion:^{
+            self.twoStepNumberToCall = [[notification userInfo] objectForKey:AppDelegateStartConnectABCallUserInfoKey];
+            
+            [self performSegueWithIdentifier:VialerRootViewControllerShowTwoStepCallingViewSegue sender:self];
         }];
     }
 }
@@ -233,7 +255,7 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    self.willPresentSIPViewController = NO;
+    self.willPresentCallingViewController = NO;
     if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
         SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
         sipIncomingViewController.call = self.activeCall;
@@ -241,6 +263,9 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
         sipCallingVC.activeCall = self.activeCall;
+    } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
+        [tscvc handlePhoneNumber:self.twoStepNumberToCall];
     }
 }
 
