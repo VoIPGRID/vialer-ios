@@ -23,7 +23,7 @@
 
     VialerLogError(@"Use encryption: %@", [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO");
 
-    if (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption) {
+    if (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {
         [SIPUtils removeSIPEndpoint];
     }
 
@@ -46,13 +46,11 @@
         endpointConfiguration.stunConfiguration = stunConfiguration;
     }
 
-    if ([SystemUser currentUser].sipUseEncryption) {
+    if ([SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {
         endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTLS]];
-    } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseTCPConnection"]) {
+    } else {
         endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                           [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
-    } else {
-        endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
     }
 
     NSError *error;

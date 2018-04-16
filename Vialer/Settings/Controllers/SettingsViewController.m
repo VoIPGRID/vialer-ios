@@ -18,7 +18,8 @@ static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
 static int const SettingsViewController3GPlus               = 2;
-static int const SettingsViewControllerSipAccountRow        = 3;
+static int const SettingsViewControllerUseTLS               = 3;
+static int const SettingsViewControllerSipAccountRow        = 4;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -36,14 +37,12 @@ static int const SettingsViewControllerUISwitchOriginOffsetY    = 15;
 
 static int const SettingsViewControllerSwitchVoIP               = 1001;
 static int const SettingsViewControllerSwitchWifiNotification   = 1002;
-static int const SettingsViewControllerSwitchTCP                = 1003;
 static int const SettingsViewControllerSwitchLogging            = 1004;
 static int const SettingsViewControllerSwitch3GPlus             = 1005;
+static int const SettingsViewControllerSwitchUseTLS             = 1006;
 
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
-
-static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConnection";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
@@ -89,15 +88,6 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
     return _currentUser;
 }
 
-- (BOOL)useTCP {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:SettingsViewControllerUseTCPConnectionKey];
-}
-
-- (void)setUseTCP:(BOOL)useTCP {
-    [[NSUserDefaults standardUserDefaults] setBool:useTCP forKey:SettingsViewControllerUseTCPConnectionKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -111,8 +101,9 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
                 // The VoIP Switch
                 // WiFi notification
                 // 3G+
+                // TLS
                 // account ID
-                return 4;
+                return 5;
             } else {
                 // Only show VoIP Switch
                 return 1;
@@ -163,6 +154,12 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
                         withTitle:NSLocalizedString(@"Use 3G+ for calls", @"Use 3G+ for calls")
                           withTag:SettingsViewControllerSwitch3GPlus
                        defaultVal:self.currentUser.use3GPlus];
+        } else if (indexPath.row == SettingsViewControllerUseTLS) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell
+                        withTitle:NSLocalizedString(@"Turn off secure calling", @"Turn off secure calling")
+                          withTag:SettingsViewControllerSwitchUseTLS
+                       defaultVal:self.currentUser.useTLS];
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
@@ -257,14 +254,8 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
         self.currentUser.showWiFiNotification = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitch3GPlus) {
         self.currentUser.use3GPlus = sender.isOn;
-    } else if (sender.tag == SettingsViewControllerSwitchTCP) {
-        self.useTCP = sender.isOn;
-        // Remove and initiate the endpoint again to make sure the new transport is loaded.
-        VialerLogVerbose(@"Remove Endpoint for new connection configurations.");
-        [SIPUtils removeSIPEndpoint];
-        VialerLogVerbose(@"Removed Endpoint, restarting.");
-        [SIPUtils setupSIPEndpoint];
-        VialerLogVerbose(@"Endpoint restarted.");
+    } else if (sender.tag == SettingsViewControllerSwitchUseTLS) {
+        self.currentUser.useTLS = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchLogging) {
         [VialerLogger setRemoteLoggingEnabled:sender.isOn];
         VialerLogVerbose(sender.isOn ? @"Remote logging enabled" : @"Remote logging disabled");

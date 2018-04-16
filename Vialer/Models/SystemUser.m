@@ -64,6 +64,7 @@ static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
 static NSString * const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
 static NSString * const SystemUserSUDSIPUseEncryption   = @"SIPUseEncryption";
 static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
+static NSString * const SystemUserSUDUseTLS             = @"UseTLS";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
@@ -241,7 +242,10 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (NSString *)sipDomain {
-    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationEncryptedSIPDomain];
+    if (self.useTLS && self.sipUseEncryption) {
+        return [[Configuration defaultConfiguration] UrlForKey:ConfigurationEncryptedSIPDomain];
+    }
+    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationSIPDomain];
 }
 
 - (NSString *)sipProxy {
@@ -259,6 +263,14 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         self.use3GPlus = YES;
     }
     return [defaults boolForKey:SystemUserSUDUse3GPlus];
+}
+
+- (BOOL)useTLS {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUseTLS]) {
+        self.useTLS = YES;
+    }
+    return [defaults boolForKey:SystemUserSUDUseTLS];
 }
 
 -(BOOL)sipUseEncryption {
@@ -347,6 +359,23 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserUse3GPlusNotification object:self];
     });
+}
+
+- (void)setUseTLS:(BOOL)useTLS {
+    useTLS = useTLS;
+    [[NSUserDefaults standardUserDefaults] setBool:useTLS forKey:SystemUserSUDUseTLS];
+
+    [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
+        VialerLogError(@"Success: %@", success ? @"YES" : @"NO");
+        if (!success) {
+            self.sipUseEncryption = NO;
+        } else {
+            self.sipUseEncryption = useTLS;
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
+    }];
 }
 
 #pragma mark - Actions
@@ -603,11 +632,24 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             }
 
             // Encryption is turned off for this account. Make an api call and enable it.
-            if ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption) {
+            if (self.useTLS && ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption)) {
                 [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
                     if (success) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
                         self.sipUseEncryption = YES;
+                    } else {
+                        if (completion) {
+                            completion(NO, error);
+                        }
+                        return;
+                    }
+                }];
+            } else if (!self.useTLS && self.sipUseEncryption){
+                VialerLogError(@"turn tls off");
+                [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
+                    if (success) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+                        self.sipUseEncryption = NO;
                     } else {
                         if (completion) {
                             completion(NO, error);
