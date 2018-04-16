@@ -183,7 +183,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 }
 
 - (void)pushUseEncryptionWithCompletion:(void (^)(BOOL, NSError *))completion {
-    NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption : @YES};
+    NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption : [[SystemUser currentUser] useTLS] ? @YES : @NO};
     
     [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {

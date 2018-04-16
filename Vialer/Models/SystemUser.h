@@ -209,6 +209,11 @@ extern NSString * const SystemUserUse3GPlusNotification;
 @property (nonatomic) BOOL use3GPlus;
 
 /**
+ * Use TLS to make VoIP calls.
+ */
+@property (nonatomic) BOOL useTLS;
+
+/**
  *  The users current availability.
  */
 @property (strong, nonatomic) NSDictionary* currentAvailability;
