@@ -39,11 +39,13 @@
 
     endpointConfiguration.ipChangeConfiguration = ipChangeConfiguration;
 
-    NSArray *stunServers = [Configuration defaultConfiguration].stunServers;
-    if (stunServers.count > 0) {
-        VSLStunConfiguration *stunConfiguration = [[VSLStunConfiguration alloc] init];
-        stunConfiguration.stunServers = stunServers;
-        endpointConfiguration.stunConfiguration = stunConfiguration;
+    if ([SystemUser currentUser].useStunServers) {
+        NSArray *stunServers = [Configuration defaultConfiguration].stunServers;
+        if (stunServers.count > 0) {
+            VSLStunConfiguration *stunConfiguration = [[VSLStunConfiguration alloc] init];
+            stunConfiguration.stunServers = stunServers;
+            endpointConfiguration.stunConfiguration = stunConfiguration;
+        }
     }
 
     if ([SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {

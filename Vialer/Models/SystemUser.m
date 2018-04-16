@@ -65,6 +65,7 @@ static NSString * const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotificati
 static NSString * const SystemUserSUDSIPUseEncryption   = @"SIPUseEncryption";
 static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
 static NSString * const SystemUserSUDUseTLS             = @"UseTLS";
+static NSString * const SystemuserSUDUseStunServers     = @"UseStunServers";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
@@ -257,7 +258,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (BOOL)use3GPlus {
-    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
     if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUse3GPlus]){
         self.use3GPlus = YES;
@@ -273,8 +274,16 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     return [defaults boolForKey:SystemUserSUDUseTLS];
 }
 
+- (BOOL)useStunServers {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemuserSUDUseStunServers]) {
+        self.useStunServers = YES;
+    }
+    return [defaults boolForKey:SystemuserSUDUseStunServers];
+}
+
 -(BOOL)sipUseEncryption {
-    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDSIPUseEncryption]){
         self.sipUseEncryption = YES;
     }
@@ -282,7 +291,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (BOOL)showWiFiNotification {
-    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]){
         self.showWiFiNotification = YES;
     }
@@ -376,6 +385,15 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
     }];
+}
+
+- (void)setUseStunServers:(BOOL)useStunServers {
+    useStunServers = useStunServers;
+    [[NSUserDefaults standardUserDefaults] setBool:useStunServers forKey:SystemuserSUDUseStunServers];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+    });
 }
 
 #pragma mark - Actions

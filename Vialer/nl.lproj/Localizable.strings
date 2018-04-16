@@ -431,3 +431,9 @@
 
 /* Use 3G+ for calls */
 "Use 3G+ for calls" = "Gebruik 3G+ om te bellen";
+
+/* Use encrypted calling */
+"Use encrypted calling" = "Gebruik versleuteld bellen";
+
+/* Use STUN for calling */
+"Use STUN for calling" = "Gebruik STUN om te bellen";
