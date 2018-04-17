@@ -214,6 +214,11 @@ extern NSString * const SystemUserUse3GPlusNotification;
 @property (nonatomic) BOOL useTLS;
 
 /**
+ * Use STUN servers in setting up VoIP calls.
+ */
+@property (nonatomic) BOOL useStunServers;
+
+/**
  *  The users current availability.
  */
 @property (strong, nonatomic) NSDictionary* currentAvailability;
