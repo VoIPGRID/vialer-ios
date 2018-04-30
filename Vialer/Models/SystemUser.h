@@ -51,6 +51,14 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      *  The user is unauthorized.
      */
     SystemUserUnAuthorized,
+    /**
+     * Two factor authentication token required
+     */
+    SystemUserTwoFactorAuthenticationTokenRequired,
+    /**
+     * Two factor authentication token invalid
+     */
+    SystemUserTwoFactorAuthenticationTokenInvalid
 };
 
 /**
@@ -93,6 +101,8 @@ extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
  */
 extern NSString * const SystemUserUse3GPlusNotification;
 
+extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
+
 /**
  *  SystemUser class is representing the user information as available on the VoIPGRID platform.
  *
@@ -114,6 +124,11 @@ extern NSString * const SystemUserUse3GPlusNotification;
  *  The password of the user that is logged in.
  */
 @property (readonly, nonatomic) NSString *password;
+
+/**
+ *  The API token to be used for API requests.
+ */
+@property (readonly, nonatomic) NSString *apiToken;
 
 /**
  *  The name of the user to display, this could be:
@@ -231,15 +246,19 @@ extern NSString * const SystemUserUse3GPlusNotification;
 + (instancetype)currentUser;
 
 /**
- *  This will login the user with the given user and password.
+ *  This will login the user with the given user and password and/or token.
  *
- *  When login on remote was successful or failure, the completionblock will be called.
+ *  When login on remote was successful or failure, the completion block will be called.
  *
  *  @param username   The username that will be used to login.
  *  @param password   The password that will be user to login.
- *  @param completion Block will be called after login. BOOL loggedin will tell if login was successful, NSError will return an error if there was one set.
+ *  @param token      The generated two factor authentication token.
+ *  @param completion Block will be called after login.
+                        BOOL loggedin will tell if login was successful,
+                        BOOL tokenRequired will tell if a two factor token is required,
+                        NSError will return an error if there was one set.
  */
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void(^)(BOOL loggedin, NSError *error))completion;
+- (void)loginToCheckTwoFactorWithUserName:(NSString *)username password:(NSString *)password andToken:(NSString *)token completion:(void(^)(BOOL loggedin, BOOL tokenRequired, NSError *error))completion;
 
 /**
  *  Destroy all the setting of the current instance.

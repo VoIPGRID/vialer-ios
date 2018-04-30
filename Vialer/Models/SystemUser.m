@@ -25,6 +25,8 @@ NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgo
 
 NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
 
+NSString * const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
+
 /**
  *  Api Dictionary keys.
  *
@@ -42,6 +44,7 @@ static NSString * const SystemUserApiKeyAppAccountURL   = @"app_account";
 static NSString * const SystemUserApiKeySIPAccount      = @"appaccount_account_id";
 static NSString * const SystemUserApiKeySIPPassword     = @"appaccount_password";
 static NSString * const SystemUserApiKeyUseEncryption   = @"appaccount_use_encryption";
+static NSString * const SystemUserApiKeyAPIToken        = @"api_token";
 
 // Constant for "suppressed" key as supplied by api for outgoingNumber
 static NSString * const SystemUserSuppressedKey = @"suppressed";
@@ -67,6 +70,7 @@ static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
 static NSString * const SystemUserSUDUseTLS             = @"UseTLS";
 static NSString * const SystemuserSUDUseStunServers     = @"UseStunServers";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
+static NSString * const SystemUserSUDAPIToken           = @"APIToken";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
 
@@ -84,6 +88,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 @property (strong, nonatomic) NSString *preposition;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *clientID;
+@property (strong, nonatomic) NSString *apiToken;
 
 /**
  *  This boolean will keep track if the migration from app version 1.x to 2.x already happend.
@@ -105,6 +110,8 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
  *  This value is used to store and retrieve keys from the Keychain.
  */
 @property (strong, nonatomic) NSString *serviceName;
+
+@property (nonatomic) BOOL loggingOut;
 @end
 
 @implementation SystemUser
@@ -160,6 +167,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.lastName           = [defaults objectForKey:SystemUserSUDLastName];
     self.clientID           = [defaults objectForKey:SystemUserSUDClientID];
     self.migrationCompleted = [defaults boolForKey:SystemUserSUDMigrationCompleted];
+    self.apiToken           = [defaults objectForKey:SystemUserSUDAPIToken];
 
     /**
      *  If there is a username, the user is supposed to be logged in.
@@ -176,6 +184,8 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.sipUseEncryption   = self.sipUseEncryption;
 
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
+
+    self.loggingOut = NO;
 }
 
 #pragma mark - Properties
@@ -200,6 +210,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)setSipEnabled:(BOOL)sipEnabled {
+    if (!self.loggedIn) {
+        return;
+    }
     NSString *stringFromSipEnabledProperty = NSStringFromSelector(@selector(sipEnabled));
     // If sip is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
@@ -210,6 +223,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         // Post the notification async. Do not use NSNotificationQueue because when the app starts
         // the app delegate does not pickup on the notification when posted using the NSNotificationQueue.
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            VialerLogDebug(@"Post from sipenabled");
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
 
@@ -375,15 +389,19 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     [[NSUserDefaults standardUserDefaults] setBool:useTLS forKey:SystemUserSUDUseTLS];
 
     [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
-        VialerLogError(@"Success: %@", success ? @"YES" : @"NO");
         if (!success) {
             self.sipUseEncryption = NO;
         } else {
             self.sipUseEncryption = useTLS;
         }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-        });
+
+
+        if ([VialerSIPLib sharedInstance].endpointAvailable) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                VialerLogDebug(@"post from setusetls");
+                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+            });
+        }
     }];
 }
 
@@ -391,15 +409,74 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     useStunServers = useStunServers;
     [[NSUserDefaults standardUserDefaults] setBool:useStunServers forKey:SystemuserSUDUseStunServers];
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-    });
+    if ([VialerSIPLib sharedInstance].endpointAvailable) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            VialerLogDebug(@"Post from setusestunservers");
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
+    }
 }
 
 #pragma mark - Actions
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void(^)(BOOL loggedin, NSError *error))completion {
-    [self.operationsManager loginWithUsername:username password:password withCompletion:^(NSDictionary *responseData, NSError *error) {
+- (void)loginToCheckTwoFactorWithUserName:(NSString *)username password:(NSString *)password andToken:(NSString *)token completion:(void(^)(BOOL loggedin, BOOL tokenRequired, NSError *error))completion {
+    [self.operationsManager loginWithUserNameForTwoFactor:username password:password orToken:token withCompletion:^(NSDictionary *responseData, NSError *error) {
+
+        if (error && [responseData objectForKey:@"apitoken"]) {
+            NSDictionary *apiTokenDict = responseData[@"apitoken"];
+
+                // There is no token supplied!
+            if ([apiTokenDict objectForKey:@"two_factor_token"]) {
+                if (completion) {
+                    NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
+                    NSString *twoFactorToken = apiTokenDict[@"two_factor_token"][0];
+
+                    SystemUserErrors tokenErrorCode = SystemUserTwoFactorAuthenticationTokenRequired;
+
+                    if ([twoFactorToken isEqualToString:@"invalid two_factor_token"]) {
+                        tokenErrorCode = SystemUserTwoFactorAuthenticationTokenInvalid;
+                    }
+
+                    completion(NO, YES, [NSError errorWithDomain:SystemUserErrorDomain
+                                                           code:tokenErrorCode
+                                                       userInfo:userInfo]);
+                    return;
+                }
+            }
+
+            // Invalid email or password.
+            if ([apiTokenDict objectForKey:@"email"] || [apiTokenDict objectForKey:@"password"]) {
+                [self removeCurrentUser];
+                if (completion) {
+                    NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
+                    completion(NO, NO, [NSError errorWithDomain:SystemUserErrorDomain
+                                                           code:SystemUserErrorLoginFailed
+                                                       userInfo:userInfo]);
+                    return;
+                }
+            }
+        } else {
+            // No token required, or token accepted.
+            self.apiToken = responseData[SystemUserApiKeyAPIToken];
+            [self.operationsManager updateAuthorisationHeaderWithTokenForUsername:username];
+
+            [self getSystemUserInfoWithUsername:username password:password completion:^(BOOL loggedin, NSError *error) {
+
+                if (loggedin) {
+                    [[NSUserDefaults standardUserDefaults] setObject:self.apiToken forKey:SystemUserSUDAPIToken];
+                    completion(YES, YES, nil);
+                } else {
+                    completion(NO, YES, error);
+                }
+            }];
+
+
+        }
+    }];
+}
+
+- (void)getSystemUserInfoWithUsername:(NSString *)username password:(NSString *)password completion:(void(^)(BOOL loggedin, NSError *error))completion {
+    [self.operationsManager getSystemUserInfowithCompletion:^(NSDictionary *responseData, NSError *error) {
         /**
          *  Login failed.
          */
@@ -447,6 +524,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 
 - (void)logoutWithUserInfo:(NSDictionary *)userInfo {
     VialerLogDebug(@"Logout!");
+    self.loggingOut = YES;
     [self removeCurrentUser];
     [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserLogoutNotification object:self userInfo:userInfo];
 }
@@ -463,6 +541,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.preposition = nil;
     self.lastName = nil;
     self.clientID = nil;
+    self.apiToken = nil;
 
     [self removeSIPCredentials];
 
@@ -474,7 +553,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)removeSIPCredentials {
-    VialerLogError(@"removeSIPCredentials");
     [SAMKeychain deletePasswordForService:self.serviceName account:self.sipAccount];
     self.sipEnabled = NO;
     self.sipAccount = nil;
@@ -524,6 +602,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     
     [defaults synchronize];
     self.loggedIn = YES;
+    self.loggingOut = NO;
 }
 
 - (void)setMobileProfileFromUserDict:(NSDictionary *)profileDict {
@@ -537,6 +616,10 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)fetchUserProfile {
+    if (self.loggingOut) {
+        VialerLogInfo(@"Already logging out, no need to fetch user profile");
+        return;
+    }
     [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
         if (!error) {
             self.outgoingNumber = responseObject[SystemUserApiKeyOutgoingNumber];
@@ -663,7 +746,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
                     }
                 }];
             } else if (!self.useTLS && self.sipUseEncryption){
-                VialerLogError(@"turn tls off");
+                VialerLogDebug(@"Turn TLS Off");
                 [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
                     if (success) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
@@ -688,7 +771,13 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 
 - (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion {
     [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
-        if (!error) {
+        
+        if (!error && [responseObject objectForKey:SystemUserApiKeyAPIToken]) {
+            self.apiToken = responseObject[SystemUserApiKeyAPIToken];
+            [[NSUserDefaults standardUserDefaults] setObject:self.apiToken forKey:SystemUserSUDAPIToken];
+
+            [self updateSystemUserFromVGWithCompletion:completion];
+        } else if (!error) {
             [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
             
             [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
@@ -700,6 +789,14 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
                     }
                 }
             }];
+        } else if (error && error.code == SystemUserTwoFactorAuthenticationTokenRequired) {
+            // The user has enabled two factor authentication.
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserTwoFactorAuthenticationTokenNotification object:self];
+            });
+            if (completion) {
+                completion(error);
+            }
         } else {
             if (completion) completion(error);
         }

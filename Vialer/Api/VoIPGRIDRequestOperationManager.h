@@ -129,6 +129,8 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  */
 - (AFHTTPRequestOperation *)DELETE:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
 
+- (void)loginWithUserNameForTwoFactor:(NSString *)username password:(NSString *)password orToken:(NSString *)token withCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion;
+
 /**
  *  This method will try to remotely login the user.
  *
@@ -138,7 +140,7 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param password   The password that should be used on login.
  *  @param completion A block that will be called after the login attempt. It will return the response data if any or an error if any.
  */
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password withCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion;
+- (void)getSystemUserInfowithCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion;
 
 /**
  *  Logout the user notification for overriding in the subclass
@@ -231,4 +233,5 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  */
 - (void)cancelTwoStepCallForCallId:(NSString *)callId withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
 
+- (void)updateAuthorisationHeaderWithTokenForUsername:(NSString *)username;
 @end

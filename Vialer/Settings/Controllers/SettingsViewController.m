@@ -199,7 +199,6 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
             cell.detailTextLabel.text = self.currentUser.username;
         }
     } else if (indexPath.section == SettingsViewControllerLoggingSection) {
-        VialerLogError(@"ROW: %ld", (long)indexPath.row);
         if (indexPath.row == SettingsViewControllerLoggingEnabledRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Remote Logging", nil)

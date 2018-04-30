@@ -34,6 +34,7 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
     self = [super initWithCoder:aDecoder];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification:) name:SystemUserLogoutNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(twoFactorRequiredNotification:) name:SystemUserTwoFactorAuthenticationTokenNotification object:nil];
     }
     return self;
 }
@@ -41,8 +42,14 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 - (void)dealloc {
     @try {
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:SystemUserLogoutNotification];
-    }@catch(id exception) {
+    }@catch(NSException *exception) {
         VialerLogError(@"Error removing observer %@: %@", SystemUserLogoutNotification, exception);
+    }
+
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:SystemUserTwoFactorAuthenticationTokenNotification];
+    } @catch (NSException *exception) {
+        VialerLogError(@"Error removing observer %@: %@", SystemUserTwoFactorAuthenticationTokenNotification, exception);
     }
 
     if ([VialerSIPLib callKitAvailable]) {
@@ -193,10 +200,38 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
                                                                   [self showLoginScreen];
                                                               }];
         [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        [[self topViewController] presentViewController:alert animated:YES completion:nil];
     } else {
         [self showLoginScreen];
     }
+}
+
+- (void)twoFactorRequiredNotification:(NSNotification *)notification {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Two-factor authentication", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = NSLocalizedString(@"Token", nil);
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    }];
+
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              UITextField *tokenField = alert.textFields[0];
+
+                                                              SystemUser *user = [SystemUser currentUser];
+
+                                                              [user loginToCheckTwoFactorWithUserName:user.username
+                                                                                             password:user.password
+                                                                                             andToken:tokenField.text
+                                                                                           completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error) {
+                                                                                               if (error && error.code == SystemUserTwoFactorAuthenticationTokenInvalid) {
+                                                                                                   [self twoFactorRequiredNotification:nil];
+                                                                                               } 
+                                                                                           }];
+                                                          }];
+    [alert addAction:defaultAction];
+
+    [[self topViewController] presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)incomingCallNotification:(NSNotification *)notification {
@@ -247,7 +282,7 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"VoIP Disabled", nil)
                                                                    message:localizedErrorString
                                                       andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
-    [[self topViewController] presentViewController:alert animated:YES completion:nil];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (UIViewController *)topViewController{

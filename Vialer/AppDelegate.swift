@@ -66,7 +66,9 @@ extension AppDelegate: UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         DispatchQueue.global(qos: .background).async {
             // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
-            self.user.updateFromVG(completion: nil)
+            if self.user.loggedIn {
+                self.user.updateFromVG(completion: nil)
+            }
             guard let call = SIPUtils.getFirstActiveCall(), call.callState == .incoming else { return }
             let notificationInfo = [VSLNotificationUserInfoCallKey: call]
             NotificationCenter.default.post(name: Configuration.Notifications.incomingCall, object: self, userInfo: notificationInfo)
@@ -267,7 +269,7 @@ extension AppDelegate {
     ///
     /// This function is only used for non CallKit app users.
     ///
-    /// - Pa rameter call: VSL call instance of the incoming call
+    /// - Parameter call: VSL call instance of the incoming call
     private func reportIncomingCallForNonCallKit(withCall call: VSLCall) {
         DispatchQueue.main.async { [unowned self] in
             if SIPUtils.anotherCall(inProgress: call) {
@@ -295,7 +297,8 @@ extension AppDelegate {
     @objc fileprivate func updatedSIPCredentials() {
         VialerLogInfo("SIP Credentials have changed")
         if !user.sipEnabled { return }
-
+        if !user.loggedIn { return }
+            
         DispatchQueue.main.async {
             SIPUtils.setupSIPEndpoint()
             APNSHandler.shared().registerForVoIPNotifications()

@@ -10,6 +10,7 @@
 #import "SystemUser.h"
 
 static NSString * const VoIPGRIDRequestOperationManagerURLSystemUserProfile = @"permission/systemuser/profile/";
+static NSString * const VoIPGRIDRequestOperationManagerURLAPIToken          = @"permission/apitoken/";
 static NSString * const VoIPGRIDRequestOperationManagerURLUserDestination   = @"userdestination/";
 static NSString * const VoIPGRIDRequestOperationManagerURLPhoneAccount      = @"phoneaccount/phoneaccount/";
 static NSString * const VoIPGRIDRequestOperationManagerURLTwoStepCall       = @"mobileapp/";
@@ -25,6 +26,10 @@ static int const VoIPGRIDRequestOperationManagerTimoutInterval = 15;
 NSString * const VoIPGRIDRequestOperationManagerErrorDomain = @"Vailer.VoIPGRIDRequestOperationManager";
 
 NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoIPGRIDRequestOperationManagerUnAuthorizedNotification";
+
+@interface VoIPGRIDRequestOperationManager()
+@property (nonatomic) BOOL checkingTwoFactor;
+@end
 
 @implementation VoIPGRIDRequestOperationManager
 
@@ -53,8 +58,15 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
         // Set basic authentication if user is logged in.
         NSString *user = [SystemUser currentUser].username;
         if (user) {
-            NSString *password = [SAMKeychain passwordForService:[[self class] serviceName] account:user];
-            [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
+            NSString *token = [SystemUser currentUser].apiToken;
+            if (![token isEqualToString:@""]) {
+                NSString *tokenString = [NSString stringWithFormat:@"Token %@:%@", [SystemUser currentUser].username, [SystemUser currentUser].apiToken];
+                [self.requestSerializer setValue:tokenString forHTTPHeaderField:@"Authorization"];
+            } else {
+                NSString *password = [SAMKeychain passwordForService:[[self class] serviceName] account:user];
+                [self.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
+            }
+
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutUserNotification:) name:SystemUserLogoutNotification object:nil];
     }
@@ -85,6 +97,14 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 
 - (AFHTTPRequestOperation *)createRequestWithUrl:(NSString *)url andMethod:(NSString *)method parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
     url = [[NSURL URLWithString:url relativeToURL:self.baseURL] absoluteString];
+
+    if ([SystemUser currentUser]) {
+        NSString *username = [SystemUser currentUser].username;
+
+        if (username != nil && ![username isEqualToString:@""]) {
+            [self updateAuthorisationHeaderWithTokenForUsername:username];
+        }
+    }
 
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:url parameters:parameters error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -119,11 +139,40 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 }
 
 #pragma mark - SytemUser actions
-
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password withCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion {
+ 
+- (void)loginWithUserNameForTwoFactor:(NSString *)username password:(NSString *)password orToken:(NSString *)token withCompletion:(void (^)(NSDictionary *, NSError *))completion {
     [self.requestSerializer clearAuthorizationHeader];
     [self.requestSerializer setAuthorizationHeaderFieldWithUsername:username password:password];
 
+    NSDictionary *parametersDict = @{
+                                     @"email": username,
+                                     @"password": password
+                                     };
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:parametersDict];
+
+    if (![token isEqualToString:@""]) {
+        [parameters setObject:token forKey:@"two_factor_token"];
+    }
+    
+    [self POST:VoIPGRIDRequestOperationManagerURLAPIToken parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (completion) {
+            if (error) {
+                NSString* errorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+                if (![errorResponse isEqualToString:@""] && [operation.response statusCode] == 400) {
+                    NSError *jsonError;
+                    responseData = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey]
+                                                                   options:0
+                                                                     error:&jsonError];
+                }
+                completion(responseData, error);
+            } else {
+                completion(responseData, nil);
+            }
+        }
+    }];
+}
+
+- (void)getSystemUserInfowithCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion {
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET"
                                                                    URLString:[[NSURL URLWithString:VoIPGRIDRequestOperationManagerURLSystemUserProfile relativeToURL:self.baseURL] absoluteString]
                                                                   parameters:nil
@@ -166,7 +215,36 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 //}
 
 - (void)userProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
-    [self GET:VoIPGRIDRequestOperationManagerURLSystemUserProfile parameters:nil withCompletion:completion];
+    NSString *apiToken = [SystemUser currentUser].apiToken;
+    NSString *username = [SystemUser currentUser].username;
+    if (apiToken == nil || [apiToken isEqualToString:@""]) {
+        NSString *apiUrl = [NSString stringWithFormat:@"%@/", [[Configuration defaultConfiguration] UrlForKey:ConfigurationVoIPGRIDBaseURLString]];
+        if (!self.checkingTwoFactor && [self.baseURL.absoluteString isEqualToString:apiUrl]) {
+            self.checkingTwoFactor = YES;
+            [self loginWithUserNameForTwoFactor:username password:[SystemUser currentUser].password orToken:@"" withCompletion:^(NSDictionary *responseData, NSError *error) {
+                if (error && [responseData objectForKey:@"apitoken"]) {
+                    NSDictionary *apiTokenDict = responseData[@"apitoken"];
+                    // There is no token supplied!
+                    if ([apiTokenDict objectForKey:@"two_factor_token"]) {
+                        if (completion) {
+                            NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
+
+                            SystemUserErrors tokenErrorCode = SystemUserTwoFactorAuthenticationTokenRequired;
+                            
+                            completion(nil, responseData, [NSError errorWithDomain:SystemUserErrorDomain
+                                                           code:tokenErrorCode
+                                                       userInfo:userInfo]);
+                            return;
+                        }
+                    }
+                } else {
+                    completion(nil, responseData, nil);
+                }
+            }];
+        }
+    } else {
+        [self GET:VoIPGRIDRequestOperationManagerURLSystemUserProfile parameters:nil withCompletion:completion];
+    }
 }
 
 - (void)pushMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion {
@@ -252,5 +330,10 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     }
 }
 
+- (void)updateAuthorisationHeaderWithTokenForUsername:(NSString *)username {
+    [self.requestSerializer clearAuthorizationHeader];
+    NSString *tokenString = [NSString stringWithFormat:@"Token %@:%@", username, [SystemUser currentUser].apiToken];
+    [self.requestSerializer setValue:tokenString forHTTPHeaderField:@"Authorization"];
+}
 
 @end

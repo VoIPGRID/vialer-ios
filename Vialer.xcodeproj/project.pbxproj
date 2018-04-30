@@ -588,6 +588,11 @@
 		EEA3C2751F90919200423F96 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
 		EEA9ADB4200DEDD5007727EB /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */; };
 		EEA9ADB5200DEDD5007727EB /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */; };
+		EEDC3042208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3044208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3045208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3047208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3048208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
 		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
@@ -598,6 +603,11 @@
 		EEEF16111F470C8200AEFA83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
 		EEEF16121F470C8200AEFA83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
 		EEEF16131F470C8200AEFA83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
+		EEF06BA520970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA620970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA720970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
 		F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -1149,6 +1159,8 @@
 		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
 		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = "<group>"; };
+		EEDC3040208725FD00C7C642 /* TwoFactorAuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TwoFactorAuthenticationView.h; path = Onboarding/Forms/TwoFactorAuthenticationView.h; sourceTree = "<group>"; };
+		EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TwoFactorAuthenticationView.m; path = Onboarding/Forms/TwoFactorAuthenticationView.m; sourceTree = "<group>"; };
 		EEDFABF91F876628002F0679 /* KeypadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewController.swift; sourceTree = "<group>"; };
 		EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIPCallingViewController.swift; sourceTree = "<group>"; };
 		EEDFABFB1F876628002F0679 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
@@ -1164,6 +1176,7 @@
 		EEEF160B1F470C4A00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Voys/nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF160E1F470C8200AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEEF16151F470DC600AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenFromPasteBoard.swift; sourceTree = "<group>"; };
 		F0EF74CC4441F17D574E9085 /* Pods-Acceptatie Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie Voys/Pods-Acceptatie Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
 		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
@@ -1530,6 +1543,8 @@
 				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
 				3DE6EAD91AF0CB4800C09935 /* UnlockView.h */,
 				3DE6EADA1AF0CB4800C09935 /* UnlockView.m */,
+				EEDC3040208725FD00C7C642 /* TwoFactorAuthenticationView.h */,
+				EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -2549,6 +2564,7 @@
 				C41C42F61D5A742100813B66 /* VialerLogger.h */,
 				C41C42F71D5A742100813B66 /* VialerLogger.m */,
 				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
+				EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2831,7 +2847,7 @@
 						};
 					};
 					C41FD8F21C60A89300BBE6D7 = {
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C41FD8551C60A08400BBE6D7;
 					};
@@ -2853,7 +2869,7 @@
 						};
 					};
 					C490ADFA1D088535004A8F83 = {
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C490AD631D0863E3004A8F83;
 					};
@@ -2880,7 +2896,7 @@
 					};
 					F22DE09F1CC90D41001468B3 = {
 						DevelopmentTeam = E2Q9UE8HM6;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = FB4226CC182261D200707349;
 					};
@@ -3760,6 +3776,7 @@
 				C4AEB2601E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */,
 				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3045208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
 				C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */,
 				C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3826,6 +3843,7 @@
 				C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
 				EE3C48142080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
+				EEF06BA720970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
 				EE3C48042080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48242080DC2D00CC80E5 /* VialerIconView.m in Sources */,
@@ -3886,6 +3904,7 @@
 				C4AEB2611E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */,
 				C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3048208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */,
 				C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */,
 				C490AD6C1D0863E3004A8F83 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3951,7 +3970,7 @@
 				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C49A46BB1E682A540097E808 /* UITableView.swift in Sources */,
-				EE3C48172080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
+				EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DE1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
 				EE3C48072080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48272080DC2D00CC80E5 /* VialerIconView.m in Sources */,
@@ -4030,6 +4049,7 @@
 				EE61F3F71F1DDDE4006E890F /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */,
 				EE61F3F81F1DDDE4006E890F /* FileManagerExtensions.swift in Sources */,
+				EEDC3047208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				EE61F3F91F1DDDE4006E890F /* UserProfileWebViewController.m in Sources */,
 				EE61F3FA1F1DDDE4006E890F /* AvailabilityModel.m in Sources */,
 				EE61F3FB1F1DDDE4006E890F /* RoundedAndColoredUIButton.m in Sources */,
@@ -4095,7 +4115,7 @@
 				EE61F4381F1DDDE4006E890F /* AppDelegate.swift in Sources */,
 				EE61F43A1F1DDDE4006E890F /* Middleware.m in Sources */,
 				EE61F43B1F1DDDE4006E890F /* ButtonWithBottomBorder.m in Sources */,
-				EE3C48162080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
+				EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				EE61F43C1F1DDDE4006E890F /* DialerViewController.swift in Sources */,
 				EE3C48062080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48262080DC2D00CC80E5 /* VialerIconView.m in Sources */,
@@ -4128,6 +4148,7 @@
 				C4AEB25F1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA31F8777E300708D96 /* SIPUtils.m in Sources */,
 				C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3044208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */,
 				F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */,
 				F20850E91D26935600A17E71 /* RoundedAndColoredUIButton.m in Sources */,
@@ -4193,7 +4214,7 @@
 				C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F208511D1D26935600A17E71 /* Middleware.m in Sources */,
 				F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */,
-				EE3C48132080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
+				EEF06BA620970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DC1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
 				EE3C48032080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48232080DC2D00CC80E5 /* VialerIconView.m in Sources */,
@@ -4245,6 +4266,7 @@
 				C4AEB25E1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA21F8777E200708D96 /* SIPUtils.m in Sources */,
 				C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3042208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
@@ -4310,7 +4332,7 @@
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
-				EE3C48112080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
+				EEF06BA520970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DB1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
 				EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48212080DC2D00CC80E5 /* VialerIconView.m in Sources */,
