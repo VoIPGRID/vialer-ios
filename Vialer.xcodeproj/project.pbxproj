@@ -403,6 +403,10 @@
 		EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
+		EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE2317F920A030BD00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		EE3C47B22080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		EE3C47B32080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
@@ -423,11 +427,7 @@
 		EE3C480C2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
 		EE3C480E2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
 		EE3C480F2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
-		EE3C48112080DC2D00CC80E5 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
-		EE3C48132080DC2D00CC80E5 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE3C48142080DC2D00CC80E5 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
-		EE3C48162080DC2D00CC80E5 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
-		EE3C48172080DC2D00CC80E5 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE3C48192080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
 		EE3C481B2080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
 		EE3C481C2080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
@@ -3917,6 +3917,7 @@
 				C43FD69E1E76F4C6002593DD /* NotificationToken.swift in Sources */,
 				C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */,
 				C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */,
+				EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */,
 				C47BB0C71E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
@@ -4061,6 +4062,7 @@
 				EE1C7B911F87778C00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				EE61F4011F1DDDE4006E890F /* NotificationToken.swift in Sources */,
 				EE61F4021F1DDDE4006E890F /* ForgotPasswordView.m in Sources */,
+				EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */,
 				EE61F4031F1DDDE4006E890F /* NSString+SubString.m in Sources */,
 				EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
@@ -4155,6 +4157,7 @@
 				F20850EA1D26935600A17E71 /* MainTabBarViewController.m in Sources */,
 				F2A958BC1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				F20850EB1D26935600A17E71 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				EE2317F920A030BD00C05EB0 /* ColoredCircle.m in Sources */,
 				C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				F20850EC1D26935600A17E71 /* MiddlewareRequestOperationManager.m in Sources */,
 				EE1C7B8F1F87778B00708D96 /* SIPIncomingCallViewController.m in Sources */,
@@ -4331,10 +4334,10 @@
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
+				EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				EEF06BA520970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DB1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
-				EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48212080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				C49A46B81E682A540097E808 /* UITableView.swift in Sources */,
@@ -4343,6 +4346,7 @@
 				C49A46B41E682A540097E808 /* UIImage.swift in Sources */,
 				EE3C48192080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0C91E72DED000A1E509 /* Managed.swift in Sources */,
+				EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */,
 				C4C675651D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE3C47C62080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
