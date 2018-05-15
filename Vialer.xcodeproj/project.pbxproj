@@ -39,34 +39,6 @@
 		C41506A71E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506A51E6EAFA80086D0B7 /* PasteableUILabel.m */; };
 		C41506A81E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506A51E6EAFA80086D0B7 /* PasteableUILabel.m */; };
 		C41506A91E6EAFA80086D0B7 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506A51E6EAFA80086D0B7 /* PasteableUILabel.m */; };
-		C41506B21E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */; };
-		C41506B31E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */; };
-		C41506B41E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */; };
-		C41506B51E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */; };
-		C41506B81E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */; };
-		C41506B91E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */; };
-		C41506BA1E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */; };
-		C41506BB1E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */; };
-		C41506BE1E6EB0520086D0B7 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */; };
-		C41506BF1E6EB0520086D0B7 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */; };
-		C41506C01E6EB0520086D0B7 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */; };
-		C41506C11E6EB0520086D0B7 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */; };
-		C41506C41E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */; };
-		C41506C51E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */; };
-		C41506C61E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */; };
-		C41506C71E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */; };
-		C41506CA1E6EB0760086D0B7 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C91E6EB0760086D0B7 /* BubblingPoints.m */; };
-		C41506CB1E6EB0760086D0B7 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C91E6EB0760086D0B7 /* BubblingPoints.m */; };
-		C41506CC1E6EB0760086D0B7 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C91E6EB0760086D0B7 /* BubblingPoints.m */; };
-		C41506CD1E6EB0760086D0B7 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C91E6EB0760086D0B7 /* BubblingPoints.m */; };
-		C41506D01E6EB0950086D0B7 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */; };
-		C41506D11E6EB0950086D0B7 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */; };
-		C41506D21E6EB0950086D0B7 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */; };
-		C41506D31E6EB0950086D0B7 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */; };
-		C41506D61E6EB0AA0086D0B7 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */; };
-		C41506D71E6EB0AA0086D0B7 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */; };
-		C41506D81E6EB0AA0086D0B7 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */; };
-		C41506D91E6EB0AA0086D0B7 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */; };
 		C41506DB1E6EB1860086D0B7 /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41506DA1E6EB1860086D0B7 /* DialerViewController.swift */; };
 		C41506DC1E6EB1860086D0B7 /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41506DA1E6EB1860086D0B7 /* DialerViewController.swift */; };
 		C41506DD1E6EB1860086D0B7 /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41506DA1E6EB1860086D0B7 /* DialerViewController.swift */; };
@@ -431,6 +403,41 @@
 		EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
+		EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE2317F920A030BD00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		EE3C47B22080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		EE3C47B32080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		EE3C47B52080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		EE3C47B62080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		EE3C47C62080DBE400CC80E5 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		EE3C47C82080DBE400CC80E5 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		EE3C47C92080DBE400CC80E5 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		EE3C47CB2080DBE400CC80E5 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		EE3C47CC2080DBE400CC80E5 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		EE3C48032080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		EE3C48042080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		EE3C48062080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		EE3C48072080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		EE3C48092080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		EE3C480B2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		EE3C480C2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		EE3C480E2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		EE3C480F2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		EE3C48142080DC2D00CC80E5 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE3C48192080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		EE3C481B2080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		EE3C481C2080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		EE3C481E2080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		EE3C481F2080DC2D00CC80E5 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		EE3C48212080DC2D00CC80E5 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		EE3C48232080DC2D00CC80E5 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		EE3C48242080DC2D00CC80E5 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		EE3C48262080DC2D00CC80E5 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		EE3C48272080DC2D00CC80E5 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
 		EE3D8675201F113900CEFDC6 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D8674201F113800CEFDC6 /* Voys.xcassets */; };
 		EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D8674201F113800CEFDC6 /* Voys.xcassets */; };
 		EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
@@ -465,24 +472,18 @@
 		EE61F40C1F1DDDE4006E890F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		EE61F40D1F1DDDE4006E890F /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		EE61F40E1F1DDDE4006E890F /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
-		EE61F40F1F1DDDE4006E890F /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */; };
 		EE61F4101F1DDDE4006E890F /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		EE61F4111F1DDDE4006E890F /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
 		EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		EE61F4131F1DDDE4006E890F /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506C91E6EB0760086D0B7 /* BubblingPoints.m */; };
-		EE61F4141F1DDDE4006E890F /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */; };
 		EE61F4151F1DDDE4006E890F /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		EE61F4161F1DDDE4006E890F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
-		EE61F4171F1DDDE4006E890F /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */; };
 		EE61F4181F1DDDE4006E890F /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */; };
 		EE61F4191F1DDDE4006E890F /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2491E6D593100550E0C /* SegueHandler.swift */; };
-		EE61F41A1F1DDDE4006E890F /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */; };
 		EE61F41B1F1DDDE4006E890F /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */; };
 		EE61F41C1F1DDDE4006E890F /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		EE61F41D1F1DDDE4006E890F /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
 		EE61F41E1F1DDDE4006E890F /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
 		EE61F41F1F1DDDE4006E890F /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
-		EE61F4201F1DDDE4006E890F /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */; };
 		EE61F4211F1DDDE4006E890F /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
 		EE61F4251F1DDDE4006E890F /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43F06CA1E77D84400D6CAAA /* PhoneNumber.swift */; };
 		EE61F4261F1DDDE4006E890F /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
@@ -505,7 +506,6 @@
 		EE61F43A1F1DDDE4006E890F /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		EE61F43B1F1DDDE4006E890F /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		EE61F43C1F1DDDE4006E890F /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41506DA1E6EB1860086D0B7 /* DialerViewController.swift */; };
-		EE61F43D1F1DDDE4006E890F /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */; };
 		EE61F43E1F1DDDE4006E890F /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		EE61F43F1F1DDDE4006E890F /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B21E682A540097E808 /* UITableView.swift */; };
 		EE61F4401F1DDDE4006E890F /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
@@ -588,6 +588,11 @@
 		EEA3C2751F90919200423F96 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
 		EEA9ADB4200DEDD5007727EB /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */; };
 		EEA9ADB5200DEDD5007727EB /* Vialer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */; };
+		EEDC3042208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3044208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3045208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3047208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EEDC3048208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
 		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
@@ -598,6 +603,11 @@
 		EEEF16111F470C8200AEFA83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
 		EEEF16121F470C8200AEFA83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
 		EEEF16131F470C8200AEFA83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
+		EEF06BA520970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA620970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA720970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
 		F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -986,20 +996,6 @@
 		C415069F1E6EAF960086D0B7 /* NumberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NumberPadButton.m; path = Vialer/Calling/Dialer/UI/NumberPadButton.m; sourceTree = SOURCE_ROOT; };
 		C41506A41E6EAFA80086D0B7 /* PasteableUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasteableUILabel.h; path = Vialer/Calling/Dialer/UI/PasteableUILabel.h; sourceTree = SOURCE_ROOT; };
 		C41506A51E6EAFA80086D0B7 /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasteableUILabel.m; path = Vialer/Calling/Dialer/UI/PasteableUILabel.m; sourceTree = SOURCE_ROOT; };
-		C41506B01E6EAFD90086D0B7 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCallingViewController.h; path = Vialer/Calling/TwoStep/Controllers/TwoStepCallingViewController.h; sourceTree = SOURCE_ROOT; };
-		C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCallingViewController.m; path = Vialer/Calling/TwoStep/Controllers/TwoStepCallingViewController.m; sourceTree = SOURCE_ROOT; };
-		C41506B61E6EB03E0086D0B7 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleWithShadow.h; path = Vialer/Calling/TwoStep/UI/CircleWithShadow.h; sourceTree = SOURCE_ROOT; };
-		C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleWithShadow.m; path = Vialer/Calling/TwoStep/UI/CircleWithShadow.m; sourceTree = SOURCE_ROOT; };
-		C41506BC1E6EB0520086D0B7 /* ColoredCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoredCircle.h; path = Vialer/Calling/TwoStep/UI/ColoredCircle.h; sourceTree = SOURCE_ROOT; };
-		C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoredCircle.m; path = Vialer/Calling/TwoStep/UI/ColoredCircle.m; sourceTree = SOURCE_ROOT; };
-		C41506C21E6EB0660086D0B7 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleWithWhiteIcon.h; path = Vialer/Calling/TwoStep/UI/CircleWithWhiteIcon.h; sourceTree = SOURCE_ROOT; };
-		C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleWithWhiteIcon.m; path = Vialer/Calling/TwoStep/UI/CircleWithWhiteIcon.m; sourceTree = SOURCE_ROOT; };
-		C41506C81E6EB0760086D0B7 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BubblingPoints.h; path = Vialer/Calling/TwoStep/UI/BubblingPoints.h; sourceTree = SOURCE_ROOT; };
-		C41506C91E6EB0760086D0B7 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BubblingPoints.m; path = Vialer/Calling/TwoStep/UI/BubblingPoints.m; sourceTree = SOURCE_ROOT; };
-		C41506CE1E6EB0950086D0B7 /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoStepCall.h; path = Vialer/Calling/TwoStep/Models/TwoStepCall.h; sourceTree = SOURCE_ROOT; };
-		C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoStepCall.m; path = Vialer/Calling/TwoStep/Models/TwoStepCall.m; sourceTree = SOURCE_ROOT; };
-		C41506D41E6EB0AA0086D0B7 /* VialerIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VialerIconView.h; path = Vialer/Calling/TwoStep/UI/VialerIconView.h; sourceTree = SOURCE_ROOT; };
-		C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VialerIconView.m; path = Vialer/Calling/TwoStep/UI/VialerIconView.m; sourceTree = SOURCE_ROOT; };
 		C41506DA1E6EB1860086D0B7 /* DialerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DialerViewController.swift; path = Vialer/Calling/Dialer/Controllers/DialerViewController.swift; sourceTree = SOURCE_ROOT; };
 		C41C42F61D5A742100813B66 /* VialerLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VialerLogger.h; path = Helpers/VialerLogger.h; sourceTree = "<group>"; };
 		C41C42F71D5A742100813B66 /* VialerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VialerLogger.m; path = Helpers/VialerLogger.m; sourceTree = "<group>"; };
@@ -1122,6 +1118,20 @@
 		EE1C7B7A1F87774F00708D96 /* SipCallingButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
+		EE3C47AE2080DBD500CC80E5 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
+		EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallingViewController.m; sourceTree = "<group>"; };
+		EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCall.m; sourceTree = "<group>"; };
+		EE3C47BA2080DBE400CC80E5 /* TwoStepCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCall.h; sourceTree = "<group>"; };
+		EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithWhiteIcon.m; sourceTree = "<group>"; };
+		EE3C47F82080DC2D00CC80E5 /* BubblingPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubblingPoints.h; sourceTree = "<group>"; };
+		EE3C47F92080DC2D00CC80E5 /* ColoredCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircle.h; sourceTree = "<group>"; };
+		EE3C47FA2080DC2D00CC80E5 /* VialerIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VialerIconView.h; sourceTree = "<group>"; };
+		EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithShadow.m; sourceTree = "<group>"; };
+		EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircle.m; sourceTree = "<group>"; };
+		EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubblingPoints.m; sourceTree = "<group>"; };
+		EE3C47FE2080DC2D00CC80E5 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithWhiteIcon.h; sourceTree = "<group>"; };
+		EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
+		EE3C48002080DC2D00CC80E5 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
 		EE3D8674201F113800CEFDC6 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Voys.xcassets; path = Branding/Voys/Voys.xcassets; sourceTree = "<group>"; };
 		EE5A1F171F94A7B200F07536 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
@@ -1149,6 +1159,8 @@
 		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
 		EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
 		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = "<group>"; };
+		EEDC3040208725FD00C7C642 /* TwoFactorAuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TwoFactorAuthenticationView.h; path = Onboarding/Forms/TwoFactorAuthenticationView.h; sourceTree = "<group>"; };
+		EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TwoFactorAuthenticationView.m; path = Onboarding/Forms/TwoFactorAuthenticationView.m; sourceTree = "<group>"; };
 		EEDFABF91F876628002F0679 /* KeypadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewController.swift; sourceTree = "<group>"; };
 		EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIPCallingViewController.swift; sourceTree = "<group>"; };
 		EEDFABFB1F876628002F0679 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
@@ -1164,6 +1176,7 @@
 		EEEF160B1F470C4A00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Voys/nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF160E1F470C8200AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEEF16151F470DC600AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenFromPasteBoard.swift; sourceTree = "<group>"; };
 		F0EF74CC4441F17D574E9085 /* Pods-Acceptatie Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie Voys/Pods-Acceptatie Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
 		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
@@ -1530,6 +1543,8 @@
 				3D1A5E641AE5483700DBE64B /* LoginFormView.m */,
 				3DE6EAD91AF0CB4800C09935 /* UnlockView.h */,
 				3DE6EADA1AF0CB4800C09935 /* UnlockView.m */,
+				EEDC3040208725FD00C7C642 /* TwoFactorAuthenticationView.h */,
+				EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -1575,9 +1590,9 @@
 			isa = PBXGroup;
 			children = (
 				C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */,
-				F9EEC9041CA28608008FB612 /* Controllers */,
-				F9EEC9071CA28608008FB612 /* Models */,
-				F9EEC90E1CA2865D008FB612 /* UI */,
+				EE3C47F62080DC2D00CC80E5 /* UI */,
+				EE3C47AD2080DBD500CC80E5 /* Controllers */,
+				EE3C47B82080DBE400CC80E5 /* Models */,
 			);
 			name = TwoStep;
 			sourceTree = "<group>";
@@ -2010,6 +2025,44 @@
 			path = Calling/SIP/Utils;
 			sourceTree = "<group>";
 		};
+		EE3C47AD2080DBD500CC80E5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE3C47AE2080DBD500CC80E5 /* TwoStepCallingViewController.h */,
+				EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */,
+			);
+			name = Controllers;
+			path = Calling/TwoStep/Controllers;
+			sourceTree = "<group>";
+		};
+		EE3C47B82080DBE400CC80E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EE3C47BA2080DBE400CC80E5 /* TwoStepCall.h */,
+				EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */,
+			);
+			name = Models;
+			path = Vialer/Calling/TwoStep/Models;
+			sourceTree = SOURCE_ROOT;
+		};
+		EE3C47F62080DC2D00CC80E5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EE3C47FE2080DC2D00CC80E5 /* CircleWithWhiteIcon.h */,
+				EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */,
+				EE3C47F82080DC2D00CC80E5 /* BubblingPoints.h */,
+				EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */,
+				EE3C47F92080DC2D00CC80E5 /* ColoredCircle.h */,
+				EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */,
+				EE3C47FA2080DC2D00CC80E5 /* VialerIconView.h */,
+				EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */,
+				EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */,
+				EE3C48002080DC2D00CC80E5 /* CircleWithShadow.h */,
+			);
+			name = UI;
+			path = Calling/TwoStep/UI;
+			sourceTree = "<group>";
+		};
 		EE61F4901F1DDE59006E890F /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2318,44 +2371,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		F9EEC9041CA28608008FB612 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C41506B01E6EAFD90086D0B7 /* TwoStepCallingViewController.h */,
-				C41506B11E6EAFD90086D0B7 /* TwoStepCallingViewController.m */,
-			);
-			name = Controllers;
-			path = TwoStepCall/Controllers;
-			sourceTree = "<group>";
-		};
-		F9EEC9071CA28608008FB612 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C41506CE1E6EB0950086D0B7 /* TwoStepCall.h */,
-				C41506CF1E6EB0950086D0B7 /* TwoStepCall.m */,
-			);
-			name = Models;
-			path = TwoStepCall/Models;
-			sourceTree = "<group>";
-		};
-		F9EEC90E1CA2865D008FB612 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				C41506C81E6EB0760086D0B7 /* BubblingPoints.h */,
-				C41506C91E6EB0760086D0B7 /* BubblingPoints.m */,
-				C41506B61E6EB03E0086D0B7 /* CircleWithShadow.h */,
-				C41506B71E6EB03E0086D0B7 /* CircleWithShadow.m */,
-				C41506C21E6EB0660086D0B7 /* CircleWithWhiteIcon.h */,
-				C41506C31E6EB0660086D0B7 /* CircleWithWhiteIcon.m */,
-				C41506BC1E6EB0520086D0B7 /* ColoredCircle.h */,
-				C41506BD1E6EB0520086D0B7 /* ColoredCircle.m */,
-				C41506D41E6EB0AA0086D0B7 /* VialerIconView.h */,
-				C41506D51E6EB0AA0086D0B7 /* VialerIconView.m */,
-			);
-			name = UI;
-			path = TwoStepCall/UI;
-			sourceTree = "<group>";
-		};
 		F9EEC9231CA2879C008FB612 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2549,6 +2564,7 @@
 				C41C42F61D5A742100813B66 /* VialerLogger.h */,
 				C41C42F71D5A742100813B66 /* VialerLogger.m */,
 				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
+				EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2831,7 +2847,7 @@
 						};
 					};
 					C41FD8F21C60A89300BBE6D7 = {
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C41FD8551C60A08400BBE6D7;
 					};
@@ -2853,7 +2869,7 @@
 						};
 					};
 					C490ADFA1D088535004A8F83 = {
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C490AD631D0863E3004A8F83;
 					};
@@ -2880,7 +2896,7 @@
 					};
 					F22DE09F1CC90D41001468B3 = {
 						DevelopmentTeam = E2Q9UE8HM6;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = FB4226CC182261D200707349;
 					};
@@ -3760,6 +3776,7 @@
 				C4AEB2601E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */,
 				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3045208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
 				C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */,
 				C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3782,28 +3799,24 @@
 				C47BB0BB1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */,
 				C41C42F91D5A742100813B66 /* VialerLogger.m in Sources */,
-				C41506C61E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */,
 				F22FF28F1D0ABF3800761C9A /* SystemUser.m in Sources */,
 				C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
-				C41506CC1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
-				C41506D81E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
-				C41506C01E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
+				EE3C480C2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
+				EE3C47B32080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				C4AEB25B1E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
 				EEA3C2691F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
 				C4AEB24C1E6D593100550E0C /* SegueHandler.swift in Sources */,
-				C41506D21E6EB0950086D0B7 /* TwoStepCall.m in Sources */,
 				F2C44A761DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
 				C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
-				C41506BA1E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
 				EE1C7B8B1F87777E00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C4B4075F1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				C43F06CD1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
@@ -3829,15 +3842,20 @@
 				C4C6756F1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C41FD8841C60A08400BBE6D7 /* ButtonWithBottomBorder.m in Sources */,
+				EE3C48142080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
+				EEF06BA720970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
+				EE3C48042080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
+				EE3C48242080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				C41506DD1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
-				C41506B41E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
 				C49A46BA1E682A540097E808 /* UITableView.swift in Sources */,
 				C47BB0C01E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */,
+				EE3C481C2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0CB1E72DED000A1E509 /* Managed.swift in Sources */,
 				C49A46B61E682A540097E808 /* UIImage.swift in Sources */,
+				EE3C47C92080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C4C675661D19B5430003A385 /* AppInfo.swift in Sources */,
 				C49A46A91E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C4AD4E651E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
@@ -3886,6 +3904,7 @@
 				C4AEB2611E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */,
 				C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3048208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */,
 				C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */,
 				C490AD6C1D0863E3004A8F83 /* RoundedAndColoredUIButton.m in Sources */,
@@ -3898,6 +3917,7 @@
 				C43FD69E1E76F4C6002593DD /* NotificationToken.swift in Sources */,
 				C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */,
 				C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */,
+				EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */,
 				C47BB0C71E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
@@ -3909,26 +3929,22 @@
 				C490AD7A1D0863E3004A8F83 /* SettingsViewController.m in Sources */,
 				C490AD7B1D0863E3004A8F83 /* VialerDrawerViewController.m in Sources */,
 				F22FF2901D0ABF3800761C9A /* SystemUser.m in Sources */,
-				C41506C71E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */,
 				C490AD7E1D0863E3004A8F83 /* GradientView.m in Sources */,
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
-				C41506CD1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
-				C41506D91E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
 				C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */,
 				C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */,
-				C41506C11E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
+				EE3C47B62080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
+				EE3C480F2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				C4AEB25C1E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
 				C4AEB24D1E6D593100550E0C /* SegueHandler.swift in Sources */,
 				F2C44A771DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				EEA3C26C1F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
-				C41506D31E6EB0950086D0B7 /* TwoStepCall.m in Sources */,
 				C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */,
 				C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */,
 				C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */,
 				C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4AEB2541E6D954400550E0C /* Resource.swift in Sources */,
-				C41506BB1E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
 				C4B407601E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8A1F87777E00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C43F06CE1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
@@ -3955,15 +3971,19 @@
 				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C49A46BB1E682A540097E808 /* UITableView.swift in Sources */,
+				EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DE1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
-				C41506B51E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */,
+				EE3C48072080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
+				EE3C48272080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */,
 				C49A46B71E682A540097E808 /* UIImage.swift in Sources */,
 				C490ADA21D0863E3004A8F83 /* AnimatedImageView.m in Sources */,
 				C47BB0C11E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C48931D41D80935F00C5633C /* VialerLogger.m in Sources */,
+				EE3C481F2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0CC1E72DED000A1E509 /* Managed.swift in Sources */,
 				C4C675671D19B5430003A385 /* AppInfo.swift in Sources */,
+				EE3C47CC2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C49A46AA1E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C4AD4E661E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
@@ -4030,6 +4050,7 @@
 				EE61F3F71F1DDDE4006E890F /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */,
 				EE61F3F81F1DDDE4006E890F /* FileManagerExtensions.swift in Sources */,
+				EEDC3047208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				EE61F3F91F1DDDE4006E890F /* UserProfileWebViewController.m in Sources */,
 				EE61F3FA1F1DDDE4006E890F /* AvailabilityModel.m in Sources */,
 				EE61F3FB1F1DDDE4006E890F /* RoundedAndColoredUIButton.m in Sources */,
@@ -4041,6 +4062,7 @@
 				EE1C7B911F87778C00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				EE61F4011F1DDDE4006E890F /* NotificationToken.swift in Sources */,
 				EE61F4021F1DDDE4006E890F /* ForgotPasswordView.m in Sources */,
+				EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */,
 				EE61F4031F1DDDE4006E890F /* NSString+SubString.m in Sources */,
 				EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
@@ -4053,26 +4075,22 @@
 				EE61F40C1F1DDDE4006E890F /* SettingsViewController.m in Sources */,
 				EE61F40D1F1DDDE4006E890F /* VialerDrawerViewController.m in Sources */,
 				EE61F40E1F1DDDE4006E890F /* VialerLogger.m in Sources */,
-				EE61F40F1F1DDDE4006E890F /* CircleWithWhiteIcon.m in Sources */,
 				EE61F4101F1DDDE4006E890F /* SystemUser.m in Sources */,
 				EE61F4111F1DDDE4006E890F /* GradientView.m in Sources */,
 				EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */,
-				EE61F4131F1DDDE4006E890F /* BubblingPoints.m in Sources */,
-				EE61F4141F1DDDE4006E890F /* VialerIconView.m in Sources */,
 				EE61F4151F1DDDE4006E890F /* AvailabilityViewController.m in Sources */,
 				EE61F4161F1DDDE4006E890F /* LogInViewController.m in Sources */,
-				EE61F4171F1DDDE4006E890F /* ColoredCircle.m in Sources */,
+				EE3C480E2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
+				EE3C47B52080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				EE61F4181F1DDDE4006E890F /* WebserviceAuthentication.swift in Sources */,
 				EE61F4191F1DDDE4006E890F /* SegueHandler.swift in Sources */,
 				EEA3C26B1F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
-				EE61F41A1F1DDDE4006E890F /* TwoStepCall.m in Sources */,
 				EE61F41B1F1DDDE4006E890F /* StartCallConvertible.swift in Sources */,
 				EE61F41C1F1DDDE4006E890F /* UIAlertController+Vialer.m in Sources */,
 				EE61F41D1F1DDDE4006E890F /* EditNumberViewController.m in Sources */,
 				EE61F41E1F1DDDE4006E890F /* UIViewControllerExtensions.swift in Sources */,
 				EE61F41F1F1DDDE4006E890F /* VialerWebViewController.m in Sources */,
-				EE61F4201F1DDDE4006E890F /* CircleWithShadow.m in Sources */,
 				EE61F4211F1DDDE4006E890F /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B881F87777C00708D96 /* TransferInProgressViewController.swift in Sources */,
 				EE61F4251F1DDDE4006E890F /* PhoneNumber.swift in Sources */,
@@ -4099,15 +4117,19 @@
 				EE61F4381F1DDDE4006E890F /* AppDelegate.swift in Sources */,
 				EE61F43A1F1DDDE4006E890F /* Middleware.m in Sources */,
 				EE61F43B1F1DDDE4006E890F /* ButtonWithBottomBorder.m in Sources */,
+				EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				EE61F43C1F1DDDE4006E890F /* DialerViewController.swift in Sources */,
-				EE61F43D1F1DDDE4006E890F /* TwoStepCallingViewController.m in Sources */,
+				EE3C48062080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
+				EE3C48262080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				EE61F43E1F1DDDE4006E890F /* UnlockView.m in Sources */,
 				EE61F43F1F1DDDE4006E890F /* UITableView.swift in Sources */,
 				EE61F4401F1DDDE4006E890F /* AnimatedImageView.m in Sources */,
 				EE61F4411F1DDDE4006E890F /* RecentCall.swift in Sources */,
 				EE61F4421F1DDDE4006E890F /* UIImage.swift in Sources */,
+				EE3C481E2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				EE61F4431F1DDDE4006E890F /* Managed.swift in Sources */,
 				EE61F4441F1DDDE4006E890F /* AppInfo.swift in Sources */,
+				EE3C47CB2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				EE61F4451F1DDDE4006E890F /* NSString+Mobile.m in Sources */,
 				EE61F4461F1DDDE4006E890F /* Vialer.xcdatamodeld in Sources */,
 				EE61F4471F1DDDE4006E890F /* RecentsViewController.swift in Sources */,
@@ -4128,12 +4150,14 @@
 				C4AEB25F1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA31F8777E300708D96 /* SIPUtils.m in Sources */,
 				C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3044208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */,
 				F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */,
 				F20850E91D26935600A17E71 /* RoundedAndColoredUIButton.m in Sources */,
 				F20850EA1D26935600A17E71 /* MainTabBarViewController.m in Sources */,
 				F2A958BC1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				F20850EB1D26935600A17E71 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				EE2317F920A030BD00C05EB0 /* ColoredCircle.m in Sources */,
 				C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				F20850EC1D26935600A17E71 /* MiddlewareRequestOperationManager.m in Sources */,
 				EE1C7B8F1F87778B00708D96 /* SIPIncomingCallViewController.m in Sources */,
@@ -4151,26 +4175,22 @@
 				F20850F71D26935600A17E71 /* SettingsViewController.m in Sources */,
 				F20850F81D26935600A17E71 /* VialerDrawerViewController.m in Sources */,
 				C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */,
-				C41506C51E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */,
 				F20850FB1D26935600A17E71 /* SystemUser.m in Sources */,
 				F20850FC1D26935600A17E71 /* GradientView.m in Sources */,
 				EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
-				C41506CB1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
-				C41506D71E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
 				F20851031D26935600A17E71 /* AvailabilityViewController.m in Sources */,
 				F20851041D26935600A17E71 /* LogInViewController.m in Sources */,
-				C41506BF1E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
+				EE3C480B2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
+				EE3C47B22080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				C4AEB25A1E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
 				C4AEB24B1E6D593100550E0C /* SegueHandler.swift in Sources */,
 				EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
-				C41506D11E6EB0950086D0B7 /* TwoStepCall.m in Sources */,
 				F2C44A751DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */,
 				F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */,
 				C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */,
 				F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */,
-				C41506B91E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
 				C4B4075E1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8C1F87777F00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C43F06CC1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
@@ -4197,15 +4217,19 @@
 				C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F208511D1D26935600A17E71 /* Middleware.m in Sources */,
 				F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */,
+				EEF06BA620970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DC1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
-				C41506B31E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */,
+				EE3C48032080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
+				EE3C48232080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				F208511F1D26935600A17E71 /* UnlockView.m in Sources */,
 				C49A46B91E682A540097E808 /* UITableView.swift in Sources */,
 				F20851201D26935600A17E71 /* AnimatedImageView.m in Sources */,
 				C47BB0BF1E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C49A46B51E682A540097E808 /* UIImage.swift in Sources */,
+				EE3C481B2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0CA1E72DED000A1E509 /* Managed.swift in Sources */,
 				F20851221D26935600A17E71 /* AppInfo.swift in Sources */,
+				EE3C47C82080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				F20851231D26935600A17E71 /* NSString+Mobile.m in Sources */,
 				C4AD4E641E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */,
@@ -4245,6 +4269,7 @@
 				C4AEB25E1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA21F8777E200708D96 /* SIPUtils.m in Sources */,
 				C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
+				EEDC3042208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
@@ -4268,26 +4293,22 @@
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
 				F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */,
 				C41C42F81D5A742100813B66 /* VialerLogger.m in Sources */,
-				C41506C41E6EB0660086D0B7 /* CircleWithWhiteIcon.m in Sources */,
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
-				C41506CA1E6EB0760086D0B7 /* BubblingPoints.m in Sources */,
-				C41506D61E6EB0AA0086D0B7 /* VialerIconView.m in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
-				C41506BE1E6EB0520086D0B7 /* ColoredCircle.m in Sources */,
+				EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
+				EE3C48092080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				C4AEB2591E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
 				C4AEB24A1E6D593100550E0C /* SegueHandler.swift in Sources */,
 				F2C44A741DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
-				C41506D01E6EB0950086D0B7 /* TwoStepCall.m in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
 				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
 				C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
-				C41506B81E6EB03E0086D0B7 /* CircleWithShadow.m in Sources */,
 				C4B4075D1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8D1F87777F00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C43F06CB1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
@@ -4313,16 +4334,21 @@
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
+				EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
+				EEF06BA520970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41506DB1E6EB1860086D0B7 /* DialerViewController.swift in Sources */,
-				C41506B21E6EAFD90086D0B7 /* TwoStepCallingViewController.m in Sources */,
+				EE3C48212080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				C49A46B81E682A540097E808 /* UITableView.swift in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
 				C47BB0BE1E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C49A46B41E682A540097E808 /* UIImage.swift in Sources */,
+				EE3C48192080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0C91E72DED000A1E509 /* Managed.swift in Sources */,
+				EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */,
 				C4C675651D19B5430003A385 /* AppInfo.swift in Sources */,
+				EE3C47C62080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,

@@ -431,3 +431,21 @@
 
 /* Use 3G+ for calls */
 "Use 3G+ for calls" = "Gebruik 3G+ om te bellen";
+
+/* Use encrypted calling */
+"Use encrypted calling" = "Gebruik versleuteld bellen";
+
+/* Use STUN for calling */
+"Use STUN for calling" = "Gebruik STUN om te bellen";
+
+/* No comment provided by engineer. */
+"Token" = "Token";
+
+/* No comment provided by engineer. */
+"Two-factor autentication" = "Twee-staps Verificatie";
+
+/* No comment provided by engineer. */
+"Token invalid" = "Incorrect token";
+
+/* No comment provided by engineer. */
+"The two-factor authentication token is invalid" = "De twee-staps verificatie token is incorrect";

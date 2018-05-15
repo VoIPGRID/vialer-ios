@@ -8,6 +8,7 @@
 typedef NS_ENUM(NSInteger, VIASceneActs) {
     VIASceneActNone,
     VIASceneActOne,
+    VIASceneActOneAndHalf,
     VIASceneActTwo,
     VIASceneActThree
 };
@@ -21,6 +22,7 @@ typedef NS_ENUM(NSInteger, VIASceneActs) {
 
 - (void)runActOne;
 - (void)runActOneInstantly;
+- (void)runActOneAndHalf;
 - (void)runActTwo;
 - (void)runActThree;
 

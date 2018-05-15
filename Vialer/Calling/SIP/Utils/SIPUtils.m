@@ -18,12 +18,16 @@
     }
 
     if ([VialerSIPLib sharedInstance].endpointAvailable) {
+        VialerLogDebug(@"Remove the endpoint that was already started");
         [SIPUtils removeSIPEndpoint];
     }
 
-    VialerLogError(@"Use encryption: %@", [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO");
+    VialerLogInfo(@"Use encryption: %@, TLS enabled: %@, SIP endpoint TLS: %@",
+                  [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO",
+                  [SystemUser currentUser].useTLS ? @"YES" : @"NO",
+                  [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO");
 
-    if (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption) {
+    if (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {
         [SIPUtils removeSIPEndpoint];
     }
 
@@ -39,20 +43,20 @@
 
     endpointConfiguration.ipChangeConfiguration = ipChangeConfiguration;
 
-    NSArray *stunServers = [Configuration defaultConfiguration].stunServers;
-    if (stunServers.count > 0) {
-        VSLStunConfiguration *stunConfiguration = [[VSLStunConfiguration alloc] init];
-        stunConfiguration.stunServers = stunServers;
-        endpointConfiguration.stunConfiguration = stunConfiguration;
+    if ([SystemUser currentUser].useStunServers) {
+        NSArray *stunServers = [Configuration defaultConfiguration].stunServers;
+        if (stunServers.count > 0) {
+            VSLStunConfiguration *stunConfiguration = [[VSLStunConfiguration alloc] init];
+            stunConfiguration.stunServers = stunServers;
+            endpointConfiguration.stunConfiguration = stunConfiguration;
+        }
     }
 
-    if ([SystemUser currentUser].sipUseEncryption) {
+    if ([SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {
         endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTLS]];
-    } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseTCPConnection"]) {
+    } else {
         endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                           [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
-    } else {
-        endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
     }
 
     NSError *error;
@@ -65,7 +69,9 @@
 }
 
 + (void)removeSIPEndpoint {
-    [[VialerSIPLib sharedInstance] removeEndpoint];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[VialerSIPLib sharedInstance] removeEndpoint];
+    });
 }
 
 + (VSLAccount *)addSIPAccountToEndpoint {
@@ -105,5 +111,4 @@
     VSLCall *call = [account firstActiveCall];
     return call;
 }
-
 @end

@@ -156,7 +156,7 @@
 		<key>API</key>
 		<string>https://partner.voipgrid.nl/api</string>
 		<key>Partner</key>
-		<string>https://partner.voipgrid.nl</string>
+		<string>https://partner.voipgrid.nl/</string>
 		<key>SIP domain</key>
 		<string>sipproxy.voipgrid.nl</string>
 		<key>onboarding-nl</key>

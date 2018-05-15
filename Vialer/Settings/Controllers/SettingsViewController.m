@@ -17,7 +17,7 @@
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
-static int const SettingsViewController3GPlus               = 2;
+static int const SettingsViewController3GPlusRow            = 2;
 static int const SettingsViewControllerSipAccountRow        = 3;
 
 static int const SettingsViewControllerNumbersSection       = 1;
@@ -26,8 +26,10 @@ static int const SettingsViewControllerOutgoingNumberRow    = 1;
 static int const SettingsViewControllerMyEmailRow           = 2;
 
 static int const SettingsViewControllerLoggingSection       = 2;
-static int const SettingsViewControllerLoggingEnabeldRow    = 0;
-static int const SettingsViewControllerLoggingIDRow         = 1;
+static int const SettingsViewControllerLoggingEnabledRow    = 0;
+static int SettingsViewControllerLoggingIDRow               = 1;
+static int SettingsViewControllerUseTLSRow                  = 2;
+static int SettingsViewControllerUseStunServersRow          = 3;
 
 
 static int const SettingsViewControllerUISwitchWidth            = 60;
@@ -36,14 +38,13 @@ static int const SettingsViewControllerUISwitchOriginOffsetY    = 15;
 
 static int const SettingsViewControllerSwitchVoIP               = 1001;
 static int const SettingsViewControllerSwitchWifiNotification   = 1002;
-static int const SettingsViewControllerSwitchTCP                = 1003;
 static int const SettingsViewControllerSwitchLogging            = 1004;
 static int const SettingsViewControllerSwitch3GPlus             = 1005;
+static int const SettingsViewControllerSwitchUseTLS             = 1006;
+static int const SettingsViewControllerSwitchUseStunServers     = 1007;
 
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
-
-static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConnection";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
@@ -89,15 +90,6 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
     return _currentUser;
 }
 
-- (BOOL)useTCP {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:SettingsViewControllerUseTCPConnectionKey];
-}
-
-- (void)setUseTCP:(BOOL)useTCP {
-    [[NSUserDefaults standardUserDefaults] setBool:useTCP forKey:SettingsViewControllerUseTCPConnectionKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -128,8 +120,28 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             break;
 
         case SettingsViewControllerLoggingSection:
-            // Show switch and optional the ID
-            return [VialerLogger remoteLoggingEnabled] ? 2 : 1;
+            if (self.currentUser.sipEnabled && [VialerLogger remoteLoggingEnabled]) {
+                SettingsViewControllerLoggingIDRow         = 1;
+                SettingsViewControllerUseTLSRow            = 2;
+                SettingsViewControllerUseStunServersRow    = 3;
+                // Remotelogging enabled (2)
+                // TLS
+                // use stun servers
+                return 4;
+            } else if (self.currentUser.sipEnabled && ![VialerLogger remoteLoggingEnabled]) {
+                // Remotelogging disabled (1)
+                // TLS
+                // use stun servers
+                SettingsViewControllerUseTLSRow            = 1;
+                SettingsViewControllerUseStunServersRow    = 2;
+                SettingsViewControllerLoggingIDRow         = -1;
+                return 3;
+            } else if (!self.currentUser.sipEnabled && [VialerLogger remoteLoggingEnabled]) {
+                SettingsViewControllerLoggingIDRow         = 1;
+                // Remotelogging enabled (2)
+                return 2;
+            }
+            return 1;
             break;
 
         default:
@@ -157,7 +169,7 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
                           withTag:SettingsViewControllerSwitchWifiNotification
                        defaultVal:self.currentUser.showWiFiNotification];
-        } else if (indexPath.row == SettingsViewController3GPlus) {
+        } else if (indexPath.row == SettingsViewController3GPlusRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell
                         withTitle:NSLocalizedString(@"Use 3G+ for calls", @"Use 3G+ for calls")
@@ -187,7 +199,7 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             cell.detailTextLabel.text = self.currentUser.username;
         }
     } else if (indexPath.section == SettingsViewControllerLoggingSection) {
-        if (indexPath.row == SettingsViewControllerLoggingEnabeldRow) {
+        if (indexPath.row == SettingsViewControllerLoggingEnabledRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Remote Logging", nil)
                           withTag:SettingsViewControllerSwitchLogging
@@ -196,6 +208,18 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"Logging identifier", nil);
             cell.detailTextLabel.text = [VialerLogger remoteIdentifier];
+        } else if (indexPath.row == SettingsViewControllerUseTLSRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell
+                        withTitle:NSLocalizedString(@"Use encrypted calling", @"Use encrypted calling")
+                          withTag:SettingsViewControllerSwitchUseTLS
+                       defaultVal:self.currentUser.useTLS];
+        } else if (indexPath.row == SettingsViewControllerUseStunServersRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell
+                        withTitle:NSLocalizedString(@"Use STUN for calling", @"Use STUN for calling")
+                          withTag:SettingsViewControllerSwitchUseStunServers
+                       defaultVal:self.currentUser.useStunServers];
         }
     }
     return cell;
@@ -257,18 +281,16 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
         self.currentUser.showWiFiNotification = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitch3GPlus) {
         self.currentUser.use3GPlus = sender.isOn;
-    } else if (sender.tag == SettingsViewControllerSwitchTCP) {
-        self.useTCP = sender.isOn;
-        // Remove and initiate the endpoint again to make sure the new transport is loaded.
-        VialerLogVerbose(@"Remove Endpoint for new connection configurations.");
-        [SIPUtils removeSIPEndpoint];
-        VialerLogVerbose(@"Removed Endpoint, restarting.");
-        [SIPUtils setupSIPEndpoint];
-        VialerLogVerbose(@"Endpoint restarted.");
+    } else if (sender.tag == SettingsViewControllerSwitchUseTLS) {
+        self.currentUser.useTLS = sender.isOn;
+    } else if (sender.tag == SettingsViewControllerSwitchUseStunServers) {
+        self.currentUser.useStunServers = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchLogging) {
         [VialerLogger setRemoteLoggingEnabled:sender.isOn];
         VialerLogVerbose(sender.isOn ? @"Remote logging enabled" : @"Remote logging disabled");
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
+        NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerLoggingSection];
+        [self.tableView  reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -291,8 +313,12 @@ static NSString * const SettingsViewControllerUseTCPConnectionKey = @"UseTCPConn
             [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
         } else {
             // Account was retrieved, show VoIP Acount row.
-            NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
-            [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+            if (sender.isOn) {
+                [self.tableView reloadData];
+            } else {
+                NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
+                [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }
     }];
 }

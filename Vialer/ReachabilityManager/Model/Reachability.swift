@@ -136,7 +136,7 @@ public class Reachability: NSObject {
 
     fileprivate var previousconnectionType: NetworkStatus?
     fileprivate var isRunningOnDevice: Bool = {
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        #if targetEnvironment(simulator)
             return false
         #else
             return true

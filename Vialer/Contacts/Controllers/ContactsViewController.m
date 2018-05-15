@@ -230,7 +230,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     if (indexPath.section == 0 && [tableView isEqual:self.tableView]) {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewMyNumberCell];
         NSString *myNumber = NSLocalizedString(@"My Number: ", nil);
-        if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+        if (![self.currentUser.outgoingNumber isEqualToString:@""] && self.currentUser.loggedIn) {
             myNumber = [myNumber stringByAppendingString:self.currentUser.outgoingNumber];
             cell.textLabel.text = myNumber;
         }

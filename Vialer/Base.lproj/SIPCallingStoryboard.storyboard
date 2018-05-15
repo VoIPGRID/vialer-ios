@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -30,7 +30,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-TQ-W7d" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="71.666666666666657" y="270.33333333333331" width="69.999999999999972" height="70"/>
+                                <rect key="frame" x="71.666666666666671" y="270.33333333333331" width="70.000000000000014" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="height" multiplier="1:1" id="gDZ-ad-KP9"/>
@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKK-AY-hTQ" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="71.666666666666657" y="348.33333333333331" width="69.999999999999972" height="70.333333333333371"/>
+                                <rect key="frame" x="71.666666666666671" y="348.33333333333331" width="70.000000000000014" height="70.333333333333314"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
@@ -55,7 +55,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE4-tc-maO" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="171.66666666666666" y="348.33333333333331" width="70.666666666666686" height="70.333333333333371"/>
+                                <rect key="frame" x="171.66666666666666" y="348.33333333333331" width="70.666666666666657" height="70.333333333333314"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
@@ -66,7 +66,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uc-x1-38o" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="71.666666666666657" y="426.66666666666669" width="69.999999999999972" height="70"/>
+                                <rect key="frame" x="71.666666666666671" y="426.66666666666669" width="70.000000000000014" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
@@ -77,7 +77,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7x-tQ-8oz" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="171.66666666666666" y="426.66666666666669" width="70.666666666666686" height="70"/>
+                                <rect key="frame" x="171.66666666666666" y="426.66666666666669" width="70.666666666666657" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
@@ -99,7 +99,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t85-kN-Xse" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="71.666666666666657" y="504.66666666666663" width="69.999999999999972" height="69.999999999999886"/>
+                                <rect key="frame" x="71.666666666666671" y="504.66666666666674" width="70.000000000000014" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
@@ -109,7 +109,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ic-sX-vrf" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="171.66666666666666" y="504.66666666666663" width="70.666666666666686" height="69.999999999999886"/>
+                                <rect key="frame" x="171.66666666666666" y="504.66666666666674" width="70.666666666666657" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
@@ -121,7 +121,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-7e-hQf" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272.33333333333331" y="504.66666666666663" width="70" height="69.999999999999886"/>
+                                <rect key="frame" x="272.33333333333331" y="504.66666666666674" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
@@ -131,7 +131,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9H-bV-hy5" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272.33333333333331" y="348.33333333333331" width="70" height="70.333333333333371"/>
+                                <rect key="frame" x="272.33333333333331" y="348.33333333333331" width="70" height="70.333333333333314"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
@@ -153,7 +153,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uC2-Oy-Ewy" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="171.66666666666666" y="270.33333333333331" width="70.666666666666686" height="70"/>
+                                <rect key="frame" x="171.66666666666666" y="270.33333333333331" width="70.666666666666657" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
@@ -164,7 +164,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJr-5Z-ZPU">
-                                <rect key="frame" x="20" y="72" width="374" height="36"/>
+                                <rect key="frame" x="20" y="28" width="374" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="IAq-q7-cx9"/>
                                 </constraints>
@@ -173,7 +173,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDw-A4-HXZ">
-                                <rect key="frame" x="20" y="116" width="374" height="24"/>
+                                <rect key="frame" x="20" y="72" width="374" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="r4U-vQ-I1K"/>
                                 </constraints>
@@ -182,7 +182,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HO9-77-XoX">
-                                <rect key="frame" x="272.33333333333331" y="660.66666666666652" width="70" height="35.333333333333371"/>
+                                <rect key="frame" x="272.33333333333331" y="660.66666666666663" width="70" height="35.333333333333371"/>
                                 <state key="normal" title="hide">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -191,7 +191,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNN-s3-SDa" userLabel="hangup-button">
-                                <rect key="frame" x="171.66666666666666" y="582.66666666666663" width="70.666666666666686" height="70"/>
+                                <rect key="frame" x="171.66666666666666" y="582.66666666666663" width="70.666666666666657" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="SIPCallingStoryboard.HangupButton"/>
                                 <state key="normal" image="declineButton">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -534,13 +534,13 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upb-YF-eAJ">
-                                        <rect key="frame" x="8" y="15" width="163.66666666666666" height="20.666666666666671"/>
+                                        <rect key="frame" x="8" y="15.000000000000002" width="163.66666666666666" height="20.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-jc-nmv">
-                                        <rect key="frame" x="254.66666666666663" y="15" width="151.33333333333337" height="20.666666666666671"/>
+                                        <rect key="frame" x="254.66666666666663" y="15.000000000000002" width="151.33333333333337" height="20.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -845,13 +845,13 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-El-Y0k">
-                                        <rect key="frame" x="8" y="15" width="189" height="20.666666666666671"/>
+                                        <rect key="frame" x="8" y="15.000000000000002" width="189" height="20.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMr-4h-sSq">
-                                        <rect key="frame" x="229" y="15" width="177" height="20.666666666666671"/>
+                                        <rect key="frame" x="229" y="15.000000000000002" width="177" height="20.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1222,6 +1222,6 @@
         <image name="successfullTransfer" width="183" height="183"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NbJ-Zx-YRq"/>
+        <segue reference="u9Q-tL-Gdw"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,11 +13,11 @@ PODS:
   - AFNetworking/Reachability (2.6.3)
   - AFNetworking/Security (2.6.3)
   - AFNetworking/Serialization (2.6.3)
-  - CocoaLumberjack (3.4.1):
-    - CocoaLumberjack/Default (= 3.4.1)
-    - CocoaLumberjack/Extensions (= 3.4.1)
-  - CocoaLumberjack/Default (3.4.1)
-  - CocoaLumberjack/Extensions (3.4.1):
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
     - CocoaLumberjack/Default
   - GoogleAnalytics (3.17.0)
   - HTCopyableLabel (0.0.7)
@@ -119,7 +119,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   le: bf3cacea7b4208b2bcda82b0c1c224603f5651a9
@@ -136,6 +136,6 @@ SPEC CHECKSUMS:
   Vialer-pjsip-iOS: 34ba5d7f2a756be28f5a2c8d72e5f68b08003844
   VialerSIPLib: 103ef429a90935fc16209a0d66f4dba42d39a031
 
-PODFILE CHECKSUM: 276f48807388635d8e774eebe49577c36f441a3a
+PODFILE CHECKSUM: 8727735d3df0baa2f9782f3321eb7ec9176f04da
 
 COCOAPODS: 1.5.0

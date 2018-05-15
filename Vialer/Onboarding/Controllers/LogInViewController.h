@@ -8,13 +8,15 @@
 #import "ForgotPasswordView.h"
 #import "LoginFormView.h"
 #import "SystemUser.h"
+#import "TwoFactorAuthenticationView.h"
 #import "UnlockView.h"
 
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, OnboardingScreens) {
-    OnboardingScreenLogin      = 0,
-    OnboardingScreenConfigure  = 1,
+    OnboardingScreenLogin = 0,
+    OnboardingScreenTwoFactorAuthentication = 1,
+    OnboardingScreenConfigure = 2,
     //Not supported yet
     //OnboardingScreenUnlock     = 2,
 };
@@ -26,10 +28,11 @@ typedef NS_ENUM(NSInteger, OnboardingScreens) {
 
 /* Forms which require user input */
 @property (nonatomic, strong) IBOutlet LoginFormView *loginFormView;
-@property (strong, nonatomic) IBOutlet ForgotPasswordView *forgotPasswordView;
+@property (nonatomic, strong) IBOutlet TwoFactorAuthenticationView *twoFactorAuthenticationView;
+@property (nonatomic, strong) IBOutlet ForgotPasswordView *forgotPasswordView;
 @property (nonatomic, strong) IBOutlet ConfigureFormView *configureFormView;
-@property (strong, nonatomic) IBOutlet UnlockView *unlockView;
-@property (strong, nonatomic) IBOutlet UIButton *closeButton;
+@property (nonatomic, strong) IBOutlet UnlockView *unlockView;
+@property (nonatomic, strong) IBOutlet UIButton *closeButton;
 
 
 /** Dependency Injection */

@@ -82,6 +82,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)deselectAllTextFields:(UITapGestureRecognizer*)recognizer {
     [self.loginFormView.usernameField resignFirstResponder];
     [self.loginFormView.passwordField resignFirstResponder];
+    [self.twoFactorAuthenticationView.tokenField resignFirstResponder];
     [self.configureFormView.phoneNumberField resignFirstResponder];
     [self.forgotPasswordView.emailTextfield resignFirstResponder];
 }
@@ -92,6 +93,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)clearAllTextFields {
     self.loginFormView.usernameField.text = nil;
     self.loginFormView.passwordField.text = nil;
+    self.twoFactorAuthenticationView.tokenField.text = nil;
     self.configureFormView.phoneNumberField.text = nil;
     self.configureFormView.outgoingNumberLabel.text = nil;
     self.forgotPasswordView.emailTextfield.text = nil;
@@ -124,6 +126,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
     // Make text field react to Enter to login!
     [self.loginFormView setTextFieldDelegate:self];
+    [self.twoFactorAuthenticationView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
     self.forgotPasswordView.emailTextfield.delegate = self;
 }
@@ -143,7 +146,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         NSString *username = self.loginFormView.usernameField.text;
         NSString *password = self.loginFormView.passwordField.text;
         if ([username length] > 0 && [password length] > 0) {
-            [self continueFromLoginFormViewToConfigureFormViewWithUserName:username andPassword:password];
+            [self continueFromConfigureFormViewToUnlockView];
             return YES;
         } else {
             self.alertShown = YES;
@@ -163,6 +166,10 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
             return NO;
         }
+    } else if ([self.twoFactorAuthenticationView.tokenField isEqual:textField]) {
+        [textField resignFirstResponder];
+        VialerLogDebug(@"show field!");
+        return YES;
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
         [textField resignFirstResponder];
         [self continueFromConfigureFormViewToUnlockView];
@@ -195,12 +202,17 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     return NO;
 }
 
-//Checks have been done to ensure the text fields have data, otherwise the button would not be clickable.
+// Checks have been done to ensure the text fields have data, otherwise the button would not be clickable.
 - (IBAction)loginButtonPushed:(UIButton *)sender {
     NSString *username = self.loginFormView.usernameField.text;
     NSString *password = self.loginFormView.passwordField.text;
 
-    [self continueFromLoginFormViewToConfigureFormViewWithUserName:username andPassword:password];
+    [self doLoginCheckForTwoFactorWithUserName:username password:password token:@"" successBlock:^ {
+        if ([SystemUser currentUser].apiToken != nil && ![[SystemUser currentUser].apiToken isEqualToString:@""]) {
+            [self retrievePhoneNumbersWithSuccessBlock:nil];
+        }
+    }];
+    [self deselectAllTextFields:nil];
 }
 
 - (void)checkIfEmailIsSetInEmailTextField {
@@ -212,7 +224,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         self.forgotPasswordView.requestPasswordButton.enabled = NO;
 }
 
-//Check for valid email is done, otherwise the button would not be enabled.
+// Check for valid email is done, otherwise the button would not be enabled.
 - (IBAction)requestPasswordButtonPressed:(UIButton *)sender {
     [self resetPasswordWithEmail:self.forgotPasswordView.emailTextfield.text];
 }
@@ -221,9 +233,13 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [self continueFromConfigureFormViewToUnlockView];
 }
 
-- (void)continueFromLoginFormViewToConfigureFormViewWithUserName:(NSString *)username andPassword:(NSString *)password {
-    [self doLoginCheckWithUname:username password:password successBlock:^{
-        [self retrievePhoneNumbersWithSuccessBlock:nil];
+- (IBAction)twoFactorAuthenticationViewContinueButtonPressed:(UIButton *)sender {
+    NSString *token = self.twoFactorAuthenticationView.tokenField.text;
+
+    [self doLoginCheckForTwoFactorWithUserName:self.loginFormView.usernameField.text password:self.loginFormView.passwordField.text token:token successBlock:^{
+        if (![[SystemUser currentUser].apiToken isEqualToString:@""]) {
+            [self retrievePhoneNumbersWithSuccessBlock:nil];
+        }
     }];
     [self deselectAllTextFields:nil];
 }
@@ -283,11 +299,14 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)addObservers{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appBecameActive:) name:UIApplicationWillEnterForegroundNotification object:nil];
+
 }
 
 - (void)removeObservers {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification*)notification {
@@ -334,10 +353,22 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
                      }];
 }
 
-- (void)keyboardWillHide:(NSNotification*)notification {
+- (void)keyboardWillHide:(NSNotification *)notification {
     if(!self.alertShown) {
         NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         [self.scene animateCloudsIntoViewWithDuration:duration];
+    }
+}
+
+- (void)appBecameActive:(NSNotification *)notification {
+    // Check if the Two Factor Authenitication view is active. If so check the clipboard for a token code.
+    if (self.twoFactorAuthenticationView.alpha == 1) {
+        VialerLogDebug(@"Check the PasteBoard for a 6 digits token field");
+        NSString *tokenFromPasteBoard = [TokenFromPasteBoard getToken];
+        if (![tokenFromPasteBoard isEqualToString:@""]) {
+            self.twoFactorAuthenticationView.tokenField.text = @"";
+            self.twoFactorAuthenticationView.tokenField.text = tokenFromPasteBoard;
+        }
     }
 }
 
@@ -452,14 +483,35 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)doLoginCheckWithUname:(NSString *)username password:(NSString *)password successBlock:(void (^)(void))success {
+- (void)doLoginCheckForTwoFactorWithUserName:(NSString *)username password:(NSString *)password token:(NSString *)token successBlock:(void(^)(void))success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
-    [self.currentUser loginWithUsername:username password:password completion:^(BOOL loggedin, NSError *error) {
+    [self.currentUser loginToCheckTwoFactorWithUserName:username password:password andToken:token completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error) {
         [SVProgressHUD dismiss];
-        if (loggedin) {
-            [self animateLoginViewToVisible:0.f delay:0.f];     // Hide
-            [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
-            [self.scene runActTwo];                       // Animate the clouds
+
+        if (!loggedin && tokenRequired && error && (error.code == SystemUserTwoFactorAuthenticationTokenInvalid || error.code == SystemUserTwoFactorAuthenticationTokenRequired)) {
+            [self animateLoginViewToVisible:0.f delay:0.f]; // Hide
+            [self animateTwoFactorAuthenticationViewToVisible:1.f delay:0.f];
+
+            [self.scene runActOneAndHalf];
+
+            if (error && error.code == SystemUserTwoFactorAuthenticationTokenInvalid) {
+                [self presentViewController:[UIAlertController alertControllerWithTitle:NSLocalizedString(@"Token invalid", nil)
+                                                                                message:NSLocalizedString(@"The two-factor authentication token is invalid", nil)
+                                                                   andDefaultButtonText:NSLocalizedString(@"Ok", nil)]
+                                   animated:YES
+                                 completion:nil];
+            } else if (success) {
+                success();
+            }
+        } else if (loggedin) {
+            // Hide the two factor authentication view.
+            [self animateTwoFactorAuthenticationViewToVisible:0.f delay:0.f];
+            // Hide the login view.
+            [self animateLoginViewToVisible:0.f delay:0.f];
+            // Show the configure the app view.
+            [self animateConfigureViewToVisible:1.f delay:0.f];
+
+            [self.scene runActTwo];
 
             //If a success block was provided, execute it
             if (success) {
@@ -487,7 +539,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)retrievePhoneNumbersWithSuccessBlock:(void (^)(void))success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Retrieving phone numbers...", nil)];
     [[SystemUser currentUser] updateSystemUserFromVGWithCompletion:^(NSError *error) {
-        [SVProgressHUD dismiss];
+    [SVProgressHUD dismiss];
 
         if (!error) {
             SystemUser *systemUser = [SystemUser currentUser];
@@ -531,6 +583,24 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         }
     };
     [UIView animateWithDuration:0.2f
+                          delay:delay
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animations
+                     completion:completion];
+}
+
+- (void)animateTwoFactorAuthenticationViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
+    void(^animations)(void) = ^{
+        [self.twoFactorAuthenticationView setAlpha:alpha];
+    };
+    void(^completion)(BOOL) = ^(BOOL finished) {
+        if (alpha == 1.f) {
+            [self.twoFactorAuthenticationView.tokenField becomeFirstResponder];
+        } else if (alpha == 0.f) {
+            [self.twoFactorAuthenticationView.tokenField resignFirstResponder];
+        }
+    };
+    [UIView animateWithDuration:0.8f
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations

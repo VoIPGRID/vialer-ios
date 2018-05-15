@@ -146,6 +146,17 @@ static CGFloat const VIASceneCloudAlpha = 0.3;
     }
 }
 
+- (void)runActOneAndHalf {
+    if (self.currentAct != VIASceneActOneAndHalf) {
+        [_onStage[0] animateToNextWithDuration:1.8 delay:0.2f];
+        [_onStage[1] animateToNextWithDuration:1.8 delay:0.2f];
+        [_onStage[2] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[3] animateToNextWithDuration:1.4 delay:0.6f];
+        [_onStage[4] animateToNextWithDuration:1.4 delay:0.6f];
+        self.currentAct = VIASceneActOneAndHalf;
+    }
+}
+
 - (void)runActTwo {
     if (self.currentAct != VIASceneActTwo) {
         [_onStage[0] animateToNextWithDuration:1.8 delay:0.2f];

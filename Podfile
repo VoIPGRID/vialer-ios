@@ -1,3 +1,6 @@
+source 'git@github.com:VoIPGRID/PrivatePodSpecs-iOS.git'
+source 'git@github.com:CocoaPods/Specs.git'
+
 platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 # use_frameworks!
@@ -12,7 +15,7 @@ def default_pods
     pod 'PBWebViewController'
     pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
-    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git'
+    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true 
     pod 'SVProgressHUD'
     pod 'VialerSIPLib'
 end
