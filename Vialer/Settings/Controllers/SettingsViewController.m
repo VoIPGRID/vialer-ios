@@ -12,7 +12,6 @@
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "Vialer-Swift.h"
-#import "VoIPGRIDRequestOperationManager.h"
 
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;

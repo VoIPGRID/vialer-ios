@@ -239,6 +239,23 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     }
 }
 
+- (void)updateDeviceRegistrationWithRemoteLoggingId {
+    VialerLogInfo(@"Update middelware with remote logging id");
+    NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
+
+    [self sentAPNSToken:storedAPNSToken withCompletion:^(NSError *error) {
+        if (error) {
+            VialerLogWarning(@"Updating the remote logging id to the middleware has failed %@", [error localizedDescription]);
+        } else {
+            if ([VialerLogger remoteLoggingEnabled]) {
+                VialerLogInfo(@"The remote logging id has been succesful sent to the middleware");
+            } else {
+                VialerLogInfo(@"The remote logging id has been succesful removed from the middleware");
+            }
+        }
+    }];
+}
+
 - (void)sentAPNSToken:(NSString *)apnsToken {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *applicationStateString;

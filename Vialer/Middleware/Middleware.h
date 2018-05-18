@@ -36,4 +36,9 @@ extern NSString * const _Nonnull MiddlewareRegistrationOnOtherDeviceNotification
  */
 - (void)handleReceivedAPSNPayload:(NSDictionary * _Nonnull) payload;
 
+/**
+ *  When remote logging is enabled in the settings, this function will update the
+ *  middleware with the remote logging id.
+ */
+- (void)updateDeviceRegistrationWithRemoteLoggingId;
 @end
