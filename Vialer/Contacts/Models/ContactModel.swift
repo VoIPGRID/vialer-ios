@@ -267,7 +267,10 @@ class ContactModel: NSObject {
                 // Add every phone number to search dictionary.
                 for number in contact.phoneNumbers {
                     let newNumber = PhoneNumber(number: number, contact: contact)
-                    self.phoneNumbersToContacts[newNumber.phoneNumber] = newNumber
+                    // Do not save contacts' phonenumbers which are less than 3 digits long
+                    if (newNumber.phoneNumber.count > 2) {
+                        self.phoneNumbersToContacts[newNumber.phoneNumber] = newNumber
+                    }
                 }
             }
 
