@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131F141B764C1E96AE2621BE /* libPods-ANNAbel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */; };
 		2863C1DD5459F397EDEDBE8D /* libPods-Verbonden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D985712C57AEF321FAC347 /* libPods-Verbonden.a */; };
 		2BB971BC191E29D60A6A49A8 /* libPods-VerbondenSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8854EC76887FC56F9F8B0D /* libPods-VerbondenSnapshotUITests.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
@@ -22,6 +23,7 @@
 		61C1C91605D6974E2A2BB4E6 /* libPods-Acceptatie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		7273048195AF10B9406CDD0A /* libPods-Acceptatie Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5A3A0941590C7F7200913A /* libPods-Acceptatie Voys.a */; };
+		872A659476081865A971CEEF /* libPods-ANNAbelSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */; };
 		A89BBA46A7258849FB9B1083 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */; };
 		C4052E561E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
 		C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
@@ -407,6 +409,154 @@
 		EE2317F920A030BD00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE23180C20A0468F00C05EB0 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
+		EE23180D20A0468F00C05EB0 /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
+		EE23180E20A0468F00C05EB0 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
+		EE23180F20A0468F00C05EB0 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		EE23181020A0468F00C05EB0 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		EE23181120A0468F00C05EB0 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
+		EE23181220A0468F00C05EB0 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
+		EE23181320A0468F00C05EB0 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
+		EE23181420A0468F00C05EB0 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
+		EE23181520A0468F00C05EB0 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
+		EE23181620A0468F00C05EB0 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
+		EE23181720A0468F00C05EB0 /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
+		EE23181820A0468F00C05EB0 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
+		EE23181920A0468F00C05EB0 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
+		EE23181A20A0468F00C05EB0 /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43FD69A1E76F4C6002593DD /* NotificationToken.swift */; };
+		EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
+		EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
+		EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
+		EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
+		EE23181F20A0468F00C05EB0 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE23182020A0468F00C05EB0 /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C415069F1E6EAF960086D0B7 /* NumberPadButton.m */; };
+		EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
+		EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
+		EE23182320A0468F00C05EB0 /* RecentCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0B81E72B0AB00A1E509 /* RecentCallManager.swift */; };
+		EE23182420A0468F00C05EB0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
+		EE23182520A0468F00C05EB0 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
+		EE23182620A0468F00C05EB0 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
+		EE23182720A0468F00C05EB0 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
+		EE23182820A0468F00C05EB0 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EAE11AF3BFA600C09935 /* GradientView.m */; };
+		EE23182920A0468F00C05EB0 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
+		EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
+		EE23182B20A0468F00C05EB0 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
+		EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
+		EE23182D20A0468F00C05EB0 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		EE23182E20A0468F00C05EB0 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		EE23182F20A0468F00C05EB0 /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */; };
+		EE23183020A0468F00C05EB0 /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2491E6D593100550E0C /* SegueHandler.swift */; };
+		EE23183120A0468F00C05EB0 /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */; };
+		EE23183220A0468F00C05EB0 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
+		EE23183320A0468F00C05EB0 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
+		EE23183420A0468F00C05EB0 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
+		EE23183520A0468F00C05EB0 /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
+		EE23183620A0468F00C05EB0 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
+		EE23183720A0468F00C05EB0 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
+		EE23183820A0468F00C05EB0 /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		EE23183920A0468F00C05EB0 /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFB1F876628002F0679 /* TransferInProgressViewController.swift */; };
+		EE23183A20A0468F00C05EB0 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43F06CA1E77D84400D6CAAA /* PhoneNumber.swift */; };
+		EE23183B20A0468F00C05EB0 /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
+		EE23183C20A0468F00C05EB0 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24E1E6D954400550E0C /* Resource.swift */; };
+		EE23183D20A0468F00C05EB0 /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
+		EE23183E20A0468F00C05EB0 /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
+		EE23183F20A0468F00C05EB0 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
+		EE23184020A0468F00C05EB0 /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */; };
+		EE23184120A0468F00C05EB0 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
+		EE23184220A0468F00C05EB0 /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */; };
+		EE23184320A0468F00C05EB0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		EE23184420A0468F00C05EB0 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
+		EE23184520A0468F00C05EB0 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
+		EE23184620A0468F00C05EB0 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
+		EE23184720A0468F00C05EB0 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
+		EE23184820A0468F00C05EB0 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
+		EE23184920A0468F00C05EB0 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
+		EE23184A20A0468F00C05EB0 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C41506A51E6EAFA80086D0B7 /* PasteableUILabel.m */; };
+		EE23184B20A0468F00C05EB0 /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
+		EE23184C20A0468F00C05EB0 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
+		EE23184D20A0468F00C05EB0 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
+		EE23184E20A0468F00C05EB0 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
+		EE23184F20A0468F00C05EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		EE23185020A0468F00C05EB0 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
+		EE23185120A0468F00C05EB0 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		EE23185220A0468F00C05EB0 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
+		EE23185320A0468F00C05EB0 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EE23185420A0468F00C05EB0 /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41506DA1E6EB1860086D0B7 /* DialerViewController.swift */; };
+		EE23185520A0468F00C05EB0 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		EE23185620A0468F00C05EB0 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
+		EE23185720A0468F00C05EB0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B21E682A540097E808 /* UITableView.swift */; };
+		EE23185820A0468F00C05EB0 /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
+		EE23185920A0468F00C05EB0 /* RecentCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0BD1E72B20000A1E509 /* RecentCall.swift */; };
+		EE23185A20A0468F00C05EB0 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B11E682A540097E808 /* UIImage.swift */; };
+		EE23185B20A0468F00C05EB0 /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		EE23185C20A0468F00C05EB0 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C81E72DED000A1E509 /* Managed.swift */; };
+		EE23185D20A0468F00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		EE23185E20A0468F00C05EB0 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
+		EE23185F20A0468F00C05EB0 /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		EE23186020A0468F00C05EB0 /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
+		EE23186120A0468F00C05EB0 /* Vialer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E611E729F780067FE40 /* Vialer.xcdatamodeld */; };
+		EE23186220A0468F00C05EB0 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
+		EE23186320A0468F00C05EB0 /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		EE23186420A0468F00C05EB0 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
+		EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
+		EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
+		EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
+		EE23186820A0468F00C05EB0 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
+		EE23186A20A0468F00C05EB0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
+		EE23186B20A0468F00C05EB0 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
+		EE23186C20A0468F00C05EB0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
+		EE23186D20A0468F00C05EB0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		EE23186E20A0468F00C05EB0 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */; };
+		EE23186F20A0468F00C05EB0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
+		EE23187020A0468F00C05EB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
+		EE23187120A0468F00C05EB0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D91A1E510C0033FF78 /* CoreVideo.framework */; };
+		EE23187220A0468F00C05EB0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D71A1E51040033FF78 /* CoreMedia.framework */; };
+		EE23187320A0468F00C05EB0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
+		EE23187420A0468F00C05EB0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
+		EE23187520A0468F00C05EB0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
+		EE23187620A0468F00C05EB0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */; };
+		EE23187720A0468F00C05EB0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
+		EE23187820A0468F00C05EB0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
+		EE23187920A0468F00C05EB0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
+		EE23187A20A0468F00C05EB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
+		EE23187B20A0468F00C05EB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
+		EE23187C20A0468F00C05EB0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
+		EE23188120A0468F00C05EB0 /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
+		EE23188220A0468F00C05EB0 /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
+		EE23188320A0468F00C05EB0 /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
+		EE23188420A0468F00C05EB0 /* TwoStepCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */; };
+		EE23188520A0468F00C05EB0 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
+		EE23188620A0468F00C05EB0 /* dtmf-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854131A7FE3CE00121366 /* dtmf-1.aif */; };
+		EE23188720A0468F00C05EB0 /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
+		EE23188820A0468F00C05EB0 /* dtmf-2.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854141A7FE3CE00121366 /* dtmf-2.aif */; };
+		EE23188920A0468F00C05EB0 /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
+		EE23188A20A0468F00C05EB0 /* dtmf-*.aif in Resources */ = {isa = PBXBuildFile; fileRef = C49A46AB1E6829DD0097E808 /* dtmf-*.aif */; };
+		EE23188B20A0468F00C05EB0 /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
+		EE23188C20A0468F00C05EB0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
+		EE23188E20A0468F00C05EB0 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
+		EE23188F20A0468F00C05EB0 /* dtmf-3.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854151A7FE3CE00121366 /* dtmf-3.aif */; };
+		EE23189020A0468F00C05EB0 /* dtmf-4.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854161A7FE3CE00121366 /* dtmf-4.aif */; };
+		EE23189120A0468F00C05EB0 /* dtmf-5.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854171A7FE3CE00121366 /* dtmf-5.aif */; };
+		EE23189220A0468F00C05EB0 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
+		EE23189320A0468F00C05EB0 /* dtmf-6.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854181A7FE3CE00121366 /* dtmf-6.aif */; };
+		EE23189520A0468F00C05EB0 /* dtmf-7.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854191A7FE3CE00121366 /* dtmf-7.aif */; };
+		EE23189620A0468F00C05EB0 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
+		EE23189720A0468F00C05EB0 /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */; };
+		EE23189820A0468F00C05EB0 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
+		EE23189920A0468F00C05EB0 /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
+		EE23189A20A0468F00C05EB0 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
+		EE23189B20A0468F00C05EB0 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
+		EE23189C20A0468F00C05EB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
+		EE23189D20A0468F00C05EB0 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
+		EE23189E20A0468F00C05EB0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
+		EE2318AC20A046AD00C05EB0 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
+		EE2318AD20A046AD00C05EB0 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
+		EE2318BC20A046BB00C05EB0 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
+		EE2318BD20A046BB00C05EB0 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
+		EE2318BE20A046BB00C05EB0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
+		EE2318C820A0476300C05EB0 /* ANNAbelIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EE2318D020A052D900C05EB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
+		EE2318D120A052EA00C05EB0 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180220A0442000C05EB0 /* Config.plist */; };
 		EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		EE3C47B22080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		EE3C47B32080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
@@ -573,6 +723,8 @@
 		EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */; };
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
+		EE65918C20AAD6BC00305980 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */; };
 		EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2671F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
@@ -829,6 +981,20 @@
 			remoteGlobalIDString = FB4226CC182261D200707349;
 			remoteInfo = Vialer;
 		};
+		EE2318C920A0476300C05EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE2318AA20A046AD00C05EB0;
+			remoteInfo = ANNAbelIntentsExtension;
+		};
+		EE2318D220A0533200C05EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE23180720A0468F00C05EB0;
+			remoteInfo = ANNAbel;
+		};
 		EE61F4A91F1DE042006E890F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB4226C5182261D200707349 /* Project object */;
@@ -905,6 +1071,27 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE2318A120A0468F00C05EB0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318CB20A0476400C05EB0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EE2318C820A0476300C05EB0 /* ANNAbelIntentsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EE61F4871F1DDDE4006E890F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -950,12 +1137,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0214FE90AB7D3EC6B381BA86 /* Pods-VialerSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		030913FF544600ABE3DC3AFD /* libPods-Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		06004A45AC48976A5FBEFC84 /* Pods-VialerSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
-		12624E425B3179740E407E2C /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
+		03F7D705E538F64D58EC5AEE /* Pods-ANNAbel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel.release.xcconfig"; sourceTree = "<group>"; };
+		0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
+		1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		205B495E88D5C4F6ADCE7353 /* Pods-VerbondenSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D9DB42F29C50D5C1326FDDD /* Pods-Verbonden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.release.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.release.xcconfig"; sourceTree = "<group>"; };
 		2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		311FF6CE99A3AD079E153505 /* Pods-ANNAbelSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		32C5444D33F89494D0435E88 /* Pods-Acceptatie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie/Pods-Acceptatie.debug.xcconfig"; sourceTree = "<group>"; };
 		3C5A3A0941590C7F7200913A /* libPods-Acceptatie Voys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Acceptatie Voys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D15A4571B2ECAA8004C5012 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -973,18 +1163,21 @@
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordView.m; path = Onboarding/Forms/ForgotPasswordView.m; sourceTree = "<group>"; };
 		3DE6EAE01AF3BFA600C09935 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientView.h; path = Helpers/GradientView.h; sourceTree = "<group>"; };
 		3DE6EAE11AF3BFA600C09935 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradientView.m; path = Helpers/GradientView.m; sourceTree = "<group>"; };
+		404C9E98A13352F73C16A694 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		43019F121BACD3F515C3245B /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
-		511F0A13DA4464E073A3F703 /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
-		5749831272C1D0CB5781D9DD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
+		60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		69D985712C57AEF321FAC347 /* libPods-Verbonden.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Verbonden.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Acceptatie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DE80135FCC84CCDC1ADB19 /* Pods-Acceptatie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie/Pods-Acceptatie.release.xcconfig"; sourceTree = "<group>"; };
 		7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C5D445BD838821356805D9A /* Pods-ANNAbel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel.debug.xcconfig"; sourceTree = "<group>"; };
 		9ECC1325D2FFCDD09B2511F4 /* Pods-VerbondenSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AD344FDE430A2F7082E8E427 /* Pods-Acceptatie Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie Voys/Pods-Acceptatie Voys.release.xcconfig"; sourceTree = "<group>"; };
+		AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbelSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8854EC76887FC56F9F8B0D /* libPods-VerbondenSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VerbondenSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4052E551E2F64FE00F45B9C /* String+regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+regex.swift"; sourceTree = "<group>"; };
 		C406C9E91BF4CDE9001363CA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsViewController.h; path = Contacts/Controllers/ContactsViewController.h; sourceTree = "<group>"; };
@@ -1118,6 +1311,17 @@
 		EE1C7B7A1F87774F00708D96 /* SipCallingButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
+		EE2317FD20A0442000C05EB0 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
+		EE2317FF20A0442000C05EB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANNAbel-Info.plist"; sourceTree = "<group>"; };
+		EE23180220A0442000C05EB0 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		EE23180320A0442000C05EB0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ANNAbelIntentsExtension.plist; sourceTree = "<group>"; };
+		EE2318A820A0468F00C05EB0 /* ANNAbel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ANNAbel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ANNAbelIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANNAbelSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2318CE20A04E8100C05EB0 /* .env.annabel */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.annabel; sourceTree = "<group>"; };
+		EE2318E420A054BD00C05EB0 /* VerbondenSnapshotUITests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "VerbondenSnapshotUITests copy-Info.plist"; path = "/Users/redmerloen/Programming/Vialer/iOS/vialer-ios/VerbondenSnapshotUITests copy-Info.plist"; sourceTree = "<absolute>"; };
 		EE3C47AE2080DBD500CC80E5 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
 		EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallingViewController.m; sourceTree = "<group>"; };
 		EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCall.m; sourceTree = "<group>"; };
@@ -1153,6 +1357,8 @@
 		EE61F49B1F1DDF1E006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
+		EE65918720AACEAB00305980 /* ANNAbel.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ANNAbel.xcassets; sourceTree = "<group>"; };
+		EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Vialer/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
@@ -1376,6 +1582,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE23186920A0468F00C05EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE23186A20A0468F00C05EB0 /* AudioToolbox.framework in Frameworks */,
+				EE23186B20A0468F00C05EB0 /* PushKit.framework in Frameworks */,
+				EE23186C20A0468F00C05EB0 /* SystemConfiguration.framework in Frameworks */,
+				EE23186D20A0468F00C05EB0 /* MobileCoreServices.framework in Frameworks */,
+				EE23186E20A0468F00C05EB0 /* AdSupport.framework in Frameworks */,
+				EE23186F20A0468F00C05EB0 /* CoreData.framework in Frameworks */,
+				EE23187020A0468F00C05EB0 /* AVFoundation.framework in Frameworks */,
+				EE23187120A0468F00C05EB0 /* CoreVideo.framework in Frameworks */,
+				EE23187220A0468F00C05EB0 /* CoreMedia.framework in Frameworks */,
+				EE23187320A0468F00C05EB0 /* CoreAudio.framework in Frameworks */,
+				EE23187420A0468F00C05EB0 /* CFNetwork.framework in Frameworks */,
+				EE23187520A0468F00C05EB0 /* CoreTelephony.framework in Frameworks */,
+				EE23187620A0468F00C05EB0 /* QuartzCore.framework in Frameworks */,
+				EE23187720A0468F00C05EB0 /* AddressBook.framework in Frameworks */,
+				EE23187820A0468F00C05EB0 /* AddressBookUI.framework in Frameworks */,
+				EE23187920A0468F00C05EB0 /* Security.framework in Frameworks */,
+				EE23187A20A0468F00C05EB0 /* UIKit.framework in Frameworks */,
+				EE23187B20A0468F00C05EB0 /* Foundation.framework in Frameworks */,
+				EE23187C20A0468F00C05EB0 /* CoreGraphics.framework in Frameworks */,
+				131F141B764C1E96AE2621BE /* libPods-ANNAbel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318AE20A046AD00C05EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318BF20A046BB00C05EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				872A659476081865A971CEEF /* libPods-ANNAbelSnapshotUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EE61F44E1F1DDDE4006E890F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1486,16 +1734,20 @@
 				2D9DB42F29C50D5C1326FDDD /* Pods-Verbonden.release.xcconfig */,
 				205B495E88D5C4F6ADCE7353 /* Pods-VerbondenSnapshotUITests.debug.xcconfig */,
 				9ECC1325D2FFCDD09B2511F4 /* Pods-VerbondenSnapshotUITests.release.xcconfig */,
-				511F0A13DA4464E073A3F703 /* Pods-Vialer.debug.xcconfig */,
-				12624E425B3179740E407E2C /* Pods-Vialer.release.xcconfig */,
-				5749831272C1D0CB5781D9DD /* Pods-VialerSnapshotUITests.debug.xcconfig */,
-				06004A45AC48976A5FBEFC84 /* Pods-VialerSnapshotUITests.release.xcconfig */,
 				FE5913D217D7DF2C0E450B4F /* Pods-VialerTests.debug.xcconfig */,
 				FE50810791825AEFA029BC70 /* Pods-VialerTests.release.xcconfig */,
 				7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */,
 				43019F121BACD3F515C3245B /* Pods-Voys.release.xcconfig */,
 				CDF2ECAB9F575E477A6C52D6 /* Pods-VoysSnapshotUITests.debug.xcconfig */,
 				60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */,
+				0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */,
+				404C9E98A13352F73C16A694 /* Pods-Vialer.release.xcconfig */,
+				9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */,
+				0214FE90AB7D3EC6B381BA86 /* Pods-VialerSnapshotUITests.release.xcconfig */,
+				9C5D445BD838821356805D9A /* Pods-ANNAbel.debug.xcconfig */,
+				03F7D705E538F64D58EC5AEE /* Pods-ANNAbel.release.xcconfig */,
+				311FF6CE99A3AD079E153505 /* Pods-ANNAbelSnapshotUITests.debug.xcconfig */,
+				60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1608,6 +1860,7 @@
 		C41FD8D01C60A12500BBE6D7 /* Branding */ = {
 			isa = PBXGroup;
 			children = (
+				EE2317FC20A0442000C05EB0 /* ANNAbel */,
 				F208516D1D2693A300A17E71 /* Acceptatie */,
 				C490ADEF1D086458004A8F83 /* Verbonden */,
 				F208517F1D269DD300A17E71 /* Vialer */,
@@ -2025,6 +2278,21 @@
 			path = Calling/SIP/Utils;
 			sourceTree = "<group>";
 		};
+		EE2317FC20A0442000C05EB0 /* ANNAbel */ = {
+			isa = PBXGroup;
+			children = (
+				EE65918720AACEAB00305980 /* ANNAbel.xcassets */,
+				EE2317FD20A0442000C05EB0 /* Snapshot-Constants.swift */,
+				EE2317FE20A0442000C05EB0 /* InfoPlist.strings */,
+				EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */,
+				EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */,
+				EE23180220A0442000C05EB0 /* Config.plist */,
+				EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */,
+			);
+			name = ANNAbel;
+			path = Branding/ANNAbel;
+			sourceTree = "<group>";
+		};
 		EE3C47AD2080DBD500CC80E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2174,6 +2442,7 @@
 				F2872D911CC8CF6000D3ACB0 /* .env.vialer */,
 				F2872D921CC8CF6000D3ACB0 /* .env.voys */,
 				F2E5EF131D09736100F7C699 /* .env.verbonden */,
+				EE2318CE20A04E8100C05EB0 /* .env.annabel */,
 				F2872D941CC8CF6000D3ACB0 /* Appfile */,
 				F2872E261CC8CF6000D3ACB0 /* Deliverfile */,
 				F2872E271CC8CF6000D3ACB0 /* Fastfile */,
@@ -2456,6 +2725,7 @@
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
 				06906700C7A484A2B879CFF7 /* Pods */,
+				EE2318E420A054BD00C05EB0 /* VerbondenSnapshotUITests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2474,6 +2744,9 @@
 				C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */,
 				C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */,
 				EE61F48D1F1DDDE4006E890F /* Acceptatie Voys.app */,
+				EE2318A820A0468F00C05EB0 /* ANNAbel.app */,
+				EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */,
+				EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2509,6 +2782,8 @@
 				575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */,
 				030913FF544600ABE3DC3AFD /* libPods-Voys.a */,
 				8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */,
+				1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */,
+				AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2717,6 +2992,69 @@
 			productReference = C4F49F271BF0B45700C25159 /* VialerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EE23180720A0468F00C05EB0 /* ANNAbel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE2318A520A0468F00C05EB0 /* Build configuration list for PBXNativeTarget "ANNAbel" */;
+			buildPhases = (
+				D77399F012FE380C2326B982 /* [CP] Check Pods Manifest.lock */,
+				EE23180B20A0468F00C05EB0 /* Sources */,
+				EE23186920A0468F00C05EB0 /* Frameworks */,
+				EE23187E20A0468F00C05EB0 /* Resources */,
+				EE23189F20A0468F00C05EB0 /* Update Version number */,
+				EE2318A020A0468F00C05EB0 /* Update Build number */,
+				EE2318A120A0468F00C05EB0 /* Embed Frameworks */,
+				EE2318CB20A0476400C05EB0 /* Embed App Extensions */,
+				E5C90D794402B1DA425A46E5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE2318CA20A0476300C05EB0 /* PBXTargetDependency */,
+			);
+			name = ANNAbel;
+			productName = Vialer;
+			productReference = EE2318A820A0468F00C05EB0 /* ANNAbel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EE2318AA20A046AD00C05EB0 /* ANNAbelIntentsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE2318B220A046AD00C05EB0 /* Build configuration list for PBXNativeTarget "ANNAbelIntentsExtension" */;
+			buildPhases = (
+				EE2318AB20A046AD00C05EB0 /* Sources */,
+				EE2318AE20A046AD00C05EB0 /* Frameworks */,
+				EE2318AF20A046AD00C05EB0 /* Resources */,
+				EE2318B020A046AD00C05EB0 /* Update Version number */,
+				EE2318B120A046AD00C05EB0 /* Update Build number */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ANNAbelIntentsExtension;
+			productName = VialerIntentsExtension;
+			productReference = EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		EE2318B720A046BB00C05EB0 /* ANNAbelSnapshotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE2318C320A046BB00C05EB0 /* Build configuration list for PBXNativeTarget "ANNAbelSnapshotUITests" */;
+			buildPhases = (
+				F8C27C5CA78E4CB93851A5ED /* [CP] Check Pods Manifest.lock */,
+				EE2318BB20A046BB00C05EB0 /* Sources */,
+				EE2318BF20A046BB00C05EB0 /* Frameworks */,
+				EE2318C120A046BB00C05EB0 /* Resources */,
+				6AC3DD9E9E0C6BE2549CA2BD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE2318D320A0533200C05EB0 /* PBXTargetDependency */,
+			);
+			name = ANNAbelSnapshotUITests;
+			productName = SnapshotUITests;
+			productReference = EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		EE61F3F11F1DDDE4006E890F /* Acceptatie Voys */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EE61F48A1F1DDDE4006E890F /* Build configuration list for PBXNativeTarget "Acceptatie Voys" */;
@@ -2834,7 +3172,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
 					C41FD8551C60A08400BBE6D7 = {
@@ -2879,6 +3217,16 @@
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = FB4226CC182261D200707349;
+					};
+					EE23180720A0468F00C05EB0 = {
+						ProvisioningStyle = Manual;
+					};
+					EE2318AA20A046AD00C05EB0 = {
+						ProvisioningStyle = Manual;
+					};
+					EE2318B720A046BB00C05EB0 = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = EE23180720A0468F00C05EB0;
 					};
 					EE61F3F11F1DDDE4006E890F = {
 						DevelopmentTeam = AM8JDXQ3L4;
@@ -2945,6 +3293,9 @@
 				C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */,
 				C490ADFA1D088535004A8F83 /* VerbondenSnapshotUITests */,
 				C4F49F261BF0B45700C25159 /* VialerTests */,
+				EE23180720A0468F00C05EB0 /* ANNAbel */,
+				EE2318AA20A046AD00C05EB0 /* ANNAbelIntentsExtension */,
+				EE2318B720A046BB00C05EB0 /* ANNAbelSnapshotUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -3059,6 +3410,59 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C4F49F251BF0B45700C25159 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE23187E20A0468F00C05EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE2318D020A052D900C05EB0 /* InfoPlist.strings in Resources */,
+				EE23188120A0468F00C05EB0 /* dtmf-#.aif in Resources */,
+				EE23188220A0468F00C05EB0 /* dtmf-0.aif in Resources */,
+				EE23188320A0468F00C05EB0 /* AvailabilityStoryboard.storyboard in Resources */,
+				EE23188420A0468F00C05EB0 /* TwoStepCallingStoryboard.storyboard in Resources */,
+				EE23188520A0468F00C05EB0 /* ContactsStoryboard.storyboard in Resources */,
+				EE23188620A0468F00C05EB0 /* dtmf-1.aif in Resources */,
+				EE23188720A0468F00C05EB0 /* SideMenuStoryboard.storyboard in Resources */,
+				EE65918C20AAD6BC00305980 /* GoogleService-Info.plist in Resources */,
+				EE23188820A0468F00C05EB0 /* dtmf-2.aif in Resources */,
+				EE23188920A0468F00C05EB0 /* ReachabilityBarStoryboard.storyboard in Resources */,
+				EE23188A20A0468F00C05EB0 /* dtmf-*.aif in Resources */,
+				EE23188B20A0468F00C05EB0 /* RecentsStoryboard.storyboard in Resources */,
+				EE23188C20A0468F00C05EB0 /* Localizable.strings in Resources */,
+				EE23188E20A0468F00C05EB0 /* ringtone.wav in Resources */,
+				EE23188F20A0468F00C05EB0 /* dtmf-3.aif in Resources */,
+				EE23189020A0468F00C05EB0 /* dtmf-4.aif in Resources */,
+				EE23189120A0468F00C05EB0 /* dtmf-5.aif in Resources */,
+				EE23189220A0468F00C05EB0 /* LogInViewController.xib in Resources */,
+				EE23189320A0468F00C05EB0 /* dtmf-6.aif in Resources */,
+				EE23189520A0468F00C05EB0 /* dtmf-7.aif in Resources */,
+				EE23189620A0468F00C05EB0 /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				EE23189720A0468F00C05EB0 /* SIPCallingStoryboard.storyboard in Resources */,
+				EE23189820A0468F00C05EB0 /* disconnected.wav in Resources */,
+				EE23189920A0468F00C05EB0 /* dtmf-8.aif in Resources */,
+				EE23189A20A0468F00C05EB0 /* SettingsStoryboard.storyboard in Resources */,
+				EE23189B20A0468F00C05EB0 /* dtmf-9.aif in Resources */,
+				EE2318D120A052EA00C05EB0 /* Config.plist in Resources */,
+				EE23189C20A0468F00C05EB0 /* Images.xcassets in Resources */,
+				EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */,
+				EE23189D20A0468F00C05EB0 /* DialerStoryboard.storyboard in Resources */,
+				EE23189E20A0468F00C05EB0 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318AF20A046AD00C05EB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318C120A046BB00C05EB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3341,6 +3745,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6AC3DD9E9E0C6BE2549CA2BD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DDE0F625C2FC239BCC302FA /* [CP] Copy Pods Resources */ = {
@@ -3642,6 +4068,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D77399F012FE380C2326B982 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ANNAbel-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DA1C226A62F17EE4FDE6D589 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3660,6 +4104,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E5C90D794402B1DA425A46E5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh",
+				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E7D405A334A222AF0147E794 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3676,6 +4142,64 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE23189F20A0468F00C05EB0 /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		EE2318A020A0468F00C05EB0 /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			showEnvVarsInLog = 0;
+		};
+		EE2318B020A046AD00C05EB0 /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		EE2318B120A046AD00C05EB0 /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		EE61F4851F1DDDE4006E890F /* Update Version number */ = {
@@ -3764,6 +4288,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		F8C27C5CA78E4CB93851A5ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ANNAbelSnapshotUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -4039,6 +4581,125 @@
 				C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */,
 				F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */,
 				C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE23180B20A0468F00C05EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE23180C20A0468F00C05EB0 /* NoAnimationSegue.m in Sources */,
+				EE23180D20A0468F00C05EB0 /* URLRequestExtensions.swift in Sources */,
+				EE23180E20A0468F00C05EB0 /* SIPUtils.m in Sources */,
+				EE23180F20A0468F00C05EB0 /* FileManagerExtensions.swift in Sources */,
+				EE23181020A0468F00C05EB0 /* TwoFactorAuthenticationView.m in Sources */,
+				EE23181120A0468F00C05EB0 /* UserProfileWebViewController.m in Sources */,
+				EE23181220A0468F00C05EB0 /* AvailabilityModel.m in Sources */,
+				EE23181320A0468F00C05EB0 /* RoundedAndColoredUIButton.m in Sources */,
+				EE23181420A0468F00C05EB0 /* MainTabBarViewController.m in Sources */,
+				EE23181520A0468F00C05EB0 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				EE23181620A0468F00C05EB0 /* MiddlewareRequestOperationManager.m in Sources */,
+				EE23181720A0468F00C05EB0 /* String+regex.swift in Sources */,
+				EE23181820A0468F00C05EB0 /* ForgotPasswordView.m in Sources */,
+				EE23181920A0468F00C05EB0 /* SIPIncomingCallViewController.m in Sources */,
+				EE23181A20A0468F00C05EB0 /* NotificationToken.swift in Sources */,
+				EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */,
+				EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */,
+				EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */,
+				EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */,
+				EE23181F20A0468F00C05EB0 /* SetupCallTransferViewController.swift in Sources */,
+				EE23182020A0468F00C05EB0 /* NumberPadButton.m in Sources */,
+				EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */,
+				EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */,
+				EE23182320A0468F00C05EB0 /* RecentCallManager.swift in Sources */,
+				EE23182420A0468F00C05EB0 /* SettingsViewController.m in Sources */,
+				EE23182520A0468F00C05EB0 /* VialerDrawerViewController.m in Sources */,
+				EE23182620A0468F00C05EB0 /* SystemUser.m in Sources */,
+				EE23182720A0468F00C05EB0 /* VialerLogger.m in Sources */,
+				EE23182820A0468F00C05EB0 /* GradientView.m in Sources */,
+				EE23182920A0468F00C05EB0 /* VIAScene.m in Sources */,
+				EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */,
+				EE23182B20A0468F00C05EB0 /* AvailabilityViewController.m in Sources */,
+				EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */,
+				EE23182D20A0468F00C05EB0 /* TwoStepCallingViewController.m in Sources */,
+				EE23182E20A0468F00C05EB0 /* CircleWithShadow.m in Sources */,
+				EE23182F20A0468F00C05EB0 /* WebserviceAuthentication.swift in Sources */,
+				EE23183020A0468F00C05EB0 /* SegueHandler.swift in Sources */,
+				EE23183120A0468F00C05EB0 /* StartCallConvertible.swift in Sources */,
+				EE23183220A0468F00C05EB0 /* UIDeviceExtensions.swift in Sources */,
+				EE23183320A0468F00C05EB0 /* UIAlertController+Vialer.m in Sources */,
+				EE23183420A0468F00C05EB0 /* EditNumberViewController.m in Sources */,
+				EE23183520A0468F00C05EB0 /* VialerWebViewController.m in Sources */,
+				EE23183620A0468F00C05EB0 /* UIViewControllerExtensions.swift in Sources */,
+				EE23183720A0468F00C05EB0 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				EE23183820A0468F00C05EB0 /* ReachabilityBarViewController.swift in Sources */,
+				EE23183920A0468F00C05EB0 /* TransferInProgressViewController.swift in Sources */,
+				EE23183A20A0468F00C05EB0 /* PhoneNumber.swift in Sources */,
+				EE23183B20A0468F00C05EB0 /* ConfigureFormView.m in Sources */,
+				EE23183C20A0468F00C05EB0 /* Resource.swift in Sources */,
+				EE23183D20A0468F00C05EB0 /* ColorConfiguration.m in Sources */,
+				EE23183E20A0468F00C05EB0 /* LoginFormView.m in Sources */,
+				EE23183F20A0468F00C05EB0 /* PhoneNumberUtils.m in Sources */,
+				EE23184020A0468F00C05EB0 /* NSUserActivity+StartCallConvertible.swift in Sources */,
+				EE23184120A0468F00C05EB0 /* ActivateSIPAccountViewController.m in Sources */,
+				EE23184220A0468F00C05EB0 /* SIPCallingViewController.swift in Sources */,
+				EE23184320A0468F00C05EB0 /* Reachability.swift in Sources */,
+				EE23184420A0468F00C05EB0 /* ReachabilityHelper.swift in Sources */,
+				EE23184520A0468F00C05EB0 /* PushedCall.swift in Sources */,
+				EE23184620A0468F00C05EB0 /* KeypadViewController.swift in Sources */,
+				EE23184720A0468F00C05EB0 /* RecentTableViewCell.m in Sources */,
+				EE23184820A0468F00C05EB0 /* SipCallingButton.m in Sources */,
+				EE23184920A0468F00C05EB0 /* Configuration.m in Sources */,
+				EE23184A20A0468F00C05EB0 /* PasteableUILabel.m in Sources */,
+				EE23184B20A0468F00C05EB0 /* WebserviceProtocol.swift in Sources */,
+				EE23184C20A0468F00C05EB0 /* Webservice.swift in Sources */,
+				EE23184D20A0468F00C05EB0 /* VialerGAITracker.swift in Sources */,
+				EE23184E20A0468F00C05EB0 /* Middleware.m in Sources */,
+				EE23184F20A0468F00C05EB0 /* AppDelegate.swift in Sources */,
+				EE23185020A0468F00C05EB0 /* RecentsTimeConverter.swift in Sources */,
+				EE23185120A0468F00C05EB0 /* CircleWithWhiteIcon.m in Sources */,
+				EE23185220A0468F00C05EB0 /* ButtonWithBottomBorder.m in Sources */,
+				EE23185320A0468F00C05EB0 /* TokenFromPasteBoard.swift in Sources */,
+				EE23185420A0468F00C05EB0 /* DialerViewController.swift in Sources */,
+				EE23185520A0468F00C05EB0 /* VialerIconView.m in Sources */,
+				EE23185620A0468F00C05EB0 /* UnlockView.m in Sources */,
+				EE23185720A0468F00C05EB0 /* UITableView.swift in Sources */,
+				EE23185820A0468F00C05EB0 /* AnimatedImageView.m in Sources */,
+				EE23185920A0468F00C05EB0 /* RecentCall.swift in Sources */,
+				EE23185A20A0468F00C05EB0 /* UIImage.swift in Sources */,
+				EE23185B20A0468F00C05EB0 /* BubblingPoints.m in Sources */,
+				EE23185C20A0468F00C05EB0 /* Managed.swift in Sources */,
+				EE23185D20A0468F00C05EB0 /* ColoredCircle.m in Sources */,
+				EE23185E20A0468F00C05EB0 /* AppInfo.swift in Sources */,
+				EE23185F20A0468F00C05EB0 /* TwoStepCall.m in Sources */,
+				EE23186020A0468F00C05EB0 /* NSString+Mobile.m in Sources */,
+				EE23186120A0468F00C05EB0 /* Vialer.xcdatamodeld in Sources */,
+				EE23186220A0468F00C05EB0 /* RecentsViewController.swift in Sources */,
+				EE23186320A0468F00C05EB0 /* VialerLogger.swift in Sources */,
+				EE23186420A0468F00C05EB0 /* ContactModel.swift in Sources */,
+				EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */,
+				EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */,
+				EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */,
+				EE23186820A0468F00C05EB0 /* APNSHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318AB20A046AD00C05EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE2318AC20A046AD00C05EB0 /* IntentHandler.swift in Sources */,
+				EE2318AD20A046AD00C05EB0 /* UIDeviceExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2318BB20A046BB00C05EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE2318BC20A046BB00C05EB0 /* Snapshot-Constants.swift in Sources */,
+				EE2318BD20A046BB00C05EB0 /* SnapshotUITests.swift in Sources */,
+				EE2318BE20A046BB00C05EB0 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4394,6 +5055,16 @@
 			target = FB4226CC182261D200707349 /* Vialer */;
 			targetProxy = C4E8600B1BF14C970051BFDE /* PBXContainerItemProxy */;
 		};
+		EE2318CA20A0476300C05EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE2318AA20A046AD00C05EB0 /* ANNAbelIntentsExtension */;
+			targetProxy = EE2318C920A0476300C05EB0 /* PBXContainerItemProxy */;
+		};
+		EE2318D320A0533200C05EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE23180720A0468F00C05EB0 /* ANNAbel */;
+			targetProxy = EE2318D220A0533200C05EB0 /* PBXContainerItemProxy */;
+		};
 		EE61F4AA1F1DE042006E890F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C431722F1DFE85B3005FF8EA /* VoysIntentsExtension */;
@@ -4482,6 +5153,15 @@
 				EE5C22221F46EDA300AFB9E2 /* nl */,
 			);
 			name = SIPCallingStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		EE2317FE20A0442000C05EB0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE2317FF20A0442000C05EB0 /* en */,
+				EE23180320A0442000C05EB0 /* nl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */ = {
@@ -5090,6 +5770,240 @@
 			};
 			name = Release;
 		};
+		EE2318A620A0468F00C05EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C5D445BD838821356805D9A /* Pods-ANNAbel.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J6QW4N3NV4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"PJ_AUTOCONF=1",
+					SANDBOX_APNS_TOKEN,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/ANNAbel/ANNAbel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bellenmetannabel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5238e0b6-0193-4b6f-97d9-029ab5bbc601";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.bellenmetannabel.app";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		EE2318A720A0468F00C05EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F7D705E538F64D58EC5AEE /* Pods-ANNAbel.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J6QW4N3NV4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/ANNAbel/ANNAbel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bellenmetannabel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e9ffabc0-ae23-4e51-9a43-da3a9d6ec796";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.bellenmetannabel.app";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		EE2318B320A046AD00C05EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = J6QW4N3NV4;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/ANNAbel/ANNAbelIntentsExtension.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bellenmetannabel.app.ANNAbelIntentsExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c8c7affe-2b4c-4aa2-82a4-178c576dd6d2";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.bellenmetannabel.app.ANNAbelIntentsExtension";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		EE2318B420A046AD00C05EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = J6QW4N3NV4;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/ANNAbel/ANNAbelIntentsExtension.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bellenmetannabel.app.ANNAbelIntentsExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "36a036e4-ade7-4b8a-bd2f-5421edd54ca9";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.bellenmetannabel.app.ANNAbelIntentsExtension";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		EE2318C420A046BB00C05EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 311FF6CE99A3AD079E153505 /* Pods-ANNAbelSnapshotUITests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = E2Q9UE8HM6;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = SnapshotUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = ANNAbel;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		EE2318C520A046BB00C05EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = E2Q9UE8HM6;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = SnapshotUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = ANNAbel;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		EE61F48B1F1DDDE4006E890F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F0EF74CC4441F17D574E9085 /* Pods-Acceptatie Voys.debug.xcconfig */;
@@ -5272,7 +6186,7 @@
 		};
 		F22DE0AA1CC90D41001468B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5749831272C1D0CB5781D9DD /* Pods-VialerSnapshotUITests.debug.xcconfig */;
+			baseConfigurationReference = 9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -5309,7 +6223,7 @@
 		};
 		F22DE0AC1CC90D41001468B3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06004A45AC48976A5FBEFC84 /* Pods-VialerSnapshotUITests.release.xcconfig */;
+			baseConfigurationReference = 0214FE90AB7D3EC6B381BA86 /* Pods-VialerSnapshotUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -5516,7 +6430,7 @@
 		};
 		FB4226FF182261D200707349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 511F0A13DA4464E073A3F703 /* Pods-Vialer.debug.xcconfig */;
+			baseConfigurationReference = 0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -5565,7 +6479,7 @@
 		};
 		FB422700182261D200707349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12624E425B3179740E407E2C /* Pods-Vialer.release.xcconfig */;
+			baseConfigurationReference = 404C9E98A13352F73C16A694 /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
@@ -5667,6 +6581,33 @@
 			buildConfigurations = (
 				C4F49F2F1BF0B45700C25159 /* Debug */,
 				C4F49F311BF0B45700C25159 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE2318A520A0468F00C05EB0 /* Build configuration list for PBXNativeTarget "ANNAbel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE2318A620A0468F00C05EB0 /* Debug */,
+				EE2318A720A0468F00C05EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE2318B220A046AD00C05EB0 /* Build configuration list for PBXNativeTarget "ANNAbelIntentsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE2318B320A046AD00C05EB0 /* Debug */,
+				EE2318B420A046AD00C05EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE2318C320A046BB00C05EB0 /* Build configuration list for PBXNativeTarget "ANNAbelSnapshotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE2318C420A046BB00C05EB0 /* Debug */,
+				EE2318C520A046BB00C05EB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

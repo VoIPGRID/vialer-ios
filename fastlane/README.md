@@ -35,17 +35,27 @@ Upload Screenshots to the iTunes Connect store
 ```
 fastlane ios sync_development_certs
 ```
-Synchronize DEVELOPMENT certificates with itunes connect
+Synchronize DEVELOPMENT certificates with iTunes Connect
 ### ios sync_adhoc_certs
 ```
 fastlane ios sync_adhoc_certs
 ```
-Synchronize ADHOC certificates with itunes connect
+Synchronize ADHOC certificates with iTunes Connect
 ### ios sync_appstore_certs
 ```
 fastlane ios sync_appstore_certs
 ```
-Synchronize APPSTORE certificates with itunes connect
+Synchronize APPSTORE certificates with iTunes Connect
+### ios sync_all_certs
+```
+fastlane ios sync_all_certs
+```
+Synchronize ALL certificates with iTunes Connect
+### ios create_new_app
+```
+fastlane ios create_new_app
+```
+Generate a new APP ID in iTunes Connect
 ### ios add_device
 ```
 fastlane ios add_device
