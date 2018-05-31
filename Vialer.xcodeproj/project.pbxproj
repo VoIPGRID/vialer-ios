@@ -1321,7 +1321,6 @@
 		EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ANNAbelIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANNAbelSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2318CE20A04E8100C05EB0 /* .env.annabel */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.annabel; sourceTree = "<group>"; };
-		EE2318E420A054BD00C05EB0 /* VerbondenSnapshotUITests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "VerbondenSnapshotUITests copy-Info.plist"; path = "/Users/redmerloen/Programming/Vialer/iOS/vialer-ios/VerbondenSnapshotUITests copy-Info.plist"; sourceTree = "<absolute>"; };
 		EE3C47AE2080DBD500CC80E5 /* TwoStepCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoStepCallingViewController.h; sourceTree = "<group>"; };
 		EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallingViewController.m; sourceTree = "<group>"; };
 		EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCall.m; sourceTree = "<group>"; };
@@ -2725,7 +2724,6 @@
 				FB4226CF182261D200707349 /* Frameworks */,
 				FB4226CE182261D200707349 /* Products */,
 				06906700C7A484A2B879CFF7 /* Pods */,
-				EE2318E420A054BD00C05EB0 /* VerbondenSnapshotUITests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
