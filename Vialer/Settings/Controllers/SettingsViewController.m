@@ -288,7 +288,6 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
     } else if (sender.tag == SettingsViewControllerSwitchLogging) {
         [VialerLogger setRemoteLoggingEnabled:sender.isOn];
         VialerLogVerbose(sender.isOn ? @"Remote logging enabled" : @"Remote logging disabled");
-//        [self.tableView reloadData];
         NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerLoggingSection];
         [self.tableView  reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
     }

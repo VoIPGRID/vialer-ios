@@ -303,7 +303,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ((self.reachability.hasHighSpeed || (self.reachability.hasHighSpeedWith3GPlus && self.currentUser.use3GPlus)) && self.currentUser.sipEnabled) {
+                if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
                     [VialerGAITracker setupOutgoingSIPCallEvent];
                     [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                 } else if (!self.reachability.isReachable) {

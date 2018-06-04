@@ -114,7 +114,7 @@ extension DialerViewController {
 
         lastCalledNumber = numberText
 
-        if user.sipEnabled && ((user.use3GPlus && reachability.hasHighSpeedWith3GPlus) || reachability.hasHighSpeed) {
+        if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else {
