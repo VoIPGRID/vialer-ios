@@ -17,7 +17,7 @@ class ReachabilityBarViewController: UIViewController {
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
     fileprivate var use3GPlusChanged: NotificationToken?
-
+    
     @IBOutlet weak var twoStepButton: UIButton!
     @IBOutlet weak var informationLabel: UILabel!
 }
@@ -78,6 +78,8 @@ extension ReachabilityBarViewController {
             case .reachableViaWiFi:
                 if !weakSelf.currentUser.sipEnabled {
                     weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
+                } else if !weakSelf.currentUser.sipUseEncryption {
+                    weakSelf.informationLabel.text = NSLocalizedString("Calls are not encrypted", comment:"Calls are not encrypted")
                 }  else {
                     weakSelf.informationLabel.text = ""
                     shouldBeVisible = false

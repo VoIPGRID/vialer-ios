@@ -26,7 +26,6 @@ NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgo
 NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
 
 NSString * const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
-
 /**
  *  Api Dictionary keys.
  *
@@ -182,7 +181,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.sipAccount         = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled         = [defaults boolForKey:SystemUserSUDSIPEnabled];
     self.sipUseEncryption   = self.sipUseEncryption;
-
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 
     self.loggingOut = NO;

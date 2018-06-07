@@ -92,7 +92,7 @@ extern NSString * const SystemUserSIPCredentialsChangedNotification;
 extern NSString * const SystemUserSIPDisabledNotification;
 
 /**
- *  Notifciation that can be listened to when the outgoing number has changed.
+ *  Notification that can be listened to when the outgoing number has changed.
  */
 extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 

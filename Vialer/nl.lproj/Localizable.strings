@@ -449,3 +449,6 @@
 
 /* No comment provided by engineer. */
 "The two-factor authentication token is invalid" = "De twee-staps verificatie token is incorrect";
+
+/*  Calls are not encrypted */
+"Calls are not encrypted" = "Gesprekken zijn niet versleuteld";
