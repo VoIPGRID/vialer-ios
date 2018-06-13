@@ -49,4 +49,12 @@
  */
 - (void)sentCallResponseToMiddleware:(NSDictionary * _Nonnull)originalPayload isAvailable:(BOOL)available withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
 
+/**
+ *  Tells the middleware why the app rejected the call.
+ *
+ *  @param originalPayload The payload that is first received from the middleware
+ *  @param available       If the user is avaiable to receive the call.
+ *  @param completion      Optional complection block giving access to an error object when one occurs.
+ */
+- (void)sendHangupReasonToMiddleware:(NSString * _Nullable)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion;
 @end

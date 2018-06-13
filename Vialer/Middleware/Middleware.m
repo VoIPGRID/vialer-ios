@@ -163,6 +163,16 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                         [SIPUtils removeSIPEndpoint];
                     });
                     self.pushNotificationProcessing = nil;
+                    
+                    [VialerGAITracker declineIncomingCallBecauseOfInsufficientInternetConnectionEvent];
+                    // Calling middleware to log that the call was rejected due to insufficient internet connection.
+                    [self.commonMiddlewareRequestOperationManager sendHangupReasonToMiddleware:@"Rejected - Insufficient internet connection" forUniqueKey:keyToProcess withCompletion:^(NSError * _Nullable error) {
+                        if (error) {
+                            VialerLogError(@"The middleware responded with an error: %@", error);
+                        } else {
+                            VialerLogDebug(@"Successfully sent to middleware that the call was rejected due to insufficient internet connection");
+                        }
+                    }];
                 } else if (attempt < MiddlewareMaxAttempts) {
                     VialerLogDebug(@"The network connection is not sufficient. Waiting for a next push");
                     self.pushNotificationProcessing = nil;
@@ -205,7 +215,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             // Not only do we want to unregister upon a 408 but on every error.
             VialerLogError(@"The middleware responded with an error: %@", error);
         } else {
-            VialerLogDebug(@"Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
+            VialerLogDebug(@"Successfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
         }
     }];
 }
