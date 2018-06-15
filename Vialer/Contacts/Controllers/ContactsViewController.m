@@ -391,6 +391,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0;
             }
+        } else if (!self.currentUser.sipUseEncryption){
+            self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else {
             self.reachabilityBarHeigthConstraint.constant = 0;
         }

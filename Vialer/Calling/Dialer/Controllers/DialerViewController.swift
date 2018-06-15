@@ -248,6 +248,8 @@ extension DialerViewController {
                 } else {
                     self.reachabilityBarHeigthConstraint.constant = 0
                 }
+            } else if (!self.user.sipUseEncryption){
+                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0
             }
