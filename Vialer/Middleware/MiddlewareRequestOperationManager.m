@@ -14,6 +14,7 @@ static NSString * const MiddlewareResponseKeyAvailableYES = @"True";
 static NSString * const MiddlewareResponseKeyAvailableNO = @"False";
 static NSString * const MiddlewareResponseKeyUniqueKey = @"unique_key";
 static NSString * const MiddlewareResponseKeySIPUserId = @"sip_user_id";
+static NSString * const MiddlewareResponseKeyRemoteLoggingId = @"remote_logging_id";
 static NSString * const MiddlewareResponseKeyToken = @"token";
 static NSString * const MiddlewareResponseKeyApp = @"app";
 static NSString * const MiddlewareMainBundleCFBundleVersion = @"CFBundleVersion";
@@ -73,8 +74,13 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              @"sandbox" : [NSNumber numberWithBool:YES]
 #endif
                              };
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
 
-    [self POST:MiddlewareURLDeviceRecordMutation parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    if ([VialerLogger remoteLoggingEnabled]) {
+        [parameters setObject:[VialerLogger remoteIdentifier] forKey:MiddlewareResponseKeyRemoteLoggingId];
+    }
+
+    [self POST:MiddlewareURLDeviceRecordMutation parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);
