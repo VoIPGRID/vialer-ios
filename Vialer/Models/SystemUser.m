@@ -393,13 +393,10 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             self.sipUseEncryption = useTLS;
         }
 
-
-        if ([VialerSIPLib sharedInstance].endpointAvailable) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                VialerLogDebug(@"post from setusetls");
-                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-            });
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            VialerLogDebug(@"post from setusetls");
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
     }];
 }
 
@@ -407,12 +404,10 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     useStunServers = useStunServers;
     [[NSUserDefaults standardUserDefaults] setBool:useStunServers forKey:SystemuserSUDUseStunServers];
 
-    if ([VialerSIPLib sharedInstance].endpointAvailable) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            VialerLogDebug(@"Post from setusestunservers");
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-        });
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        VialerLogDebug(@"Post from setusestunservers");
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+    });
 }
 
 #pragma mark - Actions

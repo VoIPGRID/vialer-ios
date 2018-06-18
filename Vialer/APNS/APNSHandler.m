@@ -41,6 +41,7 @@ static dispatch_once_t onceToken = 0;
 #pragma mark - properties
 - (PKPushRegistry *)voipRegistry {
     if (!_voipRegistry) {
+        // Nil for the queue, so that the delegate methods will be done on the main queue.
         _voipRegistry = [[PKPushRegistry alloc] initWithQueue:nil];
     }
     return _voipRegistry;

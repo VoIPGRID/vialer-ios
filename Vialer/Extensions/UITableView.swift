@@ -7,7 +7,7 @@ import Foundation
 
 protocol TableViewHandler {
     associatedtype CellIdentifier: RawRepresentable
-    weak var tableView: UITableView! { get }
+    var tableView: UITableView! { get }
 }
 
 extension TableViewHandler where Self : UIViewController, CellIdentifier.RawValue == String {

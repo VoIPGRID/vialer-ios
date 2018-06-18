@@ -181,7 +181,7 @@ extension RecentsViewController {
 
     fileprivate func call(_ number: String) {
         phoneNumberToCall = number
-        if user.sipEnabled && (reachability.hasHighSpeed || (reachability.hasHighSpeedWith3GPlus && user.use3GPlus)) {
+        if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else if reachability.status == .notReachable {
