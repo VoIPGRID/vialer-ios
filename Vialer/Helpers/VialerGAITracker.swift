@@ -183,6 +183,13 @@ class VialerGAITracker: NSObject {
     static func declineIncomingCallBecauseAnotherCallInProgressEvent() {
         sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Declined - Another call in progress", value: nil)
     }
+    
+    /**
+     The incoming call is rejected because of insufficient internet connection.
+     */
+    @objc static func declineIncomingCallBecauseOfInsufficientInternetConnectionEvent() {
+        sendEvent(withCategory: GAIConstants.Categories.call, action: GAIConstants.inbound, label: "Declined - Insufficient internet connection", value: nil)
+    }
 
     /**
      Event to track an outbound SIP call.
