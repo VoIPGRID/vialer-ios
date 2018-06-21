@@ -153,6 +153,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                 if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
                     // Highspeed, let's respond to the middleware with a success.
                     VialerLogDebug(@"Accepting call on push attempt: %d. Sending Available = YES to middleware", attempt);
+                    [VialerStats shared].middlewareUniqueKey = self.pushNotificationProcessing;
                     [self respondToMiddleware:payload isAvailable:YES withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 } else if (attempt == MiddlewareMaxAttempts) {
                     // Connection is not good enough.

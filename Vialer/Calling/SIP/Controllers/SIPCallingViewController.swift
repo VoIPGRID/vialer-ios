@@ -517,7 +517,9 @@ extension SIPCallingViewController {
             if let call = object as? VSLCall {
                 DispatchQueue.main.async { [weak self] in
                     self?.updateUI()
-                    if call.callState == .disconnected {
+                    if call.callState == .confirmed {
+                        VialerStats.shared.incomingCallSuccess(call)
+                    } else if call.callState == .disconnected {
                         self?.handleCallEnded()
                     }
                 }

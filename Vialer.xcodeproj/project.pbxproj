@@ -353,6 +353,12 @@
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		E7A9119825A31543E96AB1F0 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */; };
+		EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		EE02B3F720D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		EE02B3F820D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		EE02B3F920D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		EE02B3FA20D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		EE1C7B7E1F87777100708D96 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		EE1C7B7F1F87777200708D96 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		EE1C7B801F87777200708D96 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
@@ -1302,6 +1308,7 @@
 		CDF2ECAB9F575E477A6C52D6 /* Pods-VoysSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
+		EE02B3F420D7870F006B10FD /* VialerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VialerStats.swift; path = Helpers/VialerStats.swift; sourceTree = "<group>"; };
 		EE1C7B791F87774F00708D96 /* SipCallingButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SipCallingButton.m; sourceTree = "<group>"; };
 		EE1C7B7A1F87774F00708D96 /* SipCallingButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
@@ -2838,6 +2845,7 @@
 				C41C42F71D5A742100813B66 /* VialerLogger.m */,
 				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
 				EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */,
+				EE02B3F420D7870F006B10FD /* VialerStats.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -4342,6 +4350,7 @@
 				C41FD86A1C60A08400BBE6D7 /* GradientView.m in Sources */,
 				EEDCC3BC20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
+				EE02B3F720D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
@@ -4470,6 +4479,7 @@
 				F22FF2901D0ABF3800761C9A /* SystemUser.m in Sources */,
 				EEDCC3BE20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				C490AD7E1D0863E3004A8F83 /* GradientView.m in Sources */,
+				EE02B3F920D7870F006B10FD /* VialerStats.swift in Sources */,
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */,
@@ -4616,6 +4626,7 @@
 				EE23182820A0468F00C05EB0 /* GradientView.m in Sources */,
 				EEDCC3BF20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				EE23182920A0468F00C05EB0 /* VIAScene.m in Sources */,
+				EE02B3FA20D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */,
 				EE23182B20A0468F00C05EB0 /* AvailabilityViewController.m in Sources */,
 				EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */,
@@ -4735,6 +4746,7 @@
 				EE61F40E1F1DDDE4006E890F /* VialerLogger.m in Sources */,
 				EEDCC3BD20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				EE61F4101F1DDDE4006E890F /* SystemUser.m in Sources */,
+				EE02B3F820D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE61F4111F1DDDE4006E890F /* GradientView.m in Sources */,
 				EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */,
@@ -4835,6 +4847,7 @@
 				C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */,
 				EEDCC3BB20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				F20850FB1D26935600A17E71 /* SystemUser.m in Sources */,
+				EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */,
 				F20850FC1D26935600A17E71 /* GradientView.m in Sources */,
 				EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
@@ -4954,6 +4967,7 @@
 				3DE6EAE21AF3BFA600C09935 /* GradientView.m in Sources */,
 				EEDCC3BA20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
+				EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
