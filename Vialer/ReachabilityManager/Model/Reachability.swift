@@ -90,7 +90,6 @@ public class Reachability: NSObject {
         } else {
             return ""
         }
-
     }
 
     // Current internetconnection type.
