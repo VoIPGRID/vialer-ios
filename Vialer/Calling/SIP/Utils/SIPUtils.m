@@ -24,7 +24,8 @@
                   [SystemUser currentUser].useTLS ? @"YES" : @"NO",
                   [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO");
 
-    if (![SIPUtils tlsReady]) {
+    if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
+        ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
         VialerLogDebug(@"Endpoint or User is not TLS ready so remove the endoint so a fresh one can be setup");
         [SIPUtils removeSIPEndpoint];
     }
@@ -97,13 +98,10 @@
     return account;
 }
 
-+ (BOOL)tlsReady {
-    return [VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS;
-}
-
 + (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL success, VSLAccount *account))completion {
     BOOL forceUpdate = NO;
-    if (![SIPUtils tlsReady]) {
+    if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
+        ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
         BOOL success = [SIPUtils setupSIPEndpoint];
         if (!success) {
             VialerLogError(@"Error setting up endpoint");
