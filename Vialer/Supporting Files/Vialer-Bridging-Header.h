@@ -26,3 +26,4 @@
 #import "VialerLogger.h"
 #import <VialerSIPLib/VialerSIPLib.h>
 #import "VoIPGRIDRequestOperationManager.h"
+#import "MiddlewareRequestOperationManager.h"

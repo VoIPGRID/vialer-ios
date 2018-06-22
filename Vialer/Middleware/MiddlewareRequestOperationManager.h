@@ -45,7 +45,7 @@
  *
  *  @param originalPayload The payload that is first received from the middleware
  *  @param available       If the user is avaiable to receive the call.
- *  @param completion      Optional complection block giving access to an error object when one occurs.
+ *  @param completion      Optional completion block giving access to an error object when one occurs.
  */
 - (void)sentCallResponseToMiddleware:(NSDictionary * _Nonnull)originalPayload isAvailable:(BOOL)available withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
 
@@ -54,7 +54,15 @@
  *
  *  @param originalPayload The payload that is first received from the middleware
  *  @param available       If the user is avaiable to receive the call.
- *  @param completion      Optional complection block giving access to an error object when one occurs.
+ *  @param completion      Optional completion block giving access to an error object when one occurs.
  */
 - (void)sendHangupReasonToMiddleware:(NSString * _Nullable)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion;
+
+/**
+ *  Log metrics to middleware.
+ *
+ *  @param payload      The payload with statisics
+ *  @param completion   Optioanl completion block giving access to an error object when one occurs.
+ */
+- (void)sendMetricsToMiddleware:(NSDictionary *)payload withCompletion:(void(^) (NSError *error))completion;
 @end
