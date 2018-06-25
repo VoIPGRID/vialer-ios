@@ -122,6 +122,9 @@ import Foundation
         self.setNetworkDataAndUniqueKey()
 
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "true"
 
         sendMetrics()
