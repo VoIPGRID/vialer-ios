@@ -61,8 +61,8 @@
 /**
  *  Log metrics to middleware.
  *
- *  @param payload      The payload with statisics
- *  @param completion   Optioanl completion block giving access to an error object when one occurs.
+ *  @param payload      The payload with statistics
+ *  @param completion   Optional completion block giving access to an error object when one occurs.
  */
 - (void)sendMetricsToMiddleware:(NSDictionary *)payload withCompletion:(void(^) (NSError *error))completion;
 @end

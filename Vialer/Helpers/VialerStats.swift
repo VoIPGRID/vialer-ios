@@ -91,12 +91,9 @@ import Foundation
             VialerStatsConstants.APIKeys.appStatus: VialerStatsConstants.appStatus,
             ] as [String : String]
     }
-
-    @objc func incomingCallSuccess(_ call: VSLCall) {
-        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
-            return
-        }
-
+    
+    private func setNetworkDataAndUniqueKey(){
+        // Set the network_operator,network and the unique_key for the dictionary
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.shared.middlewareUniqueKey
         if reachability.status == .reachableVia4G {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.highSpeed
@@ -107,6 +104,13 @@ import Foundation
         } else if reachability.status == .reachableViaWiFi {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.wifi
         }
+    }
+
+    @objc func incomingCallSuccess(_ call: VSLCall) {
+        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        self.setNetworkDataAndUniqueKey()
 
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
 
@@ -125,6 +129,17 @@ import Foundation
         sendMetrics()
     }
 
+    @objc func logStatementForReceivedPushNotification(attempt: Int){
+        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        self.setNetworkDataAndUniqueKey()
+        
+        defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
+        
+        sendMetrics()
+    }
+    
     // Send the metrics to the middleware
     private func sendMetrics() {
         middlewareRequestOperationManager.sendMetrics(toMiddleware: defaultData) { (error) in
