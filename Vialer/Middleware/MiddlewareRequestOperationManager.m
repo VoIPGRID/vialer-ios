@@ -138,7 +138,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
     }];
 }
 
-- (void)sendHangupReasonToMiddleware:(NSString * _Nullable)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion {
+- (void)sendHangupReasonToMiddleware:(NSString * _Nonnull)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion {
     NSDictionary *params = @{// Key that was given in the device push message as reference (required).
                              MiddlewareResponseKeyUniqueKey: uniqueKey,
                              // Hangup reason (optional).

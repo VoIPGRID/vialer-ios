@@ -56,7 +56,7 @@
  *  @param available       If the user is avaiable to receive the call.
  *  @param completion      Optional completion block giving access to an error object when one occurs.
  */
-- (void)sendHangupReasonToMiddleware:(NSString * _Nullable)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion;
+- (void)sendHangupReasonToMiddleware:(NSString * _Nonnull)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
 
 /**
  *  Log metrics to middleware.
@@ -64,5 +64,5 @@
  *  @param payload      The payload with statistics
  *  @param completion   Optional completion block giving access to an error object when one occurs.
  */
-- (void)sendMetricsToMiddleware:(NSDictionary *)payload withCompletion:(void(^) (NSError *error))completion;
+- (void)sendMetricsToMiddleware:(NSDictionary * _Nonnull)payload withCompletion:(nullable void(^) (NSError * _Nullable error))completion;
 @end
