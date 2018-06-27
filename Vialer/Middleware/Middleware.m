@@ -102,7 +102,14 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
         // Separate VialerLog for the push notification that will be posted to LogEntries
         VialerLogPushNotification(@"iOS : %@\n", payload);
-
+        
+        NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
+        int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
+        
+        // Log statement to middleware for received push notification
+        [VialerStats shared].middlewareUniqueKey = keyToProcess;
+        [[VialerStats shared] logStatementForReceivedPushNotificationWithAttempt:attempt];
+        
         // Incoming call.
         if (![SystemUser currentUser].sipEnabled) {
             // User is not SIP enabled.
@@ -111,9 +118,6 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             return;
         }
-
-        NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
-        int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
 
         // Check for network connection before registering the account at pjsip.
         if (![[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
