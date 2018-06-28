@@ -90,10 +90,13 @@ import Foundation
             VialerStatsConstants.APIKeys.appVersion: VialerStatsConstants.appVersion,
             VialerStatsConstants.APIKeys.appStatus: VialerStatsConstants.appStatus,
             ] as [String : String]
+        if VialerLogger.remoteLoggingEnabled() {
+            defaultData[VialerStatsConstants.APIKeys.remoteLogId] = VialerLogger.remoteIdentifier()
+        }
     }
     
     private func setNetworkDataAndUniqueKey(){
-        // Set the network_operator,network and the unique_key for the dictionary
+        // Set the unique_key, network_operator, network and connection_type
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.shared.middlewareUniqueKey
         if reachability.status == .reachableVia4G {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.highSpeed
@@ -104,6 +107,12 @@ import Foundation
         } else if reachability.status == .reachableViaWiFi {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.wifi
         }
+        
+        if VialerSIPLib.sharedInstance().hasTLSTransport {
+            defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tls
+        } else {
+            defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tcp
+        }
     }
 
     @objc func incomingCallSuccess(_ call: VSLCall) {
@@ -113,19 +122,23 @@ import Foundation
         self.setNetworkDataAndUniqueKey()
 
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
-
-        if VialerLogger.remoteLoggingEnabled() {
-            defaultData[VialerStatsConstants.APIKeys.remoteLogId] = VialerLogger.remoteIdentifier()
-        }
-
-        if VialerSIPLib.sharedInstance().hasTLSTransport {
-            defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tls
-        } else {
-            defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tcp
-        }
-
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "true"
 
+        sendMetrics()
+    }
+    
+    @objc func incomingCallFailedAfterEightPushNotifications(timeToInitialReport: Double){
+        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        self.setNetworkDataAndUniqueKey()
+        
+        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = "INSUFFICIENT_NETWORK"
+        defaultData[VialerStatsConstants.APIKeys.timeToInitialResponse] = String(timeToInitialReport)
+        defaultData.removeValue(forKey: VialerStatsConstants.APIKeys.attempt)
+        
         sendMetrics()
     }
 
