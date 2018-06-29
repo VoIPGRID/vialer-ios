@@ -42,6 +42,12 @@ import Foundation
             static let udp: String = "UDP"
         }
 
+        struct FailedReason {
+            static let audioReceiving: String = "AUDIO_RX"
+            static let audioTransmitting: String = "AUDIO_TX"
+            static let audioBothDirections: String = "AUDIO_RX_TX"
+        }
+
         struct APIKeys : Hashable {
             static let sipUserId: String = "sip_user_id"
             static let os: String = "os"
@@ -65,7 +71,7 @@ import Foundation
         }
     }
 
-    @objc static let shared = VialerStats()
+    @objc static let sharedInstance = VialerStats()
 
     @objc var middlewareUniqueKey: String = ""
     @objc var middlewareResponseTime: String = ""
@@ -82,6 +88,11 @@ import Foundation
     }()
 
     private override init() {
+        super.init()
+        self.initDefaultData()
+    }
+
+    private func initDefaultData() {
         // Set the default for the dictionary, OS, OS version, app version and what type of release
         defaultData = [
             VialerStatsConstants.APIKeys.sipUserId: SystemUser.current().sipAccount,
@@ -89,15 +100,11 @@ import Foundation
             VialerStatsConstants.APIKeys.osVersion: VialerStatsConstants.osVersion,
             VialerStatsConstants.APIKeys.appVersion: VialerStatsConstants.appVersion,
             VialerStatsConstants.APIKeys.appStatus: VialerStatsConstants.appStatus,
-            ] as [String : String]
-        if VialerLogger.remoteLoggingEnabled() {
-            defaultData[VialerStatsConstants.APIKeys.remoteLogId] = VialerLogger.remoteIdentifier()
-        }
+        ] as [String : String]
     }
     
-    private func setNetworkDataAndUniqueKey(){
-        // Set the unique_key, network_operator, network and connection_type
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.shared.middlewareUniqueKey
+    private func setNetworkData(){
+        // Set the network_operator, network for the dictionary
         if reachability.status == .reachableVia4G {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.highSpeed
             defaultData[VialerStatsConstants.APIKeys.networkOperator] = reachability.carrierName
@@ -107,7 +114,9 @@ import Foundation
         } else if reachability.status == .reachableViaWiFi {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.wifi
         }
-        
+    }
+
+    private func setTransportData() {
         if VialerSIPLib.sharedInstance().hasTLSTransport {
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tls
         } else {
@@ -115,14 +124,27 @@ import Foundation
         }
     }
 
-    @objc func incomingCallSuccess(_ call: VSLCall) {
-        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
-            return
+    private func setCallDirection(_ incoming: Bool) {
+        if incoming {
+            defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        } else {
+            defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.outbound
         }
-        self.setNetworkDataAndUniqueKey()
+    }
 
-        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+    @objc func callSuccess(_ call: VSLCall) {
+        initDefaultData()
 
+        if call.isIncoming {
+            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+                return
+            }
+            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        }
+        self.setNetworkData()
+        self.setTransportData()
+        self.setCallDirection(call.isIncoming)
+        
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "true"
@@ -131,11 +153,11 @@ import Foundation
     }
     
     @objc func incomingCallFailedAfterEightPushNotifications(timeToInitialReport: Double){
-        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
             return
         }
-        self.setNetworkDataAndUniqueKey()
-        
+        self.setNetworkData()
+
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "INSUFFICIENT_NETWORK"
@@ -146,18 +168,56 @@ import Foundation
     }
 
     @objc func logStatementForReceivedPushNotification(attempt: Int){
-        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+        initDefaultData()
+
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
             return
         }
-        self.setNetworkDataAndUniqueKey()
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+
+        self.setNetworkData()
         
         defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
         
         sendMetrics()
     }
     
+    @objc func callFailedNoAudio(_ call: VSLCall) {
+        initDefaultData()
+
+        if call.isIncoming {
+            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+                return
+            }
+            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        }
+        self.setNetworkData()
+        self.setTransportData()
+        self.setCallDirection(call.isIncoming)
+
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+
+        switch call.callAudioState {
+            case .noAudioReceiving:
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioReceiving
+            case .noAudioTransmitting:
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioTransmitting
+            case .noAudioBothDirections:
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioBothDirections
+            case .OK: break
+        }
+
+        sendMetrics()
+    }
+
     // Send the metrics to the middleware
     private func sendMetrics() {
+        // Add the remote logging id to the data if it is present`
+        if VialerLogger.remoteLoggingEnabled() {
+            defaultData[VialerStatsConstants.APIKeys.remoteLogId] = VialerLogger.remoteIdentifier()
+        }
+        
         middlewareRequestOperationManager.sendMetrics(toMiddleware: defaultData) { (error) in
             if (error != nil) {
                 VialerLogDebug("Error sending stats to the middleware: \(String(describing: error))")

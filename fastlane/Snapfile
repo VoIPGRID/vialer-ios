@@ -7,15 +7,15 @@ reinstall_app true
 # A list of devices you want to take the screenshots from
 devices([
   # "iPhone 4s",
-  # "iPhone SE",
-  # "iPhone 8",
+  "iPhone SE",
+  "iPhone 8",
   "iPhone 8 Plus",
   "iPhone X",
 ])
 
 # A list of languages which should be used
 languages([
-  "en-US", # English locale
+  "en-US", # English
   "nl-NL", # Dutch locale
 ])
 

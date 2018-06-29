@@ -298,6 +298,18 @@ extension SIPCallingViewController {
 
         hangupButton?.isEnabled = false
 
+        switch self.activeCall!.callAudioState {
+            // There was no audio when the call was hungup.
+            case .noAudioReceiving: fallthrough
+            case .noAudioTransmitting: fallthrough
+            case .noAudioBothDirections:
+                VialerStats.sharedInstance.callFailedNoAudio(self.activeCall!)
+            // There was audio during the call.
+            case .OK: fallthrough
+            default:
+                VialerStats.sharedInstance.callSuccess(self.activeCall!)
+        }
+
         if didOpenSettings && reachability.status != .reachableViaWiFi {
             presentEnableWifiAlert()
         } else {
@@ -549,9 +561,7 @@ extension SIPCallingViewController {
             if let call = object as? VSLCall {
                 DispatchQueue.main.async { [weak self] in
                     self?.updateUI()
-                    if call.callState == .confirmed {
-                        VialerStats.shared.incomingCallSuccess(call)
-                    } else if call.callState == .disconnected {
+                    if call.callState == .disconnected {
                         self?.handleCallEnded()
                     }
                 }

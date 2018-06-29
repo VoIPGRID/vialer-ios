@@ -1351,7 +1351,7 @@
 		EE5C22281F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22291F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushedCall.swift; sourceTree = "<group>"; };
-		EE61F48D1F1DDDE4006E890F /* Acceptatie Voys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Acceptatie Voys.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE61F48D1F1DDDE4006E890F /* Voys Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voys Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Info.plist"; sourceTree = "<group>"; };
 		EE61F4921F1DDE7D006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1392,7 +1392,7 @@
 		F0EF74CC4441F17D574E9085 /* Pods-Acceptatie Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie Voys/Pods-Acceptatie Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
 		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
-		F208516A1D26935600A17E71 /* Acceptatie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Acceptatie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F208516A1D26935600A17E71 /* Vialer Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vialer Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20851801D269DD300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F20851811D269DD300A17E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
@@ -2744,11 +2744,11 @@
 				F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */,
 				C490ADEC1D0863E3004A8F83 /* Verbonden.app */,
 				C490AE071D088535004A8F83 /* VerbondenSnapshotUITests.xctest */,
-				F208516A1D26935600A17E71 /* Acceptatie.app */,
+				F208516A1D26935600A17E71 /* Vialer Staging.app */,
 				F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */,
 				C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */,
 				C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */,
-				EE61F48D1F1DDDE4006E890F /* Acceptatie Voys.app */,
+				EE61F48D1F1DDDE4006E890F /* Voys Staging.app */,
 				EE2318A820A0468F00C05EB0 /* ANNAbel.app */,
 				EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */,
 				EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */,
@@ -3061,9 +3061,9 @@
 			productReference = EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		EE61F3F11F1DDDE4006E890F /* Acceptatie Voys */ = {
+		EE61F3F11F1DDDE4006E890F /* Voys Staging */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EE61F48A1F1DDDE4006E890F /* Build configuration list for PBXNativeTarget "Acceptatie Voys" */;
+			buildConfigurationList = EE61F48A1F1DDDE4006E890F /* Build configuration list for PBXNativeTarget "Voys Staging" */;
 			buildPhases = (
 				246420356B44B2654E6C52B0 /* [CP] Check Pods Manifest.lock */,
 				EE61F3F51F1DDDE4006E890F /* Sources */,
@@ -3080,14 +3080,14 @@
 			dependencies = (
 				EE61F4AA1F1DE042006E890F /* PBXTargetDependency */,
 			);
-			name = "Acceptatie Voys";
+			name = "Voys Staging";
 			productName = Vialer;
-			productReference = EE61F48D1F1DDDE4006E890F /* Acceptatie Voys.app */;
+			productReference = EE61F48D1F1DDDE4006E890F /* Voys Staging.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F20850E01D26935600A17E71 /* Acceptatie */ = {
+		F20850E01D26935600A17E71 /* Vialer Staging */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F20851671D26935600A17E71 /* Build configuration list for PBXNativeTarget "Acceptatie" */;
+			buildConfigurationList = F20851671D26935600A17E71 /* Build configuration list for PBXNativeTarget "Vialer Staging" */;
 			buildPhases = (
 				CE8435747F7E1442943DE4AE /* [CP] Check Pods Manifest.lock */,
 				F20850E21D26935600A17E71 /* Sources */,
@@ -3103,9 +3103,9 @@
 			dependencies = (
 				C49B0EED1E6DA2D800DD226B /* PBXTargetDependency */,
 			);
-			name = Acceptatie;
+			name = "Vialer Staging";
 			productName = Vialer;
-			productReference = F208516A1D26935600A17E71 /* Acceptatie.app */;
+			productReference = F208516A1D26935600A17E71 /* Vialer Staging.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F22DE09F1CC90D41001468B3 /* VialerSnapshotUITests */ = {
@@ -3290,11 +3290,11 @@
 				FB4226CC182261D200707349 /* Vialer */,
 				F2C44A611DE40EDD00F7CF50 /* VialerIntentsExtension */,
 				F22DE09F1CC90D41001468B3 /* VialerSnapshotUITests */,
-				F20850E01D26935600A17E71 /* Acceptatie */,
+				F20850E01D26935600A17E71 /* Vialer Staging */,
 				C41FD8551C60A08400BBE6D7 /* Voys */,
 				C431722F1DFE85B3005FF8EA /* VoysIntentsExtension */,
 				C41FD8F21C60A89300BBE6D7 /* VoysSnapshotUITests */,
-				EE61F3F11F1DDDE4006E890F /* Acceptatie Voys */,
+				EE61F3F11F1DDDE4006E890F /* Voys Staging */,
 				C490AD631D0863E3004A8F83 /* Verbonden */,
 				C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */,
 				C490ADFA1D088535004A8F83 /* VerbondenSnapshotUITests */,
@@ -6624,7 +6624,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EE61F48A1F1DDDE4006E890F /* Build configuration list for PBXNativeTarget "Acceptatie Voys" */ = {
+		EE61F48A1F1DDDE4006E890F /* Build configuration list for PBXNativeTarget "Voys Staging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE61F48B1F1DDDE4006E890F /* Debug */,
@@ -6633,7 +6633,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F20851671D26935600A17E71 /* Build configuration list for PBXNativeTarget "Acceptatie" */ = {
+		F20851671D26935600A17E71 /* Build configuration list for PBXNativeTarget "Vialer Staging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F20851681D26935600A17E71 /* Debug */,

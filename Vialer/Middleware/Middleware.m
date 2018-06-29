@@ -108,8 +108,8 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
         
         // Log statement to middleware for received push notification
-        [VialerStats shared].middlewareUniqueKey = keyToProcess;
-        [[VialerStats shared] logStatementForReceivedPushNotificationWithAttempt:attempt];
+        [VialerStats sharedInstance].middlewareUniqueKey = keyToProcess;
+        [[VialerStats sharedInstance] logStatementForReceivedPushNotificationWithAttempt:attempt];
         
         // Incoming call.
         if (![SystemUser currentUser].sipEnabled) {
@@ -124,7 +124,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         if (![[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
             VialerLogInfo(@"Wait for the next push! We currently don't have a network connection");
             if (attempt == MiddlewareMaxAttempts) {
-                [[VialerStats shared] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
+                [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
             }
             return;
         }
@@ -148,7 +148,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [SIPUtils removeSIPEndpoint];
                     });
-                    [[VialerStats shared] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
+                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
                     self.pushNotificationProcessing = nil;
                 } else {
                     // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
@@ -162,7 +162,8 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                 if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
                     // Highspeed, let's respond to the middleware with a success.
                     VialerLogDebug(@"Accepting call on push attempt: %d. Sending Available = YES to middleware", attempt);
-                    [VialerStats shared].middlewareUniqueKey = self.pushNotificationProcessing;
+
+                    [VialerStats sharedInstance].middlewareUniqueKey = self.pushNotificationProcessing;
                     [self respondToMiddleware:payload isAvailable:YES withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 } else if (attempt == MiddlewareMaxAttempts) {
                     // Connection is not good enough.
@@ -184,7 +185,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
                         }
                     }];
                     // Log to middleware that incoming call failed after 8 received push notifications due to insufficient network.
-                    [[VialerStats shared] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
+                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
                 } else if (attempt < MiddlewareMaxAttempts) {
                     VialerLogDebug(@"The network connection is not sufficient. Waiting for a next push");
                     self.pushNotificationProcessing = nil;
@@ -193,7 +194,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         }];
 
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
-        VialerLogDebug(@"Checking payload:\n %@", payload);
+        VialerLogDebug(@"Checkin payload:\n %@", payload);
     } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage] && self.systemUser.sipEnabled) {
         VialerLogWarning(@"Another device took over the SIP account, disabling account.");
         self.systemUser.sipEnabled = NO;
