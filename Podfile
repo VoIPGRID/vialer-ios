@@ -33,10 +33,10 @@ end
 target 'ANNAbel' do
     default_pods
 end
-target 'Acceptatie' do
+target 'Vialer Staging' do
     default_pods
 end
-target 'Acceptatie Voys' do
+target 'Voys Staging' do
     default_pods
 end
 
