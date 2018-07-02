@@ -265,6 +265,7 @@ extension AppDelegate {
             case .originatorCancel:
                 VialerLogDebug("Originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
+                VialerStats.sharedInstance.incomingCallFailedOriginatorCanceled(call: call)
             case .unknown:
                 break
             }
