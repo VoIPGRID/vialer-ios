@@ -153,16 +153,39 @@ import Foundation
     }
     
     @objc func incomingCallFailedAfterEightPushNotifications(timeToInitialReport: Double){
+        initDefaultData()
+        
         guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
             return
         }
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        
         self.setNetworkData()
+        setTransportData()
+        self.setCallDirection(true)
 
-        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "INSUFFICIENT_NETWORK"
         defaultData[VialerStatsConstants.APIKeys.timeToInitialResponse] = String(timeToInitialReport)
-        defaultData.removeValue(forKey: VialerStatsConstants.APIKeys.attempt)
+        
+        sendMetrics()
+    }
+    
+    @objc func incomingCallFailedOriginatorCanceled(call: VSLCall){
+        initDefaultData()
+        
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        
+        self.setNetworkData()
+        setTransportData()
+        self.setCallDirection(true)
+        
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = "ORIGINATOR_CANCELED"
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
         
         sendMetrics()
     }
@@ -213,7 +236,7 @@ import Foundation
 
     // Send the metrics to the middleware
     private func sendMetrics() {
-        // Add the remote logging id to the data if it is present`
+        // Add the remote logging id to the data if it is present
         if VialerLogger.remoteLoggingEnabled() {
             defaultData[VialerStatsConstants.APIKeys.remoteLogId] = VialerLogger.remoteIdentifier()
         }
