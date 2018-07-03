@@ -118,7 +118,7 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
     if (error) {
         VialerLogError(@"Error declining call: %@", error);
     }
-
+    [[VialerStats sharedInstance] incomingCallFailedDeclinedWithCall:self.call];
     self.incomingCallStatusLabel.text = NSLocalizedString(@"Declined call", nil);
 }
 
