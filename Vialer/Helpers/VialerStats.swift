@@ -42,10 +42,15 @@ import Foundation
             static let udp: String = "UDP"
         }
 
-        struct FailedReason {
+        struct NoAudioReason {
             static let audioReceiving: String = "AUDIO_RX"
             static let audioTransmitting: String = "AUDIO_TX"
             static let audioBothDirections: String = "AUDIO_RX_TX"
+        }
+
+        struct HangupReason {
+            static let userHangup: String = "user"
+            static let remoteHangup: String = "remote"
         }
 
         struct APIKeys : Hashable {
@@ -65,9 +70,11 @@ import Foundation
             static let countryCode: String = "country_code"
             static let asteriskCallId: String = "call_id"
             static let remoteLogId: String = "log_id"
-            static let timeToInitialResponse = "time_to_initial_response"
-            static let failedReason = "failed_reason"
-            static let attempt = "attempt"
+            static let timeToInitialResponse: String = "time_to_initial_response"
+            static let failedReason: String = "failed_reason"
+            static let attempt: String = "attempt"
+            static let callDuration: String = "call_duration"
+            static let hangupReason: String = "hangup_reason"
         }
     }
 
@@ -89,7 +96,7 @@ import Foundation
 
     private override init() {
         super.init()
-        self.initDefaultData()
+        initDefaultData()
     }
 
     private func initDefaultData() {
@@ -141,9 +148,9 @@ import Foundation
             }
             defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
         }
-        self.setNetworkData()
-        self.setTransportData()
-        self.setCallDirection(call.isIncoming)
+        setNetworkData()
+        setTransportData()
+        setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
 
@@ -160,9 +167,9 @@ import Foundation
         }
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
         
-        self.setNetworkData()
+        setNetworkData()
         setTransportData()
-        self.setCallDirection(true)
+        setCallDirection(true)
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "INSUFFICIENT_NETWORK"
@@ -198,7 +205,7 @@ import Foundation
         }
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
 
-        self.setNetworkData()
+        setNetworkData()
         
         defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
         
@@ -214,22 +221,40 @@ import Foundation
             }
             defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
         }
-        self.setNetworkData()
-        self.setTransportData()
-        self.setCallDirection(call.isIncoming)
+        setNetworkData()
+        setTransportData()
+        setCallDirection(call.isIncoming)
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
 
         switch call.callAudioState {
             case .noAudioReceiving:
-                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioReceiving
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioReceiving
             case .noAudioTransmitting:
-                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioTransmitting
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioTransmitting
             case .noAudioBothDirections:
-                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioBothDirections
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioBothDirections
             case .OK: break
         }
+
+        sendMetrics()
+    }
+
+    @objc func callHangupReason(_ call: VSLCall) {
+        initDefaultData()
+        setNetworkData()
+        setTransportData()
+
+        if call.userDidHangUp {
+            defaultData[VialerStatsConstants.APIKeys.hangupReason] = VialerStatsConstants.HangupReason.userHangup
+        } else {
+            defaultData[VialerStatsConstants.APIKeys.hangupReason] = VialerStatsConstants.HangupReason.remoteHangup
+        }
+
+        defaultData[VialerStatsConstants.APIKeys.callDuration] = String(format: "\(call.connectDuration)")
+
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
 
         sendMetrics()
     }
