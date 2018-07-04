@@ -179,9 +179,9 @@ import Foundation
         }
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
         
-        self.setNetworkData()
+        setNetworkData()
         setTransportData()
-        self.setCallDirection(true) //orp call.isIncoming
+        setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "ORIGINATOR_CANCELED"
@@ -190,7 +190,6 @@ import Foundation
         sendMetrics()
     }
     
-    //orp
     @objc func incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: VSLCall){
         initDefaultData()
         
@@ -199,21 +198,16 @@ import Foundation
         }
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
         
-        self.setNetworkData()
+        setNetworkData()
         setTransportData()
-        self.setCallDirection(call.isIncoming)
+        setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "DECLINED_ANOTHER_CALL_IN_PROGRESS"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
         
-        for (key,value) in defaultData {
-            print(" \(key) : \(value)")
-        }
-        
-        //sendMetrics()
+        sendMetrics()
     }
-    //pro
 
     @objc func logStatementForReceivedPushNotification(attempt: Int){
         initDefaultData()

@@ -133,7 +133,6 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 
         if ([self.pushNotificationProcessing isEqualToString:keyToProcess]) {
             VialerLogInfo(@"Already processing a push notification with key: %@", keyToProcess);
-            //orp ALSO here? for another call in progress
             return;
         }
 

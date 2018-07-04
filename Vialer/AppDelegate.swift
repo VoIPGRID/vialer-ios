@@ -44,18 +44,11 @@ class AppDelegate: UIResponder {
 
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
-    //orp
-//    var mostRecentCall = VSLCall()
     var mostRecentCall : VSLCall?
-    //pro
 }
 
 // MARK: - UIApplicationDelegate
 extension AppDelegate: UIApplicationDelegate {
-
-    //orp
-    //var mostRecentCall : VSLCall
-    //pro
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         interpretLaunchArguments()
@@ -224,13 +217,6 @@ extension AppDelegate {
             VialerGAITracker.acceptIncomingCallEvent()
         } else if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallRejected {
             VialerGAITracker.declineIncomingCallEvent()
-            //orp this gets executed when another call is in progress but also when user is just rejecting an incomingCall
-            //self.mostRecentCall
-//            if let mostRecentCallUnwrapped = self.mostRecentCall {
-//                VialerStats.sharedInstance.incomingCallFailedDeclinedBecauseAnotherCallInProgress(call:mostRecentCallUnwrapped)
-//            }
-            
-            //pro
         }
     }
 }
@@ -260,9 +246,7 @@ extension AppDelegate {
             DispatchQueue.main.async {
                 if VialerSIPLib.callKitAvailable() {
                     VialerLogInfo("Incoming call block invoked, routing through CallKit.")
-                    //orp
                     self.mostRecentCall = call
-                    //pro
                     self.callKitProviderDelegate.reportIncomingCall(call)
                 } else {
                     VialerLogInfo("Incoming call block invoked, using own app presentation.")
@@ -302,9 +286,7 @@ extension AppDelegate {
                 do {
                     try call.decline()
                     VialerGAITracker.declineIncomingCallBecauseAnotherCallInProgressEvent()
-                    //orp
                     VialerStats.sharedInstance.incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: call)
-                    //pro
                 } catch let error {
                     VialerLogError("Error declining call: \(error)")
                 }
