@@ -310,6 +310,8 @@ extension SIPCallingViewController {
                 VialerStats.sharedInstance.callSuccess(self.activeCall!)
         }
 
+        VialerStats.sharedInstance.callHangupReason(self.activeCall!)
+
         if didOpenSettings && reachability.status != .reachableViaWiFi {
             presentEnableWifiAlert()
         } else {
