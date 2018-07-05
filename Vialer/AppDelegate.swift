@@ -31,6 +31,11 @@ class AppDelegate: UIResponder {
             static let count = 5
             static let interval: TimeInterval = 2.0
         }
+
+        struct TimerForCall {
+            static let maxTimesFiring = 10
+            static let interval: TimeInterval = 1.0
+        }
     }
 
     var window: UIWindow?
@@ -41,6 +46,8 @@ class AppDelegate: UIResponder {
     var stopVibrating = false
     var vibratingTask: UIBackgroundTaskIdentifier?
     var callKitProviderDelegate: CallKitProviderDelegate!
+    var callAvailabilityTimer: Timer!
+    var callAvailabilityTimesFired: Int = 0
 
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
@@ -157,6 +164,7 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
 
@@ -169,6 +177,7 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallStateChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
     }
@@ -217,6 +226,11 @@ extension AppDelegate {
         } else if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallRejected {
             VialerGAITracker.declineIncomingCallEvent()
         }
+    }
+
+    @objc fileprivate func middlewareRegistrationFinished(_ notification: NSNotification) {
+        callAvailabilityTimer = Timer.scheduledTimer(timeInterval: Configuration.TimerForCall.interval, target: self, selector: #selector(runCallTimer), userInfo: nil, repeats: true)
+        VialerLogError("Registration of VoIP account done, start timer for receiving a call.");
     }
 }
 
@@ -330,11 +344,14 @@ extension AppDelegate {
     ///
     /// - Parameter notification: Notification instance with VSLCall
     @objc fileprivate func callStateChanged(_ notification: Notification) {
+        callAvailabilityTimer.invalidate()
+
         guard let call = notification.userInfo![VSLNotificationUserInfoCallKey] as? VSLCall,
             call.callState == .connecting || call.callState == .disconnected,
             let localNotification = incomingCallNotification else { return }
         UIApplication.shared.cancelLocalNotification(localNotification)
         stopVibratingInBackground()
+
     }
 
     /// Call was initiated from recents or addressbook. This will try to setup a call.
@@ -477,6 +494,18 @@ extension AppDelegate {
     @objc fileprivate func managedObjectContextSaved(_ notification: Notification) {
         CoreDataStackHelper.instance.managedObjectContext.perform {
             CoreDataStackHelper.instance.managedObjectContext.mergeChanges(fromContextDidSave: notification)
+        }
+    }
+}
+
+// MARK: - Timed code
+extension AppDelegate {
+    @objc fileprivate func runCallTimer() {
+        callAvailabilityTimesFired += 1
+        if callAvailabilityTimesFired > Configuration.TimerForCall.maxTimesFiring {
+            callAvailabilityTimer.invalidate()
+            callAvailabilityTimesFired = 0
+            VialerStats.sharedInstance.noIncomingCallReceived()
         }
     }
 }

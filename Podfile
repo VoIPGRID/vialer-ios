@@ -17,22 +17,26 @@ def default_pods
     pod 'VialerSIPLib'
 end
 
-
 target 'Vialer' do
     default_pods
 end
+
 target 'Voys' do
     default_pods
 end
+
 target 'Verbonden' do
     default_pods
 end
+
 target 'ANNAbel' do
     default_pods
 end
+
 target 'Vialer Staging' do
     default_pods
 end
+
 target 'Voys Staging' do
     default_pods
 end
@@ -45,12 +49,15 @@ end
 target 'VialerSnapshotUITests' do
     default_pods
 end
+
 target 'VoysSnapshotUITests' do
     default_pods
 end
+
 target 'VerbondenSnapshotUITests' do
     default_pods
 end
+
 target 'ANNAbelSnapshotUITests' do
     default_pods
 end
