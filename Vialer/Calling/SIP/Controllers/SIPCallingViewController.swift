@@ -307,6 +307,8 @@ extension SIPCallingViewController {
                 VialerStats.sharedInstance.callSuccess(self.activeCall!)
         }
 
+        VialerStats.sharedInstance.callHangupReason(self.activeCall!)
+
         dismissView()
     }
 }
