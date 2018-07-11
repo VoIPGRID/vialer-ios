@@ -40,6 +40,8 @@
 	<string>ANNAbel needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>ANNAbel needs access to your microphone to make calling possible</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>ANNAbel needs access to your bluetooth devices&apos; data to log the name of the audio bluetooth device which is being used</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
