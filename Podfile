@@ -1,5 +1,3 @@
-source 'git@github.com:CocoaPods/Specs.git'
-
 platform :ios, '9.0'
 
 def default_pods

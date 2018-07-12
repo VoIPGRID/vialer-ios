@@ -66,6 +66,8 @@ import Foundation
             static let sipUserId: String = "sip_user_id"
             static let os: String = "os"
             static let osVersion: String = "os_version"
+            static let deviceManufacturer = "device_manufacturer"
+            static let deviceModel = "device_model"
             static let appVersion: String = "app_version"
             static let appStatus: String = "app_status"
             static let middlewareUniqueKey: String = "middleware_unique_key"
@@ -75,6 +77,7 @@ import Foundation
             static let networkOperator: String = "network_operator"
             static let direction: String = "direction"
             static let connectionType: String = "connection_type"
+            static let accountConnectionType: String = "account_connection_type"
             static let callSetupSuccessful: String = "call_setup_successful"
             static let countryCode: String = "country_code"
             static let asteriskCallId: String = "call_id"
@@ -113,6 +116,8 @@ import Foundation
         defaultData = [
             VialerStatsConstants.APIKeys.sipUserId: SystemUser.current().sipAccount,
             VialerStatsConstants.APIKeys.os: "iOS",
+            VialerStatsConstants.APIKeys.deviceManufacturer: UIDevice.current.model,
+            VialerStatsConstants.APIKeys.deviceModel: UIDevice.current.modelName.replacingOccurrences(of: UIDevice.current.model, with: ""),
             VialerStatsConstants.APIKeys.osVersion: VialerStatsConstants.osVersion,
             VialerStatsConstants.APIKeys.appVersion: VialerStatsConstants.appVersion,
             VialerStatsConstants.APIKeys.appStatus: VialerStatsConstants.appStatus,
@@ -137,6 +142,12 @@ import Foundation
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tls
         } else {
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tcp
+        }
+
+        if SystemUser.current().useTLS && SystemUser.current().sipUseEncryption {
+            defaultData[VialerStatsConstants.APIKeys.accountConnectionType] = VialerStatsConstants.ConnectionType.tls
+        } else {
+            defaultData[VialerStatsConstants.APIKeys.accountConnectionType] = VialerStatsConstants.ConnectionType.tcp
         }
     }
 
@@ -323,10 +334,31 @@ import Foundation
         }
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
 
+        setCallDirection(true)
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
 
         defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.noCallAfterRegistration
+
+        sendMetrics()
+    }
+
+    func callFailed(callId: String, incoming: Bool, statusCode: String) {
+        initDefaultData()
+        setNetworkData()
+        setTransportData()
+
+        if incoming {
+            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+                return
+            }
+            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        }
+
+        setCallDirection(incoming)
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = callId
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = statusCode
 
         sendMetrics()
     }

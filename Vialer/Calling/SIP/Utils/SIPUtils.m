@@ -51,7 +51,7 @@
     }
 
     if ([SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {
-        endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP]];
+        endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTLS]];
     } else {
         endpointConfiguration.transportConfigurations = @[[VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeTCP],
                                                           [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];

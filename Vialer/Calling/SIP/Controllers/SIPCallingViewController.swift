@@ -51,6 +51,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
     // Keep track if there are notifications needed for disabling/enabling WiFi.
     var didOpenSettings = false
+
+    var callGotAnError = false
     // The cleaned number that need to be called.
     var cleanedPhoneNumber: String?
     var phoneNumberLabelText: String? {
@@ -130,6 +132,7 @@ extension SIPCallingViewController {
     override func viewWillDisappear(_ animated: Bool) {
         connectDurationTimer?.invalidate()
         UIDevice.current.isProximityMonitoringEnabled = false
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
     }
 }
 
@@ -218,6 +221,8 @@ extension SIPCallingViewController {
 // MARK: - Call setup
 extension SIPCallingViewController {
     @objc func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
+        NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
+
         cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
         phoneNumberLabelText = cleanedPhoneNumber
         if let contact = contact {
@@ -246,7 +251,7 @@ extension SIPCallingViewController {
             return
         }
 
-        // Check microphone
+            // Check microphone
         checkMicrophonePermission { startCalling in
             if startCalling {
                 // Mic good, WiFi?
@@ -298,22 +303,22 @@ extension SIPCallingViewController {
 
         hangupButton?.isEnabled = false
 
-        let hasBluetooth: Bool = callManager.audioController.output == .bluetooth
+        if !self.callGotAnError {
+            let hasBluetooth: Bool = callManager.audioController.output == .bluetooth
+            switch self.activeCall!.callAudioState {
+                // There was no audio when the call was hungup.
+                case .noAudioReceiving: fallthrough
+                case .noAudioTransmitting: fallthrough
+                case .noAudioBothDirections:
+                    VialerStats.sharedInstance.callFailedNoAudio(self.activeCall!, bluetooth: hasBluetooth)
+                // There was audio during the call.
+                case .OK: fallthrough
+                default:
+                    VialerStats.sharedInstance.callSuccess(self.activeCall!, bluetooth: hasBluetooth)
+            }
 
-        switch self.activeCall!.callAudioState {
-            // There was no audio when the call was hungup.
-            case .noAudioReceiving: fallthrough
-            case .noAudioTransmitting: fallthrough
-            case .noAudioBothDirections:
-                VialerStats.sharedInstance.callFailedNoAudio(self.activeCall!, bluetooth: hasBluetooth)
-            // There was audio during the call.
-            case .OK: fallthrough
-            default:
-                VialerStats.sharedInstance.callSuccess(self.activeCall!, bluetooth: hasBluetooth)
+            VialerStats.sharedInstance.callHangupReason(self.activeCall!, bluetooth: hasBluetooth)
         }
-
-        VialerStats.sharedInstance.callHangupReason(self.activeCall!, bluetooth: hasBluetooth)
-
         if didOpenSettings && reachability.status != .reachableViaWiFi {
             presentEnableWifiAlert()
         } else {
@@ -580,5 +585,15 @@ extension SIPCallingViewController {
 extension SIPCallingViewController {
     func dtmfSent(_ dtmfSent: String?) {
         self.dtmfSent = dtmfSent
+    }
+}
+
+extension SIPCallingViewController {
+    @objc func errorDuringCallSetup(_ notification: NSNotification) {
+        let statusCode = notification.userInfo![VSLNotificationUserInfoErrorStatusCodeKey] as! String
+
+        if statusCode != "407" {
+            self.callGotAnError = true
+        }
     }
 }

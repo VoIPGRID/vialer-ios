@@ -165,6 +165,7 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
 
@@ -178,6 +179,7 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
     }
@@ -229,8 +231,26 @@ extension AppDelegate {
     }
 
     @objc fileprivate func middlewareRegistrationFinished(_ notification: NSNotification) {
-        callAvailabilityTimer = Timer.scheduledTimer(timeInterval: Configuration.TimerForCall.interval, target: self, selector: #selector(runCallTimer), userInfo: nil, repeats: true)
-        VialerLogError("Registration of VoIP account done, start timer for receiving a call.");
+        if callAvailabilityTimer == nil {
+            callAvailabilityTimer = Timer.scheduledTimer(timeInterval: Configuration.TimerForCall.interval, target: self, selector: #selector(runCallTimer), userInfo: nil, repeats: true)
+            VialerLogError("Registration of VoIP account done, start timer for receiving a call.");
+        }
+    }
+
+    @objc fileprivate func errorDuringCallSetup(_ notification: NSNotification) {
+        let statusCode = notification.userInfo![VSLNotificationUserInfoErrorStatusCodeKey] as! String
+        let statusMessage = notification.userInfo![VSLNotificationUserInfoErrorStatusMessageKey] as! String
+        if statusCode != "401" && statusCode != "407" {
+            let callId = notification.userInfo![VSLNotificationUserInfoCallIdKey] as! String
+
+            let callIncoming = callAvailabilityTimer != nil
+            if callAvailabilityTimer != nil {
+                resetCallAvailabilityTimer()
+            }
+
+            VialerStats.sharedInstance.callFailed(callId: callId, incoming: callIncoming, statusCode: statusCode)
+            VialerLogWarning("Error setting up a call with \(statusCode) / \(statusMessage)")
+        }
     }
 }
 
@@ -344,7 +364,7 @@ extension AppDelegate {
     ///
     /// - Parameter notification: Notification instance with VSLCall
     @objc fileprivate func callStateChanged(_ notification: Notification) {
-        callAvailabilityTimer.invalidate()
+        resetCallAvailabilityTimer()
 
         guard let call = notification.userInfo![VSLNotificationUserInfoCallKey] as? VSLCall,
             call.callState == .connecting || call.callState == .disconnected,
@@ -503,9 +523,16 @@ extension AppDelegate {
     @objc fileprivate func runCallTimer() {
         callAvailabilityTimesFired += 1
         if callAvailabilityTimesFired > Configuration.TimerForCall.maxTimesFiring {
-            callAvailabilityTimer.invalidate()
-            callAvailabilityTimesFired = 0
+            resetCallAvailabilityTimer()
             VialerStats.sharedInstance.noIncomingCallReceived()
+        }
+    }
+
+    fileprivate func resetCallAvailabilityTimer() {
+        callAvailabilityTimesFired = 0;
+        if callAvailabilityTimer != nil {
+            callAvailabilityTimer.invalidate()
+            callAvailabilityTimer = nil
         }
     }
 }
