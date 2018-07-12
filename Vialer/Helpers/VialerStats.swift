@@ -123,6 +123,13 @@ import Foundation
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tcp
         }
     }
+    
+    private func setMiddlewareKey(){
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+    }
 
     private func setCallDirection(_ incoming: Bool) {
         if incoming {
@@ -136,10 +143,7 @@ import Foundation
         initDefaultData()
 
         if call.isIncoming {
-            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-                return
-            }
-            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+            setMiddlewareKey()
         }
         self.setNetworkData()
         self.setTransportData()
@@ -155,11 +159,7 @@ import Foundation
     @objc func incomingCallFailedAfterEightPushNotifications(timeToInitialReport: Double){
         initDefaultData()
         
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-        
+        setMiddlewareKey()
         self.setNetworkData()
         setTransportData()
         self.setCallDirection(true)
@@ -171,40 +171,17 @@ import Foundation
         sendMetrics()
     }
     
-    @objc func incomingCallFailedOriginatorCanceled(call: VSLCall){
+    @objc func incomingCallFailedDeclined(call: VSLCall, reason: String){
         initDefaultData()
         
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-        
+        setMiddlewareKey()
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
-        defaultData[VialerStatsConstants.APIKeys.failedReason] = "ORIGINATOR_CANCELED"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
-        
-        sendMetrics()
-    }
-    
-    @objc func incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: VSLCall){
-        initDefaultData()
-        
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-        
-        setNetworkData()
-        setTransportData()
-        setCallDirection(call.isIncoming)
-        
-        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
-        defaultData[VialerStatsConstants.APIKeys.failedReason] = "DECLINED_ANOTHER_CALL_IN_PROGRESS"
-        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = reason
         
         sendMetrics()
     }
@@ -212,13 +189,9 @@ import Foundation
     @objc func logStatementForReceivedPushNotification(attempt: Int){
         initDefaultData()
 
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-
+        setMiddlewareKey()
         self.setNetworkData()
-        
+
         defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
         
         sendMetrics()
@@ -228,10 +201,7 @@ import Foundation
         initDefaultData()
 
         if call.isIncoming {
-            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-                return
-            }
-            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+            setMiddlewareKey()
         }
         self.setNetworkData()
         self.setTransportData()
