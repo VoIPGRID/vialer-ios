@@ -46,6 +46,11 @@ import Foundation
             static let audioReceiving: String = "AUDIO_RX"
             static let audioTransmitting: String = "AUDIO_TX"
             static let audioBothDirections: String = "AUDIO_RX_TX"
+            static let declined: String = "DECLINED"
+            static let insufficientNetwork: String = "INSUFFICIENT_NETWORK"
+            static let completedElsewhere: String = "CALL_COMPLETED_ELSEWHERE"
+            static let originatorCanceled: String = "ORIGINATOR_CANCELED"
+            static let anotherCallInProgress: String = "DECLINED_ANOTHER_CALL_IN_PROGRESS"
         }
 
         struct APIKeys : Hashable {
@@ -171,7 +176,7 @@ import Foundation
         sendMetrics()
     }
     
-    @objc func incomingCallFailedDeclined(call: VSLCall, reason: String){
+    @objc func incomingCallFailedDeclined(call: VSLCall){
         initDefaultData()
         
         setMiddlewareKey()
@@ -181,7 +186,30 @@ import Foundation
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
-        defaultData[VialerStatsConstants.APIKeys.failedReason] = reason
+        
+        switch call.terminateReason {
+        case .callCompletedElsewhere:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.completedElsewhere
+        case .originatorCancel:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.originatorCanceled
+        case .unknown:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.declined
+        }
+        
+        sendMetrics()
+    }
+    
+    @objc func incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: VSLCall){
+        initDefaultData()
+        
+        setMiddlewareKey()
+        setNetworkData()
+        setTransportData()
+        setCallDirection(call.isIncoming)
+        
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.anotherCallInProgress
         
         sendMetrics()
     }

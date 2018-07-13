@@ -267,7 +267,7 @@ extension AppDelegate {
             case .originatorCancel:
                 VialerLogDebug("Originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
-                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call, reason: "ORIGINATOR_CANCELED")
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
             case .unknown:
                 break
             }
@@ -286,7 +286,7 @@ extension AppDelegate {
                 do {
                     try call.decline()
                     VialerGAITracker.declineIncomingCallBecauseAnotherCallInProgressEvent()
-                    VialerStats.sharedInstance.incomingCallFailedDeclined(call: call, reason: "DECLINED_ANOTHER_CALL_IN_PROGRESS")
+                    VialerStats.sharedInstance.incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: call)
                 } catch let error {
                     VialerLogError("Error declining call: \(error)")
                 }
