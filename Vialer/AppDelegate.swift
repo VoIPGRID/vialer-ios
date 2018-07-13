@@ -262,6 +262,7 @@ extension AppDelegate {
             case .callCompletedElsewhere:
                 VialerLogDebug("Call completed elsewhere")
                 VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
+                VialerStats.shared.incomingCallFailedCallCompletedElsewhere()
             case .originatorCancel:
                 VialerLogDebug("Originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()

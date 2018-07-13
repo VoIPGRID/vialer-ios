@@ -196,6 +196,20 @@ import Foundation
         
         sendMetrics()
     }
+    
+    @objc func incomingCallFailedCallCompletedElsewhere(){
+        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        self.setNetworkDataAndUniqueKey()
+        
+        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = "CALL_COMPLETED_ELSEWHERE"
+        defaultData.removeValue(forKey: VialerStatsConstants.APIKeys.attempt)
+        
+        sendMetrics()
+    }
 
     @objc func logStatementForReceivedPushNotification(attempt: Int){
         initDefaultData()
