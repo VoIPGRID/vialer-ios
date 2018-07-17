@@ -362,8 +362,8 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 - (void)callStateChanged:(NSNotification *)notification {
     VSLCallState callState = [notification.userInfo[VSLNotificationUserInfoCallStateKey] intValue];
     
-    if (callState == VSLCallStateDisconnected || callState == VSLCallStateConfirmed) {
-        VialerLogDebug(@"Call ended or confirmed: Stop processing the notification");
+    if (callState == VSLCallStateDisconnected) {
+        VialerLogDebug(@"Call ended. Stop processing the notification");
         self.pushNotificationProcessing = nil;
     }
 }
