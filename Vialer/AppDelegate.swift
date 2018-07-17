@@ -6,6 +6,7 @@
 import CoreData
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder {
 
@@ -187,6 +188,7 @@ extension AppDelegate {
 
     /// We need to setup the local notification settings for pre CallKit app users
     fileprivate func registerForLocalNotifications() {
+        VialerLogDebug("There is not CallKit available setup local notifications")
         let acceptCallAction = UIMutableUserNotificationAction()
         acceptCallAction.activationMode = .foreground
         acceptCallAction.title = NSLocalizedString("Accept", comment: "Accept")
@@ -224,9 +226,11 @@ extension AppDelegate {
     /// Make sure the VoIP parts are up and running
     fileprivate func setupVoIP() {
         if VialerSIPLib.callKitAvailable() {
+            VialerLogDebug("Setup VoIP with CallKit support")
             callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
         }
         if user.sipEnabled {
+            VialerLogDebug("VoIP is enabled start the endpoint.")
             updatedSIPCredentials()
         }
         setupIncomingCallBack()
@@ -235,6 +239,7 @@ extension AppDelegate {
 
     /// Register a callback to the sip library so that the app can handle incoming calls
     private func setupIncomingCallBack() {
+        VialerLogDebug("Setup the listener for incoming calls through VoIP");
         vialerSIPLib.setIncomingCall { call in
             VialerGAITracker.incomingCallRingingEvent()
             DispatchQueue.main.async {
@@ -251,6 +256,7 @@ extension AppDelegate {
 
     /// Register a callback to the sip library so that the app can handle missed calls
     private func setupMissedCallBack() {
+        VialerLogDebug("Setup the listener for missing calls.");
         vialerSIPLib.setMissedCall { (call) in
             switch call.terminateReason {
             case .callCompletedElsewhere:
@@ -340,7 +346,8 @@ extension AppDelegate {
 
         guard #available(iOS 10.0, *), let phoneNumber = userActivity.startCallHandle else { return false }
 
-        if !user.sipEnabled {
+        // When there is no connection for VoIP or VoIP is disabled in the settings setup a connectAB call.
+        if !ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             let notificationInfo = [Configuration.Notifications.connectABPhoneNumberUserInfoKey: phoneNumber]
             NotificationCenter.default.post(name: Configuration.Notifications.startConnectABCall, object: self, userInfo: notificationInfo)
 

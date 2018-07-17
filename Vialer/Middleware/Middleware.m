@@ -19,9 +19,11 @@ static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
 static NSString * const MiddlewareAPNSPayloadKeyCheckin    = @"checkin";
 static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
 static NSString * const MiddlewareAPNSPayloadKeyUniqueKey  = @"unique_key";
+static NSString * const MiddlewareAPNSPayloadKeyAttempt    = @"attempt";
 
 static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 static float const MiddlewareResendTimeInterval = 10.0;
+static int const MiddlewareMaxAttempts = 8;
 NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
 
 @interface Middleware ()
@@ -111,9 +113,10 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         }
 
         NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
+        int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
 
         // Check for network connection before registering the account at pjsip.
-        if (!self.reachability.hasHighSpeed && !(self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
+        if (![[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
             VialerLogInfo(@"Wait for the next push! We currently don't have a network connection");
             return;
         }
@@ -121,35 +124,59 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         VialerLogDebug(@"Middleware key: %@, Processing notificiation key: %@", keyToProcess, self.pushNotificationProcessing);
 
         if ([self.pushNotificationProcessing isEqualToString:keyToProcess]) {
-            VialerLogInfo(@"Already processings a push notification with key: %@", keyToProcess);
+            VialerLogInfo(@"Already processing a push notification with key: %@", keyToProcess);
             return;
         }
 
+        self.pushNotificationProcessing = keyToProcess;
         // Register the account with the endpoint. This should trigger correct internet connection.
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was success.
             if (!success) {
-                VialerLogWarning(@"SIP Endpoint registration FAILED. Sending Available = NO to middleware");
-                [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SIPUtils removeSIPEndpoint];
-                });
+                // Check if it was the last attempt. If so remove the endpoint and sent no to the middleware.
+                if (attempt == MiddlewareMaxAttempts) {
+                    VialerLogWarning(@"SIP Endpoint registration FAILED after 8 tries. Sending Available = NO to middleware");
+                    [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SIPUtils removeSIPEndpoint];
+                    });
+                    self.pushNotificationProcessing = nil;
+                } else {
+                    // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
+                    VialerLogInfo(@"Registration of the account has failed, trying again with the next push. attempt: %d", attempt);
+                    self.pushNotificationProcessing = nil;
+                }
                 return;
-            }
-
-            // Now check the network connection.
-            if (self.reachability.hasHighSpeed || (self.reachability.hasHighSpeedWith3GPlus && [[SystemUser currentUser] use3GPlus])) {
-                // Highspeed, let's respond to the middleware with a success.
-                self.pushNotificationProcessing = keyToProcess;
-                [self respondToMiddleware:payload isAvailable:success withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
             } else {
-                // Connection is not good enough.
-                // Sent not available to the middleware.
-                VialerLogWarning(@"Not accepting call, connection quality insufficient. Sending Available = NO to middleware");
-                [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SIPUtils removeSIPEndpoint];
-                });
+                // The SIP account was successful registered.
+                // Now check the network connection.
+                if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
+                    // Highspeed, let's respond to the middleware with a success.
+                    VialerLogDebug(@"Accepting call on push attempt: %d. Sending Available = YES to middleware", attempt);
+                    [self respondToMiddleware:payload isAvailable:YES withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+                } else if (attempt == MiddlewareMaxAttempts) {
+                    // Connection is not good enough.
+                    // Sent not available to the middleware.
+                    VialerLogWarning(@"Not accepting call, max number of attempts reached, connection quality insufficient. Sending Available = NO to middleware");
+                    [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SIPUtils removeSIPEndpoint];
+                    });
+                    self.pushNotificationProcessing = nil;
+                    
+                    [VialerGAITracker declineIncomingCallBecauseOfInsufficientInternetConnectionEvent];
+                    // Calling middleware to log that the call was rejected due to insufficient internet connection.
+                    [self.commonMiddlewareRequestOperationManager sendHangupReasonToMiddleware:@"Rejected - Insufficient internet connection" forUniqueKey:keyToProcess withCompletion:^(NSError * _Nullable error) {
+                        if (error) {
+                            VialerLogError(@"The middleware responded with an error: %@", error);
+                        } else {
+                            VialerLogDebug(@"Successfully sent to middleware that the call was rejected due to insufficient internet connection");
+                        }
+                    }];
+                } else if (attempt < MiddlewareMaxAttempts) {
+                    VialerLogDebug(@"The network connection is not sufficient. Waiting for a next push");
+                    self.pushNotificationProcessing = nil;
+                }
             }
         }];
 
@@ -172,21 +199,23 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
     PushedCall *pushedCall = [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
     [self.context save:nil];
 
+    int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
+
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
-    VialerLogDebug(@"Responding to Middleware with URL: %@", middlewareBaseURLString);
+    VialerLogDebug(@"Responding to Middleware for attempt: %d with URL: %@", attempt, middlewareBaseURLString);
     MiddlewareRequestOperationManager *middlewareToRespondTo = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:middlewareBaseURLString];
 
     [middlewareToRespondTo sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
         // Whole response cycle completed, log duration.
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
         [VialerGAITracker respondedToIncomingPushNotificationWithResponseTime:responseTime];
-        VialerLogDebug(@"Middleware response time: [%f s]", responseTime);
+        VialerLogDebug(@"Middleware response time: [%f s] for attempt: %d", responseTime, attempt);
 
         if (error) {
             // Not only do we want to unregister upon a 408 but on every error.
             VialerLogError(@"The middleware responded with an error: %@", error);
         } else {
-            VialerLogDebug(@"Succsesfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
+            VialerLogDebug(@"Successfully sent \"availabe: %@\" to middleware", available ? @"YES" : @"NO");
         }
     }];
 }
@@ -218,6 +247,23 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         VialerLogDebug(@"Not deleting device registration from middleware, SIP Account(%@) not set or no APNS Token(%@) stored.",
                    sipAccount, storedAPNSToken);
     }
+}
+
+- (void)updateDeviceRegistrationWithRemoteLoggingId {
+    VialerLogInfo(@"Update middelware with remote logging id");
+    NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
+
+    [self sentAPNSToken:storedAPNSToken withCompletion:^(NSError *error) {
+        if (error) {
+            VialerLogWarning(@"Updating the remote logging id to the middleware has failed %@", [error localizedDescription]);
+        } else {
+            if ([VialerLogger remoteLoggingEnabled]) {
+                VialerLogInfo(@"The remote logging id has been succesful sent to the middleware");
+            } else {
+                VialerLogInfo(@"The remote logging id has been succesful removed from the middleware");
+            }
+        }
+    }];
 }
 
 - (void)sentAPNSToken:(NSString *)apnsToken {
@@ -314,11 +360,11 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 }
 
 - (void)callStateChanged:(NSNotification *)notification {
-    VSLCall *call = notification.userInfo[VSLNotificationUserInfoCallKey];
+    VSLCallState callState = [notification.userInfo[VSLNotificationUserInfoCallStateKey] intValue];
     
-    if (call.callState == VSLCallStateDisconnected) {
-        VialerLogDebug(@"Call disconnected: Stop processing the notification");
-        self.pushNotificationProcessing = @"";
+    if (callState == VSLCallStateDisconnected) {
+        VialerLogDebug(@"Call ended. Stop processing the notification");
+        self.pushNotificationProcessing = nil;
     }
 }
 

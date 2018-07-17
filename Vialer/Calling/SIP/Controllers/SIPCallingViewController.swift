@@ -263,18 +263,21 @@ extension SIPCallingViewController {
     }
 
     fileprivate func startCalling() {
-        guard let account = SIPUtils.addSIPAccountToEndpoint() else {
-            return
-        }
-
-        startConnectDurationTimer()
-
-        callManager.startCall(toNumber: cleanedPhoneNumber!, for: account) { (call, error) in
-            if error != nil {
-                VialerLogError("Error setting up call: \(String(describing: error))")
-            } else if let call = call {
-                self.activeCall = call
+        SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
+            guard account != nil else {
+                return
             }
+
+            self.startConnectDurationTimer()
+
+            self.callManager.startCall(toNumber: self.cleanedPhoneNumber!, for: account!) { (call, error) in
+                if error != nil {
+                    VialerLogError("Error setting up call: \(String(describing: error))")
+                } else if let call = call {
+                    self.activeCall = call
+                }
+            }
+
         }
     }
 

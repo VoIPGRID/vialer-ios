@@ -146,7 +146,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         NSString *username = self.loginFormView.usernameField.text;
         NSString *password = self.loginFormView.passwordField.text;
         if ([username length] > 0 && [password length] > 0) {
-            [self continueFromConfigureFormViewToUnlockView];
+            [self continueFromLoginView];
             return YES;
         } else {
             self.alertShown = YES;
@@ -168,7 +168,13 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         }
     } else if ([self.twoFactorAuthenticationView.tokenField isEqual:textField]) {
         [textField resignFirstResponder];
-        VialerLogDebug(@"show field!");
+        if ([self.twoFactorAuthenticationView.tokenField.text length] > 0) {
+            [self continueFromTwoFactorAuthenticationViewToConfigureView];
+            return YES;
+        } else {
+
+            return NO;
+        }
         return YES;
     } else if ([self.configureFormView.phoneNumberField isEqual:textField]) {
         [textField resignFirstResponder];
@@ -204,15 +210,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 // Checks have been done to ensure the text fields have data, otherwise the button would not be clickable.
 - (IBAction)loginButtonPushed:(UIButton *)sender {
-    NSString *username = self.loginFormView.usernameField.text;
-    NSString *password = self.loginFormView.passwordField.text;
-
-    [self doLoginCheckForTwoFactorWithUserName:username password:password token:@"" successBlock:^ {
-        if ([SystemUser currentUser].apiToken != nil && ![[SystemUser currentUser].apiToken isEqualToString:@""]) {
-            [self retrievePhoneNumbersWithSuccessBlock:nil];
-        }
-    }];
-    [self deselectAllTextFields:nil];
+    [self continueFromLoginView];
 }
 
 - (void)checkIfEmailIsSetInEmailTextField {
@@ -234,6 +232,22 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (IBAction)twoFactorAuthenticationViewContinueButtonPressed:(UIButton *)sender {
+    [self continueFromTwoFactorAuthenticationViewToConfigureView];
+}
+
+- (void)continueFromLoginView {
+    NSString *username = self.loginFormView.usernameField.text;
+    NSString *password = self.loginFormView.passwordField.text;
+
+    [self doLoginCheckForTwoFactorWithUserName:username password:password token:@"" successBlock:^ {
+        if ([SystemUser currentUser].apiToken != nil && ![[SystemUser currentUser].apiToken isEqualToString:@""]) {
+            [self retrievePhoneNumbersWithSuccessBlock:nil];
+        }
+    }];
+    [self deselectAllTextFields:nil];
+}
+
+- (void)continueFromTwoFactorAuthenticationViewToConfigureView {
     NSString *token = self.twoFactorAuthenticationView.tokenField.text;
 
     [self doLoginCheckForTwoFactorWithUserName:self.loginFormView.usernameField.text password:self.loginFormView.passwordField.text token:token successBlock:^{

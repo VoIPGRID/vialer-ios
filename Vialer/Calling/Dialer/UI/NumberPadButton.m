@@ -41,12 +41,11 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 }
 
 - (NSString *)number {
-    return self.numberText;
+    return self.numberLabel.text;
 }
 
 - (void)setNumber:(NSString *)number {
     self.numberLabel.text = number;
-    self.numberText = number;
 }
 
 - (NSString *)subtitle {

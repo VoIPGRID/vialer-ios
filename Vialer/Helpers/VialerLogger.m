@@ -6,6 +6,7 @@
 #import "VialerLogger.h"
 
 #import "lelib.h"
+#import "Middleware.h"
 #import "SPLumberjackLogFormatter.h"
 @import UIKit;
 
@@ -99,6 +100,9 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 + (void)setRemoteLoggingEnabled:(BOOL)enable {
     [[NSUserDefaults standardUserDefaults] setBool:enable forKey:DDLogWrapperShouldUseRemoteLoggingKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+
+    // Update the Middleware when remote logging is enabled.
+    [[[Middleware alloc] init] updateDeviceRegistrationWithRemoteLoggingId];
 }
 
 + (NSString *)remoteIdentifier {

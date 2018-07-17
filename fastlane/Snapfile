@@ -7,8 +7,8 @@ reinstall_app true
 # A list of devices you want to take the screenshots from
 devices([
   # "iPhone 4s",
-  "iPhone SE",
-  "iPhone 8",
+  # "iPhone SE",
+  # "iPhone 8",
   "iPhone 8 Plus",
   "iPhone X",
 ])
@@ -35,7 +35,7 @@ workspace "./Vialer.xcworkspace"
 localize_simulator true
 
 # Run on multiple simulators at once
-concurrent_simulators true
+concurrent_simulators false
 
 erase_simulator true
 
@@ -44,5 +44,4 @@ clean false
 derived_data_path "./fastlane/DerivedData"
 
 app_identifier ENV['APP_IDENTIFIER']
-stop_after_first_error true
 output_simulator_logs true

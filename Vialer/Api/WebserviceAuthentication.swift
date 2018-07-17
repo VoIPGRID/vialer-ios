@@ -8,7 +8,7 @@ import Foundation
 /// Convience Protocol to make authentication initialization easy for webservice
 protocol WebserviceAuthentication {
     var username: String! { get }
-    var password: String! { get }
+    var apiToken: String! { get }
 }
 
 extension Webservice {
@@ -18,7 +18,7 @@ extension Webservice {
     ///
     /// - Parameter authentication: instance that confirms to WebserviceAuthentication
     convenience init(authentication: WebserviceAuthentication) {
-        self.init(username: authentication.username, password: authentication.password)
+        self.init(username: authentication.username, apiToken: authentication.apiToken)
     }
 }
 

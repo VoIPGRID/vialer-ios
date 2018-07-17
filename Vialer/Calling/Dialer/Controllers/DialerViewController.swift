@@ -114,7 +114,7 @@ extension DialerViewController {
 
         lastCalledNumber = numberText
 
-        if user.sipEnabled && ((user.use3GPlus && reachability.hasHighSpeedWith3GPlus) || reachability.hasHighSpeed) {
+        if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             performSegue(segueIdentifier: .sipCalling)
         } else {
@@ -248,6 +248,8 @@ extension DialerViewController {
                 } else {
                     self.reachabilityBarHeigthConstraint.constant = 0
                 }
+            } else if (!self.user.sipUseEncryption){
+                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0
             }

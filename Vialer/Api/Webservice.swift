@@ -18,7 +18,7 @@ enum Result<A> {
 }
 
 final class Webservice: WebserviceProtocol {
-    private let basicAuth: String
+    private let authentifcation: String
 
     /// Default initializer
     ///
@@ -27,8 +27,8 @@ final class Webservice: WebserviceProtocol {
     /// - Parameters:
     ///   - username: String with username for authentication
     ///   - password: String with password for authentication
-    init(username: String, password: String) {
-        basicAuth = "\(username):\(password)".data(using: String.Encoding.utf8)!.base64EncodedString()
+    init(username: String, apiToken: String) {
+        authentifcation = "\(username):\(apiToken)"
     }
 
     /// Fires request to remote service
@@ -38,7 +38,9 @@ final class Webservice: WebserviceProtocol {
     ///   - completion: completionblock that will be called after the request has finished.
     ///         Completionblock will be called with WebserviceResult
     func load<A>(resource: Resource<A>, completion: @escaping (Result<A?>) -> ()) {
-        let request = URLRequest(resource: resource, basicAuth: basicAuth)
+        var request = URLRequest(resource: resource, basicAuth: authentifcation)
+        // Override the authentication with the Authorization header for Token.
+        request.setValue("Token \(authentifcation)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(error!))

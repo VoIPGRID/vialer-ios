@@ -26,7 +26,6 @@ NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgo
 NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
 
 NSString * const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
-
 /**
  *  Api Dictionary keys.
  *
@@ -182,7 +181,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.sipAccount         = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled         = [defaults boolForKey:SystemUserSUDSIPEnabled];
     self.sipUseEncryption   = self.sipUseEncryption;
-
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 
     self.loggingOut = NO;
@@ -395,13 +393,10 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             self.sipUseEncryption = useTLS;
         }
 
-
-        if ([VialerSIPLib sharedInstance].endpointAvailable) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                VialerLogDebug(@"post from setusetls");
-                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-            });
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            VialerLogDebug(@"post from setusetls");
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        });
     }];
 }
 
@@ -409,12 +404,10 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     useStunServers = useStunServers;
     [[NSUserDefaults standardUserDefaults] setBool:useStunServers forKey:SystemuserSUDUseStunServers];
 
-    if ([VialerSIPLib sharedInstance].endpointAvailable) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            VialerLogDebug(@"Post from setusestunservers");
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-        });
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        VialerLogDebug(@"Post from setusestunservers");
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+    });
 }
 
 #pragma mark - Actions

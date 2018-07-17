@@ -38,7 +38,7 @@ platform :ios do
       export_method: "app-store",
       configuration: "Release",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           ENV["APP_IDENTIFIER"] => ENV["APP_MATCH_PROFILE"],
           ENV["APP_INTENT_IDENTIFIER"] => ENV["APP_INTENT_MATCH_PROFILE"]
         }
@@ -60,11 +60,12 @@ platform :ios do
   private_lane :sync_certs do |options|
     sync_code_signing(
       app_identifier: [
-        ENV["APP_IDENTIFIER"], 
+        ENV["APP_IDENTIFIER"],
         ENV["APP_INTENT_IDENTIFIER"]
       ],
       type: options[:type],
-      force_for_new_devices: true
+      force_for_new_devices: true,
+      team_name: ENV["TEAM_NAME"],
     )
   end
 
@@ -93,20 +94,39 @@ platform :ios do
     )
   end
 
-  desc "Synchronize DEVELOPMENT certificates with itunes connect"
+  desc "Synchronize DEVELOPMENT certificates with iTunes Connect"
   lane :sync_development_certs do
     sync_certs(type: "development")
   end
 
-  desc "Synchronize ADHOC certificates with itunes connect"
+  desc "Synchronize ADHOC certificates with iTunes Connect"
   lane :sync_adhoc_certs do
     sync_certs(type: "adhoc")
   end
 
-  desc "Synchronize APPSTORE certificates with itunes connect"
+  desc "Synchronize APPSTORE certificates with iTunes Connect"
   lane :sync_appstore_certs do
     sync_certs(type: "appstore")
   end
+
+  desc "Synchronize ALL certificates with iTunes Connect"
+  lane :sync_all_certs do
+    sync_development_certs
+    sync_adhoc_certs
+    sync_appstore_certs
+  end
+
+  desc "Generate a new APP ID in iTunes Connect"
+  lane :create_new_app do
+      produce(
+        username: ENV["ITC_USERNAME"],
+        team_name: ENV["TEAM_NAME"],
+        app_identifier: ENV["APP_IDENTIFIER"],
+        app_name: ENV["APP_NAME"],
+        company_name: ENV["TEAM_NAME"],
+        language: 'Dutch'
+      )
+    end
 
   lane :add_device do
     device_name = prompt(text: "Enter the device name: ")
@@ -122,7 +142,6 @@ platform :ios do
     sync_appstore_certs
   end
 
-  # You can define as many lanes as you want
   after_all do |lane|
     clean_build_artifacts()
   end

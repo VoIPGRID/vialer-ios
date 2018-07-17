@@ -346,7 +346,7 @@
 "The number is to short" = "Het nummer is te kort";
 
 /* No comment provided by engineer. */
-"The outgoing number which the app will display is:" = "Het telefoonnummer waarmee uitgebeld wordt is:";
+"The outgoing number which the app will display is:" = "Het telefoonnummer waarmee wordt uitgebeld:";
 
 /* No comment provided by engineer. */
 "This user is not allowed to use the app" = "Dit account kan geen gebruik maken van de app";
@@ -449,3 +449,6 @@
 
 /* No comment provided by engineer. */
 "The two-factor authentication token is invalid" = "De twee-staps verificatie token is incorrect";
+
+/*  Calls are not encrypted */
+"Calls are not encrypted" = "Gesprekken zijn niet versleuteld";

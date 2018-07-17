@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yxi-SJ-vi0">
-    <device id="retina5_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yxi-SJ-vi0">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Thin</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Dialer View Controller-->
         <scene sceneID="L3G-nM-XRV">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYx-5X-82c" customClass="DialerViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYx-5X-82c" customClass="DialerViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bIK-Mu-L7W"/>
                         <viewControllerLayoutGuide type="bottom" id="Krn-1p-wH9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Je9-SI-kQJ" customClass="GradientView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi" userLabel="Left filler">
-                                <rect key="frame" x="6" y="126" width="56" height="40"/>
+                                <rect key="frame" x="6" y="118" width="56" height="40"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
-                                <rect key="frame" x="0.0" y="88" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="h5J-mQ-Y2V"/>
                                 </constraints>
@@ -41,7 +36,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" alpha="0.0" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
-                                <rect key="frame" x="313" y="126" width="56" height="40"/>
+                                <rect key="frame" x="313" y="118" width="56" height="40"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="J0y-Rp-1Bd"/>
@@ -56,7 +51,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
-                                <rect key="frame" x="151" y="697" width="73" height="73"/>
+                                <rect key="frame" x="151" y="562" width="73" height="73"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.CallButton"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <state key="normal" backgroundImage="acceptButton">
@@ -69,7 +64,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-hR-eH4" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="48" y="373" width="73" height="73"/>
+                                <rect key="frame" x="46.5" y="207.5" width="72.5" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="height" multiplier="1:1" id="2KY-EG-huc"/>
@@ -83,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOY-sc-Yj2" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="48" y="454" width="73" height="73"/>
+                                <rect key="frame" x="46.5" y="296" width="72.5" height="73"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
@@ -94,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dl3-4k-sp9" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="151" y="454" width="73" height="73"/>
+                                <rect key="frame" x="151" y="296" width="73" height="73"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
@@ -105,7 +100,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCK-eL-i9q" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="48" y="535" width="73" height="73"/>
+                                <rect key="frame" x="46.5" y="385" width="72.5" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
@@ -116,7 +111,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOM-l1-diQ" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="151" y="535" width="73" height="73"/>
+                                <rect key="frame" x="151" y="385" width="73" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
@@ -127,7 +122,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkK-Cf-MKa" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="254" y="535" width="73" height="73"/>
+                                <rect key="frame" x="256" y="385" width="72.5" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
@@ -138,7 +133,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0w-Ub-IXA" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="48" y="616" width="73" height="73"/>
+                                <rect key="frame" x="46.5" y="473.5" width="72.5" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
@@ -148,7 +143,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDW-t9-BLX" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="151" y="616" width="73" height="73"/>
+                                <rect key="frame" x="151" y="473.5" width="73" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
@@ -161,7 +156,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUP-Ju-rYA" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="254" y="616" width="73" height="73"/>
+                                <rect key="frame" x="256" y="473.5" width="72.5" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
@@ -171,7 +166,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23A-8K-gya" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="254" y="454" width="73" height="73"/>
+                                <rect key="frame" x="256" y="296" width="72.5" height="73"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
@@ -182,7 +177,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjH-on-0PS" userLabel="3-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="254" y="373" width="73" height="73"/>
+                                <rect key="frame" x="256" y="207.5" width="72.5" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
@@ -193,7 +188,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aP1-qe-ci4" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="151" y="373" width="73" height="73"/>
+                                <rect key="frame" x="151" y="207.5" width="73" height="72.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
@@ -204,7 +199,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
-                                <rect key="frame" x="65" y="126" width="245" height="40"/>
+                                <rect key="frame" x="65" y="118" width="245" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nT6-7N-5s3"/>
                                 </constraints>
@@ -214,75 +209,75 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="UOM-l1-diQ" firstAttribute="top" secondItem="Dl3-4k-sp9" secondAttribute="bottom" constant="8" id="1g5-w6-fUY"/>
+                            <constraint firstItem="UOM-l1-diQ" firstAttribute="top" secondItem="Dl3-4k-sp9" secondAttribute="bottom" constant="16" id="1g5-w6-fUY"/>
                             <constraint firstItem="UOM-l1-diQ" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="38d-ac-LaI"/>
                             <constraint firstItem="AUP-Ju-rYA" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="3Og-fm-nfJ"/>
                             <constraint firstItem="aP1-qe-ci4" firstAttribute="centerX" secondItem="Je9-SI-kQJ" secondAttribute="centerX" id="3xT-f9-n2x"/>
-                            <constraint firstItem="Krn-1p-wH9" firstAttribute="top" secondItem="fQq-Gl-ZNQ" secondAttribute="bottom" constant="8" symbolic="YES" id="4N9-aL-5jb"/>
+                            <constraint firstItem="Krn-1p-wH9" firstAttribute="top" secondItem="fQq-Gl-ZNQ" secondAttribute="bottom" constant="32" id="4N9-aL-5jb"/>
                             <constraint firstItem="aP1-qe-ci4" firstAttribute="top" secondItem="bjH-on-0PS" secondAttribute="top" id="5SV-t9-OE8"/>
                             <constraint firstItem="Z0R-4w-Bgg" firstAttribute="top" secondItem="Hbs-mW-Umr" secondAttribute="top" id="6CD-6c-9ls"/>
                             <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="centerX" secondItem="Je9-SI-kQJ" secondAttribute="centerX" id="6qj-ja-qC7"/>
-                            <constraint firstItem="Z0R-4w-Bgg" firstAttribute="top" secondItem="lTu-kS-pvN" secondAttribute="bottom" constant="8" id="7sv-0f-hht"/>
+                            <constraint firstItem="Z0R-4w-Bgg" firstAttribute="top" secondItem="lTu-kS-pvN" secondAttribute="bottom" constant="24" id="7sv-0f-hht"/>
                             <constraint firstAttribute="leadingMargin" secondItem="WhT-rC-jEi" secondAttribute="leading" constant="10" id="9sT-ac-PO9"/>
                             <constraint firstItem="lkK-Cf-MKa" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="AJS-cw-i0N"/>
-                            <constraint firstItem="NDW-t9-BLX" firstAttribute="top" secondItem="UOM-l1-diQ" secondAttribute="bottom" constant="8" id="Bxs-We-pNz"/>
+                            <constraint firstItem="NDW-t9-BLX" firstAttribute="top" secondItem="UOM-l1-diQ" secondAttribute="bottom" constant="16" id="Bxs-We-pNz"/>
                             <constraint firstItem="lTu-kS-pvN" firstAttribute="top" secondItem="bIK-Mu-L7W" secondAttribute="bottom" id="C5R-WS-VAI"/>
                             <constraint firstItem="AUP-Ju-rYA" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="CdE-ok-PLQ"/>
                             <constraint firstItem="NDW-t9-BLX" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="DOy-5G-Csl"/>
                             <constraint firstItem="Dl3-4k-sp9" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="EEv-hv-rqB"/>
-                            <constraint firstItem="23A-8K-gya" firstAttribute="leading" secondItem="Dl3-4k-sp9" secondAttribute="trailing" constant="30" id="EeS-im-ad0"/>
+                            <constraint firstItem="23A-8K-gya" firstAttribute="leading" secondItem="Dl3-4k-sp9" secondAttribute="trailing" constant="32" id="EeS-im-ad0"/>
                             <constraint firstItem="UOM-l1-diQ" firstAttribute="centerX" secondItem="Je9-SI-kQJ" secondAttribute="centerX" id="Fkb-sA-Fk7"/>
                             <constraint firstItem="tNd-hR-eH4" firstAttribute="height" secondItem="aP1-qe-ci4" secondAttribute="height" id="GqS-8N-6ba"/>
-                            <constraint firstItem="UOM-l1-diQ" firstAttribute="leading" secondItem="wCK-eL-i9q" secondAttribute="trailing" constant="30" id="HCZ-Er-CeS"/>
+                            <constraint firstItem="UOM-l1-diQ" firstAttribute="leading" secondItem="wCK-eL-i9q" secondAttribute="trailing" constant="32" id="HCZ-Er-CeS"/>
                             <constraint firstItem="Z0R-4w-Bgg" firstAttribute="leading" secondItem="WhT-rC-jEi" secondAttribute="trailing" constant="3" id="I1o-v6-3A3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hbs-mW-Umr" secondAttribute="trailing" constant="-10" id="Jip-oI-VCH"/>
                             <constraint firstItem="lTu-kS-pvN" firstAttribute="leading" secondItem="Je9-SI-kQJ" secondAttribute="leading" id="JvR-0E-zjm"/>
                             <constraint firstItem="tNd-hR-eH4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Je9-SI-kQJ" secondAttribute="leadingMargin" id="LR9-EE-Ltx"/>
                             <constraint firstItem="bjH-on-0PS" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="M8e-bW-K1k"/>
-                            <constraint firstItem="AUP-Ju-rYA" firstAttribute="top" secondItem="lkK-Cf-MKa" secondAttribute="bottom" constant="8" id="MjZ-BD-JsN"/>
-                            <constraint firstItem="NDW-t9-BLX" firstAttribute="leading" secondItem="d0w-Ub-IXA" secondAttribute="trailing" constant="30" id="PuE-Dc-Gx1"/>
-                            <constraint firstItem="Dl3-4k-sp9" firstAttribute="leading" secondItem="jOY-sc-Yj2" secondAttribute="trailing" constant="30" id="Qh5-8g-7hP"/>
+                            <constraint firstItem="AUP-Ju-rYA" firstAttribute="top" secondItem="lkK-Cf-MKa" secondAttribute="bottom" constant="16" id="MjZ-BD-JsN"/>
+                            <constraint firstItem="NDW-t9-BLX" firstAttribute="leading" secondItem="d0w-Ub-IXA" secondAttribute="trailing" constant="32" id="PuE-Dc-Gx1"/>
+                            <constraint firstItem="Dl3-4k-sp9" firstAttribute="leading" secondItem="jOY-sc-Yj2" secondAttribute="trailing" constant="32" id="Qh5-8g-7hP"/>
                             <constraint firstItem="Z0R-4w-Bgg" firstAttribute="top" secondItem="WhT-rC-jEi" secondAttribute="top" id="RiK-Nf-r6o"/>
                             <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="SNx-Su-jgf"/>
                             <constraint firstItem="jOY-sc-Yj2" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="TyT-Sc-ydY"/>
                             <constraint firstItem="Z0R-4w-Bgg" firstAttribute="bottom" secondItem="Hbs-mW-Umr" secondAttribute="bottom" id="UIl-3l-NNB"/>
                             <constraint firstItem="jOY-sc-Yj2" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="UQT-0W-93s"/>
-                            <constraint firstItem="aP1-qe-ci4" firstAttribute="leading" secondItem="tNd-hR-eH4" secondAttribute="trailing" constant="30" id="VAh-V3-gfB"/>
-                            <constraint firstItem="jOY-sc-Yj2" firstAttribute="top" secondItem="tNd-hR-eH4" secondAttribute="bottom" constant="8" id="Vzw-4W-tER"/>
+                            <constraint firstItem="aP1-qe-ci4" firstAttribute="leading" secondItem="tNd-hR-eH4" secondAttribute="trailing" constant="32" id="VAh-V3-gfB"/>
+                            <constraint firstItem="jOY-sc-Yj2" firstAttribute="top" secondItem="tNd-hR-eH4" secondAttribute="bottom" constant="16" id="Vzw-4W-tER"/>
                             <constraint firstItem="tNd-hR-eH4" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="height" multiplier="1:1" id="Xyv-0N-pY1"/>
-                            <constraint firstItem="Dl3-4k-sp9" firstAttribute="top" secondItem="aP1-qe-ci4" secondAttribute="bottom" constant="8" id="YYg-f2-cxz"/>
+                            <constraint firstItem="Dl3-4k-sp9" firstAttribute="top" secondItem="aP1-qe-ci4" secondAttribute="bottom" constant="16" id="YYg-f2-cxz"/>
                             <constraint firstItem="Hbs-mW-Umr" firstAttribute="width" secondItem="WhT-rC-jEi" secondAttribute="width" id="Yyr-v3-dC7"/>
                             <constraint firstItem="AUP-Ju-rYA" firstAttribute="bottom" secondItem="d0w-Ub-IXA" secondAttribute="bottom" id="a5c-mL-dIL"/>
-                            <constraint firstItem="lkK-Cf-MKa" firstAttribute="top" secondItem="23A-8K-gya" secondAttribute="bottom" constant="8" id="a7L-JZ-pAy"/>
+                            <constraint firstItem="lkK-Cf-MKa" firstAttribute="top" secondItem="23A-8K-gya" secondAttribute="bottom" constant="16" id="a7L-JZ-pAy"/>
                             <constraint firstItem="Dl3-4k-sp9" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="bEM-gt-2XX"/>
                             <constraint firstItem="wCK-eL-i9q" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="ccp-eF-bYA"/>
                             <constraint firstItem="UOM-l1-diQ" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="ciR-mg-44O"/>
-                            <constraint firstItem="wCK-eL-i9q" firstAttribute="top" secondItem="jOY-sc-Yj2" secondAttribute="bottom" constant="8" id="e6W-SD-acV"/>
+                            <constraint firstItem="wCK-eL-i9q" firstAttribute="top" secondItem="jOY-sc-Yj2" secondAttribute="bottom" constant="16" id="e6W-SD-acV"/>
                             <constraint firstItem="d0w-Ub-IXA" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="eMB-yw-awW"/>
                             <constraint firstItem="NDW-t9-BLX" firstAttribute="centerX" secondItem="Je9-SI-kQJ" secondAttribute="centerX" id="ehT-Nf-aZg"/>
                             <constraint firstItem="bjH-on-0PS" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="exL-VW-ikh"/>
-                            <constraint firstItem="d0w-Ub-IXA" firstAttribute="top" secondItem="wCK-eL-i9q" secondAttribute="bottom" constant="8" id="fQ3-eG-eBW"/>
+                            <constraint firstItem="d0w-Ub-IXA" firstAttribute="top" secondItem="wCK-eL-i9q" secondAttribute="bottom" constant="16" id="fQ3-eG-eBW"/>
                             <constraint firstItem="Dl3-4k-sp9" firstAttribute="centerX" secondItem="Je9-SI-kQJ" secondAttribute="centerX" id="haA-0L-gV5"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bjH-on-0PS" secondAttribute="trailing" id="hao-0y-udm"/>
                             <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="hoM-PL-fS1"/>
                             <constraint firstItem="lkK-Cf-MKa" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="irF-hc-UTE"/>
-                            <constraint firstItem="lkK-Cf-MKa" firstAttribute="leading" secondItem="UOM-l1-diQ" secondAttribute="trailing" constant="30" id="jfS-r2-QE2"/>
+                            <constraint firstItem="lkK-Cf-MKa" firstAttribute="leading" secondItem="UOM-l1-diQ" secondAttribute="trailing" constant="32" id="jfS-r2-QE2"/>
                             <constraint firstAttribute="trailing" secondItem="lTu-kS-pvN" secondAttribute="trailing" id="l11-Q1-8rT"/>
                             <constraint firstItem="aP1-qe-ci4" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="lvc-Qm-d3Y"/>
-                            <constraint firstItem="23A-8K-gya" firstAttribute="top" secondItem="bjH-on-0PS" secondAttribute="bottom" constant="8" id="mTP-Ke-0yG"/>
+                            <constraint firstItem="23A-8K-gya" firstAttribute="top" secondItem="bjH-on-0PS" secondAttribute="bottom" constant="16" id="mTP-Ke-0yG"/>
                             <constraint firstItem="NDW-t9-BLX" firstAttribute="bottom" secondItem="d0w-Ub-IXA" secondAttribute="bottom" id="nVp-dk-73K"/>
                             <constraint firstItem="aP1-qe-ci4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Z0R-4w-Bgg" secondAttribute="bottom" constant="8" id="o5n-HG-voD"/>
                             <constraint firstItem="Hbs-mW-Umr" firstAttribute="leading" secondItem="Z0R-4w-Bgg" secondAttribute="trailing" constant="3" id="pRM-Ra-v7d"/>
-                            <constraint firstItem="AUP-Ju-rYA" firstAttribute="leading" secondItem="NDW-t9-BLX" secondAttribute="trailing" constant="30" id="qIS-Tc-Czi"/>
+                            <constraint firstItem="AUP-Ju-rYA" firstAttribute="leading" secondItem="NDW-t9-BLX" secondAttribute="trailing" constant="32" id="qIS-Tc-Czi"/>
                             <constraint firstItem="NDW-t9-BLX" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="quK-o9-qqG"/>
                             <constraint firstItem="Z0R-4w-Bgg" firstAttribute="bottom" secondItem="WhT-rC-jEi" secondAttribute="bottom" id="tLd-Zb-Izh"/>
-                            <constraint firstItem="bjH-on-0PS" firstAttribute="leading" secondItem="aP1-qe-ci4" secondAttribute="trailing" constant="30" id="tml-Qr-cdW"/>
+                            <constraint firstItem="bjH-on-0PS" firstAttribute="leading" secondItem="aP1-qe-ci4" secondAttribute="trailing" constant="32" id="tml-Qr-cdW"/>
                             <constraint firstItem="wCK-eL-i9q" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="wGS-8C-wkW"/>
                             <constraint firstItem="aP1-qe-ci4" firstAttribute="top" secondItem="tNd-hR-eH4" secondAttribute="top" id="xlx-oA-wPp"/>
                             <constraint firstItem="23A-8K-gya" firstAttribute="width" secondItem="tNd-hR-eH4" secondAttribute="width" id="zAy-kw-YWA"/>
                             <constraint firstItem="d0w-Ub-IXA" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="zLg-Ey-57O"/>
                             <constraint firstItem="23A-8K-gya" firstAttribute="height" secondItem="tNd-hR-eH4" secondAttribute="height" id="zRs-RQ-uS1"/>
-                            <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="top" secondItem="NDW-t9-BLX" secondAttribute="bottom" constant="8" id="zeh-cW-9E6"/>
+                            <constraint firstItem="fQq-Gl-ZNQ" firstAttribute="top" secondItem="NDW-t9-BLX" secondAttribute="bottom" constant="16" id="zeh-cW-9E6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zim-dP-naY">
@@ -337,7 +332,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yxi-SJ-vi0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="o9U-kD-7LI">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -362,6 +357,6 @@
         <image name="acceptButton" width="73" height="73"/>
         <image name="keypad-back" width="23" height="16"/>
         <image name="keypad-back-highlighted" width="23" height="16"/>
-        <image name="menu" width="25" height="21"/>
+        <image name="menu" width="25" height="20"/>
     </resources>
 </document>

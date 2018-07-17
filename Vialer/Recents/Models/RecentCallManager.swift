@@ -71,13 +71,13 @@ class RecentCallManager {
             return
         }
 
-        let fetchDate: Date
-        // Fetch latest call 
+        var fetchDate: Date =  Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+        // Get the latest call and check if it is smaller then a month ago.
         if let call = RecentCall.fetchLatest(in: managedContext) {
-            fetchDate = Calendar.current.date(byAdding: .hour, value: -1, to: call.callDate)!
-        } else {
-            // Retrieve calls not older than 1 month
-            fetchDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+            if call.callDate > fetchDate {
+                // Fetch the latest calls minus an hour
+                fetchDate = Calendar.current.date(byAdding: .hour, value: -1, to: call.callDate)!
+            }
         }
         reloading = true
 

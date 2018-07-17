@@ -8,12 +8,15 @@
 
 static NSString * const MiddlewareURLDeviceRecordMutation = @"/api/apns-device/";
 static NSString * const MiddlewareURLIncomingCallResponse = @"/api/call-response/";
+static NSString * const MiddlewareURLHangupReason = @"/api/hangup-reason/";
+static NSString * const MiddlewareResponseKeyHangupReason = @"hangup_reason";
 static NSString * const MiddlewareResponseKeyMessageStartTime = @"message_start_time";
 static NSString * const MiddlewareResponseKeyAvailable = @"available";
 static NSString * const MiddlewareResponseKeyAvailableYES = @"True";
 static NSString * const MiddlewareResponseKeyAvailableNO = @"False";
 static NSString * const MiddlewareResponseKeyUniqueKey = @"unique_key";
 static NSString * const MiddlewareResponseKeySIPUserId = @"sip_user_id";
+static NSString * const MiddlewareResponseKeyRemoteLoggingId = @"remote_logging_id";
 static NSString * const MiddlewareResponseKeyToken = @"token";
 static NSString * const MiddlewareResponseKeyApp = @"app";
 static NSString * const MiddlewareMainBundleCFBundleVersion = @"CFBundleVersion";
@@ -73,8 +76,13 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              @"sandbox" : [NSNumber numberWithBool:YES]
 #endif
                              };
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
 
-    [self POST:MiddlewareURLDeviceRecordMutation parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    if ([VialerLogger remoteLoggingEnabled]) {
+        [parameters setObject:[VialerLogger remoteIdentifier] forKey:MiddlewareResponseKeyRemoteLoggingId];
+    }
+
+    [self POST:MiddlewareURLDeviceRecordMutation parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);
@@ -117,8 +125,26 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              // Wether the device is available to accept the call (optional but default True).
                              MiddlewareResponseKeyAvailable: available ? MiddlewareResponseKeyAvailableYES : MiddlewareResponseKeyAvailableNO,
                              };
-
+    
     [self POST:MiddlewareURLIncomingCallResponse parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (completion) {
+            if (!error) {
+                completion(nil);
+            } else {
+                completion(error);
+            }
+        }
+    }];
+}
+
+- (void)sendHangupReasonToMiddleware:(NSString * _Nullable)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion {
+    NSDictionary *params = @{// Key that was given in the device push message as reference (required).
+                             MiddlewareResponseKeyUniqueKey: uniqueKey,
+                             // Hangup reason (optional).
+                             MiddlewareResponseKeyHangupReason: hangupReason,
+                             };
+    
+    [self POST:MiddlewareURLHangupReason parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);

@@ -13,27 +13,26 @@
 # pragma mark - Methods
 
 + (BOOL)setupSIPEndpoint {
+    VialerLogDebug(@"Setup the endpoint for VoIP");
     if (![SystemUser currentUser].sipEnabled) {
         return NO;
     }
 
-    if ([VialerSIPLib sharedInstance].endpointAvailable) {
-        VialerLogDebug(@"Remove the endpoint that was already started");
-        [SIPUtils removeSIPEndpoint];
-    }
-
-    VialerLogInfo(@"Use encryption: %@, TLS enabled: %@, SIP endpoint TLS: %@",
+    VialerLogInfo(@"Endpoint Available: %@, Use encryption: %@, TLS enabled: %@, SIP endpoint TLS: %@",
+                  [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO",
                   [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO",
                   [SystemUser currentUser].useTLS ? @"YES" : @"NO",
                   [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO");
 
-    if (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) {
+    if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
+        ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
+        VialerLogDebug(@"Endpoint or User is not TLS ready so remove the endoint so a fresh one can be setup");
         [SIPUtils removeSIPEndpoint];
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
     endpointConfiguration.logLevel = 4;
-    endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@",[[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
+    endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@", [[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
     endpointConfiguration.disableVideoSupport = YES;
     endpointConfiguration.unregisterAfterCall = YES;
 
@@ -59,22 +58,36 @@
                                                           [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
     }
 
+    VSLCodecConfiguration *codecConfiguration = [[VSLCodecConfiguration alloc] init];
+    codecConfiguration.audioCodecs = @[
+                                       [[VSLAudioCodecs alloc] initWithAudioCodec:VSLAudioCodecILBC andPriority:210]
+                                       ];
+    endpointConfiguration.codecConfiguration = codecConfiguration;
+
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] configureLibraryWithEndPointConfiguration:endpointConfiguration error:&error];
     if (!success || error) {
         VialerLogError(@"Failed to startup VialerSIPLib: %@", error);
     }
-    [[VialerSIPLib sharedInstance] onlyUseIlbc:YES];
+
+    VialerLogInfo(@"Endpoint Available: %@, Use encryption: %@, TLS enabled: %@, SIP endpoint TLS: %@",
+                  [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO",
+                  [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO",
+                  [SystemUser currentUser].useTLS ? @"YES" : @"NO",
+                  [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO");
+
     return success;
 }
 
 + (void)removeSIPEndpoint {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[VialerSIPLib sharedInstance] removeEndpoint];
-    });
+    [[VialerSIPLib sharedInstance] removeEndpoint];
 }
 
 + (VSLAccount *)addSIPAccountToEndpoint {
+    if (![VialerSIPLib sharedInstance].endpointAvailable) {
+        [SIPUtils setupSIPEndpoint];
+    }
+
     NSError *error;
     VSLAccount *account = [[VialerSIPLib sharedInstance] createAccountWithSipUser:[SystemUser currentUser] error:&error];
 
@@ -86,15 +99,22 @@
 }
 
 + (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL success, VSLAccount *account))completion {
-    if (![VialerSIPLib sharedInstance].endpointAvailable || (![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption)) {
+    BOOL forceUpdate = NO;
+    if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
+        ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
         BOOL success = [SIPUtils setupSIPEndpoint];
         if (!success) {
             VialerLogError(@"Error setting up endpoint");
             completion(NO, nil);
         }
+    } else {
+        if ([[VialerSIPLib sharedInstance] firstAccount]) {
+            VialerLogDebug(@"Update the registration to make sure it is correct");
+            forceUpdate = YES;
+        }
     }
 
-    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser] withCompletion:^(BOOL success, VSLAccount *account) {
+    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser] forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
         if (!success) {
             VialerLogError(@"Error registering the account with the endpoint");
         }
