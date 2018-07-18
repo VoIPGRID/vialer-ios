@@ -234,7 +234,7 @@ import Foundation
     @objc func incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: VSLCall){
         initDefaultData()
         setBluetoothAudioDeviceAndState()
-        
+
         setMiddlewareKey()
         setNetworkData()
         setTransportData()
