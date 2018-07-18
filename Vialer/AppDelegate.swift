@@ -44,11 +44,12 @@ class AppDelegate: UIResponder {
 
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
+    var mostRecentCall : VSLCall?
 }
 
 // MARK: - UIApplicationDelegate
 extension AppDelegate: UIApplicationDelegate {
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         interpretLaunchArguments()
         VialerLogger.setup()
@@ -245,6 +246,7 @@ extension AppDelegate {
             DispatchQueue.main.async {
                 if VialerSIPLib.callKitAvailable() {
                     VialerLogInfo("Incoming call block invoked, routing through CallKit.")
+                    self.mostRecentCall = call
                     self.callKitProviderDelegate.reportIncomingCall(call)
                 } else {
                     VialerLogInfo("Incoming call block invoked, using own app presentation.")
@@ -262,11 +264,11 @@ extension AppDelegate {
             case .callCompletedElsewhere:
                 VialerLogDebug("Call completed elsewhere")
                 VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
-                VialerStats.shared.incomingCallFailedCallCompletedElsewhere()
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
             case .originatorCancel:
                 VialerLogDebug("Originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
-                VialerStats.sharedInstance.incomingCallFailedOriginatorCanceled(call: call)
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
             case .unknown:
                 break
             }
@@ -285,6 +287,7 @@ extension AppDelegate {
                 do {
                     try call.decline()
                     VialerGAITracker.declineIncomingCallBecauseAnotherCallInProgressEvent()
+                    VialerStats.sharedInstance.incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: call)
                 } catch let error {
                     VialerLogError("Error declining call: \(error)")
                 }

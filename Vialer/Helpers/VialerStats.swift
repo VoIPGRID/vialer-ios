@@ -42,17 +42,27 @@ import Foundation
             static let udp: String = "UDP"
         }
 
-        struct NoAudioReason {
+        struct FailedReason {
             static let audioReceiving: String = "AUDIO_RX"
             static let audioTransmitting: String = "AUDIO_TX"
             static let audioBothDirections: String = "AUDIO_RX_TX"
+            static let declined: String = "DECLINED"
+            static let insufficientNetwork: String = "INSUFFICIENT_NETWORK"
+            static let completedElsewhere: String = "CALL_COMPLETED_ELSEWHERE"
+            static let originatorCanceled: String = "ORIGINATOR_CANCELED"
+            static let anotherCallInProgress: String = "DECLINED_ANOTHER_CALL_IN_PROGRESS"
         }
 
         struct HangupReason {
             static let userHangup: String = "user"
             static let remoteHangup: String = "remote"
         }
-
+        
+        struct BluetoothAudio {
+            static let enabled: String = "yes"
+            static let disabled: String = "no"
+        }
+        
         struct APIKeys : Hashable {
             static let sipUserId: String = "sip_user_id"
             static let os: String = "os"
@@ -79,7 +89,7 @@ import Foundation
     }
 
     @objc static let sharedInstance = VialerStats()
-
+    
     @objc var middlewareUniqueKey: String = ""
     @objc var middlewareResponseTime: String = ""
     @objc var callSuccesful: String = ""
@@ -130,6 +140,13 @@ import Foundation
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tcp
         }
     }
+    
+    private func setMiddlewareKey(){
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+    }
 
     private func setCallDirection(_ incoming: Bool) {
         if incoming {
@@ -138,15 +155,30 @@ import Foundation
             defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.outbound
         }
     }
+    
+    private func setBluetoothAudioDeviceAndState() {
+        // Set the bluetooth device state and name only in case it is a bluetooth audio device with both input and output
+        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+
+        if currentRoute.outputs.count != 0 {
+            for output in currentRoute.outputs{
+                if output.portType == AVAudioSessionPortBluetoothHFP {  // it is a bluetooth audio device with both input and output
+                    defaultData[VialerStatsConstants.APIKeys.bluetoothDevice] = output.portName
+                    defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.enabled
+                }
+            }
+        } else {
+            defaultData[VialerStatsConstants.APIKeys.bluetoothDevice] = "no_bluetooth_headset_used"
+            defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.disabled
+        }
+    }
 
     @objc func callSuccess(_ call: VSLCall) {
         initDefaultData()
+        setBluetoothAudioDeviceAndState()
 
         if call.isIncoming {
-            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-                return
-            }
-            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+            setMiddlewareKey()
         }
         setNetworkData()
         setTransportData()
@@ -161,12 +193,9 @@ import Foundation
     
     @objc func incomingCallFailedAfterEightPushNotifications(timeToInitialReport: Double){
         initDefaultData()
+        setBluetoothAudioDeviceAndState()
         
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-        
+        setMiddlewareKey()
         setNetworkData()
         setTransportData()
         setCallDirection(true)
@@ -178,35 +207,42 @@ import Foundation
         sendMetrics()
     }
     
-    @objc func incomingCallFailedOriginatorCanceled(call: VSLCall){
+    @objc func incomingCallFailedDeclined(call: VSLCall){
         initDefaultData()
+        setBluetoothAudioDeviceAndState()
         
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-        
-        self.setNetworkData()
+        setMiddlewareKey()
+        setNetworkData()
         setTransportData()
-        self.setCallDirection(true)
+        setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
-        defaultData[VialerStatsConstants.APIKeys.failedReason] = "ORIGINATOR_CANCELED"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+        
+        switch call.terminateReason {
+        case .callCompletedElsewhere:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.completedElsewhere
+        case .originatorCancel:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.originatorCanceled
+        case .unknown:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.declined
+        }
         
         sendMetrics()
     }
     
-    @objc func incomingCallFailedCallCompletedElsewhere(){
-        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        self.setNetworkDataAndUniqueKey()
+    @objc func incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: VSLCall){
+        initDefaultData()
+        setBluetoothAudioDeviceAndState()
         
-        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        setMiddlewareKey()
+        setNetworkData()
+        setTransportData()
+        setCallDirection(call.isIncoming)
+        
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
-        defaultData[VialerStatsConstants.APIKeys.failedReason] = "CALL_COMPLETED_ELSEWHERE"
-        defaultData.removeValue(forKey: VialerStatsConstants.APIKeys.attempt)
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.anotherCallInProgress
         
         sendMetrics()
     }
@@ -214,13 +250,10 @@ import Foundation
     @objc func logStatementForReceivedPushNotification(attempt: Int){
         initDefaultData()
 
-        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-            return
-        }
-        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
-
+        setMiddlewareKey()
         setNetworkData()
-        
+        setTransportData()
+
         defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
         
         sendMetrics()
@@ -228,12 +261,10 @@ import Foundation
     
     @objc func callFailedNoAudio(_ call: VSLCall) {
         initDefaultData()
+        setBluetoothAudioDeviceAndState()
 
         if call.isIncoming {
-            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
-                return
-            }
-            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+            setMiddlewareKey()
         }
         setNetworkData()
         setTransportData()
@@ -244,11 +275,11 @@ import Foundation
 
         switch call.callAudioState {
             case .noAudioReceiving:
-                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioReceiving
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioReceiving
             case .noAudioTransmitting:
-                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioTransmitting
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioTransmitting
             case .noAudioBothDirections:
-                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioBothDirections
+                defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.audioBothDirections
             case .OK: break
         }
 
@@ -257,6 +288,7 @@ import Foundation
 
     @objc func callHangupReason(_ call: VSLCall) {
         initDefaultData()
+        setBluetoothAudioDeviceAndState()
         setNetworkData()
         setTransportData()
 
@@ -267,7 +299,6 @@ import Foundation
         }
 
         defaultData[VialerStatsConstants.APIKeys.callDuration] = String(format: "\(call.connectDuration)")
-
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
 
         sendMetrics()
@@ -286,5 +317,5 @@ import Foundation
             }
         }
     }
-    
+
 }
