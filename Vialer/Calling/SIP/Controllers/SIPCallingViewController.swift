@@ -22,7 +22,6 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             static let waitingTimeAfterDismissing = 1.0
             static let connectDurationInterval = 1.0
         }
-        static let wiFiSettingsURL = URL(string:"App-Prefs:root=WIFI")!
     }
 
     // MARK: - Properties
@@ -49,8 +48,6 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     let currentUser = SystemUser.current()!
     // ReachabilityManager, needed for showing notifications.
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
-    // Keep track if there are notifications needed for disabling/enabling WiFi.
-    var didOpenSettings = false
     // The cleaned number that need to be called.
     var cleanedPhoneNumber: String?
     var phoneNumberLabelText: String? {
@@ -298,11 +295,7 @@ extension SIPCallingViewController {
 
         hangupButton?.isEnabled = false
 
-        if didOpenSettings && reachability.status != .reachableViaWiFi {
-            presentEnableWifiAlert()
-        } else {
-            dismissView()
-        }
+        dismissView()
     }
 }
 
@@ -414,50 +407,25 @@ extension SIPCallingViewController {
     */
     fileprivate func presentWiFiNotification() {
         let alertController = UIAlertController(title: NSLocalizedString("Tip: Disable WiFi for better audio", comment: "Tip: Disable WiFi for better audio"),
-                                                message: NSLocalizedString("With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?",
-                                                                           comment: "With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?"),
+                                                message: NSLocalizedString("With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n To disable WiFi go to Settings -> WiFi and disable WiFi.",
+                                                                           comment: "With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi? To disable WiFi go to Settings -> WiFi and disable WiFi."),
                                                 preferredStyle: .alert)
 
         // User wants to use the WiFi connection.
-        let noAction = UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default) { action in
+        let continueAction = UIAlertAction(title: NSLocalizedString("Continue calling", comment: "Continue calling"), style: .default) { action in
             self.startCalling()
         }
-        alertController.addAction(noAction)
+        alertController.addAction(continueAction)
 
-        // User wants to open the settings to disable WiFi.
-        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
-            self.presentContinueCallingAlert()
-            // Open the WiFi settings.
-            self.didOpenSettings = true
-            UIApplication.shared.openURL(Config.wiFiSettingsURL)
+        // Add option to cancel the call.
+        let cancelCall = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .default) { action in
+           self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
         }
-        alertController.addAction(settingsAction)
+        alertController.addAction(cancelCall)
 
         present(alertController, animated: true, completion: nil)
     }
 
-    fileprivate func presentEnableWifiAlert() {
-        didOpenSettings = false
-        let alertController = UIAlertController(title: NSLocalizedString("Call has Ended, enable WiFi?", comment: "Call has Ended, enable WiFi?"), message: nil, preferredStyle: .alert)
-
-        let noAction = UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default) { action in
-            self.dismissView()
-        }
-        alertController.addAction(noAction)
-
-        // User wants to open the settings to disable WiFi.
-        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
-            DispatchQueue.global().async {
-                DispatchQueue.main.async {
-                    UIApplication.shared.openURL(Config.wiFiSettingsURL)
-                }
-            }
-            self.dismissView()
-        }
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
 
     /**
      Show the settings from the phone and make sure there is a notification to continue calling.
