@@ -400,7 +400,7 @@
 "VoIP disabled, enable in settings" = "VoIP gedeactiveerd, activeer VoIP bij instellingen";
 
 /* With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi? */
-"With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi?" = "Met mobiel internet (4G) is de verbinding stabieler en daarmee de geluidskwaliteit hoger.\n\n WiFi uitschakelen?";
+"With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n To disable WiFi go to the Settings of your phone and disable WiFi." = "Met mobiel internet (4G) is de verbinding stabieler en daarmee de geluidskwaliteit hoger.\n\n Om WiFi uit te schakelen ga naar de Instellingen van je telefoon en schakel WiFi uit.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";
