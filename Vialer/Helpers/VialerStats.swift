@@ -52,16 +52,22 @@ import Foundation
             static let userHangup: String = "user"
             static let remoteHangup: String = "remote"
         }
-        
+
         struct BluetoothAudio {
             static let enabled: String = "yes"
             static let disabled: String = "no"
         }
-        
+
+        struct FailedReason {
+            static let noCallAfterRegistration = "OK_MIDDLEWARE_NO_CALL"
+        }
+
         struct APIKeys : Hashable {
             static let sipUserId: String = "sip_user_id"
             static let os: String = "os"
             static let osVersion: String = "os_version"
+            static let deviceManufacturer = "device_manufacturer"
+            static let deviceModel = "device_model"
             static let appVersion: String = "app_version"
             static let appStatus: String = "app_status"
             static let middlewareUniqueKey: String = "middleware_unique_key"
@@ -71,6 +77,7 @@ import Foundation
             static let networkOperator: String = "network_operator"
             static let direction: String = "direction"
             static let connectionType: String = "connection_type"
+            static let accountConnectionType: String = "account_connection_type"
             static let callSetupSuccessful: String = "call_setup_successful"
             static let countryCode: String = "country_code"
             static let asteriskCallId: String = "call_id"
@@ -109,6 +116,8 @@ import Foundation
         defaultData = [
             VialerStatsConstants.APIKeys.sipUserId: SystemUser.current().sipAccount,
             VialerStatsConstants.APIKeys.os: "iOS",
+            VialerStatsConstants.APIKeys.deviceManufacturer: UIDevice.current.model,
+            VialerStatsConstants.APIKeys.deviceModel: UIDevice.current.modelName.replacingOccurrences(of: UIDevice.current.model, with: ""),
             VialerStatsConstants.APIKeys.osVersion: VialerStatsConstants.osVersion,
             VialerStatsConstants.APIKeys.appVersion: VialerStatsConstants.appVersion,
             VialerStatsConstants.APIKeys.appStatus: VialerStatsConstants.appStatus,
@@ -133,6 +142,12 @@ import Foundation
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tls
         } else {
             defaultData[VialerStatsConstants.APIKeys.connectionType] = VialerStatsConstants.ConnectionType.tcp
+        }
+
+        if SystemUser.current().useTLS && SystemUser.current().sipUseEncryption {
+            defaultData[VialerStatsConstants.APIKeys.accountConnectionType] = VialerStatsConstants.ConnectionType.tls
+        } else {
+            defaultData[VialerStatsConstants.APIKeys.accountConnectionType] = VialerStatsConstants.ConnectionType.tcp
         }
     }
 
@@ -161,7 +176,7 @@ import Foundation
         }
     }
 
-    @objc func callSuccess(_ call: VSLCall) {
+    @objc func callSuccess(_ call: VSLCall, bluetooth: Bool) {
         initDefaultData()
         setBluetoothAudioDeviceAndState()
 
@@ -178,6 +193,7 @@ import Foundation
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "true"
+        defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = "\(bluetooth)"
 
         sendMetrics()
     }
@@ -234,7 +250,7 @@ import Foundation
         setNetworkData()
         setTransportData()
         setCallDirection(true)
-        
+
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "CALL_COMPLETED_ELSEWHERE"
         
@@ -256,7 +272,7 @@ import Foundation
         sendMetrics()
     }
     
-    @objc func callFailedNoAudio(_ call: VSLCall) {
+    @objc func callFailedNoAudio(_ call: VSLCall, bluetooth: Bool) {
         initDefaultData()
         setBluetoothAudioDeviceAndState()
 
@@ -283,10 +299,12 @@ import Foundation
             case .OK: break
         }
 
+        defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = "\(bluetooth)"
+
         sendMetrics()
     }
 
-    @objc func callHangupReason(_ call: VSLCall) {
+    @objc func callHangupReason(_ call: VSLCall, bluetooth: Bool) {
         initDefaultData()
         setBluetoothAudioDeviceAndState()
         setNetworkData()
@@ -300,6 +318,47 @@ import Foundation
 
         defaultData[VialerStatsConstants.APIKeys.callDuration] = String(format: "\(call.connectDuration)")
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+
+        defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = "\(bluetooth)"
+
+        sendMetrics()
+    }
+
+    func noIncomingCallReceived() {
+        initDefaultData()
+        setNetworkData()
+        setTransportData()
+
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+
+        setCallDirection(true)
+        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.noCallAfterRegistration
+
+        sendMetrics()
+    }
+
+    func callFailed(callId: String, incoming: Bool, statusCode: String) {
+        initDefaultData()
+        setNetworkData()
+        setTransportData()
+
+        if incoming {
+            guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+                return
+            }
+            defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        }
+
+        setCallDirection(incoming)
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = callId
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = statusCode
 
         sendMetrics()
     }
