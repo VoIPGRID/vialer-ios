@@ -223,15 +223,20 @@ import Foundation
     }
     
     @objc func incomingCallFailedCallCompletedElsewhere(){
-        guard !VialerStats.shared.middlewareUniqueKey.isEmpty else {
+        initDefaultData()
+        setBluetoothAudioDeviceAndState()
+        
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
             return
         }
-        self.setNetworkDataAndUniqueKey()
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
         
-        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        setNetworkData()
+        setTransportData()
+        setCallDirection(true)
+        
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "CALL_COMPLETED_ELSEWHERE"
-        defaultData.removeValue(forKey: VialerStatsConstants.APIKeys.attempt)
         
         sendMetrics()
     }
