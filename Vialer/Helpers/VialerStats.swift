@@ -256,6 +256,26 @@ import Foundation
         
         sendMetrics()
     }
+    
+    @objc func incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: VSLCall){
+        initDefaultData()
+        setBluetoothAudioDeviceAndState()
+        
+        guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
+            return
+        }
+        defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+        
+        setNetworkData()
+        setTransportData()
+        setCallDirection(call.isIncoming)
+        
+        defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
+        defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
+        defaultData[VialerStatsConstants.APIKeys.failedReason] = "DECLINED_ANOTHER_CALL_IN_PROGRESS"
+        
+        sendMetrics()
+    }
 
     @objc func logStatementForReceivedPushNotification(attempt: Int){
         initDefaultData()

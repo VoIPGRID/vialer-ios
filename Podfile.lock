@@ -36,7 +36,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - OCMock (3.4.1)
+  - OCMock (3.4.2)
   - OHHTTPStubs (6.1.0):
     - OHHTTPStubs/Default (= 6.1.0)
   - OHHTTPStubs/Core (6.1.0)
@@ -58,7 +58,7 @@ PODS:
     - CocoaLumberjack
   - SVProgressHUD (2.2.5)
   - Vialer-pjsip-iOS (3.3.7)
-  - VialerSIPLib (3.3.0):
+  - VialerSIPLib (3.3.1):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -125,7 +125,7 @@ SPEC CHECKSUMS:
   le: bf3cacea7b4208b2bcda82b0c1c224603f5651a9
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   "MMDrawerController+Storyboard": 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
-  OCMock: 2cd0716969bab32a2283ff3a46fd26a8c8b4c5e3
+  OCMock: ebe9ee1dca7fbed0ff9193ac0b3e2d8862ea56f6
   OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -134,7 +134,7 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Vialer-pjsip-iOS: 3b8bac1bf7e6831379cd0b4763dce1842db0abb4
-  VialerSIPLib: ddaf08d3448ff2d31c26207094558cfe87914af7
+  VialerSIPLib: 92bcaf2f230444c8cff19f5bbed2d90a4719a158
 
 PODFILE CHECKSUM: 8e7a2fdf72deeac99781236e5c990c0e454b5552
 

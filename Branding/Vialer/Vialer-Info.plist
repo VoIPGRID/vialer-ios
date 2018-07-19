@@ -39,7 +39,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Vialer needs access to your microphone to make calling possible</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Vialer needs access to your bluetooth devices&apos; data to log the name of the audio bluetooth device which is being used</string>
+	<string>Vialer needs access to your bluetooth to get the name of the device</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
