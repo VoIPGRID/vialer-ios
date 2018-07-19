@@ -1,4 +1,4 @@
 NSContactsUsageDescription = "ANNAbel heeft toegang tot uw contacten nodig om bellen mogelijk te maken. Uw contacten worden niet door ons gebruikt or ergens anders bewaard. Alleen het telefoonnummer en de naam worden gebruikt om een gesprek op te zetten.";
 NSMicrophoneUsageDescription = "ANNAbel heeft toegang nodig tot je microfoon om bellen mogelijk te maken";
 NSCameraUsageDescription = "ANNAbel heeft toegang nodig tot je camera om video bellen mogelijk te maken";
-NSBluetoothPeripheralUsageDescription = "ANNAbel heeft toegang naar de bluetooth module van dit apparaat nodig om de naam van het bluetooth audio apparaat te kunnen loggen";
+NSBluetoothPeripheralUsageDescription = "ANNAbel heeft toegang nodig tot je bluetooth om de naam van het verbonden apparaat te krijgen";

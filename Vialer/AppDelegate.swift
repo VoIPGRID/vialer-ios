@@ -319,6 +319,7 @@ extension AppDelegate {
                 do {
                     try call.decline()
                     VialerGAITracker.declineIncomingCallBecauseAnotherCallInProgressEvent()
+                    VialerStats.sharedInstance.incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: call)
                 } catch let error {
                     VialerLogError("Error declining call: \(error)")
                 }
