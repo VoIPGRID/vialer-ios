@@ -8,6 +8,8 @@
 #import "GAITracker.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
+#import "MiddlewareRequestOperationManager.h"
+#import "Middleware.h"
 #import "Notifications-Bridging-Header.h"
 #import "NumberPadButton.h"
 #import "PasteableUILabel.h"
@@ -26,4 +28,3 @@
 #import "VialerLogger.h"
 #import <VialerSIPLib/VialerSIPLib.h>
 #import "VoIPGRIDRequestOperationManager.h"
-#import "MiddlewareRequestOperationManager.h"

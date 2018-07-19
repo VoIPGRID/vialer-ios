@@ -16,6 +16,8 @@
  */
 extern NSString * const _Nonnull MiddlewareRegistrationOnOtherDeviceNotification;
 
+extern NSString * const _Nonnull MiddlewareAccountRegistrationIsDoneNotification;
+
 /**
  *  Sent APNS token to Middleware.
  *

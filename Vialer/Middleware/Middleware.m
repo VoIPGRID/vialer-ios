@@ -25,6 +25,7 @@ static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 static float const MiddlewareResendTimeInterval = 10.0;
 static int const MiddlewareMaxAttempts = 8;
 NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
+NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareAccountRegistrationIsDoneNotification";
 
 @interface Middleware ()
 @property (strong, nonatomic) MiddlewareRequestOperationManager *commonMiddlewareRequestOperationManager;
@@ -223,6 +224,11 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
         [VialerGAITracker respondedToIncomingPushNotificationWithResponseTime:responseTime];
         VialerLogDebug(@"Middleware response time: [%f s] for attempt: %d", responseTime, attempt);
+
+        if (available) {
+            NSNotification *notification = [NSNotification notificationWithName:MiddlewareAccountRegistrationIsDoneNotification object:nil];
+            [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
+        }
 
         if (error) {
             // Not only do we want to unregister upon a 408 but on every error.
