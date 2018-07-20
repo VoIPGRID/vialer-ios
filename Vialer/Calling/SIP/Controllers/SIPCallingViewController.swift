@@ -304,20 +304,19 @@ extension SIPCallingViewController {
         hangupButton?.isEnabled = false
 
         if !self.callGotAnError {
-            let hasBluetooth: Bool = callManager.audioController.output == .bluetooth
             switch self.activeCall!.callAudioState {
                 // There was no audio when the call was hungup.
                 case .noAudioReceiving: fallthrough
                 case .noAudioTransmitting: fallthrough
                 case .noAudioBothDirections:
-                    VialerStats.sharedInstance.callFailedNoAudio(self.activeCall!, bluetooth: hasBluetooth)
+                    VialerStats.sharedInstance.callFailedNoAudio(self.activeCall!)
                 // There was audio during the call.
                 case .OK: fallthrough
                 default:
-                    VialerStats.sharedInstance.callSuccess(self.activeCall!, bluetooth: hasBluetooth)
+                    VialerStats.sharedInstance.callSuccess(self.activeCall!)
             }
 
-            VialerStats.sharedInstance.callHangupReason(self.activeCall!, bluetooth: hasBluetooth)
+            VialerStats.sharedInstance.callHangupReason(self.activeCall!)
         }
         if didOpenSettings && reachability.status != .reachableViaWiFi {
             presentEnableWifiAlert()

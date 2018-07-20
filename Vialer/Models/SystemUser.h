@@ -167,6 +167,11 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (readonly, nonatomic) NSString *clientID;
 
 /**
+ *  To which country code the app account was set.
+ */
+@property (readonly, nonatomic) NSString *country;
+
+/**
  *  Indication if the user has done the migration from version 1.x to 2.x.
  */
 @property (readonly, nonatomic) BOOL migrationCompleted;

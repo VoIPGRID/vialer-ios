@@ -122,6 +122,4 @@ extern NSString * _Nonnull const VialerLoggerCallErrorDuringCallSetupNotificatio
  @return An unique identifier
  */
 + (NSString * _Nonnull)remoteIdentifier;
-
-+ (void)checkForSIPErrosAfterRegisterWithMessage:(DDLogMessage * _Nonnull)message;
 @end
