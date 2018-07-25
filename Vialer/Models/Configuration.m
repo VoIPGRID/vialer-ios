@@ -7,7 +7,7 @@
 
 /** Key definition for Config file */
 NSString * const ConfigurationVoIPGRIDBaseURLString = @"API";
-NSString * const ConfigurationMiddleWareBaseURLString = @"Middelware BaseLink";
+NSString * const ConfigurationMiddleWareBaseURLString = @"Middleware BaseLink";
 NSString * const ConfigurationSIPDomain = @"SIP domain";
 NSString * const ConfigurationEncryptedSIPDomain = @"Encrypted SIP Domain";
 NSString * const ConfigurationPartnerURLKey = @"Partner";
