@@ -331,7 +331,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)setOutgoingNumber:(NSString *)outgoingNumber {
     if (outgoingNumber != _outgoingNumber) {
         _outgoingNumber = outgoingNumber;
-        [[NSUserDefaults standardUserDefaults] setObject:outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+        if (![outgoingNumber isKindOfClass:[NSNull class]]) {
+            [[NSUserDefaults standardUserDefaults] setObject:outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserOutgoingNumberUpdatedNotification object:self];
     }
 }
@@ -608,7 +610,11 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.country = profileDict[SystemUserApiKeyCountry];
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+    if ([profileDict[SystemUserApiKeyOutgoingNumber] isKindOfClass:[NSNull class]]) {
+        self.outgoingNumber = @"";
+    } else {
+        self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
+    }
     [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
     [defaults setObject:self.country forKey:SystemUserSUDCountry];
 

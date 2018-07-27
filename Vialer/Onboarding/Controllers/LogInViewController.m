@@ -228,7 +228,26 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (IBAction)configureViewContinueButtonPressed:(UIButton *)sender {
-    [self continueFromConfigureFormViewToUnlockView];
+    if ([self.configureFormView.outgoingNumberLabel.text isEqualToString:@""]){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Missing outgoing number", nil)
+                                                                       message:NSLocalizedString(@"Please note that as you don\'t own an outgoing number, you may only call internal numbers",nil)
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {[self continueFromConfigureFormViewToUnlockView];}];
+        
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self continueFromConfigureFormViewToUnlockView];
+    }
+    
+    
+    
 }
 
 - (IBAction)twoFactorAuthenticationViewContinueButtonPressed:(UIButton *)sender {
@@ -557,7 +576,13 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
         if (!error) {
             SystemUser *systemUser = [SystemUser currentUser];
-            self.configureFormView.outgoingNumberLabel.text = systemUser.outgoingNumber;
+            if ([systemUser.outgoingNumber isKindOfClass:[NSNull class]] || [systemUser.outgoingNumber isEqualToString:@""])
+            {
+                self.configureFormView.outgoingNumberLabel.text = @"";
+                self.configureFormView.outgoingNumberDescriptionField.text = @"";
+            } else {
+                self.configureFormView.outgoingNumberLabel.text = systemUser.outgoingNumber;
+            }
             self.configureFormView.phoneNumberField.text = systemUser.mobileNumber;
             self.unlockView.greetingsLabel.text = systemUser.displayName;
 

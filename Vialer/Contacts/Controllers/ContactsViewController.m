@@ -224,7 +224,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         }
         return [self.contactModel contactsAtSection:section - 1].count;
     }
-
     return self.contactModel.searchResult.count;
 }
 
@@ -262,9 +261,16 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0 && [tableView isEqual:self.tableView]) {
-        return 1.0f;
+            return 1.0f;
     }
     return 32.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if ([indexPath section] == 0 && [self.currentUser.outgoingNumber isEqualToString:@""]){
+        return 0;
+    }
+    return UITableViewAutomaticDimension;
 }
 
 #pragma mark - tableview delegate
@@ -368,9 +374,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - Notifications
 
 - (void)outgoingNumberUpdated:(NSNotification *)notification {
-    if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+    if (![self.currentUser.outgoingNumber isKindOfClass:[NSNull class]]) {
         [self.tableView reloadData];
-        self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+        if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+            self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+        }
+    } else {
+        self.myPhoneNumberLabel.text = @"";
     }
 }
 

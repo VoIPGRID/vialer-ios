@@ -283,7 +283,13 @@
 "Please enter a valid email address." = "Vul een geldig e-mailadres in.";
 
 /* No comment provided by engineer. */
-"Please enter your e-mail address and we will send you instructions on setting a new password." = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
+"Missing outgoing number" = "Uitgaand nummer ontbreekt";
+
+/* No comment provided by engineer. */
+"Please note that as you don\'t own an outgoing number, you may only call internal numbers" = "Vanwege het ontbreken van een uitgaand nummer kan je alleen interne nummers bellen";
+
+/* No comment provided by engineer. */
+"Please enter your e-mail address and we will send you instructions on setting a new password" = "Geef je e-mailadres op, dan sturen we de instructies voor het instellen van een nieuw wachtwoord.";
 
 /* No comment provided by engineer. */
 "Please enter your mobile number here." = "Voer hier je mobiele telefoonnummer in.";

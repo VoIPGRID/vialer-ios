@@ -123,6 +123,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     logMessage = [logMessage replaceRegexWithPattern:@"nonce=\"(.+?)\"" with:@"NONCE"];
     logMessage = [logMessage replaceRegexWithPattern:@"username=(.+?)&" with: @"USERNAME"];
     logMessage = [logMessage replaceRegexWithPattern:@"token=(.+?)&" with: @"TOKEN"];
+    logMessage = [logMessage replaceRegexWithPattern:@"sip_user_id\" = (.+?);" with:@"<SIP_ANONYMIZED>"];
 
     return logMessage;
 }
