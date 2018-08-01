@@ -175,16 +175,14 @@ import Foundation
     private func setBluetoothAudioDeviceAndState() {
         // Set the bluetooth device state and name only in case it is a bluetooth audio device with both input and output
         let currentRoute = AVAudioSession.sharedInstance().currentRoute
-
+        defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.disabled
         if currentRoute.outputs.count != 0 {
             for output in currentRoute.outputs{
-                if output.portType == AVAudioSessionPortBluetoothHFP {  // it is a bluetooth audio device with both input and output
+                if output.portType == AVAudioSessionPortBluetoothHFP {
                     defaultData[VialerStatsConstants.APIKeys.bluetoothDevice] = output.portName
                     defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.enabled
                 }
             }
-        } else {
-            defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.disabled
         }
     }
 
