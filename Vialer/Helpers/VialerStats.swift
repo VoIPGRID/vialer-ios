@@ -23,8 +23,8 @@ import Foundation
 
         // The direction of the call
         struct Direction {
-            static let inbound: String = "Inbound"
-            static let outbound: String = "Outbound"
+            static let incoming: String = "Incoming"
+            static let outgoing: String = "Outgoing"
         }
 
         // Type of network the call was made on
@@ -159,9 +159,9 @@ import Foundation
 
     private func setCallDirection(_ incoming: Bool) {
         if incoming {
-            defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+            defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.incoming
         } else {
-            defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.outbound
+            defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.outgoing
         }
     }
     
@@ -335,7 +335,7 @@ import Foundation
         setMiddlewareKey()
 
         setCallDirection(true)
-        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.inbound
+        defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.incoming
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.noCallAfterRegistration
