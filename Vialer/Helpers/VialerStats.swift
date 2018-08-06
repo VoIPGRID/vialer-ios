@@ -23,8 +23,8 @@ import Foundation
 
         // The direction of the call
         struct Direction {
-            static let incoming: String = "Incoming"
-            static let outgoing: String = "Outgoing"
+            static let incoming: String = "incoming"
+            static let outgoing: String = "outgoing"
         }
 
         // Type of network the call was made on
