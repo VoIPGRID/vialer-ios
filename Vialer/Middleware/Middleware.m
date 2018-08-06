@@ -250,7 +250,7 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
 }
 
 - (void)updateDeviceRegistrationWithRemoteLoggingId {
-    VialerLogInfo(@"Update middelware with remote logging id");
+    VialerLogInfo(@"Update Middleware with remote logging id");
     NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
 
     [self sentAPNSToken:storedAPNSToken withCompletion:^(NSError *error) {
