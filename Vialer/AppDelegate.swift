@@ -5,10 +5,11 @@
 
 import CoreData
 import UIKit
+import UserNotifications
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder {
+class AppDelegate: UIResponder , UNUserNotificationCenterDelegate {
 
     fileprivate struct Configuration {
         struct LaunchArguments {
@@ -36,7 +37,14 @@ class AppDelegate: UIResponder {
     var window: UIWindow?
 
     @objc var isScreenshotRun = false
-
+    
+    @available(iOS 10.0, *)
+    var center: UNUserNotificationCenter{
+        return UNUserNotificationCenter.current()
+    }
+    //how to declare a UNNotification variable - availability problem
+    //let incomingCallUNNotification: UNNotification? //orp NO.. use identifier instead?
+    
     var incomingCallNotification: UILocalNotification?
     var stopVibrating = false
     var vibratingTask: UIBackgroundTaskIdentifier?
@@ -57,6 +65,10 @@ extension AppDelegate: UIApplicationDelegate {
 
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
+        if #available(iOS 10.0, *) {
+            center.delegate = self
+        }
+        
         setupUI()
         setupObservers()
         setupVoIP()
@@ -109,6 +121,36 @@ extension AppDelegate: UIApplicationDelegate {
             handleIncomingBackgroundNotification(identifier: identifier, callID: callID)
         } else {
             VialerLogError("Unsupported action for local Notification: \(String(describing: identifier))")
+        }
+        completionHandler()
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound, .badge])
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        stopVibratingInBackground()
+        // Determine the user action
+        switch response.actionIdentifier {
+        case UNNotificationDismissActionIdentifier:
+            VialerLogDebug("Dismiss Action")
+        case UNNotificationDefaultActionIdentifier:
+            VialerLogDebug("Default Action")
+        case Configuration.Notifications.Identifiers.accept:
+            fallthrough
+        case Configuration.Notifications.Identifiers.decline:
+            guard let callID = response.notification.request.content.userInfo[Configuration.Notifications.incomingCallIDKey] as? Int else { return }
+            handleIncomingBackgroundNotification(identifier: response.actionIdentifier, callID: callID)
+        default:
+            VialerLogDebug("Unknown action")
         }
         completionHandler()
     }
@@ -189,28 +231,49 @@ extension AppDelegate {
     /// We need to setup the local notification settings for pre CallKit app users
     fileprivate func registerForLocalNotifications() {
         VialerLogDebug("There is not CallKit available setup local notifications")
-        let acceptCallAction = UIMutableUserNotificationAction()
-        acceptCallAction.activationMode = .foreground
-        acceptCallAction.title = NSLocalizedString("Accept", comment: "Accept")
-        acceptCallAction.identifier = Configuration.Notifications.Identifiers.accept
-        acceptCallAction.isDestructive = false
-        acceptCallAction.isAuthenticationRequired = false
-
-        let declineCallAction = UIMutableUserNotificationAction()
-        declineCallAction.activationMode = .background
-        declineCallAction.title = NSLocalizedString("Decline", comment: "Decline");
-        declineCallAction.identifier = Configuration.Notifications.Identifiers.decline
-        declineCallAction.isDestructive = false
-        declineCallAction.isAuthenticationRequired = false
-
-        let notificationCategory = UIMutableUserNotificationCategory()
-        notificationCategory.identifier = Configuration.Notifications.Identifiers.category
-        notificationCategory.setActions([acceptCallAction, declineCallAction], for: .default)
-
-        let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: Set([notificationCategory]))
-        UIApplication.shared.registerUserNotificationSettings(settings)
+        if #available(iOS 10, *) {
+            let acceptCallAction = UNNotificationAction(identifier: Configuration.Notifications.Identifiers.accept, title: NSLocalizedString("Accept", comment: "Accept"), options: [.foreground])
+            let declineCallAction = UNNotificationAction(identifier: Configuration.Notifications.Identifiers.decline, title: NSLocalizedString("Decline", comment: "Decline"), options: [])
+            let notificationCategory = UNNotificationCategory(identifier: Configuration.Notifications.Identifiers.category, actions: [acceptCallAction, declineCallAction], intentIdentifiers: [], options: [])
+            let center = UNUserNotificationCenter.current()
+            center.setNotificationCategories([notificationCategory])
+            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+            center.requestAuthorization(options: options) {
+                (granted, error) in
+                if !granted {
+                    VialerLogDebug("Authorization for using UNUserNotificationCenter is denied.")
+                }
+                // In case we want to make the user grant permission to continue..
+                //            center.getNotificationSettings { (settings) in
+                //                if settings.authorizationStatus != .authorized {
+                //                    VialerLogDebug("Authorization for using UNUserNotificationCenter is denied.")
+                //                }
+                //            }
+            }
+        } else {
+            let acceptCallAction = UIMutableUserNotificationAction()
+            acceptCallAction.activationMode = .foreground
+            acceptCallAction.title = NSLocalizedString("Accept", comment: "Accept")
+            acceptCallAction.identifier = Configuration.Notifications.Identifiers.accept
+            acceptCallAction.isDestructive = false
+            acceptCallAction.isAuthenticationRequired = false
+            
+            let declineCallAction = UIMutableUserNotificationAction()
+            declineCallAction.activationMode = .background
+            declineCallAction.title = NSLocalizedString("Decline", comment: "Decline")
+            declineCallAction.identifier = Configuration.Notifications.Identifiers.decline
+            declineCallAction.isDestructive = false
+            declineCallAction.isAuthenticationRequired = false
+            
+            let notificationCategory = UIMutableUserNotificationCategory()
+            notificationCategory.identifier = Configuration.Notifications.Identifiers.category
+            notificationCategory.setActions([acceptCallAction, declineCallAction], for: .default)
+            
+            let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: Set([notificationCategory]))
+            UIApplication.shared.registerUserNotificationSettings(settings)
+        }
     }
-
+    
     @objc fileprivate func callKitCallWasHandled(_ notification: NSNotification) {
         if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallAccepted {
             VialerGAITracker.acceptIncomingCallEvent()
@@ -331,7 +394,13 @@ extension AppDelegate {
         guard let call = notification.userInfo![VSLNotificationUserInfoCallKey] as? VSLCall,
             call.callState == .connecting || call.callState == .disconnected,
             let localNotification = incomingCallNotification else { return }
-        UIApplication.shared.cancelLocalNotification(localNotification)
+        if #available(iOS 10.0, *){
+            center.removePendingNotificationRequests(withIdentifiers: [notification.name.rawValue]) //orp: not sure about this identifier
+        } else {
+            UIApplication.shared.cancelLocalNotification(localNotification)
+        }
+        
+        
         stopVibratingInBackground()
     }
 
@@ -381,19 +450,41 @@ extension AppDelegate {
     private func createLocalNotification(forCall call: VSLCall) {
         let callerName = call.callerName!
         let callerNumber = call.callerNumber!
+        
+        if #available(iOS 10, *) {
+            let content = UNMutableNotificationContent()
+            content.userInfo = [Configuration.Notifications.incomingCallIDKey: call.callId]
+            content.title = NSLocalizedString("Incoming call", comment: "Incoming call")
+            content.body = NSLocalizedString("Incoming call from: \(callerName) \(callerNumber)",
+                comment: "Incoming call from: \(callerName) \(callerNumber)")
+            content.launchImageName = "AppIcon"
+            content.sound = UNNotificationSound(named:"ringtone.wav")
+            content.categoryIdentifier = Configuration.Notifications.Identifiers.category
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false) //orp: is this trigger how we want it?
+            let identifier = Configuration.Notifications.incomingCall.rawValue  //orp: Is this the intetifier we want here ????? or maybe this one: Configuration.Notifications.Identifiers.category?
+            let request = UNNotificationRequest(identifier: identifier,
+                                                content: content, trigger: trigger)
+            //incomingCallNotification = notification //orp: UNNotification object as class var is not available to do something similar with below..cause of ios10
+            center.add(request, withCompletionHandler: { (error) in
+                if let error = error {
+                   VialerLogError("Error on creating UNNotificationRequest: \(error)")
+                }
+            })
+        } else {
+            let notification = UILocalNotification()
+            notification.userInfo = [Configuration.Notifications.incomingCallIDKey: call.callId]
+            notification.alertTitle = NSLocalizedString("Incoming call", comment: "Incoming call")
+            notification.alertBody = NSLocalizedString("Incoming call from: \(callerName) \(callerNumber)",
+                comment: "Incoming call from: \(callerName) \(callerNumber)")
+            notification.alertLaunchImage = "AppIcon"
+            notification.soundName = "ringtone.wav"
+            notification.category = Configuration.Notifications.Identifiers.category
 
-        let notification = UILocalNotification()
-        notification.userInfo = [Configuration.Notifications.incomingCallIDKey: call.callId]
-        notification.alertTitle = NSLocalizedString("Incoming call", comment: "Incoming call")
-        notification.alertBody = NSLocalizedString("Incoming call from: \(callerName) \(callerNumber)",
-            comment: "Incoming call from: \(callerName) \(callerNumber)")
-        notification.alertLaunchImage = "AppIcon"
-        notification.soundName = "ringtone.wav"
-        notification.category = Configuration.Notifications.Identifiers.category
+            incomingCallNotification = notification
 
-        incomingCallNotification = notification
-
-        UIApplication.shared.scheduleLocalNotification(notification)
+            UIApplication.shared.scheduleLocalNotification(notification)
+        }
     }
 
     /// Handle the local notification.
@@ -419,7 +510,7 @@ extension AppDelegate {
             // Call is accepted through the button on the local notification.
             NotificationCenter.default.post(name: Configuration.Notifications.incomingCallAccepted, object: self, userInfo: notificationInfo)
         } else {
-            // The local notification was just tapped, not declined, not answerd.
+            // The local notification was just tapped, not declined, not answered.
             NotificationCenter.default.post(name: Configuration.Notifications.incomingCall, object: self, userInfo: notificationInfo)
         }
     }
