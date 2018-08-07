@@ -53,8 +53,8 @@ class DialerViewController: UIViewController, SegueHandler {
     @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var reachabilityBarHeigthConstraint: NSLayoutConstraint!
-
-
+    @IBOutlet weak var reachabilityBar: UIView!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
@@ -65,6 +65,8 @@ class DialerViewController: UIViewController, SegueHandler {
 extension DialerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        reachabilityBar.isHidden = true
+        self.reachabilityBarHeigthConstraint.constant = 0
         setupLayout()
         setupSounds()
         reachabilityChanged = notificationCenter.addObserver(descriptor: Reachability.changed) { [weak self] _ in
@@ -239,18 +241,23 @@ extension DialerViewController {
         DispatchQueue.main.async {
             self.setupButtons()
             if (!self.user.sipEnabled) {
+                self.reachabilityBar.isHidden = false
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else if (!self.reachability.hasHighSpeed) {
                 // There is no highspeed connection (4G or WiFi)
                 // Check if there is 3G+ connection and the call with 3G+ is enabled.
                 if (!self.reachability.hasHighSpeedWith3GPlus || !self.user.use3GPlus) {
+                    self.reachabilityBar.isHidden = false
                     self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
                 } else {
+                    self.reachabilityBar.isHidden = true
                     self.reachabilityBarHeigthConstraint.constant = 0
                 }
             } else if (!self.user.sipUseEncryption){
+                self.reachabilityBar.isHidden = false
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else {
+                self.reachabilityBar.isHidden = true
                 self.reachabilityBarHeigthConstraint.constant = 0
             }
             UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
