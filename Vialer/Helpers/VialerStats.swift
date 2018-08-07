@@ -84,7 +84,7 @@ import Foundation
             static let connectionType: String = "connection_type"
             static let accountConnectionType: String = "account_connection_type"
             static let callSetupSuccessful: String = "call_setup_successful"
-            static let countryCode: String = "country_code"
+            static let clientCountry: String = "client_country"
             static let asteriskCallId: String = "call_id"
             static let remoteLogId: String = "log_id"
             static let timeToInitialResponse: String = "time_to_initial_response"
@@ -198,7 +198,7 @@ import Foundation
         setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "true"
 
         sendMetrics()
@@ -215,7 +215,7 @@ import Foundation
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.insufficientNetwork
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.timeToInitialResponse] = String(timeToInitialReport)
         
         sendMetrics()
@@ -231,7 +231,7 @@ import Foundation
         setCallDirection(call.isIncoming)
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
         defaultData[VialerStatsConstants.APIKeys.failedReason] = "DECLINED_ANOTHER_CALL_IN_PROGRESS"
         
@@ -249,7 +249,7 @@ import Foundation
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
 
         switch call.terminateReason {
         case .callCompletedElsewhere:
@@ -289,7 +289,7 @@ import Foundation
 
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
 
         switch call.callAudioState {
             case .noAudioReceiving:
@@ -322,7 +322,7 @@ import Foundation
 
         defaultData[VialerStatsConstants.APIKeys.callDuration] = String(format: "\(call.connectDuration)")
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
 
         sendMetrics()
     }
@@ -337,7 +337,7 @@ import Foundation
         setCallDirection(true)
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.incoming
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.noCallAfterRegistration
 
         sendMetrics()
@@ -357,7 +357,7 @@ import Foundation
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = callId
         defaultData[VialerStatsConstants.APIKeys.failedReason] = statusCode
-        defaultData[VialerStatsConstants.APIKeys.countryCode] = SystemUser.current().country
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
 
         sendMetrics()
     }
