@@ -122,7 +122,7 @@ import Foundation
         defaultData = [
             VialerStatsConstants.APIKeys.sipUserId: SystemUser.current().sipAccount,
             VialerStatsConstants.APIKeys.os: "iOS",
-            VialerStatsConstants.APIKeys.deviceManufacturer: UIDevice.current.model,
+            VialerStatsConstants.APIKeys.deviceManufacturer: "Apple",
             VialerStatsConstants.APIKeys.deviceModel: UIDevice.current.modelName.replacingOccurrences(of: UIDevice.current.model, with: ""),
             VialerStatsConstants.APIKeys.osVersion: VialerStatsConstants.osVersion,
             VialerStatsConstants.APIKeys.appVersion: VialerStatsConstants.appVersion,
