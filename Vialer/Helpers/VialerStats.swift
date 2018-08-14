@@ -270,7 +270,7 @@ import Foundation
         setMiddlewareKey()
 
         setNetworkData()
-        
+        defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
         
         sendMetrics()
