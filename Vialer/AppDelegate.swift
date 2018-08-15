@@ -237,7 +237,7 @@ extension AppDelegate {
     @objc fileprivate func middlewareRegistrationFinished(_ notification: NSNotification) {
         if callAvailabilityTimer == nil {
             callAvailabilityTimer = Timer.scheduledTimer(timeInterval: Configuration.TimerForCall.interval, target: self, selector: #selector(runCallTimer), userInfo: nil, repeats: true)
-            VialerLogError("Registration of VoIP account done, start timer for receiving a call.");
+            VialerLogDebug("Registration of VoIP account done, start timer for receiving a call.");
         }
     }
 
@@ -377,7 +377,6 @@ extension AppDelegate {
             let localNotification = incomingCallNotification else { return }
         UIApplication.shared.cancelLocalNotification(localNotification)
         stopVibratingInBackground()
-
     }
 
     /// Call was initiated from recents or addressbook. This will try to setup a call.

@@ -165,11 +165,16 @@ import Foundation
         }
     }
     
-    private func setMiddlewareKey(){
+    private func setMiddlewareData(){
         guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
             return
         }
         defaultData[VialerStatsConstants.APIKeys.middlewareUniqueKey] = VialerStats.sharedInstance.middlewareUniqueKey
+
+        guard !VialerStats.sharedInstance.middlewareResponseTime.isEmpty else {
+            return
+        }
+        defaultData[VialerStatsConstants.APIKeys.timeToInitialResponse] = VialerStats.sharedInstance.middlewareResponseTime
     }
     
     private func setBluetoothAudioDeviceAndState() {
@@ -191,7 +196,7 @@ import Foundation
         setBluetoothAudioDeviceAndState()
 
         if call.isIncoming {
-            setMiddlewareKey()
+            setMiddlewareData()
         }
         setNetworkData()
         setTransportData()
@@ -204,11 +209,11 @@ import Foundation
         sendMetrics()
     }
     
-    @objc func incomingCallFailedAfterEightPushNotifications(timeToInitialReport: Double){
+    @objc func incomingCallFailedAfterEightPushNotifications() {
         initDefaultData()
         setBluetoothAudioDeviceAndState()
         
-        setMiddlewareKey()
+        setMiddlewareData()
         setNetworkData()
         setTransportData()
         setCallDirection(true)
@@ -216,8 +221,7 @@ import Foundation
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.insufficientNetwork
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
-        defaultData[VialerStatsConstants.APIKeys.timeToInitialResponse] = String(timeToInitialReport)
-        
+
         sendMetrics()
     }
     
@@ -225,7 +229,7 @@ import Foundation
         initDefaultData()
         setBluetoothAudioDeviceAndState()
         
-        setMiddlewareKey()
+        setMiddlewareData()
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
@@ -242,7 +246,7 @@ import Foundation
         initDefaultData()
         setBluetoothAudioDeviceAndState()
             
-        setMiddlewareKey()
+        setMiddlewareData()
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
@@ -259,17 +263,15 @@ import Foundation
         case .unknown:
             defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.declined
         }
-
         
         sendMetrics()
     }
     
     @objc func logStatementForReceivedPushNotification(attempt: Int){
         initDefaultData()
-
-        setMiddlewareKey()
-
+        setMiddlewareData()
         setNetworkData()
+
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
         defaultData[VialerStatsConstants.APIKeys.attempt] = String(attempt)
         
@@ -281,7 +283,7 @@ import Foundation
         setBluetoothAudioDeviceAndState()
 
         if call.isIncoming {
-            setMiddlewareKey()
+            setMiddlewareData()
         }
         setNetworkData()
         setTransportData()
@@ -310,8 +312,9 @@ import Foundation
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
+
         if call.isIncoming {
-            setMiddlewareKey()
+            setMiddlewareData()
         }
 
         if call.userDidHangUp {
@@ -332,9 +335,9 @@ import Foundation
         setBluetoothAudioDeviceAndState()
         setNetworkData()
         setTransportData()
-        setMiddlewareKey()
-
+        setMiddlewareData()
         setCallDirection(true)
+
         defaultData[VialerStatsConstants.APIKeys.direction] = VialerStatsConstants.Direction.incoming
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
@@ -350,7 +353,7 @@ import Foundation
         setBluetoothAudioDeviceAndState()
 
         if incoming {
-            setMiddlewareKey()
+            setMiddlewareData()
         }
 
         setCallDirection(incoming)

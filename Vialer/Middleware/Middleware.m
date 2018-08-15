@@ -104,7 +104,10 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         // Separate VialerLog for the push notification that will be posted to LogEntries
         VialerLogPushNotification(@"iOS : %@\n", payload);
         
-        double timeToInitialReport = ([pushResponseTimeMeasurementStart timeIntervalSince1970] - [[payload valueForKey:@"message_start_time"] doubleValue]) * 1000 ;
+        int timeToInitialResponse = ([pushResponseTimeMeasurementStart timeIntervalSince1970] - [[payload valueForKey:@"message_start_time"] doubleValue]) * 1000;
+        VialerLogError(@"%d", timeToInitialResponse);
+        [VialerStats sharedInstance].middlewareResponseTime = [NSString stringWithFormat:@"%d", timeToInitialResponse];
+
         NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
         int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
         
@@ -125,7 +128,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         if (![[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
             VialerLogInfo(@"Wait for the next push! We currently don't have a network connection");
             if (attempt == MiddlewareMaxAttempts) {
-                [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
+                [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
             }
             return;
         }
@@ -149,7 +152,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [SIPUtils removeSIPEndpoint];
                     });
-                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
+                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
                     self.pushNotificationProcessing = nil;
                 } else {
                     // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
@@ -186,7 +189,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                         }
                     }];
                     // Log to middleware that incoming call failed after 8 received push notifications due to insufficient network.
-                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotificationsWithTimeToInitialReport:timeToInitialReport];
+                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
                 } else if (attempt < MiddlewareMaxAttempts) {
                     VialerLogDebug(@"The network connection is not sufficient. Waiting for a next push");
                     self.pushNotificationProcessing = nil;

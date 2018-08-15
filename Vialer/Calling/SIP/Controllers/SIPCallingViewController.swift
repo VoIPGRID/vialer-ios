@@ -248,7 +248,7 @@ extension SIPCallingViewController {
             return
         }
 
-            // Check microphone
+        // Check microphone
         checkMicrophonePermission { startCalling in
             if startCalling {
                 // Mic good, WiFi?
@@ -279,7 +279,6 @@ extension SIPCallingViewController {
                     self.activeCall = call
                 }
             }
-
         }
     }
 
@@ -316,7 +315,6 @@ extension SIPCallingViewController {
 
         VialerStats.sharedInstance.callHangupReason(self.activeCall!)
         dismissView()
-
     }
 }
 
