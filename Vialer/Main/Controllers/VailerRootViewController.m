@@ -134,8 +134,11 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 - (void)setupLayout {
     NSString *launchImage;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-
-    if(screenHeight > 667.0f) {
+    
+    if(screenHeight > 736.0f) {
+        launchImage = @"LaunchImage-1100-Portrait-2436h"; // iphone-x
+    }
+    else if(screenHeight > 667.0f) {
         launchImage = @"LaunchImage-800-Portrait-736h"; // iphone6 plus
     }
     else if(screenHeight > 568.0f) {
