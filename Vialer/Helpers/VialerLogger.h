@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
+extern NSString * _Nonnull const VialerLoggerCallErrorDuringCallSetupNotification;
+
 /**
  *  A custom logger to make remote and console logging easy.
  */
@@ -120,5 +122,4 @@
  @return An unique identifier
  */
 + (NSString * _Nonnull)remoteIdentifier;
-
 @end

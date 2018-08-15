@@ -31,6 +31,35 @@ class SnapshotUITests: XCTestCase {
         super.tearDown()
     }
 
+    func testSnapshotsOfOnboarding() {
+        let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
+        waitForElementToBeHittable(usernameTextField, andHit: true)
+        waitForElementToBeHittable(usernameTextField, andHit: true)
+        usernameTextField.typeText(Constants.username)
+
+        snapshot("onboarding-01-login")
+
+        waitForElementToBeHittable(app.buttons["onboarding.loginView.forgotPassword.button"], andHit: true)
+        waitForElementToBeHittable(app.textFields["onboarding.forgotPasswordView.email.button"], andHit: false)
+
+        snapshot("onboarding-02-forgotPassword")
+
+        waitForElementToBeHittable(app.buttons["onboarding.close.button"], andHit: true)
+
+        let passwordField = app.secureTextFields["onboarding.loginView.password.textfield"]
+        waitForElementToBeHittable(passwordField, andHit: true)
+
+        passwordField.typeText(Constants.password)
+        waitForElementToBeHittable(app.buttons["onboarding.loginView.login.button"], andHit: true)
+
+        let mobileNumberField = app.textFields["onboarding.configureView.mobileNumber.textfield"]
+        clearUITextFieldText(mobileNumberField)
+
+        mobileNumberField.typeText(Constants.ownNumber)
+
+        snapshot("onboarding-03-configure")
+    }
+
     /**
      * This is the UI Test which takes the actual screenshots. Screenshots are taken in a different order as shown on the app store (efficiency)
      * but this is corrected by prefixing with a number (01-05)
@@ -52,7 +81,7 @@ class SnapshotUITests: XCTestCase {
         // any descendant has keyboard focus". For the Simulator go to:
         // "Hardware" -> "Keyboard" -> Deselect "Connect Hardware Keyboard"
         passwordField.typeText(Constants.password)
-        waitForElementToBeHittable(app.buttons["onboarding.loginView.login.button"] , andHit: true)
+        waitForElementToBeHittable(app.buttons["onboarding.loginView.login.button"], andHit: true)
 
         // Now we are in the 2nd onboarding screen where the mobile number can be entered.
         let mobileNumberField = app.textFields["onboarding.configureView.mobileNumber.textfield"]

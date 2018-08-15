@@ -9,6 +9,7 @@
 static NSString * const MiddlewareURLDeviceRecordMutation = @"/api/apns-device/";
 static NSString * const MiddlewareURLIncomingCallResponse = @"/api/call-response/";
 static NSString * const MiddlewareURLHangupReason = @"/api/hangup-reason/";
+static NSString * const MiddlewareURLLogMetrics = @"/api/log-metrics/";
 static NSString * const MiddlewareResponseKeyHangupReason = @"hangup_reason";
 static NSString * const MiddlewareResponseKeyMessageStartTime = @"message_start_time";
 static NSString * const MiddlewareResponseKeyAvailable = @"available";
@@ -137,7 +138,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
     }];
 }
 
-- (void)sendHangupReasonToMiddleware:(NSString * _Nullable)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion {
+- (void)sendHangupReasonToMiddleware:(NSString * _Nonnull)hangupReason forUniqueKey:(NSString * _Nonnull)uniqueKey withCompletion:(void (^)(NSError *error))completion {
     NSDictionary *params = @{// Key that was given in the device push message as reference (required).
                              MiddlewareResponseKeyUniqueKey: uniqueKey,
                              // Hangup reason (optional).
@@ -145,6 +146,19 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              };
     
     [self POST:MiddlewareURLHangupReason parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (completion) {
+            if (!error) {
+                completion(nil);
+            } else {
+                completion(error);
+            }
+        }
+    }];
+}
+
+- (void)sendMetricsToMiddleware:(NSDictionary *)payload withCompletion:(void(^) (NSError *error))completion {
+    VialerLogDebug(@"Sending payload: %@", payload);
+    [self POST:MiddlewareURLLogMetrics parameters:payload withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);

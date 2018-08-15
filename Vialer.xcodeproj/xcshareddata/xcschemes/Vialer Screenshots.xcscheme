@@ -52,6 +52,11 @@
                BlueprintName = "VialerSnapshotUITests"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SnapshotUITests/testSnapshotsOfOnboarding()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
