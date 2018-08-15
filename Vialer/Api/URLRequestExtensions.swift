@@ -6,8 +6,11 @@
 import Foundation
 
 extension URLRequest {
-    init<A>(resource: Resource<A>, basicAuth: String) {
+    init<A>(resource: Resource<A>, middleware: Bool = false, basicAuth: String) {
         var url = URL(string: Configuration.default().url(forKey: ConfigurationVoIPGRIDBaseURLString))!
+        if middleware {
+            url = URL(string: Configuration.default().url(forKey: ConfigurationMiddleWareBaseURLString))!
+        } 
         if let params = resource.parameters?.stringFromHttpParameters() {
             url = URL(string: "\(url)\(resource.path)?\(params)")!
         }

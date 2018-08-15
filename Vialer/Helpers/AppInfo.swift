@@ -8,6 +8,14 @@ import Foundation
 /// Wrapper class that can retrieve information of the app.
 @objc class AppInfo: NSObject {
 
+    static func appIdentifier() -> String? {
+        guard let infoDict = Bundle.main.infoDictionary else {
+            return nil
+        }
+
+        return infoDict["CFBundleIdentifier"] as? String
+    }
+
     /**
      Get the current version number of the app.
 

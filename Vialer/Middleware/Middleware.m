@@ -306,6 +306,9 @@ NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareR
         backgroundTaskCleanupBlock();
     }];
 
+    
+    
+
     [self sentAPNSToken:apnsToken withCompletion:^(NSError *error) {
         NSMutableString *logString = [NSMutableString stringWithFormat:@"APNS token background task completed"];
         if (application.applicationState == UIApplicationStateBackground) {

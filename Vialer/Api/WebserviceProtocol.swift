@@ -8,4 +8,5 @@ import Foundation
 
 protocol WebserviceProtocol {
     func load<A>(resource: Resource<A>, completion: @escaping (Result<A?>) -> ())
+    func loadMiddleware<A>(resource: Resource<A>, completion: @escaping (Result<A?>) -> ())
 }

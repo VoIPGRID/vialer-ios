@@ -745,6 +745,18 @@
 		EEDCC3C320C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEDCC3C420C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEDCC3C520C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
+		EEE5D3132122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */; };
+		EEE5D3152122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */; };
+		EEE5D3162122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */; };
+		EEE5D3182122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */; };
+		EEE5D3192122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */; };
+		EEE5D31B2122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */; };
+		EEE5D3292122FF1800DA9A51 /* MiddlewareApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */; };
+		EEE5D32B2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */; };
+		EEE5D32C2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */; };
+		EEE5D32E2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */; };
+		EEE5D32F2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */; };
+		EEE5D3312122FF1800DA9A51 /* MiddlewareApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */; };
 		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
 		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
@@ -1373,6 +1385,8 @@
 		EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCallViewController.swift; sourceTree = "<group>"; };
 		EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferViewController.swift; sourceTree = "<group>"; };
 		EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
+		EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddlewareApiManager.swift; sourceTree = "<group>"; };
+		EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddlewareApi.swift; sourceTree = "<group>"; };
 		EEEF16001F470C1500AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16021F470C1C00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16051F470C2E00AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2394,6 +2408,15 @@
 			path = Calling/SIP/Controllers;
 			sourceTree = "<group>";
 		};
+		EEE5D3112122D05C00DA9A51 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				EEE5D3122122D07200DA9A51 /* MiddlewareApiManager.swift */,
+				EEE5D3282122FF1800DA9A51 /* MiddlewareApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		F208516D1D2693A300A17E71 /* Acceptatie */ = {
 			isa = PBXGroup;
 			children = (
@@ -2487,6 +2510,7 @@
 		F2B40BD91C731F3E00502769 /* Middleware */ = {
 			isa = PBXGroup;
 			children = (
+				EEE5D3112122D05C00DA9A51 /* Api */,
 				F2B40BDA1C731F3E00502769 /* Middleware.h */,
 				F2B40BDB1C731F3E00502769 /* Middleware.m */,
 				C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */,
@@ -4335,6 +4359,7 @@
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
 				C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
+				EEE5D32C2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */,
 				C47BB0BB1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */,
 				C41C42F91D5A742100813B66 /* VialerLogger.m in Sources */,
@@ -4400,6 +4425,7 @@
 				C49A46A91E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C4AD4E651E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C43B6E281E2E524400942F9B /* VialerLogger.swift in Sources */,
+				EEE5D3162122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */,
 				C48B78161DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E6A1E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
@@ -4463,6 +4489,7 @@
 				EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
 				C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */,
 				C490AD751D0863E3004A8F83 /* SideMenuViewController.m in Sources */,
+				EEE5D32F2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */,
 				C47BB0BC1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				C490AD771D0863E3004A8F83 /* VailerRootViewController.m in Sources */,
 				C490AD7A1D0863E3004A8F83 /* SettingsViewController.m in Sources */,
@@ -4528,6 +4555,7 @@
 				C4AD4E661E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
 				C43B6E291E2E524400942F9B /* VialerLogger.swift in Sources */,
+				EEE5D3192122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */,
 				C48B78171DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E6B1E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C490ADA71D0863E3004A8F83 /* UIView+RoundedStyle.m in Sources */,
@@ -4609,6 +4637,7 @@
 				EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */,
 				EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */,
 				EE23182320A0468F00C05EB0 /* RecentCallManager.swift in Sources */,
+				EEE5D3312122FF1800DA9A51 /* MiddlewareApi.swift in Sources */,
 				EE23182420A0468F00C05EB0 /* SettingsViewController.m in Sources */,
 				EE23182520A0468F00C05EB0 /* VialerDrawerViewController.m in Sources */,
 				EE23182620A0468F00C05EB0 /* SystemUser.m in Sources */,
@@ -4674,6 +4703,7 @@
 				EE23186120A0468F00C05EB0 /* Vialer.xcdatamodeld in Sources */,
 				EE23186220A0468F00C05EB0 /* RecentsViewController.swift in Sources */,
 				EE23186320A0468F00C05EB0 /* VialerLogger.swift in Sources */,
+				EEE5D31B2122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */,
 				EE23186420A0468F00C05EB0 /* ContactModel.swift in Sources */,
 				EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */,
 				EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */,
@@ -4728,6 +4758,7 @@
 				EE1C7B961F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
 				EE61F4061F1DDDE4006E890F /* PhoneNumberModel.m in Sources */,
 				EE61F4071F1DDDE4006E890F /* SideMenuViewController.m in Sources */,
+				EEE5D32E2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */,
 				EE61F40A1F1DDDE4006E890F /* RecentCallManager.swift in Sources */,
 				EE61F40B1F1DDDE4006E890F /* VailerRootViewController.m in Sources */,
 				EE61F40C1F1DDDE4006E890F /* SettingsViewController.m in Sources */,
@@ -4793,6 +4824,7 @@
 				EE61F4461F1DDDE4006E890F /* Vialer.xcdatamodeld in Sources */,
 				EE61F4471F1DDDE4006E890F /* RecentsViewController.swift in Sources */,
 				EE61F4481F1DDDE4006E890F /* VialerLogger.swift in Sources */,
+				EEE5D3182122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */,
 				EE61F4491F1DDDE4006E890F /* ContactModel.swift in Sources */,
 				EE61F44A1F1DDDE4006E890F /* CoreDataStack.swift in Sources */,
 				EE61F44B1F1DDDE4006E890F /* UIView+RoundedStyle.m in Sources */,
@@ -4828,6 +4860,7 @@
 				EE1C7B9A1F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
 				F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */,
 				F20850F21D26935600A17E71 /* SideMenuViewController.m in Sources */,
+				EEE5D32B2122FF1800DA9A51 /* MiddlewareApi.swift in Sources */,
 				C47BB0BA1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				F20850F41D26935600A17E71 /* VailerRootViewController.m in Sources */,
 				F20850F71D26935600A17E71 /* SettingsViewController.m in Sources */,
@@ -4893,6 +4926,7 @@
 				C4AD4E641E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E271E2E524400942F9B /* VialerLogger.swift in Sources */,
+				EEE5D3152122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */,
 				C48B78151DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E691E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				F20851261D26935600A17E71 /* UIView+RoundedStyle.m in Sources */,
@@ -4947,6 +4981,7 @@
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
 				C47BB0B91E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
+				EEE5D3292122FF1800DA9A51 /* MiddlewareApi.swift in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
 				F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */,
@@ -5012,6 +5047,7 @@
 				C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,
+				EEE5D3132122D07200DA9A51 /* MiddlewareApiManager.swift in Sources */,
 				C48B78141DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E681E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,

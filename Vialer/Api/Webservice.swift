@@ -18,7 +18,7 @@ enum Result<A> {
 }
 
 final class Webservice: WebserviceProtocol {
-    private let authentifcation: String
+    private let authentication: String
 
     /// Default initializer
     ///
@@ -28,7 +28,7 @@ final class Webservice: WebserviceProtocol {
     ///   - username: String with username for authentication
     ///   - password: String with password for authentication
     init(username: String, apiToken: String) {
-        authentifcation = "\(username):\(apiToken)"
+        authentication = "\(username):\(apiToken)"
     }
 
     /// Fires request to remote service
@@ -38,9 +38,9 @@ final class Webservice: WebserviceProtocol {
     ///   - completion: completionblock that will be called after the request has finished.
     ///         Completionblock will be called with WebserviceResult
     func load<A>(resource: Resource<A>, completion: @escaping (Result<A?>) -> ()) {
-        var request = URLRequest(resource: resource, basicAuth: authentifcation)
+        var request = URLRequest(resource: resource, basicAuth: authentication)
         // Override the authentication with the Authorization header for Token.
-        request.setValue("Token \(authentifcation)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token \(authentication)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(error!))
@@ -63,5 +63,33 @@ final class Webservice: WebserviceProtocol {
                 completion(.success(result))
             }
         }.resume()
+    }
+
+    func loadMiddleware<A>(resource: Resource<A>, completion: @escaping (Result<A?>) -> ()) {
+        var request = URLRequest(resource: resource, middleware: true, basicAuth: authentication)
+        request.setValue("Token \(authentication)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            
+            let resp = response as! HTTPURLResponse
+            switch resp.statusCode {
+            case 401:
+                NotificationCenter.default.post(name: NSNotification.Name.VoIPGRIDRequestOperationManagerUnAuthorized, object: nil)
+                completion(.failure(WebserviceError.unauthorized))
+            case 403:
+                completion(.failure(WebserviceError.forbidden))
+            case 404:
+                completion(.failure(WebserviceError.notFound))
+            case let code where code / 100 != 2:
+                completion(.failure(WebserviceError.other("Wrong status: \(resp.statusCode)")))
+            default:
+                let result = data.flatMap(resource.parse)
+                completion(.success(result))
+            }
+            }.resume()
     }
 }
