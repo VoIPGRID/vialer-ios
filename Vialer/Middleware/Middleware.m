@@ -105,7 +105,6 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         VialerLogPushNotification(@"iOS : %@\n", payload);
         
         int timeToInitialResponse = ([pushResponseTimeMeasurementStart timeIntervalSince1970] - [[payload valueForKey:@"message_start_time"] doubleValue]) * 1000;
-        VialerLogError(@"%d", timeToInitialResponse);
         [VialerStats sharedInstance].middlewareResponseTime = [NSString stringWithFormat:@"%d", timeToInitialResponse];
 
         NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
