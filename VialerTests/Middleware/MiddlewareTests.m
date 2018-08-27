@@ -8,13 +8,13 @@
 #import "Middleware.h"
 #import "MiddlewareRequestOperationManager.h"
 #import <OCMock/OCMock.h>
-#import "ReachabilityManager.h"
+#import "Vialer-Swift.h"
 #import "SystemUser.h"
 @import XCTest;
 
 @interface Middleware()
 @property (strong, nonatomic) MiddlewareRequestOperationManager *commonMiddlewareRequestOperationManager;
-@property (strong, nonatomic) ReachabilityManager *reachabilityManager;
+@property (strong, nonatomic) ReachabilityHelper *reachabilityHelper;
 @property (weak, nonatomic) SystemUser *systemUser;
 @end
 
@@ -57,8 +57,15 @@
 }
 
 - (void)testReachabilityManagerCreation {
-    //The Assert calls the getter which will lazy load de registry which succeeds the test.
-    XCTAssert([self.middleware.reachabilityManager isKindOfClass:[ReachabilityManager class]]);
+    //The Assert calls the getter which will lazy load the registry which succeeds the test.
+    //XCTAssert([self.middleware.reachabilityManager isKindOfClass:[ReachabilityManager class]]); //old code, reachabilityManager is not anywhere
+    
+    XCTAssert([self.middleware.reachabilityHelper  isKindOfClass:[ReachabilityHelper class]]);          //this test fails
+    //XCTAssert([self.middleware.reachabilityHelper.reachability  isKindOfClass:[Reachability class]]); //this test fails too
+    
+    //with this message:unrecognized selector sent to instance 0x600000476e40
+//    /Users/chris/Projects/Vialer/iOS/vialer-ios/VialerTests/Middleware/MiddlewareTests.m:70: error: -[MiddlewareTests testReachabilityManagerCreation] : (([mw.reachabilityHelper isKindOfClass:[sharedReachabilityHelper class]]) is true) failed: throwing "-[Middleware reachabilityHelper]: unrecognized selector sent to instance 0x600000476e40"
+    
 }
 
 - (void)testSentAPNSToken {

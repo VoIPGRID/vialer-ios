@@ -92,7 +92,7 @@ public class Reachability: NSObject {
         }
     }
 
-    // Current internetconnection type.
+    // Current internet connection type.
     public var status: NetworkStatus {
         guard isReachable else {
             return .notReachable
