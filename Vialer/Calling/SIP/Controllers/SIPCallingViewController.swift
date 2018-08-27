@@ -200,6 +200,12 @@ extension SIPCallingViewController {
     }
 
     @IBAction func hangupButtonPressed(_ sender: UIButton) {
+        #if DEBUG
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.isScreenshotRun {
+            dismissView()
+            return
+        }
+        #endif
         guard let call = activeCall, call.callState != .disconnected else { return }
         statusLabel.text = NSLocalizedString("Ending call...", comment: "Ending call...")
 
