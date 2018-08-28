@@ -27,6 +27,19 @@ class SnapshotUITests: XCTestCase {
 
     override func tearDown() {
         removeUIInterruptionMonitor(self.interruptionHandler)
+
+        sleep(2)
+        let hamburger = app.navigationBars.buttons.element(boundBy: 0)
+        waitForElementToBeHittable(hamburger, andHit: true)
+
+        sleep(2)
+        waitForElementToBeHittable(app.buttons["sidemenu.button.logout"], andHit: true)
+
+        sleep(2)
+        app.alerts["Log out"].buttons["Yes"].tap()
+
+        sleep(2)
+
         app = nil
         super.tearDown()
     }
@@ -58,6 +71,16 @@ class SnapshotUITests: XCTestCase {
         mobileNumberField.typeText(Constants.ownNumber)
 
         snapshot("onboarding-03-configure")
+
+        let continueButton = app.buttons["onboarding.configureView.continue.button"]
+
+        // For iPhone 4(s). If the continue button does not exist, it is hidden below the keyboard.
+        // Simulate a tap to make the keyboard dissapear.
+        if (!continueButton.isHittable) {
+            app.tap()
+        }
+
+        waitForElementToBeHittable(continueButton, andHit: true)
     }
 
     /**

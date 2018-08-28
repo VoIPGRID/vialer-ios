@@ -129,6 +129,7 @@ static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
     [message appendFormat:@"\n%@", NSLocalizedString(@"Are you sure you want to log out?", nil)];
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Log out", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[SystemUser currentUser] logout];
     }];

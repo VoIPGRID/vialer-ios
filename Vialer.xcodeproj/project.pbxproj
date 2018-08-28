@@ -3324,10 +3324,10 @@
 				C490AD631D0863E3004A8F83 /* Verbonden */,
 				C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */,
 				C490ADFA1D088535004A8F83 /* VerbondenSnapshotUITests */,
-				C4F49F261BF0B45700C25159 /* VialerTests */,
 				EE23180720A0468F00C05EB0 /* ANNAbel */,
 				EE2318AA20A046AD00C05EB0 /* ANNAbelIntentsExtension */,
 				EE2318B720A046BB00C05EB0 /* ANNAbelSnapshotUITests */,
+				C4F49F261BF0B45700C25159 /* VialerTests */,
 			);
 		};
 /* End PBXProject section */
