@@ -42,6 +42,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @property (weak, nonatomic) ContactModel *contactModel;
 @property (weak, nonatomic) Configuration *defaultConfiguration;
 @property (strong, nonatomic) Reachability *reachability;
+@property (weak, nonatomic) IBOutlet UIView *reachabilityBar;
 
 @property (nonatomic) BOOL showTitleImage;
 
@@ -63,6 +64,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self hideReachabilityBar];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     self.showTitleImage = YES;
     [self setupLayout];
@@ -222,7 +224,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         }
         return [self.contactModel contactsAtSection:section - 1].count;
     }
-
     return self.contactModel.searchResult.count;
 }
 
@@ -260,9 +261,16 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0 && [tableView isEqual:self.tableView]) {
-        return 1.0f;
+            return 1.0f;
     }
     return 32.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if ([indexPath section] == 0 && [self.currentUser.outgoingNumber isEqualToString:@""]){
+        return 0;
+    }
+    return UITableViewAutomaticDimension;
 }
 
 #pragma mark - tableview delegate
@@ -366,37 +374,45 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - Notifications
 
 - (void)outgoingNumberUpdated:(NSNotification *)notification {
-    if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+    if (![self.currentUser.outgoingNumber isKindOfClass:[NSNull class]]) {
         [self.tableView reloadData];
-        self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+        if (![self.currentUser.outgoingNumber isEqualToString:@""]) {
+            self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
+        }
+    } else {
+        self.myPhoneNumberLabel.text = @"";
     }
 }
 
 - (void)hideReachabilityBar {
     self.reachabilityBarHeigthConstraint.constant = 0;
+    [[self reachabilityBar] setHidden:true];
     [self.view layoutIfNeeded];
 }
 
 - (void)updateReachabilityBar {
     dispatch_async(dispatch_get_main_queue(), ^{
-
         // SIP is disabled, show the VoIP disabled message
         if (!self.currentUser.sipEnabled) {
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+            [[self reachabilityBar] setHidden:false];
         } else if (!self.reachability.hasHighSpeed) {
             // There is no highspeed connection (4G or WiFi)
             // Check if there is 3G+ connection and the call with 3G+ is enabled.
             if (!self.reachability.hasHighSpeedWith3GPlus || !self.currentUser.use3GPlus) {
                 self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+                [[self reachabilityBar] setHidden:false];
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0;
+                [[self reachabilityBar] setHidden:true];
             }
         } else if (!self.currentUser.sipUseEncryption){
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
+            [[self reachabilityBar] setHidden:false];
         } else {
             self.reachabilityBarHeigthConstraint.constant = 0;
+            [[self reachabilityBar] setHidden:true];
         }
-        
         [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
             [self.view layoutIfNeeded];
         }];

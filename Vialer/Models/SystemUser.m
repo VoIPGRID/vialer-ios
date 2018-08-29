@@ -43,6 +43,7 @@ static NSString * const SystemUserApiKeyAppAccountURL   = @"app_account";
 static NSString * const SystemUserApiKeySIPAccount      = @"appaccount_account_id";
 static NSString * const SystemUserApiKeySIPPassword     = @"appaccount_password";
 static NSString * const SystemUserApiKeyUseEncryption   = @"appaccount_use_encryption";
+static NSString * const SystemUserApiKeyCountry         = @"appaccount_country";
 static NSString * const SystemUserApiKeyAPIToken        = @"api_token";
 
 // Constant for "suppressed" key as supplied by api for outgoingNumber
@@ -70,6 +71,7 @@ static NSString * const SystemUserSUDUseTLS             = @"UseTLS";
 static NSString * const SystemuserSUDUseStunServers     = @"UseStunServers";
 static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString * const SystemUserSUDAPIToken           = @"APIToken";
+static NSString * const SystemUserSUDCountry            = @"Country";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 
 
@@ -88,6 +90,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *clientID;
 @property (strong, nonatomic) NSString *apiToken;
+@property (strong, nonatomic) NSString *country;
 
 /**
  *  This boolean will keep track if the migration from app version 1.x to 2.x already happend.
@@ -167,6 +170,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.clientID           = [defaults objectForKey:SystemUserSUDClientID];
     self.migrationCompleted = [defaults boolForKey:SystemUserSUDMigrationCompleted];
     self.apiToken           = [defaults objectForKey:SystemUserSUDAPIToken];
+    self.country            = [defaults objectForKey:SystemUserSUDCountry];
 
     /**
      *  If there is a username, the user is supposed to be logged in.
@@ -327,7 +331,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)setOutgoingNumber:(NSString *)outgoingNumber {
     if (outgoingNumber != _outgoingNumber) {
         _outgoingNumber = outgoingNumber;
-        [[NSUserDefaults standardUserDefaults] setObject:outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+        if (![outgoingNumber isKindOfClass:[NSNull class]]) {
+            [[NSUserDefaults standardUserDefaults] setObject:outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserOutgoingNumberUpdatedNotification object:self];
     }
 }
@@ -535,6 +541,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.lastName = nil;
     self.clientID = nil;
     self.apiToken = nil;
+    self.country = nil;
 
     [self removeSIPCredentials];
 
@@ -600,10 +607,16 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 
 - (void)setMobileProfileFromUserDict:(NSDictionary *)profileDict {
     self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.country = profileDict[SystemUserApiKeyCountry];
 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([profileDict[SystemUserApiKeyOutgoingNumber] isKindOfClass:[NSNull class]]) {
+        self.outgoingNumber = @"";
+    } else {
+        self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
+    }
     [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+    [defaults setObject:self.country forKey:SystemUserSUDCountry];
 
     [defaults synchronize];
 }
@@ -700,7 +713,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             id sipAccount = responseData[SystemUserApiKeySIPAccount];
             id sipPassword = responseData[SystemUserApiKeySIPPassword];
             id useEncryption = responseData[SystemUserApiKeyUseEncryption];
-            
+
             if ([sipAccount isKindOfClass:[NSNull class]] || [sipPassword isKindOfClass:[NSNull class]]) {
                 [self removeSIPCredentials];
                 

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EE61F3F11F1DDDE4006E890F"
-               BuildableName = "Acceptatie Voys.app"
-               BlueprintName = "Acceptatie Voys"
+               BlueprintIdentifier = "F20850E01D26935600A17E71"
+               BuildableName = "Vialer Staging.app"
+               BlueprintName = "Vialer Staging"
                ReferencedContainer = "container:Vialer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EE61F3F11F1DDDE4006E890F"
-            BuildableName = "Acceptatie Voys.app"
-            BlueprintName = "Acceptatie Voys"
+            BlueprintIdentifier = "F20850E01D26935600A17E71"
+            BuildableName = "Vialer Staging.app"
+            BlueprintName = "Vialer Staging"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EE61F3F11F1DDDE4006E890F"
-            BuildableName = "Acceptatie Voys.app"
-            BlueprintName = "Acceptatie Voys"
+            BlueprintIdentifier = "F20850E01D26935600A17E71"
+            BuildableName = "Vialer Staging.app"
+            BlueprintName = "Vialer Staging"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EE61F3F11F1DDDE4006E890F"
-            BuildableName = "Acceptatie Voys.app"
-            BlueprintName = "Acceptatie Voys"
+            BlueprintIdentifier = "F20850E01D26935600A17E71"
+            BuildableName = "Vialer Staging.app"
+            BlueprintName = "Vialer Staging"
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

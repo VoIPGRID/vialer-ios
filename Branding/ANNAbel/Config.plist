@@ -144,7 +144,7 @@
 		</array>
 		<key>Encrypted SIP Domain</key>
 		<string>sip.encryptedsip.com</string>
-		<key>Middelware BaseLink</key>
+		<key>Middleware BaseLink</key>
 		<string>https://vialerpush.voipgrid.nl</string>
 		<key>API</key>
 		<string>https://partner.voipgrid.nl/api</string>
@@ -153,9 +153,9 @@
 		<key>SIP domain</key>
 		<string>sipproxy.voipgrid.nl</string>
 		<key>onboarding-nl</key>
-		<string>https://help.bellenmetannabel.nl/index.php/Vialer</string>
+		<string>https://bellenmetannabel.nl/hoe-werkt-de-annabel-app/</string>
 		<key>onboarding-en</key>
-		<string>https://help.bellenmetannabel.nl/index.php/Vialer</string>
+		<string>https://bellenmetannabel.nl/hoe-werkt-de-annabel-app/</string>
 	</dict>
 	<key>GA Custom Dimensions</key>
 	<dict>

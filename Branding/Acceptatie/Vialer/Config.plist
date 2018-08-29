@@ -137,7 +137,7 @@
 		</array>
 		<key>Encrypted SIP Domain</key>
 		<string>staging.encryptedsip.com</string>
-		<key>Middelware BaseLink</key>
+		<key>Middleware BaseLink</key>
 		<string>https://vialerpush-staging.voipgrid.nl</string>
 		<key>API</key>
 		<string>https://staging.voipgrid.nl/api</string>

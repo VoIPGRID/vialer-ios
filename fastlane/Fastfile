@@ -76,7 +76,7 @@ platform :ios do
     build
     upload_beta
     slack(
-      message: sh("git describe --abbrev=0") + " uploaded to ITC",
+      message: ENV["APP_NAME"] + " version: " + sh("git describe --abbrev=0") + " uploaded to Appstore Connect",
     )
   end
 

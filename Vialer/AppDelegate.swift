@@ -31,6 +31,11 @@ class AppDelegate: UIResponder {
             static let count = 5
             static let interval: TimeInterval = 2.0
         }
+
+        struct TimerForCall {
+            static let maxTimesFiring = 10
+            static let interval: TimeInterval = 1.0
+        }
     }
 
     var window: UIWindow?
@@ -41,9 +46,12 @@ class AppDelegate: UIResponder {
     var stopVibrating = false
     var vibratingTask: UIBackgroundTaskIdentifier?
     var callKitProviderDelegate: CallKitProviderDelegate!
+    var callAvailabilityTimer: Timer!
+    var callAvailabilityTimesFired: Int = 0
 
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
+    var mostRecentCall : VSLCall?
 }
 
 // MARK: - UIApplicationDelegate
@@ -157,6 +165,8 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
 
@@ -169,6 +179,8 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallStateChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
     }
@@ -216,6 +228,32 @@ extension AppDelegate {
             VialerGAITracker.acceptIncomingCallEvent()
         } else if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallRejected {
             VialerGAITracker.declineIncomingCallEvent()
+            if let mostRecentCallUnwrapped = self.mostRecentCall {
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call:mostRecentCallUnwrapped)
+            }
+        }
+    }
+
+    @objc fileprivate func middlewareRegistrationFinished(_ notification: NSNotification) {
+        if callAvailabilityTimer == nil {
+            callAvailabilityTimer = Timer.scheduledTimer(timeInterval: Configuration.TimerForCall.interval, target: self, selector: #selector(runCallTimer), userInfo: nil, repeats: true)
+            VialerLogDebug("Registration of VoIP account done, start timer for receiving a call.");
+        }
+    }
+
+    @objc fileprivate func errorDuringCallSetup(_ notification: NSNotification) {
+        let statusCode = notification.userInfo![VSLNotificationUserInfoErrorStatusCodeKey] as! String
+        let statusMessage = notification.userInfo![VSLNotificationUserInfoErrorStatusMessageKey] as! String
+        if statusCode != "401" && statusCode != "407" {
+            let callId = notification.userInfo![VSLNotificationUserInfoCallIdKey] as! String
+
+            let callIncoming = callAvailabilityTimer != nil
+            if callAvailabilityTimer != nil {
+                resetCallAvailabilityTimer()
+            }
+
+            VialerStats.sharedInstance.callFailed(callId: callId, incoming: callIncoming, statusCode: statusCode)
+            VialerLogWarning("Error setting up a call with \(statusCode) / \(statusMessage)")
         }
     }
 }
@@ -245,6 +283,7 @@ extension AppDelegate {
             DispatchQueue.main.async {
                 if VialerSIPLib.callKitAvailable() {
                     VialerLogInfo("Incoming call block invoked, routing through CallKit.")
+                    self.mostRecentCall = call
                     self.callKitProviderDelegate.reportIncomingCall(call)
                 } else {
                     VialerLogInfo("Incoming call block invoked, using own app presentation.")
@@ -262,9 +301,11 @@ extension AppDelegate {
             case .callCompletedElsewhere:
                 VialerLogDebug("Call completed elsewhere")
                 VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
             case .originatorCancel:
                 VialerLogDebug("Originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
             case .unknown:
                 break
             }
@@ -283,6 +324,7 @@ extension AppDelegate {
                 do {
                     try call.decline()
                     VialerGAITracker.declineIncomingCallBecauseAnotherCallInProgressEvent()
+                    VialerStats.sharedInstance.incomingCallFailedDeclinedBecauseAnotherCallInProgress(call: call)
                 } catch let error {
                     VialerLogError("Error declining call: \(error)")
                 }
@@ -328,6 +370,8 @@ extension AppDelegate {
     ///
     /// - Parameter notification: Notification instance with VSLCall
     @objc fileprivate func callStateChanged(_ notification: Notification) {
+        resetCallAvailabilityTimer()
+
         guard let call = notification.userInfo![VSLNotificationUserInfoCallKey] as? VSLCall,
             call.callState == .connecting || call.callState == .disconnected,
             let localNotification = incomingCallNotification else { return }
@@ -411,6 +455,7 @@ extension AppDelegate {
             // Call is declined through the button on the local notification.
             do {
                 try call.decline()
+                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
                 VialerGAITracker.declineIncomingCallEvent()
             } catch let error {
                 VialerLogError("Error declining call: \(error)")
@@ -475,6 +520,25 @@ extension AppDelegate {
     @objc fileprivate func managedObjectContextSaved(_ notification: Notification) {
         CoreDataStackHelper.instance.managedObjectContext.perform {
             CoreDataStackHelper.instance.managedObjectContext.mergeChanges(fromContextDidSave: notification)
+        }
+    }
+}
+
+// MARK: - Timed code
+extension AppDelegate {
+    @objc fileprivate func runCallTimer() {
+        callAvailabilityTimesFired += 1
+        if callAvailabilityTimesFired > Configuration.TimerForCall.maxTimesFiring {
+            resetCallAvailabilityTimer()
+            VialerStats.sharedInstance.noIncomingCallReceived()
+        }
+    }
+
+    fileprivate func resetCallAvailabilityTimer() {
+        callAvailabilityTimesFired = 0;
+        if callAvailabilityTimer != nil {
+            callAvailabilityTimer.invalidate()
+            callAvailabilityTimer = nil
         }
     }
 }

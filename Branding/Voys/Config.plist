@@ -146,7 +146,7 @@
 		</array>
 		<key>Encrypted SIP Domain</key>
 		<string>sip.encryptedsip.com</string>
-		<key>Middelware BaseLink</key>
+		<key>Middleware BaseLink</key>
 		<string>https://vialerpush.voipgrid.nl</string>
 		<key>API</key>
 		<string>https://partner.voipgrid.nl/api</string>
