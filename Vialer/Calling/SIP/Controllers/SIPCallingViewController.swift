@@ -50,6 +50,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
 
     var callGotAnError = false
+
     // The cleaned number that need to be called.
     var cleanedPhoneNumber: String?
     var phoneNumberLabelText: String? {
