@@ -4,8 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ReachabilityBarViewController.h"
+//#import "ReachabilityBarViewController.h"
 
-@interface TestReachabilityManagerDelegate : NSObject <ReachabilityBarViewControllerDelegate>
-
-@end
+//@interface TestReachabilityManagerDelegate : NSObject <ReachabilityBarViewControllerDelegate>
+//
+//@end

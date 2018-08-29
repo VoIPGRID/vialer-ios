@@ -5,7 +5,7 @@
 
 #import "Middleware.h"
 
-#import "APNSHandler.h"
+//#import "APNSHandler.h"
 #import "Configuration.h"
 @import CoreData;
 #import "MiddlewareRequestOperationManager.h"
@@ -247,13 +247,13 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 - (void)updateAPNSTokenOnSIPCredentialsChange {
     if (self.systemUser.sipEnabled) {
         VialerLogInfo(@"Sip Credentials have changed, updating Middleware");
-        [self sentAPNSToken:[APNSHandler storedAPNSToken]];
+        [self sentAPNSToken: [[APNSHandler shared] storedAPNSToken]];
     }
 }
 
 - (void)deleteDeviceRegistrationFromMiddleware:(NSNotification *)notification {
     VialerLogInfo(@"SIP Disabled, unregistering from middleware");
-    NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
+    NSString *storedAPNSToken = [[APNSHandler shared] storedAPNSToken];
     NSString *sipAccount = notification.object;
 
     if (sipAccount && storedAPNSToken) {
@@ -272,7 +272,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 - (void)updateDeviceRegistrationWithRemoteLoggingId {
     VialerLogInfo(@"Update Middleware with remote logging id");
-    NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
+    NSString *storedAPNSToken = [[APNSHandler shared] storedAPNSToken];
 
     [self sentAPNSToken:storedAPNSToken withCompletion:^(NSError *error) {
         if (error) {

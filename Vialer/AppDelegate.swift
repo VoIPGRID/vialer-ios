@@ -349,7 +349,8 @@ extension AppDelegate {
             
         DispatchQueue.main.async {
             SIPUtils.setupSIPEndpoint()
-            APNSHandler.shared().registerForVoIPNotifications()
+            APNSHandler.shared.registerForVoIPNotifications()
+//            APNSHandler.shared().registerForVoIPNotifications()
             if !VialerSIPLib.callKitAvailable() {
                 self.registerForLocalNotifications()
             }

@@ -67,7 +67,9 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              @"os_version": [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion],
 
                              // The version of this client app. Useful when debugging possible issues in the future.
-                             @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:MiddlewareMainBundleCFBundleShortVersionString], [infoDict objectForKey:MiddlewareMainBundleCFBundleVersion]],
+                             @"client_version": [NSString stringWithFormat:@"%@ (%@)",
+                                                 [infoDict objectForKey:MiddlewareMainBundleCFBundleShortVersionString],
+                                                 [infoDict objectForKey:MiddlewareMainBundleCFBundleVersion]],
 
                              //Sandbox is determined by the provisioning profile used on build, not on a build configuration.
                              //So, this is not the best way of detecting a Sandbox token or not.
