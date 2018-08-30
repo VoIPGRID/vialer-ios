@@ -1,13 +1,13 @@
+////
+////  testReachabilityManagerDelegate.m
+////  Copyright © 2016 VoIPGRID. All rights reserved.
+////
 //
-//  testReachabilityManagerDelegate.m
-//  Copyright © 2016 VoIPGRID. All rights reserved.
+//#import "TestReachabilityManagerDelegate.h"
 //
-
-#import "TestReachabilityManagerDelegate.h"
-
-@implementation TestReachabilityManagerDelegate
-
-- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {}
-- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {}
-
-@end
+//@implementation TestReachabilityManagerDelegate
+//
+//- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar shouldBeVisible:(BOOL)visible {}
+//- (void)reachabilityBar:(ReachabilityBarViewController *)reachabilityBar statusChanged:(ReachabilityManagerStatusType)status {}
+//
+//@end
