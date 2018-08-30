@@ -14,7 +14,7 @@
 
 @interface Middleware()
 @property (strong, nonatomic) MiddlewareRequestOperationManager *commonMiddlewareRequestOperationManager;
-@property (strong, nonatomic) ReachabilityHelper *reachabilityHelper;
+@property (strong, nonatomic) Reachability *reachability;
 @property (weak, nonatomic) SystemUser *systemUser;
 @end
 
@@ -56,16 +56,9 @@
               @"Only GET and HEAD parameters should be put in URI, the rest in body");
 }
 
-- (void)testReachabilityManagerCreation {
+- (void)testReachabilityCreation {
     //The Assert calls the getter which will lazy load the registry which succeeds the test.
-    //XCTAssert([self.middleware.reachabilityManager isKindOfClass:[ReachabilityManager class]]); //old code, reachabilityManager is not anywhere
-    
-    XCTAssert([self.middleware.reachabilityHelper  isKindOfClass:[ReachabilityHelper class]]);          //this test fails
-    //XCTAssert([self.middleware.reachabilityHelper.reachability  isKindOfClass:[Reachability class]]); //this test fails too
-    
-    //with this message:unrecognized selector sent to instance 0x600000476e40
-//    /Users/chris/Projects/Vialer/iOS/vialer-ios/VialerTests/Middleware/MiddlewareTests.m:70: error: -[MiddlewareTests testReachabilityManagerCreation] : (([mw.reachabilityHelper isKindOfClass:[sharedReachabilityHelper class]]) is true) failed: throwing "-[Middleware reachabilityHelper]: unrecognized selector sent to instance 0x600000476e40"
-    
+    XCTAssert([self.middleware.reachability  isKindOfClass:[Reachability class]]);
 }
 
 - (void)testSentAPNSToken {
