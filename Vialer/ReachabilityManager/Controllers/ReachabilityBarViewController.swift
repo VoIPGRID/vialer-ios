@@ -5,12 +5,19 @@
 
 import UIKit
 
-class ReachabilityBarViewController: UIViewController {
+protocol ReachabilityBarViewControllerProtocol {
+    var reachability: ReachabilityProtocol { get set }
+    var currentUser: SystemUser { get set }
+
+    func updateLayout()
+}
+
+class ReachabilityBarViewController: UIViewController, ReachabilityBarViewControllerProtocol {
 
     fileprivate let notificationCenter = NotificationCenter.default
-    fileprivate let currentUser = SystemUser.current()!
+    internal var currentUser = SystemUser.current()!
     fileprivate let configuration = Configuration.default()
-    fileprivate let reachability = ReachabilityHelper.instance.reachability!
+    public var reachability: ReachabilityProtocol = ReachabilityHelper.instance.reachability!
 
     fileprivate var reachabilityChanged: NotificationToken?
     fileprivate var userLogout: NotificationToken?
@@ -85,6 +92,8 @@ extension ReachabilityBarViewController {
                     shouldBeVisible = false
                 }
             }
+
+            VialerLogError("Label: \(weakSelf.informationLabel.text!) SIP Enabled: \(weakSelf.currentUser.sipEnabled) visble: \(shouldBeVisible)")
 
             if shouldBeVisible {
                 weakSelf.view.backgroundColor = weakSelf.configuration.colorConfiguration.color(forKey: ConfigurationReachabilityBarBackgroundColor)

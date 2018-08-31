@@ -35,37 +35,6 @@
 //    [super tearDown];
 //}
 //
-//- (void)testSetSharedHandler {
-//    APNSHandler *testOverriddenSharedHandler = [[APNSHandler alloc] init];
-//    [APNSHandler setSharedHandler:testOverriddenSharedHandler];
-//
-//    XCTAssertEqual(testOverriddenSharedHandler, [APNSHandler sharedHandler], @"SharedHandler returned object should match the one which was set");
-//}
-//
-//- (void)testResettingOfSharedHandler {
-//    APNSHandler *sharedHandler1 = [APNSHandler sharedHandler];
-//    [APNSHandler setSharedHandler:nil];
-//
-//    XCTAssertNotEqual(sharedHandler1, [APNSHandler sharedHandler], @"A new SharedHandler instance should have been returned.");
-//}
-//
-//- (void)testSharedHandlerCreation {
-//    APNSHandler *createdObject = [APNSHandler sharedHandler];
-//    XCTAssert([createdObject isKindOfClass:[APNSHandler class]]);
-//
-//    APNSHandler *createdObject2 = [APNSHandler sharedHandler];
-//    XCTAssertEqual(createdObject, createdObject2);
-//}
-//
-//- (void)testMiddlewareGetter {
-//    //The Assert calls the getter which will lazy load de registry which succeeds the test.
-//    XCTAssert([self.apnsHandler.middleware isKindOfClass:[Middleware class]]);
-//}
-//
-//- (void)testVoIPRegistryCreation {
-//    //The Assert calls the getter which will lazy load de registry which succeeds the test.
-//    XCTAssert([self.apnsHandler.voipRegistry isKindOfClass:[PKPushRegistry class]]);
-//}
 //
 //- (void)testDidSetPKPushRegistryDelegate {
 //    // Given

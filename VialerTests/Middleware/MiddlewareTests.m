@@ -3,7 +3,6 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import "APNSHandler.h"
 #import "Configuration.h"
 #import "Middleware.h"
 #import "MiddlewareRequestOperationManager.h"

@@ -29,6 +29,10 @@ import SystemConfiguration
 import Foundation
 import CoreTelephony
 
+protocol ReachabilityProtocol {
+    var status: NetworkStatus { get }
+}
+
 public enum ReachabilityError: Error {
     case FailedToCreateWithAddress(sockaddr_in)
     case FailedToCreateWithHostname(String)
@@ -36,30 +40,31 @@ public enum ReachabilityError: Error {
     case UnableToSetDispatchQueue
 }
 
-public class Reachability: NSObject {
+
+public enum NetworkStatus: CustomStringConvertible {
+    case notReachable
+    case reachableViaWiFi
+    case reachableVia2G
+    case reachableVia3G
+    case reachableVia3GPlus
+    case reachableVia4G
+
+    public var description: String {
+        switch self {
+        case .reachableVia2G: return "2G"
+        case .reachableVia3G: return "3G"
+        case .reachableVia3GPlus: return "3G+"
+        case .reachableVia4G: return "4G"
+        case .reachableViaWiFi: return "Wifi"
+        case .notReachable: return "No Connection"
+        }
+    }
+}
+
+public class Reachability: NSObject, ReachabilityProtocol {
 
     // MARK: - Public properties.
 
-    public enum NetworkStatus: CustomStringConvertible {
-
-        case notReachable
-        case reachableViaWiFi
-        case reachableVia2G
-        case reachableVia3G
-        case reachableVia3GPlus
-        case reachableVia4G
-
-        public var description: String {
-            switch self {
-            case .reachableVia2G: return "2G"
-            case .reachableVia3G: return "3G"
-            case .reachableVia3GPlus: return "3G+"
-            case .reachableVia4G: return "4G"
-            case .reachableViaWiFi: return "Wifi"
-            case .notReachable: return "No Connection"
-            }
-        }
-    }
 
     // Optional Callback.
     public typealias NetworkChanged = (Reachability) -> ()

@@ -4,6 +4,7 @@
 //
 
 import XCTest
+import PushKit
 @testable import Vialer
 
 class APNSHandlerTests: XCTestCase {
@@ -21,6 +22,10 @@ class APNSHandlerTests: XCTestCase {
 
     func test_MiddlewareGetter() {
         /// Test if the Middleware has been created.
-        XCTAssert(apnsHandler.middleware .isKind(of: Middleware.self))
+        XCTAssert(apnsHandler.middleware.isKind(of: Middleware.self))
+    }
+
+    func test_VoIPRegistryCreating() {
+        XCTAssert(apnsHandler.voipRegistry.isKind(of: PKPushRegistry.self))
     }
 }

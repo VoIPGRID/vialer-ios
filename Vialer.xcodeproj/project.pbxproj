@@ -157,7 +157,6 @@
 		C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
 		C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
 		C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F100A1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m */; };
-		C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F100C1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m */; };
 		C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
 		C47481981BF5CAAF00EA8672 /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
@@ -274,7 +273,6 @@
 		C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */; };
 		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
-		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
 		C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
 		C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
 		C49A46A91E6829CE0097E808 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
@@ -296,7 +294,6 @@
 		C49B0EEA1E6D9D4C00DD226B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
 		C49B0EEB1E6D9D4C00DD226B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
 		C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */; };
-		C4A0B46F1DE8499B00AB4E26 /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */; };
 		C4A0B4701DE8499B00AB4E26 /* ColorConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */; };
 		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
@@ -597,6 +594,17 @@
 		EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		EE5EC389213572B50000EE4D /* APNSHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC388213572B50000EE4D /* APNSHandlerTests.swift */; };
+		EE5EC392213693AF0000EE4D /* ReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC391213693AF0000EE4D /* ReachabilityMock.swift */; };
+		EE5EC39821369EF00000EE4D /* LabelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC39721369EF00000EE4D /* LabelMock.swift */; };
+		EE5EC39B2136C7420000EE4D /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
+		EE5EC39C2136C7420000EE4D /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		EE5EC39D2136C7420000EE4D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		EE5EC39E2136C8240000EE4D /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43FD69A1E76F4C6002593DD /* NotificationToken.swift */; };
+		EE5EC39F2136C8D00000EE4D /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		EE5EC3A12137F5EA0000EE4D /* ButtonMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3A02137F5EA0000EE4D /* ButtonMock.swift */; };
+		EE5EC3A321382C340000EE4D /* ReachabilityBarViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3A221382C340000EE4D /* ReachabilityBarViewControllerTests.swift */; };
+		EE5EC3A421382CC30000EE4D /* APNSHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE12672221353305008B451D /* APNSHandler.swift */; };
+		EE5EC3A6213910930000EE4D /* APNSHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3A5213910930000EE4D /* APNSHandlerMock.swift */; };
 		EE5F1E691E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		EE5F1E6A1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		EE5F1E6B1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
@@ -874,9 +882,6 @@
 		F22FF2941D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
 		F22FF2951D0ABF5E00761C9A /* ColorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2921D0ABF5E00761C9A /* ColorConfiguration.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
-		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
-		F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */; };
-		F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */; };
 		F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */; };
 		F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		F2A958BA1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -886,7 +891,6 @@
 		F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */; };
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
-		F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BE31C731F7500502769 /* MiddlewareTests.m */; };
 		F2C17B031D35231A00067B05 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
 		F2C44A651DE40EDD00F7CF50 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		F2C44A691DE40EDD00F7CF50 /* VialerIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1366,6 +1370,11 @@
 		EE5C22281F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22291F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		EE5EC388213572B50000EE4D /* APNSHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APNSHandlerTests.swift; path = APNS/APNSHandlerTests.swift; sourceTree = "<group>"; };
+		EE5EC391213693AF0000EE4D /* ReachabilityMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityMock.swift; sourceTree = "<group>"; };
+		EE5EC39721369EF00000EE4D /* LabelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelMock.swift; sourceTree = "<group>"; };
+		EE5EC3A02137F5EA0000EE4D /* ButtonMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMock.swift; sourceTree = "<group>"; };
+		EE5EC3A221382C340000EE4D /* ReachabilityBarViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReachabilityBarViewControllerTests.swift; path = ReachabilityManager/ReachabilityBarViewControllerTests.swift; sourceTree = "<group>"; };
+		EE5EC3A5213910930000EE4D /* APNSHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSHandlerMock.swift; sourceTree = "<group>"; };
 		EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushedCall.swift; sourceTree = "<group>"; };
 		EE61F48D1F1DDDE4006E890F /* Voys Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voys Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Info.plist"; sourceTree = "<group>"; };
@@ -1433,9 +1442,6 @@
 		F2872E2A1CC8CF6000D3ACB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F2872E2C1CC8CF6000D3ACB0 /* Scanfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Scanfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F2872E2F1CC8CF6000D3ACB0 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityBarViewControllerTests.m; sourceTree = "<group>"; };
-		F2A7AEF61CF34E4900889DD8 /* TestReachabilityManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestReachabilityManagerDelegate.h; sourceTree = "<group>"; };
-		F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestReachabilityManagerDelegate.m; sourceTree = "<group>"; };
 		F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestKVOObserverClass.h; sourceTree = "<group>"; };
 		F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestKVOObserverClass.m; sourceTree = "<group>"; };
 		F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsTimeConverter.swift; path = Recents/Models/RecentsTimeConverter.swift; sourceTree = "<group>"; };
@@ -2259,6 +2265,7 @@
 		C4F49F281BF0B45700C25159 /* VialerTests */ = {
 			isa = PBXGroup;
 			children = (
+				EE5EC390213693AF0000EE4D /* Mocks */,
 				C4C50F951DE6E05100B632FA /* PhoneNumber */,
 				F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */,
 				F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */,
@@ -2359,6 +2366,16 @@
 			);
 			name = UI;
 			path = Calling/TwoStep/UI;
+			sourceTree = "<group>";
+		};
+		EE5EC390213693AF0000EE4D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				EE5EC391213693AF0000EE4D /* ReachabilityMock.swift */,
+				EE5EC39721369EF00000EE4D /* LabelMock.swift */,
+				EE5EC3A02137F5EA0000EE4D /* ButtonMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		EE61F4901F1DDE59006E890F /* Vialer */ = {
@@ -2483,6 +2500,7 @@
 			children = (
 				F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */,
 				EE5EC388213572B50000EE4D /* APNSHandlerTests.swift */,
+				EE5EC3A5213910930000EE4D /* APNSHandlerMock.swift */,
 			);
 			name = APNS;
 			sourceTree = "<group>";
@@ -2508,9 +2526,7 @@
 		F2A7AEF31CF3319F00889DD8 /* ReachabilityManager */ = {
 			isa = PBXGroup;
 			children = (
-				F2A7AEF61CF34E4900889DD8 /* TestReachabilityManagerDelegate.h */,
-				F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */,
-				F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */,
+				EE5EC3A221382C340000EE4D /* ReachabilityBarViewControllerTests.swift */,
 			);
 			name = ReachabilityManager;
 			sourceTree = "<group>";
@@ -4587,25 +4603,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE5EC3A6213910930000EE4D /* APNSHandlerMock.swift in Sources */,
+				EE5EC39F2136C8D00000EE4D /* VialerLogger.swift in Sources */,
+				EE5EC3A421382CC30000EE4D /* APNSHandler.swift in Sources */,
+				EE5EC39B2136C7420000EE4D /* ReachabilityHelper.swift in Sources */,
+				EE5EC3A12137F5EA0000EE4D /* ButtonMock.swift in Sources */,
+				EE5EC39C2136C7420000EE4D /* ReachabilityBarViewController.swift in Sources */,
+				EE5EC39D2136C7420000EE4D /* Reachability.swift in Sources */,
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				C42B048D1E79354700280381 /* RecentCallManagerTests.swift in Sources */,
-				F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */,
 				C41D3A721DE728DC00AEA929 /* ContactModelTestCase.swift in Sources */,
 				F2A958C51D2BA24B00C1D854 /* RecentsTimeConverter.swift in Sources */,
-				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
 				C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */,
 				C42B048B1E7925E600280381 /* RecentCallTests.swift in Sources */,
-				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
-				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
+				EE5EC3A321382C340000EE4D /* ReachabilityBarViewControllerTests.swift in Sources */,
+				EE5EC392213693AF0000EE4D /* ReachabilityMock.swift in Sources */,
 				C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */,
 				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
 				EE5EC389213572B50000EE4D /* APNSHandlerTests.swift in Sources */,
-				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
 				C4A0B4701DE8499B00AB4E26 /* ColorConfigurationTests.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
-				C4A0B46F1DE8499B00AB4E26 /* SystemUserTests.m in Sources */,
+				EE5EC39E2136C8240000EE4D /* NotificationToken.swift in Sources */,
+				EE5EC39821369EF00000EE4D /* LabelMock.swift in Sources */,
 				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
 				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
@@ -4613,7 +4634,6 @@
 				F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
 				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
-				F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */,
 				C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */,
 				F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */,
 				C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */,

@@ -24,11 +24,21 @@
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F22DE09F1CC90D41001468B3"
+               BuildableName = "VialerSnapshotUITests.xctest"
+               BlueprintName = "VialerSnapshotUITests"
+               ReferencedContainer = "container:Vialer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -40,19 +50,84 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "SIPIncomingCallViewControllerTests/testAcceptCallButtonPressetMovesToSegue">
+                  Identifier = "APNSHandlerTests">
+               </Test>
+               <Test
+                  Identifier = "ActivateSIPAccountViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "AvailabilityModelTests">
+               </Test>
+               <Test
+                  Identifier = "ColorConfigurationTests">
+               </Test>
+               <Test
+                  Identifier = "ConfigurationTests">
+               </Test>
+               <Test
+                  Identifier = "ConfigureFormViewTests">
+               </Test>
+               <Test
+                  Identifier = "ContactModelTestCase">
+               </Test>
+               <Test
+                  Identifier = "ForgotPasswordViewTests">
+               </Test>
+               <Test
+                  Identifier = "LogInViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "LoginFormViewTests">
+               </Test>
+               <Test
+                  Identifier = "MiddlewareRequestOperationManagerTests">
+               </Test>
+               <Test
+                  Identifier = "MiddlewareTests">
+               </Test>
+               <Test
+                  Identifier = "PhoneNumberUtilsTestCase">
+               </Test>
+               <Test
+                  Identifier = "RecentCallManagerTests">
+               </Test>
+               <Test
+                  Identifier = "RecentCallTests">
+               </Test>
+               <Test
+                  Identifier = "RecentsTimeConverterTests">
+               </Test>
+               <Test
+                  Identifier = "RoundedAndColoredUIButtonTests">
+               </Test>
+               <Test
+                  Identifier = "SIPIncomingCallViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "SIPUtilsTests">
+               </Test>
+               <Test
+                  Identifier = "SettingsViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "SideMenuViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "SystemUserTests">
+               </Test>
+               <Test
+                  Identifier = "TwoStepCallTests">
+               </Test>
+               <Test
+                  Identifier = "UserProfileWebViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "UserProfileWebViewControllerTests/testBackButtonPressedWillCheckSipStatus">
+               </Test>
+               <Test
+                  Identifier = "VialerWebViewControllerTests">
                </Test>
             </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F22DE09F1CC90D41001468B3"
-               BuildableName = "VialerSnapshotUITests.xctest"
-               BlueprintName = "VialerSnapshotUITests"
-               ReferencedContainer = "container:Vialer.xcodeproj">
-            </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
