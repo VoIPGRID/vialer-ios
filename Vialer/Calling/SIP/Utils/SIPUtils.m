@@ -30,6 +30,15 @@
         [SIPUtils removeSIPEndpoint];
     }
 
+    // User has STUN enbaled but the enpoint is not configured to use STUN.
+    if ([SystemUser currentUser].useStunServers && ![VialerSIPLib sharedInstance].hasSTUNEnabled) {
+        VialerLogDebug(@"User has STUN ENABLED but the enpoint is not configured to use STUN. Setup a new endpoint with STUN");
+        [SIPUtils removeSIPEndpoint];
+    } else if (![SystemUser currentUser].useStunServers && [VialerSIPLib sharedInstance].hasSTUNEnabled) {
+        VialerLogDebug(@"User has STUN DISABLED but the endpoint is configured to use STUN. Setup a new endpoint without STUN");
+        [SIPUtils removeSIPEndpoint];
+    }
+
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
     endpointConfiguration.logLevel = 4;
     endpointConfiguration.userAgent = [NSString stringWithFormat:@"iOS:%@-%@", [[NSBundle mainBundle] bundleIdentifier], [AppInfo currentAppVersion]];
