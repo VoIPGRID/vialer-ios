@@ -28,4 +28,8 @@ class APNSHandlerTests: XCTestCase {
     func test_VoIPRegistryCreating() {
         XCTAssert(apnsHandler.voipRegistry.isKind(of: PKPushRegistry.self))
     }
+
+    func test_ReceiptOfAPNSToken() {
+
+    }
 }

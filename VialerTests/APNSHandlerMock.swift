@@ -12,15 +12,21 @@ import PushKit
 
 
 class APNSHandlerMock: APNSHandlerProtocol {
-    var voipRegistry: PKPushRegistry
-    
-    var middleware: Middleware
-    
+    static let shared = APNSHandlerMock()
+
     let tokenData: NSData = NSData()
+    let registerForPushType: PKPushType = PKPushType.voIP
+
+    func registerForVoIPNotifications() {
+
+    }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         <#code#>
     }
 
+    func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
+
+    }
 
 }

@@ -7,19 +7,16 @@ import Foundation
 import PushKit
 
 protocol APNSHandlerProtocol {
-    var voipRegistry: PKPushRegistry { get }
-    var middleware: Middleware { get }
-
+    func registerForVoIPNotifications()
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void)
+    func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType)
 }
-
-protocol PKPushRegistryProtocol {}
 
 @objc class APNSHandler: NSObject, APNSHandlerProtocol, PKPushRegistryDelegate {
     @objc static let shared = APNSHandler()
 
-    internal var middleware: Middleware
-    internal var voipRegistry: PKPushRegistry
+    let middleware: Middleware
+    let voipRegistry: PKPushRegistry
 
     private override init() {
         middleware = Middleware()
