@@ -4,6 +4,7 @@
 //
 
 #import "ForgotPasswordView.h"
+#import "Vialer-Swift.h"
 
 static CGFloat const ForgotPasswordViewButtonRadius = 5.0;
 
@@ -22,15 +23,8 @@ static CGFloat const ForgotPasswordViewButtonRadius = 5.0;
 
     self.requestPasswordButton.borderWidth = 1;
     self.requestPasswordButton.cornerRadius = ForgotPasswordViewButtonRadius;
-    self.requestPasswordButton.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBorderColor];
-    self.requestPasswordButton.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
-}
-
-- (Configuration *)configuration {
-    if (!_configuration) {
-        _configuration = [Configuration defaultConfiguration];
-    }
-    return _configuration;
+    self.requestPasswordButton.borderColor = [[ColorsConfiguration shared]  colorForKey:ColorsLogInViewControllerButtonBorder];
+    self.requestPasswordButton.backgroundColorForPressedState = [[ColorsConfiguration shared]  colorForKey:ColorsLogInViewControllerButtonBackgroundPressedState];
 }
 
 @end

@@ -25,19 +25,12 @@ static CGFloat const TwoFactorAuthenticationViewButtonRadius = 5.0;
     [self setupRoundedButtons:@[self.continueButton]];
 }
 
-- (Configuration *)configuration {
-    if (!_configuration) {
-        _configuration = [Configuration defaultConfiguration];
-    }
-    return _configuration;
-}
-
 - (void)setupRoundedButtons:(NSArray<RoundedAndColoredUIButton *> *)buttons {
     for (RoundedAndColoredUIButton *button in buttons) {
         button.borderWidth = 1;
         button.cornerRadius = TwoFactorAuthenticationViewButtonRadius;
-        button.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBorderColor];
-        button.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
+        button.borderColor = [[ColorsConfiguration shared] colorForKey:ColorsLogInViewControllerButtonBorder];
+        button.backgroundColorForPressedState = [[ColorsConfiguration shared] colorForKey:ColorsLogInViewControllerButtonBackgroundPressedState];
     }
 }
 

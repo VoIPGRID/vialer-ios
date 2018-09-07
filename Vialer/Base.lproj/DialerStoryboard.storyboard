@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="top" id="bIK-Mu-L7W"/>
                         <viewControllerLayoutGuide type="bottom" id="Krn-1p-wH9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Je9-SI-kQJ" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="Je9-SI-kQJ" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

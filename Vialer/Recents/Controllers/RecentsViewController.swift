@@ -27,7 +27,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
 
     // MARK: - Dependency Injection
     var user = SystemUser.current()!
-    var defaultConfiguration = Configuration.default()
+    var colorsConfiguration = ColorsConfiguration.shared
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
     fileprivate var notificationCenter = NotificationCenter.default
     fileprivate var reachabilityChanged: NotificationToken?
@@ -84,7 +84,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     }
     @IBOutlet weak var filterControl: UISegmentedControl! {
         didSet {
-            filterControl.tintColor = defaultConfiguration.colorConfiguration.color(forKey: ConfigurationRecentsFilterControlTintColor)
+            filterControl.tintColor = colorsConfiguration.colorForKey(ColorsConfiguration.Colors.recentsFilterControlTint)
         }
     }
     @IBOutlet weak var reachabilityBarHeigthConstraint: NSLayoutConstraint!
@@ -176,7 +176,7 @@ extension RecentsViewController {
             showTitleImage = true
         }
         reachabilityBarHeigthConstraint.constant = 0.0
-        navigationController?.view.backgroundColor = defaultConfiguration.colorConfiguration.color(forKey: ConfigurationNavigationBarBarTintColor)
+        navigationController?.view.backgroundColor = colorsConfiguration.colorForKey(ColorsConfiguration.Colors.navigationBarBarTint)
     }
 
     fileprivate func call(_ number: String) {

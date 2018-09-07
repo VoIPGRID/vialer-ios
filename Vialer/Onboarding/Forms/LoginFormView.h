@@ -16,9 +16,6 @@ IB_DESIGNABLE
 @property (nonatomic, weak) IBOutlet RoundedAndColoredUIButton *forgotPasswordButton;
 @property (nonatomic, weak) IBOutlet RoundedAndColoredUIButton *configurationInstructionsButton;
 
-/* Dependency Injection */
-@property (nonatomic) Configuration *configuration;
-
 // Keep track if the form is moved already
 @property (nonatomic) BOOL isMoved;
 

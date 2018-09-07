@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Thin</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Keypad View Controller-->
         <scene sceneID="MTO-IF-tUn">
             <objects>
-                <viewController id="gkX-qY-AIB" customClass="KeypadViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gkX-qY-AIB" customClass="KeypadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BNe-Tv-NtN"/>
                         <viewControllerLayoutGuide type="bottom" id="51B-d5-ps1"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Kif-jA-29n" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="Kif-jA-29n" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -286,12 +281,12 @@
         <!--Calling View Controller-->
         <scene sceneID="EqN-j7-u7b">
             <objects>
-                <viewController id="n1v-MQ-FjB" customClass="SIPCallingViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="n1v-MQ-FjB" customClass="SIPCallingViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kdc-JO-wUM"/>
                         <viewControllerLayoutGuide type="bottom" id="z1c-mm-Aw5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Y12-1W-nLk" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="Y12-1W-nLk" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -521,12 +516,12 @@
         <!--Call Transfer-->
         <scene sceneID="dzA-vc-gwf">
             <objects>
-                <viewController id="gjH-5U-15N" customClass="SetupCallTransferViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gjH-5U-15N" customClass="SetupCallTransferViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XvE-M2-U6h"/>
                         <viewControllerLayoutGuide type="bottom" id="cBN-Ff-T6S"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Q3T-G4-7cy" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="Q3T-G4-7cy" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -832,12 +827,12 @@
         <!--Call Transfer-->
         <scene sceneID="opG-bd-MXL">
             <objects>
-                <viewController id="9vo-dM-YYf" customClass="SecondCallViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9vo-dM-YYf" customClass="SecondCallViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nwe-Ug-vDD"/>
                         <viewControllerLayoutGuide type="bottom" id="IKT-zP-YhF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EX7-zD-4eF" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="EX7-zD-4eF" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1109,12 +1104,12 @@
         <!--Call Transfer-->
         <scene sceneID="Bfn-Bi-DfE">
             <objects>
-                <viewController id="Lfl-9a-GUJ" customClass="TransferInProgressViewController" customModule="Acceptatie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Lfl-9a-GUJ" customClass="TransferInProgressViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eW7-IQ-kDl"/>
                         <viewControllerLayoutGuide type="bottom" id="aqX-RA-5Sl"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YaM-wy-9D5" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="YaM-wy-9D5" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

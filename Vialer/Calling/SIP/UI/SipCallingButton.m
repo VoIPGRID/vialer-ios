@@ -5,7 +5,7 @@
 
 #import "SipCallingButton.h"
 
-#import "Configuration.h"
+#import "Vialer-Swift.h"
 
 
 static float const SipCallingButtonPressedAlpha = 0.5;
@@ -16,18 +16,18 @@ static float const SipCallingButtonDisabledAlpha = 0.2;
 @property (strong, nonatomic) UIColor *textColor;
 @property (strong, nonatomic) UIColor *pressedColor;
 
-@property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (weak, nonatomic) ColorsConfiguration *colorsConfiguration;
 @end
 
 @implementation SipCallingButton
 
 #pragma mark - Properties
 
-- (Configuration *)defaultConfiguration {
-    if (!_defaultConfiguration) {
-        _defaultConfiguration = [Configuration defaultConfiguration];
+- (ColorsConfiguration *)colorsConfiguration {
+    if (!_colorsConfiguration) {
+        _colorsConfiguration = [ColorsConfiguration shared];
     }
-    return _defaultConfiguration;
+    return _colorsConfiguration;
 }
 
 - (void)setButtonImage:(NSString *)buttonImage {
@@ -48,14 +48,14 @@ static float const SipCallingButtonDisabledAlpha = 0.2;
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.colorsConfiguration colorForKey:ColorsNumberPadButtonText];
     }
     return _textColor;
 }
 
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:SipCallingButtonPressedAlpha];
+        _pressedColor = [[self.colorsConfiguration colorForKey:ColorsNumberPadButtonPressed] colorWithAlphaComponent:SipCallingButtonPressedAlpha];
     }
     return _pressedColor;
 }

@@ -5,24 +5,11 @@
 
 #import "Configuration.h"
 
-/** Key definition for Config file */
-NSString * const ConfigurationVoIPGRIDBaseURLString = @"API";
-NSString * const ConfigurationMiddleWareBaseURLString = @"Middleware BaseLink";
-NSString * const ConfigurationSIPDomain = @"SIP domain";
-NSString * const ConfigurationEncryptedSIPDomain = @"Encrypted SIP Domain";
-NSString * const ConfigurationPartnerURLKey = @"Partner";
-
 NSString * const ConfigurationGADimensionClientIDIndex = @"Client ID index";
 NSString * const ConfigurationGADimensionBuildIndex = @"Build index";
 
 static NSString * const ConfigurationColorsKey = @"Tint colors";
-static NSString * const ConfigurationUrlsKey = @"URLS";
 static NSString * const ConfigurationGACustomDimensionKey = @"GA Custom Dimensions";
-static NSString * const ConfigurationLogEntries = @"Log Entries";
-static NSString * const ConfigurationStunServers = @"Stun Servers";
-static NSString * const ConfigurationLogEntriesMainToken = @"Main";
-static NSString * const ConfigurationLogEntriesPartnerToken = @"Partner";
-static NSString * const ConfigurationLogEntriesPushNotificationsToken = @"Push Notifications";
 static NSString * const ConfigurationGoogleTrackingId = @"TRACKING_ID";
 
 @interface Configuration ()
@@ -82,48 +69,6 @@ static dispatch_once_t onceToken = 0;
         _colorConfiguration = [[ColorConfiguration alloc] initWithConfigPlist:self.configPlist];
     }
     return _colorConfiguration;
-}
-
-#pragma mark - Public instance methods
-
-- (NSString *)UrlForKey:(NSString *)key {
-    NSString *urlString = self.configPlist[ConfigurationUrlsKey][key];
-    NSAssert(urlString != nil, @"%@ - %@, not found in Config.plist!", ConfigurationUrlsKey, key);
-    return urlString;
-}
-
-- (int)customDimensionIndexForKey:(NSString *)key {
-    id value = self.configPlist[ConfigurationGACustomDimensionKey][key];
-    NSAssert([value isKindOfClass:[NSNumber class]], @"Fetched key was not found or was not a NSNumber.");
-
-    return ((NSNumber *)value).intValue;
-}
-
-- (NSDictionary *)logEntriesDictionairy {
-    return self.configPlist[ConfigurationLogEntries];
-}
-
-- (NSString *)logEntriesToken {
-    return [self logEntriesDictionairy][ConfigurationLogEntriesMainToken];
-}
-
-- (NSString *)logEntriesPartnerToken {
-    return [self logEntriesDictionairy][ConfigurationLogEntriesPartnerToken];
-}
-
-- (NSString *)logEntriesPushNotificationsToken {
-    return [self logEntriesDictionairy][ConfigurationLogEntriesPushNotificationsToken];
-}
-
-- (NSString *)googleTrackingId {
-    return self.googleConfigPlist[ConfigurationGoogleTrackingId];
-}
-
-- (NSArray<NSString *> *)stunServers {
-    if (self.configPlist[ConfigurationUrlsKey][ConfigurationStunServers]) {
-        return self.configPlist[ConfigurationUrlsKey][ConfigurationStunServers];
-    }
-    return [NSArray new];
 }
 
 @end

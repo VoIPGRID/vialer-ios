@@ -5,6 +5,7 @@
 
 #import "ConfigureFormView.h"
 #import "UIView+RoundedStyle.h"
+#import "Vialer-Swift.h"
 
 static CGFloat const ConfigureFormViewButtonRadius = 5.0;
 
@@ -39,15 +40,8 @@ static CGFloat const ConfigureFormViewButtonRadius = 5.0;
 
     self.continueButton.borderWidth = 1;
     self.continueButton.cornerRadius = ConfigureFormViewButtonRadius;
-    self.continueButton.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBorderColor];
-    self.continueButton.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
-}
-
-- (Configuration *)configuration {
-    if (!_configuration) {
-        _configuration = [Configuration defaultConfiguration];
-    }
-    return _configuration;
+    self.continueButton.borderColor = [[ColorsConfiguration shared] colorForKey:ColorsLogInViewControllerButtonBorder];
+    self.continueButton.backgroundColorForPressedState = [[ColorsConfiguration shared] colorForKey:ColorsLogInViewControllerButtonBackgroundPressedState];
 }
 
 @end
