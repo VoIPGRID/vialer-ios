@@ -9,6 +9,7 @@
 #import "NSString+SubString.h"
 #import "SAMKeychain.h"
 #import "VoIPGRIDRequestOperationManager.h"
+#import "Vialer-Swift.h"
 
 
 NSString * const SystemUserErrorDomain = @"Vialer.Systemuser";
@@ -260,9 +261,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 
 - (NSString *)sipDomain {
     if (self.useTLS && self.sipUseEncryption) {
-        return [[Configuration defaultConfiguration] UrlForKey:ConfigurationEncryptedSIPDomain];
+        return [[UrlsConfiguration shared] encryptedSipDomain];
     }
-    return [[Configuration defaultConfiguration] UrlForKey:ConfigurationSIPDomain];
+    return [[UrlsConfiguration shared] sipDomain];
 }
 
 - (NSString *)sipProxy {

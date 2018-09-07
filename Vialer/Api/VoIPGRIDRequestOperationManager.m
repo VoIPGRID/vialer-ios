@@ -8,6 +8,7 @@
 #import "Configuration.h"
 #import "SAMKeychain.h"
 #import "SystemUser.h"
+#import "Vialer-Swift.h"
 
 static NSString * const VoIPGRIDRequestOperationManagerURLSystemUserProfile = @"permission/systemuser/profile/";
 static NSString * const VoIPGRIDRequestOperationManagerURLAPIToken          = @"permission/apitoken/";
@@ -40,12 +41,12 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 }
 
 - (instancetype)initWithDefaultBaseURL {
-    NSURL *baseURL = [NSURL URLWithString:[[Configuration defaultConfiguration] UrlForKey:ConfigurationVoIPGRIDBaseURLString]];
+    NSURL *baseURL = [NSURL URLWithString:[[UrlsConfiguration shared] apiUrl]];
     return [self initWithBaseURL:baseURL andRequestOperationTimeoutInterval:VoIPGRIDRequestOperationManagerTimoutInterval];
 }
 
 - (instancetype)initWithDefaultBaseURLandRequestOperationTimeoutInterval:(NSTimeInterval)requestTimeoutInterval {
-    NSURL *baseURL = [NSURL URLWithString:[[Configuration defaultConfiguration] UrlForKey:ConfigurationVoIPGRIDBaseURLString]];
+    NSURL *baseURL = [NSURL URLWithString:[[UrlsConfiguration shared] apiUrl]];
     return [self initWithBaseURL:baseURL andRequestOperationTimeoutInterval:requestTimeoutInterval];}
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL andRequestOperationTimeoutInterval:(NSTimeInterval)requestTimeoutInterval {
@@ -218,7 +219,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     NSString *apiToken = [SystemUser currentUser].apiToken;
     NSString *username = [SystemUser currentUser].username;
     if (apiToken == nil || [apiToken isEqualToString:@""]) {
-        NSString *apiUrl = [NSString stringWithFormat:@"%@/", [[Configuration defaultConfiguration] UrlForKey:ConfigurationVoIPGRIDBaseURLString]];
+        NSString *apiUrl = [NSString stringWithFormat:@"%@/", [[UrlsConfiguration shared] apiUrl]];
         if (!self.checkingTwoFactor && [self.baseURL.absoluteString isEqualToString:apiUrl]) {
             self.checkingTwoFactor = YES;
             [self loginWithUserNameForTwoFactor:username password:[SystemUser currentUser].password orToken:@"" withCompletion:^(NSDictionary *responseData, NSError *error) {

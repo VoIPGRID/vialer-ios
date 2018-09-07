@@ -31,3 +31,6 @@
 
 /* Class = "UILabel"; text = "Two step modus enabled"; ObjectID = "qq9-WU-COt"; */
 "qq9-WU-COt.text" = "Twee staps modus ingeschakeld";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DlK-sD-tTC"; */
+"DlK-sD-tTC.normalTitle" = "";

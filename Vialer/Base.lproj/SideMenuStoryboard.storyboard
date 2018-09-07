@@ -381,7 +381,7 @@
         <image name="menu-logout" width="18" height="19"/>
         <image name="menu-settings" width="23" height="23"/>
         <image name="menu-stats" width="21" height="25"/>
-        <image name="sideMenuLogo" width="60" height="58"/>
+        <image name="sideMenuLogo" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="siu-OK-7GP"/>

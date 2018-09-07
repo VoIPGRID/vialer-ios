@@ -10,3 +10,12 @@
 
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[1] = "Missed"; ObjectID = "rDx-8g-SbK"; */
 "rDx-8g-SbK.segmentTitles[1]" = "Gemist";
+
+/* Class = "UILabel"; text = "date"; ObjectID = "8Jg-mD-iX2"; */
+"8Jg-mD-iX2.text" = "";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "PRa-sg-NzP"; */
+"PRa-sg-NzP.text" = "";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "bHO-4g-VGn"; */
+"bHO-4g-VGn.text" = "";

@@ -4,7 +4,7 @@
 //
 
 #import "MainTabBarViewController.h"
-#import "Configuration.h"
+#import "Vialer-Swift.h"
 
 @interface MainTabBarViewController ()
 
@@ -18,12 +18,12 @@
 }
 
 - (void)setupLayout {
-    Configuration *config = [Configuration defaultConfiguration];
+    ColorsConfiguration *config = [ColorsConfiguration shared];
 
     // Customize TabBar
-    [UITabBar appearance].tintColor = [config.colorConfiguration colorForKey:ConfigurationTabBarTintColor];
-    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIToolbar class]]] setTintColor:[config.colorConfiguration colorForKey:ConfigurationTabBarTintColor]];
-    [UITabBar appearance].barTintColor = [config.colorConfiguration colorForKey:ConfigurationTabBarBackgroundColor];
+    [UITabBar appearance].tintColor = [config colorForKey:ColorsTabBarTint];
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIToolbar class]]] setTintColor:[config colorForKey: ColorsTabBarTint]];
+    [UITabBar appearance].barTintColor = [config colorForKey: ColorsTabBarBackground];
 }
 
 @end

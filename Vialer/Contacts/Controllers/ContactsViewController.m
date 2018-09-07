@@ -40,7 +40,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @property (strong, nonatomic) CNContact *selectedContact;
 
 @property (weak, nonatomic) ContactModel *contactModel;
-@property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (weak, nonatomic) ColorsConfiguration *colorsConfiguration;
 @property (strong, nonatomic) Reachability *reachability;
 @property (weak, nonatomic) IBOutlet UIView *reachabilityBar;
 
@@ -109,16 +109,17 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 # pragma mark - setup
 
 - (void)setupLayout {
+
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
-    self.tableView.sectionIndexColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactsTableSectionIndexColor];
+    self.tableView.sectionIndexColor = [self.colorsConfiguration colorForKey: ColorsContactsTableSectionIndex];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    self.searchBar.barTintColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationContactSearchBarBarTintColor];
+    self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
 
-    self.navigationController.view.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
+    self.navigationController.view.backgroundColor = [self.colorsConfiguration colorForKey: ColorsNavigationBarBarTint];
     [self updateReachabilityBar];
 }
 
@@ -153,11 +154,11 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     return _contactModel;
 }
 
-- (Configuration *)defaultConfiguration {
-    if (!_defaultConfiguration) {
-        _defaultConfiguration = [Configuration defaultConfiguration];
+- (ColorsConfiguration *)colorsConfiguration {
+    if (!_colorsConfiguration) {
+        _colorsConfiguration = [ColorsConfiguration shared];
     }
-    return _defaultConfiguration;
+    return _colorsConfiguration;
 }
 
 - (Reachability *)reachability {
@@ -180,7 +181,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactViewController];
-    nav.view.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
+    nav.view.backgroundColor = [self.colorsConfiguration colorForKey: ColorsNavigationBarBarTint];
     [self presentViewController:nav animated:YES completion:nil];
 }
 

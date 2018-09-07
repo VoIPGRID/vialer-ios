@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gU5-bE-K8d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gU5-bE-K8d">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,11 +19,12 @@
                         <viewControllerLayoutGuide type="top" id="NVt-sg-wgQ"/>
                         <viewControllerLayoutGuide type="bottom" id="yQ6-Qt-aAC"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Xcd-5K-y8o" customClass="GradientView">
+                    <view key="view" contentMode="scaleToFill" id="Xcd-5K-y8o" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-JN-qTG" userLabel="decline-button">
+                                <rect key="frame" x="72.5" y="537" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="SIPIncomingCallStoryboard.HangupButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="1zY-5f-pIo"/>
@@ -35,6 +40,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+31 123 45 67 890" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="WNk-Js-erb">
+                                <rect key="frame" x="64" y="66" width="247" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WNk-Js-erb" secondAttribute="height" multiplier="16:1" constant="-792" id="t7z-Tt-PwI"/>
                                 </constraints>
@@ -43,6 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-Be-v8D" userLabel="status label">
+                                <rect key="frame" x="64" y="158" width="247" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zEP-Be-v8D" secondAttribute="height" multiplier="16:1" constant="-280" id="aQO-5v-KRe"/>
                                 </constraints>
@@ -51,6 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkp-kf-uI8" userLabel="accept-button">
+                                <rect key="frame" x="232.5" y="537" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hkp-kf-uI8" secondAttribute="height" multiplier="1:1" id="5JO-1Q-bwq"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="EUX-ok-A1p"/>
@@ -65,11 +73,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JN-KW-x5m">
+                                <rect key="frame" x="83.5" y="615" width="48.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-Lx-HHe">
+                                <rect key="frame" x="245" y="615" width="45.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

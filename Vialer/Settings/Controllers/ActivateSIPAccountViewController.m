@@ -15,7 +15,6 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 
 @interface ActivateSIPAccountViewController()
 @property (weak, nonatomic) IBOutlet RoundedAndColoredUIButton *userProfileButton;
-@property (strong, nonatomic) Configuration *configuration;
 @property (strong, nonatomic) SystemUser *user;
 @end
 
@@ -34,20 +33,14 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
 }
 
 - (void)setupUserProfileButton {
+    ColorsConfiguration *colorsConfiguration = [ColorsConfiguration shared];
     self.userProfileButton.borderWidth = 1;
     self.userProfileButton.cornerRadius = ActivateSIPAccountViewControllerButtonRadius;
-    self.userProfileButton.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationActivateSIPAccountViewControllerButtonBorderColor];
-    self.userProfileButton.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationActivateSIPAccountViewControllerButtonBackgroundColorForPressedState];
+    self.userProfileButton.borderColor = [colorsConfiguration colorForKey:ColorsActivateSIPAccountViewControllerButtonBorder];
+    self.userProfileButton.backgroundColorForPressedState = [colorsConfiguration colorForKey:ColorsActivateSIPAccountViewControllerButtonBackgroundPressedState];
 }
 
 #pragma mark - Properties
-
-- (Configuration *)configuration {
-    if (!_configuration) {
-        _configuration = [Configuration defaultConfiguration];
-    }
-    return _configuration;
-}
 
 - (SystemUser *)user {
     if (!_user) {

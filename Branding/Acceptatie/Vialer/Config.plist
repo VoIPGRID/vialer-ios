@@ -91,7 +91,7 @@
 		<key>RecentsTableViewTintColor</key>
 		<string>PrimaryBrandColor</string>
 		<key>ContactSearchBarTintColor</key>
-		<string>BlackColor</string>
+		<string>PrimaryBrandColor</string>
 		<key>ContactSearchBarBarTintColor</key>
 		<string>PrimaryBrandColor</string>
 		<key>LeftDrawerButtonTintColor</key>
@@ -100,23 +100,23 @@
 		<string>PrimaryBrandColor</string>
 		<key>TwoStepScreenInfoBarBackgroundColor</key>
 		<array>
-			<string>229</string>
-			<string>229</string>
-			<string>229</string>
+			<integer>229</integer>
+			<integer>229</integer>
+			<integer>229</integer>
 		</array>
 		<key>TwoStepScreenVialerIconColor</key>
 		<string>SecondaryBrandColor</string>
 		<key>TwoStepScreenBubblingColor</key>
 		<array>
-			<string>61</string>
-			<string>65</string>
-			<string>84</string>
+			<integer>61</integer>
+			<integer>65</integer>
+			<integer>84</integer>
 		</array>
 		<key>TwoStepScreenSideAIconColor</key>
 		<array>
-			<string>61</string>
-			<string>65</string>
-			<string>84</string>
+			<integer>61</integer>
+			<integer>65</integer>
+			<integer>84</integer>
 		</array>
 		<key>TwoStepScreenSideBIconColor</key>
 		<string>SecondaryBrandColor</string>

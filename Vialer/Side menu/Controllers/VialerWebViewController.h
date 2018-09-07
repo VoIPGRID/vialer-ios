@@ -6,6 +6,7 @@
 #import "Configuration.h"
 #import <PBWebViewController/PBWebViewController.h>
 #import "SystemUser.h"
+#import "Vialer-Swift.h"
 
 @class SystemUser;
 
@@ -14,7 +15,7 @@
 /**
  *  The currently loaded configuration.
  */
-@property (strong, nonatomic) Configuration * _Nonnull configuration;
+@property (strong, nonatomic) UrlsConfiguration * _Nonnull urlsConfiguration;
 
 /**
  *  The currently logged in user.

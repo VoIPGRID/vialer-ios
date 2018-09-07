@@ -498,8 +498,12 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)openConfigurationInstructions:(id)sender {
     PBWebViewController *webViewController = [[PBWebViewController alloc] init];
 
-    NSString *localizedOnboarding = [NSString stringWithFormat:@"onboarding-%@", [[NSBundle mainBundle] preferredLocalizations][0]];
-    NSString *onboardingUrl = [[Configuration defaultConfiguration] UrlForKey:localizedOnboarding];
+    OnboardingLanguage onboardingLanuage = OnboardingLanguageEn;
+    if ([[[NSBundle mainBundle] preferredLocalizations][0] isEqualToString:@"nl"]) {
+        onboardingLanuage = OnboardingLanguageNl;
+    }
+
+    NSString *onboardingUrl = [[UrlsConfiguration shared] onboardingUrlWithLanguage: onboardingLanuage];
     webViewController.URL = [NSURL URLWithString:onboardingUrl];
     webViewController.showsNavigationToolbar = NO;
     webViewController.hidesBottomBarWhenPushed = YES;

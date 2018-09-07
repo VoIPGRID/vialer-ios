@@ -20,8 +20,8 @@ class VialerGAITracker: NSObject {
          VIALI-3274: index of the dimension should be read from Config.plist.
          */
         struct CustomDimensions {
-            static let clientID: UInt = 1
-            static let build: UInt = 2
+            static let clientID: UInt = GAConfiguration.shared.clientIndex()
+            static let build: UInt = GAConfiguration.shared.buildIndex()
         }
 
         /**
@@ -103,7 +103,7 @@ class VialerGAITracker: NSObject {
             assert(false, "Google Analytics not configured correctly")
             return false
         }
-        gai.tracker(withTrackingId: Configuration.default().googleTrackingId());
+        gai.tracker(withTrackingId: GAConfiguration.shared.trackingId());
         gai.trackUncaughtExceptions = true
         gai.logger.logLevel = logLevel
         gai.dryRun = isDryRun
