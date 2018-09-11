@@ -5,7 +5,11 @@
 
 import Foundation
 
-@objc class ColorsConfiguration: NSObject {
+protocol ColorsConfigurationProtocol {
+    func colorForKey(_ key: ColorsConfiguration.Colors) -> UIColor
+}
+
+@objc class ColorsConfiguration: NSObject, ColorsConfigurationProtocol {
 
     fileprivate struct PrimaryColors: Decodable {
         var PrimaryBrandColor: [Double]

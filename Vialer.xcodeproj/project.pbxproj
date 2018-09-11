@@ -37,8 +37,6 @@
 		C4052E591E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
 		C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
 		C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3A81C24CFF1007DCC4A /* LoginFormViewTests.m */; };
-		C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AB1C255563007DCC4A /* ConfigureFormViewTests.m */; };
-		C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C409F3AD1C25570D007DCC4A /* ForgotPasswordViewTests.m */; };
 		C41C42F81D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		C41C42F91D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
@@ -270,10 +268,7 @@
 		C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
 		C4947FD31C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
 		C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
-		C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8E91C2AB21B00C42619 /* VialerWebViewControllerTests.m */; };
-		C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8EC1C2AB46900C42619 /* SideMenuViewControllerTests.m */; };
 		C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FD1C2C6F5D00C42619 /* SettingsViewControllerTests.m */; };
-		C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C496A8FF1C2C755700C42619 /* LogInViewControllerTests.m */; };
 		C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
 		C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
 		C49A46A91E6829CE0097E808 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
@@ -294,9 +289,6 @@
 		C49B0EE91E6D9D4C00DD226B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
 		C49B0EEA1E6D9D4C00DD226B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
 		C49B0EEB1E6D9D4C00DD226B /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
-		C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */; };
-		C4A0B46F1DE8499B00AB4E26 /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */; };
-		C4A0B4701DE8499B00AB4E26 /* ColorConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */; };
 		C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */; };
 		C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E611E729F780067FE40 /* Vialer.xcdatamodeld */; };
@@ -744,6 +736,16 @@
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
+		EE65918C20AAD6BC00305980 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */; };
+		EE6F2A77214A330500229C75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE6F2A75214A330500229C75 /* InfoPlist.strings */; };
+		EE6F2A79214A331100229C75 /* Acceptatie-Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */; };
+		EE8C5EA62147AF2B008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE8C5EA72147B053008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE8C5EA82147B054008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE8C5EA92147B055008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE8C5EAA2147B056008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE8C5EAB2147B056008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE8C5EAC2147B057008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
 		EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2671F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
@@ -797,6 +799,8 @@
 		EEF06BA720970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
 		EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
 		EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		EEF1889A2146477F004A0852 /* ColorsConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF188992146477F004A0852 /* ColorsConfigurationTests.swift */; };
+		EEF1889E21464E3F004A0852 /* ColorsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3BF213FE0F70000EE4D /* ColorsConfiguration.swift */; };
 		F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -898,8 +902,6 @@
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
 		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
-		F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF41CF332D700889DD8 /* ReachabilityBarViewControllerTests.m */; };
-		F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEF71CF34E4900889DD8 /* TestReachabilityManagerDelegate.m */; };
 		F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */; };
 		F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		F2A958BA1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -909,7 +911,6 @@
 		F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */; };
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
-		F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BE31C731F7500502769 /* MiddlewareTests.m */; };
 		F2C17B031D35231A00067B05 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
 		F2C44A651DE40EDD00F7CF50 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		F2C44A691DE40EDD00F7CF50 /* VialerIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -930,7 +931,6 @@
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
-		F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AACDAE1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m */; };
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
 		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
@@ -1304,7 +1304,6 @@
 		C49EDAEC1E35FE9A0053F68C /* PULL_REQUEST_TEMPLATE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PULL_REQUEST_TEMPLATE.md; path = .github/PULL_REQUEST_TEMPLATE.md; sourceTree = "<group>"; };
 		C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationTests.m; path = Models/ConfigurationTests.m; sourceTree = "<group>"; };
 		C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUserTests.m; path = Models/SystemUserTests.m; sourceTree = "<group>"; };
-		C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorConfigurationTests.m; path = Models/ColorConfigurationTests.m; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedAndColoredUIButton.h; path = Onboarding/UI/RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedAndColoredUIButton.m; path = Onboarding/UI/RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
 		C4A452661C24641300846591 /* RoundedAndColoredUIButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndColoredUIButtonTests.m; sourceTree = "<group>"; };
@@ -1400,7 +1399,11 @@
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE65918720AACEAB00305980 /* ANNAbel.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ANNAbel.xcassets; sourceTree = "<group>"; };
+		EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Vialer/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		EE6F2A76214A330500229C75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EE6F2A78214A331000229C75 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtenstions.swift; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
@@ -1429,6 +1432,7 @@
 		EEEF160E1F470C8200AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEEF16151F470DC600AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenFromPasteBoard.swift; sourceTree = "<group>"; };
+		EEF188992146477F004A0852 /* ColorsConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsConfigurationTests.swift; sourceTree = "<group>"; };
 		F0EF74CC4441F17D574E9085 /* Pods-Acceptatie Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptatie Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptatie Voys/Pods-Acceptatie Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		F204B0641CFC968E00257E7D /* NSString+SubString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SubString.h"; sourceTree = "<group>"; };
 		F204B0651CFC968E00257E7D /* NSString+SubString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SubString.m"; sourceTree = "<group>"; };
@@ -1860,7 +1864,6 @@
 		C409F3A11C24B9D6007DCC4A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C4A0B46D1DE8499B00AB4E26 /* ColorConfigurationTests.m */,
 				C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */,
 				C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */,
 			);
@@ -2145,6 +2148,7 @@
 				C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */,
 				C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */,
 				EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */,
+				EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2292,6 +2296,7 @@
 				F275FDB01C608B7E006AEEA2 /* APNS */,
 				C40CB3981C45129400248690 /* Calling */,
 				F9906C261C3AA0C20044EA99 /* Contacts */,
+				EEF1889821464766004A0852 /* Configuration */,
 				F2A7AEF31CF3319F00889DD8 /* ReachabilityManager */,
 				C48F5AC71C6E22E700A3D9AE /* Recents */,
 				F2B40BE21C731F7500502769 /* Middleware */,
@@ -2411,6 +2416,7 @@
 		EE61F4991F1DDF1E006E890F /* Voys */ = {
 			isa = PBXGroup;
 			children = (
+				EE6F2A75214A330500229C75 /* InfoPlist.strings */,
 				EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */,
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
@@ -2460,6 +2466,14 @@
 			);
 			name = Controllers;
 			path = Calling/SIP/Controllers;
+			sourceTree = "<group>";
+		};
+		EEF1889821464766004A0852 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				EEF188992146477F004A0852 /* ColorsConfigurationTests.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		F208516D1D2693A300A17E71 /* Acceptatie */ = {
@@ -2930,7 +2944,6 @@
 				C41FD8C71C60A08400BBE6D7 /* Embed Frameworks */,
 				C43172461DFE8669005FF8EA /* Embed App Extensions */,
 				3532FA59A2DD36E4DB31CFDD /* [CP] Copy Pods Resources */,
-				EEC1E76D214278BD0057B7F5 /* Update localized strings */,
 			);
 			buildRules = (
 			);
@@ -3013,7 +3026,6 @@
 				C490ADE51D0863E3004A8F83 /* Embed Frameworks */,
 				C431724A1DFE8673005FF8EA /* Embed App Extensions */,
 				34A4970CC0209C9D7D0E329D /* [CP] Copy Pods Resources */,
-				EEC1E76F214278CD0057B7F5 /* Update localized strings */,
 			);
 			buildRules = (
 			);
@@ -3077,7 +3089,6 @@
 				EE2318A120A0468F00C05EB0 /* Embed Frameworks */,
 				EE2318CB20A0476400C05EB0 /* Embed App Extensions */,
 				E5C90D794402B1DA425A46E5 /* [CP] Copy Pods Resources */,
-				EEC1E770214278D30057B7F5 /* Update localized strings */,
 			);
 			buildRules = (
 			);
@@ -3141,7 +3152,6 @@
 				EE61F4871F1DDDE4006E890F /* Embed Frameworks */,
 				EE61F4BA1F1DE5E5006E890F /* Embed App Extensions */,
 				9B74100CB9322E9B866B92D2 /* [CP] Copy Pods Resources */,
-				EEC1E76E214278C80057B7F5 /* Update localized strings */,
 			);
 			buildRules = (
 			);
@@ -3165,7 +3175,6 @@
 				F20851631D26935600A17E71 /* Update Build number */,
 				F20851641D26935600A17E71 /* Embed Frameworks */,
 				0F7A305757DC75BE40AB7907 /* [CP] Copy Pods Resources */,
-				EEC1E76B2142789D0057B7F5 /* Update localized strings */,
 			);
 			buildRules = (
 			);
@@ -3229,7 +3238,6 @@
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
 				F2C44A6D1DE40EDD00F7CF50 /* Embed App Extensions */,
 				156B6B5CBAE3EA760F5E1953 /* [CP] Copy Pods Resources */,
-				EEC1E76A214278670057B7F5 /* Update localized strings */,
 			);
 			buildRules = (
 			);
@@ -3550,6 +3558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE61F4B81F1DE36C006E890F /* Config.plist in Resources */,
+				EE6F2A77214A330500229C75 /* InfoPlist.strings in Resources */,
 				EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */,
 				EE61F4661F1DDDE4006E890F /* dtmf-#.aif in Resources */,
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
@@ -3569,6 +3578,7 @@
 				EE61F4741F1DDDE4006E890F /* Images.xcassets in Resources */,
 				EE61F4751F1DDDE4006E890F /* LogInViewController.xib in Resources */,
 				EE61F4761F1DDDE4006E890F /* dtmf-4.aif in Resources */,
+				EE6F2A79214A331100229C75 /* Acceptatie-Voys-Info.plist in Resources */,
 				EE61F4771F1DDDE4006E890F /* dtmf-5.aif in Resources */,
 				EE61F4781F1DDDE4006E890F /* dtmf-6.aif in Resources */,
 				EE61F4791F1DDDE4006E890F /* dtmf-7.aif in Resources */,
@@ -4307,90 +4317,6 @@
 			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
 			showEnvVarsInLog = 0;
 		};
-		EEC1E76A214278670057B7F5 /* Update localized strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update localized strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n  # Incrementally update all Storyboards/XIBs strings files\n  bartycrouch interfaces -p \"$PROJECT_DIR\"\n\n  # Add new keys to Localizable.strings files from NSLocalizedString in code\n  bartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a -s\nelse\n  echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
-		};
-		EEC1E76B2142789D0057B7F5 /* Update localized strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update localized strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a -s\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
-		};
-		EEC1E76D214278BD0057B7F5 /* Update localized strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update localized strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a -s\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
-		};
-		EEC1E76E214278C80057B7F5 /* Update localized strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update localized strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a -s\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
-		};
-		EEC1E76F214278CD0057B7F5 /* Update localized strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update localized strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a -s\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
-		};
-		EEC1E770214278D30057B7F5 /* Update localized strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update localized strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a -s\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
-		};
 		F20851621D26935600A17E71 /* Update Version number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4564,6 +4490,7 @@
 				C49A46B61E682A540097E808 /* UIImage.swift in Sources */,
 				EE3C47C92080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C4C675661D19B5430003A385 /* AppInfo.swift in Sources */,
+				EE8C5EA82147B054008A430F /* UIColorExtenstions.swift in Sources */,
 				C49A46A91E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C4AD4E651E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C43B6E281E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -4697,6 +4624,7 @@
 				C4C675671D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE3C47CC2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C49A46AA1E6829CE0097E808 /* RecentsViewController.swift in Sources */,
+				EE8C5EA92147B055008A430F /* UIColorExtenstions.swift in Sources */,
 				C4AD4E661E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
 				C43B6E291E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -4724,32 +4652,23 @@
 			files = (
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				C42B048D1E79354700280381 /* RecentCallManagerTests.swift in Sources */,
-				F2A7AEF81CF34E4900889DD8 /* TestReachabilityManagerDelegate.m in Sources */,
+				EEF1889A2146477F004A0852 /* ColorsConfigurationTests.swift in Sources */,
+				EE8C5EAC2147B057008A430F /* UIColorExtenstions.swift in Sources */,
 				C41D3A721DE728DC00AEA929 /* ContactModelTestCase.swift in Sources */,
 				F2A958C51D2BA24B00C1D854 /* RecentsTimeConverter.swift in Sources */,
 				F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */,
 				C46F100B1C7CA0B5007F30A6 /* ActivateSIPAccountViewControllerTests.m in Sources */,
 				C42B048B1E7925E600280381 /* RecentCallTests.swift in Sources */,
 				C46F100D1C7CA349007F30A6 /* UserProfileWebViewControllerTests.m in Sources */,
-				C496A9001C2C755700C42619 /* LogInViewControllerTests.m in Sources */,
 				C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */,
-				C4A0B46E1DE8499B00AB4E26 /* ConfigurationTests.m in Sources */,
 				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
-				F2A7AEF51CF332D800889DD8 /* ReachabilityBarViewControllerTests.m in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
-				C4A0B4701DE8499B00AB4E26 /* ColorConfigurationTests.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
-				C4A0B46F1DE8499B00AB4E26 /* SystemUserTests.m in Sources */,
-				C496A8ED1C2AB46900C42619 /* SideMenuViewControllerTests.m in Sources */,
-				C409F3AC1C255563007DCC4A /* ConfigureFormViewTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
 				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
-				F9AACDAF1C7C6CC4000A7593 /* MiddlewareRequestOperationManagerTests.m in Sources */,
 				C496A8FE1C2C6F5D00C42619 /* SettingsViewControllerTests.m in Sources */,
-				C409F3AE1C25570D007DCC4A /* ForgotPasswordViewTests.m in Sources */,
-				F2B40BE41C731F7500502769 /* MiddlewareTests.m in Sources */,
-				C496A8EA1C2AB21B00C42619 /* VialerWebViewControllerTests.m in Sources */,
 				F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */,
+				EEF1889E21464E3F004A0852 /* ColorsConfiguration.swift in Sources */,
 				C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4848,6 +4767,7 @@
 				EE23185E20A0468F00C05EB0 /* AppInfo.swift in Sources */,
 				EE23185F20A0468F00C05EB0 /* TwoStepCall.m in Sources */,
 				EE23186020A0468F00C05EB0 /* NSString+Mobile.m in Sources */,
+				EE8C5EAB2147B056008A430F /* UIColorExtenstions.swift in Sources */,
 				EE23186120A0468F00C05EB0 /* Vialer.xcdatamodeld in Sources */,
 				EE23186220A0468F00C05EB0 /* RecentsViewController.swift in Sources */,
 				EE23186320A0468F00C05EB0 /* VialerLogger.swift in Sources */,
@@ -4972,6 +4892,7 @@
 				EE61F4441F1DDDE4006E890F /* AppInfo.swift in Sources */,
 				EE3C47CB2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				EE61F4451F1DDDE4006E890F /* NSString+Mobile.m in Sources */,
+				EE8C5EAA2147B056008A430F /* UIColorExtenstions.swift in Sources */,
 				EE61F4461F1DDDE4006E890F /* Vialer.xcdatamodeld in Sources */,
 				EE61F4471F1DDDE4006E890F /* RecentsViewController.swift in Sources */,
 				EE61F4481F1DDDE4006E890F /* VialerLogger.swift in Sources */,
@@ -5077,6 +4998,7 @@
 				F20851221D26935600A17E71 /* AppInfo.swift in Sources */,
 				EE3C47C82080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				F20851231D26935600A17E71 /* NSString+Mobile.m in Sources */,
+				EE8C5EA72147B053008A430F /* UIColorExtenstions.swift in Sources */,
 				C4AD4E641E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E271E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -5201,6 +5123,7 @@
 				C4C675651D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE3C47C62080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
+				EE8C5EA62147AF2B008A430F /* UIColorExtenstions.swift in Sources */,
 				C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -5350,6 +5273,15 @@
 			children = (
 				EE2317FF20A0442000C05EB0 /* en */,
 				EE23180320A0442000C05EB0 /* nl */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EE6F2A75214A330500229C75 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE6F2A76214A330500229C75 /* en */,
+				EE6F2A78214A331000229C75 /* nl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

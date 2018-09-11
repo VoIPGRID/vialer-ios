@@ -39,7 +39,7 @@ import Foundation
 
     @objc static let shared = UrlsConfiguration()
 
-    fileprivate let plistUrl: URL = Bundle.main.url(forResource: "Config", withExtension: "plist")!
+    fileprivate var plistUrl: URL = Bundle.main.url(forResource: "Config", withExtension: "plist")!
     fileprivate var urlsConfig: Keys?
 
     private override init() {
@@ -49,6 +49,7 @@ import Foundation
             urlsConfig = try decoder.decode(Keys.self, from: data)
         } catch {
             print(error)
+            assertionFailure("Config.plist file not found!")
         }
     }
 

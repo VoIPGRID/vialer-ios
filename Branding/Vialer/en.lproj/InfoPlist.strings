@@ -1,2 +1,4 @@
-
-
+NSContactsUsageDescription = "Vialer needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.";
+NSMicrophoneUsageDescription = "Vialer needs access to your microphone to make calling possible";
+NSCameraUsageDescription= "Vialer needs access to your camera to make video calls";
+NSBluetoothPeripheralUsageDescription = "Vialer needs access to your bluetooth to get the name of the device";

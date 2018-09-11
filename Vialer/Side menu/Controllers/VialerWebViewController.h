@@ -3,19 +3,12 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "Configuration.h"
 #import <PBWebViewController/PBWebViewController.h>
 #import "SystemUser.h"
-#import "Vialer-Swift.h"
 
 @class SystemUser;
 
 @interface VialerWebViewController : PBWebViewController
-
-/**
- *  The currently loaded configuration.
- */
-@property (strong, nonatomic) UrlsConfiguration * _Nonnull urlsConfiguration;
 
 /**
  *  The currently logged in user.

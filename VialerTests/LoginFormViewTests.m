@@ -25,10 +25,6 @@
     id colorConfigurationMock = OCMClassMock([ColorConfiguration class]);
     OCMStub([colorConfigurationMock colorForKey:[OCMArg any]]).andReturn(self.color);
 
-    self.configurationMock = OCMClassMock([Configuration class]);
-    OCMStub([self.configurationMock colorConfiguration]).andReturn(colorConfigurationMock);
-    OCMStub([self.configurationMock defaultConfiguration]).andReturn(self.configurationMock);
-
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
     [self.loginViewController loadViewIfNeeded];
     self.loginFormView = self.loginViewController.loginFormView;
@@ -39,8 +35,6 @@
     self.loginViewController = nil;
     self.color = nil;
 
-    [self.configurationMock stopMocking];
-    self.configurationMock = nil;
     [super tearDown];
 }
 
