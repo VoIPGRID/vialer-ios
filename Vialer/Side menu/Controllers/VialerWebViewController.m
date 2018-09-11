@@ -7,11 +7,14 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SVProgressHUD.h"
+#import "Vialer-Swift.h"
+
 
 static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 
 @interface VialerWebViewController()
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+@property (strong, nonatomic) UrlsConfiguration *urlsConfiguration;
 @end
 
 @implementation VialerWebViewController

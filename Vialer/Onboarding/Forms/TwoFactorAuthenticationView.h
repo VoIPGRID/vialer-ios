@@ -6,7 +6,6 @@
 #import <UIKit/UIKit.h>
 #import "Configuration.h"
 #import "RoundedAndColoredUIButton.h"
-#import "Vialer-Swift.h"
 
 IB_DESIGNABLE
 @interface TwoFactorAuthenticationView : UIView

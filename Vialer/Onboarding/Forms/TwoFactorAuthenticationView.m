@@ -5,6 +5,7 @@
 
 #import "TwoFactorAuthenticationView.h"
 #import "UIView+RoundedStyle.h"
+#import "Vialer-Swift.h"
 
 static CGFloat const TwoFactorAuthenticationViewButtonRadius = 5.0;
 
