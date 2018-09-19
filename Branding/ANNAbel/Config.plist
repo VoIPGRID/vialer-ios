@@ -149,7 +149,7 @@
 		<key>API</key>
 		<string>https://partner.voipgrid.nl/api</string>
 		<key>Partner</key>
-		<string>https://freedom.voys.nl</string>
+		<string>https://mijn.bellenmetannabel.nl</string>
 		<key>SIP domain</key>
 		<string>sipproxy.voipgrid.nl</string>
 		<key>onboarding-nl</key>
