@@ -1189,6 +1189,8 @@
 		7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		7CE771AA34104D7A975041F1 /* libPods-Voys Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8D6569077E6E442EDF57FE /* Pods-Vialer Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging.release.xcconfig"; sourceTree = "<group>"; };
+		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
+		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2782,6 +2784,8 @@
 		FB4226CF182261D200707349 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8319505521528D27009E960D /* Pods-VialerTests-resources.sh */,
+				8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */,
 				836884AC20F4B4290098A961 /* CoreBluetooth.framework */,
 				3D15A4571B2ECAA8004C5012 /* PushKit.framework */,
 				F25B39181B08EF43005ED515 /* MobileCoreServices.framework */,

@@ -286,7 +286,7 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 - (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void(^)(BOOL success, NSError *error))completion;
 
 /**
- *  This will fetch the up to date information from the VoIPGRID platform and on succes enables SIP.
+ *  This will fetch the up to date information from the VoIPGRID platform and on success enables SIP.
  *
  *  @param completion Block will be called after the fetch from the VoIPGRID platform. BOOL success will tell if fetch was successful, NSError will return an error if there was one set.
  */

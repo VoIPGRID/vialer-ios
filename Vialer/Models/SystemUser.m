@@ -690,7 +690,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (self.loggedIn) {
         [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
-            // It is only an success if the request was success and there was an sipAcount set.
+            // It is only a success if the request was successful and there was an sipAcount set.
             if (success && self.sipAccount) {
                 self.sipEnabled = YES;
             } else {
