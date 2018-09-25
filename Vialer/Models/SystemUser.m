@@ -293,7 +293,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (BOOL)useStunServers {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemuserSUDUseStunServers]) {
-        self.useStunServers = YES;
+        self.useStunServers = NO;
     }
     return [defaults boolForKey:SystemuserSUDUseStunServers];
 }
@@ -400,7 +400,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         }
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            VialerLogDebug(@"post from setusetls");
+            VialerLogDebug(@"post from setUseTLS");
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
     }];
@@ -411,7 +411,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     [[NSUserDefaults standardUserDefaults] setBool:useStunServers forKey:SystemuserSUDUseStunServers];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        VialerLogDebug(@"Post from setusestunservers");
+        VialerLogDebug(@"Post from setUseStunServers");
         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
     });
 }
