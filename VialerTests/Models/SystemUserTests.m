@@ -55,7 +55,7 @@
     self.userDefaultsMock = nil;
     [self.operationsMock stopMocking];
     self.operationsMock = nil;
-    self.userDefaultsMock = nil;
+    self.userDefaultsMock = nil; //orp : should this be removed
     [self.keychainMock stopMocking];
     self.keychainMock = nil;
     [super tearDown];
@@ -138,26 +138,54 @@
     OCMVerify([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg isEqual:@"testUsername"] password:[OCMArg isEqual:@"testPassword"] orToken:[OCMArg isEqual:@"testToken"] withCompletion:[OCMArg any]]);
 }
 
-//orp: Below test is failing: [SystemUserTests testLoginUserWillStoreCredentials] : ((self.user.username) equal to (@"testUsername")) failed: ("(null)") is not equal to ("testUsername") - The correct username should have been set
-- (void)testLoginUserWillStoreCredentials {
-    //NSDictionary *response = @{@"client": @"42"};
-    NSDictionary *response = @{@"client": @"42",
-                               //@"app_account": appAccountURLString,
-                               @"apitoken": @"testToken"
-                               };
-    
-//    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+
+
+
+
+
+
+- (void)testLoginUserWillStoreCredentialsByChris { //orp
+    NSDictionary *response = @{@"client": @"42"};
+
     OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
     
-//    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
+//    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+//        passedBlock(response, nil);
+//        return YES;
+//    }]])._andDo(^(NSInvocation *invocation){
+//        void (^ completion)(NSDictionary<NSString *, NSString *> * _Nonnull);
+//        [invocation getArgument:&completion atIndex:2];
+//        // Do other stuff
+//    });
+    
     [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
 
+    OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]); //this is always verified....! Even if it is the only line in this test..
+    XCTAssertEqualObjects(self.user.username, @"testUsername", @"The correct username should have been set");
+}
+//orp: Below test is failing: [SystemUserTests testLoginUserWillStoreCredentials] : ((self.user.username) equal to (@"testUsername")) failed: ("(null)") is not equal to ("testUsername") - The correct username should have been set
+- (void)testLoginUserWillStoreCredentials { //orp: the old test.. just with updated methods. It fails.
+    NSDictionary *response = @{@"client": @"42"};
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
+    
     OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]);
     XCTAssertEqualObjects(self.user.username, @"testUsername", @"The correct username should have been set");
 }
+
+
+
+
+
+
+
 
 //orp: Below test is failing: ((self.user.displayName) equal to (@"John Appleseed")) failed: ("No email address configured") is not equal to ("John Appleseed") - The correct first and lastname should have been fetched.
 - (void)testFetchPropertiesFromRemoteWillSetPropertiesOnInstance {
@@ -245,7 +273,7 @@
     XCTAssertTrue(newUser.showWiFiNotification, @"ShowWifiNotification should be YES");
 }
 
-//orp: Test below is crashing the app or failing with error: /Users/chris/Projects/Vialer/iOS/vialer-ios/VialerTests/Models/SystemUserTests.m:252: error: -[SystemUserTests testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD] : OCMockObject(NSUserDefaults): Method setBool:YES forKey:@"NoWiFiNotification" was not invoked.
+//orp: Test below is failing with error: /Users/chris/Projects/Vialer/iOS/vialer-ios/VialerTests/Models/SystemUserTests.m:252: error: -[SystemUserTests testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD] : OCMockObject(NSUserDefaults): Method setBool:YES forKey:@"NoWiFiNotification" was not invoked.
 - (void)testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD {
 
     self.user.showWiFiNotification = YES;
