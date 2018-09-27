@@ -55,7 +55,6 @@
     self.userDefaultsMock = nil;
     [self.operationsMock stopMocking];
     self.operationsMock = nil;
-    self.userDefaultsMock = nil; //orp : should this be removed
     [self.keychainMock stopMocking];
     self.keychainMock = nil;
     [super tearDown];
@@ -145,47 +144,23 @@
 
 - (void)testLoginUserWillStoreCredentials {
     NSDictionary *response = @{@"client": @"42"};
-
-//    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
-//        passedBlock(response, nil);
-//        NSLog(@"#########papdpafpasfpasfpasfp#####//orp#");
-//        return YES;
-//    }]]);
+    
     OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:([OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
-        NSLog(@"#########papdpafpasfpasfpasfp#####//orp#");
         return YES;
     }])]);
 
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
     
-    
-    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:nil completion:nil];
-                //completion:(void(^)(BOOL loggedin, BOOL tokenRequired, NSError *error))completion {
-//    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error){
-//        NSLog(@"#########papdpafpasfpasfpasfp#####//orpadgsdgdgaerzgzdhdzfhzdfhz66666#");
-//        NSLog(@"%@",error);
-//    }];
-
-    
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
 
     OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]); //this is always verified....! Even if it is the only line in this test..even for random values like testPassword223132 and testUsername24324..
     
-    //[self.user getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
     XCTAssertEqualObjects(self.user.username, @"testUsername", @"The correct username should have been set");
-    //}];
 }
-// Disabled, fix with VIALI-3272
-//- (void)testLoginUserWillStoreCredentialsOLD {
-//    NSDictionary *response = @{@"client": @"42"};
-//    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
-//        passedBlock(response, nil);
-//        return YES;
-//    }]]);
-//    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
-//
-//    OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]);
-//    XCTAssertEqualObjects(self.user.username, @"testUsername", @"The correct username should have been set");
-//}
 
 
 
@@ -286,7 +261,7 @@
 - (void)testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD {
 
     self.user.showWiFiNotification = YES;
-    OCMVerify([self.userDefaultsMock setBool:YES forKey:@"NoWiFiNotification"]);
+    OCMVerify([self.userDefaultsMock setBool:YES forKey:@"ShowWiFiNotification"]);
 }
 
 //orp: Test below is crashing the app with error: /Users/chris/Projects/Vialer/iOS/vialer-ios/VialerTests/Models/SystemUserTests.m:272: error: -[SystemUserTests testLoggingInWithUserWithSIPEnabledWillFetchAppAccount] : OCMockObject(NSUserDefaults): Method boolForKey:@"XCTEmitOSLogs" was not invoked.

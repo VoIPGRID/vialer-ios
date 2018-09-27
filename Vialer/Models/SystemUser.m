@@ -424,7 +424,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         if (error && [responseData objectForKey:@"apitoken"]) {
             NSDictionary *apiTokenDict = responseData[@"apitoken"];
 
-                // There is no token supplied!
+            // There is no token supplied!
             if ([apiTokenDict objectForKey:@"two_factor_token"]) {
                 if (completion) {
                     NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
