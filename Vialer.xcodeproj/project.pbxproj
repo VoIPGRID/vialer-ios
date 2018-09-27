@@ -25,6 +25,7 @@
 		61C1C91605D6974E2A2BB4E6 /* libPods-Acceptatie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		7273048195AF10B9406CDD0A /* libPods-Acceptatie Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5A3A0941590C7F7200913A /* libPods-Acceptatie Voys.a */; };
+		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
 		836884AD20F4B4290098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
@@ -718,7 +719,6 @@
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
-		EE65918C20AAD6BC00305980 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */; };
 		EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2671F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
@@ -1189,6 +1189,7 @@
 		7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
 		7CE771AA34104D7A975041F1 /* libPods-Voys Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voys Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8D6569077E6E442EDF57FE /* Pods-Vialer Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging.release.xcconfig"; sourceTree = "<group>"; };
+		83129868215D033A00CFE01D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1372,7 +1373,6 @@
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE65918720AACEAB00305980 /* ANNAbel.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ANNAbel.xcassets; sourceTree = "<group>"; };
-		EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Vialer/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
@@ -2313,7 +2313,7 @@
 				EE65918720AACEAB00305980 /* ANNAbel.xcassets */,
 				EE2317FD20A0442000C05EB0 /* Snapshot-Constants.swift */,
 				EE2317FE20A0442000C05EB0 /* InfoPlist.strings */,
-				EE65918B20AAD6BB00305980 /* GoogleService-Info.plist */,
+				83129868215D033A00CFE01D /* GoogleService-Info.plist */,
 				EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */,
 				EE23180220A0442000C05EB0 /* Config.plist */,
 				EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */,
@@ -3460,7 +3460,6 @@
 				EE23188520A0468F00C05EB0 /* ContactsStoryboard.storyboard in Resources */,
 				EE23188620A0468F00C05EB0 /* dtmf-1.aif in Resources */,
 				EE23188720A0468F00C05EB0 /* SideMenuStoryboard.storyboard in Resources */,
-				EE65918C20AAD6BC00305980 /* GoogleService-Info.plist in Resources */,
 				EE23188820A0468F00C05EB0 /* dtmf-2.aif in Resources */,
 				EE23188920A0468F00C05EB0 /* ReachabilityBarStoryboard.storyboard in Resources */,
 				EE23188A20A0468F00C05EB0 /* dtmf-*.aif in Resources */,
@@ -3478,6 +3477,7 @@
 				EE23189820A0468F00C05EB0 /* disconnected.wav in Resources */,
 				EE23189920A0468F00C05EB0 /* dtmf-8.aif in Resources */,
 				EE23189A20A0468F00C05EB0 /* SettingsStoryboard.storyboard in Resources */,
+				83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */,
 				EE23189B20A0468F00C05EB0 /* dtmf-9.aif in Resources */,
 				EE2318D120A052EA00C05EB0 /* Config.plist in Resources */,
 				EE23189C20A0468F00C05EB0 /* Images.xcassets in Resources */,
