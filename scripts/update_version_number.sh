@@ -34,8 +34,12 @@ else
 	echo "Additional Version String: ${POSSIBLE_REST}"
 fi
 
-${PLISTBUDDY} -c "Set :CFBundleShortVersionString ${VERSION_NUMBER}" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
-#Also update dSYM file
-${PLISTBUDDY} -c "Set :CFBundleShortVersionString ${VERSION_NUMBER}" "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist"
+plist="${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}"
+
+${PLISTBUDDY} -c "Set :CFBundleShortVersionString ${VERSION_NUMBER}" "${plist}"
+if [ -f "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist" ]; then
+	${PLISTBUDDY} -c "Set :CFBundleShortVersionString ${VERSION_NUMBER}" "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist"
+fi
+
 #Store the possible string found behind the "clean" version string
-${PLISTBUDDY} -c "Set :Additional_Version_String ${POSSIBLE_REST}" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
+# ${PLISTBUDDY} -c "Set :Additional_Version_String ${POSSIBLE_REST}" "${plist}"

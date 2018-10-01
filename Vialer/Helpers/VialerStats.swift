@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 @objc class VialerStats : NSObject {
 

@@ -246,13 +246,13 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
             [self dismissViewControllerAnimated:NO completion:^{
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
             }];
-        } else {
+        } else if (notification.name == AppDelegateIncomingCallNotification) {
             [self dismissViewControllerAnimated:NO completion:^{
-                if (notification.name == AppDelegateIncomingCallNotification) {
-                            [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:self];
-                } else if (notification.name == AppDelegateIncomingBackgroundCallAcceptedNotification) {
-                            [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
-                }
+                [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:self];
+            }];
+        } else if (notification.name == AppDelegateIncomingBackgroundCallAcceptedNotification) {
+            [self dismissViewControllerAnimated:NO completion:^{
+                [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
             }];
         }
     }

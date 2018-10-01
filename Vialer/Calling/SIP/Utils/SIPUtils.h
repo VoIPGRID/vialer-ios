@@ -5,7 +5,6 @@
 
 #import <Foundation/Foundation.h>
 #import "VialerSIPLib/VialerSIPLib.h"
-#import "VialerSIPLib/VSLRingtone.h"
 
 @interface SIPUtils : NSObject
 
@@ -20,6 +19,11 @@
  *  Remove the SIP endpoint.
  */
 + (void)removeSIPEndpoint;
+
+/**
+ *  Only update the codecs on the SIP endpoint.
+ */
++ (BOOL)updateCodecs;
 
 /**
  *  Add the sipAccount of the current SystemUser to the endpoint.
@@ -59,4 +63,11 @@
  *  @return A VSLCall instance or nil.
  */
 + (VSLCall * _Nullable)getFirstActiveCall;
+
+/**
+ *  The codec configuration that is going to be used.
+ *
+ *  @return a VSLCodecConfiguration instance.
+ */
++ (VSLCodecConfiguration * _Nonnull)codecConfiguration;
 @end

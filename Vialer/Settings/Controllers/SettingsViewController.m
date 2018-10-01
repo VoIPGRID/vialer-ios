@@ -17,7 +17,8 @@ static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
 static int const SettingsViewController3GPlusRow            = 2;
-static int const SettingsViewControllerSipAccountRow        = 3;
+static int const SettingsViewControllerAudioQualityRow      = 3;
+static int const SettingsViewControllerSipAccountRow        = 4;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -44,6 +45,7 @@ static int const SettingsViewControllerSwitchUseStunServers     = 1007;
 
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
+static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudioQualitySegue";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
@@ -102,8 +104,9 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
                 // The VoIP Switch
                 // WiFi notification
                 // 3G+
+                // Audio Quality
                 // account ID
-                return 4;
+                return 5;
             } else {
                 // Only show VoIP Switch
                 return 1;
@@ -174,6 +177,14 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
                         withTitle:NSLocalizedString(@"Use 3G+ for calls", @"Use 3G+ for calls")
                           withTag:SettingsViewControllerSwitch3GPlus
                        defaultVal:self.currentUser.use3GPlus];
+        } else if (indexPath.row == SettingsViewControllerAudioQualityRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
+            cell.textLabel.text = NSLocalizedString(@"Audio quality", nil);
+            if (self.currentUser.currentAudioQuality == AudioQualityLow) {
+                cell.detailTextLabel.text = NSLocalizedString(@"Standard audio", @"Standard audio");
+            } else if (self.currentUser.currentAudioQuality == AudioQualityHigh) {
+                cell.detailTextLabel.text = NSLocalizedString(@"Higher quality audio", @"Higher quality audio");
+            }
         } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
             cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
@@ -251,6 +262,8 @@ static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowAct
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == SettingsViewControllerNumbersSection && indexPath.row == SettingsViewControllerMyNumberRow) {
         [self performSegueWithIdentifier:SettingsViewControllerShowEditNumberSegue sender:self];
+    } else if (indexPath.section == SettingsViewControllerVoIPAccountSection && indexPath.row == SettingsViewControllerAudioQualityRow) {
+        [self performSegueWithIdentifier:SettingsViewControllerShowAudioQualitySegue sender:self];
     }
 }
 
