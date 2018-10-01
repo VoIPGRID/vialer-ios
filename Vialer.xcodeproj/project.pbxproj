@@ -105,7 +105,6 @@
 		C41FD8B71C60A08400BBE6D7 /* dtmf-7.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854191A7FE3CE00121366 /* dtmf-7.aif */; };
 		C41FD8B81C60A08400BBE6D7 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 		C41FD8B91C60A08400BBE6D7 /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
-		C41FD8BA1C60A08400BBE6D7 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
 		C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
@@ -257,7 +256,6 @@
 		C490ADD71D0863E3004A8F83 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		C490ADD81D0863E3004A8F83 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 		C490ADD91D0863E3004A8F83 /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
-		C490ADDA1D0863E3004A8F83 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		C490ADDB1D0863E3004A8F83 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
 		C490ADDD1D0863E3004A8F83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		C490ADE01D0863E3004A8F83 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
@@ -542,7 +540,6 @@
 		EE23189720A0468F00C05EB0 /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */; };
 		EE23189820A0468F00C05EB0 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 		EE23189920A0468F00C05EB0 /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
-		EE23189A20A0468F00C05EB0 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		EE23189B20A0468F00C05EB0 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
 		EE23189C20A0468F00C05EB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		EE23189D20A0468F00C05EB0 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
@@ -709,7 +706,6 @@
 		EE61F47B1F1DDDE4006E890F /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */; };
 		EE61F47D1F1DDDE4006E890F /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 		EE61F47E1F1DDDE4006E890F /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
-		EE61F47F1F1DDDE4006E890F /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		EE61F4801F1DDDE4006E890F /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
 		EE61F4831F1DDDE4006E890F /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		EE61F4841F1DDDE4006E890F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
@@ -719,6 +715,24 @@
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
+		EE683F8D216254A700D6831B /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
+		EE733DA22164995900D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
+		EE733DA32164995A00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
+		EE733DA42164995B00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
+		EE733DA52164995B00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
+		EE733DA62164995C00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
+		EE733DAA21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		EE733DAB21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		EE733DAC21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		EE733DAD21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		EE733DAE21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		EE733DAF21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		EE733DB22164B34600D05CA3 /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		EE733DB32164B34600D05CA3 /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		EE733DB42164B34600D05CA3 /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		EE733DB52164B34600D05CA3 /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		EE733DB62164B34600D05CA3 /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		EE733DB72164B34600D05CA3 /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
 		EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2671F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
@@ -852,7 +866,6 @@
 		F20851561D26935600A17E71 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F20851571D26935600A17E71 /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
 		F20851581D26935600A17E71 /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
-		F20851591D26935600A17E71 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F208515A1D26935600A17E71 /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
 		F208515F1D26935600A17E71 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		F20851601D26935600A17E71 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
@@ -860,7 +873,6 @@
 		F20851841D269DD300A17E71 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851801D269DD300A17E71 /* Config.plist */; };
 		F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851811D269DD300A17E71 /* GoogleService-Info.plist */; };
 		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
-		F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */; };
 		F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		F22FF28B1D0ABF3800761C9A /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
 		F22FF28C1D0ABF3800761C9A /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF2881D0ABF3800761C9A /* Configuration.m */; };
@@ -1362,7 +1374,6 @@
 		EE5C22241F46EDA300AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ContactsStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22261F46EDA300AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ReachabilityBarStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22271F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RecentsStoryboard.strings; sourceTree = "<group>"; };
-		EE5C22281F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22291F46EDA400AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SideMenuStoryboard.strings; sourceTree = "<group>"; };
 		EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushedCall.swift; sourceTree = "<group>"; };
 		EE61F48D1F1DDDE4006E890F /* Voys Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voys Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1373,6 +1384,10 @@
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE65918720AACEAB00305980 /* ANNAbel.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ANNAbel.xcassets; sourceTree = "<group>"; };
+		EE683F8C216254A700D6831B /* AudioQualityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioQualityViewController.swift; path = Settings/Controllers/AudioQualityViewController.swift; sourceTree = "<group>"; };
+		EE733DA921649C6200D05CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		EE733DB021649C7200D05CA3 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
+		EE733DB12164B34600D05CA3 /* EnumHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnumHelper.swift; path = Helpers/EnumHelper.swift; sourceTree = "<group>"; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
@@ -1411,7 +1426,6 @@
 		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
 		F20851881D269E1700A17E71 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
-		F22362651C22EE6200D6F5FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22FF2871D0ABF3800761C9A /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		F22FF2881D0ABF3800761C9A /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
@@ -2021,6 +2035,7 @@
 				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
 				C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */,
 				C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */,
+				EE683F8C216254A700D6831B /* AudioQualityViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2584,7 +2599,7 @@
 		F2E811BF1B37E2EB00EA640F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */,
+				EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */,
 				C4675FFE1C46E656008820C8 /* Controllers */,
 			);
 			name = Settings;
@@ -2872,6 +2887,7 @@
 				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
 				EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */,
 				EE02B3F420D7870F006B10FD /* VialerStats.swift */,
+				EE733DB12164B34600D05CA3 /* EnumHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -3358,11 +3374,11 @@
 				C41FD8B31C60A08400BBE6D7 /* dtmf-4.aif in Resources */,
 				C41FD8B51C60A08400BBE6D7 /* dtmf-5.aif in Resources */,
 				C49B0EEA1E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
+				EE733DAC21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				C41FD8B61C60A08400BBE6D7 /* dtmf-6.aif in Resources */,
 				C41FD8B71C60A08400BBE6D7 /* dtmf-7.aif in Resources */,
 				C41FD8B81C60A08400BBE6D7 /* disconnected.wav in Resources */,
 				C41FD8B91C60A08400BBE6D7 /* dtmf-8.aif in Resources */,
-				C41FD8BA1C60A08400BBE6D7 /* SettingsStoryboard.storyboard in Resources */,
 				C4F385961D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
 				C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */,
@@ -3419,12 +3435,12 @@
 				C49B0EEB1E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
 				C490ADD51D0863E3004A8F83 /* dtmf-6.aif in Resources */,
 				C490ADD61D0863E3004A8F83 /* dtmf-7.aif in Resources */,
+				EE733DAE21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				C490ADF91D086458004A8F83 /* Verbonden.xcassets in Resources */,
 				C490ADD71D0863E3004A8F83 /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				C490ADD81D0863E3004A8F83 /* disconnected.wav in Resources */,
 				C4F385971D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				C490ADD91D0863E3004A8F83 /* dtmf-8.aif in Resources */,
-				C490ADDA1D0863E3004A8F83 /* SettingsStoryboard.storyboard in Resources */,
 				C490ADDB1D0863E3004A8F83 /* dtmf-9.aif in Resources */,
 				C490ADDD1D0863E3004A8F83 /* Images.xcassets in Resources */,
 				C490ADF51D086458004A8F83 /* Config.plist in Resources */,
@@ -3466,6 +3482,7 @@
 				EE23188B20A0468F00C05EB0 /* RecentsStoryboard.storyboard in Resources */,
 				EE23188C20A0468F00C05EB0 /* Localizable.strings in Resources */,
 				EE23188E20A0468F00C05EB0 /* ringtone.wav in Resources */,
+				EE733DAF21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EE23188F20A0468F00C05EB0 /* dtmf-3.aif in Resources */,
 				EE23189020A0468F00C05EB0 /* dtmf-4.aif in Resources */,
 				EE23189120A0468F00C05EB0 /* dtmf-5.aif in Resources */,
@@ -3476,7 +3493,6 @@
 				EE23189720A0468F00C05EB0 /* SIPCallingStoryboard.storyboard in Resources */,
 				EE23189820A0468F00C05EB0 /* disconnected.wav in Resources */,
 				EE23189920A0468F00C05EB0 /* dtmf-8.aif in Resources */,
-				EE23189A20A0468F00C05EB0 /* SettingsStoryboard.storyboard in Resources */,
 				83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */,
 				EE23189B20A0468F00C05EB0 /* dtmf-9.aif in Resources */,
 				EE2318D120A052EA00C05EB0 /* Config.plist in Resources */,
@@ -3527,12 +3543,12 @@
 				EE61F4761F1DDDE4006E890F /* dtmf-4.aif in Resources */,
 				EE61F4771F1DDDE4006E890F /* dtmf-5.aif in Resources */,
 				EE61F4781F1DDDE4006E890F /* dtmf-6.aif in Resources */,
+				EE733DAD21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EE61F4791F1DDDE4006E890F /* dtmf-7.aif in Resources */,
 				EE61F47A1F1DDDE4006E890F /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				EE61F47B1F1DDDE4006E890F /* SIPCallingStoryboard.storyboard in Resources */,
 				EE61F47D1F1DDDE4006E890F /* disconnected.wav in Resources */,
 				EE61F47E1F1DDDE4006E890F /* dtmf-8.aif in Resources */,
-				EE61F47F1F1DDDE4006E890F /* SettingsStoryboard.storyboard in Resources */,
 				EE61F4801F1DDDE4006E890F /* dtmf-9.aif in Resources */,
 				EE61F4831F1DDDE4006E890F /* DialerStoryboard.storyboard in Resources */,
 				EE61F4841F1DDDE4006E890F /* MainStoryboard.storyboard in Resources */,
@@ -3565,12 +3581,12 @@
 				F20851541D26935600A17E71 /* dtmf-6.aif in Resources */,
 				F20851551D26935600A17E71 /* dtmf-7.aif in Resources */,
 				F20851561D26935600A17E71 /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				EE733DAB21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				C4F385981D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				F20851571D26935600A17E71 /* disconnected.wav in Resources */,
 				F20851581D26935600A17E71 /* dtmf-8.aif in Resources */,
 				EE61F4A41F1DDF31006E890F /* GoogleService-Info.plist in Resources */,
 				EE61F4A31F1DDF31006E890F /* Config.plist in Resources */,
-				F20851591D26935600A17E71 /* SettingsStoryboard.storyboard in Resources */,
 				F208515A1D26935600A17E71 /* dtmf-9.aif in Resources */,
 				F208515F1D26935600A17E71 /* DialerStoryboard.storyboard in Resources */,
 				F20851601D26935600A17E71 /* MainStoryboard.storyboard in Resources */,
@@ -3609,6 +3625,7 @@
 				C49A46AC1E6829DD0097E808 /* dtmf-*.aif in Resources */,
 				C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */,
 				EEEF160F1F470C8200AEFA83 /* Localizable.strings in Resources */,
+				EE733DAA21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EEA9ADB4200DEDD5007727EB /* Vialer.xcassets in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
 				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
@@ -3622,7 +3639,6 @@
 				C4F385951D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				FEE6D6AA1B9F12F2001D25B1 /* disconnected.wav in Resources */,
 				FBB854261A7FE67300121366 /* dtmf-8.aif in Resources */,
-				F22362641C22EE6200D6F5FF /* SettingsStoryboard.storyboard in Resources */,
 				FBB854271A7FE67300121366 /* dtmf-9.aif in Resources */,
 				FB21E0401A3B48D800AE746B /* Images.xcassets in Resources */,
 				C4EFCF801BF21E210000CC6F /* DialerStoryboard.storyboard in Resources */,
@@ -3951,7 +3967,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"\n";
 		};
 		C41FD8C61C60A08400BBE6D7 /* Update Build number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3965,7 +3981,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C490ADE31D0863E3004A8F83 /* Update Version number */ = {
@@ -4065,7 +4081,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"\n";
 		};
 		C4E97AD31E700D73006ECDE3 /* Update Build number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4079,7 +4095,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE8435747F7E1442943DE4AE /* [CP] Check Pods Manifest.lock */ = {
@@ -4304,7 +4320,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F298A9741B5E28D100467E31 /* Update Version number */ = {
@@ -4319,7 +4335,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"\n";
 		};
 		F8C27C5CA78E4CB93851A5ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4364,6 +4380,7 @@
 				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C61E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B971F87779300708D96 /* SecondCallViewController.swift in Sources */,
+				EE733DA32164995A00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				EE1C7B981F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
@@ -4377,6 +4394,7 @@
 				EEDCC3BC20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
 				EE02B3F720D7870F006B10FD /* VialerStats.swift in Sources */,
+				EE733DB42164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
 				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
@@ -4493,6 +4511,7 @@
 				C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */,
 				C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */,
 				EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */,
+				EE733DA52164995B00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				C47BB0C71E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
@@ -4506,6 +4525,7 @@
 				EEDCC3BE20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				C490AD7E1D0863E3004A8F83 /* GradientView.m in Sources */,
 				EE02B3F920D7870F006B10FD /* VialerStats.swift in Sources */,
+				EE733DB62164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */,
@@ -4640,6 +4660,7 @@
 				EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */,
 				EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */,
 				EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */,
+				EE733DA62164995C00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */,
 				EE23181F20A0468F00C05EB0 /* SetupCallTransferViewController.swift in Sources */,
 				EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */,
@@ -4653,6 +4674,7 @@
 				EEDCC3BF20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				EE23182920A0468F00C05EB0 /* VIAScene.m in Sources */,
 				EE02B3FA20D7870F006B10FD /* VialerStats.swift in Sources */,
+				EE733DB72164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */,
 				EE23182B20A0468F00C05EB0 /* AvailabilityViewController.m in Sources */,
 				EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */,
@@ -4760,6 +4782,7 @@
 				EE61F4021F1DDDE4006E890F /* ForgotPasswordView.m in Sources */,
 				EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */,
 				EE61F4031F1DDDE4006E890F /* NSString+SubString.m in Sources */,
+				EE733DA42164995B00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B961F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
@@ -4773,6 +4796,7 @@
 				EEDCC3BD20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				EE61F4101F1DDDE4006E890F /* SystemUser.m in Sources */,
 				EE02B3F820D7870F006B10FD /* VialerStats.swift in Sources */,
+				EE733DB52164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE61F4111F1DDDE4006E890F /* GradientView.m in Sources */,
 				EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */,
@@ -4861,6 +4885,7 @@
 				C43FD69C1E76F4C6002593DD /* NotificationToken.swift in Sources */,
 				F20850ED1D26935600A17E71 /* ForgotPasswordView.m in Sources */,
 				F20850EE1D26935600A17E71 /* NSString+SubString.m in Sources */,
+				EE733DA22164995900D05CA3 /* AudioQualityViewController.swift in Sources */,
 				C47BB0C51E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B991F87779300708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B9A1F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
@@ -4874,6 +4899,7 @@
 				EEDCC3BB20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				F20850FB1D26935600A17E71 /* SystemUser.m in Sources */,
 				EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */,
+				EE733DB32164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				F20850FC1D26935600A17E71 /* GradientView.m in Sources */,
 				EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
@@ -4995,6 +5021,7 @@
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
 				EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
+				EE733DB22164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
@@ -5051,6 +5078,7 @@
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,
+				EE683F8D216254A700D6831B /* AudioQualityViewController.swift in Sources */,
 				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78141DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E681E729F940067FE40 /* CoreDataStack.swift in Sources */,
@@ -5202,6 +5230,15 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE733DA921649C6200D05CA3 /* Base */,
+				EE733DB021649C7200D05CA3 /* nl */,
+			);
+			name = SettingsStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5235,15 +5272,6 @@
 				EEEF160E1F470C8200AEFA83 /* nl */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F22362661C22EE6200D6F5FF /* SettingsStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F22362651C22EE6200D6F5FF /* Base */,
-				EE5C22281F46EDA400AFB9E2 /* nl */,
-			);
-			name = SettingsStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */ = {

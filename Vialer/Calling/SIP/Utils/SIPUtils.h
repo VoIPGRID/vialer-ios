@@ -21,6 +21,8 @@
  */
 + (void)removeSIPEndpoint;
 
++ (BOOL)updateCodecs;
+
 /**
  *  Add the sipAccount of the current SystemUser to the endpoint.
  *
@@ -59,4 +61,6 @@
  *  @return A VSLCall instance or nil.
  */
 + (VSLCall * _Nullable)getFirstActiveCall;
+
++ (VSLCodecConfiguration * _Nonnull)codecConfiguration;
 @end

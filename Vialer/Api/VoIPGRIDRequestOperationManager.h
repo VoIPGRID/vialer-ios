@@ -172,6 +172,14 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 - (void)pushUseEncryptionWithCompletion:(void(^)(BOOL success, NSError *error))completion;
 
 /**
+ *  This method will try to enable or disable the use of the opus codec.
+ *
+ *  @param enable       Wheter to enable the opus codec.
+ *  @param completion   A block that will be called after the push attempt. It will return the response data if any or an error if any.
+ */
+- (void)pushUseOpus:(BOOL)enable withCompletion:(void(^)(BOOL success, NSError *error))completion;
+
+/**
  *  This method will try to fetch the mobile profile of the currently authenticated user.
  *
  *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.

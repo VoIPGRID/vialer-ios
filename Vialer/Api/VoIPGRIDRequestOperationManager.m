@@ -20,6 +20,7 @@ static NSString * const VoIPGRIDRequestOperationManagerURLMobileProfile     = @"
 
 static NSString * const VoIPGRIDRequestOperationManagerApiKeyMobileNumber               = @"mobile_nr";
 static NSString * const VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption    = @"appaccount_use_encryption";
+static NSString * const VoIPGRIDRequestOperationManagerApiKeyAppAccountUseOpus          = @"appaccount_use_opus";
 
 static int const VoIPGRIDRequestOperationManagerTimoutInterval = 15;
 
@@ -263,6 +264,20 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 - (void)pushUseEncryptionWithCompletion:(void (^)(BOOL, NSError *))completion {
     NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption : [[SystemUser currentUser] useTLS] ? @YES : @NO};
     
+    [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (completion) {
+            if (error) {
+                completion(NO, error);
+            } else {
+                completion(YES, nil);
+            }
+        }
+    }];
+}
+
+- (void)pushUseOpus:(BOOL)enable withCompletion:(void (^)(BOOL, NSError *))completion {
+    NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseOpus: enable ? @YES : @NO};
+
     [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (error) {

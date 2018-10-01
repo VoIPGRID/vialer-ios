@@ -48,6 +48,10 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      */
     SystemUserFailedToSaveEncryptionToRemote,
     /**
+     *  When the use of opus couldn't be stored remotely.
+     */
+    SystemUserFailedToSaveOpusToRemote,
+    /**
      *  The user is unauthorized.
      */
     SystemUserUnAuthorized,
@@ -85,6 +89,16 @@ extern NSString * const SystemUserLogoutNotificationErrorKey;
  *  Notification that can be listened to when the user has changed SIP credentials.
  */
 extern NSString * const SystemUserSIPCredentialsChangedNotification;
+
+/**
+ *  Notification that can be listened to when the user has changed the use of STUN.
+ */
+extern NSString * const SystemUserStunUsageChangedNotification;
+
+/**
+ *  Notification that can be listened to when the user has changed the use of encryption.
+ */
+extern NSString * const SystemUserEncryptionUsageChangedNotification;
 
 /**
  *  Notification that can be listened to when the user has disabled SIP.
@@ -244,6 +258,11 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (strong, nonatomic) NSDictionary* currentAvailability;
 
 /**
+ *  The users current audio quality for VoIP calls.
+ */
+@property (nonatomic) NSInteger currentAudioQuality;
+
+/**
  *  Singleton instance of the current user.
  *
  *  @return SystemUser singleton instance.
@@ -284,6 +303,8 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
  *  @param completion   A will be called after the update. BOOL success will tell if the update was successful, NSError will return an error if there was one set.
  */
 - (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void(^)(BOOL success, NSError *error))completion;
+
+- (void)updateUseOpus:(NSInteger)codec withCompletion:(void(^)(BOOL success, NSError *error))completion;
 
 /**
  *  This will fetch the up to date information from the VoIPGRID platform and on succes enables SIP.

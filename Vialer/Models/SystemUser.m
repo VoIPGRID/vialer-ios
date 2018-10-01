@@ -8,6 +8,7 @@
 #import "Configuration.h"
 #import "NSString+SubString.h"
 #import "SAMKeychain.h"
+#import "SIPUtils.h"
 #import "VoIPGRIDRequestOperationManager.h"
 
 
@@ -18,7 +19,10 @@ NSString * const SystemUserLogoutNotification               = @"SystemUserLogout
 NSString * const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogoutNotificationDisplayNameKey";
 NSString * const SystemUserLogoutNotificationErrorKey       = @"SystemUserLogoutNotificationErrorKey";
 
-NSString * const SystemUserSIPCredentialsChangedNotification = @"SystemUserSIPCredentialsChangedNotification";
+NSString * const SystemUserSIPCredentialsChangedNotification    = @"SystemUserSIPCredentialsChangedNotification";
+NSString * const SystemUserStunUsageChangedNotification         = @"SystemUserStunUsageChangedNotification";
+NSString * const SystemUserEncryptionUsageChangedNotification   = @"SystemUserEncryptionUsageChangedNotification";
+
 NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDisabledNotification";
 
 NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
@@ -44,6 +48,7 @@ static NSString * const SystemUserApiKeySIPAccount      = @"appaccount_account_i
 static NSString * const SystemUserApiKeySIPPassword     = @"appaccount_password";
 static NSString * const SystemUserApiKeyUseEncryption   = @"appaccount_use_encryption";
 static NSString * const SystemUserApiKeyCountry         = @"appaccount_country";
+static NSString * const SystemUserApiKeyOpusEnabled     = @"appaccount_use_opus";
 static NSString * const SystemUserApiKeyAPIToken        = @"api_token";
 
 // Constant for "suppressed" key as supplied by api for outgoingNumber
@@ -73,6 +78,7 @@ static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComple
 static NSString * const SystemUserSUDAPIToken           = @"APIToken";
 static NSString * const SystemUserSUDCountry            = @"Country";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
+static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQualitySUDKey";
 
 
 @interface SystemUser ()
@@ -326,6 +332,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 
 - (void)setSipUseEncryption:(BOOL)sipUseEncryption {
     [[NSUserDefaults standardUserDefaults] setBool:sipUseEncryption forKey:SystemUserSUDSIPUseEncryption];
+    if (self.sipEnabled && self.loggedIn) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserEncryptionUsageChangedNotification object:self];
+    }
 }
 
 - (void)setOutgoingNumber:(NSString *)outgoingNumber {
@@ -374,13 +383,20 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     [[NSUserDefaults standardUserDefaults] setObject:currentAvailability forKey:SystemUserCurrentAvailabilitySUDKey];
 }
 
+- (NSInteger)currentAudioQuality {
+   return [[NSUserDefaults standardUserDefaults] integerForKey:SystemUserAudioQualitySUDKey];
+}
+
+- (void)setCurrentAudioQuality: (NSInteger)currentAudioQuality {
+    [[NSUserDefaults standardUserDefaults] setInteger:currentAudioQuality forKey:SystemUserAudioQualitySUDKey];
+}
+
 - (void)setShowWiFiNotification:(BOOL)showWiFiNotification {
     showWiFiNotification = showWiFiNotification;
     [[NSUserDefaults standardUserDefaults] setBool:showWiFiNotification forKey:SystemUserSUDShowWiFiNotification];
 }
 
 - (void)setUse3GPlus:(BOOL)use3GPlus {
-    use3GPlus = use3GPlus;
     [[NSUserDefaults standardUserDefaults] setBool:use3GPlus forKey:SystemUserSUDUse3GPlus];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -389,7 +405,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 }
 
 - (void)setUseTLS:(BOOL)useTLS {
-    useTLS = useTLS;
     [[NSUserDefaults standardUserDefaults] setBool:useTLS forKey:SystemUserSUDUseTLS];
 
     [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
@@ -400,19 +415,26 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         }
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            VialerLogDebug(@"post from setUseTLS");
-            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+            if (self.loggedIn && self.sipEnabled) {
+                VialerLogDebug(@"post from setUseTLS");
+                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserEncryptionUsageChangedNotification object:self];
+            } else {
+                VialerLogDebug(@"Nothing to do here sip has not been enabled");
+            }
         });
     }];
 }
 
 - (void)setUseStunServers:(BOOL)useStunServers {
-    useStunServers = useStunServers;
     [[NSUserDefaults standardUserDefaults] setBool:useStunServers forKey:SystemuserSUDUseStunServers];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        VialerLogDebug(@"Post from setUseStunServers");
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+        if (self.loggedIn && self.sipEnabled) {
+            VialerLogDebug(@"Post from setUseStunServers");
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserStunUsageChangedNotification object:self];
+        } else {
+            VialerLogDebug(@"Nothing to do here sip has not been enabled");
+        }
     });
 }
 
@@ -468,8 +490,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
                     completion(NO, YES, error);
                 }
             }];
-
-
         }
     }];
 }
@@ -531,7 +551,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)removeCurrentUser {
     [SAMKeychain deletePasswordForService:self.serviceName account:self.username];
 
-    self.loggedIn = NO;
     self.username = nil;
     self.outgoingNumber = nil;
     self.mobileNumber = nil;
@@ -550,6 +569,8 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removePersistentDomainForName:appDomain];
     [defaults synchronize];
+
+    self.loggedIn = NO;
 }
 
 - (void)removeSIPCredentials {
@@ -557,10 +578,14 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.sipEnabled = NO;
     self.sipAccount = nil;
     self.sipUseEncryption = NO;
+    self.useTLS = NO;
+    self.useStunServers = NO;
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPAccount];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPEnabled];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPUseEncryption];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDUseTLS];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemuserSUDUseStunServers];
 }
 
 - (void)setOwnPropertiesFromUserDict:(NSDictionary *)userDict withUsername:(NSString *)username andPassword:(NSString *)password {
@@ -609,6 +634,23 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
     self.country = profileDict[SystemUserApiKeyCountry];
 
+    BOOL opusEnabled = NO;
+    if (![profileDict[SystemUserApiKeyOpusEnabled] isKindOfClass:[NSNull class]]) {
+        opusEnabled = [profileDict[SystemUserApiKeyOpusEnabled] boolValue];
+    }
+
+    if (self.currentAudioQuality == 0 && opusEnabled) {
+        self.currentAudioQuality = 1;
+        if (self.sipEnabled) {
+            [SIPUtils updateCodecs];
+        }
+    } else if (self.currentAudioQuality > 0 && !opusEnabled) {
+        self.currentAudioQuality = 0;
+        if (self.sipEnabled) {
+            [SIPUtils updateCodecs];
+        }
+    }
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([profileDict[SystemUserApiKeyOutgoingNumber] isKindOfClass:[NSNull class]]) {
         self.outgoingNumber = @"";
@@ -616,6 +658,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
     }
     [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
+
     if (![self.country isKindOfClass:[NSNull class]]) {
         [defaults setObject:self.country forKey:SystemUserSUDCountry];
     }
@@ -687,6 +730,24 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
     }];
 }
 
+-(void)updateUseOpus:(NSInteger)codec withCompletion:(void (^)(BOOL, NSError *))completion {
+    BOOL enable = NO;
+    if (codec > 0) {
+        enable =YES;
+    }
+
+    [self.operationsManager pushUseOpus:enable withCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            completion(YES, nil);
+        } else {
+            NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
+                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save the use of opus.", nil)
+                                       };
+            completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserFailedToSaveOpusToRemote userInfo:userInfo]);
+        }
+    }];
+}
+
 #pragma mark - SIP Handling
 
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
@@ -709,9 +770,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)fetchMobileProfileFromRemoteWithCompletion:(void(^)(BOOL success, NSError *error))completion {
     [self.operationsManager getMobileProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
         if (!error) {
-            
-            [self setMobileProfileFromUserDict:responseData];
-            
+
             id sipAccount = responseData[SystemUserApiKeySIPAccount];
             id sipPassword = responseData[SystemUserApiKeySIPPassword];
             id useEncryption = responseData[SystemUserApiKeyUseEncryption];
@@ -737,36 +796,37 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
                 self.sipAccount = [sipAccount stringValue];
                 [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
-                [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+
+                    // Encryption is turned off for this account. Make an api call and enable it.
+                if (self.useTLS && ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption)) {
+                    [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
+                        if (success) {
+                            self.sipUseEncryption = YES;
+                        } else {
+                            if (completion) {
+                                completion(NO, error);
+                            }
+                            return;
+                        }
+                    }];
+                } else if (!self.useTLS && self.sipUseEncryption){
+                    VialerLogDebug(@"Turn TLS Off");
+                    [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
+                        if (success) {
+                            self.sipUseEncryption = NO;
+                        } else {
+                            if (completion) {
+                                completion(NO, error);
+                            }
+                            return;
+                        }
+                    }];
+                } else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
+                }
             }
 
-            // Encryption is turned off for this account. Make an api call and enable it.
-            if (self.useTLS && ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption)) {
-                [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
-                    if (success) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-                        self.sipUseEncryption = YES;
-                    } else {
-                        if (completion) {
-                            completion(NO, error);
-                        }
-                        return;
-                    }
-                }];
-            } else if (!self.useTLS && self.sipUseEncryption){
-                VialerLogDebug(@"Turn TLS Off");
-                [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
-                    if (success) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
-                        self.sipUseEncryption = NO;
-                    } else {
-                        if (completion) {
-                            completion(NO, error);
-                        }
-                        return;
-                    }
-                }];
-            }
+            [self setMobileProfileFromUserDict:responseData];
 
             if (completion) completion(YES, nil);
         } else {
