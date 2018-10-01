@@ -616,7 +616,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
         self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
     }
     [defaults setObject:self.outgoingNumber forKey:SystemUserSUDOutgoingNumber];
-    [defaults setObject:self.country forKey:SystemUserSUDCountry];
+    if (![self.country isKindOfClass:[NSNull class]]) {
+        [defaults setObject:self.country forKey:SystemUserSUDCountry];
+    }
 
     [defaults synchronize];
 }
