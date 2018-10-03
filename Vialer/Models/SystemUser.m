@@ -4,7 +4,6 @@
 //
 
 #import "SystemUser.h"
-
 #import "Configuration.h"
 #import "NSString+SubString.h"
 #import "SAMKeychain.h"
@@ -12,19 +11,14 @@
 
 
 NSString * const SystemUserErrorDomain = @"Vialer.Systemuser";
-
 NSString * const SystemUserLoginNotification                = @"SystemUserLoginNotification";
 NSString * const SystemUserLogoutNotification               = @"SystemUserLogoutNotification";
 NSString * const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogoutNotificationDisplayNameKey";
 NSString * const SystemUserLogoutNotificationErrorKey       = @"SystemUserLogoutNotificationErrorKey";
-
 NSString * const SystemUserSIPCredentialsChangedNotification = @"SystemUserSIPCredentialsChangedNotification";
 NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDisabledNotification";
-
 NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
-
 NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
-
 NSString * const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
 /**
  *  Api Dictionary keys.
