@@ -391,6 +391,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             self.sipUseEncryption = NO;
         } else {
             self.sipUseEncryption = useTLS;
+//            if (useTLS && ![self.sipAccount isEqualToString:@""]) {
+//                self.sipEnabled = YES;
+//            }
         }
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -759,7 +762,9 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
                     }
                 }];
             }
-
+            
+            [self setOwnPropertiesFromUserDict:responseData withUsername:nil andPassword:nil];
+            
             if (completion) completion(YES, nil);
         } else {
             if (completion) completion(NO, error);
