@@ -391,9 +391,6 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
             self.sipUseEncryption = NO;
         } else {
             self.sipUseEncryption = useTLS;
-//            if (useTLS && ![self.sipAccount isEqualToString:@""]) {
-//                self.sipEnabled = YES;
-//            }
         }
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -687,7 +684,7 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (self.loggedIn) {
         [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
-            // It is only a success if the request was successful and there was an sipAcount set.
+            // It is only a success if the request was successful and there was a sipAcount set.
             if (success && self.sipAccount) {
                 self.sipEnabled = YES;
             } else {
@@ -762,9 +759,8 @@ static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityMode
                     }
                 }];
             }
-            
+            // This is to update properties like sipEnabled and sipAccount in various cases like when fetching app account
             [self setOwnPropertiesFromUserDict:responseData withUsername:nil andPassword:nil];
-            
             if (completion) completion(YES, nil);
         } else {
             if (completion) completion(NO, error);

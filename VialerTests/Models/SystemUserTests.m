@@ -16,7 +16,7 @@
 - (instancetype) initPrivate;
 
 @property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *sipAccount; //SIPAccount
+@property (strong, nonatomic) NSString *sipAccount;
 @property (strong, nonatomic) NSString *mobileNumber;
 @property (strong, nonatomic) NSString *emailAddress;
 @property (strong, nonatomic) NSString *firstName;
@@ -314,7 +314,7 @@
     OCMStub([SAMKeychain passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
 
     [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error) {
-        OCMVerify([self.userDefaultsMock setObject:[OCMArg isEqual:@"12340042"] forKey:[OCMArg isEqual:@"SIPAccount"]]); //SystemUserSUDSIPAccount
+        OCMVerify([self.userDefaultsMock setObject:[OCMArg isEqual:@"12340042"] forKey:[OCMArg isEqual:@"SIPAccount"]]);
     }];
     
     OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:@"12340042"]);
@@ -420,7 +420,7 @@
 }
 
 - (void)testUserCanEnableSIPWhenHeIsAllowedAndHasAccount {
-    OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES); //fails
+    OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
     
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.sipAccount = @"42";
@@ -731,7 +731,6 @@
     [kvoObserver stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testKVONotificationDoesNotFireNilCase {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
