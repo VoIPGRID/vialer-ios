@@ -44,16 +44,6 @@
                </Test>
             </SkippedTests>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F22DE09F1CC90D41001468B3"
-               BuildableName = "VialerSnapshotUITests.xctest"
-               BlueprintName = "VialerSnapshotUITests"
-               ReferencedContainer = "container:Vialer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
