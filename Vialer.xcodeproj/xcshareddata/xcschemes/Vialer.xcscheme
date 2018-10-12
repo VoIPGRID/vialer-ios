@@ -29,21 +29,6 @@
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C4F49F261BF0B45700C25159"
-               BuildableName = "VialerTests.xctest"
-               BlueprintName = "VialerTests"
-               ReferencedContainer = "container:Vialer.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "SIPIncomingCallViewControllerTests/testAcceptCallButtonPressetMovesToSegue">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

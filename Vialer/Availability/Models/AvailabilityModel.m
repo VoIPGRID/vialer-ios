@@ -5,7 +5,6 @@
 
 #import "AvailabilityModel.h"
 #import "SystemUser.h"
-
 #import "VoIPGRIDRequestOperationManager.h"
 
 NSString * const AvailabilityModelDescription = @"availabilityDescription";
@@ -24,9 +23,9 @@ static NSString *const AvailabilityModelSelectedUserDestinationKey = @"selectedu
 static NSString *const AvailabilityModelSelectedUserDestinationPhoneaccountKey = @"phoneaccount";
 static NSString *const AvailabilityModelSelectedUserDestinationFixedKey = @"fixeddestination";
 static NSString *const AvailabilityModelSelectedUserDestinationIdKey = @"id";
-
 static NSString * const AvailabilityModelLastFetchKey = @"AvailabilityModelLastFetchKey";
 static NSString * const AvailabilityModelAvailabilityKey = @"AvailabilityModelAvailabilityKey";
+
 static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of seconds between fetching of availability
 
 @interface AvailabilityModel()

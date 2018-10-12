@@ -5,7 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AvailabilityViewController;
+@class AvailabilityViewControllerOLD;
 @protocol AvailabilityViewControllerDelegate <NSObject>
 - (void)availabilityViewController:(AvailabilityViewController *)controller availabilityHasChanged:(NSArray *)availabilityOptions;
 @end
