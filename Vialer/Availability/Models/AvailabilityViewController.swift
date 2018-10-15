@@ -38,6 +38,13 @@ private let AvailabilityViewControllerAddFixedDestinationPageURLWithVariableForC
         tableView.tintColor = Configuration.default().colorConfiguration.color(forKey: ConfigurationAvailabilityTableViewTintColor)
     }
     
+//    func availabilityModel() -> AvailabilityModel? {
+//        if availabilityModel == nil {
+//            availabilityModel = AvailabilityModel()
+//        }
+//        return availabilityModel
+//    }
+    
     func availabilityModel() -> AvailabilityModel? {
         if availabilityModel == nil {
             availabilityModel = AvailabilityModel()
