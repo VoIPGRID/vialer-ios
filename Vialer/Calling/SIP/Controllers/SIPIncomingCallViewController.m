@@ -4,7 +4,6 @@
 //
 
 #import "SIPIncomingCallViewController.h"
-
 #import "PhoneNumberModel.h"
 #import "SIPUtils.h"
 #import <VialerSIPLib/VialerSIPLib.h>

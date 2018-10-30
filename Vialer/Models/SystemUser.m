@@ -316,7 +316,6 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
     return [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 }
 
-
 - (void)setMobileNumber:(NSString *)mobileNumber {
     _mobileNumber = mobileNumber;
     if (mobileNumber) {

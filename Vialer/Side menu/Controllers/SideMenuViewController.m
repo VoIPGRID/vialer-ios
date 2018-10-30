@@ -4,8 +4,6 @@
 //
 
 #import "SideMenuViewController.h"
-
-#import "AvailabilityModel.h"
 #import "Configuration.h"
 #import "SystemUser.h"
 #import "VialerWebViewController.h"
@@ -15,7 +13,7 @@ static NSString * const SideMenuTableViewControllerLogoImageName = @"logo";
 static NSString * const SideMenuViewControllerStatisticsPageURL = @"/stats/dashboard/";
 static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
 
-@interface SideMenuViewController() //<AvailabilityViewControllerDelegate> //orp
+@interface SideMenuViewController() <AvailabilityViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;

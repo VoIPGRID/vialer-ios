@@ -4,7 +4,7 @@
 //
 
 #import "ContactsViewController.h"
-
+#import "Configuration.h"
 #import "ContactsUI/ContactsUI.h"
 #import "Notifications-Bridging-Header.h"
 #import "SystemUser.h"

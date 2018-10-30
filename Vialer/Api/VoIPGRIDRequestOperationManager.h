@@ -73,6 +73,10 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 - (instancetype)initWithDefaultBaseURLandRequestOperationTimeoutInterval:(NSTimeInterval)requestTimeoutInterval;
 
 /**
+ * This init is not available.
+ */
+-  (instancetype _Nonnull)init __attribute__((unavailable("Init is not available")));
+/**
  *  This method will do a HTTP GET request on the given url with given parameters.
  *
  *  When the request is completed, the completionblock will be called.

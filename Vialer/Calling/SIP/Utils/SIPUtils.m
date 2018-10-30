@@ -4,7 +4,6 @@
 //
 
 #import "SIPUtils.h"
-
 #import "SystemUser.h"
 #import "Vialer-Swift.h"
 
