@@ -5,6 +5,7 @@
 
 #import "LoginFormView.h"
 #import "UIView+RoundedStyle.h"
+#import "Vialer-Swift.h"
 
 static CGFloat const LoginFormViewButtonRadius = 5.0;
 
@@ -39,19 +40,12 @@ static CGFloat const LoginFormViewButtonRadius = 5.0;
     [self setupRoundedButtons:@[self.loginButton, self.forgotPasswordButton, self.configurationInstructionsButton]];
 }
 
-- (Configuration *)configuration {
-    if (!_configuration) {
-        _configuration = [Configuration defaultConfiguration];
-    }
-    return _configuration;
-}
-
 - (void)setupRoundedButtons:(NSArray<RoundedAndColoredUIButton *> *)buttons {
     for (RoundedAndColoredUIButton *button in buttons) {
         button.borderWidth = 1;
         button.cornerRadius = LoginFormViewButtonRadius;
-        button.borderColor = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBorderColor];
-        button.backgroundColorForPressedState = [self.configuration.colorConfiguration colorForKey:ConfigurationLogInViewControllerButtonBackgroundColorForPressedState];
+        button.borderColor = [[ColorsConfiguration shared] colorForKey:ColorsLogInViewControllerButtonBorder];
+        button.backgroundColorForPressedState = [[ColorsConfiguration shared]  colorForKey: ColorsLogInViewControllerButtonBackgroundPressedState];
     }
 }
 

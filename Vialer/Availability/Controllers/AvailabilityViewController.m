@@ -39,7 +39,7 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationAvailabilityTableViewTintColor];
+    self.tableView.tintColor = [[ColorsConfiguration shared] colorForKey:ColorsAvailabilityTableViewTint];
 }
 
 - (AvailabilityModel *)availabilityModel {

@@ -7,11 +7,14 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 #import "SVProgressHUD.h"
+#import "Vialer-Swift.h"
+
 
 static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 
 @interface VialerWebViewController()
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+@property (strong, nonatomic) UrlsConfiguration *urlsConfiguration;
 @end
 
 @implementation VialerWebViewController
@@ -34,31 +37,11 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 }
 
 #pragma mark - properties
-
-- (Configuration *)configuration {
-    if (!_configuration) {
-        _configuration = [Configuration defaultConfiguration];
+- (UrlsConfiguration *)urlsConfiguration {
+    if (!_urlsConfiguration) {
+        _urlsConfiguration = [UrlsConfiguration shared];
     }
-    return _configuration;
-}
-
-- (void)nextUrl:(NSString *)nextUrl {
-    [self.operationManager autoLoginTokenWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
-        if (error) {
-            VialerLogError(@"Error %@", [error localizedDescription]);
-            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", @"failed to load webpage with title"), self.title]];
-            return;
-        }
-        NSString *partnerBaseUrl = [self.configuration UrlForKey:ConfigurationPartnerURLKey];
-        NSString *user = [self urlEncodedString:self.currentUser.username];
-        NSString *token = responseData[VialerWebViewControllerApiKeyToken];
-        NSString *encodedNextUrl = [self urlEncodedString:nextUrl];
-
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, encodedNextUrl]];
-        VialerLogDebug(@"Go to url: %@", url);
-        self.URL = url;
-        [self load];
-    }];
+    return _urlsConfiguration;
 }
 
 - (VoIPGRIDRequestOperationManager *)operationManager {
@@ -73,6 +56,25 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
         _currentUser = [SystemUser currentUser];
     }
     return _currentUser;
+}
+
+- (void)nextUrl:(NSString *)nextUrl {
+    [self.operationManager autoLoginTokenWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+        if (error) {
+            VialerLogError(@"Error %@", [error localizedDescription]);
+            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", @"failed to load webpage with title"), self.title]];
+            return;
+        }
+        NSString *partnerBaseUrl = [self.urlsConfiguration partnerUrl];
+        NSString *user = [self urlEncodedString:self.currentUser.username];
+        NSString *token = responseData[VialerWebViewControllerApiKeyToken];
+        NSString *encodedNextUrl = [self urlEncodedString:nextUrl];
+
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/user/autologin/?username=%@&token=%@&next=%@", partnerBaseUrl, user, token, encodedNextUrl]];
+        VialerLogDebug(@"Go to url: %@", url);
+        self.URL = url;
+        [self load];
+    }];
 }
 
 #pragma mark - UIWebViewDelegate

@@ -7,7 +7,6 @@
 
 #import "AvailabilityModel.h"
 #import "AvailabilityViewController.h"
-#import "Configuration.h"
 #import "SystemUser.h"
 #import "VialerWebViewController.h"
 #import "Vialer-Swift.h"
@@ -33,14 +32,14 @@ static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
 @property (strong, nonatomic) NSString *appVersionBuildString;
 @property (strong, nonatomic) UIColor *tintColor;
 @property (strong, nonatomic) AvailabilityModel *availabilityModel;
-@property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (weak, nonatomic) ColorsConfiguration *colorsConfiguration;
 @end
 
 @implementation SideMenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.headerView.backgroundColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuHeaderBackgroundColor];
+    self.headerView.backgroundColor = [self.colorsConfiguration colorForKey:ColorsSideMenuHeaderBackground];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,21 +51,21 @@ static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
 
 #pragma mark - properties
 
-- (Configuration *)defaultConfiguration {
-    if (!_defaultConfiguration) {
-        _defaultConfiguration = [Configuration defaultConfiguration];
+- (ColorsConfiguration *)colorsConfiguration {
+    if (!_colorsConfiguration) {
+        _colorsConfiguration = [ColorsConfiguration shared];
     }
-    return _defaultConfiguration;
+    return _colorsConfiguration;
 }
 
 - (void)setUsernameLabel:(UILabel *)usernameLabel {
     _usernameLabel = usernameLabel;
-    _usernameLabel.textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
+    _usernameLabel.textColor = [self.colorsConfiguration colorForKey:ColorsSideMenuTint];
 }
 
 - (void)setOutgoingNumberLabel:(UILabel *)outgoingNumberLabel {
     _outgoingNumberLabel = outgoingNumberLabel;
-    _outgoingNumberLabel.textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
+    _outgoingNumberLabel.textColor = [self.colorsConfiguration colorForKey:ColorsSideMenuTint];
 }
 
 - (void)setBuildVersionLabel:(UILabel *)buildVersionLabel {
@@ -80,7 +79,7 @@ static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
 }
 
 - (UIColor *)tintColor {
-    return [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationSideMenuTintColor];
+    return [self.colorsConfiguration colorForKey:ColorsSideMenuTint];
 }
 
 - (void)setAvailabilityIcon:(UIImageView *)availabilityIcon {
@@ -154,8 +153,12 @@ static NSString * const SideMenuViewControllerDialplanPageURL = @"/dialplan/";
         VialerWebViewController *webController = navController.viewControllers[0];
         webController.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:SideMenuTableViewControllerLogoImageName]];
 
-        NSString *localizedOnboarding = [NSString stringWithFormat:@"onboarding-%@", [[NSBundle mainBundle] preferredLocalizations][0]];
-        NSString *onboardingUrl = [self.defaultConfiguration UrlForKey:localizedOnboarding];
+        OnboardingLanguage onboardingLanuage = OnboardingLanguageEn;
+        if ([[[NSBundle mainBundle] preferredLocalizations][0] isEqualToString:@"nl"]) {
+            onboardingLanuage = OnboardingLanguageNl;
+        }
+
+        NSString *onboardingUrl = [[UrlsConfiguration shared] onboardingUrlWithLanguage: onboardingLanuage];
 
         webController.title = NSLocalizedString(@"Information", nil);
         webController.URL = [NSURL URLWithString:onboardingUrl];

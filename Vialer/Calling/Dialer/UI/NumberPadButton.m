@@ -8,7 +8,7 @@
 
 #import "NumberPadButton.h"
 
-#import "Configuration.h"
+#import "Vialer-Swift.h"
 
 static float const NumberPadButtonTitleYFactorOffset = .1;
 static float const NumberPadButtonTitleHeigthFactor = .60;
@@ -25,7 +25,7 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIColor *pressedColor;
 
-@property (weak, nonatomic) Configuration *defaultConfiguration;
+@property (weak, nonatomic) ColorsConfiguration *colorsConfiguration;
 @property (weak, nonatomic) NSString *numberText;
 @end
 
@@ -33,11 +33,11 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 
 #pragma mark - Properties
 
-- (Configuration *)defaultConfiguration {
-    if (!_defaultConfiguration) {
-        _defaultConfiguration = [Configuration defaultConfiguration];
+- (ColorsConfiguration *)colorsConfiguration {
+    if (!_colorsConfiguration) {
+        _colorsConfiguration = [ColorsConfiguration shared];
     }
-    return _defaultConfiguration;
+    return _colorsConfiguration;
 }
 
 - (NSString *)number {
@@ -87,14 +87,14 @@ static float const NumberPadButtonPressedAlpha = 0.2;
 
 - (UIColor *)textColor {
     if (!_textColor) {
-        _textColor = [self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonTextColor];
+        _textColor = [self.colorsConfiguration colorForKey:ColorsNumberPadButtonText];
     }
     return _textColor;
 }
 
 - (UIColor *)pressedColor {
     if (!_pressedColor) {
-        _pressedColor = [[self.defaultConfiguration.colorConfiguration colorForKey:ConfigurationNumberPadButtonPressedColor] colorWithAlphaComponent:NumberPadButtonPressedAlpha];
+        _pressedColor = [[self.colorsConfiguration colorForKey:ColorsNumberPadButtonPressed] colorWithAlphaComponent:NumberPadButtonPressedAlpha];
     }
     return _pressedColor;
 }

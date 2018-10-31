@@ -113,8 +113,8 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startConnectABCall:) name:AppDelegateStartConnectABCallNotification object:nil];
 
     // Customize NavigationBar
-    [UINavigationBar appearance].tintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationNavigationBarTintColor];
-    [UINavigationBar appearance].barTintColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationNavigationBarBarTintColor];
+    [UINavigationBar appearance].tintColor = [[ColorsConfiguration shared] colorForKey:ColorsNavigationBarTint];
+    [UINavigationBar appearance].barTintColor = [[ColorsConfiguration shared]  colorForKey:ColorsNavigationBarBarTint];
     [UINavigationBar appearance].translucent = NO;
 }
 

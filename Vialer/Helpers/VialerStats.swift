@@ -109,7 +109,7 @@ import Foundation
     }()
 
     private lazy var middlewareRequestOperationManager: MiddlewareRequestOperationManager = {
-        return MiddlewareRequestOperationManager(baseURLasString: Configuration.default().url(forKey: ConfigurationMiddleWareBaseURLString))!
+        return MiddlewareRequestOperationManager(baseURLasString: UrlsConfiguration.shared.middlewareBaseUrl())!
     }()
 
     private override init() {

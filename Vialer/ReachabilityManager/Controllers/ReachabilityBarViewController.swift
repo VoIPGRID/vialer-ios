@@ -9,7 +9,7 @@ class ReachabilityBarViewController: UIViewController {
 
     fileprivate let notificationCenter = NotificationCenter.default
     fileprivate let currentUser = SystemUser.current()!
-    fileprivate let configuration = Configuration.default()
+    fileprivate let colorsConfiguration = ColorsConfiguration.shared
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
 
     fileprivate var reachabilityChanged: NotificationToken?
@@ -87,7 +87,7 @@ extension ReachabilityBarViewController {
             }
 
             if shouldBeVisible {
-                weakSelf.view.backgroundColor = weakSelf.configuration.colorConfiguration.color(forKey: ConfigurationReachabilityBarBackgroundColor)
+                weakSelf.view.backgroundColor = weakSelf.colorsConfiguration.colorForKey(ColorsConfiguration.Colors.reachabilityBarBackground)
                 weakSelf.view.isHidden = false
             } else {
                 weakSelf.view.backgroundColor = nil

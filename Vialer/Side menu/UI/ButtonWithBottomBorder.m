@@ -5,7 +5,7 @@
 
 #import "ButtonWithBottomBorder.h"
 
-#import "Configuration.h"
+#import "Vialer-Swift.h"
 
 @implementation ButtonWithBottomBorder
 
@@ -17,7 +17,7 @@
 - (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
     if (highlighted) {
-        self.backgroundColor = [[Configuration defaultConfiguration].colorConfiguration colorForKey:ConfigurationSideMenuButtonPressedState];
+        self.backgroundColor = [[ColorsConfiguration shared] colorForKey:ColorsSideMenuButtonPressedState];
     } else {
         self.backgroundColor = nil;
     }

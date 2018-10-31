@@ -1,39 +1,15 @@
 
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button0"; ObjectID = "0ic-sX-vrf"; */
-"0ic-sX-vrf.accessibilityIdentifier" = "DialerStoryboard.dialer.button0";
-
 /* Class = "UILabel"; text = "NumberToDialLabel"; ObjectID = "5gZ-PC-qXQ"; */
 "5gZ-PC-qXQ.text" = "NumberToDialLabel";
 
 /* Class = "UILabel"; text = "number"; ObjectID = "7mc-Od-Pb6"; */
 "7mc-Od-Pb6.text" = "number";
 
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button7"; ObjectID = "8uc-x1-38o"; */
-"8uc-x1-38o.accessibilityIdentifier" = "DialerStoryboard.dialer.button7";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button#"; ObjectID = "9eb-7e-hQf"; */
-"9eb-7e-hQf.accessibilityIdentifier" = "DialerStoryboard.dialer.button#";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button6"; ObjectID = "9gP-sN-XvB"; */
-"9gP-sN-XvB.accessibilityIdentifier" = "DialerStoryboard.dialer.button6";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button3"; ObjectID = "AHB-re-dgx"; */
-"AHB-re-dgx.accessibilityIdentifier" = "DialerStoryboard.dialer.button3";
-
-/* Class = "UILabel"; text = "Numberlabel secondCall"; ObjectID = "AOE-ZZ-MDl"; */
-"AOE-ZZ-MDl.text" = "Numberlabel secondCall";
+/* Class = "UILabel"; text = "Numberlabel currentCall"; ObjectID = "AOE-ZZ-MDl"; */
+"AOE-ZZ-MDl.text" = "Numberlabel currentCall";
 
 /* Class = "UILabel"; text = "Transfer status"; ObjectID = "Cdl-Ba-h64"; */
 "Cdl-Ba-h64.text" = "Doorverbind status";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button2"; ObjectID = "E0g-Fl-Qu5"; */
-"E0g-Fl-Qu5.accessibilityIdentifier" = "DialerStoryboard.dialer.button2";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button0"; ObjectID = "G3i-XW-znd"; */
-"G3i-XW-znd.accessibilityIdentifier" = "DialerStoryboard.dialer.button0";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button4"; ObjectID = "GIv-gx-bL3"; */
-"GIv-gx-bL3.accessibilityIdentifier" = "DialerStoryboard.dialer.button4";
 
 /* Class = "UILabel"; text = "currentCall statusLabel"; ObjectID = "GMr-4h-sSq"; */
 "GMr-4h-sSq.text" = "currentCall statusLabel";
@@ -44,11 +20,8 @@
 /* Class = "UILabel"; text = "keypad"; ObjectID = "HRl-h7-hor"; */
 "HRl-h7-hor.text" = "toetsen";
 
-/* Class = "UILabel"; text = "currentCall statusLabel"; ObjectID = "I6Q-jc-nmv"; */
-"I6Q-jc-nmv.text" = "currentCall statusLabel";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button1"; ObjectID = "IBs-up-y6F"; */
-"IBs-up-y6F.accessibilityIdentifier" = "DialerStoryboard.dialer.button1";
+/* Class = "UILabel"; text = "firstCall statusLabel"; ObjectID = "I6Q-jc-nmv"; */
+"I6Q-jc-nmv.text" = "firstCall statusLabel";
 
 /* Class = "UILabel"; text = "number"; ObjectID = "IXJ-58-omV"; */
 "IXJ-58-omV.text" = "number";
@@ -59,11 +32,8 @@
 /* Class = "UILabel"; text = "status"; ObjectID = "SA5-ky-WbU"; */
 "SA5-ky-WbU.text" = "status";
 
-/* Class = "UILabel"; text = "pauze"; ObjectID = "Sha-hC-udf"; */
-"Sha-hC-udf.text" = "pauze";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button1"; ObjectID = "TlB-TQ-W7d"; */
-"TlB-TQ-W7d.accessibilityIdentifier" = "DialerStoryboard.dialer.button1";
+/* Class = "UILabel"; text = "hold"; ObjectID = "Sha-hC-udf"; */
+"Sha-hC-udf.text" = "hold";
 
 /* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "TmX-Be-JPc"; */
 "TmX-Be-JPc.title" = "Gesprek Doorverbinden";
@@ -71,14 +41,8 @@
 /* Class = "UILabel"; text = "status"; ObjectID = "UDw-A4-HXZ"; */
 "UDw-A4-HXZ.text" = "status";
 
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button*"; ObjectID = "VN4-PJ-HuA"; */
-"VN4-PJ-HuA.accessibilityIdentifier" = "DialerStoryboard.dialer.button*";
-
 /* Class = "UILabel"; text = "speaker"; ObjectID = "Vhb-cu-5yP"; */
 "Vhb-cu-5yP.text" = "luidspreker";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button6"; ObjectID = "X9H-bV-hy5"; */
-"X9H-bV-hy5.accessibilityIdentifier" = "DialerStoryboard.dialer.button6";
 
 /* Class = "UILabel"; text = "speaker"; ObjectID = "Xd7-O4-f23"; */
 "Xd7-O4-f23.text" = "speaker";
@@ -92,62 +56,26 @@
 /* Class = "UILabel"; text = "hold"; ObjectID = "ZFf-51-ebq"; */
 "ZFf-51-ebq.text" = "pauze";
 
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button9"; ObjectID = "ZkA-Mj-NDd"; */
-"ZkA-Mj-NDd.accessibilityIdentifier" = "DialerStoryboard.dialer.button9";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button9"; ObjectID = "b74-9M-nGe"; */
-"b74-9M-nGe.accessibilityIdentifier" = "DialerStoryboard.dialer.button9";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button4"; ObjectID = "cKK-AY-hTQ"; */
-"cKK-AY-hTQ.accessibilityIdentifier" = "DialerStoryboard.dialer.button4";
-
 /* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "d0S-EE-akL"; */
 "d0S-EE-akL.title" = "Gesprek Doorverbinden";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button5"; ObjectID = "fE4-tc-maO"; */
-"fE4-tc-maO.accessibilityIdentifier" = "DialerStoryboard.dialer.button5";
 
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "gET-mp-cOT"; */
 "gET-mp-cOT.title" = "Annuleren";
 
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button5"; ObjectID = "hEP-Bk-KAS"; */
-"hEP-Bk-KAS.accessibilityIdentifier" = "DialerStoryboard.dialer.button5";
-
-/* Class = "UILabel"; text = "doorverbinden"; ObjectID = "jL8-gK-ccx"; */
-"jL8-gK-ccx.text" = "doorverbinden";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button8"; ObjectID = "m7x-tQ-8oz"; */
-"m7x-tQ-8oz.accessibilityIdentifier" = "DialerStoryboard.dialer.button8";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button#"; ObjectID = "oRn-Qk-6PL"; */
-"oRn-Qk-6PL.accessibilityIdentifier" = "DialerStoryboard.dialer.button#";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button3"; ObjectID = "ofT-FE-Anc"; */
-"ofT-FE-Anc.accessibilityIdentifier" = "DialerStoryboard.dialer.button3";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button7"; ObjectID = "pXZ-HO-t65"; */
-"pXZ-HO-t65.accessibilityIdentifier" = "DialerStoryboard.dialer.button7";
+/* Class = "UILabel"; text = "merge calls"; ObjectID = "jL8-gK-ccx"; */
+"jL8-gK-ccx.text" = "merge calls";
 
 /* Class = "UILabel"; text = "transfer"; ObjectID = "sYz-Wv-igq"; */
 "sYz-Wv-igq.text" = "doorverbinden";
 
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button*"; ObjectID = "t85-kN-Xse"; */
-"t85-kN-Xse.accessibilityIdentifier" = "DialerStoryboard.dialer.button*";
-
-/* Class = "UILabel"; text = "geluid uit"; ObjectID = "u6z-pi-U1s"; */
-"u6z-pi-U1s.text" = "geluid uit";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button2"; ObjectID = "uC2-Oy-Ewy"; */
-"uC2-Oy-Ewy.accessibilityIdentifier" = "DialerStoryboard.dialer.button2";
+/* Class = "UILabel"; text = "mute"; ObjectID = "u6z-pi-U1s"; */
+"u6z-pi-U1s.text" = "mute";
 
 /* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "uYD-Ra-2f5"; */
 "uYD-Ra-2f5.title" = "Gesprek doorverbinden";
 
-/* Class = "UILabel"; text = "currentCall numberLabel"; ObjectID = "upb-YF-eAJ"; */
-"upb-YF-eAJ.text" = "currentCall numberLabel";
-
-/* Class = "UIButton"; accessibilityIdentifier = "DialerStoryboard.dialer.button8"; ObjectID = "vKa-Bv-OIF"; */
-"vKa-Bv-OIF.accessibilityIdentifier" = "DialerStoryboard.dialer.button8";
+/* Class = "UILabel"; text = "firstCall numberLabel"; ObjectID = "upb-YF-eAJ"; */
+"upb-YF-eAJ.text" = "firstCall numberLabel";
 
 /* Class = "UILabel"; text = "NumberLabel firstCall"; ObjectID = "wgC-ID-R8a"; */
 "wgC-ID-R8a.text" = "NumberLabel firstCall";
@@ -160,6 +88,3 @@
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "yQi-zQ-RoI"; */
 "yQi-zQ-RoI.title" = "Terug";
-
-/* Class = "UILabel"; text = "merge calls"; ObjectID = "jL8-gK-ccx"; */
-"jL8-gK-ccx.text" = "voeg samen";

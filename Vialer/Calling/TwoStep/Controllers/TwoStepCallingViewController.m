@@ -81,18 +81,18 @@ static NSString * const TwoStepCallingViewControllerAsideIcon = @"personIcon";
 }
 
 - (void)setupView {
-    Configuration *defaultConfiguration = [Configuration defaultConfiguration];
+    ColorsConfiguration *colorsConfiguration = [ColorsConfiguration shared];
     // Setup colors & icons
-    self.backgroundHeader.backgroundColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenBackgroundHeaderColor];
-    self.infobarBackground.backgroundColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenInfoBarBackgroundColor];
-    self.vialerIconView.iconColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenVialerIconColor];
-    self.aSide.innerCircleColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenSideAIconColor];
+    self.backgroundHeader.backgroundColor = [colorsConfiguration colorForKey:ColorsTwoStepScreenBackgroundHeader];
+    self.infobarBackground.backgroundColor = [colorsConfiguration colorForKey:ColorsTwoStepScreenInfoBarBackground];
+    self.vialerIconView.iconColor = [colorsConfiguration colorForKey:ColorsTwoStepScreenVialerIcon];
+    self.aSide.innerCircleColor = [colorsConfiguration colorForKey:ColorsTwoStepScreenSideAIcon];
     UIImage *iconForAAndBSide = [UIImage imageNamed:TwoStepCallingViewControllerAsideIcon];
     self.aSide.icon = iconForAAndBSide;
-    self.bSide.innerCircleColor = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenSideBIconColor];
+    self.bSide.innerCircleColor = [colorsConfiguration colorForKey:ColorsTwoStepScreenSideBIcon];
     self.bSide.icon = iconForAAndBSide;
-    self.bubblingOne.color = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenBubblingColor];
-    self.bubblingTwo.color = [defaultConfiguration.colorConfiguration colorForKey:ConfigurationTwoStepScreenBubblingColor];
+    self.bubblingOne.color = [colorsConfiguration colorForKey:ColorsTwoStepScreenBubbling];
+    self.bubblingTwo.color = [colorsConfiguration colorForKey:ColorsTwoStepScreenBubbling];
 }
 
 # pragma mark - properties

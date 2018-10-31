@@ -181,7 +181,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     NSString *log = [NSString stringWithFormat:@"%@ %@ %@ - %@", level, [VialerLogger remoteIdentifier], deviceInfo, logMessage];
 
     if (forceRemote) {
-        NSString *logEntriesPushNotificationsToken = [[Configuration defaultConfiguration] logEntriesPushNotificationsToken];
+        NSString *logEntriesPushNotificationsToken = [[LogEntriesConfiguration shared] pushNotificationsKey];
 
         if ([logEntriesPushNotificationsToken length] > 0) {
             LELog* logger = [LELog sessionWithToken:logEntriesPushNotificationsToken];
@@ -189,13 +189,13 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
             [logger log: log];
         }
     } else {
-        NSString * mainLogEntriesToken = [[Configuration defaultConfiguration] logEntriesToken];
+        NSString * mainLogEntriesToken = [[LogEntriesConfiguration shared] mainKey];
 
         LELog* logger = [LELog sessionWithToken:mainLogEntriesToken];
         logger.debugLogs = NO;
         [logger log: log];
 
-        NSString * partnerLogEntriesToken = [[Configuration defaultConfiguration] logEntriesPartnerToken];
+        NSString * partnerLogEntriesToken = [[LogEntriesConfiguration shared] partnerKey];
         if ([partnerLogEntriesToken length] > 0) {
             LELog* logger = [LELog sessionWithToken:partnerLogEntriesToken];
             logger.debugLogs = NO;

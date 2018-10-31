@@ -14,9 +14,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *pleaseEnterEmailLabel;
 @property (nonatomic, weak) IBOutlet RoundedAndColoredUIButton *requestPasswordButton;
 
-/* Dependency Injection */
-@property (nonatomic) Configuration *configuration;
-
 // Keep track if the form is moved already
 @property (nonatomic) BOOL isMoved;
 

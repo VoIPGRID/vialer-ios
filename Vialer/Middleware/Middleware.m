@@ -78,7 +78,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
  */
 - (MiddlewareRequestOperationManager *)commonMiddlewareRequestOperationManager {
     if (!_commonMiddlewareRequestOperationManager) {
-        NSString *baseURLString = [[Configuration defaultConfiguration] UrlForKey:ConfigurationMiddleWareBaseURLString];
+        NSString *baseURLString = [[UrlsConfiguration shared] middlewareBaseUrl];
         _commonMiddlewareRequestOperationManager = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:baseURLString];
     }
     return _commonMiddlewareRequestOperationManager;

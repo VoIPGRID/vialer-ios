@@ -52,7 +52,7 @@
     endpointConfiguration.ipChangeConfiguration = ipChangeConfiguration;
 
     if ([SystemUser currentUser].useStunServers) {
-        NSArray *stunServers = [Configuration defaultConfiguration].stunServers;
+        NSArray *stunServers = [[UrlsConfiguration shared] stunServers];
         if (stunServers.count > 0) {
             VSLStunConfiguration *stunConfiguration = [[VSLStunConfiguration alloc] init];
             stunConfiguration.stunServers = stunServers;
