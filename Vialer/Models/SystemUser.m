@@ -5,7 +5,6 @@
 
 #import "SystemUser.h"
 
-#import "Configuration.h"
 #import "NSString+SubString.h"
 #import "SAMKeychain.h"
 #import "SIPUtils.h"

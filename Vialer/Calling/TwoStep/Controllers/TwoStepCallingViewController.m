@@ -7,7 +7,6 @@
 
 #import "BubblingPoints.h"
 #import "CircleWithWhiteIcon.h"
-#import "Configuration.h"
 #import "SystemUser.h"
 #import "TwoStepCall.h"
 #import "VialerIconView.h"

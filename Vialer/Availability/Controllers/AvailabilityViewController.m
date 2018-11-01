@@ -6,7 +6,6 @@
 #import "AvailabilityViewController.h"
 
 #import "AvailabilityModel.h"
-#import "Configuration.h"
 #import "SVProgressHUD.h"
 #import "UIAlertController+Vialer.h"
 #import "Vialer-Swift.h"
