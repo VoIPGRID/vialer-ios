@@ -15,28 +15,31 @@
 + (BOOL)setupSIPEndpoint {
     VialerLogDebug(@"Setup the endpoint for VoIP");
     if (![SystemUser currentUser].sipEnabled) {
+        VialerLogWarning(@"Not setting up sip endpoint because sip disabled");
         return NO;
     }
 
-    VialerLogInfo(@"Endpoint Available: %@, Use encryption: %@, TLS enabled: %@, SIP endpoint TLS: %@",
-                  [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO",
-                  [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO",
-                  [SystemUser currentUser].useTLS ? @"YES" : @"NO",
-                  [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO");
+    VialerLogInfo(@"SIP endpoint available: %@", [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO");
+    if ([VialerSIPLib sharedInstance].endpointAvailable) {
+        BOOL shouldRemoveEndpoint = NO;
+        if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
+            ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
+            VialerLogDebug(@"Endpoint or User is not TLS ready so remove the endoint so a fresh one can be setup");
+            shouldRemoveEndpoint = YES;
+        }
 
-    if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
-        ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
-        VialerLogDebug(@"Endpoint or User is not TLS ready so remove the endoint so a fresh one can be setup");
-        [SIPUtils removeSIPEndpoint];
-    }
+        // User has STUN enbaled but the enpoint is not configured to use STUN.
+        if ([SystemUser currentUser].useStunServers && ![VialerSIPLib sharedInstance].hasSTUNEnabled) {
+            VialerLogDebug(@"User has STUN ENABLED but the enpoint is not configured to use STUN. Setup a new endpoint with STUN");
+            shouldRemoveEndpoint = YES;
+        } else if (![SystemUser currentUser].useStunServers && [VialerSIPLib sharedInstance].hasSTUNEnabled) {
+            VialerLogDebug(@"User has STUN DISABLED but the endpoint is configured to use STUN. Setup a new endpoint without STUN");
+            shouldRemoveEndpoint = YES;
+        }
 
-    // User has STUN enbaled but the enpoint is not configured to use STUN.
-    if ([SystemUser currentUser].useStunServers && ![VialerSIPLib sharedInstance].hasSTUNEnabled) {
-        VialerLogDebug(@"User has STUN ENABLED but the enpoint is not configured to use STUN. Setup a new endpoint with STUN");
-        [SIPUtils removeSIPEndpoint];
-    } else if (![SystemUser currentUser].useStunServers && [VialerSIPLib sharedInstance].hasSTUNEnabled) {
-        VialerLogDebug(@"User has STUN DISABLED but the endpoint is configured to use STUN. Setup a new endpoint without STUN");
-        [SIPUtils removeSIPEndpoint];
+        if (shouldRemoveEndpoint) {
+            [SIPUtils removeSIPEndpoint];
+        }
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
@@ -67,11 +70,7 @@
                                                           [VSLTransportConfiguration configurationWithTransportType:VSLTransportTypeUDP]];
     }
 
-    VSLCodecConfiguration *codecConfiguration = [[VSLCodecConfiguration alloc] init];
-    codecConfiguration.audioCodecs = @[
-                                       [[VSLAudioCodecs alloc] initWithAudioCodec:VSLAudioCodecILBC andPriority:210]
-                                       ];
-    endpointConfiguration.codecConfiguration = codecConfiguration;
+    endpointConfiguration.codecConfiguration = [SIPUtils codecConfiguration];
 
     NSError *error;
     BOOL success = [[VialerSIPLib sharedInstance] configureLibraryWithEndPointConfiguration:endpointConfiguration error:&error];
@@ -79,17 +78,31 @@
         VialerLogError(@"Failed to startup VialerSIPLib: %@", error);
     }
 
-    VialerLogInfo(@"Endpoint Available: %@, Use encryption: %@, TLS enabled: %@, SIP endpoint TLS: %@",
-                  [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO",
-                  [SystemUser currentUser].sipUseEncryption ? @"YES": @"NO",
-                  [SystemUser currentUser].useTLS ? @"YES" : @"NO",
-                  [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO");
+    VialerLogInfo(@"TLS status: endpoint: %@, user setting: %@",
+                  [VialerSIPLib sharedInstance].hasTLSTransport ? @"YES" : @"NO",
+                  ([SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ? @"YES" : @"NO");
+    VialerLogInfo(@"STUN status: endpoint: %@, user setting: %@",
+                  [VialerSIPLib sharedInstance].hasSTUNEnabled ? @"YES": @"NO",
+                  [SystemUser currentUser].useStunServers ? @"YES" : @"NO");
 
     return success;
 }
 
 + (void)removeSIPEndpoint {
     [[VialerSIPLib sharedInstance] removeEndpoint];
+}
+
++ (BOOL)updateCodecs {
+    VialerLogDebug(@"Updating the codec which is being used");
+    VSLCodecConfiguration *codecConfiguration = [SIPUtils codecConfiguration];
+    VSLAudioCodecs *codec = codecConfiguration.audioCodecs.firstObject;
+    VialerLogDebug(@"Swithcing to codec: %@", [VSLAudioCodecs codecString: codec.codec]);
+    if (![[VialerSIPLib sharedInstance] updateCodecConfiguration:codecConfiguration]) {
+        [SIPUtils removeSIPEndpoint];
+        [SIPUtils setupSIPEndpoint];
+    }
+
+    return YES;
 }
 
 + (VSLAccount *)addSIPAccountToEndpoint {
@@ -139,5 +152,26 @@
     VSLAccount *account = [[VialerSIPLib sharedInstance] firstAccount];
     VSLCall *call = [account firstActiveCall];
     return call;
+}
+
++ (VSLCodecConfiguration *)codecConfiguration {
+    VSLCodecConfiguration *codecConfiguration = [[VSLCodecConfiguration alloc] init];
+
+    if ([SystemUser currentUser].currentAudioQuality > 0) {
+        codecConfiguration.audioCodecs = @[
+                                           [[VSLAudioCodecs alloc] initWithAudioCodec:VSLAudioCodecOpus andPriority:210]
+                                           ];
+        VSLOpusConfiguration *opusConfiguration = [[VSLOpusConfiguration alloc] init];
+        opusConfiguration.sampleRate = VSLOpusConfigurationSampleRateWideBand;
+        opusConfiguration.frameDuration = VSLOpusConfigurationFrameDurationTwenty;
+
+        codecConfiguration.opusConfiguration = opusConfiguration;
+    } else {
+        codecConfiguration.audioCodecs = @[
+                                           [[VSLAudioCodecs alloc] initWithAudioCodec:VSLAudioCodecILBC andPriority:210]
+                                           ];
+    }
+
+    return codecConfiguration;
 }
 @end

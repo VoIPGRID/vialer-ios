@@ -15,7 +15,7 @@ import UIKit
     override func layoutSubviews() {
         let startColor = ColorsConfiguration.shared.gradientColors(.start)
         let endColor = ColorsConfiguration.shared.gradientColors(.end)
-        self.gradientLayer = self.layer as! CAGradientLayer
+        self.gradientLayer = (self.layer as! CAGradientLayer)
         self.gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
         self.gradientLayer.startPoint = createStartPoint()
         self.gradientLayer.endPoint = createEndPoint()
