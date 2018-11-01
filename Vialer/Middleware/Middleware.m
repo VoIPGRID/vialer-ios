@@ -6,7 +6,6 @@
 #import "Middleware.h"
 
 #import "APNSHandler.h"
-#import "Configuration.h"
 @import CoreData;
 #import "MiddlewareRequestOperationManager.h"
 #import "SIPUtils.h"

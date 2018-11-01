@@ -4,7 +4,6 @@
 //
 
 #import "ActivateSIPAccountViewController.h"
-#import "Configuration.h"
 #import "RoundedAndColoredUIButton.h"
 #import "UserProfileWebViewController.h"
 #import "Vialer-Swift.h"

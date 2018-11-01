@@ -4,7 +4,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Configuration.h"
 #import "RoundedAndColoredUIButton.h"
 
 @interface ForgotPasswordView : UIView

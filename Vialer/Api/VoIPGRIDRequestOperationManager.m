@@ -5,7 +5,6 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 
-#import "Configuration.h"
 #import "SAMKeychain.h"
 #import "SystemUser.h"
 #import "Vialer-Swift.h"
