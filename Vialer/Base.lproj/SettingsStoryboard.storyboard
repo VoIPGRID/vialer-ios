@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wbd-46-JZE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wbd-46-JZE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -128,6 +127,7 @@
                     <connections>
                         <segue destination="zEE-Ao-KU6" kind="show" identifier="ShowEditNumberSegue" id="x7r-DJ-ID7"/>
                         <segue destination="YfQ-oy-Qzc" kind="show" identifier="ShowActivateSIPAccount" id="RKt-er-1hs"/>
+                        <segue destination="zk1-1z-hLN" kind="show" identifier="ShowAudioQualitySegue" id="b5T-6q-Qgg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IaI-um-zII" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +298,74 @@ At this moment there is no VoIP account linked to your user.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVo-uT-7Db" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="625"/>
+            <point key="canvasLocation" x="1346" y="1143"/>
+        </scene>
+        <!--Audio Quality-->
+        <scene sceneID="xwv-9x-WAZ">
+            <objects>
+                <viewController id="zk1-1z-hLN" customClass="AudioQualityViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8wp-nH-HWY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Isg-tr-PTy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gR9-Xe-EIQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="01J-sa-L18">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AudioQualityCell" textLabel="3sE-tJ-A80" detailTextLabel="y4G-Cq-OBg" style="IBUITableViewCellStyleSubtitle" id="Dtg-wN-EjP">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dtg-wN-EjP" id="Y6A-iV-ogI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sE-tJ-A80">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y4G-Cq-OBg">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="01J-sa-L18" secondAttribute="trailing" id="5FB-Eb-iY4"/>
+                            <constraint firstItem="01J-sa-L18" firstAttribute="top" secondItem="8wp-nH-HWY" secondAttribute="bottom" id="IdM-i7-G69"/>
+                            <constraint firstItem="01J-sa-L18" firstAttribute="bottom" secondItem="Isg-tr-PTy" secondAttribute="top" id="gxO-x9-81R"/>
+                            <constraint firstItem="01J-sa-L18" firstAttribute="leading" secondItem="gR9-Xe-EIQ" secondAttribute="leading" id="oCR-2H-sUg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Audio Quality" id="Ayx-zo-TME">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="nqE-VI-Hnq">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="zk1-1z-hLN" id="ZfG-2R-i4H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="01J-sa-L18" id="uUJ-8O-TdR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="svf-4n-0Oj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2047" y="1143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OxG-fz-0Qy">
@@ -316,7 +383,7 @@ At this moment there is no VoIP account linked to your user.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="swc-W8-Hfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="631" y="374"/>
+            <point key="canvasLocation" x="753" y="324"/>
         </scene>
     </scenes>
     <resources>

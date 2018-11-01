@@ -53,12 +53,12 @@ PODS:
   - PBWebViewController (0.5.0)
   - Reachability (3.2)
   - SAMKeychain (1.5.3)
-  - SimulatorStatusMagic (2.2)
+  - SimulatorStatusMagic (2.3)
   - SPLumberjackLogFormatter (0.0.1):
     - CocoaLumberjack
   - SVProgressHUD (2.2.5)
-  - Vialer-pjsip-iOS (3.3.7)
-  - VialerSIPLib (3.3.4):
+  - Vialer-pjsip-iOS (3.4.1)
+  - VialerSIPLib (3.4.0):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -130,11 +130,11 @@ SPEC CHECKSUMS:
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SimulatorStatusMagic: 0389a805fa8bd001e2977c4046730bdbd6642861
+  SimulatorStatusMagic: 631fe6e4195a8a8d587ad8744af9015126526cc2
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  Vialer-pjsip-iOS: 3b8bac1bf7e6831379cd0b4763dce1842db0abb4
-  VialerSIPLib: 93ffe714270208cb1c5595eb8febca71feb8ff84
+  Vialer-pjsip-iOS: 9b8fc1226e9a51150642b9cc81a8c62c9e9c530b
+  VialerSIPLib: d62821042b97fd6264fd44da07661648dd00fb3f
 
 PODFILE CHECKSUM: 8e7a2fdf72deeac99781236e5c990c0e454b5552
 

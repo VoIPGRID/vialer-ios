@@ -3,6 +3,7 @@
 //  Copyright © 2017 VoIPGRID. All rights reserved.
 //
 
+import AVFoundation
 import CoreData
 import UIKit
 
@@ -160,8 +161,11 @@ extension AppDelegate {
     /// Hook up the observers that AppDelegate should listen to
     fileprivate func setupObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updatedSIPCredentials), name: NSNotification.Name.SystemUserSIPCredentialsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSIPEndpoint(_:)), name: NSNotification.Name.SystemUserEncryptionUsageChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSIPEndpoint(_:)), name: NSNotification.Name.SystemUserStunUsageChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserLogout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(registerForPushNotification), name: NSNotification.Name.SystemUserLogin, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
@@ -176,7 +180,10 @@ extension AppDelegate {
     /// Remove the observers that the AppDelegate is listening to
     fileprivate func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserSIPCredentialsChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserEncryptionUsageChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserStunUsageChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogin, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
@@ -344,8 +351,14 @@ extension AppDelegate {
     /// Setup the endpoint if user has SIP enabled
     @objc fileprivate func updatedSIPCredentials() {
         VialerLogInfo("SIP Credentials have changed")
-        if !user.sipEnabled { return }
-        if !user.loggedIn { return }
+        if !user.loggedIn {
+            VialerLogWarning("User is not logged in")
+            return
+        }
+        if !user.sipEnabled {
+            VialerLogWarning("SIP not enabled")
+            return
+        }
             
         DispatchQueue.main.async {
             SIPUtils.setupSIPEndpoint()
@@ -353,6 +366,30 @@ extension AppDelegate {
             if !VialerSIPLib.callKitAvailable() {
                 self.registerForLocalNotifications()
             }
+        }
+    }
+
+    @objc fileprivate func updateSIPEndpoint(_ notification: NSNotification) {
+        VialerLogInfo("\(notification.name) fired to update SIP endpoint")
+        if !user.loggedIn {
+            VialerLogWarning("User is not logged in")
+            return
+        }
+        if !user.sipEnabled {
+            VialerLogWarning("SIP not enabled")
+            return
+        }
+
+        DispatchQueue.main.async {
+            SIPUtils.setupSIPEndpoint()
+        }
+    }
+
+    @objc fileprivate func registerForPushNotification() {
+        VialerLogInfo("User has been logged in register for push notifications")
+
+        DispatchQueue.main.async {
+            APNSHandler.shared()?.registerForVoIPNotifications()
         }
     }
 

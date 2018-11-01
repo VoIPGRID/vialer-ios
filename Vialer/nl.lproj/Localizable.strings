@@ -458,3 +458,21 @@
 
 /*  Calls are not encrypted */
 "Calls are not encrypted" = "Gesprekken zijn niet versleuteld";
+
+/* Standard audio */
+"Standard audio" = "Standaard audio";
+
+/* Higher quality audio */
+"Higher quality audio" = "Hogere audio kwaliteit";
+
+/* Low bandwidth */
+"Low bandwidth" = "Lagere bandbreedte";
+
+/* Clearer audio - possible higher bandwidth */
+"Clearer audio - possible higher bandwidth" = "Heldere audio - gebruikt mogelijk meer bandbreedte";
+
+/* Could not save audio settings */
+"Could not save audio settings" = "Kon de audio instellingen niet opslaan";
+
+/* An error occured when saving your changes. Please try again. */
+"An error occured when saving your changes. Please try again." = "Fout opgetreden tijdens het opslaan van de wijzigingen. Probeer het nog eens.";
