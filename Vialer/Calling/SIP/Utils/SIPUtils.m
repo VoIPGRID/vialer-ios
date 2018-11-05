@@ -139,8 +139,13 @@
     [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser] forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
         if (!success) {
             VialerLogError(@"Error registering the account with the endpoint");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SIPUtils removeSIPEndpoint];
+            });
+            completion(NO, nil);
+        } else {
+            completion(success, account);
         }
-        completion(success, account);
     }];
 }
 

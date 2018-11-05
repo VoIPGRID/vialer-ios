@@ -272,8 +272,14 @@ extension SIPCallingViewController {
     }
 
     fileprivate func startCalling() {
-        SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
+        VialerLogInfo("Start calling")
+        SIPUtils.registerSIPAccountWithEndpoint { [unowned self] (success, account) in
             guard account != nil else {
+                VialerLogError("Unable to setup account because there was an error")
+                DispatchQueue.main.async { [unowned self] in
+                    self.statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
+                }
+                self.dismissView()
                 return
             }
 
@@ -282,6 +288,10 @@ extension SIPCallingViewController {
             self.callManager.startCall(toNumber: self.cleanedPhoneNumber!, for: account!) { (call, error) in
                 if error != nil {
                     VialerLogError("Error setting up call: \(String(describing: error))")
+                    DispatchQueue.main.async { [unowned self] in
+                        self.statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
+                    }
+                    self.dismissView()
                 } else if let call = call {
                     self.activeCall = call
                 }

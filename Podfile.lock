@@ -77,7 +77,7 @@ DEPENDENCIES:
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
   - SVProgressHUD
-  - VialerSIPLib
+  - VialerSIPLib (from `../VialerSIPLib/`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -95,7 +95,6 @@ SPEC REPOS:
     - SimulatorStatusMagic
     - SVProgressHUD
     - Vialer-pjsip-iOS
-    - VialerSIPLib
 
 EXTERNAL SOURCES:
   le:
@@ -104,6 +103,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
+  VialerSIPLib:
+    :path: "../VialerSIPLib/"
 
 CHECKOUT OPTIONS:
   le:
@@ -134,8 +135,8 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Vialer-pjsip-iOS: 9b8fc1226e9a51150642b9cc81a8c62c9e9c530b
-  VialerSIPLib: d62821042b97fd6264fd44da07661648dd00fb3f
+  VialerSIPLib: 7c927e77cdfee99885ac51fefb70c37d25b6b4cb
 
-PODFILE CHECKSUM: 8e7a2fdf72deeac99781236e5c990c0e454b5552
+PODFILE CHECKSUM: e56ce1d3d76afd13a4b9a5286fdccba8f1805b54
 
 COCOAPODS: 1.5.3
