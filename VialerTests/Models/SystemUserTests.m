@@ -16,7 +16,6 @@
 - (instancetype) initPrivate;
 
 @property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *user;
 @property (strong, nonatomic) NSString *sipAccount;
 @property (strong, nonatomic) NSString *mobileNumber;
 @property (strong, nonatomic) NSString *emailAddress;
@@ -54,7 +53,7 @@
     [self.userDefaultsMock stopMocking];
     self.userDefaultsMock = nil;
     [self.operationsMock stopMocking];
-    self.userDefaultsMock = nil;
+    self.operationsMock = nil;
     [self.keychainMock stopMocking];
     self.keychainMock = nil;
     [super tearDown];
@@ -128,25 +127,32 @@
 
     SystemUser *user = [[SystemUser alloc] initPrivate];
 
-    XCTAssertEqualObjects(user.displayName, @"John", @"The firstname should be displayed and not the emailaddress");
+    XCTAssertEqualObjects(user.displayName, @"John", @"The firstname should be displayed and not the email address");
 }
 
 - (void)testLoginUserWillLoginOnRemote {
-    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
-
-    OCMVerify([self.operationsMock loginWithUsername:[OCMArg isEqual:@"testUsername"] password:[OCMArg isEqual:@"testPassword"] withCompletion:[OCMArg any]]);
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
+    
+    OCMVerify([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg isEqual:@"testUsername"] password:[OCMArg isEqual:@"testPassword"] orToken:[OCMArg isEqual:@"testToken"] withCompletion:[OCMArg any]]);
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testLoginUserWillStoreCredentials {
     NSDictionary *response = @{@"client": @"42"};
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+    
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:([OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }])]);
+
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
-    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
+    
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
 
-    OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]);
+    OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:[OCMArg isEqual:@"testUsername"]]); //this is always verified....! Even if it is the only line in this test and has random values like testPassword223132 and testUsername24324..
+    
     XCTAssertEqualObjects(self.user.username, @"testUsername", @"The correct username should have been set");
 }
 
@@ -155,13 +161,19 @@
                                 @"first_name": @"John",
                                 @"last_name": @"Appleseed"
                                 };
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
 
-    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
-
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
+    
     XCTAssertEqualObjects(self.user.displayName, @"John Appleseed", @"The correct first and lastname should have been fetched.");
 }
 
@@ -171,12 +183,18 @@
                                 @"preposition": @"of",
                                 @"last_name": @"Appleseed"
                                 };
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
-
-    [self.user loginWithUsername:@"testUsername" password:@"testPassword" completion:nil];
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
 
     XCTAssertEqualObjects(self.user.displayName, @"John of Appleseed", @"The correct firstname, preposition and lastname should have been fetched.");
 }
@@ -188,27 +206,29 @@
 - (void)testSystemUserWithSipEnabledAndSipAccountWillSetSoOnInit {
     OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
     OCMStub([self.userDefaultsMock objectForKey:@"SIPAccount"]).andReturn(@"12340042");
+    OCMStub([self.userDefaultsMock objectForKey:@"User"]).andReturn(@"johna");
 
     SystemUser *newUser = [[SystemUser alloc] initPrivate];
-
+    
     XCTAssertTrue(newUser.sipEnabled, @"The user should be able to call SIP");
 }
 
 - (void)testSystemUserWithSipEnabledAndSipAccountWillPostNotification {
     OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
     OCMStub([self.userDefaultsMock objectForKey:@"SIPAccount"]).andReturn(@"12340042");
-
+    OCMStub([self.userDefaultsMock objectForKey:@"User"]).andReturn(@"johna");
+    
     SystemUser *newUser = [SystemUser alloc];
-
+    
     [self expectationForNotification:SystemUserSIPCredentialsChangedNotification
                               object:newUser
                              handler:^BOOL(NSNotification * _Nonnull notification) {
                                  NSLog(@"Notification observed");
                                  return YES;
                              }];
-
+    
     newUser = [newUser initPrivate];
-
+    
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"expectation Timeout!");
@@ -221,26 +241,23 @@
 }
 
 - (void)testSystemUserHasWithNoWifiNotificationWhenInSUD {
-    OCMStub([self.userDefaultsMock boolForKey:@"NoWiFiNotification"]).andReturn(YES);
-
+    OCMStub([self.userDefaultsMock boolForKey:@"ShowWiFiNotification"]).andReturn(YES);
+    
     SystemUser *newUser = [[SystemUser alloc] initPrivate];
 
-    XCTAssertTrue(newUser.showWiFiNotification, @"NoWifiNotification should be YES");
+    XCTAssertTrue(newUser.showWiFiNotification, @"ShowWifiNotification should be YES");
 }
 
 - (void)testSystemUserWithChangesNoWiFiNotificationWillStoreInSUD {
 
     self.user.showWiFiNotification = YES;
-    OCMVerify([self.userDefaultsMock setBool:YES forKey:@"NoWiFiNotification"]);
+    OCMVerify([self.userDefaultsMock setBool:YES forKey:@"ShowWiFiNotification"]);
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testLoggingInWithUserWithSIPEnabledWillFetchAppAccount {
-    NSString *appAccountURLString = @"/account/12340042";
-    NSDictionary *response = @{@"client": @"42",
-                               @"app_account": appAccountURLString,
-                               };
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+    NSDictionary *response = @{@"client": @"42"};
+    
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
@@ -249,86 +266,129 @@
         passedBlock(nil, response, nil);
         return YES;
     }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
 
-    [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
 
-    OCMVerify([self.operationsMock retrievePhoneAccountForUrl:[OCMArg isEqual:@"/account/12340042"] withCompletion:[OCMArg any]]);
+    OCMVerify([self.operationsMock getMobileProfileWithCompletion:[OCMArg any]]);
 }
 
-// Fails, fix with VIALI-3272
 - (void)testFetchingAppAccountWillSetProperCredentials {
     NSDictionary *response = @{@"client": @"42",
                                @"app_account": @"/account/12340042",
                                };
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+    
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
-    NSDictionary *responseAppAccount = @{@"account_id": @12340042,
-                                         @"password": @"testPassword",
+    
+    NSDictionary *responseAppAccount = @{@"appaccount_account_id": @12340042,
+                                         @"appaccount_password": @"testPassword",
                                          };
-    OCMStub([self.operationsMock retrievePhoneAccountForUrl:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
-        passedBlock(nil, responseAppAccount, nil);
-        return YES;
-    }]]);
 
     OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, responseAppAccount, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock pushUseEncryptionWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL success, NSError *error)) {
+        passedBlock(YES, nil);
         return YES;
     }]]);
 
     OCMStub([SAMKeychain passwordForService:[OCMArg any] account:[OCMArg any]]).andReturn(@"testPassword");
 
-    [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
-
-    OCMVerify([self.userDefaultsMock setObject:[OCMArg isEqual:@"12340042"] forKey:[OCMArg isEqual:@"SIPAccount"]]);
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error) {
+        OCMVerify([self.userDefaultsMock setObject:[OCMArg isEqual:@"12340042"] forKey:[OCMArg isEqual:@"SIPAccount"]]);
+    }];
+    
     OCMVerify([SAMKeychain setPassword:[OCMArg isEqual:@"testPassword"] forService:[OCMArg any] account:@"12340042"]);
     XCTAssertEqualObjects(self.user.sipAccount, @"12340042", @"the correct sipaccount should have been set");
     XCTAssertEqualObjects(self.user.sipPassword, @"testPassword", @"the correct sipaccount should have been set");
-
     XCTAssertTrue(self.user.sipEnabled, @"Setting: \"Enable VoIP\" should have been enabled");
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testLoggingInUserWithoutSIPEnabledWillPostLoginNotification {
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
     NSDictionary *response = @{@"client": @"42"};
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
 
-    [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:nil];
 
     OCMVerify([mockNotificationCenter postNotificationName:[OCMArg isEqual:SystemUserLoginNotification] object:[OCMArg isEqual:self.user]]);
 
     [mockNotificationCenter stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testLoggingInUserWithSIPEnabledWillPostLoginNotification {
     id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
     OCMStub([mockNotificationCenter defaultCenter]).andReturn(mockNotificationCenter);
 
     NSDictionary *response = @{@"client": @"42"};
-    OCMStub([self.operationsMock loginWithUsername:[OCMArg any] password:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+     OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
         passedBlock(response, nil);
         return YES;
     }]]);
-    NSDictionary *responseAppAccount = @{@"account_id": @12340042,
-                                         @"password": @"testPassword",
+    
+    NSDictionary *responseAppAccount = @{@"appaccount_account_id": @12340042,
+                                         @"appaccount_password": @"testPassword",
                                          };
-    OCMStub([self.operationsMock retrievePhoneAccountForUrl:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);
+    
+    OCMStub([self.operationsMock pushUseEncryptionWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL success, NSError *error)) {
+        passedBlock(YES, nil);
+        return YES;
+    }]]);
 
-    [self.user loginWithUsername:@"testUser" password:@"testPassword" completion:nil];
+    [self.user loginToCheckTwoFactorWithUserName:@"testUsername" password:@"testPassword" andToken:@"testToken" completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error) {
+    }];
 
     OCMVerify([mockNotificationCenter postNotificationName:[OCMArg isEqual:SystemUserLoginNotification] object:[OCMArg isEqual:self.user]]);
-
+    
     [mockNotificationCenter stopMocking];
 }
 
@@ -342,7 +402,6 @@
     [mockNotificationCenter stopMocking];
 }
 
-// Fails, fix with VIALI-3272
 - (void)testUnAuthorizedNotificationWillLogoutUser {
     self.user.loggedIn = YES;
 
@@ -361,12 +420,13 @@
 }
 
 - (void)testUserCanEnableSIPWhenHeIsAllowedAndHasAccount {
-    OCMStub([self.userDefaultsMock boolForKey:@"SIPAllowed"]).andReturn(YES);
+    OCMStub([self.userDefaultsMock boolForKey:@"SipEnabled"]).andReturn(YES);
+    
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.sipAccount = @"42";
-
+    user.loggedIn = YES;
     user.sipEnabled = YES;
-
+    
     OCMVerify([self.userDefaultsMock setBool:YES forKey:@"SipEnabled"]);
 }
 
@@ -383,14 +443,13 @@
     [keyChainMock stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testUpdateSIPAccountInformationWhenAsked {
-    // Make sure we have a properly loggedin user.
+    // Make sure we have a properly logged in user.
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
     user.sipAccount = @"42";
-    user.sipEnabled = YES;
     user.loggedIn = YES;
+    user.sipEnabled = YES;
 
     // Fake user profile.
     NSDictionary *response = @{@"client": @"42",
@@ -402,16 +461,32 @@
     }]]);
 
     // Fake sip account.
-    NSDictionary *responseAppAccount = @{@"account_id": @12340044,
-                                         @"password": @"newTestPassword",
+    NSDictionary *responseAppAccount = @{@"appaccount_account_id": @12340044,
+                                         @"appaccount_password": @"newTestPassword",
                                          };
-    OCMStub([self.operationsMock retrievePhoneAccountForUrl:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);
-
+    
+    OCMStub([self.operationsMock pushUseEncryptionWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL success, NSError *error)) {
+        passedBlock(YES, nil);
+        return YES;
+    }]]);
+    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Expect status call from TwoStepCall."];
-    [user updateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
+    [user getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
         XCTAssertTrue(success, @"It should have been a success when updating the SIP account of the user.");
         XCTAssertNil(error, @"There should be no error");
         XCTAssertEqualObjects(user.sipAccount, @"12340044", @"The new account should have been set.");
@@ -428,48 +503,75 @@
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
     user.loggedIn = YES;
-    [user getAndActivateSIPAccountWithCompletion:nil];
-
-    OCMVerify([self.operationsMock userProfileWithCompletion:[OCMArg any]]);
+    
+    [user getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
+        OCMVerify([self.operationsMock userProfileWithCompletion:[OCMArg any]]);
+    }];
 }
 
 - (void)testGetAndActivateSipAccountWillAskOperationManagerToFetchAccount {
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
-        passedBlock(nil,  @{@"client": @"42",
-                            @"app_account": @"/account/12340044",
-                            }, nil);
+    
+    NSDictionary *response = @{@"client": @"42"};
+    
+    OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
         return YES;
     }]]);
+    
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
     user.loggedIn = YES;
+    
     [user getAndActivateSIPAccountWithCompletion:nil];
-
-    OCMVerify([self.operationsMock retrievePhoneAccountForUrl:[OCMArg isEqual:@"/account/12340044"] withCompletion:[OCMArg any]]);
+    OCMVerify([self.operationsMock getMobileProfileWithCompletion:[OCMArg any]]);
 }
 
 - (void)testGetAndActivateSipAccountWillReturnYESOnSuccess {
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
+    
+    NSDictionary *response = @{@"client": @"42"};
+    
+    // Fake sip account.
+    NSDictionary *responseAppAccount = @{@"appaccount_account_id": @12340044,
+                                         @"appaccount_password": @"newTestPassword",
+                                         };
+    
     OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
-        passedBlock(nil,  @{@"client": @"42",
-                            @"app_account": @"/account/12340044",
-                            }, nil);
+        passedBlock(nil, response, nil);
         return YES;
     }]]);
-    OCMStub([self.operationsMock retrievePhoneAccountForUrl:[OCMArg isEqual:@"/account/12340044"] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
-        passedBlock(nil,  @{@"account_id": @12340044,
-                            @"password": @"newTestPassword",
-                            }, nil);
-
+    
+    OCMStub([self.operationsMock getSystemUserInfowithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
+        passedBlock(response, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+        passedBlock(nil, responseAppAccount, nil);
+        return YES;
+    }]]);
+    
+    OCMStub([self.operationsMock pushUseEncryptionWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL success, NSError *error)) {
+        passedBlock(YES, nil);
         return YES;
     }]]);
     user.loggedIn = YES;
 
-    [user getAndActivateSIPAccountWithCompletion:nil];
-
-    XCTAssertTrue(user.sipEnabled, @"User should have sip enabled");
-    XCTAssertEqualObjects(user.sipAccount, @"12340044", @"User should have correct sip account");
+    [user getAndActivateSIPAccountWithCompletion:^(BOOL success, NSError *error) {
+        XCTAssertTrue(user.sipEnabled, @"User should have sip enabled");
+        XCTAssertEqualObjects(user.sipAccount, @"12340044", @"User should have correct sip account");
+    }];
 }
 
 - (void)testClientIDSetterWithAURLStyledString {
@@ -521,7 +623,6 @@
     XCTAssertNil(user.clientID, @"Client ID should have been nil");
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testKVONotificationFiresWhenClientIDChangesFromNilToValue {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -549,7 +650,6 @@
     [kvoObserver stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testKVONotificationFiresWhenClientIDChanges {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -577,7 +677,6 @@
     [kvoObserver stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testKVONotificationFiresWhenClientIDChangesFromValueToNil {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -605,7 +704,6 @@
     [kvoObserver stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testKVONotificationDoesNotFire {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));
@@ -633,7 +731,6 @@
     [kvoObserver stopMocking];
 }
 
-// Disabled, fix with VIALI-3272
 - (void)testKVONotificationDoesNotFireNilCase {
     // Given
     NSString *kvoKeypath = NSStringFromSelector(@selector(clientID));

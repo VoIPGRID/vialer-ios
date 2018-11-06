@@ -13,7 +13,6 @@
 
 
 NSString * const SystemUserErrorDomain = @"Vialer.Systemuser";
-
 NSString * const SystemUserLoginNotification                = @"SystemUserLoginNotification";
 NSString * const SystemUserLogoutNotification               = @"SystemUserLogoutNotification";
 NSString * const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogoutNotificationDisplayNameKey";
@@ -24,11 +23,8 @@ NSString * const SystemUserStunUsageChangedNotification         = @"SystemUserSt
 NSString * const SystemUserEncryptionUsageChangedNotification   = @"SystemUserEncryptionUsageChangedNotification";
 
 NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDisabledNotification";
-
 NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
-
 NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
-
 NSString * const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
 /**
  *  Api Dictionary keys.
@@ -446,7 +442,7 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
         if (error && [responseData objectForKey:@"apitoken"]) {
             NSDictionary *apiTokenDict = responseData[@"apitoken"];
 
-                // There is no token supplied!
+            // There is no token supplied!
             if ([apiTokenDict objectForKey:@"two_factor_token"]) {
                 if (completion) {
                     NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
@@ -753,7 +749,7 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
 - (void)getAndActivateSIPAccountWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (self.loggedIn) {
         [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
-            // It is only an success if the request was success and there was an sipAcount set.
+            // It is only a success if the request was successful and there was a sipAcount set.
             if (success && self.sipAccount) {
                 self.sipEnabled = YES;
             } else {
@@ -828,6 +824,8 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
 
             [self setMobileProfileFromUserDict:responseData];
 
+            // This is to update properties like sipEnabled and sipAccount in various cases like when fetching app account
+            [self setOwnPropertiesFromUserDict:responseData withUsername:nil andPassword:nil];
             if (completion) completion(YES, nil);
         } else {
             if (completion) completion(NO, error);
