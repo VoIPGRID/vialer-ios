@@ -1,18 +1,21 @@
 PODS:
-  - AFNetworkActivityLogger (2.0.4):
-    - AFNetworking/NSURLConnection (~> 2.0)
-    - AFNetworking/NSURLSession (~> 2.0)
-  - AFNetworking/NSURLConnection (2.6.3):
+  - AFNetworkActivityLogger (3.0.0):
+    - AFNetworking/NSURLSession (~> 3.0)
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.3)
-  - AFNetworking/Security (2.6.3)
-  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
   - CocoaLumberjack (3.4.2):
     - CocoaLumberjack/Default (= 3.4.2)
     - CocoaLumberjack/Extensions (= 3.4.2)
@@ -36,7 +39,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - OCMock (3.4.2)
+  - OCMock (3.4.3)
   - OHHTTPStubs (6.1.0):
     - OHHTTPStubs/Default (= 6.1.0)
   - OHHTTPStubs/Core (6.1.0)
@@ -53,7 +56,7 @@ PODS:
   - PBWebViewController (0.5.0)
   - Reachability (3.2)
   - SAMKeychain (1.5.3)
-  - SimulatorStatusMagic (2.3)
+  - SimulatorStatusMagic (2.3.2)
   - SPLumberjackLogFormatter (0.0.1):
     - CocoaLumberjack
   - SVProgressHUD (2.2.5)
@@ -64,8 +67,8 @@ PODS:
     - Vialer-pjsip-iOS
 
 DEPENDENCIES:
-  - AFNetworkActivityLogger (~> 2.0)
-  - AFNetworking/NSURLSession (~> 2.6)
+  - AFNetworkActivityLogger
+  - AFNetworking
   - GoogleAnalytics
   - HTCopyableLabel
   - le (from `https://github.com/LogentriesCommunity/le_ios.git`)
@@ -117,25 +120,25 @@ CHECKOUT OPTIONS:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
 SPEC CHECKSUMS:
-  AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
-  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  AFNetworkActivityLogger: e77f68d014becb33c4306a23f56a64906ff72670
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   le: bf3cacea7b4208b2bcda82b0c1c224603f5651a9
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   "MMDrawerController+Storyboard": 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
-  OCMock: ebe9ee1dca7fbed0ff9193ac0b3e2d8862ea56f6
+  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
   OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SimulatorStatusMagic: 631fe6e4195a8a8d587ad8744af9015126526cc2
+  SimulatorStatusMagic: 0c0e711acef6e70dd8a0710962347635a9cdef24
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Vialer-pjsip-iOS: 9b8fc1226e9a51150642b9cc81a8c62c9e9c530b
   VialerSIPLib: d62821042b97fd6264fd44da07661648dd00fb3f
 
-PODFILE CHECKSUM: 8e7a2fdf72deeac99781236e5c990c0e454b5552
+PODFILE CHECKSUM: 06f5b387fe0b1888b0635c151ef2e7fe39da6305
 
 COCOAPODS: 1.5.3

@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 
 def default_pods
-    pod 'AFNetworkActivityLogger', '~> 2.0'
-    pod 'AFNetworking/NSURLSession', '~> 2.6'
+    pod 'AFNetworkActivityLogger'
+    pod 'AFNetworking'
     pod 'GoogleAnalytics'
     pod 'HTCopyableLabel'
     pod 'le', :git => 'https://github.com/LogentriesCommunity/le_ios.git'

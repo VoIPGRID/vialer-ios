@@ -13,6 +13,6 @@
  *  @param email      The email address where the password reset is asked for.
  *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.
  */
-- (void)passwordResetWithEmail:(NSString *)email withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)passwordResetWithEmail:(NSString *)email withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion;
 
 @end

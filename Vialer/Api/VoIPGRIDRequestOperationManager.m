@@ -30,6 +30,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 
 @interface VoIPGRIDRequestOperationManager()
 @property (nonatomic) BOOL checkingTwoFactor;
+@property (strong, nonatomic) AFURLSessionManager *manager;
 @end
 
 @implementation VoIPGRIDRequestOperationManager
@@ -74,29 +75,37 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     return self;
 }
 
+- (AFURLSessionManager *)manager {
+    if (!_manager) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    }
+    return _manager;
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Default authorized methods
 
-- (AFHTTPRequestOperation *)GET:(NSString *)url parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (NSURLSessionDataTask *)GET:(NSString *)url parameters:parameters withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     return [self createRequestWithUrl:url andMethod:@"GET" parameters:parameters withCompletion:completion];
 }
 
-- (AFHTTPRequestOperation *)PUT:(NSString *)url parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (NSURLSessionDataTask *)PUT:(NSString *)url parameters:parameters withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     return [self createRequestWithUrl:url andMethod:@"PUT" parameters:parameters withCompletion:completion];
 }
 
-- (AFHTTPRequestOperation *)POST:(NSString *)url parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (NSURLSessionDataTask *)POST:(NSString *)url parameters:parameters withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     return [self createRequestWithUrl:url andMethod:@"POST" parameters:parameters withCompletion:completion];
 }
 
-- (AFHTTPRequestOperation *)DELETE:(NSString *)url parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (NSURLSessionDataTask *)DELETE:(NSString *)url parameters:parameters withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     return [self createRequestWithUrl:url andMethod:@"DELETE" parameters:parameters withCompletion:completion];
 }
 
-- (AFHTTPRequestOperation *)createRequestWithUrl:(NSString *)url andMethod:(NSString *)method parameters:parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (NSURLSessionDataTask *)createRequestWithUrl:(NSString *)url andMethod:(NSString *)method parameters:parameters withCompletion:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completion {
     url = [[NSURL URLWithString:url relativeToURL:self.baseURL] absoluteString];
 
     if ([SystemUser currentUser]) {
@@ -107,28 +116,30 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
         }
     }
 
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:url parameters:parameters error:nil];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        completion(operation, responseObject, nil);
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        /**
-         *  Notify if the request was unauthorized.
-         */
-        if (operation.response.statusCode == VoIPGRIDHttpErrorUnauthorized) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:VoIPGRIDRequestOperationManagerUnAuthorizedNotification object:self];
+    NSURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:url parameters:parameters error:nil];
+    NSURLSessionDataTask *dataTask = [self.manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            /**
+             *  Notify if the request was unauthorized.
+             */
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+            if (httpResponse.statusCode == VoIPGRIDHttpErrorUnauthorized) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:VoIPGRIDRequestOperationManagerUnAuthorizedNotification object:self];
+            }
+            completion(response, nil, error);
+        } else {
+            completion(response, responseObject, nil);
         }
-        completion(operation, nil, error);
     }];
+    [self setHandleAuthorizationRedirectForRequest:request];
+    [dataTask resume];
 
-    [self setHandleAuthorizationRedirectForRequest:request andOperation:operation];
-    [self.operationQueue addOperation:operation];
-
-    return operation;
+    return dataTask;
 }
 
-- (void)setHandleAuthorizationRedirectForRequest:(NSURLRequest *)request andOperation:(AFHTTPRequestOperation *)operation {
+- (void)setHandleAuthorizationRedirectForRequest:(NSURLRequest *)request {
     __block NSString *authorization = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
-    [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
+    [self.manager setTaskWillPerformHTTPRedirectionBlock:^NSURLRequest * _Nullable(NSURLSession * _Nonnull session, NSURLSessionTask * _Nonnull task, NSURLResponse * _Nonnull response, NSURLRequest * _Nonnull request) {
         if ([request.allHTTPHeaderFields objectForKey:@"Authorization"] != nil) {
             return request;
         }
@@ -136,6 +147,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
         NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL cachePolicy:request.cachePolicy timeoutInterval:request.timeoutInterval];
         [urlRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
         return urlRequest;
+
     }];
 }
 
@@ -154,12 +166,13 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
     if (![token isEqualToString:@""]) {
         [parameters setObject:token forKey:@"two_factor_token"];
     }
-    
-    [self POST:VoIPGRIDRequestOperationManagerURLAPIToken parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+
+    [self POST:VoIPGRIDRequestOperationManagerURLAPIToken parameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (error) {
                 NSString* errorResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-                if (![errorResponse isEqualToString:@""] && [operation.response statusCode] == 400) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) operation;
+                if (![errorResponse isEqualToString:@""] && httpResponse.statusCode == 400) {
                     NSError *jsonError;
                     responseData = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey]
                                                                    options:0
@@ -178,22 +191,24 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
                                                                    URLString:[[NSURL URLWithString:VoIPGRIDRequestOperationManagerURLSystemUserProfile relativeToURL:self.baseURL] absoluteString]
                                                                   parameters:nil
                                                                        error:nil];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (completion) {
-            completion(responseObject, nil);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
-                                   NSLocalizedDescriptionKey : NSLocalizedString(@"Login failed", nil)
-                                   };
-        completion(nil, [NSError errorWithDomain:VoIPGRIDRequestOperationManagerErrorDomain code:VoIPGRIDRequestOperationsManagerErrorLoginFailed userInfo:userInfo]);
-    }];
+     NSURLSessionDataTask *dataTask = [self.manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+         if (error) {
+             NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
+                                       NSLocalizedDescriptionKey : NSLocalizedString(@"Login failed", nil)
+                                       };
+            completion(nil, [NSError errorWithDomain:VoIPGRIDRequestOperationManagerErrorDomain code:VoIPGRIDRequestOperationsManagerErrorLoginFailed userInfo:userInfo]);
+         } else {
+             if(completion) {
+                 completion(responseObject, nil);
+             }
+         }
+     }];
 
-    [self setHandleAuthorizationRedirectForRequest:request andOperation:operation];
-    [self.operationQueue addOperation:operation];
+    [self setHandleAuthorizationRedirectForRequest:request];
+    [dataTask resume];
 }
 
-- (void)getMobileProfileWithCompletion:(void(^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) completion {
+- (void)getMobileProfileWithCompletion:(void(^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) completion {
     [self GET:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:nil withCompletion: completion];
 }
 
@@ -202,8 +217,8 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 // Uncomment all below, put a breakpoint on line: [possibleModifiedResponseData setObject:[NSNumber numberWithBool:allowAppAccount] forKey:@"allow_app_account"];
 // In the debug window you can change the value of allowAppAccount with "call allowAppAccount = YES/NO;"
 //BOOL allowAppAccount = YES;
-//- (void)userProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
-//    [self GET:VoIPGRIDRequestOperationManagerURLSystemUserProfile parameters:nil withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+//- (void)userProfileWithCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
+//    [self GET:VoIPGRIDRequestOperationManagerURLSystemUserProfile parameters:nil withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
 //        NSMutableDictionary *possibleModifiedResponseData = [responseData mutableCopy];
 //
 //        if ([responseData objectForKey:@"allow_app_account"]) {
@@ -215,7 +230,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 //    }];
 //}
 
-- (void)userProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)userProfileWithCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     NSString *apiToken = [SystemUser currentUser].apiToken;
     NSString *username = [SystemUser currentUser].username;
     if (apiToken == nil || [apiToken isEqualToString:@""]) {
@@ -250,7 +265,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 
 - (void)pushMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion {
     NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyMobileNumber : mobileNumber};
-    [self PUT:VoIPGRIDRequestOperationManagerURLMobileNumber parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self PUT:VoIPGRIDRequestOperationManagerURLMobileNumber parameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (error) {
                 completion(NO, error);
@@ -264,7 +279,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 - (void)pushUseEncryptionWithCompletion:(void (^)(BOOL, NSError *))completion {
     NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption : [[SystemUser currentUser] useTLS] ? @YES : @NO};
     
-    [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (error) {
                 completion(NO, error);
@@ -278,7 +293,7 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 - (void)pushUseOpus:(BOOL)enable withCompletion:(void (^)(BOOL, NSError *))completion {
     NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseOpus: enable ? @YES : @NO};
 
-    [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (error) {
                 completion(NO, error);
@@ -291,39 +306,39 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 
 #pragma mark - Miscellaneous
 
-- (void)autoLoginTokenWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)autoLoginTokenWithCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     [self GET:VoIPGRIDRequestOperationManagerURLAutoLoginToken parameters:nil withCompletion:completion];
 }
 
 #pragma mark - SIP
 
-- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     phoneAccountUrl = [phoneAccountUrl stringByReplacingOccurrencesOfString:@"/api/" withString:@""];
     [self GET:phoneAccountUrl parameters:nil withCompletion:completion];
 }
 
 #pragma mark - User Destinations
 
-- (void)userDestinationsWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)userDestinationsWithCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     [self GET:VoIPGRIDRequestOperationManagerURLUserDestination parameters:nil withCompletion:completion];
 }
 
-- (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     [self PUT:selectedUserResourceUri parameters:destinationDict withCompletion:completion];
 }
 
 #pragma mark - TwoStepCall
 
-- (void)setupTwoStepCallWithParameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)setupTwoStepCallWithParameters:(NSDictionary *)parameters withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     [self POST:VoIPGRIDRequestOperationManagerURLTwoStepCall parameters:parameters withCompletion:completion];
 }
 
-- (void)twoStepCallStatusForCallId:(NSString *)callId withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)twoStepCallStatusForCallId:(NSString *)callId withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     NSString *updateStatusURL = [NSString stringWithFormat:@"%@%@/", VoIPGRIDRequestOperationManagerURLTwoStepCall, callId];
     [self GET:updateStatusURL parameters:nil withCompletion:completion];
 }
 
-- (void)cancelTwoStepCallForCallId:(NSString *)callId withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion {
+- (void)cancelTwoStepCallForCallId:(NSString *)callId withCompletion:(void (^)(NSURLResponse *operation, NSDictionary *responseData, NSError *error))completion {
     NSString *updateStatusURL = [NSString stringWithFormat:@"%@%@/", VoIPGRIDRequestOperationManagerURLTwoStepCall, callId];
     [self DELETE:updateStatusURL parameters:nil withCompletion:completion];
 }

@@ -117,10 +117,11 @@ static int const TwoStepCallCancelTimeout = 3.0;
                                  @"b_cli" : @"default_number",
                                  };
 
-    [self.operationsManager setupTwoStepCallWithParameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self.operationsManager setupTwoStepCallWithParameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         // Check if error.
         if (error) {
-            if (operation.response.statusCode == VoIPGRIDHttpErrorBadRequest) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)operation;
+            if (httpResponse.statusCode == VoIPGRIDHttpErrorBadRequest) {
                 /**
                  *  Request malfomed, the request returned the failure reason.
                  *
@@ -128,12 +129,13 @@ static int const TwoStepCallCancelTimeout = 3.0;
                  *  - Extensions or phonenumbers not valid.
                  *  - This number is not permitted.
                  */
-                if (operation.responseString.length > 0) {
-                    if ([operation.responseString isEqualToString:TwoStepCallErrorPhoneNumber]) {
+                NSString *responseString = [responseData description];
+                if (responseString.length > 0) {
+                    if ([responseString isEqualToString:TwoStepCallErrorPhoneNumber]) {
                         self.status = TwoStepCallStatusInvalidNumber;
                         self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Invalid number used to setup call", nil)}];
                     } else {
-                        self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: operation.responseString}];
+                        self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: responseString}];
                     }
                 }
             } else {
@@ -204,7 +206,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
 
     self.cancelingCall = YES;
     self.canCancel = NO;
-    [self.operationsManager cancelTwoStepCallForCallId:self.callID withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self.operationsManager cancelTwoStepCallForCallId:self.callID withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (error) {
             self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorCancelFailed userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Two step call cancel failed", nil)}];
             return;
@@ -222,7 +224,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
     }
 
     self.fetching = YES;
-    [self.operationsManager twoStepCallStatusForCallId:self.callID withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self.operationsManager twoStepCallStatusForCallId:self.callID withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         self.fetching = NO;
         if (error) {
             self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorStatusRequestFailed userInfo:@{NSUnderlyingErrorKey: error,

@@ -3,12 +3,12 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 
 /**
  *  Error Domain for VoIPGRIDRequestOperationManager.
  */
-extern NSString * const VoIPGRIDRequestOperationManagerErrorDomain;
+extern NSString * _Nonnull const VoIPGRIDRequestOperationManagerErrorDomain;
 
 /**
  *  Error the VoIPGRIDRequestOperationManager can have.
@@ -51,7 +51,10 @@ typedef NS_ENUM(NSInteger, VoIPGRIDHttpErrors) {
  */
 extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
 
-@interface VoIPGRIDRequestOperationManager : AFHTTPRequestOperationManager
+@interface VoIPGRIDRequestOperationManager : AFHTTPSessionManager
+
+@property (readonly) AFURLSessionManager *manager;
+
 /**
  *  Default initializer for this class.
  *
@@ -80,9 +83,11 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param parameters The url parameters that should be sent with the request.
  *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
  *
- *  @return The AFHTTPRequestOperation instance.
+ *  @return The NSURLResponse instance.
  */
-- (AFHTTPRequestOperation *)GET:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (nullable NSURLSessionDataTask *)GET:(nonnull NSString *)URLString
+                            parameters:(nullable id)parameters
+                        withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will do a HTTP PUT request on the given url with given parameters.
@@ -95,10 +100,11 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param parameters The url parameters that should be sent with the request.
  *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
  *
- *  @return The AFHTTPRequestOperation instance.
+ *  @return The NSURLResponse instance.
  */
-- (AFHTTPRequestOperation *)PUT:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
-
+- (nullable NSURLSessionDataTask *)PUT:(nonnull NSString *)URLString
+                            parameters:(nullable id)parameters
+                        withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 /**
  *  This method will do a HTTP POST request on the given url with given parameters.
  *
@@ -110,10 +116,11 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param parameters The url parameters that should be sent with the request.
  *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
  *
- *  @return The AFHTTPRequestOperation instance.
+ *  @return The NSURLResponse instance.
  */
-- (AFHTTPRequestOperation *)POST:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
-
+- (nullable NSURLSessionDataTask *)POST:(nonnull NSString *)URLString
+                            parameters:(nullable id)parameters
+                        withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 /**
  *  This method will do a HTTP DELETE request on the given url with given parameters.
  *
@@ -125,11 +132,16 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param parameters The url parameters that should be sent with the request.
  *  @param completion A block that will be called after the request has been finished. It will have the operation, possible responseData and an Error if something went wrong.
  *
- *  @return The AFHTTPRequestOperation instance.
+ *  @return The NSURLResponse instance.
  */
-- (AFHTTPRequestOperation *)DELETE:(NSString *)url parameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (nullable NSURLSessionDataTask *)DELETE:(nonnull NSString *)URLString
+                               parameters:(nullable id)parameters
+                           withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
-- (void)loginWithUserNameForTwoFactor:(NSString *)username password:(NSString *)password orToken:(NSString *)token withCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion;
+- (void)loginWithUserNameForTwoFactor:(nonnull NSString *)username
+                             password:(nonnull NSString *)password
+                              orToken:(nonnull NSString *)token
+                       withCompletion:(void (^ _Nullable)(NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to remotely login the user.
@@ -140,21 +152,21 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param password   The password that should be used on login.
  *  @param completion A block that will be called after the login attempt. It will return the response data if any or an error if any.
  */
-- (void)getSystemUserInfowithCompletion:(void (^)(NSDictionary *responseData, NSError *error))completion;
+- (void)getSystemUserInfowithCompletion:(void (^ _Nullable )(NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  Logout the user notification for overriding in the subclass
  *
  *  @param notification NSNotification
  */
-- (void)logoutUserNotification:(NSNotification *)notification;
+- (void)logoutUserNotification:(NSNotification * _Nullable)notification;
 
 /**
  *  This method will try to fetch the profile of the currently authenticated user.
  *
  *  @param completion A block that will be called after the fetch attempt. It will return the response data if any or an error if any.
  */
-- (void)userProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)userProfileWithCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  Pushes the user's mobile number to the server
@@ -162,14 +174,14 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param mobileNumber The mobile number to push.
  *  @param completion   A block that will be called after fetch attempt. It will return the response data if any or an error if any.
  */
-- (void)pushMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion;
+- (void)pushMobileNumber:(nonnull NSString *)mobileNumber withCompletion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion;
 
 /**
  *  Enables secure calling for the users connected VoIP Account.
  *
  *  @param completion   A block that will be called after the push attempt. It will return the response data if any or an error if any.
  */
-- (void)pushUseEncryptionWithCompletion:(void(^)(BOOL success, NSError *error))completion;
+- (void)pushUseEncryptionWithCompletion:(void(^ _Nullable)(BOOL success, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to enable or disable the use of the opus codec.
@@ -184,14 +196,14 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *
  *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.
  */
-- (void)getMobileProfileWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)getMobileProfileWithCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to request for a login token for the currently authenticated user.
  *
  *  @param completion A block that will be called after request attempt. It will return the response data if any or an error if any.
  */
-- (void)autoLoginTokenWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)autoLoginTokenWithCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to remotely fetch the phone account credentials.
@@ -199,14 +211,14 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param phoneAccountUrl Url of the phone account that needs to be fetched.
  *  @param completion      A block that will be called after fetch attempt. It will return the response data if any or an error if any.
  */
-- (void)retrievePhoneAccountForUrl:(NSString *)phoneAccountUrl withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)retrievePhoneAccountForUrl:(nonnull NSString *)phoneAccountUrl withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nonnull responseData, NSError * _Nonnull error))completion;
 
 /**
  *  This method will try to remotely fetch the user destinations of the currently authenticated user.
  *
  *  @param completion A block that will be called after the fetch attempt. It will return the response data if any or an error if any.
  */
-- (void)userDestinationsWithCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)userDestinationsWithCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to remotely set the user destination of the currently authenticated user.
@@ -215,7 +227,9 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param destinationDict         A dictionary with the new user destination.
  *  @param completion              A block that will be called after put attempt. It will return the response data if any or an error if any.
  */
-- (void)pushSelectedUserDestination:(NSString *)selectedUserResourceUri destinationDict:(NSDictionary *)destinationDict withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)pushSelectedUserDestination:(nonnull NSString *)selectedUserResourceUri
+                    destinationDict:(nonnull NSDictionary *)destinationDict
+                     withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to setup a TwoStep call remotely.
@@ -223,7 +237,8 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param parameters A dictionary with parameters that are sent along with the request.
  *  @param completion A block that will be called after the setup attempt. It will return the response data if any or an error if any.
  */
-- (void)setupTwoStepCallWithParameters:(NSDictionary *)parameters withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)setupTwoStepCallWithParameters:(nonnull NSDictionary *)parameters
+                        withCompletion:(void (^ _Nullable )(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to fetch the callstatus of a TwoStep call remotely.
@@ -231,7 +246,8 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param callId     The ID of the call.
  *  @param completion A block that will be called after the fetch attempt. It will return the response data if any or an error if any.
  */
-- (void)twoStepCallStatusForCallId:(NSString *)callId withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)twoStepCallStatusForCallId:(nonnull NSString *)callId
+                    withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
 /**
  *  This method will try to cancel to TwoStep call remotely.
@@ -239,7 +255,7 @@ extern NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification;
  *  @param callId     The ID of the call.
  *  @param completion A block that will be called after the cancel attempt. It will return the response data if any or an error if any.
  */
-- (void)cancelTwoStepCallForCallId:(NSString *)callId withCompletion:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error))completion;
+- (void)cancelTwoStepCallForCallId:(nonnull NSString *)callId withCompletion:(void (^ _Nullable)(NSURLResponse * _Nonnull operation, NSDictionary * _Nullable responseData, NSError * _Nullable error))completion;
 
-- (void)updateAuthorisationHeaderWithTokenForUsername:(NSString *)username;
+- (void)updateAuthorisationHeaderWithTokenForUsername:(nonnull NSString *)username;
 @end

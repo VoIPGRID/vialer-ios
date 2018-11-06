@@ -3,7 +3,6 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "Configuration.h"
 #import "LoginFormView.h"
 #import "LogInViewController.h"
 #import <OCMock/OCMock.h>
@@ -21,9 +20,6 @@
 - (void)setUp {
     [super setUp];
     self.color = [UIColor redColor];
-
-    id colorConfigurationMock = OCMClassMock([ColorConfiguration class]);
-    OCMStub([colorConfigurationMock colorForKey:[OCMArg any]]).andReturn(self.color);
 
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
     [self.loginViewController loadViewIfNeeded];

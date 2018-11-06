@@ -667,7 +667,7 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
         VialerLogInfo(@"Already logging out, no need to fetch user profile");
         return;
     }
-    [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
+    [self.operationsManager userProfileWithCompletion:^(NSURLResponse *operation, NSDictionary *responseObject, NSError *error) {
         if (!error) {
             self.outgoingNumber = responseObject[SystemUserApiKeyOutgoingNumber];
         }
@@ -764,9 +764,13 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
 }
 
 - (void)fetchMobileProfileFromRemoteWithCompletion:(void(^)(BOOL success, NSError *error))completion {
-    [self.operationsManager getMobileProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
-        if (!error) {
-
+    [self.operationsManager getMobileProfileWithCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
+        if (error) {
+            if (completion) completion(NO, error);
+        } else {
+            
+            [self setMobileProfileFromUserDict:responseData];
+            
             id sipAccount = responseData[SystemUserApiKeySIPAccount];
             id sipPassword = responseData[SystemUserApiKeySIPPassword];
             id useEncryption = responseData[SystemUserApiKeyUseEncryption];
@@ -777,7 +781,6 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
                 if (completion) {
                     completion(YES, nil);
                 }
-                return;
             }
             
             if (![sipAccount isKindOfClass:[NSNumber class]] || ![sipPassword isKindOfClass:[NSString class]]) {
@@ -786,7 +789,6 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
                     NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingSIPAccount userInfo:nil];
                     completion(NO, error);
                 }
-                return;
             }
             
             if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
@@ -827,8 +829,6 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
             // This is to update properties like sipEnabled and sipAccount in various cases like when fetching app account
             [self setOwnPropertiesFromUserDict:responseData withUsername:nil andPassword:nil];
             if (completion) completion(YES, nil);
-        } else {
-            if (completion) completion(NO, error);
         }
     }];
 }
@@ -836,7 +836,7 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
 #pragma mark - API calls
 
 - (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion {
-    [self.operationsManager userProfileWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject, NSError *error) {
+    [self.operationsManager userProfileWithCompletion:^(NSURLResponse *operation, NSDictionary *responseObject, NSError *error) {
         
         if (!error && [responseObject objectForKey:SystemUserApiKeyAPIToken]) {
             self.apiToken = responseObject[SystemUserApiKeyAPIToken];

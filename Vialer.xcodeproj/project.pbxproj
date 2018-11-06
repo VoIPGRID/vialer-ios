@@ -571,6 +571,7 @@
 		EE3C48272080DC2D00CC80E5 /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
 		EE3D8675201F113900CEFDC6 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D8674201F113800CEFDC6 /* Voys.xcassets */; };
 		EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D8674201F113800CEFDC6 /* Voys.xcassets */; };
+		EE45A3A421919D160065AB62 /* SystemUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */; };
 		EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
@@ -728,13 +729,7 @@
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
-		EE683F8D216254A700D6831B /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
 		EE6F2A77214A330500229C75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE6F2A75214A330500229C75 /* InfoPlist.strings */; };
-		EE733DA22164995900D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
-		EE733DA32164995A00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
-		EE733DA42164995B00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
-		EE733DA52164995B00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
-		EE733DA62164995C00D05CA3 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE683F8C216254A700D6831B /* AudioQualityViewController.swift */; };
 		EE733DAA21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
 		EE733DAB21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
 		EE733DAC21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
@@ -754,6 +749,12 @@
 		EE8C5EAA2147B056008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
 		EE8C5EAB2147B056008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
 		EE8C5EAC2147B057008A430F /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		EE9D2F5F2191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		EE9D2F602191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		EE9D2F612191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		EE9D2F622191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		EE9D2F632191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		EE9D2F642191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
 		EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2671F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
 		EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
@@ -1302,7 +1303,6 @@
 		C49EDAE91E35FD6C0053F68C /* CONTRIBUTORS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTORS.md; sourceTree = "<group>"; };
 		C49EDAEA1E35FE570053F68C /* ISSUE_TEMPLATE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = ISSUE_TEMPLATE.md; path = .github/ISSUE_TEMPLATE.md; sourceTree = "<group>"; };
 		C49EDAEC1E35FE9A0053F68C /* PULL_REQUEST_TEMPLATE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PULL_REQUEST_TEMPLATE.md; path = .github/PULL_REQUEST_TEMPLATE.md; sourceTree = "<group>"; };
-		C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationTests.m; path = Models/ConfigurationTests.m; sourceTree = "<group>"; };
 		C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUserTests.m; path = Models/SystemUserTests.m; sourceTree = "<group>"; };
 		C4A452601C2462C700846591 /* RoundedAndColoredUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedAndColoredUIButton.h; path = Onboarding/UI/RoundedAndColoredUIButton.h; sourceTree = "<group>"; };
 		C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedAndColoredUIButton.m; path = Onboarding/UI/RoundedAndColoredUIButton.m; sourceTree = "<group>"; };
@@ -1398,7 +1398,6 @@
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE65918720AACEAB00305980 /* ANNAbel.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ANNAbel.xcassets; sourceTree = "<group>"; };
-		EE683F8C216254A700D6831B /* AudioQualityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioQualityViewController.swift; path = Settings/Controllers/AudioQualityViewController.swift; sourceTree = "<group>"; };
 		EE6F2A76214A330500229C75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE6F2A78214A331000229C75 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE733DA921649C6200D05CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -1406,6 +1405,7 @@
 		EE733DB12164B34600D05CA3 /* EnumHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnumHelper.swift; path = Helpers/EnumHelper.swift; sourceTree = "<group>"; };
 		EE81BB691EF4154300639E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtenstions.swift; sourceTree = "<group>"; };
+		EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioQualityViewController.swift; path = Settings/Controllers/AudioQualityViewController.swift; sourceTree = "<group>"; };
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
@@ -1861,7 +1861,6 @@
 		C409F3A11C24B9D6007DCC4A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C4A0B46B1DE8499B00AB4E26 /* ConfigurationTests.m */,
 				C4A0B46C1DE8499B00AB4E26 /* SystemUserTests.m */,
 			);
 			name = Models;
@@ -2042,13 +2041,13 @@
 			children = (
 				C46F10021C7C668D007F30A6 /* ActivateSIPAccountViewController.h */,
 				C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */,
+				EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */,
 				C46760001C46EBBE008820C8 /* EditNumberViewController.h */,
 				C46760011C46EBBE008820C8 /* EditNumberViewController.m */,
 				F2CD45F31B330ADA00CE9B1D /* SettingsViewController.h */,
 				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
 				C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */,
 				C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */,
-				EE683F8C216254A700D6831B /* AudioQualityViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -4415,13 +4414,13 @@
 				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C61E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B971F87779300708D96 /* SecondCallViewController.swift in Sources */,
-				EE733DA32164995A00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				EE1C7B981F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
 				EE5EC3BB213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
 				C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
+				EE9D2F612191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				C47BB0BB1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */,
 				C41C42F91D5A742100813B66 /* VialerLogger.m in Sources */,
@@ -4549,13 +4548,13 @@
 				C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */,
 				C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */,
 				EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */,
-				EE733DA52164995B00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				C47BB0C71E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BD213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
 				C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */,
 				C490AD751D0863E3004A8F83 /* SideMenuViewController.m in Sources */,
+				EE9D2F632191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				C47BB0BC1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				C490AD771D0863E3004A8F83 /* VailerRootViewController.m in Sources */,
 				C490AD7A1D0863E3004A8F83 /* SettingsViewController.m in Sources */,
@@ -4646,6 +4645,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE45A3A421919D160065AB62 /* SystemUserTests.m in Sources */,
 				C409F3A91C24CFF1007DCC4A /* LoginFormViewTests.m in Sources */,
 				C42B048D1E79354700280381 /* RecentCallManagerTests.swift in Sources */,
 				EEF1889A2146477F004A0852 /* ColorsConfigurationTests.swift in Sources */,
@@ -4692,13 +4692,13 @@
 				EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */,
 				EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */,
 				EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */,
-				EE733DA62164995C00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */,
 				EE5EC3BE213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE23181F20A0468F00C05EB0 /* SetupCallTransferViewController.swift in Sources */,
 				EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */,
 				EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */,
 				EE23182320A0468F00C05EB0 /* RecentCallManager.swift in Sources */,
+				EE9D2F642191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				EE23182420A0468F00C05EB0 /* SettingsViewController.m in Sources */,
 				EE23182520A0468F00C05EB0 /* VialerDrawerViewController.m in Sources */,
 				EE23182620A0468F00C05EB0 /* SystemUser.m in Sources */,
@@ -4817,13 +4817,13 @@
 				EE61F4021F1DDDE4006E890F /* ForgotPasswordView.m in Sources */,
 				EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */,
 				EE61F4031F1DDDE4006E890F /* NSString+SubString.m in Sources */,
-				EE733DA42164995B00D05CA3 /* AudioQualityViewController.swift in Sources */,
 				EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BC213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B961F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
 				EE61F4061F1DDDE4006E890F /* PhoneNumberModel.m in Sources */,
 				EE61F4071F1DDDE4006E890F /* SideMenuViewController.m in Sources */,
+				EE9D2F622191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				EE61F40A1F1DDDE4006E890F /* RecentCallManager.swift in Sources */,
 				EE61F40B1F1DDDE4006E890F /* VailerRootViewController.m in Sources */,
 				EE61F40C1F1DDDE4006E890F /* SettingsViewController.m in Sources */,
@@ -4923,13 +4923,13 @@
 				C43FD69C1E76F4C6002593DD /* NotificationToken.swift in Sources */,
 				F20850ED1D26935600A17E71 /* ForgotPasswordView.m in Sources */,
 				F20850EE1D26935600A17E71 /* NSString+SubString.m in Sources */,
-				EE733DA22164995900D05CA3 /* AudioQualityViewController.swift in Sources */,
 				C47BB0C51E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BA213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE1C7B991F87779300708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B9A1F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
 				F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */,
 				F20850F21D26935600A17E71 /* SideMenuViewController.m in Sources */,
+				EE9D2F602191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				C47BB0BA1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
 				F20850F41D26935600A17E71 /* VailerRootViewController.m in Sources */,
 				F20850F71D26935600A17E71 /* SettingsViewController.m in Sources */,
@@ -5054,6 +5054,7 @@
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
 				C47BB0B91E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
+				EE9D2F5F2191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				F2CD45F61B330ADA00CE9B1D /* SettingsViewController.m in Sources */,
 				C4DA5C811BFB2E590043DED7 /* VialerDrawerViewController.m in Sources */,
 				F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */,
@@ -5121,7 +5122,6 @@
 				EE8C5EA62147AF2B008A430F /* UIColorExtenstions.swift in Sources */,
 				C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,
-				EE683F8D216254A700D6831B /* AudioQualityViewController.swift in Sources */,
 				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78141DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E681E729F940067FE40 /* CoreDataStack.swift in Sources */,

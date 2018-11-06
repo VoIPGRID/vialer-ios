@@ -481,18 +481,17 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)sendEmail:(NSString *)email {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Sending email...", nil)];
 
-    [self.operationManager passwordResetWithEmail:email withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self.operationManager passwordResetWithEmail:email withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         // Check if there was an error.
         if (error) {
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Failed to send email.", nil)];
             [self animateLoginViewToVisible:1.f delay:0.8f];
             [self animateForgotPasswordViewToVisible:0.f delay:0.8];
-            return;
+        } else {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
+            [self animateLoginViewToVisible:1.f delay:1.f];
+            [self animateForgotPasswordViewToVisible:0.f delay:0.8f];
         }
-
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Email sent successfully.", nil)];
-        [self animateLoginViewToVisible:1.f delay:1.f];
-        [self animateForgotPasswordViewToVisible:0.f delay:0.8f];
     }];
 }
 

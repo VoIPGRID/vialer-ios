@@ -45,20 +45,19 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 }
 
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion {
-    [self.voipgridRequestOperationManager userDestinationsWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self.voipgridRequestOperationManager userDestinationsWithCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         // Check if error happend.
         if (error) {
             NSString *localizedStringError = NSLocalizedString(@"Error getting the availability options", nil);
             if (completion) {
                 completion(localizedStringError);
             }
-            return;
-        }
-
-        // Successful fetch of user destinations.
-        [self userDestinationsToArray: responseData[@"objects"][0]];
-        if (completion) {
-            completion(nil);
+        } else {
+            // Successful fetch of user destinations.
+            [self userDestinationsToArray: responseData[@"objects"][0]];
+            if (completion) {
+                completion(nil);
+            }
         }
     }];
 }
@@ -156,7 +155,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 
     [self.voipgridRequestOperationManager pushSelectedUserDestination:self.availabilityResourceUri
                                                       destinationDict:saveDict
-                                                       withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+                                                       withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         // Check if there was an error.
         if (error) {
             NSString *error = NSLocalizedString(@"Saving availability has failed", nil);

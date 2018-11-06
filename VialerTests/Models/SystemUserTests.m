@@ -262,7 +262,7 @@
         return YES;
     }]]);
 
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURL *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -291,7 +291,7 @@
                                          @"appaccount_password": @"testPassword",
                                          };
 
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -301,7 +301,7 @@
         return YES;
     }]]);
     
-    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);
@@ -333,7 +333,7 @@
         return YES;
     }]]);
     
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -363,8 +363,8 @@
     NSDictionary *responseAppAccount = @{@"appaccount_account_id": @12340042,
                                          @"appaccount_password": @"testPassword",
                                          };
-    
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -374,7 +374,7 @@
         return YES;
     }]]);
     
-    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);
@@ -455,7 +455,7 @@
     NSDictionary *response = @{@"client": @"42",
                                @"app_account": @"/account/12340044",
                                };
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -464,8 +464,8 @@
     NSDictionary *responseAppAccount = @{@"appaccount_account_id": @12340044,
                                          @"appaccount_password": @"newTestPassword",
                                          };
-    
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -475,7 +475,7 @@
         return YES;
     }]]);
     
-    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);
@@ -512,7 +512,7 @@
 - (void)testGetAndActivateSipAccountWillAskOperationManagerToFetchAccount {
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
-    
+
     NSDictionary *response = @{@"client": @"42"};
     
     OCMStub([self.operationsMock loginWithUserNameForTwoFactor:[OCMArg any] password:[OCMArg any] orToken:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSDictionary *responseData, NSError *error)) {
@@ -520,7 +520,7 @@
         return YES;
     }]]);
     
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -539,7 +539,7 @@
 - (void)testGetAndActivateSipAccountWillReturnYESOnSuccess {
     SystemUser *user = [[SystemUser alloc] initPrivate];
     user.operationsManager = self.operationsMock;
-    
+
     NSDictionary *response = @{@"client": @"42"};
     
     // Fake sip account.
@@ -547,7 +547,7 @@
                                          @"appaccount_password": @"newTestPassword",
                                          };
     
-    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock userProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, response, nil);
         return YES;
     }]]);
@@ -557,7 +557,7 @@
         return YES;
     }]]);
     
-    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([self.operationsMock getMobileProfileWithCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, responseAppAccount, nil);
         return YES;
     }]]);

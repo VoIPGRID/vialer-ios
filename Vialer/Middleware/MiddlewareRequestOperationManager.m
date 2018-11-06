@@ -35,7 +35,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
     self = [super initWithBaseURL:url];
 
     if (self) {
-        self.responseSerializer = [AFHTTPResponseSerializer serializer];
+        self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
         //To have DELETE also put it's parameters into the request body: (Default on JSON Serializer is to put them in URI)
         self.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
@@ -83,7 +83,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
         [parameters setObject:[VialerLogger remoteIdentifier] forKey:MiddlewareResponseKeyRemoteLoggingId];
     }
 
-    [self POST:MiddlewareURLDeviceRecordMutation parameters:parameters withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self POST:MiddlewareURLDeviceRecordMutation parameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);
@@ -106,7 +106,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              MiddlewareResponseKeyApp: [[NSBundle mainBundle].infoDictionary objectForKey:MiddlewareMainBundleCFBundleIdentifier],
                              };
 
-    [self DELETE:MiddlewareURLDeviceRecordMutation parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self DELETE:MiddlewareURLDeviceRecordMutation parameters:params withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);
@@ -127,7 +127,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              MiddlewareResponseKeyAvailable: available ? MiddlewareResponseKeyAvailableYES : MiddlewareResponseKeyAvailableNO,
                              };
     
-    [self POST:MiddlewareURLIncomingCallResponse parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self POST:MiddlewareURLIncomingCallResponse parameters:params withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);
@@ -145,7 +145,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              MiddlewareResponseKeyHangupReason: hangupReason,
                              };
     
-    [self POST:MiddlewareURLHangupReason parameters:params withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self POST:MiddlewareURLHangupReason parameters:params withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);
@@ -158,7 +158,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 
 - (void)sendMetricsToMiddleware:(NSDictionary *)payload withCompletion:(void(^) (NSError *error))completion {
     VialerLogDebug(@"Sending payload: %@", payload);
-    [self POST:MiddlewareURLLogMetrics parameters:payload withCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self POST:MiddlewareURLLogMetrics parameters:payload withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (completion) {
             if (!error) {
                 completion(nil);

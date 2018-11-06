@@ -21,6 +21,10 @@ class LogEntriesConfiguration: NSObject {
 
     fileprivate struct Keys: Decodable {
         var LogEntries: LogEntries
+
+        private enum CodingKeys: String, CodingKey {
+            case LogEntries = "Log Entries"
+        }
     }
 
     @objc static let shared = LogEntriesConfiguration()

@@ -59,7 +59,7 @@ static NSString * const VialerWebViewControllerApiKeyToken = @"token";
 }
 
 - (void)nextUrl:(NSString *)nextUrl {
-    [self.operationManager autoLoginTokenWithCompletion:^(AFHTTPRequestOperation *operation, NSDictionary *responseData, NSError *error) {
+    [self.operationManager autoLoginTokenWithCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (error) {
             VialerLogError(@"Error %@", [error localizedDescription]);
             [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Failed to load %@", @"failed to load webpage with title"), self.title]];
