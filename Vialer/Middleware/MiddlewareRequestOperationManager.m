@@ -118,6 +118,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 }
 
 - (void)sentCallResponseToMiddleware:(NSDictionary *)originalPayload isAvailable:(BOOL)available withCompletion:(void (^)(NSError *error))completion {
+    VialerLogDebug(@"@@@-2 start into the sentCallResponseToMiddleware"); //orp
     // We should respond to the URL specified in the payload see VIALI-3185.
     NSDictionary *params = @{// Key that was given in the device push message as reference (required).
                              MiddlewareResponseKeyUniqueKey: originalPayload[MiddlewareResponseKeyUniqueKey],
@@ -126,12 +127,17 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              // Wether the device is available to accept the call (optional but default True).
                              MiddlewareResponseKeyAvailable: available ? MiddlewareResponseKeyAvailableYES : MiddlewareResponseKeyAvailableNO,
                              };
-    
+    VialerLogDebug(@"@@@-3 created dictionary into the sentCallResponseToMiddleware"); //orp
     [self POST:MiddlewareURLIncomingCallResponse parameters:params withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
+        VialerLogDebug(@"@@@-5 into the sentCallResponseToMiddleware: in the completion of self POST:MiddlewareURLIncomingCallResponse"); //orp
         if (completion) {
             if (!error) {
+                VialerLogDebug(@"@@@-6a into the sentCallResponseToMiddleware: in the completion of self POST:MiddlewareURLIncomingCallResponse with no error"); //orp
+
                 completion(nil);
             } else {
+                VialerLogDebug(@"@@@-6b into the sentCallResponseToMiddleware: in the completion of self POST:MiddlewareURLIncomingCallResponse with ERROR: %@", error); //orp
+
                 completion(error);
             }
         }

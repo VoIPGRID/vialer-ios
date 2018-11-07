@@ -210,18 +210,16 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     NSString *connectionTypeString = self.reachability.statusString;
     [VialerGAITracker pushNotificationWithIsAccepted:available connectionType:connectionTypeString];
 
-    // Track the pushed call in Core Data.
-    PushedCall *pushedCall = [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
-    [self.context save:nil];
-
     int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
 
     NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
     VialerLogDebug(@"Responding to Middleware for attempt: %d with URL: %@", attempt, middlewareBaseURLString);
     MiddlewareRequestOperationManager *middlewareToRespondTo = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:middlewareBaseURLString];
-
+    VialerLogDebug(@"@@@-1 after aloc/init of MiddlewareRequestOperationManager"); //orp
     [middlewareToRespondTo sentCallResponseToMiddleware:payload isAvailable:available withCompletion:^(NSError * _Nullable error) {
         // Whole response cycle completed, log duration.
+        VialerLogDebug(@"@@@-7 in the completion of sentCallResponseToMiddleware isAvailable, next middleware response time.."); //orp
+
         NSTimeInterval responseTime = [[NSDate date] timeIntervalSinceDate:pushResponseTimeMeasurmentStart];
         [VialerGAITracker respondedToIncomingPushNotificationWithResponseTime:responseTime];
         VialerLogDebug(@"Middleware response time: [%f s] for attempt: %d", responseTime, attempt);
@@ -230,7 +228,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             NSNotification *notification = [NSNotification notificationWithName:MiddlewareAccountRegistrationIsDoneNotification object:nil];
             [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
         }
-
+        VialerLogDebug(@"@@@-8-Final- after the Middleware response time and the if available.."); //orp
         if (error) {
             // Not only do we want to unregister upon a 408 but on every error.
             VialerLogError(@"The middleware responded with an error: %@", error);
