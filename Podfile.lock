@@ -145,7 +145,7 @@ PODS:
     - CocoaLumberjack
   - SVProgressHUD (2.2.5)
   - Vialer-pjsip-iOS (3.4.1)
-  - VialerSIPLib (3.4.0):
+  - VialerSIPLib (3.4.1):
     - CocoaLumberjack
     - Reachability
     - Vialer-pjsip-iOS
@@ -255,7 +255,7 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Vialer-pjsip-iOS: 9b8fc1226e9a51150642b9cc81a8c62c9e9c530b
-  VialerSIPLib: d62821042b97fd6264fd44da07661648dd00fb3f
+  VialerSIPLib: 1f022839e1edeaf21cc4eef128f13ebb563e773a
 
 PODFILE CHECKSUM: e46134d6d68b7bb9c365448b3281e82b5d4da1c1
 
