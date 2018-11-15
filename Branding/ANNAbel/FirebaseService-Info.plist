@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>915182362191-rie2hfrbhvelhtbdrskbo12eciu525f0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.915182362191-rie2hfrbhvelhtbdrskbo12eciu525f0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDaGcKIk5AKxuZwwpoFnj4cGVgLybJfAyU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>915182362191</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.bellenmetannabel.app</string>
+	<key>PROJECT_ID</key>
+	<string>bellen-met-annabel</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bellen-met-annabel.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:915182362191:ios:52a37b0209817b64</string>
+	<key>DATABASE_URL</key>
+	<string>https://bellen-met-annabel.firebaseio.com</string>
+</dict>
+</plist>

@@ -5,6 +5,7 @@
 
 import AVFoundation
 import CoreData
+import Firebase
 import UIKit
 
 
@@ -69,6 +70,8 @@ extension AppDelegate: UIApplicationDelegate {
         setupUI()
         setupObservers()
         setupVoIP()
+
+        setupFirebase()
 
         return true
     }
@@ -137,6 +140,13 @@ extension AppDelegate {
         if arguments.contains(Configuration.LaunchArguments.noAnimations) {
             UIView.setAnimationsEnabled(false)
         }
+    }
+
+    fileprivate func setupFirebase() {
+        let filePath = Bundle.main.path(forResource: "FirebaseService-Info", ofType: "plist")
+        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
+            else { assert(false, "Couldn't load config file") }
+        FirebaseApp.configure(options: fileopts)
     }
 
     /// Set global UI settings

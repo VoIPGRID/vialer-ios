@@ -793,6 +793,11 @@
 		EEDCC3C320C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEDCC3C420C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEDCC3C520C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
+		EEEDF355219DBE4E00D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */; };
+		EEEDF358219DC2AF00D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */; };
+		EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */; };
+		EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
+		EEEDF362219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
 		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
 		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
@@ -1425,6 +1430,10 @@
 		EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCallViewController.swift; sourceTree = "<group>"; };
 		EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferViewController.swift; sourceTree = "<group>"; };
 		EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
+		EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
+		EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
+		EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
+		EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FirebaseService-Info.plist"; path = "Branding/Voys/FirebaseService-Info.plist"; sourceTree = "<group>"; };
 		EEEF16001F470C1500AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16021F470C1C00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16051F470C2E00AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1932,6 +1941,7 @@
 				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
+				EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */,
 				C41FD8E41C60A55000BBE6D7 /* Config.plist */,
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
 				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
@@ -2096,6 +2106,7 @@
 				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
 				C490ADF41D086458004A8F83 /* Verbonden.xcassets */,
 				C490ADF01D086458004A8F83 /* Config.plist */,
+				EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */,
 				C490ADF11D086458004A8F83 /* GoogleService-Info.plist */,
 			);
 			name = Verbonden;
@@ -2345,6 +2356,7 @@
 				83129868215D033A00CFE01D /* GoogleService-Info.plist */,
 				EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */,
 				EE23180220A0442000C05EB0 /* Config.plist */,
+				EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */,
 				EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */,
 			);
 			name = ANNAbel;
@@ -2493,6 +2505,7 @@
 				F20851821D269DD300A17E71 /* Vialer-Info.plist */,
 				F20851881D269E1700A17E71 /* Snapshot-Constants.swift */,
 				F20851801D269DD300A17E71 /* Config.plist */,
+				EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */,
 				F20851811D269DD300A17E71 /* GoogleService-Info.plist */,
 				EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */,
 			);
@@ -2940,6 +2953,7 @@
 				C41FD8C71C60A08400BBE6D7 /* Embed Frameworks */,
 				C43172461DFE8669005FF8EA /* Embed App Extensions */,
 				3532FA59A2DD36E4DB31CFDD /* [CP] Copy Pods Resources */,
+				EEEDF35B219DC33100D0D853 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3022,6 +3036,7 @@
 				C490ADE51D0863E3004A8F83 /* Embed Frameworks */,
 				C431724A1DFE8673005FF8EA /* Embed App Extensions */,
 				34A4970CC0209C9D7D0E329D /* [CP] Copy Pods Resources */,
+				EEEDF359219DC2D900D0D853 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3085,6 +3100,7 @@
 				EE2318A120A0468F00C05EB0 /* Embed Frameworks */,
 				EE2318CB20A0476400C05EB0 /* Embed App Extensions */,
 				E5C90D794402B1DA425A46E5 /* [CP] Copy Pods Resources */,
+				EEEDF35A219DC31800D0D853 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3234,6 +3250,7 @@
 				3D1A5E8E1AE6308500DBE64B /* Embed Frameworks */,
 				F2C44A6D1DE40EDD00F7CF50 /* Embed App Extensions */,
 				156B6B5CBAE3EA760F5E1953 /* [CP] Copy Pods Resources */,
+				EEEDF356219DC18900D0D853 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3402,6 +3419,7 @@
 				EEEF16111F470C8200AEFA83 /* Localizable.strings in Resources */,
 				C41FD8AE1C60A08400BBE6D7 /* dtmf-2.aif in Resources */,
 				C41FD8AF1C60A08400BBE6D7 /* RecentsStoryboard.storyboard in Resources */,
+				EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */,
 				C41FD8B11C60A08400BBE6D7 /* dtmf-3.aif in Resources */,
 				C41FD8B31C60A08400BBE6D7 /* dtmf-4.aif in Resources */,
 				C41FD8B51C60A08400BBE6D7 /* dtmf-5.aif in Resources */,
@@ -3463,6 +3481,7 @@
 				C490ADCE1D0863E3004A8F83 /* ringtone.wav in Resources */,
 				C490ADCF1D0863E3004A8F83 /* dtmf-3.aif in Resources */,
 				C490ADD11D0863E3004A8F83 /* dtmf-4.aif in Resources */,
+				EEEDF358219DC2AF00D0D853 /* FirebaseService-Info.plist in Resources */,
 				C490ADD21D0863E3004A8F83 /* dtmf-5.aif in Resources */,
 				C49B0EEB1E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
 				C490ADD51D0863E3004A8F83 /* dtmf-6.aif in Resources */,
@@ -3516,6 +3535,8 @@
 				EE23188E20A0468F00C05EB0 /* ringtone.wav in Resources */,
 				EE733DAF21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EE23188F20A0468F00C05EB0 /* dtmf-3.aif in Resources */,
+				EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */,
+				EEEDF362219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */,
 				EE23189020A0468F00C05EB0 /* dtmf-4.aif in Resources */,
 				EE23189120A0468F00C05EB0 /* dtmf-5.aif in Resources */,
 				EE23189220A0468F00C05EB0 /* LogInViewController.xib in Resources */,
@@ -3660,6 +3681,7 @@
 				EEEF160F1F470C8200AEFA83 /* Localizable.strings in Resources */,
 				EE733DAA21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EEA9ADB4200DEDD5007727EB /* Vialer.xcassets in Resources */,
+				EEEDF355219DBE4E00D0D853 /* FirebaseService-Info.plist in Resources */,
 				FBB8542D1A7FF15300121366 /* ringtone.wav in Resources */,
 				FBB854211A7FE67300121366 /* dtmf-3.aif in Resources */,
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
@@ -4311,6 +4333,82 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
 			showEnvVarsInLog = 0;
+		};
+		EEEDF356219DC18900D0D853 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)\n",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		EEEDF359219DC2D900D0D853 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)\n",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		EEEDF35A219DC31800D0D853 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		EEEDF35B219DC33100D0D853 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		F20851621D26935600A17E71 /* Update Version number */ = {
 			isa = PBXShellScriptBuildPhase;
