@@ -277,6 +277,11 @@ NSString * const VoIPGRIDRequestOperationManagerUnAuthorizedNotification = @"VoI
 }
 
 - (void)pushUseEncryptionWithCompletion:(void (^)(BOOL, NSError *))completion {
+    if (![SystemUser currentUser].loggedIn) {
+        VialerLogDebug(@"Not sending update encryption request as there is no user logged in");
+        return;
+    }
+    
     NSDictionary *parameters = @{VoIPGRIDRequestOperationManagerApiKeyAppAccountUseEncryption : [[SystemUser currentUser] useTLS] ? @YES : @NO};
     
     [self PUT:VoIPGRIDRequestOperationManagerURLMobileProfile parameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
