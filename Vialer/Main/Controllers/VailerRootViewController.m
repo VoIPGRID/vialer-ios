@@ -144,6 +144,8 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
         //launchImage = @"LaunchImage-1125@3x.png";   //orp NO
         //launchImage = @"LaunchImage-1125-Portrait-2436h"; //orp NO
         //launchImage = @"LaunchImage-700"; //testing Ok shows the little one streched
+        //launchImage = @"LaunchImage-812h@3x.png"; //no
+        //launchImage = @"LaunchImage-812h@3x"; //no
         
     }
     else if(screenHeight > 667.0f) {
