@@ -31,6 +31,18 @@
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
+		83C82A5721BEA05600D67FD6 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */; };
+		83C82A5821BEA05600D67FD6 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */; };
+		83C82A5921BEA05600D67FD6 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */; };
+		83C82A5A21BEA05600D67FD6 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */; };
+		83C82A5B21BEA05600D67FD6 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */; };
+		83C82A5C21BEA05600D67FD6 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */; };
+		83C82A5E21BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */; };
+		83C82A5F21BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */; };
+		83C82A6021BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */; };
+		83C82A6121BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */; };
+		83C82A6221BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */; };
+		83C82A6321BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */; };
 		872A659476081865A971CEEF /* libPods-ANNAbelSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */; };
 		A89BBA46A7258849FB9B1083 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */; };
 		C4052E561E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
@@ -44,7 +56,6 @@
 		C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		C41D3A721DE728DC00AEA929 /* ContactModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */; };
 		C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
-		C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		C41FD85F1C60A08400BBE6D7 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
@@ -53,7 +64,6 @@
 		C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		C41FD8671C60A08400BBE6D7 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
@@ -183,7 +193,6 @@
 		C48B78171DE309B000B17BCF /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
 		C490AD661D0863E3004A8F83 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
-		C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		C490AD6C1D0863E3004A8F83 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		C490AD6D1D0863E3004A8F83 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		C490AD6E1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
@@ -196,7 +205,6 @@
 		C490AD7A1D0863E3004A8F83 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
 		C490AD7B1D0863E3004A8F83 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
@@ -405,7 +413,6 @@
 		EE23180F20A0468F00C05EB0 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		EE23181020A0468F00C05EB0 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		EE23181120A0468F00C05EB0 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
-		EE23181220A0468F00C05EB0 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		EE23181320A0468F00C05EB0 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		EE23181420A0468F00C05EB0 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		EE23181520A0468F00C05EB0 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
@@ -428,7 +435,6 @@
 		EE23182720A0468F00C05EB0 /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		EE23182920A0468F00C05EB0 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
 		EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
-		EE23182B20A0468F00C05EB0 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		EE23182D20A0468F00C05EB0 /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		EE23182E20A0468F00C05EB0 /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
@@ -617,7 +623,6 @@
 		EE61F3F71F1DDDE4006E890F /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
 		EE61F3F81F1DDDE4006E890F /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		EE61F3F91F1DDDE4006E890F /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
-		EE61F3FA1F1DDDE4006E890F /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		EE61F3FB1F1DDDE4006E890F /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		EE61F3FC1F1DDDE4006E890F /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		EE61F3FD1F1DDDE4006E890F /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -637,7 +642,6 @@
 		EE61F40E1F1DDDE4006E890F /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		EE61F4101F1DDDE4006E890F /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		EE61F4151F1DDDE4006E890F /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		EE61F4161F1DDDE4006E890F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		EE61F4181F1DDDE4006E890F /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */; };
 		EE61F4191F1DDDE4006E890F /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2491E6D593100550E0C /* SegueHandler.swift */; };
@@ -821,7 +825,6 @@
 		F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
-		F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F20850E91D26935600A17E71 /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		F20850EA1D26935600A17E71 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		F20850EB1D26935600A17E71 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
@@ -835,7 +838,6 @@
 		F20850F81D26935600A17E71 /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		F20850FB1D26935600A17E71 /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		F20850FD1D26935600A17E71 /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		F20851031D26935600A17E71 /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		F20851041D26935600A17E71 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
 		F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
@@ -933,12 +935,10 @@
 		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
-		F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
-		F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
 		F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
 		F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
 		F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
@@ -1223,6 +1223,8 @@
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
+		83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvailabilityModel.swift; path = Availability/Models/AvailabilityModel.swift; sourceTree = "<group>"; };
+		83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvailabilityViewController.swift; path = Availability/Controllers/AvailabilityViewController.swift; sourceTree = "<group>"; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97BDE05E53D773AA579B4B0C /* Pods-Voys Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1493,10 +1495,6 @@
 		F2DE21851CB69E7F007B5B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		F2E5EF131D09736100F7C699 /* .env.verbonden */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.verbonden; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Vialer-Prefix.pch"; path = "Supporting Files/Vialer-Prefix.pch"; sourceTree = "<group>"; };
-		F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AvailabilityViewController.h; path = Availability/Controllers/AvailabilityViewController.h; sourceTree = "<group>"; };
-		F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AvailabilityViewController.m; path = Availability/Controllers/AvailabilityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		F919B9E11BA856F60082AD79 /* AvailabilityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AvailabilityModel.h; path = Availability/Models/AvailabilityModel.h; sourceTree = "<group>"; };
-		F919B9E21BA856F60082AD79 /* AvailabilityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AvailabilityModel.m; path = Availability/Models/AvailabilityModel.m; sourceTree = "<group>"; };
 		F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewControllerTests.m; sourceTree = "<group>"; };
 		F9A71EBE1C7F5F360083C8B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPIncomingCallStoryboard.storyboard; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
@@ -2663,8 +2661,7 @@
 		F919B9D11BA812450082AD79 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F919B9E11BA856F60082AD79 /* AvailabilityModel.h */,
-				F919B9E21BA856F60082AD79 /* AvailabilityModel.m */,
+				83C82A5621BEA05600D67FD6 /* AvailabilityModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2672,8 +2669,7 @@
 		F919B9D31BA812520082AD79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F919B9DC1BA81B430082AD79 /* AvailabilityViewController.h */,
-				F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */,
+				83C82A5D21BEA06F00D67FD6 /* AvailabilityViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -4501,7 +4497,6 @@
 				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3045208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
-				C41FD85B1C60A08400BBE6D7 /* AvailabilityModel.m in Sources */,
 				C41FD85C1C60A08400BBE6D7 /* RoundedAndColoredUIButton.m in Sources */,
 				F2A958BA1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				C41FD85E1C60A08400BBE6D7 /* MainTabBarViewController.m in Sources */,
@@ -4531,7 +4526,6 @@
 				EE733DB42164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
-				C41FD86D1C60A08400BBE6D7 /* AvailabilityViewController.m in Sources */,
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
 				EE3C480C2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				EE3C47B32080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
@@ -4545,6 +4539,7 @@
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
 				C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */,
+				83C82A5921BEA05600D67FD6 /* AvailabilityModel.swift in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				EE1C7B8B1F87777E00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C4B4075F1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
@@ -4586,6 +4581,7 @@
 				EE3C47C92080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C4C675661D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE8C5EA82147B054008A430F /* UIColorExtenstions.swift in Sources */,
+				83C82A6021BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */,
 				C49A46A91E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C4AD4E651E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C43B6E281E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -4635,7 +4631,6 @@
 				C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3048208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */,
-				C490AD6B1D0863E3004A8F83 /* AvailabilityModel.m in Sources */,
 				C490AD6C1D0863E3004A8F83 /* RoundedAndColoredUIButton.m in Sources */,
 				C490AD6D1D0863E3004A8F83 /* MainTabBarViewController.m in Sources */,
 				F2A958BB1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
@@ -4665,7 +4660,6 @@
 				EE733DB62164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
-				C490AD851D0863E3004A8F83 /* AvailabilityViewController.m in Sources */,
 				C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */,
 				EE3C47B62080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				EE3C480F2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
@@ -4679,6 +4673,7 @@
 				C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */,
 				C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */,
 				C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				83C82A5B21BEA05600D67FD6 /* AvailabilityModel.swift in Sources */,
 				C4AEB2541E6D954400550E0C /* Resource.swift in Sources */,
 				C4B407601E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8A1F87777E00708D96 /* TransferInProgressViewController.swift in Sources */,
@@ -4720,6 +4715,7 @@
 				EE3C47CC2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C49A46AA1E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				EE8C5EA92147B055008A430F /* UIColorExtenstions.swift in Sources */,
+				83C82A6221BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */,
 				C4AD4E661E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
 				C43B6E291E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -4781,7 +4777,6 @@
 				EE23180F20A0468F00C05EB0 /* FileManagerExtensions.swift in Sources */,
 				EE23181020A0468F00C05EB0 /* TwoFactorAuthenticationView.m in Sources */,
 				EE23181120A0468F00C05EB0 /* UserProfileWebViewController.m in Sources */,
-				EE23181220A0468F00C05EB0 /* AvailabilityModel.m in Sources */,
 				EE23181320A0468F00C05EB0 /* RoundedAndColoredUIButton.m in Sources */,
 				EE23181420A0468F00C05EB0 /* MainTabBarViewController.m in Sources */,
 				EE23181520A0468F00C05EB0 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
@@ -4810,7 +4805,6 @@
 				EE02B3FA20D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE733DB72164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */,
-				EE23182B20A0468F00C05EB0 /* AvailabilityViewController.m in Sources */,
 				EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */,
 				EE23182D20A0468F00C05EB0 /* TwoStepCallingViewController.m in Sources */,
 				EE23182E20A0468F00C05EB0 /* CircleWithShadow.m in Sources */,
@@ -4825,6 +4819,7 @@
 				EE23183520A0468F00C05EB0 /* VialerWebViewController.m in Sources */,
 				EE23183620A0468F00C05EB0 /* UIViewControllerExtensions.swift in Sources */,
 				EE23183720A0468F00C05EB0 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				83C82A5C21BEA05600D67FD6 /* AvailabilityModel.swift in Sources */,
 				EE23183820A0468F00C05EB0 /* ReachabilityBarViewController.swift in Sources */,
 				EE23183920A0468F00C05EB0 /* TransferInProgressViewController.swift in Sources */,
 				EE23183A20A0468F00C05EB0 /* PhoneNumber.swift in Sources */,
@@ -4866,6 +4861,7 @@
 				EE23185F20A0468F00C05EB0 /* TwoStepCall.m in Sources */,
 				EE23186020A0468F00C05EB0 /* NSString+Mobile.m in Sources */,
 				EE8C5EAB2147B056008A430F /* UIColorExtenstions.swift in Sources */,
+				83C82A6321BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */,
 				EE23186120A0468F00C05EB0 /* Vialer.xcdatamodeld in Sources */,
 				EE23186220A0468F00C05EB0 /* RecentsViewController.swift in Sources */,
 				EE23186320A0468F00C05EB0 /* VialerLogger.swift in Sources */,
@@ -4906,7 +4902,6 @@
 				EE61F3F81F1DDDE4006E890F /* FileManagerExtensions.swift in Sources */,
 				EEDC3047208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				EE61F3F91F1DDDE4006E890F /* UserProfileWebViewController.m in Sources */,
-				EE61F3FA1F1DDDE4006E890F /* AvailabilityModel.m in Sources */,
 				EE61F3FB1F1DDDE4006E890F /* RoundedAndColoredUIButton.m in Sources */,
 				EE61F3FC1F1DDDE4006E890F /* MainTabBarViewController.m in Sources */,
 				EE61F3FD1F1DDDE4006E890F /* RecentsTimeConverter.swift in Sources */,
@@ -4937,7 +4932,6 @@
 				EE733DB52164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */,
-				EE61F4151F1DDDE4006E890F /* AvailabilityViewController.m in Sources */,
 				EE61F4161F1DDDE4006E890F /* LogInViewController.m in Sources */,
 				EE3C480E2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				EE3C47B52080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
@@ -4950,6 +4944,7 @@
 				EE61F41C1F1DDDE4006E890F /* UIAlertController+Vialer.m in Sources */,
 				EE61F41D1F1DDDE4006E890F /* EditNumberViewController.m in Sources */,
 				EE61F41E1F1DDDE4006E890F /* UIViewControllerExtensions.swift in Sources */,
+				83C82A5A21BEA05600D67FD6 /* AvailabilityModel.swift in Sources */,
 				EE61F41F1F1DDDE4006E890F /* VialerWebViewController.m in Sources */,
 				EE61F4211F1DDDE4006E890F /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B881F87777C00708D96 /* TransferInProgressViewController.swift in Sources */,
@@ -4991,6 +4986,7 @@
 				EE3C47CB2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				EE61F4451F1DDDE4006E890F /* NSString+Mobile.m in Sources */,
 				EE8C5EAA2147B056008A430F /* UIColorExtenstions.swift in Sources */,
+				83C82A6121BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */,
 				EE61F4461F1DDDE4006E890F /* Vialer.xcdatamodeld in Sources */,
 				EE61F4471F1DDDE4006E890F /* RecentsViewController.swift in Sources */,
 				EE61F4481F1DDDE4006E890F /* VialerLogger.swift in Sources */,
@@ -5012,7 +5008,6 @@
 				C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3044208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */,
-				F20850E81D26935600A17E71 /* AvailabilityModel.m in Sources */,
 				F20850E91D26935600A17E71 /* RoundedAndColoredUIButton.m in Sources */,
 				F20850EA1D26935600A17E71 /* MainTabBarViewController.m in Sources */,
 				F2A958BC1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
@@ -5043,7 +5038,6 @@
 				EE733DB32164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
-				F20851031D26935600A17E71 /* AvailabilityViewController.m in Sources */,
 				F20851041D26935600A17E71 /* LogInViewController.m in Sources */,
 				EE3C480B2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				EE3C47B22080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
@@ -5056,6 +5050,7 @@
 				F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */,
 				F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */,
 				C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */,
+				83C82A5821BEA05600D67FD6 /* AvailabilityModel.swift in Sources */,
 				F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */,
 				C4B4075E1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8C1F87777F00708D96 /* TransferInProgressViewController.swift in Sources */,
@@ -5097,6 +5092,7 @@
 				EE3C47C82080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				F20851231D26935600A17E71 /* NSString+Mobile.m in Sources */,
 				EE8C5EA72147B053008A430F /* UIColorExtenstions.swift in Sources */,
+				83C82A5F21BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */,
 				C4AD4E641E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E271E2E524400942F9B /* VialerLogger.swift in Sources */,
@@ -5137,7 +5133,6 @@
 				C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3042208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
-				F919B9E31BA856F60082AD79 /* AvailabilityModel.m in Sources */,
 				C4A452621C2462C700846591 /* RoundedAndColoredUIButton.m in Sources */,
 				C4DA5C841BFB31900043DED7 /* MainTabBarViewController.m in Sources */,
 				C46F10111C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
@@ -5166,7 +5161,6 @@
 				EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE733DB22164B34600D05CA3 /* EnumHelper.swift in Sources */,
-				F9D0A53E1BB57BBE0036843A /* AvailabilityViewController.m in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				EE3C48092080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
@@ -5181,6 +5175,7 @@
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,
 				C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				83C82A5721BEA05600D67FD6 /* AvailabilityModel.swift in Sources */,
 				C4B4075D1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8D1F87777F00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C43F06CB1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
@@ -5222,6 +5217,7 @@
 				EE3C47C62080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
 				EE8C5EA62147AF2B008A430F /* UIColorExtenstions.swift in Sources */,
+				83C82A5E21BEA06F00D67FD6 /* AvailabilityViewController.swift in Sources */,
 				C4AD4E631E729F780067FE40 /* Vialer.xcdatamodeld in Sources */,
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,

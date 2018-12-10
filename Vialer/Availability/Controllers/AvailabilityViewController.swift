@@ -39,7 +39,7 @@ private let AvailabilityViewControllerAddFixedDestinationPageURLWithVariableForC
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tintColor = Configuration.default().colorConfiguration.color(forKey: ConfigurationAvailabilityTableViewTintColor)
+        self.tableView.tintColor = ColorsConfiguration.shared.colorForKey(.availabilityTableViewTint)
     }
     
     @IBAction func loadUserDestinations(_ sender: UIRefreshControl) {

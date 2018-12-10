@@ -24,7 +24,6 @@ private let AvailabilityModelSelectedUserDestinationFixedKey = "fixeddestination
 private let AvailabilityModelSelectedUserDestinationIdKey = "id"
 private let AvailabilityModelLastFetchKey = "AvailabilityModelLastFetchKey"
 private let AvailabilityModelAvailabilityKey = "AvailabilityModelAvailabilityKey"
-
 private let AvailabilityModelFetchInterval: TimeInterval = 10 // number of seconds between fetching of availability. Last value used:3600
 
 @objc class AvailabilityModel: NSObject {
@@ -32,7 +31,7 @@ private let AvailabilityModelFetchInterval: TimeInterval = 10 // number of secon
     private var availabilityResourceUri = ""
     
     lazy private var voipgridRequestOperationManager: VoIPGRIDRequestOperationManager = {
-        let url = URL(string: Configuration.init().url(forKey: ConfigurationVoIPGRIDBaseURLString))
+        let url = URL(string: UrlsConfiguration.shared.apiUrl())
         return VoIPGRIDRequestOperationManager(baseURL: url)
     }()
    
