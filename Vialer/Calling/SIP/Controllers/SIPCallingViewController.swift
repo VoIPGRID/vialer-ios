@@ -408,7 +408,7 @@ extension SIPCallingViewController {
                     nameLabel?.text = numberLabel?.text
                 }
             }
-            if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) {
+            if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) && currentUser.sipAccount != numberLabel?.text {
                 numberLabel?.isHidden = false
                 statusLabelTopConstraint.constant = 20
             } else {
@@ -416,6 +416,7 @@ extension SIPCallingViewController {
                 numberLabel?.isHidden = true
             }
         }
+        
         
         switch call.callState {
         case .null:
