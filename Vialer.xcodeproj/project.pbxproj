@@ -29,6 +29,12 @@
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		837C558B21C2989500F50D83 /* String+numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C558A21C2989500F50D83 /* String+numeric.swift */; };
+		837C558C21C2989500F50D83 /* String+numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C558A21C2989500F50D83 /* String+numeric.swift */; };
+		837C558D21C2989500F50D83 /* String+numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C558A21C2989500F50D83 /* String+numeric.swift */; };
+		837C558E21C2989500F50D83 /* String+numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C558A21C2989500F50D83 /* String+numeric.swift */; };
+		837C558F21C2989500F50D83 /* String+numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C558A21C2989500F50D83 /* String+numeric.swift */; };
+		837C559021C2989500F50D83 /* String+numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C558A21C2989500F50D83 /* String+numeric.swift */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
 		872A659476081865A971CEEF /* libPods-ANNAbelSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */; };
@@ -1221,6 +1227,7 @@
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		837C558A21C2989500F50D83 /* String+numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+numeric.swift"; sourceTree = "<group>"; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2150,6 +2157,7 @@
 				F204B0651CFC968E00257E7D /* NSString+SubString.m */,
 				F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */,
 				C4052E551E2F64FE00F45B9C /* String+regex.swift */,
+				837C558A21C2989500F50D83 /* String+numeric.swift */,
 				C45F3DFC1BFE67150012494D /* UIAlertController+Vialer.h */,
 				C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */,
 				C49A46B11E682A540097E808 /* UIImage.swift */,
@@ -4511,6 +4519,7 @@
 				F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */,
 				EE1C7B901F87778B00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				C43FD69D1E76F4C6002593DD /* NotificationToken.swift in Sources */,
+				837C558D21C2989500F50D83 /* String+numeric.swift in Sources */,
 				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C61E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B971F87779300708D96 /* SecondCallViewController.swift in Sources */,
@@ -4645,6 +4654,7 @@
 				C490AD6F1D0863E3004A8F83 /* MiddlewareRequestOperationManager.m in Sources */,
 				EE1C7B921F87778C00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				C43FD69E1E76F4C6002593DD /* NotificationToken.swift in Sources */,
+				837C558F21C2989500F50D83 /* String+numeric.swift in Sources */,
 				C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */,
 				C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */,
 				EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */,
@@ -4791,6 +4801,7 @@
 				EE23181820A0468F00C05EB0 /* ForgotPasswordView.m in Sources */,
 				EE23181920A0468F00C05EB0 /* SIPIncomingCallViewController.m in Sources */,
 				EE23181A20A0468F00C05EB0 /* NotificationToken.swift in Sources */,
+				837C559021C2989500F50D83 /* String+numeric.swift in Sources */,
 				EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */,
 				EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */,
 				EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */,
@@ -4916,6 +4927,7 @@
 				EE61F4001F1DDDE4006E890F /* MiddlewareRequestOperationManager.m in Sources */,
 				EE1C7B911F87778C00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				EE61F4011F1DDDE4006E890F /* NotificationToken.swift in Sources */,
+				837C558E21C2989500F50D83 /* String+numeric.swift in Sources */,
 				EE61F4021F1DDDE4006E890F /* ForgotPasswordView.m in Sources */,
 				EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */,
 				EE61F4031F1DDDE4006E890F /* NSString+SubString.m in Sources */,
@@ -5022,6 +5034,7 @@
 				C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */,
 				F20850EC1D26935600A17E71 /* MiddlewareRequestOperationManager.m in Sources */,
 				EE1C7B8F1F87778B00708D96 /* SIPIncomingCallViewController.m in Sources */,
+				837C558C21C2989500F50D83 /* String+numeric.swift in Sources */,
 				C43FD69C1E76F4C6002593DD /* NotificationToken.swift in Sources */,
 				F20850ED1D26935600A17E71 /* ForgotPasswordView.m in Sources */,
 				F20850EE1D26935600A17E71 /* NSString+SubString.m in Sources */,
@@ -5147,6 +5160,7 @@
 				3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */,
 				EE1C7B8E1F87778A00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				C43FD69B1E76F4C6002593DD /* NotificationToken.swift in Sources */,
+				837C558B21C2989500F50D83 /* String+numeric.swift in Sources */,
 				F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */,
 				F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C41E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,

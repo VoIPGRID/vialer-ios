@@ -382,7 +382,7 @@ extension SIPCallingViewController {
         muteButton?.active = call.muted
         speakerButton?.active = callManager.audioController.output == .bluetooth || callManager.audioController.output == .speaker
         
-        // When dtmf is sent, add that to the numberLabel
+        // When dtmf is sent, add that to the numberLabel otherwise make checks for what to show on the numberLabel and nameLabel avoiding wrong data sent by the library
         if dtmfSingleTimeValue != "" || dtmfWholeValue != "" {
             if nameLabel?.text == phoneNumberLabelText {
                 numberLabel?.text = dtmfWholeValue + dtmfSingleTimeValue
@@ -408,7 +408,8 @@ extension SIPCallingViewController {
                     nameLabel?.text = numberLabel?.text
                 }
             }
-            if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) && numberLabel?.text != currentUser.sipAccount {
+            // Three cases which the numberLabel needs to be visible
+            if numberLabel?.text != nameLabel?.text && numberLabel?.text?.isNumeric() ?? false && numberLabel?.text != currentUser.sipAccount {
                 numberLabel?.isHidden = false
                 statusLabelTopConstraint.constant = 20
             } else {
@@ -416,7 +417,6 @@ extension SIPCallingViewController {
                 numberLabel?.isHidden = true
             }
         }
-        
         
         switch call.callState {
         case .null:
