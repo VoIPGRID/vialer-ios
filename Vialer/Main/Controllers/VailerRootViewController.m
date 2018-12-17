@@ -133,33 +133,37 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)setupLayout {
     NSString *launchImage;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height; //orp delete this
+    CGFloat screenNativeBoundsHeight = [UIScreen mainScreen].nativeBounds.size.height;
     
-    if(screenHeight > 812.0f) {
-        launchImage = @"LaunchImage-1100-Portrait-2436h"; // iphone-xs max //orp 1242x2688 and 828x1792
+    if(screenNativeBoundsHeight == 1792.0f) {
+        launchImage = @"Static-LaunchImage-828w-1792h";  // iphone-xr
     }
-    else if(screenHeight > 736.0f) {
-        //launchImage = @"LaunchImage-1100-Portrait-2436h"; // iphone-x, xs //orp is this the correct filename?
-        //launchImage = @"LaunchImage-1125@3x";     //orp NO. nothing is showing but this is the name of the file in finder WTF...
-        //launchImage = @"LaunchImage-1125@3x.png";   //orp NO
-        //launchImage = @"LaunchImage-1125-Portrait-2436h"; //orp NO
-        //launchImage = @"LaunchImage-700"; //testing Ok shows the little one streched
-        //launchImage = @"LaunchImage-812h@3x.png"; //no
-        //launchImage = @"LaunchImage-812h@3x"; //no
-        
+    else if(screenNativeBoundsHeight == 2688.0f) {
+        launchImage = @"Static-LaunchImage-1242w-2688h"; // iphone-xs max
     }
-    else if(screenHeight > 667.0f) {
-        launchImage = @"LaunchImage-800-Portrait-736h"; // iphone6,7,8 plus
+    else if(screenNativeBoundsHeight == 2436.0f) {
+        launchImage = @"Static-LaunchImage-1125w-2436h"; // iphone-x, xs
     }
-    else if(screenHeight > 568.0f) {
-        launchImage = @"LaunchImage-800-667h"; // iphone6,7,8
+    else if(screenNativeBoundsHeight == 2208.0f || screenNativeBoundsHeight == 1920.0f) { //orp
+        launchImage = @"LaunchImage-800-Portrait-736h"; // iphone6,7,8 plus with old name convention
     }
-    else if(screenHeight > 480.0f){
-        launchImage = @"LaunchImage-700-568h"; // iphone5/5plus
+    else if(screenNativeBoundsHeight == 1334.0f) {
+        launchImage = @"LaunchImage-800-667h";          // iphone6,7,8 with old name convention
+    }
+    else if(screenNativeBoundsHeight == 1136.0f){
+        launchImage = @"LaunchImage-700-568h";          // iphone5/5plus with old name convention
     } else {
-        launchImage = @"LaunchImage-700"; // iphone4 or below
+        launchImage = @"LaunchImage-700";               // iphone4 or below with old name convention
     }
     self.launchImage.image = [UIImage imageNamed:launchImage];
+    
+    
+    NSLog(@"loaded = %@",launchImage);                       //orp d
+    NSLog(@"NativeHeight = %f",screenNativeBoundsHeight);    //orp d
+    NSLog(@"height = %f",screenHeight);
+    //orp need for iphone6plus : 1920 x 1080 pixels
+    
 }
 
 #pragma mark - properties
