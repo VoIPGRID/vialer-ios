@@ -133,7 +133,6 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)setupLayout {
     NSString *launchImage;
-//    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height; //orp delete this
     CGFloat screenNativeBoundsHeight = [UIScreen mainScreen].nativeBounds.size.height;
     
     if(screenNativeBoundsHeight == 1792.0f) {
@@ -143,27 +142,20 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
         launchImage = @"Static-LaunchImage-1242w-2688h"; // iphone-xs max
     }
     else if(screenNativeBoundsHeight == 2436.0f) {
-        launchImage = @"Static-LaunchImage-1125w-2436h"; // iphone-x, xs
+        launchImage = @"Static-LaunchImage-1125w-2436h"; // iphone-x/xs
     }
-    else if(screenNativeBoundsHeight == 2208.0f || screenNativeBoundsHeight == 1920.0f) { //orp
-        launchImage = @"LaunchImage-800-Portrait-736h"; // iphone6,7,8 plus with old name conversion: https://stackoverflow.com/questions/52315956/how-to-programmatically-detect-iphone-xs-or-iphone-x
+    else if(screenNativeBoundsHeight == 2208.0f || screenNativeBoundsHeight == 1920.0f) {
+        launchImage = @"LaunchImage-800-Portrait-736h"; // iphone-6plus/7plus/8plus with old name conversion like the rest cases below: https://stackoverflow.com/questions/33120932/how-to-get-the-right-launch-image-in-ios9-programmatically/33122807#33122807
     }
     else if(screenNativeBoundsHeight == 1334.0f) {
-        launchImage = @"LaunchImage-800-667h";          // iphone6,7,8 with old name conversion
+        launchImage = @"LaunchImage-800-667h";          // iphone-6/7/8
     }
     else if(screenNativeBoundsHeight == 1136.0f){
-        launchImage = @"LaunchImage-700-568h";          // iphone5/5plus with old name conversion
+        launchImage = @"LaunchImage-700-568h";          // iphone-5/SE
     } else {
-        launchImage = @"LaunchImage-700";               // iphone4 or below with old name conversion
+        launchImage = @"LaunchImage-700";               // iphone-4/4s
     }
     self.launchImage.image = [UIImage imageNamed:launchImage];
-    
-    
-//    NSLog(@"loaded = %@",launchImage);                       //orp d
-//    NSLog(@"NativeHeight = %f",screenNativeBoundsHeight);    //orp d
-//    NSLog(@"height = %f",screenHeight);
-    //orp need for iphone6plus : 1920 x 1080 pixels
-    
 }
 
 #pragma mark - properties
