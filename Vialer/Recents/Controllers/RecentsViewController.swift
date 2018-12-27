@@ -215,10 +215,10 @@ extension RecentsViewController {
             contactViewController = CNContactViewController(forUnknownContact: unknownContact)
             contactViewController.title = newPhoneNumber
         }
-
         contactViewController.contactStore = contactModel.contactStore
         contactViewController.allowsActions = false
         contactViewController.delegate = self
+        contactViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(contactViewController, animated: true)
     }
 
@@ -309,6 +309,7 @@ extension RecentsViewController: UITableViewDelegate {
         guard fetchedResultController.fetchedObjects?.count != 0 else { return }
         let recent = fetchedResultController.object(at: indexPath)
         showContactViewController(forRecent: recent)
+        self.tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 

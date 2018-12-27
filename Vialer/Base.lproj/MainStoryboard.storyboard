@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
-    <device id="retina5_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,18 +15,18 @@
             <objects>
                 <viewController id="BQ4-be-ZGE" customClass="VailerRootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bti-2h-Pg1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TKx-Qn-Q5o">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8vI-DI-UXA" firstAttribute="trailing" secondItem="TKx-Qn-Q5o" secondAttribute="trailing" id="I4p-Qb-Z1p"/>
                             <constraint firstItem="TKx-Qn-Q5o" firstAttribute="top" secondItem="Bti-2h-Pg1" secondAttribute="top" id="VCd-hK-cmk"/>
-                            <constraint firstItem="8vI-DI-UXA" firstAttribute="bottom" secondItem="TKx-Qn-Q5o" secondAttribute="bottom" id="cP2-7V-rRJ"/>
+                            <constraint firstAttribute="bottom" secondItem="TKx-Qn-Q5o" secondAttribute="bottom" id="cP2-7V-rRJ"/>
                             <constraint firstItem="TKx-Qn-Q5o" firstAttribute="leading" secondItem="8vI-DI-UXA" secondAttribute="leading" id="dte-Yd-KXm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8vI-DI-UXA"/>
@@ -43,7 +43,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iot-wT-SKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OBw-wl-6xF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2738" y="-584"/>
+            <point key="canvasLocation" x="2736.8000000000002" y="-584.48275862068965"/>
         </scene>
         <!--SIPIncomingCallStoryboard-->
         <scene sceneID="tH0-5A-ya0">
@@ -74,7 +74,7 @@
             <objects>
                 <viewController storyboardIdentifier="VialerDrawerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i10-iY-7zz" customClass="VialerDrawerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mzC-cA-UBR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="zgc-ik-ngg"/>
