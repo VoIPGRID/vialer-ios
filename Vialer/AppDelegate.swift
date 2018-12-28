@@ -145,7 +145,10 @@ extension AppDelegate {
     fileprivate func setupFirebase() {
         if let filePath = Bundle.main.path(forResource: "FirebaseService-Info", ofType: "plist") {
             guard let fileopts = FirebaseOptions(contentsOfFile: filePath)
-                else { assert(false, "Couldn't load config file") }
+                else {
+                    assert(false, "Couldn't load config file")
+                    return
+                }
             FirebaseApp.configure(options: fileopts)
         }
     }
