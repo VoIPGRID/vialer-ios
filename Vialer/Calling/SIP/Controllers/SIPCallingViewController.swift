@@ -115,6 +115,22 @@ extension SIPCallingViewController {
         if call.callState == .disconnected {
             handleCallEnded()
         }
+        
+        //orp
+        if call.callerName == nil || call.callerName == "" {
+            // Set phonenumber first.
+            phoneNumberLabelText = call.callerNumber
+            // Search contact info.
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async { [weak self] in
+                PhoneNumberModel.getCallName(call) { phoneNumberModel in
+                    self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                }
+            }
+        } else {
+            // Set callerName.
+            phoneNumberLabelText = call.callerName
+        }
+        //pro
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -285,7 +301,7 @@ extension SIPCallingViewController {
         let waitingTimeAfterDismissing = Config.Timing.waitingTimeAfterDismissing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [weak self] in
             if self?.activeCall?.isIncoming ?? false {
-                self?.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+                self?.performSegue(segueIdentifier: .unwindToVialerRootViewController) //orp problem starts with this
             } else {
                 UIDevice.current.isProximityMonitoringEnabled = false
                 self?.presentingViewController?.dismiss(animated: false, completion: nil)
@@ -387,7 +403,9 @@ extension SIPCallingViewController {
             if nameLabel?.text == phoneNumberLabelText {
                 numberLabel?.text = dtmfWholeValue + dtmfSingleTimeValue
                 numberLabel?.isHidden = false
-                statusLabelTopConstraint.constant = 20
+                if (statusLabelTopConstraint != nil){ //orp
+                    statusLabelTopConstraint.constant = 20
+                }
             } else {
                 numberLabel?.text = (phoneNumberLabelText ?? "") + " " + dtmfWholeValue + dtmfSingleTimeValue
             }
@@ -410,10 +428,20 @@ extension SIPCallingViewController {
             }
             if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) {
                 numberLabel?.isHidden = false
-                statusLabelTopConstraint.constant = 20
+                //statusLabelTopConstraint.constant = 20 //orp
+                if (statusLabelTopConstraint != nil){ //orp
+                    statusLabelTopConstraint.constant = 20
+                }
             } else {
-                statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
+//                statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0) //orp was
+//                numberLabel?.isHidden = true //orp was
+                
+                //orp
+                if (statusLabelTopConstraint != nil){
+                    statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
+                }
                 numberLabel?.isHidden = true
+                //pro
             }
         }
         
@@ -550,7 +578,29 @@ extension SIPCallingViewController {
             let setupCallTransferVC = navVC.viewControllers[0] as! SetupCallTransferViewController
             setupCallTransferVC.firstCall = activeCall
             setupCallTransferVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
-        case .unwindToVialerRootViewController:
+        case .unwindToVialerRootViewController: //orp after this we get the background image stuck..when we merge calls..
+            
+            //orp
+            //self.navigationController?.popToViewController(self, animated: true) //no
+//            print(self)
+//            print(self.navigationController?.viewControllers as Any)
+            //self.navigationController?.popToViewController(vialerRootViewController, animated: true)
+            
+//            let navVC = segue.destination as! UINavigationController
+//            let vialerRootVC = navVC.viewControllers[0] as! VailerRootViewController
+            //setupCallTransferVC.firstCall = activeCall
+            //setupCallTransferVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            
+            //let vialerRootVC = segue.destination as! VailerRootViewController //no
+            //self.view.bringSubview(toFront: vialerRootVC) //no
+            
+            //let vialerRootVC = segue.destination as! VailerRootViewController
+            //vialerRootVC.navigationController?.popToViewController(vialerRootVC, animated: true) //no
+            
+            //vialerRootVC.navigationController?.popViewController(animated: true) //orp nav is nil...for root and for self..
+            
+            //pro
+            
             break
         }
     }
