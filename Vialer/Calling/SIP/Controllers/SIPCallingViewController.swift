@@ -329,7 +329,9 @@ extension SIPCallingViewController {
             hangupButton?.isEnabled = true
             statusLabel?.text = "09:41"
             numberLabel?.isHidden = true
-            statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
+            if statusLabelTopConstraint != nil {
+                statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
+            }
             nameLabel?.text = phoneNumberLabelText
             return
         }
@@ -387,7 +389,9 @@ extension SIPCallingViewController {
             if nameLabel?.text == phoneNumberLabelText {
                 numberLabel?.text = dtmfWholeValue + dtmfSingleTimeValue
                 numberLabel?.isHidden = false
-                statusLabelTopConstraint.constant = 20
+                if statusLabelTopConstraint != nil {
+                    statusLabelTopConstraint.constant = 20
+                }
             } else {
                 numberLabel?.text = (phoneNumberLabelText ?? "") + " " + dtmfWholeValue + dtmfSingleTimeValue
             }
@@ -410,9 +414,13 @@ extension SIPCallingViewController {
             }
             if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) {
                 numberLabel?.isHidden = false
-                statusLabelTopConstraint.constant = 20
+                if statusLabelTopConstraint != nil {
+                    statusLabelTopConstraint.constant = 20
+                }
             } else {
-                statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
+                if statusLabelTopConstraint != nil {
+                    statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
+                }
                 numberLabel?.isHidden = true
             }
         }
