@@ -906,13 +906,11 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     [self logoutWithUserInfo:logoutUserInfo];
 }
 
-// Override default KVO behaviour for automatic notificationing
+// Override default Key-Value Observing (KVO) behaviour for automatic notificationing.
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:NSStringFromSelector(@selector(sipEnabled))] ||
-        [key isEqualToString:NSStringFromSelector(@selector(clientID))]) {
-        return NO;
-    }
-    return YES;
+    NSString *sipEnabled = NSStringFromSelector(@selector(sipEnabled));
+    NSString *clientID = NSStringFromSelector(@selector(clientID));
+    return !([key isEqualToString:sipEnabled] || [key isEqualToString:clientID]);
 }
 
 # pragma mark - helper functions
