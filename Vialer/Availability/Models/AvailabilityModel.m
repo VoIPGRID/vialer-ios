@@ -72,8 +72,8 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     }
 
     NSDictionary *defaultDict = @{
-                                  AvailabilityModelDescription: NSLocalizedString(@"Not available", nil),
-                                  AvailabilityModelPhoneNumberKey: @0,
+                                  SystemUserAvailabilityDescriptionKey: NSLocalizedString(@"Not available", nil),
+                                  SystemUserAvailabilityPhoneNumberKey: @0,
                                   AvailabilityModelSelected: availabilitySelected,
                                   };
     [destinations addObject: defaultDict];
@@ -95,7 +95,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
 
             if ([destinationType isEqualToString: AvailabilityModelSelectedUserDestinationFixedKey]) {
                 NSNumberFormatter *nsNumberFormatter = [[NSNumberFormatter alloc] init];
-                phoneNumber = [nsNumberFormatter numberFromString:[userDestination objectForKey:AvailabilityModelPhoneNumberKey]];
+                phoneNumber = [nsNumberFormatter numberFromString:[userDestination objectForKey:SystemUserAvailabilityPhoneNumberKey]];
             }else{
                 phoneNumber =  [userDestination objectForKey:AvailabilityModelInternalNumbersKey];
             }
@@ -116,13 +116,13 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                 if ([availabilityDestinationId isEqualToString:selectedDestinationType]){
 
                     availabilitySelected = [NSNumber numberWithBool:YES];
-                    [[SystemUser currentUser] storeNewAvialibityInSUD:@{AvailabilityModelPhoneNumberKey: phoneNumber, AvailabilityModelDescription:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
+                    [[SystemUser currentUser] storeNewAvialibityInSUD:@{SystemUserAvailabilityPhoneNumberKey: phoneNumber, SystemUserAvailabilityDescriptionKey:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
                 }
             }
             NSDictionary *destination = @{
                                           AvailabilityModelId: [userDestination objectForKey:AvailabilityModelSelectedUserDestinationIdKey],
-                                          AvailabilityModelDescription: [userDestination objectForKey:AvailabilityModelDescriptionKey],
-                                          AvailabilityModelPhoneNumberKey: phoneNumber,
+                                          SystemUserAvailabilityDescriptionKey: [userDestination objectForKey:AvailabilityModelDescriptionKey],
+                                          SystemUserAvailabilityPhoneNumberKey: phoneNumber,
                                           AvailabilityModelSelected: availabilitySelected,
                                           AvailabilityModelDestinationType: destinationType,
                                           };
@@ -171,9 +171,9 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     NSDictionary *currentAvailability = [SystemUser currentUser].currentAvailability;
 
     // Check no availability.
-    if (!currentAvailability[AvailabilityModelLastFetchKey] ||
+    if (!currentAvailability[SystemUserAvailabilityLastFetchKey] ||
         // Or outdated.
-        fabs([(NSDate *)currentAvailability[AvailabilityModelLastFetchKey] timeIntervalSinceNow]) > AvailabilityModelFetchInterval) {
+        fabs([(NSDate *)currentAvailability[SystemUserAvailabilityLastFetchKey] timeIntervalSinceNow]) > AvailabilityModelFetchInterval) {
         // Fetch new info.
         [self getUserDestinations:^(NSString *localizedErrorString) {
             // Error.
@@ -194,7 +194,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
         }];
     } else {
         // Return existing key.
-        completionBlock(currentAvailability[AvailabilityModelAvailabilityKey], nil);
+        completionBlock(currentAvailability[SystemUserAvailabilityAvailabilityKey], nil);
     }
 }
 

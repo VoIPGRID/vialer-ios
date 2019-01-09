@@ -11,10 +11,10 @@
  */
 extern NSString * const SystemUserErrorDomain;
 
-extern NSString * const AvailabilityModelPhoneNumberKey;
-extern NSString * const AvailabilityModelDescription; // TODO: Add Key to name.
-extern NSString * const AvailabilityModelLastFetchKey;
-extern NSString * const AvailabilityModelAvailabilityKey;
+extern NSString * const SystemUserAvailabilityPhoneNumberKey;
+extern NSString * const SystemUserAvailabilityDescriptionKey;
+extern NSString * const SystemUserAvailabilityLastFetchKey;
+extern NSString * const SystemUserAvailabilityAvailabilityKey;
 
 /**
  *  Errors the SystemUser can have.

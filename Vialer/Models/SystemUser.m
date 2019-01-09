@@ -76,10 +76,10 @@ static NSString * const SystemUserSUDCountry            = @"Country";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQualitySUDKey";
 
-NSString * const AvailabilityModelPhoneNumberKey = @"phonenumber";
-NSString * const AvailabilityModelDescription = @"availabilityDescription";
-NSString * const AvailabilityModelLastFetchKey = @"AvailabilityModelLastFetchKey";
-NSString * const AvailabilityModelAvailabilityKey = @"AvailabilityModelAvailabilityKey";
+NSString * const SystemUserAvailabilityPhoneNumberKey = @"phonenumber";
+NSString * const SystemUserAvailabilityDescriptionKey = @"availabilityDescription";
+NSString * const SystemUserAvailabilityLastFetchKey = @"AvailabilityModelLastFetchKey";
+NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvailabilityKey";
 
 @interface SystemUser ()
 @property (nonatomic) BOOL loggedIn;
@@ -752,19 +752,19 @@ NSString * const AvailabilityModelAvailabilityKey = @"AvailabilityModelAvailabil
     NSString *newAvailabilityString;
     
     // Determine if the user chooses to be available or not, and if so, under which number he'll be available.
-    if (![option[AvailabilityModelPhoneNumberKey] isEqualToNumber:@0]) {
-        NSString *phoneNumber = [option[AvailabilityModelPhoneNumberKey] stringValue];
+    if (![option[SystemUserAvailabilityPhoneNumberKey] isEqualToNumber:@0]) {
+        NSString *phoneNumber = [option[SystemUserAvailabilityPhoneNumberKey] stringValue];
         if (phoneNumber.length > 5) {
             phoneNumber = [@"+" stringByAppendingString:phoneNumber];
         }
-        newAvailabilityString = [NSString stringWithFormat:@"%@ / %@", phoneNumber, option[AvailabilityModelDescription]];
+        newAvailabilityString = [NSString stringWithFormat:@"%@ / %@", phoneNumber, option[SystemUserAvailabilityDescriptionKey]];
     } else {
         newAvailabilityString = NSLocalizedString(@"Not available", nil);
     }
     
     NSDictionary *currentAvailability = @{
-                                          AvailabilityModelLastFetchKey:[NSDate date],
-                                          AvailabilityModelAvailabilityKey:newAvailabilityString,
+                                          SystemUserAvailabilityLastFetchKey:[NSDate date],
+                                          SystemUserAvailabilityAvailabilityKey:newAvailabilityString,
                                           };
     [SystemUser currentUser].currentAvailability = currentAvailability;
     return newAvailabilityString;
