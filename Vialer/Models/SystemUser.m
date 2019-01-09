@@ -47,7 +47,7 @@ static NSString * const SystemUserApiKeyCountry         = @"appaccount_country";
 static NSString * const SystemUserApiKeyOpusEnabled     = @"appaccount_use_opus";
 static NSString * const SystemUserApiKeyAPIToken        = @"api_token";
 
-// Constant for "suppressed" key as supplied by api for outgoingNumber
+// Constant for "suppressed" key as supplied by API for outgoingNumber.
 static NSString * const SystemUserSuppressedKey = @"suppressed";
 
 /**
@@ -222,7 +222,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
         return;
     }
     NSString *stringFromSipEnabledProperty = NSStringFromSelector(@selector(sipEnabled));
-    // If sip is being enabled, check if there is an sipAccount and fire notification.
+    // If SIP is being enabled, check if there is an sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
         [self willChangeValueForKey:stringFromSipEnabledProperty];
         _sipEnabled = YES;
@@ -235,7 +235,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
 
-        // If sip is being disabled, fire a notification.
+        // If SIP is being disabled, fire a notification.
     } else if (!sipEnabled && _sipEnabled) {
         [self willChangeValueForKey:stringFromSipEnabledProperty];
         _sipEnabled = NO;
@@ -822,7 +822,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
                 self.sipAccount = [sipAccount stringValue];
                 [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
 
-                    // Encryption is turned off for this account. Make an api call and enable it.
+                    // Encryption is turned off for this account. Make an API call and enable it.
                 if (self.useTLS && ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption)) {
                     [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
                         if (success) {
@@ -853,7 +853,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 
             [self setMobileProfileFromUserDict:responseData];
 
-            // This is to update properties like sipEnabled and sipAccount in various cases like when fetching app account
+            // This is to update properties like sipEnabled and sipAccount in various cases like when fetching app account.
             [self setOwnPropertiesFromUserDict:responseData withUsername:nil andPassword:nil];
             if (completion) completion(YES, nil);
         }
