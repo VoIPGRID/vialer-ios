@@ -443,11 +443,11 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 - (void)loginToCheckTwoFactorWithUserName:(NSString *)username password:(NSString *)password andToken:(NSString *)token completion:(void(^)(BOOL loggedin, BOOL tokenRequired, NSError *error))completion {
     [self.operationsManager loginWithUserNameForTwoFactor:username password:password orToken:token withCompletion:^(NSDictionary *responseData, NSError *error) {
 
-        if (error && [responseData objectForKey:@"apitoken"]) {
+        if (error && responseData[@"apitoken"]) {
             NSDictionary *apiTokenDict = responseData[@"apitoken"];
 
             // There is no token supplied!
-            if ([apiTokenDict objectForKey:@"two_factor_token"]) {
+            if (apiTokenDict[@"two_factor_token"]) {
                 if (completion) {
                     NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
                     NSString *twoFactorToken = apiTokenDict[@"two_factor_token"][0];
@@ -466,7 +466,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
             }
 
             // Invalid email or password.
-            if ([apiTokenDict objectForKey:@"email"] || [apiTokenDict objectForKey:@"password"]) {
+            if (apiTokenDict[@"email"] || apiTokenDict[@"password"]) {
                 [self removeCurrentUser];
                 if (completion) {
                     NSDictionary *userInfo = @{NSUnderlyingErrorKey: error};
@@ -511,8 +511,8 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
         /**
          *  Check if the user is a Client or a Partner user.
          */
-        NSString *client = [responseData objectForKey:SystemUserApiKeyClient];
-        NSString *partner = [responseData objectForKey:SystemUserApiKeyPartner];
+        NSString *client = responseData[SystemUserApiKeyClient];
+        NSString *partner = responseData[SystemUserApiKeyPartner];
         // Client should be valid, and partner should not be present.
         BOOL clientValid = client && ![client isKindOfClass:[NSNull class]];
         BOOL partnerValid = partner && ![partner isKindOfClass:[NSNull class]];
@@ -865,7 +865,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 - (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion {
     [self.operationsManager userProfileWithCompletion:^(NSURLResponse *operation, NSDictionary *responseObject, NSError *error) {
         
-        if (!error && [responseObject objectForKey:SystemUserApiKeyAPIToken]) {
+        if (!error && responseObject[SystemUserApiKeyAPIToken]) {
             self.apiToken = responseObject[SystemUserApiKeyAPIToken];
             [[NSUserDefaults standardUserDefaults] setObject:self.apiToken forKey:SystemUserSUDAPIToken];
 
