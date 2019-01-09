@@ -748,7 +748,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     }];
 }
 
-- (NSString *)storeNewAvialibityInSUD:(NSDictionary *)option {
+- (NSString *)storeNewAvailabilityInSUD:(NSDictionary *)option {
     NSString *newAvailabilityString;
     
     // Determine if the user chooses to be available or not, and if so, under which number he'll be available.

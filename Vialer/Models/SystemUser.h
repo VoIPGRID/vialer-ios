@@ -337,6 +337,6 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
  * @param option Dictionary containing the new availability options.
  * @return String representation of the phone number and description or an indication the user isn't available.
  */
-- (NSString *)storeNewAvialibityInSUD:(NSDictionary *)option;
+- (NSString *)storeNewAvailabilityInSUD:(NSDictionary *)option;
 
 @end

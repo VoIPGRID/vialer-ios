@@ -115,7 +115,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                 if ([availabilityDestinationId isEqualToString:selectedDestinationType]){
 
                     availabilitySelected = [NSNumber numberWithBool:YES];
-                    [[SystemUser currentUser] storeNewAvialibityInSUD:@{SystemUserAvailabilityPhoneNumberKey: phoneNumber, SystemUserAvailabilityDescriptionKey:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
+                    [[SystemUser currentUser] storeNewAvailabilityInSUD:@{SystemUserAvailabilityPhoneNumberKey: phoneNumber, SystemUserAvailabilityDescriptionKey:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
                 }
             }
             NSDictionary *destination = @{
@@ -159,7 +159,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
             }
             return;
         }
-        [[SystemUser currentUser] storeNewAvialibityInSUD:selectedDict];
+        [[SystemUser currentUser] storeNewAvailabilityInSUD:selectedDict];
         if (completion) {
             completion(nil);
         }
@@ -184,7 +184,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                 // Find current selected.
                 if ([option[AvailabilityModelSelected] isEqualToNumber:@1]) {
                     //Create string and update SUD.
-                    NSString *newAvailabilityString = [[SystemUser currentUser] storeNewAvialibityInSUD:option];
+                    NSString *newAvailabilityString = [[SystemUser currentUser] storeNewAvailabilityInSUD:option];
                     // Return new string.
                     completionBlock(newAvailabilityString, nil);
                     break;
