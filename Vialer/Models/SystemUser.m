@@ -76,6 +76,10 @@ static NSString * const SystemUserSUDCountry            = @"Country";
 static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
 static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQualitySUDKey";
 
+NSString * const AvailabilityModelPhoneNumberKey = @"phonenumber";
+NSString * const AvailabilityModelDescription = @"availabilityDescription";
+NSString * const AvailabilityModelLastFetchKey = @"AvailabilityModelLastFetchKey";
+NSString * const AvailabilityModelAvailabilityKey = @"AvailabilityModelAvailabilityKey";
 
 @interface SystemUser ()
 @property (nonatomic) BOOL loggedIn;
@@ -186,7 +190,7 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
      */
     self.sipAccount         = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled         = [defaults boolForKey:SystemUserSUDSIPEnabled];
-    self.sipUseEncryption   = self.sipUseEncryption;
+    self.sipUseEncryption   = self.sipUseEncryption; //TODO: explain to me.
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 
     self.loggingOut = NO;
@@ -743,6 +747,29 @@ static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQuali
         }
     }];
 }
+
+- (NSString *)storeNewAvialibityInSUD:(NSDictionary *)option {
+    NSString *newAvailabilityString;
+    
+    // Determine if the user chooses to be available or not, and if so, under which number he'll be available.
+    if (![option[AvailabilityModelPhoneNumberKey] isEqualToNumber:@0]) {
+        NSString *phoneNumber = [option[AvailabilityModelPhoneNumberKey] stringValue];
+        if (phoneNumber.length > 5) {
+            phoneNumber = [@"+" stringByAppendingString:phoneNumber];
+        }
+        newAvailabilityString = [NSString stringWithFormat:@"%@ / %@", phoneNumber, option[AvailabilityModelDescription]];
+    } else {
+        newAvailabilityString = NSLocalizedString(@"Not available", nil);
+    }
+    
+    NSDictionary *currentAvailability = @{
+                                          AvailabilityModelLastFetchKey:[NSDate date],
+                                          AvailabilityModelAvailabilityKey:newAvailabilityString,
+                                          };
+    [SystemUser currentUser].currentAvailability = currentAvailability;
+    return newAvailabilityString;
+}
+
 
 #pragma mark - SIP Handling
 

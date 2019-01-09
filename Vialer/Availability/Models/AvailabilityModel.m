@@ -8,11 +8,9 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 
-NSString * const AvailabilityModelDescription = @"availabilityDescription";
 NSString * const AvailabilityModelPhoneNumber = @"availabilityPhoneNumber";
 NSString * const AvailabilityModelSelected = @"availabilitySelected";
 NSString * const AvailabilityModelDestinationType = @"availabilityType";
-NSString *const AvailabilityModelPhoneNumberKey = @"phonenumber";
 NSString * const AvailabilityModelId = @"availabilityId";
 
 static NSString *const AvailabilityModelFixedDestinationsKey = @"fixeddestinations";
@@ -25,8 +23,6 @@ static NSString *const AvailabilityModelSelectedUserDestinationPhoneaccountKey =
 static NSString *const AvailabilityModelSelectedUserDestinationFixedKey = @"fixeddestination";
 static NSString *const AvailabilityModelSelectedUserDestinationIdKey = @"id";
 
-static NSString * const AvailabilityModelLastFetchKey = @"AvailabilityModelLastFetchKey";
-static NSString * const AvailabilityModelAvailabilityKey = @"AvailabilityModelAvailabilityKey";
 static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of seconds between fetching of availability
 
 @interface AvailabilityModel()
@@ -120,7 +116,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                 if ([availabilityDestinationId isEqualToString:selectedDestinationType]){
 
                     availabilitySelected = [NSNumber numberWithBool:YES];
-                    [self storeNewAvialibityInSUD:@{AvailabilityModelPhoneNumberKey: phoneNumber, AvailabilityModelDescription:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
+                    [[SystemUser currentUser] storeNewAvialibityInSUD:@{AvailabilityModelPhoneNumberKey: phoneNumber, AvailabilityModelDescription:[userDestination objectForKey:AvailabilityModelDescriptionKey]}];
                 }
             }
             NSDictionary *destination = @{
@@ -164,7 +160,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
             }
             return;
         }
-        [self storeNewAvialibityInSUD:selectedDict];
+        [[SystemUser currentUser] storeNewAvialibityInSUD:selectedDict];
         if (completion) {
             completion(nil);
         }
@@ -189,7 +185,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                 // Find current selected.
                 if ([option[AvailabilityModelSelected] isEqualToNumber:@1]) {
                     //Create string and update SUD.
-                    NSString *newAvailabilityString = [self storeNewAvialibityInSUD:option];
+                    NSString *newAvailabilityString = [[SystemUser currentUser] storeNewAvialibityInSUD:option];
                     // Return new string.
                     completionBlock(newAvailabilityString, nil);
                     break;
@@ -200,27 +196,6 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
         // Return existing key.
         completionBlock(currentAvailability[AvailabilityModelAvailabilityKey], nil);
     }
-}
-
-- (NSString *)storeNewAvialibityInSUD:(NSDictionary *)option {
-    NSString *newAvailabilityString;
-
-    if (![option[AvailabilityModelPhoneNumberKey] isEqualToNumber:@0]) {
-        NSString *phoneNumber = [option[AvailabilityModelPhoneNumberKey] stringValue];
-        if (phoneNumber.length > 5) {
-            phoneNumber = [@"+" stringByAppendingString:phoneNumber];
-        }
-        newAvailabilityString = [NSString stringWithFormat:@"%@ / %@", phoneNumber, option[AvailabilityModelDescription]];
-    } else {
-        newAvailabilityString = NSLocalizedString(@"Not available", nil);
-    }
-
-    NSDictionary *currentAvailability = @{
-                            AvailabilityModelLastFetchKey:[NSDate date],
-                            AvailabilityModelAvailabilityKey:newAvailabilityString,
-                            };
-    [SystemUser currentUser].currentAvailability = currentAvailability;
-    return newAvailabilityString;
 }
 
 @end

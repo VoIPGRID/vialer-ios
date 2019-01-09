@@ -11,6 +11,11 @@
  */
 extern NSString * const SystemUserErrorDomain;
 
+extern NSString * const AvailabilityModelPhoneNumberKey;
+extern NSString * const AvailabilityModelDescription; // TODO: Add Key to name.
+extern NSString * const AvailabilityModelLastFetchKey;
+extern NSString * const AvailabilityModelAvailabilityKey;
+
 /**
  *  Errors the SystemUser can have.
  */
@@ -325,5 +330,13 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
  *  @param completion Block that will be called after fetch. If an error during the fetch happend, this will be passed to the block.
  */
 - (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion;
+
+/**
+ * Store the provided availabilty options for the current user.
+ *
+ * @param option Dictionary containing the new availabilty options.
+ * @return String representation of the phone number and description or an indication the user isn't available.
+ */
+- (NSString *)storeNewAvialibityInSUD:(NSDictionary *)option;
 
 @end

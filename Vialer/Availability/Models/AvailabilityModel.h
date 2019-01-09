@@ -5,11 +5,9 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const AvailabilityModelDescription;
-extern NSString *const AvailabilityModelPhoneNumber;
-extern NSString *const AvailabilityModelPhoneNumberKey;
-extern NSString *const AvailabilityModelSelected;
-extern NSString *const AvailabilityModelDestinationType;
+extern NSString *const AvailabilityModelPhoneNumber; // TODO: unused? remove then.
+extern NSString *const AvailabilityModelSelected; // TODO: extern needed? Better move to?
+extern NSString *const AvailabilityModelDestinationType; // TODO: extern needed? Also move?
 
 @interface AvailabilityModel : NSObject
 
