@@ -102,7 +102,6 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
     if ([VialerSIPLib callKitAvailable]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
-
     } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:AppDelegateIncomingBackgroundCallAcceptedNotification object:nil];
@@ -245,19 +244,23 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)showSipCallingViewOrIncomingCallNotification:(NSNotification *)notification {
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
-        self.willPresentCallingViewController = YES;
-        self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
         if (![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
             ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
+            self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
+                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
             }];
         } else if (notification.name == AppDelegateIncomingCallNotification) {
+            self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
+                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:self];
             }];
         } else if (notification.name == AppDelegateIncomingBackgroundCallAcceptedNotification) {
+            self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
+                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
             }];
         }
