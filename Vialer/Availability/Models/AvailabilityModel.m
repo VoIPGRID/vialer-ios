@@ -8,7 +8,6 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 
-NSString * const AvailabilityModelPhoneNumber = @"availabilityPhoneNumber";
 NSString * const AvailabilityModelSelected = @"availabilitySelected";
 NSString * const AvailabilityModelDestinationType = @"availabilityType";
 NSString * const AvailabilityModelId = @"availabilityId";
