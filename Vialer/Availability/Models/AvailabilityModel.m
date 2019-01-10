@@ -8,9 +8,9 @@
 
 #import "VoIPGRIDRequestOperationManager.h"
 
-NSString * const AvailabilityModelSelected = @"availabilitySelected";
-NSString * const AvailabilityModelDestinationType = @"availabilityType";
-NSString * const AvailabilityModelId = @"availabilityId";
+NSString *const AvailabilityModelSelected = @"availabilitySelected";
+NSString *const AvailabilityModelDestinationType = @"availabilityType";
+NSString *const AvailabilityModelId = @"availabilityId";
 
 static NSString *const AvailabilityModelFixedDestinationsKey = @"fixeddestinations";
 static NSString *const AvailabilityModelPhoneaccountsKey = @"phoneaccounts";
@@ -24,19 +24,19 @@ static NSString *const AvailabilityModelSelectedUserDestinationIdKey = @"id";
 
 static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of seconds between fetching of availability
 
-@interface AvailabilityModel()
-@property (nonatomic, strong) NSArray *availabilityOptions;
-@property (nonatomic, strong) NSString *availabilityResourceUri;
-@property (strong, nonatomic) VoIPGRIDRequestOperationManager *voipgridRequestOperationManager;
+@interface AvailabilityModel ()
+@property(nonatomic, strong) NSArray *availabilityOptions;
+@property(nonatomic, strong) NSString *availabilityResourceUri;
+@property(strong, nonatomic) VoIPGRIDRequestOperationManager *voipgridRequestOperationManager;
 @end
 
 @implementation AvailabilityModel
 
 - (VoIPGRIDRequestOperationManager *)voipgridRequestOperationManager {
-	if (!_voipgridRequestOperationManager) {
-		_voipgridRequestOperationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
-	}
-	return _voipgridRequestOperationManager;
+    if (!_voipgridRequestOperationManager) {
+        _voipgridRequestOperationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
+    }
+    return _voipgridRequestOperationManager;
 }
 
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion {
@@ -49,7 +49,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
             }
         } else {
             // Successful fetch of user destinations.
-            [self userDestinationsToArray: responseData[@"objects"][0]];
+            [self userDestinationsToArray:responseData[@"objects"][0]];
             if (completion) {
                 completion(nil);
             }
@@ -57,7 +57,7 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     }];
 }
 
-- (void)userDestinationsToArray:(NSDictionary *) userDestinations {
+- (void)userDestinationsToArray:(NSDictionary *)userDestinations {
     NSMutableArray *destinations = [[NSMutableArray alloc] init];
     NSArray *phoneAccounts = userDestinations[AvailabilityModelPhoneaccountsKey];
     NSArray *fixedDestinations = userDestinations[AvailabilityModelFixedDestinationsKey];
@@ -66,16 +66,16 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     NSString *fixedDestination = selectedDestination[AvailabilityModelSelectedUserDestinationFixedKey];
 
     NSNumber *availabilitySelected = @0;
-    if ([phoneAccountDestination isEqual:[NSNull null]] && [fixedDestination isEqual: [NSNull null]]) {
+    if ([phoneAccountDestination isEqual:[NSNull null]] && [fixedDestination isEqual:[NSNull null]]) {
         availabilitySelected = @1;
     }
 
     NSDictionary *defaultDict = @{
-                                  SystemUserAvailabilityDescriptionKey: NSLocalizedString(@"Not available", nil),
-                                  SystemUserAvailabilityPhoneNumberKey: @0,
-                                  AvailabilityModelSelected: availabilitySelected,
-                                  };
-    [destinations addObject: defaultDict];
+            SystemUserAvailabilityDescriptionKey: NSLocalizedString(@"Not available", nil),
+            SystemUserAvailabilityPhoneNumberKey: @0,
+            AvailabilityModelSelected: availabilitySelected,
+    };
+    [destinations addObject:defaultDict];
 
     [destinations addObjectsFromArray:[self createDestinations:phoneAccounts withDestinationType:AvailabilityModelSelectedUserDestinationPhoneaccountKey withSelectedDestination:selectedDestination]];
     [destinations addObjectsFromArray:[self createDestinations:fixedDestinations withDestinationType:AvailabilityModelSelectedUserDestinationFixedKey withSelectedDestination:selectedDestination]];
@@ -84,18 +84,18 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     self.availabilityResourceUri = selectedDestination[AvailabilityModelResourceUriKey];
 }
 
-- (NSArray *)createDestinations:(NSArray*)userDestinations withDestinationType:(NSString*)destinationType withSelectedDestination:(NSDictionary*)selectedDestination {
+- (NSArray *)createDestinations:(NSArray *)userDestinations withDestinationType:(NSString *)destinationType withSelectedDestination:(NSDictionary *)selectedDestination {
     NSNumber *phoneNumber;
 
     NSMutableArray *destinations = [[NSMutableArray alloc] init];
     if ([userDestinations count]) {
-        for (NSDictionary *userDestination in userDestinations){
+        for (NSDictionary *userDestination in userDestinations) {
             NSNumber *availabilitySelected = @NO;
 
-            if ([destinationType isEqualToString: AvailabilityModelSelectedUserDestinationFixedKey]) {
+            if ([destinationType isEqualToString:AvailabilityModelSelectedUserDestinationFixedKey]) {
                 NSNumberFormatter *nsNumberFormatter = [[NSNumberFormatter alloc] init];
                 phoneNumber = [nsNumberFormatter numberFromString:userDestination[SystemUserAvailabilityPhoneNumberKey]];
-            }else{
+            } else {
                 phoneNumber = userDestination[AvailabilityModelInternalNumbersKey];
             }
 
@@ -112,20 +112,20 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
                     selectedDestinationType = [selectedDestinationType stringValue];
                 }
 
-                if ([availabilityDestinationId isEqualToString:selectedDestinationType]){
+                if ([availabilityDestinationId isEqualToString:selectedDestinationType]) {
 
                     availabilitySelected = @YES;
                     [[SystemUser currentUser] storeNewAvailabilityInSUD:@{SystemUserAvailabilityPhoneNumberKey: phoneNumber, SystemUserAvailabilityDescriptionKey: userDestination[AvailabilityModelDescriptionKey]}];
                 }
             }
             NSDictionary *destination = @{
-                                          AvailabilityModelId: userDestination[AvailabilityModelSelectedUserDestinationIdKey],
-                                          SystemUserAvailabilityDescriptionKey: userDestination[AvailabilityModelDescriptionKey],
-                                          SystemUserAvailabilityPhoneNumberKey: phoneNumber,
-                                          AvailabilityModelSelected: availabilitySelected,
-                                          AvailabilityModelDestinationType: destinationType,
-                                          };
-            [destinations addObject: destination];
+                    AvailabilityModelId: userDestination[AvailabilityModelSelectedUserDestinationIdKey],
+                    SystemUserAvailabilityDescriptionKey: userDestination[AvailabilityModelDescriptionKey],
+                    SystemUserAvailabilityPhoneNumberKey: phoneNumber,
+                    AvailabilityModelSelected: availabilitySelected,
+                    AvailabilityModelDestinationType: destinationType,
+            };
+            [destinations addObject:destination];
 
         }
     }
@@ -144,35 +144,34 @@ static NSTimeInterval const AvailabilityModelFetchInterval = 3600; // number of 
     }
 
     NSDictionary *saveDict = @{
-                               AvailabilityModelSelectedUserDestinationPhoneaccountKey: phoneaccount,
-                               AvailabilityModelSelectedUserDestinationFixedKey: fixedDestination,
-                               };
+            AvailabilityModelSelectedUserDestinationPhoneaccountKey: phoneaccount,
+            AvailabilityModelSelectedUserDestinationFixedKey: fixedDestination,
+    };
 
     [self.voipgridRequestOperationManager pushSelectedUserDestination:self.availabilityResourceUri
                                                       destinationDict:saveDict
                                                        withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
-        // Check if there was an error.
-        if (error) {
-            NSString *error = NSLocalizedString(@"Saving availability has failed", nil);
-            if (completion) {
-                completion(error);
-            }
-            return;
-        }
-        [[SystemUser currentUser] storeNewAvailabilityInSUD:selectedDict];
-        if (completion) {
-            completion(nil);
-        }
-    }];
+                                                           // Check if there was an error.
+                                                           if (error) {
+                                                               NSString *error = NSLocalizedString(@"Saving availability has failed", nil);
+                                                               if (completion) {
+                                                                   completion(error);
+                                                               }
+                                                               return;
+                                                           }
+                                                           [[SystemUser currentUser] storeNewAvailabilityInSUD:selectedDict];
+                                                           if (completion) {
+                                                               completion(nil);
+                                                           }
+                                                       }];
 }
 
 - (void)getCurrentAvailabilityWithBlock:(void (^)(NSString *currentAvailability, NSString *localizedError))completionBlock {
     NSDictionary *currentAvailability = [SystemUser currentUser].currentAvailability;
 
-    // Check no availability.
+    // Check no availability or outdated.
     if (!currentAvailability[SystemUserAvailabilityLastFetchKey] ||
-        // Or outdated.
-        fabs([(NSDate *)currentAvailability[SystemUserAvailabilityLastFetchKey] timeIntervalSinceNow]) > AvailabilityModelFetchInterval) {
+            fabs([(NSDate *) currentAvailability[SystemUserAvailabilityLastFetchKey] timeIntervalSinceNow]) > AvailabilityModelFetchInterval) {
         // Fetch new info.
         [self getUserDestinations:^(NSString *localizedErrorString) {
             // Error.

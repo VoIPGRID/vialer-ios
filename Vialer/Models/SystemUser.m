@@ -12,114 +12,114 @@
 #import "Vialer-Swift.h"
 
 
-NSString * const SystemUserErrorDomain = @"Vialer.Systemuser";
-NSString * const SystemUserLoginNotification                = @"SystemUserLoginNotification";
-NSString * const SystemUserLogoutNotification               = @"SystemUserLogoutNotification";
-NSString * const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogoutNotificationDisplayNameKey";
-NSString * const SystemUserLogoutNotificationErrorKey       = @"SystemUserLogoutNotificationErrorKey";
+NSString *const SystemUserErrorDomain = @"Vialer.Systemuser";
+NSString *const SystemUserLoginNotification = @"SystemUserLoginNotification";
+NSString *const SystemUserLogoutNotification = @"SystemUserLogoutNotification";
+NSString *const SystemUserLogoutNotificationDisplayNameKey = @"SystemUserLogoutNotificationDisplayNameKey";
+NSString *const SystemUserLogoutNotificationErrorKey = @"SystemUserLogoutNotificationErrorKey";
 
-NSString * const SystemUserSIPCredentialsChangedNotification    = @"SystemUserSIPCredentialsChangedNotification";
-NSString * const SystemUserStunUsageChangedNotification         = @"SystemUserStunUsageChangedNotification";
-NSString * const SystemUserEncryptionUsageChangedNotification   = @"SystemUserEncryptionUsageChangedNotification";
+NSString *const SystemUserSIPCredentialsChangedNotification = @"SystemUserSIPCredentialsChangedNotification";
+NSString *const SystemUserStunUsageChangedNotification = @"SystemUserStunUsageChangedNotification";
+NSString *const SystemUserEncryptionUsageChangedNotification = @"SystemUserEncryptionUsageChangedNotification";
 
-NSString * const SystemUserSIPDisabledNotification           = @"SystemUserSIPDisabledNotification";
-NSString * const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
-NSString * const SystemUserUse3GPlusNotification             = @"SystemUserUse3GPlusNotification";
-NSString * const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
+NSString *const SystemUserSIPDisabledNotification = @"SystemUserSIPDisabledNotification";
+NSString *const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
+NSString *const SystemUserUse3GPlusNotification = @"SystemUserUse3GPlusNotification";
+NSString *const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
 /**
  *  Api Dictionary keys.
  *
  *  These keys can be used to get the information from the dictionary received from the VoIPGRID platform.
  */
-static NSString * const SystemUserApiKeyClient          = @"client";
-static NSString * const SystemUserApiKeyPartner         = @"partner";
-static NSString * const SystemUserApiKeyMobileNumber    = @"mobile_nr";
-static NSString * const SystemUserApiKeyOutgoingNumber  = @"outgoing_cli";
-static NSString * const SystemUserApiKeyEmailAddress    = @"email";
-static NSString * const SystemUserApiKeyFirstName       = @"first_name";
-static NSString * const SystemUserApiKeyPreposition     = @"preposition";
-static NSString * const SystemUserApiKeyLastName        = @"last_name";
-static NSString * const SystemUserApiKeyAppAccountURL   = @"app_account";
-static NSString * const SystemUserApiKeySIPAccount      = @"appaccount_account_id";
-static NSString * const SystemUserApiKeySIPPassword     = @"appaccount_password";
-static NSString * const SystemUserApiKeyUseEncryption   = @"appaccount_use_encryption";
-static NSString * const SystemUserApiKeyCountry         = @"appaccount_country";
-static NSString * const SystemUserApiKeyOpusEnabled     = @"appaccount_use_opus";
-static NSString * const SystemUserApiKeyAPIToken        = @"api_token";
+static NSString *const SystemUserApiKeyClient = @"client";
+static NSString *const SystemUserApiKeyPartner = @"partner";
+static NSString *const SystemUserApiKeyMobileNumber = @"mobile_nr";
+static NSString *const SystemUserApiKeyOutgoingNumber = @"outgoing_cli";
+static NSString *const SystemUserApiKeyEmailAddress = @"email";
+static NSString *const SystemUserApiKeyFirstName = @"first_name";
+static NSString *const SystemUserApiKeyPreposition = @"preposition";
+static NSString *const SystemUserApiKeyLastName = @"last_name";
+static NSString *const SystemUserApiKeyAppAccountURL = @"app_account";
+static NSString *const SystemUserApiKeySIPAccount = @"appaccount_account_id";
+static NSString *const SystemUserApiKeySIPPassword = @"appaccount_password";
+static NSString *const SystemUserApiKeyUseEncryption = @"appaccount_use_encryption";
+static NSString *const SystemUserApiKeyCountry = @"appaccount_country";
+static NSString *const SystemUserApiKeyOpusEnabled = @"appaccount_use_opus";
+static NSString *const SystemUserApiKeyAPIToken = @"api_token";
 
 // Constant for "suppressed" key as supplied by API for outgoingNumber.
-static NSString * const SystemUserSuppressedKey = @"suppressed";
+static NSString *const SystemUserSuppressedKey = @"suppressed";
 
 /**
  *  NSUserDefault keys.
  *
  *  These keys are used to store and retrieve information in the NSUserDefaults.
  */
-static NSString * const SystemUserSUDUsername           = @"User";
-static NSString * const SystemUserSUDOutgoingNumber     = @"OutgoingCLI";
-static NSString * const SystemUserSUDMobileNumber       = @"MobileNumber";
-static NSString * const SystemUserSUDEmailAddress       = @"Email";
-static NSString * const SystemUserSUDFirstName          = @"FirstName";
-static NSString * const SystemUserSUDPreposition        = @"Preposition";
-static NSString * const SystemUserSUDLastName           = @"LastName";
-static NSString * const SystemUserSUDClientID           = @"ClientID";
-static NSString * const SystemUserSUDSIPAccount         = @"SIPAccount";
-static NSString * const SystemUserSUDSIPEnabled         = @"SipEnabled";
-static NSString * const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
-static NSString * const SystemUserSUDSIPUseEncryption   = @"SIPUseEncryption";
-static NSString * const SystemUserSUDUse3GPlus          = @"Use3GPlus";
-static NSString * const SystemUserSUDUseTLS             = @"UseTLS";
-static NSString * const SystemuserSUDUseStunServers     = @"UseStunServers";
-static NSString * const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
-static NSString * const SystemUserSUDAPIToken           = @"APIToken";
-static NSString * const SystemUserSUDCountry            = @"Country";
-static NSString * const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
-static NSString * const SystemUserAudioQualitySUDKey    = @"SystemUserAudioQualitySUDKey";
+static NSString *const SystemUserSUDUsername = @"User";
+static NSString *const SystemUserSUDOutgoingNumber = @"OutgoingCLI";
+static NSString *const SystemUserSUDMobileNumber = @"MobileNumber";
+static NSString *const SystemUserSUDEmailAddress = @"Email";
+static NSString *const SystemUserSUDFirstName = @"FirstName";
+static NSString *const SystemUserSUDPreposition = @"Preposition";
+static NSString *const SystemUserSUDLastName = @"LastName";
+static NSString *const SystemUserSUDClientID = @"ClientID";
+static NSString *const SystemUserSUDSIPAccount = @"SIPAccount";
+static NSString *const SystemUserSUDSIPEnabled = @"SipEnabled";
+static NSString *const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
+static NSString *const SystemUserSUDSIPUseEncryption = @"SIPUseEncryption";
+static NSString *const SystemUserSUDUse3GPlus = @"Use3GPlus";
+static NSString *const SystemUserSUDUseTLS = @"UseTLS";
+static NSString *const SystemuserSUDUseStunServers = @"UseStunServers";
+static NSString *const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
+static NSString *const SystemUserSUDAPIToken = @"APIToken";
+static NSString *const SystemUserSUDCountry = @"Country";
+static NSString *const SystemUserCurrentAvailabilitySUDKey = @"AvailabilityModelSUDKey";
+static NSString *const SystemUserAudioQualitySUDKey = @"SystemUserAudioQualitySUDKey";
 
-NSString * const SystemUserAvailabilityPhoneNumberKey = @"phonenumber";
-NSString * const SystemUserAvailabilityDescriptionKey = @"availabilityDescription";
-NSString * const SystemUserAvailabilityLastFetchKey = @"AvailabilityModelLastFetchKey";
-NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvailabilityKey";
+NSString *const SystemUserAvailabilityPhoneNumberKey = @"phonenumber";
+NSString *const SystemUserAvailabilityDescriptionKey = @"availabilityDescription";
+NSString *const SystemUserAvailabilityLastFetchKey = @"AvailabilityModelLastFetchKey";
+NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvailabilityKey";
 
 @interface SystemUser ()
-@property (nonatomic) BOOL loggedIn;
+@property(nonatomic) BOOL loggedIn;
 
 /**
  *  User properties.
  */
-@property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *outgoingNumber;
-@property (strong, nonatomic) NSString *mobileNumber;
-@property (strong, nonatomic) NSString *emailAddress;
-@property (strong, nonatomic) NSString *firstName;
-@property (strong, nonatomic) NSString *preposition;
-@property (strong, nonatomic) NSString *lastName;
-@property (strong, nonatomic) NSString *clientID;
-@property (strong, nonatomic) NSString *apiToken;
-@property (strong, nonatomic) NSString *country;
+@property(strong, nonatomic) NSString *username;
+@property(strong, nonatomic) NSString *outgoingNumber;
+@property(strong, nonatomic) NSString *mobileNumber;
+@property(strong, nonatomic) NSString *emailAddress;
+@property(strong, nonatomic) NSString *firstName;
+@property(strong, nonatomic) NSString *preposition;
+@property(strong, nonatomic) NSString *lastName;
+@property(strong, nonatomic) NSString *clientID;
+@property(strong, nonatomic) NSString *apiToken;
+@property(strong, nonatomic) NSString *country;
 
 /**
  *  This boolean will keep track if the migration from app version 1.x to 2.x already happend.
  */
-@property (readwrite, nonatomic) BOOL migrationCompleted;
+@property(readwrite, nonatomic) BOOL migrationCompleted;
 
 /**
  *  SIP Properties
  */
-@property (strong, nonatomic) NSString *sipAccount;
-@property (readwrite, nonatomic) BOOL sipRegisterOnAdd;
+@property(strong, nonatomic) NSString *sipAccount;
+@property(readwrite, nonatomic) BOOL sipRegisterOnAdd;
 
 /**
  *  Depenpency Injection.
  */
-@property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationsManager;
+@property(strong, nonatomic) VoIPGRIDRequestOperationManager *operationsManager;
 
 /**
  *  This value is used to store and retrieve keys from the Keychain.
  */
-@property (strong, nonatomic) NSString *serviceName;
+@property(strong, nonatomic) NSString *serviceName;
 
-@property (nonatomic) BOOL loggingOut;
+@property(nonatomic) BOOL loggingOut;
 @end
 
 @implementation SystemUser
@@ -166,17 +166,17 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     /**
      *  User settings.
      */
-    self.username           = [defaults objectForKey:SystemUserSUDUsername];
-    self.outgoingNumber     = [defaults objectForKey:SystemUserSUDOutgoingNumber];
-    self.mobileNumber       = [defaults objectForKey:SystemUserSUDMobileNumber];
-    self.emailAddress       = [defaults objectForKey:SystemUserSUDEmailAddress];
-    self.firstName          = [defaults objectForKey:SystemUserSUDFirstName];
-    self.preposition        = [defaults objectForKey:SystemUserSUDPreposition];
-    self.lastName           = [defaults objectForKey:SystemUserSUDLastName];
-    self.clientID           = [defaults objectForKey:SystemUserSUDClientID];
+    self.username = [defaults objectForKey:SystemUserSUDUsername];
+    self.outgoingNumber = [defaults objectForKey:SystemUserSUDOutgoingNumber];
+    self.mobileNumber = [defaults objectForKey:SystemUserSUDMobileNumber];
+    self.emailAddress = [defaults objectForKey:SystemUserSUDEmailAddress];
+    self.firstName = [defaults objectForKey:SystemUserSUDFirstName];
+    self.preposition = [defaults objectForKey:SystemUserSUDPreposition];
+    self.lastName = [defaults objectForKey:SystemUserSUDLastName];
+    self.clientID = [defaults objectForKey:SystemUserSUDClientID];
     self.migrationCompleted = [defaults boolForKey:SystemUserSUDMigrationCompleted];
-    self.apiToken           = [defaults objectForKey:SystemUserSUDAPIToken];
-    self.country            = [defaults objectForKey:SystemUserSUDCountry];
+    self.apiToken = [defaults objectForKey:SystemUserSUDAPIToken];
+    self.country = [defaults objectForKey:SystemUserSUDCountry];
 
     /**
      *  If there is a username, the user is supposed to be logged in.
@@ -188,9 +188,9 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     /**
      *  SIP settings.
      */
-    self.sipAccount         = [defaults objectForKey:SystemUserSUDSIPAccount];
-    self.sipEnabled         = [defaults boolForKey:SystemUserSUDSIPEnabled];
-    self.sipUseEncryption   = self.sipUseEncryption; //TODO: explain to me.
+    self.sipAccount = [defaults objectForKey:SystemUserSUDSIPAccount];
+    self.sipEnabled = [defaults boolForKey:SystemUserSUDSIPEnabled];
+    self.sipUseEncryption = self.sipUseEncryption; //TODO: explain to me.
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 
     self.loggingOut = NO;
@@ -282,7 +282,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 - (BOOL)use3GPlus {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
-    if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUse3GPlus]){
+    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUse3GPlus]) {
         self.use3GPlus = YES;
     }
     return [defaults boolForKey:SystemUserSUDUse3GPlus];
@@ -304,9 +304,9 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     return [defaults boolForKey:SystemuserSUDUseStunServers];
 }
 
--(BOOL)sipUseEncryption {
+- (BOOL)sipUseEncryption {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDSIPUseEncryption]){
+    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDSIPUseEncryption]) {
         self.sipUseEncryption = YES;
     }
     return [defaults boolForKey:SystemUserSUDSIPUseEncryption];
@@ -314,7 +314,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 
 - (BOOL)showWiFiNotification {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if(![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]){
+    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDShowWiFiNotification]) {
         self.showWiFiNotification = YES;
     }
     return [defaults boolForKey:SystemUserSUDShowWiFiNotification];
@@ -384,10 +384,10 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 }
 
 - (NSInteger)currentAudioQuality {
-   return [[NSUserDefaults standardUserDefaults] integerForKey:SystemUserAudioQualitySUDKey];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:SystemUserAudioQualitySUDKey];
 }
 
-- (void)setCurrentAudioQuality: (NSInteger)currentAudioQuality {
+- (void)setCurrentAudioQuality:(NSInteger)currentAudioQuality {
     [[NSUserDefaults standardUserDefaults] setInteger:currentAudioQuality forKey:SystemUserAudioQualitySUDKey];
 }
 
@@ -398,7 +398,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 
 - (void)setUse3GPlus:(BOOL)use3GPlus {
     [[NSUserDefaults standardUserDefaults] setBool:use3GPlus forKey:SystemUserSUDUse3GPlus];
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserUse3GPlusNotification object:self];
     });
@@ -440,7 +440,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 
 #pragma mark - Actions
 
-- (void)loginToCheckTwoFactorWithUserName:(NSString *)username password:(NSString *)password andToken:(NSString *)token completion:(void(^)(BOOL loggedin, BOOL tokenRequired, NSError *error))completion {
+- (void)loginToCheckTwoFactorWithUserName:(NSString *)username password:(NSString *)password andToken:(NSString *)token completion:(void (^)(BOOL loggedin, BOOL tokenRequired, NSError *error))completion {
     [self.operationsManager loginWithUserNameForTwoFactor:username password:password orToken:token withCompletion:^(NSDictionary *responseData, NSError *error) {
 
         if (error && responseData[@"apitoken"]) {
@@ -459,8 +459,8 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
                     }
 
                     completion(NO, YES, [NSError errorWithDomain:SystemUserErrorDomain
-                                                           code:tokenErrorCode
-                                                       userInfo:userInfo]);
+                                                            code:tokenErrorCode
+                                                        userInfo:userInfo]);
                     return;
                 }
             }
@@ -494,7 +494,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     }];
 }
 
-- (void)getSystemUserInfoWithUsername:(NSString *)username password:(NSString *)password completion:(void(^)(BOOL loggedin, NSError *error))completion {
+- (void)getSystemUserInfoWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL loggedin, NSError *error))completion {
     [self.operationsManager getSystemUserInfowithCompletion:^(NSDictionary *responseData, NSError *error) {
         /**
          *  Login failed.
@@ -518,7 +518,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
         BOOL partnerValid = partner && ![partner isKindOfClass:[NSNull class]];
         if (!clientValid || partnerValid) {
             // This is a partner or superuser account, don't log in!
-            NSDictionary *userInfo = @{NSLocalizedDescriptionKey : NSLocalizedString(@"user type not allowed", nil)};
+            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"user type not allowed", nil)};
             completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorUserTypeNotAllowed userInfo:userInfo]);
             return;
         }
@@ -594,17 +594,17 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
         [SAMKeychain setPassword:password forService:self.serviceName account:username];
     }
 
-    self.emailAddress   = userDict[SystemUserApiKeyEmailAddress];
+    self.emailAddress = userDict[SystemUserApiKeyEmailAddress];
 
-    self.firstName      = userDict[SystemUserApiKeyFirstName];
-    self.preposition    = userDict[SystemUserApiKeyPreposition];
-    self.lastName       = userDict[SystemUserApiKeyLastName];
-    self.clientID       = userDict[SystemUserApiKeyClient];
+    self.firstName = userDict[SystemUserApiKeyFirstName];
+    self.preposition = userDict[SystemUserApiKeyPreposition];
+    self.lastName = userDict[SystemUserApiKeyLastName];
+    self.clientID = userDict[SystemUserApiKeyClient];
 
     if (![userDict[SystemUserApiKeyMobileNumber] isEqual:[NSNull null]]) {
         self.mobileNumber = userDict[SystemUserApiKeyMobileNumber];
     }
-    
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     // If the defaults contains a value for SIP Enabled, use that value,
@@ -624,7 +624,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     [defaults setObject:self.clientID forKey:SystemUserApiKeyClient];
 
     [defaults setObject:self.mobileNumber forKey:SystemUserSUDMobileNumber];
-    
+
     [defaults synchronize];
     self.loggedIn = YES;
     self.loggingOut = NO;
@@ -678,7 +678,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     }];
 }
 
-- (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void(^)(BOOL success, NSError *error))completion {
+- (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (!mobileNumber.length) {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"The number is to short", nil)};
         completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorMobileNumberToShort userInfo:userInfo]);
@@ -707,8 +707,8 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
                 completion(YES, nil);
             } else {
                 NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
-                                           NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save the number, please update the number.", nil)
-                                           };
+                        NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save the number, please update the number.", nil)
+                };
                 completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserFailedToSaveNumberRemote userInfo:userInfo]);
             }
         }];
@@ -717,23 +717,23 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     }
 }
 
-- (void)updateUseEncryptionWithCompletion:(void(^)(BOOL success, NSError *error))completion {
+- (void)updateUseEncryptionWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     [self.operationsManager pushUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
         if (success) {
             completion(YES, nil);
         } else {
             NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
-                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save to use encryption.", nil)
-                                       };
+                    NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save to use encryption.", nil)
+            };
             completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserFailedToSaveEncryptionToRemote userInfo:userInfo]);
         }
     }];
 }
 
--(void)updateUseOpus:(NSInteger)codec withCompletion:(void (^)(BOOL, NSError *))completion {
+- (void)updateUseOpus:(NSInteger)codec withCompletion:(void (^)(BOOL, NSError *))completion {
     BOOL enable = NO;
     if (codec > 0) {
-        enable =YES;
+        enable = YES;
     }
 
     [self.operationsManager pushUseOpus:enable withCompletion:^(BOOL success, NSError *error) {
@@ -741,8 +741,8 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
             completion(YES, nil);
         } else {
             NSDictionary *userInfo = @{NSUnderlyingErrorKey: error,
-                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save the use of opus.", nil)
-                                       };
+                    NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to save the use of opus.", nil)
+            };
             completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserFailedToSaveOpusToRemote userInfo:userInfo]);
         }
     }];
@@ -750,7 +750,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 
 - (NSString *)storeNewAvailabilityInSUD:(NSDictionary *)option {
     NSString *newAvailabilityString;
-    
+
     // Determine if the user chooses to be available or not, and if so, under which number he'll be available.
     if (![option[SystemUserAvailabilityPhoneNumberKey] isEqualToNumber:@0]) {
         NSString *phoneNumber = [option[SystemUserAvailabilityPhoneNumberKey] stringValue];
@@ -761,11 +761,11 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     } else {
         newAvailabilityString = NSLocalizedString(@"Not available", nil);
     }
-    
+
     NSDictionary *currentAvailability = @{
-                                          SystemUserAvailabilityLastFetchKey:[NSDate date],
-                                          SystemUserAvailabilityAvailabilityKey:newAvailabilityString,
-                                          };
+            SystemUserAvailabilityLastFetchKey: [NSDate date],
+            SystemUserAvailabilityAvailabilityKey: newAvailabilityString,
+    };
     [SystemUser currentUser].currentAvailability = currentAvailability;
     return newAvailabilityString;
 }
@@ -790,26 +790,26 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
     }
 }
 
-- (void)fetchMobileProfileFromRemoteWithCompletion:(void(^)(BOOL success, NSError *error))completion {
+- (void)fetchMobileProfileFromRemoteWithCompletion:(void (^)(BOOL success, NSError *error))completion {
     [self.operationsManager getMobileProfileWithCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         if (error) {
             if (completion) completion(NO, error);
         } else {
-            
+
             [self setMobileProfileFromUserDict:responseData];
-            
+
             id sipAccount = responseData[SystemUserApiKeySIPAccount];
             id sipPassword = responseData[SystemUserApiKeySIPPassword];
             id useEncryption = responseData[SystemUserApiKeyUseEncryption];
 
             if ([sipAccount isKindOfClass:[NSNull class]] || [sipPassword isKindOfClass:[NSNull class]]) {
                 [self removeSIPCredentials];
-                
+
                 if (completion) {
                     completion(YES, nil);
                 }
             }
-            
+
             if (![sipAccount isKindOfClass:[NSNumber class]] || ![sipPassword isKindOfClass:[NSString class]]) {
                 [self removeSIPCredentials];
                 if (completion) {
@@ -817,12 +817,12 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
                     completion(NO, error);
                 }
             }
-            
+
             if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
                 self.sipAccount = [sipAccount stringValue];
                 [SAMKeychain setPassword:sipPassword forService:self.serviceName account:self.sipAccount];
 
-                    // Encryption is turned off for this account. Make an API call and enable it.
+                // Encryption is turned off for this account. Make an API call and enable it.
                 if (self.useTLS && ([useEncryption isEqualToNumber:@0] || !self.sipUseEncryption)) {
                     [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
                         if (success) {
@@ -834,7 +834,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
                             return;
                         }
                     }];
-                } else if (!self.useTLS && self.sipUseEncryption){
+                } else if (!self.useTLS && self.sipUseEncryption) {
                     VialerLogDebug(@"Turn TLS Off");
                     [self updateUseEncryptionWithCompletion:^(BOOL success, NSError *error) {
                         if (success) {
@@ -864,7 +864,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 
 - (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion {
     [self.operationsManager userProfileWithCompletion:^(NSURLResponse *operation, NSDictionary *responseObject, NSError *error) {
-        
+
         if (!error && responseObject[SystemUserApiKeyAPIToken]) {
             self.apiToken = responseObject[SystemUserApiKeyAPIToken];
             [[NSUserDefaults standardUserDefaults] setObject:self.apiToken forKey:SystemUserSUDAPIToken];
@@ -872,7 +872,7 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
             [self updateSystemUserFromVGWithCompletion:completion];
         } else if (!error) {
             [self setOwnPropertiesFromUserDict:responseObject withUsername:nil andPassword:nil];
-            
+
             [self fetchMobileProfileFromRemoteWithCompletion:^(BOOL success, NSError *error) {
                 if (completion) {
                     if (success) {
@@ -901,8 +901,8 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
 - (void)authorizationFailedNotification:(NSNotification *)notification {
     NSDictionary *errorUserInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"You're not authorized", nil)};
     NSDictionary *logoutUserInfo = @{SystemUserLogoutNotificationDisplayNameKey: [self.displayName copy],
-                                     SystemUserLogoutNotificationErrorKey: [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserUnAuthorized userInfo:errorUserInfo]
-                                     };
+            SystemUserLogoutNotificationErrorKey: [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserUnAuthorized userInfo:errorUserInfo]
+    };
     [self logoutWithUserInfo:logoutUserInfo];
 }
 
@@ -923,9 +923,9 @@ NSString * const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvai
  *
  *  @return the plain clientID or nil.
  */
-- (NSString *)parseStringForClientID:(NSString *) givenString {
+- (NSString *)parseStringForClientID:(NSString *)givenString {
     NSString *clientIDPatternToSearch = @"/client/";
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSCharacterSet *notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
 
     if (!givenString || [givenString isEqualToString:@""]) {
         return nil;

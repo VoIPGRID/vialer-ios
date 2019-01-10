@@ -9,9 +9,10 @@ extern NSString *const AvailabilityModelSelected;
 
 @interface AvailabilityModel : NSObject
 
-@property (readonly, nonatomic) NSArray *availabilityOptions;
+@property(readonly, nonatomic) NSArray *availabilityOptions;
 
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion;
+
 - (void)saveUserDestination:(NSUInteger)index withCompletion:(void (^)(NSString *localizedErrorString))completion;
 
 /**
