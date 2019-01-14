@@ -797,7 +797,6 @@
 		EEEDF358219DC2AF00D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */; };
 		EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */; };
 		EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
-		EEEDF362219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
 		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
 		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
@@ -3526,7 +3525,6 @@
 				EE733DAF21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EE23188F20A0468F00C05EB0 /* dtmf-3.aif in Resources */,
 				EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */,
-				EEEDF362219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */,
 				EE23189020A0468F00C05EB0 /* dtmf-4.aif in Resources */,
 				EE23189120A0468F00C05EB0 /* dtmf-5.aif in Resources */,
 				EE23189220A0468F00C05EB0 /* LogInViewController.xib in Resources */,
