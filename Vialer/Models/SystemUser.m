@@ -190,7 +190,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
      */
     self.sipAccount = [defaults objectForKey:SystemUserSUDSIPAccount];
     self.sipEnabled = [defaults boolForKey:SystemUserSUDSIPEnabled];
-    self.sipUseEncryption = self.sipUseEncryption; //TODO: explain to me.
+    self.sipUseEncryption = self.sipUseEncryption;
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
 
     self.loggingOut = NO;

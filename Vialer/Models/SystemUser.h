@@ -203,7 +203,7 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (readonly, nonatomic) NSString *sipAccount;
 
 /**
- *  The password that will be user for SIP calling.
+ *  The password that will be used for SIP calling.
  */
 @property (readonly, nonatomic) NSString *sipPassword;
 
