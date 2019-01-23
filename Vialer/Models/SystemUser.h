@@ -11,6 +11,11 @@
  */
 extern NSString * const SystemUserErrorDomain;
 
+extern NSString * const SystemUserAvailabilityPhoneNumberKey;
+extern NSString * const SystemUserAvailabilityDescriptionKey;
+extern NSString * const SystemUserAvailabilityLastFetchKey;
+extern NSString * const SystemUserAvailabilityAvailabilityKey;
+
 /**
  *  Errors the SystemUser can have.
  */
@@ -24,7 +29,7 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      */
     SystemUserErrorLoginFailed,
     /**
-     *  It was not possible to fetch the SIP account of the user
+     *  It was not possible to fetch the SIP account of the user.
      */
     SystemUserErrorFetchingSIPAccount,
     /**
@@ -56,11 +61,11 @@ typedef NS_ENUM(NSInteger, SystemUserErrors) {
      */
     SystemUserUnAuthorized,
     /**
-     * Two factor authentication token required
+     * Two factor authentication token required.
      */
     SystemUserTwoFactorAuthenticationTokenRequired,
     /**
-     * Two factor authentication token invalid
+     * Two factor authentication token invalid.
      */
     SystemUserTwoFactorAuthenticationTokenInvalid
 };
@@ -198,7 +203,7 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (readonly, nonatomic) NSString *sipAccount;
 
 /**
- *  The password that will be user for sip calling.
+ *  The password that will be used for SIP calling.
  */
 @property (readonly, nonatomic) NSString *sipPassword;
 
@@ -218,7 +223,7 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (readonly, nonatomic) BOOL sipContactRewriteMethodAlwaysUpdate;
 
 /**
- *  This will return if the sip account should register when the user is added to the endpoint.
+ *  This will return if the SIP account should register when the user is added to the endpoint.
  */
 @property (readonly, nonatomic) BOOL sipRegisterOnAdd;
 
@@ -322,8 +327,16 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 /**
  *  This will fetch up to date information from the VoIPGRID platform.
  *
- *  @param completion Block that will be called after fetch. If an error during the fetch happend, this will be passed to the block.
+ *  @param completion Block that will be called after fetch. If an error during the fetch happened, this will be passed to the block.
  */
 - (void)updateSystemUserFromVGWithCompletion:(void (^)(NSError *error))completion;
+
+/**
+ * Store the provided availability options for the current user.
+ *
+ * @param option Dictionary containing the new availability options.
+ * @return String representation of the phone number and description or an indication the user isn't available.
+ */
+- (NSString *)storeNewAvailabilityInSUD:(NSDictionary *)option;
 
 @end

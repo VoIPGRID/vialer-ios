@@ -74,14 +74,14 @@ static NSString * const AvailabilityViewControllerAddFixedDestinationPageURLWith
     NSDictionary *availabilityDict = self.availabilityModel.availabilityOptions[indexPath.row];
 
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:DefaultCellIdentifier];
-    if ([availabilityDict[AvailabilityModelPhoneNumberKey] isEqualToNumber:@0]){
-        cell.textLabel.text = availabilityDict[AvailabilityModelDescription];
+    if ([availabilityDict[SystemUserAvailabilityPhoneNumberKey] isEqualToNumber:@0]){
+        cell.textLabel.text = availabilityDict[SystemUserAvailabilityDescriptionKey];
     } else {
-        NSString *phoneNumber = [availabilityDict[AvailabilityModelPhoneNumberKey] stringValue];
+        NSString *phoneNumber = [availabilityDict[SystemUserAvailabilityPhoneNumberKey] stringValue];
         if (phoneNumber.length > 5) {
             phoneNumber = [@"+" stringByAppendingString:phoneNumber];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ / %@",  phoneNumber, availabilityDict[AvailabilityModelDescription]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ / %@",  phoneNumber, availabilityDict[SystemUserAvailabilityDescriptionKey]];
     }
 
     if ([availabilityDict[AvailabilityModelSelected] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
