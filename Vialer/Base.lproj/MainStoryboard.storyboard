@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,24 +15,12 @@
             <objects>
                 <viewController id="BQ4-be-ZGE" customClass="VailerRootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bti-2h-Pg1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TKx-Qn-Q5o">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="8vI-DI-UXA" firstAttribute="trailing" secondItem="TKx-Qn-Q5o" secondAttribute="trailing" id="I4p-Qb-Z1p"/>
-                            <constraint firstItem="TKx-Qn-Q5o" firstAttribute="top" secondItem="Bti-2h-Pg1" secondAttribute="top" id="VCd-hK-cmk"/>
-                            <constraint firstAttribute="bottom" secondItem="TKx-Qn-Q5o" secondAttribute="bottom" id="cP2-7V-rRJ"/>
-                            <constraint firstItem="TKx-Qn-Q5o" firstAttribute="leading" secondItem="8vI-DI-UXA" secondAttribute="leading" id="dte-Yd-KXm"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="8vI-DI-UXA"/>
+                        <viewLayoutGuide key="safeArea" id="Kwr-Zg-43A"/>
                     </view>
                     <connections>
-                        <outlet property="launchImage" destination="TKx-Qn-Q5o" id="WdN-iC-xym"/>
                         <segue destination="i10-iY-7zz" kind="showDetail" identifier="ShowVialerDrawerViewSegue" customClass="NoAnimationSegue" id="jgD-42-JhD"/>
                         <segue destination="ZYs-HX-JeK" kind="presentation" identifier="ShowSIPIncomingCallViewSegue" animates="NO" id="18T-Qb-NXM"/>
                         <segue destination="OBw-wl-6xF" kind="unwind" identifier="goToVialerRootViewControllerIdentifier" unwindAction="goToVialerRootViewController:" id="Hm1-9D-gHw"/>
@@ -74,10 +62,10 @@
             <objects>
                 <viewController storyboardIdentifier="VialerDrawerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i10-iY-7zz" customClass="VialerDrawerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mzC-cA-UBR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="zgc-ik-ngg"/>
+                        <viewLayoutGuide key="safeArea" id="PVo-bT-P72"/>
                     </view>
                     <connections>
                         <segue destination="ALB-k4-yaR" kind="custom" identifier="mm_center" customClass="MMDrawerControllerSegue" id="tO0-Oo-pCK"/>
@@ -152,7 +140,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tab-contact" width="27" height="28"/>
+        <image name="tab-contact" width="30" height="30"/>
         <image name="tab-contact-active" width="27" height="28"/>
         <image name="tab-keypad" width="24" height="24"/>
         <image name="tab-keypad-active" width="24" height="24"/>
