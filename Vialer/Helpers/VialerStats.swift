@@ -93,6 +93,8 @@ import AVFoundation
             static let attempt: String = "attempt"
             static let callDuration: String = "call_duration"
             static let hangupReason: String = "hangup_reason"
+            static let codec: String = "codec"
+            static let mos: String = "mos"
         }
         
     }
@@ -166,6 +168,16 @@ import AVFoundation
         }
     }
     
+    private func setCallInformation(_ call: VSLCall) {
+        if (call.mos > 0.0) {
+            defaultData[VialerStatsConstants.APIKeys.mos] = call.mos.description;
+        }
+        
+        if (!call.activeCodec.isEmpty) {
+            defaultData[VialerStatsConstants.APIKeys.codec] = call.activeCodec;
+        }
+    }
+    
     private func setMiddlewareData(){
         guard !VialerStats.sharedInstance.middlewareUniqueKey.isEmpty else {
             return
@@ -202,6 +214,7 @@ import AVFoundation
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
+        setCallInformation(call)
         
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
@@ -234,6 +247,7 @@ import AVFoundation
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
+        setCallInformation(call)
         
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
@@ -251,7 +265,8 @@ import AVFoundation
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
-
+        setCallInformation(call)
+        
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
@@ -289,7 +304,8 @@ import AVFoundation
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
-
+        setCallInformation(call)
+        
         defaultData[VialerStatsConstants.APIKeys.callSetupSuccessful] = "false"
         defaultData[VialerStatsConstants.APIKeys.asteriskCallId] = call.messageCallId
         defaultData[VialerStatsConstants.APIKeys.clientCountry] = SystemUser.current().country
@@ -313,7 +329,8 @@ import AVFoundation
         setNetworkData()
         setTransportData()
         setCallDirection(call.isIncoming)
-
+        setCallInformation(call)
+        
         if call.isIncoming {
             setMiddlewareData()
         }
