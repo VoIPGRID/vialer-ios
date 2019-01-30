@@ -808,13 +808,14 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
             id sipAccount = responseData[SystemUserApiKeySIPAccount];
             id sipPassword = responseData[SystemUserApiKeySIPPassword];
             id useEncryption = responseData[SystemUserApiKeyUseEncryption];
-
+            
+            // Checking if there is no any app acount set for the user which will cause the app to crash
             if ([sipAccount isKindOfClass:[NSNull class]] || [sipPassword isKindOfClass:[NSNull class]]) {
                 [self removeSIPCredentials];
-
                 if (completion) {
                     completion(YES, nil);
                 }
+                return;
             }
 
             if (![sipAccount isKindOfClass:[NSNumber class]] || ![sipPassword isKindOfClass:[NSString class]]) {
@@ -823,6 +824,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
                     NSError *error = [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorFetchingSIPAccount userInfo:nil];
                     completion(NO, error);
                 }
+                return;
             }
 
             if (![self.sipAccount isEqualToString:[sipAccount stringValue]] || ![self.sipPassword isEqualToString:sipPassword]) {
