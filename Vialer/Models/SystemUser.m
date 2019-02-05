@@ -594,14 +594,22 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
         [SAMKeychain setPassword:password forService:self.serviceName account:username];
     }
 
-    self.emailAddress = userDict[SystemUserApiKeyEmailAddress];
-
-    self.firstName = userDict[SystemUserApiKeyFirstName];
-    self.preposition = userDict[SystemUserApiKeyPreposition];
-    self.lastName = userDict[SystemUserApiKeyLastName];
-    self.clientID = userDict[SystemUserApiKeyClient];
-
-    if (![userDict[SystemUserApiKeyMobileNumber] isEqual:[NSNull null]]) {
+    if (userDict[SystemUserApiKeyEmailAddress]) {
+        self.emailAddress = userDict[SystemUserApiKeyEmailAddress];
+    }
+    if (userDict[SystemUserApiKeyFirstName]) {
+        self.firstName = userDict[SystemUserApiKeyFirstName];
+    }
+    if (userDict[SystemUserApiKeyPreposition]) {
+        self.preposition = userDict[SystemUserApiKeyPreposition];
+    }
+    if (userDict[SystemUserApiKeyLastName]) {
+        self.lastName= userDict[SystemUserApiKeyLastName];
+    }
+    if (userDict[SystemUserApiKeyClient]) {
+        self.clientID = userDict[SystemUserApiKeyClient];
+    }
+    if (userDict[SystemUserApiKeyMobileNumber]) {
         self.mobileNumber = userDict[SystemUserApiKeyMobileNumber];
     }
 
@@ -617,15 +625,14 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 
     [defaults setObject:self.username forKey:SystemUserSUDUsername];
     [defaults setObject:self.emailAddress forKey:SystemUserSUDEmailAddress];
-
     [defaults setObject:self.firstName forKey:SystemUserSUDFirstName];
     [defaults setObject:self.preposition forKey:SystemUserSUDPreposition];
     [defaults setObject:self.lastName forKey:SystemUserSUDLastName];
     [defaults setObject:self.clientID forKey:SystemUserApiKeyClient];
-
     [defaults setObject:self.mobileNumber forKey:SystemUserSUDMobileNumber];
 
     [defaults synchronize];
+
     self.loggedIn = YES;
     self.loggingOut = NO;
 }
@@ -855,6 +862,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 
             // This is to update properties like sipEnabled and sipAccount in various cases like when fetching app account.
             [self setOwnPropertiesFromUserDict:responseData withUsername:nil andPassword:nil];
+
             if (completion) completion(YES, nil);
         }
     }];
