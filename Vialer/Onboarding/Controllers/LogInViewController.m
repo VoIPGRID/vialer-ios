@@ -36,10 +36,8 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     UITapGestureRecognizer *tg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselectAllTextFields:)];
     [self.view addGestureRecognizer:tg];
-
     self.logoView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
 }
 
@@ -139,6 +137,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 #pragma mark - UITextField delegate methods
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([self.loginFormView.usernameField isEqual:textField]) {
         [textField resignFirstResponder];
@@ -407,9 +406,9 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 #pragma mark - Navigation actions
+
 - (void)moveLogoOutOfScreen { /* Act one (1) */
     // Create an animation scenes that transitions to configure view.
-
     if (CGRectGetMaxY(self.logoView.frame) > 0) {
         [UIView animateWithDuration:2.2 animations:^{
             [self.logoView setCenter:CGPointMake(self.logoView.center.x, -CGRectGetHeight(self.logoView.frame))];

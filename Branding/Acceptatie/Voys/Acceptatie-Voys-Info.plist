@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Voys needs access to your camera to make video calls</string>
 	<key>Additional_Version_String</key>
 	<string>Updated on build</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -36,12 +34,14 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Voys needs access to your bluetooth to get the name of the device</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Voys needs access to your camera to make video calls</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Voys needs access to your contacts to make calling to your contacts possible</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Voys needs access to your microphone to make calling possible</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Voys needs access to your bluetooth to get the name of the device</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

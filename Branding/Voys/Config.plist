@@ -55,9 +55,9 @@
 	<dict>
 		<key>BackgroundGradientEndColor</key>
 		<array>
-			<integer>42</integer>
-			<integer>45</integer>
-			<integer>169</integer>
+			<integer>91</integer>
+			<integer>93</integer>
+			<integer>163</integer>
 		</array>
 		<key>BackgroundGradientStartColor</key>
 		<array>

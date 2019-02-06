@@ -22,6 +22,9 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 @property (nonatomic) BOOL willPresentCallingViewController;
 @property (weak, nonatomic) VSLCall *activeCall;
 @property(weak, nonatomic) NSString *twoStepNumberToCall;
+@property (weak, nonatomic) IBOutlet GradientView *backgroundGrandientView;
+@property (weak, nonatomic) IBOutlet UIView *backgroundSolidColorView;
+
 @end
 
 @implementation VailerRootViewController
@@ -96,7 +99,7 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupLayout];
+    self.backgroundSolidColorView.backgroundColor = [[ColorsConfiguration shared] colorForKey:ColorsBackgroundGradientStart];
     if ([VialerSIPLib callKitAvailable]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
@@ -117,41 +120,25 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // Prevent segue if we are in the process of showing an incoming view controller.
-    if (!self.willPresentCallingViewController) {
-        if ([self shouldPresentLoginViewController]) {
-            [self presentViewController:self.loginViewController animated:NO completion:nil];
-        } else {
-            [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
-        }
-    }
+    // Animate background from solid to gradient color
+    [UIView animateWithDuration:1 animations:^{
+        [self.backgroundGrandientView setAlpha:1];
+     }
+     completion:^(BOOL finished){
+         // Prevent segue if we are in the process of showing an incoming view controller.
+         if (!self.willPresentCallingViewController) {
+             if ([self shouldPresentLoginViewController]) {
+                 [self presentViewController:self.loginViewController animated:NO completion:nil];
+             } else {
+                 [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
+             }
+         }
+         
+     }];
 }
 
-- (void)setupLayout {
-    NSString *launchImage;
-    CGFloat screenNativeBoundsHeight = [UIScreen mainScreen].nativeBounds.size.height;
-    // The block below is using the reference to each correct for the resolution launch image. Source: https://stackoverflow.com/questions/33120932/how-to-get-the-right-launch-image-in-ios9-programmatically/33122807#33122807
-    if(screenNativeBoundsHeight == 1792.0f) {
-        launchImage = @"LaunchImage-1200-Portrait-1792h";  // iphone-xr
-    }
-    else if(screenNativeBoundsHeight == 2688.0f) {
-        launchImage = @"LaunchImage-1200-Portrait-2688h";  //iphone-xs max
-    }
-    else if(screenNativeBoundsHeight == 2436.0f) {
-        launchImage = @"LaunchImage-1100-Portrait-2436h";  // iphone-x/xs
-    }
-    else if(screenNativeBoundsHeight == 2208.0f || screenNativeBoundsHeight == 1920.0f) {
-        launchImage = @"LaunchImage-800-Portrait-736h";    // iphone-6plus/7plus/8plus
-    }
-    else if(screenNativeBoundsHeight == 1334.0f) {
-        launchImage = @"LaunchImage-800-667h";             // iphone-6/7/8
-    }
-    else if(screenNativeBoundsHeight == 1136.0f){
-        launchImage = @"LaunchImage-700-568h";             // iphone-5/SE
-    } else {
-        launchImage = @"LaunchImage-700";                  // iphone-4/4s
-    }
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:launchImage]];
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - properties

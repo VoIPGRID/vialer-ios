@@ -23,6 +23,12 @@
 		4D27D40E66E3E080DBB02CF4 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
+		833DFB3F2211B934003E19CC /* Vialer-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */; };
+		833DFB42221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */; };
+		833DFB44221461F8003E19CC /* Voys-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB43221461F8003E19CC /* Voys-LaunchScreen.storyboard */; };
+		833DFB462214624F003E19CC /* Verbonden-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB452214624F003E19CC /* Verbonden-LaunchScreen.storyboard */; };
+		833DFB4822146265003E19CC /* Voys-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */; };
+		833DFB4A22146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */; };
 		836884AD20F4B4290098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
@@ -1215,6 +1221,12 @@
 		83129868215D033A00CFE01D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
+		833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		833DFB43221461F8003E19CC /* Voys-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		833DFB452214624F003E19CC /* Verbonden-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Verbonden-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
@@ -1925,15 +1937,16 @@
 		C41FD8D11C60A12E00BBE6D7 /* Voys */ = {
 			isa = PBXGroup;
 			children = (
-				EE3D8674201F113800CEFDC6 /* Voys.xcassets */,
 				EEEF16081F470C4400AEFA83 /* InfoPlist.strings */,
 				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
 				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
-				EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */,
 				C41FD8E41C60A55000BBE6D7 /* Config.plist */,
+				EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */,
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
 				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
+				EE3D8674201F113800CEFDC6 /* Voys.xcassets */,
+				833DFB43221461F8003E19CC /* Voys-LaunchScreen.storyboard */,
 			);
 			name = Voys;
 			sourceTree = "<group>";
@@ -2093,10 +2106,11 @@
 				EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */,
 				C490ADF31D086458004A8F83 /* Verbonden-Info.plist */,
 				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
-				C490ADF41D086458004A8F83 /* Verbonden.xcassets */,
 				C490ADF01D086458004A8F83 /* Config.plist */,
 				EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */,
 				C490ADF11D086458004A8F83 /* GoogleService-Info.plist */,
+				C490ADF41D086458004A8F83 /* Verbonden.xcassets */,
+				833DFB452214624F003E19CC /* Verbonden-LaunchScreen.storyboard */,
 			);
 			name = Verbonden;
 			path = Branding/Verbonden;
@@ -2347,6 +2361,7 @@
 				EE23180220A0442000C05EB0 /* Config.plist */,
 				EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */,
 				EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */,
+				833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */,
 			);
 			name = ANNAbel;
 			path = Branding/ANNAbel;
@@ -2407,6 +2422,7 @@
 				EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */,
 				EE61F4921F1DDE7D006E890F /* Config.plist */,
 				EE61F4931F1DDE7D006E890F /* GoogleService-Info.plist */,
+				833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */,
 			);
 			path = Vialer;
 			sourceTree = "<group>";
@@ -2418,6 +2434,7 @@
 				EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */,
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
+				833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */,
 			);
 			path = Voys;
 			sourceTree = "<group>";
@@ -2497,6 +2514,7 @@
 				EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */,
 				F20851811D269DD300A17E71 /* GoogleService-Info.plist */,
 				EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */,
+				833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */,
 			);
 			name = Vialer;
 			path = Branding/Vialer;
@@ -3422,6 +3440,7 @@
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
 				C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */,
 				C42FAD3D1D198D34004D9D00 /* ringtone.wav in Resources */,
+				833DFB44221461F8003E19CC /* Voys-LaunchScreen.storyboard in Resources */,
 				C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */,
 				C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */,
 				C41FD8C21C60A08400BBE6D7 /* MainStoryboard.storyboard in Resources */,
@@ -3478,6 +3497,7 @@
 				EE733DAE21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				C490ADF91D086458004A8F83 /* Verbonden.xcassets in Resources */,
 				C490ADD71D0863E3004A8F83 /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				833DFB462214624F003E19CC /* Verbonden-LaunchScreen.storyboard in Resources */,
 				C490ADD81D0863E3004A8F83 /* disconnected.wav in Resources */,
 				C4F385971D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				C490ADD91D0863E3004A8F83 /* dtmf-8.aif in Resources */,
@@ -3525,6 +3545,7 @@
 				EE733DAF21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				EE23188F20A0468F00C05EB0 /* dtmf-3.aif in Resources */,
 				EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */,
+				833DFB42221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard in Resources */,
 				EE23189020A0468F00C05EB0 /* dtmf-4.aif in Resources */,
 				EE23189120A0468F00C05EB0 /* dtmf-5.aif in Resources */,
 				EE23189220A0468F00C05EB0 /* LogInViewController.xib in Resources */,
@@ -3569,6 +3590,7 @@
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
 				EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */,
 				EE61F4681F1DDDE4006E890F /* AvailabilityStoryboard.storyboard in Resources */,
+				833DFB4822146265003E19CC /* Voys-Staging-LaunchScreen.storyboard in Resources */,
 				EE61F4691F1DDDE4006E890F /* TwoStepCallingStoryboard.storyboard in Resources */,
 				EE61F46A1F1DDDE4006E890F /* ContactsStoryboard.storyboard in Resources */,
 				EE61F46B1F1DDDE4006E890F /* dtmf-1.aif in Resources */,
@@ -3603,6 +3625,7 @@
 			files = (
 				F20851431D26935600A17E71 /* dtmf-#.aif in Resources */,
 				F20851441D26935600A17E71 /* dtmf-0.aif in Resources */,
+				833DFB4A22146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard in Resources */,
 				F20851451D26935600A17E71 /* AvailabilityStoryboard.storyboard in Resources */,
 				F20851461D26935600A17E71 /* TwoStepCallingStoryboard.storyboard in Resources */,
 				F20851471D26935600A17E71 /* ContactsStoryboard.storyboard in Resources */,
@@ -3665,6 +3688,7 @@
 				FBB854201A7FE67300121366 /* dtmf-2.aif in Resources */,
 				F2DE21831CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */,
 				C49A46AC1E6829DD0097E808 /* dtmf-*.aif in Resources */,
+				833DFB3F2211B934003E19CC /* Vialer-LaunchScreen.storyboard in Resources */,
 				C46183731BFA23AB0075709B /* RecentsStoryboard.storyboard in Resources */,
 				EEEF160F1F470C8200AEFA83 /* Localizable.strings in Resources */,
 				EE733DAA21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
@@ -6029,7 +6053,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6079,7 +6102,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6353,7 +6375,6 @@
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6401,7 +6422,6 @@
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6416,6 +6436,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
+					"PJ_AUTOCONF=1",
+					"$(inherited)",
+					"PB_FIELD_32BIT=1",
+					"PB_NO_PACKED_STRUCTS=1",
+					"PB_ENABLE_MALLOC=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -6687,7 +6718,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6736,7 +6766,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6751,6 +6780,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
+					"PJ_AUTOCONF=1",
+					"$(inherited)",
+					"PB_FIELD_32BIT=1",
+					"PB_NO_PACKED_STRUCTS=1",
+					"PB_ENABLE_MALLOC=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
