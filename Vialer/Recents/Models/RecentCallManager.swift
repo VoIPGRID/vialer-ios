@@ -28,20 +28,8 @@ class RecentCallManager {
     /// Why did the last fetch failed?
     public var recentsFetchErrorCode: RecentCallManagerError?
 
-    private struct Configuration {
-
-        /// What is the minimum time between 2 fetches.
-        static let refreshInterval = 60.0
-    }
-
     /// Context that is used to fetch and store RecentCalls in.
     private let managedContext: NSManagedObjectContext
-
-    /// Last time the recents where fetched.
-    private var previousRefresh: Date?
-
-    /// observer that listens to logout actions
-    private var userLogout: NotificationToken
 
     private var webservice: WebserviceProtocol!
 
@@ -51,42 +39,29 @@ class RecentCallManager {
     required init(managedContext: NSManagedObjectContext, webservice: WebserviceProtocol? = nil) {
         self.managedContext = managedContext
         self.webservice = webservice ?? Webservice(authentication: SystemUser.current())
-
-        // When users does a logout, remove all calls.
-        userLogout = NotificationCenter.default.addObserver(descriptor: SystemUser.logoutNotification) { _ in
-            let request = NSBatchDeleteRequest(fetchRequest: RecentCall.sortedFetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-            managedContext.perform {
-                _ = try? managedContext.execute(request)
-            }
-        }
     }
 
     /// Fetch the latest calls and store them in the context.
     ///
     /// - Parameter completion: Completionblock that is called when completed.
-    public func getLatestRecentCalls(completion: @escaping (RecentCallManagerError?)->()) {
-        // Check if already reloading or fetch took place recently.
-        guard !reloading, previousRefresh?.timeIntervalSinceNow ?? -Configuration.refreshInterval-1 < -Configuration.refreshInterval else {
-            completion(nil)
-            return
-        }
-
-        var fetchDate: Date =  Calendar.current.date(byAdding: .month, value: -1, to: Date())!
-        // Get the latest call and check if it is smaller then a month ago.
-        if let call = RecentCall.fetchLatest(in: managedContext) {
-            if call.callDate > fetchDate {
-                // Fetch the latest calls minus an hour
-                fetchDate = Calendar.current.date(byAdding: .hour, value: -1, to: call.callDate)!
-            }
-        }
+    public func getLatestRecentCalls(onlyMine: Bool = false, completion: @escaping (RecentCallManagerError?)->()) {
+        var fetchDate: Date = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
         reloading = true
 
+        var resource: Resource<[JSONDictionary]>
+        if onlyMine {
+            resource = RecentCall.myCallsSince(date: fetchDate)
+        } else {
+            resource = RecentCall.allCallsSince(date: fetchDate)
+        }
+
         // Fetch calls from remote.
-        webservice.load(resource: RecentCall.allSince(date: fetchDate)) { result in
+        webservice.load(resource: resource) { result in
             defer {
                 completion(self.recentsFetchErrorCode)
             }
             self.reloading = false
+            
             switch result {
             case .failure(WebserviceError.forbidden):
                 self.recentsFetchErrorCode = .fetchNotAllowed
@@ -96,8 +71,6 @@ class RecentCallManager {
                 guard let calls = calls else {
                     return
                 }
-                // Set last fetch date to now.
-                self.previousRefresh = Date()
                 self.recentsFetchErrorCode = nil
 
                 // Create and store the calls in the context.
@@ -108,6 +81,26 @@ class RecentCallManager {
                     }
                 }
             }
+        }
+    }
+    
+    public func deleteRecentCalls() {
+        let fetchRequest = RecentCall.sortedFetchRequest as! NSFetchRequest<NSFetchRequestResult>
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: RecentCall.entityName, in: managedContext)
+        fetchRequest.predicate = nil // Make sure you're not delete a subset but indeed all recent calls.
+        fetchRequest.includesPropertyValues = false // Don't load unnecessary data in memory.
+        do {
+            if let calls = try managedContext.fetch(fetchRequest) as? [NSManagedObject] {
+                // Delete every object.
+                for call in calls {
+                    managedContext.delete(call)
+                }
+
+                try managedContext.save()
+            }
+        } catch {
+            let deleteError = error as NSError
+            print("\(deleteError), \(deleteError.userInfo)")
         }
     }
 }

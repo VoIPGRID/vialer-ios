@@ -19,17 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rDx-8g-SbK">
-                                <rect key="frame" x="130" y="126" width="115" height="29"/>
+                                <rect key="frame" x="143" y="126" width="89" height="29"/>
                                 <segments>
                                     <segment title="All"/>
-                                    <segment title="Missed"/>
+                                    <segment title="Mine"/>
                                 </segments>
                                 <connections>
                                     <action selector="filterControlTappedWithSender:" destination="0f0-Ph-M40" eventType="valueChanged" id="zYa-mF-Py4"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only show missed calls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOo-ij-9EJ">
+                                <rect key="frame" x="16" y="184" width="178" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5q6-TX-K0J">
-                                <rect key="frame" x="-4" y="162" width="383" height="616"/>
+                                <rect key="frame" x="-4" y="229" width="383" height="549"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecentCallCell" id="MVa-bZ-AmS" customClass="RecentTableViewCell">
@@ -108,6 +114,7 @@
                             </tableView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55g-eG-z1G">
                                 <rect key="frame" x="0.0" y="88" width="375" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ukd-Uj-tbQ"/>
                                 </constraints>
@@ -115,18 +122,49 @@
                                     <segue destination="EMp-fQ-O5Y" kind="embed" identifier="ReachabilityBarSegue" id="TRe-Cg-v1h"/>
                                 </connections>
                             </containerView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YDB-6W-DF8">
+                                <rect key="frame" x="310" y="179" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchToggledWithSender:" destination="0f0-Ph-M40" eventType="valueChanged" id="NAP-nV-KZA"/>
+                                </connections>
+                            </switch>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LR8-da-sK4" userLabel="Horizontal space 2">
+                                <rect key="frame" x="0.0" y="219" width="375" height="5"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="spg-hE-zPW"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HOo-DR-3ah" userLabel="Horizontal space 1">
+                                <rect key="frame" x="0.0" y="163" width="375" height="5"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="Cfj-jY-9Dd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rDx-8g-SbK" firstAttribute="centerX" secondItem="jeA-DB-ao2" secondAttribute="centerX" id="06t-G9-mdf"/>
+                            <constraint firstItem="LR8-da-sK4" firstAttribute="top" secondItem="rDx-8g-SbK" secondAttribute="bottom" constant="65" id="0zn-Bj-OU1"/>
                             <constraint firstItem="5q6-TX-K0J" firstAttribute="leading" secondItem="vf6-Ti-hhH" secondAttribute="leadingMargin" constant="-20" id="AZf-eU-lwU"/>
-                            <constraint firstItem="jeA-DB-ao2" firstAttribute="trailing" secondItem="55g-eG-z1G" secondAttribute="trailing" id="MUZ-d9-ha5"/>
+                            <constraint firstItem="jeA-DB-ao2" firstAttribute="trailing" secondItem="HOo-DR-3ah" secondAttribute="trailing" id="HAL-Xt-3t0"/>
+                            <constraint firstItem="kOo-ij-9EJ" firstAttribute="top" secondItem="rDx-8g-SbK" secondAttribute="bottom" constant="30" id="HXO-qa-8P0"/>
+                            <constraint firstItem="HOo-DR-3ah" firstAttribute="top" secondItem="rDx-8g-SbK" secondAttribute="bottom" constant="9" id="Jay-B0-tdf"/>
+                            <constraint firstItem="55g-eG-z1G" firstAttribute="trailing" secondItem="jeA-DB-ao2" secondAttribute="trailing" id="MUZ-d9-ha5"/>
+                            <constraint firstItem="5q6-TX-K0J" firstAttribute="top" secondItem="rDx-8g-SbK" secondAttribute="bottom" constant="75" id="PCv-f8-yeO"/>
+                            <constraint firstItem="YDB-6W-DF8" firstAttribute="trailing" secondItem="jeA-DB-ao2" secondAttribute="trailing" constant="-16" id="Spt-kT-NJc"/>
                             <constraint firstItem="55g-eG-z1G" firstAttribute="top" secondItem="jeA-DB-ao2" secondAttribute="top" id="UoK-0O-9ww"/>
                             <constraint firstItem="rDx-8g-SbK" firstAttribute="top" secondItem="55g-eG-z1G" secondAttribute="bottom" constant="8" symbolic="YES" id="c3q-77-3Z8"/>
-                            <constraint firstItem="5q6-TX-K0J" firstAttribute="top" secondItem="rDx-8g-SbK" secondAttribute="bottom" constant="8" id="hma-FT-faL"/>
+                            <constraint firstItem="kOo-ij-9EJ" firstAttribute="leading" secondItem="jeA-DB-ao2" secondAttribute="leading" constant="16" id="hds-qS-Ekr"/>
+                            <constraint firstItem="kOo-ij-9EJ" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="jeA-DB-ao2" secondAttribute="trailing" constant="-30" id="k1b-7J-GKJ"/>
+                            <constraint firstItem="YDB-6W-DF8" firstAttribute="centerY" secondItem="kOo-ij-9EJ" secondAttribute="centerY" id="kKM-9L-dUQ"/>
+                            <constraint firstItem="jeA-DB-ao2" firstAttribute="trailing" secondItem="LR8-da-sK4" secondAttribute="trailing" id="kO5-Id-YVX"/>
+                            <constraint firstItem="HOo-DR-3ah" firstAttribute="leading" secondItem="jeA-DB-ao2" secondAttribute="leading" id="v1o-pl-THx"/>
                             <constraint firstItem="55g-eG-z1G" firstAttribute="leading" secondItem="jeA-DB-ao2" secondAttribute="leading" id="va5-AY-u7y"/>
-                            <constraint firstItem="jeA-DB-ao2" firstAttribute="bottom" secondItem="5q6-TX-K0J" secondAttribute="bottom" id="wzO-9U-hJR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5q6-TX-K0J" secondAttribute="trailing" constant="-20" id="yfb-NU-ilg"/>
+                            <constraint firstItem="5q6-TX-K0J" firstAttribute="bottom" secondItem="jeA-DB-ao2" secondAttribute="bottom" id="wzO-9U-hJR"/>
+                            <constraint firstItem="5q6-TX-K0J" firstAttribute="trailing" secondItem="vf6-Ti-hhH" secondAttribute="trailingMargin" constant="20" id="yfb-NU-ilg"/>
+                            <constraint firstItem="LR8-da-sK4" firstAttribute="leading" secondItem="jeA-DB-ao2" secondAttribute="leading" id="z0O-3X-Gxb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jeA-DB-ao2"/>
                     </view>
@@ -147,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQB-Ls-LjO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2120.8000000000002" y="293.70314842578711"/>
+            <point key="canvasLocation" x="2120.8000000000002" y="293.3497536945813"/>
         </scene>
         <!--ReachabilityBarStoryboard-->
         <scene sceneID="nLh-iA-k5W">
