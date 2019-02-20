@@ -735,7 +735,6 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             [self.unlockView setAlpha:0.f];
             [self.logoView setAlpha:1.f];
             [self.logoView setCenter:self.view.center];
-
         }];
     }
     // Remove tap.

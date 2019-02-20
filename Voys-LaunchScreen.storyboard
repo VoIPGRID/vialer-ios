@@ -18,16 +18,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VoysBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="7wj-5v-5fd">
+                                <rect key="frame" x="146" y="0.0" width="49" height="885"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vialer-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Sep-A2-IRN">
-                                <rect key="frame" x="0.0" y="229" width="375" height="209"/>
+                                <rect key="frame" x="0.0" y="297.5" width="375" height="72"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Sep-A2-IRN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5FK-2l-6sZ"/>
+                            <constraint firstItem="7wj-5v-5fd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="146" id="BqF-EB-e7D"/>
+                            <constraint firstItem="7wj-5v-5fd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Gz9-Bn-6yD"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="7wj-5v-5fd" secondAttribute="trailing" constant="180" id="Vc4-43-Res"/>
                             <constraint firstItem="Sep-A2-IRN" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="bTI-tg-LZc"/>
                             <constraint firstItem="Sep-A2-IRN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dgq-MP-mA3"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Sep-A2-IRN" secondAttribute="trailing" id="t8O-F1-n8a"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="7wj-5v-5fd" secondAttribute="bottom" constant="-218" id="u9s-W5-iIi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>
@@ -38,6 +44,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="vialer-logo" width="149" height="209"/>
+        <image name="VoysBackgroundImage" width="889" height="666"/>
+        <image name="vialer-logo" width="293" height="72"/>
     </resources>
 </document>

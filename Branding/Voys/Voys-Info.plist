@@ -34,14 +34,14 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Voys needs access to your bluetooth to get the name of the device</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Voys needs access to your camera to make video calls</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Voys needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Voys needs access to your microphone to make calling possible</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Voys needs access to your bluetooth to get the name of the device</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -49,6 +49,8 @@
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Voys-LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
