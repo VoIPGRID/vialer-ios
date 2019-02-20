@@ -233,9 +233,10 @@ extension DialerViewController {
     }
 
     fileprivate func playSound(character: String) {
-        let player = sounds[character]!
-        player.currentTime = 0
-        player.play()
+        if let player = sounds[character] {
+            player.currentTime = 0
+            player.play()
+        }
     }
 
     fileprivate func updateReachabilityBar() {
