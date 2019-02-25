@@ -12,7 +12,7 @@
         <!--Keypad View Controller-->
         <scene sceneID="MTO-IF-tUn">
             <objects>
-                <viewController id="gkX-qY-AIB" customClass="KeypadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="gkX-qY-AIB" customClass="KeypadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BNe-Tv-NtN"/>
                         <viewControllerLayoutGuide type="bottom" id="51B-d5-ps1"/>
@@ -273,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EQ-Mu-CjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="-2118"/>
+            <point key="canvasLocation" x="2872" y="-2207"/>
         </scene>
         <!--Calling View Controller-->
         <scene sceneID="EqN-j7-u7b">
@@ -360,7 +360,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-Ll-8UO" userLabel="speaker-button" customClass="SipCallingButton">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-Ll-8UO" userLabel="transfer-button" customClass="SipCallingButton">
                                 <rect key="frame" x="102.5" y="343.5" width="70" height="70"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -515,20 +515,20 @@
                         <outlet property="statusLabel" destination="Xmp-RO-FFl" id="5dr-sR-9YD"/>
                         <outlet property="statusLabelTopConstraint" destination="zNv-dQ-xkI" id="ge8-rR-CsR"/>
                         <outlet property="transferButton" destination="dCO-Ll-8UO" id="Cs7-gs-s3U"/>
-                        <segue destination="n4B-SY-mqf" kind="presentation" identifier="SetupTransferSegue" id="mqM-GO-vhG"/>
                         <segue destination="gkX-qY-AIB" kind="presentation" identifier="ShowKeypadSegue" id="u9Q-tL-Gdw"/>
                         <segue destination="fpx-WN-oDc" kind="unwind" identifier="UnwindToVialerRootViewControllerSegue" unwindAction="unwindVialerRootViewController:" id="KJO-To-tPY"/>
+                        <segue destination="nmE-zF-ggY" kind="presentation" identifier="SetupTransferSegue" id="bwU-yo-HY0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ud2-F1-SSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fpx-WN-oDc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="624.79999999999995" y="-1007.0464767616193"/>
+            <point key="canvasLocation" x="630" y="-1008"/>
         </scene>
-        <!--Call Transfer-->
+        <!--Call transfer-->
         <scene sceneID="dzA-vc-gwf">
             <objects>
-                <viewController id="gjH-5U-15N" customClass="SetupCallTransferViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gjH-5U-15N" customClass="SetupCallTransferDialPadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XvE-M2-U6h"/>
                         <viewControllerLayoutGuide type="bottom" id="cBN-Ff-T6S"/>
@@ -537,31 +537,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-4p-BmQ">
-                                <rect key="frame" x="0.0" y="64" width="414" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upb-YF-eAJ">
-                                        <rect key="frame" x="8" y="14.666666666666673" width="163.66666666666666" height="20.666666666666671"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-jc-nmv">
-                                        <rect key="frame" x="254.66666666666663" y="14.666666666666673" width="151.33333333333337" height="20.666666666666671"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="HpX-iP-0J6"/>
-                                    <constraint firstAttribute="trailing" secondItem="I6Q-jc-nmv" secondAttribute="trailing" constant="8" id="Z2H-jk-NZo"/>
-                                    <constraint firstItem="I6Q-jc-nmv" firstAttribute="centerY" secondItem="e7f-4p-BmQ" secondAttribute="centerY" id="elA-0y-ZK8"/>
-                                    <constraint firstItem="upb-YF-eAJ" firstAttribute="centerY" secondItem="e7f-4p-BmQ" secondAttribute="centerY" id="i31-oY-Lab"/>
-                                    <constraint firstItem="upb-YF-eAJ" firstAttribute="leading" secondItem="e7f-4p-BmQ" secondAttribute="leading" constant="8" id="oHc-PV-Qhy"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="re1-Gc-q4V" userLabel="Left filler">
                                 <rect key="frame" x="20" y="122" width="56" height="40"/>
                             </view>
@@ -590,7 +565,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBs-up-y6F" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="334" width="70" height="70"/>
+                                <rect key="frame" x="72" y="285" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="height" multiplier="1:1" id="Un1-uy-hhI"/>
@@ -604,7 +579,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-gx-bL3" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="412" width="70" height="70"/>
+                                <rect key="frame" x="72" y="363" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
@@ -615,7 +590,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEP-Bk-KAS" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="412" width="70" height="70"/>
+                                <rect key="frame" x="172" y="363" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
@@ -626,7 +601,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-HO-t65" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="490" width="70" height="70"/>
+                                <rect key="frame" x="72" y="441" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
@@ -637,7 +612,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Bv-OIF" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="490" width="70" height="70"/>
+                                <rect key="frame" x="172" y="441" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
@@ -648,7 +623,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkA-Mj-NDd" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="490" width="70" height="70"/>
+                                <rect key="frame" x="272" y="441" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
@@ -659,7 +634,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VN4-PJ-HuA" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="568" width="70" height="70"/>
+                                <rect key="frame" x="72" y="519" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
@@ -669,7 +644,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3i-XW-znd" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="568" width="70" height="70"/>
+                                <rect key="frame" x="172" y="519" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
@@ -682,7 +657,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-sN-XvB" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="412" width="70" height="70"/>
+                                <rect key="frame" x="272" y="363" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
@@ -693,7 +668,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofT-FE-Anc" userLabel="3-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="334" width="70" height="70"/>
+                                <rect key="frame" x="272" y="285" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
@@ -704,7 +679,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-fS-OHu" userLabel="hangup-button">
-                                <rect key="frame" x="172" y="646" width="70" height="70"/>
+                                <rect key="frame" x="172" y="597" width="70" height="70"/>
                                 <state key="normal" image="acceptButton">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -714,7 +689,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-Fl-Qu5" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="334" width="70" height="70"/>
+                                <rect key="frame" x="172" y="285" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
@@ -725,7 +700,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-Qk-6PL" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="568" width="70" height="70"/>
+                                <rect key="frame" x="272" y="519" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
@@ -734,9 +709,36 @@
                                     <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="PeZ-tj-fgg"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-4p-BmQ">
+                                <rect key="frame" x="0.0" y="64" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upb-YF-eAJ">
+                                        <rect key="frame" x="8" y="14.666666666666671" width="163.66666666666666" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-jc-nmv">
+                                        <rect key="frame" x="179.66666666666663" y="14.666666666666671" width="226.33333333333337" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HpX-iP-0J6"/>
+                                    <constraint firstItem="I6Q-jc-nmv" firstAttribute="centerY" secondItem="e7f-4p-BmQ" secondAttribute="centerY" id="elA-0y-ZK8"/>
+                                    <constraint firstItem="upb-YF-eAJ" firstAttribute="centerY" secondItem="e7f-4p-BmQ" secondAttribute="centerY" id="i31-oY-Lab"/>
+                                    <constraint firstItem="I6Q-jc-nmv" firstAttribute="leading" secondItem="upb-YF-eAJ" secondAttribute="trailing" constant="8" id="kWA-bw-cxN"/>
+                                    <constraint firstItem="upb-YF-eAJ" firstAttribute="leading" secondItem="e7f-4p-BmQ" secondAttribute="leading" constant="8" id="oHc-PV-Qhy"/>
+                                    <constraint firstAttribute="trailing" secondItem="I6Q-jc-nmv" secondAttribute="trailing" constant="8" id="y4K-CF-kbo"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ofT-FE-Anc" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="0d8-37-9qJ"/>
+                            <constraint firstItem="cBN-Ff-T6S" firstAttribute="top" secondItem="6Da-fS-OHu" secondAttribute="bottom" constant="20" id="2ja-YL-ETw"/>
                             <constraint firstItem="pXZ-HO-t65" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="2mr-fc-3Wv"/>
                             <constraint firstItem="oRn-Qk-6PL" firstAttribute="top" secondItem="ZkA-Mj-NDd" secondAttribute="bottom" constant="8" id="3Qt-gj-moh"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="bottom" secondItem="re1-Gc-q4V" secondAttribute="bottom" id="46r-fX-lRV"/>
@@ -748,23 +750,23 @@
                             <constraint firstItem="G3i-XW-znd" firstAttribute="leading" secondItem="VN4-PJ-HuA" secondAttribute="trailing" constant="30" id="7f7-bk-Gpu"/>
                             <constraint firstItem="vKa-Bv-OIF" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="7kz-it-CBg"/>
                             <constraint firstItem="pXZ-HO-t65" firstAttribute="top" secondItem="GIv-gx-bL3" secondAttribute="bottom" constant="8" id="8O4-qq-ck3"/>
-                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="leading" secondItem="Q3T-G4-7cy" secondAttribute="leadingMargin" constant="-20" id="9Ov-wa-bnh"/>
                             <constraint firstItem="VN4-PJ-HuA" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="9ea-to-ir0"/>
                             <constraint firstItem="ZkA-Mj-NDd" firstAttribute="leading" secondItem="vKa-Bv-OIF" secondAttribute="trailing" constant="30" id="AVN-Ch-qAe"/>
                             <constraint firstItem="hEP-Bk-KAS" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="B8P-Ly-CN4"/>
+                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="leading" secondItem="Q3T-G4-7cy" secondAttribute="leading" id="Bmr-Zn-jvD"/>
                             <constraint firstItem="oRn-Qk-6PL" firstAttribute="leading" secondItem="G3i-XW-znd" secondAttribute="trailing" constant="30" id="BnY-dD-geP"/>
                             <constraint firstItem="hEP-Bk-KAS" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="CGH-n8-Y06"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="leading" secondItem="re1-Gc-q4V" secondAttribute="trailing" constant="3" id="FBB-Cg-xfH"/>
-                            <constraint firstItem="cBN-Ff-T6S" firstAttribute="top" secondItem="6Da-fS-OHu" secondAttribute="bottom" constant="20" id="HT3-PL-d0I"/>
                             <constraint firstItem="hEP-Bk-KAS" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="IDJ-5g-whi"/>
+                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="top" secondItem="XvE-M2-U6h" secondAttribute="bottom" id="IFr-db-29Q"/>
                             <constraint firstItem="IBs-up-y6F" firstAttribute="height" secondItem="E0g-Fl-Qu5" secondAttribute="height" id="IJG-bU-qpa"/>
                             <constraint firstItem="hEP-Bk-KAS" firstAttribute="top" secondItem="E0g-Fl-Qu5" secondAttribute="bottom" constant="8" id="K36-1T-PcE"/>
                             <constraint firstItem="IBs-up-y6F" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="height" multiplier="1:1" id="K75-HZ-4Th"/>
                             <constraint firstItem="2xz-P9-kDV" firstAttribute="leading" secondItem="5gZ-PC-qXQ" secondAttribute="trailing" constant="3" id="LGy-w9-f5r"/>
                             <constraint firstItem="G3i-XW-znd" firstAttribute="top" secondItem="vKa-Bv-OIF" secondAttribute="bottom" constant="8" id="LPL-XP-NDR"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="bottom" secondItem="2xz-P9-kDV" secondAttribute="bottom" id="Lra-Lb-84J"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="e7f-4p-BmQ" secondAttribute="trailing" constant="-20" id="NJb-hs-I5c"/>
                             <constraint firstItem="9gP-sN-XvB" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="QVN-Wy-4g9"/>
+                            <constraint firstAttribute="trailing" secondItem="e7f-4p-BmQ" secondAttribute="trailing" id="SHU-Pv-ZTe"/>
                             <constraint firstItem="6Da-fS-OHu" firstAttribute="top" secondItem="G3i-XW-znd" secondAttribute="bottom" constant="8" id="THP-9x-bEn"/>
                             <constraint firstItem="9gP-sN-XvB" firstAttribute="leading" secondItem="hEP-Bk-KAS" secondAttribute="trailing" constant="30" id="TQ9-NB-hFT"/>
                             <constraint firstItem="6Da-fS-OHu" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="TfT-NZ-zvt"/>
@@ -781,7 +783,6 @@
                             <constraint firstItem="G3i-XW-znd" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="bVM-PW-Jfh"/>
                             <constraint firstItem="ZkA-Mj-NDd" firstAttribute="top" secondItem="9gP-sN-XvB" secondAttribute="bottom" constant="8" id="cB8-aZ-x4u"/>
                             <constraint firstItem="E0g-Fl-Qu5" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="dAH-XT-kwG"/>
-                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="top" secondItem="XvE-M2-U6h" secondAttribute="bottom" id="dXt-yH-WB2"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="top" secondItem="e7f-4p-BmQ" secondAttribute="bottom" constant="8" id="dmQ-MN-rAk"/>
                             <constraint firstItem="G3i-XW-znd" firstAttribute="bottom" secondItem="VN4-PJ-HuA" secondAttribute="bottom" id="ewT-nU-evM"/>
                             <constraint firstAttribute="leadingMargin" secondItem="re1-Gc-q4V" secondAttribute="leading" id="gZJ-QD-LUT"/>
@@ -804,10 +805,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="2xz-P9-kDV" secondAttribute="trailing" id="yLD-FW-Oyk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Call Transfer" id="uYD-Ra-2f5">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EZ0-CF-aS4">
+                    <navigationItem key="navigationItem" title="Call transfer" id="Zq1-qL-Luw">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="G8C-Kf-Vyr">
                             <connections>
-                                <action selector="backButtonPressed:" destination="gjH-5U-15N" id="fHA-Vt-Z7v"/>
+                                <action selector="backButtonPressed:" destination="gjH-5U-15N" id="wG8-Fr-l2b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -834,12 +835,12 @@
                 </pongPressGestureRecognizer>
                 <exit id="Fig-1Q-8Lj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2293" y="-1007"/>
+            <point key="canvasLocation" x="3366.666666666667" y="-1323.913043478261"/>
         </scene>
         <!--Call Transfer-->
         <scene sceneID="opG-bd-MXL">
             <objects>
-                <viewController id="9vo-dM-YYf" customClass="SecondCallViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="9vo-dM-YYf" customClass="SecondCallViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nwe-Ug-vDD"/>
                         <viewControllerLayoutGuide type="bottom" id="IKT-zP-YhF"/>
@@ -852,13 +853,13 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-El-Y0k">
-                                        <rect key="frame" x="8" y="14.666666666666673" width="189" height="20.666666666666671"/>
+                                        <rect key="frame" x="8" y="14.666666666666671" width="189" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMr-4h-sSq">
-                                        <rect key="frame" x="229" y="14.666666666666673" width="177" height="20.666666666666671"/>
+                                        <rect key="frame" x="229" y="14.666666666666671" width="177" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -963,7 +964,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huE-Pb-Xit" userLabel="hangup-button">
-                                <rect key="frame" x="172" y="646" width="70" height="70"/>
+                                <rect key="frame" x="172" y="602" width="70" height="70"/>
                                 <accessibility key="accessibilityConfiguration" identifier="SIPCallingStoryboard.HangupButton"/>
                                 <state key="normal" image="declineButton"/>
                                 <state key="disabled" image="declineButtonDisabled"/>
@@ -1111,12 +1112,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzf-VT-iVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="10U-cZ-ZuY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3186.4000000000001" y="-1007.0464767616193"/>
+            <point key="canvasLocation" x="4239" y="-1008"/>
         </scene>
         <!--Call Transfer-->
         <scene sceneID="Bfn-Bi-DfE">
             <objects>
-                <viewController id="Lfl-9a-GUJ" customClass="TransferInProgressViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Lfl-9a-GUJ" customClass="TransferInProgressViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eW7-IQ-kDl"/>
                         <viewControllerLayoutGuide type="bottom" id="aqX-RA-5Sl"/>
@@ -1126,35 +1127,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="successfullTransfer" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Oa-YQV">
-                                <rect key="frame" x="120" y="247" width="174" height="174"/>
+                                <rect key="frame" x="120" y="225" width="174" height="174"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Kbt-Oa-YQV" secondAttribute="height" multiplier="1:1" id="rrU-Ia-MFG"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Numberlabel currentCall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOE-ZZ-MDl">
-                                <rect key="frame" x="20" y="517" width="374" height="36"/>
+                                <rect key="frame" x="20" y="495" width="374" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="Transfer status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cdl-Ba-h64">
-                                <rect key="frame" x="20" y="485" width="374" height="24"/>
+                                <rect key="frame" x="20" y="463" width="374" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="NumberLabel firstCall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgC-ID-R8a">
-                                <rect key="frame" x="20" y="441" width="374" height="36"/>
+                                <rect key="frame" x="20" y="419" width="374" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnF-VJ-yjH" userLabel="Filler view">
-                                <rect key="frame" x="20" y="553" width="374" height="183"/>
+                                <rect key="frame" x="20" y="531" width="374" height="161"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C31-C4-4us" userLabel="Filler view">
-                                <rect key="frame" x="20" y="64" width="374" height="183"/>
+                                <rect key="frame" x="20" y="64" width="374" height="161"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -1198,25 +1199,162 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9T-Dx-5Hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4160" y="-1007"/>
+            <point key="canvasLocation" x="5066.666666666667" y="-1007.608695652174"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Azu-6w-uwJ">
+        <!--Contacts-->
+        <scene sceneID="So9-Of-KEw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n4B-SY-mqf" sceneMemberID="viewController">
+                <viewController title="Contacts" id="OJG-uy-AEd" customClass="SetupCallTransferContactsViewController" customModule="Vialer" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aPQ-bT-j7o"/>
+                        <viewControllerLayoutGuide type="bottom" id="bdq-wz-ZPK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S08-HM-mXv" userLabel="Gradient View" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcd-Hv-zV1">
+                                <rect key="frame" x="0.0" y="64" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfP-Zh-QBL">
+                                        <rect key="frame" x="180" y="14.666666666666671" width="226" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlt-sc-72V">
+                                        <rect key="frame" x="8" y="14.666666666666671" width="164" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="cfP-Zh-QBL" firstAttribute="leading" secondItem="Qlt-sc-72V" secondAttribute="trailing" constant="8" id="8ff-AO-wqP"/>
+                                    <constraint firstItem="Qlt-sc-72V" firstAttribute="leading" secondItem="gcd-Hv-zV1" secondAttribute="leading" constant="8" id="BKe-l9-8Mv"/>
+                                    <constraint firstItem="cfP-Zh-QBL" firstAttribute="centerY" secondItem="gcd-Hv-zV1" secondAttribute="centerY" id="IZB-ww-rfc"/>
+                                    <constraint firstAttribute="trailing" secondItem="cfP-Zh-QBL" secondAttribute="trailing" constant="8" id="XXd-Ve-Aw8"/>
+                                    <constraint firstItem="Qlt-sc-72V" firstAttribute="centerY" secondItem="gcd-Hv-zV1" secondAttribute="centerY" id="teR-cP-802"/>
+                                    <constraint firstAttribute="height" constant="50" id="uzQ-2S-4OJ"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="deH-4E-XWO">
+                                <rect key="frame" x="0.0" y="114" width="414" height="529"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactsTableViewCell" textLabel="8gx-cV-qCK" style="IBUITableViewCellStyleDefault" id="gGe-8e-wPs" customClass="TransferContactTableViewCell" customModule="Vialer">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gGe-8e-wPs" id="e05-kq-PHz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8gx-cV-qCK">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gcd-Hv-zV1" secondAttribute="trailing" id="2tI-W1-SCL"/>
+                            <constraint firstItem="gcd-Hv-zV1" firstAttribute="leading" secondItem="S08-HM-mXv" secondAttribute="leading" id="6ju-WX-sJi"/>
+                            <constraint firstItem="deH-4E-XWO" firstAttribute="top" secondItem="gcd-Hv-zV1" secondAttribute="bottom" id="8s1-yb-LxY"/>
+                            <constraint firstItem="deH-4E-XWO" firstAttribute="trailing" secondItem="gcd-Hv-zV1" secondAttribute="trailing" id="KjQ-SE-cjM"/>
+                            <constraint firstItem="bdq-wz-ZPK" firstAttribute="top" secondItem="deH-4E-XWO" secondAttribute="bottom" id="Qhb-gc-atk"/>
+                            <constraint firstItem="deH-4E-XWO" firstAttribute="leading" secondItem="gcd-Hv-zV1" secondAttribute="leading" id="ZfS-no-2aE"/>
+                            <constraint firstItem="gcd-Hv-zV1" firstAttribute="top" secondItem="aPQ-bT-j7o" secondAttribute="bottom" id="ovd-90-Ib9"/>
+                        </constraints>
+                    </view>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="776-TZ-Wz9">
+                    <navigationItem key="navigationItem" title="Call transfer" id="v2x-E3-dtS">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="AaQ-U1-SzN">
+                            <connections>
+                                <action selector="cancelPressed:" destination="OJG-uy-AEd" id="vs9-fp-8fk"/>
+                                <segue destination="PVt-rZ-XRt" kind="unwind" identifier="UnwindToFirstCallSegue" unwindAction="unwindToFirstCallSegue:" id="EZE-5S-8HS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="firstCallNumberLabel" destination="Qlt-sc-72V" id="I5I-cC-yZ4"/>
+                        <outlet property="firstCallStatusLabel" destination="cfP-Zh-QBL" id="JAS-ko-kiy"/>
+                        <outlet property="tableView" destination="deH-4E-XWO" id="1hK-uv-8up"/>
+                        <segue destination="9vo-dM-YYf" kind="show" identifier="SecondCallActiveSegue" id="kCy-ed-6ie"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6qz-xY-1Ht" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="PVt-rZ-XRt" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3366.666666666667" y="-610.59782608695662"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="14E-GS-WOb">
+            <objects>
+                <tabBarController id="nmE-zF-ggY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="LJ5-QR-2VH"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KK0-XV-8WR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Mud-r7-iUA" kind="relationship" relationship="viewControllers" id="6iv-dX-QA7"/>
+                        <segue destination="2Gc-Ki-zeb" kind="relationship" relationship="viewControllers" id="suE-BE-d86"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a3W-Ui-g96" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588" y="-1008"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="IIh-I8-Eu6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mud-r7-iUA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contacts" image="tab-contact" id="KqJ-56-jOU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vix-Ba-bhc">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="gjH-5U-15N" kind="relationship" relationship="rootViewController" id="f5K-2b-cmM"/>
+                        <segue destination="OJG-uy-AEd" kind="relationship" relationship="rootViewController" id="NDv-rR-tBQ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AFU-CF-Imm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fWn-gw-iWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1481" y="-1007"/>
+            <point key="canvasLocation" x="2461" y="-609"/>
+        </scene>
+        <!--Dail pad-->
+        <scene sceneID="ekh-BO-1wD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Gc-Ki-zeb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Dail pad" image="tab-keypad" id="2FA-uM-dis"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KdQ-vA-Paa">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gjH-5U-15N" kind="relationship" relationship="rootViewController" id="Udd-2d-uvM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6V1-Zb-kjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2461" y="-1323"/>
         </scene>
     </scenes>
     <resources>
@@ -1227,8 +1365,11 @@
         <image name="keypad-back" width="23" height="16"/>
         <image name="keypad-back-highlighted" width="23" height="16"/>
         <image name="successfullTransfer" width="183" height="183"/>
+        <image name="tab-contact" width="27" height="28"/>
+        <image name="tab-keypad" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="kCy-ed-6ie"/>
         <segue reference="u9Q-tL-Gdw"/>
     </inferredMetricsTieBreakers>
 </document>

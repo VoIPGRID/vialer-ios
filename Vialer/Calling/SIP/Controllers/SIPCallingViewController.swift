@@ -554,10 +554,15 @@ extension SIPCallingViewController {
             keypadVC.delegate = self
             keypadVC.phoneNumberLabelText = phoneNumberLabelText
         case .setupTransfer:
-            let navVC = segue.destination as! UINavigationController
-            let setupCallTransferVC = navVC.viewControllers[0] as! SetupCallTransferViewController
-            setupCallTransferVC.firstCall = activeCall
-            setupCallTransferVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            let tabBarC = segue.destination as! UITabBarController
+            let transferContactListNavC = tabBarC.viewControllers![0] as! UINavigationController
+            let transferDialPadNavC = tabBarC.viewControllers![1] as! UINavigationController
+            let setupCallTransferContactsVC = transferContactListNavC.viewControllers[0] as! SetupCallTransferContactsViewController
+            let setupCallTransferDialPadVC = transferDialPadNavC.viewControllers[0] as! SetupCallTransferDialPadViewController
+            setupCallTransferDialPadVC.firstCall = activeCall
+            setupCallTransferDialPadVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            setupCallTransferContactsVC.firstCall = activeCall
+            setupCallTransferContactsVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
         case .unwindToVialerRootViewController:
             break
         }
