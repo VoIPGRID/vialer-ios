@@ -87,7 +87,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 /**
- * clears all text field contents from all views
+ * Clears all text field contents from all views.
  */
 - (void)clearAllTextFields {
     self.loginFormView.usernameField.text = nil;
@@ -106,7 +106,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [self clearAllTextFields];
     [self addObservers];
 
-    // animate logo to top
+    // Animate logo to top.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self moveLogoOutOfScreen];
     });
@@ -120,10 +120,10 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [super viewDidAppear:animated];
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
 
-    //to be able/disable the enable the request password button
+    // To be able/disable the request password button.
     [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(checkIfEmailIsSetInEmailTextField) forControlEvents:UIControlEventEditingChanged];
 
-    // Make text field react to Enter to login!
+    // Make text field react to Enter to login.
     [self.loginFormView setTextFieldDelegate:self];
     [self.twoFactorAuthenticationView setTextFieldDelegate:self];
     [self.configureFormView setTextFieldDelegate:self];
@@ -245,9 +245,6 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     } else {
         [self continueFromConfigureFormViewToUnlockView];
     }
-    
-    
-    
 }
 
 - (IBAction)twoFactorAuthenticationViewContinueButtonPressed:(UIButton *)sender {
@@ -287,9 +284,9 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Number saved", nil)];
 
             [self.configureFormView.phoneNumberField resignFirstResponder];
-            [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide
-            [self animateUnlockViewToVisible:1.f delay:1.5f];   // Show
-            [self.scene runActThree];                           // Animate the clouds
+            [self animateConfigureViewToVisible:0.f delay:0.f]; // Hide.
+            [self animateUnlockViewToVisible:1.f delay:1.5f];   // Show.
+            [self.scene runActThree];                           // Animate the clouds.
 
             if ([SystemUser currentUser].sipEnabled) {
                 [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
@@ -333,7 +330,6 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appBecameActive:) name:UIApplicationWillEnterForegroundNotification object:nil];
-
 }
 
 - (void)removeObservers {
@@ -349,12 +345,12 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     NSValue *keyboardRect = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
     CGFloat keyboardHeight = CGRectGetHeight([keyboardRect CGRectValue]);
 
-    // After the animation, the respective view should be centered on the remaining screen height (original screen height -keyboard height)
+    // After the animation, the respective view should be centered on the remaining screen height (original screen height -keyboard height).
     CGFloat remainingScreenHeight = CGRectGetHeight(self.view.frame) - keyboardHeight;
-    // Divide the remaining screen height by 2, this will be the center of the displayed view
+    // Divide the remaining screen height by 2, this will be the center of the displayed view.
     CGFloat newCenter = lroundf(remainingScreenHeight /2);
 
-    // Move the left top most cloud away to make the text visable (white on white)
+    // Move the left top most cloud away to make the text visable (white on white).
     [self.scene animateCloudsOutOfViewWithDuration:duration];
 
     // Animate every form once to prevent jumping screens.
@@ -420,12 +416,12 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             [self.scene runActOne];
             break;
         case OnboardingScreenConfigure:
-            [self.scene runActOneInstantly];  // Remove the scene 1 clouds instantly
-            [self.scene runActTwo];           // Animate the clouds
+            [self.scene runActOneInstantly];  // Remove the scene 1 clouds instantly.
+            [self.scene runActTwo];           // Animate the clouds.
             [self retrievePhoneNumbersWithSuccessBlock:nil];
             break;
         default:
-            //Show the login screen as default
+            // Show the login screen as default.
             [self.scene runActOne];
             break;
     }
@@ -433,13 +429,13 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     [UIView animateWithDuration:1.9 delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         switch (self.screenToShow) {
             case OnboardingScreenLogin:
-                [self animateLoginViewToVisible:1.f delay:0.f]; // show
+                [self animateLoginViewToVisible:1.f delay:0.f]; // Show.
                 break;
             case OnboardingScreenConfigure:
-                [self animateConfigureViewToVisible:1.f delay:0.f]; // Show
+                [self animateConfigureViewToVisible:1.f delay:0.f]; // Show.
                 break;
             default:
-                //Show the login screen as default
+                // Show the login screen as default.
                 [self.scene runActOne];
                 break;
         }
@@ -456,10 +452,16 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (IBAction)closeButtonPressed:(UIButton *)sender {
+    // Close button appears on forgot password and two factor view, so on close, clean up both views.
     [self.forgotPasswordView.emailTextfield resignFirstResponder];
+    [self.twoFactorAuthenticationView.tokenField resignFirstResponder];
 
+    // Hide both views.
     [self animateForgotPasswordViewToVisible:0.f delay:0.f];
-    [self animateLoginViewToVisible:1.f delay:1.5f];
+    [self animateTwoFactorAuthenticationViewToVisible:0.f delay:0.f];
+    
+    // And show the login view again.
+    [self animateLoginViewToVisible:1.f delay:1.0f];
 }
 
 - (void)resetPasswordWithEmail:(NSString*)email {
@@ -525,7 +527,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         [SVProgressHUD dismiss];
 
         if (!loggedin && tokenRequired && error && (error.code == SystemUserTwoFactorAuthenticationTokenInvalid || error.code == SystemUserTwoFactorAuthenticationTokenRequired)) {
-            [self animateLoginViewToVisible:0.f delay:0.f]; // Hide
+            [self animateLoginViewToVisible:0.f delay:0.f]; // Hide.
             [self animateTwoFactorAuthenticationViewToVisible:1.f delay:0.f];
 
             [self.scene runActOneAndHalf];
@@ -549,7 +551,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
             [self.scene runActTwo];
 
-            //If a success block was provided, execute it
+            // If a success block was provided, execute it.
             if (success) {
                 success();
             }
@@ -589,7 +591,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             self.configureFormView.phoneNumberField.text = systemUser.mobileNumber;
             self.unlockView.greetingsLabel.text = systemUser.displayName;
 
-            //If a success block was provided, execute it
+            // If a success block was provided, execute it.
             if (success) {
                 success();
             }
@@ -613,7 +615,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 #pragma mark - Navigation animations
 
-- (void)animateLoginViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act one (2) */
+- (void)animateLoginViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act 1 (2). */
     void(^animations)(void) = ^{
         [self.loginFormView setAlpha:alpha];
     };
@@ -633,6 +635,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)animateTwoFactorAuthenticationViewToVisible:(CGFloat)alpha delay:(CGFloat)delay {
     void(^animations)(void) = ^{
+        [self.closeButton setAlpha:alpha];
         [self.twoFactorAuthenticationView setAlpha:alpha];
     };
     void(^completion)(BOOL) = ^(BOOL finished) {
@@ -672,7 +675,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
                      completion:completion];
 }
 
-- (void)animateConfigureViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act two */
+- (void)animateConfigureViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act two. */
     void(^animations)(void) = ^{
         [self.configureFormView setAlpha:alpha];
     };
@@ -688,10 +691,9 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animations
                      completion:completion];
-
 }
 
-- (void)animateUnlockViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* act three */
+- (void)animateUnlockViewToVisible:(CGFloat)alpha delay:(CGFloat)delay { /* Act three. */
     void(^animations)(void) = ^{
         [self.unlockView setAlpha:alpha];
     };
@@ -702,19 +704,18 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:animations
                      completion:^(BOOL finished) {
-                         // If the animation finished normally, start the timer otherwise we were interrupted with the tap
+                         // If the animation finished normally, start the timer otherwise we were interrupted with the tap.
                          if (finished) {
-                             // Automatically continue after 2 seconds
+                             // Automatically continue after 2 seconds.
                              [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(unlockIt) userInfo:nil repeats:NO];
                          }
                      }];
-
 }
 
 - (void)handleUnlockTap:(UITapGestureRecognizer *)gesture {
     // Did we get a succesfull tap?
     if (gesture.state == UIGestureRecognizerStateRecognized) {
-        // Move out of the welcome screen
+        // Move out of the welcome screen.
         [self unlockIt];
     }
 }
