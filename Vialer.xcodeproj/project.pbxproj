@@ -21,7 +21,6 @@
 		3DE6EADE1AF24CF500C09935 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		45FAA197D07A701481006D03 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030913FF544600ABE3DC3AFD /* libPods-Voys.a */; };
 		4D27D40E66E3E080DBB02CF4 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */; };
-		61C1C91605D6974E2A2BB4E6 /* libPods-Acceptatie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		7273048195AF10B9406CDD0A /* libPods-Acceptatie Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5A3A0941590C7F7200913A /* libPods-Acceptatie Voys.a */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
@@ -1734,7 +1733,6 @@
 				F208513E1D26935600A17E71 /* UIKit.framework in Frameworks */,
 				F208513F1D26935600A17E71 /* Foundation.framework in Frameworks */,
 				F20851401D26935600A17E71 /* CoreGraphics.framework in Frameworks */,
-				61C1C91605D6974E2A2BB4E6 /* libPods-Acceptatie.a in Frameworks */,
 				05180B54031A7A2054CC2AB2 /* libPods-Vialer Staging.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
