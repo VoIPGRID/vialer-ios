@@ -3083,6 +3083,7 @@
 				C4F49F231BF0B45700C25159 /* Sources */,
 				C4F49F241BF0B45700C25159 /* Frameworks */,
 				C4F49F251BF0B45700C25159 /* Resources */,
+				AC3560A755AF920B47A7DEF0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4002,6 +4003,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC3560A755AF920B47A7DEF0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BA687CEC9FB3DCEC6A3F8B06 /* [CP] Check Pods Manifest.lock */ = {
@@ -5980,6 +6003,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+				USER_HEADER_SEARCH_PATHS = "${PODS_ROOT}/**";
 			};
 			name = Debug;
 		};
@@ -6041,6 +6065,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vialer.app/Vialer";
+				USER_HEADER_SEARCH_PATHS = "${PODS_ROOT}/**";
 			};
 			name = Release;
 		};
