@@ -22,6 +22,8 @@ PODS:
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
   - Fabric (1.9.0)
+  - Firebase (5.19.0):
+    - Firebase/Core (= 5.19.0)
   - Firebase/Core (5.19.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.8.0)
@@ -153,6 +155,7 @@ DEPENDENCIES:
   - AFNetworking
   - Crashlytics
   - Fabric
+  - Firebase
   - Firebase/Core
   - Firebase/Performance
   - GoogleAnalytics
@@ -255,6 +258,6 @@ SPEC CHECKSUMS:
   Vialer-pjsip-iOS: 9b8fc1226e9a51150642b9cc81a8c62c9e9c530b
   VialerSIPLib: 43af81f9d6774d7988dc1f3fedb908e15be5a154
 
-PODFILE CHECKSUM: 4bb44a056bc21eadc6d3ac64069461e34e345ae8
+PODFILE CHECKSUM: 111436d222542004acfb49ff19db0068bb836179
 
 COCOAPODS: 1.6.1

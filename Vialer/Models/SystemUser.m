@@ -609,6 +609,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     if (userDict[SystemUserApiKeyClient]) {
         self.clientID = userDict[SystemUserApiKeyClient];
     }
+    // Backend is sending NSNull null when no value is available so it has to be checked like below to avoid null exception
     if (userDict[SystemUserApiKeyMobileNumber] && userDict[SystemUserApiKeyMobileNumber]!=[NSNull null]) {
         self.mobileNumber = userDict[SystemUserApiKeyMobileNumber];
     }

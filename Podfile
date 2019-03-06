@@ -47,6 +47,7 @@ target 'VialerTests' do
     pod 'OCMock'
     pod 'OHHTTPStubs'
     pod 'VialerSIPLib'
+    pod 'Firebase'
 end
 
 target 'VialerSnapshotUITests' do
