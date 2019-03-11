@@ -609,7 +609,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     if (userDict[SystemUserApiKeyClient]) {
         self.clientID = userDict[SystemUserApiKeyClient];
     }
-    if (userDict[SystemUserApiKeyMobileNumber]) {
+    if (userDict[SystemUserApiKeyMobileNumber] && userDict[SystemUserApiKeyMobileNumber]!=[NSNull null]) {
         self.mobileNumber = userDict[SystemUserApiKeyMobileNumber];
     }
 
