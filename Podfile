@@ -16,7 +16,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true 
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib'
+    pod 'VialerSIPLib', :path => '/Users/chris/Projects/Vialer/iOS/VialerSIPLib' #//orp to run locally
 end
 
 target 'Vialer' do
