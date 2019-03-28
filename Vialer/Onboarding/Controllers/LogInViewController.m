@@ -30,6 +30,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 @property (strong, nonatomic) VIAScene *scene;
 @property (strong, nonatomic) UITapGestureRecognizer *tapToUnlock;
 @property (strong, nonatomic) VoIPGRIDRequestOperationManager *operationManager;
+@property (strong, nonatomic) Reachability *reachability;
 @end
 
 @implementation LogInViewController
@@ -73,6 +74,13 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         _operationManager = [[VoIPGRIDRequestOperationManager alloc] initWithDefaultBaseURL];
     }
     return _operationManager;
+}
+
+- (Reachability *)reachability {
+    if (!_reachability) {
+        _reachability = [ReachabilityHelper sharedInstance].reachability;
+    }
+    return _reachability;
 }
 
 /**
@@ -465,6 +473,14 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 }
 
 - (void)resetPasswordWithEmail:(NSString*)email {
+    if (!self.reachability.isReachable) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                                       message:NSLocalizedString(@"Can't reset password. Make sure you have an internet connection.", nil)
+                                                          andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Send email?", nil)
                                                                    message:[NSString stringWithFormat:NSLocalizedString(@"If your email address is %@ we will send you an email with instructions to reset your password.", nil), email]
                                                             preferredStyle:UIAlertControllerStyleAlert];
@@ -523,6 +539,15 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (void)doLoginCheckForTwoFactorWithUserName:(NSString *)username password:(NSString *)password token:(NSString *)token successBlock:(void(^)(void))success {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Logging in...", nil)];
+
+    if (!self.reachability.isReachable) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                                       message:NSLocalizedString(@"Can't login. Make sure you have an internet connection.", nil)
+                                                          andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     [self.currentUser loginToCheckTwoFactorWithUserName:username password:password andToken:token completion:^(BOOL loggedin, BOOL tokenRequired, NSError *error) {
         [SVProgressHUD dismiss];
 

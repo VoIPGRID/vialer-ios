@@ -476,3 +476,9 @@
 
 /* An error occured when saving your changes. Please try again. */
 "An error occured when saving your changes. Please try again." = "Fout opgetreden tijdens het opslaan van de wijzigingen. Probeer het nog eens.";
+
+/* Can't reset password. Make sure you have an internet connection. */
+"Can't reset password. Make sure you have an internet connection." = "Wachtwoord herstellen mislukt. Zorg voor een internetverbinding."
+
+/* Can't login. Make sure you have an internet connection. */
+"Can't login. Make sure you have an internet connection." = "Inloggen mislukt. Zorg voor een internetverbinding."
