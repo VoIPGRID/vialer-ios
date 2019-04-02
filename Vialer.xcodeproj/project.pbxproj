@@ -2926,9 +2926,9 @@
 				F2E811BF1B37E2EB00EA640F /* Settings */,
 				C4FCC6091BB925380013689F /* Side Menu */,
 				FB364D111836846A00932D6E /* Sounds */,
-				EEEF160D1F470C8200AEFA83 /* Localizable.strings */,
-				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
 				FB4226D7182261D200707349 /* Supporting Files */,
+				FB21E03F1A3B48D800AE746B /* Images.xcassets */,
+				EEEF160D1F470C8200AEFA83 /* Localizable.strings */,
 			);
 			path = Vialer;
 			sourceTree = "<group>";

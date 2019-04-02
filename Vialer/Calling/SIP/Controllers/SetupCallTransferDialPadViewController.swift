@@ -96,7 +96,7 @@ extension SetupCallTransferDialPadViewController {
             callButton.isEnabled = true
             return
         }
-        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number)!
+        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number) ?? ""
         currentCallPhoneNumberLabelText = cleanedPhoneNumber
         callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
             DispatchQueue.main.async { [weak self] in

@@ -304,6 +304,15 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     if ([property.key isEqualToString:CNContactPhoneNumbersKey]) {
         CNPhoneNumber *phoneNumberProperty = property.value;
         self.phoneNumberToCall = [phoneNumberProperty stringValue];
+        // Check if the number is invalid, after cleaning it should not be nil.
+        NSString *cleanedPhoneNumber = [PhoneNumberUtils cleanPhoneNumber:self.phoneNumberToCall];
+        if (cleanedPhoneNumber == nil) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Invalid phone number", nil)
+                                                                           message:NSLocalizedString(@"It's not possible to setup this call. Please make sure you are trying to call a valid number.", nil)
+                                                              andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
+            [self presentViewController:alert animated:YES completion:nil];
+            return NO;
+        }
         /**
          *  We need to return asap to prevent default action (calling with native dialer).
          *  As a workaround, we put the presenting of the new viewcontroller via a separate queue,

@@ -34,11 +34,11 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             } else {
                 numberToClean = activeCall!.numberToCall
             }
-            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean)!
-            phoneNumberLabelText = cleanedPhoneNumber
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.updateUI()
+            if let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean) {
+                phoneNumberLabelText = cleanedPhoneNumber
+                DispatchQueue.main.async { [weak self] in
+                    self?.updateUI()
+                }
             }
             activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
             activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
@@ -219,11 +219,12 @@ extension SIPCallingViewController {
     @objc func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
         phoneNumberLabelText = cleanedPhoneNumber
-        if let contact = contact {
+        
+        if let unwrappedContact = contact {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
+                PhoneNumberModel.getCallName(from: unwrappedContact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
                     DispatchQueue.main.async { [weak self] in
                         self?.phoneNumberLabelText = phoneNumberModel.callerInfo
                     }
@@ -234,8 +235,10 @@ extension SIPCallingViewController {
     }
     
     func handleOutgoingCallForScreenshot(phoneNumber: String){
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
-        phoneNumberLabelText = cleanedPhoneNumber
+        if let unwrappedCleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber){
+            cleanedPhoneNumber = unwrappedCleanedPhoneNumber
+            phoneNumberLabelText = cleanedPhoneNumber
+        }
     }
     
     /// Check 2 things before setting up a call:
@@ -268,14 +271,15 @@ extension SIPCallingViewController {
             guard account != nil else {
                 return
             }
-            
-            self.startConnectDurationTimer()
-            
-            self.callManager.startCall(toNumber: self.cleanedPhoneNumber!, for: account!) { (call, error) in
-                if error != nil {
-                    VialerLogError("Error setting up call: \(String(describing: error))")
-                } else if let call = call {
-                    self.activeCall = call
+
+            if let unwrappedCleanedPhoneNumber = self.cleanedPhoneNumber {
+                self.startConnectDurationTimer()
+                self.callManager.startCall(toNumber: unwrappedCleanedPhoneNumber, for: account!) { (call, error) in
+                    if error != nil {
+                        VialerLogError("Error setting up call: \(String(describing: error))")
+                    } else if let call = call {
+                        self.activeCall = call
+                    }
                 }
             }
         }

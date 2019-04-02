@@ -250,7 +250,7 @@ class ContactModel: NSObject {
         }
 
         // Clear current dictionary
-        phoneNumbersToContacts = [String: PhoneNumber]()
+        phoneNumbersToContacts.removeAll()
 
         var newContacts = [String: [CNContact]]()
         do {
