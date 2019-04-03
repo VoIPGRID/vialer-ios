@@ -127,9 +127,13 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.forgotPasswordView.requestPasswordButton.enabled = NO;
+    self.twoFactorAuthenticationView.continueButton.enabled = NO;
 
     // To be able/disable the request password button.
     [self.forgotPasswordView.emailTextfield addTarget:self action:@selector(checkIfEmailIsSetInEmailTextField) forControlEvents:UIControlEventEditingChanged];
+    
+    // Toggle active state of 2fa continue button based on input.
+    [self.twoFactorAuthenticationView.tokenField addTarget:self action:@selector(checkFor2faTokenInTextField) forControlEvents:UIControlEventEditingChanged];
 
     // Make text field react to Enter to login.
     [self.loginFormView setTextFieldDelegate:self];
@@ -176,11 +180,10 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         }
     } else if ([self.twoFactorAuthenticationView.tokenField isEqual:textField]) {
         [textField resignFirstResponder];
-        if ([self.twoFactorAuthenticationView.tokenField.text length] > 0) {
+        if ([self.twoFactorAuthenticationView.tokenField.text length] == 6) {
             [self continueFromTwoFactorAuthenticationViewToConfigureView];
             return YES;
         } else {
-
             return NO;
         }
         return YES;
@@ -257,6 +260,15 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
 
 - (IBAction)twoFactorAuthenticationViewContinueButtonPressed:(UIButton *)sender {
     [self continueFromTwoFactorAuthenticationViewToConfigureView];
+}
+
+
+- (void)checkFor2faTokenInTextField {
+    if ([self.twoFactorAuthenticationView.tokenField.text length] == 6) {
+        self.twoFactorAuthenticationView.continueButton.enabled = YES;
+    } else {
+        self.twoFactorAuthenticationView.continueButton.enabled = NO;
+    }
 }
 
 - (void)continueFromLoginView {
@@ -663,6 +675,7 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
         [self.closeButton setAlpha:alpha];
         [self.twoFactorAuthenticationView setAlpha:alpha];
     };
+    [self checkFor2faTokenInTextField];
     void(^completion)(BOOL) = ^(BOOL finished) {
         if (alpha == 1.f) {
             [self.twoFactorAuthenticationView.tokenField becomeFirstResponder];
