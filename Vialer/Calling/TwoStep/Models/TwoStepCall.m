@@ -120,6 +120,9 @@ static int const TwoStepCallCancelTimeout = 3.0;
     [self.operationsManager setupTwoStepCallWithParameters:parameters withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
         // Check if error.
         if (error) {
+            self.status = TwoStepCallStatusFailedSetup;
+            self.error = error;
+            
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)operation;
             if (httpResponse.statusCode == VoIPGRIDHttpErrorBadRequest) {
                 /**
@@ -138,10 +141,8 @@ static int const TwoStepCallCancelTimeout = 3.0;
                         self.error = [NSError errorWithDomain:TwoStepCallErrorDomain code:TwoStepCallErrorSetupFailed userInfo:@{NSLocalizedDescriptionKey: responseString}];
                     }
                 }
-            } else {
-                self.status = TwoStepCallStatusFailedSetup;
-                self.error = error;
             }
+            
             return;
         }
 
