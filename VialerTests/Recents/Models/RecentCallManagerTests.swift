@@ -12,14 +12,16 @@ class RecentCallManagerTests: XCTestCase {
     var sut: RecentCallManager!
     var webservice: WebserviceMock!
 
-    let exampleDictionary: JSONDictionary = ["src_number": "+3150809000",
-                                             "callerid": "VoIPGRID",
-                                             "call_date": "2017-03-15T09:41:27",
-                                             "direction": "inbound",
-                                             "dst_number": "+31508009064",
-                                             "dialed_number": "+31508009064",
-                                             "atime": Int16(42),
-                                             "id": Int64(123456789)]
+    let exampleDictionary: JSONDictionary = [
+        "src_number": "+3150809000",
+        "callerid": "VoIPGRID",
+        "call_date": "2017-03-15T09:41:27",
+        "direction": "inbound",
+        "dst_number": "+31508009064",
+        "dialed_number": "+31508009064",
+        "atime": Int16(42),
+        "id": Int64(123456789),
+    ]
 
     override func setUp() {
         super.setUp()
