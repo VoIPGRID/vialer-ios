@@ -23,7 +23,7 @@ static CGFloat const ForgotPasswordViewButtonRadius = 5.0;
 
     self.requestPasswordButton.borderWidth = 1;
     self.requestPasswordButton.cornerRadius = ForgotPasswordViewButtonRadius;
-    self.requestPasswordButton.borderColor = [[ColorsConfiguration shared]  colorForKey:ColorsLogInViewControllerButtonBorder];
+    self.requestPasswordButton.borderColor = [[ColorsConfiguration shared] colorForKey:ColorsLogInViewControllerButtonBorder];
     self.requestPasswordButton.backgroundColorForPressedState = [[ColorsConfiguration shared]  colorForKey:ColorsLogInViewControllerButtonBackgroundPressedState];
 }
 
