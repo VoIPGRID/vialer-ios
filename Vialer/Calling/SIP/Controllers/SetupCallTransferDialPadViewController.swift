@@ -5,27 +5,7 @@
 
 private var myContext = 0
 
-class SetupCallTransferViewController: UIViewController, SegueHandler {
-
-    // MARK: - Configuration
-    enum SegueIdentifier : String {
-        case unwindToFirstCall = "UnwindToFirstCallSegue"
-        case secondCallActive = "SecondCallActiveSegue"
-    }
-
-    // Properties
-    var firstCall: VSLCall? {
-        didSet {
-            updateUI()
-        }
-    }
-    var firstCallPhoneNumberLabelText: String? {
-        didSet {
-            updateUI()
-        }
-    }
-    var currentCall: VSLCall?
-    var callManager = VialerSIPLib.sharedInstance().callManager
+class SetupCallTransferDialPadViewController: SetupCallTransfer, SegueHandler {
     var currentCallPhoneNumberLabelText: String?
     var number: String {
         set {
@@ -47,10 +27,25 @@ class SetupCallTransferViewController: UIViewController, SegueHandler {
             numberToDialLabel.text = ""
         }
     }
+    
+    override func updateUI() {
+        firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+        
+        callButton?.isEnabled = number != ""
+        deleteButton?.isEnabled = number != ""
+        toggleDeleteButton()
+        
+        guard let call = firstCall else { return }        
+        if call.callState == .disconnected {
+            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
+        } else {
+            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
+        }
+    }
 }
 
 // MARK: - Lifecycle
-extension SetupCallTransferViewController {
+extension SetupCallTransferDialPadViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
@@ -65,7 +60,7 @@ extension SetupCallTransferViewController {
 }
 
 // MARK: - Actions
-extension SetupCallTransferViewController {
+extension SetupCallTransferDialPadViewController {
     @IBAction func backButtonPressed(_ sender: AnyObject) {
         guard let call = currentCall else {
             performSegue(segueIdentifier: .unwindToFirstCall)
@@ -119,23 +114,7 @@ extension SetupCallTransferViewController {
 }
 
 // MARK: - Helper functions
-extension SetupCallTransferViewController {
-    fileprivate func updateUI() {
-        firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
-
-        callButton?.isEnabled = number != ""
-        deleteButton?.isEnabled = number != ""
-        toggleDeleteButton()
-
-        guard let call = firstCall else { return }
-
-        if call.callState == .disconnected {
-            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
-        } else {
-            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-        }
-    }
-
+extension SetupCallTransferDialPadViewController {
     private func toggleDeleteButton () {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.deleteButton?.alpha = self.number.count == 0 ? 0.0 : 1.0
@@ -144,7 +123,7 @@ extension SetupCallTransferViewController {
 }
 
 // MARK: - Segues
-extension SetupCallTransferViewController {
+extension SetupCallTransferDialPadViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // First check if the destinationVC is SecondCallVC, because SecondCallVC is also subtype of SIPCallingVC.
         switch segueIdentifier(segue: segue) {
@@ -166,7 +145,7 @@ extension SetupCallTransferViewController {
 }
 
 // MARK: - KVO
-extension SetupCallTransferViewController {
+extension SetupCallTransferDialPadViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &myContext {
             DispatchQueue.main.async { [weak self] in

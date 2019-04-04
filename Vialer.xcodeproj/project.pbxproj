@@ -355,6 +355,8 @@
 		C4F385981D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */; };
 		C4F49F331BF0C06A00C25159 /* TwoStepCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */; };
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
+		D400290822083BC600E5AA68 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		E7A9119825A31543E96AB1F0 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */; };
 		EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
@@ -383,15 +385,15 @@
 		EE1C7B911F87778C00708D96 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
 		EE1C7B921F87778C00708D96 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
 		EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
-		EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE1C7B941F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
 		EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
-		EE1C7B961F87779200708D96 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE1C7B961F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
 		EE1C7B971F87779300708D96 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
-		EE1C7B981F87779300708D96 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE1C7B981F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
 		EE1C7B991F87779300708D96 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
-		EE1C7B9A1F87779300708D96 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE1C7B9A1F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
 		EE1C7B9B1F87779400708D96 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
-		EE1C7B9C1F87779400708D96 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE1C7B9C1F87779400708D96 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
 		EE1C7B9D1F8777DB00708D96 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
 		EE1C7B9E1F8777DC00708D96 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
 		EE1C7B9F1F8777DD00708D96 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
@@ -425,7 +427,7 @@
 		EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
 		EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
-		EE23181F20A0468F00C05EB0 /* SetupCallTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */; };
+		EE23181F20A0468F00C05EB0 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
 		EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		EE23182320A0468F00C05EB0 /* RecentCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0B81E72B0AB00A1E509 /* RecentCallManager.swift */; };
@@ -1360,6 +1362,8 @@
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		CDF2ECAB9F575E477A6C52D6 /* Pods-VoysSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferContactsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		D400290922083C2400E5AA68 /* SetupCallTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransfer.swift; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
 		EE02B3F420D7870F006B10FD /* VialerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VialerStats.swift; path = Helpers/VialerStats.swift; sourceTree = "<group>"; };
 		EE1C7B791F87774F00708D96 /* SipCallingButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SipCallingButton.m; sourceTree = "<group>"; };
@@ -1437,11 +1441,11 @@
 		EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasteableUILabel.m; sourceTree = "<group>"; };
 		EEDCC3B320C520E0003480F6 /* NumberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPadButton.h; sourceTree = "<group>"; };
 		EEDFABF91F876628002F0679 /* KeypadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewController.swift; sourceTree = "<group>"; };
-		EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIPCallingViewController.swift; sourceTree = "<group>"; };
+		EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIPCallingViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EEDFABFB1F876628002F0679 /* TransferInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInProgressViewController.swift; sourceTree = "<group>"; };
 		EEDFABFC1F876628002F0679 /* SIPIncomingCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPIncomingCallViewController.h; sourceTree = "<group>"; };
 		EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCallViewController.swift; sourceTree = "<group>"; };
-		EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferViewController.swift; sourceTree = "<group>"; };
+		EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferDialPadViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
 		EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
 		EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
@@ -2480,7 +2484,9 @@
 				EEDFABFC1F876628002F0679 /* SIPIncomingCallViewController.h */,
 				EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */,
 				EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */,
-				EEDFABFE1F876628002F0679 /* SetupCallTransferViewController.swift */,
+				EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */,
+				D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */,
+				D400290922083C2400E5AA68 /* SetupCallTransfer.swift */,
 			);
 			name = Controllers;
 			path = Calling/SIP/Controllers;
@@ -3726,7 +3732,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3739,7 +3745,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		156B6B5CBAE3EA760F5E1953 /* [CP] Copy Pods Resources */ = {
@@ -3748,7 +3754,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3761,7 +3767,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		246420356B44B2654E6C52B0 /* [CP] Check Pods Manifest.lock */ = {
@@ -3806,7 +3812,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3819,7 +3825,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3532FA59A2DD36E4DB31CFDD /* [CP] Copy Pods Resources */ = {
@@ -3828,7 +3834,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Voys/Pods-Voys-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3841,7 +3847,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Voys/Pods-Voys-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6005BCA334D1556E346EBB9E /* [CP] Copy Pods Resources */ = {
@@ -3850,7 +3856,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3863,7 +3869,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6AC3DD9E9E0C6BE2549CA2BD /* [CP] Copy Pods Resources */ = {
@@ -3872,7 +3878,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3885,7 +3891,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DDE0F625C2FC239BCC302FA /* [CP] Copy Pods Resources */ = {
@@ -3894,7 +3900,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3907,7 +3913,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8D8E5EA888EFB1090F5C5581 /* [CP] Copy Pods Resources */ = {
@@ -3916,7 +3922,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3929,7 +3935,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92D7D73E457E7F726CDF19A5 /* [CP] Check Pods Manifest.lock */ = {
@@ -3956,7 +3962,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3969,7 +3975,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9F14E7CCCC52E66377EB53E9 /* [CP] Check Pods Manifest.lock */ = {
@@ -4177,7 +4183,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -4188,7 +4194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE8435747F7E1442943DE4AE /* [CP] Check Pods Manifest.lock */ = {
@@ -4251,7 +4257,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -4264,7 +4270,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E7D405A334A222AF0147E794 /* [CP] Check Pods Manifest.lock */ = {
@@ -4550,7 +4556,7 @@
 				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C61E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B971F87779300708D96 /* SecondCallViewController.swift in Sources */,
-				EE1C7B981F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
+				EE1C7B981F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				EE5EC3BB213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
@@ -4687,7 +4693,7 @@
 				C47BB0C71E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BD213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
-				EE1C7B941F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
+				EE1C7B941F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */,
 				C490AD751D0863E3004A8F83 /* SideMenuViewController.m in Sources */,
 				EE9D2F632191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
@@ -4835,7 +4841,7 @@
 				EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */,
 				EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */,
 				EE5EC3BE213FDC680000EE4D /* GAConfiguration.swift in Sources */,
-				EE23181F20A0468F00C05EB0 /* SetupCallTransferViewController.swift in Sources */,
+				EE23181F20A0468F00C05EB0 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */,
 				EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */,
 				EE23182320A0468F00C05EB0 /* RecentCallManager.swift in Sources */,
@@ -4961,7 +4967,7 @@
 				EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BC213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
-				EE1C7B961F87779200708D96 /* SetupCallTransferViewController.swift in Sources */,
+				EE1C7B961F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				EE61F4061F1DDDE4006E890F /* PhoneNumberModel.m in Sources */,
 				EE61F4071F1DDDE4006E890F /* SideMenuViewController.m in Sources */,
 				EE9D2F622191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
@@ -5067,7 +5073,7 @@
 				C47BB0C51E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BA213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				EE1C7B991F87779300708D96 /* SecondCallViewController.swift in Sources */,
-				EE1C7B9A1F87779300708D96 /* SetupCallTransferViewController.swift in Sources */,
+				EE1C7B9A1F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */,
 				F20850F21D26935600A17E71 /* SideMenuViewController.m in Sources */,
 				EE9D2F602191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
@@ -5191,7 +5197,7 @@
 				C47BB0C41E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B9B1F87779400708D96 /* SecondCallViewController.swift in Sources */,
 				EE5EC3B9213FDC680000EE4D /* GAConfiguration.swift in Sources */,
-				EE1C7B9C1F87779400708D96 /* SetupCallTransferViewController.swift in Sources */,
+				EE1C7B9C1F87779400708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,
 				C47BB0B91E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
@@ -5242,6 +5248,7 @@
 				C4AEB2551E6D954400550E0C /* Webservice.swift in Sources */,
 				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
 				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
+				D400290822083BC600E5AA68 /* SetupCallTransferContactsViewController.swift in Sources */,
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
 				EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
@@ -5255,6 +5262,7 @@
 				C47BB0BE1E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C49A46B41E682A540097E808 /* UIImage.swift in Sources */,
 				EE3C48192080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
+				D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */,
 				C47BB0C91E72DED000A1E509 /* Managed.swift in Sources */,
 				EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */,
 				C4C675651D19B5430003A385 /* AppInfo.swift in Sources */,

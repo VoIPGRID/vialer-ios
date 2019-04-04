@@ -25,7 +25,7 @@ static NSString * const ContactsTableViewCell = @"ContactsTableViewCell";
 static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
 static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CNContactViewControllerDelegate>
+@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;

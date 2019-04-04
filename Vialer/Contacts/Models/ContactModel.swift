@@ -5,6 +5,7 @@
 
 import Foundation
 
+
 class ContactModel: NSObject {
 
     /**
@@ -58,7 +59,7 @@ class ContactModel: NSObject {
         }
     }
 
-    /// Dictionary with phone numbers as keys and info about phonenumbers as value.
+    // Dictionary with phone numbers as keys and info about phonenumbers as value.
     var phoneNumbersToContacts = [String: PhoneNumber]()
 
     /**
@@ -84,18 +85,22 @@ class ContactModel: NSObject {
         }
     }()
 
-    private let keysToFetch: [CNKeyDescriptor] = [CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactViewController.descriptorForRequiredKeys()]
+    private let keysToFetch: [CNKeyDescriptor] = [
+        CNContactPhoneNumbersKey as CNKeyDescriptor,
+        CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+        CNContactViewController.descriptorForRequiredKeys()
+    ]
 
     /**
      Dictionary with First characters as keys and CNContacts arrays as values
     */
     private var contacts = [String: [CNContact]]()
-
+    
     // MARK: - lifecycle
 
     override init() {
         super.init()
-
+        
         // Listen to changes in contacts, and refresh if there was a change.
         NotificationCenter.default.addObserver(forName: Notification.Name.CNContactStoreDidChange, object: nil, queue: nil) { _ in
             DispatchQueue.global().async {
@@ -239,7 +244,7 @@ class ContactModel: NSObject {
     /**
      Reload the contacts from the CNContactStore.
     */
-    private func refreshContacts() {
+    func refreshContacts() {
         if !hasContactAccess() {
             return
         }
@@ -272,6 +277,7 @@ class ContactModel: NSObject {
                         self.phoneNumbersToContacts[newNumber.phoneNumber] = newNumber
                     }
                 }
+             
             }
 
             contacts = newContacts
