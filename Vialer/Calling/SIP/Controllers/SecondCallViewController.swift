@@ -11,6 +11,7 @@ class SecondCallViewController: SIPCallingViewController {
     enum SecondCallVCSegue : String { // TODO: find a way to handle subclassed ViewControllers with SegueHandler.
         case transferInProgress = "TransferInProgressSegue"
         case unwindToFirstCall = "UnwindToFirstCallSegue"
+        case showKeypad = "ShowKeypadSegue"
     }
 
     // MARK: - Properties
@@ -127,6 +128,11 @@ extension SecondCallViewController {
                 firstCallVC.activeCall = firstCall
                 firstCallVC.phoneNumberLabelText = firstCallPhoneNumberLabelText
             }
+        case .showKeypad:
+            let keypadVC = segue.destination as! KeypadViewController
+            keypadVC.call = activeCall
+            keypadVC.delegate = self
+            keypadVC.phoneNumberLabelText = phoneNumberLabelText
         }
     }
 }
