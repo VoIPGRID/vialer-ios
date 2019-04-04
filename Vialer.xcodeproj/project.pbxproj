@@ -3726,7 +3726,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3739,7 +3739,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		156B6B5CBAE3EA760F5E1953 /* [CP] Copy Pods Resources */ = {
@@ -3748,7 +3748,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3761,7 +3761,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		246420356B44B2654E6C52B0 /* [CP] Check Pods Manifest.lock */ = {
@@ -3806,7 +3806,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3819,7 +3819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3532FA59A2DD36E4DB31CFDD /* [CP] Copy Pods Resources */ = {
@@ -3828,7 +3828,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Voys/Pods-Voys-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3841,7 +3841,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Voys/Pods-Voys-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6005BCA334D1556E346EBB9E /* [CP] Copy Pods Resources */ = {
@@ -3850,7 +3850,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3863,7 +3863,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6AC3DD9E9E0C6BE2549CA2BD /* [CP] Copy Pods Resources */ = {
@@ -3872,7 +3872,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3885,7 +3885,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DDE0F625C2FC239BCC302FA /* [CP] Copy Pods Resources */ = {
@@ -3894,7 +3894,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3907,7 +3907,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8D8E5EA888EFB1090F5C5581 /* [CP] Copy Pods Resources */ = {
@@ -3916,7 +3916,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3929,7 +3929,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92D7D73E457E7F726CDF19A5 /* [CP] Check Pods Manifest.lock */ = {
@@ -3956,7 +3956,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -3969,7 +3969,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9F14E7CCCC52E66377EB53E9 /* [CP] Check Pods Manifest.lock */ = {
@@ -4177,7 +4177,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -4188,7 +4188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE8435747F7E1442943DE4AE /* [CP] Check Pods Manifest.lock */ = {
@@ -4251,7 +4251,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
@@ -4264,7 +4264,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E7D405A334A222AF0147E794 /* [CP] Check Pods Manifest.lock */ = {
