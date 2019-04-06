@@ -53,6 +53,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     
     // The cleaned number that needs to be called.
     var cleanedPhoneNumber: String?
+    var diplayNameForOutgoingCall: String?
     var phoneNumberLabelText: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -389,21 +390,26 @@ extension SIPCallingViewController {
             if nameLabel?.text == phoneNumberLabelText {
                 numberLabel?.text = dtmfWholeValue + dtmfSingleTimeValue
                 numberLabel?.isHidden = false
-                if statusLabelTopConstraint != nil {
-                    statusLabelTopConstraint.constant = 20
-                }
+                statusLabelTopConstraint.constant = 20
             } else {
                 numberLabel?.text = (phoneNumberLabelText ?? "") + " " + dtmfWholeValue + dtmfSingleTimeValue
             }
         } else {
-            var diplayNameForOutgoingCall: String?
             if !call.isIncoming {
                 if let activeCallUnwrapped = activeCall {
-                    PhoneNumberModel.getCallName(activeCallUnwrapped, withCompletion: { (phoneNumberModel) in
-                        diplayNameForOutgoingCall = phoneNumberModel.displayName
-                    })
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async {
+                        PhoneNumberModel.getCallName(activeCallUnwrapped, withCompletion: { (phoneNumberModel) in
+                            DispatchQueue.main.async { [weak self] in
+                                self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
+                            }
+                        })
+                    }
                 }
-                nameLabel?.text = diplayNameForOutgoingCall ?? phoneNumberLabelText
+                if diplayNameForOutgoingCall != nil {
+                    nameLabel?.text = diplayNameForOutgoingCall != "" ? diplayNameForOutgoingCall : phoneNumberLabelText
+                } else {
+                    nameLabel?.text = phoneNumberLabelText
+                }
                 numberLabel?.text = phoneNumberLabelText
             } else {
                 numberLabel?.text = PhoneNumberUtils.cleanPhoneNumber(call.callerNumber ?? "")
@@ -414,13 +420,9 @@ extension SIPCallingViewController {
             }
             if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) {
                 numberLabel?.isHidden = false
-                if statusLabelTopConstraint != nil {
-                    statusLabelTopConstraint.constant = 20
-                }
+                statusLabelTopConstraint.constant = 20
             } else {
-                if statusLabelTopConstraint != nil {
-                    statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
-                }
+                statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
                 numberLabel?.isHidden = true
             }
         }
