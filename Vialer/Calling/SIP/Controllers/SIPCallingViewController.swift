@@ -34,8 +34,19 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             } else {
                 numberToClean = activeCall!.numberToCall
             }
-            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean)!
-            phoneNumberLabelText = cleanedPhoneNumber
+            if let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean) {
+                phoneNumberLabelText = cleanedPhoneNumber
+            }
+            
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                PhoneNumberModel.getCallName(self.activeCall!, withCompletion: { (phoneNumberModel) in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
+                    }
+                })
+            }
+            
             
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
@@ -66,8 +77,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     fileprivate var dtmfSent: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                if let dtmfSentUnwrapped = self?.dtmfSent {
-                    self?.dtmfSingleTimeValue = dtmfSentUnwrapped
+                if let unwrappedDtmfSent = self?.dtmfSent {
+                    self?.dtmfSingleTimeValue = unwrappedDtmfSent
                 }
             }
         }
@@ -220,13 +231,14 @@ extension SIPCallingViewController {
     @objc func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
         phoneNumberLabelText = cleanedPhoneNumber
         if let contact = contact {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
                 PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
                     DispatchQueue.main.async { [weak self] in
                         self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
                     }
                 })
             }
@@ -235,7 +247,7 @@ extension SIPCallingViewController {
     }
     
     func handleOutgoingCallForScreenshot(phoneNumber: String){
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
         phoneNumberLabelText = cleanedPhoneNumber
     }
     
@@ -396,17 +408,8 @@ extension SIPCallingViewController {
             }
         } else {
             if !call.isIncoming {
-                if let activeCallUnwrapped = activeCall {
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async {
-                        PhoneNumberModel.getCallName(activeCallUnwrapped, withCompletion: { (phoneNumberModel) in
-                            DispatchQueue.main.async { [weak self] in
-                                self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
-                            }
-                        })
-                    }
-                }
-                if diplayNameForOutgoingCall != nil {
-                    nameLabel?.text = diplayNameForOutgoingCall != "" ? diplayNameForOutgoingCall : phoneNumberLabelText
+                if let unwrappedDiplayNameForOutgoingCall = diplayNameForOutgoingCall{
+                    nameLabel?.text = unwrappedDiplayNameForOutgoingCall.isEmpty ? phoneNumberLabelText : unwrappedDiplayNameForOutgoingCall
                 } else {
                     nameLabel?.text = phoneNumberLabelText
                 }
