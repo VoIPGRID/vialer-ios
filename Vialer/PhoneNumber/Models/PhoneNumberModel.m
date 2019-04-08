@@ -82,7 +82,12 @@
 
 + (void)getCallName:(VSLCall *)call withCompletion:(void (^ _Nullable)(PhoneNumberModel * _Nonnull))completion {
     PhoneNumberModel *model = [[[self class] alloc] init];
-    BOOL success = [model getContactWithPhoneNumber:call.callerNumber];
+    BOOL success = NO;
+    if (call.callerNumber){
+        success = [model getContactWithPhoneNumber:call.callerNumber];
+    } else {
+        success = [model getContactWithPhoneNumber:call.numberToCall];
+    }
 
     if (success) {
         model.callerInfo = model.displayName;
