@@ -92,6 +92,11 @@ extension SecondCallViewController {
         // Only enable transferButton if both calls are confirmed.
         transferButton?.isEnabled = activeCall?.callState == .confirmed && firstCall?.callState == .confirmed
         firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+        
+        numberLabel?.isHidden = false
+        if statusLabelTopConstraint != nil {
+            statusLabelTopConstraint.constant = 20
+        }
 
         guard let call = firstCall else { return }
 

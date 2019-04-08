@@ -34,8 +34,20 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             } else {
                 numberToClean = activeCall!.numberToCall
             }
-            let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean)!
-            phoneNumberLabelText = cleanedPhoneNumber
+            if let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean) {
+                phoneNumberLabelText = cleanedPhoneNumber
+            }
+            
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                PhoneNumberModel.getCallName(self.activeCall!, withCompletion: { (phoneNumberModel) in
+                    DispatchQueue.main.async { [weak self] in
+                        if !phoneNumberModel.callerInfo.isEmpty {
+                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                        }
+                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
+                    }
+                })
+            }
             
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
@@ -53,6 +65,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     
     // The cleaned number that needs to be called.
     var cleanedPhoneNumber: String?
+    var diplayNameForOutgoingCall: String?
     var phoneNumberLabelText: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -65,8 +78,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     fileprivate var dtmfSent: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                if let dtmfSentUnwrapped = self?.dtmfSent {
-                    self?.dtmfSingleTimeValue = dtmfSentUnwrapped
+                if let unwrappedDtmfSent = self?.dtmfSent {
+                    self?.dtmfSingleTimeValue = unwrappedDtmfSent
                 }
             }
         }
@@ -219,13 +232,16 @@ extension SIPCallingViewController {
     @objc func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
         phoneNumberLabelText = cleanedPhoneNumber
         if let contact = contact {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
                 PhoneNumberModel.getCallName(from: contact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
                     DispatchQueue.main.async { [weak self] in
-                        self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                        if !phoneNumberModel.callerInfo.isEmpty {
+                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+                        }
+                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
                     }
                 })
             }
@@ -234,7 +250,7 @@ extension SIPCallingViewController {
     }
     
     func handleOutgoingCallForScreenshot(phoneNumber: String){
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber)!
+        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
         phoneNumberLabelText = cleanedPhoneNumber
     }
     
@@ -396,14 +412,18 @@ extension SIPCallingViewController {
                 numberLabel?.text = (phoneNumberLabelText ?? "") + " " + dtmfWholeValue + dtmfSingleTimeValue
             }
         } else {
-            var diplayNameForOutgoingCall: String?
             if !call.isIncoming {
-                if let activeCallUnwrapped = activeCall {
-                    PhoneNumberModel.getCallName(activeCallUnwrapped, withCompletion: { (phoneNumberModel) in
-                        diplayNameForOutgoingCall = phoneNumberModel.displayName
-                    })
+                if let unwrappedDiplayNameForOutgoingCall = diplayNameForOutgoingCall{
+                    if unwrappedDiplayNameForOutgoingCall.isEmpty {
+                        nameLabel?.text = phoneNumberLabelText
+                    } else {
+                        nameLabel?.text = unwrappedDiplayNameForOutgoingCall
+                    }
+                } else {
+                    if nameLabel?.text?.isEmpty ?? false {
+                        nameLabel?.text = phoneNumberLabelText
+                    }
                 }
-                nameLabel?.text = diplayNameForOutgoingCall ?? phoneNumberLabelText
                 numberLabel?.text = phoneNumberLabelText
             } else {
                 numberLabel?.text = PhoneNumberUtils.cleanPhoneNumber(call.callerNumber ?? "")
@@ -412,16 +432,17 @@ extension SIPCallingViewController {
                     nameLabel?.text = numberLabel?.text
                 }
             }
-            if numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it")) {
+
+            if (numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it"))) || (numberLabel?.text ?? "").isEmpty {
                 numberLabel?.isHidden = false
                 if statusLabelTopConstraint != nil {
                     statusLabelTopConstraint.constant = 20
                 }
             } else {
+                numberLabel?.isHidden = true
                 if statusLabelTopConstraint != nil {
                     statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
                 }
-                numberLabel?.isHidden = true
             }
         }
         
