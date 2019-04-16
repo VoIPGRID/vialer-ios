@@ -169,7 +169,7 @@ DEPENDENCIES:
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
   - SVProgressHUD
-  - VialerSIPLib
+  - VialerSIPLib (~> 3.5.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
