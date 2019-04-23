@@ -4,9 +4,6 @@
 //
 
 #import "SideMenuViewController.h"
-
-#import "AvailabilityModel.h"
-#import "AvailabilityViewController.h"
 #import "SystemUser.h"
 #import "VialerWebViewController.h"
 #import "Vialer-Swift.h"
