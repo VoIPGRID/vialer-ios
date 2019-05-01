@@ -31,8 +31,8 @@ import Foundation
 
         /// We sometimes use a tag the likes of 2.0.beta.03. Since Apple only wants numbers and dots as CFBundleShortVersionString
         /// the additional part of the tag is stored in de plist by the update_version_number script. If set, display it.
-        if let additionalVersion = infoDict[AppInfo.Constants.additionalVersionString] as? String, !additionalVersion.isEmpty {
-            version = "\(version).\(additionalVersion)"
+        if let additionalVersion = infoDict[AppInfo.Constants.additionalVersionString] as? String, !additionalVersion.isEmpty, additionalVersion != "Updated on build" {
+            version = "\(version). \(additionalVersion)"
         }
         #if DEBUG
             if let commitNumber = infoDict[AppInfo.Constants.commitShortHash] {
@@ -40,7 +40,7 @@ import Foundation
             }
         #else
             if let bundleVersion = infoDict[AppInfo.Constants.cfBundleVersion] {
-                version = "\(version) (\(bundleVersion))"
+                version = "\(version)"
             }
         #endif
         return version
