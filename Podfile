@@ -16,7 +16,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true 
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib', '~> 3.5.4'
+    pod 'VialerSIPLib'
 end
 
 target 'Vialer' do

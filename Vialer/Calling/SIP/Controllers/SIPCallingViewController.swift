@@ -48,9 +48,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
                     }
                 })
             }
-                DispatchQueue.main.async { [weak self] in
-                    self?.updateUI()
-                }
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUI()
             }
             activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
             activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
