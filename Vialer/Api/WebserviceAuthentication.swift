@@ -17,8 +17,15 @@ extension Webservice {
     /// Can use any instance that will confirm to Webservice Authentication to setup authenticated requests
     ///
     /// - Parameter authentication: instance that confirms to WebserviceAuthentication
-    convenience init(authentication: WebserviceAuthentication) {
-        self.init(username: authentication.username, apiToken: authentication.apiToken)
+    convenience init?(authentication: WebserviceAuthentication) {
+        guard let unwrappedUsername = authentication.username, let unwrappedApiToken = authentication.apiToken else {
+            if let username = SystemUser.current()?.username, let apiToken = SystemUser.current()?.apiToken {
+                self.init(username: username, apiToken: apiToken)
+                return
+            }
+                return nil
+        }
+        self.init(username: unwrappedUsername, apiToken: unwrappedApiToken)
     }
 }
 
