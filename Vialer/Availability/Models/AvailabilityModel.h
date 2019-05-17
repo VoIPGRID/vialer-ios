@@ -5,17 +5,14 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const AvailabilityModelDescription;
-extern NSString *const AvailabilityModelPhoneNumber;
-extern NSString *const AvailabilityModelPhoneNumberKey;
 extern NSString *const AvailabilityModelSelected;
-extern NSString *const AvailabilityModelDestinationType;
 
 @interface AvailabilityModel : NSObject
 
-@property (readonly, nonatomic) NSArray *availabilityOptions;
+@property(readonly, nonatomic) NSArray *availabilityOptions;
 
 - (void)getUserDestinations:(void (^)(NSString *localizedErrorString))completion;
+
 - (void)saveUserDestination:(NSUInteger)index withCompletion:(void (^)(NSString *localizedErrorString))completion;
 
 /**

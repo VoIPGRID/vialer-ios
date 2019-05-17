@@ -5,46 +5,51 @@
 
 import Foundation
 
-class ContactModel: NSObject {
 
+@objc class ContactModel: NSObject {
+    
+    // MARK: - Properties
+    
     /**
      Notification that is posted when reloading contacts is done.
     */
-    static let ContactsUpdated = Notification.Name(rawValue: "ContactModel.ContactsUpdated")
-
-    // MARK: - Properties
-
+    @objc static let ContactsUpdated = Notification.Name(rawValue: "ContactModel.ContactsUpdated")
+    
+    @objc let concurrentContactQueue = DispatchQueue(label: "com.vialer.contactQueue", attributes: .concurrent)
+    
     /**
      Singleton instance of ContactModel.
     */
     @objc static let defaultModel: ContactModel = {
         let model = ContactModel()
-        DispatchQueue.global(qos: .userInteractive).async {
+        let concurrentContactQueue = DispatchQueue(label: "com.vialer.contactQueue", attributes: .concurrent)
+        
+        concurrentContactQueue.async(flags: .barrier) {
             model.refreshContacts()
         }
         return model
     }()
-
+    
     /**
      The section titles of all contacts.
     */
     @objc var sectionTitles: [String]?
-
+    
     /**
      Current status of the access rights to the Contacts of the user.
     */
     @objc var authorizationStatus: CNAuthorizationStatus = .notDetermined
-
+    
     /**
      The contact store that is used within this model.
     */
     @objc let contactStore = CNContactStore()
-
+    
     /**
      The search results in one Array.
     */
     @objc var searchResult = [CNContact]()
-
+    
     /**
      All the contacts fetched from the Store.
     */
@@ -57,76 +62,74 @@ class ContactModel: NSObject {
             return allContacts
         }
     }
-
-    /// Dictionary with phone numbers as keys and info about phonenumbers as value.
+    
+    // Dictionary with phone numbers as keys and info about phonenumbers as value.
     var phoneNumbersToContacts = [String: PhoneNumber]()
-
+    
     /**
      The sort order of the users contacts.
     */
     private lazy var sortOrder: CNContactSortOrder = {
         let comparator = CNContact.comparator(forNameSortOrder: .userDefault)
-
         let contact0 = CNMutableContact()
         contact0.givenName = "A"
         contact0.familyName = "Z"
-
         let contact1 = CNMutableContact()
         contact1.givenName = "Z"
         contact1.familyName = "A"
-
         let result = comparator(contact0, contact1)
-
         if result == .orderedAscending {
             return .givenName
         } else {
             return .familyName
         }
     }()
-
-    private let keysToFetch: [CNKeyDescriptor] = [CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactViewController.descriptorForRequiredKeys()]
-
+    
+    private let keysToFetch: [CNKeyDescriptor] = [
+        CNContactPhoneNumbersKey as CNKeyDescriptor,
+        CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+        CNContactViewController.descriptorForRequiredKeys()
+    ]
+    
     /**
      Dictionary with First characters as keys and CNContacts arrays as values
     */
     private var contacts = [String: [CNContact]]()
-
+    
     // MARK: - lifecycle
-
+    
     override init() {
         super.init()
-
         // Listen to changes in contacts, and refresh if there was a change.
         NotificationCenter.default.addObserver(forName: Notification.Name.CNContactStoreDidChange, object: nil, queue: nil) { _ in
-            DispatchQueue.global().async {
+            self.concurrentContactQueue.async(flags: .barrier) {
                 self.refreshContacts()
             }
         }
     }
-
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.CNContactStoreDidChange, object: nil)
     }
-
+    
+    
     // MARK: - Functions
-
+    
     /**
      Return all the contacts at a section.
     */
     @objc func contactsAt(section: Int) -> [CNContact] {
         return contacts[sectionTitles![section]]!
     }
-
+    
     /**
      Return the contact given the section and index.
     */
     @objc func contactAt(section: Int, index: Int) -> CNContact {
         return contactsAt(section: section)[index]
     }
-
+    
     /**
      Will check if there is authorization to access the contacts.
-
      Will store the status in `authorizationStatus`.
     */
     @objc func hasContactAccess() -> Bool {
@@ -142,31 +145,28 @@ class ContactModel: NSObject {
             return false
         }
     }
-
+    
     /**
      Will request contact access if not given and will load the contacts when given.
     */
     @objc func requestContactAccess() {
         contactStore.requestAccess(for: .contacts) { granted, error in
             if granted {
-                DispatchQueue.global().async {
+                self.concurrentContactQueue.async(flags: .barrier) {
                     self.refreshContacts()
                 }
             }
         }
     }
-
+    
     /**
      Creates an attributed string for the given contact.
-
      Based on the sort order of the users Contacts, the correct portion of the name will be made bold
-
      - parameters:
         - for: CNContact
      - returns: NSAttributed string with bolded name
     */
     @objc func attributedString(for contact: CNContact) -> NSAttributedString? {
-
         guard let attributedName = CNContactFormatter.attributedString(from: contact, style: .fullName, defaultAttributes: nil) else {
             if let fullName = CNContactFormatter.string(from: contact, style: .fullName) {
                 return NSAttributedString(string: fullName)
@@ -176,16 +176,15 @@ class ContactModel: NSObject {
             }
             return nil
         }
-
+        
         let keyToHighlight: String
         if contact.contactType == .person {
             keyToHighlight = sortOrder == .familyName ? CNContactFamilyNameKey : CNContactGivenNameKey
         } else {
             keyToHighlight = CNContactOrganizationNameKey
         }
-
+        
         let highlightedName = attributedName.mutableCopy() as! NSMutableAttributedString
-
         highlightedName.enumerateAttributes(in: NSMakeRange(0, highlightedName.length), options: [], using: { (attrs, range, stop) in
             if let property = attrs[NSAttributedStringKey.init(CNContactPropertyAttribute)] as? String, property == keyToHighlight {
                 let boldAttributes = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17)]
@@ -194,28 +193,24 @@ class ContactModel: NSObject {
         })
         return highlightedName
     }
-
+    
     @objc func displayName(for contact: CNContact) -> String? {
         return attributedString(for: contact)?.string
     }
-
+    
     // MARK: - Search
-
+    
     @objc func searchContacts(for searchText: String) -> Bool {
         searchResult.removeAll()
-
         if searchText == "" {
             return false
         }
-
         if !hasContactAccess() {
             return false
         }
-
         let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
         fetchRequest.sortOrder = sortOrder
         fetchRequest.predicate = CNContact.predicateForContacts(matchingName: searchText)
-
         do {
             try contactStore.enumerateContacts(with: fetchRequest) { contact, stop in
                 self.searchResult.append(contact)
@@ -226,16 +221,16 @@ class ContactModel: NSObject {
         }
         return true
     }
-
+    
     func getContact(for identifier: String) -> CNContact? {
         if !hasContactAccess() {
             return nil
         }
         return try? contactStore.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
     }
-
+    
     // MARK: - Helper (private) functions
-
+    
     /**
      Reload the contacts from the CNContactStore.
     */
@@ -245,16 +240,14 @@ class ContactModel: NSObject {
         }
 
         // Clear current dictionary
-        phoneNumbersToContacts = [String: PhoneNumber]()
+        phoneNumbersToContacts.removeAll()
 
         var newContacts = [String: [CNContact]]()
         do {
             let request = CNContactFetchRequest(keysToFetch: keysToFetch)
             request.sortOrder = sortOrder
             try contactStore.enumerateContacts(with: request) { contact, stop in
-
                 let firstChar = self.getFirstChar(for: contact)
-
                 var contactList: [CNContact]
                 if newContacts[firstChar] != nil {
                     contactList = newContacts[firstChar]!
@@ -263,7 +256,7 @@ class ContactModel: NSObject {
                 }
                 contactList.append(contact)
                 newContacts[firstChar] = contactList
-
+                
                 // Add every phone number to search dictionary.
                 for number in contact.phoneNumbers {
                     let newNumber = PhoneNumber(number: number, contact: contact)
@@ -273,14 +266,12 @@ class ContactModel: NSObject {
                     }
                 }
             }
-
             contacts = newContacts
             sectionTitles = Array(contacts.keys).sorted()
             if sectionTitles?.first == "#" {
                 sectionTitles?.remove(at: 0)
                 sectionTitles?.append("#")
             }
-
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: ContactModel.ContactsUpdated, object: nil)
             }
@@ -288,12 +279,10 @@ class ContactModel: NSObject {
             VialerLogError("Contact refresh error: \(error)")
         }
     }
-
+    
     /**
      Returns the first character of the name of the contact.
-
      Gets the character based on the contact type and sort order of the user contacts.
-
      - parameters:
         - for: CNContact
      - returns: Optional String with the first character

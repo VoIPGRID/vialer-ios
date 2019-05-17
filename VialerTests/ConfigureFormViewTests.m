@@ -3,7 +3,7 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "Configuration.h"
+#import "Vialer-Swift.h"
 #import "ConfigureFormView.h"
 #import "LogInViewController.h"
 #import <OCMock/OCMock.h>
@@ -12,23 +12,13 @@
 @interface ConfigureFormViewTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;
 @property (nonatomic) ConfigureFormView *configurationFormView;
-@property (nonatomic) id configurationMock;
-@property (nonatomic) UIColor *color;
 @end
 
 @implementation ConfigureFormViewTests
 
 - (void)setUp {
     [super setUp];
-    self.color = [UIColor redColor];
-
-    id colorConfigurationMock = OCMClassMock([ColorConfiguration class]);
-    OCMStub([colorConfigurationMock colorForKey:[OCMArg any]]).andReturn(self.color);
-
-    self.configurationMock = OCMClassMock([Configuration class]);
-    OCMStub([self.configurationMock colorConfiguration]).andReturn(colorConfigurationMock);
-    OCMStub([self.configurationMock defaultConfiguration]).andReturn(self.configurationMock);
-
+    
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
     [self.loginViewController loadViewIfNeeded];
     self.configurationFormView = self.loginViewController.configureFormView;
@@ -37,10 +27,7 @@
 - (void)tearDown {
     self.configurationFormView = nil;
     self.loginViewController = nil;
-    self.color = nil;
-
-    [self.configurationMock stopMocking];
-    self.configurationMock = nil;
+    
     [super tearDown];
 }
 
@@ -58,7 +45,8 @@
 }
 
 - (void)testContinueButtonHasCorrectBackGroundColorForPressedState {
-    XCTAssertEqual(self.configurationFormView.continueButton.backgroundColorForPressedState, self.color, @"continueButton should have gotten the color from config.");
+    OCMStub([self.configurationFormView.continueButton setHighlighted:YES]);
+    XCTAssert([self.configurationFormView.continueButton.backgroundColorForPressedState isEqual:self.configurationFormView.continueButton.backgroundColor], @"ContinueButton should have gotten the color given from the custom method setHighlighted.");
     XCTAssertTrue(self.configurationFormView.continueButton.borderWidth > 0, @"button needs a border");
     XCTAssertTrue(self.configurationFormView.continueButton.cornerRadius > 0, @"button needs rounded corners");
 }

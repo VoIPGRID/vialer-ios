@@ -15,11 +15,12 @@ static CGFloat const TwoFactorAuthenticationViewButtonRadius = 5.0;
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    self.twoFactorAuthenticationDescriptionField.text = NSLocalizedString(@"Two-factor autentication", nil);
+    self.twoFactorAuthenticationDescriptionField.text = NSLocalizedString(@"Two-factor authentication", nil);
 
     self.tokenField.placeholder = NSLocalizedString(@"Token", nil);
     [self.tokenField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [self.tokenField cleanStyle];
+    self.tokenField.keyboardType = UIKeyboardTypeNumberPad;
 
     [self.continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
 

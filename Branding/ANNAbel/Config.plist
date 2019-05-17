@@ -20,7 +20,7 @@
 		<key>SecondaryBrandColor</key>
 		<array>
 			<integer>127</integer>
-			<string>114</string>
+			<integer>114</integer>
 			<integer>164</integer>
 		</array>
 		<key>BlackColor</key>

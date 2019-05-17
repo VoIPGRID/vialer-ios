@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n1v-MQ-FjB">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Keypad View Controller-->
         <scene sceneID="MTO-IF-tUn">
             <objects>
-                <viewController id="gkX-qY-AIB" customClass="KeypadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="gkX-qY-AIB" customClass="KeypadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BNe-Tv-NtN"/>
                         <viewControllerLayoutGuide type="bottom" id="51B-d5-ps1"/>
@@ -21,140 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-TQ-W7d" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="271" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="height" multiplier="1:1" id="gDZ-ad-KP9"/>
-                                    <constraint firstAttribute="width" priority="998" constant="70" id="myc-SU-JFc"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="1"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="3h3-7r-Hoi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKK-AY-hTQ" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="349" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="GHI"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="cGq-ip-fWR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE4-tc-maO" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="349" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="JKL"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="6Yw-Kr-qNp"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uc-x1-38o" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="427" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="PQRS"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="phD-17-kt6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7x-tQ-8oz" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="427" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="TUV"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="5CH-Tk-GaB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b74-9M-nGe" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="427" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="WXYZ"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="eBY-Wx-RtQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t85-kN-Xse" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="505" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="RDQ-yB-1Xv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ic-sX-vrf" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="505" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
-                                <gestureRecognizers/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="0"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="+"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="4zI-Si-gj8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-7e-hQf" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="505" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="rJe-67-URX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9H-bV-hy5" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="349" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="MNO"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="hKm-D9-cXP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHB-re-dgx" userLabel="3-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="271" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="DEF"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="WgS-3I-PpC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uC2-Oy-Ewy" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="271" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="ABC"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="sTg-zE-6cG"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJr-5Z-ZPU">
                                 <rect key="frame" x="20" y="63" width="374" height="36"/>
                                 <constraints>
@@ -173,97 +39,231 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HO9-77-XoX">
-                                <rect key="frame" x="272" y="661" width="70" height="35"/>
-                                <state key="normal" title="hide">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="hideButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="k0y-bj-w0U"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNN-s3-SDa" userLabel="hangup-button">
-                                <rect key="frame" x="172" y="583" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="SIPCallingStoryboard.HangupButton"/>
-                                <state key="normal" image="declineButton">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="disabled" image="declineButtonDisabled"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonHangup"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="endCallButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="p2i-kd-xrm"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SsZ-zo-cMR" userLabel="Keypad container view">
+                                <rect key="frame" x="20" y="201" width="374" height="456"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qbV-XY-f3f" userLabel="Keypad">
+                                        <rect key="frame" x="43.333333333333343" y="0.0" width="287.33333333333326" height="456"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="r7o-h8-3gj">
+                                                <rect key="frame" x="0.0" y="0.0" width="287.33333333333331" height="79.333333333333329"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-TQ-W7d" userLabel="1-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="height" multiplier="1:1" id="Dj8-RY-Wne"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="85" id="de7-a6-3gg"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="1"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="3h3-7r-Hoi"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uC2-Oy-Ewy" userLabel="2-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="ABC"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="sTg-zE-6cG"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHB-re-dgx" userLabel="3-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="DEF"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="WgS-3I-PpC"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="UWU-Rr-XhT">
+                                                <rect key="frame" x="0.0" y="94.333333333333314" width="287.33333333333331" height="79"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKK-AY-hTQ" userLabel="4-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="GHI"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="cGq-ip-fWR"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE4-tc-maO" userLabel="5-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="JKL"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="6Yw-Kr-qNp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9H-bV-hy5" userLabel="6-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="MNO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="hKm-D9-cXP"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="b1j-xG-pAs">
+                                                <rect key="frame" x="0.0" y="188.33333333333331" width="287.33333333333331" height="79.333333333333314"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uc-x1-38o" userLabel="7-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="PQRS"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="phD-17-kt6"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7x-tQ-8oz" userLabel="8-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="TUV"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="5CH-Tk-GaB"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b74-9M-nGe" userLabel="9-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="WXYZ"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="eBY-Wx-RtQ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Dvm-2W-7DG">
+                                                <rect key="frame" x="0.0" y="282.66666666666669" width="287.33333333333331" height="79"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t85-kN-Xse" userLabel="*-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="RDQ-yB-1Xv"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ic-sX-vrf" userLabel="0-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
+                                                        <gestureRecognizers/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="0"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="+"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="4zI-Si-gj8"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-7e-hQf" userLabel="#-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="numberButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="rJe-67-URX"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="LQo-Ez-Feg">
+                                                <rect key="frame" x="0.0" y="376.66666666666663" width="287.33333333333331" height="79.333333333333314"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MpI-cG-Ly1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNN-s3-SDa" userLabel="call-button">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="SIPCallingStoryboard.HangupButton"/>
+                                                        <state key="normal" image="declineButton">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <state key="disabled" image="declineButtonDisabled"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="buttonImage" value="CallButtonHangup"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="endCallButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="p2i-kd-xrm"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zz-vg-7VB">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HO9-77-XoX">
+                                                                <rect key="frame" x="25" y="25" width="30" height="30"/>
+                                                                <state key="normal" title="hide">
+                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="hideButtonPressed:" destination="gkX-qY-AIB" eventType="touchUpInside" id="k0y-bj-w0U"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="HO9-77-XoX" firstAttribute="centerY" secondItem="7zz-vg-7VB" secondAttribute="centerY" id="HUa-AB-PeO"/>
+                                                            <constraint firstItem="HO9-77-XoX" firstAttribute="centerX" secondItem="7zz-vg-7VB" secondAttribute="centerX" id="ZSb-kB-wG5"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qbV-XY-f3f" firstAttribute="bottom" secondItem="SsZ-zo-cMR" secondAttribute="bottom" id="RKl-iT-EIt"/>
+                                    <constraint firstItem="qbV-XY-f3f" firstAttribute="centerX" secondItem="SsZ-zo-cMR" secondAttribute="centerX" id="aDU-Lh-WVT"/>
+                                    <constraint firstItem="qbV-XY-f3f" firstAttribute="height" secondItem="SsZ-zo-cMR" secondAttribute="height" priority="999" id="hPJ-bd-kua"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99041569232940674" green="0.50026911497116089" blue="0.032865822315216064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="t85-kN-Xse" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="0Vf-ZD-52d"/>
-                            <constraint firstItem="AHB-re-dgx" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="0Vo-C7-de6"/>
-                            <constraint firstItem="TlB-TQ-W7d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kif-jA-29n" secondAttribute="leadingMargin" id="43e-rq-m0s"/>
-                            <constraint firstItem="X9H-bV-hy5" firstAttribute="top" secondItem="AHB-re-dgx" secondAttribute="bottom" constant="8" id="4fi-Zv-bXq"/>
-                            <constraint firstItem="LNN-s3-SDa" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="53v-wX-f3v"/>
-                            <constraint firstItem="cKK-AY-hTQ" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="5U1-ur-yvw"/>
-                            <constraint firstItem="uC2-Oy-Ewy" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="7Lr-T8-pta"/>
-                            <constraint firstItem="uC2-Oy-Ewy" firstAttribute="centerX" secondItem="Kif-jA-29n" secondAttribute="centerX" id="7dT-Ms-6PL"/>
-                            <constraint firstItem="uC2-Oy-Ewy" firstAttribute="top" secondItem="TlB-TQ-W7d" secondAttribute="top" id="7hW-qs-Ew3"/>
-                            <constraint firstItem="8uc-x1-38o" firstAttribute="top" secondItem="cKK-AY-hTQ" secondAttribute="bottom" constant="8" id="7qe-hI-vNC"/>
-                            <constraint firstItem="uC2-Oy-Ewy" firstAttribute="top" secondItem="AHB-re-dgx" secondAttribute="top" id="83P-on-ugI"/>
-                            <constraint firstItem="fE4-tc-maO" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="8JE-8b-08H"/>
-                            <constraint firstItem="LNN-s3-SDa" firstAttribute="centerX" secondItem="Kif-jA-29n" secondAttribute="centerX" id="A9s-Nc-znJ"/>
-                            <constraint firstItem="m7x-tQ-8oz" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="AgN-OD-rN9"/>
-                            <constraint firstItem="TlB-TQ-W7d" firstAttribute="height" secondItem="uC2-Oy-Ewy" secondAttribute="height" id="CHC-oQ-Yxb"/>
-                            <constraint firstItem="9eb-7e-hQf" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="CXx-Wm-eJr"/>
-                            <constraint firstItem="9eb-7e-hQf" firstAttribute="bottom" secondItem="t85-kN-Xse" secondAttribute="bottom" id="Cyx-Zg-RQq"/>
-                            <constraint firstItem="AHB-re-dgx" firstAttribute="leading" secondItem="uC2-Oy-Ewy" secondAttribute="trailing" constant="30" id="DLz-6c-4h6"/>
-                            <constraint firstItem="0ic-sX-vrf" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="E88-4t-exM"/>
-                            <constraint firstItem="m7x-tQ-8oz" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="EKO-8Q-Ykp"/>
-                            <constraint firstItem="X9H-bV-hy5" firstAttribute="leading" secondItem="fE4-tc-maO" secondAttribute="trailing" constant="30" id="HO2-6X-a19"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="AHB-re-dgx" secondAttribute="trailing" id="Hbg-X8-sbb"/>
-                            <constraint firstItem="X9H-bV-hy5" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="IC3-yG-Fkz"/>
-                            <constraint firstItem="m7x-tQ-8oz" firstAttribute="top" secondItem="fE4-tc-maO" secondAttribute="bottom" constant="8" id="K6O-OU-f2k"/>
-                            <constraint firstItem="AHB-re-dgx" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="Mmv-Or-B7f"/>
-                            <constraint firstItem="X9H-bV-hy5" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="NPN-iY-Eug"/>
-                            <constraint firstItem="9eb-7e-hQf" firstAttribute="top" secondItem="b74-9M-nGe" secondAttribute="bottom" constant="8" id="Op7-Wh-l1m"/>
-                            <constraint firstItem="uC2-Oy-Ewy" firstAttribute="leading" secondItem="TlB-TQ-W7d" secondAttribute="trailing" constant="30" id="PMh-HO-uUh"/>
+                            <constraint firstItem="51B-d5-ps1" firstAttribute="top" secondItem="SsZ-zo-cMR" secondAttribute="bottom" constant="79" id="ESG-3U-Kbh"/>
+                            <constraint firstItem="SsZ-zo-cMR" firstAttribute="leading" secondItem="Kif-jA-29n" secondAttribute="leading" constant="20" id="JgQ-JZ-Djo"/>
                             <constraint firstAttribute="leadingMargin" secondItem="xJr-5Z-ZPU" secondAttribute="leading" id="PoQ-k7-oLS"/>
-                            <constraint firstItem="LNN-s3-SDa" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="Svs-Ho-hI3"/>
-                            <constraint firstItem="0ic-sX-vrf" firstAttribute="centerX" secondItem="Kif-jA-29n" secondAttribute="centerX" id="TPx-Pj-08a"/>
-                            <constraint firstItem="fE4-tc-maO" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="TqZ-ej-opI"/>
-                            <constraint firstItem="fE4-tc-maO" firstAttribute="top" secondItem="uC2-Oy-Ewy" secondAttribute="bottom" constant="8" id="TtF-gr-qQZ"/>
-                            <constraint firstItem="m7x-tQ-8oz" firstAttribute="leading" secondItem="8uc-x1-38o" secondAttribute="trailing" constant="30" id="WS1-fz-y79"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UDw-A4-HXZ" secondAttribute="trailing" id="Wnh-we-KWY"/>
-                            <constraint firstItem="0ic-sX-vrf" firstAttribute="bottom" secondItem="t85-kN-Xse" secondAttribute="bottom" id="ZK0-pj-EYK"/>
+                            <constraint firstItem="SsZ-zo-cMR" firstAttribute="top" secondItem="BNe-Tv-NtN" secondAttribute="bottom" constant="181" id="Ylk-8w-1bw"/>
                             <constraint firstItem="UDw-A4-HXZ" firstAttribute="top" secondItem="xJr-5Z-ZPU" secondAttribute="bottom" constant="20" id="aCX-Hq-aAT"/>
-                            <constraint firstItem="uC2-Oy-Ewy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UDw-A4-HXZ" secondAttribute="bottom" constant="20" id="bgG-8r-biM"/>
-                            <constraint firstItem="8uc-x1-38o" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="bjv-vT-Ygd"/>
-                            <constraint firstItem="b74-9M-nGe" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="dJ7-jl-Jbj"/>
-                            <constraint firstItem="9eb-7e-hQf" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="dom-GO-va0"/>
-                            <constraint firstItem="HO9-77-XoX" firstAttribute="leading" secondItem="9eb-7e-hQf" secondAttribute="leading" id="ees-xV-u40"/>
-                            <constraint firstItem="b74-9M-nGe" firstAttribute="top" secondItem="X9H-bV-hy5" secondAttribute="bottom" constant="8" id="evH-zt-Or7"/>
-                            <constraint firstItem="t85-kN-Xse" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="f3D-hS-Bwr"/>
-                            <constraint firstItem="m7x-tQ-8oz" firstAttribute="centerX" secondItem="Kif-jA-29n" secondAttribute="centerX" id="i1m-I3-yY3"/>
-                            <constraint firstItem="HO9-77-XoX" firstAttribute="top" secondItem="LNN-s3-SDa" secondAttribute="bottom" constant="8" id="iZd-e2-6Ut"/>
-                            <constraint firstItem="fE4-tc-maO" firstAttribute="leading" secondItem="cKK-AY-hTQ" secondAttribute="trailing" constant="30" id="j0P-dJ-1ri"/>
-                            <constraint firstItem="b74-9M-nGe" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="kKW-Oq-sgW"/>
-                            <constraint firstItem="HO9-77-XoX" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" multiplier="0.5" id="kRQ-5D-kR1"/>
-                            <constraint firstItem="cKK-AY-hTQ" firstAttribute="top" secondItem="TlB-TQ-W7d" secondAttribute="bottom" constant="8" id="kTD-AV-5ac"/>
-                            <constraint firstItem="LNN-s3-SDa" firstAttribute="top" secondItem="0ic-sX-vrf" secondAttribute="bottom" constant="8" id="kVU-rh-68e"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xJr-5Z-ZPU" secondAttribute="trailing" id="lLG-Au-eDD"/>
-                            <constraint firstItem="0ic-sX-vrf" firstAttribute="leading" secondItem="t85-kN-Xse" secondAttribute="trailing" constant="30" id="m5x-Cg-Hlq"/>
-                            <constraint firstItem="9eb-7e-hQf" firstAttribute="leading" secondItem="0ic-sX-vrf" secondAttribute="trailing" constant="30" id="nsq-C8-gCf"/>
-                            <constraint firstItem="HO9-77-XoX" firstAttribute="width" secondItem="TlB-TQ-W7d" secondAttribute="width" id="oSI-aL-iPZ"/>
-                            <constraint firstItem="51B-d5-ps1" firstAttribute="top" secondItem="HO9-77-XoX" secondAttribute="bottom" constant="40" id="qFH-3p-7zp"/>
-                            <constraint firstItem="0ic-sX-vrf" firstAttribute="top" secondItem="m7x-tQ-8oz" secondAttribute="bottom" constant="8" id="qMY-53-DZz"/>
-                            <constraint firstItem="t85-kN-Xse" firstAttribute="top" secondItem="8uc-x1-38o" secondAttribute="bottom" constant="8" id="rSf-uM-gZG"/>
                             <constraint firstItem="xJr-5Z-ZPU" firstAttribute="top" secondItem="BNe-Tv-NtN" secondAttribute="bottom" constant="43" id="rs7-NK-lZ7"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UDw-A4-HXZ" secondAttribute="leading" id="tY1-IV-vP0"/>
-                            <constraint firstItem="fE4-tc-maO" firstAttribute="centerX" secondItem="Kif-jA-29n" secondAttribute="centerX" id="uL7-n4-umP"/>
-                            <constraint firstItem="cKK-AY-hTQ" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="urq-Xd-W7Y"/>
-                            <constraint firstItem="8uc-x1-38o" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="xtZ-vq-Wmd"/>
-                            <constraint firstItem="0ic-sX-vrf" firstAttribute="height" secondItem="TlB-TQ-W7d" secondAttribute="height" id="yU5-4H-zi6"/>
-                            <constraint firstItem="b74-9M-nGe" firstAttribute="leading" secondItem="m7x-tQ-8oz" secondAttribute="trailing" constant="30" id="yvJ-Il-xvH"/>
+                            <constraint firstAttribute="trailing" secondItem="SsZ-zo-cMR" secondAttribute="trailing" constant="20" id="yUE-17-oPk"/>
                         </constraints>
                     </view>
                     <connections>
@@ -273,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EQ-Mu-CjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="-2118"/>
+            <point key="canvasLocation" x="2872" y="-2207"/>
         </scene>
         <!--Calling View Controller-->
         <scene sceneID="EqN-j7-u7b">
@@ -360,7 +360,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-Ll-8UO" userLabel="speaker-button" customClass="SipCallingButton">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-Ll-8UO" userLabel="transfer-button" customClass="SipCallingButton">
                                 <rect key="frame" x="102.5" y="343.5" width="70" height="70"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -515,20 +515,20 @@
                         <outlet property="statusLabel" destination="Xmp-RO-FFl" id="5dr-sR-9YD"/>
                         <outlet property="statusLabelTopConstraint" destination="zNv-dQ-xkI" id="ge8-rR-CsR"/>
                         <outlet property="transferButton" destination="dCO-Ll-8UO" id="Cs7-gs-s3U"/>
-                        <segue destination="n4B-SY-mqf" kind="presentation" identifier="SetupTransferSegue" id="mqM-GO-vhG"/>
                         <segue destination="gkX-qY-AIB" kind="presentation" identifier="ShowKeypadSegue" id="u9Q-tL-Gdw"/>
                         <segue destination="fpx-WN-oDc" kind="unwind" identifier="UnwindToVialerRootViewControllerSegue" unwindAction="unwindVialerRootViewController:" id="KJO-To-tPY"/>
+                        <segue destination="nmE-zF-ggY" kind="presentation" identifier="SetupTransferSegue" id="bwU-yo-HY0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ud2-F1-SSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fpx-WN-oDc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="624.79999999999995" y="-1007.0464767616193"/>
+            <point key="canvasLocation" x="630" y="-1008"/>
         </scene>
-        <!--Call Transfer-->
+        <!--Call transfer-->
         <scene sceneID="dzA-vc-gwf">
             <objects>
-                <viewController id="gjH-5U-15N" customClass="SetupCallTransferViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gjH-5U-15N" customClass="SetupCallTransferDialPadViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XvE-M2-U6h"/>
                         <viewControllerLayoutGuide type="bottom" id="cBN-Ff-T6S"/>
@@ -540,14 +540,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-4p-BmQ">
                                 <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upb-YF-eAJ">
-                                        <rect key="frame" x="8" y="14.666666666666673" width="163.66666666666666" height="20.666666666666671"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upb-YF-eAJ">
+                                        <rect key="frame" x="8" y="14.999999999999998" width="163.33333333333334" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-jc-nmv">
-                                        <rect key="frame" x="254.66666666666663" y="14.666666666666673" width="151.33333333333337" height="20.666666666666671"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-jc-nmv">
+                                        <rect key="frame" x="179.33333333333337" y="14.999999999999998" width="226.66666666666663" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -556,10 +556,11 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HpX-iP-0J6"/>
-                                    <constraint firstAttribute="trailing" secondItem="I6Q-jc-nmv" secondAttribute="trailing" constant="8" id="Z2H-jk-NZo"/>
                                     <constraint firstItem="I6Q-jc-nmv" firstAttribute="centerY" secondItem="e7f-4p-BmQ" secondAttribute="centerY" id="elA-0y-ZK8"/>
                                     <constraint firstItem="upb-YF-eAJ" firstAttribute="centerY" secondItem="e7f-4p-BmQ" secondAttribute="centerY" id="i31-oY-Lab"/>
+                                    <constraint firstItem="I6Q-jc-nmv" firstAttribute="leading" secondItem="upb-YF-eAJ" secondAttribute="trailing" constant="8" id="kWA-bw-cxN"/>
                                     <constraint firstItem="upb-YF-eAJ" firstAttribute="leading" secondItem="e7f-4p-BmQ" secondAttribute="leading" constant="8" id="oHc-PV-Qhy"/>
+                                    <constraint firstAttribute="trailing" secondItem="I6Q-jc-nmv" secondAttribute="trailing" constant="8" id="y4K-CF-kbo"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="re1-Gc-q4V" userLabel="Left filler">
@@ -589,225 +590,231 @@
                                     <outletCollection property="gestureRecognizers" destination="7XA-AR-Myl" appends="YES" id="yZ9-1s-RtL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBs-up-y6F" userLabel="1-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="334" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FsJ-vs-884" userLabel="Keypad container View">
+                                <rect key="frame" x="20" y="201" width="374" height="456"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="RLG-AU-Uxw" userLabel="Keypad">
+                                        <rect key="frame" x="43.333333333333343" y="0.0" width="287.33333333333326" height="456"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="VQr-vq-JWz">
+                                                <rect key="frame" x="0.0" y="0.0" width="287.33333333333331" height="79.333333333333329"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBs-up-y6F" userLabel="1-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button1"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="height" multiplier="1:1" id="4g2-Cg-sDl"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="85" id="vNj-6H-8YL"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="1"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="Nf6-Ck-xlJ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-Fl-Qu5" userLabel="2-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="ABC"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="SAT-Kc-Rov"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofT-FE-Anc" userLabel="3-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="DEF"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="sNf-0J-CY6"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="sAE-rj-uPK">
+                                                <rect key="frame" x="0.0" y="94.333333333333314" width="287.33333333333331" height="79"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-gx-bL3" userLabel="4-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="GHI"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="Ce9-ae-tsq"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEP-Bk-KAS" userLabel="5-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="JKL"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="cFo-xI-HZG"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-sN-XvB" userLabel="6-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="MNO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="d1U-zh-DGV"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oLE-kE-Dfn">
+                                                <rect key="frame" x="0.0" y="188.33333333333331" width="287.33333333333331" height="79.333333333333314"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-HO-t65" userLabel="7-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="PQRS"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="yMg-hh-QBm"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Bv-OIF" userLabel="8-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="TUV"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="LUL-OW-xES"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkA-Mj-NDd" userLabel="9-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="WXYZ"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="ddL-x3-sUa"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-qO-gMI">
+                                                <rect key="frame" x="0.0" y="282.66666666666669" width="287.33333333333331" height="79"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VN4-PJ-HuA" userLabel="*-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="68Q-US-sbZ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3i-XW-znd" userLabel="0-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
+                                                        <gestureRecognizers/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="0"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="+"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="l9b-gE-rsH"/>
+                                                            <outletCollection property="gestureRecognizers" destination="XyR-nG-P2u" appends="YES" id="SmW-Mq-lQN"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-Qk-6PL" userLabel="#-Button" customClass="NumberPadButton">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="PeZ-tj-fgg"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="cDL-J5-VSD">
+                                                <rect key="frame" x="0.0" y="376.66666666666663" width="287.33333333333331" height="79.333333333333314"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45r-Rs-lSK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-fS-OHu" userLabel="call-button">
+                                                        <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
+                                                        <state key="normal" image="acceptButton">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <state key="disabled" image="acceptButtonDisabled"/>
+                                                        <connections>
+                                                            <action selector="callButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="8pL-Qf-veP"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73T-79-Iub">
+                                                        <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="height" multiplier="1:1" id="Un1-uy-hhI"/>
-                                    <constraint firstAttribute="width" priority="998" constant="70" id="vCR-rF-yCM"/>
+                                    <constraint firstItem="RLG-AU-Uxw" firstAttribute="height" secondItem="FsJ-vs-884" secondAttribute="height" priority="999" id="C7e-kA-LBN"/>
+                                    <constraint firstItem="RLG-AU-Uxw" firstAttribute="centerX" secondItem="FsJ-vs-884" secondAttribute="centerX" id="f7K-j2-tod"/>
+                                    <constraint firstItem="RLG-AU-Uxw" firstAttribute="bottom" secondItem="FsJ-vs-884" secondAttribute="bottom" id="kpF-TG-V1o"/>
+                                    <constraint firstItem="RLG-AU-Uxw" firstAttribute="width" secondItem="FsJ-vs-884" secondAttribute="width" id="rF8-hE-9CN"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="1"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="Nf6-Ck-xlJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-gx-bL3" userLabel="4-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="412" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button4"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="4"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="GHI"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="Ce9-ae-tsq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEP-Bk-KAS" userLabel="5-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="412" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button5"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="5"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="JKL"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="cFo-xI-HZG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-HO-t65" userLabel="7-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="490" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button7"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="7"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="PQRS"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="yMg-hh-QBm"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Bv-OIF" userLabel="8-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="490" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button8"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="8"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="TUV"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="LUL-OW-xES"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkA-Mj-NDd" userLabel="9-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="490" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button9"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="9"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="WXYZ"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="ddL-x3-sUa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VN4-PJ-HuA" userLabel="*-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="72" y="568" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button*"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="68Q-US-sbZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3i-XW-znd" userLabel="0-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="568" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button0"/>
-                                <gestureRecognizers/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="0"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="+"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="l9b-gE-rsH"/>
-                                    <outletCollection property="gestureRecognizers" destination="XyR-nG-P2u" appends="YES" id="SmW-Mq-lQN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-sN-XvB" userLabel="6-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="412" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button6"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="6"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="MNO"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="d1U-zh-DGV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofT-FE-Anc" userLabel="3-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="334" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button3"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="3"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="DEF"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="sNf-0J-CY6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-fS-OHu" userLabel="hangup-button">
-                                <rect key="frame" x="172" y="646" width="70" height="70"/>
-                                <state key="normal" image="acceptButton">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <state key="disabled" image="acceptButtonDisabled"/>
-                                <connections>
-                                    <action selector="callButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="8pL-Qf-veP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0g-Fl-Qu5" userLabel="2-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="172" y="334" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button2"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="2"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="ABC"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="SAT-Kc-Rov"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-Qk-6PL" userLabel="#-Button" customClass="NumberPadButton">
-                                <rect key="frame" x="272" y="568" width="70" height="70"/>
-                                <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.dialer.button#"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="keypadButtonPressed:" destination="gjH-5U-15N" eventType="touchUpInside" id="PeZ-tj-fgg"/>
-                                </connections>
-                            </button>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="rF8-hE-9CN"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ofT-FE-Anc" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="0d8-37-9qJ"/>
-                            <constraint firstItem="pXZ-HO-t65" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="2mr-fc-3Wv"/>
-                            <constraint firstItem="oRn-Qk-6PL" firstAttribute="top" secondItem="ZkA-Mj-NDd" secondAttribute="bottom" constant="8" id="3Qt-gj-moh"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="bottom" secondItem="re1-Gc-q4V" secondAttribute="bottom" id="46r-fX-lRV"/>
-                            <constraint firstItem="oRn-Qk-6PL" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="478-jn-tPM"/>
-                            <constraint firstItem="vKa-Bv-OIF" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="5dQ-30-PDU"/>
-                            <constraint firstItem="E0g-Fl-Qu5" firstAttribute="top" secondItem="IBs-up-y6F" secondAttribute="top" id="6O8-yW-IU6"/>
-                            <constraint firstItem="G3i-XW-znd" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="6V2-dK-tVo"/>
-                            <constraint firstItem="ofT-FE-Anc" firstAttribute="leading" secondItem="E0g-Fl-Qu5" secondAttribute="trailing" constant="30" id="7Ye-Cf-YA5"/>
-                            <constraint firstItem="G3i-XW-znd" firstAttribute="leading" secondItem="VN4-PJ-HuA" secondAttribute="trailing" constant="30" id="7f7-bk-Gpu"/>
-                            <constraint firstItem="vKa-Bv-OIF" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="7kz-it-CBg"/>
-                            <constraint firstItem="pXZ-HO-t65" firstAttribute="top" secondItem="GIv-gx-bL3" secondAttribute="bottom" constant="8" id="8O4-qq-ck3"/>
-                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="leading" secondItem="Q3T-G4-7cy" secondAttribute="leadingMargin" constant="-20" id="9Ov-wa-bnh"/>
-                            <constraint firstItem="VN4-PJ-HuA" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="9ea-to-ir0"/>
-                            <constraint firstItem="ZkA-Mj-NDd" firstAttribute="leading" secondItem="vKa-Bv-OIF" secondAttribute="trailing" constant="30" id="AVN-Ch-qAe"/>
-                            <constraint firstItem="hEP-Bk-KAS" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="B8P-Ly-CN4"/>
-                            <constraint firstItem="oRn-Qk-6PL" firstAttribute="leading" secondItem="G3i-XW-znd" secondAttribute="trailing" constant="30" id="BnY-dD-geP"/>
-                            <constraint firstItem="hEP-Bk-KAS" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="CGH-n8-Y06"/>
+                            <constraint firstItem="FsJ-vs-884" firstAttribute="leading" secondItem="Q3T-G4-7cy" secondAttribute="leading" constant="20" id="5v5-xV-IGE"/>
+                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="leading" secondItem="Q3T-G4-7cy" secondAttribute="leading" id="Bmr-Zn-jvD"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="leading" secondItem="re1-Gc-q4V" secondAttribute="trailing" constant="3" id="FBB-Cg-xfH"/>
-                            <constraint firstItem="cBN-Ff-T6S" firstAttribute="top" secondItem="6Da-fS-OHu" secondAttribute="bottom" constant="20" id="HT3-PL-d0I"/>
-                            <constraint firstItem="hEP-Bk-KAS" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="IDJ-5g-whi"/>
-                            <constraint firstItem="IBs-up-y6F" firstAttribute="height" secondItem="E0g-Fl-Qu5" secondAttribute="height" id="IJG-bU-qpa"/>
-                            <constraint firstItem="hEP-Bk-KAS" firstAttribute="top" secondItem="E0g-Fl-Qu5" secondAttribute="bottom" constant="8" id="K36-1T-PcE"/>
-                            <constraint firstItem="IBs-up-y6F" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="height" multiplier="1:1" id="K75-HZ-4Th"/>
+                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="top" secondItem="XvE-M2-U6h" secondAttribute="bottom" id="IFr-db-29Q"/>
                             <constraint firstItem="2xz-P9-kDV" firstAttribute="leading" secondItem="5gZ-PC-qXQ" secondAttribute="trailing" constant="3" id="LGy-w9-f5r"/>
-                            <constraint firstItem="G3i-XW-znd" firstAttribute="top" secondItem="vKa-Bv-OIF" secondAttribute="bottom" constant="8" id="LPL-XP-NDR"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="bottom" secondItem="2xz-P9-kDV" secondAttribute="bottom" id="Lra-Lb-84J"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="e7f-4p-BmQ" secondAttribute="trailing" constant="-20" id="NJb-hs-I5c"/>
-                            <constraint firstItem="9gP-sN-XvB" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="QVN-Wy-4g9"/>
-                            <constraint firstItem="6Da-fS-OHu" firstAttribute="top" secondItem="G3i-XW-znd" secondAttribute="bottom" constant="8" id="THP-9x-bEn"/>
-                            <constraint firstItem="9gP-sN-XvB" firstAttribute="leading" secondItem="hEP-Bk-KAS" secondAttribute="trailing" constant="30" id="TQ9-NB-hFT"/>
-                            <constraint firstItem="6Da-fS-OHu" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="TfT-NZ-zvt"/>
+                            <constraint firstAttribute="trailing" secondItem="e7f-4p-BmQ" secondAttribute="trailing" id="SHU-Pv-ZTe"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="top" secondItem="re1-Gc-q4V" secondAttribute="top" id="U1T-D1-Q70"/>
-                            <constraint firstItem="ZkA-Mj-NDd" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="Ui1-5L-nBB"/>
-                            <constraint firstItem="GIv-gx-bL3" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="UxL-mz-fSS"/>
-                            <constraint firstItem="GIv-gx-bL3" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="WKv-0o-OHn"/>
-                            <constraint firstItem="vKa-Bv-OIF" firstAttribute="top" secondItem="hEP-Bk-KAS" secondAttribute="bottom" constant="8" id="Xwg-Ft-YEf"/>
-                            <constraint firstItem="ofT-FE-Anc" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="Ygb-sM-46K"/>
-                            <constraint firstItem="ZkA-Mj-NDd" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="Zil-DS-bCE"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="top" secondItem="2xz-P9-kDV" secondAttribute="top" id="ZpR-Sw-OLa"/>
-                            <constraint firstItem="6Da-fS-OHu" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="aTh-In-sYO"/>
-                            <constraint firstItem="6Da-fS-OHu" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="arl-zy-MrE"/>
-                            <constraint firstItem="G3i-XW-znd" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="bVM-PW-Jfh"/>
-                            <constraint firstItem="ZkA-Mj-NDd" firstAttribute="top" secondItem="9gP-sN-XvB" secondAttribute="bottom" constant="8" id="cB8-aZ-x4u"/>
-                            <constraint firstItem="E0g-Fl-Qu5" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="dAH-XT-kwG"/>
-                            <constraint firstItem="e7f-4p-BmQ" firstAttribute="top" secondItem="XvE-M2-U6h" secondAttribute="bottom" id="dXt-yH-WB2"/>
+                            <constraint firstAttribute="trailing" secondItem="FsJ-vs-884" secondAttribute="trailing" constant="20" id="a0e-ge-npP"/>
+                            <constraint firstItem="FsJ-vs-884" firstAttribute="top" secondItem="XvE-M2-U6h" secondAttribute="bottom" constant="137" id="bgU-4n-IFA"/>
                             <constraint firstItem="5gZ-PC-qXQ" firstAttribute="top" secondItem="e7f-4p-BmQ" secondAttribute="bottom" constant="8" id="dmQ-MN-rAk"/>
-                            <constraint firstItem="G3i-XW-znd" firstAttribute="bottom" secondItem="VN4-PJ-HuA" secondAttribute="bottom" id="ewT-nU-evM"/>
                             <constraint firstAttribute="leadingMargin" secondItem="re1-Gc-q4V" secondAttribute="leading" id="gZJ-QD-LUT"/>
-                            <constraint firstItem="E0g-Fl-Qu5" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="hEm-9L-QWW"/>
-                            <constraint firstItem="VN4-PJ-HuA" firstAttribute="top" secondItem="pXZ-HO-t65" secondAttribute="bottom" constant="8" id="hTd-2k-WO8"/>
-                            <constraint firstItem="oRn-Qk-6PL" firstAttribute="bottom" secondItem="VN4-PJ-HuA" secondAttribute="bottom" id="hdJ-DE-uyr"/>
-                            <constraint firstItem="9gP-sN-XvB" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="htx-eC-cht"/>
-                            <constraint firstItem="G3i-XW-znd" firstAttribute="width" secondItem="IBs-up-y6F" secondAttribute="width" id="jte-zW-3qQ"/>
-                            <constraint firstItem="E0g-Fl-Qu5" firstAttribute="top" secondItem="ofT-FE-Anc" secondAttribute="top" id="kVW-1o-ENq"/>
-                            <constraint firstItem="VN4-PJ-HuA" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="kw2-N9-GkC"/>
-                            <constraint firstItem="hEP-Bk-KAS" firstAttribute="leading" secondItem="GIv-gx-bL3" secondAttribute="trailing" constant="30" id="n2P-B8-yEo"/>
-                            <constraint firstItem="9gP-sN-XvB" firstAttribute="top" secondItem="ofT-FE-Anc" secondAttribute="bottom" constant="8" id="n62-5b-b1F"/>
+                            <constraint firstItem="cBN-Ff-T6S" firstAttribute="top" secondItem="FsJ-vs-884" secondAttribute="bottom" constant="30" id="ncU-c1-Le4"/>
                             <constraint firstItem="2xz-P9-kDV" firstAttribute="width" secondItem="re1-Gc-q4V" secondAttribute="width" id="nlr-Y2-dgz"/>
-                            <constraint firstItem="E0g-Fl-Qu5" firstAttribute="leading" secondItem="IBs-up-y6F" secondAttribute="trailing" constant="30" id="sIM-Gp-dug"/>
-                            <constraint firstItem="GIv-gx-bL3" firstAttribute="top" secondItem="IBs-up-y6F" secondAttribute="bottom" constant="8" id="tHh-FQ-PA3"/>
-                            <constraint firstItem="vKa-Bv-OIF" firstAttribute="leading" secondItem="pXZ-HO-t65" secondAttribute="trailing" constant="30" id="tXG-lD-yX9"/>
-                            <constraint firstItem="oRn-Qk-6PL" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="uT8-Ls-5eF"/>
-                            <constraint firstItem="vKa-Bv-OIF" firstAttribute="centerX" secondItem="Q3T-G4-7cy" secondAttribute="centerX" id="veN-ch-teN"/>
-                            <constraint firstItem="pXZ-HO-t65" firstAttribute="height" secondItem="IBs-up-y6F" secondAttribute="height" id="xJU-Ux-XLk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2xz-P9-kDV" secondAttribute="trailing" id="yLD-FW-Oyk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Call Transfer" id="uYD-Ra-2f5">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EZ0-CF-aS4">
+                    <navigationItem key="navigationItem" title="Call transfer" id="Zq1-qL-Luw">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="G8C-Kf-Vyr">
                             <connections>
-                                <action selector="backButtonPressed:" destination="gjH-5U-15N" id="fHA-Vt-Z7v"/>
+                                <action selector="backButtonPressed:" destination="gjH-5U-15N" id="wG8-Fr-l2b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -834,12 +841,12 @@
                 </pongPressGestureRecognizer>
                 <exit id="Fig-1Q-8Lj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2293" y="-1007"/>
+            <point key="canvasLocation" x="3366.666666666667" y="-1323.913043478261"/>
         </scene>
         <!--Call Transfer-->
         <scene sceneID="opG-bd-MXL">
             <objects>
-                <viewController id="9vo-dM-YYf" customClass="SecondCallViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="9vo-dM-YYf" customClass="SecondCallViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nwe-Ug-vDD"/>
                         <viewControllerLayoutGuide type="bottom" id="IKT-zP-YhF"/>
@@ -852,13 +859,13 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall numberLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-El-Y0k">
-                                        <rect key="frame" x="8" y="14.666666666666673" width="189" height="20.666666666666671"/>
+                                        <rect key="frame" x="8" y="14.666666666666671" width="189" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currentCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMr-4h-sSq">
-                                        <rect key="frame" x="229" y="14.666666666666673" width="177" height="20.666666666666671"/>
+                                        <rect key="frame" x="229" y="14.666666666666671" width="177" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1111,12 +1118,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzf-VT-iVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="10U-cZ-ZuY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3186.4000000000001" y="-1007.0464767616193"/>
+            <point key="canvasLocation" x="4239" y="-1008"/>
         </scene>
         <!--Call Transfer-->
         <scene sceneID="Bfn-Bi-DfE">
             <objects>
-                <viewController id="Lfl-9a-GUJ" customClass="TransferInProgressViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Lfl-9a-GUJ" customClass="TransferInProgressViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eW7-IQ-kDl"/>
                         <viewControllerLayoutGuide type="bottom" id="aqX-RA-5Sl"/>
@@ -1198,25 +1205,162 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9T-Dx-5Hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4160" y="-1007"/>
+            <point key="canvasLocation" x="5066.666666666667" y="-1007.608695652174"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Azu-6w-uwJ">
+        <!--Contacts-->
+        <scene sceneID="So9-Of-KEw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n4B-SY-mqf" sceneMemberID="viewController">
+                <viewController title="Contacts" id="OJG-uy-AEd" customClass="SetupCallTransferContactsViewController" customModule="Vialer" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aPQ-bT-j7o"/>
+                        <viewControllerLayoutGuide type="bottom" id="bdq-wz-ZPK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S08-HM-mXv" userLabel="Gradient View" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcd-Hv-zV1">
+                                <rect key="frame" x="0.0" y="64" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="firstCall statusLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfP-Zh-QBL">
+                                        <rect key="frame" x="180" y="14.666666666666671" width="226" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstCall numberLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlt-sc-72V">
+                                        <rect key="frame" x="8" y="14.666666666666671" width="164" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="cfP-Zh-QBL" firstAttribute="leading" secondItem="Qlt-sc-72V" secondAttribute="trailing" constant="8" id="8ff-AO-wqP"/>
+                                    <constraint firstItem="Qlt-sc-72V" firstAttribute="leading" secondItem="gcd-Hv-zV1" secondAttribute="leading" constant="8" id="BKe-l9-8Mv"/>
+                                    <constraint firstItem="cfP-Zh-QBL" firstAttribute="centerY" secondItem="gcd-Hv-zV1" secondAttribute="centerY" id="IZB-ww-rfc"/>
+                                    <constraint firstAttribute="trailing" secondItem="cfP-Zh-QBL" secondAttribute="trailing" constant="8" id="XXd-Ve-Aw8"/>
+                                    <constraint firstItem="Qlt-sc-72V" firstAttribute="centerY" secondItem="gcd-Hv-zV1" secondAttribute="centerY" id="teR-cP-802"/>
+                                    <constraint firstAttribute="height" constant="50" id="uzQ-2S-4OJ"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="deH-4E-XWO">
+                                <rect key="frame" x="0.0" y="114" width="414" height="529"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactsTableViewCell" textLabel="8gx-cV-qCK" style="IBUITableViewCellStyleDefault" id="gGe-8e-wPs" customClass="TransferContactTableViewCell" customModule="Vialer">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gGe-8e-wPs" id="e05-kq-PHz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8gx-cV-qCK">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gcd-Hv-zV1" secondAttribute="trailing" id="2tI-W1-SCL"/>
+                            <constraint firstItem="gcd-Hv-zV1" firstAttribute="leading" secondItem="S08-HM-mXv" secondAttribute="leading" id="6ju-WX-sJi"/>
+                            <constraint firstItem="deH-4E-XWO" firstAttribute="top" secondItem="gcd-Hv-zV1" secondAttribute="bottom" id="8s1-yb-LxY"/>
+                            <constraint firstItem="deH-4E-XWO" firstAttribute="trailing" secondItem="gcd-Hv-zV1" secondAttribute="trailing" id="KjQ-SE-cjM"/>
+                            <constraint firstItem="bdq-wz-ZPK" firstAttribute="top" secondItem="deH-4E-XWO" secondAttribute="bottom" id="Qhb-gc-atk"/>
+                            <constraint firstItem="deH-4E-XWO" firstAttribute="leading" secondItem="gcd-Hv-zV1" secondAttribute="leading" id="ZfS-no-2aE"/>
+                            <constraint firstItem="gcd-Hv-zV1" firstAttribute="top" secondItem="aPQ-bT-j7o" secondAttribute="bottom" id="ovd-90-Ib9"/>
+                        </constraints>
+                    </view>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="776-TZ-Wz9">
+                    <navigationItem key="navigationItem" title="Call transfer" id="v2x-E3-dtS">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="AaQ-U1-SzN">
+                            <connections>
+                                <action selector="cancelPressed:" destination="OJG-uy-AEd" id="vs9-fp-8fk"/>
+                                <segue destination="PVt-rZ-XRt" kind="unwind" identifier="UnwindToFirstCallSegue" unwindAction="unwindToFirstCallSegue:" id="EZE-5S-8HS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="firstCallNumberLabel" destination="Qlt-sc-72V" id="I5I-cC-yZ4"/>
+                        <outlet property="firstCallStatusLabel" destination="cfP-Zh-QBL" id="JAS-ko-kiy"/>
+                        <outlet property="tableView" destination="deH-4E-XWO" id="1hK-uv-8up"/>
+                        <segue destination="9vo-dM-YYf" kind="show" identifier="SecondCallActiveSegue" id="kCy-ed-6ie"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6qz-xY-1Ht" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="PVt-rZ-XRt" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3366.666666666667" y="-610.59782608695662"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="14E-GS-WOb">
+            <objects>
+                <tabBarController id="nmE-zF-ggY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="LJ5-QR-2VH"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KK0-XV-8WR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Mud-r7-iUA" kind="relationship" relationship="viewControllers" id="6iv-dX-QA7"/>
+                        <segue destination="2Gc-Ki-zeb" kind="relationship" relationship="viewControllers" id="suE-BE-d86"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a3W-Ui-g96" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588" y="-1008"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="IIh-I8-Eu6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mud-r7-iUA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contacts" image="tab-contact" id="KqJ-56-jOU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vix-Ba-bhc">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="gjH-5U-15N" kind="relationship" relationship="rootViewController" id="f5K-2b-cmM"/>
+                        <segue destination="OJG-uy-AEd" kind="relationship" relationship="rootViewController" id="NDv-rR-tBQ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AFU-CF-Imm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fWn-gw-iWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1481" y="-1007"/>
+            <point key="canvasLocation" x="2461" y="-609"/>
+        </scene>
+        <!--Keypad-->
+        <scene sceneID="ekh-BO-1wD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Gc-Ki-zeb" userLabel="Keypad" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Keypad" image="tab-keypad" id="2FA-uM-dis" userLabel="Keypad"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KdQ-vA-Paa">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gjH-5U-15N" kind="relationship" relationship="rootViewController" id="Udd-2d-uvM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6V1-Zb-kjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2461" y="-1323"/>
         </scene>
     </scenes>
     <resources>
@@ -1227,8 +1371,11 @@
         <image name="keypad-back" width="23" height="16"/>
         <image name="keypad-back-highlighted" width="23" height="16"/>
         <image name="successfullTransfer" width="183" height="183"/>
+        <image name="tab-contact" width="27" height="28"/>
+        <image name="tab-keypad" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wPg-Sy-wa9"/>
         <segue reference="u9Q-tL-Gdw"/>
     </inferredMetricsTieBreakers>
 </document>

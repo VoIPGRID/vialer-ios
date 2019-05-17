@@ -188,7 +188,8 @@
 
     [self.settingsViewController didChangeSwitch:mockSwitch];
 
-    OCMVerify([mockTableView reloadSections:[OCMArg any] withRowAnimation:UITableViewRowAnimationAutomatic]);
+    OCMVerify([mockTableView reloadData]);
+    
     [mockSystemUser stopMocking];
     [mockSwitch stopMocking];
     [mockTableView stopMocking];

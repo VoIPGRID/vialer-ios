@@ -141,6 +141,16 @@ platform :ios do
     sync_development_certs
     sync_appstore_certs
   end
+  
+  lane :refresh_dsyms do              # for vialer run on console: fastlane refresh_dsyms --env vialer
+      download_dsyms(                 # Download dSYM files from iTunnesConnect
+         username: ENV["ITC_USERNAME"],
+         team_name: ENV["TEAM_NAME"],
+         app_identifier: ENV["APP_IDENTIFIER"]
+      )
+      upload_symbols_to_crashlytics   # Upload them to Crashlytics
+      clean_build_artifacts           # Delete the local dSYM files
+  end
 
   after_all do |lane|
     clean_build_artifacts()

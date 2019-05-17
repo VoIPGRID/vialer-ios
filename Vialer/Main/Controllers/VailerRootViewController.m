@@ -4,7 +4,6 @@
 //
 
 #import "VailerRootViewController.h"
-
 #import "Middleware.h"
 #import "Notifications-Bridging-Header.h"
 #import "SIPIncomingCallViewController.h"
@@ -20,10 +19,12 @@ static NSString * const VialerRootViewControllerShowSIPCallingViewSegue = @"Show
 static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"ShowTwoStepCallingViewSegue";
 
 @interface VailerRootViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *launchImage;
 @property (nonatomic) BOOL willPresentCallingViewController;
 @property (weak, nonatomic) VSLCall *activeCall;
 @property(weak, nonatomic) NSString *twoStepNumberToCall;
+@property (weak, nonatomic) IBOutlet GradientView *backgroundGrandientView;
+@property (weak, nonatomic) IBOutlet UIView *backgroundSolidColorView;
+
 @end
 
 @implementation VailerRootViewController
@@ -98,11 +99,10 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupLayout];
+    self.backgroundSolidColorView.backgroundColor = [[ColorsConfiguration shared] colorForKey:ColorsBackgroundGradientStart];
     if ([VialerSIPLib callKitAvailable]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
-
     } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:AppDelegateIncomingBackgroundCallAcceptedNotification object:nil];
@@ -120,42 +120,25 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    // Prevent segue if we are in the process of showing an incoming view controller.
-    if (!self.willPresentCallingViewController) {
-        if ([self shouldPresentLoginViewController]) {
-            [self presentViewController:self.loginViewController animated:NO completion:nil];
-        } else {
-            [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
-        }
-    }
+    // Animate background from solid to gradient color
+    [UIView animateWithDuration:1 animations:^{
+        [self.backgroundGrandientView setAlpha:1];
+     }
+     completion:^(BOOL finished){
+         // Prevent segue if we are in the process of showing an incoming view controller.
+         if (!self.willPresentCallingViewController) {
+             if ([self shouldPresentLoginViewController]) {
+                 [self presentViewController:self.loginViewController animated:NO completion:nil];
+             } else {
+                 [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
+             }
+         }
+         
+     }];
 }
 
-- (void)setupLayout {
-    NSString *launchImage;
-    CGFloat screenNativeBoundsHeight = [UIScreen mainScreen].nativeBounds.size.height;
-    
-    if(screenNativeBoundsHeight == 1792.0f) {
-        launchImage = @"Static-LaunchImage-828w-1792h";  // iphone-xr
-    }
-    else if(screenNativeBoundsHeight == 2688.0f) {
-        launchImage = @"Static-LaunchImage-1242w-2688h"; // iphone-xs max
-    }
-    else if(screenNativeBoundsHeight == 2436.0f) {
-        launchImage = @"Static-LaunchImage-1125w-2436h"; // iphone-x/xs
-    }
-    else if(screenNativeBoundsHeight == 2208.0f || screenNativeBoundsHeight == 1920.0f) {
-        launchImage = @"LaunchImage-800-Portrait-736h"; // iphone-6plus/7plus/8plus with old name conversion like the rest cases below: https://stackoverflow.com/questions/33120932/how-to-get-the-right-launch-image-in-ios9-programmatically/33122807#33122807
-    }
-    else if(screenNativeBoundsHeight == 1334.0f) {
-        launchImage = @"LaunchImage-800-667h";          // iphone-6/7/8
-    }
-    else if(screenNativeBoundsHeight == 1136.0f){
-        launchImage = @"LaunchImage-700-568h";          // iphone-5/SE
-    } else {
-        launchImage = @"LaunchImage-700";               // iphone-4/4s
-    }
-    self.launchImage.image = [UIImage imageNamed:launchImage];
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - properties
@@ -245,19 +228,23 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)showSipCallingViewOrIncomingCallNotification:(NSNotification *)notification {
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
-        self.willPresentCallingViewController = YES;
-        self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
         if (![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
             ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
+            self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
+                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
             }];
         } else if (notification.name == AppDelegateIncomingCallNotification) {
+            self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
+                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:self];
             }];
         } else if (notification.name == AppDelegateIncomingBackgroundCallAcceptedNotification) {
+            self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
+                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
                 [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
             }];
         }

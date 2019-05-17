@@ -4,7 +4,7 @@
 //
 
 #import "PhoneNumberUtils.h"
-
+#import "Vialer-Swift.h"
 #import "NSString+Mobile.h"
 
 @implementation PhoneNumberUtils

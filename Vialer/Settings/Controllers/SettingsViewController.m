@@ -323,13 +323,7 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
             sender.on = NO;
             [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
         } else {
-            // Account was retrieved, show VoIP Acount row.
-            if (sender.isOn) {
-                [self.tableView reloadData];
-            } else {
-                NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerVoIPAccountSection];
-                [self.tableView reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
+            [self.tableView reloadData];
         }
     }];
 }

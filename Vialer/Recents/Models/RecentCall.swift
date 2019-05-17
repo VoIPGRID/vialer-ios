@@ -57,7 +57,7 @@ final class RecentCall: NSManagedObject {
             let id = dictionary["id"] as? Int64
             else {
                 return nil
-        }
+            }
 
         // Check if there is already a call in Core Data given the id.
         let predicate = RecentCall.predicate(format: "%K == %lld", #keyPath(callID), id)
@@ -72,18 +72,17 @@ final class RecentCall: NSManagedObject {
             call.inbound = direction == "inbound"
             call.sourceNumber = sourceNumber
 
-            // Check if number is a match with addressbook.
+            // Check if the phone number is in the addressbook and extract contact information.
             let phoneNumberToSearch = call.inbound ? sourceNumber : destinationNumber
             let digits = PhoneNumberUtils.removePrefix(fromPhoneNumber: phoneNumberToSearch)
             if let phoneNumber = ContactModel.defaultModel.phoneNumbersToContacts[digits] {
                 call.displayName = phoneNumber.callerName
                 call.callerRecordID = phoneNumber.contactIdentifier
                 call.phoneType = phoneNumber.type
-
-            // Set name.
             } else if call.suppressed {
                 call.displayName = NSLocalizedString("No Caller ID", comment: "No Caller ID")
             }
+            
             if call.displayName == nil || call.displayName == "" {
                 if let name = callerID.firstMatch(for: "\"(.*?)\""), name != ""  {
                     call.displayName = name
@@ -125,17 +124,34 @@ extension RecentCall: Managed {
 extension RecentCall {
 
     /// Fetch all calls.
-    static let all = Resource<[JSONDictionary]>(path: "/cdr/record/", parameters: ["limit": 50], parseJSON: { json in
+    static let allCalls = Resource<[JSONDictionary]>(path: "/cdr/record/", parameters: ["limit": 50], parseJSON: { json in
         guard let dictionaries = json["objects"] as? [JSONDictionary] else { return nil }
         return dictionaries
     })
+    
+    // Fetch personal calls.
+    static let myCalls = Resource<[JSONDictionary]>(path: "/cdr/record/personalized/", parameters: ["limit": 50], parseJSON: { json in
+        guard let dictionaries = json["objects"] as? [JSONDictionary] else { return nil }
+        return dictionaries
+    })
+    
 
-    /// Fetch all calls from a given date.
+    /// Fetch all calls since a given date.
     ///
     /// - Parameter date: call need to be newer than this date.
     /// - Returns: RecentCall Resource.
-    static func allSince(date: Date) -> Resource<[JSONDictionary]> {
-        var resource = RecentCall.all
+    static func allCallsSince(date: Date) -> Resource<[JSONDictionary]> {
+        var resource = RecentCall.allCalls
+        resource.add(parameters: ["call_date__gte": date.apiFormatted24hCET])
+        return resource
+    }
+    
+    /// Fetch my calls since a given date.
+    ///
+    /// - Parameter date: call need to be newer than this date.
+    /// - Returns: RecentCall Resource.
+    static func myCallsSince(date: Date) -> Resource<[JSONDictionary]> {
+        var resource = RecentCall.myCalls
         resource.add(parameters: ["call_date__gte": date.apiFormatted24hCET])
         return resource
     }

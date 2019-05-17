@@ -35,6 +35,8 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     fileprivate var sipChanged: NotificationToken?
 
     var contactModel = ContactModel.defaultModel
+    var onlyMyCalls = false
+    var onlyMissedCalls = false
 
     private lazy var mainContext: NSManagedObjectContext = {
         return CoreDataStackHelper.instance.coreDataStack.mainContext
@@ -67,11 +69,19 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     // MARK: - Internal state
     var showTitleImage = false
     var phoneNumberToCall: String!
+    
+    // Observer that listens to logout actions.
+    private var userLogout: NotificationToken? = nil
 
     // MARK: - Initialisation
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
+        
+        // When the user logs out, remove all calls.
+        userLogout = NotificationCenter.default.addObserver(descriptor: SystemUser.logoutNotification) { _ in
+            self.callManager.deleteRecentCalls()
+        }
     }
 
     // MARK: - Outlets
@@ -106,6 +116,7 @@ extension RecentsViewController {
             self?.updateReachabilityBar()
         }
         updateReachabilityBar()
+        callManager.deleteRecentCalls()
         do {
             try fetchedResultController.performFetch()
         } catch let error as NSError {
@@ -117,7 +128,7 @@ extension RecentsViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
-        tableView.reloadData()
+        setPredicate()
         refreshRecents()
         updateReachabilityBar()
     }
@@ -130,12 +141,14 @@ extension RecentsViewController {
     }
 
     @IBAction func filterControlTapped(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 1 {
-            fetchedResultController.fetchRequest.predicate = NSPredicate(format: "duration == 0 AND inbound == YES")
-        } else {
-            fetchedResultController.fetchRequest.predicate = nil
-        }
-
+        onlyMyCalls = sender.selectedSegmentIndex == 1
+        callManager.deleteRecentCalls()
+        refreshRecents()
+    }
+    
+    @IBAction func switchToggled(sender: UISwitch) {
+        onlyMissedCalls = sender.isOn
+        setPredicate()
         do {
             try fetchedResultController.performFetch()
             tableView.reloadData()
@@ -223,6 +236,7 @@ extension RecentsViewController {
     }
 
     @objc fileprivate func refresh(control: UIRefreshControl) {
+        setPredicate()
         refreshRecents()
     }
 
@@ -230,11 +244,13 @@ extension RecentsViewController {
         guard !callManager.reloading else {
             return
         }
+        
         refreshControl.beginRefreshing()
         DispatchQueue.global(qos: .userInteractive).async {
-            self.callManager.getLatestRecentCalls { fetchError in
+            self.callManager.getLatestRecentCalls(onlyMine: self.onlyMyCalls) { fetchError in
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
+                    
                     if let error = fetchError, error == .fetchNotAllowed {
                         let alert = UIAlertController(title: NSLocalizedString("Not allowed", comment: "Not allowed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
                         self.present(alert, animated: true, completion: nil)
@@ -264,6 +280,16 @@ extension RecentsViewController {
             UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
                 self.view.layoutIfNeeded()
             }
+        }
+    }
+    
+    fileprivate func setPredicate() {
+        if onlyMissedCalls {
+            // Filter the list to show only missed calls.
+            fetchedResultController.fetchRequest.predicate = NSPredicate(format: "duration == 0 AND inbound == YES")
+        } else {
+            // Disable the filter on the list.
+            fetchedResultController.fetchRequest.predicate = nil
         }
     }
 }
@@ -342,16 +368,25 @@ extension RecentsViewController : NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         // If we're showing 1 cell because of error, we need to reload the complete table.
         guard tableView(tableView, numberOfRowsInSection: 0) > 1 else { return }
+        
         switch type {
         case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
+            if let newIndex = newIndexPath {
+                tableView.insertRows(at: [newIndex], with: .fade)
+            }
         case .update:
-            _ = recentCell(indexPath: indexPath!)
+            if let index = indexPath {
+                _ = recentCell(indexPath: index)
+            }
         case .move:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
+            if let index = indexPath, let newIndex = newIndexPath {
+                tableView.deleteRows(at: [index], with: .fade)
+                tableView.insertRows(at: [newIndex], with: .fade)
+            }
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
+            if let index = indexPath {
+                tableView.deleteRows(at: [index], with: .fade)
+            }
         }
     }
 
@@ -365,7 +400,7 @@ extension RecentsViewController : NSFetchedResultsControllerDelegate {
     }
 }
 
-// MARK: - Cell configuration
+// MARK: - Cell / table configuration
 extension RecentsViewController {
     fileprivate func failedLoadingRecentsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(cellIdentifier: .errorText, for: indexPath)
@@ -379,13 +414,13 @@ extension RecentsViewController {
     }
 
     fileprivate func noRecentsCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = dequeueReusableCell(cellIdentifier: .errorText, for: indexPath)
         let noRecents: String
-        if filterControl.selectedSegmentIndex == 0 {
+        if onlyMissedCalls {
             noRecents = NSLocalizedString("No recent calls", comment: "No recent calls")
         } else {
             noRecents = NSLocalizedString("No missed calls", comment: "No missed calls")
         }
-        let cell = dequeueReusableCell(cellIdentifier: .errorText, for: indexPath)
         cell.textLabel?.text = noRecents
         return cell
     }

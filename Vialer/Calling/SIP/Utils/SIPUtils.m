@@ -136,7 +136,7 @@
         }
     }
 
-    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser] forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
+    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
         if (!success) {
             VialerLogError(@"Error registering the account with the endpoint");
         }
@@ -162,8 +162,7 @@
                                            [[VSLAudioCodecs alloc] initWithAudioCodec:VSLAudioCodecOpus andPriority:210]
                                            ];
         VSLOpusConfiguration *opusConfiguration = [[VSLOpusConfiguration alloc] init];
-        opusConfiguration.sampleRate = VSLOpusConfigurationSampleRateWideBand;
-        opusConfiguration.frameDuration = VSLOpusConfigurationFrameDurationTwenty;
+        opusConfiguration.frameDuration = VSLOpusConfigurationFrameDurationTwenty;        
 
         codecConfiguration.opusConfiguration = opusConfiguration;
     } else {

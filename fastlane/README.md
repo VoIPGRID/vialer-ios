@@ -61,6 +61,11 @@ Generate a new APP ID in iTunes Connect
 fastlane ios add_device
 ```
 
+### ios refresh_dsyms
+```
+fastlane ios refresh_dsyms
+```
+
 
 ----
 

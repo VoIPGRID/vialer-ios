@@ -78,7 +78,7 @@ static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number"
                                           AvailabilityModelId: @242,
                                           AvailabilityModelSelected: @1,
                                           AvailabilityModelDestinationType: givenDestinationType,
-                                          AvailabilityModelPhoneNumberKey: @42,
+                                          AvailabilityModelPhoneNumber: @42,
                                         }
                                       ];
     XCTAssertEqualObjects(outputDestinations, expectedDestinations, @"Outputs did not match");
@@ -105,7 +105,7 @@ static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number"
                                           AvailabilityModelId: @"242",
                                           AvailabilityModelSelected: @1,
                                           AvailabilityModelDestinationType: givenDestinationType,
-                                          AvailabilityModelPhoneNumberKey: @42,
+                                          AvailabilityModelPhoneNumber: @42,
                                           }
                                       ];
     XCTAssertEqualObjects(outputDestinations, expectedDestinations, @"Outputs did not match");
@@ -117,7 +117,7 @@ static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number"
                                        @{
                                            AvailabilityModelDescriptionKey: @"Test User",
                                            AvailabilityModelSelectedUserDestinationIdKey: @342,
-                                           AvailabilityModelPhoneNumberKey: @"42",
+                                           AvailabilityModelPhoneNumber: @"42",
                                            }
                                        ];
     NSString *givenDestinationType = AvailabilityModelSelectedUserDestinationFixedKey;
@@ -132,7 +132,7 @@ static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number"
                                           AvailabilityModelId: @342,
                                           AvailabilityModelSelected: @1,
                                           AvailabilityModelDestinationType: givenDestinationType,
-                                          AvailabilityModelPhoneNumberKey: @42,
+                                          AvailabilityModelPhoneNumber: @42,
                                           }
                                       ];
     XCTAssertEqualObjects(outputDestinations, expectedDestinations, @"Outputs did not match");
@@ -141,7 +141,7 @@ static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number"
 - (void)testStoreNewAvailability {
     // Given
     NSDictionary *option = @{
-                             AvailabilityModelPhoneNumberKey: @42,
+                             AvailabilityModelPhoneNumber: @42,
                              AvailabilityModelDescription: @"Test phonennumber"
                              };
 
@@ -149,14 +149,14 @@ static NSString * const AvailabilityModelInternalNumbersKey = @"internal_number"
     NSString *newAvailabilityString = [self.availabilityModel storeNewAvialibityInSUD:option];
 
     // Then
-    NSString *expectedString = [NSString stringWithFormat:@"%@ / %@", option[AvailabilityModelPhoneNumberKey], option[AvailabilityModelDescription]];
+    NSString *expectedString = [NSString stringWithFormat:@"%@ / %@", option[AvailabilityModelPhoneNumber], option[AvailabilityModelDescription]];
     XCTAssertEqualObjects(newAvailabilityString, expectedString, @"The string did not match");
 }
 
 - (void)testStoreNewAvailabilityNotAvailable {
     // Given
     NSDictionary *option = @{
-                             AvailabilityModelPhoneNumberKey: @0,
+                             AvailabilityModelPhoneNumber: @0,
                              };
 
     // When

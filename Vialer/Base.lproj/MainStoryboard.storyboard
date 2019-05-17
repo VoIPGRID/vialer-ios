@@ -18,21 +18,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TKx-Qn-Q5o">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1DY-ie-kRe" userLabel="BackgroundViewWithLogo">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIb-rP-QDN" userLabel="BackgroundSolidColorView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Km0-zp-Jub" userLabel="BackgroundGradientView" customClass="GradientView" customModule="ANNAbel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vialer-logo" translatesAutoresizingMaskIntoConstraints="NO" id="vaX-QE-6Dz">
+                                        <rect key="frame" x="0.0" y="332" width="414" height="72"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Km0-zp-Jub" firstAttribute="top" secondItem="1DY-ie-kRe" secondAttribute="top" id="0Ii-Ct-TvG"/>
+                                    <constraint firstItem="vIb-rP-QDN" firstAttribute="top" secondItem="1DY-ie-kRe" secondAttribute="top" id="2TK-aF-5cw"/>
+                                    <constraint firstItem="vaX-QE-6Dz" firstAttribute="leading" secondItem="Km0-zp-Jub" secondAttribute="leading" id="7na-Ec-iNt"/>
+                                    <constraint firstItem="vaX-QE-6Dz" firstAttribute="centerY" secondItem="1DY-ie-kRe" secondAttribute="centerY" id="I2m-a4-37R"/>
+                                    <constraint firstAttribute="bottom" secondItem="vIb-rP-QDN" secondAttribute="bottom" id="OaS-eA-YXa"/>
+                                    <constraint firstItem="vaX-QE-6Dz" firstAttribute="trailing" secondItem="vIb-rP-QDN" secondAttribute="trailing" id="QRG-a3-I4r"/>
+                                    <constraint firstAttribute="trailing" secondItem="vIb-rP-QDN" secondAttribute="trailing" id="d6k-by-ORF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Km0-zp-Jub" secondAttribute="bottom" id="jzF-Jn-dMm"/>
+                                    <constraint firstItem="Km0-zp-Jub" firstAttribute="leading" secondItem="1DY-ie-kRe" secondAttribute="leading" id="nfQ-Ut-oAS"/>
+                                    <constraint firstItem="vIb-rP-QDN" firstAttribute="leading" secondItem="1DY-ie-kRe" secondAttribute="leading" id="v5f-qS-0zH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Km0-zp-Jub" secondAttribute="trailing" id="vL6-8J-Ejv"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8vI-DI-UXA" firstAttribute="trailing" secondItem="TKx-Qn-Q5o" secondAttribute="trailing" id="I4p-Qb-Z1p"/>
-                            <constraint firstItem="TKx-Qn-Q5o" firstAttribute="top" secondItem="Bti-2h-Pg1" secondAttribute="top" id="VCd-hK-cmk"/>
-                            <constraint firstAttribute="bottom" secondItem="TKx-Qn-Q5o" secondAttribute="bottom" id="cP2-7V-rRJ"/>
-                            <constraint firstItem="TKx-Qn-Q5o" firstAttribute="leading" secondItem="8vI-DI-UXA" secondAttribute="leading" id="dte-Yd-KXm"/>
+                            <constraint firstItem="1DY-ie-kRe" firstAttribute="top" secondItem="Bti-2h-Pg1" secondAttribute="top" id="16M-tT-1es"/>
+                            <constraint firstItem="Kwr-Zg-43A" firstAttribute="trailing" secondItem="1DY-ie-kRe" secondAttribute="trailing" id="7Z4-eE-fdC"/>
+                            <constraint firstAttribute="bottom" secondItem="1DY-ie-kRe" secondAttribute="bottom" id="PNn-Fl-IY1"/>
+                            <constraint firstItem="1DY-ie-kRe" firstAttribute="leading" secondItem="Kwr-Zg-43A" secondAttribute="leading" id="zIy-sG-KI7"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8vI-DI-UXA"/>
+                        <viewLayoutGuide key="safeArea" id="Kwr-Zg-43A"/>
                     </view>
                     <connections>
-                        <outlet property="launchImage" destination="TKx-Qn-Q5o" id="WdN-iC-xym"/>
+                        <outlet property="backgroundGrandientView" destination="Km0-zp-Jub" id="6Kh-La-gj5"/>
+                        <outlet property="backgroundSolidColorView" destination="vIb-rP-QDN" id="cJZ-iI-xvR"/>
                         <segue destination="i10-iY-7zz" kind="showDetail" identifier="ShowVialerDrawerViewSegue" customClass="NoAnimationSegue" id="jgD-42-JhD"/>
                         <segue destination="ZYs-HX-JeK" kind="presentation" identifier="ShowSIPIncomingCallViewSegue" animates="NO" id="18T-Qb-NXM"/>
                         <segue destination="OBw-wl-6xF" kind="unwind" identifier="goToVialerRootViewControllerIdentifier" unwindAction="goToVialerRootViewController:" id="Hm1-9D-gHw"/>
@@ -43,7 +70,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iot-wT-SKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OBw-wl-6xF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2736.8000000000002" y="-584.48275862068965"/>
+            <point key="canvasLocation" x="2736.8000000000002" y="-585.1574212893554"/>
         </scene>
         <!--SIPIncomingCallStoryboard-->
         <scene sceneID="tH0-5A-ya0">
@@ -77,7 +104,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="zgc-ik-ngg"/>
+                        <viewLayoutGuide key="safeArea" id="PVo-bT-P72"/>
                     </view>
                     <connections>
                         <segue destination="ALB-k4-yaR" kind="custom" identifier="mm_center" customClass="MMDrawerControllerSegue" id="tO0-Oo-pCK"/>
@@ -158,5 +185,6 @@
         <image name="tab-keypad-active" width="24" height="24"/>
         <image name="tab-recent" width="26" height="26"/>
         <image name="tab-recent-active" width="26" height="26"/>
+        <image name="vialer-logo" width="293" height="72"/>
     </resources>
 </document>

@@ -8,6 +8,7 @@
 #import "UserProfileWebViewController.h"
 #import "Vialer-Swift.h"
 
+
 static NSString *ActivateSIPAccountViewControllerUserProfileURL = @"/user/change/";
 static NSString *ActivateSIPAccountViewControllerVialerRootViewControllerSegue = @"VialerRootViewControllerSegue";
 static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;

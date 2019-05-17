@@ -92,6 +92,8 @@ protocol ColorsConfigurationProtocol {
         case twoStepScreenSideBIcon
         case twoStepScreenBackgroundHeader
         case reachabilityBarBackground
+        case backgroundGradientStart
+        case backgroundGradientEnd
     }
 
     enum GradientKey {
@@ -296,8 +298,17 @@ protocol ColorsConfigurationProtocol {
                 color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
             }
             break
+        case .backgroundGradientStart:
+            if colorsConfig != nil {
+                color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientStartColor)
+            }
+            break
+        case .backgroundGradientEnd:
+            if colorsConfig != nil {
+                color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientEndColor)
+            }
+            break
         }
-
         return color
     }
 

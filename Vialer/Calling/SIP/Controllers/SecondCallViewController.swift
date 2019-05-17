@@ -11,6 +11,7 @@ class SecondCallViewController: SIPCallingViewController {
     enum SecondCallVCSegue : String { // TODO: find a way to handle subclassed ViewControllers with SegueHandler.
         case transferInProgress = "TransferInProgressSegue"
         case unwindToFirstCall = "UnwindToFirstCallSegue"
+        case showKeypad = "ShowKeypadSegue"
     }
 
     // MARK: - Properties
@@ -92,6 +93,11 @@ extension SecondCallViewController {
         // Only enable transferButton if both calls are confirmed.
         transferButton?.isEnabled = activeCall?.callState == .confirmed && firstCall?.callState == .confirmed
         firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+        
+        numberLabel?.isHidden = false
+        if statusLabelTopConstraint != nil {
+            statusLabelTopConstraint.constant = 20
+        }
 
         guard let call = firstCall else { return }
 
@@ -127,6 +133,11 @@ extension SecondCallViewController {
                 firstCallVC.activeCall = firstCall
                 firstCallVC.phoneNumberLabelText = firstCallPhoneNumberLabelText
             }
+        case .showKeypad:
+            let keypadVC = segue.destination as! KeypadViewController
+            keypadVC.call = activeCall
+            keypadVC.delegate = self
+            keypadVC.phoneNumberLabelText = phoneNumberLabelText
         }
     }
 }

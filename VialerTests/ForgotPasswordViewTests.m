@@ -3,7 +3,7 @@
 //  Copyright © 2015 VoIPGRID. All rights reserved.
 //
 
-#import "Configuration.h"
+#import "Vialer-Swift.h"
 #import "ForgotPasswordView.h"
 #import "LogInViewController.h"
 #import <OCMock/OCMock.h>
@@ -12,24 +12,13 @@
 @interface ForgotPasswordViewTests : XCTestCase
 @property (nonatomic) LogInViewController *loginViewController;
 @property (nonatomic) ForgotPasswordView *forgotPasswordView;
-@property (nonatomic) id configurationMock;
-@property (nonatomic) UIColor *color;
 @end
 
 @implementation ForgotPasswordViewTests
 
 - (void)setUp {
     [super setUp];
-
-    self.color = [UIColor redColor];
-
-    id colorConfigurationMock = OCMClassMock([ColorConfiguration class]);
-    OCMStub([colorConfigurationMock colorForKey:[OCMArg any]]).andReturn(self.color);
-
-    self.configurationMock = OCMClassMock([Configuration class]);
-    OCMStub([self.configurationMock colorConfiguration]).andReturn(colorConfigurationMock);
-    OCMStub([self.configurationMock defaultConfiguration]).andReturn(self.configurationMock);
-
+    
     self.loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
     [self.loginViewController loadViewIfNeeded];
     self.forgotPasswordView = self.loginViewController.forgotPasswordView;
@@ -38,10 +27,7 @@
 - (void)tearDown {
     self.forgotPasswordView = nil;
     self.loginViewController = nil;
-    self.color = nil;
 
-    [self.configurationMock stopMocking];
-    self.configurationMock = nil;
     [super tearDown];
 }
 
@@ -59,7 +45,8 @@
 }
 
 - (void)testRequestPasswordButtonHasCorrectBackGroundColorForPressedState {
-    XCTAssertEqual(self.forgotPasswordView.requestPasswordButton.backgroundColorForPressedState, self.color, @"requestPasswordButton should have gotten the color from config.");
+    OCMStub([self.forgotPasswordView.requestPasswordButton setHighlighted:YES]);
+    XCTAssert([self.forgotPasswordView.requestPasswordButton.backgroundColorForPressedState isEqual:self.forgotPasswordView.requestPasswordButton.backgroundColor], @"ContinueButton should have gotten the color given from the custom method setHighlighted.");
     XCTAssertTrue(self.forgotPasswordView.requestPasswordButton.borderWidth > 0, @"button needs a border");
     XCTAssertTrue(self.forgotPasswordView.requestPasswordButton.cornerRadius > 0, @"button needs rounded corners");
 }
