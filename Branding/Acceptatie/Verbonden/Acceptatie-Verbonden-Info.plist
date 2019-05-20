@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UILaunchStoryboardName</key>
-	<string>Verbonden-LaunchScreen</string>
 	<key>Additional_Version_String</key>
 	<string>Updated on build</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -49,6 +47,8 @@
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Verbonden-Staging-LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>

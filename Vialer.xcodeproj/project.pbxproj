@@ -26,18 +26,337 @@
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
 		831E6BAE22316C57003B6AAC /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E6BAD22316C57003B6AAC /* ConfigureFormViewTests.m */; };
+		832104B5229552F5002766BA /* Voys-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */; };
 		833DFB3F2211B934003E19CC /* Vialer-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */; };
 		833DFB42221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */; };
-		833DFB44221461F8003E19CC /* Voys-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB43221461F8003E19CC /* Voys-LaunchScreen.storyboard */; };
-		833DFB462214624F003E19CC /* Verbonden-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB452214624F003E19CC /* Verbonden-LaunchScreen.storyboard */; };
 		833DFB4822146265003E19CC /* Voys-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */; };
 		833DFB4A22146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */; };
+		8358B8F62296ED9D00CCA6CC /* Verbonden.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73522296C9F000987168 /* Verbonden.xcassets */; };
 		836884AD20F4B4290098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		838206452290979A0098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
+		838206462290979A0098EABD /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
+		838206472290979A0098EABD /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
+		838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
+		8382064B2290979A0098EABD /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
+		8382064C2290979A0098EABD /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
+		8382064D2290979A0098EABD /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
+		8382064E2290979A0098EABD /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
+		8382064F2290979A0098EABD /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
+		838206502290979A0098EABD /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
+		838206512290979A0098EABD /* LogEntriesConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3B1213FD8390000EE4D /* LogEntriesConfiguration.swift */; };
+		838206522290979A0098EABD /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
+		838206532290979A0098EABD /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
+		838206542290979A0098EABD /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43FD69A1E76F4C6002593DD /* NotificationToken.swift */; };
+		838206552290979A0098EABD /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
+		838206562290979A0098EABD /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
+		838206572290979A0098EABD /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
+		838206582290979A0098EABD /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
+		838206592290979A0098EABD /* GAConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3B8213FDC680000EE4D /* GAConfiguration.swift */; };
+		8382065A2290979A0098EABD /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
+		8382065B2290979A0098EABD /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
+		8382065C2290979A0098EABD /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
+		8382065D2290979A0098EABD /* RecentCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0B81E72B0AB00A1E509 /* RecentCallManager.swift */; };
+		8382065E2290979A0098EABD /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		8382065F2290979A0098EABD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
+		838206602290979A0098EABD /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
+		838206612290979A0098EABD /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
+		838206622290979A0098EABD /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
+		838206632290979A0098EABD /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B020C520E0003480F6 /* NumberPadButton.m */; };
+		838206642290979A0098EABD /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
+		838206652290979A0098EABD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		838206662290979A0098EABD /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		838206672290979A0098EABD /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
+		838206682290979A0098EABD /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
+		838206692290979A0098EABD /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
+		8382066A2290979A0098EABD /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		8382066B2290979A0098EABD /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		8382066C2290979A0098EABD /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */; };
+		8382066D2290979A0098EABD /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2491E6D593100550E0C /* SegueHandler.swift */; };
+		8382066E2290979A0098EABD /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */; };
+		8382066F2290979A0098EABD /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
+		838206702290979A0098EABD /* ColorsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3BF213FE0F70000EE4D /* ColorsConfiguration.swift */; };
+		838206712290979A0098EABD /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
+		838206722290979A0098EABD /* UrlsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3AA213D08670000EE4D /* UrlsConfiguration.swift */; };
+		838206732290979A0098EABD /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
+		838206742290979A0098EABD /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
+		838206752290979A0098EABD /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
+		838206762290979A0098EABD /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
+		838206772290979A0098EABD /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		838206782290979A0098EABD /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFB1F876628002F0679 /* TransferInProgressViewController.swift */; };
+		838206792290979A0098EABD /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43F06CA1E77D84400D6CAAA /* PhoneNumber.swift */; };
+		8382067A2290979A0098EABD /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
+		8382067B2290979A0098EABD /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24E1E6D954400550E0C /* Resource.swift */; };
+		8382067C2290979A0098EABD /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
+		8382067D2290979A0098EABD /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
+		8382067E2290979A0098EABD /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */; };
+		8382067F2290979A0098EABD /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
+		838206802290979A0098EABD /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */; };
+		838206812290979A0098EABD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		838206822290979A0098EABD /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
+		838206832290979A0098EABD /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
+		838206842290979A0098EABD /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
+		838206852290979A0098EABD /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
+		838206862290979A0098EABD /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
+		838206872290979A0098EABD /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
+		838206882290979A0098EABD /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3AE20C520E0003480F6 /* DialerViewController.swift */; };
+		838206892290979A0098EABD /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
+		8382068A2290979A0098EABD /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
+		8382068B2290979A0098EABD /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
+		8382068C2290979A0098EABD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
+		8382068D2290979A0098EABD /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		8382068E2290979A0098EABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		8382068F2290979A0098EABD /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
+		838206902290979A0098EABD /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		838206912290979A0098EABD /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
+		838206922290979A0098EABD /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		838206932290979A0098EABD /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		838206942290979A0098EABD /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
+		838206952290979A0098EABD /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B21E682A540097E808 /* UITableView.swift */; };
+		838206962290979A0098EABD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3C6214008860000EE4D /* GradientView.swift */; };
+		838206972290979A0098EABD /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
+		838206982290979A0098EABD /* RecentCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0BD1E72B20000A1E509 /* RecentCall.swift */; };
+		838206992290979A0098EABD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B11E682A540097E808 /* UIImage.swift */; };
+		8382069A2290979A0098EABD /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		8382069B2290979A0098EABD /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		8382069C2290979A0098EABD /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C81E72DED000A1E509 /* Managed.swift */; };
+		8382069D2290979A0098EABD /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		8382069E2290979A0098EABD /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
+		8382069F2290979A0098EABD /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		838206A02290979A0098EABD /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
+		838206A12290979A0098EABD /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		838206A22290979A0098EABD /* Vialer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E611E729F780067FE40 /* Vialer.xcdatamodeld */; };
+		838206A32290979A0098EABD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
+		838206A42290979A0098EABD /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		838206A52290979A0098EABD /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
+		838206A62290979A0098EABD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
+		838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
+		838206A82290979A0098EABD /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
+		838206A92290979A0098EABD /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
+		838206AB2290979A0098EABD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		838206AC2290979A0098EABD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
+		838206AD2290979A0098EABD /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
+		838206AE2290979A0098EABD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
+		838206AF2290979A0098EABD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		838206B02290979A0098EABD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */; };
+		838206B12290979A0098EABD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
+		838206B22290979A0098EABD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
+		838206B32290979A0098EABD /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D91A1E510C0033FF78 /* CoreVideo.framework */; };
+		838206B42290979A0098EABD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D71A1E51040033FF78 /* CoreMedia.framework */; };
+		838206B52290979A0098EABD /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
+		838206B62290979A0098EABD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
+		838206B72290979A0098EABD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
+		838206B82290979A0098EABD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */; };
+		838206B92290979A0098EABD /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
+		838206BA2290979A0098EABD /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
+		838206BB2290979A0098EABD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
+		838206BC2290979A0098EABD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
+		838206BD2290979A0098EABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
+		838206BE2290979A0098EABD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
+		838206BF2290979A0098EABD /* libPods-ANNAbel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */; };
+		838206C22290979A0098EABD /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
+		838206C32290979A0098EABD /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
+		838206C42290979A0098EABD /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
+		838206C52290979A0098EABD /* TwoStepCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */; };
+		838206C62290979A0098EABD /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
+		838206C72290979A0098EABD /* dtmf-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854131A7FE3CE00121366 /* dtmf-1.aif */; };
+		838206C82290979A0098EABD /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
+		838206C92290979A0098EABD /* dtmf-2.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854141A7FE3CE00121366 /* dtmf-2.aif */; };
+		838206CA2290979A0098EABD /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
+		838206CB2290979A0098EABD /* dtmf-*.aif in Resources */ = {isa = PBXBuildFile; fileRef = C49A46AB1E6829DD0097E808 /* dtmf-*.aif */; };
+		838206CC2290979A0098EABD /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
+		838206CD2290979A0098EABD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
+		838206CE2290979A0098EABD /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
+		838206CF2290979A0098EABD /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		838206D02290979A0098EABD /* dtmf-3.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854151A7FE3CE00121366 /* dtmf-3.aif */; };
+		838206D32290979A0098EABD /* dtmf-4.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854161A7FE3CE00121366 /* dtmf-4.aif */; };
+		838206D42290979A0098EABD /* dtmf-5.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854171A7FE3CE00121366 /* dtmf-5.aif */; };
+		838206D52290979A0098EABD /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
+		838206D62290979A0098EABD /* dtmf-6.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854181A7FE3CE00121366 /* dtmf-6.aif */; };
+		838206D72290979A0098EABD /* dtmf-7.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854191A7FE3CE00121366 /* dtmf-7.aif */; };
+		838206D82290979A0098EABD /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
+		838206D92290979A0098EABD /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */; };
+		838206DA2290979A0098EABD /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
+		838206DB2290979A0098EABD /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
+		838206DD2290979A0098EABD /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
+		838206DF2290979A0098EABD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
+		838206E02290979A0098EABD /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
+		838206E12290979A0098EABD /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
+		838206E22290979A0098EABD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
+		838206E72290979A0098EABD /* ANNAbelIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		838206F4229098D20098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
+		838206F5229098D20098EABD /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
+		838206F6229098D20098EABD /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
+		838206F7229098D20098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
+		838206F8229098D20098EABD /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
+		838206F9229098D20098EABD /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
+		838206FA229098D20098EABD /* AvailabilityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9E21BA856F60082AD79 /* AvailabilityModel.m */; };
+		838206FB229098D20098EABD /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
+		838206FC229098D20098EABD /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
+		838206FD229098D20098EABD /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
+		838206FE229098D20098EABD /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
+		838206FF229098D20098EABD /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
+		83820700229098D20098EABD /* LogEntriesConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3B1213FD8390000EE4D /* LogEntriesConfiguration.swift */; };
+		83820701229098D20098EABD /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
+		83820702229098D20098EABD /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
+		83820703229098D20098EABD /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43FD69A1E76F4C6002593DD /* NotificationToken.swift */; };
+		83820704229098D20098EABD /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
+		83820705229098D20098EABD /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
+		83820706229098D20098EABD /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
+		83820707229098D20098EABD /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
+		83820708229098D20098EABD /* GAConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3B8213FDC680000EE4D /* GAConfiguration.swift */; };
+		83820709229098D20098EABD /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
+		8382070A229098D20098EABD /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
+		8382070B229098D20098EABD /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
+		8382070C229098D20098EABD /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
+		8382070D229098D20098EABD /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
+		8382070E229098D20098EABD /* RecentCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0B81E72B0AB00A1E509 /* RecentCallManager.swift */; };
+		8382070F229098D20098EABD /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
+		83820710229098D20098EABD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
+		83820711229098D20098EABD /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
+		83820712229098D20098EABD /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
+		83820713229098D20098EABD /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B020C520E0003480F6 /* NumberPadButton.m */; };
+		83820714229098D20098EABD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
+		83820715229098D20098EABD /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
+		83820716229098D20098EABD /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
+		83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
+		83820718229098D20098EABD /* AvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F919B9DD1BA81B430082AD79 /* AvailabilityViewController.m */; };
+		83820719229098D20098EABD /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
+		8382071A229098D20098EABD /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
+		8382071B229098D20098EABD /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
+		8382071C229098D20098EABD /* WebserviceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2501E6D954400550E0C /* WebserviceAuthentication.swift */; };
+		8382071D229098D20098EABD /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB2491E6D593100550E0C /* SegueHandler.swift */; };
+		8382071E229098D20098EABD /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6F1DE4149F00F7CF50 /* StartCallConvertible.swift */; };
+		8382071F229098D20098EABD /* ColorsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3BF213FE0F70000EE4D /* ColorsConfiguration.swift */; };
+		83820720229098D20098EABD /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
+		83820721229098D20098EABD /* UrlsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3AA213D08670000EE4D /* UrlsConfiguration.swift */; };
+		83820722229098D20098EABD /* UIAlertController+Vialer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DFD1BFE67150012494D /* UIAlertController+Vialer.m */; };
+		83820723229098D20098EABD /* EditNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46760011C46EBBE008820C8 /* EditNumberViewController.m */; };
+		83820724229098D20098EABD /* VialerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3EAEB1BFB73B200AA4B2A /* VialerWebViewController.m */; };
+		83820725229098D20098EABD /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
+		83820726229098D20098EABD /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24E1E6D954400550E0C /* Resource.swift */; };
+		83820727229098D20098EABD /* ReachabilityBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B4075C1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift */; };
+		83820728229098D20098EABD /* TransferInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFB1F876628002F0679 /* TransferInProgressViewController.swift */; };
+		83820729229098D20098EABD /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43F06CA1E77D84400D6CAAA /* PhoneNumber.swift */; };
+		8382072A229098D20098EABD /* ConfigureFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D608B601AE67DC800FA02CE /* ConfigureFormView.m */; };
+		8382072B229098D20098EABD /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */; };
+		8382072C229098D20098EABD /* LoginFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A5E641AE5483700DBE64B /* LoginFormView.m */; };
+		8382072D229098D20098EABD /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
+		8382072E229098D20098EABD /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
+		8382072F229098D20098EABD /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
+		83820730229098D20098EABD /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */; };
+		83820731229098D20098EABD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
+		83820732229098D20098EABD /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
+		83820733229098D20098EABD /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
+		83820734229098D20098EABD /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
+		83820735229098D20098EABD /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
+		83820736229098D20098EABD /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
+		83820737229098D20098EABD /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
+		83820738229098D20098EABD /* DialerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3AE20C520E0003480F6 /* DialerViewController.swift */; };
+		83820739229098D20098EABD /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
+		8382073A229098D20098EABD /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
+		8382073B229098D20098EABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
+		8382073C229098D20098EABD /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		8382073D229098D20098EABD /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
+		8382073E229098D20098EABD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
+		8382073F229098D20098EABD /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
+		83820740229098D20098EABD /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B21E682A540097E808 /* UITableView.swift */; };
+		83820741229098D20098EABD /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
+		83820742229098D20098EABD /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
+		83820743229098D20098EABD /* VialerIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */; };
+		83820744229098D20098EABD /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
+		83820745229098D20098EABD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3C6214008860000EE4D /* GradientView.swift */; };
+		83820746229098D20098EABD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B11E682A540097E808 /* UIImage.swift */; };
+		83820747229098D20098EABD /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
+		83820748229098D20098EABD /* RecentCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0BD1E72B20000A1E509 /* RecentCall.swift */; };
+		83820749229098D20098EABD /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
+		8382074A229098D20098EABD /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		8382074B229098D20098EABD /* BubblingPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FD2080DC2D00CC80E5 /* BubblingPoints.m */; };
+		8382074C229098D20098EABD /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C81E72DED000A1E509 /* Managed.swift */; };
+		8382074D229098D20098EABD /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C675641D19B5430003A385 /* AppInfo.swift */; };
+		8382074E229098D20098EABD /* TwoStepCall.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47B92080DBE400CC80E5 /* TwoStepCall.m */; };
+		8382074F229098D20098EABD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46A61E6829CE0097E808 /* RecentsViewController.swift */; };
+		83820750229098D20098EABD /* UIColorExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */; };
+		83820751229098D20098EABD /* Vialer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E611E729F780067FE40 /* Vialer.xcdatamodeld */; };
+		83820752229098D20098EABD /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
+		83820753229098D20098EABD /* VialerLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B6E251E2E524400942F9B /* VialerLogger.swift */; };
+		83820754229098D20098EABD /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B78131DE309B000B17BCF /* ContactModel.swift */; };
+		83820755229098D20098EABD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
+		83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
+		83820757229098D20098EABD /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
+		83820758229098D20098EABD /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
+		8382075A229098D20098EABD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		8382075B229098D20098EABD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
+		8382075C229098D20098EABD /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
+		8382075D229098D20098EABD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
+		8382075E229098D20098EABD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
+		8382075F229098D20098EABD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B47DD1ABC277600B0DBC4 /* AdSupport.framework */; };
+		83820760229098D20098EABD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
+		83820761229098D20098EABD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D51A1E50F10033FF78 /* AVFoundation.framework */; };
+		83820762229098D20098EABD /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D91A1E510C0033FF78 /* CoreVideo.framework */; };
+		83820763229098D20098EABD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D71A1E51040033FF78 /* CoreMedia.framework */; };
+		83820764229098D20098EABD /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D31A1E50E30033FF78 /* CoreAudio.framework */; };
+		83820765229098D20098EABD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3820D11A1E50D60033FF78 /* CFNetwork.framework */; };
+		83820766229098D20098EABD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5D2915182BCB1F001DA8F2 /* CoreTelephony.framework */; };
+		83820767229098D20098EABD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD7F19182AE98F002FC8FC /* QuartzCore.framework */; };
+		83820768229098D20098EABD /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5C182A38E5004B7D27 /* AddressBook.framework */; };
+		83820769229098D20098EABD /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB302E5D182A38E5004B7D27 /* AddressBookUI.framework */; };
+		8382076A229098D20098EABD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB64313F182281C500E1BF17 /* Security.framework */; };
+		8382076B229098D20098EABD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
+		8382076C229098D20098EABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
+		8382076D229098D20098EABD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
+		8382076E229098D20098EABD /* libPods-Verbonden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D985712C57AEF321FAC347 /* libPods-Verbonden.a */; };
+		83820770229098D20098EABD /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
+		83820772229098D20098EABD /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
+		83820773229098D20098EABD /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
+		83820774229098D20098EABD /* TwoStepCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */; };
+		83820775229098D20098EABD /* ContactsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C474819A1BF5CAAF00EA8672 /* ContactsStoryboard.storyboard */; };
+		83820776229098D20098EABD /* dtmf-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854131A7FE3CE00121366 /* dtmf-1.aif */; };
+		83820777229098D20098EABD /* SideMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF21BFB7C5E00AA4B2A /* SideMenuStoryboard.storyboard */; };
+		83820778229098D20098EABD /* dtmf-2.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854141A7FE3CE00121366 /* dtmf-2.aif */; };
+		8382077A229098D20098EABD /* dtmf-*.aif in Resources */ = {isa = PBXBuildFile; fileRef = C49A46AB1E6829DD0097E808 /* dtmf-*.aif */; };
+		8382077B229098D20098EABD /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
+		8382077C229098D20098EABD /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
+		8382077D229098D20098EABD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF160D1F470C8200AEFA83 /* Localizable.strings */; };
+		8382077E229098D20098EABD /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
+		8382077F229098D20098EABD /* dtmf-3.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854151A7FE3CE00121366 /* dtmf-3.aif */; };
+		83820780229098D20098EABD /* dtmf-4.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854161A7FE3CE00121366 /* dtmf-4.aif */; };
+		83820782229098D20098EABD /* dtmf-5.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854171A7FE3CE00121366 /* dtmf-5.aif */; };
+		83820783229098D20098EABD /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
+		83820784229098D20098EABD /* dtmf-6.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854181A7FE3CE00121366 /* dtmf-6.aif */; };
+		83820785229098D20098EABD /* dtmf-7.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854191A7FE3CE00121366 /* dtmf-7.aif */; };
+		83820786229098D20098EABD /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
+		83820788229098D20098EABD /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
+		8382078A229098D20098EABD /* disconnected.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE6D6A91B9F12F2001D25B1 /* disconnected.wav */; };
+		8382078B229098D20098EABD /* SIPCallingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */; };
+		8382078C229098D20098EABD /* dtmf-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541A1A7FE3CE00121366 /* dtmf-8.aif */; };
+		8382078D229098D20098EABD /* dtmf-9.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB8541B1A7FE3CE00121366 /* dtmf-9.aif */; };
+		8382078E229098D20098EABD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
+		83820790229098D20098EABD /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
+		83820792229098D20098EABD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
+		83820797229098D20098EABD /* VerbondenIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172411DFE85F8005FF8EA /* VerbondenIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		838207B92292CB550098EABD /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207B32292CB540098EABD /* Config.plist */; };
+		838207BB2292CB550098EABD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207B52292CB540098EABD /* GoogleService-Info.plist */; };
+		838207BD2292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838207B72292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard */; };
+		838207D92292D0A70098EABD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207D82292D0A70098EABD /* GoogleService-Info.plist */; };
+		838207DA2292D0C10098EABD /* ANNAbel-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */; };
+		838207DB2292F97A0098EABD /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207C82292CFF80098EABD /* Config.plist */; };
+		838207DE2292F9A50098EABD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838207D62292D04D0098EABD /* InfoPlist.strings */; };
+		838207DF2293F4B70098EABD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838207C22292CCFA0098EABD /* InfoPlist.strings */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
+		83CB73542296C9F000987168 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73472296C9EF00987168 /* GoogleService-Info.plist */; };
+		83CB73552296C9F000987168 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73492296C9F000987168 /* InfoPlist.strings */; };
+		83CB73562296C9F000987168 /* Verbonden-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734B2296C9F000987168 /* Verbonden-Info.plist */; };
+		83CB73572296C9F000987168 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734C2296C9F000987168 /* Config.plist */; };
+		83CB73582296C9F000987168 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734D2296C9F000987168 /* FirebaseService-Info.plist */; };
+		83CB73592296C9F000987168 /* Verbonden-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */; };
+		83CB735B2296C9F000987168 /* Verbonden.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73522296C9F000987168 /* Verbonden.xcassets */; };
+		83CB735C2296C9F000987168 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */; };
 		83CD3F2B22845D540079A2A9 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		83DA46032272047000212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		83DA46042272047100212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
@@ -49,6 +368,7 @@
 		83DA460A2272047900212371 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		83DA460B2272047A00212371 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		872A659476081865A971CEEF /* libPods-ANNAbelSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */; };
+		87D39B0E567D261AACDD2993 /* libPods-Verbonden Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CC407352871DE562624E6D /* libPods-Verbonden Staging.a */; };
 		A89BBA46A7258849FB9B1083 /* libPods-VialerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */; };
 		C4052E561E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
 		C4052E571E2F64FE00F45B9C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4052E551E2F64FE00F45B9C /* String+regex.swift */; };
@@ -274,12 +594,8 @@
 		C490ADDD1D0863E3004A8F83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		C490ADE01D0863E3004A8F83 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C490ADE11D0863E3004A8F83 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
-		C490ADF51D086458004A8F83 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C490ADF01D086458004A8F83 /* Config.plist */; };
-		C490ADF61D086458004A8F83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C490ADF11D086458004A8F83 /* GoogleService-Info.plist */; };
-		C490ADF91D086458004A8F83 /* Verbonden.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C490ADF41D086458004A8F83 /* Verbonden.xcassets */; };
 		C490ADFF1D088535004A8F83 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		C490AE001D088535004A8F83 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
-		C490AE0B1D088564004A8F83 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */; };
 		C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
 		C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
 		C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
@@ -367,6 +683,7 @@
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		D400290822083BC600E5AA68 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		D99509E85091A372BCE8EB50 /* libPods-ANNAbel Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */; };
 		E7A9119825A31543E96AB1F0 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */; };
 		EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
@@ -815,11 +1132,8 @@
 		EEDCC3C420C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEDCC3C520C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEEDF355219DBE4E00D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */; };
-		EEEDF358219DC2AF00D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */; };
 		EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */; };
 		EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
-		EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */; };
-		EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		EEEF160A1F470C4400AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
 		EEEF160C1F470C4A00AEFA83 /* VoysIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */; };
@@ -999,6 +1313,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		838206422290979A0098EABD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE2318AA20A046AD00C05EB0;
+			remoteInfo = ANNAbelIntentsExtension;
+		};
+		838206F1229098D20098EABD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4226C5182261D200707349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C43172391DFE85F8005FF8EA;
+			remoteInfo = VerbondenIntentsExtension;
+		};
 		C41FD9021C60B28E00BBE6D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB4226C5182261D200707349 /* Project object */;
@@ -1087,6 +1415,48 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838206E52290979A0098EABD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838206E62290979A0098EABD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				838206E72290979A0098EABD /* ANNAbelIntentsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83820795229098D20098EABD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83820796229098D20098EABD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				83820797229098D20098EABD /* VerbondenIntentsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C41FD8C71C60A08400BBE6D7 /* Embed Frameworks */ = {
@@ -1204,6 +1574,7 @@
 		0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		205B495E88D5C4F6ADCE7353 /* Pods-VerbondenSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9DB42F29C50D5C1326FDDD /* Pods-Verbonden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.release.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.release.xcconfig"; sourceTree = "<group>"; };
 		2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		311FF6CE99A3AD079E153505 /* Pods-ANNAbelSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1223,11 +1594,14 @@
 		3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordView.m; path = Onboarding/Forms/ForgotPasswordView.m; sourceTree = "<group>"; };
 		404C9E98A13352F73C16A694 /* Pods-Vialer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.release.xcconfig"; sourceTree = "<group>"; };
 		43019F121BACD3F515C3245B /* Pods-Voys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.release.xcconfig"; sourceTree = "<group>"; };
+		462AC61C028E13F0CB8CD9E3 /* Pods-Verbonden Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging.release.xcconfig"; sourceTree = "<group>"; };
 		4DFEED51258B69BC8EC6A71F /* Pods-Vialer Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging.debug.xcconfig"; sourceTree = "<group>"; };
+		50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		69D985712C57AEF321FAC347 /* libPods-Verbonden.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Verbonden.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		6E5A3938EA55131C5AB18EFE /* libPods-Vialer Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Acceptatie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys/Pods-Voys.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1239,20 +1613,44 @@
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
 		831E6BAD22316C57003B6AAC /* ConfigureFormViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormViewTests.m; sourceTree = "<group>"; };
+		832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Voys-LaunchScreen.storyboard"; path = "Branding/Voys/Voys-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-LaunchScreen.storyboard"; sourceTree = "<group>"; };
-		833DFB43221461F8003E19CC /* Voys-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-LaunchScreen.storyboard"; sourceTree = "<group>"; };
-		833DFB452214624F003E19CC /* Verbonden-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Verbonden-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		838206ED2290979A0098EABD /* ANNAbel Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ANNAbel Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8382079D229098D20098EABD /* Verbonden Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Verbonden Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		838207B22292CB530098EABD /* Acceptatie-Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Verbonden-Info.plist"; sourceTree = "<group>"; };
+		838207B32292CB540098EABD /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		838207B52292CB540098EABD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		838207B72292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Verbonden-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		838207C12292CCFA0098EABD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838207C32292CCFE0098EABD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838207C82292CFF80098EABD /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		838207C92292CFF80098EABD /* Acceptatie-ANNAbel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-ANNAbel-Info.plist"; sourceTree = "<group>"; };
+		838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		838207D52292D04D0098EABD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838207D72292D0530098EABD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838207D82292D0A70098EABD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
+		83CB73472296C9EF00987168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Verbonden/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		83CB734A2296C9F000987168 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = InfoPlist.strings; sourceTree = "<group>"; };
+		83CB734B2296C9F000987168 /* Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Verbonden-Info.plist"; path = "Branding/Verbonden/Verbonden-Info.plist"; sourceTree = SOURCE_ROOT; };
+		83CB734C2296C9F000987168 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Branding/Verbonden/Config.plist; sourceTree = SOURCE_ROOT; };
+		83CB734D2296C9F000987168 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FirebaseService-Info.plist"; path = "Branding/Verbonden/FirebaseService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Verbonden-LaunchScreen.storyboard"; path = "Branding/Verbonden/Verbonden-LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		83CB73522296C9F000987168 /* Verbonden.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Verbonden.xcassets; path = Branding/Verbonden/Verbonden.xcassets; sourceTree = SOURCE_ROOT; };
+		83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VerbondenIntentsExtension.plist; path = Branding/Verbonden/VerbondenIntentsExtension.plist; sourceTree = SOURCE_ROOT; };
+		83CB735F2296CA4E00987168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		83CB73602296CA5100987168 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = ../nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97BDE05E53D773AA579B4B0C /* Pods-Voys Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		9C5D445BD838821356805D9A /* Pods-ANNAbel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel.debug.xcconfig"; sourceTree = "<group>"; };
 		9ECC1325D2FFCDD09B2511F4 /* Pods-VerbondenSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A3CC407352871DE562624E6D /* libPods-Verbonden Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Verbonden Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbelSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8854EC76887FC56F9F8B0D /* libPods-VerbondenSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VerbondenSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4052E551E2F64FE00F45B9C /* String+regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+regex.swift"; sourceTree = "<group>"; };
@@ -1310,11 +1708,6 @@
 		C47BB0C81E72DED000A1E509 /* Managed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
 		C48B78131DE309B000B17BCF /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactModel.swift; path = Contacts/Models/ContactModel.swift; sourceTree = "<group>"; };
 		C490ADEC1D0863E3004A8F83 /* Verbonden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verbonden.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C490ADF01D086458004A8F83 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
-		C490ADF11D086458004A8F83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
-		C490ADF31D086458004A8F83 /* Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Verbonden-Info.plist"; sourceTree = "<group>"; };
-		C490ADF41D086458004A8F83 /* Verbonden.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Verbonden.xcassets; sourceTree = "<group>"; };
 		C490AE071D088535004A8F83 /* VerbondenSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VerbondenSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiddlewareRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1372,6 +1765,7 @@
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		CDF2ECAB9F575E477A6C52D6 /* Pods-VoysSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1451B6C942ADC0A1D3C4C93 /* Pods-ANNAbel Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.release.xcconfig"; sourceTree = "<group>"; };
 		D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferContactsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D400290922083C2400E5AA68 /* SetupCallTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransfer.swift; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1441,7 +1835,6 @@
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
-		EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
 		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = "<group>"; };
 		EEDC3040208725FD00C7C642 /* TwoFactorAuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TwoFactorAuthenticationView.h; path = Onboarding/Forms/TwoFactorAuthenticationView.h; sourceTree = "<group>"; };
 		EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TwoFactorAuthenticationView.m; path = Onboarding/Forms/TwoFactorAuthenticationView.m; sourceTree = "<group>"; };
@@ -1458,11 +1851,8 @@
 		EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferDialPadViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
 		EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
-		EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
 		EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
 		EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FirebaseService-Info.plist"; path = "Branding/Voys/FirebaseService-Info.plist"; sourceTree = "<group>"; };
-		EEEF16001F470C1500AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EEEF16021F470C1C00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16051F470C2E00AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16071F470C3500AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16091F470C4400AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Branding/Voys/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1570,6 +1960,64 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		838206AA2290979A0098EABD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				838206AB2290979A0098EABD /* CoreBluetooth.framework in Frameworks */,
+				838206AC2290979A0098EABD /* AudioToolbox.framework in Frameworks */,
+				838206AD2290979A0098EABD /* PushKit.framework in Frameworks */,
+				838206AE2290979A0098EABD /* SystemConfiguration.framework in Frameworks */,
+				838206AF2290979A0098EABD /* MobileCoreServices.framework in Frameworks */,
+				838206B02290979A0098EABD /* AdSupport.framework in Frameworks */,
+				838206B12290979A0098EABD /* CoreData.framework in Frameworks */,
+				838206B22290979A0098EABD /* AVFoundation.framework in Frameworks */,
+				838206B32290979A0098EABD /* CoreVideo.framework in Frameworks */,
+				838206B42290979A0098EABD /* CoreMedia.framework in Frameworks */,
+				838206B52290979A0098EABD /* CoreAudio.framework in Frameworks */,
+				838206B62290979A0098EABD /* CFNetwork.framework in Frameworks */,
+				838206B72290979A0098EABD /* CoreTelephony.framework in Frameworks */,
+				838206B82290979A0098EABD /* QuartzCore.framework in Frameworks */,
+				838206B92290979A0098EABD /* AddressBook.framework in Frameworks */,
+				838206BA2290979A0098EABD /* AddressBookUI.framework in Frameworks */,
+				838206BB2290979A0098EABD /* Security.framework in Frameworks */,
+				838206BC2290979A0098EABD /* UIKit.framework in Frameworks */,
+				838206BD2290979A0098EABD /* Foundation.framework in Frameworks */,
+				838206BE2290979A0098EABD /* CoreGraphics.framework in Frameworks */,
+				838206BF2290979A0098EABD /* libPods-ANNAbel.a in Frameworks */,
+				D99509E85091A372BCE8EB50 /* libPods-ANNAbel Staging.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83820759229098D20098EABD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8382075A229098D20098EABD /* CoreBluetooth.framework in Frameworks */,
+				8382075B229098D20098EABD /* AudioToolbox.framework in Frameworks */,
+				8382075C229098D20098EABD /* PushKit.framework in Frameworks */,
+				8382075D229098D20098EABD /* SystemConfiguration.framework in Frameworks */,
+				8382075E229098D20098EABD /* MobileCoreServices.framework in Frameworks */,
+				8382075F229098D20098EABD /* AdSupport.framework in Frameworks */,
+				83820760229098D20098EABD /* CoreData.framework in Frameworks */,
+				83820761229098D20098EABD /* AVFoundation.framework in Frameworks */,
+				83820762229098D20098EABD /* CoreVideo.framework in Frameworks */,
+				83820763229098D20098EABD /* CoreMedia.framework in Frameworks */,
+				83820764229098D20098EABD /* CoreAudio.framework in Frameworks */,
+				83820765229098D20098EABD /* CFNetwork.framework in Frameworks */,
+				83820766229098D20098EABD /* CoreTelephony.framework in Frameworks */,
+				83820767229098D20098EABD /* QuartzCore.framework in Frameworks */,
+				83820768229098D20098EABD /* AddressBook.framework in Frameworks */,
+				83820769229098D20098EABD /* AddressBookUI.framework in Frameworks */,
+				8382076A229098D20098EABD /* Security.framework in Frameworks */,
+				8382076B229098D20098EABD /* UIKit.framework in Frameworks */,
+				8382076C229098D20098EABD /* Foundation.framework in Frameworks */,
+				8382076D229098D20098EABD /* CoreGraphics.framework in Frameworks */,
+				8382076E229098D20098EABD /* libPods-Verbonden.a in Frameworks */,
+				87D39B0E567D261AACDD2993 /* libPods-Verbonden Staging.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C41FD88E1C60A08400BBE6D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1832,6 +2280,10 @@
 				7F8D6569077E6E442EDF57FE /* Pods-Vialer Staging.release.xcconfig */,
 				97BDE05E53D773AA579B4B0C /* Pods-Voys Staging.debug.xcconfig */,
 				044D2E78EC312E66BE9DA029 /* Pods-Voys Staging.release.xcconfig */,
+				6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */,
+				D1451B6C942ADC0A1D3C4C93 /* Pods-ANNAbel Staging.release.xcconfig */,
+				50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */,
+				462AC61C028E13F0CB8CD9E3 /* Pods-Verbonden Staging.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1883,6 +2335,45 @@
 				EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		832104B92296C78D002766BA /* Verbonden */ = {
+			isa = PBXGroup;
+			children = (
+				83CB734C2296C9F000987168 /* Config.plist */,
+				83CB73492296C9F000987168 /* InfoPlist.strings */,
+				83CB734D2296C9F000987168 /* FirebaseService-Info.plist */,
+				83CB73472296C9EF00987168 /* GoogleService-Info.plist */,
+				83CB734B2296C9F000987168 /* Verbonden-Info.plist */,
+				83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */,
+				83CB73522296C9F000987168 /* Verbonden.xcassets */,
+				83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */,
+			);
+			path = Verbonden;
+			sourceTree = "<group>";
+		};
+		8382079F229099400098EABD /* ANNAbel */ = {
+			isa = PBXGroup;
+			children = (
+				838207C92292CFF80098EABD /* Acceptatie-ANNAbel-Info.plist */,
+				838207C82292CFF80098EABD /* Config.plist */,
+				838207D82292D0A70098EABD /* GoogleService-Info.plist */,
+				838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */,
+				838207D62292D04D0098EABD /* InfoPlist.strings */,
+			);
+			path = ANNAbel;
+			sourceTree = "<group>";
+		};
+		838207A0229099610098EABD /* Verbonden */ = {
+			isa = PBXGroup;
+			children = (
+				838207B22292CB530098EABD /* Acceptatie-Verbonden-Info.plist */,
+				838207B32292CB540098EABD /* Config.plist */,
+				838207B52292CB540098EABD /* GoogleService-Info.plist */,
+				838207C22292CCFA0098EABD /* InfoPlist.strings */,
+				838207B72292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard */,
+			);
+			path = Verbonden;
 			sourceTree = "<group>";
 		};
 		C409F3A11C24B9D6007DCC4A /* Models */ = {
@@ -1942,11 +2433,11 @@
 		C41FD8D01C60A12500BBE6D7 /* Branding */ = {
 			isa = PBXGroup;
 			children = (
-				EE2317FC20A0442000C05EB0 /* ANNAbel */,
-				F208516D1D2693A300A17E71 /* Acceptatie */,
-				C490ADEF1D086458004A8F83 /* Verbonden */,
 				F208517F1D269DD300A17E71 /* Vialer */,
 				C41FD8D11C60A12E00BBE6D7 /* Voys */,
+				EE2317FC20A0442000C05EB0 /* ANNAbel */,
+				832104B92296C78D002766BA /* Verbonden */,
+				F208516D1D2693A300A17E71 /* Acceptatie */,
 			);
 			name = Branding;
 			sourceTree = "<group>";
@@ -1963,7 +2454,7 @@
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
 				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
 				EE3D8674201F113800CEFDC6 /* Voys.xcassets */,
-				833DFB43221461F8003E19CC /* Voys-LaunchScreen.storyboard */,
+				832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */,
 			);
 			name = Voys;
 			sourceTree = "<group>";
@@ -2114,23 +2605,6 @@
 				C42B048C1E79354700280381 /* RecentCallManagerTests.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		C490ADEF1D086458004A8F83 /* Verbonden */ = {
-			isa = PBXGroup;
-			children = (
-				EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */,
-				EEBB57431E5D68960018BD1D /* VerbondenIntentsExtension.plist */,
-				C490ADF31D086458004A8F83 /* Verbonden-Info.plist */,
-				C490ADF21D086458004A8F83 /* Snapshot-Constants.swift */,
-				C490ADF01D086458004A8F83 /* Config.plist */,
-				EEEDF357219DC2AE00D0D853 /* FirebaseService-Info.plist */,
-				C490ADF11D086458004A8F83 /* GoogleService-Info.plist */,
-				C490ADF41D086458004A8F83 /* Verbonden.xcassets */,
-				833DFB452214624F003E19CC /* Verbonden-LaunchScreen.storyboard */,
-			);
-			name = Verbonden;
-			path = Branding/Verbonden;
 			sourceTree = "<group>";
 		};
 		C496A8E71C2AB1FE00C42619 /* Side Menu */ = {
@@ -2447,10 +2921,10 @@
 		EE61F4991F1DDF1E006E890F /* Voys */ = {
 			isa = PBXGroup;
 			children = (
-				EE6F2A75214A330500229C75 /* InfoPlist.strings */,
 				EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */,
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
+				EE6F2A75214A330500229C75 /* InfoPlist.strings */,
 				833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */,
 			);
 			path = Voys;
@@ -2513,8 +2987,10 @@
 		F208516D1D2693A300A17E71 /* Acceptatie */ = {
 			isa = PBXGroup;
 			children = (
-				EE61F4991F1DDF1E006E890F /* Voys */,
 				EE61F4901F1DDE59006E890F /* Vialer */,
+				EE61F4991F1DDF1E006E890F /* Voys */,
+				8382079F229099400098EABD /* ANNAbel */,
+				838207A0229099610098EABD /* Verbonden */,
 			);
 			name = Acceptatie;
 			path = Branding/Acceptatie;
@@ -2859,6 +3335,8 @@
 				EE2318A820A0468F00C05EB0 /* ANNAbel.app */,
 				EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */,
 				EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */,
+				838206ED2290979A0098EABD /* ANNAbel Staging.app */,
+				8382079D229098D20098EABD /* Verbonden Staging.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2901,6 +3379,8 @@
 				AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */,
 				6E5A3938EA55131C5AB18EFE /* libPods-Vialer Staging.a */,
 				7CE771AA34104D7A975041F1 /* libPods-Voys Staging.a */,
+				21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */,
+				A3CC407352871DE562624E6D /* libPods-Verbonden Staging.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2966,6 +3446,56 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		838206402290979A0098EABD /* ANNAbel Staging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 838206EA2290979A0098EABD /* Build configuration list for PBXNativeTarget "ANNAbel Staging" */;
+			buildPhases = (
+				838206432290979A0098EABD /* [CP] Check Pods Manifest.lock */,
+				838206442290979A0098EABD /* Sources */,
+				838206AA2290979A0098EABD /* Frameworks */,
+				838206C02290979A0098EABD /* Resources */,
+				838206E32290979A0098EABD /* Update Version number */,
+				838206E42290979A0098EABD /* Update Build number */,
+				838206E52290979A0098EABD /* Embed Frameworks */,
+				838206E62290979A0098EABD /* Embed App Extensions */,
+				838206E82290979A0098EABD /* [CP] Copy Pods Resources */,
+				838206E92290979A0098EABD /* Crashlytics */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				838206412290979A0098EABD /* PBXTargetDependency */,
+			);
+			name = "ANNAbel Staging";
+			productName = Vialer;
+			productReference = 838206ED2290979A0098EABD /* ANNAbel Staging.app */;
+			productType = "com.apple.product-type.application";
+		};
+		838206EF229098D20098EABD /* Verbonden Staging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8382079A229098D20098EABD /* Build configuration list for PBXNativeTarget "Verbonden Staging" */;
+			buildPhases = (
+				838206F2229098D20098EABD /* [CP] Check Pods Manifest.lock */,
+				838206F3229098D20098EABD /* Sources */,
+				83820759229098D20098EABD /* Frameworks */,
+				8382076F229098D20098EABD /* Resources */,
+				83820793229098D20098EABD /* Update Version number */,
+				83820794229098D20098EABD /* Update Build number */,
+				83820795229098D20098EABD /* Embed Frameworks */,
+				83820796229098D20098EABD /* Embed App Extensions */,
+				83820798229098D20098EABD /* [CP] Copy Pods Resources */,
+				83820799229098D20098EABD /* Crashlytics */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				838206F0229098D20098EABD /* PBXTargetDependency */,
+			);
+			name = "Verbonden Staging";
+			productName = Vialer;
+			productReference = 8382079D229098D20098EABD /* Verbonden Staging.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C41FD8551C60A08400BBE6D7 /* Voys */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C41FD8CA1C60A08400BBE6D7 /* Build configuration list for PBXNativeTarget "Voys" */;
@@ -3299,6 +3829,12 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = VoIPGRID;
 				TargetAttributes = {
+					838206402290979A0098EABD = {
+						ProvisioningStyle = Manual;
+					};
+					838206EF229098D20098EABD = {
+						ProvisioningStyle = Manual;
+					};
 					C41FD8551C60A08400BBE6D7 = {
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
@@ -3400,6 +3936,7 @@
 				Base,
 				en,
 				nl,
+				global,
 			);
 			mainGroup = FB4226C4182261D200707349;
 			productRefGroup = FB4226CE182261D200707349 /* Products */;
@@ -3417,15 +3954,97 @@
 				C490AD631D0863E3004A8F83 /* Verbonden */,
 				C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */,
 				C490ADFA1D088535004A8F83 /* VerbondenSnapshotUITests */,
+				838206EF229098D20098EABD /* Verbonden Staging */,
 				EE23180720A0468F00C05EB0 /* ANNAbel */,
 				EE2318AA20A046AD00C05EB0 /* ANNAbelIntentsExtension */,
 				EE2318B720A046BB00C05EB0 /* ANNAbelSnapshotUITests */,
+				838206402290979A0098EABD /* ANNAbel Staging */,
 				C4F49F261BF0B45700C25159 /* VialerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		838206C02290979A0098EABD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				838206C22290979A0098EABD /* dtmf-#.aif in Resources */,
+				838206C32290979A0098EABD /* dtmf-0.aif in Resources */,
+				838206C42290979A0098EABD /* AvailabilityStoryboard.storyboard in Resources */,
+				838206C52290979A0098EABD /* TwoStepCallingStoryboard.storyboard in Resources */,
+				838207DB2292F97A0098EABD /* Config.plist in Resources */,
+				838207DE2292F9A50098EABD /* InfoPlist.strings in Resources */,
+				838206C62290979A0098EABD /* ContactsStoryboard.storyboard in Resources */,
+				838206C72290979A0098EABD /* dtmf-1.aif in Resources */,
+				838206C82290979A0098EABD /* SideMenuStoryboard.storyboard in Resources */,
+				838206C92290979A0098EABD /* dtmf-2.aif in Resources */,
+				838206CA2290979A0098EABD /* ReachabilityBarStoryboard.storyboard in Resources */,
+				838206CB2290979A0098EABD /* dtmf-*.aif in Resources */,
+				838206CC2290979A0098EABD /* RecentsStoryboard.storyboard in Resources */,
+				838206CD2290979A0098EABD /* Localizable.strings in Resources */,
+				838206CE2290979A0098EABD /* ringtone.wav in Resources */,
+				838206CF2290979A0098EABD /* SettingsStoryboard.storyboard in Resources */,
+				838206D02290979A0098EABD /* dtmf-3.aif in Resources */,
+				838206D32290979A0098EABD /* dtmf-4.aif in Resources */,
+				838206D42290979A0098EABD /* dtmf-5.aif in Resources */,
+				838206D52290979A0098EABD /* LogInViewController.xib in Resources */,
+				838206D62290979A0098EABD /* dtmf-6.aif in Resources */,
+				838207DA2292D0C10098EABD /* ANNAbel-Staging-LaunchScreen.storyboard in Resources */,
+				838206D72290979A0098EABD /* dtmf-7.aif in Resources */,
+				838206D82290979A0098EABD /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				838206D92290979A0098EABD /* SIPCallingStoryboard.storyboard in Resources */,
+				838206DA2290979A0098EABD /* disconnected.wav in Resources */,
+				838206DB2290979A0098EABD /* dtmf-8.aif in Resources */,
+				838206DD2290979A0098EABD /* dtmf-9.aif in Resources */,
+				838207D92292D0A70098EABD /* GoogleService-Info.plist in Resources */,
+				838206DF2290979A0098EABD /* Images.xcassets in Resources */,
+				838206E02290979A0098EABD /* ANNAbel.xcassets in Resources */,
+				838206E12290979A0098EABD /* DialerStoryboard.storyboard in Resources */,
+				838206E22290979A0098EABD /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8382076F229098D20098EABD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83820770229098D20098EABD /* dtmf-#.aif in Resources */,
+				83820772229098D20098EABD /* dtmf-0.aif in Resources */,
+				83820773229098D20098EABD /* AvailabilityStoryboard.storyboard in Resources */,
+				83820774229098D20098EABD /* TwoStepCallingStoryboard.storyboard in Resources */,
+				83820775229098D20098EABD /* ContactsStoryboard.storyboard in Resources */,
+				83820776229098D20098EABD /* dtmf-1.aif in Resources */,
+				83820777229098D20098EABD /* SideMenuStoryboard.storyboard in Resources */,
+				83820778229098D20098EABD /* dtmf-2.aif in Resources */,
+				8382077A229098D20098EABD /* dtmf-*.aif in Resources */,
+				8382077B229098D20098EABD /* ReachabilityBarStoryboard.storyboard in Resources */,
+				8382077C229098D20098EABD /* RecentsStoryboard.storyboard in Resources */,
+				8382077D229098D20098EABD /* Localizable.strings in Resources */,
+				838207B92292CB550098EABD /* Config.plist in Resources */,
+				8382077E229098D20098EABD /* ringtone.wav in Resources */,
+				8382077F229098D20098EABD /* dtmf-3.aif in Resources */,
+				83820780229098D20098EABD /* dtmf-4.aif in Resources */,
+				83820782229098D20098EABD /* dtmf-5.aif in Resources */,
+				83820783229098D20098EABD /* LogInViewController.xib in Resources */,
+				83820784229098D20098EABD /* dtmf-6.aif in Resources */,
+				83820785229098D20098EABD /* dtmf-7.aif in Resources */,
+				83820786229098D20098EABD /* SettingsStoryboard.storyboard in Resources */,
+				838207BB2292CB550098EABD /* GoogleService-Info.plist in Resources */,
+				83820788229098D20098EABD /* SIPIncomingCallStoryboard.storyboard in Resources */,
+				8382078A229098D20098EABD /* disconnected.wav in Resources */,
+				838207BD2292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard in Resources */,
+				838207DF2293F4B70098EABD /* InfoPlist.strings in Resources */,
+				8382078B229098D20098EABD /* SIPCallingStoryboard.storyboard in Resources */,
+				8382078C229098D20098EABD /* dtmf-8.aif in Resources */,
+				8382078D229098D20098EABD /* dtmf-9.aif in Resources */,
+				8382078E229098D20098EABD /* Images.xcassets in Resources */,
+				8358B8F62296ED9D00CCA6CC /* Verbonden.xcassets in Resources */,
+				83820790229098D20098EABD /* DialerStoryboard.storyboard in Resources */,
+				83820792229098D20098EABD /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C41FD8A61C60A08400BBE6D7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3438,6 +4057,7 @@
 				EE3D8675201F113900CEFDC6 /* Voys.xcassets in Resources */,
 				C41FD8AA1C60A08400BBE6D7 /* TwoStepCallingStoryboard.storyboard in Resources */,
 				C41FD8AB1C60A08400BBE6D7 /* ContactsStoryboard.storyboard in Resources */,
+				832104B5229552F5002766BA /* Voys-LaunchScreen.storyboard in Resources */,
 				EEEF160C1F470C4A00AEFA83 /* VoysIntentsExtension.plist in Resources */,
 				F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				C41FD8AC1C60A08400BBE6D7 /* dtmf-1.aif in Resources */,
@@ -3461,7 +4081,6 @@
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
 				C41FD8BD1C60A08400BBE6D7 /* Images.xcassets in Resources */,
 				C42FAD3D1D198D34004D9D00 /* ringtone.wav in Resources */,
-				833DFB44221461F8003E19CC /* Voys-LaunchScreen.storyboard in Resources */,
 				C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */,
 				C41FD8C11C60A08400BBE6D7 /* DialerStoryboard.storyboard in Resources */,
 				C41FD8C21C60A08400BBE6D7 /* MainStoryboard.storyboard in Resources */,
@@ -3494,15 +4113,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C490ADC41D0863E3004A8F83 /* dtmf-#.aif in Resources */,
-				EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */,
 				C490ADC51D0863E3004A8F83 /* dtmf-0.aif in Resources */,
 				C490ADC61D0863E3004A8F83 /* AvailabilityStoryboard.storyboard in Resources */,
 				C490ADC71D0863E3004A8F83 /* TwoStepCallingStoryboard.storyboard in Resources */,
+				83CB73542296C9F000987168 /* GoogleService-Info.plist in Resources */,
 				C490ADC81D0863E3004A8F83 /* ContactsStoryboard.storyboard in Resources */,
 				C490ADC91D0863E3004A8F83 /* dtmf-1.aif in Resources */,
 				C490ADCA1D0863E3004A8F83 /* SideMenuStoryboard.storyboard in Resources */,
 				C490ADCB1D0863E3004A8F83 /* dtmf-2.aif in Resources */,
-				C490ADF61D086458004A8F83 /* GoogleService-Info.plist in Resources */,
 				C49A46AF1E6829DD0097E808 /* dtmf-*.aif in Resources */,
 				C490ADCC1D0863E3004A8F83 /* ReachabilityBarStoryboard.storyboard in Resources */,
 				C490ADCD1D0863E3004A8F83 /* RecentsStoryboard.storyboard in Resources */,
@@ -3510,23 +4128,25 @@
 				C490ADCE1D0863E3004A8F83 /* ringtone.wav in Resources */,
 				C490ADCF1D0863E3004A8F83 /* dtmf-3.aif in Resources */,
 				C490ADD11D0863E3004A8F83 /* dtmf-4.aif in Resources */,
-				EEEDF358219DC2AF00D0D853 /* FirebaseService-Info.plist in Resources */,
+				83CB73582296C9F000987168 /* FirebaseService-Info.plist in Resources */,
 				C490ADD21D0863E3004A8F83 /* dtmf-5.aif in Resources */,
 				C49B0EEB1E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
 				C490ADD51D0863E3004A8F83 /* dtmf-6.aif in Resources */,
+				83CB73552296C9F000987168 /* InfoPlist.strings in Resources */,
+				83CB735B2296C9F000987168 /* Verbonden.xcassets in Resources */,
 				C490ADD61D0863E3004A8F83 /* dtmf-7.aif in Resources */,
 				EE733DAE21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
-				C490ADF91D086458004A8F83 /* Verbonden.xcassets in Resources */,
 				C490ADD71D0863E3004A8F83 /* SIPIncomingCallStoryboard.storyboard in Resources */,
-				833DFB462214624F003E19CC /* Verbonden-LaunchScreen.storyboard in Resources */,
+				83CB735C2296C9F000987168 /* VerbondenIntentsExtension.plist in Resources */,
 				C490ADD81D0863E3004A8F83 /* disconnected.wav in Resources */,
 				C4F385971D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
+				83CB73562296C9F000987168 /* Verbonden-Info.plist in Resources */,
 				C490ADD91D0863E3004A8F83 /* dtmf-8.aif in Resources */,
 				C490ADDB1D0863E3004A8F83 /* dtmf-9.aif in Resources */,
+				83CB73572296C9F000987168 /* Config.plist in Resources */,
 				C490ADDD1D0863E3004A8F83 /* Images.xcassets in Resources */,
-				C490ADF51D086458004A8F83 /* Config.plist in Resources */,
+				83CB73592296C9F000987168 /* Verbonden-LaunchScreen.storyboard in Resources */,
 				C490ADE01D0863E3004A8F83 /* DialerStoryboard.storyboard in Resources */,
-				EEEF16031F470C1C00AEFA83 /* VerbondenIntentsExtension.plist in Resources */,
 				C490ADE11D0863E3004A8F83 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3926,6 +4546,182 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		838206432290979A0098EABD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ANNAbel Staging-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		838206E32290979A0098EABD /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		838206E42290979A0098EABD /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			showEnvVarsInLog = 0;
+		};
+		838206E82290979A0098EABD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging-resources.sh",
+				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		838206E92290979A0098EABD /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		838206F2229098D20098EABD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Verbonden Staging-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83820793229098D20098EABD /* Update Version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+		};
+		83820794229098D20098EABD /* Update Build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			showEnvVarsInLog = 0;
+		};
+		83820798229098D20098EABD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging-resources.sh",
+				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83820799229098D20098EABD /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)\n",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		8D8E5EA888EFB1090F5C5581 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4544,6 +5340,222 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		838206442290979A0098EABD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				838206452290979A0098EABD /* NoAnimationSegue.m in Sources */,
+				838206462290979A0098EABD /* URLRequestExtensions.swift in Sources */,
+				838206472290979A0098EABD /* SIPUtils.m in Sources */,
+				838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */,
+				838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */,
+				8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */,
+				8382064B2290979A0098EABD /* AvailabilityModel.m in Sources */,
+				8382064C2290979A0098EABD /* RoundedAndColoredUIButton.m in Sources */,
+				8382064D2290979A0098EABD /* MainTabBarViewController.m in Sources */,
+				8382064E2290979A0098EABD /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				8382064F2290979A0098EABD /* MiddlewareRequestOperationManager.m in Sources */,
+				838206502290979A0098EABD /* String+regex.swift in Sources */,
+				838206512290979A0098EABD /* LogEntriesConfiguration.swift in Sources */,
+				838206522290979A0098EABD /* ForgotPasswordView.m in Sources */,
+				838206532290979A0098EABD /* SIPIncomingCallViewController.m in Sources */,
+				838206542290979A0098EABD /* NotificationToken.swift in Sources */,
+				838206552290979A0098EABD /* NSString+SubString.m in Sources */,
+				838206562290979A0098EABD /* PhoneNumberModel.m in Sources */,
+				838206572290979A0098EABD /* NSManagedObjectContext.swift in Sources */,
+				838206582290979A0098EABD /* SecondCallViewController.swift in Sources */,
+				838206592290979A0098EABD /* GAConfiguration.swift in Sources */,
+				8382065A2290979A0098EABD /* SetupCallTransferDialPadViewController.swift in Sources */,
+				8382065B2290979A0098EABD /* SideMenuViewController.m in Sources */,
+				8382065C2290979A0098EABD /* VailerRootViewController.m in Sources */,
+				8382065D2290979A0098EABD /* RecentCallManager.swift in Sources */,
+				8382065E2290979A0098EABD /* AudioQualityViewController.swift in Sources */,
+				8382065F2290979A0098EABD /* SettingsViewController.m in Sources */,
+				838206602290979A0098EABD /* VialerDrawerViewController.m in Sources */,
+				838206612290979A0098EABD /* SystemUser.m in Sources */,
+				838206622290979A0098EABD /* VialerLogger.m in Sources */,
+				838206632290979A0098EABD /* NumberPadButton.m in Sources */,
+				838206642290979A0098EABD /* VIAScene.m in Sources */,
+				838206652290979A0098EABD /* VialerStats.swift in Sources */,
+				838206662290979A0098EABD /* EnumHelper.swift in Sources */,
+				838206672290979A0098EABD /* CoreDataStackHelper.swift in Sources */,
+				838206682290979A0098EABD /* AvailabilityViewController.m in Sources */,
+				838206692290979A0098EABD /* LogInViewController.m in Sources */,
+				8382066A2290979A0098EABD /* TwoStepCallingViewController.m in Sources */,
+				8382066B2290979A0098EABD /* CircleWithShadow.m in Sources */,
+				8382066C2290979A0098EABD /* WebserviceAuthentication.swift in Sources */,
+				8382066D2290979A0098EABD /* SegueHandler.swift in Sources */,
+				8382066E2290979A0098EABD /* StartCallConvertible.swift in Sources */,
+				8382066F2290979A0098EABD /* UIDeviceExtensions.swift in Sources */,
+				838206702290979A0098EABD /* ColorsConfiguration.swift in Sources */,
+				838206712290979A0098EABD /* UIAlertController+Vialer.m in Sources */,
+				838206722290979A0098EABD /* UrlsConfiguration.swift in Sources */,
+				838206732290979A0098EABD /* EditNumberViewController.m in Sources */,
+				838206742290979A0098EABD /* VialerWebViewController.m in Sources */,
+				838206752290979A0098EABD /* UIViewControllerExtensions.swift in Sources */,
+				838206762290979A0098EABD /* VoIPGRIDRequestOperationManager.m in Sources */,
+				838206772290979A0098EABD /* ReachabilityBarViewController.swift in Sources */,
+				838206782290979A0098EABD /* TransferInProgressViewController.swift in Sources */,
+				838206792290979A0098EABD /* PhoneNumber.swift in Sources */,
+				8382067A2290979A0098EABD /* ConfigureFormView.m in Sources */,
+				8382067B2290979A0098EABD /* Resource.swift in Sources */,
+				8382067C2290979A0098EABD /* LoginFormView.m in Sources */,
+				8382067D2290979A0098EABD /* PhoneNumberUtils.m in Sources */,
+				8382067E2290979A0098EABD /* NSUserActivity+StartCallConvertible.swift in Sources */,
+				8382067F2290979A0098EABD /* ActivateSIPAccountViewController.m in Sources */,
+				838206802290979A0098EABD /* SIPCallingViewController.swift in Sources */,
+				838206812290979A0098EABD /* Reachability.swift in Sources */,
+				838206822290979A0098EABD /* ReachabilityHelper.swift in Sources */,
+				838206832290979A0098EABD /* PushedCall.swift in Sources */,
+				838206842290979A0098EABD /* KeypadViewController.swift in Sources */,
+				838206852290979A0098EABD /* PasteableUILabel.m in Sources */,
+				838206862290979A0098EABD /* RecentTableViewCell.m in Sources */,
+				838206872290979A0098EABD /* SipCallingButton.m in Sources */,
+				838206882290979A0098EABD /* DialerViewController.swift in Sources */,
+				838206892290979A0098EABD /* WebserviceProtocol.swift in Sources */,
+				8382068A2290979A0098EABD /* Webservice.swift in Sources */,
+				8382068B2290979A0098EABD /* VialerGAITracker.swift in Sources */,
+				8382068C2290979A0098EABD /* Middleware.m in Sources */,
+				8382068D2290979A0098EABD /* SetupCallTransferContactsViewController.swift in Sources */,
+				8382068E2290979A0098EABD /* AppDelegate.swift in Sources */,
+				8382068F2290979A0098EABD /* RecentsTimeConverter.swift in Sources */,
+				838206902290979A0098EABD /* CircleWithWhiteIcon.m in Sources */,
+				838206912290979A0098EABD /* ButtonWithBottomBorder.m in Sources */,
+				838206922290979A0098EABD /* TokenFromPasteBoard.swift in Sources */,
+				838206932290979A0098EABD /* VialerIconView.m in Sources */,
+				838206942290979A0098EABD /* UnlockView.m in Sources */,
+				838206952290979A0098EABD /* UITableView.swift in Sources */,
+				838206962290979A0098EABD /* GradientView.swift in Sources */,
+				838206972290979A0098EABD /* AnimatedImageView.m in Sources */,
+				838206982290979A0098EABD /* RecentCall.swift in Sources */,
+				838206992290979A0098EABD /* UIImage.swift in Sources */,
+				8382069A2290979A0098EABD /* BubblingPoints.m in Sources */,
+				8382069B2290979A0098EABD /* SetupCallTransfer.swift in Sources */,
+				8382069C2290979A0098EABD /* Managed.swift in Sources */,
+				8382069D2290979A0098EABD /* ColoredCircle.m in Sources */,
+				8382069E2290979A0098EABD /* AppInfo.swift in Sources */,
+				8382069F2290979A0098EABD /* TwoStepCall.m in Sources */,
+				838206A02290979A0098EABD /* NSString+Mobile.m in Sources */,
+				838206A12290979A0098EABD /* UIColorExtenstions.swift in Sources */,
+				838206A22290979A0098EABD /* Vialer.xcdatamodeld in Sources */,
+				838206A32290979A0098EABD /* RecentsViewController.swift in Sources */,
+				838206A42290979A0098EABD /* VialerLogger.swift in Sources */,
+				838206A52290979A0098EABD /* ContactModel.swift in Sources */,
+				838206A62290979A0098EABD /* CoreDataStack.swift in Sources */,
+				838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */,
+				838206A82290979A0098EABD /* ContactsViewController.m in Sources */,
+				838206A92290979A0098EABD /* APNSHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838206F3229098D20098EABD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				838206F4229098D20098EABD /* NoAnimationSegue.m in Sources */,
+				838206F5229098D20098EABD /* URLRequestExtensions.swift in Sources */,
+				838206F6229098D20098EABD /* SIPUtils.m in Sources */,
+				838206F7229098D20098EABD /* FileManagerExtensions.swift in Sources */,
+				838206F8229098D20098EABD /* TwoFactorAuthenticationView.m in Sources */,
+				838206F9229098D20098EABD /* UserProfileWebViewController.m in Sources */,
+				838206FA229098D20098EABD /* AvailabilityModel.m in Sources */,
+				838206FB229098D20098EABD /* RoundedAndColoredUIButton.m in Sources */,
+				838206FC229098D20098EABD /* MainTabBarViewController.m in Sources */,
+				838206FD229098D20098EABD /* RecentsTimeConverter.swift in Sources */,
+				838206FE229098D20098EABD /* String+regex.swift in Sources */,
+				838206FF229098D20098EABD /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
+				83820700229098D20098EABD /* LogEntriesConfiguration.swift in Sources */,
+				83820701229098D20098EABD /* MiddlewareRequestOperationManager.m in Sources */,
+				83820702229098D20098EABD /* SIPIncomingCallViewController.m in Sources */,
+				83820703229098D20098EABD /* NotificationToken.swift in Sources */,
+				83820704229098D20098EABD /* ForgotPasswordView.m in Sources */,
+				83820705229098D20098EABD /* NSString+SubString.m in Sources */,
+				83820706229098D20098EABD /* ColoredCircle.m in Sources */,
+				83820707229098D20098EABD /* NSManagedObjectContext.swift in Sources */,
+				83820708229098D20098EABD /* GAConfiguration.swift in Sources */,
+				83820709229098D20098EABD /* SecondCallViewController.swift in Sources */,
+				8382070A229098D20098EABD /* SetupCallTransferDialPadViewController.swift in Sources */,
+				8382070B229098D20098EABD /* PhoneNumberModel.m in Sources */,
+				8382070C229098D20098EABD /* SideMenuViewController.m in Sources */,
+				8382070D229098D20098EABD /* AudioQualityViewController.swift in Sources */,
+				8382070E229098D20098EABD /* RecentCallManager.swift in Sources */,
+				8382070F229098D20098EABD /* VailerRootViewController.m in Sources */,
+				83820710229098D20098EABD /* SettingsViewController.m in Sources */,
+				83820711229098D20098EABD /* VialerDrawerViewController.m in Sources */,
+				83820712229098D20098EABD /* SystemUser.m in Sources */,
+				83820713229098D20098EABD /* NumberPadButton.m in Sources */,
+				83820714229098D20098EABD /* VialerStats.swift in Sources */,
+				83820715229098D20098EABD /* EnumHelper.swift in Sources */,
+				83820716229098D20098EABD /* VIAScene.m in Sources */,
+				83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */,
+				83820718229098D20098EABD /* AvailabilityViewController.m in Sources */,
+				83820719229098D20098EABD /* LogInViewController.m in Sources */,
+				8382071A229098D20098EABD /* TwoStepCallingViewController.m in Sources */,
+				8382071B229098D20098EABD /* CircleWithShadow.m in Sources */,
+				8382071C229098D20098EABD /* WebserviceAuthentication.swift in Sources */,
+				8382071D229098D20098EABD /* SegueHandler.swift in Sources */,
+				8382071E229098D20098EABD /* StartCallConvertible.swift in Sources */,
+				8382071F229098D20098EABD /* ColorsConfiguration.swift in Sources */,
+				83820720229098D20098EABD /* UIDeviceExtensions.swift in Sources */,
+				83820721229098D20098EABD /* UrlsConfiguration.swift in Sources */,
+				83820722229098D20098EABD /* UIAlertController+Vialer.m in Sources */,
+				83820723229098D20098EABD /* EditNumberViewController.m in Sources */,
+				83820724229098D20098EABD /* VialerWebViewController.m in Sources */,
+				83820725229098D20098EABD /* VoIPGRIDRequestOperationManager.m in Sources */,
+				83820726229098D20098EABD /* Resource.swift in Sources */,
+				83820727229098D20098EABD /* ReachabilityBarViewController.swift in Sources */,
+				83820728229098D20098EABD /* TransferInProgressViewController.swift in Sources */,
+				83820729229098D20098EABD /* PhoneNumber.swift in Sources */,
+				8382072A229098D20098EABD /* ConfigureFormView.m in Sources */,
+				8382072B229098D20098EABD /* NSUserActivity+StartCallConvertible.swift in Sources */,
+				8382072C229098D20098EABD /* LoginFormView.m in Sources */,
+				8382072D229098D20098EABD /* PhoneNumberUtils.m in Sources */,
+				8382072E229098D20098EABD /* ActivateSIPAccountViewController.m in Sources */,
+				8382072F229098D20098EABD /* RecentTableViewCell.m in Sources */,
+				83820730229098D20098EABD /* SIPCallingViewController.swift in Sources */,
+				83820731229098D20098EABD /* Reachability.swift in Sources */,
+				83820732229098D20098EABD /* ReachabilityHelper.swift in Sources */,
+				83820733229098D20098EABD /* PushedCall.swift in Sources */,
+				83820734229098D20098EABD /* PasteableUILabel.m in Sources */,
+				83820735229098D20098EABD /* KeypadViewController.swift in Sources */,
+				83820736229098D20098EABD /* Webservice.swift in Sources */,
+				83820737229098D20098EABD /* SipCallingButton.m in Sources */,
+				83820738229098D20098EABD /* DialerViewController.swift in Sources */,
+				83820739229098D20098EABD /* WebserviceProtocol.swift in Sources */,
+				8382073A229098D20098EABD /* UIViewControllerExtensions.swift in Sources */,
+				8382073B229098D20098EABD /* AppDelegate.swift in Sources */,
+				8382073C229098D20098EABD /* SetupCallTransferContactsViewController.swift in Sources */,
+				8382073D229098D20098EABD /* VialerGAITracker.swift in Sources */,
+				8382073E229098D20098EABD /* Middleware.m in Sources */,
+				8382073F229098D20098EABD /* ButtonWithBottomBorder.m in Sources */,
+				83820740229098D20098EABD /* UITableView.swift in Sources */,
+				83820741229098D20098EABD /* TokenFromPasteBoard.swift in Sources */,
+				83820742229098D20098EABD /* CircleWithWhiteIcon.m in Sources */,
+				83820743229098D20098EABD /* VialerIconView.m in Sources */,
+				83820744229098D20098EABD /* UnlockView.m in Sources */,
+				83820745229098D20098EABD /* GradientView.swift in Sources */,
+				83820746229098D20098EABD /* UIImage.swift in Sources */,
+				83820747229098D20098EABD /* AnimatedImageView.m in Sources */,
+				83820748229098D20098EABD /* RecentCall.swift in Sources */,
+				83820749229098D20098EABD /* VialerLogger.m in Sources */,
+				8382074A229098D20098EABD /* SetupCallTransfer.swift in Sources */,
+				8382074B229098D20098EABD /* BubblingPoints.m in Sources */,
+				8382074C229098D20098EABD /* Managed.swift in Sources */,
+				8382074D229098D20098EABD /* AppInfo.swift in Sources */,
+				8382074E229098D20098EABD /* TwoStepCall.m in Sources */,
+				8382074F229098D20098EABD /* RecentsViewController.swift in Sources */,
+				83820750229098D20098EABD /* UIColorExtenstions.swift in Sources */,
+				83820751229098D20098EABD /* Vialer.xcdatamodeld in Sources */,
+				83820752229098D20098EABD /* NSString+Mobile.m in Sources */,
+				83820753229098D20098EABD /* VialerLogger.swift in Sources */,
+				83820754229098D20098EABD /* ContactModel.swift in Sources */,
+				83820755229098D20098EABD /* CoreDataStack.swift in Sources */,
+				83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */,
+				83820757229098D20098EABD /* ContactsViewController.m in Sources */,
+				83820758229098D20098EABD /* APNSHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C41FD8571C60A08400BBE6D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4792,7 +5804,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C490AE0B1D088564004A8F83 /* Snapshot-Constants.swift in Sources */,
 				C490ADFF1D088535004A8F83 /* SnapshotUITests.swift in Sources */,
 				C490AE001D088535004A8F83 /* SnapshotHelper.swift in Sources */,
 			);
@@ -5304,6 +6315,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		838206412290979A0098EABD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE2318AA20A046AD00C05EB0 /* ANNAbelIntentsExtension */;
+			targetProxy = 838206422290979A0098EABD /* PBXContainerItemProxy */;
+		};
+		838206F0229098D20098EABD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C43172391DFE85F8005FF8EA /* VerbondenIntentsExtension */;
+			targetProxy = 838206F1229098D20098EABD /* PBXContainerItemProxy */;
+		};
 		C41FD9031C60B28E00BBE6D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C41FD8551C60A08400BBE6D7 /* Voys */;
@@ -5362,6 +6383,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		838207C22292CCFA0098EABD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838207C12292CCFA0098EABD /* en */,
+				838207C32292CCFE0098EABD /* nl */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		838207D62292D04D0098EABD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838207D52292D04D0098EABD /* en */,
+				838207D72292D0530098EABD /* nl */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		83CB73492296C9F000987168 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83CB734A2296C9F000987168 /* nl */,
+				83CB735F2296CA4E00987168 /* en */,
+				83CB73602296CA5100987168 /* nl */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5461,15 +6510,6 @@
 			name = SettingsStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
-		EEEF15FF1F470C1500AEFA83 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EEEF16001F470C1500AEFA83 /* en */,
-				EEEF16021F470C1C00AEFA83 /* nl */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5518,6 +6558,188 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		838206EB2290979A0098EABD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J6QW4N3NV4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"PJ_AUTOCONF=1",
+					SANDBOX_APNS_TOKEN,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Acceptatie/ANNAbel/Acceptatie-ANNAbel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bellenmetannabel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5238e0b6-0193-4b6f-97d9-029ab5bbc601";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.bellenmetannabel.app";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		838206EC2290979A0098EABD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1451B6C942ADC0A1D3C4C93 /* Pods-ANNAbel Staging.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J6QW4N3NV4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Acceptatie/ANNAbel/Acceptatie-ANNAbel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bellenmetannabel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e9ffabc0-ae23-4e51-9a43-da3a9d6ec796";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.bellenmetannabel.app";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		8382079B229098D20098EABD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = LG97ZGSAVA;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"PJ_AUTOCONF=1",
+					SANDBOX_APNS_TOKEN,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Acceptatie/Verbonden/Acceptatie-Verbonden-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ff6bedf2-eddc-454b-9bb6-d310e86f406e";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.verbonden.app";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		8382079C229098D20098EABD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 462AC61C028E13F0CB8CD9E3 /* Pods-Verbonden Staging.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = LG97ZGSAVA;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/\"",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Vialer/Supporting Files/Vialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Branding/Acceptatie/Verbonden/Acceptatie-Verbonden-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.verbonden.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "50701d7d-7a55-470f-87f2-f4d15b57627e";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore nl.verbonden.app";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		C41FD8CB1C60A08400BBE6D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */;
@@ -6884,6 +8106,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		838206EA2290979A0098EABD /* Build configuration list for PBXNativeTarget "ANNAbel Staging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				838206EB2290979A0098EABD /* Debug */,
+				838206EC2290979A0098EABD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8382079A229098D20098EABD /* Build configuration list for PBXNativeTarget "Verbonden Staging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8382079B229098D20098EABD /* Debug */,
+				8382079C229098D20098EABD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C41FD8CA1C60A08400BBE6D7 /* Build configuration list for PBXNativeTarget "Voys" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
