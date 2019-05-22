@@ -258,6 +258,9 @@
 /* Not allowed */
 "Not allowed" = "Niet toegestaan";
 
+/* Fetching recent calls failed */
+"Fetching recent calls failed" = "Ophalen recente gesprekken mislukt";
+
 /* No comment provided by engineer. */
 "Not available" = "Niet bereikbaar";
 
