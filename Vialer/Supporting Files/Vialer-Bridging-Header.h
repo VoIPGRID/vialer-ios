@@ -30,3 +30,5 @@
 #import "PhoneNumberUtils.h"
 #import "VialerWebViewController.h"
 #import "SideMenuViewController.h"
+#import "VailerRootViewController.h"
+#import "VialerDrawerViewController.h"

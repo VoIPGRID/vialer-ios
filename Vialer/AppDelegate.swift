@@ -7,6 +7,7 @@ import AVFoundation
 import CoreData
 import Firebase
 import UIKit
+import UserNotifications
 
 
 @UIApplicationMain
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder {
                 static let category = "IncomingCall"
                 static let accept = "AcceptCall"
                 static let decline = "DeclineCall"
+                static let missed = "MissedCall"
             }
             static let incomingCall = Notification.Name(rawValue: AppDelegateIncomingCallNotification)
             static let incomingCallAccepted = Notification.Name(rawValue: AppDelegateIncomingBackgroundCallAcceptedNotification)
@@ -70,8 +72,8 @@ extension AppDelegate: UIApplicationDelegate {
         setupUI()
         setupObservers()
         setupVoIP()
-
         setupFirebase()
+        setupMissedCallNotifications()
 
         return true
     }
@@ -277,6 +279,21 @@ extension AppDelegate {
             VialerLogWarning("Error setting up a call with \(statusCode) / \(statusMessage)")
         }
     }
+
+    fileprivate func setupMissedCallNotifications() {
+        if #available(iOS 10.0, *) {
+            let options: UNAuthorizationOptions = [.alert, .sound]
+            
+            UNUserNotificationCenter.current().delegate = self
+            
+            UNUserNotificationCenter.current().requestAuthorization(options: options) {
+                (granted, error) in
+                if !granted {
+                    VialerLogInfo("User has declined notifications")
+                }
+            }
+        }
+    }
 }
 
 // MARK: - VoIP
@@ -320,14 +337,19 @@ extension AppDelegate {
         vialerSIPLib.setMissedCall { (call) in
             switch call.terminateReason {
             case .callCompletedElsewhere:
-                VialerLogDebug("Call completed elsewhere")
+                VialerLogDebug("Missed call, call completed elsewhere")
                 VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
                 VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
             case .originatorCancel:
-                VialerLogDebug("Originator cancelled")
+                VialerLogDebug("Missed call, originator cancelled")
                 VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
                 VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
+                
+                if #available(iOS 10.0, *) {
+                    self.createLocalNotificationMissedCall(forCall: call)
+                }                
             case .unknown:
+                VialerLogDebug("Missed call, unknown reason")
                 break
             }
         }
@@ -490,6 +512,38 @@ extension AppDelegate {
 
         UIApplication.shared.scheduleLocalNotification(notification)
     }
+    
+    @available(iOS 10.0, *)
+    private func createLocalNotificationMissedCall(forCall call: VSLCall) {
+        let content = UNMutableNotificationContent()        
+        let callerNumber = call.callerNumber! // Possible options: a phone number or "anonymous".
+        var displayName = callerNumber
+        
+        // If the call isn't anonymous try to look up the number for a known contact.
+        if callerNumber != "anonymous" {
+            let digits = PhoneNumberUtils.removePrefix(fromPhoneNumber: callerNumber)
+            
+            if let phoneNumber = ContactModel.defaultModel.phoneNumbersToContacts[digits] {
+                displayName = phoneNumber.callerName!
+            }
+        } else {
+            displayName = NSLocalizedString("Anonymous", comment: "Anonymous")
+        }
+        
+        content.title = displayName
+        content.body = NSLocalizedString("Missed call", comment: "Missed call")
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let identifier = Configuration.Notifications.Identifiers.missed
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("Could not add missed call notification: \(error.localizedDescription)")
+            }
+        }
+    }
 
     /// Handle the local notification.
     ///
@@ -592,4 +646,35 @@ extension AppDelegate {
             callAvailabilityTimer = nil
         }
     }
+}
+
+
+@available(iOS 10.0, *)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Called when the app receive notification.
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        // The user taps on the missed call notification.
+        if response.notification.request.identifier == Configuration.Notifications.Identifiers.missed {
+            // Present the RecentsViewController.
+            if let vialerRootVC = self.window?.rootViewController as? VailerRootViewController,
+                let vialerDrawerVC = vialerRootVC.presentedViewController as? VialerDrawerViewController,
+                let mainTabBarVC = vialerDrawerVC.centerViewController as? UITabBarController {
+                
+                mainTabBarVC.selectedIndex = 2
+            }
+            
+            completionHandler()
+        }
+    }
+
 }

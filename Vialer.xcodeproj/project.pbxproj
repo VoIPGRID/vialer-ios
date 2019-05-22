@@ -7285,7 +7285,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
+					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -7349,7 +7349,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
+					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
