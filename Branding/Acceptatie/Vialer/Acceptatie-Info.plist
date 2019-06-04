@@ -50,7 +50,7 @@
 		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>Vialer-LaunchScreen</string>
+	<string>Vialer-Staging-LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>

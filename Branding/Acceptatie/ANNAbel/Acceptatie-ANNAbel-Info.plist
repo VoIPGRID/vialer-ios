@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UILaunchStoryboardName</key>
-	<string>Verbonden-LaunchScreen</string>
 	<key>Additional_Version_String</key>
 	<string>Updated on build</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -36,12 +34,14 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSContactsUsageDescription</key>
-	<string>Verbonden needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Verbonden needs access to your microphone to make calling possible</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Verbonden needs access to your bluetooth to get the name of the device</string>
+	<string>ANNAbel needs access to your bluetooth to get the name of the device</string>
+	<key>NSCameraUsageDescription</key>
+	<string>ANNAbel needs access to your camera to make video calls</string>
+	<key>NSContactsUsageDescription</key>
+	<string>ANNAbel needs access to your contacts to make calls to your contacts possible. Your contacts will not be used by us or uploaded anywhere. Only the phone number and name are used to setup a call.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>ANNAbel needs access to your microphone to make calling possible</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -49,6 +49,8 @@
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>ANNAbel-Staging-LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -73,8 +75,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Verbonden needs access to your camera to make video calls</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

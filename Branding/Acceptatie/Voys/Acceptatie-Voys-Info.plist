@@ -50,7 +50,7 @@
 		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>Voys-LaunchScreen</string>
+	<string>Voys-Staging-LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>

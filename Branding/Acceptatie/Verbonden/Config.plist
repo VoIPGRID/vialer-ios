@@ -2,17 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Log Entries</key>
+	<dict>
+		<key>Main</key>
+		<string>712c6c73-82d2-4be5-af08-84e18386e1e0</string>
+		<key>Push Notifications</key>
+		<string>07c8e655-a758-4590-aafe-682627d50904</string>
+	</dict>
+	<key>GA Custom Dimensions</key>
+	<dict>
+		<key>Build index</key>
+		<integer>2</integer>
+		<key>Client ID index</key>
+		<integer>1</integer>
+	</dict>
 	<key>Primary colors</key>
 	<dict>
 		<key>PrimaryBrandColor</key>
 		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>246</integer>
+			<integer>0</integer>
+			<integer>8</integer>
+			<integer>199</integer>
 		</array>
 		<key>SecondaryBrandColor</key>
 		<array>
-			<integer>238</integer>
+			<integer>46</integer>
 			<integer>49</integer>
 			<integer>246</integer>
 		</array>
@@ -46,15 +60,15 @@
 	<dict>
 		<key>BackgroundGradientEndColor</key>
 		<array>
-			<integer>42</integer>
-			<integer>45</integer>
-			<integer>14</integer>
+			<integer>28</integer>
+			<integer>101</integer>
+			<integer>253</integer>
 		</array>
 		<key>BackgroundGradientStartColor</key>
 		<array>
-			<integer>46</integer>
-			<integer>49</integer>
-			<integer>246</integer>
+			<integer>0</integer>
+			<integer>58</integer>
+			<integer>199</integer>
 		</array>
 		<key>NumberPadButtonPressedColor</key>
 		<string>WhiteColor</string>
@@ -80,11 +94,11 @@
 		<string>PrimaryBrandColor</string>
 		<key>SideMenuTintColor</key>
 		<string>PrimaryBrandColor</string>
-		<key>SideMenuHeaderBackgroundColor</key>
-		<string>AppleDefaultOffWhite</string>
 		<key>SideMenuButtonPressedState</key>
 		<string>AppleDefaultOffWhite</string>
 		<key>NavigationBarBarTintColor</key>
+		<string>AppleDefaultOffWhite</string>
+		<key>SideMenuHeaderBackgroundColor</key>
 		<string>AppleDefaultOffWhite</string>
 		<key>AvailabilityTableViewTintColor</key>
 		<string>PrimaryBrandColor</string>
@@ -146,18 +160,9 @@
 		<key>SIP domain</key>
 		<string>sipproxy-staging.voipgrid.nl</string>
 		<key>onboarding-nl</key>
-		<string>https://www.voys.nl/app-info</string>
+		<string>https://verbonden.nl/app/app-info-nl</string>
 		<key>onboarding-en</key>
-		<string>https://www.voys.nl/en/app-info</string>
+		<string>https://verbonden.nl/app/app-info</string>
 	</dict>
-	<key>GA Custom Dimensions</key>
-	<dict>
-		<key>Build index</key>
-		<integer>2</integer>
-		<key>Client ID index</key>
-		<integer>1</integer>
-	</dict>
-	<key>LogEntries Token</key>
-	<string>abb25255-136c-4443-b0dd-0d7f4db33069</string>
 </dict>
 </plist>

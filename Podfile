@@ -43,6 +43,14 @@ target 'Voys Staging' do
     default_pods
 end
 
+target 'Verbonden Staging' do
+  default_pods
+end
+
+target 'ANNAbel Staging' do
+  default_pods
+end
+
 target 'VialerTests' do
     pod 'OCMock'
     pod 'OHHTTPStubs'
