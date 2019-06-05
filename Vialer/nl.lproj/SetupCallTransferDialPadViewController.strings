@@ -1,0 +1,44 @@
+/* Class = "UILabel"; text = "mute"; ObjectID = "S17-XB-OpN"; */
+"S17-XB-OpN.text" = "geluid uit";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "plA-AI-dxy"; */
+"plA-AI-dxy.title" = "Gesprek doorverbinden";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "wmR-19-wPt"; */
+"wmR-19-wPt.title" = "Gesprek doorverbinden";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "d4M-24-x0P"; */
+"d4M-24-x0P.title" = "Gesprek doorverbinden";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "LJH-DE-P1N"; */
+"LJH-DE-P1N.title" = "Terug";
+
+/* Class = "UITabBarItem"; title = "Keypad"; ObjectID = "HpZ-oI-ATg"; */
+"HpZ-oI-ATg.title" = "Toetsen";
+
+/* Class = "UILabel"; text = "keypad"; ObjectID = "Ap5-85-p01"; */
+"Ap5-85-p01.text" = "toetsen";
+
+/* Class = "UILabel"; text = "speaker"; ObjectID = "EBN-Cj-wUa"; */
+"EBN-Cj-wUa.text" = "luidspreker";
+
+/* Class = "UIButton"; normalTitle = "hide"; ObjectID = "mAT-po-jLo"; */
+"mAT-po-jLo.normalTitle" = "verbergen";
+
+/* Class = "UILabel"; text = "hold"; ObjectID = "1DB-1w-eYT"; */
+"1DB-1w-eYT.text" = "in wacht";
+
+/* Class = "UILabel"; text = "merge calls"; ObjectID = "ofp-Gc-j35"; */
+"ofp-Gc-j35.text" = "samenvoegen";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "v9P-DD-SH6"; */
+"v9P-DD-SH6.title" = "Annuleren";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "plA-AI-dxy"; */
+"plA-AI-dxy.title" = "Gesprek Doorverbinden";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "pfi-f3-nav"; */
+"pfi-f3-nav.title" = "Annuleren";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "wmR-19-wPt"; */
+"wmR-19-wPt.title" = "Gesprek Doorverbinden";

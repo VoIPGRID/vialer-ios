@@ -72,7 +72,6 @@ extension SetupCallTransferDialPadViewController {
             } else {
                 self.performSegue(segueIdentifier: .unwindToFirstCall)
             }
-
         }
     }
 

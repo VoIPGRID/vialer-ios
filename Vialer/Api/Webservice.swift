@@ -59,7 +59,11 @@ final class Webservice: WebserviceProtocol {
             case let code where code / 100 != 2:
                 completion(.failure(WebserviceError.other("Wrong status: \(resp.statusCode)")))
             default:
-                let result = data.flatMap(resource.parse)
+                guard let result = data.flatMap(resource.parse) else {
+                    completion(.failure(WebserviceError.other("response result was nil")));
+                    VialerLogWarning("Webservice's response result was nil");
+                    return
+                }
                 completion(.success(result))
             }
         }.resume()

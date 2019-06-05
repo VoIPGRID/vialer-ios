@@ -229,7 +229,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="75.5" height="75"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-Gl-ZNQ">
                                                         <rect key="frame" x="100.5" y="0.0" width="75" height="75"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="DialerStoryboard.CallButton"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="34"/>
