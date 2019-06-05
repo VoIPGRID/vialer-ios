@@ -417,9 +417,9 @@ extension RecentsViewController {
         let cell = dequeueReusableCell(cellIdentifier: .errorText, for: indexPath)
         let noRecents: String
         if onlyMissedCalls {
-            noRecents = NSLocalizedString("No recent calls", comment: "No recent calls")
-        } else {
             noRecents = NSLocalizedString("No missed calls", comment: "No missed calls")
+        } else {
+            noRecents = NSLocalizedString("No recent calls", comment: "No recent calls")
         }
         cell.textLabel?.text = noRecents
         return cell
