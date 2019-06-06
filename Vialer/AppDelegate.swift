@@ -376,7 +376,7 @@ extension AppDelegate {
             
         DispatchQueue.main.async {
             SIPUtils.setupSIPEndpoint()
-            APNSHandler.shared().registerForVoIPNotifications()
+            APNSHandler.shared.registerForVoIPNotifications()
             if !VialerSIPLib.callKitAvailable() {
                 self.registerForLocalNotifications()
             }
@@ -403,7 +403,7 @@ extension AppDelegate {
         VialerLogInfo("User has been logged in register for push notifications")
 
         DispatchQueue.main.async {
-            APNSHandler.shared()?.registerForVoIPNotifications()
+            APNSHandler.shared.registerForVoIPNotifications()
         }
     }
 
