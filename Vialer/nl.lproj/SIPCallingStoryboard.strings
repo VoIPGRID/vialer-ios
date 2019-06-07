@@ -88,3 +88,10 @@
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "yQi-zQ-RoI"; */
 "yQi-zQ-RoI.title" = "Terug";
+
+/* Class = "UITabBarItem"; title = "Keypad"; ObjectID = "hic-qE-fXK"; */
+"hic-qE-fXK.title" = "Toetsen";
+
+/* Class = "UITabBarItem"; title = ""Contacts""; ObjectID = "KqJ-56-jOU"; */
+"KqJ-56-jOU.title" = "Contacten";
+

@@ -38,6 +38,12 @@
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
+		83C040FF22B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
+		83C0410022B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
+		83C0410122B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
+		83C0410222B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
+		83C0410322B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
+		83C0410422B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		83CD3F2B22845D540079A2A9 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		83DA46032272047000212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		83DA46042272047100212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
@@ -1248,6 +1254,8 @@
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
+		83C0410722B1293A00405624 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SetupCallTransferDialPadViewController.storyboard; sourceTree = "<group>"; };
+		83C0410822B1295F00405624 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SetupCallTransferDialPadViewController.strings; sourceTree = "<group>"; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9251428B8B3DB22F6FC7F0FD /* Pods-VialerSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VialerSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97BDE05E53D773AA579B4B0C /* Pods-Voys Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2247,6 +2255,7 @@
 				EEDFABF81F876628002F0679 /* Controllers */,
 				C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */,
 				F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */,
+				83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */,
 			);
 			name = SIP;
 			sourceTree = "<group>";
@@ -3434,6 +3443,7 @@
 				EEEF160A1F470C4400AEFA83 /* InfoPlist.strings in Resources */,
 				C41FD8A81C60A08400BBE6D7 /* dtmf-0.aif in Resources */,
 				C41FD8A91C60A08400BBE6D7 /* AvailabilityStoryboard.storyboard in Resources */,
+				83C0410122B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				C41FD8E81C60A55000BBE6D7 /* Config.plist in Resources */,
 				EE3D8675201F113900CEFDC6 /* Voys.xcassets in Resources */,
 				C41FD8AA1C60A08400BBE6D7 /* TwoStepCallingStoryboard.storyboard in Resources */,
@@ -3497,6 +3507,7 @@
 				EEEF16011F470C1500AEFA83 /* InfoPlist.strings in Resources */,
 				C490ADC51D0863E3004A8F83 /* dtmf-0.aif in Resources */,
 				C490ADC61D0863E3004A8F83 /* AvailabilityStoryboard.storyboard in Resources */,
+				83C0410322B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				C490ADC71D0863E3004A8F83 /* TwoStepCallingStoryboard.storyboard in Resources */,
 				C490ADC81D0863E3004A8F83 /* ContactsStoryboard.storyboard in Resources */,
 				C490ADC91D0863E3004A8F83 /* dtmf-1.aif in Resources */,
@@ -3572,6 +3583,7 @@
 				EE23189220A0468F00C05EB0 /* LogInViewController.xib in Resources */,
 				EE23189320A0468F00C05EB0 /* dtmf-6.aif in Resources */,
 				EE23189520A0468F00C05EB0 /* dtmf-7.aif in Resources */,
+				83C0410422B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				EE23189620A0468F00C05EB0 /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				EE23189720A0468F00C05EB0 /* SIPCallingStoryboard.storyboard in Resources */,
 				EE23189820A0468F00C05EB0 /* disconnected.wav in Resources */,
@@ -3618,6 +3630,7 @@
 				EE61F46C1F1DDDE4006E890F /* SideMenuStoryboard.storyboard in Resources */,
 				EE61F46D1F1DDDE4006E890F /* dtmf-2.aif in Resources */,
 				EE61F46E1F1DDDE4006E890F /* dtmf-*.aif in Resources */,
+				83C0410222B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				EE61F4701F1DDDE4006E890F /* ReachabilityBarStoryboard.storyboard in Resources */,
 				EE61F4711F1DDDE4006E890F /* RecentsStoryboard.storyboard in Resources */,
 				EE61F4721F1DDDE4006E890F /* ringtone.wav in Resources */,
@@ -3666,6 +3679,7 @@
 				F20851511D26935600A17E71 /* dtmf-5.aif in Resources */,
 				F20851541D26935600A17E71 /* dtmf-6.aif in Resources */,
 				F20851551D26935600A17E71 /* dtmf-7.aif in Resources */,
+				83C0410022B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				F20851561D26935600A17E71 /* SIPIncomingCallStoryboard.storyboard in Resources */,
 				EE733DAB21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */,
 				C4F385981D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
@@ -3720,6 +3734,7 @@
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
 				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
 				C49B0EE81E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
+				83C040FF22B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */,
 				F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */,
 				FBB854251A7FE67300121366 /* dtmf-7.aif in Resources */,
@@ -5362,6 +5377,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83C0410722B1293A00405624 /* Base */,
+				83C0410822B1295F00405624 /* nl */,
+			);
+			name = SetupCallTransferDialPadViewController.storyboard;
+			sourceTree = "<group>";
+		};
 		C4529E311C4542D10063F08B /* TwoStepCallingStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
