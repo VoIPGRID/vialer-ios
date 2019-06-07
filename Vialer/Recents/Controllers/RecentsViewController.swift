@@ -59,6 +59,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
         controller.delegate = self
         return controller
     }()
+
     fileprivate lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.attributedTitle = NSAttributedString(string: NSLocalizedString("Fetching the latest recent calls from the server.", comment: "Fetching the latest recent calls from the server."))
@@ -116,9 +117,9 @@ extension RecentsViewController {
             self?.updateReachabilityBar()
         }
         updateReachabilityBar()
-        callManager.deleteRecentCalls()
+        self.callManager.deleteRecentCalls()
         do {
-            try fetchedResultController.performFetch()
+            try self.fetchedResultController.performFetch()
         } catch let error as NSError {
             VialerLogError("Unable to fetch recents from CD: \(error) \(error.userInfo)")
             abort()
@@ -142,7 +143,7 @@ extension RecentsViewController {
 
     @IBAction func filterControlTapped(sender: UISegmentedControl) {
         onlyMyCalls = sender.selectedSegmentIndex == 1
-        callManager.deleteRecentCalls()
+        self.callManager.deleteRecentCalls()
         refreshRecents()
     }
     
@@ -150,8 +151,8 @@ extension RecentsViewController {
         onlyMissedCalls = sender.isOn
         setPredicate()
         do {
-            try fetchedResultController.performFetch()
-            tableView.reloadData()
+            try self.fetchedResultController.performFetch()
+            self.tableView.reloadData()
         } catch let error as NSError {
             VialerLogError("Error fetching recents: \(error) \(error.userInfo)")
         }
@@ -246,14 +247,20 @@ extension RecentsViewController {
         }
         
         refreshControl.beginRefreshing()
+        filterControl.isEnabled = false
         DispatchQueue.global(qos: .userInteractive).async {
             self.callManager.getLatestRecentCalls(onlyMine: self.onlyMyCalls) { fetchError in
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
+                    self.filterControl.isEnabled = true
                     
-                    if let error = fetchError, error == .fetchNotAllowed {
-                        let alert = UIAlertController(title: NSLocalizedString("Not allowed", comment: "Not allowed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
-                        self.present(alert, animated: true, completion: nil)
+                    if let error = fetchError, error == .fetchNotAllowed || error == .fetchFailed {
+                        var alert: UIAlertController
+                        if error == .fetchNotAllowed {
+                            alert = UIAlertController(title: NSLocalizedString("Not allowed", comment: "Not allowed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        self.callManager.recentsFetchFailed = true
                     }
                 }
             }
@@ -284,12 +291,12 @@ extension RecentsViewController {
     }
     
     fileprivate func setPredicate() {
-        if onlyMissedCalls {
+        if self.onlyMissedCalls {
             // Filter the list to show only missed calls.
-            fetchedResultController.fetchRequest.predicate = NSPredicate(format: "duration == 0 AND inbound == YES")
+            self.fetchedResultController.fetchRequest.predicate = NSPredicate(format: "duration == 0 AND inbound == YES")
         } else {
             // Disable the filter on the list.
-            fetchedResultController.fetchRequest.predicate = nil
+            self.fetchedResultController.fetchRequest.predicate = nil
         }
     }
 }
@@ -427,7 +434,7 @@ extension RecentsViewController {
 
     fileprivate func recentCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(cellIdentifier: .recentCall, for: indexPath) as! RecentTableViewCell
-        let recent = fetchedResultController.object(at: indexPath)
+        let recent = self.fetchedResultController.object(at: indexPath)
         cell.inbound = recent.inbound
         cell.name = recent.displayName
         cell.subtitle = recent.phoneType

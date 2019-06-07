@@ -30,9 +30,9 @@ class RecentCallManager {
 
     /// Context that is used to fetch and store RecentCalls in.
     private let managedContext: NSManagedObjectContext
-
-    private var webservice: WebserviceProtocol!
-
+    
+    private var webservice: WebserviceProtocol?
+    
     /// Initializer
     ///
     /// - Parameter managedContext: Context that is used to fetch and store RecentCalls in.
@@ -54,33 +54,49 @@ class RecentCallManager {
         } else {
             resource = RecentCall.allCallsSince(date: fetchDate)
         }
-
+        
         // Fetch calls from remote.
-        webservice.load(resource: resource) { result in
-            defer {
-                completion(self.recentsFetchErrorCode)
-            }
-            self.reloading = false
-            
-            switch result {
-            case .failure(WebserviceError.forbidden):
-                self.recentsFetchErrorCode = .fetchNotAllowed
-            case .failure:
-                self.recentsFetchErrorCode = .fetchFailed
-            case let .success(calls):
-                guard let calls = calls else {
-                    return
+        if let unwrappedWebservice = webservice {
+            unwrappedWebservice.load(resource: resource) { result in
+                defer {
+                    completion(self.recentsFetchErrorCode)
                 }
-                self.recentsFetchErrorCode = nil
-
-                // Create and store the calls in the context.
-                self.managedContext.performAndWait {
-                    for call in calls {
-                        _ = RecentCall.findOrCreate(for: call, in: self.managedContext)
-                        try? self.managedContext.save()
+                self.reloading = false
+                
+                switch result {
+                case .failure(WebserviceError.forbidden):
+                    self.recentsFetchErrorCode = .fetchNotAllowed
+                case .failure:
+                    self.recentsFetchErrorCode = .fetchFailed
+                case let .success(calls):
+                    guard let calls = calls else {
+                        return
+                    }
+                    self.recentsFetchErrorCode = nil
+                    self.recentsFetchFailed = false
+                    
+                    // Create and store the calls in the context.
+                    self.managedContext.performAndWait {
+                        for call in calls {
+                            do {
+                                _ = RecentCall.findOrCreate(for: call, in: self.managedContext)
+                                try self.managedContext.save()
+                            } catch {
+                                let saveError = error as NSError
+                                VialerLogWarning("Something is wrong here. managedContext.save() failed with error:\(saveError), \(saveError.userInfo) ")
+                                self.recentsFetchErrorCode = .fetchFailed
+                                self.recentsFetchFailed = true
+                            }
+                        }
                     }
                 }
             }
+        } else {
+            VialerLogWarning("Webservice was found nil! Cannot fetch latest recent calls.")
+            self.recentsFetchErrorCode = .fetchFailed
+            self.recentsFetchFailed = true
+            self.webservice = Webservice(authentication: SystemUser.current())
+            completion(self.recentsFetchErrorCode)
         }
     }
     
@@ -95,7 +111,6 @@ class RecentCallManager {
                 for call in calls {
                     managedContext.delete(call)
                 }
-
                 try managedContext.save()
             }
         } catch {
