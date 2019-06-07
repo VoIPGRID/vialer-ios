@@ -136,7 +136,6 @@
 		838206A62290979A0098EABD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
 		838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		838206A82290979A0098EABD /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		838206A92290979A0098EABD /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		838206AB2290979A0098EABD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		838206AC2290979A0098EABD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		838206AD2290979A0098EABD /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
@@ -288,7 +287,6 @@
 		83820755229098D20098EABD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
 		83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		83820757229098D20098EABD /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		83820758229098D20098EABD /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		8382075A229098D20098EABD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		8382075B229098D20098EABD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		8382075C229098D20098EABD /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
@@ -559,7 +557,6 @@
 		C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
 		C490ADA71D0863E3004A8F83 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		C490ADA91D0863E3004A8F83 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		C490ADAA1D0863E3004A8F83 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		C490ADAC1D0863E3004A8F83 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		C490ADAD1D0863E3004A8F83 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		C490ADAF1D0863E3004A8F83 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
@@ -829,7 +826,6 @@
 		EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
 		EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		EE23186820A0468F00C05EB0 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		EE23186A20A0468F00C05EB0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		EE23186B20A0468F00C05EB0 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		EE23186C20A0468F00C05EB0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
@@ -1023,7 +1019,6 @@
 		EE61F44A1F1DDDE4006E890F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AD4E671E729F940067FE40 /* CoreDataStack.swift */; };
 		EE61F44B1F1DDDE4006E890F /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		EE61F44C1F1DDDE4006E890F /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		EE61F44D1F1DDDE4006E890F /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		EE61F44F1F1DDDE4006E890F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		EE61F4501F1DDDE4006E890F /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		EE61F4511F1DDDE4006E890F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
@@ -1195,7 +1190,6 @@
 		F20851231D26935600A17E71 /* NSString+Mobile.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BB401875B63700C0D5DB /* NSString+Mobile.m */; };
 		F20851261D26935600A17E71 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		F20851281D26935600A17E71 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406C9EA1BF4CDE9001363CA /* ContactsViewController.m */; };
-		F20851291D26935600A17E71 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F208512B1D26935600A17E71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB853165183986A5008A7EF1 /* AudioToolbox.framework */; };
 		F208512C1D26935600A17E71 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
 		F208512E1D26935600A17E71 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB088C9182284A20004FFD1 /* SystemConfiguration.framework */; };
@@ -1240,13 +1234,11 @@
 		F208517A1D2695FE00A17E71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		F20851841D269DD300A17E71 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851801D269DD300A17E71 /* Config.plist */; };
 		F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851811D269DD300A17E71 /* GoogleService-Info.plist */; };
-		F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		F22FF28E1D0ABF3800761C9A /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		F22FF28F1D0ABF3800761C9A /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		F22FF2901D0ABF3800761C9A /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		F25B39191B08EF43005ED515 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25B39181B08EF43005ED515 /* MobileCoreServices.framework */; };
-		F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */; };
 		F275FDB21C608BA4006AEEA2 /* APNSHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */; };
 		F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */; };
 		F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -1882,8 +1874,6 @@
 		F22FF2891D0ABF3800761C9A /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
 		F22FF28A1D0ABF3800761C9A /* SystemUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUser.m; sourceTree = "<group>"; };
 		F25B39181B08EF43005ED515 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNSHandler.h; sourceTree = "<group>"; };
-		F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandler.m; sourceTree = "<group>"; };
 		F275FDB11C608BA4006AEEA2 /* APNSHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNSHandlerTests.m; sourceTree = "<group>"; };
 		F2872D911CC8CF6000D3ACB0 /* .env.vialer */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.vialer; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F2872D921CC8CF6000D3ACB0 /* .env.voys */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.voys; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -3041,8 +3031,6 @@
 		F275FDAC1C5FA253006AEEA2 /* APNS */ = {
 			isa = PBXGroup;
 			children = (
-				F275FDAD1C5FA253006AEEA2 /* APNSHandler.h */,
-				F275FDAE1C5FA253006AEEA2 /* APNSHandler.m */,
 				83C040EF22A7B6D500405624 /* APNSHandler.swift */,
 			);
 			path = APNS;
@@ -5455,7 +5443,6 @@
 				838206A62290979A0098EABD /* CoreDataStack.swift in Sources */,
 				838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */,
 				838206A82290979A0098EABD /* ContactsViewController.m in Sources */,
-				838206A92290979A0098EABD /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5564,7 +5551,6 @@
 				83820755229098D20098EABD /* CoreDataStack.swift in Sources */,
 				83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */,
 				83820757229098D20098EABD /* ContactsViewController.m in Sources */,
-				83820758229098D20098EABD /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5631,7 +5617,6 @@
 				C41FD87B1C60A08400BBE6D7 /* ConfigureFormView.m in Sources */,
 				C4AEB2531E6D954400550E0C /* Resource.swift in Sources */,
 				F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */,
-				F2153E9C1C91C496009A5FD7 /* APNSHandler.m in Sources */,
 				EE1C7B851F87777800708D96 /* SIPCallingViewController.swift in Sources */,
 				F2C44A721DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
 				EEA3C2721F90919200423F96 /* ReachabilityHelper.swift in Sources */,
@@ -5810,7 +5795,6 @@
 				C4AD4E6B1E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C490ADA71D0863E3004A8F83 /* UIView+RoundedStyle.m in Sources */,
 				C490ADA91D0863E3004A8F83 /* ContactsViewController.m in Sources */,
-				C490ADAA1D0863E3004A8F83 /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5961,7 +5945,6 @@
 				EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */,
 				EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */,
 				EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */,
-				EE23186820A0468F00C05EB0 /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6089,7 +6072,6 @@
 				EE61F44A1F1DDDE4006E890F /* CoreDataStack.swift in Sources */,
 				EE61F44B1F1DDDE4006E890F /* UIView+RoundedStyle.m in Sources */,
 				EE61F44C1F1DDDE4006E890F /* ContactsViewController.m in Sources */,
-				EE61F44D1F1DDDE4006E890F /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6198,7 +6180,6 @@
 				C4AD4E691E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				F20851261D26935600A17E71 /* UIView+RoundedStyle.m in Sources */,
 				F20851281D26935600A17E71 /* ContactsViewController.m in Sources */,
-				F20851291D26935600A17E71 /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6326,7 +6307,6 @@
 				C4AD4E681E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
-				F275FDAF1C5FA253006AEEA2 /* APNSHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
