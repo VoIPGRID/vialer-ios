@@ -224,7 +224,7 @@
                                                         <rect key="frame" x="208.33333333333334" y="0.0" width="79.000000000000028" height="79.333333333333329"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HO9-77-XoX">
-                                                                <rect key="frame" x="25" y="25" width="30" height="30"/>
+                                                                <rect key="frame" x="24.666666666666629" y="24.666666666666742" width="30" height="30"/>
                                                                 <state key="normal" title="hide">
                                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
@@ -758,7 +758,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="79" height="79.333333333333329"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-fS-OHu" userLabel="call-button">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Da-fS-OHu" userLabel="call-button">
                                                         <rect key="frame" x="104" y="0.0" width="79.333333333333314" height="79.333333333333329"/>
                                                         <state key="normal" image="acceptButton">
                                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
