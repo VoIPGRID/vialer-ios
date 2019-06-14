@@ -18,7 +18,6 @@ class KeypadViewController: UIViewController {
     }
 
     // MARK: - Properties
-
     var call: VSLCall?
     var delegate: KeypadViewControllerDelegate?
     var callManager: VSLCallManager {
@@ -77,11 +76,15 @@ class KeypadViewController: UIViewController {
 
     @IBAction func numberButtonPressed(_ sender: NumberPadButton) {
         guard let call = call, call.callState != .disconnected else { return }
-        callManager.sendDTMF(for: call, character: sender.number) { error in
-            if error != nil {
-                VialerLogError("Error sending DTMF: \(String(describing: error))")
-            } else {
-                self.dtmfSent = (self.dtmfSent ?? "") + sender.number
+        DispatchQueue.main.async{ [weak self] in
+            if let numberPressed = sender.number {
+                self?.callManager.sendDTMF(for: call, character: numberPressed) { error in
+                    if error != nil {
+                        VialerLogError("Error sending DTMF: \(String(describing: error))")
+                    } else {
+                        self?.dtmfSent = (self?.dtmfSent ?? "") + numberPressed
+                    }
+                }
             }
         }
     }
