@@ -89,7 +89,6 @@ class RecentCallManager {
             self.recentsFetchErrorCode = .fetchFailed
             self.webservice = Webservice(authentication: SystemUser.current())
             completion(self.recentsFetchErrorCode)
-            
         }
     }
     
