@@ -241,7 +241,7 @@ extension RecentsViewController {
     }
 
     fileprivate func refreshRecents() {
-        guard !callManager.reloading || self.callManager.recentsFetchFailed else {
+        guard !callManager.reloading else {
             return
         }
         
@@ -251,15 +251,11 @@ extension RecentsViewController {
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
                     
-                    if let error = fetchError, error == .fetchNotAllowed || error == .fetchFailed {
-                        var alert: UIAlertController
+                    if let error = fetchError {
                         if error == .fetchNotAllowed {
-                            alert = UIAlertController(title: NSLocalizedString("Not allowed", comment: "Not allowed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
-                            
-                        } else {
-                            alert = UIAlertController(title: NSLocalizedString("Fetching recent calls failed", comment: "Fetching recent calls failed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
+                           let alert = UIAlertController(title: NSLocalizedString("Not allowed", comment: "Not allowed"), message: error.localizedDescription, andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
+                           self.present(alert, animated: true, completion: nil)
                         }
-                        self.present(alert, animated: true, completion: nil)
                         self.callManager.recentsFetchFailed = true
                     }
                 }
