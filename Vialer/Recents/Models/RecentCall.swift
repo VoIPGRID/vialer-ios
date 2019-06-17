@@ -169,7 +169,7 @@ extension RecentCall {
         request.returnsObjectsAsFaults = false
         var call: RecentCall?
         managedContext.performAndWait {
-            if let result = try? managedContext.fetch(request).first {
+            if let result = ((try? managedContext.fetch(request).first) as RecentCall??) {
                 call = result
             }
         }

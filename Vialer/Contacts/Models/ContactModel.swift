@@ -186,8 +186,8 @@ import Foundation
         
         let highlightedName = attributedName.mutableCopy() as! NSMutableAttributedString
         highlightedName.enumerateAttributes(in: NSMakeRange(0, highlightedName.length), options: [], using: { (attrs, range, stop) in
-            if let property = attrs[NSAttributedStringKey.init(CNContactPropertyAttribute)] as? String, property == keyToHighlight {
-                let boldAttributes = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17)]
+            if let property = attrs[NSAttributedString.Key.init(CNContactPropertyAttribute)] as? String, property == keyToHighlight {
+                let boldAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17)]
                 highlightedName.addAttributes(boldAttributes, range: range)
             }
         })

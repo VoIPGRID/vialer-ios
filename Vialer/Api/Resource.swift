@@ -28,7 +28,7 @@ extension Resource {
         self.path = path
         self.parameters = parameters
         self.parse = { data in
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary else { return nil }
+            guard let json = ((try? JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary) as JSONDictionary??) else { return nil }
             return json.flatMap(parseJSON)
         }
     }

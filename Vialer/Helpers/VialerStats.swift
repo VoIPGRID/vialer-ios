@@ -196,7 +196,7 @@ import AVFoundation
         defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.disabled
         if currentRoute.outputs.count != 0 {
             for output in currentRoute.outputs{
-                if output.portType == AVAudioSessionPortBluetoothHFP {
+                if output.portType.rawValue == AVAudioSession.Port.bluetoothHFP.rawValue {
                     defaultData[VialerStatsConstants.APIKeys.bluetoothDevice] = output.portName
                     defaultData[VialerStatsConstants.APIKeys.bluetoothAudio] = VialerStatsConstants.BluetoothAudio.enabled
                 }
