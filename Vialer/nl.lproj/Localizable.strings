@@ -351,8 +351,8 @@
 /* Successfully connected with */
 "Successfully connected with" = "Succesvol verbonden met";
 
-/* No comment provided by engineer. */
-"The number is to short" = "Het nummer is te kort";
+/* The number is too short */
+"The number is too short" = "Het nummer is te kort";
 
 /* No comment provided by engineer. */
 "The outgoing number which the app will display is:" = "Het telefoonnummer waarmee wordt uitgebeld:";

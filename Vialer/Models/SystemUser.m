@@ -688,7 +688,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 
 - (void)updateMobileNumber:(NSString *)mobileNumber withCompletion:(void (^)(BOOL success, NSError *error))completion {
     if (!mobileNumber.length) {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"The number is to short", nil)};
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"The number is too short", nil)};
         completion(NO, [NSError errorWithDomain:SystemUserErrorDomain code:SystemUserErrorMobileNumberToShort userInfo:userInfo]);
         return;
     }
