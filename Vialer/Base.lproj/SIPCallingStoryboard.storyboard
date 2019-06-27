@@ -903,7 +903,7 @@
         <!--Contacts-->
         <scene sceneID="So9-Of-KEw">
             <objects>
-                <viewController title="Contacts" id="OJG-uy-AEd" customClass="SetupCallTransferContactsViewController" customModule="Vialer" sceneMemberID="viewController">
+                <viewController title="Contacts" id="OJG-uy-AEd" customClass="SetupCallTransferContactsViewController" customModule="ANNAbel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aPQ-bT-j7o"/>
                         <viewControllerLayoutGuide type="bottom" id="bdq-wz-ZPK"/>
