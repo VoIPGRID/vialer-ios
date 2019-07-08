@@ -44,8 +44,6 @@ private let AvailabilityModelFetchInterval: TimeInterval = 600 // number of seco
                         }
                     }
                 }
-                VialerLogError("Error on unwrapping the response data on 'AvailabilityModel:getUserDestinations' ")
-                completion(localizedStringError)
             }
         })
     }
