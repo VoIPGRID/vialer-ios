@@ -28,3 +28,5 @@
 #import <VialerSIPLib/VialerSIPLib.h>
 #import "VoIPGRIDRequestOperationManager.h"
 #import "PhoneNumberUtils.h"
+#import "VialerWebViewController.h"
+#import "SideMenuViewController.h"

@@ -3,7 +3,6 @@
 //  Copyright © 2016 VoIPGRID. All rights reserved.
 //
 
-#import "AvailabilityModel.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import <OCMock/OCMock.h>
 @import XCTest;
