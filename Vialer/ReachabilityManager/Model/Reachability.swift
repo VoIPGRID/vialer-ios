@@ -383,6 +383,6 @@ func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFl
 
 extension Reachability {
     static var changed = NotificationDescriptor<Any>(name: NSNotification.Name(rawValue: ReachabilityChangedNotification))
-    static var appEntersForeground = NotificationDescriptor<Any>(name: Notification.Name.UIApplicationWillEnterForeground)
+    static var appEntersForeground = NotificationDescriptor<Any>(name: UIApplication.willEnterForegroundNotification)
     static var radioChanged = NotificationDescriptor<Any>(name: Notification.Name.CTRadioAccessTechnologyDidChange)
 }

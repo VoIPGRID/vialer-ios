@@ -59,13 +59,13 @@ class AppDelegate: UIResponder {
 // MARK: - UIApplicationDelegate
 extension AppDelegate: UIApplicationDelegate {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         interpretLaunchArguments()
         VialerLogger.setup()
 
         SAMKeychain.setAccessibilityType(kSecAttrAccessibleAfterFirstUnlock)
 
-        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
         setupUI()
         setupObservers()
@@ -88,7 +88,7 @@ extension AppDelegate: UIApplicationDelegate {
         }
     }
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         return didStartCallFor(userActivity: userActivity)
     }
 
@@ -530,7 +530,7 @@ extension AppDelegate {
             if let task = self.vibratingTask {
                 application.endBackgroundTask(task)
             }
-            self.vibratingTask = UIBackgroundTaskInvalid
+            self.vibratingTask = UIBackgroundTaskIdentifier(rawValue: UIBackgroundTaskIdentifier.invalid.rawValue)
         }
 
         DispatchQueue.global(qos: .userInteractive).async {
@@ -544,7 +544,7 @@ extension AppDelegate {
             if let task = self.vibratingTask {
                 application.endBackgroundTask(task)
             }
-            self.vibratingTask = UIBackgroundTaskInvalid
+            self.vibratingTask = UIBackgroundTaskIdentifier(rawValue: UIBackgroundTaskIdentifier.invalid.rawValue)
         }
     }
 

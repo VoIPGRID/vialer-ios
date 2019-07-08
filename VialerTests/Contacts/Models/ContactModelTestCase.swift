@@ -26,7 +26,7 @@ class ContactModelTestCase: XCTestCase {
     func testFamilyNameIsBoldForContact() {
         let styledContact = contactModel.attributedString(for: contactToTest())!
 
-        let fontAtFamilyName = styledContact.attribute(kCTFontAttributeName as NSAttributedStringKey, at: 6, effectiveRange:nil) as! UIFont
+        let fontAtFamilyName = styledContact.attribute(kCTFontAttributeName as NSAttributedString.Key, at: 6, effectiveRange:nil) as! UIFont
 
         XCTAssertEqual(fontAtFamilyName, UIFont.boldSystemFont(ofSize: 17.0))
     }
@@ -34,7 +34,7 @@ class ContactModelTestCase: XCTestCase {
     func testGivenNameIsNotBoldForContact() {
         let styledContact = contactModel.attributedString(for: contactToTest())!
 
-        XCTAssertNil(styledContact.attribute(kCTFontAttributeName as NSAttributedStringKey, at: 1, effectiveRange: nil) as? UIFont)
+        XCTAssertNil(styledContact.attribute(kCTFontAttributeName as NSAttributedString.Key, at: 1, effectiveRange: nil) as? UIFont)
     }
 
     func testEmailAddressIsGivenWhenThereIsNoName() {

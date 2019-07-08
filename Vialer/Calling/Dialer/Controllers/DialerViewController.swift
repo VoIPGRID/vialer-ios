@@ -84,7 +84,7 @@ extension DialerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         VialerGAITracker.trackScreenForController(name: controllerName)
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: AVAudioSession.Category.ambient.rawValue))
         setupButtons()
         updateReachabilityBar()
     }
@@ -268,3 +268,4 @@ extension DialerViewController {
         }
     }
 }
+

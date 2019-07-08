@@ -560,7 +560,7 @@ extension SIPCallingViewController {
         
         // User wants to open the settings to enable microphone permission.
         let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
-            UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.openURL(URL(string:UIApplication.openSettingsURLString)!)
         }
         alertController.addAction(settingsAction)
         
