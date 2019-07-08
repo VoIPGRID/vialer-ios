@@ -11,6 +11,7 @@ devices([
   "iPhone 8",
   "iPhone 8 Plus",
   "iPhone X",
+  "iPhone Xs Max",
 ])
 
 # A list of languages which should be used

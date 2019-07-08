@@ -36,6 +36,10 @@
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		8374B85422BA85210048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */; };
+		8374B86622C0E4BE0048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */; };
+		8374B86B22C0E6830048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86922C0E6760048C7C3 /* Snapshot-Constants.swift */; };
+		8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */; };
 		838206452290979A0098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		838206462290979A0098EABD /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
 		838206472290979A0098EABD /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
@@ -447,7 +451,6 @@
 		C41FD8E81C60A55000BBE6D7 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E41C60A55000BBE6D7 /* Config.plist */; };
 		C41FD8E91C60A55000BBE6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */; };
 		C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
-		C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */; };
 		C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
 		C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
 		C420AEC61E30C4CE005B2E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
@@ -870,7 +873,6 @@
 		EE23189E20A0468F00C05EB0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		EE2318AC20A046AD00C05EB0 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		EE2318AD20A046AD00C05EB0 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
-		EE2318BC20A046BB00C05EB0 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
 		EE2318BD20A046BB00C05EB0 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		EE2318BE20A046BB00C05EB0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		EE2318C820A0476300C05EB0 /* ANNAbelIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1249,7 +1251,6 @@
 		F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */; };
 		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
-		F2C17B031D35231A00067B05 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20851881D269E1700A17E71 /* Snapshot-Constants.swift */; };
 		F2C44A651DE40EDD00F7CF50 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		F2C44A691DE40EDD00F7CF50 /* VialerIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F2C44A701DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */; };
@@ -1619,6 +1620,10 @@
 		833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
+		8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
+		8374B86922C0E6760048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
+		8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		838206ED2290979A0098EABD /* ANNAbel Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ANNAbel Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8382079D229098D20098EABD /* Verbonden Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Verbonden Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838207B22292CB530098EABD /* Acceptatie-Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Verbonden-Info.plist"; sourceTree = "<group>"; };
@@ -1665,7 +1670,6 @@
 		C41FD8E41C60A55000BBE6D7 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Branding/Voys/Config.plist; sourceTree = "<group>"; };
 		C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Voys/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoysSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Branding/Voys/Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		C42B048A1E7925E600280381 /* RecentCallTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentCallTests.swift; path = Recents/Models/RecentCallTests.swift; sourceTree = "<group>"; };
@@ -1774,7 +1778,6 @@
 		EE1C7B7A1F87774F00708D96 /* SipCallingButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
-		EE2317FD20A0442000C05EB0 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		EE2317FF20A0442000C05EB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANNAbel-Info.plist"; sourceTree = "<group>"; };
 		EE23180220A0442000C05EB0 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -1799,7 +1802,6 @@
 		EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
 		EE3C48002080DC2D00CC80E5 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
 		EE3D8674201F113800CEFDC6 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Voys.xcassets; path = Branding/Voys/Voys.xcassets; sourceTree = "<group>"; };
-		EE5A1F171F94A7B200F07536 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
 		EE5C221F1F46EDA200AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22201F46EDA300AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
@@ -1867,7 +1869,6 @@
 		F20851801D269DD300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F20851811D269DD300A17E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
-		F20851881D269E1700A17E71 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22FF2891D0ABF3800761C9A /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
@@ -2348,6 +2349,7 @@
 				83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */,
 				83CB73522296C9F000987168 /* Verbonden.xcassets */,
 				83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */,
+				8374B86922C0E6760048C7C3 /* Snapshot-Constants.swift */,
 			);
 			path = Verbonden;
 			sourceTree = "<group>";
@@ -2448,7 +2450,7 @@
 				EEEF16081F470C4400AEFA83 /* InfoPlist.strings */,
 				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
-				C41FD9081C60B40400BBE6D7 /* Snapshot-Constants.swift */,
+				8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */,
 				C41FD8E41C60A55000BBE6D7 /* Config.plist */,
 				EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */,
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
@@ -2845,9 +2847,9 @@
 			isa = PBXGroup;
 			children = (
 				EE65918720AACEAB00305980 /* ANNAbel.xcassets */,
-				EE2317FD20A0442000C05EB0 /* Snapshot-Constants.swift */,
 				EE2317FE20A0442000C05EB0 /* InfoPlist.strings */,
 				83129868215D033A00CFE01D /* GoogleService-Info.plist */,
+				8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */,
 				EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */,
 				EE23180220A0442000C05EB0 /* Config.plist */,
 				EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */,
@@ -2999,17 +3001,16 @@
 		F208517F1D269DD300A17E71 /* Vialer */ = {
 			isa = PBXGroup;
 			children = (
-				EE5A1F171F94A7B200F07536 /* Snapshot-Constants.swift */,
 				EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */,
 				C4FE25E11D819A8B002BE230 /* Vialer.entitlements */,
 				C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */,
 				F20851821D269DD300A17E71 /* Vialer-Info.plist */,
-				F20851881D269E1700A17E71 /* Snapshot-Constants.swift */,
 				F20851801D269DD300A17E71 /* Config.plist */,
 				EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */,
 				F20851811D269DD300A17E71 /* GoogleService-Info.plist */,
 				EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */,
 				833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */,
+				8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */,
 			);
 			name = Vialer;
 			path = Branding/Vialer;
@@ -5668,9 +5669,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C41FD90A1C60B40700BBE6D7 /* Snapshot-Constants.swift in Sources */,
 				F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */,
 				C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */,
+				8374B86622C0E4BE0048C7C3 /* Snapshot-Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5804,6 +5805,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8374B86B22C0E6830048C7C3 /* Snapshot-Constants.swift in Sources */,
 				C490ADFF1D088535004A8F83 /* SnapshotUITests.swift in Sources */,
 				C490AE001D088535004A8F83 /* SnapshotHelper.swift in Sources */,
 			);
@@ -5963,7 +5965,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE2318BC20A046BB00C05EB0 /* Snapshot-Constants.swift in Sources */,
+				8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */,
 				EE2318BD20A046BB00C05EB0 /* SnapshotUITests.swift in Sources */,
 				EE2318BE20A046BB00C05EB0 /* SnapshotHelper.swift in Sources */,
 			);
@@ -6189,7 +6191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2C17B031D35231A00067B05 /* Snapshot-Constants.swift in Sources */,
+				8374B85422BA85210048C7C3 /* Snapshot-Constants.swift in Sources */,
 				F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */,
 				F22DE0A51CC90D41001468B3 /* SnapshotHelper.swift in Sources */,
 			);
