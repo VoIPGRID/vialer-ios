@@ -66,6 +66,11 @@ fastlane ios add_device
 fastlane ios refresh_dsyms
 ```
 
+### ios tests
+```
+fastlane ios tests
+```
+Run all the UITests on the terminal like this for example: bundle exec Fastlane --env voys tests
 
 ----
 
