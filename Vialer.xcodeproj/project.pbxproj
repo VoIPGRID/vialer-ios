@@ -2810,8 +2810,6 @@
 			isa = PBXGroup;
 			children = (
 				C4C50F951DE6E05100B632FA /* PhoneNumber */,
-				F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */,
-				F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */,
 				F9EF27E91C60E2D70097E3AC /* Availabilty */,
 				F275FDB01C608B7E006AEEA2 /* APNS */,
 				C40CB3981C45129400248690 /* Calling */,
@@ -2825,6 +2823,8 @@
 				C496A8F71C2C6EC500C42619 /* Settings */,
 				C496A8E71C2AB1FE00C42619 /* Side Menu */,
 				C4F49F2B1BF0B45700C25159 /* Info.plist */,
+				F2A7AEF91CF4757600889DD8 /* TestKVOObserverClass.h */,
+				F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */,
 			);
 			path = VialerTests;
 			sourceTree = "<group>";

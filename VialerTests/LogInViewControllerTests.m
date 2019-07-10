@@ -65,10 +65,11 @@
 }
 
 - (void)testUnsuccessfulLoginActionWillKeepUsernameInFieldLogin {
-    OCMStub([self.mockUser loginToCheckTwoFactorWithUserName:[OCMArg any] password:[OCMArg any] andToken:[OCMArg any] completion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL loggedin, NSError *error)) {
-        passedBlock(NO, nil);
+    OCMStub([self.mockUser loginToCheckTwoFactorWithUserName:[OCMArg any] password:[OCMArg any] andToken:[OCMArg any] completion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(BOOL loggedin, BOOL tokenRequired, NSError *error)) {
+        passedBlock(NO, NO, nil);
         return YES;
     }]]);
+    
     [self.loginViewController loadViewIfNeeded];
     self.loginViewController.loginFormView.usernameField.text = @"testUsername";
     self.loginViewController.loginFormView.passwordField.text = @"testPassword";
@@ -181,7 +182,7 @@
     [self.loginViewController loadViewIfNeeded];
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Should show the login form."];
-    OCMStub([mockOperationsManager passwordResetWithEmail:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(     *operation, NSDictionary *responseData, NSError *error)) {
+    OCMStub([mockOperationsManager passwordResetWithEmail:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
         passedBlock(nil, nil, nil);
         [expectation fulfill];
         return YES;
