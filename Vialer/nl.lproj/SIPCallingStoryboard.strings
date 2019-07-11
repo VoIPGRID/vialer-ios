@@ -33,10 +33,10 @@
 "SA5-ky-WbU.text" = "status";
 
 /* Class = "UILabel"; text = "hold"; ObjectID = "Sha-hC-udf"; */
-"Sha-hC-udf.text" = "hold";
+"Sha-hC-udf.text" = "in wacht";
 
 /* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "TmX-Be-JPc"; */
-"TmX-Be-JPc.title" = "Gesprek Doorverbinden";
+"TmX-Be-JPc.title" = "Gesprek doorverbinden";
 
 /* Class = "UILabel"; text = "status"; ObjectID = "UDw-A4-HXZ"; */
 "UDw-A4-HXZ.text" = "status";
@@ -45,7 +45,7 @@
 "Vhb-cu-5yP.text" = "luidspreker";
 
 /* Class = "UILabel"; text = "speaker"; ObjectID = "Xd7-O4-f23"; */
-"Xd7-O4-f23.text" = "speaker";
+"Xd7-O4-f23.text" = "luidspreker";
 
 /* Class = "UILabel"; text = "status"; ObjectID = "Xmp-RO-FFl"; */
 "Xmp-RO-FFl.text" = "status";
@@ -54,22 +54,22 @@
 "Yok-El-Y0k.text" = "currentCall numberLabel";
 
 /* Class = "UILabel"; text = "hold"; ObjectID = "ZFf-51-ebq"; */
-"ZFf-51-ebq.text" = "pauze";
+"ZFf-51-ebq.text" = "in wacht";
 
 /* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "d0S-EE-akL"; */
-"d0S-EE-akL.title" = "Gesprek Doorverbinden";
+"d0S-EE-akL.title" = "Gesprek doorverbinden";
 
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "gET-mp-cOT"; */
 "gET-mp-cOT.title" = "Annuleren";
 
 /* Class = "UILabel"; text = "merge calls"; ObjectID = "jL8-gK-ccx"; */
-"jL8-gK-ccx.text" = "merge calls";
+"jL8-gK-ccx.text" = "samenvoegen";
 
 /* Class = "UILabel"; text = "transfer"; ObjectID = "sYz-Wv-igq"; */
 "sYz-Wv-igq.text" = "doorverbinden";
 
 /* Class = "UILabel"; text = "mute"; ObjectID = "u6z-pi-U1s"; */
-"u6z-pi-U1s.text" = "mute";
+"u6z-pi-U1s.text" = "geluid uit";
 
 /* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "uYD-Ra-2f5"; */
 "uYD-Ra-2f5.title" = "Gesprek doorverbinden";
