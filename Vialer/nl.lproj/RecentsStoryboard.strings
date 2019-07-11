@@ -19,3 +19,6 @@
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "bHO-4g-VGn"; */
 "bHO-4g-VGn.text" = "";
+
+/* Class = "UILabel"; text = "Only show missed calls"; ObjectID = "kOo-ij-9EJ"; */
+"kOo-ij-9EJ.text" = "Toon enkel gemiste oproepen";
