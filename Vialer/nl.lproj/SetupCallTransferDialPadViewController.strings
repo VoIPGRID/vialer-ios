@@ -30,3 +30,15 @@
 
 /* Class = "UILabel"; text = "merge calls"; ObjectID = "ofp-Gc-j35"; */
 "ofp-Gc-j35.text" = "samenvoegen";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "v9P-DD-SH6"; */
+"v9P-DD-SH6.title" = "Annuleren";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "plA-AI-dxy"; */
+"plA-AI-dxy.title" = "Gesprek Doorverbinden";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "pfi-f3-nav"; */
+"pfi-f3-nav.title" = "Annuleren";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "wmR-19-wPt"; */
+"wmR-19-wPt.title" = "Gesprek Doorverbinden";

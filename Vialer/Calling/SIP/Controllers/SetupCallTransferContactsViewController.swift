@@ -129,7 +129,7 @@ extension SetupCallTransferContactsViewController {
                 callActionSheet.addAction(callAction)
             }
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel) { (action) in
                 tableView.deselectRow(at: indexPath, animated: false)
             }
             callActionSheet.addAction(cancelAction)

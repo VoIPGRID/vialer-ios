@@ -95,3 +95,9 @@
 /* Class = "UITabBarItem"; title = ""Contacts""; ObjectID = "KqJ-56-jOU"; */
 "KqJ-56-jOU.title" = "Contacten";
 
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "AaQ-U1-SzN"; */
+"AaQ-U1-SzN.title" = "Annuleren";
+
+/* Class = "UINavigationItem"; title = "Call Transfer"; ObjectID = "v2x-E3-dtS"; */
+"v2x-E3-dtS.title" = "Gesprek Doorverbinden";
+
