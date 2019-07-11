@@ -15,3 +15,18 @@
 
 /* Class = "UITabBarItem"; title = "Keypad"; ObjectID = "HpZ-oI-ATg"; */
 "HpZ-oI-ATg.title" = "Toetsen";
+
+/* Class = "UILabel"; text = "keypad"; ObjectID = "Ap5-85-p01"; */
+"Ap5-85-p01.text" = "toetsen";
+
+/* Class = "UILabel"; text = "speaker"; ObjectID = "EBN-Cj-wUa"; */
+"EBN-Cj-wUa.text" = "luidspreker";
+
+/* Class = "UIButton"; normalTitle = "hide"; ObjectID = "mAT-po-jLo"; */
+"mAT-po-jLo.normalTitle" = "verbergen";
+
+/* Class = "UILabel"; text = "hold"; ObjectID = "1DB-1w-eYT"; */
+"1DB-1w-eYT.text" = "in wacht";
+
+/* Class = "UILabel"; text = "merge calls"; ObjectID = "ofp-Gc-j35"; */
+"ofp-Gc-j35.text" = "samenvoegen";
