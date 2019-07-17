@@ -78,16 +78,19 @@
     [mockLabel stopMocking];
 }
 
-// Test disabled, need to mock out the callManager
-- (void)testAcceptCallButtonPressetMovesToSegue {
+- (void)testAcceptCallButtonPressedMovesToSegue {
+    self.sipIncomingCallVC.call = self.mockCall;
+    OCMStub([self.mockCall answerWithCompletion:([OCMArg invokeBlockWithArgs:[NSNull null], nil])]);
+    
     id mockSipIncomingCallVC = OCMPartialMock(self.sipIncomingCallVC);
-
-    OCMStub([mockSipIncomingCallVC performSegueWithIdentifier:[OCMArg any] sender:[OCMArg any]]).andDo(nil);
 
     id mockButton = OCMClassMock([UIButton class]);
     [self.sipIncomingCallVC acceptCallButtonPressed:mockButton];
-
+    
+    //Run the main loop briefly to let it call the async block. https://stackoverflow.com/questions/12463733/objective-c-unit-testing-dispatch-async-block
+    [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
     OCMVerify([mockSipIncomingCallVC performSegueWithIdentifier:@"SIPCallingSegue" sender:[OCMArg any]]);
+    
     [mockButton stopMocking];
     [mockSipIncomingCallVC stopMocking];
 }
