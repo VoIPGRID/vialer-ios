@@ -225,7 +225,7 @@ extension RecentsViewController {
             let phoneNumbers = CNLabeledValue<CNPhoneNumber>(label: CNLabelPhoneNumberMain, value: phoneNumber)
             let unknownContact = CNMutableContact()
             unknownContact.phoneNumbers = [phoneNumbers]
-            unknownContact.givenName = recent.displayName ?? ""
+            unknownContact.givenName = ""
             contactViewController = CNContactViewController(forUnknownContact: unknownContact)
             contactViewController.title = newPhoneNumber
         }
