@@ -6,14 +6,25 @@
 private var myContext = 0
 
 class TransferInProgressViewController: UIViewController {
+    
+    // MARK: - Configuration
+    enum SegueIdentifier : String {
+        case unwindToVialerRootViewController = "UnwindToVialerRootViewControllerSegue"
+    }
 
     // MARK: - Properties
+    var callManager = VialerSIPLib.sharedInstance().callManager
+    
+    var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
+
     var firstCall: VSLCall? {
         didSet {
+            firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+            callObserversSet = true
+
             updateUI()
         }
     }
-    var callManager = VialerSIPLib.sharedInstance().callManager
     var firstCallPhoneNumberLabelText: String? {
         didSet {
             updateUI()
@@ -43,14 +54,18 @@ class TransferInProgressViewController: UIViewController {
 extension TransferInProgressViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         VialerGAITracker.trackScreenForController(name: controllerName)
-        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
         updateUI()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        firstCall?.removeObserver(self, forKeyPath: "callState")
+
+        if callObserversSet {
+            firstCall?.removeObserver(self, forKeyPath: "callState")
+            callObserversSet = false
+        }
     }
 
 }
@@ -58,14 +73,18 @@ extension TransferInProgressViewController {
 // MARK: - Actions
 extension TransferInProgressViewController {
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
-        callManager.end(firstCall!) { error in
-            if error != nil {
-                VialerLogError("Error disconnecting call: \(error!)")
+        if firstCall?.callState != .disconnected {
+            callManager.end(firstCall!) { error in
+                if error != nil {
+                    VialerLogError("Error disconnecting call: \(error!)")
+                }
             }
         }
-        callManager.end(currentCall!) { error in
-            if error != nil {
-                VialerLogError("Error disconnecting call: \(error!)")
+        if currentCall?.callState != .disconnected {
+            callManager.end(currentCall!) { error in
+                if error != nil {
+                    VialerLogError("Error disconnecting call: \(error!)")
+                }
             }
         }
     }
@@ -104,6 +123,7 @@ extension TransferInProgressViewController {
 // MARK: - KVO
 extension TransferInProgressViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
         if context == &myContext {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
@@ -111,6 +131,7 @@ extension TransferInProgressViewController {
 
                 guard let call = object as? VSLCall, call.transferStatus == .accepted || call.transferStatus == .rejected else { return }
 
+                // Call transfer is finished, so end the transferred calls,
                 if self!.firstCall?.callState != .disconnected {
                     strongSelf.callManager.end(self!.firstCall!) { error in
                         if error != nil {
@@ -125,6 +146,9 @@ extension TransferInProgressViewController {
                         }
                     }
                 }
+                
+                // and return to the root view controller.
+                strongSelf.performSegue(withIdentifier: SegueIdentifier.unwindToVialerRootViewController.rawValue, sender: nil)
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)

@@ -54,9 +54,11 @@ extension SetupCallTransferContactsViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        VialerGAITracker.trackScreenForController(name: controllerName)
-
         firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+        callObserversSet = true
+        
+        VialerGAITracker.trackScreenForController(name: controllerName)
 
         updateUI()
     }
@@ -64,7 +66,11 @@ extension SetupCallTransferContactsViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        firstCall?.removeObserver(self, forKeyPath: "callState")
+        if callObserversSet {
+            firstCall?.removeObserver(self, forKeyPath: "callState")
+            firstCall?.removeObserver(self, forKeyPath: "mediaState")
+            callObserversSet = false
+        }
     }
 }
 
@@ -149,6 +155,7 @@ extension SetupCallTransferContactsViewController {
             secondCallVC.firstCall = firstCall
             secondCallVC.phoneNumberLabelText = currentCall?.numberToCall
             secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
+//            secondCallVC.observingSIPCallingVC = observingSIPCallingVC
         case .unwindToFirstCall:
             let callVC = segue.destination as! SIPCallingViewController
             if let call = currentCall, call.callState != .null && call.callState != .disconnected {
