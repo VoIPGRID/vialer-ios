@@ -155,7 +155,6 @@ extension SetupCallTransferContactsViewController {
             secondCallVC.firstCall = firstCall
             secondCallVC.phoneNumberLabelText = currentCall?.numberToCall
             secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-//            secondCallVC.observingSIPCallingVC = observingSIPCallingVC
         case .unwindToFirstCall:
             let callVC = segue.destination as! SIPCallingViewController
             if let call = currentCall, call.callState != .null && call.callState != .disconnected {
