@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		05180B54031A7A2054CC2AB2 /* libPods-Vialer Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5A3938EA55131C5AB18EFE /* libPods-Vialer Staging.a */; };
-		131F141B764C1E96AE2621BE /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		2863C1DD5459F397EDEDBE8D /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		131F141B764C1E96AE2621BE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		2863C1DD5459F397EDEDBE8D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		2BB971BC191E29D60A6A49A8 /* libPods-VerbondenSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8854EC76887FC56F9F8B0D /* libPods-VerbondenSnapshotUITests.a */; };
 		2FD77E3E05F087B8BCE46819 /* libPods-Voys Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE771AA34104D7A975041F1 /* libPods-Voys Staging.a */; };
 		3D15A4581B2ECAA8004C5012 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D15A4571B2ECAA8004C5012 /* PushKit.framework */; };
@@ -22,6 +22,8 @@
 		45FAA197D07A701481006D03 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030913FF544600ABE3DC3AFD /* libPods-Voys.a */; };
 		4D27D40E66E3E080DBB02CF4 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
+		7B5B40DCEFF0B6694341779F /* libPods-ANNAbel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83600D1EB24E7A47BCF0EA6F /* libPods-ANNAbel.a */; };
+		7B5DBAB2BDFBE36DACEAFB9C /* libPods-Verbonden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 228AAEB47BE259EF0ABF8AE5 /* libPods-Verbonden.a */; };
 		83021DE52232BC56007F63ED /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */; };
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
@@ -46,7 +48,7 @@
 		838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
-		8382064B2290979A0098EABD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8382064B2290979A0098EABD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8382064C2290979A0098EABD /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		8382064D2290979A0098EABD /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		8382064E2290979A0098EABD /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10101C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m */; };
@@ -75,7 +77,7 @@
 		838206652290979A0098EABD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		838206662290979A0098EABD /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
 		838206672290979A0098EABD /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
-		838206682290979A0098EABD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		838206682290979A0098EABD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		838206692290979A0098EABD /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		8382066A2290979A0098EABD /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		8382066B2290979A0098EABD /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
@@ -197,7 +199,7 @@
 		838206F7229098D20098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		838206F8229098D20098EABD /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		838206F9229098D20098EABD /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
-		838206FA229098D20098EABD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		838206FA229098D20098EABD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		838206FB229098D20098EABD /* RoundedAndColoredUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A452611C2462C700846591 /* RoundedAndColoredUIButton.m */; };
 		838206FC229098D20098EABD /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C831BFB31900043DED7 /* MainTabBarViewController.m */; };
 		838206FD229098D20098EABD /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -227,7 +229,7 @@
 		83820715229098D20098EABD /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
 		83820716229098D20098EABD /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
 		83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
-		83820718229098D20098EABD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		83820718229098D20098EABD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		83820719229098D20098EABD /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
 		8382071A229098D20098EABD /* TwoStepCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47AF2080DBD500CC80E5 /* TwoStepCallingViewController.m */; };
 		8382071B229098D20098EABD /* CircleWithShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FB2080DC2D00CC80E5 /* CircleWithShadow.m */; };
@@ -364,12 +366,22 @@
 		83CB73592296C9F000987168 /* Verbonden-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */; };
 		83CB735B2296C9F000987168 /* Verbonden.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73522296C9F000987168 /* Verbonden.xcassets */; };
 		83CB735C2296C9F000987168 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */; };
+		83CD3F2B22845D540079A2A9 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		83DA45F322706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F422706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F522706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F622706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F722706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F822706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
+		83DA46032272047000212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		83DA46042272047100212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		83DA46052272047200212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		83DA46062272047300212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		83DA46072272047300212371 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
+		83DA46082272047800212371 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		83DA46092272047800212371 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		83DA460A2272047900212371 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		83DA460B2272047A00212371 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		83FC989C228975D500A44738 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		83FC989D228975D500A44738 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		83FC989E228975D500A44738 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
@@ -1578,6 +1590,7 @@
 		0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
 		205B495E88D5C4F6ADCE7353 /* Pods-VerbondenSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		228AAEB47BE259EF0ABF8AE5 /* libPods-Verbonden.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Verbonden.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9DB42F29C50D5C1326FDDD /* Pods-Verbonden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.release.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.release.xcconfig"; sourceTree = "<group>"; };
 		2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		311FF6CE99A3AD079E153505 /* Pods-ANNAbelSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1620,6 +1633,7 @@
 		833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB4922146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		83600D1EB24E7A47BCF0EA6F /* libPods-ANNAbel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
@@ -2092,7 +2106,8 @@
 				C490ADBF1D0863E3004A8F83 /* UIKit.framework in Frameworks */,
 				C490ADC01D0863E3004A8F83 /* Foundation.framework in Frameworks */,
 				C490ADC11D0863E3004A8F83 /* CoreGraphics.framework in Frameworks */,
-				2863C1DD5459F397EDEDBE8D /* (null) in Frameworks */,
+				2863C1DD5459F397EDEDBE8D /* BuildFile in Frameworks */,
+				7B5DBAB2BDFBE36DACEAFB9C /* libPods-Verbonden.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2136,7 +2151,8 @@
 				EE23187A20A0468F00C05EB0 /* UIKit.framework in Frameworks */,
 				EE23187B20A0468F00C05EB0 /* Foundation.framework in Frameworks */,
 				EE23187C20A0468F00C05EB0 /* CoreGraphics.framework in Frameworks */,
-				131F141B764C1E96AE2621BE /* (null) in Frameworks */,
+				131F141B764C1E96AE2621BE /* BuildFile in Frameworks */,
+				7B5B40DCEFF0B6694341779F /* libPods-ANNAbel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3378,6 +3394,8 @@
 				7CE771AA34104D7A975041F1 /* libPods-Voys Staging.a */,
 				21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */,
 				A3CC407352871DE562624E6D /* libPods-Verbonden Staging.a */,
+				83600D1EB24E7A47BCF0EA6F /* libPods-ANNAbel.a */,
+				228AAEB47BE259EF0ABF8AE5 /* libPods-Verbonden.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -5348,7 +5366,7 @@
 				838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */,
 				838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */,
 				8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */,
-				8382064B2290979A0098EABD /* (null) in Sources */,
+				8382064B2290979A0098EABD /* BuildFile in Sources */,
 				8382064C2290979A0098EABD /* RoundedAndColoredUIButton.m in Sources */,
 				8382064D2290979A0098EABD /* MainTabBarViewController.m in Sources */,
 				8382064E2290979A0098EABD /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
@@ -5377,7 +5395,7 @@
 				838206652290979A0098EABD /* VialerStats.swift in Sources */,
 				838206662290979A0098EABD /* EnumHelper.swift in Sources */,
 				838206672290979A0098EABD /* CoreDataStackHelper.swift in Sources */,
-				838206682290979A0098EABD /* (null) in Sources */,
+				838206682290979A0098EABD /* BuildFile in Sources */,
 				838206692290979A0098EABD /* LogInViewController.m in Sources */,
 				8382066A2290979A0098EABD /* TwoStepCallingViewController.m in Sources */,
 				8382066B2290979A0098EABD /* CircleWithShadow.m in Sources */,
@@ -5456,7 +5474,7 @@
 				838206F7229098D20098EABD /* FileManagerExtensions.swift in Sources */,
 				838206F8229098D20098EABD /* TwoFactorAuthenticationView.m in Sources */,
 				838206F9229098D20098EABD /* UserProfileWebViewController.m in Sources */,
-				838206FA229098D20098EABD /* (null) in Sources */,
+				838206FA229098D20098EABD /* BuildFile in Sources */,
 				838206FB229098D20098EABD /* RoundedAndColoredUIButton.m in Sources */,
 				838206FC229098D20098EABD /* MainTabBarViewController.m in Sources */,
 				838206FD229098D20098EABD /* RecentsTimeConverter.swift in Sources */,
@@ -5486,7 +5504,7 @@
 				83820715229098D20098EABD /* EnumHelper.swift in Sources */,
 				83820716229098D20098EABD /* VIAScene.m in Sources */,
 				83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */,
-				83820718229098D20098EABD /* (null) in Sources */,
+				83820718229098D20098EABD /* BuildFile in Sources */,
 				83820719229098D20098EABD /* LogInViewController.m in Sources */,
 				8382071A229098D20098EABD /* TwoStepCallingViewController.m in Sources */,
 				8382071B229098D20098EABD /* CircleWithShadow.m in Sources */,
