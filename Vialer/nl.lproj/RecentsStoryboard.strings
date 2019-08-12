@@ -8,8 +8,8 @@
 /* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[0] = "All"; ObjectID = "rDx-8g-SbK"; */
 "rDx-8g-SbK.segmentTitles[0]" = "Alles";
 
-/* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[1] = "Missed"; ObjectID = "rDx-8g-SbK"; */
-"rDx-8g-SbK.segmentTitles[1]" = "Gemist";
+/* Class = "UISegmentedControl"; rDx-8g-SbK.segmentTitles[1] = "Mine"; ObjectID = "rDx-8g-SbK"; */
+"rDx-8g-SbK.segmentTitles[1]" = "Mijn";
 
 /* Class = "UILabel"; text = "date"; ObjectID = "8Jg-mD-iX2"; */
 "8Jg-mD-iX2.text" = "";
