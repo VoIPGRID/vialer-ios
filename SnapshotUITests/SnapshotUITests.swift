@@ -86,7 +86,8 @@ class SnapshotUITests: XCTestCase {
     /**
      * This is the UI Test which takes the actual screenshots. Screenshots are taken in a different order as shown on the app store (efficiency)
      * but this is corrected by prefixing with a number (01-05)
-     * If the test fails without an apparent reason, try resetting the simulator. (Simulator -> Reset Content and Settings)
+     * If the test fails without an apparent reason, try resetting (Hardware -> Erase Content and Settings) the simulator. Possible reason is
+     * that the app isn't in the state the test assumes, at the login screen. So just logout could be a solution too.
      */
     func testSnapshotScreenshotRun() {
         let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
