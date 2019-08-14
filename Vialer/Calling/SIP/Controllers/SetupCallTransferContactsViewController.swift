@@ -150,6 +150,7 @@ extension SetupCallTransferContactsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(segue: segue) {
         case .secondCallActive:
+            // The second call is active and is a subtype of SIPCallingVC, so cast the destination to it.
             let secondCallVC = segue.destination as! SecondCallViewController
             secondCallVC.activeCall = currentCall
             secondCallVC.firstCall = firstCall

@@ -107,7 +107,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
     
-    deinit { // TODO: Remove because the observers are already removed during viewWillDisappear?
+    deinit {
         if callObserversSet {
             activeCall?.removeObserver(self, forKeyPath: "callState")
             activeCall?.removeObserver(self, forKeyPath: "mediaState")
