@@ -10,8 +10,8 @@ import Foundation
  */
 
 struct Constants {
-    static let username = ""
+    static let username = ""  // = Email address.
     static let password = ""
-    static let ownNumber = ""
-    static let numberToDail = ""
+    static let ownNumber = "" // Include + and country code prefix, ie. +31611223344.
+    static let numberToDail = "" // Exclude + and country code prefix, ie. 0611223344.
 }
