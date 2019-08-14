@@ -7,6 +7,8 @@ class SetupCallTransfer: UIViewController {
         case secondCallActive = "SecondCallActiveSegue"
     }
     
+    var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
+    
     var firstCall: VSLCall? {
         didSet {
             updateUI()

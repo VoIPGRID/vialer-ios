@@ -12,11 +12,15 @@ class SecondCallViewController: SIPCallingViewController {
         case transferInProgress = "TransferInProgressSegue"
         case unwindToFirstCall = "UnwindToFirstCallSegue"
         case showKeypad = "ShowKeypadSegue"
+        case unwindToActiveCall = "UnwindToActiveCall"
     }
 
     // MARK: - Properties
     var firstCall: VSLCall? {
         didSet {
+            firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+            firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+
             updateUI()
         }
     }
@@ -34,17 +38,24 @@ class SecondCallViewController: SIPCallingViewController {
 // MARK: - Lifecycle
 extension SecondCallViewController{
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         VialerGAITracker.trackScreenForController(name: controllerName)
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
         startConnectDurationTimer()
-        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
         UIDevice.current.isProximityMonitoringEnabled = false
-        firstCall?.removeObserver(self, forKeyPath: "callState")
+        
+        if callObserversSet {
+            firstCall?.removeObserver(self, forKeyPath: "callState")
+            firstCall?.removeObserver(self, forKeyPath: "mediaState")
+            callObserversSet = false
+        }
     }
 }
 
@@ -126,18 +137,17 @@ extension SecondCallViewController {
             transferInProgressVC.currentCallPhoneNumberLabelText = phoneNumberLabelText
         case .unwindToFirstCall:
             let firstCallVC = segue.destination as! SIPCallingViewController
-            if firstCall?.callState == .disconnected {
-                firstCallVC.activeCall = activeCall
-                firstCallVC.phoneNumberLabelText = phoneNumberLabelText
-            } else {
-                firstCallVC.activeCall = firstCall
-                firstCallVC.phoneNumberLabelText = firstCallPhoneNumberLabelText
-            }
+            firstCallVC.activeCall = firstCall
+            firstCallVC.phoneNumberLabelText = firstCallPhoneNumberLabelText
         case .showKeypad:
             let keypadVC = segue.destination as! KeypadViewController
             keypadVC.call = activeCall
             keypadVC.delegate = self
             keypadVC.phoneNumberLabelText = phoneNumberLabelText
+        case .unwindToActiveCall:
+            let firstCallVC = segue.destination as! SIPCallingViewController
+            firstCallVC.activeCall = activeCall
+            firstCallVC.phoneNumberLabelText = phoneNumberLabelText
         }
     }
 }
@@ -145,13 +155,13 @@ extension SecondCallViewController {
 // MARK: - KVO
 extension SecondCallViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-
         // If the first call is disconnected and the second call is in progress, unwind to CallViewController.
         // In prepare the second call will be set as the activeCall.
         if let call = object as? VSLCall, call == firstCall && call.callState == .disconnected && call.transferStatus == .unkown,
             let activeCall = activeCall, activeCall.callState != .null {
+
             DispatchQueue.main.async { [weak self] in
-                self?.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+                self?.performSegue(withIdentifier: SecondCallVCSegue.unwindToActiveCall.rawValue, sender: nil)
             }
             return
         }

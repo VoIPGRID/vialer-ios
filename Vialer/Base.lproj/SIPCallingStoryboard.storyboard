@@ -224,7 +224,7 @@
                                                         <rect key="frame" x="173" y="0.0" width="61.666666666666657" height="61.666666666666664"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HO9-77-XoX">
-                                                                <rect key="frame" x="16" y="16" width="30" height="30"/>
+                                                                <rect key="frame" x="24.666666666666629" y="24.666666666666742" width="30" height="30"/>
                                                                 <state key="normal" title="hide">
                                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
@@ -795,6 +795,7 @@
                         <segue destination="10U-cZ-ZuY" kind="unwind" identifier="UnwindToFirstCallSegue" unwindAction="unwindToFirstCallSegue:" id="3Q0-da-GNb"/>
                         <segue destination="Lfl-9a-GUJ" kind="show" identifier="TransferInProgressSegue" id="IJh-Ii-oBO"/>
                         <segue destination="gkX-qY-AIB" kind="show" identifier="ShowKeypadSegue" id="NbJ-Zx-YRq"/>
+                        <segue destination="10U-cZ-ZuY" kind="unwind" identifier="UnwindToActiveCall" unwindAction="unwindToActiveCallSegue:" id="V7s-Hx-uI7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzf-VT-iVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -875,6 +876,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="yQi-zQ-RoI">
                             <connections>
                                 <action selector="backButtonPressed:" destination="Lfl-9a-GUJ" id="lJg-ct-Oeu"/>
+                                <segue destination="aWK-Fn-YFu" kind="unwind" identifier="UnwindToVialerRootViewControllerSegue" unwindAction="unwindVialerRootViewController:" id="VuX-Oo-7HS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -886,6 +888,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9T-Dx-5Hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aWK-Fn-YFu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5066.666666666667" y="-1007.608695652174"/>
         </scene>
