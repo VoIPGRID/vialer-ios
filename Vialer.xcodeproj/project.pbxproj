@@ -156,7 +156,6 @@
 		838206BC2290979A0098EABD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
 		838206BD2290979A0098EABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
 		838206BE2290979A0098EABD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
-		838206BF2290979A0098EABD /* libPods-ANNAbel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */; };
 		838206C22290979A0098EABD /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
 		838206C32290979A0098EABD /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
 		838206C42290979A0098EABD /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
@@ -307,7 +306,6 @@
 		8382076B229098D20098EABD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D0182261D200707349 /* UIKit.framework */; };
 		8382076C229098D20098EABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D2182261D200707349 /* Foundation.framework */; };
 		8382076D229098D20098EABD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4226D4182261D200707349 /* CoreGraphics.framework */; };
-		8382076E229098D20098EABD /* libPods-Verbonden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D985712C57AEF321FAC347 /* libPods-Verbonden.a */; };
 		83820770229098D20098EABD /* dtmf-#.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854111A7FE3CE00121366 /* dtmf-#.aif */; };
 		83820772229098D20098EABD /* dtmf-0.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854121A7FE3CE00121366 /* dtmf-0.aif */; };
 		83820773229098D20098EABD /* AvailabilityStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3EAF91BFB7C9900AA4B2A /* AvailabilityStoryboard.storyboard */; };
@@ -1572,7 +1570,6 @@
 		03F7D705E538F64D58EC5AEE /* Pods-ANNAbel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel/Pods-ANNAbel.release.xcconfig"; sourceTree = "<group>"; };
 		044D2E78EC312E66BE9DA029 /* Pods-Voys Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voys Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voys Staging/Pods-Voys Staging.release.xcconfig"; sourceTree = "<group>"; };
 		0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer/Pods-Vialer.debug.xcconfig"; sourceTree = "<group>"; };
-		1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		205B495E88D5C4F6ADCE7353 /* Pods-VerbondenSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VerbondenSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9DB42F29C50D5C1326FDDD /* Pods-Verbonden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.release.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.release.xcconfig"; sourceTree = "<group>"; };
@@ -1600,7 +1597,6 @@
 		575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
-		69D985712C57AEF321FAC347 /* libPods-Verbonden.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Verbonden.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		6E5A3938EA55131C5AB18EFE /* libPods-Vialer Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vialer Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Acceptatie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1983,7 +1979,6 @@
 				838206BC2290979A0098EABD /* UIKit.framework in Frameworks */,
 				838206BD2290979A0098EABD /* Foundation.framework in Frameworks */,
 				838206BE2290979A0098EABD /* CoreGraphics.framework in Frameworks */,
-				838206BF2290979A0098EABD /* libPods-ANNAbel.a in Frameworks */,
 				D99509E85091A372BCE8EB50 /* libPods-ANNAbel Staging.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2012,7 +2007,6 @@
 				8382076B229098D20098EABD /* UIKit.framework in Frameworks */,
 				8382076C229098D20098EABD /* Foundation.framework in Frameworks */,
 				8382076D229098D20098EABD /* CoreGraphics.framework in Frameworks */,
-				8382076E229098D20098EABD /* libPods-Verbonden.a in Frameworks */,
 				87D39B0E567D261AACDD2993 /* libPods-Verbonden Staging.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3366,14 +3360,12 @@
 				FB4226D4182261D200707349 /* CoreGraphics.framework */,
 				6EAD7089BF0A00A41F5AA8FE /* libPods-Acceptatie.a */,
 				3C5A3A0941590C7F7200913A /* libPods-Acceptatie Voys.a */,
-				69D985712C57AEF321FAC347 /* libPods-Verbonden.a */,
 				BD8854EC76887FC56F9F8B0D /* libPods-VerbondenSnapshotUITests.a */,
 				CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */,
 				2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */,
 				575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */,
 				030913FF544600ABE3DC3AFD /* libPods-Voys.a */,
 				8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */,
-				1BFDD126C6E31921F01E6222 /* libPods-ANNAbel.a */,
 				AEBCFBF586B140C9FD3D42B4 /* libPods-ANNAbelSnapshotUITests.a */,
 				6E5A3938EA55131C5AB18EFE /* libPods-Vialer Staging.a */,
 				7CE771AA34104D7A975041F1 /* libPods-Voys Staging.a */,
@@ -4985,15 +4977,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
 			);
@@ -7249,7 +7237,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
+					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -7313,7 +7301,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
+					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;

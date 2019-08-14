@@ -8,7 +8,7 @@
 
 import Foundation
 import PushKit
-//import UIKit //orp
+import UIKit //orp
 
 // To make the singleton pattern testable.
 //var _sharedAPNSHandler: APNSHandler? = nil //orp WTF
@@ -18,27 +18,34 @@ import PushKit
     // MARK: - Properties
     // Singleton instance of APNSHandler
     //@objc static let sharedAPNSHandler = APNSHandler() //orp
-    @objc static let shared = APNSHandler()
+    @objc static let shared = APNSHandler(voipRegistry: <#T##PKPushRegistry#>, middleware: <#T##Middleware#>)
     
-    @objc var voipRegistry: PKPushRegistry { //orp
-        get {
-            // Nil for the queue, so that the delegate methods will be done on the main queue.
-            let voipRegistry = PKPushRegistry(queue: nil)
-            return voipRegistry
-        }
-    }
+//    @objc var voipRegistry: PKPushRegistry { //orp
+//        get {
+//            // Nil for the queue, so that the delegate methods will be done on the main queue.
+//            let voipRegistry = PKPushRegistry(queue: nil)
+//            return voipRegistry
+//        }
+//    }
+    @objc var voipRegistry: PKPushRegistry
     
-    @objc var middleware: Middleware { //orp
-        get {
-            let middleware = Middleware()
-            return middleware
-        }
-    }
+//    @objc var middleware: Middleware { //orp
+//        get {
+//            let middleware = Middleware()
+//            return middleware
+//        }
+//    }
+    @objc var middleware: Middleware
     
     // MARK: - Lifecyrcle
-    private override init() {
-        super.init()
+    @objc init(voipRegistry: PKPushRegistry, middleware: Middleware) {
+        self.voipRegistry = voipRegistry
+        self.middleware = middleware
     }
+    
+//    private override init() {
+//        super.init()
+//    }
     
     // MARK: - Actions
     @objc func registerForVoIPNotifications() {
