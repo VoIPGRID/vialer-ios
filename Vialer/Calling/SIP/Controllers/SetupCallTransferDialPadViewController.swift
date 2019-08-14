@@ -48,14 +48,23 @@ class SetupCallTransferDialPadViewController: SetupCallTransfer, SegueHandler {
 extension SetupCallTransferDialPadViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+        callObserversSet = true
+
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
-        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        firstCall?.removeObserver(self, forKeyPath: "callState")
+
+        if callObserversSet {
+            firstCall?.removeObserver(self, forKeyPath: "callState")
+            firstCall?.removeObserver(self, forKeyPath: "mediaState")
+            callObserversSet = false
+        }
     }
 }
 
@@ -124,9 +133,9 @@ extension SetupCallTransferDialPadViewController {
 // MARK: - Segues
 extension SetupCallTransferDialPadViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // First check if the destinationVC is SecondCallVC, because SecondCallVC is also subtype of SIPCallingVC.
         switch segueIdentifier(segue: segue) {
         case .secondCallActive:
+            // The second call is active and is a subtype of SIPCallingVC, so cast the destination to it.
             let secondCallVC = segue.destination as! SecondCallViewController
             secondCallVC.activeCall = currentCall
             secondCallVC.firstCall = firstCall

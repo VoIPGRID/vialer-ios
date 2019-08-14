@@ -25,7 +25,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     }
     
     // MARK: - Properties
-    
+    var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
+
     @objc var activeCall: VSLCall? {
         didSet {
             var numberToClean: String
@@ -51,8 +52,10 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
             }
+
             activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
             activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+            callObserversSet = true
         }
     }
     var callManager = VialerSIPLib.sharedInstance().callManager
@@ -61,7 +64,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
     
     var callGotAnError = false
-    
+
     // The cleaned number that needs to be called.
     var cleanedPhoneNumber: String?
     var diplayNameForOutgoingCall: String?
@@ -105,8 +108,11 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
     
     deinit {
-        activeCall?.removeObserver(self, forKeyPath: "callState")
-        activeCall?.removeObserver(self, forKeyPath: "mediaState")
+        if callObserversSet {
+            activeCall?.removeObserver(self, forKeyPath: "callState")
+            activeCall?.removeObserver(self, forKeyPath: "mediaState")
+            callObserversSet = false
+        }
     }
 }
 
@@ -114,6 +120,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
 extension SIPCallingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         UIDevice.current.isProximityMonitoringEnabled = true
         VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
@@ -130,9 +137,17 @@ extension SIPCallingViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         connectDurationTimer?.invalidate()
         UIDevice.current.isProximityMonitoringEnabled = false
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
+        
+        if callObserversSet {
+            activeCall?.removeObserver(self, forKeyPath: "callState")
+            activeCall?.removeObserver(self, forKeyPath: "mediaState")
+            callObserversSet = false
+        }
     }
 }
 
@@ -585,6 +600,7 @@ extension SIPCallingViewController {
             let setupCallTransferDialPadVC = transferDialPadNavC.viewControllers[0] as! SetupCallTransferDialPadViewController
             setupCallTransferDialPadVC.firstCall = activeCall
             setupCallTransferDialPadVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            
             setupCallTransferContactsVC.firstCall = activeCall
             setupCallTransferContactsVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
         case .unwindToVialerRootViewController:
@@ -593,7 +609,9 @@ extension SIPCallingViewController {
     }
     
     @IBAction func unwindToFirstCallSegue(_ segue: UIStoryboardSegue) {}
-    
+
+    @IBAction func unwindToActiveCallSegue(_ segue: UIStoryboardSegue) {} // Seque used to make the second call the active one when the first call is ended during a transfer setup.
+
 }
 
 // MARK: - KVO
@@ -625,7 +643,7 @@ extension SIPCallingViewController {
     @objc func errorDuringCallSetup(_ notification: NSNotification) {
         let statusCode = notification.userInfo![VSLNotificationUserInfoErrorStatusCodeKey] as! String
         
-        if statusCode != "407" {
+        if statusCode != "407" {  // ==PJSIP_SC_REQUEST_TERMINATED aka call being cancelled, which is technically not an error.
             self.callGotAnError = true
         }
     }

@@ -54,9 +54,11 @@ extension SetupCallTransferContactsViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        VialerGAITracker.trackScreenForController(name: controllerName)
-
         firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+        callObserversSet = true
+        
+        VialerGAITracker.trackScreenForController(name: controllerName)
 
         updateUI()
     }
@@ -64,7 +66,11 @@ extension SetupCallTransferContactsViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        firstCall?.removeObserver(self, forKeyPath: "callState")
+        if callObserversSet {
+            firstCall?.removeObserver(self, forKeyPath: "callState")
+            firstCall?.removeObserver(self, forKeyPath: "mediaState")
+            callObserversSet = false
+        }
     }
 }
 
@@ -144,6 +150,7 @@ extension SetupCallTransferContactsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(segue: segue) {
         case .secondCallActive:
+            // The second call is active and is a subtype of SIPCallingVC, so cast the destination to it.
             let secondCallVC = segue.destination as! SecondCallViewController
             secondCallVC.activeCall = currentCall
             secondCallVC.firstCall = firstCall
