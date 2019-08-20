@@ -2364,13 +2364,13 @@
 			isa = PBXGroup;
 			children = (
 				D449C087230BF83E0086720A /* InfoPlist.strings */,
+				83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */,
+				83CB734B2296C9F000987168 /* Verbonden-Info.plist */,
 				83CB734C2296C9F000987168 /* Config.plist */,
 				83CB734D2296C9F000987168 /* FirebaseService-Info.plist */,
 				83CB73472296C9EF00987168 /* GoogleService-Info.plist */,
-				83CB734B2296C9F000987168 /* Verbonden-Info.plist */,
-				83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */,
 				83CB73522296C9F000987168 /* Verbonden.xcassets */,
-				83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */,
+				83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */,
 				8374B86922C0E6760048C7C3 /* Snapshot-Constants.swift */,
 			);
 			path = Verbonden;
@@ -2391,11 +2391,11 @@
 		838207A0229099610098EABD /* Verbonden */ = {
 			isa = PBXGroup;
 			children = (
-				D449C081230BF4620086720A /* InfoPlist.strings */,
 				838207B22292CB530098EABD /* Acceptatie-Verbonden-Info.plist */,
 				838207B32292CB540098EABD /* Config.plist */,
 				838207B52292CB540098EABD /* GoogleService-Info.plist */,
 				838207B72292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard */,
+				D449C081230BF4620086720A /* InfoPlist.strings */,
 			);
 			path = Verbonden;
 			sourceTree = "<group>";
@@ -2472,13 +2472,13 @@
 				EEEF16081F470C4400AEFA83 /* InfoPlist.strings */,
 				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
-				8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */,
 				C41FD8E41C60A55000BBE6D7 /* Config.plist */,
 				EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */,
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
-				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
 				EE3D8674201F113800CEFDC6 /* Voys.xcassets */,
 				832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */,
+				8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */,
+				C42FAD3C1D198D34004D9D00 /* ringtone.wav */,
 			);
 			name = Voys;
 			sourceTree = "<group>";
@@ -2869,15 +2869,15 @@
 		EE2317FC20A0442000C05EB0 /* ANNAbel */ = {
 			isa = PBXGroup;
 			children = (
-				EE65918720AACEAB00305980 /* ANNAbel.xcassets */,
 				EE2317FE20A0442000C05EB0 /* InfoPlist.strings */,
-				83129868215D033A00CFE01D /* GoogleService-Info.plist */,
-				8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */,
+				EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */,
 				EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */,
 				EE23180220A0442000C05EB0 /* Config.plist */,
 				EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */,
-				EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */,
+				83129868215D033A00CFE01D /* GoogleService-Info.plist */,
+				EE65918720AACEAB00305980 /* ANNAbel.xcassets */,
 				833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */,
+				8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */,
 			);
 			name = ANNAbel;
 			path = Branding/ANNAbel;
@@ -2949,8 +2949,8 @@
 				EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */,
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
-				EE6F2A75214A330500229C75 /* InfoPlist.strings */,
 				833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */,
+				EE6F2A75214A330500229C75 /* InfoPlist.strings */,
 			);
 			path = Voys;
 			sourceTree = "<group>";
