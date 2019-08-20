@@ -716,6 +716,7 @@
 		D4E7F2BA230C134800E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		D4E7F2BB230C15F900E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2BC230C160000E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
+		D4E7F2BD230C176E00E76FA4 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		D99509E85091A372BCE8EB50 /* libPods-ANNAbel Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */; };
 		E7A9119825A31543E96AB1F0 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */; };
 		EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
@@ -4089,6 +4090,7 @@
 				C49A46AE1E6829DD0097E808 /* dtmf-*.aif in Resources */,
 				C41FD8AD1C60A08400BBE6D7 /* SideMenuStoryboard.storyboard in Resources */,
 				EEEF16111F470C8200AEFA83 /* Localizable.strings in Resources */,
+				D4E7F2BD230C176E00E76FA4 /* ringtone.wav in Resources */,
 				C41FD8AE1C60A08400BBE6D7 /* dtmf-2.aif in Resources */,
 				C41FD8AF1C60A08400BBE6D7 /* RecentsStoryboard.storyboard in Resources */,
 				EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */,
