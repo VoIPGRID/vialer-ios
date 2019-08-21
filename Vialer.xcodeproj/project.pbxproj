@@ -709,6 +709,7 @@
 		D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
 		D449C083230BF4620086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C081230BF4620086720A /* InfoPlist.strings */; };
 		D449C089230BF83E0086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
+		D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2B8230C0D8D00E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D4E7F2B9230C121D00E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -4294,6 +4295,7 @@
 				833DFB4A22146279003E19CC /* Vialer-Staging-LaunchScreen.storyboard in Resources */,
 				F20851451D26935600A17E71 /* AvailabilityStoryboard.storyboard in Resources */,
 				F20851461D26935600A17E71 /* TwoStepCallingStoryboard.storyboard in Resources */,
+				D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */,
 				F20851471D26935600A17E71 /* ContactsStoryboard.storyboard in Resources */,
 				F20851481D26935600A17E71 /* dtmf-1.aif in Resources */,
 				F20851491D26935600A17E71 /* SideMenuStoryboard.storyboard in Resources */,
