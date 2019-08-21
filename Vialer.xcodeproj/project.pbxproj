@@ -349,7 +349,6 @@
 		838207D92292D0A70098EABD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207D82292D0A70098EABD /* GoogleService-Info.plist */; };
 		838207DA2292D0C10098EABD /* ANNAbel-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */; };
 		838207DB2292F97A0098EABD /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207C82292CFF80098EABD /* Config.plist */; };
-		838207DE2292F9A50098EABD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838207D62292D04D0098EABD /* InfoPlist.strings */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
 		83C040FF22B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -711,6 +710,7 @@
 		D449C089230BF83E0086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
+		D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
 		D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2B8230C0D8D00E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D4E7F2B9230C121D00E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -1654,8 +1654,6 @@
 		838207C82292CFF80098EABD /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		838207C92292CFF80098EABD /* Acceptatie-ANNAbel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-ANNAbel-Info.plist"; sourceTree = "<group>"; };
 		838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
-		838207D52292D04D0098EABD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		838207D72292D0530098EABD /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		838207D82292D0A70098EABD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
@@ -2380,7 +2378,6 @@
 				838207C82292CFF80098EABD /* Config.plist */,
 				838207D82292D0A70098EABD /* GoogleService-Info.plist */,
 				838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */,
-				838207D62292D04D0098EABD /* InfoPlist.strings */,
 			);
 			path = ANNAbel;
 			sourceTree = "<group>";
@@ -3991,7 +3988,7 @@
 				838206C42290979A0098EABD /* AvailabilityStoryboard.storyboard in Resources */,
 				838206C52290979A0098EABD /* TwoStepCallingStoryboard.storyboard in Resources */,
 				838207DB2292F97A0098EABD /* Config.plist in Resources */,
-				838207DE2292F9A50098EABD /* InfoPlist.strings in Resources */,
+				D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */,
 				838206C62290979A0098EABD /* ContactsStoryboard.storyboard in Resources */,
 				838206C72290979A0098EABD /* dtmf-1.aif in Resources */,
 				838206C82290979A0098EABD /* SideMenuStoryboard.storyboard in Resources */,
@@ -6420,15 +6417,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		838207D62292D04D0098EABD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				838207D52292D04D0098EABD /* en */,
-				838207D72292D0530098EABD /* nl */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
