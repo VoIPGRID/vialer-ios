@@ -706,11 +706,11 @@
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		D400290822083BC600E5AA68 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
-		D449C083230BF4620086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C081230BF4620086720A /* InfoPlist.strings */; };
 		D449C089230BF83E0086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
 		D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
+		D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2B8230C0D8D00E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D4E7F2B9230C121D00E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -1790,8 +1790,6 @@
 		D1451B6C942ADC0A1D3C4C93 /* Pods-ANNAbel Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.release.xcconfig"; sourceTree = "<group>"; };
 		D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferContactsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D400290922083C2400E5AA68 /* SetupCallTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransfer.swift; sourceTree = "<group>"; };
-		D449C082230BF4620086720A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D449C084230BF4790086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D449C088230BF83E0086720A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Verbonden/nl.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		D449C08A230BF84F0086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../Branding/Verbonden/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2389,7 +2387,6 @@
 				838207B32292CB540098EABD /* Config.plist */,
 				838207B52292CB540098EABD /* GoogleService-Info.plist */,
 				838207B72292CB550098EABD /* Verbonden-Staging-LaunchScreen.storyboard */,
-				D449C081230BF4620086720A /* InfoPlist.strings */,
 			);
 			path = Verbonden;
 			sourceTree = "<group>";
@@ -4029,6 +4026,7 @@
 				83820773229098D20098EABD /* AvailabilityStoryboard.storyboard in Resources */,
 				83820774229098D20098EABD /* TwoStepCallingStoryboard.storyboard in Resources */,
 				83820775229098D20098EABD /* ContactsStoryboard.storyboard in Resources */,
+				D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */,
 				83820776229098D20098EABD /* dtmf-1.aif in Resources */,
 				83820777229098D20098EABD /* SideMenuStoryboard.storyboard in Resources */,
 				83820778229098D20098EABD /* dtmf-2.aif in Resources */,
@@ -4056,7 +4054,6 @@
 				8382078E229098D20098EABD /* Images.xcassets in Resources */,
 				8358B8F62296ED9D00CCA6CC /* Verbonden.xcassets in Resources */,
 				83820790229098D20098EABD /* DialerStoryboard.storyboard in Resources */,
-				D449C083230BF4620086720A /* InfoPlist.strings in Resources */,
 				83820792229098D20098EABD /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6496,15 +6493,6 @@
 				EE5C22221F46EDA300AFB9E2 /* nl */,
 			);
 			name = SIPCallingStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
-		D449C081230BF4620086720A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D449C082230BF4620086720A /* nl */,
-				D449C084230BF4790086720A /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		D449C087230BF83E0086720A /* InfoPlist.strings */ = {
