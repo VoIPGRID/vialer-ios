@@ -711,6 +711,13 @@
 		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
 		D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
 		D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
+		D44C0665230D43820000A631 /* Vialer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851821D269DD300A17E71 /* Vialer-Info.plist */; };
+		D44C0667230D444C0000A631 /* Vialer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851821D269DD300A17E71 /* Vialer-Info.plist */; };
+		D44C0668230D44550000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
+		D44C0669230D44560000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
+		D44C066A230D445D0000A631 /* ANNAbel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */; };
+		D44C066B230D445E0000A631 /* ANNAbel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */; };
+		D44C066C230D44650000A631 /* Verbonden-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734B2296C9F000987168 /* Verbonden-Info.plist */; };
 		D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2B8230C0D8D00E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D4E7F2B9230C121D00E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -1685,7 +1692,7 @@
 		C41C42F71D5A742100813B66 /* VialerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VialerLogger.m; path = Helpers/VialerLogger.m; sourceTree = "<group>"; };
 		C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactModelTestCase.swift; path = Contacts/Models/ContactModelTestCase.swift; sourceTree = "<group>"; };
 		C41FD8CE1C60A08400BBE6D7 /* Voys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voys.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Voys-Info.plist"; path = "Branding/Voys/Voys-Info.plist"; sourceTree = "<group>"; };
+		C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Voys-Info.plist"; path = "Branding/Voys/Voys-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C41FD8E41C60A55000BBE6D7 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Branding/Voys/Config.plist; sourceTree = "<group>"; };
 		C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Voys/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoysSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1800,7 +1807,7 @@
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
 		EE2317FF20A0442000C05EB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANNAbel-Info.plist"; sourceTree = "<group>"; };
+		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ANNAbel-Info.plist"; path = "Branding/ANNAbel/ANNAbel-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EE23180220A0442000C05EB0 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE23180320A0442000C05EB0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ANNAbelIntentsExtension.plist; sourceTree = "<group>"; };
@@ -1887,7 +1894,7 @@
 		F208516A1D26935600A17E71 /* Vialer Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vialer Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20851801D269DD300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F20851811D269DD300A17E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
+		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Vialer-Info.plist"; path = "Branding/Vialer/Vialer-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22FF2891D0ABF3800761C9A /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
@@ -3987,6 +3994,7 @@
 				838207DB2292F97A0098EABD /* Config.plist in Resources */,
 				D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */,
 				838206C62290979A0098EABD /* ContactsStoryboard.storyboard in Resources */,
+				D44C066B230D445E0000A631 /* ANNAbel-Info.plist in Resources */,
 				838206C72290979A0098EABD /* dtmf-1.aif in Resources */,
 				838206C82290979A0098EABD /* SideMenuStoryboard.storyboard in Resources */,
 				838206C92290979A0098EABD /* dtmf-2.aif in Resources */,
@@ -4029,6 +4037,7 @@
 				D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */,
 				83820776229098D20098EABD /* dtmf-1.aif in Resources */,
 				83820777229098D20098EABD /* SideMenuStoryboard.storyboard in Resources */,
+				D44C066C230D44650000A631 /* Verbonden-Info.plist in Resources */,
 				83820778229098D20098EABD /* dtmf-2.aif in Resources */,
 				8382077A229098D20098EABD /* dtmf-*.aif in Resources */,
 				8382077B229098D20098EABD /* ReachabilityBarStoryboard.storyboard in Resources */,
@@ -4091,6 +4100,7 @@
 				C41FD8B61C60A08400BBE6D7 /* dtmf-6.aif in Resources */,
 				C41FD8B71C60A08400BBE6D7 /* dtmf-7.aif in Resources */,
 				C41FD8B81C60A08400BBE6D7 /* disconnected.wav in Resources */,
+				D44C0668230D44550000A631 /* Voys-Info.plist in Resources */,
 				C41FD8B91C60A08400BBE6D7 /* dtmf-8.aif in Resources */,
 				C4F385961D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
@@ -4218,6 +4228,7 @@
 				EE23189C20A0468F00C05EB0 /* Images.xcassets in Resources */,
 				EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */,
 				EE23189D20A0468F00C05EB0 /* DialerStoryboard.storyboard in Resources */,
+				D44C066A230D445D0000A631 /* ANNAbel-Info.plist in Resources */,
 				EE23189E20A0468F00C05EB0 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4245,6 +4256,7 @@
 				EE61F4661F1DDDE4006E890F /* dtmf-#.aif in Resources */,
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
 				EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */,
+				D44C0669230D44560000A631 /* Voys-Info.plist in Resources */,
 				D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */,
 				EE61F4681F1DDDE4006E890F /* AvailabilityStoryboard.storyboard in Resources */,
 				833DFB4822146265003E19CC /* Voys-Staging-LaunchScreen.storyboard in Resources */,
@@ -4288,6 +4300,7 @@
 				F20851461D26935600A17E71 /* TwoStepCallingStoryboard.storyboard in Resources */,
 				D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */,
 				F20851471D26935600A17E71 /* ContactsStoryboard.storyboard in Resources */,
+				D44C0667230D444C0000A631 /* Vialer-Info.plist in Resources */,
 				F20851481D26935600A17E71 /* dtmf-1.aif in Resources */,
 				F20851491D26935600A17E71 /* SideMenuStoryboard.storyboard in Resources */,
 				F208514A1D26935600A17E71 /* dtmf-2.aif in Resources */,
@@ -4359,6 +4372,7 @@
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
 				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
 				C49B0EE81E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
+				D44C0665230D43820000A631 /* Vialer-Info.plist in Resources */,
 				83C040FF22B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */,
 				F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */,
