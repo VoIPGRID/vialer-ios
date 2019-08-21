@@ -710,6 +710,7 @@
 		D449C083230BF4620086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C081230BF4620086720A /* InfoPlist.strings */; };
 		D449C089230BF83E0086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
+		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
 		D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2B8230C0D8D00E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D4E7F2B9230C121D00E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -1096,7 +1097,6 @@
 		EE61F4B81F1DE36C006E890F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE61F49B1F1DDF1E006E890F /* Config.plist */; };
 		EE61F4B91F1DE5E5006E890F /* VoysIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C43172371DFE85B3005FF8EA /* VoysIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE65918720AACEAB00305980 /* ANNAbel.xcassets */; };
-		EE6F2A77214A330500229C75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE6F2A75214A330500229C75 /* InfoPlist.strings */; };
 		EE733DAA21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
 		EE733DAB21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
 		EE733DAC21649C6200D05CA3 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE733DA821649C6200D05CA3 /* SettingsStoryboard.storyboard */; };
@@ -1851,8 +1851,6 @@
 		EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE61F4B31F1DE0A8006E890F /* Acceptatie-Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Voys-Info.plist"; sourceTree = "<group>"; };
 		EE65918720AACEAB00305980 /* ANNAbel.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ANNAbel.xcassets; sourceTree = "<group>"; };
-		EE6F2A76214A330500229C75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EE6F2A78214A331000229C75 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE733DA921649C6200D05CA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		EE733DB021649C7200D05CA3 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SettingsStoryboard.strings; sourceTree = "<group>"; };
 		EE733DB12164B34600D05CA3 /* EnumHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnumHelper.swift; path = Helpers/EnumHelper.swift; sourceTree = "<group>"; };
@@ -2948,7 +2946,6 @@
 				EE61F49B1F1DDF1E006E890F /* Config.plist */,
 				EE61F49C1F1DDF1E006E890F /* GoogleService-Info.plist */,
 				833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */,
-				EE6F2A75214A330500229C75 /* InfoPlist.strings */,
 			);
 			path = Voys;
 			sourceTree = "<group>";
@@ -4250,11 +4247,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE61F4B81F1DE36C006E890F /* Config.plist in Resources */,
-				EE6F2A77214A330500229C75 /* InfoPlist.strings in Resources */,
 				EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */,
 				EE61F4661F1DDDE4006E890F /* dtmf-#.aif in Resources */,
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
 				EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */,
+				D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */,
 				EE61F4681F1DDDE4006E890F /* AvailabilityStoryboard.storyboard in Resources */,
 				833DFB4822146265003E19CC /* Voys-Staging-LaunchScreen.storyboard in Resources */,
 				EE61F4691F1DDDE4006E890F /* TwoStepCallingStoryboard.storyboard in Resources */,
@@ -6536,15 +6533,6 @@
 			children = (
 				EE2317FF20A0442000C05EB0 /* en */,
 				EE23180320A0442000C05EB0 /* nl */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		EE6F2A75214A330500229C75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EE6F2A76214A330500229C75 /* en */,
-				EE6F2A78214A331000229C75 /* nl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
