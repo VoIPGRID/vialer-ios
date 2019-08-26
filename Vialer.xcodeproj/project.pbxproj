@@ -358,7 +358,6 @@
 		83C0410322B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		83C0410422B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		83CB73542296C9F000987168 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73472296C9EF00987168 /* GoogleService-Info.plist */; };
-		83CB73562296C9F000987168 /* Verbonden-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734B2296C9F000987168 /* Verbonden-Info.plist */; };
 		83CB73572296C9F000987168 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734C2296C9F000987168 /* Config.plist */; };
 		83CB73582296C9F000987168 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734D2296C9F000987168 /* FirebaseService-Info.plist */; };
 		83CB73592296C9F000987168 /* Verbonden-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */; };
@@ -4160,7 +4159,6 @@
 				83CB735C2296C9F000987168 /* VerbondenIntentsExtension.plist in Resources */,
 				C490ADD81D0863E3004A8F83 /* disconnected.wav in Resources */,
 				C4F385971D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
-				83CB73562296C9F000987168 /* Verbonden-Info.plist in Resources */,
 				C490ADD91D0863E3004A8F83 /* dtmf-8.aif in Resources */,
 				C490ADDB1D0863E3004A8F83 /* dtmf-9.aif in Resources */,
 				83CB73572296C9F000987168 /* Config.plist in Resources */,
