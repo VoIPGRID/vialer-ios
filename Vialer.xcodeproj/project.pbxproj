@@ -702,7 +702,6 @@
 		D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0667230D444C0000A631 /* Vialer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851821D269DD300A17E71 /* Vialer-Info.plist */; };
 		D44C0669230D44560000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
-		D44C066A230D445D0000A631 /* ANNAbel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */; };
 		D44C066B230D445E0000A631 /* ANNAbel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */; };
 		D44C066C230D44650000A631 /* Verbonden-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB734B2296C9F000987168 /* Verbonden-Info.plist */; };
 		D44C066D230D45EC0000A631 /* VialerIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */; };
@@ -4222,7 +4221,6 @@
 				EE23189C20A0468F00C05EB0 /* Images.xcassets in Resources */,
 				EE65918820AACEAB00305980 /* ANNAbel.xcassets in Resources */,
 				EE23189D20A0468F00C05EB0 /* DialerStoryboard.storyboard in Resources */,
-				D44C066A230D445D0000A631 /* ANNAbel-Info.plist in Resources */,
 				EE23189E20A0468F00C05EB0 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
