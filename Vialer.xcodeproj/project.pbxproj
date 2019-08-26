@@ -701,7 +701,6 @@
 		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
 		D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
 		D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
-		D44C0665230D43820000A631 /* Vialer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851821D269DD300A17E71 /* Vialer-Info.plist */; };
 		D44C0667230D444C0000A631 /* Vialer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851821D269DD300A17E71 /* Vialer-Info.plist */; };
 		D44C0668230D44550000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
 		D44C0669230D44560000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
@@ -4374,7 +4373,6 @@
 				FBB854221A7FE67300121366 /* dtmf-4.aif in Resources */,
 				FBB854231A7FE67300121366 /* dtmf-5.aif in Resources */,
 				C49B0EE81E6D9D4C00DD226B /* LogInViewController.xib in Resources */,
-				D44C0665230D43820000A631 /* Vialer-Info.plist in Resources */,
 				83C040FF22B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				FBB854241A7FE67300121366 /* dtmf-6.aif in Resources */,
 				F20851851D269DD300A17E71 /* GoogleService-Info.plist in Resources */,
