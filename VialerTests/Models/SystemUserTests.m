@@ -404,9 +404,9 @@
 
 - (void)testUnAuthorizedNotificationWillLogoutUser {
     self.user.loggedIn = YES;
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:VoIPGRIDRequestOperationManagerUnAuthorizedNotification object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:VoIPGRIDRequestOperationManagerUnAuthorizedNotification object:self.user];
+    
     XCTAssertFalse(self.user.loggedIn, @"The user should be logged out.");
 }
 
