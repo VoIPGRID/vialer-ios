@@ -702,7 +702,6 @@
 		D44C0663230D3DC70000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
 		D44C0664230D3E6E0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0667230D444C0000A631 /* Vialer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F20851821D269DD300A17E71 /* Vialer-Info.plist */; };
-		D44C0668230D44550000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
 		D44C0669230D44560000A631 /* Voys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */; };
 		D44C066A230D445D0000A631 /* ANNAbel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */; };
 		D44C066B230D445E0000A631 /* ANNAbel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */; };
@@ -4097,7 +4096,6 @@
 				C41FD8B61C60A08400BBE6D7 /* dtmf-6.aif in Resources */,
 				C41FD8B71C60A08400BBE6D7 /* dtmf-7.aif in Resources */,
 				C41FD8B81C60A08400BBE6D7 /* disconnected.wav in Resources */,
-				D44C0668230D44550000A631 /* Voys-Info.plist in Resources */,
 				C41FD8B91C60A08400BBE6D7 /* dtmf-8.aif in Resources */,
 				C4F385961D5B66AC005D8146 /* SIPCallingStoryboard.storyboard in Resources */,
 				C41FD8BB1C60A08400BBE6D7 /* dtmf-9.aif in Resources */,
