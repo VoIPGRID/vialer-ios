@@ -492,3 +492,8 @@
 /* It's not possible to setup a call. Make sure you are trying to call a valid number. */
 "It's not possible to setup this call. Please make sure you are trying to call a valid number." = "Het gesprek kan niet worden opgezet. Zorg voor een geldig telefoonnummer.";
 
+/* Missed call */
+"Missed call" = "Gemiste oproep";
+
+/* Anonymous */
+"Anonymous" = "Anoniem";
