@@ -774,4 +774,33 @@
     OCMVerifyAll(self.keychainMock);
 }
 
+- (void)testStoreNewAvailability {
+    // Given
+    NSDictionary *option = @{
+                             SystemUserAvailabilityPhoneNumberKey: @42,
+                             SystemUserAvailabilityDescriptionKey: @"Test phonennumber"
+                             };
+
+    // When
+    NSString *newAvailabilityString = [self.user storeNewAvailabilityInSUD:option];
+
+    // Then
+    NSString *expectedString = [NSString stringWithFormat:@"%@ / %@", option[SystemUserAvailabilityPhoneNumberKey], option[SystemUserAvailabilityDescriptionKey]];
+    XCTAssertEqualObjects(newAvailabilityString, expectedString, @"Expected and retrieved availability states mismatch");
+}
+
+- (void)testStoreNewAvailabilityNotAvailable {
+    // Given
+    NSDictionary *option = @{
+                             SystemUserAvailabilityPhoneNumberKey: @0,
+                             };
+
+    // When
+    NSString *newAvailabilityString = [self.user storeNewAvailabilityInSUD:option];
+
+    // Then
+    NSString *expectedString = NSLocalizedString(@"Not available", nil);
+    XCTAssertEqualObjects(newAvailabilityString, expectedString, @"Expected and retrieved availability states mismatch");
+}
+
 @end

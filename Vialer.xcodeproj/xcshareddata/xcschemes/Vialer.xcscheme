@@ -40,9 +40,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "AvailabilityModelTests">
-               </Test>
-               <Test
                   Identifier = "SIPIncomingCallViewControllerTests/testAcceptCallButtonPressetMovesToSegue">
                </Test>
             </SkippedTests>
