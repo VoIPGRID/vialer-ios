@@ -6,6 +6,7 @@
 #import "ActivateSIPAccountViewController.h"
 #import <OCMock/OCMock.h>
 #import "UserProfileWebViewController.h"
+#import "SystemUser.h"
 @import XCTest;
 
 @interface ActivateSIPAccountViewControllerTests : XCTestCase
@@ -29,20 +30,32 @@
     id mockActivateSIPAccountVC = OCMPartialMock(self.activateSIPAccountVC);
     id mockNavigationController = OCMClassMock([UINavigationController class]);
     OCMStub([mockActivateSIPAccountVC navigationController]).andReturn(mockNavigationController);
+    
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    OCMStub([mockActivateSIPAccountVC user]).andReturn(mockSystemUser);
+    OCMStub([mockSystemUser updateSystemUserFromVGWithCompletion:nil]);
 
     [self.activateSIPAccountVC backButtonPressed:nil];
-
     OCMVerify([mockNavigationController popViewControllerAnimated:YES]);
-
+    
     [mockActivateSIPAccountVC stopMocking];
     [mockNavigationController stopMocking];
+    [mockSystemUser stopMocking];
 }
 
-- (void)testBackgroundButtonWillSegueToRootViewController {
-    self.activateSIPAccountVC.backButtonToRootViewController = YES;
+- (void)testBackButtonWillSegueToRootViewController {
+    id mockActivateSIPAccountVC = OCMPartialMock(self.activateSIPAccountVC);
+    
+    id mockSystemUser = OCMClassMock([SystemUser class]);
+    OCMStub([mockActivateSIPAccountVC user]).andReturn(mockSystemUser);
+    OCMStub([mockSystemUser updateSystemUserFromVGWithCompletion:nil]);
+    
     [self.activateSIPAccountVC backButtonPressed:nil];
 
     OCMVerify([self.activateSIPAccountVC performSegueWithIdentifier:@"VialerRootViewControllerSegue" sender:self]);
+    
+    [mockActivateSIPAccountVC stopMocking];
+    [mockSystemUser stopMocking];
 }
 
 - (void)testPrepareForSegueWillSetNextURL {
