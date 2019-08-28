@@ -132,7 +132,7 @@ static int const TwoStepCallCancelTimeout = 3.0;
                  *  - Extensions or phonenumbers not valid.
                  *  - This number is not permitted.
                  */
-                NSString *responseString = [responseData description];
+                NSString *responseString = responseData[@"description"];
                 if (responseString.length > 0) {
                     if ([responseString isEqualToString:TwoStepCallErrorPhoneNumber]) {
                         self.status = TwoStepCallStatusInvalidNumber;

@@ -710,6 +710,7 @@
 		D44C0670230D46330000A631 /* ANNAbelIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */; };
 		D44C0671230D46350000A631 /* ANNAbelIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */; };
 		D44C0672230D463D0000A631 /* VerbondenIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */; };
+		D48BAB002315198100A3F4F4 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
 		D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2B8230C0D8D00E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D4E7F2B9230C121D00E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -1161,7 +1162,6 @@
 		EEDCC3C520C520E0003480F6 /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		EEEDF355219DBE4E00D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */; };
 		EEEDF35F219DC3D500D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */; };
-		EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */; };
 		EEEF16061F470C2E00AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		EEEF160A1F470C4400AEFA83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
 		EEEF160C1F470C4A00AEFA83 /* VoysIntentsExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */; };
@@ -1634,7 +1634,7 @@
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
 		831E6BAD22316C57003B6AAC /* ConfigureFormViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigureFormViewTests.m; sourceTree = "<group>"; };
-		832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Voys-LaunchScreen.storyboard"; path = "Branding/Voys/Voys-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB3E2211B934003E19CC /* Vialer-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Vialer-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB41221461D4003E19CC /* ANNAbel-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		833DFB4722146264003E19CC /* Voys-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Voys-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
@@ -1658,13 +1658,13 @@
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
 		83C0410722B1293A00405624 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SetupCallTransferDialPadViewController.storyboard; sourceTree = "<group>"; };
 		83C0410822B1295F00405624 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SetupCallTransferDialPadViewController.strings; sourceTree = "<group>"; };
-		83CB73472296C9EF00987168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Verbonden/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		83CB734B2296C9F000987168 /* Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Verbonden-Info.plist"; path = "Branding/Verbonden/Verbonden-Info.plist"; sourceTree = SOURCE_ROOT; };
-		83CB734C2296C9F000987168 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Branding/Verbonden/Config.plist; sourceTree = SOURCE_ROOT; };
-		83CB734D2296C9F000987168 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FirebaseService-Info.plist"; path = "Branding/Verbonden/FirebaseService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Verbonden-LaunchScreen.storyboard"; path = "Branding/Verbonden/Verbonden-LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
-		83CB73522296C9F000987168 /* Verbonden.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Verbonden.xcassets; path = Branding/Verbonden/Verbonden.xcassets; sourceTree = SOURCE_ROOT; };
-		83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VerbondenIntentsExtension.plist; path = Branding/Verbonden/VerbondenIntentsExtension.plist; sourceTree = SOURCE_ROOT; };
+		83CB73472296C9EF00987168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		83CB734B2296C9F000987168 /* Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Verbonden-Info.plist"; sourceTree = "<group>"; };
+		83CB734C2296C9F000987168 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		83CB734D2296C9F000987168 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
+		83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Verbonden-LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		83CB73522296C9F000987168 /* Verbonden.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Verbonden.xcassets; sourceTree = "<group>"; };
+		83CB73532296C9F000987168 /* VerbondenIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VerbondenIntentsExtension.plist; sourceTree = "<group>"; };
 		83DA45F222706A9300212371 /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
 		83FC989B228975D500A44738 /* AvailabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityViewController.swift; sourceTree = "<group>"; };
 		8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VoysSnapshotUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1684,9 +1684,9 @@
 		C41C42F71D5A742100813B66 /* VialerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VialerLogger.m; path = Helpers/VialerLogger.m; sourceTree = "<group>"; };
 		C41D3A711DE728DC00AEA929 /* ContactModelTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactModelTestCase.swift; path = Contacts/Models/ContactModelTestCase.swift; sourceTree = "<group>"; };
 		C41FD8CE1C60A08400BBE6D7 /* Voys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voys.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Voys-Info.plist"; path = "Branding/Voys/Voys-Info.plist"; sourceTree = SOURCE_ROOT; };
-		C41FD8E41C60A55000BBE6D7 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Branding/Voys/Config.plist; sourceTree = "<group>"; };
-		C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Branding/Voys/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Voys-Info.plist"; sourceTree = "<group>"; };
+		C41FD8E41C60A55000BBE6D7 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C41FD9001C60A89300BBE6D7 /* VoysSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoysSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
@@ -1769,7 +1769,7 @@
 		C4C675611D19B5420003A385 /* Vialer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Vialer-Bridging-Header.h"; path = "Supporting Files/Vialer-Bridging-Header.h"; sourceTree = "<group>"; };
 		C4C675641D19B5430003A385 /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppInfo.swift; path = Helpers/AppInfo.swift; sourceTree = "<group>"; };
 		C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VialerGAITracker.swift; path = Helpers/VialerGAITracker.swift; sourceTree = "<group>"; };
-		C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VialerIntentsExtension.plist; path = Branding/Vialer/VialerIntentsExtension.plist; sourceTree = SOURCE_ROOT; };
+		C4D2704C1E70179E00B1637B /* VialerIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VialerIntentsExtension.plist; sourceTree = "<group>"; };
 		C4DA5C791BFB27580043DED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C4DA5C7F1BFB2E590043DED7 /* VialerDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VialerDrawerViewController.h; path = Main/Controllers/VialerDrawerViewController.h; sourceTree = "<group>"; };
 		C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VialerDrawerViewController.m; path = Main/Controllers/VialerDrawerViewController.m; sourceTree = "<group>"; };
@@ -1781,7 +1781,7 @@
 		C4F49F271BF0B45700C25159 /* VialerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F49F2B1BF0B45700C25159 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F49F321BF0C06A00C25159 /* TwoStepCallTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoStepCallTests.m; sourceTree = "<group>"; };
-		C4FE25E11D819A8B002BE230 /* Vialer.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = Vialer.entitlements; path = ../../Vialer/Vialer.entitlements; sourceTree = "<group>"; };
+		C4FE25E11D819A8B002BE230 /* Vialer.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = Vialer.entitlements; path = Vialer/Vialer.entitlements; sourceTree = SOURCE_ROOT; };
 		C83D52DEEA84B69B3F39737D /* UIView+RoundedStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedStyle.h"; sourceTree = "<group>"; };
 		C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedStyle.m"; sourceTree = "<group>"; };
 		CDF2ECAB9F575E477A6C52D6 /* Pods-VoysSnapshotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1790,7 +1790,7 @@
 		D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferContactsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D400290922083C2400E5AA68 /* SetupCallTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransfer.swift; sourceTree = "<group>"; };
 		D449C088230BF83E0086720A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Verbonden/nl.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
-		D449C08A230BF84F0086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../Branding/Verbonden/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D449C08A230BF84F0086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
 		DA8ECD27FFFF5F670A0811A1 /* libPods-ANNAbel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE02B3F420D7870F006B10FD /* VialerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VialerStats.swift; path = Helpers/VialerStats.swift; sourceTree = "<group>"; };
@@ -1799,10 +1799,10 @@
 		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
 		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
 		EE2317FF20A0442000C05EB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ANNAbel-Info.plist"; path = "Branding/ANNAbel/ANNAbel-Info.plist"; sourceTree = SOURCE_ROOT; };
+		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANNAbel-Info.plist"; sourceTree = "<group>"; };
 		EE23180220A0442000C05EB0 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		EE23180320A0442000C05EB0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ANNAbelIntentsExtension.plist; path = Branding/ANNAbel/ANNAbelIntentsExtension.plist; sourceTree = SOURCE_ROOT; };
+		EE23180620A0442000C05EB0 /* ANNAbelIntentsExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ANNAbelIntentsExtension.plist; sourceTree = "<group>"; };
 		EE2318A820A0468F00C05EB0 /* ANNAbel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ANNAbel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ANNAbelIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2318C620A046BB00C05EB0 /* ANNAbelSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANNAbelSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1821,7 +1821,7 @@
 		EE3C47FE2080DC2D00CC80E5 /* CircleWithWhiteIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithWhiteIcon.h; sourceTree = "<group>"; };
 		EE3C47FF2080DC2D00CC80E5 /* VialerIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VialerIconView.m; sourceTree = "<group>"; };
 		EE3C48002080DC2D00CC80E5 /* CircleWithShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithShadow.h; sourceTree = "<group>"; };
-		EE3D8674201F113800CEFDC6 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Voys.xcassets; path = Branding/Voys/Voys.xcassets; sourceTree = "<group>"; };
+		EE3D8674201F113800CEFDC6 /* Voys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Voys.xcassets; sourceTree = "<group>"; };
 		EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
 		EE5C221F1F46EDA200AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AvailabilityStoryboard.strings; sourceTree = "<group>"; };
 		EE5C22201F46EDA300AFB9E2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DialerStoryboard.strings; sourceTree = "<group>"; };
@@ -1855,7 +1855,7 @@
 		EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		EEA9ADB3200DEDD4007727EB /* Vialer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vialer.xcassets; sourceTree = "<group>"; };
-		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = VoysIntentsExtension.plist; path = Branding/Voys/VoysIntentsExtension.plist; sourceTree = SOURCE_ROOT; };
+		EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VoysIntentsExtension.plist; sourceTree = "<group>"; };
 		EEDC3040208725FD00C7C642 /* TwoFactorAuthenticationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TwoFactorAuthenticationView.h; path = Onboarding/Forms/TwoFactorAuthenticationView.h; sourceTree = "<group>"; };
 		EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TwoFactorAuthenticationView.m; path = Onboarding/Forms/TwoFactorAuthenticationView.m; sourceTree = "<group>"; };
 		EEDCC3AE20C520E0003480F6 /* DialerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialerViewController.swift; sourceTree = "<group>"; };
@@ -1872,11 +1872,11 @@
 		EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewController.m; sourceTree = "<group>"; };
 		EEEDF354219DBE4C00D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
 		EEEDF35E219DC3D400D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
-		EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FirebaseService-Info.plist"; path = "Branding/Voys/FirebaseService-Info.plist"; sourceTree = "<group>"; };
+		EEEDF360219DC7A100D0D853 /* FirebaseService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseService-Info.plist"; sourceTree = "<group>"; };
 		EEEF16051F470C2E00AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF16071F470C3500AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EEEF16091F470C4400AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Branding/Voys/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EEEF160B1F470C4A00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Voys/nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EEEF16091F470C4400AEFA83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EEEF160B1F470C4A00AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EEEF160E1F470C8200AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEEF16151F470DC600AEFA83 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenFromPasteBoard.swift; sourceTree = "<group>"; };
@@ -1886,7 +1886,7 @@
 		F208516A1D26935600A17E71 /* Vialer Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vialer Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20851801D269DD300A17E71 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F20851811D269DD300A17E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Vialer-Info.plist"; path = "Branding/Vialer/Vialer-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F20851821D269DD300A17E71 /* Vialer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Vialer-Info.plist"; sourceTree = "<group>"; };
 		F21ECCE71C47D94000E9B276 /* Snapshot-Constants.EXAMPLE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snapshot-Constants.EXAMPLE"; sourceTree = "<group>"; };
 		F22DE0AD1CC90D41001468B3 /* VialerSnapshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VialerSnapshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22FF2891D0ABF3800761C9A /* SystemUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUser.h; sourceTree = "<group>"; };
@@ -2365,7 +2365,8 @@
 				83CB734E2296C9F000987168 /* Verbonden-LaunchScreen.storyboard */,
 				8374B86922C0E6760048C7C3 /* Snapshot-Constants.swift */,
 			);
-			path = Verbonden;
+			name = Verbonden;
+			path = Branding/Verbonden;
 			sourceTree = "<group>";
 		};
 		8382079F229099400098EABD /* ANNAbel */ = {
@@ -2470,6 +2471,7 @@
 				8374B86322C0E4BD0048C7C3 /* Snapshot-Constants.swift */,
 			);
 			name = Voys;
+			path = Branding/Voys;
 			sourceTree = "<group>";
 		};
 		C432A86A1C58EF8C00909F16 /* Dialer */ = {
@@ -4084,8 +4086,8 @@
 				EEEF16111F470C8200AEFA83 /* Localizable.strings in Resources */,
 				D4E7F2BD230C176E00E76FA4 /* ringtone.wav in Resources */,
 				C41FD8AE1C60A08400BBE6D7 /* dtmf-2.aif in Resources */,
+				D48BAB002315198100A3F4F4 /* FirebaseService-Info.plist in Resources */,
 				C41FD8AF1C60A08400BBE6D7 /* RecentsStoryboard.storyboard in Resources */,
-				EEEDF361219DC7A200D0D853 /* FirebaseService-Info.plist in Resources */,
 				C41FD8B11C60A08400BBE6D7 /* dtmf-3.aif in Resources */,
 				C41FD8B31C60A08400BBE6D7 /* dtmf-4.aif in Resources */,
 				C41FD8B51C60A08400BBE6D7 /* dtmf-5.aif in Resources */,
@@ -7147,7 +7149,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7185,7 +7187,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LG97ZGSAVA;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;

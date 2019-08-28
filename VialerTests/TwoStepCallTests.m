@@ -67,22 +67,23 @@
 
 - (void)testInvalidNumberWillSetCorrectStatusWhenStart {
     NSError *error = [NSError errorWithDomain:@"testDomain" code:VoIPGRIDHttpErrorBadRequest userInfo:nil];
+    NSDictionary *responseData = @{@"description" : @"Extensions or phonenumbers not valid"};
+    
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
     id mockNSURLResponse = OCMClassMock([NSURLResponse class]);
-//    OCMStub([mockNSURLResponse responseString]).andReturn(@"Extensions or phonenumbers not valid");
     id mockNSHTTPURLResponse = OCMClassMock([NSHTTPURLResponse class]);
-    OCMStub([mockNSHTTPURLResponse statusCode]).andReturn(400);
-    OCMStub([mockNSURLResponse response]).andReturn(mockNSHTTPURLResponse);
+    OCMStub([mockNSURLResponse statusCode]).andReturn(VoIPGRIDHttpErrorBadRequest);
     OCMStub([mockOperationsManager setupTwoStepCallWithParameters:[OCMArg any] withCompletion:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSURLResponse *operation, NSDictionary *responseData, NSError *error)) {
-        passedBlock(mockNSURLResponse, nil, error);
+        passedBlock(mockNSURLResponse, responseData, error);
         return YES;
     }]]);
+    
     TwoStepCall *call = [[TwoStepCall alloc] initWithANumber:@"42" andBNumber:@"43"];
     call.operationsManager = mockOperationsManager;
-
     [call start];
 
     XCTAssertEqual(call.status, TwoStepCallStatusInvalidNumber, @"Status should be invalid number.");
+    
     [mockOperationsManager stopMocking];
     [mockNSURLResponse stopMocking];
     [mockNSHTTPURLResponse stopMocking];
