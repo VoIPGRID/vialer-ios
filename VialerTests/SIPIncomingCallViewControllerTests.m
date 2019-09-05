@@ -5,6 +5,7 @@
 
 #import <OCMock/OCMock.h>
 #import "SIPIncomingCallViewController.h"
+#import "SystemUser.h"
 @import XCTest;
 
 @interface SIPIncomingCallViewController (PrivateImplementation)
@@ -15,6 +16,7 @@
 @interface SIPIncomingCallViewControllerTests : XCTestCase
 @property (strong, nonatomic) SIPIncomingCallViewController *sipIncomingCallVC;
 @property (strong, nonatomic) id mockCall;
+@property (strong, nonatomic) id mockSystemUser;
 @end
 
 @implementation SIPIncomingCallViewControllerTests
@@ -24,12 +26,18 @@
     self.sipIncomingCallVC = (SIPIncomingCallViewController *)[[UIStoryboard storyboardWithName:@"SIPIncomingCallStoryboard" bundle:nil] instantiateInitialViewController];
     [self.sipIncomingCallVC loadViewIfNeeded];
     self.mockCall = OCMClassMock([VSLCall class]);
+
+    self.mockSystemUser = OCMClassMock([SystemUser class]);
+    OCMStub([self.mockSystemUser currentUser]).andReturn(self.mockSystemUser);
+    NSString *mockSIPAccount = @"012334456";
+    OCMStub([self.mockSystemUser sipAccount]).andReturn(mockSIPAccount);
 }
 
 - (void)tearDown {
     [self.mockCall stopMocking];
     self.mockCall = nil;
     self.sipIncomingCallVC = nil;
+    [self.mockSystemUser stopMocking];
     [super tearDown];
 }
 
