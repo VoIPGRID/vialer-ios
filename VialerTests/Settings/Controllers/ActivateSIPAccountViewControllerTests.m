@@ -43,21 +43,6 @@
     [mockSystemUser stopMocking];
 }
 
-- (void)testBackButtonWillSegueToRootViewController {
-    id mockActivateSIPAccountVC = OCMPartialMock(self.activateSIPAccountVC);
-    
-    id mockSystemUser = OCMClassMock([SystemUser class]);
-    OCMStub([mockActivateSIPAccountVC user]).andReturn(mockSystemUser);
-    OCMStub([mockSystemUser updateSystemUserFromVGWithCompletion:nil]);
-    
-    [self.activateSIPAccountVC backButtonPressed:nil];
-
-    OCMVerify([self.activateSIPAccountVC performSegueWithIdentifier:@"VialerRootViewControllerSegue" sender:self]);
-    
-    [mockActivateSIPAccountVC stopMocking];
-    [mockSystemUser stopMocking];
-}
-
 - (void)testPrepareForSegueWillSetNextURL {
     id mockUserProfileWVC = OCMClassMock([UserProfileWebViewController class]);
     id mockSegue = OCMClassMock([UIStoryboardSegue class]);
