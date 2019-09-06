@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5L0-rr-mn0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5L0-rr-mn0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,13 +109,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Availability" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPz-xs-tCd">
-                                <rect key="frame" x="74" y="118" width="212" height="21"/>
+                                <rect key="frame" x="74" y="117" width="212" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu-availability" translatesAutoresizingMaskIntoConstraints="NO" id="MPe-uD-cr1">
-                                <rect key="frame" x="31" y="118" width="20" height="20"/>
+                                <rect key="frame" x="31" y="117.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="NC4-cK-EyL"/>
                                     <constraint firstAttribute="width" secondItem="MPe-uD-cr1" secondAttribute="height" multiplier="1:1" id="P4V-fx-R9L"/>
@@ -130,7 +128,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu-stats" translatesAutoresizingMaskIntoConstraints="NO" id="dxy-2d-HKe">
-                                <rect key="frame" x="31" y="177" width="20" height="20"/>
+                                <rect key="frame" x="31" y="176.5" width="20" height="20"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYx-5y-Hcg" userLabel="Settings Button" customClass="ButtonWithBottomBorder">
                                 <rect key="frame" x="-4" y="275" width="290" height="59"/>
@@ -176,7 +174,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu-logout" translatesAutoresizingMaskIntoConstraints="NO" id="SUO-mu-hgy">
-                                <rect key="frame" x="30" y="411" width="23" height="23"/>
+                                <rect key="frame" x="33" y="414.5" width="16" height="16"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hy-Xe-x0x">
                                 <rect key="frame" x="74" y="412" width="54" height="21"/>
@@ -185,7 +183,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu-info" translatesAutoresizingMaskIntoConstraints="NO" id="Fbt-OY-ljp">
-                                <rect key="frame" x="30" y="352" width="23" height="23"/>
+                                <rect key="frame" x="33" y="355.5" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fbt-OY-ljp" secondAttribute="height" multiplier="1:1" id="2so-7q-l0R"/>
                                 </constraints>
@@ -197,7 +195,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu-settings" translatesAutoresizingMaskIntoConstraints="NO" id="LYX-av-nDt">
-                                <rect key="frame" x="30" y="293" width="23" height="23"/>
+                                <rect key="frame" x="33" y="296.5" width="16" height="16"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovr-N7-TnJ">
                                 <rect key="frame" x="74" y="294" width="212" height="21"/>
@@ -206,7 +204,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu-dialplan" translatesAutoresizingMaskIntoConstraints="NO" id="nR4-Av-fCn">
-                                <rect key="frame" x="31" y="236" width="20" height="20"/>
+                                <rect key="frame" x="31" y="235.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nR4-Av-fCn" secondAttribute="height" multiplier="1:1" id="jqs-Xn-XPD"/>
                                 </constraints>
@@ -218,7 +216,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(checking availability)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0z-sI-DgE">
-                                <rect key="frame" x="74" y="139" width="212" height="12"/>
+                                <rect key="frame" x="74" y="138" width="212" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -381,7 +379,7 @@
         <image name="menu-logout" width="18" height="19"/>
         <image name="menu-settings" width="23" height="23"/>
         <image name="menu-stats" width="21" height="25"/>
-        <image name="sideMenuLogo" width="60" height="60"/>
+        <image name="sideMenuLogo" width="60" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="siu-OK-7GP"/>
