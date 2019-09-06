@@ -13,12 +13,12 @@ import UIKit
 
 @objc class APNSHandler: NSObject, PKPushRegistryDelegate {
     
-// MARK: - Properties
+    // MARK: - Properties
     @objc static var sharedAPNSHandler = APNSHandler()
     @objc var voipRegistry: PKPushRegistry = PKPushRegistry(queue: nil)
     @objc var middleware: Middleware = Middleware()
     
-// MARK: - Lifecyrcle
+    // MARK: - Lifecyrcle
     @objc private override init(){}
     
     @objc class func setSharedHandler(_ sharedHandler: APNSHandler) {
@@ -27,7 +27,7 @@ import UIKit
         }
     }
     
-// MARK: - Actions
+    // MARK: - Actions
     @objc func registerForVoIPNotifications() {
         // Only register once, if delegate is set, registration has been done before:
         if voipRegistry.delegate == nil {
@@ -44,7 +44,7 @@ import UIKit
         return sharedHandler?.nsString(fromNSData: token) as String?
     }
     
-// MARK: - PKPushRegistry management
+    // MARK: - PKPushRegistry management
     @objc func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
         VialerLogWarning("APNS Token became invalid")
     }
@@ -59,7 +59,7 @@ import UIKit
         middleware.sentAPNSToken(nsString(fromNSData: credentials.token) as String? ?? "" as String)
     }
     
-// MARK: - Token conversion
+    // MARK: - Token conversion
     @objc func nsString(fromNSData data: Data?) -> NSString? { //no error
         guard let data = data else { return "" }
         let token = data.map { String(format: "%02.2hhx", $0 as CVarArg) }.joined()
