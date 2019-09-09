@@ -55,14 +55,22 @@ import UIKit
     }
     
     @objc func pushRegistry(_ registry: PKPushRegistry, didUpdate credentials: PKPushCredentials, for type: PKPushType) {
-        VialerLogInfo("Type:\(type). APNS registration successful. Token: \(credentials.token)")
-        middleware.sentAPNSToken(nsString(fromNSData: credentials.token) as String? ?? "" as String)
+        VialerLogInfo("Type:\(type). APNS registration successful.")
+        middleware.sentAPNSToken(nsString(fromNSData: credentials.token) as String? ?? "")
     }
     
     // MARK: - Token conversion
-    @objc func nsString(fromNSData data: Data?) -> NSString? { //no error
-        guard let data = data else { return "" }
-        let token = data.map { String(format: "%02.2hhx", $0 as CVarArg) }.joined()
+    /*
+     * Returns hexadecimal string of NSData. Empty string if data is empty.
+     * http://stackoverflow.com/questions/1305225/best-way-to-serialize-a-nsdata-into-an-hexadeximal-string
+     */
+    @objc func nsString(fromNSData data: Data?) -> NSString? {
+        guard
+            let data = data
+        else {
+            return ""
+        }
+        let token = data.map { String(format: "%02.2hhx", $0) }.joined()
         return NSString(utf8String: token)
     }
 }
