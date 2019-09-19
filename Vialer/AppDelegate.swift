@@ -47,7 +47,7 @@ class AppDelegate: UIResponder {
     @objc var isScreenshotRun = false
 
     @available(iOS 10.0, *)
-    var center: UNUserNotificationCenter{
+    var notificationCenter: UNUserNotificationCenter{
         return UNUserNotificationCenter.current()
     }
     var incomingCallNotification: UILocalNotification?
@@ -229,9 +229,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if #available(iOS 10.0, *) {
             let options: UNAuthorizationOptions = [.alert, .sound]
             
-            center.delegate = self
+            notificationCenter.delegate = self
             
-            center.requestAuthorization(options: options) {
+            notificationCenter.requestAuthorization(options: options) {
                 (granted, error) in
                 if !granted {
                     VialerLogInfo("User has declined notifications")
@@ -282,22 +282,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
 
-    /// We need to setup the local notification settings for pre CallKit app users
     fileprivate func registerForLocalNotifications() {
         if #available(iOS 10, *) {
             VialerLogDebug("Using UNNotification for ios 10 and greater.")
             let acceptCallAction = UNNotificationAction(identifier: Configuration.Notifications.Identifiers.accept, title: NSLocalizedString("Accept", comment: "Accept"), options: [.foreground])
             let declineCallAction = UNNotificationAction(identifier: Configuration.Notifications.Identifiers.decline, title: NSLocalizedString("Decline", comment: "Decline"), options: [])
             let notificationCategory = UNNotificationCategory(identifier: Configuration.Notifications.Identifiers.category, actions: [acceptCallAction, declineCallAction], intentIdentifiers: [], options: [])
-            let center = UNUserNotificationCenter.current()
-            center.setNotificationCategories([notificationCategory])
+            notificationCenter.setNotificationCategories([notificationCategory])
             let options: UNAuthorizationOptions = [.alert, .sound]
-            center.requestAuthorization(options: options) {
+            notificationCenter.requestAuthorization(options: options) {
                 (granted, error) in
                 if !granted {
                     VialerLogDebug("Authorization for using UNUserNotificationCenter is denied.")
                 }
             }
+        // We need to setup the local notification settings for pre CallKit app users
         } else {
             VialerLogDebug("Using UIUserNotification for ios 9 and below.")
             let acceptCallAction = UIMutableUserNotificationAction()
@@ -461,9 +460,7 @@ extension AppDelegate {
         DispatchQueue.main.async {
             SIPUtils.setupSIPEndpoint()
             APNSHandler.sharedAPNSHandler.registerForVoIPNotifications()
-            if !VialerSIPLib.callKitAvailable() {
-                self.registerForLocalNotifications()
-            }
+            self.registerForLocalNotifications()
         }
     }
 
@@ -511,7 +508,7 @@ extension AppDelegate {
             call.callState == .connecting || call.callState == .disconnected,
             let localNotification = incomingCallNotification else { return }
         if #available(iOS 10.0, *){
-            center.removePendingNotificationRequests(withIdentifiers: [notification.name.rawValue])
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [notification.name.rawValue])
         } else {
             sharedApplication.cancelLocalNotification(localNotification)
         }
@@ -579,7 +576,7 @@ extension AppDelegate {
             let identifier = Configuration.Notifications.incomingCall.rawValue
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: content, trigger: trigger)
-            center.add(request, withCompletionHandler: { (error) in
+            notificationCenter.add(request, withCompletionHandler: { (error) in
                 if let error = error {
                     VialerLogError("Error on creating UNNotificationRequest: \(error)")
                 }
@@ -625,7 +622,7 @@ extension AppDelegate {
         let identifier = Configuration.Notifications.Identifiers.missed
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
-        center.add(request) { (error) in
+        notificationCenter.add(request) { (error) in
             if let error = error {
                 print("Could not add missed call notification: \(error.localizedDescription)")
             }
