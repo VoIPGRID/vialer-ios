@@ -128,12 +128,12 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
          // Prevent segue if we are in the process of showing an incoming view controller.
          if (!self.willPresentCallingViewController) {
              if ([self shouldPresentLoginViewController]) {
+                 [self.loginViewController setModalPresentationStyle: UIModalPresentationFullScreen];
                  [self presentViewController:self.loginViewController animated:NO completion:nil];
              } else {
                  [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
              }
          }
-         
      }];
 }
 

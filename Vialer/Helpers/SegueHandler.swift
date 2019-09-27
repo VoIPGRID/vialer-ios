@@ -11,7 +11,9 @@ protocol SegueHandler {
 
 extension SegueHandler where Self : UIViewController, SegueIdentifier.RawValue == String {
     func performSegue(segueIdentifier: SegueIdentifier, sender: Any? = nil) {
-        performSegue(withIdentifier: segueIdentifier.rawValue, sender: sender)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: segueIdentifier.rawValue, sender: sender)
+        }
     }
 
     func segueIdentifier(segue: UIStoryboardSegue) -> SegueIdentifier {
