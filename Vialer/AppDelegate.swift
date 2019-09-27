@@ -110,7 +110,6 @@ extension AppDelegate: UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         removeObservers()
 
-        // Saves changes in the application's managed object context before the application terminates.
         saveContext()
     }
 
