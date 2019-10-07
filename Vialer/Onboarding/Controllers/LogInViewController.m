@@ -768,9 +768,9 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
     } else {
         // Enable SIP for this user after onboarding.
         self.currentUser.sipEnabled = YES;
-
+        
         // Put here what happens when it is unlocked.
-        [self dismissViewControllerAnimated:NO completion:^{
+        [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
             [self.unlockView setAlpha:0.f];
             [self.logoView setAlpha:1.f];
             [self.logoView setCenter:self.view.center];

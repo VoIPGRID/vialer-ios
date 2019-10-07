@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,7 +28,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vialer-logo" translatesAutoresizingMaskIntoConstraints="NO" id="vaX-QE-6Dz">
-                                        <rect key="frame" x="0.0" y="360" width="414" height="16"/>
+                                        <rect key="frame" x="0.0" y="332" width="414" height="72"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,7 +58,7 @@
                     <connections>
                         <outlet property="backgroundGrandientView" destination="Km0-zp-Jub" id="6Kh-La-gj5"/>
                         <outlet property="backgroundSolidColorView" destination="vIb-rP-QDN" id="cJZ-iI-xvR"/>
-                        <segue destination="i10-iY-7zz" kind="showDetail" identifier="ShowVialerDrawerViewSegue" customClass="NoAnimationSegue" id="jgD-42-JhD"/>
+                        <segue destination="i10-iY-7zz" kind="presentation" identifier="ShowVialerDrawerViewSegue" customClass="NoAnimationSegue" modalPresentationStyle="fullScreen" id="jgD-42-JhD"/>
                         <segue destination="ZYs-HX-JeK" kind="presentation" identifier="ShowSIPIncomingCallViewSegue" animates="NO" id="18T-Qb-NXM"/>
                         <segue destination="OBw-wl-6xF" kind="unwind" identifier="goToVialerRootViewControllerIdentifier" unwindAction="goToVialerRootViewController:" id="Hm1-9D-gHw"/>
                         <segue destination="gzv-u3-1Wl" kind="presentation" identifier="ShowSIPCallingViewSegue" animates="NO" id="tTg-fr-cKc"/>
