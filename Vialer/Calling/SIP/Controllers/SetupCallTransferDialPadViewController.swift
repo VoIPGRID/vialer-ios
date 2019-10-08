@@ -49,6 +49,9 @@ extension SetupCallTransferDialPadViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // This fixes the transparent-line-on-navigation-bar bug
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.968627, green: 0.968627, blue: 0.968627, alpha: 1)
+         
         firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
         firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
         callObserversSet = true
