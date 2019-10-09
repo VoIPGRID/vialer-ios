@@ -17,7 +17,8 @@ import UIKit
     @objc static var sharedAPNSHandler = APNSHandler()
     @objc var voipRegistry: PKPushRegistry = PKPushRegistry(queue: nil)
     @objc var middleware: Middleware = Middleware()
-    
+    @available(iOS 10.0, *)
+    lazy var provider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))
     // MARK: - Lifecyrcle
     @objc private override init(){}
     
@@ -49,14 +50,27 @@ import UIKit
         VialerLogWarning("APNS Token became invalid")
     }
     
-    @objc func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
-        VialerLogDebug("Incoming push notification of type: \(type)")
-        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
-    }
     
     @objc func pushRegistry(_ registry: PKPushRegistry, didUpdate credentials: PKPushCredentials, for type: PKPushType) {
         VialerLogInfo("Type:\(type). APNS registration successful.")
         middleware.sentAPNSToken(nsString(fromNSData: credentials.token) as String? ?? "")
+    }
+    
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        VialerLogDebug("Incoming push notification of type: \(type)")
+        if type == .voIP {
+            if let handle = payload.dictionaryPayload["phonenumber"] as? String {
+                if #available(iOS 10.0, *) {
+                    let callUpdate = CXCallUpdate()
+                    callUpdate.remoteHandle = CXHandle(type: .phoneNumber, value: handle)
+                    let callUUID = UUID()
+                    provider.reportNewIncomingCall(with: callUUID, update: callUpdate) { _ in
+                        completion()
+                    }
+                }
+            }
+        }
+        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
     }
     
     // MARK: - Token conversion
