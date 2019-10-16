@@ -19,6 +19,11 @@ import UIKit
     @objc var middleware: Middleware = Middleware()
     @available(iOS 10.0, *)
     lazy var provider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))
+    lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
+    var callKitProviderDelegate: CallKitProviderDelegate! //orp
+    var mostRecentCall : VSLCall?
+    
+    
     // MARK: - Lifecyrcle
     @objc private override init(){}
     
@@ -56,20 +61,69 @@ import UIKit
         middleware.sentAPNSToken(nsString(fromNSData: credentials.token) as String? ?? "")
     }
     
+//    @objc func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+//        VialerLogDebug("Incoming push notification of type: \(type)")
+//        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
+//    }
+    
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        
+        print(payload.dictionaryPayload) //orp
+        let phonenumber = payload.dictionaryPayload["phonenumber"] as! NSString
+
+        callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
         VialerLogDebug("Incoming push notification of type: \(type)")
+        if #available(iOS 10.0, *) {
+            let appname = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "Vialer"
+            let providerConfiguration = CXProviderConfiguration(localizedName: NSLocalizedString(appname, comment: ""))
+
+            providerConfiguration.maximumCallGroups = 2
+            providerConfiguration.maximumCallsPerCallGroup = 1
+            //providerConfiguration.supportsVideo = !VSLEndpoint.shared().endpointConfiguration.disableVideoSupport
+            //providerConfiguration.supportsVideo = false //by default //orp
+
+            if Bundle.main.path(forResource: "ringtone", ofType: "wav") != nil {
+                providerConfiguration.ringtoneSound = "ringtone.wav"
+            } else {
+             // print in log that there was no ringtone file //orp
+            }
+
+            providerConfiguration.supportedHandleTypes = [CXHandle.HandleType.phoneNumber]
+            provider = CXProvider(configuration: providerConfiguration)
+            provider.setDelegate(callKitProviderDelegate, queue: nil)
+
+            NotificationCenter.default.addObserver(callKitProviderDelegate, selector: #selector(CallKitProviderDelegate.callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
+        }
+        
         if type == .voIP {
-            if let handle = payload.dictionaryPayload["phonenumber"] as? String {
-                if #available(iOS 10.0, *) {
-                    let callUpdate = CXCallUpdate()
-                    callUpdate.remoteHandle = CXHandle(type: .phoneNumber, value: handle)
-                    let callUUID = UUID()
-                    provider.reportNewIncomingCall(with: callUUID, update: callUpdate) { _ in
-                        completion()
-                    }
-                }
+            if #available(iOS 10.0, *) {
+                let callUpdate = CXCallUpdate()
+                callUpdate.remoteHandle = CXHandle(type: .phoneNumber, value: phonenumber as String)
+                let callUUID = UUID()
+                
+                provider.reportNewIncomingCall(with: callUUID,
+                            update: callUpdate, completion: { (error) in
+                   if error == nil {
+                      // If the system allows the call to proceed, make a data record for it.
+//                          let newCall = VoipCall(callUUID, phoneNumber: handle)
+//                          self.callManager.addCall(newCall)
+                        //create/update the call object here?
+                        self.vialerSIPLib.setIncomingCall { call in
+                            VialerGAITracker.incomingCallRingingEvent()
+                            DispatchQueue.main.async {
+                                VialerLogInfo("Incoming call block invoked, routing through CallKit.")
+                                self.mostRecentCall = call
+                                self.callKitProviderDelegate.reportIncomingCall(call)
+                            }
+                        }
+                   }
+
+                   // Tell PushKit that the notification is handled.
+                   completion()
+                })
             }
         }
+        
         middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
     }
     
