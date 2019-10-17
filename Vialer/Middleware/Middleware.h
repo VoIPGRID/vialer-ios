@@ -36,7 +36,7 @@ extern NSString * const _Nonnull MiddlewareAccountRegistrationIsDoneNotification
  *
  *  @param payload The payload received through an APNS message.
  */
-- (void)handleReceivedAPSNPayload:(NSDictionary * _Nonnull) payload;
+- (void)handleReceivedAPSNPayload:(NSDictionary * _Nonnull) payload uuid:(NSUUID * _Nonnull) uuid;
 
 /**
  *  When remote logging is enabled in the settings, this function will update the

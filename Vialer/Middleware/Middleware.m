@@ -89,7 +89,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 }
 
 #pragma mark - actions
-- (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
+- (void)handleReceivedAPSNPayload:(NSDictionary *)payload uuid:(NSUUID * _Nonnull) uuid {
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
 
@@ -171,8 +171,12 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
                     // Now we have a calll reported to CallKit, and we successfully registerd at Asteriks and therefore have an account. Update the call with account info.
                     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
-                    NSString *payloadUUID = payload[@"unique_key"];
-                    VSLCall *call = [callManager callWithUUID:[[NSUUID alloc] initWithUUIDString:payloadUUID]];
+//                    NSMutableString *uuidString = payload[@"unique_key"];
+//                    [uuidString insertString:@"-" atIndex:8];
+//                    [uuidString insertString:@"-" atIndex:13];
+//                    [uuidString insertString:@"-" atIndex:18];
+//                    [uuidString insertString:@"-" atIndex:23];
+                    VSLCall *call = [callManager callWithUUID:uuid];
                     call.account = account;
                     
                     [VialerStats sharedInstance].middlewareUniqueKey = self.pushNotificationProcessing;
