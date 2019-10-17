@@ -117,6 +117,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             // Send not available to the middleware.
             VialerLogWarning(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
+            
+            // TODO: call was already added, so what to do with it?
             return;
         }
 
@@ -125,6 +127,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             VialerLogInfo(@"Wait for the next push! We currently don't have a network connection");
             if (attempt == MiddlewareMaxAttempts) {
                 [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
+                
+                // TODO: call was already added, so what to do with it?
             }
             return;
         }
@@ -150,6 +154,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     });
                     [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
                     self.pushNotificationProcessing = nil;
+                    
+                    // TODO: call was already added, so what to do with it?
                 } else {
                     // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
                     VialerLogInfo(@"Registration of the account has failed, trying again with the next push. attempt: %d", attempt);
@@ -163,6 +169,12 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     // Highspeed, let's respond to the middleware with a success.
                     VialerLogDebug(@"Accepting call on push attempt: %d. Sending Available = YES to middleware", attempt);
 
+                    // Now we have a calll reported to CallKit, and we successfully registerd at Asteriks and therefore have an account. Update the call with account info.
+                    VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
+                    NSString *payloadUUID = payload[@"unique_key"];
+                    VSLCall *call = [callManager callWithUUID:[[NSUUID alloc] initWithUUIDString:payloadUUID]];
+                    call.account = account;
+                    
                     [VialerStats sharedInstance].middlewareUniqueKey = self.pushNotificationProcessing;
                     [self respondToMiddleware:payload isAvailable:YES withAccount:account andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
                 } else if (attempt == MiddlewareMaxAttempts) {
@@ -186,6 +198,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     }];
                     // Log to middleware that incoming call failed after 8 received push notifications due to insufficient network.
                     [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
+                    
+                    // TODO: call was already added, so what to do with it?
                 } else if (attempt < MiddlewareMaxAttempts) {
                     VialerLogDebug(@"The network connection is not sufficient. Waiting for a next push");
                     self.pushNotificationProcessing = nil;
@@ -225,8 +239,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         VialerLogDebug(@"Middleware response time: [%f s] for attempt: %d", responseTime, attempt);
 
         if (available) {
-            NSNotification *notification = [NSNotification notificationWithName:MiddlewareAccountRegistrationIsDoneNotification object:nil];
-            [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
+//            NSNotification *notification = [NSNotification notificationWithName:MiddlewareAccountRegistrationIsDoneNotification object:nil];
+//            [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
         }
 
         if (error) {

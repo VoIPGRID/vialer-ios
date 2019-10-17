@@ -365,6 +365,10 @@ extension AppDelegate {
         if VialerSIPLib.callKitAvailable() {
             VialerLogDebug("Setup VoIP with CallKit support")
             callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
+            if #available(iOS 10.0, *) {
+                let provider = callKitProviderDelegate.provider!
+                APNSHandler.setCallProvider(provider)
+            }
         }
         if user.sipEnabled {
             VialerLogDebug("VoIP is enabled start the endpoint.")
