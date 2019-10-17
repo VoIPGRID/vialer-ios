@@ -61,10 +61,10 @@ import UIKit
         middleware.sentAPNSToken(nsString(fromNSData: credentials.token) as String? ?? "")
     }
     
-//    @objc func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
-//        VialerLogDebug("Incoming push notification of type: \(type)")
-//        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
-//    }
+    @objc func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        VialerLogDebug("Incoming push notification of type: \(type)")
+        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
+    }
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         
