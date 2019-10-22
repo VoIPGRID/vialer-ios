@@ -35,6 +35,7 @@ extern NSString * const _Nonnull MiddlewareAccountRegistrationIsDoneNotification
  *  can be called to process it.
  *
  *  @param payload The payload received through an APNS message.
+ *  TODO: add param in comments, or don't pass it to the func, but retrieve it there again.
  */
 - (void)handleReceivedAPSNPayload:(NSDictionary * _Nonnull) payload uuid:(NSUUID * _Nonnull) uuid;
 

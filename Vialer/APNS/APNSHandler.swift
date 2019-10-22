@@ -67,39 +67,32 @@ import UIKit
             if type == .voIP {
                 // Extract the call information from the push notification payload
                 if let handle = payload.dictionaryPayload["phonenumber"] as? String, // TODO use constants for key
-                    var uuidString = payload.dictionaryPayload["unique_key"] as? String
-//                    let caller_id = payload.dictionaryPayload["caller_id"] as? String,
-                    {
-                    // unique_key in the payload is missing hyphens, so UUID initializer return nil, so add them.
-                    uuidString.insert("-", at: uuidString.index(uuidString.startIndex, offsetBy: 8)) //  TODO: make more robust, and as a method
-                    uuidString.insert("-", at: uuidString.index(uuidString.startIndex, offsetBy: 13))
-                    uuidString.insert("-", at: uuidString.index(uuidString.startIndex, offsetBy: 18))
-                    uuidString.insert("-", at: uuidString.index(uuidString.startIndex, offsetBy: 23))
-
-                    let callUUID = UUID(uuidString: uuidString)
-                    // Configure the call information data structures.
-                    let callUpdate = CXCallUpdate()
-                    let phoneNumber = CXHandle(type: .phoneNumber, value: handle)
-                    callUpdate.remoteHandle = phoneNumber
-//                    callUpdate.localizedCallerName = caller_id
-                    callUpdate.localizedCallerName = "Connecting Call..." // At this stage you don't know yet whose calling, it will update after registration at Asteriks if successful.
+                    let uuidString = payload.dictionaryPayload["unique_key"] as? String {
+                        // The uuid string in the payload is missing hyphens, so fix that.
+                        let callUUID = UUID.uuidFixer(uuidString: uuidString)
                         
-                    // Report the call to CallKit, and let it display the call UI.
+                        // Configure the call information data structures.
+                        let callUpdate = CXCallUpdate()
+                        let phoneNumber = CXHandle(type: .phoneNumber, value: handle)
+                        callUpdate.remoteHandle = phoneNumber
+                        callUpdate.localizedCallerName = "Connecting Call..."
+                        if let caller_id = payload.dictionaryPayload["caller_id"] as? String {  // TODO: Does this ever give a value? Or use the phone number.
+                            callUpdate.localizedCallerName = caller_id
+                        }
+                        
+                        // Report the call to CallKit, and let it display the call UI.
                         APNSHandler.callProvider.reportNewIncomingCall(with: callUUID!, update: callUpdate, completion: { (error) in
-                        if error == nil {
-                            // If the system allows the call to proceed, make a data record for it.
-//                            let newCall = VoipCall(callUUID, phoneNumber: phoneNumber)
-                            
-                            // TODO: at this stage account is not available yet - sip invite has not arrived
-                            // TODO: create a new VSCall constructor with only uuid and phone number
-                            
+                        if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call.
+                            // FYI: at this stage account is not available yet - sip invite has not arrived
 //                            let endpoint = VialerSIPLib.sharedInstance().endpoint
 //                            let account = endpoint.lookupAccount(<#T##accountId: Int##Int#>)
 //                            let newCall = VSLCall(inboundCallWithCallId: callUUID, account: <#T##VSLAccount#>)
+                            
                             let newCall = VSLCall(inboundCallWithUUIDandNumber: callUUID!, number: handle)
                             let callManager = VialerSIPLib.sharedInstance().callManager
-
                             callManager.add(newCall!)
+                            
+                            self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload, uuid:callUUID!) // TODO: rethink this line here - instead of location in apple example
                         }
 
                         // Tell PushKit that the notification is handled.
@@ -110,7 +103,7 @@ import UIKit
                 // Asynchronously register with the telephony server and
                 // process the call. Report updates to CallKit as needed.
     //            establishConnection(for: callUUID)
-                        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload, uuid:callUUID!) // TODO: correct place? not directly after completion()
+//                        middleware.handleReceivedAPSNPayload(payload.dictionaryPayload, uuid:callUUID!) // TODO: correct place? not directly after completion() why handle the push message if an error occured.
               }
            }
             
