@@ -27,7 +27,7 @@ import UIKit
         }
     }
     @available(iOS 10.0, *)
-    static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))
+    static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))  // TODO: init with nil or something.
 
     @available(iOS 10.0, *)
     class func setCallProvider(_ provider: CXProvider) {
@@ -79,7 +79,9 @@ import UIKit
                         if let caller_id = payload.dictionaryPayload["caller_id"] as? String {  // TODO: Does this ever give a value? Or use the phone number.
                             callUpdate.localizedCallerName = caller_id
                         }
-                        
+                    
+                        print("AFV pushRegistry: \(String(describing: callUUID?.uuidString))");
+                    
                         // Report the call to CallKit, and let it display the call UI.
                         APNSHandler.callProvider.reportNewIncomingCall(with: callUUID!, update: callUpdate, completion: { (error) in
                         if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call.

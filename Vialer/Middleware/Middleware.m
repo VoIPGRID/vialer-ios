@@ -120,8 +120,13 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             
             // TODO: There is no check on MiddlewareMaxAttempts here, what happens on the next 7 push messages?
             
-            // TODO: Remove call from call manager
+            VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
+            VSLCall *call = [callManager callWithUUID:uuid];
+            [callManager endCall:call completion:nil]; //TODO: no completion?
             // TODO: dismiss CallKitUI
+            
+            [[APNSHandler callp] .reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonRemoteEnded];
+            
             return;
         }
 
