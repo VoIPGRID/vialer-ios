@@ -124,8 +124,12 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             VSLCall *call = [callManager callWithUUID:uuid];
             [callManager endCall:call completion:nil]; //TODO: no completion?
             // TODO: dismiss CallKitUI
-            
-            [[APNSHandler callp] .reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonRemoteEnded];
+            //orp 
+            if(@available(iOS 10.0, *)){
+                CXProvider *callProvider = [APNSHandler getCallProvider];
+                [callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonRemoteEnded]; // TODO: just testing this. I don't think is needed here.
+            }
+            //pro
             
             return;
         }
@@ -145,7 +149,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             return;
         }
 
-        VialerLogDebug(@"Middleware key: %@, Processing notificiation key: %@", keyToProcess, self.pushNotificationProcessing);
+        VialerLogDebug(@"Middleware key: %@, Processing notification key: %@", keyToProcess, self.pushNotificationProcessing);
         if ([self.pushNotificationProcessing isEqualToString:keyToProcess]) {
             VialerLogInfo(@"Already processing a push notification with key: %@", keyToProcess);
             return;

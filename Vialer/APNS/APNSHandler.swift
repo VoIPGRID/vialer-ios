@@ -27,12 +27,19 @@ import UIKit
         }
     }
     @available(iOS 10.0, *)
-    static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))  // TODO: init with nil or something.
+    @objc static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))  // TODO: init with nil or something.
 
     @available(iOS 10.0, *)
     class func setCallProvider(_ provider: CXProvider) {
         callProvider = provider
     }
+    
+    //orp
+    @available(iOS 10.0, *)
+    @objc class func getCallProvider() -> CXProvider {
+        return callProvider
+    }
+    //pro
     
     // MARK: - Actions
     @objc func registerForVoIPNotifications() {
@@ -75,7 +82,7 @@ import UIKit
                         let callUpdate = CXCallUpdate()
                         let phoneNumber = CXHandle(type: .phoneNumber, value: handle)
                         callUpdate.remoteHandle = phoneNumber
-                        callUpdate.localizedCallerName = "Connecting Call..."
+                        callUpdate.localizedCallerName = handle
                         if let caller_id = payload.dictionaryPayload["caller_id"] as? String {  // TODO: Does this ever give a value? Or use the phone number.
                             callUpdate.localizedCallerName = caller_id
                         }
