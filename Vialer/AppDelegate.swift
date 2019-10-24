@@ -60,6 +60,17 @@ class AppDelegate: UIResponder {
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
     var mostRecentCall : VSLCall?
+    
+    
+    private var _callObserver: Any? = nil
+    @available(iOS 10.0, *)
+    fileprivate var callObserver: CXCallObserver {
+        if _callObserver == nil {
+            _callObserver = CXCallObserver()
+        }
+        return _callObserver as! CXCallObserver
+    }
+    
 }
 
 // MARK: - UIApplicationDelegate
@@ -368,6 +379,8 @@ extension AppDelegate {
             if #available(iOS 10.0, *) {
                 let provider = callKitProviderDelegate.provider!
                 APNSHandler.setCallProvider(provider)
+           
+                callObserver.setDelegate(self, queue: nil) // nil queue means main thread
             }
         }
         if user.sipEnabled {
@@ -731,5 +744,26 @@ extension AppDelegate {
             callAvailabilityTimer.invalidate()
             callAvailabilityTimer = nil
         }
+    }
+}
+
+@available(iOS 10.0, *)
+extension AppDelegate: CXCallObserverDelegate {
+    // TODO: Move to a better place.
+    func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
+        if call.hasEnded == true {
+            print("AFV Disconnected")
+        }
+        if call.isOutgoing == true && call.hasConnected == false {
+            print("AFV Dialing")
+        }
+        if call.isOutgoing == false && call.hasConnected == false && call.hasEnded == false {
+            print("AFV Incoming")
+        }
+        if call.hasConnected == true && call.hasEnded == false {
+            print("AFV Connected")
+        }
+        
+        print("AFV \(callObserver.calls.debugDescription)")
     }
 }
