@@ -700,6 +700,14 @@
 		C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = C83D5B7C2725D51F49FBE8B7 /* UIView+RoundedStyle.m */; };
 		D400290822083BC600E5AA68 /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290922083C2400E5AA68 /* SetupCallTransfer.swift */; };
+		D410708C235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D410708D235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D410708E235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D410708F235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D4107090235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D4107091235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D4107092235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D4107093235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
 		D449C089230BF83E0086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
@@ -1790,6 +1798,7 @@
 		D1451B6C942ADC0A1D3C4C93 /* Pods-ANNAbel Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.release.xcconfig"; sourceTree = "<group>"; };
 		D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferContactsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D400290922083C2400E5AA68 /* SetupCallTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransfer.swift; sourceTree = "<group>"; };
+		D410708B235D9BF900F0E31C /* UUIDExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtension.swift; sourceTree = "<group>"; };
 		D449C088230BF83E0086720A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Verbonden/nl.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		D449C08A230BF84F0086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2665,6 +2674,7 @@
 				C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */,
 				EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */,
 				EE8C5EA52147AF2B008A430F /* UIColorExtenstions.swift */,
+				D410708B235D9BF900F0E31C /* UUIDExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -5469,6 +5479,7 @@
 				838206A42290979A0098EABD /* VialerLogger.swift in Sources */,
 				838206A52290979A0098EABD /* ContactModel.swift in Sources */,
 				838206A62290979A0098EABD /* CoreDataStack.swift in Sources */,
+				D4107093235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */,
 				838206A82290979A0098EABD /* ContactsViewController.m in Sources */,
 			);
@@ -5579,6 +5590,7 @@
 				83820753229098D20098EABD /* VialerLogger.swift in Sources */,
 				83820754229098D20098EABD /* ContactModel.swift in Sources */,
 				83820755229098D20098EABD /* CoreDataStack.swift in Sources */,
+				D4107091235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */,
 				83820757229098D20098EABD /* ContactsViewController.m in Sources */,
 			);
@@ -5667,6 +5679,7 @@
 				EE3C48142080DC2D00CC80E5 /* ColoredCircle.m in Sources */,
 				EEF06BA720970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				C41FD8861C60A08400BBE6D7 /* UnlockView.m in Sources */,
+				D410708E235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				EE3C48042080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48242080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				EE5EC3C9214008860000EE4D /* GradientView.swift in Sources */,
@@ -5803,6 +5816,7 @@
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C49A46BB1E682A540097E808 /* UITableView.swift in Sources */,
 				EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
+				D4107090235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				EE3C48072080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48272080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */,
@@ -5954,6 +5968,7 @@
 				EE23185120A0468F00C05EB0 /* CircleWithWhiteIcon.m in Sources */,
 				EE23185220A0468F00C05EB0 /* ButtonWithBottomBorder.m in Sources */,
 				EE23185320A0468F00C05EB0 /* TokenFromPasteBoard.swift in Sources */,
+				D4107092235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				EE23185520A0468F00C05EB0 /* VialerIconView.m in Sources */,
 				EE23185620A0468F00C05EB0 /* UnlockView.m in Sources */,
 				EE23185720A0468F00C05EB0 /* UITableView.swift in Sources */,
@@ -6081,6 +6096,7 @@
 				EE61F43A1F1DDDE4006E890F /* Middleware.m in Sources */,
 				EE61F43B1F1DDDE4006E890F /* ButtonWithBottomBorder.m in Sources */,
 				EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
+				D410708F235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				EE3C48062080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48262080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				EE61F43E1F1DDDE4006E890F /* UnlockView.m in Sources */,
@@ -6189,6 +6205,7 @@
 				F208511D1D26935600A17E71 /* Middleware.m in Sources */,
 				F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */,
 				EEF06BA620970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
+				D410708D235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				EE3C48032080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				EE3C48232080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				F208511F1D26935600A17E71 /* UnlockView.m in Sources */,
@@ -6316,6 +6333,7 @@
 				EE3C48012080DC2D00CC80E5 /* CircleWithWhiteIcon.m in Sources */,
 				C4675FF41C46A01F008820C8 /* ButtonWithBottomBorder.m in Sources */,
 				EEF06BA520970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
+				D410708C235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				EE3C48212080DC2D00CC80E5 /* VialerIconView.m in Sources */,
 				3DE6EADB1AF0CB4800C09935 /* UnlockView.m in Sources */,
 				C49A46B81E682A540097E808 /* UITableView.swift in Sources */,

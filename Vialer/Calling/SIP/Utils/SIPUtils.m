@@ -162,8 +162,10 @@
                                            [[VSLAudioCodecs alloc] initWithAudioCodec:VSLAudioCodecOpus andPriority:210]
                                            ];
         VSLOpusConfiguration *opusConfiguration = [[VSLOpusConfiguration alloc] init];
-        opusConfiguration.frameDuration = VSLOpusConfigurationFrameDurationTwenty;        
+        //opusConfiguration.frameDuration = VSLOpusConfigurationFrameDurationTwenty; // VSLOpusConfigurationFrameDurationSixty is default (=VSLOpusConfigurationFrameDurationDefault)
 
+        opusConfiguration.constantBitRate = YES;
+        
         codecConfiguration.opusConfiguration = opusConfiguration;
     } else {
         codecConfiguration.audioCodecs = @[
