@@ -89,12 +89,25 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 }
 
 #pragma mark - actions
+- (void)callCleanUp:(NSUUID * _Nonnull)uuid {
+    VialerLogDebug(@"Cleaning up call and CallKitUI for: %@", uuid);
+    
+    VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
+    VSLCall *call = [callManager callWithUUID:uuid];
+    [callManager endCall:call completion:nil]; //TODO: no completion?  // TODO: removeCall would be a better name.
+    
+    if(@available(iOS 10.0, *)){
+        CXProvider *callProvider = [APNSHandler getCallProvider];
+        [callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
+    }
+}
+
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload uuid:(NSUUID * _Nonnull) uuid {
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
 
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
-    VialerLogDebug(@"Push message received from middleware of type: %@", payloadType);
+    VialerLogDebug(@"Processing push message received from middleware of type: %@", payloadType);
     VialerLogDebug(@"Payload:\n%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
@@ -120,16 +133,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             
             // TODO: There is no check on MiddlewareMaxAttempts here, what happens on the next 7 push messages?
             
-            VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
-            VSLCall *call = [callManager callWithUUID:uuid];
-            [callManager endCall:call completion:nil]; //TODO: no completion?
-            // TODO: dismiss CallKitUI
-            //orp 
-            if(@available(iOS 10.0, *)){
-                CXProvider *callProvider = [APNSHandler getCallProvider];
-                [callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonRemoteEnded]; // TODO: just testing this. I don't think is needed here.
-            }
-            //pro
+            // Clean up the call and the CallKit UI before an actual call has been setup.
+            [self callCleanUp:uuid];
             
             return;
         }
@@ -143,8 +148,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                 
                 // TODO: Should there be a response to middleware?
                 
-                // TODO: Remove call from call manager
-                // TODO: dismiss CallKitUI
+                // Clean up the call and the CallKit UI before an actual call has been setup.
+                [self callCleanUp:uuid];
             }
             return;
         }
@@ -152,6 +157,9 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         VialerLogDebug(@"Middleware key: %@, Processing notification key: %@", keyToProcess, self.pushNotificationProcessing);
         if ([self.pushNotificationProcessing isEqualToString:keyToProcess]) {
             VialerLogInfo(@"Already processing a push notification with key: %@", keyToProcess);
+            
+            // TODO: Add clean up `if (attempt == MiddlewareMaxAttempts) {}` ?
+            
             return;
         }
         self.pushNotificationProcessing = keyToProcess;
@@ -171,8 +179,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
                     self.pushNotificationProcessing = nil;
                     
-                    // TODO: Remove call from call manager
-                    // TODO: dismiss CallKitUI
+                    // Clean up the call and the CallKit UI before an actual call has been setup.
+                    [self callCleanUp:uuid];
                 } else {
                     // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
                     VialerLogInfo(@"Registration of the account has failed, trying again with the next push. attempt: %d", attempt);
@@ -186,7 +194,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     // Highspeed, let's respond to the middleware that we are available.
                     VialerLogDebug(@"Accepting call on push attempt: %d. Sending Available = YES to middleware", attempt);
 
-                    // Now we have a calll reported to CallKit, and we successfully registerd at Asteriks and therefore have an account. Update the call with account info.
+                    // Now we have a calll reported to CallKit, and we successfully registered at Asteriks and therefore have an account. Update the call with account info.
                     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
                     VSLCall *call = [callManager callWithUUID:uuid];
                     call.account = account;
@@ -203,8 +211,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     });
                     self.pushNotificationProcessing = nil;
                     
-                    // TODO: Remove call from call manager
-                    // TODO: dismiss CallKitUI
+                    // Clean up the call and the CallKit UI before an actual call has been setup.
+                    [self callCleanUp:uuid];
                     
                     // Calling middleware to log that the call was rejected due to insufficient internet connection.
                     [self.commonMiddlewareRequestOperationManager sendHangupReasonToMiddleware:@"Rejected - Insufficient internet connection" forUniqueKey:keyToProcess withCompletion:^(NSError * _Nullable error) {
@@ -243,7 +251,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     [VialerGAITracker pushNotificationWithIsAccepted:available connectionType:connectionTypeString];
 
     // Track the pushed call in Core Data.
-    PushedCall *pushedCall = [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context]; // TODO: look into where it's used again.
+    PushedCall *pushedCall = [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
     [self.context save:nil];
 
     int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];

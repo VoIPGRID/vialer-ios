@@ -27,19 +27,17 @@ import UIKit
         }
     }
     @available(iOS 10.0, *)
-    @objc static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))  // TODO: init with nil or something.
+    @objc static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))  // TODO: init with nil or something. Not Vialer but Brand names.
 
     @available(iOS 10.0, *)
     class func setCallProvider(_ provider: CXProvider) {
         callProvider = provider
     }
     
-    //orp
     @available(iOS 10.0, *)
     @objc class func getCallProvider() -> CXProvider {
         return callProvider
     }
-    //pro
     
     // MARK: - Actions
     @objc func registerForVoIPNotifications() {
@@ -87,10 +85,8 @@ import UIKit
                             callUpdate.localizedCallerName = caller_id
                         }
                     
-                        print("AFV pushRegistry: \(String(describing: callUUID?.uuidString))");
-                    
-                        // Report the call to CallKit, and let it display the call UI.
-                        APNSHandler.callProvider.reportNewIncomingCall(with: callUUID!, update: callUpdate, completion: { (error) in
+                        VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID?.uuidString))")
+                        APNSHandler.callProvider.reportNewIncomingCall(with: callUUID!, update: callUpdate, completion: { (error) in // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
                         if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call.
                             // FYI: at this stage account is not available yet - sip invite has not arrived
 //                            let endpoint = VialerSIPLib.sharedInstance().endpoint
@@ -100,8 +96,8 @@ import UIKit
                             let newCall = VSLCall(inboundCallWithUUIDandNumber: callUUID!, number: handle)
                             let callManager = VialerSIPLib.sharedInstance().callManager
                             callManager.add(newCall!)
-                            
-                            self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload, uuid:callUUID!) // TODO: rethink this line here - instead of location in apple example
+                        
+                            self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload, uuid:callUUID!) // TODO: rethink this line here - instead of location in apple example, and is this / can it be async?
                         }
 
                         // Tell PushKit that the notification is handled.
