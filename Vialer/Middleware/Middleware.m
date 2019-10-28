@@ -102,7 +102,13 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     }
 }
 
-- (void)handleReceivedAPSNPayload:(NSDictionary *)payload uuid:(NSUUID * _Nonnull) uuid {
+- (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
+    //orp
+    // Get the callUUID from the payload
+    NSString* uuidString = payload[@"unique_key"];
+    // The uuid string in the payload is missing hyphens so fix that.
+    //NSUUID* callUUID = [NSUUID uuid //orp
+        
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
 
