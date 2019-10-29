@@ -69,7 +69,8 @@ import UIKit
                 if let phoneNumberString = payload.dictionaryPayload["phonenumber"] as? String, // TODO use constants for key
                     let uuidString = payload.dictionaryPayload["unique_key"] as? String {
                         // The uuid string in the payload is missing hyphens so fix that.
-                        let callUUID = UUID.uuidFixer(uuidString: uuidString)
+//                        let callUUID = UUID.uuidFixer(uuidString: uuidString)
+                        let callUUID = NSUUID.uuidFixer(uuidString: uuidString)! as UUID //orp
                         
                         // Configure the call information data structures.
                         let callUpdate = CXCallUpdate()
@@ -80,11 +81,11 @@ import UIKit
                             callUpdate.localizedCallerName = callerId
                         }
                     
-                        VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID?.uuidString))")
-                        APNSHandler.callProvider.reportNewIncomingCall(with: callUUID!, update: callUpdate, completion: { (error) in // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
+                        VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID.uuidString))")
+                    APNSHandler.callProvider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
                             if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call. At this stage account is not available - sip invite has not arrived yet.
                                 
-                                let newCall = VSLCall(inboundCallWith: callUUID!, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "")
+                                let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "")
                                 let callManager =  VialerSIPLib.sharedInstance().callManager
                                 callManager.add(newCall!)
                             
