@@ -61,16 +61,14 @@ class AppDelegate: UIResponder {
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
     var mostRecentCall : VSLCall?
     
-    
-    private var _callObserver: Any? = nil
+    private var _callEventMonitor: Any? = nil
     @available(iOS 10.0, *)
-    fileprivate var callObserver: CXCallObserver {
-        if _callObserver == nil {
-            _callObserver = CXCallObserver()
+    fileprivate var callEventMonitor: CallEventsMonitor {
+        if _callEventMonitor == nil {
+            _callEventMonitor = CallEventsMonitor()
         }
-        return _callObserver as! CXCallObserver
+        return _callEventMonitor as! CallEventsMonitor
     }
-    
 }
 
 // MARK: - UIApplicationDelegate
@@ -120,7 +118,11 @@ extension AppDelegate: UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         removeObservers()
-
+        
+        if #available(iOS 10.0, *) {
+            callEventMonitor.stop()
+        }
+        
         // Saves changes in the application's managed object context before the application terminates.
         saveContext()
     }
@@ -379,8 +381,8 @@ extension AppDelegate {
             if #available(iOS 10.0, *) {
                 let provider = callKitProviderDelegate.provider!
                 APNSHandler.setCallProvider(provider)
-           
-                callObserver.setDelegate(self, queue: nil) // nil queue means main thread
+                
+                callEventMonitor.start()
             }
         }
         if user.sipEnabled {
@@ -744,26 +746,5 @@ extension AppDelegate {
             callAvailabilityTimer.invalidate()
             callAvailabilityTimer = nil
         }
-    }
-}
-
-@available(iOS 10.0, *)
-extension AppDelegate: CXCallObserverDelegate {
-    // TODO: Move to a better place.
-    func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
-        if call.hasEnded == true {
-            print("AFV Disconnected")
-        }
-        if call.isOutgoing == true && call.hasConnected == false {
-            print("AFV Dialing")
-        }
-        if call.isOutgoing == false && call.hasConnected == false && call.hasEnded == false {
-            print("AFV Incoming")
-        }
-        if call.hasConnected == true && call.hasEnded == false {
-            print("AFV Connected")
-        }
-        
-        print("AFV \(callObserver.calls.debugDescription)")
     }
 }
