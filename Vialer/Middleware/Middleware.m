@@ -94,7 +94,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     
     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
     VSLCall *call = [callManager callWithUUID:uuid];
-    [callManager endCall:call completion:nil]; //TODO: no completion?  // TODO: removeCall would be a better name.
+    [callManager removeCall:call];
     
     if(@available(iOS 10.0, *)){
         CXProvider *callProvider = [APNSHandler getCallProvider];
@@ -107,7 +107,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     // Get the callUUID from the payload
     NSString* uuidString = payload[@"unique_key"];
     // The uuid string in the payload is missing hyphens so fix that.
-    //NSUUID* callUUID = [NSUUID uuid //orp
+    NSUUID* callUUID = [NSUUID uuidfixer:uuidString];
         
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
