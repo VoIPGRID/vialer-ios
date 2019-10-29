@@ -32,10 +32,12 @@ import UIKit
     @available(iOS 10.0, *)
     class func setCallProvider(_ provider: CXProvider) {
         callProvider = provider
+        VialerLogDebug("AFV CallProvider:\(callProvider)");
     }
     
     @available(iOS 10.0, *)
     @objc class func getCallProvider() -> CXProvider {
+        VialerLogDebug("AFV CallProvider:\(callProvider)");
         return callProvider
     }
     
@@ -82,7 +84,7 @@ import UIKit
                         }
                     
                         VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID.uuidString))")
-                    APNSHandler.callProvider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
+                        APNSHandler.callProvider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
                             if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call. At this stage account is not available - sip invite has not arrived yet.
                                 
                                 let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "")
@@ -93,7 +95,6 @@ import UIKit
                                     self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
                                 }
                             }
-
                             // Tell PushKit that the notification is handled.
                             completion()
                         })

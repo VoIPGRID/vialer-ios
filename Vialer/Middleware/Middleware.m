@@ -98,6 +98,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     
     if(@available(iOS 10.0, *)){
         CXProvider *callProvider = [APNSHandler getCallProvider];
+        VialerLogDebug(@"AFV CallProvider:%@", callProvider);
         [callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
     }
 }
