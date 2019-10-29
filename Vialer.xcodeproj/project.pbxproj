@@ -708,6 +708,13 @@
 		D4107091235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
 		D4107092235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
 		D4107093235D9BF900F0E31C /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410708B235D9BF900F0E31C /* UUIDExtension.swift */; };
+		D4107095236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
+		D4107096236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
+		D4107097236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
+		D4107098236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
+		D4107099236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
+		D410709A236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
+		D410709B236717CB00F0E31C /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
 		D449C089230BF83E0086720A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D449C087230BF83E0086720A /* InfoPlist.strings */; };
 		D44C0661230D3B780000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16041F470C2E00AEFA83 /* InfoPlist.strings */; };
 		D44C0662230D3CED0000A631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEEF16081F470C4400AEFA83 /* InfoPlist.strings */; };
@@ -1799,6 +1806,7 @@
 		D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransferContactsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D400290922083C2400E5AA68 /* SetupCallTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCallTransfer.swift; sourceTree = "<group>"; };
 		D410708B235D9BF900F0E31C /* UUIDExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtension.swift; sourceTree = "<group>"; };
+		D4107094236717CA00F0E31C /* CallEventsMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallEventsMonitor.swift; sourceTree = "<group>"; };
 		D449C088230BF83E0086720A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Branding/Verbonden/nl.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		D449C08A230BF84F0086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3459,6 +3467,7 @@
 				EE02B3F420D7870F006B10FD /* VialerStats.swift */,
 				EE5EC3C6214008860000EE4D /* GradientView.swift */,
 				EE733DB12164B34600D05CA3 /* EnumHelper.swift */,
+				D4107094236717CA00F0E31C /* CallEventsMonitor.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -5385,6 +5394,7 @@
 				838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */,
 				8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */,
 				D4E7F2BB230C15F900E76FA4 /* AvailabilityViewController.swift in Sources */,
+				D410709B236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				8382064B2290979A0098EABD /* (null) in Sources */,
 				8382064C2290979A0098EABD /* RoundedAndColoredUIButton.m in Sources */,
 				8382064D2290979A0098EABD /* MainTabBarViewController.m in Sources */,
@@ -5685,6 +5695,7 @@
 				EE5EC3C9214008860000EE4D /* GradientView.swift in Sources */,
 				C41FD8881C60A08400BBE6D7 /* AnimatedImageView.m in Sources */,
 				83DA45F522706A9300212371 /* AvailabilityModel.swift in Sources */,
+				D4107097236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				C49A46BA1E682A540097E808 /* UITableView.swift in Sources */,
 				C47BB0C01E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C41FD8891C60A08400BBE6D7 /* NSString+Mobile.m in Sources */,
@@ -5822,6 +5833,7 @@
 				C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */,
 				EE5EC3CB214008860000EE4D /* GradientView.swift in Sources */,
 				C49A46B71E682A540097E808 /* UIImage.swift in Sources */,
+				D4107099236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				83DA45F722706A9300212371 /* AvailabilityModel.swift in Sources */,
 				C490ADA21D0863E3004A8F83 /* AnimatedImageView.m in Sources */,
 				C47BB0C11E72B20000A1E509 /* RecentCall.swift in Sources */,
@@ -5974,6 +5986,7 @@
 				EE23185720A0468F00C05EB0 /* UITableView.swift in Sources */,
 				EE5EC3CC214008860000EE4D /* GradientView.swift in Sources */,
 				EE23185820A0468F00C05EB0 /* AnimatedImageView.m in Sources */,
+				D410709A236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				83DA45F822706A9300212371 /* AvailabilityModel.swift in Sources */,
 				EE23185920A0468F00C05EB0 /* RecentCall.swift in Sources */,
 				EE23185A20A0468F00C05EB0 /* UIImage.swift in Sources */,
@@ -6102,6 +6115,7 @@
 				EE61F43E1F1DDDE4006E890F /* UnlockView.m in Sources */,
 				EE5EC3CA214008860000EE4D /* GradientView.swift in Sources */,
 				EE61F43F1F1DDDE4006E890F /* UITableView.swift in Sources */,
+				D4107098236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				83DA45F622706A9300212371 /* AvailabilityModel.swift in Sources */,
 				EE61F4401F1DDDE4006E890F /* AnimatedImageView.m in Sources */,
 				EE61F4411F1DDDE4006E890F /* RecentCall.swift in Sources */,
@@ -6211,6 +6225,7 @@
 				F208511F1D26935600A17E71 /* UnlockView.m in Sources */,
 				EE5EC3C8214008860000EE4D /* GradientView.swift in Sources */,
 				C49A46B91E682A540097E808 /* UITableView.swift in Sources */,
+				D4107096236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				83DA45F422706A9300212371 /* AvailabilityModel.swift in Sources */,
 				F20851201D26935600A17E71 /* AnimatedImageView.m in Sources */,
 				C47BB0BF1E72B20000A1E509 /* RecentCall.swift in Sources */,
@@ -6339,6 +6354,7 @@
 				C49A46B81E682A540097E808 /* UITableView.swift in Sources */,
 				EE5EC3C7214008860000EE4D /* GradientView.swift in Sources */,
 				3D44303C1AEF67D50034156F /* AnimatedImageView.m in Sources */,
+				D4107095236717CB00F0E31C /* CallEventsMonitor.swift in Sources */,
 				C47BB0BE1E72B20000A1E509 /* RecentCall.swift in Sources */,
 				C49A46B41E682A540097E808 /* UIImage.swift in Sources */,
 				EE3C48192080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
