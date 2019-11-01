@@ -26,24 +26,7 @@ import UIKit
             sharedAPNSHandler = sharedHandler
         }
     }
-    //@available(iOS 10.0, *)
-    //@objc static var callProvider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Vialer"))  // TODO: init with nil or something. Not Vialer but Brand names. //orp use the provider and configuration from callkitdelegate/appdelegate ??!!??
-    //@objc static var callProvider = UIApplication.shared.delegate.
-//    @objc static var callProvider = (UIApplication.shared.delegate as? MyAppDelegate)?callKitProviderDelegate
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    //let aVariable = self.appDelegate.someVariable
-
-//    @available(iOS 10.0, *)
-//    class func setCallProvider(_ provider: CXProvider) {
-//        callProvider = provider
-//        VialerLogDebug("//orp AFV set CallProvider:\(callProvider)");
-//    }
-//
-//    @available(iOS 10.0, *)
-//    @objc class func getCallProvider() -> CXProvider {
-//        VialerLogDebug("//orp AFV get CallProvider:\(callProvider)");
-//        return callProvider
-//    }
     
     // MARK: - Actions
     @objc func registerForVoIPNotifications() {
@@ -69,14 +52,12 @@ import UIKit
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         if #available(iOS 10.0, *) {
-
             if type == .voIP {
                 // Extract the call information from the push notification payload
                 if let phoneNumberString = payload.dictionaryPayload["phonenumber"] as? String, // TODO use constants for key
                     let uuidString = payload.dictionaryPayload["unique_key"] as? String {
                         // The uuid string in the payload is missing hyphens so fix that.
                         let callUUID = NSUUID.uuidFixer(uuidString: uuidString)! as UUID
-                        VialerLogDebug(" //orp in didreceiveIncomingPush UUID=\(callUUID.uuidString)")//orp
                         
                         // Configure the call information data structures.
                         let callUpdate = CXCallUpdate()
@@ -89,14 +70,14 @@ import UIKit
 
                         VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID.uuidString))")
                         appDelegate.callKitProviderDelegate.provider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in
-                        //APNSHandler.callProvider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
+                        // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
                             if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call. At this stage account is not available - sip invite has not arrived yet.
                                 
                                 let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "")
                                 let callManager =  VialerSIPLib.sharedInstance().callManager
                                 callManager.add(newCall!)
                             
-                                DispatchQueue.main.async { //orp is this needed
+                                DispatchQueue.main.async {
                                     self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
                                 }
                             }

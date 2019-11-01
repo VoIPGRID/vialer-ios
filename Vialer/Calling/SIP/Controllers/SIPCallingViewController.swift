@@ -155,7 +155,6 @@ extension SIPCallingViewController {
 extension SIPCallingViewController {
     @IBAction func muteButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall, call.callState != .disconnected else { return }
-        VialerLogDebug(" ****** 1 //orp in muteButtonPressed UUID=\(call.uuid.uuidString)****")//orp
         callManager.toggleMute(for: call) { error in
             if error != nil {
                 VialerLogError("Error muting call: \(String(describing: error))")

@@ -90,42 +90,30 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 #pragma mark - actions
 - (void)callCleanUp:(NSUUID * _Nonnull)uuid {
-    VialerLogDebug(@"//orp Cleaning up call and CallKitUI for: %@", uuid);
+    VialerLogDebug(@"Cleaning up call and CallKitUI for: %@", uuid);
     
     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
     VSLCall *call = [callManager callWithUUID:uuid];
     [callManager removeCall:call];
     
     if(@available(iOS 10.0, *)){
-        //VialerLogDebug(@"//orp AFV @callCleanUp APNSHandler:%@", APNSHandler.sharedAPNSHandler);
-        //CXProvider *callProvider = [APNSHandler getCallProvider]; //orp add sheredInstance on every APNSHANdler?
-        //VialerLogDebug(@"//orp AFV @callCleanUp get CallProvider:%@", callProvider);
-        
-
-        //id appDelegate = [(MyAppDelegate *)[UIApplication sharedApplication] delegate];
-        //AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
-
-       
-        //[callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
     }
 }
 
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
-    //orp
     // Get the callUUID from the payload
     NSString* uuidString = payload[@"unique_key"];
     // The uuid string in the payload is missing hyphens so fix that.
     //NSUUID* callUUID = [NSUUID uuidfixer:uuidString];
     NSUUID* callUUID = [NSUUID uuidFixerWithString:uuidString];
-    VialerLogDebug(@" //orp in handleReceivedAPSNPayload UUID=%@ ",[callUUID UUIDString]);//orp
         
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
 
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
-    VialerLogDebug(@"Processing push message received from middleware of type: %@", payloadType);
+    VialerLogDebug(@"Processing push message received in Middleware.m:handleReceivedAPSNPayload from middleware of type: %@", payloadType);
     VialerLogDebug(@"Payload:\n%@", payload);
 
     if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {

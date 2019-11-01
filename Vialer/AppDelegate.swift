@@ -11,7 +11,7 @@ import UserNotifications
 
 
 @UIApplicationMain
-@objc class AppDelegate: UIResponder { //orp added @objc
+@objc class AppDelegate: UIResponder {
 
     fileprivate struct Configuration {
         struct LaunchArguments {
@@ -376,12 +376,9 @@ extension AppDelegate {
     /// Make sure the VoIP parts are up and running
     fileprivate func setupVoIP() {
         if VialerSIPLib.callKitAvailable() {
-            VialerLogDebug("Setup VoIP with CallKit support")
-            callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager) //orp this is how you load the callKitDelegate
+            VialerLogDebug("Setup VoIP with CallKit support, loading the callKitProvider.")
+            callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
             if #available(iOS 10.0, *) {
-//                let provider = callKitProviderDelegate.provider! //orp No need to load this cause we removed the property from the apnsHandler
-//                APNSHandler.setCallProvider(provider)
-                
                 callEventMonitor.start()
             }
         }
