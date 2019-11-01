@@ -90,16 +90,25 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 #pragma mark - actions
 - (void)callCleanUp:(NSUUID * _Nonnull)uuid {
-    VialerLogDebug(@"Cleaning up call and CallKitUI for: %@", uuid);
+    VialerLogDebug(@"//orp Cleaning up call and CallKitUI for: %@", uuid);
     
     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
     VSLCall *call = [callManager callWithUUID:uuid];
     [callManager removeCall:call];
     
     if(@available(iOS 10.0, *)){
-        CXProvider *callProvider = [APNSHandler getCallProvider];
-        VialerLogDebug(@"AFV CallProvider:%@", callProvider);
-        [callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
+        //VialerLogDebug(@"//orp AFV @callCleanUp APNSHandler:%@", APNSHandler.sharedAPNSHandler);
+        //CXProvider *callProvider = [APNSHandler getCallProvider]; //orp add sheredInstance on every APNSHANdler?
+        //VialerLogDebug(@"//orp AFV @callCleanUp get CallProvider:%@", callProvider);
+        
+
+        //id appDelegate = [(MyAppDelegate *)[UIApplication sharedApplication] delegate];
+        //AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+        [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
+
+       
+        //[callProvider reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
     }
 }
 
@@ -108,7 +117,9 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     // Get the callUUID from the payload
     NSString* uuidString = payload[@"unique_key"];
     // The uuid string in the payload is missing hyphens so fix that.
-    NSUUID* callUUID = [NSUUID uuidfixer:uuidString];
+    //NSUUID* callUUID = [NSUUID uuidfixer:uuidString];
+    NSUUID* callUUID = [NSUUID uuidFixerWithString:uuidString];
+    VialerLogDebug(@" //orp in handleReceivedAPSNPayload UUID=%@ ",[callUUID UUIDString]);//orp
         
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
@@ -141,7 +152,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             // TODO: There is no check on MiddlewareMaxAttempts here, what happens on the next 7 push messages?
             
             // Clean up the call and the CallKit UI before an actual call has been setup.
-            [self callCleanUp:uuid];
+            [self callCleanUp:callUUID];
             
             return;
         }
@@ -156,7 +167,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                 // TODO: Should there be a response to middleware?
                 
                 // Clean up the call and the CallKit UI before an actual call has been setup.
-                [self callCleanUp:uuid];
+                [self callCleanUp:callUUID];
             }
             return;
         }
@@ -187,7 +198,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     self.pushNotificationProcessing = nil;
                     
                     // Clean up the call and the CallKit UI before an actual call has been setup.
-                    [self callCleanUp:uuid];
+                    [self callCleanUp:callUUID];
                 } else {
                     // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
                     VialerLogInfo(@"Registration of the account has failed, trying again with the next push. attempt: %d", attempt);
@@ -203,7 +214,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
                     // Now we have a calll reported to CallKit, and we successfully registered at Asteriks and therefore have an account. Update the call with account info.
                     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
-                    VSLCall *call = [callManager callWithUUID:uuid];
+                    VSLCall *call = [callManager callWithUUID:callUUID];
                     call.account = account;
                     
                     [VialerStats sharedInstance].middlewareUniqueKey = self.pushNotificationProcessing;
@@ -219,7 +230,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     self.pushNotificationProcessing = nil;
                     
                     // Clean up the call and the CallKit UI before an actual call has been setup.
-                    [self callCleanUp:uuid];
+                    [self callCleanUp:callUUID];
                     
                     // Calling middleware to log that the call was rejected due to insufficient internet connection.
                     [self.commonMiddlewareRequestOperationManager sendHangupReasonToMiddleware:@"Rejected - Insufficient internet connection" forUniqueKey:keyToProcess withCompletion:^(NSError * _Nullable error) {
