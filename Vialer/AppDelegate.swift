@@ -11,7 +11,7 @@ import UserNotifications
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder {
+@objc class AppDelegate: UIResponder {
 
     fileprivate struct Configuration {
         struct LaunchArguments {
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder {
     var incomingCallNotification: UILocalNotification?
     var stopVibrating = false
     var vibratingTask: UIBackgroundTaskIdentifier?
-    var callKitProviderDelegate: CallKitProviderDelegate!
+    @objc var callKitProviderDelegate: CallKitProviderDelegate!
     var callAvailabilityTimer: Timer!
     var callAvailabilityTimesFired: Int = 0
 
@@ -376,12 +376,9 @@ extension AppDelegate {
     /// Make sure the VoIP parts are up and running
     fileprivate func setupVoIP() {
         if VialerSIPLib.callKitAvailable() {
-            VialerLogDebug("Setup VoIP with CallKit support")
+            VialerLogDebug("Setup VoIP with CallKit support, loading the callKitProvider.")
             callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
             if #available(iOS 10.0, *) {
-                let provider = callKitProviderDelegate.provider!
-                APNSHandler.setCallProvider(provider)
-                
                 callEventMonitor.start()
             }
         }
