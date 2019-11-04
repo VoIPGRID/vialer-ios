@@ -106,12 +106,10 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     // Get the callUUID from the payload
     NSString* uuidString = payload[@"unique_key"];
     // The uuid string in the payload is missing hyphens so fix that.
-    //NSUUID* callUUID = [NSUUID uuidfixer:uuidString];
     NSUUID* callUUID = [NSUUID uuidFixerWithString:uuidString];
-        
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
-
+    
     NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
     VialerLogDebug(@"Processing push message received in Middleware.m:handleReceivedAPSNPayload from middleware of type: %@", payloadType);
     VialerLogDebug(@"Payload:\n%@", payload);
