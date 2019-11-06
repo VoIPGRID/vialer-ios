@@ -13,5 +13,4 @@ static NSString * const AppDelegateStartConnectABCallNotification = @"AppDelegat
 static NSString * const AppDelegateStartConnectABCallUserInfoKey = @"PhoneNumber";
 static NSString * const ReachabilityChangedNotification = @"ReachabilityChangedNotification";
 
-
 #endif /* Notifications_Bridging_Header_h */

@@ -59,11 +59,7 @@ extension Managed where Self: NSManagedObject {
 
     /// Name of the model.
     public static var entityName: String {
-        if #available(iOS 10.0, *) {
-            return entity().name!
-        } else {
-            fatalError("Please provide an entityName for your NSManagedObjects!")
-        }
+        return entity().name!
     }
 
     /// Search for model instance given the predicate. If none found, create a new object.
