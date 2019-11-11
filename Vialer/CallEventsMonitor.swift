@@ -1,6 +1,5 @@
 import CallKit
 
-@available(iOS 10.0, *)
 class CallEventsMonitor:NSObject, CXCallObserverDelegate {
     
     var callObserver: CXCallObserver? = nil

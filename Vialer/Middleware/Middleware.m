@@ -96,10 +96,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     VSLCall *call = [callManager callWithUUID:uuid];
     [callManager removeCall:call];
     
-    if(@available(iOS 10.0, *)){
-        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
-    }
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
 }
 
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {

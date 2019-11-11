@@ -53,33 +53,16 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
         VialerLogError(@"Error removing observer %@: %@", SystemUserTwoFactorAuthenticationTokenNotification, exception);
     }
 
-    if ([VialerSIPLib callKitAvailable]) {
-        @try {
-            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAcceptedNotification];
-        } @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
-        }
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAcceptedNotification];
+    } @catch (NSException *exception) {
+        VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
+    }
 
-        @try {
-            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStartedNotification];
-        } @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
-        }
-
-    } else {
-        @try {
-            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingCallNotification];
-        }
-        @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", AppDelegateIncomingCallNotification, exception);
-        }
-
-        @try {
-            [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AppDelegateIncomingBackgroundCallAcceptedNotification];
-        }
-        @catch (NSException *exception) {
-            VialerLogError(@"Error removing observer %@: %@", AppDelegateIncomingBackgroundCallAcceptedNotification, exception);
-        }
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStartedNotification];
+    } @catch (NSException *exception) {
+        VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
     }
 
     @try {
@@ -100,13 +83,8 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.backgroundSolidColorView.backgroundColor = [[ColorsConfiguration shared] colorForKey:ColorsBackgroundGradientStart];
-    if ([VialerSIPLib callKitAvailable]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
-    } else {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:AppDelegateIncomingCallNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:AppDelegateIncomingBackgroundCallAcceptedNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voipWasDisabled:) name:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
 
@@ -230,18 +208,6 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
     if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
         if (![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
             ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
-            self.willPresentCallingViewController = YES;
-            [self dismissViewControllerAnimated:NO completion:^{
-                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
-                [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
-            }];
-        } else if (notification.name == AppDelegateIncomingCallNotification) {
-            self.willPresentCallingViewController = YES;
-            [self dismissViewControllerAnimated:NO completion:^{
-                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
-                [self performSegueWithIdentifier:VialerRootViewControllerShowSIPIncomingCallViewSegue sender:self];
-            }];
-        } else if (notification.name == AppDelegateIncomingBackgroundCallAcceptedNotification) {
             self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
                 self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
