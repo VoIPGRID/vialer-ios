@@ -411,7 +411,7 @@ extension AppDelegate {
         stopVibratingInBackground()
     }
 
-    /// Call was initiated from recents or addressbook. This will try to setup a call.
+    /// Call was initiated from recents, addressbook or via call back on the native call kit ui. This will try to setup a call.
     ///
     /// - Parameter userActivity: NSUseractivity instance
     /// - Returns: success or failure of setting up call
