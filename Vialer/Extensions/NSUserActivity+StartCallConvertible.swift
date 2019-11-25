@@ -39,6 +39,8 @@ protocol SupportedStartCallIntent {
     var contacts: [INPerson]? { get }
 }
 
-extension INStartAudioCallIntent: SupportedStartCallIntent {}
+@available(iOS 13.0, *)
+extension INStartCallIntent: SupportedStartCallIntent {}
 
+extension INStartAudioCallIntent: SupportedStartCallIntent {}
 extension INStartVideoCallIntent: SupportedStartCallIntent {}
