@@ -109,7 +109,9 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
                  [self.loginViewController setModalPresentationStyle: UIModalPresentationFullScreen];
                  [self presentViewController:self.loginViewController animated:NO completion:nil];
              } else {
-                 [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [self performSegueWithIdentifier:VialerRootViewControllerShowVialerDrawerViewSegue sender:self];
+                 });
              }
          }
      }];
@@ -211,7 +213,9 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
             self.willPresentCallingViewController = YES;
             [self dismissViewControllerAnimated:NO completion:^{
                 self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
-                [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
+                });
             }];
         }
     }
@@ -222,8 +226,9 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
         self.willPresentCallingViewController = YES;
         [self dismissViewControllerAnimated:NO completion:^{
             self.twoStepNumberToCall = [[notification userInfo] objectForKey:AppDelegateStartConnectABCallUserInfoKey];
-            
-            [self performSegueWithIdentifier:VialerRootViewControllerShowTwoStepCallingViewSegue sender:self];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self performSegueWithIdentifier:VialerRootViewControllerShowTwoStepCallingViewSegue sender:self];
+            });
         }];
     }
 }

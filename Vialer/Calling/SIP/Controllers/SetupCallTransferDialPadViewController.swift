@@ -75,14 +75,18 @@ extension SetupCallTransferDialPadViewController {
 extension SetupCallTransferDialPadViewController {
     @IBAction func backButtonPressed(_ sender: AnyObject) {
         guard let call = currentCall else {
-            performSegue(segueIdentifier: .unwindToFirstCall)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToFirstCall)
+            }
             return
         }
         callManager.end(call) { error in
             if error != nil {
                 VialerLogError("Could not hangup call: \(String(describing: error))")
             } else {
-                self.performSegue(segueIdentifier: .unwindToFirstCall)
+                DispatchQueue.main.async {
+                    self.performSegue(segueIdentifier: .unwindToFirstCall)
+                }
             }
         }
     }

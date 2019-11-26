@@ -16,11 +16,14 @@ class SecondCallViewController: SIPCallingViewController {
     }
 
     // MARK: - Properties
+    private var firstCallObserversWereSet = false
+    
     var firstCall: VSLCall? {
         didSet {
-            firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
-            firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
-
+            guard let call = firstCall else { return }
+            call.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+            call.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+            firstCallObserversWereSet = true
             updateUI()
         }
     }
@@ -47,15 +50,14 @@ extension SecondCallViewController{
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
         UIDevice.current.isProximityMonitoringEnabled = false
         
-        if callObserversSet {
+        if firstCallObserversWereSet {
             firstCall?.removeObserver(self, forKeyPath: "callState")
             firstCall?.removeObserver(self, forKeyPath: "mediaState")
-            callObserversSet = false
+            firstCallObserversWereSet = false
         }
+        super.viewWillDisappear(animated)
     }
 }
 
@@ -76,13 +78,17 @@ extension SecondCallViewController {
                     VialerLogError("Error hanging up call: \(String(describing: error))")
                 }
             }
-            performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
+            }
         }
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         guard let activeCall = activeCall, activeCall.callState != .disconnected else {
-            performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+            }
             return
         }
         // If current call is not disconnected, hangup the call.
@@ -90,7 +96,9 @@ extension SecondCallViewController {
             if error != nil {
                 VialerLogError("Error hanging up call: \(String(describing: error))")
             } else {
-                self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+                }
             }
         }
     }
@@ -99,24 +107,27 @@ extension SecondCallViewController {
 // MARK: - Helper functions
 extension SecondCallViewController {
     override func updateUI() {
-        super.updateUI()
+        DispatchQueue.main.async {
+            super.updateUI()
 
-        // Only enable transferButton if both calls are confirmed.
-        transferButton?.isEnabled = activeCall?.callState == .confirmed && firstCall?.callState == .confirmed
-        firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+            // Only enable transferButton if both calls are confirmed.
+            self.transferButton?.isEnabled = self.activeCall?.callState == .confirmed && self.firstCall?.callState == .confirmed
+            self.firstCallNumberLabel?.text = self.firstCallPhoneNumberLabelText
+            
+            self.numberLabel?.isHidden = false
+            if self.statusLabelTopConstraint != nil {
+                self.statusLabelTopConstraint.constant = 20
+            }
+
+            guard let call = self.firstCall else { return }
+
+            if call.callState == .disconnected {
+                self.firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
+            } else {
+                self.firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
+            }
+        }
         
-        numberLabel?.isHidden = false
-        if statusLabelTopConstraint != nil {
-            statusLabelTopConstraint.constant = 20
-        }
-
-        guard let call = firstCall else { return }
-
-        if call.callState == .disconnected {
-            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
-        } else {
-            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-        }
     }
 
     // Don't present wifi notification on second call.

@@ -25,7 +25,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     }
     
     // MARK: - Properties
-    var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
+    private var activeCallObserversWereSet = false // Keep track if observers are set to prevent removing unset observers.
 
     @objc var activeCall: VSLCall? {
         didSet {
@@ -55,7 +55,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
 
             activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
             activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
-            callObserversSet = true
+            activeCallObserversWereSet = true
         }
     }
     var callManager = VialerSIPLib.sharedInstance().callManager
@@ -108,10 +108,10 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
     
     deinit {
-        if callObserversSet {
+        if activeCallObserversWereSet {
             activeCall?.removeObserver(self, forKeyPath: "callState")
             activeCall?.removeObserver(self, forKeyPath: "mediaState")
-            callObserversSet = false
+            activeCallObserversWereSet = false
         }
     }
 }
@@ -143,10 +143,10 @@ extension SIPCallingViewController {
         UIDevice.current.isProximityMonitoringEnabled = false
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         
-        if callObserversSet {
+        if activeCallObserversWereSet {
             activeCall?.removeObserver(self, forKeyPath: "callState")
             activeCall?.removeObserver(self, forKeyPath: "mediaState")
-            callObserversSet = false
+            activeCallObserversWereSet = false
         }
     }
 }
@@ -169,7 +169,9 @@ extension SIPCallingViewController {
     @IBAction func keypadButtonPressed(_ sender: SipCallingButton) {
         dtmfWholeValue += dtmfSingleTimeValue
         dtmfSingleTimeValue = ""
-        performSegue(segueIdentifier: .showKeypad)
+        DispatchQueue.main.async {
+            self.performSegue(segueIdentifier: .showKeypad)
+        }
     }
     
     @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
@@ -193,14 +195,18 @@ extension SIPCallingViewController {
     @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
         guard let call = activeCall, call.callState == .confirmed else { return }
         if call.onHold {
-            performSegue(segueIdentifier: .setupTransfer)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .setupTransfer)
+            }
             return
         }
         callManager.toggleHold(for: call) { error in
             if error != nil {
                 VialerLogError("Error holding current call: \(String(describing: error))")
             } else {
-                self.performSegue(segueIdentifier: .setupTransfer)
+                DispatchQueue.main.async {
+                    self.performSegue(segueIdentifier: .setupTransfer)
+                }
             }
         }
     }
@@ -318,7 +324,9 @@ extension SIPCallingViewController {
         let waitingTimeAfterDismissing = Config.Timing.waitingTimeAfterDismissing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [weak self] in
             if self?.activeCall?.isIncoming ?? false {
-                self?.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+                DispatchQueue.main.async {
+                    self?.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+                }
             } else {
                 UIDevice.current.isProximityMonitoringEnabled = false
                 self?.presentingViewController?.dismiss(animated: false, completion: nil)
@@ -403,7 +411,8 @@ extension SIPCallingViewController {
             transferButton?.isEnabled = true
             speakerButton?.isEnabled = true
             hangupButton?.isEnabled = true
-        case .disconnected:
+        case .disconnected:fallthrough
+        default:
             holdButton?.isEnabled = false
             muteButton?.isEnabled = false
             transferButton?.isEnabled = false
@@ -479,7 +488,8 @@ extension SIPCallingViewController {
             } else {
                 statusLabel?.text = "\(dateComponentsFormatter.string(from: call.connectDuration)!)"
             }
-        case .disconnected:
+        case .disconnected:fallthrough
+        default:
             statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
             connectDurationTimer?.invalidate()
         }
@@ -515,7 +525,9 @@ extension SIPCallingViewController {
         
         // Add option to cancel the call.
         let cancelCall = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .default) { action in
-            self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            }
         }
         alertController.addAction(cancelCall)
         
@@ -531,7 +543,9 @@ extension SIPCallingViewController {
         
         // Make it possible to cancel the call
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            }
         }
         alertController.addAction(cancelAction)
         
@@ -568,7 +582,9 @@ extension SIPCallingViewController {
         
         // Cancel the call, without audio, calling isn't possible.
         let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            }
         }
         alertController.addAction(noAction)
         

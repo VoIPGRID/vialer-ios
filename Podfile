@@ -16,7 +16,7 @@ def default_pods
     pod 'PBWebViewController'
     pod 'SAMKeychain'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
-    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true 
+    pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true
     pod 'SVProgressHUD'
     pod 'VialerSIPLib', :path => '/Users/chris/projects/Vialer/iOS/vialersiplib'
 end
@@ -54,9 +54,9 @@ target 'ANNAbel Staging' do
 end
 
 target 'VialerTests' do
+    pod 'VialerSIPLib', :path => '/Users/chris/projects/Vialer/iOS/vialersiplib'
     pod 'OCMock'
     pod 'OHHTTPStubs'
-    pod 'VialerSIPLib', :path => '/Users/chris/projects/Vialer/iOS/vialersiplib'
     pod 'Firebase'
 end
 

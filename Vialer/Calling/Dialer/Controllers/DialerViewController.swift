@@ -119,10 +119,14 @@ extension DialerViewController {
 
         if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
-            performSegue(segueIdentifier: .sipCalling)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .sipCalling)
+            }
         } else {
             VialerGAITracker.setupOutgoingConnectABCallEvent()
-            performSegue(segueIdentifier: .twoStepCalling)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .twoStepCalling)
+            }
         }
     }
 
