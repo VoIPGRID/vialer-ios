@@ -25,14 +25,18 @@ class SetupCallTransferContactsViewController: SetupCallTransfer, UITableViewDat
 
     @IBAction func cancelPressed(_ sender: AnyObject) {
         guard let call = currentCall else {
-            performSegue(segueIdentifier: .unwindToFirstCall)
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToFirstCall)
+            }
             return
         }
         callManager.end(call) { error in
             if error != nil {
                 VialerLogError("Could not hangup call: \(String(describing: error))")
             } else {
-                self.performSegue(segueIdentifier: .unwindToFirstCall)
+                DispatchQueue.main.async {
+                    self.performSegue(segueIdentifier: .unwindToFirstCall)
+                }
             }
 
         }
@@ -150,12 +154,13 @@ extension SetupCallTransferContactsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(segue: segue) {
         case .secondCallActive:
-            // The second call is active and is a subtype of SIPCallingVC, so cast the destination to it.
-            let secondCallVC = segue.destination as! SecondCallViewController
-            secondCallVC.activeCall = currentCall
-            secondCallVC.firstCall = firstCall
-            secondCallVC.phoneNumberLabelText = currentCall?.numberToCall
-            secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
+            // The second call is active and a subtype of SIPCallingVC, so cast the destination to it.
+            let secondCallVC = segue.destination as? SecondCallViewController
+            
+            secondCallVC?.activeCall = currentCall
+            secondCallVC?.firstCall = firstCall
+            secondCallVC?.phoneNumberLabelText = currentCall?.numberToCall
+            secondCallVC?.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
         case .unwindToFirstCall:
             let callVC = segue.destination as! SIPCallingViewController
             if let call = currentCall, call.callState != .null && call.callState != .disconnected {
@@ -164,7 +169,7 @@ extension SetupCallTransferContactsViewController {
                 callVC.activeCall = call
             }
             if let cas = callActionSheet {
-                // If the action sheet is visable when unwinding to the first call, cancel it.
+                // If the action sheet is visible when unwinding to the first call, cancel it.
                 cas.dismiss(animated: false, completion: nil)
             }
         }

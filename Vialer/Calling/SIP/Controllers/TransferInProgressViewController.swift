@@ -130,7 +130,6 @@ extension TransferInProgressViewController {
                 strongSelf.updateUI()
 
                 guard let call = object as? VSLCall, call.transferStatus == .accepted || call.transferStatus == .rejected else { return }
-
                 // Call transfer is finished, so end the transferred calls,
                 if self!.firstCall?.callState != .disconnected {
                     strongSelf.callManager.end(self!.firstCall!) { error in
@@ -148,7 +147,9 @@ extension TransferInProgressViewController {
                 }
                 
                 // and return to the root view controller.
-                strongSelf.performSegue(withIdentifier: SegueIdentifier.unwindToVialerRootViewController.rawValue, sender: nil)
+                DispatchQueue.main.async {
+                    strongSelf.performSegue(withIdentifier: SegueIdentifier.unwindToVialerRootViewController.rawValue, sender: nil)
+                }
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)

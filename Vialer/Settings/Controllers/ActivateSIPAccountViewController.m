@@ -55,8 +55,10 @@ static CGFloat const ActivateSIPAccountViewControllerButtonRadius = 5.0;
     [self.user updateSystemUserFromVGWithCompletion:nil];
 
     if (self.backButtonToRootViewController) {
-        [self performSegueWithIdentifier:ActivateSIPAccountViewControllerVialerRootViewControllerSegue sender:self];
-        self.backButtonToRootViewController = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:ActivateSIPAccountViewControllerVialerRootViewControllerSegue sender:self];
+            self.backButtonToRootViewController = NO;
+        });
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }

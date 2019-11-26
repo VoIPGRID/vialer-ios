@@ -66,7 +66,9 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
 
     if (self.showSIPAccountWebview) {
-        [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
+        });
     } else {
         [self.tableView reloadData];
     }
@@ -261,9 +263,13 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == SettingsViewControllerNumbersSection && indexPath.row == SettingsViewControllerMyNumberRow) {
-        [self performSegueWithIdentifier:SettingsViewControllerShowEditNumberSegue sender:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:SettingsViewControllerShowEditNumberSegue sender:self];
+        });
     } else if (indexPath.section == SettingsViewControllerVoIPAccountSection && indexPath.row == SettingsViewControllerAudioQualityRow) {
-        [self performSegueWithIdentifier:SettingsViewControllerShowAudioQualitySegue sender:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:SettingsViewControllerShowAudioQualitySegue sender:self];
+        });
     }
 }
 
@@ -321,7 +327,9 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
         } else if (!success) {
             // There is no account, show info page.
             sender.on = NO;
-            [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self performSegueWithIdentifier:SettingsViewControllerShowActivateSIPAccount sender:self];
+            });
         } else {
             [self.tableView reloadData];
         }

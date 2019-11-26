@@ -25,10 +25,14 @@ static NSString * const UserProfileWebViewControllerVialerRootViewControllerSegu
         // If account was set, lets unwind to the settings.
         if (success && self.currentUser.sipAccount) {
             if (self.backButtonToRootViewController) {
-                [self performSegueWithIdentifier:UserProfileWebViewControllerVialerRootViewControllerSegue sender:self];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:UserProfileWebViewControllerVialerRootViewControllerSegue sender:self];
+                });
                 self.backButtonToRootViewController = NO;
             } else {
-                [self performSegueWithIdentifier:UserProfileWebViewControllerUnwindToSettingsSegue sender:self];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:UserProfileWebViewControllerUnwindToSettingsSegue sender:self];
+                });
             }
         } else {
             [self.navigationController popViewControllerAnimated:YES];
