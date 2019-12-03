@@ -25,12 +25,8 @@
                                     <segue destination="MYK-u7-9i7" kind="embed" id="sC3-Cr-D0B"/>
                                 </connections>
                             </containerView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="M8h-9A-CeY">
-                                <rect key="frame" x="-4" y="118" width="383" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wCx-cG-eqa">
-                                <rect key="frame" x="0.0" y="174" width="375" height="604"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="660"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactsTableViewCell" textLabel="RTF-RC-BhL" style="IBUITableViewCellStyleDefault" id="76I-1d-Ia8">
@@ -75,17 +71,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="M8h-9A-CeY" firstAttribute="leading" secondItem="1fe-4D-UHQ" secondAttribute="leading" constant="-4" id="5pc-qu-pgK"/>
                             <constraint firstItem="o9w-Ng-5VK" firstAttribute="top" secondItem="1fe-4D-UHQ" secondAttribute="top" id="Bnk-Fi-Z8O"/>
-                            <constraint firstItem="wCx-cG-eqa" firstAttribute="top" secondItem="M8h-9A-CeY" secondAttribute="bottom" id="PKf-h4-4U8"/>
                             <constraint firstItem="wCx-cG-eqa" firstAttribute="leading" secondItem="1fe-4D-UHQ" secondAttribute="leading" id="TSJ-nM-gX4"/>
-                            <constraint firstItem="M8h-9A-CeY" firstAttribute="top" secondItem="o9w-Ng-5VK" secondAttribute="bottom" id="Yww-JM-f21"/>
                             <constraint firstItem="o9w-Ng-5VK" firstAttribute="leading" secondItem="1fe-4D-UHQ" secondAttribute="leading" id="arB-HE-w3n"/>
                             <constraint firstItem="1fe-4D-UHQ" firstAttribute="trailing" secondItem="o9w-Ng-5VK" secondAttribute="trailing" id="egV-w1-QH8"/>
-                            <constraint firstItem="M8h-9A-CeY" firstAttribute="top" secondItem="o9w-Ng-5VK" secondAttribute="bottom" id="emj-nZ-O3A"/>
                             <constraint firstItem="1fe-4D-UHQ" firstAttribute="bottom" secondItem="wCx-cG-eqa" secondAttribute="bottom" id="oZ6-Vc-LR3"/>
-                            <constraint firstItem="1fe-4D-UHQ" firstAttribute="trailing" secondItem="M8h-9A-CeY" secondAttribute="trailing" constant="-4" id="oeD-VJ-Tfo"/>
                             <constraint firstItem="1fe-4D-UHQ" firstAttribute="trailing" secondItem="wCx-cG-eqa" secondAttribute="trailing" id="rNb-Te-dba"/>
+                            <constraint firstItem="wCx-cG-eqa" firstAttribute="top" secondItem="o9w-Ng-5VK" secondAttribute="bottom" id="u8W-rL-3Kt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1fe-4D-UHQ"/>
                     </view>
@@ -104,7 +96,6 @@
                     <connections>
                         <outlet property="reachabilityBar" destination="o9w-Ng-5VK" id="na9-u0-lDu"/>
                         <outlet property="reachabilityBarHeigthConstraint" destination="Lbr-8g-i5M" id="EYN-Og-FYy"/>
-                        <outlet property="searchBar" destination="M8h-9A-CeY" id="boH-le-e3P"/>
                         <outlet property="tableView" destination="wCx-cG-eqa" id="YCb-1j-Ab2"/>
                         <segue destination="SsV-wV-G7i" kind="presentation" identifier="TwoStepCallingSegue" id="1Ru-DV-dGe"/>
                         <segue destination="bh2-HM-jQM" kind="presentation" identifier="SIPCallingSegue" id="M9G-wQ-xPp"/>

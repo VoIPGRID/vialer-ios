@@ -27,7 +27,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> //orp new
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 //orp old stuff
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar; //orp
+//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar; //orp
 //orp new stuff
 @property (strong, nonatomic) UISearchController *searchController;
 //orp
@@ -81,20 +81,17 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     self.searchController.dimsBackgroundDuringPresentation = YES; //orp maybe change this
     self.searchController.obscuresBackgroundDuringPresentation = TRUE;
     self.searchController.searchBar.placeholder = @"Search"; //orp localize this
-//    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),  //orp remove this?
-//                                                          NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
     self.searchController.searchBar.delegate = self;
     
-    //self.searchBar = self.searchController.searchBar;
-    self.searchBar.placeholder = @"Search //orp "; //orp
-    self.searchBar.delegate = self; //orp
+    //self.searchBar.placeholder = @"Search //orp "; //orp
+    //self.searchBar.delegate = self; //orp
+    self.searchController.searchBar.delegate = self;
     
-//    self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
     
     [self.searchController.searchBar sizeToFit];
-    
-    self.searchBar = self.searchController.searchBar; //orp
+
+    self.navigationItem.searchController = self.searchController; //orp do something for ios 10
     //orp
     
     
@@ -151,10 +148,16 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     
     //self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint]; //orp OLD //color here
     //orp new
-    self.searchBar.searchTextField.backgroundColor =  [self.colorsConfiguration colorForKey: ColorsWhiteColor];
-    self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
-    self.searchBar.barStyle = UISearchBarStyleProminent;
+//    self.searchBar.searchTextField.backgroundColor =  [self.colorsConfiguration colorForKey: ColorsWhiteColor];
+//    self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
+//    self.searchBar.barStyle = UISearchBarStyleProminent;
     
+//    self.searchController.searchBar.searchTextField.backgroundColor =  [self.colorsConfiguration colorForKey: ColorsWhiteColor];
+//    self.searchController.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
+//    self.searchController.searchBar.barStyle = UISearchBarStyleProminent;
+    //orp
+    
+
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
     
     self.navigationController.view.backgroundColor = [self.colorsConfiguration colorForKey: ColorsNavigationBarBarTint];
@@ -384,22 +387,22 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 #pragma mark - searchbar delegate
 //orp old stuff
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar { //orp called on new
     [self hideReachabilityBar];
     return YES;
 }
 
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar { //orp crash free
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar { //orp
     [self updateReachabilityBar];
     return YES;
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { //orp crash free
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { //orp called on new
     [self.contactModel searchContactsFor:searchText];
 }
 
 //orp new stuff
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController //orp called on new
 {
   NSString *searchString = searchController.searchBar.text;
   //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex]; //orp replaced this with the below
