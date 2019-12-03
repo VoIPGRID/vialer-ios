@@ -4,7 +4,6 @@
 //
 
 #import "ContactsViewController.h"
-
 #import "ContactsUI/ContactsUI.h"
 #import "Notifications-Bridging-Header.h"
 #import "SystemUser.h"
@@ -18,16 +17,20 @@ static NSString * const ContactsViewControllerTabContactImageName = @"tab-contac
 static NSString * const ContactsViewControllerTabContactActiveImageName = @"tab-contact-active";
 static NSString * const ContactsViewControllerTwoStepCallingSegue = @"TwoStepCallingSegue";
 static NSString * const ContactsViewControllerSIPCallingSegue = @"SIPCallingSegue";
-
 static NSString * const ContactsTableViewMyNumberCell = @"ContactsTableViewMyNumberCell";
 static NSString * const ContactsTableViewCell = @"ContactsTableViewCell";
 
 static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
 static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+//@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> //orp old
+@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> //orp new
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+//orp old stuff
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar; //orp
+//orp new stuff
+@property (strong, nonatomic) UISearchController *searchController;
+//orp
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
@@ -61,9 +64,40 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     return self;
 }
 
+//- (void)encodeWithCoder:(nonnull NSCoder *)coder { //orp it needs this?
+//    <#code#>
+//}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self hideReachabilityBar];
+    
+    
+    //orp
+    // Search controller and Bar initiallization
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = YES; //orp maybe change this
+    self.searchController.obscuresBackgroundDuringPresentation = TRUE;
+    self.searchController.searchBar.placeholder = @"Search"; //orp localize this
+//    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),  //orp remove this?
+//                                                          NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
+    self.searchController.searchBar.delegate = self;
+    
+    //self.searchBar = self.searchController.searchBar;
+    self.searchBar.placeholder = @"Search //orp "; //orp
+    self.searchBar.delegate = self; //orp
+    
+//    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
+    
+    [self.searchController.searchBar sizeToFit];
+    
+    self.searchBar = self.searchController.searchBar; //orp
+    //orp
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     self.showTitleImage = YES;
     [self setupLayout];
@@ -88,7 +122,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     [super viewDidAppear:animated];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:ContactsViewControllerLogoImageName]];
     [self checkContactsAccess];
-
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ContactModel.ContactsUpdated" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -108,16 +142,21 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 # pragma mark - setup
 
 - (void)setupLayout {
-
+    
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-
+    
     self.tableView.sectionIndexColor = [self.colorsConfiguration colorForKey: ColorsContactsTableSectionIndex];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-
+    
+    //self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint]; //orp OLD //color here
+    //orp new
+    self.searchBar.searchTextField.backgroundColor =  [self.colorsConfiguration colorForKey: ColorsWhiteColor];
     self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
+    self.searchBar.barStyle = UISearchBarStyleProminent;
+    
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
-
+    
     self.navigationController.view.backgroundColor = [self.colorsConfiguration colorForKey: ColorsNavigationBarBarTint];
     [self updateReachabilityBar];
 }
@@ -237,17 +276,17 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         }
         return cell;
     }
-
+    
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewCell];
-
+    
     CNContact *contact;
-
+    
     if ([tableView isEqual:self.tableView]) {
         contact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
     } else {
         contact = self.contactModel.searchResult[indexPath.row];
     }
-
+    
     cell.textLabel.attributedText = [self.contactModel attributedStringFor:contact];
     return cell;
 }
@@ -261,7 +300,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0 && [tableView isEqual:self.tableView]) {
-            return 1.0f;
+        return 1.0f;
     }
     return 32.0f;
 }
@@ -285,13 +324,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     } else {
         self.selectedContact = self.contactModel.searchResult[indexPath.row];
     }
-
+    
     CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
     contactViewController.title = [CNContactFormatter stringFromContact:self.selectedContact style:CNContactFormatterStyleFullName];
     contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
-
+    
     self.navigationItem.titleView = nil;
     self.showTitleImage = NO;
     [self.navigationController pushViewController:contactViewController animated:YES];
@@ -344,20 +383,82 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 #pragma mark - searchbar delegate
-
+//orp old stuff
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     [self hideReachabilityBar];
     return YES;
 }
 
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar { //orp crash free
     [self updateReachabilityBar];
     return YES;
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { //orp crash free
     [self.contactModel searchContactsFor:searchText];
 }
+
+//orp new stuff
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+  NSString *searchString = searchController.searchBar.text;
+  //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex]; //orp replaced this with the below
+    bool shouldBeginSearching = [self.contactModel searchContactsFor:searchString];
+    if (shouldBeginSearching) { //orp is this needed with the reload?
+        [self.tableView reloadData];
+    }
+}
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope //orp not needed I think
+{
+  [self updateSearchResultsForSearchController:self.searchController];
+}
+
+//orp xcode suggests
+
+//- (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController {
+//    <#code#>
+//}
+
+//- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
+//    <#code#>
+//}
+//
+//- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+//    <#code#>
+//}
+//
+//- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
+//    <#code#>
+//}
+//
+//- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+//    <#code#>
+//}
+//
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+//    <#code#>
+//}
+//
+//- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+//    <#code#>
+//}
+//
+//- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
+//    <#code#>
+//}
+//
+//- (void)setNeedsFocusUpdate {
+//    <#code#>
+//}
+//
+//- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
+//    <#code#>
+//}
+//
+//- (void)updateFocusIfNeeded {
+//    <#code#>
+//}
 
 #pragma mark - utils
 
@@ -365,7 +466,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     if (![self.contactModel hasContactAccess]) {
         [self.contactModel requestContactAccess];
     }
-
+    
     switch (self.contactModel.authorizationStatus) {
         case CNAuthorizationStatusAuthorized:
             break;

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t16-Xz-giH">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t16-Xz-giH">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,9 +28,6 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="M8h-9A-CeY">
                                 <rect key="frame" x="-4" y="118" width="383" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="0Ia-Zs-OfH" id="6N3-ui-s2X"/>
-                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wCx-cG-eqa">
                                 <rect key="frame" x="0.0" y="174" width="375" height="604"/>
@@ -42,11 +37,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="76I-1d-Ia8" id="J3F-XJ-wvm">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RTF-RC-BhL">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.666666666666664"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -59,11 +54,11 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XYI-PN-bPJ" id="O5z-TE-JDn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OLh-j1-l2M">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.666666666666664"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <attributedString key="attributedText"/>
                                                     <nil key="highlightedColor"/>
@@ -110,22 +105,12 @@
                         <outlet property="reachabilityBar" destination="o9w-Ng-5VK" id="na9-u0-lDu"/>
                         <outlet property="reachabilityBarHeigthConstraint" destination="Lbr-8g-i5M" id="EYN-Og-FYy"/>
                         <outlet property="searchBar" destination="M8h-9A-CeY" id="boH-le-e3P"/>
-                        <outlet property="searchDisplayController" destination="YTY-Pe-Xze" id="A2D-kg-NAL"/>
                         <outlet property="tableView" destination="wCx-cG-eqa" id="YCb-1j-Ab2"/>
                         <segue destination="SsV-wV-G7i" kind="presentation" identifier="TwoStepCallingSegue" id="1Ru-DV-dGe"/>
                         <segue destination="bh2-HM-jQM" kind="presentation" identifier="SIPCallingSegue" id="M9G-wQ-xPp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9d-Fe-j1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="YTY-Pe-Xze">
-                    <connections>
-                        <outlet property="delegate" destination="0Ia-Zs-OfH" id="JRW-Ye-8QE"/>
-                        <outlet property="searchBar" destination="M8h-9A-CeY" id="n7P-Ui-vGh"/>
-                        <outlet property="searchContentsController" destination="0Ia-Zs-OfH" id="CxJ-gk-QZl"/>
-                        <outlet property="searchResultsDataSource" destination="0Ia-Zs-OfH" id="bZV-qF-pK8"/>
-                        <outlet property="searchResultsDelegate" destination="0Ia-Zs-OfH" id="bgY-wH-XCb"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2848.8000000000002" y="129.31034482758622"/>
         </scene>

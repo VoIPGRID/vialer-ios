@@ -5,6 +5,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContactsViewController : UIViewController
+@interface ContactsViewController : UIViewController <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @end

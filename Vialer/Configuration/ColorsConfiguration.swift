@@ -51,6 +51,7 @@ protocol ColorsConfigurationProtocol {
         var TwoStepScreenSideBIconColor: String
         var TwoStepScreenBackgroundHeaderColor: String
         var ReachabilityBarBackgroundColor: [Double]
+//        var WhiteColor: String //orp
     }
 
     fileprivate struct Keys: Decodable {
@@ -94,6 +95,7 @@ protocol ColorsConfigurationProtocol {
         case reachabilityBarBackground
         case backgroundGradientStart
         case backgroundGradientEnd
+        case whiteColor
     }
 
     enum GradientKey {
@@ -293,11 +295,6 @@ protocol ColorsConfigurationProtocol {
                 color = arrayToUIColor(stringToPrimaryColor(linkedTo))
             }
             break
-        case .reachabilityBarBackground:
-            if colorsConfig != nil {
-                color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
-            }
-            break
         case .backgroundGradientStart:
             if colorsConfig != nil {
                 color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientStartColor)
@@ -306,6 +303,17 @@ protocol ColorsConfigurationProtocol {
         case .backgroundGradientEnd:
             if colorsConfig != nil {
                 color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientEndColor)
+            }
+            break
+        case .reachabilityBarBackground:
+            if colorsConfig != nil {
+                color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
+            }
+            break
+        case .whiteColor: fallthrough
+        default:
+            if colorsConfig != nil {
+                color = arrayToUIColor(colorsConfig!.primaryColors.WhiteColor)
             }
             break
         }
