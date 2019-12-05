@@ -369,6 +369,9 @@
 /* No comment provided by engineer. */
 "Top name matches" = "Meest overeenkomende namen";
 
+/* No comment provided by engineer. */
+"No matches" = "Geen overeenkomende";
+
 /* Transfer in progress to */
 "Transfer in progress to" = "Doorverbinden opgezet met";
 
