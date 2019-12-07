@@ -23,7 +23,6 @@ static NSString * const ContactsTableViewCell = @"ContactsTableViewCell";
 static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
 static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-//@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> //orp old
 @interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> //orp new
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 //orp old stuff
@@ -35,6 +34,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopReachabilityBottomConstraint; //orp DELETE THIS
 
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
@@ -65,28 +65,23 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     return self;
 }
 
-//- (void)encodeWithCoder:(nonnull NSCoder *)coder { //orp it needs this?
-//    <#code#>
-//}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self hideReachabilityBar];
     
     
     //orp
-    //resultsTableController.tableView.delegate = self; //for second tableview implementation
-    
+    //self.view.autoresizesSubviews = NO;
     // SearchController configuration
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO; //orp maybe change this
-    self.searchController.obscuresBackgroundDuringPresentation = NO; //orp maybe change this
-    self.searchController.searchBar.placeholder = @"Search"; //orp localize this
-    self.searchController.searchBar.delegate = self; //orp is this needed
+    self.searchController.obscuresBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.placeholder = @"Search"; //orp localize this?
+    self.searchController.searchBar.delegate = self;
+    self.searchController.delegate = self;
     self.definesPresentationContext = YES;
     [self.searchController.searchBar sizeToFit];
+    
     
     if (@available(iOS 11.0, *)) {
         self.navigationItem.searchController = self.searchController;
@@ -108,6 +103,26 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //orp here fix the tableview constrain
+    NSLog(@"//orp ---------------------------------------");
+    NSLog(@"//orp self.navigationController.navigationBar.frame.size.height = %f", self.navigationController.navigationBar.frame.size.height);
+    NSLog(@"//orp self.reachabilityBar.frame.origin.y = %f", self.reachabilityBar.frame.origin.y);
+    NSLog(@"//orp tableViewTopReachabilityBottomConstraint.constant = %f", self.tableViewTopReachabilityBottomConstraint.constant);
+    NSLog(@"//orp tableView Y = %f", self.tableView.frame.origin.y);
+    NSLog(@"//orp ---------------------------------------");
+    
+
+     // To avoid apple's bug missplacing tableview, force layout guide to reset by pushing a dummy controller and popping it right back
+    [self.navigationController pushViewController:[UIViewController new] animated:NO];
+    [self.navigationController popViewControllerAnimated:NO];
+    
+    NSLog(@"//orp ---------------------------------------");
+    NSLog(@"//orp self.navigationController.navigationBar.frame.size.height = %f", self.reachabilityBar.frame.size.height);
+    NSLog(@"//orp tableViewTopReachabilityBottomConstraint.constant = %f", self.tableViewTopReachabilityBottomConstraint.constant);
+    NSLog(@"//orp self.navigationController.navigationBar.frame.origin.y = %f", self.navigationController.navigationBar.frame.size.height);
+    NSLog(@"//orp ---------------------------------------");
+    //
     [self updateReachabilityBar];
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     
@@ -142,24 +157,11 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 # pragma mark - setup
 
 - (void)setupLayout {
-    
     self.definesPresentationContext = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.tableView.sectionIndexColor = [self.colorsConfiguration colorForKey: ColorsContactsTableSectionIndex];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    
-    //self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint]; //orp OLD //color here
-    //orp new
-//    self.searchBar.searchTextField.backgroundColor =  [self.colorsConfiguration colorForKey: ColorsWhiteColor];
-//    self.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
-//    self.searchBar.barStyle = UISearchBarStyleProminent;
-    
-//    self.searchController.searchBar.searchTextField.backgroundColor =  [self.colorsConfiguration colorForKey: ColorsWhiteColor];
-//    self.searchController.searchBar.barTintColor = [self.colorsConfiguration colorForKey: ColorsContactSearchBarTint];
-//    self.searchController.searchBar.barStyle = UISearchBarStyleProminent;
-    //orp
-    
 
     self.myPhoneNumberLabel.text = self.currentUser.outgoingNumber;
     
@@ -242,31 +244,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - tableview datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    if ([tableView isEqual:self.tableView]) {
-//        return self.contactModel.sectionTitles.count + 1;
-//    }
-//    return 1;
-    //orp
     if (self.searchController.isActive && ![self.searchController.searchBar.text isEqual: @""]) {
-    //if (self.searchController.isActive) {
         return 1;
     }
     return self.contactModel.sectionTitles.count + 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    if ([tableView isEqual:self.tableView]) {
-//        if (section == 0) {
-//            return @"";
-//        }
-//        return self.contactModel.sectionTitles[section - 1];
-//    } else {
-//        if (self.contactModel.searchResult.count) {
-//            return NSLocalizedString(@"Top name matches", nil);
-//        }
-//    }
-//    return nil;
-    //orp
     if (self.searchController.isActive && ![self.searchController.searchBar.text isEqual: @""]) {
         if (self.contactModel.searchResult.count) {
             return NSLocalizedString(@"Top name matches", nil);
@@ -280,14 +264,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if ([tableView isEqual:self.tableView]) {
-//        if (section == 0) {
-//            return 1;
-//        }
-//        return [self.contactModel contactsAtSection:section - 1].count;
-//    }
-//    return self.contactModel.searchResult.count;
-    //orp
     if (self.searchController.isActive && ![self.searchController.searchBar.text isEqual: @""]) {
         return self.contactModel.searchResult.count;
     }
@@ -298,30 +274,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section == 0 && [tableView isEqual:self.tableView]) {
-//        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewMyNumberCell];
-//        NSString *myNumber = NSLocalizedString(@"My Number: ", nil);
-//        if (![self.currentUser.outgoingNumber isEqualToString:@""] && self.currentUser.loggedIn) {
-//            myNumber = [myNumber stringByAppendingString:self.currentUser.outgoingNumber];
-//            cell.textLabel.text = myNumber;
-//        }
-//        return cell;
-//    }
-//
-//    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewCell];
-//
-//    CNContact *contact;
-//
-//    if ([tableView isEqual:self.tableView]) {
-//        contact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
-//    } else {
-//        contact = self.contactModel.searchResult[indexPath.row];
-//    }
-//
-//    cell.textLabel.attributedText = [self.contactModel attributedStringFor:contact];
-//    return cell;
-    //orp
-    //if (indexPath.section == 0 && !self.searchController.isActive) { //orp
     if (indexPath.section == 0 && (!self.searchController.isActive || [self.searchController.searchBar.text isEqual: @""])) {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContactsTableViewMyNumberCell];
         NSString *myNumber = NSLocalizedString(@"My Number: ", nil);
@@ -346,11 +298,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//    if ([tableView isEqual:self.tableView]) {
-//        return self.contactModel.sectionTitles;
-//    }
-//    return nil;
-    //orp
     if (self.searchController.isActive && ![self.searchController.searchBar.text isEqual: @""]) {
         return nil;
     }
@@ -358,12 +305,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (section == 0 && [tableView isEqual:self.tableView]) {
-//        return 1.0f;
-//    }
-//    return 32.0f;
-    //orp
-    //if (section == 0 && !self.searchController.isActive && [self.searchController.searchBar.text isEqual: @""]) {
     if (section == 0 && (!self.searchController.isActive || [self.searchController.searchBar.text isEqual: @""])) {
         return 1.0f;
     }
@@ -371,12 +312,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-//    if ([indexPath section] == 0 && [self.currentUser.outgoingNumber isEqualToString:@""]){
-//        return 0;
-//    }
-//    return UITableViewAutomaticDimension;
-    //orp
-    //if (indexPath.section == 0 && !self.searchController.isActive && [self.searchController.searchBar.text isEqual: @""]) {
     if (indexPath.section == 0 && (!self.searchController.isActive || [self.searchController.searchBar.text isEqual: @""])) {
         return 0;
     }
@@ -386,27 +321,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - tableview delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([tableView isEqual:self.tableView]) {
-//        if (indexPath.section == 0) {
-//            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//            return;
-//        }
-//        self.selectedContact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
-//    } else {
-//        self.selectedContact = self.contactModel.searchResult[indexPath.row];
-//    }
-//
-//    CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
-//    contactViewController.title = [CNContactFormatter stringFromContact:self.selectedContact style:CNContactFormatterStyleFullName];
-//    contactViewController.contactStore = self.contactModel.contactStore;
-//    contactViewController.allowsActions = NO;
-//    contactViewController.delegate = self;
-//
-//    self.navigationItem.titleView = nil;
-//    self.showTitleImage = NO;
-//    [self.navigationController pushViewController:contactViewController animated:YES];
-//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    //orp
     if (self.searchController.isActive && ![self.searchController.searchBar.text isEqual: @""]) {
         self.selectedContact = self.contactModel.searchResult[indexPath.row];
     } else {
@@ -476,7 +390,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 #pragma mark - searchbar delegate
 //orp old stuff
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar { //orp called on new
-    [self hideReachabilityBar];
     return YES;
 }
 
@@ -486,18 +399,14 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { //orp called on new
-    [self.contactModel searchContactsFor:searchText];
+    (void)[self.contactModel searchContactsFor:searchText];
 }
 
 //orp new stuff
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController //orp called on new
 {
-  NSString *searchString = searchController.searchBar.text;
-  //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex]; //orp replaced this with the below
-    bool shouldBeginSearching = [self.contactModel searchContactsFor:searchString];
-//    if (shouldBeginSearching) { //orp is this needed with the reload?
-//        [self.tableView reloadData]; //orp needed?
-//    }
+    NSString *searchString = searchController.searchBar.text;
+    (void)[self.contactModel searchContactsFor:searchString];
     [self.tableView reloadData];
 }
 

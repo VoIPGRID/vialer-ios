@@ -51,7 +51,6 @@ protocol ColorsConfigurationProtocol {
         var TwoStepScreenSideBIconColor: String
         var TwoStepScreenBackgroundHeaderColor: String
         var ReachabilityBarBackgroundColor: [Double]
-//        var WhiteColor: String //orp
     }
 
     fileprivate struct Keys: Decodable {
