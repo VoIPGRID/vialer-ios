@@ -215,7 +215,7 @@ import Foundation
         fetchRequest.predicate = CNContact.predicateForContacts(matchingName: searchText)
         do {
             try contactStore.enumerateContacts(with: fetchRequest) { contact, stop in
-                self.searchResult.append(contact) //orp here? check search
+                self.searchResult.append(contact)
             }
         } catch let error {
             VialerLogError("Contact search error: \(error)")

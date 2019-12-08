@@ -97,7 +97,6 @@
                         <outlet property="reachabilityBar" destination="o9w-Ng-5VK" id="na9-u0-lDu"/>
                         <outlet property="reachabilityBarHeigthConstraint" destination="Lbr-8g-i5M" id="EYN-Og-FYy"/>
                         <outlet property="tableView" destination="wCx-cG-eqa" id="YCb-1j-Ab2"/>
-                        <outlet property="tableViewTopReachabilityBottomConstraint" destination="u8W-rL-3Kt" id="8ry-3w-COw"/>
                         <segue destination="SsV-wV-G7i" kind="presentation" identifier="TwoStepCallingSegue" id="1Ru-DV-dGe"/>
                         <segue destination="bh2-HM-jQM" kind="presentation" identifier="SIPCallingSegue" id="M9G-wQ-xPp"/>
                     </connections>

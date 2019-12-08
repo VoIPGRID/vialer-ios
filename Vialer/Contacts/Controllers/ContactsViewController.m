@@ -23,18 +23,12 @@ static NSString * const ContactsTableViewCell = @"ContactsTableViewCell";
 static CGFloat const ContactsViewControllerReachabilityBarHeight = 30.0;
 static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDuration = 0.3;
 
-@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> //orp new
+@interface ContactsViewController () <CNContactViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-//orp old stuff
-//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar; //orp
-//orp new stuff
 @property (strong, nonatomic) UISearchController *searchController;
-//@property (strong, nonatomic) UITableViewController *resultsTableController;
-//orp
 @property (weak, nonatomic) IBOutlet UILabel *warningMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myPhoneNumberLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reachabilityBarHeigthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopReachabilityBottomConstraint; //orp DELETE THIS
 
 @property (strong, nonatomic) NSString *warningMessage;
 @property (strong, nonatomic) NSString *phoneNumberToCall;
@@ -67,63 +61,24 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self hideReachabilityBar];
-    
-    
-    //orp
-    //self.view.autoresizesSubviews = NO;
-    // SearchController configuration
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.obscuresBackgroundDuringPresentation = NO;
-    self.searchController.searchBar.placeholder = @"Search"; //orp localize this?
-    self.searchController.searchBar.delegate = self;
-    self.searchController.delegate = self;
-    self.definesPresentationContext = YES;
-    [self.searchController.searchBar sizeToFit];
-    
-    
-    if (@available(iOS 11.0, *)) {
-        self.navigationItem.searchController = self.searchController;
-        self.navigationItem.hidesSearchBarWhenScrolling = false;
-    } else {
-        self.tableView.tableHeaderView = self.searchController.searchBar;
-    }
-
-    //orp
-    
+    [self setupSearchController];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     self.showTitleImage = YES;
     [self setupLayout];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:ReachabilityChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPDisabledNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPDisabledNotification object:nil]; //orp do we need another local notif for encryption?
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPCredentialsChangedNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self updateReachabilityBar];
     
-    //orp here fix the tableview constrain
-    NSLog(@"//orp ---------------------------------------");
-    NSLog(@"//orp self.navigationController.navigationBar.frame.size.height = %f", self.navigationController.navigationBar.frame.size.height);
-    NSLog(@"//orp self.reachabilityBar.frame.origin.y = %f", self.reachabilityBar.frame.origin.y);
-    NSLog(@"//orp tableViewTopReachabilityBottomConstraint.constant = %f", self.tableViewTopReachabilityBottomConstraint.constant);
-    NSLog(@"//orp tableView Y = %f", self.tableView.frame.origin.y);
-    NSLog(@"//orp ---------------------------------------");
-    
-
      // To avoid apple's bug missplacing tableview, force layout guide to reset by pushing a dummy controller and popping it right back
     [self.navigationController pushViewController:[UIViewController new] animated:NO];
     [self.navigationController popViewControllerAnimated:NO];
     
-    NSLog(@"//orp ---------------------------------------");
-    NSLog(@"//orp self.navigationController.navigationBar.frame.size.height = %f", self.reachabilityBar.frame.size.height);
-    NSLog(@"//orp tableViewTopReachabilityBottomConstraint.constant = %f", self.tableViewTopReachabilityBottomConstraint.constant);
-    NSLog(@"//orp self.navigationController.navigationBar.frame.origin.y = %f", self.navigationController.navigationBar.frame.size.height);
-    NSLog(@"//orp ---------------------------------------");
-    //
-    [self updateReachabilityBar];
     [VialerGAITracker trackScreenForControllerWithName:NSStringFromClass([self class])];
     
     if (self.showTitleImage) {
@@ -338,7 +293,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     
     self.navigationItem.titleView = nil;
     self.showTitleImage = NO;
-    [self.navigationController pushViewController:contactViewController animated:YES]; //orp pushing is good?
+    [self.navigationController pushViewController:contactViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
@@ -387,79 +342,30 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - searchbar delegate
-//orp old stuff
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar { //orp called on new
-    return YES;
+#pragma mark - searchController setup and delegate
+- (void)setupSearchController {
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.obscuresBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.placeholder = @"Search";
+    self.searchController.searchBar.delegate = self;
+    self.searchController.delegate = self;
+    self.definesPresentationContext = YES;
+    [self.searchController.searchBar sizeToFit];
+    
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.searchController = self.searchController;
+        self.navigationItem.hidesSearchBarWhenScrolling = false;
+    } else {
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+    }
 }
 
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar { //orp
-    [self updateReachabilityBar];
-    return YES;
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { //orp called on new
-    (void)[self.contactModel searchContactsFor:searchText];
-}
-
-//orp new stuff
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController //orp called on new
-{
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = searchController.searchBar.text;
     (void)[self.contactModel searchContactsFor:searchString];
     [self.tableView reloadData];
 }
-
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope //orp not needed I think
-{
-  [self updateSearchResultsForSearchController:self.searchController];
-}
-
-//orp xcode suggests
-
-//- (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController {
-//    <#code#>
-//}
-
-//- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-//    <#code#>
-//}
-//
-//- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    <#code#>
-//}
-//
-//- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-//    <#code#>
-//}
-//
-//- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    <#code#>
-//}
-//
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    <#code#>
-//}
-//
-//- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    <#code#>
-//}
-//
-//- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-//    <#code#>
-//}
-//
-//- (void)setNeedsFocusUpdate {
-//    <#code#>
-//}
-//
-//- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-//    <#code#>
-//}
-//
-//- (void)updateFocusIfNeeded {
-//    <#code#>
-//}
 
 #pragma mark - utils
 
@@ -498,7 +404,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 - (void)hideReachabilityBar {
     self.reachabilityBarHeigthConstraint.constant = 0;
     [[self reachabilityBar] setHidden:true];
-    [self.view layoutIfNeeded];
 }
 
 - (void)updateReachabilityBar {
@@ -514,15 +419,12 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                 self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
                 [[self reachabilityBar] setHidden:false];
             } else {
-                self.reachabilityBarHeigthConstraint.constant = 0;
-                [[self reachabilityBar] setHidden:true];
-            }
+                [self hideReachabilityBar];            }
         } else if (!self.currentUser.sipUseEncryption){
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
             [[self reachabilityBar] setHidden:false];
         } else {
-            self.reachabilityBarHeigthConstraint.constant = 0;
-            [[self reachabilityBar] setHidden:true];
+            [self hideReachabilityBar];
         }
         [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
             [self.view layoutIfNeeded];
