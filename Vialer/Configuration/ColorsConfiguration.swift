@@ -94,7 +94,6 @@ protocol ColorsConfigurationProtocol {
         case reachabilityBarBackground
         case backgroundGradientStart
         case backgroundGradientEnd
-        case whiteColor
     }
 
     enum GradientKey {
@@ -304,15 +303,10 @@ protocol ColorsConfigurationProtocol {
                 color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientEndColor)
             }
             break
-        case .reachabilityBarBackground:
-            if colorsConfig != nil {
-                color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
-            }
-            break
-        case .whiteColor: fallthrough
+        case .reachabilityBarBackground:fallthrough
         default:
             if colorsConfig != nil {
-                color = arrayToUIColor(colorsConfig!.primaryColors.WhiteColor)
+                color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
             }
             break
         }
