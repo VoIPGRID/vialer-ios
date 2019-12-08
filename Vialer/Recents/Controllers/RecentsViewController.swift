@@ -8,6 +8,8 @@ import CoreData
 
 class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
 
+    @IBOutlet weak var reachabilityBar: UIView!
+    
     // MARK: - Configuration
     enum SegueIdentifier: String {
         case sipCalling = "SIPCallingSegue"
@@ -33,6 +35,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     fileprivate var reachabilityChanged: NotificationToken?
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
+    fileprivate var encryptionUsageChanged: NotificationToken?
 
     var contactModel = ContactModel.defaultModel
     var onlyMyCalls = false
@@ -114,6 +117,9 @@ extension RecentsViewController {
             self?.updateReachabilityBar()
         }
         sipChanged = notificationCenter.addObserver(descriptor: SystemUser.sipChangedNotification) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
+        encryptionUsageChanged = notificationCenter.addObserver(descriptor:SystemUser.encryptionUsageNotification) { [weak self] _ in
             self?.updateReachabilityBar()
         }
         updateReachabilityBar()
@@ -288,6 +294,7 @@ extension RecentsViewController {
                 self.reachabilityBarHeigthConstraint.constant = 0
             }
             UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
+                self.reachabilityBar.setNeedsUpdateConstraints()
                 self.view.layoutIfNeeded()
             }
         }
@@ -393,7 +400,8 @@ extension RecentsViewController : NSFetchedResultsControllerDelegate {
                 tableView.deleteRows(at: [index], with: .fade)
                 tableView.insertRows(at: [newIndex], with: .fade)
             }
-        case .delete:
+        case .delete:fallthrough
+        default:
             if let index = indexPath {
                 tableView.deleteRows(at: [index], with: .fade)
             }

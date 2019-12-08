@@ -43,7 +43,8 @@ class DialerViewController: UIViewController, SegueHandler {
     fileprivate var reachabilityChanged: NotificationToken?
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
-
+    fileprivate var encryptionUsageChanged: NotificationToken?
+    
     // MARK: - Outlets
     @IBOutlet weak var leftDrawerButton: UIBarButtonItem!
     @IBOutlet weak var numberLabel: PasteableUILabel! {
@@ -66,8 +67,6 @@ class DialerViewController: UIViewController, SegueHandler {
 extension DialerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        reachabilityBar.isHidden = true
-        self.reachabilityBarHeigthConstraint.constant = 0
         setupLayout()
         setupSounds()
         reachabilityChanged = notificationCenter.addObserver(descriptor: Reachability.changed) { [weak self] _ in
@@ -79,14 +78,17 @@ extension DialerViewController {
         sipChanged = notificationCenter.addObserver(descriptor: SystemUser.sipChangedNotification) { [weak self] _ in
             self?.updateReachabilityBar()
         }
+        encryptionUsageChanged = notificationCenter.addObserver(descriptor:SystemUser.encryptionUsageNotification) { [weak self] _ in
+            self?.updateReachabilityBar()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateReachabilityBar()
         VialerGAITracker.trackScreenForController(name: controllerName)
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: AVAudioSession.Category.ambient.rawValue))
         setupButtons()
-        updateReachabilityBar()
     }
 }
 
@@ -247,26 +249,22 @@ extension DialerViewController {
         DispatchQueue.main.async {
             self.setupButtons()
             if (!self.user.sipEnabled) {
-                self.reachabilityBar.isHidden = false
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else if (!self.reachability.hasHighSpeed) {
                 // There is no highspeed connection (4G or WiFi)
                 // Check if there is 3G+ connection and the call with 3G+ is enabled.
                 if (!self.reachability.hasHighSpeedWith3GPlus || !self.user.use3GPlus) {
-                    self.reachabilityBar.isHidden = false
                     self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
                 } else {
-                    self.reachabilityBar.isHidden = true
                     self.reachabilityBarHeigthConstraint.constant = 0
                 }
             } else if (!self.user.sipUseEncryption){
-                self.reachabilityBar.isHidden = false
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else {
-                self.reachabilityBar.isHidden = true
                 self.reachabilityBarHeigthConstraint.constant = 0
             }
             UIView.animate(withDuration: Config.ReachabilityBar.animationDuration) {
+                self.reachabilityBar.setNeedsUpdateConstraints()
                 self.view.layoutIfNeeded()
             }
         }
