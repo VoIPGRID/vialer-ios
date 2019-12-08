@@ -52,9 +52,10 @@ extension NotificationCenter {
 
 extension SystemUser {
     static var logoutNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserLogout)
-    static var sipChangedNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPDisabled)
-    static var sipDisabledNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPCredentialsChanged)
+    static var sipDisabledNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPDisabled)
+    static var sipChangedNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPCredentialsChanged)
     static var use3GPlusNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserUse3GPlus)
+    static var encryptionUsageNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserEncryptionUsageChanged)
 }
 
 extension Middleware {
