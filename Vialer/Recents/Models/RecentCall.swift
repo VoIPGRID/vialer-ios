@@ -64,7 +64,9 @@ final class RecentCall: NSManagedObject {
         return findOrCreate(in: context, matching: predicate) { call in
 
             // Populate the call.
-            call.callDate = callDate.date!
+            if let callDateFromString = callDate.date {
+                call.callDate = callDateFromString
+            }
             call.callID = id
             call.destinationNumber = destinationNumber
             call.dialedNumber = dialedNumber
