@@ -210,7 +210,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         if (self.contactModel.searchResult.count) {
             return NSLocalizedString(@"Top name matches", nil);
         }
-        return NSLocalizedString(@"No matches", nil);
+        return NSLocalizedString(@"No results", nil);
     }
     if (section == 0) {
         return @"";
@@ -347,7 +347,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.obscuresBackgroundDuringPresentation = NO;
-    self.searchController.searchBar.placeholder = @"Search";
+    self.searchController.searchBar.placeholder = NSLocalizedString(@"Search", nil);
     self.searchController.searchBar.delegate = self;
     self.searchController.delegate = self;
     self.definesPresentationContext = YES;
