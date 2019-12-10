@@ -142,6 +142,8 @@ import Foundation
         case .denied:
             return false
         case .restricted:
+            fallthrough
+        default:
             return false
         }
     }
@@ -296,7 +298,8 @@ import Foundation
             } else {
                 fallthrough
             }
-        case .person:
+        case .person:fallthrough
+        default:
             switch sortOrder {
             case .familyName:
                 if let char = contact.familyName.uppercased().replacingOccurrences(of: "(", with: "").first {

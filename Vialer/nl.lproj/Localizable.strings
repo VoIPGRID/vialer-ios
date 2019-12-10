@@ -367,7 +367,13 @@
 "To make Two step calling possible, we need to have your mobile phone number." = "Om Twee stap bellen mogelijk te maken, hebben we je mobiele nummer nodig.";
 
 /* No comment provided by engineer. */
+"Search" = "Zoek";
+
+/* No comment provided by engineer. */
 "Top name matches" = "Meest overeenkomende namen";
+
+/* No comment provided by engineer. */
+"No results" = "Niets gevonden";
 
 /* Transfer in progress to */
 "Transfer in progress to" = "Doorverbinden opgezet met";

@@ -293,11 +293,6 @@ protocol ColorsConfigurationProtocol {
                 color = arrayToUIColor(stringToPrimaryColor(linkedTo))
             }
             break
-        case .reachabilityBarBackground:
-            if colorsConfig != nil {
-                color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
-            }
-            break
         case .backgroundGradientStart:
             if colorsConfig != nil {
                 color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientStartColor)
@@ -306,6 +301,12 @@ protocol ColorsConfigurationProtocol {
         case .backgroundGradientEnd:
             if colorsConfig != nil {
                 color = arrayToUIColor(colorsConfig!.tintColors.BackgroundGradientEndColor)
+            }
+            break
+        case .reachabilityBarBackground:fallthrough
+        default:
+            if colorsConfig != nil {
+                color = arrayToUIColor(colorsConfig!.tintColors.ReachabilityBarBackgroundColor)
             }
             break
         }
