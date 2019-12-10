@@ -120,7 +120,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         [VialerStats sharedInstance].middlewareUniqueKey = keyToProcess;
         [[VialerStats sharedInstance] logStatementForReceivedPushNotificationWithAttempt:attempt];
         
-        if (![SystemUser currentUser].sipEnabled) { // TODO: Should this check be done before reportNewIncomingCall in pushRegistry ?
+        if (![SystemUser currentUser].sipEnabled) {
             // User is not SIP enabled. Send not available to the middleware.
             VialerLogWarning(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
