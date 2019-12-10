@@ -452,10 +452,14 @@ extension SIPCallingViewController {
                 }
                 numberLabel?.text = phoneNumberLabelText
             } else {
-                numberLabel?.text = PhoneNumberUtils.cleanPhoneNumber(call.callerNumber ?? "")
-                nameLabel?.text = call.callerName
-                if (nameLabel?.text ?? "").isEmpty {
-                    nameLabel?.text = numberLabel?.text
+                if (phoneNumberLabelText != nil) {
+                    nameLabel?.text = phoneNumberLabelText
+                } else {
+                    numberLabel?.text = PhoneNumberUtils.cleanPhoneNumber(call.callerNumber ?? "")
+                    nameLabel?.text = call.callerName
+                    if (nameLabel?.text ?? "").isEmpty {
+                        nameLabel?.text = numberLabel?.text
+                    }
                 }
             }
 
