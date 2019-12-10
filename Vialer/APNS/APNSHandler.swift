@@ -53,8 +53,8 @@ import UIKit
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         if type == .voIP {
             // Extract the call information from the push notification payload
-            if let phoneNumberString = payload.dictionaryPayload["phonenumber"] as? String, // TODO use constants for key
-                let uuidString = payload.dictionaryPayload["unique_key"] as? String {
+            if let phoneNumberString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyPhonenumber] as? String,
+                let uuidString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyUniqueKey] as? String {
                     // The uuid string in the payload is missing hyphens so fix that.
                     let callUUID = NSUUID.uuidFixer(uuidString: uuidString)! as UUID
                     
@@ -63,7 +63,7 @@ import UIKit
                     let phoneNumberHandle = CXHandle(type: .phoneNumber, value: phoneNumberString)
                     callUpdate.remoteHandle = phoneNumberHandle
                     callUpdate.localizedCallerName = phoneNumberString
-                    if let callerId = payload.dictionaryPayload["caller_id"] as? String {
+                    if let callerId = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyCallerId] as? String {
                         callUpdate.localizedCallerName = callerId
                     }
 

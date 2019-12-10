@@ -11,14 +11,6 @@
 #import "Vialer-Swift.h"
 #import "VialerSIPLib.h"
 
-static NSString * const MiddlewareAPNSPayloadKeyType       = @"type";
-static NSString * const MiddlewareAPNSPayloadKeyCall       = @"call";
-static NSString * const MiddlewareAPNSPayloadKeyCheckin    = @"checkin";
-static NSString * const MiddlewareAPNSPayloadKeyMessage    = @"message";
-static NSString * const MiddlewareAPNSPayloadKeyUniqueKey  = @"unique_key";
-static NSString * const MiddlewareAPNSPayloadKeyAttempt    = @"attempt";
-
-static NSString * const MiddlewareAPNSPayloadKeyResponseAPI = @"response_api";
 static float const MiddlewareResendTimeInterval = 10.0;
 static int const MiddlewareMaxAttempts = 8;
 NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
@@ -102,17 +94,17 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
     // Get the callUUID from the payload
-    NSString* uuidString = payload[@"unique_key"];
+    NSString* uuidString = payload[[PushedCall MiddlewareAPNSPayloadKeyUniqueKey]];
     // The uuid string in the payload is missing hyphens so fix that.
     NSUUID* callUUID = [NSUUID uuidFixerWithString:uuidString];
     // Set current time to measure response time.
     NSDate *pushResponseTimeMeasurementStart = [NSDate date];
     
-    NSString *payloadType = payload[MiddlewareAPNSPayloadKeyType];
-    VialerLogDebug(@"Processing push message received in Middleware.m:handleReceivedAPSNPayload from middleware of type: %@", payloadType);
+    NSString *payloadType = payload[[PushedCall MiddlewareAPNSPayloadKeyType]];
+    VialerLogDebug(@"Processing push message received in handleReceivedAPSNPayload from middleware of type: %@", payloadType);
     VialerLogDebug(@"Payload:\n%@", payload);
 
-    if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCall]) {
+    if ([payloadType isEqualToString:[PushedCall MiddlewareAPNSPayloadKeyCall]]) {
         // Incoming call.
 
         // Separate VialerLog for the push notification that will be posted to LogEntries.
@@ -121,8 +113,8 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         int timeToInitialResponse = ([pushResponseTimeMeasurementStart timeIntervalSince1970] - [[payload valueForKey:@"message_start_time"] doubleValue]) * 1000;
         [VialerStats sharedInstance].middlewareResponseTime = [NSString stringWithFormat:@"%d", timeToInitialResponse];
 
-        NSString *keyToProcess = payload[MiddlewareAPNSPayloadKeyUniqueKey];
-        int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
+        NSString *keyToProcess = payload[[PushedCall MiddlewareAPNSPayloadKeyUniqueKey]];
+        int attempt = [payload[[PushedCall MiddlewareAPNSPayloadKeyAttempt]] intValue];
         
         // Log statement to middleware for received push notification.
         [VialerStats sharedInstance].middlewareUniqueKey = keyToProcess;
@@ -237,9 +229,9 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             }
         }];
 
-    } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyCheckin]) {
+    } else if ([payloadType isEqualToString:[PushedCall MiddlewareAPNSPayloadKeyCheckin]]) {
         VialerLogDebug(@"Checkin payload:\n %@", payload);
-    } else if ([payloadType isEqualToString:MiddlewareAPNSPayloadKeyMessage] && self.systemUser.sipEnabled) {
+    } else if ([payloadType isEqualToString:[PushedCall MiddlewareAPNSPayloadKeyMessage]] && self.systemUser.sipEnabled) {
         VialerLogWarning(@"Another device took over the SIP account, disabling account.");
         self.systemUser.sipEnabled = NO;
         NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
@@ -256,9 +248,9 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
     PushedCall *pushedCall = [PushedCall findOrCreateFor:payload accepted:available connectionType:connectionTypeString in:self.context];
     [self.context save:nil];
 
-    int attempt = [payload[MiddlewareAPNSPayloadKeyAttempt] intValue];
+    int attempt = [payload[[PushedCall MiddlewareAPNSPayloadKeyAttempt]] intValue];
 
-    NSString *middlewareBaseURLString = payload[MiddlewareAPNSPayloadKeyResponseAPI];
+    NSString *middlewareBaseURLString = payload[[PushedCall MiddlewareAPNSPayloadKeyResponseAPI]];
     VialerLogDebug(@"Responding to Middleware for attempt: %d with URL: %@", attempt, middlewareBaseURLString);
     MiddlewareRequestOperationManager *middlewareToRespondTo = [[MiddlewareRequestOperationManager alloc] initWithBaseURLasString:middlewareBaseURLString];
 
