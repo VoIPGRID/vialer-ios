@@ -93,7 +93,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 }
 
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
-    // Get the callUUID from the payload
+    // Get the callUUID from the payload.
     NSString* uuidString = payload[[PushedCall MiddlewareAPNSPayloadKeyUniqueKey]];
     // The uuid string in the payload is missing hyphens so fix that.
     NSUUID* callUUID = [NSUUID uuidFixerWithString:uuidString];
@@ -121,12 +121,10 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         [[VialerStats sharedInstance] logStatementForReceivedPushNotificationWithAttempt:attempt];
         
         if (![SystemUser currentUser].sipEnabled) {
-            // User is not SIP enabled. Send not available to the middleware.
+            // User disabled SIP aka VoIP disabled in the app settings. Send not available to the middleware.
             VialerLogWarning(@"Not accepting call, SIP Disabled, Sending Available = NO to middleware");
             [self respondToMiddleware:payload isAvailable:NO withAccount:nil andPushResponseTimeMeasurementStart:pushResponseTimeMeasurementStart];
-            
-            // TODO: There is no check on MiddlewareMaxAttempts here, what happens on the next 7 push messages?
-            
+                        
             // Clean up the call and the CallKit UI before an actual call has been setup.
             [self callCleanUp:callUUID];
             
