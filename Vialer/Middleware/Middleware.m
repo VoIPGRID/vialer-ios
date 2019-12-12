@@ -150,8 +150,12 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         if ([self.pushNotificationProcessing isEqualToString:keyToProcess]) {
             VialerLogInfo(@"Already processing a push notification with key: %@", keyToProcess);
             
-            // TODO: Add clean up `if (attempt == MiddlewareMaxAttempts) {}` ?
-            
+            if (attempt == MiddlewareMaxAttempts) {
+                VialerLogInfo(@"Unable to succesfull process the push notification within 8 attempts.");
+             
+                // Clean up the call and the CallKit UI because vialer was unable to register within 8 attempted push messages.
+                [self callCleanUp:callUUID];
+            }            
             return;
         }
         self.pushNotificationProcessing = keyToProcess;
