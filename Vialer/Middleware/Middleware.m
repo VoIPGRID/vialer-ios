@@ -81,15 +81,17 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 }
 
 #pragma mark - actions
-- (void)callCleanUp:(NSUUID * _Nonnull)uuid {   // TODO: what happens when this is done repeatetely for the same uuid? crash or ignore?
+- (void)callCleanUp:(NSUUID * _Nonnull)uuid {
     VialerLogDebug(@"Cleaning up call and CallKitUI for: %@", uuid);
     
     VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
-    VSLCall *call = [callManager callWithUUID:uuid]; // Handle YES, NO and NIL
-    [callManager removeCall:call];
+    VSLCall *call = [callManager callWithUUID:uuid];
+    if (call) {
+        [callManager removeCall:call];
     
-    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
+        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+        [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
+    }
 }
 
 - (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
