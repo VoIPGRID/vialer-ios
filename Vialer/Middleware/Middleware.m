@@ -163,7 +163,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         }
         self.pushNotificationProcessing = keyToProcess;
         
-        // Register the SIP account with the endpoint. This should trigger correct internet connection.  // TODO: What does the last sentence mean?
+        // Register the SIP account with the endpoint.
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was not successfull.
             if (!success) {
