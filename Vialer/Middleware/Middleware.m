@@ -155,7 +155,10 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
              
                 // Clean up the call and the CallKit UI because vialer was unable to register within 8 attempted push messages.
                 [self callCleanUp:callUUID];
-            }            
+                
+                // Log to middleware that incoming call failed after 8 received push notifications.
+                [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
+            }
             return;
         }
         self.pushNotificationProcessing = keyToProcess;
@@ -177,6 +180,9 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                     
                     // Clean up the call and the CallKit UI before an actual call has been setup.
                     [self callCleanUp:callUUID];
+                    
+                    // Log to middleware that incoming call failed after 8 received push notifications due to insufficient network.
+                    [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
                 } else {
                     // Registration has failed. But we are not at the last attempt yet, so we try again with the next notification.
                     VialerLogInfo(@"Registration of the account has failed, trying again with the next push. attempt: %d", attempt);
