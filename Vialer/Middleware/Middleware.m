@@ -139,9 +139,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             if (attempt == MiddlewareMaxAttempts) {
                 VialerLogInfo(@"We currently don't have a fast enough network connection and failed after 8 attempts.");
                 [[VialerStats sharedInstance] incomingCallFailedAfterEightPushNotifications];
-                
-                // TODO: Should there be a response to middleware?
-                
+             
                 // Clean up the call and the CallKit UI before an actual call has been setup.
                 [self callCleanUp:callUUID];
             }
