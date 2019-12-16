@@ -70,7 +70,6 @@ import UIKit
             
             VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID.uuidString))")
             appDelegate.callKitProviderDelegate.provider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in
-                // TODO with each push message the same call is reported multiple times before middleware knows the call is setup, is that a problem?
                 if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call. At this stage account is not available - sip invite has not arrived yet.
                     
                     let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "")
