@@ -17,6 +17,7 @@ class ReachabilityBarViewController: UIViewController {
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
     fileprivate var use3GPlusChanged: NotificationToken?
+    fileprivate var encryptionUsageChanged: NotificationToken?
     
     @IBOutlet weak var twoStepButton: UIButton!
     @IBOutlet weak var informationLabel: UILabel!
@@ -39,6 +40,9 @@ extension ReachabilityBarViewController {
             self?.updateLayout()
         }
         use3GPlusChanged = notificationCenter.addObserver(descriptor: SystemUser.use3GPlusNotification) { [weak self] _ in
+            self?.updateLayout()
+        }
+        encryptionUsageChanged = notificationCenter.addObserver(descriptor:SystemUser.encryptionUsageNotification) { [weak self] _ in
             self?.updateLayout()
         }
         updateLayout()

@@ -62,13 +62,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSearchController];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     self.showTitleImage = YES;
     [self setupLayout];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:ReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPDisabledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserSIPCredentialsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReachabilityBar) name:SystemUserEncryptionUsageChangedNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -401,32 +401,26 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     }
 }
 
-- (void)hideReachabilityBar {
-    self.reachabilityBarHeigthConstraint.constant = 0;
-    [[self reachabilityBar] setHidden:true];
-}
-
 - (void)updateReachabilityBar {
     dispatch_async(dispatch_get_main_queue(), ^{
         // SIP is disabled, show the VoIP disabled message
         if (!self.currentUser.sipEnabled) {
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
-            [[self reachabilityBar] setHidden:false];
         } else if (!self.reachability.hasHighSpeed) {
             // There is no highspeed connection (4G or WiFi)
             // Check if there is 3G+ connection and the call with 3G+ is enabled.
             if (!self.reachability.hasHighSpeedWith3GPlus || !self.currentUser.use3GPlus) {
                 self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
-                [[self reachabilityBar] setHidden:false];
             } else {
-                [self hideReachabilityBar];            }
+                self.reachabilityBarHeigthConstraint.constant = 0;
+            }
         } else if (!self.currentUser.sipUseEncryption){
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
-            [[self reachabilityBar] setHidden:false];
         } else {
-            [self hideReachabilityBar];
+            self.reachabilityBarHeigthConstraint.constant = 0;
         }
         [UIView animateWithDuration:ContactsViewControllerReachabilityBarAnimationDuration animations:^{
+            [[self reachabilityBar] setNeedsUpdateConstraints];
             [self.view layoutIfNeeded];
         }];
     });

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yxi-SJ-vi0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yxi-SJ-vi0">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,19 +20,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-rC-jEi" userLabel="Left filler">
-                                <rect key="frame" x="6" y="98" width="56" height="40"/>
+                                <rect key="frame" x="6" y="68" width="56" height="40"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-kS-pvN">
-                                <rect key="frame" x="0.0" y="44" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="h5J-mQ-Y2V"/>
+                                    <constraint firstAttribute="height" id="h5J-mQ-Y2V"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="Ln5-cm-6au" kind="embed" identifier="ReachabilityBarSegue" id="Egt-H7-SHk"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0R-4w-Bgg" customClass="PasteableUILabel">
-                                <rect key="frame" x="65" y="98" width="245" height="40"/>
+                                <rect key="frame" x="65" y="68" width="245" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nT6-7N-5s3"/>
                                 </constraints>
@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.0" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-mW-Umr">
-                                <rect key="frame" x="313" y="98" width="56" height="40"/>
+                                <rect key="frame" x="313" y="68" width="56" height="40"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="J0y-Rp-1Bd"/>
