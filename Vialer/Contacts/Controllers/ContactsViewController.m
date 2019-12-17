@@ -267,7 +267,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && (!self.searchController.isActive || [self.searchController.searchBar.text isEqual: @""])) {
+    if (indexPath.section == 0 && (!self.searchController.isActive || [self.searchController.searchBar.text isEqual: @""]) && [self.currentUser.outgoingNumber isEqualToString:@""]) {
         return 0;
     }
     return UITableViewAutomaticDimension;
