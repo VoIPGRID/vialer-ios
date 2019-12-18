@@ -62,7 +62,7 @@ class RecentCallManagerTests: XCTestCase {
     func testGettingLatestCallsWillUseTheDateOfTheMostRecentCall() {
         let aDayAgo = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         var dictionary = exampleDictionary
-        dictionary["call_date"] = aDayAgo.apiFormatted24hCET
+        dictionary["call_date"] = aDayAgo.VGDateFormat
         _ = RecentCall.findOrCreate(for: dictionary, in: coreDataStack.mainContext)
 
         sut.getLatestRecentCalls { _ in }
