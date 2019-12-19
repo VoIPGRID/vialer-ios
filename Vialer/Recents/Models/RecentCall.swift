@@ -136,7 +136,6 @@ extension RecentCall {
         guard let dictionaries = json["objects"] as? [JSONDictionary] else { return nil }
         return dictionaries
     })
-    
 
     /// Fetch all calls since a given date.
     ///
@@ -144,7 +143,7 @@ extension RecentCall {
     /// - Returns: RecentCall Resource.
     static func allCallsSince(date: Date) -> Resource<[JSONDictionary]> {
         var resource = RecentCall.allCalls
-        resource.add(parameters: ["call_date__gte": date.apiFormatted24hCET])
+        resource.add(parameters: ["call_date__gte": date.VGDateFormat])
         return resource
     }
     
@@ -154,7 +153,7 @@ extension RecentCall {
     /// - Returns: RecentCall Resource.
     static func myCallsSince(date: Date) -> Resource<[JSONDictionary]> {
         var resource = RecentCall.myCalls
-        resource.add(parameters: ["call_date__gte": date.apiFormatted24hCET])
+        resource.add(parameters: ["call_date__gte": date.VGDateFormat])
         return resource
     }
 }
