@@ -5,7 +5,7 @@
 
 import Foundation
 
-func configureDateFormatter(with format:String) -> DateFormatter {
+func configureDateFormatter(with format: String) -> DateFormatter {
     let formatter = DateFormatter()
 
     // If the device is setup to use AM/PM, the line below will convert
@@ -43,18 +43,18 @@ func configureDateFormatter(with format:String) -> DateFormatter {
      - parameter date: The date of which you want a relative date string
      - returns: A time, "yesterday" or a date
      */
-    @objc func relativeDayTimeStringFrom(date:Date) -> String {
+    @objc func relativeDayTimeStringFrom(date: Date) -> String {
         let now = Date()
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: now)
 
         let deltaSeconds = startOfToday.timeIntervalSince(date)
-        let deltaDays:Int = Int(deltaSeconds / (60 * 60 * 24))
+        let deltaDays: Int = Int(deltaSeconds / (60 * 60 * 24))
 
-        if (deltaDays > 0 ) {
+        if deltaDays > 0 {
             // Return a short styled date.
             return RecentsTimeConverter.usersLocalShortStyleDateFormatter.string(from: date)
-        } else if (deltaSeconds > 0) {
+        } else if deltaSeconds > 0 {
             return NSLocalizedString("yesterday", comment: "")
         } else {
             // Return a time.
