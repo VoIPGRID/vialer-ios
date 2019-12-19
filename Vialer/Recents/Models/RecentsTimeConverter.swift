@@ -5,7 +5,7 @@
 
 import Foundation
 
-func configureDateForamtter(with format:String) -> DateFormatter {
+func configureDateFormatter(with format:String) -> DateFormatter {
     let formatter = DateFormatter()
 
     // If the device is setup to use AM/PM, the line below will convert
@@ -65,13 +65,13 @@ func configureDateForamtter(with format:String) -> DateFormatter {
 
 extension DateFormatter {
     // Date formatter that can translate API dates with or without fractional seconds returned by VG back and forth.
-    // VG returns dates in ISO-8601 UTC extended format. The provided format is without the time zone designator Z.
+    // VG returns dates in CET.
     static var VGDateFormat: DateFormatter {
-        return configureDateForamtter(with: "yyyy-MM-dd'T'HH:mm:ss")
+        return configureDateFormatter(with: "yyyy-MM-dd'T'HH:mm:ss")
     }
 
     static let VGDateFormatWithFractionalSeconds: DateFormatter = {
-        return configureDateForamtter(with: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+        return configureDateFormatter(with: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     }()
 }
 
