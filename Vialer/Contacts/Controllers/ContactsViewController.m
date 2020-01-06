@@ -349,13 +349,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     self.searchController.obscuresBackgroundDuringPresentation = NO;
     self.searchController.searchBar.placeholder = NSLocalizedString(@"Search", nil);
     self.searchController.searchBar.delegate = self;
-    self.searchController.delegate = self;
     self.definesPresentationContext = YES;
-    [self.searchController.searchBar sizeToFit];
     
     if (@available(iOS 11.0, *)) {
         self.navigationItem.searchController = self.searchController;
-        self.navigationItem.hidesSearchBarWhenScrolling = false;
     } else {
         self.tableView.tableHeaderView = self.searchController.searchBar;
     }
@@ -365,6 +362,9 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     NSString *searchString = searchController.searchBar.text;
     (void)[self.contactModel searchContactsFor:searchString];
     [self.tableView reloadData];
+    if (self.mm_drawerController.openSide == MMDrawerSideLeft){
+        [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - utils
