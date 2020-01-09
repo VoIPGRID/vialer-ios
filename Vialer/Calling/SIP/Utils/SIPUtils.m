@@ -38,6 +38,10 @@
         }
 
         if (shouldRemoveEndpoint) {
+            // Remove all endpoint accounts for VialerSIPLib to allow the endpoint removal.
+            for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
+                [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
+            }
             [SIPUtils removeSIPEndpoint];
         }
     }
