@@ -160,33 +160,32 @@ private let AvailabilityModelFetchInterval: TimeInterval = 600 // number of seco
     }
     
     @objc func getCurrentAvailability(withBlock completionBlock: @escaping (_ currentAvailability: String?, _ localizedError: String?) -> Void) {
-        if let currentAvailability = SystemUser.current().currentAvailability {
-            // Check no availability or outdated.
-            if ((currentAvailability[SystemUserAvailabilityLastFetchKey]) == nil) || fabs(Float((currentAvailability[SystemUserAvailabilityLastFetchKey] as? Date)?.timeIntervalSinceNow ?? 0.0)) > Float(AvailabilityModelFetchInterval) {
-                // Fetch new info.
-                getUserDestinations({ localizedErrorString in
-                    if localizedErrorString != nil {
-                        completionBlock(nil, localizedErrorString)
-                    }
-                    
-                    if let unwrappedAvailabilityOptions = self.availabilityOptions as? [NSDictionary] {
-                        for option: NSDictionary? in unwrappedAvailabilityOptions {
-                            // Find current selected.
-                            if (option?[AvailabilityModelSelected] as? Int == 1) {
-                                //Create string and update SUD.
-                                let newAvailabilityString = SystemUser.current().storeNewAvailability(inSUD: option as? [AnyHashable : Any])
-                                // Return new string.
-                                completionBlock(newAvailabilityString, nil)
-                                break
-                            }
+        let currentAvailability = SystemUser.current().currentAvailability
+        // Check no availability or outdated.
+        if ((currentAvailability?[SystemUserAvailabilityLastFetchKey]) == nil) || abs(Float((currentAvailability?[SystemUserAvailabilityLastFetchKey] as? Date)?.timeIntervalSinceNow ?? 0.0)) > Float(AvailabilityModelFetchInterval) {
+            // Fetch new info.
+            getUserDestinations({ localizedErrorString in
+                if localizedErrorString != nil {
+                    completionBlock(nil, localizedErrorString)
+                }
+                
+                if let unwrappedAvailabilityOptions = self.availabilityOptions as? [NSDictionary] {
+                    for option: NSDictionary? in unwrappedAvailabilityOptions {
+                        // Find current selected.
+                        if (option?[AvailabilityModelSelected] as? Int == 1) {
+                            //Create string and update SUD.
+                            let newAvailabilityString = SystemUser.current().storeNewAvailability(inSUD: option as? [AnyHashable : Any])
+                            // Return new string.
+                            completionBlock(newAvailabilityString, nil)
+                            break
                         }
                     }
-                })
-            } else {
-                // Return existing key.
-                if let currentAvailabilityKeyString = currentAvailability[SystemUserAvailabilityAvailabilityKey] as? String {
-                    completionBlock(currentAvailabilityKeyString, nil)
                 }
+            })
+        } else {
+            // Return existing key.
+            if let currentAvailabilityKeyString = currentAvailability?[SystemUserAvailabilityAvailabilityKey] as? String {
+                completionBlock(currentAvailabilityKeyString, nil)
             }
         }
     }
