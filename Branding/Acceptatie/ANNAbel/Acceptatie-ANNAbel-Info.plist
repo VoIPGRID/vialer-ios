@@ -37,7 +37,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>ANNAbel needs access to your bluetooth to get the name of the device</string>
+	<string>ANNAbel needs access to your bluetooth to make handsfree calling possible</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>ANNAbel needs access to your bluetooth to make handsfree calling possible</string>
 	<key>NSCameraUsageDescription</key>
 	<string>ANNAbel needs access to your camera to make video calls</string>
 	<key>NSContactsUsageDescription</key>
