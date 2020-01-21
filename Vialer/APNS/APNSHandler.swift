@@ -72,12 +72,13 @@ import UIKit
             appDelegate.callKitProviderDelegate.provider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in
                 if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call. At this stage account is not available - sip invite has not arrived yet.
                     
-                    let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "")
-                    let callManager =  VialerSIPLib.sharedInstance().callManager
-                    callManager.add(newCall!)
-                    
-                    DispatchQueue.main.async {
-                        self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
+                    if let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "") {
+                        let callManager =  VialerSIPLib.sharedInstance().callManager
+                        callManager.add(newCall)
+                        
+                        DispatchQueue.main.async {
+                            self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
+                        }
                     }
                 }
                 // Tell PushKit that the notification is handled.
