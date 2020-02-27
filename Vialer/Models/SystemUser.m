@@ -649,12 +649,11 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     
     if (self.currentAudioQuality == 0 && opusEnabled) {
         self.currentAudioQuality = 1;
-        [SIPUtils updateCodecs];
     } else if (self.currentAudioQuality > 0 && !opusEnabled) {
         self.currentAudioQuality = 0;
-        [SIPUtils updateCodecs];
     }
-
+    [SIPUtils updateCodecs];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([profileDict[SystemUserApiKeyOutgoingNumber] isKindOfClass:[NSNull class]]) {
         self.outgoingNumber = @"";
