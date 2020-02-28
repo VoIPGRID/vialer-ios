@@ -146,7 +146,7 @@ extension TransferInProgressViewController {
                     }
                 }
                 
-                // and return to the root view controller.
+                // Return to the root view controller.
                 DispatchQueue.main.async {
                     strongSelf.performSegue(withIdentifier: SegueIdentifier.unwindToVialerRootViewController.rawValue, sender: nil)
                 }
