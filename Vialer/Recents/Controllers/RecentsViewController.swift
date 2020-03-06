@@ -281,13 +281,7 @@ extension RecentsViewController {
             if (!self.user.sipEnabled) {
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else if (!self.reachability.hasHighSpeed) {
-                // There is no highspeed connection (4G or WiFi)
-                // Check if there is 3G+ connection and the call with 3G+ is enabled.
-                if (!self.reachability.hasHighSpeedWith3GPlus || !self.user.use3GPlus) {
-                    self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
-                } else {
-                    self.reachabilityBarHeigthConstraint.constant = 0
-                }
+                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else if (!self.user.sipUseEncryption){
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else {

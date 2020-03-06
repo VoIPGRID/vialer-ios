@@ -69,10 +69,6 @@ public class Reachability: NSObject {
     @objc public var hasHighSpeed: Bool {
         return status == .reachableViaWiFi || status == .reachableVia4G
     }
-    
-    @objc public var hasHighSpeedWith3GPlus: Bool {
-        return hasHighSpeed || status == .reachableVia3GPlus
-    }
 
     @objc public var statusString: String {
         return "\(status)"

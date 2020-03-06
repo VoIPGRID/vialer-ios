@@ -16,9 +16,8 @@
 static int const SettingsViewControllerVoIPAccountSection   = 0;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
-static int const SettingsViewController3GPlusRow            = 2;
-static int const SettingsViewControllerAudioQualityRow      = 3;
-static int const SettingsViewControllerSipAccountRow        = 4;
+static int const SettingsViewControllerAudioQualityRow      = 2;
+static int const SettingsViewControllerSipAccountRow        = 3;
 
 static int const SettingsViewControllerNumbersSection       = 1;
 static int const SettingsViewControllerMyNumberRow          = 0;
@@ -39,7 +38,6 @@ static int const SettingsViewControllerUISwitchOriginOffsetY    = 15;
 static int const SettingsViewControllerSwitchVoIP               = 1001;
 static int const SettingsViewControllerSwitchWifiNotification   = 1002;
 static int const SettingsViewControllerSwitchLogging            = 1004;
-static int const SettingsViewControllerSwitch3GPlus             = 1005;
 static int const SettingsViewControllerSwitchUseTLS             = 1006;
 static int const SettingsViewControllerSwitchUseStunServers     = 1007;
 
@@ -108,7 +106,7 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
                 // 3G+
                 // Audio Quality
                 // account ID
-                return 5;
+                return 4;
             } else {
                 // Only show VoIP Switch
                 return 1;
@@ -173,12 +171,6 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
                           withTag:SettingsViewControllerSwitchWifiNotification
                        defaultVal:self.currentUser.showWiFiNotification];
-        } else if (indexPath.row == SettingsViewController3GPlusRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
-            [self createOnOffView:cell
-                        withTitle:NSLocalizedString(@"Use 3G+ for calls", @"Use 3G+ for calls")
-                          withTag:SettingsViewControllerSwitch3GPlus
-                       defaultVal:self.currentUser.use3GPlus];
         } else if (indexPath.row == SettingsViewControllerAudioQualityRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
             cell.textLabel.text = NSLocalizedString(@"Audio quality", nil);
@@ -297,8 +289,6 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
         }
     } else if (sender.tag == SettingsViewControllerSwitchWifiNotification) {
         self.currentUser.showWiFiNotification = sender.isOn;
-    } else if (sender.tag == SettingsViewControllerSwitch3GPlus) {
-        self.currentUser.use3GPlus = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchUseTLS) {
         self.currentUser.useTLS = sender.isOn;
     } else if (sender.tag == SettingsViewControllerSwitchUseStunServers) {

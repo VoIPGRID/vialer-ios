@@ -24,7 +24,6 @@ NSString *const SystemUserEncryptionUsageChangedNotification = @"SystemUserEncry
 
 NSString *const SystemUserSIPDisabledNotification = @"SystemUserSIPDisabledNotification";
 NSString *const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
-NSString *const SystemUserUse3GPlusNotification = @"SystemUserUse3GPlusNotification";
 NSString *const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
 /**
  *  Api Dictionary keys.
@@ -67,7 +66,6 @@ static NSString *const SystemUserSUDSIPAccount = @"SIPAccount";
 static NSString *const SystemUserSUDSIPEnabled = @"SipEnabled";
 static NSString *const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
 static NSString *const SystemUserSUDSIPUseEncryption = @"SIPUseEncryption";
-static NSString *const SystemUserSUDUse3GPlus = @"Use3GPlus";
 static NSString *const SystemUserSUDUseTLS = @"UseTLS";
 static NSString *const SystemuserSUDUseStunServers = @"UseStunServers";
 static NSString *const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
@@ -279,15 +277,6 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     return [[NSBundle mainBundle] bundleIdentifier];
 }
 
-- (BOOL)use3GPlus {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
-    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUse3GPlus]) {
-        self.use3GPlus = YES;
-    }
-    return [defaults boolForKey:SystemUserSUDUse3GPlus];
-}
-
 - (BOOL)useTLS {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUseTLS]) {
@@ -394,14 +383,6 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 - (void)setShowWiFiNotification:(BOOL)showWiFiNotification {
     showWiFiNotification = showWiFiNotification;
     [[NSUserDefaults standardUserDefaults] setBool:showWiFiNotification forKey:SystemUserSUDShowWiFiNotification];
-}
-
-- (void)setUse3GPlus:(BOOL)use3GPlus {
-    [[NSUserDefaults standardUserDefaults] setBool:use3GPlus forKey:SystemUserSUDUse3GPlus];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserUse3GPlusNotification object:self];
-    });
 }
 
 - (void)setUseTLS:(BOOL)useTLS {

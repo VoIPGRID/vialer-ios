@@ -16,7 +16,6 @@ class ReachabilityBarViewController: UIViewController {
     fileprivate var userLogout: NotificationToken?
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
-    fileprivate var use3GPlusChanged: NotificationToken?
     fileprivate var encryptionUsageChanged: NotificationToken?
     
     @IBOutlet weak var twoStepButton: UIButton!
@@ -37,9 +36,6 @@ extension ReachabilityBarViewController {
             self?.updateLayout()
         }
         sipChanged = notificationCenter.addObserver(descriptor: SystemUser.sipChangedNotification) { [weak self] _ in
-            self?.updateLayout()
-        }
-        use3GPlusChanged = notificationCenter.addObserver(descriptor: SystemUser.use3GPlusNotification) { [weak self] _ in
             self?.updateLayout()
         }
         encryptionUsageChanged = notificationCenter.addObserver(descriptor:SystemUser.encryptionUsageNotification) { [weak self] _ in
@@ -69,9 +65,9 @@ extension ReachabilityBarViewController {
                     weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
                 }
             case .reachableVia3GPlus:
-                if !weakSelf.currentUser.sipEnabled && weakSelf.currentUser.use3GPlus {
+                if !weakSelf.currentUser.sipEnabled {
                     weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
-                } else if weakSelf.currentUser.sipEnabled && !weakSelf.currentUser.use3GPlus {
+                } else if weakSelf.currentUser.sipEnabled {
                     weakSelf.informationLabel.text = NSLocalizedString("Poor connection, Two step calling enabled.", comment: "Poor connection, Two step calling enabled.")
                     weakSelf.twoStepButton.isHidden = false
                 } else {
