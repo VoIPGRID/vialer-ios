@@ -103,7 +103,6 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
             if (self.currentUser.sipEnabled) {
                 // The VoIP Switch
                 // WiFi notification
-                // 3G+
                 // Audio Quality
                 // account ID
                 return 4;

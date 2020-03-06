@@ -91,7 +91,7 @@ extension ReachabilityBarViewController {
 extension ReachabilityBarViewController {
     @IBAction func infoButtonPressed(_ sender: UIButton) {
         let alert = UIAlertController(title: NSLocalizedString("Two step modus", comment:"Two step modus"),
-                                    message: NSLocalizedString("Only 3g+ is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose.", comment: "Only 3g+ is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose."),
+                                    message: NSLocalizedString("Only 4G is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose.", comment: "Only 4G is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose."),
                                       andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
         present(alert, animated: true)
     }
