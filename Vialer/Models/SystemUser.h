@@ -115,10 +115,6 @@ extern NSString * const SystemUserSIPDisabledNotification;
  */
 extern NSString * const SystemUserOutgoingNumberUpdatedNotification;
 
-/**
- * Notification that can be listened to when the use 3G plus for calling has changed.
- */
-extern NSString * const SystemUserUse3GPlusNotification;
 
 extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 
@@ -241,11 +237,6 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
  *  Does the user want a WiFi Notification when setting up a call.
  */
 @property (nonatomic) BOOL showWiFiNotification;
-
-/**
- * Use 3G+ to make VoIP calls.
- */
-@property (nonatomic) BOOL use3GPlus;
 
 /**
  * Use TLS to make VoIP calls.
