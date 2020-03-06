@@ -278,11 +278,7 @@ extension RecentsViewController {
 
     fileprivate func updateReachabilityBar() {
         DispatchQueue.main.async {
-            if (!self.user.sipEnabled) {
-                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
-            } else if (!self.reachability.hasHighSpeed) {
-                self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
-            } else if (!self.user.sipUseEncryption){
+            if (!self.user.sipEnabled || !self.reachability.hasHighSpeed || !self.user.sipUseEncryption) {
                 self.reachabilityBarHeigthConstraint.constant = Config.ReachabilityBar.height
             } else {
                 self.reachabilityBarHeigthConstraint.constant = 0
