@@ -64,16 +64,6 @@ extension ReachabilityBarViewController {
                 } else {
                     weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
                 }
-            case .reachableVia3GPlus:
-                if !weakSelf.currentUser.sipEnabled {
-                    weakSelf.informationLabel.text = NSLocalizedString("VoIP disabled, enable in settings", comment:"VoIP disabled, enable in settings")
-                } else if weakSelf.currentUser.sipEnabled {
-                    weakSelf.informationLabel.text = NSLocalizedString("Poor connection, Two step calling enabled.", comment: "Poor connection, Two step calling enabled.")
-                    weakSelf.twoStepButton.isHidden = false
-                } else {
-                    weakSelf.informationLabel.text = ""
-                    shouldBeVisible = false;
-                }
             case .reachableVia4G: fallthrough
             case .reachableViaWiFi:
                 if !weakSelf.currentUser.sipEnabled {
