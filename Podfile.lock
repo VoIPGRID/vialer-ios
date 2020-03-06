@@ -194,7 +194,7 @@ DEPENDENCIES:
   - VialerSIPLib
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworkActivityLogger
     - AFNetworking
     - CocoaLumberjack
@@ -296,4 +296,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 44dcec167843c60630701d402d64ab4eaab789a1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

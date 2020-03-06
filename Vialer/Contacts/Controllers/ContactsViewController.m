@@ -407,13 +407,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         if (!self.currentUser.sipEnabled) {
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else if (!self.reachability.hasHighSpeed) {
-            // There is no highspeed connection (4G or WiFi)
-            // Check if there is 3G+ connection and the call with 3G+ is enabled.
-            if (!self.reachability.hasHighSpeedWith3GPlus || !self.currentUser.use3GPlus) {
-                self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
-            } else {
-                self.reachabilityBarHeigthConstraint.constant = 0;
-            }
+            self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else if (!self.currentUser.sipUseEncryption){
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else {

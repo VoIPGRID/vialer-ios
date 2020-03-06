@@ -390,8 +390,8 @@
 /* Two step modus */
 "Two step modus" = "Twee staps modus";
 
-/* Only 3g+ is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose. */
-"Only 3g+ is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose." = "Alleen 3g+ wordt ondersteund voor VoIP. Het telefoniesysteem belt eerst jouw mobiele nummer en verbind je daarna vervolgens door met degene die je wilt bellen.";
+/* Only 4G is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose. */
+"Only 4G is supported for VoIP telephony. In Two step modus the app calls your mobile number first and then connects you to the contact you chose." = "Alleen 4G wordt ondersteund voor VoIP. Het telefoniesysteem belt eerst jouw mobiele nummer en verbind je daarna vervolgens door met degene die je wilt bellen.";
 
 /* No comment provided by engineer. */
 "Unable to fetch availability" = "Niet mogelijk bereikbaarheid op te halen";
@@ -443,9 +443,6 @@
 
 /* No comment provided by engineer. */
 "Your VoIP account has been registered on another device. You can re-enable VoIP in Settings" = "Je VoIP account is geregistreerd op een ander apparaat. Je kunt VoIP weer activeren bij instellingen";
-
-/* Use 3G+ for calls */
-"Use 3G+ for calls" = "Gebruik 3G+ om te bellen";
 
 /* Use encrypted calling */
 "Use encrypted calling" = "Gebruik versleuteld bellen";
