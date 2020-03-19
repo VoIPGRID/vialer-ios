@@ -6819,7 +6819,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "23c488eb-9903-4e82-aed1-9eb29767ff30";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app 1583422078";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -6861,7 +6861,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "30052e94-5b8b-447b-a175-642a528142d9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app 1583422143";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -6970,7 +6970,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2570312d-3a9a-4931-addd-bec78cf1bd18";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app.VoysIntentsExtension";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app.VoysIntentsExtension 1583422088";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -7005,7 +7005,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cbed52f9-994c-435d-92dc-457208a87182";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app.VoysIntentsExtension";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voys.app.VoysIntentsExtension 1583422151";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -7789,7 +7789,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "929e2459-18b1-45a5-a9ac-40f158072ed2";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.voipgrid.vialer";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voipgrid.vialer";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";

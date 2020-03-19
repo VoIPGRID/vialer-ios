@@ -306,9 +306,18 @@ fileprivate extension Reachability {
         guard previousconnectionType != newReachabilityStatus else { return }
 
         VialerLogInfo("Network changed")
-
+        VialerLogInfo("Network changed//orp ")
+        
         whenConnectionChanged?(self)
         notificationCenter.post(descriptor: Reachability.changed, object:self)
+        //notificationCenter.post(descriptor: Reachability.myNetworkChanged, object: self) //orp
+        //orp
+//        let vialerSIPLib = VialerSIPLib.sharedInstance()
+//        Call InternetConnectionChanged:
+       
+//        vialerSIPLib.removeEndpoint()
+//        vialerSIPLib.endpoint.networkMonitor()
+
         previousconnectionType = newReachabilityStatus
     }
 }
@@ -367,7 +376,7 @@ func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFl
     guard let info = info else { return }
     let reachability = Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue()
     DispatchQueue.main.async {
-        reachability.reachabilityChanged()
+        reachability.reachabilityChanged() //orp apo edw ksekina
     }
 }
 
@@ -375,4 +384,5 @@ extension Reachability {
     static var changed = NotificationDescriptor<Any>(name: NSNotification.Name(rawValue: ReachabilityChangedNotification))
     static var appEntersForeground = NotificationDescriptor<Any>(name: UIApplication.willEnterForegroundNotification)
     static var radioChanged = NotificationDescriptor<Any>(name: Notification.Name.CTRadioAccessTechnologyDidChange)
+    static var myNetworkChanged = NotificationDescriptor<Any>(name: NSNotification.Name(rawValue: NetworkChangedNotification)) //orp
 }

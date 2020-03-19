@@ -303,6 +303,10 @@ extension SIPCallingViewController {
     
     fileprivate func startCalling() {
         SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
+            if(!success){//orp
+                VialerLogError("    //orp startCalling() registerSIPAccountWithEndpoint FAILED ")
+            }
+            
             guard account != nil else {
                 return
             }

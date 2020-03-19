@@ -167,6 +167,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was not successfull.
             if (!success) {
+                VialerLogError(@"    //orp handleReceivedAPNSPayload registerSIPAccountWithEndpoint FAILED ");
                 // Registration failed.
                 if (attempt == MiddlewareMaxAttempts) {
                     // And we tried registring for maximum times and it still failed, so remove the endpoint and send not available to the middleware.

@@ -139,13 +139,19 @@
             forceUpdate = YES;
         }
     }
-
-    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
+    //orp
+    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:YES withCompletion:^(BOOL success, VSLAccount *account) {
         if (!success) {
             VialerLogError(@"Error registering the account with the endpoint");
         }
         completion(success, account);
     }];
+//    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
+//        if (!success) {
+//            VialerLogError(@"Error registering the account with the endpoint");
+//        }
+//        completion(success, account);
+//    }];
 }
 
 + (BOOL)anotherCallInProgress:(VSLCall *)receivedCall {

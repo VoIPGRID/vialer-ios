@@ -12,5 +12,5 @@ static NSString * const AppDelegateIncomingBackgroundCallAcceptedNotification = 
 static NSString * const AppDelegateStartConnectABCallNotification = @"AppDelegateStartConnectABCallNotification";
 static NSString * const AppDelegateStartConnectABCallUserInfoKey = @"PhoneNumber";
 static NSString * const ReachabilityChangedNotification = @"ReachabilityChangedNotification";
-
+static NSString * const NetworkChangedNotification = @"VSLNetworkMonitorChangedNotification" ; //orp @"VSLNetworkMonitorChangedNotification" @"kReachabilityChangedNotification"
 #endif /* Notifications_Bridging_Header_h */

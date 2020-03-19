@@ -18,7 +18,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib'
+    pod 'VialerSIPLib' , :path => '/Users/chris/projects/Vialer/iOS/vialersiplib' # //orp
 end
 
 target 'Vialer' do
@@ -54,7 +54,7 @@ target 'ANNAbel Staging' do
 end
 
 target 'VialerTests' do
-    pod 'VialerSIPLib'
+    pod 'VialerSIPLib' , :path => '/Users/chris/projects/Vialer/iOS/vialersiplib' # //orp
     pod 'OCMock'
     pod 'OHHTTPStubs'
     pod 'Firebase'
