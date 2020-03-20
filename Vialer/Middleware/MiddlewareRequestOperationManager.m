@@ -69,13 +69,9 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              // The version of this client app. Useful when debugging possible issues in the future.
                              @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:MiddlewareMainBundleCFBundleShortVersionString], [infoDict objectForKey:MiddlewareMainBundleCFBundleVersion]],
 
-                             //Sandbox is determined by the provisioning profile used on build, not on a build configuration.
-                             //So, this is not the best way of detecting a Sandbox token or not.
-                             //If this turns out to be unworkable, have a look at:
-                             //https://github.com/blindsightcorp/BSMobileProvision
-#if SANDBOX_APNS_TOKEN
-                             @"sandbox" : [NSNumber numberWithBool:YES]
-#endif
+                             #if DEBUG
+                                @"sandbox" : [NSNumber numberWithBool:YES]
+                             #endif
                              };
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
 

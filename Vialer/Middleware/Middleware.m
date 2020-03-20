@@ -162,7 +162,7 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
             return;
         }
         self.pushNotificationProcessing = keyToProcess;
-        
+         VialerLogDebug(@"registerSIPAccountWithEndpointWithCompletionregisterSIPAccountWithEndpointWithCompletionregisterSIPAccountWithEndpointWithCompletionregisterSIPAccountWithEndpointWithCompletion");
         // Register the SIP account with the endpoint.
         [SIPUtils registerSIPAccountWithEndpointWithCompletion:^(BOOL success, VSLAccount *account) {
             // Check if register was not successfull.
