@@ -27,47 +27,66 @@ class APNSCallHandler {
        
         APNSCallHandler.handledUuids.append(uuid.uuidString)
         
-        if (!reachabilityHelper.connectionFastEnoughForVoIP()) {
-            VialerLogInfo("Rejecting the call because our connection is not fast enough")
-            respondToMiddleware(available: false)
+        if (!(SystemUser.current()?.sipEnabled ?? false)) {
+            VialerLogError("There is no user, we are rejecting the call, the user will still hear this notification so this should not be happening..")
             rejectCall(uuid: uuid, update: update)
             return
         }
         
+        if (!reachabilityHelper.connectionFastEnoughForVoIP()) {
+            VialerLogWarning("The connection is not fast enough for VoIP but we can no longer decline the call.")
+        }
+        
         SIPUtils.setupSIPEndpoint()
+        
+        registerAndRespond(uuid: uuid)
+        
+        sleep(1)
         
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
             if error != nil {
-                VialerLogDebug("ERRROR!")
+                self.callFailed(uuid: uuid)
                 completion()
                 return
             }
                 
             guard let newCall = VSLCall(inboundCallWith: uuid, number: number, name:update.localizedCallerName ?? "") else {
-                VialerLogError("FAILED TO CREATE CALL, ABORT!")
+                self.callFailed(uuid: uuid)
                 completion()
                 return
             }
                 
             VialerSIPLib.sharedInstance().callManager.add(newCall)
         
+            self.registerAndRespond(uuid: uuid)
+            
             completion()
         })
-        
+    }
+    
+    private func registerAndRespond(uuid: UUID) {
         SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
             if (!success) {
-                self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
-                VialerLogError("FAILED TO REGISTER!")
+                self.callFailed(uuid: uuid)
                 return
             }
             
-            VialerSIPLib.sharedInstance().callManager.call(with: uuid)?.account = account
+            guard let call = VialerSIPLib.sharedInstance().callManager.call(with: uuid) else { return }
+            
+            if (call.account != nil) { return }
+            
+            call.account = account
             
             self.respondToMiddleware(available: true)
         }
     }
+    
+    private func callFailed(uuid: UUID) {
+        VialerLogError("Incoming call failed to setup!")
+        self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
+    }
 
-    func respondToMiddleware(available: Bool) {
+    private func respondToMiddleware(available: Bool) {
         guard let url: String = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyResponseAPI] as? String else { return }
         
         let middleware = MiddlewareRequestOperationManager(baseURLasString: url)
@@ -77,7 +96,7 @@ class APNSCallHandler {
         })
     }
     
-    func rejectCall(uuid: UUID, update: CXCallUpdate) {
+    private func rejectCall(uuid: UUID, update: CXCallUpdate) {
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
             self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
         })
