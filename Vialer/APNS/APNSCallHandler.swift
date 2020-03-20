@@ -21,8 +21,13 @@ class APNSCallHandler {
         self.payload = payload
     }
     
+    /**
+        Process an incoming VoIP notification, launching the Call UI and connecting to the back-end.
+     */
     func handle(completion: @escaping () -> Void, uuid: UUID, number: String, update: CXCallUpdate) {
        
+        // This is to temporarily ignore all other push notifications for this call, it can be removed
+        // when the middleware only sends one.
         if (APNSCallHandler.handledUuids.contains(uuid.uuidString)) { return }
        
         APNSCallHandler.handledUuids.append(uuid.uuidString)
@@ -64,6 +69,9 @@ class APNSCallHandler {
         })
     }
     
+    /**
+        Register to SIP and respond to the middleware when registered successfully.
+     */
     private func registerAndRespond(uuid: UUID) {
         SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
             if (!success) {
@@ -81,11 +89,6 @@ class APNSCallHandler {
         }
     }
     
-    private func callFailed(uuid: UUID) {
-        VialerLogError("Incoming call failed to setup!")
-        self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
-    }
-
     private func respondToMiddleware(available: Bool) {
         guard let url: String = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyResponseAPI] as? String else { return }
         
@@ -96,6 +99,15 @@ class APNSCallHandler {
         })
     }
     
+    private func callFailed(uuid: UUID) {
+        VialerLogError("Incoming call failed to setup!")
+        self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
+    }
+    
+    /**
+        To reject a call we have to momentarily show the UI and then immediately report it as failed. The user will still see/hear
+        the incoming call briefly.
+     */
     private func rejectCall(uuid: UUID, update: CXCallUpdate) {
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
             self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
