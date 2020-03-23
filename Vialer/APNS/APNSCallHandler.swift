@@ -25,7 +25,7 @@ class APNSCallHandler {
         Process an incoming VoIP notification, launching the Call UI and connecting to the back-end.
      */
     func handle(completion: @escaping () -> Void, uuid: UUID, number: String, update: CXCallUpdate) {
-       
+        VialerLogError("ASDASDASDbe happening.. \(String(Thread.isMainThread))")
         // This is to temporarily ignore all other push notifications for this call, it can be removed
         // when the middleware only sends one.
         if (APNSCallHandler.handledUuids.contains(uuid.uuidString)) { return }
@@ -42,13 +42,8 @@ class APNSCallHandler {
             VialerLogWarning("The connection is not fast enough for VoIP but we can no longer decline the call.")
         }
         
-        SIPUtils.setupSIPEndpoint()
-        
-        registerAndRespond(uuid: uuid)
-        
-        sleep(1)
-        
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
+            VialerLogError("Reported")
             if error != nil {
                 self.callFailed(uuid: uuid)
                 completion()
@@ -60,11 +55,13 @@ class APNSCallHandler {
                 completion()
                 return
             }
+            
+            SIPUtils.setupSIPEndpoint()
                 
-            VialerSIPLib.sharedInstance().callManager.add(newCall)
-        
             self.registerAndRespond(uuid: uuid)
             
+            VialerSIPLib.sharedInstance().callManager.add(newCall)
+        
             completion()
         })
     }
