@@ -13,6 +13,10 @@ import UIKit
 
 @objc class APNSHandler: NSObject, PKPushRegistryDelegate {
     
+    let callKit = (UIApplication.shared.delegate as! AppDelegate).callKitProviderDelegate.provider!
+    let reachabilityHelper = ReachabilityHelper.sharedInstance()
+    var payload: PKPushPayload = PKPushPayload() //orp just for testing changes
+    
     // MARK: - Properties
     @objc static var sharedAPNSHandler = APNSHandler()
     @objc var voipRegistry: PKPushRegistry = PKPushRegistry(queue: nil)
@@ -55,22 +59,55 @@ import UIKit
         guard type == .voIP else { return }
         
         // Extract the call information from the push notification payload.
-        if let phoneNumberString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyPhonenumber] as? String,
+        if let number = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyPhonenumber] as? String,
             let uuidString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyUniqueKey] as? String {
             // The uuid string in the payload is missing hyphens so fix that.
-            let callUUID = NSUUID.uuidFixer(uuidString: uuidString)! as UUID
+            let uuid = NSUUID.uuidFixer(uuidString: uuidString)! as UUID
             
             // Configure the call information data structures.
-            let callUpdate = CXCallUpdate()
-            let phoneNumberHandle = CXHandle(type: .phoneNumber, value: phoneNumberString)
-            callUpdate.remoteHandle = phoneNumberHandle
-            callUpdate.localizedCallerName = phoneNumberString
+            let update = CXCallUpdate()
+            let phoneNumberHandle = CXHandle(type: .phoneNumber, value: number)
+            update.remoteHandle = phoneNumberHandle
+            update.localizedCallerName = number
             if let callerId = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyCallerId] as? String {
-                callUpdate.localizedCallerName = callerId
+                update.localizedCallerName = callerId
             }
-        
             
-            APNSCallHandler(payload: payload).handle(completion: completion, uuid: callUUID, number: phoneNumberString, update: callUpdate)
+            self.payload = payload
+
+            if (!(SystemUser.current()?.sipEnabled ?? false)) {
+                VialerLogError("There is no user, we are rejecting the call, the user will still hear this notification so this should not be happening..")
+                rejectCall(uuid: uuid, update: update)
+                return
+            }
+
+            if (!reachabilityHelper.connectionFastEnoughForVoIP()) {
+                VialerLogWarning("The connection is not fast enough for VoIP but we can no longer decline the call.")
+            }
+
+            SIPUtils.setupSIPEndpoint()
+
+            registerAndRespond(uuid: uuid)
+
+            sleep(1)
+
+            callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
+                if error != nil {
+                     self.callFailed(uuid: uuid)
+                     completion()
+                     return
+                }
+
+                completion()
+            })
+            guard let newCall = VSLCall(inboundCallWith: uuid, number: number, name:update.localizedCallerName ?? "") else {
+                 self.callFailed(uuid: uuid)
+                 return
+            }
+             
+            VialerSIPLib.sharedInstance().callManager.add(newCall)
+
+            self.registerAndRespond(uuid: uuid)
         }
     }
     
@@ -92,6 +129,52 @@ import UIKit
         }
         let token = data.map { String(format: "%02.2hhx", $0) }.joined()
         return NSString(utf8String: token)
+    }
+    
+    /**
+           Register to SIP and respond to the middleware when registered successfully.
+    */
+    private func registerAndRespond(uuid: UUID) {
+        SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
+            if (!success) {
+               self.callFailed(uuid: uuid)
+               return
+            }
+
+            guard let call = VialerSIPLib.sharedInstance().callManager.call(with: uuid) else { return }
+
+            if (call.account != nil) { return }
+
+            call.account = account
+
+            self.respondToMiddleware(available: true)
+        }
+    }
+   
+    private func respondToMiddleware(available: Bool) {
+        //guard let payload = payload else { return }
+        guard let url: String = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyResponseAPI] as? String else { return }
+
+        let middleware = MiddlewareRequestOperationManager(baseURLasString: url)
+
+        middleware?.sentCallResponse(toMiddleware: payload.dictionaryPayload, isAvailable: available, withCompletion: { (error) in
+            VialerLogInfo("Responded to middleware!")
+        })
+    }
+   
+    private func callFailed(uuid: UUID) {
+        VialerLogError("Incoming call failed to setup!")
+        self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
+    }
+   
+   /**
+       To reject a call we have to momentarily show the UI and then immediately report it as failed. The user will still see/hear
+       the incoming call briefly.
+    */
+    private func rejectCall(uuid: UUID, update: CXCallUpdate) {
+        callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
+            self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
+        })
     }
 }
 
