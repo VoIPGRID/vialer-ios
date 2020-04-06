@@ -13,14 +13,12 @@
 # pragma mark - Methods
 
 + (BOOL)setupSIPEndpoint {
-    VialerLogDebug(@"Setup the endpoint for VoIP -- with changes jn");
     if (![SystemUser currentUser].sipEnabled) {
         VialerLogWarning(@"Not setting up sip endpoint because sip disabled");
         return NO;
     }
-
-    VialerLogInfo(@"SIP endpoint available: %@", [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO");
-    if ([VialerSIPLib sharedInstance].endpointAvailable) {
+    
+    if ([VialerSIPLib sharedInstance].endpointAvailable && [self getFirstActiveCall] == nil) {
         for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
             [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
         }
@@ -106,14 +104,11 @@
 }
 
 + (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL success, VSLAccount *account))completion {
-    NSLog(@"log: %@",[NSThread callStackSymbols]);
-
-    [SIPUtils setupSIPEndpoint];
-
-    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:true withCompletion:^(BOOL success, VSLAccount *account) {
+    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:false withCompletion:^(BOOL success, VSLAccount *account) {
         if (!success) {
             VialerLogError(@"Error registering the account with the endpoint");
         }
+        
         completion(success, account);
     }];
 }
