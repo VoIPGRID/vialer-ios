@@ -302,6 +302,8 @@ extension SIPCallingViewController {
     }
     
     fileprivate func startCalling() {
+        SIPUtils.setupSIPEndpoint()
+        
         SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
             guard account != nil else {
                 return

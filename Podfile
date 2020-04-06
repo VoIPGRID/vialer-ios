@@ -1,6 +1,6 @@
 platform :ios, '10.0'
 
-SIPlibVersion = '3.7.0'
+SIPlibVersion = '3.7.1'
 
 def default_pods
     pod 'AFNetworkActivityLogger'
@@ -18,7 +18,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib'
+    pod 'VialerSIPLib', SIPlibVersion
 end
 
 target 'Vialer' do
@@ -54,7 +54,7 @@ target 'ANNAbel Staging' do
 end
 
 target 'VialerTests' do
-    pod 'VialerSIPLib'
+    pod 'VialerSIPLib', SIPlibVersion
     pod 'OCMock'
     pod 'OHHTTPStubs'
     pod 'Firebase'
