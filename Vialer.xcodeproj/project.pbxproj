@@ -39,6 +39,7 @@
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		837093272447ADC4001C32F6 /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
 		8374B85422BA85210048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */; };
 		8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */; };
 		838206452290979A0098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -5529,6 +5530,7 @@
 				83820702229098D20098EABD /* SIPIncomingCallViewController.m in Sources */,
 				83820703229098D20098EABD /* NotificationToken.swift in Sources */,
 				83820704229098D20098EABD /* ForgotPasswordView.m in Sources */,
+				837093272447ADC4001C32F6 /* CallEventsMonitor.swift in Sources */,
 				83820705229098D20098EABD /* NSString+SubString.m in Sources */,
 				83820706229098D20098EABD /* ColoredCircle.m in Sources */,
 				83820707229098D20098EABD /* NSManagedObjectContext.swift in Sources */,
