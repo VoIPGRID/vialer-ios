@@ -289,6 +289,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
+    contactViewController.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.navigationItem.titleView = nil;
     self.showTitleImage = NO;
