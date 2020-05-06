@@ -286,7 +286,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         self.selectedContact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
     }
     CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
-    contactViewController.title = [CNContactFormatter stringFromContact:self.selectedContact style:CNContactFormatterStyleFullName];
     contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
