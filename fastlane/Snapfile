@@ -2,32 +2,35 @@
 scheme ENV["SNAPSHOT_SCHEME"]
 
 # Reinstall app for screenshot run
-reinstall_app true
+reinstall_app false #//orp was true maybe change this?
 
 # A list of devices you want to take the screenshots from
 devices([
-  # "iPhone 4s",
-  "iPhone SE",
-  "iPhone 8",
-  "iPhone 8 Plus",
-  "iPhone X",
-  "iPhone Xs Max",
+ # "iPhone SE",          # 4"
+ # "iPhone 8",           # 4.7"
+  "iPhone 8 Plus",      # 5.5"
+  "iPhone X",           # 5.8" "iPhone 11 Pro" or "iPhone Xs" or "iPhone X"
+  #"iPhone 11 Pro Max",  # 6.5" "iPhone 11 Pro Max" or "iPhone Xs Max"
+  "iPhone Xʀ",          # 6.1" "iPhone 11" or "iPhone XR"
 ])
 
 # A list of languages which should be used
 languages([
-  "en-US", # English
-  "nl-NL", # Dutch locale
+  "en-EN", #//orp sinking lower
+  "en-US",
+  "nl-NL",
+  "en-EN", #//orp sinking lower
+  "nl-NL", #//orp sinking lower
 ])
 
 # Where should the resulting screenshots be stored?
 output_directory "./fastlane/Brands/" + ENV["BRAND_FOLDER"] + "/screenshots"
 
 # Clear all previously generated screenshots before creating new ones
-clear_previous_screenshots false
+clear_previous_screenshots false #//orp was false
 
 # The number of times a test can fail before snapshot should stop retrying
-number_of_retries 4
+number_of_retries 4 #//orp initially was 4
 
 # Choose which project/workspace to use
 workspace "./Vialer.xcworkspace"
@@ -38,9 +41,9 @@ localize_simulator true
 # Run on multiple simulators at once
 concurrent_simulators false
 
-erase_simulator true
+erase_simulator true #//orp was true
 
-clean false
+clean false #//orp was false
 
 derived_data_path "./fastlane/DerivedData"
 

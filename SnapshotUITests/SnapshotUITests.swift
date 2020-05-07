@@ -90,9 +90,14 @@ class SnapshotUITests: XCTestCase {
      * that the app isn't in the state the test assumes, at the login screen. So just logout could be a solution too.
      */
     func testSnapshotScreenshotRun() {
+        sleep(3)//orp wait a bit at the start
+        
+        //orp tap screen for to remove the ios type by sliding tip
+        app.tap()
+        
         let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
         waitForElementToBeHittable(usernameTextField, andHit: true)
-        waitForElementToBeHittable(usernameTextField, andHit: true)
+        waitForElementToBeHittable(usernameTextField, andHit: true) //orp why 2nd time?
         usernameTextField.typeText(Constants.username)
 
         // Snapshot of the Login screen dispalying a username.
@@ -121,7 +126,7 @@ class SnapshotUITests: XCTestCase {
         }
 
         waitForElementToBeHittable(continueButton, andHit: true)
-
+        sleep(3) //orp for the 131 line
         // At this point, onboarding is finished, the contacts authorization has been granted and the
         // "Contacts" view is displayed.
         // Click on the Toolbar's "Contacts" button.
@@ -129,18 +134,19 @@ class SnapshotUITests: XCTestCase {
         waitForElementToBeHittable(contactsTabBarButton, andHit: true)
         waitForElementToBeHittable(contactsTabBarButton, andHit: true)
 
+        sleep(3) //orp add some time to be sure the contacts are loaded
+        
         // Snapshot of the "Contacts" view prefilled with Apple's default contacts.
         snapshot("05-ContactsView")
-
+        
         // Click on the Toolbar's "Keypad" button.
         let dialerTabBarButton = app.tabBars.buttons.element(boundBy: 0)
         waitForElementToBeHittable(dialerTabBarButton, andHit: true)
         // Click on the navigation bar's "Hamburg menu".
         let hamburger = app.navigationBars.buttons.element(boundBy: 0)
         waitForElementToBeHittable(hamburger, andHit: true)
-
         sleep(2)
-        // Snapshot with the sidemenu extended and part of the dialer shown.
+        
         snapshot("04-SideMenuWithDailer")
 
         waitForElementToBeHittable(dialerTabBarButton, andHit: true)
@@ -192,16 +198,16 @@ class SnapshotUITests: XCTestCase {
     }
 
     /**
-     * Function waits for the given XCUIElement to become hittable or times out after 60 sec.
+     * Function waits for the given XCUIElement to become hittable or times out after 30 sec. //orp
      * modified example from: http://masilotti.com/xctest-helpers/
      */
     private func waitForElementToBeHittable(_ element: XCUIElement, file: String = #file, line: UInt = #line, andHit: Bool)  {
         let existsPredicate = NSPredicate(format: "hittable == true")
         expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectations(timeout: 10) { (error) -> Void in
+        waitForExpectations(timeout: 30) { (error) -> Void in //orp timeout was 10
             if (error != nil) {
-                let message = "Failed to find \(element) after 10 seconds."
+                let message = "Failed to find \(element) after 30 seconds." //orp seconds was 10
                 self.recordFailure(withDescription: message,
                                    inFile: file, atLine: Int(line), expected: true)
             }
