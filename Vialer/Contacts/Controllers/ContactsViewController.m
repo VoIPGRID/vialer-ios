@@ -340,8 +340,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(CNContact *)contact {
-    //[self dismissViewControllerAnimated:YES completion:nil]; //orp
-    [self popoverPresentationController];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - searchController setup and delegate
