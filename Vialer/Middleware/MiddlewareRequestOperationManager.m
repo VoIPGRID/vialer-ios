@@ -46,9 +46,13 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 
 - (void)updateDeviceRecordWithAPNSToken:(NSString *)apnsToken sipAccount:(NSString *)sipAccount withCompletion:(void (^)(NSError *error))completion {
     // The Nullable and nonnull keywords are not enough, an empty string is also not acceptable.
-    NSAssert(sipAccount.length > 0, @"SIP Account was not set, could not update middleware.");
-    NSAssert(apnsToken.length > 0, @"APNS Token was not provided, could not update middleware");
-
+    if (sipAccount.length == 0) {
+        VialerLogError(@"SIP Account was not set, could not update middleware.");
+    }
+    if (apnsToken.length == 0) {
+        VialerLogError(@"APNS Token was not provided, could not update middleware.");
+    }
+    
     NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
     NSDictionary *params = @{
                              // user id used as primary key of the SIP account registered with the currently logged in user.
@@ -68,17 +72,16 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
 
                              // The version of this client app. Useful when debugging possible issues in the future.
                              @"client_version": [NSString stringWithFormat:@"%@ (%@)", [infoDict objectForKey:MiddlewareMainBundleCFBundleShortVersionString], [infoDict objectForKey:MiddlewareMainBundleCFBundleVersion]],
-
-                             //Sandbox is determined by the provisioning profile used on build, not on a build configuration.
-                             //So, this is not the best way of detecting a Sandbox token or not.
-                             //If this turns out to be unworkable, have a look at:
-                             //https://github.com/blindsightcorp/BSMobileProvision
-#if SANDBOX_APNS_TOKEN
-                             @"sandbox" : [NSNumber numberWithBool:YES]
-#endif
+                             
+                             #if DEBUG
+                                @"sandbox" : [NSNumber numberWithBool:YES],
+                             #endif
+                             
+                             // The number of push notifications for one incoming call should be expected from middleware.
+                             @"push_profile" : @"once"
                              };
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
-
+    
     if ([VialerLogger remoteLoggingEnabled]) {
         [parameters setObject:[VialerLogger remoteIdentifier] forKey:MiddlewareResponseKeyRemoteLoggingId];
     }

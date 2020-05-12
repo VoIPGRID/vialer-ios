@@ -13,37 +13,16 @@
 # pragma mark - Methods
 
 + (BOOL)setupSIPEndpoint {
-    VialerLogDebug(@"Setup the endpoint for VoIP");
     if (![SystemUser currentUser].sipEnabled) {
         VialerLogWarning(@"Not setting up sip endpoint because sip disabled");
         return NO;
     }
-
-    VialerLogInfo(@"SIP endpoint available: %@", [VialerSIPLib sharedInstance].endpointAvailable ? @"YES" : @"NO");
-    if ([VialerSIPLib sharedInstance].endpointAvailable) {
-        BOOL shouldRemoveEndpoint = NO;
-        if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
-            ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
-            VialerLogDebug(@"Endpoint or User is not TLS ready so remove the endoint so a fresh one can be setup");
-            shouldRemoveEndpoint = YES;
+    
+    if ([VialerSIPLib sharedInstance].endpointAvailable && [self getFirstActiveCall] == nil) {
+        for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
+            [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
         }
-
-        // User has STUN enbaled but the enpoint is not configured to use STUN.
-        if ([SystemUser currentUser].useStunServers && ![VialerSIPLib sharedInstance].hasSTUNEnabled) {
-            VialerLogDebug(@"User has STUN ENABLED but the enpoint is not configured to use STUN. Setup a new endpoint with STUN");
-            shouldRemoveEndpoint = YES;
-        } else if (![SystemUser currentUser].useStunServers && [VialerSIPLib sharedInstance].hasSTUNEnabled) {
-            VialerLogDebug(@"User has STUN DISABLED but the endpoint is configured to use STUN. Setup a new endpoint without STUN");
-            shouldRemoveEndpoint = YES;
-        }
-
-        if (shouldRemoveEndpoint) {
-            // Remove all endpoint accounts for VialerSIPLib to allow the endpoint removal.
-            for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
-                [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
-            }
-            [SIPUtils removeSIPEndpoint];
-        }
+        [SIPUtils removeSIPEndpoint];
     }
 
     VSLEndpointConfiguration *endpointConfiguration = [[VSLEndpointConfiguration alloc] init];
@@ -125,25 +104,11 @@
 }
 
 + (void)registerSIPAccountWithEndpointWithCompletion:(void (^)(BOOL success, VSLAccount *account))completion {
-    BOOL forceUpdate = NO;
-    if ((![VialerSIPLib sharedInstance].hasTLSTransport && [SystemUser currentUser].sipUseEncryption && [SystemUser currentUser].useTLS) ||
-        ([VialerSIPLib sharedInstance].hasTLSTransport && ![SystemUser currentUser].sipUseEncryption && ![SystemUser currentUser].useTLS)) {
-        BOOL success = [SIPUtils setupSIPEndpoint];
-        if (!success) {
-            VialerLogError(@"Error setting up endpoint");
-            completion(NO, nil);
-        }
-    } else {
-        if ([[VialerSIPLib sharedInstance] firstAccount]) {
-            VialerLogDebug(@"Update the registration to make sure it is correct");
-            forceUpdate = YES;
-        }
-    }
-
-    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:forceUpdate withCompletion:^(BOOL success, VSLAccount *account) {
+    [[VialerSIPLib sharedInstance] registerAccountWithUser:[SystemUser currentUser]  forceRegistration:false withCompletion:^(BOOL success, VSLAccount *account) {
         if (!success) {
             VialerLogError(@"Error registering the account with the endpoint");
         }
+        
         completion(success, account);
     }];
 }

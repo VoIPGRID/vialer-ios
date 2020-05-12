@@ -138,7 +138,7 @@ import AVFoundation
         if reachability.status == .reachableVia4G {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.highSpeed
             defaultData[VialerStatsConstants.APIKeys.networkOperator] = reachability.carrierName
-        } else if reachability.status == .reachableVia3GPlus || reachability.status == .reachableVia3G {
+        } else if reachability.status == .reachableVia3G {
             defaultData[VialerStatsConstants.APIKeys.network] = VialerStatsConstants.Network.lowSpeed
             defaultData[VialerStatsConstants.APIKeys.networkOperator] = reachability.carrierName
         } else if reachability.status == .reachableViaWiFi {

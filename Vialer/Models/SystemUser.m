@@ -24,7 +24,6 @@ NSString *const SystemUserEncryptionUsageChangedNotification = @"SystemUserEncry
 
 NSString *const SystemUserSIPDisabledNotification = @"SystemUserSIPDisabledNotification";
 NSString *const SystemUserOutgoingNumberUpdatedNotification = @"SystemUserOutgoingNumberUpdatedNotification";
-NSString *const SystemUserUse3GPlusNotification = @"SystemUserUse3GPlusNotification";
 NSString *const SystemUserTwoFactorAuthenticationTokenNotification = @"SystemUserTwoFactorAuthenticationTokenNotification";
 /**
  *  Api Dictionary keys.
@@ -67,7 +66,6 @@ static NSString *const SystemUserSUDSIPAccount = @"SIPAccount";
 static NSString *const SystemUserSUDSIPEnabled = @"SipEnabled";
 static NSString *const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotification";
 static NSString *const SystemUserSUDSIPUseEncryption = @"SIPUseEncryption";
-static NSString *const SystemUserSUDUse3GPlus = @"Use3GPlus";
 static NSString *const SystemUserSUDUseTLS = @"UseTLS";
 static NSString *const SystemuserSUDUseStunServers = @"UseStunServers";
 static NSString *const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
@@ -222,7 +220,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
         return;
     }
     NSString *stringFromSipEnabledProperty = NSStringFromSelector(@selector(sipEnabled));
-    // If SIP is being enabled, check if there is an sipAccount and fire notification.
+    // If SIP is being enabled, check if there is a sipAccount and fire notification.
     if (sipEnabled && !_sipEnabled && self.sipAccount) {
         [self willChangeValueForKey:stringFromSipEnabledProperty];
         _sipEnabled = YES;
@@ -231,7 +229,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
         // Post the notification async. Do not use NSNotificationQueue because when the app starts
         // the app delegate does not pickup on the notification when posted using the NSNotificationQueue.
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            VialerLogDebug(@"Post from sipenabled");
+            VialerLogDebug(@"Post from setSipEnabled.");
             [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserSIPCredentialsChangedNotification object:self];
         });
 
@@ -277,15 +275,6 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 
 - (NSString *)serviceName {
     return [[NSBundle mainBundle] bundleIdentifier];
-}
-
-- (BOOL)use3GPlus {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    // 3G+ calling is opt-out. So check if the key is not there, set it to yes.
-    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemUserSUDUse3GPlus]) {
-        self.use3GPlus = YES;
-    }
-    return [defaults boolForKey:SystemUserSUDUse3GPlus];
 }
 
 - (BOOL)useTLS {
@@ -394,14 +383,6 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 - (void)setShowWiFiNotification:(BOOL)showWiFiNotification {
     showWiFiNotification = showWiFiNotification;
     [[NSUserDefaults standardUserDefaults] setBool:showWiFiNotification forKey:SystemUserSUDShowWiFiNotification];
-}
-
-- (void)setUse3GPlus:(BOOL)use3GPlus {
-    [[NSUserDefaults standardUserDefaults] setBool:use3GPlus forKey:SystemUserSUDUse3GPlus];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserUse3GPlusNotification object:self];
-    });
 }
 
 - (void)setUseTLS:(BOOL)useTLS {
@@ -609,14 +590,14 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     if (userDict[SystemUserApiKeyClient]) {
         self.clientID = userDict[SystemUserApiKeyClient];
     }
-    // Backend is sending NSNull null when no value is available so it has to be checked like below to avoid null exception
+    // Backend is sending NSNull null when no value is available so it has to be checked like below to avoid null exception.
     if (userDict[SystemUserApiKeyMobileNumber] && userDict[SystemUserApiKeyMobileNumber]!=[NSNull null]) {
         self.mobileNumber = userDict[SystemUserApiKeyMobileNumber];
     }
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    // If the defaults contains a value for SIP Enabled, use that value,
+    // If the defaults contains a value for SIP Enabled, use that value.
     if ([defaults objectForKey:SystemUserSUDSIPEnabled]) {
         self.sipEnabled = [defaults boolForKey:SystemUserSUDSIPEnabled];
     } else {
@@ -646,19 +627,16 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     if (![profileDict[SystemUserApiKeyOpusEnabled] isKindOfClass:[NSNull class]]) {
         opusEnabled = [profileDict[SystemUserApiKeyOpusEnabled] boolValue];
     }
-
+    
     if (self.currentAudioQuality == 0 && opusEnabled) {
         self.currentAudioQuality = 1;
-        if (self.sipEnabled) {
-            [SIPUtils updateCodecs];
-        }
-    } else if (self.currentAudioQuality > 0 && !opusEnabled) {
+    } else if (self.currentAudioQuality == 1 && !opusEnabled) {
         self.currentAudioQuality = 0;
-        if (self.sipEnabled) {
-            [SIPUtils updateCodecs];
-        }
     }
-
+    if (self.sipEnabled) {
+        [SIPUtils updateCodecs];
+    }
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([profileDict[SystemUserApiKeyOutgoingNumber] isKindOfClass:[NSNull class]]) {
         self.outgoingNumber = @"";
