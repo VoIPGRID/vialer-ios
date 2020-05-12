@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>Additional_Version_String</key>
 	<string>Updated on build</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -36,9 +34,9 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Vialer needs access to your bluetooth to make handsfree calling possible</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Vialer needs access to your bluetooth to make handsfree calling possible</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Vialer needs access to your bluetooth to make handsfree calling possible</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Vialer needs access to your camera to make video calls</string>
@@ -79,6 +77,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>
