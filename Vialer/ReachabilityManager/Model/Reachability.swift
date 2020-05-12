@@ -46,14 +46,12 @@ public class Reachability: NSObject {
         case reachableViaWiFi
         case reachableVia2G
         case reachableVia3G
-        case reachableVia3GPlus
         case reachableVia4G
 
         public var description: String {
             switch self {
             case .reachableVia2G: return "2G"
             case .reachableVia3G: return "3G"
-            case .reachableVia3GPlus: return "3G+"
             case .reachableVia4G: return "4G"
             case .reachableViaWiFi: return "Wifi"
             case .notReachable: return "No Connection"
@@ -68,10 +66,6 @@ public class Reachability: NSObject {
     public var onWWAN: Bool
     @objc public var hasHighSpeed: Bool {
         return status == .reachableViaWiFi || status == .reachableVia4G
-    }
-    
-    @objc public var hasHighSpeedWith3GPlus: Bool {
-        return hasHighSpeed || status == .reachableVia3GPlus
     }
 
     @objc public var statusString: String {
@@ -117,8 +111,6 @@ public class Reachability: NSObject {
         }
         if fastInternet.contains(currentRadio) {
             return .reachableVia4G
-        } else if mediumFastInternet.contains(currentRadio) {
-            return .reachableVia3GPlus
         } else if mediumInternet.contains(currentRadio) {
             return .reachableVia3G
         }
@@ -158,12 +150,10 @@ public class Reachability: NSObject {
     fileprivate let mediumInternet: Set<String> = [ CTRadioAccessTechnologyWCDMA,
                                                     CTRadioAccessTechnologyCDMAEVDORev0,
                                                     CTRadioAccessTechnologyCDMAEVDORevA,
-                                                    CTRadioAccessTechnologyCDMAEVDORevB
-    ]
-    
-    fileprivate let mediumFastInternet: Set<String> = [ CTRadioAccessTechnologyHSDPA, // 3.5  G
-                                                        CTRadioAccessTechnologyHSUPA, // 3.75 G
-                                                        CTRadioAccessTechnologyeHRPD, // 3    G++
+                                                    CTRadioAccessTechnologyCDMAEVDORevB,
+                                                    CTRadioAccessTechnologyHSDPA, // 3.5  G
+                                                    CTRadioAccessTechnologyHSUPA, // 3.75 G
+                                                    CTRadioAccessTechnologyeHRPD
     ]
     
     // 4G.

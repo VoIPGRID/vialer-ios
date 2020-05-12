@@ -50,6 +50,9 @@ private let AvailabilityViewControllerAddFixedDestinationPageURLWithVariableForC
                 self.present(UIAlertController(title: NSLocalizedString("Error", comment: ""), message: localizedErrorString, andDefaultButtonText: NSLocalizedString("Ok", comment: "")), animated: true)
             } else {
                 self.tableView.reloadData()
+                
+                // Load the availability to update the sideMenu's label in case of changes have been made from the platform after user has toggled the sideMenu.
+                self.delegate?.availabilityViewController(self, availabilityHasChanged: self.availabilityModel.availabilityOptions)
             }
             self.refreshControl?.endRefreshing()
         })

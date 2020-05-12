@@ -19,7 +19,7 @@ private let AvailabilityModelSelectedUserDestinationKey = "selecteduserdestinati
 private let AvailabilityModelSelectedUserDestinationPhoneaccountKey = "phoneaccount"
 private let AvailabilityModelSelectedUserDestinationFixedKey = "fixeddestination"
 private let AvailabilityModelSelectedUserDestinationIdKey = "id"
-private let AvailabilityModelFetchInterval: TimeInterval = 600 // number of seconds between fetching of availability
+private let AvailabilityModelFetchInterval: TimeInterval = 5 // number of seconds between fetching of availability
 
 @objc class AvailabilityModel: NSObject {
     @objc var availabilityOptions: NSArray = []

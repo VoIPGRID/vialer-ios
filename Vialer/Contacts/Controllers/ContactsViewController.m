@@ -286,10 +286,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         self.selectedContact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
     }
     CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
-    contactViewController.title = [CNContactFormatter stringFromContact:self.selectedContact style:CNContactFormatterStyleFullName];
     contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
+    contactViewController.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.navigationItem.titleView = nil;
     self.showTitleImage = NO;
@@ -339,7 +339,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(CNContact *)contact {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self popoverPresentationController];
 }
 
 #pragma mark - searchController setup and delegate
@@ -407,13 +407,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         if (!self.currentUser.sipEnabled) {
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else if (!self.reachability.hasHighSpeed) {
-            // There is no highspeed connection (4G or WiFi)
-            // Check if there is 3G+ connection and the call with 3G+ is enabled.
-            if (!self.reachability.hasHighSpeedWith3GPlus || !self.currentUser.use3GPlus) {
-                self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
-            } else {
-                self.reachabilityBarHeigthConstraint.constant = 0;
-            }
+            self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else if (!self.currentUser.sipUseEncryption){
             self.reachabilityBarHeigthConstraint.constant = ContactsViewControllerReachabilityBarHeight;
         } else {
