@@ -23,6 +23,7 @@
 		443ADCC63772033D19331C83 /* libPods-Verbonden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 937C6B3AD252B195DDFCADF2 /* libPods-Verbonden.a */; };
 		45FAA197D07A701481006D03 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030913FF544600ABE3DC3AFD /* libPods-Voys.a */; };
 		4D27D40E66E3E080DBB02CF4 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */; };
+		5C5584912424BA1000A9AFA3 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		83021DE52232BC56007F63ED /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */; };
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
@@ -38,6 +39,7 @@
 		836884AE20F4B43A0098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884AF20F4B4490098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
+		837093272447ADC4001C32F6 /* CallEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4107094236717CA00F0E31C /* CallEventsMonitor.swift */; };
 		8374B85422BA85210048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */; };
 		8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */; };
 		838206452290979A0098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
@@ -375,6 +377,13 @@
 		83DA45F622706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F722706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		83DA45F822706A9300212371 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
+		83F543A624292C8F002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		83F543A824292C91002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		83F543A924292C91002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		83F543AA24292C93002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		83F543AB24292C95002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		83F543AC24292C96002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		83F543AD24292C99002AABA5 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
 		83FC989C228975D500A44738 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		83FC989D228975D500A44738 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		83FC989E228975D500A44738 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
@@ -1635,6 +1644,7 @@
 		4DFEED51258B69BC8EC6A71F /* Pods-Vialer Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSCallHandler.swift; sourceTree = "<group>"; };
 		60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3064,6 +3074,7 @@
 			isa = PBXGroup;
 			children = (
 				83BA7FDB233226F800B066E6 /* APNSHandler.swift */,
+				5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */,
 			);
 			path = APNS;
 			sourceTree = "<group>";
@@ -5427,6 +5438,7 @@
 				838206682290979A0098EABD /* (null) in Sources */,
 				838206692290979A0098EABD /* LogInViewController.m in Sources */,
 				8382066A2290979A0098EABD /* TwoStepCallingViewController.m in Sources */,
+				83F543AD24292C99002AABA5 /* APNSCallHandler.swift in Sources */,
 				8382066B2290979A0098EABD /* CircleWithShadow.m in Sources */,
 				8382066C2290979A0098EABD /* WebserviceAuthentication.swift in Sources */,
 				8382066D2290979A0098EABD /* SegueHandler.swift in Sources */,
@@ -5508,6 +5520,7 @@
 				D4E7F2B7230C0D7300E76FA4 /* AvailabilityViewController.swift in Sources */,
 				838206FA229098D20098EABD /* (null) in Sources */,
 				838206FB229098D20098EABD /* RoundedAndColoredUIButton.m in Sources */,
+				83F543AC24292C96002AABA5 /* APNSCallHandler.swift in Sources */,
 				838206FC229098D20098EABD /* MainTabBarViewController.m in Sources */,
 				838206FD229098D20098EABD /* RecentsTimeConverter.swift in Sources */,
 				838206FE229098D20098EABD /* String+regex.swift in Sources */,
@@ -5517,6 +5530,7 @@
 				83820702229098D20098EABD /* SIPIncomingCallViewController.m in Sources */,
 				83820703229098D20098EABD /* NotificationToken.swift in Sources */,
 				83820704229098D20098EABD /* ForgotPasswordView.m in Sources */,
+				837093272447ADC4001C32F6 /* CallEventsMonitor.swift in Sources */,
 				83820705229098D20098EABD /* NSString+SubString.m in Sources */,
 				83820706229098D20098EABD /* ColoredCircle.m in Sources */,
 				83820707229098D20098EABD /* NSManagedObjectContext.swift in Sources */,
@@ -5702,6 +5716,7 @@
 				EE3C481C2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0CB1E72DED000A1E509 /* Managed.swift in Sources */,
 				C49A46B61E682A540097E808 /* UIImage.swift in Sources */,
+				83F543A824292C91002AABA5 /* APNSCallHandler.swift in Sources */,
 				EE3C47C92080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C4C675661D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE8C5EA82147B054008A430F /* UIColorExtenstions.swift in Sources */,
@@ -5840,6 +5855,7 @@
 				C48931D41D80935F00C5633C /* VialerLogger.m in Sources */,
 				EE3C481F2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0CC1E72DED000A1E509 /* Managed.swift in Sources */,
+				83F543AB24292C95002AABA5 /* APNSCallHandler.swift in Sources */,
 				C4C675671D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE3C47CC2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				C49A46AA1E6829CE0097E808 /* RecentsViewController.swift in Sources */,
@@ -5993,6 +6009,7 @@
 				EE23185B20A0468F00C05EB0 /* BubblingPoints.m in Sources */,
 				EE23185C20A0468F00C05EB0 /* Managed.swift in Sources */,
 				EE23185D20A0468F00C05EB0 /* ColoredCircle.m in Sources */,
+				83F543AA24292C93002AABA5 /* APNSCallHandler.swift in Sources */,
 				EE23185E20A0468F00C05EB0 /* AppInfo.swift in Sources */,
 				EE23185F20A0468F00C05EB0 /* TwoStepCall.m in Sources */,
 				EE23186020A0468F00C05EB0 /* NSString+Mobile.m in Sources */,
@@ -6122,6 +6139,7 @@
 				EE61F4421F1DDDE4006E890F /* UIImage.swift in Sources */,
 				EE3C481E2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				EE61F4431F1DDDE4006E890F /* Managed.swift in Sources */,
+				83F543A924292C91002AABA5 /* APNSCallHandler.swift in Sources */,
 				EE61F4441F1DDDE4006E890F /* AppInfo.swift in Sources */,
 				EE3C47CB2080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				EE61F4451F1DDDE4006E890F /* NSString+Mobile.m in Sources */,
@@ -6232,6 +6250,7 @@
 				C49A46B51E682A540097E808 /* UIImage.swift in Sources */,
 				EE3C481B2080DC2D00CC80E5 /* BubblingPoints.m in Sources */,
 				C47BB0CA1E72DED000A1E509 /* Managed.swift in Sources */,
+				83F543A624292C8F002AABA5 /* APNSCallHandler.swift in Sources */,
 				F20851221D26935600A17E71 /* AppInfo.swift in Sources */,
 				EE3C47C82080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				F20851231D26935600A17E71 /* NSString+Mobile.m in Sources */,
@@ -6361,6 +6380,7 @@
 				D400290A22083C2400E5AA68 /* SetupCallTransfer.swift in Sources */,
 				C47BB0C91E72DED000A1E509 /* Managed.swift in Sources */,
 				EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */,
+				5C5584912424BA1000A9AFA3 /* APNSCallHandler.swift in Sources */,
 				C4C675651D19B5430003A385 /* AppInfo.swift in Sources */,
 				EE3C47C62080DBE400CC80E5 /* TwoStepCall.m in Sources */,
 				FB48BB411875B63700C0D5DB /* NSString+Mobile.m in Sources */,
@@ -6819,7 +6839,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "23c488eb-9903-4e82-aed1-9eb29767ff30";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app 1583422078";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vialer/Supporting Files/Vialer-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Vialer-Swift.h";
@@ -6838,7 +6858,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = AM8JDXQ3L4;
@@ -6956,7 +6976,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -6970,7 +6990,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.voys.app.VoysIntentsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2570312d-3a9a-4931-addd-bec78cf1bd18";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app.VoysIntentsExtension";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.voys.app.VoysIntentsExtension 1583422088";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -6989,7 +7009,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;

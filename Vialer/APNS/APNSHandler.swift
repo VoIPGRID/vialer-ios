@@ -17,7 +17,7 @@ import UIKit
     @objc static var sharedAPNSHandler = APNSHandler()
     @objc var voipRegistry: PKPushRegistry = PKPushRegistry(queue: nil)
     @objc var middleware: Middleware = Middleware()
-    
+        
     // MARK: - Lifecycle
     @objc private override init(){}
     
@@ -27,6 +27,7 @@ import UIKit
         }
     }
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     
     // MARK: - Actions
     @objc func registerForVoIPNotifications() {
@@ -67,23 +68,9 @@ import UIKit
             if let callerId = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyCallerId] as? String {
                 callUpdate.localizedCallerName = callerId
             }
+        
             
-            VialerLogDebug("Reporting a new call to CallKit provider with UUID: \(String(describing: callUUID.uuidString))")
-            appDelegate.callKitProviderDelegate.provider.reportNewIncomingCall(with: callUUID, update: callUpdate, completion: { (error) in
-                if error == nil {  // The call is not blocked by DnD or blacklisted by the iPhone, so continue processing the call. At this stage account is not available - sip invite has not arrived yet.
-                    
-                    if let newCall = VSLCall(inboundCallWith: callUUID, number: phoneNumberString, name:callUpdate.localizedCallerName ?? "") {
-                        let callManager =  VialerSIPLib.sharedInstance().callManager
-                        callManager.add(newCall)
-                        
-                        DispatchQueue.main.async {
-                            self.middleware.handleReceivedAPSNPayload(payload.dictionaryPayload)
-                        }
-                    }
-                }
-                // Tell PushKit that the notification is handled.
-                completion()
-            })
+            APNSCallHandler(payload: payload).handle(completion: completion, uuid: callUUID, number: phoneNumberString, update: callUpdate)
         }
     }
     

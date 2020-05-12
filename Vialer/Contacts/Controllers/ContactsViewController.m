@@ -286,10 +286,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         self.selectedContact = [self.contactModel contactAtSection:indexPath.section - 1 index:indexPath.row];
     }
     CNContactViewController *contactViewController = [CNContactViewController viewControllerForContact:self.selectedContact];
-    contactViewController.title = [CNContactFormatter stringFromContact:self.selectedContact style:CNContactFormatterStyleFullName];
     contactViewController.contactStore = self.contactModel.contactStore;
     contactViewController.allowsActions = NO;
     contactViewController.delegate = self;
+    contactViewController.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.navigationItem.titleView = nil;
     self.showTitleImage = NO;
@@ -339,7 +339,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 }
 
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(CNContact *)contact {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self popoverPresentationController];
 }
 
 #pragma mark - searchController setup and delegate
