@@ -27,6 +27,10 @@
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		83021DE52232BC56007F63ED /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */; };
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
+		83039D86246D943300219076 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D85246D943300219076 /* Snapshot-Constants.swift */; };
+		83039D87247299C400219076 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
+		83039D88247299C600219076 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
+		83039D89247299C900219076 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
 		831E6BAE22316C57003B6AAC /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E6BAD22316C57003B6AAC /* ConfigureFormViewTests.m */; };
 		832104B5229552F5002766BA /* Voys-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */; };
@@ -347,7 +351,6 @@
 		838207DA2292D0C10098EABD /* ANNAbel-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */; };
 		838207DB2292F97A0098EABD /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207C82292CFF80098EABD /* Config.plist */; };
 		83916FCF231D076900EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FCE231D076900EBF713 /* Snapshot-Constants.swift */; };
-		83916FD1231D09E300EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
 		83BA7FDC233226F800B066E6 /* APNSHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BA7FDB233226F800B066E6 /* APNSHandler.swift */; };
@@ -619,7 +622,6 @@
 		C490ADDD1D0863E3004A8F83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		C490ADE01D0863E3004A8F83 /* DialerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFCF821BF21E210000CC6F /* DialerStoryboard.storyboard */; };
 		C490ADE11D0863E3004A8F83 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
-		C490ADFF1D088535004A8F83 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		C490AE001D088535004A8F83 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
 		C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491B4431D5B1A0300F44090 /* UIViewControllerExtensions.swift */; };
@@ -930,7 +932,6 @@
 		EE23189E20A0468F00C05EB0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4DA5C7A1BFB27580043DED7 /* MainStoryboard.storyboard */; };
 		EE2318AC20A046AD00C05EB0 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		EE2318AD20A046AD00C05EB0 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C2651F908B6700423F96 /* UIDeviceExtensions.swift */; };
-		EE2318BD20A046BB00C05EB0 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		EE2318BE20A046BB00C05EB0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */; };
 		EE2318C820A0476300C05EB0 /* ANNAbelIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE2318D020A052D900C05EB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE2317FE20A0442000C05EB0 /* InfoPlist.strings */; };
@@ -1312,7 +1313,6 @@
 		F2DE21831CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
-		F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
@@ -1654,6 +1654,7 @@
 		7F8D6569077E6E442EDF57FE /* Pods-Vialer Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging.release.xcconfig"; sourceTree = "<group>"; };
 		83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		83021DE62232C18A007F63ED /* LogInViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
+		83039D85246D943300219076 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		83129868215D033A00CFE01D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
@@ -1677,7 +1678,6 @@
 		838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		838207D82292D0A70098EABD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		83916FCE231D076900EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Verbonden/Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
-		83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
 		83BA7FDB233226F800B066E6 /* APNSHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSHandler.swift; sourceTree = "<group>"; };
@@ -2493,7 +2493,7 @@
 				C41FD8E51C60A55000BBE6D7 /* GoogleService-Info.plist */,
 				EE3D8674201F113800CEFDC6 /* Voys.xcassets */,
 				832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */,
-				83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */,
+				83039D85246D943300219076 /* Snapshot-Constants.swift */,
 			);
 			name = Voys;
 			path = Branding/Voys;
@@ -5733,8 +5733,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83916FD1231D09E300EBF713 /* Snapshot-Constants.swift in Sources */,
-				F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */,
+				83039D86246D943300219076 /* Snapshot-Constants.swift in Sources */,
+				83039D89247299C900219076 /* SnapshotUITests.swift in Sources */,
 				C41FD8F81C60A89300BBE6D7 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5873,7 +5873,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83916FCF231D076900EBF713 /* Snapshot-Constants.swift in Sources */,
-				C490ADFF1D088535004A8F83 /* SnapshotUITests.swift in Sources */,
+				83039D87247299C400219076 /* SnapshotUITests.swift in Sources */,
 				C490AE001D088535004A8F83 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6036,7 +6036,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */,
-				EE2318BD20A046BB00C05EB0 /* SnapshotUITests.swift in Sources */,
+				83039D88247299C600219076 /* SnapshotUITests.swift in Sources */,
 				EE2318BE20A046BB00C05EB0 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

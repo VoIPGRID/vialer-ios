@@ -93,16 +93,16 @@ class SnapshotUITests: XCTestCase {
         sleep(10)//orp wait a bit at the start
         
         //orp tap screen for to remove the ios type by sliding tip
-//        app.tap()
+        app.tap()
         sleep(10)//orp wait a bit more at the start
         
         let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
-//        waitForElementToBeHittable(usernameTextField, andHit: true)
-//        waitForElementToBeHittable(usernameTextField, andHit: true) //orp why 2nd time?
+        waitForElementToBeHittable(usernameTextField, andHit: true)
+        waitForElementToBeHittable(usernameTextField, andHit: true) //orp why 2nd time?
         usernameTextField.typeText(Constants.username)
 
         // Snapshot of the Login screen dispalying a username.
-        snapshot("01-LoginScreen")
+        // orp for BRANDS snapshot("01-LoginScreen")
 
         let passwordField = app.secureTextFields["onboarding.loginView.password.textfield"]
         waitForElementToBeHittable(passwordField , andHit: true)

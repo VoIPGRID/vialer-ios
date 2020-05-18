@@ -6,12 +6,12 @@ reinstall_app false #//orp was true maybe change this?
 
 # A list of devices you want to take the screenshots from
 devices([
-  "iPhone SE",          # 4"
-  "iPhone 7",           # 4.7"
+#  "iPhone SE",          # 4"
+#  "iPhone 7",           # 4.7"
   "iPhone 7 Plus",      # 5.5"
-  #Done"iPhone 11 Pro",           # 5.8" "iPhone 11 Pro" or "iPhone Xs" or "iPhone X"
-  #Done "iPhone 11 Pro Max",  # 6.5" "iPhone 11 Pro Max" or "iPhone Xs Max"
-  #Done "iPhone 11",          # 6.1" "iPhone 11" or "iPhone XR"
+  "iPhone 11 Pro",           # 5.8" "iPhone 11 Pro" or "iPhone Xs" or "iPhone X"
+  "iPhone 11 Pro Max",  # 6.5" "iPhone 11 Pro Max" or "iPhone Xs Max"
+  #"iPhone 11",          # 6.1" "iPhone 11" or "iPhone XR"
 ])
 
 # A list of languages which should be used
