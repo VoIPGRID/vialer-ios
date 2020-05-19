@@ -12,28 +12,18 @@ import PushKit
 class SynchronousSipRegistration {
     
     private var hasRegistered = false
-    
+
     private var hasFailed = false
     
     var account: VSLAccount?
-    
+
     /**
         Perform synchronous registration, this code will hang until registration succeeds or fails
      */
     func register() -> Bool {
-        rebootSip()
-
         performRegister()
 
         return hasRegistered
-    }
-
-    /**
-        Reboot the sip endpoint before each registration attempt
-    */
-    func rebootSip() {
-        VialerLogInfo("Rebooting SIP")
-        SIPUtils.setupSIPEndpoint()
     }
 
     /**
@@ -55,7 +45,7 @@ class SynchronousSipRegistration {
         }
 
         let TIMEOUT_MILLISECONDS = 10 * 1000
-        let MILLISECONDS_BETWEEN_ITERATION = 50
+        let MILLISECONDS_BETWEEN_ITERATION = 5
         var millisecondsTrying = 0
 
         while (!hasRegistered && !hasFailed && millisecondsTrying < TIMEOUT_MILLISECONDS) {
