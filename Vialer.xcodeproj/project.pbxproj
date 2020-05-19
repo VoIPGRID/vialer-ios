@@ -27,6 +27,8 @@
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		83021DE52232BC56007F63ED /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */; };
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
+		83039D8B24745C4E00219076 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83039D8A24745C4E00219076 /* ringtone.wav */; };
+		83039D8E2474619C00219076 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83039D8A24745C4E00219076 /* ringtone.wav */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
 		831E6BAE22316C57003B6AAC /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E6BAD22316C57003B6AAC /* ConfigureFormViewTests.m */; };
 		832104B5229552F5002766BA /* Voys-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */; };
@@ -746,7 +748,6 @@
 		D4E7F2BA230C134800E76FA4 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		D4E7F2BB230C15F900E76FA4 /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC989B228975D500A44738 /* AvailabilityViewController.swift */; };
 		D4E7F2BC230C160000E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
-		D4E7F2BD230C176E00E76FA4 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		D99509E85091A372BCE8EB50 /* libPods-ANNAbel Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */; };
 		E7A9119825A31543E96AB1F0 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */; };
 		EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
@@ -1103,7 +1104,6 @@
 		EE61F46E1F1DDDE4006E890F /* dtmf-*.aif in Resources */ = {isa = PBXBuildFile; fileRef = C49A46AB1E6829DD0097E808 /* dtmf-*.aif */; };
 		EE61F4701F1DDDE4006E890F /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		EE61F4711F1DDDE4006E890F /* RecentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46183751BFA23AB0075709B /* RecentsStoryboard.storyboard */; };
-		EE61F4721F1DDDE4006E890F /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBB8542C1A7FF15300121366 /* ringtone.wav */; };
 		EE61F4731F1DDDE4006E890F /* dtmf-3.aif in Resources */ = {isa = PBXBuildFile; fileRef = FBB854151A7FE3CE00121366 /* dtmf-3.aif */; };
 		EE61F4741F1DDDE4006E890F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21E03F1A3B48D800AE746B /* Images.xcassets */; };
 		EE61F4751F1DDDE4006E890F /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49B0EE71E6D9D4C00DD226B /* LogInViewController.xib */; };
@@ -1655,6 +1655,7 @@
 		7F8D6569077E6E442EDF57FE /* Pods-Vialer Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vialer Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging.release.xcconfig"; sourceTree = "<group>"; };
 		83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		83021DE62232C18A007F63ED /* LogInViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
+		83039D8A24745C4E00219076 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
 		83129868215D033A00CFE01D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
@@ -2486,6 +2487,7 @@
 		C41FD8D11C60A12E00BBE6D7 /* Voys */ = {
 			isa = PBXGroup;
 			children = (
+				83039D8A24745C4E00219076 /* ringtone.wav */,
 				EEEF16081F470C4400AEFA83 /* InfoPlist.strings */,
 				EEBB57441E5D68D10018BD1D /* VoysIntentsExtension.plist */,
 				C41FD8E31C60A55000BBE6D7 /* Voys-Info.plist */,
@@ -4112,7 +4114,7 @@
 				C49A46AE1E6829DD0097E808 /* dtmf-*.aif in Resources */,
 				C41FD8AD1C60A08400BBE6D7 /* SideMenuStoryboard.storyboard in Resources */,
 				EEEF16111F470C8200AEFA83 /* Localizable.strings in Resources */,
-				D4E7F2BD230C176E00E76FA4 /* ringtone.wav in Resources */,
+				83039D8B24745C4E00219076 /* ringtone.wav in Resources */,
 				C41FD8AE1C60A08400BBE6D7 /* dtmf-2.aif in Resources */,
 				D48BAB002315198100A3F4F4 /* FirebaseService-Info.plist in Resources */,
 				C41FD8AF1C60A08400BBE6D7 /* RecentsStoryboard.storyboard in Resources */,
@@ -4275,6 +4277,7 @@
 			files = (
 				EE61F4B81F1DE36C006E890F /* Config.plist in Resources */,
 				EE61F4B71F1DE133006E890F /* GoogleService-Info.plist in Resources */,
+				83039D8E2474619C00219076 /* ringtone.wav in Resources */,
 				EE61F4661F1DDDE4006E890F /* dtmf-#.aif in Resources */,
 				EE61F4671F1DDDE4006E890F /* dtmf-0.aif in Resources */,
 				EE3D8676201F113900CEFDC6 /* Voys.xcassets in Resources */,
@@ -4291,7 +4294,6 @@
 				83C0410222B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */,
 				EE61F4701F1DDDE4006E890F /* ReachabilityBarStoryboard.storyboard in Resources */,
 				EE61F4711F1DDDE4006E890F /* RecentsStoryboard.storyboard in Resources */,
-				EE61F4721F1DDDE4006E890F /* ringtone.wav in Resources */,
 				EE61F4731F1DDDE4006E890F /* dtmf-3.aif in Resources */,
 				EEEF16121F470C8200AEFA83 /* Localizable.strings in Resources */,
 				EE61F4741F1DDDE4006E890F /* Images.xcassets in Resources */,
