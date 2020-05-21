@@ -55,7 +55,7 @@ import UserNotifications
     var user = SystemUser.current()!
     lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
     var mostRecentCall : VSLCall?
-    
+    let reachability = Reachability(true)!
     private var _callEventMonitor: Any? = nil
     fileprivate var callEventMonitor: CallEventsMonitor {
         if _callEventMonitor == nil {
@@ -175,7 +175,14 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: NSNotification.Name(rawValue: ReachabilityChangedNotification),object: reachability)
+
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
+
+        do {
+            try reachability.startNotifier()
+        } catch {
+        }
 
         _ = ReachabilityHelper.instance
     }
@@ -192,7 +199,9 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ReachabilityChangedNotification), object: reachability)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
+        reachability.stopNotifier()
     }
 }
 
@@ -539,5 +548,13 @@ extension AppDelegate {
             callAvailabilityTimer.invalidate()
             callAvailabilityTimer = nil
         }
+    }
+}
+
+// Reachability
+extension AppDelegate {
+    @objc func reachabilityChanged(note: NSNotification) {
+        VialerLogInfo("Reachability changed, rebooting SIP")
+        SIPUtils.setupSIPEndpoint()
     }
 }
