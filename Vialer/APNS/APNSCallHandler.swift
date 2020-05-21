@@ -15,6 +15,9 @@ class APNSCallHandler {
     let reachabilityHelper = ReachabilityHelper.sharedInstance()
     let payload: PKPushPayload
     let synchronousSip: SynchronousSipRegistration
+    let vsl = VialerSIPLib.sharedInstance()
+
+    var call: VSLCall?
 
     init(payload: PKPushPayload) {
         self.payload = payload
@@ -49,18 +52,18 @@ class APNSCallHandler {
                 return
             }
 
-            guard let newCall = VSLCall(inboundCallWith: uuid, number: number, name: update.localizedCallerName ?? "") else {
-                self.callFailed(uuid: uuid)
-                completion()
-                return
+            self.call = VSLCall(inboundCallWith: uuid, number: number, name: update.localizedCallerName ?? "")
+
+            if let call = self.call {
+                call.account = self.synchronousSip.account ?? nil
+                self.vsl.callManager.add(call)
             }
-
-            newCall.account = self.synchronousSip.account ?? nil
-
-            VialerSIPLib.sharedInstance().callManager.add(newCall)
 
             completion()
         })
+
+
+        stopRingingIfInvalidCall(uuid: uuid)
     }
     
     private func respondToMiddleware(available: Bool) {
@@ -86,5 +89,19 @@ class APNSCallHandler {
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
             self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
         })
+    }
+
+    /**
+        We are going to wait a short amount of time and then check to see if our incoming call has
+        an actual invite, this should validate that it is a valid call.
+     */
+    private func stopRingingIfInvalidCall(uuid: UUID) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            let hasInvite = self.call?.invite != nil
+            if (!hasInvite) {
+                VialerLogError("Call does not have an invite, therefore stopping ringing and marking as failed")
+                self.callFailed(uuid: uuid)
+            }
+        }
     }
 }
