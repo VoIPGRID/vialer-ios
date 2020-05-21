@@ -24,6 +24,14 @@
 		45FAA197D07A701481006D03 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030913FF544600ABE3DC3AFD /* libPods-Voys.a */; };
 		4D27D40E66E3E080DBB02CF4 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */; };
 		5C5584912424BA1000A9AFA3 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		5CEC5D86243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D89243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D8A243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D8D243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D8E243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D91243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D92243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
+		5CEC5D95243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */; };
 		644BC2453E4782C0BF5C0CAB /* libPods-Vialer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5A80F00FD008B22FF87BE8 /* libPods-Vialer.a */; };
 		83021DE52232BC56007F63ED /* ForgotPasswordViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */; };
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
@@ -1645,6 +1653,7 @@
 		50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSCallHandler.swift; sourceTree = "<group>"; };
+		5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronousSipRegistration.swift; sourceTree = "<group>"; };
 		60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbel Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3077,6 +3086,7 @@
 			children = (
 				83BA7FDB233226F800B066E6 /* APNSHandler.swift */,
 				5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */,
+				5CEC5D85243E0C3800F6F3D2 /* SynchronousSipRegistration.swift */,
 			);
 			path = APNS;
 			sourceTree = "<group>";
@@ -5474,6 +5484,7 @@
 				838206882290979A0098EABD /* DialerViewController.swift in Sources */,
 				838206892290979A0098EABD /* WebserviceProtocol.swift in Sources */,
 				8382068A2290979A0098EABD /* Webservice.swift in Sources */,
+				5CEC5D95243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				8382068B2290979A0098EABD /* VialerGAITracker.swift in Sources */,
 				8382068C2290979A0098EABD /* Middleware.m in Sources */,
 				8382068D2290979A0098EABD /* SetupCallTransferContactsViewController.swift in Sources */,
@@ -5550,6 +5561,7 @@
 				83820713229098D20098EABD /* NumberPadButton.m in Sources */,
 				83820714229098D20098EABD /* VialerStats.swift in Sources */,
 				83820715229098D20098EABD /* EnumHelper.swift in Sources */,
+				5CEC5D91243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				83820716229098D20098EABD /* VIAScene.m in Sources */,
 				83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */,
 				83820718229098D20098EABD /* (null) in Sources */,
@@ -5677,6 +5689,7 @@
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
 				C41FD8761C60A08400BBE6D7 /* EditNumberViewController.m in Sources */,
 				C491B4451D5B1AB300F44090 /* UIViewControllerExtensions.swift in Sources */,
+				5CEC5D8A243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				C41FD8781C60A08400BBE6D7 /* VialerWebViewController.m in Sources */,
 				EE1C7B8B1F87777E00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C4B4075F1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
@@ -5816,6 +5829,7 @@
 				C490AD8D1D0863E3004A8F83 /* EditNumberViewController.m in Sources */,
 				C490AD8E1D0863E3004A8F83 /* VialerWebViewController.m in Sources */,
 				C490AD8F1D0863E3004A8F83 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				5CEC5D8E243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				C4AEB2541E6D954400550E0C /* Resource.swift in Sources */,
 				C4B407601E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8A1F87777E00708D96 /* TransferInProgressViewController.swift in Sources */,
@@ -5970,6 +5984,7 @@
 				EE23183520A0468F00C05EB0 /* VialerWebViewController.m in Sources */,
 				EE23183620A0468F00C05EB0 /* UIViewControllerExtensions.swift in Sources */,
 				EE23183720A0468F00C05EB0 /* VoIPGRIDRequestOperationManager.m in Sources */,
+				5CEC5D92243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				EE23183820A0468F00C05EB0 /* ReachabilityBarViewController.swift in Sources */,
 				EE23183920A0468F00C05EB0 /* TransferInProgressViewController.swift in Sources */,
 				EE23183A20A0468F00C05EB0 /* PhoneNumber.swift in Sources */,
@@ -6100,6 +6115,7 @@
 				EE61F41C1F1DDDE4006E890F /* UIAlertController+Vialer.m in Sources */,
 				EE61F41D1F1DDDE4006E890F /* EditNumberViewController.m in Sources */,
 				EE61F41E1F1DDDE4006E890F /* UIViewControllerExtensions.swift in Sources */,
+				5CEC5D8D243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				EE61F41F1F1DDDE4006E890F /* VialerWebViewController.m in Sources */,
 				EE61F4211F1DDDE4006E890F /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B881F87777C00708D96 /* TransferInProgressViewController.swift in Sources */,
@@ -6211,6 +6227,7 @@
 				F20851071D26935600A17E71 /* UIAlertController+Vialer.m in Sources */,
 				F208510A1D26935600A17E71 /* EditNumberViewController.m in Sources */,
 				C491B4461D5B1AB400F44090 /* UIViewControllerExtensions.swift in Sources */,
+				5CEC5D89243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				F208510B1D26935600A17E71 /* VialerWebViewController.m in Sources */,
 				C4B4075E1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
 				EE1C7B8C1F87777F00708D96 /* TransferInProgressViewController.swift in Sources */,
@@ -6341,6 +6358,7 @@
 				C491B4441D5B1A0300F44090 /* UIViewControllerExtensions.swift in Sources */,
 				FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */,
 				C4B4075D1E7ADFB900F5FC31 /* ReachabilityBarViewController.swift in Sources */,
+				5CEC5D86243E0C3800F6F3D2 /* SynchronousSipRegistration.swift in Sources */,
 				EE1C7B8D1F87777F00708D96 /* TransferInProgressViewController.swift in Sources */,
 				C43F06CB1E77D84400D6CAAA /* PhoneNumber.swift in Sources */,
 				3D608B611AE67DC800FA02CE /* ConfigureFormView.m in Sources */,

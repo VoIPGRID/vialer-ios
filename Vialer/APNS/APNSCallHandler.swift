@@ -14,78 +14,56 @@ class APNSCallHandler {
     let callKit = (UIApplication.shared.delegate as! AppDelegate).callKitProviderDelegate.provider!
     let reachabilityHelper = ReachabilityHelper.sharedInstance()
     let payload: PKPushPayload
-    
-    static var handledUuids = [String]()
-    
+    let synchronousSip: SynchronousSipRegistration
+    let vsl = VialerSIPLib.sharedInstance()
+
+    var call: VSLCall?
+
     init(payload: PKPushPayload) {
         self.payload = payload
+        self.synchronousSip = SynchronousSipRegistration()
     }
     
     /**
         Process an incoming VoIP notification, launching the Call UI and connecting to the back-end.
      */
     func handle(completion: @escaping () -> Void, uuid: UUID, number: String, update: CXCallUpdate) {
-         // This is to temporarily ignore all other push notifications for this call, it can be removed
-         // when the middleware only sends one.
-         if (APNSCallHandler.handledUuids.contains(uuid.uuidString)) { return }
-        
-         APNSCallHandler.handledUuids.append(uuid.uuidString)
-         
-         if (!(SystemUser.current()?.sipEnabled ?? false)) {
-             VialerLogError("There is no user, we are rejecting the call, the user will still hear this notification so this should not be happening..")
-             rejectCall(uuid: uuid, update: update)
-             return
-         }
-         
-         if (!reachabilityHelper.connectionFastEnoughForVoIP()) {
-             VialerLogWarning("The connection is not fast enough for VoIP but we can no longer decline the call.")
-         }
-         
-         SIPUtils.setupSIPEndpoint()
-         
-         registerAndRespond(uuid: uuid)
-         
-         sleep(1)
-         
-         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
-             if error != nil {
-                 self.callFailed(uuid: uuid)
-                 completion()
-                 return
-             }
-                 
-             guard let newCall = VSLCall(inboundCallWith: uuid, number: number, name:update.localizedCallerName ?? "") else {
-                 self.callFailed(uuid: uuid)
-                 completion()
-                 return
-             }
-                 
-             VialerSIPLib.sharedInstance().callManager.add(newCall)
-         
-             self.registerAndRespond(uuid: uuid)
-             
-             completion()
-         })
-    }
-    
-    /**
-        Register to SIP and respond to the middleware when registered successfully.
-     */
-    private func registerAndRespond(uuid: UUID) {
-        SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
-            if (!success) {
+        if (!(SystemUser.current()?.sipEnabled ?? false)) {
+            VialerLogError("There is no user, we are rejecting the call, the user will still hear this notification so this should not be happening..")
+            rejectCall(uuid: uuid, update: update)
+            return
+        }
+
+        if (!reachabilityHelper.connectionFastEnoughForVoIP()) {
+            VialerLogWarning("The connection is not fast enough for VoIP but we can no longer decline the call.")
+        }
+
+        if (!synchronousSip.register()) {
+            self.callFailed(uuid: uuid)
+            return
+        }
+
+        respondToMiddleware(available: true)
+
+        callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
+            if error != nil {
                 self.callFailed(uuid: uuid)
+                completion()
                 return
             }
-            
-            guard let call = VialerSIPLib.sharedInstance().callManager.call(with: uuid) else { return }
-            
-            if (call.account != nil) { return }
-            
-            call.account = account
-            
-            self.respondToMiddleware(available: true)
-        }
+
+            self.call = VSLCall(inboundCallWith: uuid, number: number, name: update.localizedCallerName ?? "")
+
+            if let call = self.call {
+                call.account = self.synchronousSip.account ?? nil
+                self.vsl.callManager.add(call)
+            }
+
+            completion()
+        })
+
+
+        stopRingingIfInvalidCall(uuid: uuid)
     }
     
     private func respondToMiddleware(available: Bool) {
@@ -111,5 +89,19 @@ class APNSCallHandler {
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
             self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
         })
+    }
+
+    /**
+        We are going to wait a short amount of time and then check to see if our incoming call has
+        an actual invite, this should validate that it is a valid call.
+     */
+    private func stopRingingIfInvalidCall(uuid: UUID) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            let hasInvite = self.call?.invite != nil
+            if (!hasInvite) {
+                VialerLogError("Call does not have an invite, therefore stopping ringing and marking as failed")
+                self.callFailed(uuid: uuid)
+            }
+        }
     }
 }
