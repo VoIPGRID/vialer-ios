@@ -136,6 +136,11 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (readonly, nonatomic) NSString *username;
 
 /**
+ *  The username of the uuid.
+ */
+@property (readonly, nonatomic) NSString *uuid;
+
+/**
  *  The password of the user that is logged in.
  */
 @property (readonly, nonatomic) NSString *password;

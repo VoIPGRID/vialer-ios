@@ -106,7 +106,13 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 }
 
 + (NSString *)remoteIdentifier {
-    return [[[UIDevice currentDevice].identifierForVendor UUIDString] substringToIndex:8];
+    NSString *uuid = [SystemUser currentUser].uuid;
+
+    if (uuid == nil) {
+        return @"NO-RID";
+    }
+
+    return [SystemUser currentUser].uuid;
 }
 
 #pragma mark - Helper Functions
@@ -192,7 +198,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
         NSString * mainLogEntriesToken = [[LogEntriesConfiguration shared] mainKey];
 
         LELog* logger = [LELog sessionWithToken:mainLogEntriesToken];
-        logger.debugLogs = NO;
+        logger.debugLogs = YES;
         [logger log: log];
 
         NSString * partnerLogEntriesToken = [[LogEntriesConfiguration shared] partnerKey];
