@@ -198,7 +198,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
         NSString * mainLogEntriesToken = [[LogEntriesConfiguration shared] mainKey];
 
         LELog* logger = [LELog sessionWithToken:mainLogEntriesToken];
-        logger.debugLogs = YES;
+        logger.debugLogs = NO;
         [logger log: log];
 
         NSString * partnerLogEntriesToken = [[LogEntriesConfiguration shared] partnerKey];
