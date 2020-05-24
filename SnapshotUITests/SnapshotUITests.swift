@@ -90,11 +90,12 @@ class SnapshotUITests: XCTestCase {
      * that the app isn't in the state the test assumes, at the login screen. So just logout could be a solution too.
      */
     func testSnapshotScreenshotRun() {
-        sleep(10)//orp wait a bit at the start
+        sleep(3)//orp wait a bit at the start
         
         //orp tap screen for to remove the ios type by sliding tip
-        app.tap()
-        sleep(10)//orp wait a bit more at the start
+//        app.tap()
+        sleep(3)//orp wait a bit more at the start
+        
         
         let usernameTextField = app.textFields["onboarding.loginView.username.textfield"]
         waitForElementToBeHittable(usernameTextField, andHit: true)
@@ -102,7 +103,7 @@ class SnapshotUITests: XCTestCase {
         usernameTextField.typeText(Constants.username)
 
         // Snapshot of the Login screen dispalying a username.
-        // orp for BRANDS snapshot("01-LoginScreen")
+        snapshot("01-LoginScreen")
 
         let passwordField = app.secureTextFields["onboarding.loginView.password.textfield"]
         waitForElementToBeHittable(passwordField , andHit: true)
@@ -131,11 +132,11 @@ class SnapshotUITests: XCTestCase {
         // At this point, onboarding is finished, the contacts authorization has been granted and the
         // "Contacts" view is displayed.
         // Click on the Toolbar's "Contacts" button.
-//        sleep(4) //orp
-//        let contactsTabBarButton = XCUIApplication().tabBars.buttons.element(boundBy: 1)
-//        sleep(4) //orp
-//        waitForElementToBeHittable(contactsTabBarButton, andHit: true)
-//        waitForElementToBeHittable(contactsTabBarButton, andHit: true)
+        sleep(6) //orp
+        let contactsTabBarButton = XCUIApplication().tabBars.buttons.element(boundBy: 1)
+        sleep(4) //orp
+        waitForElementToBeHittable(contactsTabBarButton, andHit: true)
+        waitForElementToBeHittable(contactsTabBarButton, andHit: true)
 
         sleep(8) //orp add some time to be sure the contacts are loaded
         
