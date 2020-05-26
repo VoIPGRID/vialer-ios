@@ -35,6 +35,14 @@
 		83021DE72232C18A007F63ED /* LogInViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83021DE62232C18A007F63ED /* LogInViewControllerTests.m */; };
 		83039D8B24745C4E00219076 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83039D8A24745C4E00219076 /* ringtone.wav */; };
 		83039D8E2474619C00219076 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83039D8A24745C4E00219076 /* ringtone.wav */; };
+		83039D91247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D92247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D93247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D94247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D95247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D96247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D97247806E900219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
+		83039D98247806EA00219076 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83039D90247806E800219076 /* ReviewManager.swift */; };
 		83129869215D033A00CFE01D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83129868215D033A00CFE01D /* GoogleService-Info.plist */; };
 		831E6BAE22316C57003B6AAC /* ConfigureFormViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E6BAD22316C57003B6AAC /* ConfigureFormViewTests.m */; };
 		832104B5229552F5002766BA /* Voys-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832104B4229552F5002766BA /* Voys-LaunchScreen.storyboard */; };
@@ -1670,6 +1678,7 @@
 		83021DE42232BC56007F63ED /* ForgotPasswordViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewTests.m; sourceTree = "<group>"; };
 		83021DE62232C18A007F63ED /* LogInViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogInViewControllerTests.m; sourceTree = "<group>"; };
 		83039D8A24745C4E00219076 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
+		83039D90247806E800219076 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		83129868215D033A00CFE01D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8319505321528D16009E960D /* Pods-VialerTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-frameworks.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-frameworks.sh"; sourceTree = "<group>"; };
 		8319505521528D27009E960D /* Pods-VialerTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Pods-VialerTests-resources.sh"; path = "Pods/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh"; sourceTree = "<group>"; };
@@ -2390,6 +2399,14 @@
 				EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		83039D8F2478062900219076 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				83039D90247806E800219076 /* ReviewManager.swift */,
+			);
+			name = Feedback;
 			sourceTree = "<group>";
 		};
 		832104B92296C78D002766BA /* Verbonden */ = {
@@ -3452,6 +3469,7 @@
 				EE5EC3A9213D084F0000EE4D /* Configuration */,
 				F94F47CA1BCB9F8400F40737 /* Contacts */,
 				C49A46B01E682A540097E808 /* Extensions */,
+				83039D8F2478062900219076 /* Feedback */,
 				FB5D291A182BE407001DA8F2 /* Helpers */,
 				C4C3EB011BFB882300AA4B2A /* Main */,
 				F2B40BD91C731F3E00502769 /* Middleware */,
@@ -5498,6 +5516,7 @@
 				838206942290979A0098EABD /* UnlockView.m in Sources */,
 				838206952290979A0098EABD /* UITableView.swift in Sources */,
 				838206962290979A0098EABD /* GradientView.swift in Sources */,
+				83039D98247806EA00219076 /* ReviewManager.swift in Sources */,
 				838206972290979A0098EABD /* AnimatedImageView.m in Sources */,
 				838206982290979A0098EABD /* RecentCall.swift in Sources */,
 				838206992290979A0098EABD /* UIImage.swift in Sources */,
@@ -5611,6 +5630,7 @@
 				83820743229098D20098EABD /* VialerIconView.m in Sources */,
 				83820744229098D20098EABD /* UnlockView.m in Sources */,
 				83820745229098D20098EABD /* GradientView.swift in Sources */,
+				83039D96247806E900219076 /* ReviewManager.swift in Sources */,
 				83820746229098D20098EABD /* UIImage.swift in Sources */,
 				83820747229098D20098EABD /* AnimatedImageView.m in Sources */,
 				83820748229098D20098EABD /* RecentCall.swift in Sources */,
@@ -5679,6 +5699,7 @@
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
 				C41FD86E1C60A08400BBE6D7 /* LogInViewController.m in Sources */,
 				EE3C480C2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
+				83039D93247806E900219076 /* ReviewManager.swift in Sources */,
 				EE3C47B32080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				C4947FD41C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m in Sources */,
 				C4AEB25B1E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
@@ -5821,6 +5842,7 @@
 				EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C490AD861D0863E3004A8F83 /* LogInViewController.m in Sources */,
 				EE3C47B62080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
+				83039D95247806E900219076 /* ReviewManager.swift in Sources */,
 				EE3C480F2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				C4AEB25C1E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
 				C4AEB24D1E6D593100550E0C /* SegueHandler.swift in Sources */,
@@ -5980,6 +6002,7 @@
 				EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */,
 				EE23182D20A0468F00C05EB0 /* TwoStepCallingViewController.m in Sources */,
 				EE23182E20A0468F00C05EB0 /* CircleWithShadow.m in Sources */,
+				83039D97247806E900219076 /* ReviewManager.swift in Sources */,
 				EE23182F20A0468F00C05EB0 /* WebserviceAuthentication.swift in Sources */,
 				EE23183020A0468F00C05EB0 /* SegueHandler.swift in Sources */,
 				EE23183120A0468F00C05EB0 /* StartCallConvertible.swift in Sources */,
@@ -6112,6 +6135,7 @@
 				EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */,
 				EE61F4161F1DDDE4006E890F /* LogInViewController.m in Sources */,
+				83039D94247806E900219076 /* ReviewManager.swift in Sources */,
 				EE3C480E2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				EE3C47B52080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				EE61F4181F1DDDE4006E890F /* WebserviceAuthentication.swift in Sources */,
@@ -6225,6 +6249,7 @@
 				EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
 				F20851041D26935600A17E71 /* LogInViewController.m in Sources */,
+				83039D92247806E900219076 /* ReviewManager.swift in Sources */,
 				EE3C480B2080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
 				EE3C47B22080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				C4AEB25A1E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
@@ -6357,6 +6382,7 @@
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
 				EE3C47B02080DBD500CC80E5 /* TwoStepCallingViewController.m in Sources */,
 				EE3C48092080DC2D00CC80E5 /* CircleWithShadow.m in Sources */,
+				83039D91247806E900219076 /* ReviewManager.swift in Sources */,
 				C4AEB2591E6D954400550E0C /* WebserviceAuthentication.swift in Sources */,
 				C4AEB24A1E6D593100550E0C /* SegueHandler.swift in Sources */,
 				F2C44A741DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,

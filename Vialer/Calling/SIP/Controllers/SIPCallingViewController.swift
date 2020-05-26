@@ -343,7 +343,7 @@ extension SIPCallingViewController {
         
         if !self.callGotAnError {
             switch self.activeCall!.callAudioState {
-            // There was no audio when the call was hungup.
+            // There was no audio when the call was hung up.
             case .noAudioReceiving: fallthrough
             case .noAudioTransmitting: fallthrough
             case .noAudioBothDirections:
@@ -352,6 +352,9 @@ extension SIPCallingViewController {
             case .OK: fallthrough
             default:
                 VialerStats.sharedInstance.callSuccess(self.activeCall!)
+                if #available(iOS 10.3, *) {
+                    ReviewManager.requestReviewIfAppropriate()
+                }
             }
         }
         
