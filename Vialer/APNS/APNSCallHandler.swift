@@ -61,9 +61,6 @@ class APNSCallHandler {
 
             completion()
         })
-
-
-        stopRingingIfInvalidCall(uuid: uuid)
     }
     
     private func respondToMiddleware(available: Bool) {
@@ -89,19 +86,5 @@ class APNSCallHandler {
         callKit.reportNewIncomingCall(with: uuid, update: update, completion: { (error) in
             self.callKit.reportCall(with: uuid, endedAt: nil, reason: CXCallEndedReason.failed)
         })
-    }
-
-    /**
-        We are going to wait a short amount of time and then check to see if our incoming call has
-        an actual invite, this should validate that it is a valid call.
-     */
-    private func stopRingingIfInvalidCall(uuid: UUID) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            let hasInvite = self.call?.invite != nil
-            if (!hasInvite) {
-                VialerLogError("Call does not have an invite, therefore stopping ringing and marking as failed")
-                self.callFailed(uuid: uuid)
-            }
-        }
     }
 }
