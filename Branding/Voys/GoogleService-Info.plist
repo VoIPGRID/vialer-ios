@@ -4,21 +4,35 @@
 <dict>
 	<key>TRACKING_ID</key>
 	<string>UA-401436-28</string>
+	<key>CLIENT_ID</key>
+	<string>535767674588-4qj5sfcq1kodqt4ba2smcij01rrdmgri.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.535767674588-4qj5sfcq1kodqt4ba2smcij01rrdmgri</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBcm77egMVKQzGRfhTxI0wJazA7r2iwBzQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>535767674588</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.voys.app</string>
+	<key>PROJECT_ID</key>
+	<string>voys-fcm</string>
+	<key>STORAGE_BUCKET</key>
+	<string>voys-fcm.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<false/>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1088426131543:ios:65ad463e19edf623</string>
+	<string>1:535767674588:ios:65ad463e19edf623</string>
+	<key>DATABASE_URL</key>
+	<string>https://voys-fcm.firebaseio.com</string>
 </dict>
 </plist>
