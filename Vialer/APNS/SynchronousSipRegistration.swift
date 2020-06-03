@@ -14,7 +14,9 @@ class SynchronousSipRegistration {
     private var hasRegistered = false
 
     private var hasFailed = false
-    
+
+    private var vsl = VialerSIPLib.sharedInstance()
+
     var account: VSLAccount?
 
     /**
@@ -32,6 +34,13 @@ class SynchronousSipRegistration {
     */
     func performRegister() {
         VialerLogInfo("Attempting to register SIP account")
+
+        if (vsl.firstAccount()?.isRegistered == true) {
+            VialerLogInfo("Account is already registered!")
+            hasRegistered = true
+            self.account = vsl.firstAccount()
+            return;
+        }
 
         SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
             if (success) {
