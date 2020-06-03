@@ -554,7 +554,9 @@ extension AppDelegate {
 // Reachability
 extension AppDelegate {
     @objc func reachabilityChanged(note: NSNotification) {
-        VialerLogInfo("Reachability changed, rebooting SIP")
-        SIPUtils.setupSIPEndpoint()
+        if (reachability.isReachable) {
+            VialerLogInfo("Reachability changed, rebooting SIP")
+            SIPUtils.setupSIPEndpoint()
+        }
     }
 }
