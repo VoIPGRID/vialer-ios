@@ -81,40 +81,6 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 }
 
 #pragma mark - actions
-- (void)callCleanUp:(NSUUID * _Nonnull)uuid {
-    VialerLogDebug(@"Cleaning up call and CallKitUI for: %@", uuid);
-    
-    VSLCallManager *callManager = [VialerSIPLib sharedInstance].callManager;
-    VSLCall *call = [callManager callWithUUID:uuid];
-    if (call) {
-        [callManager removeCall:call];
-    
-        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        [[[appDelegate callKitProviderDelegate] provider] reportCallWithUUID:call.uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonFailed];
-    }
-}
-
-- (void)handleReceivedAPSNPayload:(NSDictionary *)payload {
-    // Get the callUUID from the payload.
-    NSString* uuidString = payload[[PushedCall MiddlewareAPNSPayloadKeyUniqueKey]];
-    // The uuid string in the payload is missing hyphens so fix that.
-    NSUUID* callUUID = [NSUUID uuidFixerWithString:uuidString];
-    // Set current time to measure response time.
-    NSDate *pushResponseTimeMeasurementStart = [NSDate date];
-    
-    NSString *payloadType = payload[[PushedCall MiddlewareAPNSPayloadKeyType]];
-    VialerLogDebug(@"Processing push message received in handleReceivedAPSNPayload from middleware of type: %@", payloadType);
-    VialerLogDebug(@"Payload:\n%@", payload);
-
-    if ([payloadType isEqualToString:[PushedCall MiddlewareAPNSPayloadKeyCheckin]]) {
-        VialerLogDebug(@"Checkin payload:\n %@", payload);
-    } else if ([payloadType isEqualToString:[PushedCall MiddlewareAPNSPayloadKeyMessage]] && self.systemUser.sipEnabled) {
-        VialerLogWarning(@"Another device took over the SIP account, disabling account.");
-        self.systemUser.sipEnabled = NO;
-        NSNotification *notification = [NSNotification notificationWithName:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
-        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostASAP];
-    }
-}
 
 /**
  *  Invoked when the SystemUserSIPCredentialsChangedNotification is received.

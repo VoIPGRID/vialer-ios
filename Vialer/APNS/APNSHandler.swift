@@ -17,7 +17,7 @@ import UIKit
     @objc static var sharedAPNSHandler = APNSHandler()
     @objc var voipRegistry: PKPushRegistry = PKPushRegistry(queue: nil)
     @objc var middleware: Middleware = Middleware()
-        
+
     // MARK: - Lifecycle
     @objc private override init(){}
     
@@ -57,8 +57,8 @@ import UIKit
         VialerLogInfo("We have received a push message, attempting to handle it.")
         
         // Extract the call information from the push notification payload.
-        if let phoneNumberString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyPhonenumber] as? String,
-            let uuidString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyUniqueKey] as? String {
+        if let phoneNumberString = payload.dictionaryPayload[APNSCallHandler.PayloadLookup.phoneNumber] as? String,
+            let uuidString = payload.dictionaryPayload[APNSCallHandler.PayloadLookup.uniqueKey] as? String {
             // The uuid string in the payload is missing hyphens so fix that.
             let callUUID = NSUUID.uuidFixer(uuidString: uuidString)! as UUID
             
@@ -67,7 +67,7 @@ import UIKit
             let phoneNumberHandle = CXHandle(type: .phoneNumber, value: phoneNumberString)
             callUpdate.remoteHandle = phoneNumberHandle
             callUpdate.localizedCallerName = phoneNumberString
-            if let callerId = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyCallerId] as? String {
+            if let callerId = payload.dictionaryPayload[APNSCallHandler.PayloadLookup.callerId] as? String {
                 callUpdate.localizedCallerName = callerId
             }
 
