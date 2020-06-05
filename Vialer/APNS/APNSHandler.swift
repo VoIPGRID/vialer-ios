@@ -53,6 +53,8 @@ import UIKit
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         guard type == .voIP else { return }
+
+        VialerLogInfo("We have received a push message, attempting to handle it.")
         
         // Extract the call information from the push notification payload.
         if let phoneNumberString = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyPhonenumber] as? String,
@@ -68,8 +70,7 @@ import UIKit
             if let callerId = payload.dictionaryPayload[PushedCall.MiddlewareAPNSPayloadKeyCallerId] as? String {
                 callUpdate.localizedCallerName = callerId
             }
-        
-            
+
             APNSCallHandler(payload: payload).handle(completion: completion, uuid: callUUID, number: phoneNumberString, update: callUpdate)
         }
     }
