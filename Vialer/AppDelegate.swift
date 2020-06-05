@@ -175,15 +175,8 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: NSNotification.Name(rawValue: ReachabilityChangedNotification),object: reachability)
 
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
-
-        do {
-            try reachability.startNotifier()
-        } catch {
-        }
-
         _ = ReachabilityHelper.instance
     }
 
@@ -199,7 +192,6 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ReachabilityChangedNotification), object: reachability)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
         reachability.stopNotifier()
     }
@@ -325,6 +317,7 @@ extension AppDelegate {
         VialerLogDebug("Setup the listener for incoming calls through VoIP.");
         vialerSIPLib.setIncomingCall { call in
             VialerGAITracker.incomingCallRingingEvent()
+            APNSCallHandler.incomingCallConfirmed = true
             DispatchQueue.main.async {
                 VialerLogInfo("Incoming call block invoked, routing through CallKit.")
                 self.mostRecentCall = call
@@ -547,16 +540,6 @@ extension AppDelegate {
         if callAvailabilityTimer != nil {
             callAvailabilityTimer.invalidate()
             callAvailabilityTimer = nil
-        }
-    }
-}
-
-// Reachability
-extension AppDelegate {
-    @objc func reachabilityChanged(note: NSNotification) {
-        if (reachability.isReachable) {
-            VialerLogInfo("Reachability changed, rebooting SIP")
-            SIPUtils.setupSIPEndpoint()
         }
     }
 }
