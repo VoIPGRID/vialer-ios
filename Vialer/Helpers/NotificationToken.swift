@@ -56,7 +56,3 @@ extension SystemUser {
     static var sipChangedNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserSIPCredentialsChanged)
     static var encryptionUsageNotification = NotificationDescriptor<Any>(name: Notification.Name.SystemUserEncryptionUsageChanged)
 }
-
-extension Middleware {
-    static var accountRegistrationDone = NotificationDescriptor<Any>(name: Notification.Name.MiddlewareAccountRegistrationIsDone)
-}

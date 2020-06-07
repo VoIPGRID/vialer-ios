@@ -110,7 +110,6 @@
 		838206802290979A0098EABD /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */; };
 		838206812290979A0098EABD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
 		838206822290979A0098EABD /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
-		838206832290979A0098EABD /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		838206842290979A0098EABD /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		838206852290979A0098EABD /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		838206862290979A0098EABD /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
@@ -119,7 +118,6 @@
 		838206892290979A0098EABD /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
 		8382068A2290979A0098EABD /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
 		8382068B2290979A0098EABD /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
-		8382068C2290979A0098EABD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		8382068D2290979A0098EABD /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		8382068E2290979A0098EABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
 		8382068F2290979A0098EABD /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
@@ -259,7 +257,6 @@
 		83820730229098D20098EABD /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */; };
 		83820731229098D20098EABD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
 		83820732229098D20098EABD /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
-		83820733229098D20098EABD /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		83820734229098D20098EABD /* PasteableUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B220C520E0003480F6 /* PasteableUILabel.m */; };
 		83820735229098D20098EABD /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		83820736229098D20098EABD /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
@@ -270,7 +267,6 @@
 		8382073B229098D20098EABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
 		8382073C229098D20098EABD /* SetupCallTransferContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D400290722083BC600E5AA68 /* SetupCallTransferContactsViewController.swift */; };
 		8382073D229098D20098EABD /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
-		8382073E229098D20098EABD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		8382073F229098D20098EABD /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		83820740229098D20098EABD /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B21E682A540097E808 /* UITableView.swift */; };
 		83820741229098D20098EABD /* TokenFromPasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */; };
@@ -575,7 +571,6 @@
 		C490AD961D0863E3004A8F83 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
 		C490AD991D0863E3004A8F83 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		C490AD9A1D0863E3004A8F83 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
-		C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		C490ADA11D0863E3004A8F83 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		C490ADA21D0863E3004A8F83 /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
@@ -854,14 +849,12 @@
 		EE23184220A0468F00C05EB0 /* SIPCallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFA1F876628002F0679 /* SIPCallingViewController.swift */; };
 		EE23184320A0468F00C05EB0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
 		EE23184420A0468F00C05EB0 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3C26E1F90919200423F96 /* ReachabilityHelper.swift */; };
-		EE23184520A0468F00C05EB0 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		EE23184620A0468F00C05EB0 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		EE23184720A0468F00C05EB0 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		EE23184820A0468F00C05EB0 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
 		EE23184B20A0468F00C05EB0 /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
 		EE23184C20A0468F00C05EB0 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
 		EE23184D20A0468F00C05EB0 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
-		EE23184E20A0468F00C05EB0 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		EE23184F20A0468F00C05EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
 		EE23185020A0468F00C05EB0 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		EE23185120A0468F00C05EB0 /* CircleWithWhiteIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47F72080DC2D00CC80E5 /* CircleWithWhiteIcon.m */; };
@@ -1008,10 +1001,6 @@
 		EE5EC3CA214008860000EE4D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3C6214008860000EE4D /* GradientView.swift */; };
 		EE5EC3CB214008860000EE4D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3C6214008860000EE4D /* GradientView.swift */; };
 		EE5EC3CC214008860000EE4D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3C6214008860000EE4D /* GradientView.swift */; };
-		EE5F1E691E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
-		EE5F1E6A1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
-		EE5F1E6B1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
-		EE5F1E6C1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		EE61F3F61F1DDDE4006E890F /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		EE61F3F71F1DDDE4006E890F /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
 		EE61F3F81F1DDDE4006E890F /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
@@ -1052,14 +1041,12 @@
 		EE61F42B1F1DDDE4006E890F /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */; };
 		EE61F42C1F1DDDE4006E890F /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
 		EE61F42D1F1DDDE4006E890F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B407571E7A869900F5FC31 /* Reachability.swift */; };
-		EE61F42E1F1DDDE4006E890F /* PushedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */; };
 		EE61F42F1F1DDDE4006E890F /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		EE61F4301F1DDDE4006E890F /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		EE61F4331F1DDDE4006E890F /* WebserviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B048E1E7936FD00280381 /* WebserviceProtocol.swift */; };
 		EE61F4341F1DDDE4006E890F /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB24F1E6D954400550E0C /* Webservice.swift */; };
 		EE61F4361F1DDDE4006E890F /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
 		EE61F4381F1DDDE4006E890F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC31E30C4CE005B2E4E /* AppDelegate.swift */; };
-		EE61F43A1F1DDDE4006E890F /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		EE61F43B1F1DDDE4006E890F /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		EE61F43E1F1DDDE4006E890F /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		EE61F43F1F1DDDE4006E890F /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A46B21E682A540097E808 /* UITableView.swift */; };
@@ -1234,7 +1221,6 @@
 		F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10031C7C668D007F30A6 /* ActivateSIPAccountViewController.m */; };
 		F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C467430B1BF726AA0032D77B /* RecentTableViewCell.m */; };
 		F208511C1D26935600A17E71 /* VialerGAITracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C6756D1D19C04C0003A385 /* VialerGAITracker.swift */; };
-		F208511D1D26935600A17E71 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4675FF31C46A01F008820C8 /* ButtonWithBottomBorder.m */; };
 		F208511F1D26935600A17E71 /* UnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADA1AF0CB4800C09935 /* UnlockView.m */; };
 		F20851201D26935600A17E71 /* AnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303B1AEF67D50034156F /* AnimatedImageView.m */; };
@@ -1299,8 +1285,6 @@
 		F2A958BC1D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		F2A958C51D2BA24B00C1D854 /* RecentsTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */; };
 		F2A958C71D2BA2A800C1D854 /* RecentsTimeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */; };
-		F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
-		F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B40BDB1C731F3E00502769 /* Middleware.m */; };
 		F2C44A651DE40EDD00F7CF50 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A641DE40EDD00F7CF50 /* IntentHandler.swift */; };
 		F2C44A691DE40EDD00F7CF50 /* VialerIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F2C44A701DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C44A6E1DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift */; };
@@ -1316,6 +1300,33 @@
 		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
+		F81F007C70C1441996158E9F /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F0159A631FB06EE9EBDCD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F0175AA8D58FCE4CB0D6D /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F018ABBB65934950EEBDB /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F01DB8F0274D1C924A053 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F0205ECEC10433798CDD6 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F021BC6ADDF94E5DDB908 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F028666EB76E42F957238 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F03298E167AE1E469826B /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F03FAFC2A2FA25A78DABF /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F056FA88CDA7542DBFB1E /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F0576C62465CD6267C091 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F0588D0B6B0E560955CFA /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F05D3A033CCCA9A850B1D /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F07ACAC4EDEC07D019F8A /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F085C07311554C7B89228 /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F0AF9E9216CBBAC8C2702 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F0C1E3FEC440514C2F5EC /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F0C6A162B61A1E017010E /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F0CAB070A5C18D8794387 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F0DCE30DF249B8294BABF /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F0F52613D9C71BA058DA7 /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
 		F9A71EC01C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
@@ -1869,7 +1880,6 @@
 		EE5EC3B8213FDC680000EE4D /* GAConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAConfiguration.swift; sourceTree = "<group>"; };
 		EE5EC3BF213FE0F70000EE4D /* ColorsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsConfiguration.swift; sourceTree = "<group>"; };
 		EE5EC3C6214008860000EE4D /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = Helpers/GradientView.swift; sourceTree = "<group>"; };
-		EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushedCall.swift; sourceTree = "<group>"; };
 		EE61F48D1F1DDDE4006E890F /* Voys Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voys Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE61F4911F1DDE7D006E890F /* Acceptatie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Info.plist"; sourceTree = "<group>"; };
 		EE61F4921F1DDE7D006E890F /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -1941,8 +1951,6 @@
 		F2A7AEFA1CF4757600889DD8 /* TestKVOObserverClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestKVOObserverClass.m; sourceTree = "<group>"; };
 		F2A958B81D2AA11700C1D854 /* RecentsTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsTimeConverter.swift; path = Recents/Models/RecentsTimeConverter.swift; sourceTree = "<group>"; };
 		F2A958C61D2BA2A800C1D854 /* RecentsTimeConverterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsTimeConverterTests.swift; sourceTree = "<group>"; };
-		F2B40BDA1C731F3E00502769 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
-		F2B40BDB1C731F3E00502769 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
 		F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
 		F2B43F161C3BEB880089A387 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F2C44A621DE40EDD00F7CF50 /* VialerIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VialerIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1954,6 +1962,10 @@
 		F2DE21851CB69E7F007B5B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ReachabilityBarStoryboard.storyboard; sourceTree = "<group>"; };
 		F2E5EF131D09736100F7C699 /* .env.verbonden */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.verbonden; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Vialer-Prefix.pch"; path = "Supporting Files/Vialer-Prefix.pch"; sourceTree = "<group>"; };
+		F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VialerCallKitDelegate.swift; sourceTree = "<group>"; };
+		F81F05D06D0A053005A21DD8 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
+		F81F0C232DB66DD915AB9078 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
+		F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSLExtensions.swift; sourceTree = "<group>"; };
 		F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewControllerTests.m; sourceTree = "<group>"; };
 		F9A71EBE1C7F5F360083C8B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPIncomingCallStoryboard.storyboard; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
@@ -2820,6 +2832,8 @@
 				C432A86A1C58EF8C00909F16 /* Dialer */,
 				C41926511BE3A67100436D92 /* TwoStep */,
 				C4C3EB051BFB88B000AA4B2A /* SIP */,
+				F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */,
+				F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */,
 			);
 			name = Calling;
 			sourceTree = "<group>";
@@ -3122,11 +3136,10 @@
 		F2B40BD91C731F3E00502769 /* Middleware */ = {
 			isa = PBXGroup;
 			children = (
-				F2B40BDA1C731F3E00502769 /* Middleware.h */,
-				F2B40BDB1C731F3E00502769 /* Middleware.m */,
 				C4947FD11C999DDA0065D7C1 /* MiddlewareRequestOperationManager.h */,
 				C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */,
-				EE5F1E681E9CDCBC00E71AC2 /* PushedCall.swift */,
+				F81F05D06D0A053005A21DD8 /* Middleware.m */,
+				F81F0C232DB66DD915AB9078 /* Middleware.h */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -5466,7 +5479,6 @@
 				838206812290979A0098EABD /* Reachability.swift in Sources */,
 				838206822290979A0098EABD /* ReachabilityHelper.swift in Sources */,
 				83BA7FE3233226F800B066E6 /* APNSHandler.swift in Sources */,
-				838206832290979A0098EABD /* PushedCall.swift in Sources */,
 				838206842290979A0098EABD /* KeypadViewController.swift in Sources */,
 				838206852290979A0098EABD /* PasteableUILabel.m in Sources */,
 				838206862290979A0098EABD /* RecentTableViewCell.m in Sources */,
@@ -5476,7 +5488,6 @@
 				8382068A2290979A0098EABD /* Webservice.swift in Sources */,
 				5CEC5D95243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift in Sources */,
 				8382068B2290979A0098EABD /* VialerGAITracker.swift in Sources */,
-				8382068C2290979A0098EABD /* Middleware.m in Sources */,
 				8382068D2290979A0098EABD /* SetupCallTransferContactsViewController.swift in Sources */,
 				8382068E2290979A0098EABD /* AppDelegate.swift in Sources */,
 				8382068F2290979A0098EABD /* RecentsTimeConverter.swift in Sources */,
@@ -5507,6 +5518,9 @@
 				D4107093235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */,
 				838206A82290979A0098EABD /* ContactsViewController.m in Sources */,
+				F81F0AF9E9216CBBAC8C2702 /* Middleware.m in Sources */,
+				F81F007C70C1441996158E9F /* VialerCallKitDelegate.swift in Sources */,
+				F81F085C07311554C7B89228 /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5580,7 +5594,6 @@
 				83820731229098D20098EABD /* Reachability.swift in Sources */,
 				83BA7FE1233226F800B066E6 /* APNSHandler.swift in Sources */,
 				83820732229098D20098EABD /* ReachabilityHelper.swift in Sources */,
-				83820733229098D20098EABD /* PushedCall.swift in Sources */,
 				83820734229098D20098EABD /* PasteableUILabel.m in Sources */,
 				83820735229098D20098EABD /* KeypadViewController.swift in Sources */,
 				83820736229098D20098EABD /* Webservice.swift in Sources */,
@@ -5591,7 +5604,6 @@
 				8382073B229098D20098EABD /* AppDelegate.swift in Sources */,
 				8382073C229098D20098EABD /* SetupCallTransferContactsViewController.swift in Sources */,
 				8382073D229098D20098EABD /* VialerGAITracker.swift in Sources */,
-				8382073E229098D20098EABD /* Middleware.m in Sources */,
 				8382073F229098D20098EABD /* ButtonWithBottomBorder.m in Sources */,
 				83820740229098D20098EABD /* UITableView.swift in Sources */,
 				83820741229098D20098EABD /* TokenFromPasteBoard.swift in Sources */,
@@ -5619,6 +5631,9 @@
 				D4107091235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */,
 				83820757229098D20098EABD /* ContactsViewController.m in Sources */,
+				F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */,
+				F81F0CAB070A5C18D8794387 /* VialerCallKitDelegate.swift in Sources */,
+				F81F05D3A033CCCA9A850B1D /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5626,7 +5641,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2B40BDF1C731F3E00502769 /* Middleware.m in Sources */,
 				C4AEB2601E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
 				EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */,
 				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
@@ -5690,7 +5704,6 @@
 				EE1C7B851F87777800708D96 /* SIPCallingViewController.swift in Sources */,
 				F2C44A721DE4149F00F7CF50 /* NSUserActivity+StartCallConvertible.swift in Sources */,
 				EEA3C2721F90919200423F96 /* ReachabilityHelper.swift in Sources */,
-				EE5F1E6B1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				EE1C7B801F87777200708D96 /* KeypadViewController.swift in Sources */,
 				EEDCC3C220C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				C4B4075A1E7A869900F5FC31 /* Reachability.swift in Sources */,
@@ -5731,6 +5744,9 @@
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
+				F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */,
+				F81F0576C62465CD6267C091 /* VialerCallKitDelegate.swift in Sources */,
+				F81F0F52613D9C71BA058DA7 /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5832,7 +5848,6 @@
 				EE1C7B831F87777700708D96 /* SIPCallingViewController.swift in Sources */,
 				C4B4075B1E7A869900F5FC31 /* Reachability.swift in Sources */,
 				EEA3C2751F90919200423F96 /* ReachabilityHelper.swift in Sources */,
-				EE5F1E6C1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				EEDCC3C420C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE1C7B821F87777400708D96 /* KeypadViewController.swift in Sources */,
 				C4AEB2581E6D954400550E0C /* Webservice.swift in Sources */,
@@ -5842,7 +5857,6 @@
 				C48931D31D8092E300C5633C /* UIViewControllerExtensions.swift in Sources */,
 				C420AEC71E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				C4C675701D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
-				C490AD9F1D0863E3004A8F83 /* Middleware.m in Sources */,
 				C490ADA01D0863E3004A8F83 /* ButtonWithBottomBorder.m in Sources */,
 				C49A46BB1E682A540097E808 /* UITableView.swift in Sources */,
 				EEF06BA920970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
@@ -5871,6 +5885,9 @@
 				C4AD4E6B1E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C490ADA71D0863E3004A8F83 /* UIView+RoundedStyle.m in Sources */,
 				C490ADA91D0863E3004A8F83 /* ContactsViewController.m in Sources */,
+				F81F01DB8F0274D1C924A053 /* Middleware.m in Sources */,
+				F81F018ABBB65934950EEBDB /* VialerCallKitDelegate.swift in Sources */,
+				F81F03FAFC2A2FA25A78DABF /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5914,6 +5931,9 @@
 				C4A452671C24641300846591 /* RoundedAndColoredUIButtonTests.m in Sources */,
 				83021DE52232BC56007F63ED /* ForgotPasswordViewTests.m in Sources */,
 				831E6BAE22316C57003B6AAC /* ConfigureFormViewTests.m in Sources */,
+				F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */,
+				F81F03298E167AE1E469826B /* VialerCallKitDelegate.swift in Sources */,
+				F81F056FA88CDA7542DBFB1E /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5986,7 +6006,6 @@
 				EE23184220A0468F00C05EB0 /* SIPCallingViewController.swift in Sources */,
 				EE23184320A0468F00C05EB0 /* Reachability.swift in Sources */,
 				EE23184420A0468F00C05EB0 /* ReachabilityHelper.swift in Sources */,
-				EE23184520A0468F00C05EB0 /* PushedCall.swift in Sources */,
 				EE23184620A0468F00C05EB0 /* KeypadViewController.swift in Sources */,
 				EEDCC3C520C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE23184720A0468F00C05EB0 /* RecentTableViewCell.m in Sources */,
@@ -5995,7 +6014,6 @@
 				EE23184B20A0468F00C05EB0 /* WebserviceProtocol.swift in Sources */,
 				EE23184C20A0468F00C05EB0 /* Webservice.swift in Sources */,
 				EE23184D20A0468F00C05EB0 /* VialerGAITracker.swift in Sources */,
-				EE23184E20A0468F00C05EB0 /* Middleware.m in Sources */,
 				EE23184F20A0468F00C05EB0 /* AppDelegate.swift in Sources */,
 				EE23185020A0468F00C05EB0 /* RecentsTimeConverter.swift in Sources */,
 				EE23185120A0468F00C05EB0 /* CircleWithWhiteIcon.m in Sources */,
@@ -6026,6 +6044,9 @@
 				EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */,
 				EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */,
 				EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */,
+				F81F0175AA8D58FCE4CB0D6D /* Middleware.m in Sources */,
+				F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */,
+				F81F07ACAC4EDEC07D019F8A /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6118,7 +6139,6 @@
 				EE1C7B841F87777700708D96 /* SIPCallingViewController.swift in Sources */,
 				EE61F42D1F1DDDE4006E890F /* Reachability.swift in Sources */,
 				EEA3C2741F90919200423F96 /* ReachabilityHelper.swift in Sources */,
-				EE61F42E1F1DDDE4006E890F /* PushedCall.swift in Sources */,
 				EEDCC3C320C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE1C7B811F87777300708D96 /* KeypadViewController.swift in Sources */,
 				EE61F42F1F1DDDE4006E890F /* ActivateSIPAccountViewController.m in Sources */,
@@ -6129,7 +6149,6 @@
 				EE61F4341F1DDDE4006E890F /* Webservice.swift in Sources */,
 				EE61F4361F1DDDE4006E890F /* VialerGAITracker.swift in Sources */,
 				EE61F4381F1DDDE4006E890F /* AppDelegate.swift in Sources */,
-				EE61F43A1F1DDDE4006E890F /* Middleware.m in Sources */,
 				EE61F43B1F1DDDE4006E890F /* ButtonWithBottomBorder.m in Sources */,
 				EEF06BA820970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				D410708F235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
@@ -6157,6 +6176,9 @@
 				EE61F44A1F1DDDE4006E890F /* CoreDataStack.swift in Sources */,
 				EE61F44B1F1DDDE4006E890F /* UIView+RoundedStyle.m in Sources */,
 				EE61F44C1F1DDDE4006E890F /* ContactsViewController.m in Sources */,
+				F81F028666EB76E42F957238 /* Middleware.m in Sources */,
+				F81F0205ECEC10433798CDD6 /* VialerCallKitDelegate.swift in Sources */,
+				F81F0588D0B6B0E560955CFA /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6230,7 +6252,6 @@
 				EE1C7B861F87777800708D96 /* SIPCallingViewController.swift in Sources */,
 				C4B407591E7A869900F5FC31 /* Reachability.swift in Sources */,
 				EEA3C2711F90919200423F96 /* ReachabilityHelper.swift in Sources */,
-				EE5F1E6A1E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				EEDCC3C120C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE1C7B7F1F87777200708D96 /* KeypadViewController.swift in Sources */,
 				F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */,
@@ -6241,7 +6262,6 @@
 				C4AEB2561E6D954400550E0C /* Webservice.swift in Sources */,
 				F208511C1D26935600A17E71 /* VialerGAITracker.swift in Sources */,
 				C420AEC51E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
-				F208511D1D26935600A17E71 /* Middleware.m in Sources */,
 				F208511E1D26935600A17E71 /* ButtonWithBottomBorder.m in Sources */,
 				EEF06BA620970400000CF109 /* TokenFromPasteBoard.swift in Sources */,
 				D410708D235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
@@ -6269,6 +6289,9 @@
 				C4AD4E691E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				F20851261D26935600A17E71 /* UIView+RoundedStyle.m in Sources */,
 				F20851281D26935600A17E71 /* ContactsViewController.m in Sources */,
+				F81F0C1E3FEC440514C2F5EC /* Middleware.m in Sources */,
+				F81F021BC6ADDF94E5DDB908 /* VialerCallKitDelegate.swift in Sources */,
+				F81F0DCE30DF249B8294BABF /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6358,7 +6381,6 @@
 				EE1C7B871F87777900708D96 /* SIPCallingViewController.swift in Sources */,
 				C4B407581E7A869900F5FC31 /* Reachability.swift in Sources */,
 				EEA3C26F1F90919200423F96 /* ReachabilityHelper.swift in Sources */,
-				EE5F1E691E9CDCBC00E71AC2 /* PushedCall.swift in Sources */,
 				EE1C7B7E1F87777100708D96 /* KeypadViewController.swift in Sources */,
 				83DA45F322706A9300212371 /* AvailabilityModel.swift in Sources */,
 				EEDCC3C020C520E0003480F6 /* PasteableUILabel.m in Sources */,
@@ -6368,7 +6390,6 @@
 				C42B048F1E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
 				C4AEB2551E6D954400550E0C /* Webservice.swift in Sources */,
 				C4C6756E1D19C04C0003A385 /* VialerGAITracker.swift in Sources */,
-				F2B40BDE1C731F3E00502769 /* Middleware.m in Sources */,
 				D400290822083BC600E5AA68 /* SetupCallTransferContactsViewController.swift in Sources */,
 				C420AEC41E30C4CE005B2E4E /* AppDelegate.swift in Sources */,
 				F2A958B91D2AA11700C1D854 /* RecentsTimeConverter.swift in Sources */,
@@ -6400,6 +6421,9 @@
 				C4AD4E681E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
+				F81F0159A631FB06EE9EBDCD /* Middleware.m in Sources */,
+				F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */,
+				F81F0C6A162B61A1E017010E /* VSLExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

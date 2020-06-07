@@ -48,7 +48,7 @@ import UserNotifications
     }
     var stopVibrating = false
     var vibratingTask: UIBackgroundTaskIdentifier?
-    @objc var callKitProviderDelegate: CallKitProviderDelegate!
+    @objc var callKitProviderDelegate: VialerCallKitDelegate!
     var callAvailabilityTimer: Timer!
     var callAvailabilityTimesFired: Int = 0
     
@@ -103,6 +103,7 @@ extension AppDelegate: UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        NotificationCenter.default.post(name: Notification.Name.teardownSip, object: self)
         saveContext()
     }
 
@@ -175,6 +176,7 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tearDownSip(_:)), name: Notification.Name.teardownSip, object: nil)
 
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
         _ = ReachabilityHelper.instance
@@ -192,6 +194,7 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.teardownSip, object: nil)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
         reachability.stopNotifier()
     }
@@ -294,6 +297,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             VialerLogWarning("Error setting up a call with \(statusCode) / \(statusMessage)")
         }
     }
+
+    @objc fileprivate func tearDownSip(_ notification: NSNotification) {
+        SIPUtils.safelyRemoveSipEndpoint()
+    }
 }
 
 // MARK: - VoIP
@@ -302,7 +309,7 @@ extension AppDelegate {
     /// Make sure the VoIP parts are up and running
     fileprivate func setupVoIP() {
         VialerLogDebug("Setup VoIP with CallKit support, loading the callKitProvider.")
-        callKitProviderDelegate = CallKitProviderDelegate(callManager: vialerSIPLib.callManager)
+        callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
         callEventMonitor.start()
         if user.sipEnabled {
             VialerLogDebug("VoIP is enabled start the endpoint.")
@@ -321,7 +328,7 @@ extension AppDelegate {
             DispatchQueue.main.async {
                 VialerLogInfo("Incoming call block invoked, routing through CallKit.")
                 self.mostRecentCall = call
-                self.callKitProviderDelegate.reportIncomingCall(call)
+                self.callKitProviderDelegate.reportIncomingCall(call: call)
             }
         }
     }
@@ -360,7 +367,6 @@ extension AppDelegate {
         }
             
         DispatchQueue.main.async {
-            SIPUtils.setupSIPEndpoint()
             APNSHandler.sharedAPNSHandler.registerForVoIPNotifications()
             self.registerForLocalNotifications()
         }
@@ -375,10 +381,6 @@ extension AppDelegate {
         if !user.sipEnabled {
             VialerLogWarning("SIP not enabled")
             return
-        }
-
-        DispatchQueue.main.async {
-            SIPUtils.setupSIPEndpoint()
         }
     }
 
@@ -427,6 +429,8 @@ extension AppDelegate {
 
             return true;
         }
+
+        SIPUtils.setupSIPEndpoint()
 
         guard let account = SIPUtils.addSIPAccountToEndpoint() else {
             VialerLogError("Couldn't add account to endpoint, not setting up call to: \(phoneNumber)")

@@ -71,6 +71,15 @@
     return success;
 }
 
++ (void)safelyRemoveSipEndpoint {
+    if ([VialerSIPLib sharedInstance].endpointAvailable && [self getFirstActiveCall] == nil) {
+        for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
+            [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
+        }
+        [SIPUtils removeSIPEndpoint];
+    }
+}
+
 + (void)removeSIPEndpoint {
     [[VialerSIPLib sharedInstance] removeEndpoint];
 }
@@ -80,11 +89,7 @@
     VSLCodecConfiguration *codecConfiguration = [SIPUtils codecConfiguration];
     VSLAudioCodecs *codec = codecConfiguration.audioCodecs.firstObject;
     VialerLogDebug(@"Swithcing to codec: %@", [VSLAudioCodecs codecString: codec.codec]);
-    if (![[VialerSIPLib sharedInstance] updateCodecConfiguration:codecConfiguration]) {
-        [SIPUtils removeSIPEndpoint];
-        [SIPUtils setupSIPEndpoint];
-    }
-
+    [[VialerSIPLib sharedInstance] updateCodecConfiguration:codecConfiguration];
     return YES;
 }
 
