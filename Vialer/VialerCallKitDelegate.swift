@@ -192,7 +192,6 @@ extension VialerCallKitDelegate: CXProviderDelegate {
 
         guard let call = findCall(action: action) else { return }
 
-
         call.start { error in
             if (error != nil) {
                 self.logError(error: error, call: call)
