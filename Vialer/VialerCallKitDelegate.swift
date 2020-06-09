@@ -39,7 +39,7 @@ class VialerCallKitDelegate: NSObject {
                 localizedName: Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         )
 
-        providerConfiguration.maximumCallGroups = 1
+        providerConfiguration.maximumCallGroups = 2
         providerConfiguration.maximumCallsPerCallGroup = 1
         providerConfiguration.supportsVideo = false
 
