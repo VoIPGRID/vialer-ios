@@ -188,9 +188,10 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     }
 
     public func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
-        guard let call = findCallOrFail(action: action) else { return }
-
         callManager.audioController.configureAudioSession()
+
+        guard let call = findCall(action: action) else { return }
+
 
         call.start { error in
             if (error != nil) {
