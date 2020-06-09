@@ -39,7 +39,7 @@ class VialerCallKitDelegate: NSObject {
                 localizedName: Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         )
 
-        providerConfiguration.maximumCallGroups = 1
+        providerConfiguration.maximumCallGroups = 2
         providerConfiguration.maximumCallsPerCallGroup = 1
         providerConfiguration.supportsVideo = false
 
@@ -129,7 +129,8 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         guard let call = findCallOrFail(action: action) else { return }
 
-        if (!waitForCallConfirmation()) {
+
+        if (!waitForCallConfirmation(call: call)) {
             VialerLogError("Unable to confirm call: \(call.uuid.uuidString)")
             action.fail()
             return
@@ -165,7 +166,7 @@ extension VialerCallKitDelegate: CXProviderDelegate {
 
         do {
             if call.isIncoming && call.callState != VSLCallState.confirmed {
-                if (!waitForCallConfirmation()) {
+                if (!waitForCallConfirmation(call: call)) {
                     VialerLogError("Unable to confirm call: \(call.uuid.uuidString)")
                     action.fulfill()
                     return
@@ -187,9 +188,9 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     }
 
     public func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
-        guard let call = findCallOrFail(action: action) else { return }
-
         callManager.audioController.configureAudioSession()
+
+        guard let call = findCall(action: action) else { return }
 
         call.start { error in
             if (error != nil) {
@@ -300,7 +301,11 @@ extension VialerCallKitDelegate {
         VialerLogError("Unable to perform action on call (\(call.uuid.uuidString)), error: \(error!.localizedDescription)")
     }
 
-    private func waitForCallConfirmation() -> Bool {
+    private func waitForCallConfirmation(call: VSLCall) -> Bool {
+        if !call.isIncoming {
+            return true
+        }
+
         if isCallConfirmed() {
             return true
         }
