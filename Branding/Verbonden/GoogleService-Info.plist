@@ -4,23 +4,35 @@
 <dict>
 	<key>TRACKING_ID</key>
 	<string>UA-79028801-1</string>
+	<key>CLIENT_ID</key>
+	<string>1028378367821-75fc5ukunthu7s9k4j5os3nh6hgrtcng.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1028378367821-75fc5ukunthu7s9k4j5os3nh6hgrtcng</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB4ocAQDNDSh0BCfixO7SM-KN737IcK-7w</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1028378367821</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>nl.verbonden.app</string>
 	<key>PROJECT_ID</key>
-	<string>verbonden-a568c</string>
+	<string>verbonden-fcm</string>
+	<key>STORAGE_BUCKET</key>
+	<string>verbonden-fcm.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<false/>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:248870426812:ios:f94506a87a68b2ec</string>
+	<string>1:1028378367821:ios:f94506a87a68b2ec</string>
+	<key>DATABASE_URL</key>
+	<string>https://verbonden-fcm.firebaseio.com</string>
 </dict>
 </plist>

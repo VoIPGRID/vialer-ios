@@ -5291,7 +5291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		EEEDF359219DC2D900D0D853 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5310,7 +5310,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		EEEDF35A219DC31800D0D853 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5329,7 +5329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		EEEDF35B219DC33100D0D853 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5348,7 +5348,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		F20851621D26935600A17E71 /* Update Version number */ = {
 			isa = PBXShellScriptBuildPhase;
