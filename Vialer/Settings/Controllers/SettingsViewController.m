@@ -26,9 +26,8 @@ static int const SettingsViewControllerMyEmailRow           = 2;
 
 static int const SettingsViewControllerLoggingSection       = 2;
 static int const SettingsViewControllerLoggingEnabledRow    = 0;
-static int SettingsViewControllerLoggingIDRow               = 1;
-static int SettingsViewControllerUseTLSRow                  = 2;
-static int SettingsViewControllerUseStunServersRow          = 3;
+static int SettingsViewControllerUseTLSRow                  = 1;
+static int SettingsViewControllerUseStunServersRow          = 2;
 
 
 static int const SettingsViewControllerUISwitchWidth            = 60;
@@ -56,6 +55,8 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self tableView].estimatedRowHeight = 85.0;
+    [self tableView].rowHeight = UITableViewAutomaticDimension;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingNumberUpdated:) name:SystemUserOutgoingNumberUpdatedNotification object:nil];
 }
 
@@ -121,29 +122,15 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
             break;
 
         case SettingsViewControllerLoggingSection:
-            if (self.currentUser.sipEnabled && [VialerLogger remoteLoggingEnabled]) {
-                SettingsViewControllerLoggingIDRow         = 1;
-                SettingsViewControllerUseTLSRow            = 2;
-                SettingsViewControllerUseStunServersRow    = 3;
+            if (self.currentUser.sipEnabled) {
                 // Remotelogging enabled (2)
                 // TLS
                 // use stun servers
-                return 4;
-            } else if (self.currentUser.sipEnabled && ![VialerLogger remoteLoggingEnabled]) {
-                // Remotelogging disabled (1)
-                // TLS
-                // use stun servers
-                SettingsViewControllerUseTLSRow            = 1;
-                SettingsViewControllerUseStunServersRow    = 2;
-                SettingsViewControllerLoggingIDRow         = -1;
                 return 3;
-            } else if (!self.currentUser.sipEnabled && [VialerLogger remoteLoggingEnabled]) {
-                SettingsViewControllerLoggingIDRow         = 1;
+            } else {
                 // Remotelogging enabled (2)
-                return 2;
+                return 1;
             }
-            return 1;
-            break;
 
         default:
             return 0;
@@ -164,12 +151,14 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
                           withTag:SettingsViewControllerSwitchVoIP
-                       defaultVal:self.currentUser.sipEnabled];
+                       defaultVal:self.currentUser.sipEnabled
+                        withDetail:nil];
         } else if (indexPath.row == SettingsViewControllerWifiNotificationRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
                           withTag:SettingsViewControllerSwitchWifiNotification
-                       defaultVal:self.currentUser.showWiFiNotification];
+                       defaultVal:self.currentUser.showWiFiNotification
+                        withDetail:nil];
         } else if (indexPath.row == SettingsViewControllerAudioQualityRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
             cell.textLabel.text = NSLocalizedString(@"Audio quality", nil);
@@ -206,23 +195,22 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell withTitle: NSLocalizedString(@"Remote Logging", nil)
                           withTag:SettingsViewControllerSwitchLogging
-                       defaultVal:[VialerLogger remoteLoggingEnabled]];
-        } else if (indexPath.row == SettingsViewControllerLoggingIDRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
-            cell.textLabel.text = NSLocalizedString(@"Logging identifier", nil);
-            cell.detailTextLabel.text = [VialerLogger remoteIdentifier];
+                       defaultVal:[VialerLogger remoteLoggingEnabled]
+                       withDetail:NSLocalizedString(@"Automatically share your app activity with our developers and support team to help resolve issues and errors", nil)];
         } else if (indexPath.row == SettingsViewControllerUseTLSRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell
                         withTitle:NSLocalizedString(@"Use encrypted calling", @"Use encrypted calling")
                           withTag:SettingsViewControllerSwitchUseTLS
-                       defaultVal:self.currentUser.useTLS];
+                       defaultVal:self.currentUser.useTLS
+                       withDetail:nil];
         } else if (indexPath.row == SettingsViewControllerUseStunServersRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell
                         withTitle:NSLocalizedString(@"Use STUN for calling", @"Use STUN for calling")
                           withTag:SettingsViewControllerSwitchUseStunServers
-                       defaultVal:self.currentUser.useStunServers];
+                       defaultVal:self.currentUser.useStunServers
+                       withDetail:nil];
         }
     }
     return cell;
@@ -327,9 +315,13 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
 
 #pragma mark - Helper function for switches in table
 
-- (void)createOnOffView:(UITableViewCell*)cell withTitle:(NSString*)title withTag:(int)tag defaultVal:(BOOL)defaultVal {
+- (void)createOnOffView:(UITableViewCell*)cell withTitle:(NSString*)title withTag:(int)tag defaultVal:(BOOL)defaultVal withDetail:(NSString*)detail {
     cell.textLabel.text = title;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.detailTextLabel.numberOfLines = 0;
+    cell.detailTextLabel.text = detail;
+    cell.detailTextLabel.enabled = (detail != nil) ? YES : NO;
 
     CGRect rect;
     rect = cell.contentView.frame;

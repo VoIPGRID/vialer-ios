@@ -34,6 +34,7 @@ static NSString *const SystemUserApiKeyClient = @"client";
 static NSString *const SystemUserApiKeyPartner = @"partner";
 static NSString *const SystemUserApiKeyMobileNumber = @"mobile_nr";
 static NSString *const SystemUserApiKeyOutgoingNumber = @"outgoing_cli";
+static NSString *const SystemUserApiKeyUuid = @"uuid";
 static NSString *const SystemUserApiKeyEmailAddress = @"email";
 static NSString *const SystemUserApiKeyFirstName = @"first_name";
 static NSString *const SystemUserApiKeyPreposition = @"preposition";
@@ -55,6 +56,7 @@ static NSString *const SystemUserSuppressedKey = @"suppressed";
  *  These keys are used to store and retrieve information in the NSUserDefaults.
  */
 static NSString *const SystemUserSUDUsername = @"User";
+static NSString *const SystemUserSUDUuid = @"UUID";
 static NSString *const SystemUserSUDOutgoingNumber = @"OutgoingCLI";
 static NSString *const SystemUserSUDMobileNumber = @"MobileNumber";
 static NSString *const SystemUserSUDEmailAddress = @"Email";
@@ -95,6 +97,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 @property(strong, nonatomic) NSString *clientID;
 @property(strong, nonatomic) NSString *apiToken;
 @property(strong, nonatomic) NSString *country;
+@property(strong, nonatomic) NSString *uuid;
 
 /**
  *  This boolean will keep track if the migration from app version 1.x to 2.x already happend.
@@ -165,6 +168,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
      *  User settings.
      */
     self.username = [defaults objectForKey:SystemUserSUDUsername];
+    self.uuid = [defaults objectForKey:SystemUserSUDUuid];
     self.outgoingNumber = [defaults objectForKey:SystemUserSUDOutgoingNumber];
     self.mobileNumber = [defaults objectForKey:SystemUserSUDMobileNumber];
     self.emailAddress = [defaults objectForKey:SystemUserSUDEmailAddress];
@@ -542,6 +546,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     self.clientID = nil;
     self.apiToken = nil;
     self.country = nil;
+    self.uuid = nil;
 
     [self removeSIPCredentials];
 
@@ -589,6 +594,9 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     }
     if (userDict[SystemUserApiKeyClient]) {
         self.clientID = userDict[SystemUserApiKeyClient];
+    }
+    if (userDict[SystemUserApiKeyUuid]) {
+        self.uuid = userDict[SystemUserApiKeyUuid];
     }
     // Backend is sending NSNull null when no value is available so it has to be checked like below to avoid null exception.
     if (userDict[SystemUserApiKeyMobileNumber] && userDict[SystemUserApiKeyMobileNumber]!=[NSNull null]) {
