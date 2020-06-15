@@ -450,6 +450,9 @@
 /* Use STUN for calling */
 "Use STUN for calling" = "Gebruik STUN om te bellen";
 
+/* Use STUN for calling */
+"Automatically share your app activity with our developers and support team to help resolve issues and errors" = "TBD";
+
 /* No comment provided by engineer. */
 "Token" = "Token";
 

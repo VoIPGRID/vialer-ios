@@ -106,7 +106,13 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 }
 
 + (NSString *)remoteIdentifier {
-    return [[[UIDevice currentDevice].identifierForVendor UUIDString] substringToIndex:8];
+    NSString *uuid = [SystemUser currentUser].uuid;
+
+    if (uuid == nil) {
+        return @"NO-RID";
+    }
+
+    return [SystemUser currentUser].uuid;
 }
 
 #pragma mark - Helper Functions
