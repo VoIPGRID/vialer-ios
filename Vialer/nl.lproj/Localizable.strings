@@ -503,3 +503,15 @@
 
 /* Anonymous */
 "Anonymous" = "Anoniem";
+
+/* Call settings */
+"Call settings" = "Gespreksinstellingen";
+
+/* Account */
+"Account" = "Account";
+
+/* Advanced call settings */
+"Advanced call settings" = "Geavanceerde gespreksinstellingen";
+
+/* Debug settings */
+"Debug settings" = "Debug Instellingen";
