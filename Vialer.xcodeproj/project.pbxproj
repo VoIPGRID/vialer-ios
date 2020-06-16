@@ -22,6 +22,14 @@
 		45FAA197D07A701481006D03 /* libPods-Voys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030913FF544600ABE3DC3AFD /* libPods-Voys.a */; };
 		4D27D40E66E3E080DBB02CF4 /* libPods-VialerSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA66CADF9E0ACFF208D5EA4 /* libPods-VialerSnapshotUITests.a */; };
 		5C5584912424BA1000A9AFA3 /* APNSCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */; };
+		5CB1B1EA249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1EC249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1ED249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1EF249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1F0249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1F2249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1F3249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
+		5CB1B1F5249782B100A7337D /* SubmitFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */; };
 		5CEC5D86243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift */; };
 		5CEC5D89243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift */; };
 		5CEC5D8A243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC5D85243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift */; };
@@ -1666,6 +1674,7 @@
 		50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		575B8E9FB91EC90046F32E7F /* libPods-VialerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VialerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSCallHandler.swift; sourceTree = "<group>"; };
+		5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFeedbackController.swift; sourceTree = "<group>"; };
 		5CEC5D85243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoipTaskSynchronizer.swift; sourceTree = "<group>"; };
 		60092174004F09C1A62522A2 /* Pods-VoysSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoysSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60480CB991663B4EDA1C628D /* Pods-ANNAbelSnapshotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ANNAbelSnapshotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2641,6 +2650,7 @@
 				F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */,
 				C46F10061C7C6FEA007F30A6 /* UserProfileWebViewController.h */,
 				C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */,
+				5CB1B1E9249782B100A7337D /* SubmitFeedbackController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -5455,6 +5465,7 @@
 				838206572290979A0098EABD /* NSManagedObjectContext.swift in Sources */,
 				838206582290979A0098EABD /* SecondCallViewController.swift in Sources */,
 				838206592290979A0098EABD /* GAConfiguration.swift in Sources */,
+				5CB1B1F5249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				8382065A2290979A0098EABD /* SetupCallTransferDialPadViewController.swift in Sources */,
 				8382065B2290979A0098EABD /* SideMenuViewController.m in Sources */,
 				8382065C2290979A0098EABD /* VailerRootViewController.m in Sources */,
@@ -5569,6 +5580,7 @@
 				83820705229098D20098EABD /* NSString+SubString.m in Sources */,
 				83820706229098D20098EABD /* ColoredCircle.m in Sources */,
 				83820707229098D20098EABD /* NSManagedObjectContext.swift in Sources */,
+				5CB1B1F2249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				83820708229098D20098EABD /* GAConfiguration.swift in Sources */,
 				83820709229098D20098EABD /* SecondCallViewController.swift in Sources */,
 				8382070A229098D20098EABD /* SetupCallTransferDialPadViewController.swift in Sources */,
@@ -5683,6 +5695,7 @@
 				EE1C7B981F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				EE5EC3BB213FDC680000EE4D /* GAConfiguration.swift in Sources */,
 				C41FD8601C60A08400BBE6D7 /* SideMenuViewController.m in Sources */,
+				5CB1B1ED249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				C41FD8621C60A08400BBE6D7 /* VailerRootViewController.m in Sources */,
 				C46F10091C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
 				C41FD8651C60A08400BBE6D7 /* SettingsViewController.m in Sources */,
@@ -5825,6 +5838,7 @@
 				83FC98A0228975D500A44738 /* AvailabilityViewController.swift in Sources */,
 				C47BB0C71E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BD213FDC680000EE4D /* GAConfiguration.swift in Sources */,
+				5CB1B1F0249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B941F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */,
@@ -5985,6 +5999,7 @@
 				83FC98A1228975D600A44738 /* AvailabilityViewController.swift in Sources */,
 				EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */,
 				EE5EC3BE213FDC680000EE4D /* GAConfiguration.swift in Sources */,
+				5CB1B1F3249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE23181F20A0468F00C05EB0 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				EE23182120A0468F00C05EB0 /* SideMenuViewController.m in Sources */,
 				EE23182220A0468F00C05EB0 /* VailerRootViewController.m in Sources */,
@@ -6118,6 +6133,7 @@
 				83FC989F228975D500A44738 /* AvailabilityViewController.swift in Sources */,
 				EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BC213FDC680000EE4D /* GAConfiguration.swift in Sources */,
+				5CB1B1EF249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B961F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				EE61F4061F1DDDE4006E890F /* PhoneNumberModel.m in Sources */,
@@ -6232,6 +6248,7 @@
 				83FC989D228975D500A44738 /* AvailabilityViewController.swift in Sources */,
 				C47BB0C51E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE5EC3BA213FDC680000EE4D /* GAConfiguration.swift in Sources */,
+				5CB1B1EC249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B991F87779300708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B9A1F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */,
@@ -6365,6 +6382,7 @@
 				C47BB0C41E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B9B1F87779400708D96 /* SecondCallViewController.swift in Sources */,
 				EE5EC3B9213FDC680000EE4D /* GAConfiguration.swift in Sources */,
+				5CB1B1EA249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B9C1F87779400708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
 				C4DA5C951BFB64AC0043DED7 /* SideMenuViewController.m in Sources */,
 				C45F3DF21BFCA6600012494D /* VailerRootViewController.m in Sources */,

@@ -29,6 +29,8 @@ static int const SettingsViewControllerLoggingEnabledRow    = 0;
 static int SettingsViewControllerUseTLSRow                  = 1;
 static int SettingsViewControllerUseStunServersRow          = 2;
 
+static int const SettingsViewControllerFeedbackSection      = 3;
+static int const SettingsViewControllerSubmitFeedbackRow          = 0;
 
 static int const SettingsViewControllerUISwitchWidth            = 60;
 static int const SettingsViewControllerUISwitchOriginOffsetX    = 35;
@@ -43,6 +45,7 @@ static int const SettingsViewControllerSwitchUseStunServers     = 1007;
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
 static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudioQualitySegue";
+static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedbackFormSegue";
 
 @interface SettingsViewController() <EditNumberViewControllerDelegate>
 @property (weak, nonatomic) SystemUser *currentUser;
@@ -95,7 +98,7 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -131,6 +134,10 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
                 // Remotelogging enabled (2)
                 return 1;
             }
+            break;
+
+        case SettingsViewControllerFeedbackSection:
+            return 1;
 
         default:
             return 0;
@@ -213,6 +220,21 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
                        withDetail:nil];
         }
     }
+    else if (indexPath.section == SettingsViewControllerFeedbackSection) {
+        if (indexPath.row == SettingsViewControllerSubmitFeedbackRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:@"sendFeedback"];
+
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"sendFeedback"];
+            }
+            cell.textLabel.text =NSLocalizedString(@"Send Feedback", nil);
+            cell.detailTextLabel.text = NSLocalizedString(@"Report issues or suggest new features", nil);
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            cell.detailTextLabel.numberOfLines = 0;
+            cell.detailTextLabel.enabled = YES;
+        }
+    }
     return cell;
 }
 
@@ -248,6 +270,10 @@ static NSString * const SettingsViewControllerShowAudioQualitySegue = @"ShowAudi
     } else if (indexPath.section == SettingsViewControllerVoIPAccountSection && indexPath.row == SettingsViewControllerAudioQualityRow) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:SettingsViewControllerShowAudioQualitySegue sender:self];
+        });
+    } else if (indexPath.section == SettingsViewControllerFeedbackSection && indexPath.row == SettingsViewControllerSubmitFeedbackRow) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:SettingsViewControllerShowFeedbackSegue sender:self];
         });
     }
 }
