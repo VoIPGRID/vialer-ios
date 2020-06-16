@@ -75,7 +75,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="number" value="1"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="fUj-cF-X3o"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="fUj-cF-X3o"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aP1-qe-ci4" userLabel="2-Button" customClass="NumberPadButton">
@@ -86,7 +86,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="ABC"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="8jP-BJ-Zcj"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="8jP-BJ-Zcj"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjH-on-0PS" userLabel="3-Button" customClass="NumberPadButton">
@@ -97,7 +97,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="DEF"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="yxQ-6r-9EB"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="yxQ-6r-9EB"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -114,7 +114,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="GHI"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="06p-lv-DTp"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="06p-lv-DTp"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dl3-4k-sp9" userLabel="5-Button" customClass="NumberPadButton">
@@ -125,7 +125,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="JKL"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="vqn-em-iFv"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="vqn-em-iFv"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23A-8K-gya" userLabel="6-Button" customClass="NumberPadButton">
@@ -136,7 +136,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="MNO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="kns-EQ-y90"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="kns-EQ-y90"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -153,7 +153,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="PQRS"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="tR2-30-W1A"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="tR2-30-W1A"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOM-l1-diQ" userLabel="8-Button" customClass="NumberPadButton">
@@ -164,7 +164,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="TUV"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="YJx-sN-EO0"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="YJx-sN-EO0"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkK-Cf-MKa" userLabel="9-Button" customClass="NumberPadButton">
@@ -175,7 +175,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value="WXYZ"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="kKw-gt-mgw"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="kKw-gt-mgw"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -191,7 +191,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="number" value="*"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="bGF-5i-IvH"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="bGF-5i-IvH"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDW-t9-BLX" userLabel="0-Button" customClass="NumberPadButton">
@@ -214,7 +214,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="number" value="#"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchUpInside" id="jKk-l2-t21"/>
+                                                            <action selector="numberPressed:" destination="FYx-5X-82c" eventType="touchDown" id="jKk-l2-t21"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
