@@ -13,24 +13,25 @@
 #import "UIAlertController+Vialer.h"
 #import "Vialer-Swift.h"
 
-static int const SettingsViewControllerVoIPAccountSection   = 0;
-static int const SettingsViewControllerSipEnabledRow        = 0;
-static int const SettingsViewControllerWifiNotificationRow  = 1;
-static int const SettingsViewControllerAudioQualityRow      = 2;
-static int const SettingsViewControllerSipAccountRow        = 3;
-
-static int const SettingsViewControllerNumbersSection       = 1;
+static int const SettingsViewControllerNumbersSection       = 0;
 static int const SettingsViewControllerMyNumberRow          = 0;
 static int const SettingsViewControllerOutgoingNumberRow    = 1;
 static int const SettingsViewControllerMyEmailRow           = 2;
+static int const SettingsViewControllerSipAccountRow        = 3;
 
-static int const SettingsViewControllerLoggingSection       = 2;
-static int const SettingsViewControllerLoggingEnabledRow    = 0;
-static int SettingsViewControllerUseTLSRow                  = 1;
-static int SettingsViewControllerUseStunServersRow          = 2;
+static int const SettingsViewControllerVoIPAccountSection   = 1;
+static int const SettingsViewControllerSipEnabledRow        = 0;
+static int const SettingsViewControllerWifiNotificationRow  = 1;
+static int const SettingsViewControllerAudioQualityRow      = 2;
 
-static int const SettingsViewControllerFeedbackSection      = 3;
-static int const SettingsViewControllerSubmitFeedbackRow          = 0;
+
+static int const SettingsViewControllerAdvancedSection       = 2;
+static int SettingsViewControllerUseTLSRow                  = 0;
+static int SettingsViewControllerUseStunServersRow          = 1;
+
+static int const SettingsViewControllerDebugSection         = 3;
+static int const SettingsViewControllerSubmitFeedbackRow    = 0;
+static int const SettingsViewControllerLoggingEnabledRow    = 1;
 
 static int const SettingsViewControllerUISwitchWidth            = 60;
 static int const SettingsViewControllerUISwitchOriginOffsetX    = 35;
@@ -103,47 +104,49 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
+        case SettingsViewControllerNumbersSection:
+            // Always 3
+            // - My number
+            // - Outgoing number
+            // - Email address
+            // account ID
+            return self.currentUser.sipEnabled ? 4 : 3;
+            break;
+
         case SettingsViewControllerVoIPAccountSection:
             if (self.currentUser.sipEnabled) {
                 // The VoIP Switch
                 // WiFi notification
                 // Audio Quality
-                // account ID
-                return 4;
+                return 3;
             } else {
                 // Only show VoIP Switch
                 return 1;
             }
             break;
 
-        case SettingsViewControllerNumbersSection:
-            // Always 3
-            // - My number
-            // - Outgoing number
-            // - Email address
-            return 3;
-            break;
-
-        case SettingsViewControllerLoggingSection:
+        case SettingsViewControllerAdvancedSection:
             if (self.currentUser.sipEnabled) {
                 // Remotelogging enabled (2)
                 // TLS
                 // use stun servers
-                return 3;
+                return 2;
             } else {
                 // Remotelogging enabled (2)
-                return 1;
+                return 0;
             }
             break;
 
-        case SettingsViewControllerFeedbackSection:
-            return 1;
+        case SettingsViewControllerDebugSection:
+            return 2;
 
         default:
             return 0;
             break;
     }
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableViewSettingsCell = @"SettingsCell";
@@ -153,33 +156,7 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
     UITableViewCell *cell;
 
     // Specific config according to cell function.
-    if (indexPath.section == SettingsViewControllerVoIPAccountSection) {
-        if (indexPath.row == SettingsViewControllerSipEnabledRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
-            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
-                          withTag:SettingsViewControllerSwitchVoIP
-                       defaultVal:self.currentUser.sipEnabled
-                        withDetail:nil];
-        } else if (indexPath.row == SettingsViewControllerWifiNotificationRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
-            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
-                          withTag:SettingsViewControllerSwitchWifiNotification
-                       defaultVal:self.currentUser.showWiFiNotification
-                        withDetail:nil];
-        } else if (indexPath.row == SettingsViewControllerAudioQualityRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
-            cell.textLabel.text = NSLocalizedString(@"Audio quality", nil);
-            if (self.currentUser.currentAudioQuality == AudioQualityLow) {
-                cell.detailTextLabel.text = NSLocalizedString(@"Standard audio", @"Standard audio");
-            } else if (self.currentUser.currentAudioQuality == AudioQualityHigh) {
-                cell.detailTextLabel.text = NSLocalizedString(@"Higher quality audio", @"Higher quality audio");
-            }
-        } else if (indexPath.row == SettingsViewControllerSipAccountRow) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
-            cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
-            cell.detailTextLabel.text = self.currentUser.sipAccount;
-        }
-    } else if (indexPath.section == SettingsViewControllerNumbersSection) {
+    if (indexPath.section == SettingsViewControllerNumbersSection) {
         if (indexPath.row == SettingsViewControllerMyNumberRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
             cell.textLabel.text = NSLocalizedString(@"My number", nil);
@@ -197,14 +174,35 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
             cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
             cell.detailTextLabel.text = self.currentUser.username;
         }
-    } else if (indexPath.section == SettingsViewControllerLoggingSection) {
-        if (indexPath.row == SettingsViewControllerLoggingEnabledRow) {
+        else if (indexPath.row == SettingsViewControllerSipAccountRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsCell];
+            cell.textLabel.text = NSLocalizedString(@"VoIP account ID", nil);
+            cell.detailTextLabel.text = self.currentUser.sipAccount;
+        }
+    } else if (indexPath.section == SettingsViewControllerVoIPAccountSection) {
+        if (indexPath.row == SettingsViewControllerSipEnabledRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
-            [self createOnOffView:cell withTitle: NSLocalizedString(@"Remote Logging", nil)
-                          withTag:SettingsViewControllerSwitchLogging
-                       defaultVal:[VialerLogger remoteLoggingEnabled]
-                       withDetail:NSLocalizedString(@"Automatically share your app activity with our developers and support team to help resolve issues and errors", nil)];
-        } else if (indexPath.row == SettingsViewControllerUseTLSRow) {
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable VoIP", nil)
+                          withTag:SettingsViewControllerSwitchVoIP
+                       defaultVal:self.currentUser.sipEnabled
+                       withDetail:nil];
+        } else if (indexPath.row == SettingsViewControllerWifiNotificationRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Enable WiFi notification", nil)
+                          withTag:SettingsViewControllerSwitchWifiNotification
+                       defaultVal:self.currentUser.showWiFiNotification
+                       withDetail:nil];
+        } else if (indexPath.row == SettingsViewControllerAudioQualityRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithAccessoryCell];
+            cell.textLabel.text = NSLocalizedString(@"Audio quality", nil);
+            if (self.currentUser.currentAudioQuality == AudioQualityLow) {
+                cell.detailTextLabel.text = NSLocalizedString(@"Standard audio", @"Standard audio");
+            } else if (self.currentUser.currentAudioQuality == AudioQualityHigh) {
+                cell.detailTextLabel.text = NSLocalizedString(@"Higher quality audio", @"Higher quality audio");
+            }
+        }
+    } else if (indexPath.section == SettingsViewControllerAdvancedSection) {
+        if (indexPath.row == SettingsViewControllerUseTLSRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
             [self createOnOffView:cell
                         withTitle:NSLocalizedString(@"Use encrypted calling", @"Use encrypted calling")
@@ -220,8 +218,15 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
                        withDetail:nil];
         }
     }
-    else if (indexPath.section == SettingsViewControllerFeedbackSection) {
-        if (indexPath.row == SettingsViewControllerSubmitFeedbackRow) {
+    else if (indexPath.section == SettingsViewControllerDebugSection) {
+        if (indexPath.row == SettingsViewControllerLoggingEnabledRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle: NSLocalizedString(@"Remote Logging", nil)
+                          withTag:SettingsViewControllerSwitchLogging
+                       defaultVal:[VialerLogger remoteLoggingEnabled]
+                       withDetail:NSLocalizedString(@"Automatically share your app activity with our developers and support team to help resolve issues and errors", nil)];
+        }
+        else if (indexPath.row == SettingsViewControllerSubmitFeedbackRow) {
             cell = [self.tableView dequeueReusableCellWithIdentifier:@"sendFeedback"];
 
             if (cell == nil) {
@@ -271,7 +276,7 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:SettingsViewControllerShowAudioQualitySegue sender:self];
         });
-    } else if (indexPath.section == SettingsViewControllerFeedbackSection && indexPath.row == SettingsViewControllerSubmitFeedbackRow) {
+    } else if (indexPath.section == SettingsViewControllerDebugSection && indexPath.row == SettingsViewControllerSubmitFeedbackRow) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:SettingsViewControllerShowFeedbackSegue sender:self];
         });
@@ -309,7 +314,7 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
     } else if (sender.tag == SettingsViewControllerSwitchLogging) {
         [VialerLogger setRemoteLoggingEnabled:sender.isOn];
         VialerLogVerbose(sender.isOn ? @"Remote logging enabled" : @"Remote logging disabled");
-        NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerLoggingSection];
+        NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerDebugSection];
         [self.tableView  reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -380,6 +385,26 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
             [SVProgressHUD dismiss];
         });
     }
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if ([self tableView:tableView numberOfRowsInSection:section] <= 0) {
+        return nil;
+    }
+
+    switch (section) {
+        case SettingsViewControllerVoIPAccountSection:
+            return NSLocalizedString(@"Call settings", nil);
+        case SettingsViewControllerNumbersSection:
+            return NSLocalizedString(@"Account", nil);
+        case SettingsViewControllerAdvancedSection:
+            return NSLocalizedString(@"Advanced call settings", nil);
+        case SettingsViewControllerDebugSection:
+            return NSLocalizedString(@"Debug settings", nil);
+    }
+    
+    return @"";
 }
 
 @end
