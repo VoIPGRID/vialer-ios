@@ -299,7 +299,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     @objc fileprivate func tearDownSip(_ notification: NSNotification) {
-        SIPUtils.safelyRemoveSipEndpoint()
+        resetVoip()
     }
 }
 
@@ -354,6 +354,19 @@ extension AppDelegate {
         }
     }
 
+    private func resetVoip() {
+        let success = SIPUtils.safelyRemoveSipEndpoint()
+
+        if success {
+            setupVoIP()
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                SIPUtils.safelyRemoveSipEndpoint()
+                self.setupVoIP()
+            }
+        }
+    }
+
     /// Setup the endpoint if user has SIP enabled
     @objc fileprivate func updatedSIPCredentials() {
         VialerLogInfo("SIP Credentials have changed")
@@ -382,6 +395,8 @@ extension AppDelegate {
             VialerLogWarning("SIP not enabled")
             return
         }
+
+        resetVoip()
     }
 
     @objc fileprivate func registerForPushNotification() {

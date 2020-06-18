@@ -71,13 +71,16 @@
     return success;
 }
 
-+ (void)safelyRemoveSipEndpoint {
-    if ([VialerSIPLib sharedInstance].endpointAvailable && [self getFirstActiveCall] == nil) {
++ (BOOL)safelyRemoveSipEndpoint {
+    if ([VialerSIPLib sharedInstance].endpointAvailable && [self getFirstCall] == nil) {
         for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
             [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
         }
         [SIPUtils removeSIPEndpoint];
+        return true;
     }
+
+    return false;
 }
 
 + (void)removeSIPEndpoint {
@@ -125,6 +128,12 @@
 + (VSLCall *)getFirstActiveCall {
     VSLAccount *account = [[VialerSIPLib sharedInstance] firstAccount];
     VSLCall *call = [account firstActiveCall];
+    return call;
+}
+
++ (VSLCall *)getFirstCall {
+    VSLAccount *account = [[VialerSIPLib sharedInstance] firstAccount];
+    VSLCall *call = [account firstCall];
     return call;
 }
 
