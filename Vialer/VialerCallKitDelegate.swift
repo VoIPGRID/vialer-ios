@@ -16,7 +16,6 @@ class VialerCallKitDelegate: NSObject {
     private let callManager: VSLCallManager
     public let provider: CXProvider
     private let notifications = NotificationCenter.default
-    private var callConfirmed = false
 
     init(callManager: VSLCallManager) {
         self.callManager = callManager
@@ -42,14 +41,14 @@ class VialerCallKitDelegate: NSObject {
         providerConfiguration.maximumCallGroups = 2
         providerConfiguration.maximumCallsPerCallGroup = 1
         providerConfiguration.supportsVideo = false
+        providerConfiguration.supportedHandleTypes = [CXHandle.HandleType.phoneNumber]
 
-        let ringtoneFileName = Bundle.main.path(forResource: "ringtone", ofType: "wav")
-
-        if (ringtoneFileName != nil) {
-            providerConfiguration.ringtoneSound = "ringtone.wav"
+        if !SystemUser.current().usePhoneRingtone {
+            if let ringtoneFileName = Bundle.main.path(forResource: "ringtone", ofType: "wav") {
+                providerConfiguration.ringtoneSound = "ringtone.wav"
+            }
         }
 
-        providerConfiguration.supportedHandleTypes = [CXHandle.HandleType.phoneNumber]
         return providerConfiguration
     }
 

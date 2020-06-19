@@ -70,6 +70,7 @@ static NSString *const SystemUserSUDShowWiFiNotification = @"ShowWiFiNotificatio
 static NSString *const SystemUserSUDSIPUseEncryption = @"SIPUseEncryption";
 static NSString *const SystemUserSUDUseTLS = @"UseTLS";
 static NSString *const SystemuserSUDUseStunServers = @"UseStunServers";
+static NSString *const SystemuserSUDUsePhoneRingtone = @"UsePhoneRingtone";
 static NSString *const SystemUserSUDMigrationCompleted = @"v2.0_MigrationComplete";
 static NSString *const SystemUserSUDAPIToken = @"APIToken";
 static NSString *const SystemUserSUDCountry = @"Country";
@@ -194,6 +195,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     self.sipEnabled = [defaults boolForKey:SystemUserSUDSIPEnabled];
     self.sipUseEncryption = self.sipUseEncryption;
     self.showWiFiNotification = [defaults boolForKey:SystemUserSUDShowWiFiNotification];
+    self.usePhoneRingtone = [defaults boolForKey:SystemuserSUDUsePhoneRingtone];
 
     self.loggingOut = NO;
 }
@@ -295,6 +297,14 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
         self.useStunServers = NO;
     }
     return [defaults boolForKey:SystemuserSUDUseStunServers];
+}
+
+- (BOOL)usePhoneRingtone {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![[[defaults dictionaryRepresentation] allKeys] containsObject:SystemuserSUDUsePhoneRingtone]) {
+        self.usePhoneRingtone = NO;
+    }
+    return [defaults boolForKey:SystemuserSUDUsePhoneRingtone];
 }
 
 - (BOOL)sipUseEncryption {
@@ -420,6 +430,14 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
         } else {
             VialerLogDebug(@"Nothing to do here sip has not been enabled");
         }
+    });
+}
+
+- (void)setUsePhoneRingtone:(BOOL)usePhoneRingtone {
+    [[NSUserDefaults standardUserDefaults] setBool:usePhoneRingtone forKey:SystemuserSUDUsePhoneRingtone];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SystemUserStunUsageChangedNotification object:self];
     });
 }
 
@@ -566,6 +584,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     self.sipUseEncryption = NO;
     self.useTLS = NO;
     self.useStunServers = NO;
+    self.usePhoneRingtone = NO;
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPAccount];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:SystemUserSUDSIPEnabled];

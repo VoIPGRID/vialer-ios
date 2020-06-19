@@ -254,6 +254,11 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
 @property (nonatomic) BOOL useStunServers;
 
 /**
+ * Use the phone's ringtone instead of the Vialer specific one.
+ */
+@property (nonatomic) BOOL usePhoneRingtone;
+
+/**
  *  The users current availability.
  */
 @property (strong, nonatomic) NSDictionary* currentAvailability;
