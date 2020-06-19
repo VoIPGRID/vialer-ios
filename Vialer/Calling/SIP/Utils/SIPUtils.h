@@ -23,7 +23,7 @@
 /*
  * Remove the SIP endpoint if there are no active calls.
  */
-+ (void)safelyRemoveSipEndpoint;
++ (BOOL)safelyRemoveSipEndpoint;
 
 /**
  *  Only update the codecs on the SIP endpoint.

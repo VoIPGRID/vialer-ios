@@ -515,3 +515,12 @@
 
 /* Debug settings */
 "Debug settings" = "Debug Instellingen";
+
+/* Use phone ringtone */
+"Use phone ringtone" = "Gebruik ringtoon van de telefoon";
+
+/* Incoming calls will use the phone's current ringtone. */
+"Incoming calls will use the phone's current ringtone." = "Gebruik jouw ringtoon";
+
+/* Incoming calls will use a special ringtone specific to this application. */
+"Incoming calls will use a special ringtone specific to this application." = "Inkomende oproepen gebruiken een speciaal voor deze applicatie ontwikkelde ringtoon";

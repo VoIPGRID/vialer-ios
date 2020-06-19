@@ -299,7 +299,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     @objc fileprivate func tearDownSip(_ notification: NSNotification) {
-        SIPUtils.safelyRemoveSipEndpoint()
+        resetVoip()
     }
 }
 
@@ -307,9 +307,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate {
 
     /// Make sure the VoIP parts are up and running
-    fileprivate func setupVoIP() {
-        VialerLogDebug("Setup VoIP with CallKit support, loading the callKitProvider.")
-        callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
+    fileprivate func setupVoIP(forceRecreateVoip: Bool = false) {
+        VialerLogDebug("Setting up VoIP")
+        if callKitProviderDelegate == nil || forceRecreateVoip {
+            VialerLogDebug("Initializing CallKit")
+            callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
+        }
         callEventMonitor.start()
         if user.sipEnabled {
             VialerLogDebug("VoIP is enabled start the endpoint.")
@@ -354,6 +357,19 @@ extension AppDelegate {
         }
     }
 
+    private func resetVoip() {
+        let success = SIPUtils.safelyRemoveSipEndpoint()
+
+        if success {
+            setupVoIP(forceRecreateVoip: true)
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                SIPUtils.safelyRemoveSipEndpoint()
+                self.setupVoIP()
+            }
+        }
+    }
+
     /// Setup the endpoint if user has SIP enabled
     @objc fileprivate func updatedSIPCredentials() {
         VialerLogInfo("SIP Credentials have changed")
@@ -382,6 +398,8 @@ extension AppDelegate {
             VialerLogWarning("SIP not enabled")
             return
         }
+
+        resetVoip()
     }
 
     @objc fileprivate func registerForPushNotification() {

@@ -23,6 +23,7 @@ static int const SettingsViewControllerVoIPAccountSection   = 1;
 static int const SettingsViewControllerSipEnabledRow        = 0;
 static int const SettingsViewControllerWifiNotificationRow  = 1;
 static int const SettingsViewControllerAudioQualityRow      = 2;
+static int const SettingsViewControllerRingtoneRow      = 3;
 
 
 static int const SettingsViewControllerAdvancedSection       = 2;
@@ -42,6 +43,7 @@ static int const SettingsViewControllerSwitchWifiNotification   = 1002;
 static int const SettingsViewControllerSwitchLogging            = 1004;
 static int const SettingsViewControllerSwitchUseTLS             = 1006;
 static int const SettingsViewControllerSwitchUseStunServers     = 1007;
+static int const SettingsViewControllerSwitchUsePhoneRingtone     = 1008;
 
 static NSString * const SettingsViewControllerShowEditNumberSegue       = @"ShowEditNumberSegue";
 static NSString * const SettingsViewControllerShowActivateSIPAccount = @"ShowActivateSIPAccount";
@@ -118,7 +120,7 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
                 // The VoIP Switch
                 // WiFi notification
                 // Audio Quality
-                return 3;
+                return 4;
             } else {
                 // Only show VoIP Switch
                 return 1;
@@ -200,6 +202,16 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
             } else if (self.currentUser.currentAudioQuality == AudioQualityHigh) {
                 cell.detailTextLabel.text = NSLocalizedString(@"Higher quality audio", @"Higher quality audio");
             }
+        }
+        else if (indexPath.row == SettingsViewControllerRingtoneRow) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:tableViewSettingsWithSwitchCell];
+            [self createOnOffView:cell withTitle:NSLocalizedString(@"Use phone ringtone", nil)
+                          withTag:SettingsViewControllerSwitchUsePhoneRingtone
+                       defaultVal:self.currentUser.usePhoneRingtone
+                       withDetail:NSLocalizedString(self.currentUser.usePhoneRingtone ?
+                               @"Incoming calls will use the phone\'s current ringtone."
+                               : @"Incoming calls will use a special ringtone specific to this application.", nil)
+            ];
         }
     } else if (indexPath.section == SettingsViewControllerAdvancedSection) {
         if (indexPath.row == SettingsViewControllerUseTLSRow) {
@@ -316,6 +328,9 @@ static NSString * const SettingsViewControllerShowFeedbackSegue = @"ShowFeedback
         VialerLogVerbose(sender.isOn ? @"Remote logging enabled" : @"Remote logging disabled");
         NSIndexSet *indexSetWithIndex = [NSIndexSet indexSetWithIndex:SettingsViewControllerDebugSection];
         [self.tableView  reloadSections:indexSetWithIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (sender.tag == SettingsViewControllerSwitchUsePhoneRingtone) {
+        self.currentUser.usePhoneRingtone = sender.isOn;
+        [self.tableView reloadData];
     }
 }
 
