@@ -307,9 +307,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate {
 
     /// Make sure the VoIP parts are up and running
-    fileprivate func setupVoIP() {
-        VialerLogDebug("Setup VoIP with CallKit support, loading the callKitProvider.")
-        callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
+    fileprivate func setupVoIP(forceRecreateVoip: Bool = false) {
+        VialerLogDebug("Setting up VoIP")
+        if callKitProviderDelegate == nil || forceRecreateVoip {
+            VialerLogDebug("Initializing CallKit")
+            callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
+        }
         callEventMonitor.start()
         if user.sipEnabled {
             VialerLogDebug("VoIP is enabled start the endpoint.")
@@ -358,7 +361,7 @@ extension AppDelegate {
         let success = SIPUtils.safelyRemoveSipEndpoint()
 
         if success {
-            setupVoIP()
+            setupVoIP(forceRecreateVoip: true)
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 SIPUtils.safelyRemoveSipEndpoint()

@@ -16,7 +16,6 @@ class VialerCallKitDelegate: NSObject {
     private let callManager: VSLCallManager
     public let provider: CXProvider
     private let notifications = NotificationCenter.default
-    private var callConfirmed = false
 
     init(callManager: VSLCallManager) {
         self.callManager = callManager
