@@ -41,6 +41,7 @@ class VialerCallKitDelegate: NSObject {
         providerConfiguration.maximumCallGroups = 2
         providerConfiguration.maximumCallsPerCallGroup = 1
         providerConfiguration.supportsVideo = false
+        providerConfiguration.supportedHandleTypes = [CXHandle.HandleType.phoneNumber]
 
         if !SystemUser.current().usePhoneRingtone {
             if let ringtoneFileName = Bundle.main.path(forResource: "ringtone", ofType: "wav") {
@@ -48,7 +49,6 @@ class VialerCallKitDelegate: NSObject {
             }
         }
 
-        providerConfiguration.supportedHandleTypes = [CXHandle.HandleType.phoneNumber]
         return providerConfiguration
     }
 
