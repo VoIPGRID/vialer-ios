@@ -1316,16 +1316,22 @@
 		F2DE21841CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DE21861CB69E7F007B5B4D /* ReachabilityBarStoryboard.storyboard */; };
 		F2FCE4CC1CC918F2001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
 		F2FCE4CD1CC918F4001DE20B /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B43F0D1C3BEB3F0089A387 /* SnapshotUITests.swift */; };
+		F81F001475405C10E4580C33 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
+		F81F002664B354F74F607143 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F007C70C1441996158E9F /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F0159A631FB06EE9EBDCD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F0175AA8D58FCE4CB0D6D /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F018ABBB65934950EEBDB /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F01DB8F0274D1C924A053 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F01FC922E52E6F3465B96 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F0205ECEC10433798CDD6 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F021BC6ADDF94E5DDB908 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F028666EB76E42F957238 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F02F3D13814709D2215B1 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F03298E167AE1E469826B /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F03364B144FD1E1742F9C /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F03FAFC2A2FA25A78DABF /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F049D68D7AFA5C8481045 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F056FA88CDA7542DBFB1E /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
@@ -1333,7 +1339,9 @@
 		F81F0588D0B6B0E560955CFA /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F05D3A033CCCA9A850B1D /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F069E87B48F91DBB8AB10 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F07948536809B1147A130 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F07ACAC4EDEC07D019F8A /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F085C07311554C7B89228 /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
@@ -1342,6 +1350,7 @@
 		F81F0C6A162B61A1E017010E /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F0CAB070A5C18D8794387 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F0DCE30DF249B8294BABF /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
+		F81F0F468CE1F4C529BD86D7 /* PushRegistryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */; };
 		F81F0F52613D9C71BA058DA7 /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
@@ -1982,6 +1991,7 @@
 		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Vialer-Prefix.pch"; path = "Supporting Files/Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VialerCallKitDelegate.swift; sourceTree = "<group>"; };
 		F81F05D06D0A053005A21DD8 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
+		F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRegistryDelegate.swift; sourceTree = "<group>"; };
 		F81F0C232DB66DD915AB9078 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
 		F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSLExtensions.swift; sourceTree = "<group>"; };
 		F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewControllerTests.m; sourceTree = "<group>"; };
@@ -3120,6 +3130,7 @@
 				83BA7FDB233226F800B066E6 /* APNSHandler.swift */,
 				5C5584902424BA1000A9AFA3 /* APNSCallHandler.swift */,
 				5CEC5D85243E0C3800F6F3D2 /* VoipTaskSynchronizer.swift */,
+				F81F0B98665E92866F4D60AA /* PushRegistryDelegate.swift */,
 			);
 			path = APNS;
 			sourceTree = "<group>";
@@ -5551,6 +5562,7 @@
 				F81F0AF9E9216CBBAC8C2702 /* Middleware.m in Sources */,
 				F81F007C70C1441996158E9F /* VialerCallKitDelegate.swift in Sources */,
 				F81F085C07311554C7B89228 /* VSLExtensions.swift in Sources */,
+				F81F069E87B48F91DBB8AB10 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5666,6 +5678,7 @@
 				F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */,
 				F81F0CAB070A5C18D8794387 /* VialerCallKitDelegate.swift in Sources */,
 				F81F05D3A033CCCA9A850B1D /* VSLExtensions.swift in Sources */,
+				F81F001475405C10E4580C33 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5781,6 +5794,7 @@
 				F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */,
 				F81F0576C62465CD6267C091 /* VialerCallKitDelegate.swift in Sources */,
 				F81F0F52613D9C71BA058DA7 /* VSLExtensions.swift in Sources */,
+				F81F03364B144FD1E1742F9C /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5924,6 +5938,7 @@
 				F81F01DB8F0274D1C924A053 /* Middleware.m in Sources */,
 				F81F018ABBB65934950EEBDB /* VialerCallKitDelegate.swift in Sources */,
 				F81F03FAFC2A2FA25A78DABF /* VSLExtensions.swift in Sources */,
+				F81F07948536809B1147A130 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5970,6 +5985,7 @@
 				F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */,
 				F81F03298E167AE1E469826B /* VialerCallKitDelegate.swift in Sources */,
 				F81F056FA88CDA7542DBFB1E /* VSLExtensions.swift in Sources */,
+				F81F0F468CE1F4C529BD86D7 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6085,6 +6101,7 @@
 				F81F0175AA8D58FCE4CB0D6D /* Middleware.m in Sources */,
 				F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */,
 				F81F07ACAC4EDEC07D019F8A /* VSLExtensions.swift in Sources */,
+				F81F049D68D7AFA5C8481045 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6219,6 +6236,7 @@
 				F81F028666EB76E42F957238 /* Middleware.m in Sources */,
 				F81F0205ECEC10433798CDD6 /* VialerCallKitDelegate.swift in Sources */,
 				F81F0588D0B6B0E560955CFA /* VSLExtensions.swift in Sources */,
+				F81F01FC922E52E6F3465B96 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6334,6 +6352,7 @@
 				F81F0C1E3FEC440514C2F5EC /* Middleware.m in Sources */,
 				F81F021BC6ADDF94E5DDB908 /* VialerCallKitDelegate.swift in Sources */,
 				F81F0DCE30DF249B8294BABF /* VSLExtensions.swift in Sources */,
+				F81F002664B354F74F607143 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6468,6 +6487,7 @@
 				F81F0159A631FB06EE9EBDCD /* Middleware.m in Sources */,
 				F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */,
 				F81F0C6A162B61A1E017010E /* VSLExtensions.swift in Sources */,
+				F81F02F3D13814709D2215B1 /* PushRegistryDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,6 @@ class APNSCallHandler {
 
     let callKit = (UIApplication.shared.delegate as! AppDelegate).callKitProviderDelegate.provider
     let payload: PKPushPayload
-    let synchronously: VoipTaskSynchronizer
     let vsl = VialerSIPLib.sharedInstance()
     let sip = SIPUtils.self
 
@@ -31,7 +30,6 @@ class APNSCallHandler {
 
     init(payload: PKPushPayload) {
         self.payload = payload
-        self.synchronously = VoipTaskSynchronizer()
     }
     
     /**
