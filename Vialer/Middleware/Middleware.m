@@ -29,16 +29,12 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 #pragma mark - Lifecycle
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPCredentialsChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SystemUserSIPDisabledNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallStateChangedNotification object: nil];
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAPNSTokenOnSIPCredentialsChange) name:SystemUserSIPCredentialsChangedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteDeviceRegistrationFromMiddleware:) name:SystemUserSIPDisabledNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callStateChanged:) name:VSLCallStateChangedNotification object:nil];
     }
     return self;
@@ -82,20 +78,10 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 #pragma mark - actions
 
-/**
- *  Invoked when the SystemUserSIPCredentialsChangedNotification is received.
- */
-- (void)updateAPNSTokenOnSIPCredentialsChange {
-    if (self.systemUser.sipEnabled) {
-        VialerLogInfo(@"Sip Credentials have changed, updating Middleware");
-        [self sentAPNSToken:[APNSHandler storedAPNSToken]];
-    }
-}
-
-- (void)deleteDeviceRegistrationFromMiddleware:(NSNotification *)notification {
+- (void)deleteDeviceRegistration: (NSString *_Nonnull) apnsToken {
     VialerLogInfo(@"SIP Disabled, unregistering from middleware");
-    NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
-    NSString *sipAccount = notification.object;
+    NSString *storedAPNSToken = apnsToken;
+    NSString *sipAccount = SystemUser.currentUser.sipAccount;
 
     if (sipAccount && storedAPNSToken) {
         [self.commonMiddlewareRequestOperationManager deleteDeviceRecordWithAPNSToken:storedAPNSToken sipAccount:sipAccount withCompletion:^(NSError *error) {
@@ -109,23 +95,6 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
         VialerLogDebug(@"Not deleting device registration from middleware, SIP Account(%@) not set or no APNS Token(%@) stored.",
                    sipAccount, storedAPNSToken);
     }
-}
-
-- (void)updateDeviceRegistrationWithRemoteLoggingId {
-    VialerLogInfo(@"Update Middleware with remote logging id");
-    NSString *storedAPNSToken = [APNSHandler storedAPNSToken];
-
-    [self sentAPNSToken:storedAPNSToken withCompletion:^(NSError *error) {
-        if (error) {
-            VialerLogWarning(@"Updating the remote logging id to the middleware has failed %@", [error localizedDescription]);
-        } else {
-            if ([VialerLogger remoteLoggingEnabled]) {
-                VialerLogInfo(@"The remote logging id has been succesful sent to the middleware");
-            } else {
-                VialerLogInfo(@"The remote logging id has been succesful removed from the middleware");
-            }
-        }
-    }];
 }
 
 - (void)sentAPNSToken:(NSString *)apnsToken {

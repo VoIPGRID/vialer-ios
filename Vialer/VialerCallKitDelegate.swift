@@ -311,7 +311,7 @@ extension VialerCallKitDelegate {
 
         VialerLogInfo("Awaiting the incoming call to be confirmed")
 
-        VoipTaskSynchronizer.wait(timeoutInMilliseconds: 5000) { isCallConfirmed() }
+        VialerCallKitDelegate.wait(timeoutInMilliseconds: 5000) { isCallConfirmed() }
 
         VialerLogInfo("Finished waiting with result: \(isCallConfirmed())")
 
@@ -319,10 +319,29 @@ extension VialerCallKitDelegate {
     }
 
     private func isCallConfirmed() -> Bool {
-        APNSCallHandler.incomingCallConfirmed
+        VoIPPushHandler.incomingCallConfirmed
     }
 }
 
 extension Notification.Name {
     static let teardownSip = Notification.Name("destroy-sip")
+}
+
+extension VialerCallKitDelegate {
+
+    /**
+        Wait for a given condition or until a certain timeout has been reached.
+    */
+    public static func wait(timeoutInMilliseconds: Int = 10000, until: () -> Bool) -> Bool {
+        let TIMEOUT_MILLISECONDS = timeoutInMilliseconds
+        let MILLISECONDS_BETWEEN_ITERATION = 5
+        var millisecondsTrying = 0
+
+        while (!until() && millisecondsTrying < TIMEOUT_MILLISECONDS) {
+            millisecondsTrying += MILLISECONDS_BETWEEN_ITERATION
+            usleep(useconds_t(MILLISECONDS_BETWEEN_ITERATION * 1000))
+        }
+
+        return until()
+    }
 }

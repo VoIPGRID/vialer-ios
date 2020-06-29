@@ -94,30 +94,6 @@
     [pkPushRegistryMock stopMocking];
 }
 
-- (void)testReceiptOfAPNSToken {
-    // Given
-    NSString *tokenString = @"0000000011111111222222223333333344444444555555556666666677777777";
-    NSData *mockToken = [self nsDataFromHexString:tokenString];
-
-    id mockCredentials = OCMClassMock([PKPushCredentials class]);
-    OCMStub([mockCredentials token]).andReturn(mockToken);
-
-    id mockMiddleware = OCMClassMock([Middleware class]);
-    self.apnsHandler.middleware = mockMiddleware;
-
-    id mockPushRegistry = OCMClassMock([PKPushRegistry class]);
-
-    // Then
-    OCMExpect([mockMiddleware sentAPNSToken:[OCMArg checkWithSelector:@selector(isEqualToString:) onObject:tokenString]]);
-
-    // When
-    [self.apnsHandler pushRegistry:mockPushRegistry didUpdatePushCredentials:mockCredentials forType:PKPushTypeVoIP];
-    OCMVerifyAll(mockMiddleware);
-
-    [mockCredentials stopMocking];
-    [mockMiddleware stopMocking];
-}
-
 - (void)testRetrievingStoredAPNSTokenClassFunction {
     // Given
     NSString *givenToken = @"0000000011111111222222223333333344444444555555556666666677777777";
