@@ -43,4 +43,7 @@ extern NSString * const _Nonnull MiddlewareAccountRegistrationIsDoneNotification
  *  middleware with the remote logging id.
  */
 - (void)updateDeviceRegistrationWithRemoteLoggingId;
+
+- (void)deleteDeviceRegistration: (NSString *_Nonnull) apnsToken;
+
 @end

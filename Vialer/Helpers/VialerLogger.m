@@ -100,9 +100,7 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
 + (void)setRemoteLoggingEnabled:(BOOL)enable {
     [[NSUserDefaults standardUserDefaults] setBool:enable forKey:DDLogWrapperShouldUseRemoteLoggingKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
-    // Update the Middleware when remote logging is enabled.
-    [[[Middleware alloc] init] updateDeviceRegistrationWithRemoteLoggingId];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"remote-logging-state-changed" object:nil];
 }
 
 + (NSString *)remoteIdentifier {

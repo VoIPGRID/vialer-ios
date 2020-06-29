@@ -63,6 +63,7 @@ import UserNotifications
         }
         return _callEventMonitor as! CallEventsMonitor
     }
+    let pushKitManager = PushKitManager()
 }
 
 // MARK: - UIApplicationDelegate
@@ -100,11 +101,19 @@ extension AppDelegate: UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         stopVibratingInBackground()
+
+        DispatchQueue.main.async {
+            self.pushKitManager.registerForVoIPPushes()
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         NotificationCenter.default.post(name: Notification.Name.teardownSip, object: self)
         saveContext()
+
+        DispatchQueue.main.async {
+            self.pushKitManager.registerForVoIPPushes()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -169,7 +178,7 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSIPEndpoint(_:)), name: NSNotification.Name.SystemUserStunUsageChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserLogout, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(registerForPushNotification), name: NSNotification.Name.SystemUserLogin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userLoggedIn), name: NSNotification.Name.SystemUserLogin, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
@@ -177,6 +186,8 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tearDownSip(_:)), name: Notification.Name.teardownSip, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.receivedApnsToken, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.remoteLoggingStateChanged, object: nil)
 
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
         _ = ReachabilityHelper.instance
@@ -195,6 +206,8 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.teardownSip, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.receivedApnsToken, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.remoteLoggingStateChanged, object: nil)
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
         reachability.stopNotifier()
     }
@@ -327,7 +340,7 @@ extension AppDelegate {
         VialerLogDebug("Setup the listener for incoming calls through VoIP.");
         vialerSIPLib.setIncomingCall { call in
             VialerGAITracker.incomingCallRingingEvent()
-            APNSCallHandler.incomingCallConfirmed = true
+            VoIPPushHandler.incomingCallConfirmed = true
             DispatchQueue.main.async {
                 VialerLogInfo("Incoming call block invoked, routing through CallKit.")
                 self.mostRecentCall = call
@@ -383,7 +396,7 @@ extension AppDelegate {
         }
             
         DispatchQueue.main.async {
-            APNSHandler.sharedAPNSHandler.registerForVoIPNotifications()
+            self.refreshMiddlewareRegistration()
             self.registerForLocalNotifications()
         }
     }
@@ -402,11 +415,11 @@ extension AppDelegate {
         resetVoip()
     }
 
-    @objc fileprivate func registerForPushNotification() {
+    @objc fileprivate func userLoggedIn() {
         VialerLogInfo("User has been logged in register for push notifications")
 
         DispatchQueue.main.async {
-            APNSHandler.sharedAPNSHandler.registerForVoIPNotifications()
+            self.refreshMiddlewareRegistration()
         }
     }
 
@@ -415,6 +428,12 @@ extension AppDelegate {
         VialerLogInfo("SIP has been disabled")
         DispatchQueue.main.async {
             SIPUtils.removeSIPEndpoint()
+
+            if let token = self.pushKitManager.token {
+                Middleware().deleteDeviceRegistration(token)
+            } else {
+                VialerLogWarning("Unable to delete device from middleware as we have no token")
+            }
         }
     }
 
@@ -564,4 +583,43 @@ extension AppDelegate {
             callAvailabilityTimer = nil
         }
     }
+}
+
+// MARK: - Middleware
+extension AppDelegate {
+
+    /**
+        This can be called, regardless of the current state, and it will properly set the correct middleware
+        registration status.
+    */
+    func refreshMiddlewareRegistration() {
+        guard let token = self.pushKitManager.token else {
+            VialerLogInfo("Unable to perform any middleware updates as we do not have a valid APNS token.")
+            self.pushKitManager.registerForVoIPPushes()
+            return
+        }
+
+        let middleware = Middleware()
+
+        if user.loggedIn && user.sipEnabled {
+            VialerLogInfo("Registering user with the middleware.")
+            middleware.sentAPNSToken(token)
+        } else {
+            VialerLogInfo("Deleting user from the middleware.")
+            middleware.deleteDeviceRegistration(token)
+        }
+    }
+
+    @objc fileprivate func receivedApnsToken(_ notification: NSNotification) {
+        refreshMiddlewareRegistration()
+    }
+}
+
+extension Notification.Name {
+
+    /**
+        A notification that is emitted when a token has been received from the apns
+        servers.
+    */
+    static let remoteLoggingStateChanged = Notification.Name("remote-logging-state-changed")
 }
