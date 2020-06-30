@@ -44,7 +44,7 @@ class VialerCallKitDelegate: NSObject {
         providerConfiguration.supportedHandleTypes = [CXHandle.HandleType.phoneNumber]
 
         if !SystemUser.current().usePhoneRingtone {
-            if let ringtoneFileName = Bundle.main.path(forResource: "ringtone", ofType: "wav") {
+            if Bundle.main.path(forResource: "ringtone", ofType: "wav") != nil {
                 providerConfiguration.ringtoneSound = "ringtone.wav"
             }
         }
@@ -107,7 +107,7 @@ class VialerCallKitDelegate: NSObject {
             handleValue = call.callerNumber!
         }
 
-        let handle = CXHandle(
+        _ = CXHandle(
                 type: CXHandle.HandleType.phoneNumber,
                 value: handleValue
         )
