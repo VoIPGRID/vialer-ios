@@ -188,9 +188,16 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(tearDownSip(_:)), name: Notification.Name.teardownSip, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.receivedApnsToken, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.remoteLoggingStateChanged, object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: NSNotification.Name(rawValue: ReachabilityChangedNotification),object: reachability)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
         _ = ReachabilityHelper.instance
+
+        do {
+            try reachability.startNotifier()
+        } catch {
+            VialerLogDebug("Reachability notifier failed to start.")
+        }
+
     }
 
     /// Remove the observers that the AppDelegate is listening to
@@ -208,6 +215,8 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.teardownSip, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.receivedApnsToken, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.remoteLoggingStateChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ReachabilityChangedNotification), object: reachability)
+
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
         reachability.stopNotifier()
     }
@@ -622,4 +631,12 @@ extension Notification.Name {
         servers.
     */
     static let remoteLoggingStateChanged = Notification.Name("remote-logging-state-changed")
+}
+
+// Reachability
+extension AppDelegate {
+    @objc func reachabilityChanged(note: NSNotification) {
+        VialerLogInfo("Reachability changed, rebooting SIP")
+        SIPUtils.safelyRemoveSipEndpoint()
+    }
 }

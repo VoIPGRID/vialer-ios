@@ -208,11 +208,9 @@ SPEC REPOS:
     - OCMock
     - OHHTTPStubs
     - PBWebViewController
-    - Reachability
     - SAMKeychain
     - SimulatorStatusMagic
     - SVProgressHUD
-    - Vialer-pjsip-iOS
   trunk:
     - Firebase
     - FirebaseABTesting
@@ -234,6 +232,8 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - Reachability
+    - Vialer-pjsip-iOS
     - VialerSIPLib
 
 EXTERNAL SOURCES:
@@ -297,4 +297,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b9720278bacdf604fddc96a384d9cc82eaefa705
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1
