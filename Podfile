@@ -1,6 +1,6 @@
 platform :ios, '10.0'
 
-SIPlibVersion = '3.7.1'
+SIPlibVersion = '3.7.2'
 
 def default_pods
     pod 'AFNetworkActivityLogger'
