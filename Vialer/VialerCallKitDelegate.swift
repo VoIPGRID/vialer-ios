@@ -33,6 +33,10 @@ class VialerCallKitDelegate: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
 
+    func refresh() {
+        self.provider.configuration = VialerCallKitDelegate.self.createConfiguration()
+    }
+
     private static func createConfiguration() -> CXProviderConfiguration {
         let providerConfiguration = CXProviderConfiguration(
                 localizedName: Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
@@ -126,6 +130,7 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     }
 
     public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+        VialerLogDebug("CXANSWERCDALLACTION")
         guard let call = findCallOrFail(action: action) else { return }
 
 

@@ -329,11 +329,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate {
 
     /// Make sure the VoIP parts are up and running
-    fileprivate func setupVoIP(forceRecreateVoip: Bool = false) {
+    fileprivate func setupVoIP() {
         VialerLogDebug("Setting up VoIP")
-        if callKitProviderDelegate == nil || forceRecreateVoip {
+        if callKitProviderDelegate == nil {
             VialerLogDebug("Initializing CallKit")
             callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
+        } else {
+            callKitProviderDelegate.refresh()
         }
         callEventMonitor.start()
         if user.sipEnabled {
@@ -380,10 +382,11 @@ extension AppDelegate {
     }
 
     private func resetVoip() {
+        self.mostRecentCall = nil
         let success = SIPUtils.safelyRemoveSipEndpoint()
 
         if success {
-            setupVoIP(forceRecreateVoip: true)
+            setupVoIP()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 SIPUtils.safelyRemoveSipEndpoint()
