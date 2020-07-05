@@ -130,7 +130,6 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     }
 
     public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-        VialerLogDebug("CXANSWERCDALLACTION")
         guard let call = findCallOrFail(action: action) else { return }
 
 
