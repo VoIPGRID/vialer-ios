@@ -147,7 +147,7 @@
         VSLOpusConfiguration *opusConfiguration = [[VSLOpusConfiguration alloc] init];
         //opusConfiguration.frameDuration = VSLOpusConfigurationFrameDurationTwenty; // VSLOpusConfigurationFrameDurationSixty is default (=VSLOpusConfigurationFrameDurationDefault)
 
-        opusConfiguration.constantBitRate = YES;
+        opusConfiguration.constantBitRate = NO;
         
         codecConfiguration.opusConfiguration = opusConfiguration;
     } else {
