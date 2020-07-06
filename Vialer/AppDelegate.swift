@@ -104,6 +104,7 @@ extension AppDelegate: UIApplicationDelegate {
 
         DispatchQueue.main.async {
             self.pushKitManager.registerForVoIPPushes()
+            self.syncUserWithBackend()
         }
     }
 
@@ -410,6 +411,7 @@ extension AppDelegate {
         DispatchQueue.main.async {
             self.refreshMiddlewareRegistration()
             self.registerForLocalNotifications()
+            self.syncUserWithBackend()
         }
     }
 
@@ -432,6 +434,28 @@ extension AppDelegate {
 
         DispatchQueue.main.async {
             self.refreshMiddlewareRegistration()
+            self.syncUserWithBackend()
+        }
+    }
+
+    /**
+        Ensures we have opus enabled on the backend for users.
+    */
+    private func syncUserWithBackend() {
+        if self.user.isOpusEnabledViaApi { return }
+
+        if self.user.currentAudioQuality == 0 { return }
+
+        self.user.updateUseOpus(1) { success, error in
+            if success {
+                VialerLogInfo("OPUS has been enabled for this user")
+            } else {
+                VialerLogError("Unable to enable OPUS for this user")
+            }
+
+            if error != nil {
+                VialerLogError("Failed to enable OPUS for user: \(error)")
+            }
         }
     }
 

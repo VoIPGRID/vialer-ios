@@ -268,6 +268,8 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
  */
 @property (nonatomic) NSInteger currentAudioQuality;
 
+@property (nonatomic) BOOL isOpusEnabledViaApi;
+
 /**
  *  Singleton instance of the current user.
  *
