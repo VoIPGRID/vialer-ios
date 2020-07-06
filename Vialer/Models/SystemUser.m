@@ -387,6 +387,15 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
 }
 
 - (NSInteger)currentAudioQuality {
+    NSObject *obj = [[NSUserDefaults standardUserDefaults] objectForKey: SystemUserAudioQualitySUDKey];
+
+    // if the user has not selected any preference
+    if (obj == nil) {
+        // default to opus
+        return 1;
+    }
+
+    // otherwise use their preference
     return [[NSUserDefaults standardUserDefaults] integerForKey:SystemUserAudioQualitySUDKey];
 }
 
@@ -650,16 +659,12 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     self.outgoingNumber = profileDict[SystemUserApiKeyOutgoingNumber];
     self.country = profileDict[SystemUserApiKeyCountry];
 
-    BOOL opusEnabled = NO;
     if (![profileDict[SystemUserApiKeyOpusEnabled] isKindOfClass:[NSNull class]]) {
-        opusEnabled = [profileDict[SystemUserApiKeyOpusEnabled] boolValue];
+        self.isOpusEnabledViaApi = [profileDict[SystemUserApiKeyOpusEnabled] boolValue];
+    } else {
+        self.isOpusEnabledViaApi = false;
     }
-    
-    if (self.currentAudioQuality == 0 && opusEnabled) {
-        self.currentAudioQuality = 1;
-    } else if (self.currentAudioQuality == 1 && !opusEnabled) {
-        self.currentAudioQuality = 0;
-    }
+
     if (self.sipEnabled) {
         [SIPUtils updateCodecs];
     }
