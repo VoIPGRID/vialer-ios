@@ -29,7 +29,9 @@ class PushKitManager: NSObject {
     */
     func registerForVoIPPushes() {
         if hasRegisteredForVoIPPushes() {
-            notifications.post(name: Notification.Name.receivedApnsToken, object: nil)
+            if self.token != nil {
+                notifications.post(name: Notification.Name.receivedApnsToken, object: nil)
+            }
             return
         }
 
