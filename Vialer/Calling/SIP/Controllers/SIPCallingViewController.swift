@@ -5,6 +5,7 @@
 
 import Contacts
 import MediaPlayer
+import PhoneLib
 
 private var myContext = 0
 
@@ -27,38 +28,32 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     // MARK: - Properties
     private var activeCallObserversWereSet = false // Keep track if observers are set to prevent removing unset observers.
 
-    @objc var activeCall: VSLCall? {
+    var activeCall: Session? {
         didSet {
-            var numberToClean: String
-            if activeCall!.isIncoming {
-                numberToClean = activeCall!.callerNumber!
-            } else {
-                numberToClean = activeCall!.numberToCall
-            }
-            if let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(numberToClean) {
+            if let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(activeCall?.remoteNumber) {
                 phoneNumberLabelText = cleanedPhoneNumber
             }
             
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                PhoneNumberModel.getCallName(self.activeCall!, withCompletion: { (phoneNumberModel) in
-                    DispatchQueue.main.async { [weak self] in
-                        if !phoneNumberModel.callerInfo.isEmpty {
-                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
-                        }
-                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
-                    }
-                })
+//                PhoneNumberModel.getCallName(self.activeCall!, withCompletion: { (phoneNumberModel) in
+//                    DispatchQueue.main.async { [weak self] in
+//                        if !phoneNumberModel.callerInfo.isEmpty {
+//                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+//                        }
+//                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
+//                    }
+//                })
             }
             DispatchQueue.main.async { [weak self] in
                 self?.updateUI()
             }
 
-            activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
-            activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+           // activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+            //activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
             activeCallObserversWereSet = true
         }
     }
-    var callManager = VialerSIPLib.sharedInstance().callManager
+//    var callManager = VialerSIPLib.sharedInstance().callManager
     let currentUser = SystemUser.current()!
     // ReachabilityManager, needed for showing notifications.
     fileprivate let reachability = ReachabilityHelper.instance.reachability!
@@ -256,14 +251,14 @@ extension SIPCallingViewController {
         
         if let unwrappedContact = contact {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                PhoneNumberModel.getCallName(from: unwrappedContact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
-                    DispatchQueue.main.async { [weak self] in
-                        if !phoneNumberModel.callerInfo.isEmpty {
-                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
-                        }
-                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
-                    }
-                })
+//                PhoneNumberModel.getCallName(from: unwrappedContact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
+//                    DispatchQueue.main.async { [weak self] in
+//                        if !phoneNumberModel.callerInfo.isEmpty {
+//                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
+//                        }
+//                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
+//                    }
+//                })
             }
         }
         updateUI()
@@ -302,22 +297,14 @@ extension SIPCallingViewController {
     }
     
     fileprivate func startCalling() {
-        SIPUtils.setupSIPEndpoint()
+        if let unwrappedCleanedPhoneNumber = self.cleanedPhoneNumber {
+            self.startConnectDurationTimer()
+            let success = PhoneLib.shared.register(domain: "sip.encryptedsip.com", port: 5060, username: SystemUser.current().username, password: SystemUser.current().password)
 
-        SIPUtils.registerSIPAccountWithEndpoint { (success, account) in
-            guard account != nil else {
-                return
-            }
-
-            if let unwrappedCleanedPhoneNumber = self.cleanedPhoneNumber {
-                self.startConnectDurationTimer()
-                self.callManager.startCall(toNumber: unwrappedCleanedPhoneNumber, for: account!) { (call, error) in
-                    if error != nil {
-                        VialerLogError("Error setting up call: \(String(describing: error))")
-                    } else if let call = call {
-                        self.activeCall = call
-                    }
-                }
+            if success {
+                let session = PhoneLib.shared.call(to: String)
+            } else {
+                VialerLogError("Registration failed...")
             }
         }
     }

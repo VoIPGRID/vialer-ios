@@ -5,8 +5,9 @@
 
 import Foundation
 import PushKit
+import PhoneLib
 
-class VoIPPushHandler {
+class VoIPPushHandler: SessionDelegate {
 
     private let middleware = Middleware()
     private let voIPPushPayloadTransformer = VoIPPushPayloadTransformer()
@@ -22,9 +23,11 @@ class VoIPPushHandler {
     // However, it must always be set to false when a new call is coming in.
     static var incomingCallConfirmed = false
 
+
     func handle(payload: PKPushPayload, completion: @escaping () -> ()) {
         VoIPPushHandler.self.incomingCallConfirmed = false
 
+        PhoneLib.shared.sessionDelegate = self
         guard let payload = voIPPushPayloadTransformer.transform(payload: payload) else {
             VialerLogError("Unable to properly extract call information from payload. Not handling call.")
             return

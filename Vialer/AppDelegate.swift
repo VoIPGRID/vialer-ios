@@ -8,7 +8,7 @@ import CoreData
 import Firebase
 import UIKit
 import UserNotifications
-
+import PhoneLib
 
 @UIApplicationMain
 @objc class AppDelegate: UIResponder {
@@ -53,7 +53,6 @@ import UserNotifications
     var callAvailabilityTimesFired: Int = 0
     
     var user = SystemUser.current()!
-    lazy var vialerSIPLib = VialerSIPLib.sharedInstance()
     var mostRecentCall : VSLCall?
     let reachability = Reachability(true)!
     private var _callEventMonitor: Any? = nil
@@ -184,21 +183,12 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tearDownSip(_:)), name: Notification.Name.teardownSip, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.receivedApnsToken, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.remoteLoggingStateChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: NSNotification.Name(rawValue: ReachabilityChangedNotification),object: reachability)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
         _ = ReachabilityHelper.instance
-
-        do {
-            try reachability.startNotifier()
-        } catch {
-            VialerLogDebug("Reachability notifier failed to start.")
-        }
-
     }
 
     /// Remove the observers that the AppDelegate is listening to
@@ -211,15 +201,11 @@ extension AppDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.teardownSip, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.receivedApnsToken, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.remoteLoggingStateChanged, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ReachabilityChangedNotification), object: reachability)
-
         user.removeObserver(self, forKeyPath: #keyPath(SystemUser.clientID))
-        reachability.stopNotifier()
     }
 }
 
@@ -345,55 +331,14 @@ extension AppDelegate {
         }
         setupIncomingCallBack()
         setupMissedCallBack()
-    }
 
-    /// Register a callback to the sip library so that the app can handle incoming calls
-    private func setupIncomingCallBack() {
-        VialerLogDebug("Setup the listener for incoming calls through VoIP.");
-        vialerSIPLib.setIncomingCall { call in
-            VialerGAITracker.incomingCallRingingEvent()
-            VoIPPushHandler.incomingCallConfirmed = true
-            DispatchQueue.main.async {
-                VialerLogInfo("Incoming call block invoked, routing through CallKit.")
-                self.mostRecentCall = call
-                self.callKitProviderDelegate.reportIncomingCall(call: call)
-            }
-        }
+        PhoneLib.shared.sessionDelegate = self
+        PhoneLib.shared.registrationDelegate = self
     }
 
     /// Register a callback to the sip library so that the app can handle missed calls
     private func setupMissedCallBack() {
-        VialerLogDebug("Setup the listener for missing calls.");
-        vialerSIPLib.setMissedCall { (call) in
-            switch call.terminateReason {
-            case .callCompletedElsewhere:
-                VialerLogDebug("Missed call, call completed elsewhere.")
-                VialerGAITracker.missedIncomingCallCompletedElsewhereEvent()
-                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
-            case .originatorCancel:
-                VialerLogDebug("Missed call, originator cancelled.")
-                VialerGAITracker.missedIncomingCallOriginatorCancelledEvent()
-                VialerStats.sharedInstance.incomingCallFailedDeclined(call: call)
-                self.createLocalNotificationMissedCall(forCall: call)
-            default:
-                VialerLogDebug("Missed call, unknown reason.")
-                break
-            }
-        }
-    }
-
-    private func resetVoip() {
-        self.mostRecentCall = nil
-        let success = SIPUtils.safelyRemoveSipEndpoint()
-
-        if success {
-            setupVoIP()
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                SIPUtils.safelyRemoveSipEndpoint()
-                self.setupVoIP()
-            }
-        }
+        //@TODO - Reimplement when library supports
     }
 
     /// Setup the endpoint if user has SIP enabled
@@ -479,13 +424,13 @@ extension AppDelegate {
     ///
     /// - Parameter notification: Notification instance with VSLCall
     @objc fileprivate func callStateChanged(_ notification: Notification) {
-        resetCallAvailabilityTimer()
-
-        guard let call = notification.userInfo![VSLNotificationUserInfoCallKey] as? VSLCall,
-            call.callState == .connecting || call.callState == .disconnected else { return }
-        
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [notification.name.rawValue])
-        stopVibratingInBackground()
+//        resetCallAvailabilityTimer()
+//
+//        guard let call = notification.userInfo![VSLNotificationUserInfoCallKey] as? VSLCall,
+//            call.callState == .connecting || call.callState == .disconnected else { return }
+//
+//        notificationCenter.removePendingNotificationRequests(withIdentifiers: [notification.name.rawValue])
+//        stopVibratingInBackground()
     }
 
     /// Call was initiated from recents, addressbook or via call back on the native call kit ui. This will try to setup a call.
@@ -503,18 +448,8 @@ extension AppDelegate {
             return true;
         }
 
-        SIPUtils.setupSIPEndpoint()
+        let session = PhoneLib.shared.call(to: phoneNumber)
 
-        guard let account = SIPUtils.addSIPAccountToEndpoint() else {
-            VialerLogError("Couldn't add account to endpoint, not setting up call to: \(phoneNumber)")
-            return false
-        }
-        VialerGAITracker.setupOutgoingSIPCallEvent()
-        vialerSIPLib.callManager.startCall(toNumber: phoneNumber, for: account) { _, error in
-            if error != nil {
-                VialerLogError("Error starting call through User activity. Error: \(String(describing: error))")
-            }
-        }
         return true
     }
     
@@ -660,10 +595,48 @@ extension Notification.Name {
     static let remoteLoggingStateChanged = Notification.Name("remote-logging-state-changed")
 }
 
-// Reachability
-extension AppDelegate {
-    @objc func reachabilityChanged(note: NSNotification) {
-        VialerLogInfo("Reachability changed, rebooting SIP")
-        SIPUtils.safelyRemoveSipEndpoint()
+// MARK: - SessionDelegate
+extension AppDelegate: SessionDelegate {
+    public func didReceive(incomingSession: Session) {
+        VialerLogDebug("Incoming session didReceive")
+
+        VialerGAITracker.incomingCallRingingEvent()
+        VoIPPushHandler.incomingCallConfirmed = true
+        DispatchQueue.main.async {
+            VialerLogInfo("Incoming call block invoked, routing through CallKit.")
+            //self.mostRecentCall = call
+            //self.callKitProviderDelegate.reportIncomingCall(call: call)
+        }
+    }
+
+    public func outgoingDidInitialize(session: Session) {
+        VialerLogDebug("outgoingDidInitialize")
+    }
+
+    public func sessionUpdated(_ session: Session, message: String) {
+        VialerLogDebug("sessionUpdated")
+    }
+
+    public func sessionConnected(_ session: Session) {
+        VialerLogDebug("sessionConnected")
+    }
+
+    public func sessionEnded(_ session: Session) {
+        VialerLogDebug("sessionEnded")
+    }
+
+    public func sessionReleased(_ session: Session) {
+        VialerLogDebug("esessionReleased")
+    }
+
+    public func error(session: Session, message: String) {
+        VialerLogDebug("Error session \(message)")
+    }
+}
+
+// MARK: - RegistrationDelegate
+extension AppDelegate: RegistrationStateDelegate {
+    public func didChangeRegisterState(_ state: SipRegistrationStatus) {
+        VialerLogDebug("Reg state: \(state.rawValue)")
     }
 }

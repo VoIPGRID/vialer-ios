@@ -55,8 +55,7 @@ class AudioQualityViewController: UIViewController, TableViewHandler {
             SystemUser.current()?.updateUseOpus(audioQualityToStore, withCompletion: { (success, error) in
                 if success {
                     SystemUser.current()?.currentAudioQuality = audioQualityToStore
-                    let updateSuccess = SIPUtils.updateCodecs()
-                    if updateSuccess {
+                    if success {
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         let alertController = UIAlertController(title: NSLocalizedString("Could not save audio settings", comment: "Could not save audio settings"),

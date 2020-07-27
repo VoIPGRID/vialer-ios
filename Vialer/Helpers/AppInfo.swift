@@ -51,15 +51,17 @@ import Foundation
             return nil
         }
 
-        if let additionalVersion = infoDict[AppInfo.Constants.additionalVersionString] as? String, !additionalVersion.isEmpty {
-            return VialerStats.Status.beta
-        }
+//        if let additionalVersion = infoDict[AppInfo.Constants.additionalVersionString] as? String, !additionalVersion.isEmpty {
+//            return VialerStats.Status.beta
+//        }
 
-        #if DEBUG
-        if let commitNumber = infoDict[AppInfo.Constants.commitShortHash] as? String, !commitNumber.isEmpty {
-            return VialerStats.Status.custom
-        }
-        #endif
-        return VialerStats.Status.production
+//        #if DEBUG
+//        if let commitNumber = infoDict[AppInfo.Constants.commitShortHash] as? String, !commitNumber.isEmpty {
+//            return VialerStats.Status.custom
+//        }
+//        #endif
+//        return VialerStats.Status.production
+
+        return "New"
     }
 }

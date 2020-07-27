@@ -1,4 +1,6 @@
 import Foundation
+import Contacts
+import ContactsUI
 
 private var myContext = 0
 
@@ -11,35 +13,35 @@ class SetupCallTransferContactsViewController: SetupCallTransfer, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
 
     override func updateUI() {
-        if (firstCallPhoneNumberLabelText != nil) {
-            firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
-        }
-
-        guard let call = firstCall else { return }
-        if call.callState == .disconnected {
-            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
-        } else {
-            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-        }
+//        if (firstCallPhoneNumberLabelText != nil) {
+//            firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+//        }
+//
+//        guard let call = firstCall else { return }
+//        if call.callState == .disconnected {
+//            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
+//        } else {
+//            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
+//        }
     }
 
     @IBAction func cancelPressed(_ sender: AnyObject) {
-        guard let call = currentCall else {
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .unwindToFirstCall)
-            }
-            return
-        }
-        callManager.end(call) { error in
-            if error != nil {
-                VialerLogError("Could not hangup call: \(String(describing: error))")
-            } else {
-                DispatchQueue.main.async {
-                    self.performSegue(segueIdentifier: .unwindToFirstCall)
-                }
-            }
-
-        }
+//        guard let call = currentCall else {
+//            DispatchQueue.main.async {
+//                self.performSegue(segueIdentifier: .unwindToFirstCall)
+//            }
+//            return
+//        }
+//        callManager.end(call) { error in
+//            if error != nil {
+//                VialerLogError("Could not hangup call: \(String(describing: error))")
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.performSegue(segueIdentifier: .unwindToFirstCall)
+//                }
+//            }
+//
+//        }
     }
 
 }
@@ -58,8 +60,8 @@ extension SetupCallTransferContactsViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
-        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+//        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+//        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
         callObserversSet = true
         
         VialerGAITracker.trackScreenForController(name: controllerName)
@@ -71,8 +73,8 @@ extension SetupCallTransferContactsViewController {
         super.viewWillDisappear(animated)
 
         if callObserversSet {
-            firstCall?.removeObserver(self, forKeyPath: "callState")
-            firstCall?.removeObserver(self, forKeyPath: "mediaState")
+//            firstCall?.removeObserver(self, forKeyPath: "callState")
+//            firstCall?.removeObserver(self, forKeyPath: "mediaState")
             callObserversSet = false
         }
     }
@@ -152,56 +154,56 @@ extension SetupCallTransferContactsViewController {
 // MARK: - Segues
 extension SetupCallTransferContactsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(segue: segue) {
-        case .secondCallActive:
-            // The second call is active and a subtype of SIPCallingVC, so cast the destination to it.
-            let secondCallVC = segue.destination as? SecondCallViewController
-            
-            secondCallVC?.activeCall = currentCall
-            secondCallVC?.firstCall = firstCall
-            secondCallVC?.phoneNumberLabelText = currentCall?.numberToCall
-            secondCallVC?.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-        case .unwindToFirstCall:
-            let callVC = segue.destination as! SIPCallingViewController
-            if let call = currentCall, call.callState != .null && call.callState != .disconnected {
-                callVC.activeCall = call
-            } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
-                callVC.activeCall = call
-            }
-            if let cas = callActionSheet {
-                // If the action sheet is visible when unwinding to the first call, cancel it.
-                cas.dismiss(animated: false, completion: nil)
-            }
-        }
+//        switch segueIdentifier(segue: segue) {
+//        case .secondCallActive:
+//            // The second call is active and a subtype of SIPCallingVC, so cast the destination to it.
+//            let secondCallVC = segue.destination as? SecondCallViewController
+//
+//            secondCallVC?.activeCall = currentCall
+//            secondCallVC?.firstCall = firstCall
+//            secondCallVC?.phoneNumberLabelText = currentCall?.numberToCall
+//            secondCallVC?.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
+//        case .unwindToFirstCall:
+//            let callVC = segue.destination as! SIPCallingViewController
+//            if let call = currentCall, call.callState != .null && call.callState != .disconnected {
+//                callVC.activeCall = call
+//            } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
+//                callVC.activeCall = call
+//            }
+//            if let cas = callActionSheet {
+//                // If the action sheet is visible when unwinding to the first call, cancel it.
+//                cas.dismiss(animated: false, completion: nil)
+//            }
+//        }
     }
 }
 
 // MARK: - Utils
 extension SetupCallTransferContactsViewController {
     func makeCall(phoneNumber: CNPhoneNumber) {
-        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber.stringValue)!
-        
-        callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
-            DispatchQueue.main.async { [weak self] in
-                self?.currentCall = call
-                self?.performSegue(segueIdentifier: .secondCallActive)
-            }
-        }
+//        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber.stringValue)!
+//
+//        callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
+//            DispatchQueue.main.async { [weak self] in
+//                self?.currentCall = call
+//                self?.performSegue(segueIdentifier: .secondCallActive)
+//            }
+//        }
     }
 }
 
 // MARK: - KVO
 extension SetupCallTransferContactsViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &myContext {
-            DispatchQueue.main.async { [weak self] in
-                self?.updateUI()
-                if let call = self?.firstCall, call.callState == .disconnected {
-                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
-                }
-            }
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
+//        if context == &myContext {
+//            DispatchQueue.main.async { [weak self] in
+//                self?.updateUI()
+//                if let call = self?.firstCall, call.callState == .disconnected {
+//                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
+//                }
+//            }
+//        } else {
+//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+//        }
     }
 }

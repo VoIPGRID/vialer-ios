@@ -19,108 +19,119 @@ PODS:
   - CocoaLumberjack (3.6.1):
     - CocoaLumberjack/Core (= 3.6.1)
   - CocoaLumberjack/Core (3.6.1)
-  - Firebase (6.27.0):
-    - Firebase/Core (= 6.27.0)
-  - Firebase/Core (6.27.0):
+  - Firebase (6.28.1):
+    - Firebase/Core (= 6.28.1)
+  - Firebase/Core (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.6.1)
-  - Firebase/CoreOnly (6.27.0):
-    - FirebaseCore (= 6.8.0)
-  - Firebase/Crashlytics (6.27.0):
+    - FirebaseAnalytics (= 6.6.2)
+  - Firebase/CoreOnly (6.28.1):
+    - FirebaseCore (= 6.9.1)
+  - Firebase/Crashlytics (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 4.2.0)
-  - Firebase/Performance (6.27.0):
+    - FirebaseCrashlytics (~> 4.3.0)
+  - Firebase/Performance (6.28.1):
     - Firebase/CoreOnly
-    - FirebasePerformance (~> 3.1.11)
-  - FirebaseABTesting (3.3.0):
+    - FirebasePerformance (~> 3.2.0)
+  - FirebaseABTesting (4.0.0):
     - FirebaseCore (~> 6.8)
-    - Protobuf (>= 3.9.2, ~> 3.9)
-  - FirebaseAnalytics (6.6.1):
+  - FirebaseAnalytics (6.6.2):
     - FirebaseCore (~> 6.8)
     - FirebaseInstallations (~> 1.4)
-    - GoogleAppMeasurement (= 6.6.1)
+    - GoogleAppMeasurement (= 6.6.2)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 1.30905.0)
-  - FirebaseCore (6.8.0):
+  - FirebaseCore (6.9.1):
     - FirebaseCoreDiagnostics (~> 1.3)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.4.0):
-    - GoogleDataTransportCCTSupport (~> 3.1)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.5.0):
+    - GoogleDataTransport (~> 7.0)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30905.0)
-  - FirebaseCrashlytics (4.2.0):
+  - FirebaseCrashlytics (4.3.0):
     - FirebaseCore (~> 6.8)
     - FirebaseInstallations (~> 1.1)
-    - GoogleDataTransport (~> 6.1)
-    - GoogleDataTransportCCTSupport (~> 3.1)
+    - GoogleDataTransport (~> 7.0)
     - nanopb (~> 1.30905.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstallations (1.4.0):
+  - FirebaseInstallations (1.5.0):
     - FirebaseCore (~> 6.8)
-    - GoogleUtilities/Environment (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
     - PromisesObjC (~> 1.2)
-  - FirebasePerformance (3.1.11):
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.1)
-    - FirebaseRemoteConfig (~> 4.4)
+  - FirebasePerformance (3.2.1):
+    - FirebaseCore (~> 6.9)
+    - FirebaseInstallations (~> 1.5)
+    - FirebaseRemoteConfig (~> 4.7)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - GoogleUtilities/Environment (~> 6.2)
     - GoogleUtilities/ISASwizzler (~> 6.2)
     - GoogleUtilities/MethodSwizzler (~> 6.2)
     - GTMSessionFetcher/Core (~> 1.1)
-    - Protobuf (~> 3.9)
-  - FirebaseRemoteConfig (4.6.0):
-    - FirebaseABTesting (~> 3.1)
+    - Protobuf (~> 3.12)
+  - FirebaseRemoteConfig (4.7.0):
+    - FirebaseABTesting (~> 4.0)
     - FirebaseCore (~> 6.8)
     - FirebaseInstallations (~> 1.1)
-    - GoogleUtilities/Environment (~> 6.2)
-    - "GoogleUtilities/NSData+zlib (~> 6.2)"
+    - GoogleUtilities/Environment (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
   - GoogleAnalytics (3.17.0)
-  - GoogleAppMeasurement (6.6.1):
+  - GoogleAppMeasurement (6.6.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 1.30905.0)
-  - GoogleDataTransport (6.2.1)
-  - GoogleDataTransportCCTSupport (3.2.0):
-    - GoogleDataTransport (~> 6.1)
+  - GoogleDataTransport (7.0.0):
     - nanopb (~> 1.30905.0)
   - GoogleToolboxForMac/Defines (2.2.2)
   - GoogleToolboxForMac/Logger (2.2.2):
     - GoogleToolboxForMac/Defines (= 2.2.2)
   - "GoogleToolboxForMac/NSData+zlib (2.2.2)":
     - GoogleToolboxForMac/Defines (= 2.2.2)
-  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.7.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.6.0):
+  - GoogleUtilities/Environment (6.7.1):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/ISASwizzler (6.6.0)
-  - GoogleUtilities/Logger (6.6.0):
+  - GoogleUtilities/ISASwizzler (6.7.1)
+  - GoogleUtilities/Logger (6.7.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.6.0):
+  - GoogleUtilities/MethodSwizzler (6.7.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.6.0):
+  - GoogleUtilities/Network (6.7.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.6.0)"
-  - GoogleUtilities/Reachability (6.6.0):
+  - "GoogleUtilities/NSData+zlib (6.7.1)"
+  - GoogleUtilities/Reachability (6.7.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.6.0):
+  - GoogleUtilities/UserDefaults (6.7.1):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.4.0)
   - HTCopyableLabel (0.0.7)
   - le (1.2)
+  - linphone-sdk (4.4.0):
+    - linphone-sdk/all-frameworks (= 4.4.0)
+    - linphone-sdk/app-extension (= 4.4.0)
+    - linphone-sdk/app-extension-swift (= 4.4.0)
+    - linphone-sdk/basic-frameworks (= 4.4.0)
+    - linphone-sdk/swift (= 4.4.0)
+  - linphone-sdk/all-frameworks (4.4.0)
+  - linphone-sdk/app-extension (4.4.0)
+  - linphone-sdk/app-extension-swift (4.4.0):
+    - linphone-sdk/app-extension
+  - linphone-sdk/basic-frameworks (4.4.0):
+    - linphone-sdk/app-extension
+  - linphone-sdk/swift (4.4.0):
+    - linphone-sdk/app-extension-swift
+    - linphone-sdk/basic-frameworks
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -140,7 +151,7 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - OCMock (3.6)
+  - OCMock (3.7.1)
   - OHHTTPStubs (9.0.0):
     - OHHTTPStubs/Default (= 9.0.0)
   - OHHTTPStubs/Core (9.0.0)
@@ -155,19 +166,15 @@ PODS:
     - OHHTTPStubs/Core
   - OHHTTPStubs/OHPathHelpers (9.0.0)
   - PBWebViewController (0.5.0)
+  - PhoneLib (0.1.0):
+    - linphone-sdk
   - PromisesObjC (1.2.9)
   - Protobuf (3.12.0)
-  - Reachability (3.2)
   - SAMKeychain (1.5.3)
   - SimulatorStatusMagic (2.4.1)
   - SPLumberjackLogFormatter (0.0.1):
     - CocoaLumberjack
   - SVProgressHUD (2.2.5)
-  - Vialer-pjsip-iOS (3.5)
-  - VialerSIPLib (3.7.2):
-    - CocoaLumberjack
-    - Reachability
-    - Vialer-pjsip-iOS
 
 DEPENDENCIES:
   - AFNetworkActivityLogger
@@ -183,11 +190,11 @@ DEPENDENCIES:
   - OCMock
   - OHHTTPStubs
   - PBWebViewController
+  - PhoneLib (from `https://github.com/open-voip-alliance/iOSPhoneLib.git`)
   - SAMKeychain
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
   - SVProgressHUD
-  - VialerSIPLib (= 3.7.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -206,7 +213,6 @@ SPEC REPOS:
     - GoogleAnalytics
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleDataTransportCCTSupport
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
@@ -218,18 +224,19 @@ SPEC REPOS:
     - PBWebViewController
     - PromisesObjC
     - Protobuf
-    - Reachability
     - SAMKeychain
     - SimulatorStatusMagic
     - SVProgressHUD
-    - Vialer-pjsip-iOS
-    - VialerSIPLib
+  https://gitlab.linphone.org/BC/public/podspec.git:
+    - linphone-sdk
 
 EXTERNAL SOURCES:
   le:
     :git: https://github.com/LogentriesCommunity/le_ios.git
   "MMDrawerController+Storyboard":
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
+  PhoneLib:
+    :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
@@ -240,6 +247,9 @@ CHECKOUT OPTIONS:
   "MMDrawerController+Storyboard":
     :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
+  PhoneLib:
+    :commit: 6865e372437fffe99b594daf5d3e7c522bdfa9d4
+    :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
   SPLumberjackLogFormatter:
     :commit: c0155bfd953746f13e94c84b8b2c13908242e3e4
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
@@ -248,40 +258,38 @@ SPEC CHECKSUMS:
   AFNetworkActivityLogger: e77f68d014becb33c4306a23f56a64906ff72670
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
-  Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
-  FirebaseABTesting: b7f8b6c8c9398e98bb30c4195f697b5b73a330d0
-  FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
-  FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
-  FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
-  FirebaseCrashlytics: 7d0fa02ea8842cc4b2ab07b0735edafde1ad77d6
-  FirebaseInstallations: 293f567159b6d66d1c990f13bb868066096c94ec
-  FirebasePerformance: 5652d2004001e886da6dca04f478c695f87c4702
-  FirebaseRemoteConfig: 63ae9d14848e645c7f070daa6af89265be48f803
+  Firebase: ed042590caa0029392257529a8003c25ee82bc18
+  FirebaseABTesting: dc041951b2d9d9279c300222647b0cba48022d1f
+  FirebaseAnalytics: 5fa308e1b13f838d0f6dc74719ac2a72e8c5afc4
+  FirebaseCore: 687b8e6a0a4337b898a6326d68254c2f80c143af
+  FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
+  FirebaseCrashlytics: f6ae039fdaf07980425f2ae9f49131fc94009c58
+  FirebaseInstallations: 3c520c951305cbf9ca54eb891ff9e6d1fd384881
+  FirebasePerformance: 9cb28cff0fbfcde01eac95d35fa8c001970e8849
+  FirebaseRemoteConfig: a7d272194b5336a66ca3e35beb5de67f18c79b91
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
-  GoogleAppMeasurement: 2fd5c5a56c069db635c8e7b92d4809a9591d0a69
-  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
-  GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
+  GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
+  GoogleDataTransport: 8a40cb194ad242b6f6dfe72c14fe40fc67c4dcd7
   GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
-  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   le: 6854003e293bf5b3cb822ef06971f1cc23a77eb9
+  linphone-sdk: c5765e58b2b17f292e7792c6f4b231dfe4079c68
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   "MMDrawerController+Storyboard": 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
+  OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
+  PhoneLib: d7036554c8407bcc4530d16477a22f8940944807
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SimulatorStatusMagic: 28d4a9d1a500ac7cea0b2b5a43c1c6ddb40ba56c
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  Vialer-pjsip-iOS: 5ceea9f0e46a7748b2542ba04ca7dacf4de4b51c
-  VialerSIPLib: 35c1cb375d191b196276ab624f61aa2388aec971
 
-PODFILE CHECKSUM: 2f1f7a4cb3b79158e2da8f160af8f36b62681ddb
+PODFILE CHECKSUM: e8f9ef64d83f2b2f08c596b7dfbc9a11851a220c
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.8.4

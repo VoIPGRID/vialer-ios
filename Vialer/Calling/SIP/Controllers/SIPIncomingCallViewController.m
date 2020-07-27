@@ -76,13 +76,13 @@ static double const SIPIncomingCallViewControllerDismissTimeAfterHangup = 1.0;
         }
     });
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.phoneNumber = phoneNumberModel.callerInfo;
-            });
-        }];
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//        [PhoneNumberModel getCallName:call withCompletion:^(PhoneNumberModel * _Nonnull phoneNumberModel) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.phoneNumber = phoneNumberModel.callerInfo;
+//            });
+//        }];
+//    });
 }
 
 - (void)setPhoneNumber:(NSString *)phoneNumber {

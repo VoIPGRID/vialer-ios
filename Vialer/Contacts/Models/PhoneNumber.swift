@@ -4,7 +4,8 @@
 //
 
 import Foundation
-
+import Contacts
+import ContactsUI
 
 /// Simple struct that contains information about a phone number.
 struct PhoneNumber {

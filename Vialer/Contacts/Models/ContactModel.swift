@@ -4,7 +4,8 @@
 //
 
 import Foundation
-
+import Contacts
+import ContactsUI
 
 @objc class ContactModel: NSObject {
     

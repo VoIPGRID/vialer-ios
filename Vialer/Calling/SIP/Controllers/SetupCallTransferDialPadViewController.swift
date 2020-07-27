@@ -29,18 +29,18 @@ class SetupCallTransferDialPadViewController: SetupCallTransfer, SegueHandler {
     }
     
     override func updateUI() {
-        firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
-        
-        callButton?.isEnabled = number != ""
-        deleteButton?.isEnabled = number != ""
-        toggleDeleteButton()
-        
-        guard let call = firstCall else { return }        
-        if call.callState == .disconnected {
-            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
-        } else {
-            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-        }
+//        firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+//
+//        callButton?.isEnabled = number != ""
+//        deleteButton?.isEnabled = number != ""
+//        toggleDeleteButton()
+//
+//        guard let call = firstCall else { return }
+//        if call.callState == .disconnected {
+//            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
+//        } else {
+//            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
+//        }
     }
 }
 
@@ -52,8 +52,8 @@ extension SetupCallTransferDialPadViewController {
         // This fixes the transparent-line-on-navigation-bar bug
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.968627, green: 0.968627, blue: 0.968627, alpha: 1)
          
-        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
-        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
+//        firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
+//        firstCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
         callObserversSet = true
 
         VialerGAITracker.trackScreenForController(name: controllerName)
@@ -64,8 +64,8 @@ extension SetupCallTransferDialPadViewController {
         super.viewWillDisappear(animated)
 
         if callObserversSet {
-            firstCall?.removeObserver(self, forKeyPath: "callState")
-            firstCall?.removeObserver(self, forKeyPath: "mediaState")
+//            firstCall?.removeObserver(self, forKeyPath: "callState")
+//            firstCall?.removeObserver(self, forKeyPath: "mediaState")
             callObserversSet = false
         }
     }
@@ -74,21 +74,21 @@ extension SetupCallTransferDialPadViewController {
 // MARK: - Actions
 extension SetupCallTransferDialPadViewController {
     @IBAction func backButtonPressed(_ sender: AnyObject) {
-        guard let call = currentCall else {
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .unwindToFirstCall)
-            }
-            return
-        }
-        callManager.end(call) { error in
-            if error != nil {
-                VialerLogError("Could not hangup call: \(String(describing: error))")
-            } else {
-                DispatchQueue.main.async {
-                    self.performSegue(segueIdentifier: .unwindToFirstCall)
-                }
-            }
-        }
+//        guard let call = currentCall else {
+//            DispatchQueue.main.async {
+//                self.performSegue(segueIdentifier: .unwindToFirstCall)
+//            }
+//            return
+//        }
+//        callManager.end(call) { error in
+//            if error != nil {
+//                VialerLogError("Could not hangup call: \(String(describing: error))")
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.performSegue(segueIdentifier: .unwindToFirstCall)
+//                }
+//            }
+//        }
     }
 
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
@@ -106,19 +106,19 @@ extension SetupCallTransferDialPadViewController {
     }
 
     @IBAction func callButtonPressed(_ sender: UIButton) {
-        callButton.isEnabled = false
-        guard let number = numberToDialLabel.text, number != "" else {
-            callButton.isEnabled = true
-            return
-        }
-        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number) ?? ""
-        currentCallPhoneNumberLabelText = cleanedPhoneNumber
-        callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
-            DispatchQueue.main.async { [weak self] in
-                self?.currentCall = call
-                self?.performSegue(segueIdentifier: .secondCallActive)
-            }
-        }
+//        callButton.isEnabled = false
+//        guard let number = numberToDialLabel.text, number != "" else {
+//            callButton.isEnabled = true
+//            return
+//        }
+//        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(number) ?? ""
+//        currentCallPhoneNumberLabelText = cleanedPhoneNumber
+//        callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
+//            DispatchQueue.main.async { [weak self] in
+//                self?.currentCall = call
+//                self?.performSegue(segueIdentifier: .secondCallActive)
+//            }
+//        }
     }
 
     @IBAction func zeroButtonLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -140,37 +140,37 @@ extension SetupCallTransferDialPadViewController {
 // MARK: - Segues
 extension SetupCallTransferDialPadViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(segue: segue) {
-        case .secondCallActive:
-            // The second call is active and is a subtype of SIPCallingVC, so cast the destination to it.
-            let secondCallVC = segue.destination as! SecondCallViewController
-            secondCallVC.activeCall = currentCall
-            secondCallVC.firstCall = firstCall
-            secondCallVC.phoneNumberLabelText = currentCallPhoneNumberLabelText
-            secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-        case .unwindToFirstCall:
-            let callVC = segue.destination as! SIPCallingViewController
-            if let call = currentCall, call.callState != .null && call.callState != .disconnected {
-                callVC.activeCall = call
-            } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
-                callVC.activeCall = call
-            }
-        }
+//        switch segueIdentifier(segue: segue) {
+//        case .secondCallActive:
+//            // The second call is active and is a subtype of SIPCallingVC, so cast the destination to it.
+//            let secondCallVC = segue.destination as! SecondCallViewController
+//            secondCallVC.activeCall = currentCall
+//            secondCallVC.firstCall = firstCall
+//            secondCallVC.phoneNumberLabelText = currentCallPhoneNumberLabelText
+//            secondCallVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
+//        case .unwindToFirstCall:
+//            let callVC = segue.destination as! SIPCallingViewController
+//            if let call = currentCall, call.callState != .null && call.callState != .disconnected {
+//                callVC.activeCall = call
+//            } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
+//                callVC.activeCall = call
+//            }
+//        }
     }
 }
 
 // MARK: - KVO
 extension SetupCallTransferDialPadViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &myContext {
-            DispatchQueue.main.async { [weak self] in
-                self?.updateUI()
-                if let call = self?.firstCall, call.callState == .disconnected {
-                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
-                }
-            }
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
+//        if context == &myContext {
+//            DispatchQueue.main.async { [weak self] in
+//                self?.updateUI()
+//                if let call = self?.firstCall, call.callState == .disconnected {
+//                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
+//                }
+//            }
+//        } else {
+//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+//        }
     }
 }

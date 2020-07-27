@@ -59,7 +59,6 @@
 		8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */; };
 		838206452290979A0098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		838206462290979A0098EABD /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
-		838206472290979A0098EABD /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
@@ -73,7 +72,6 @@
 		838206532290979A0098EABD /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
 		838206542290979A0098EABD /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43FD69A1E76F4C6002593DD /* NotificationToken.swift */; };
 		838206552290979A0098EABD /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
-		838206562290979A0098EABD /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		838206572290979A0098EABD /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
 		838206582290979A0098EABD /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
 		838206592290979A0098EABD /* GAConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3B8213FDC680000EE4D /* GAConfiguration.swift */; };
@@ -88,7 +86,6 @@
 		838206622290979A0098EABD /* VialerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C41C42F71D5A742100813B66 /* VialerLogger.m */; };
 		838206632290979A0098EABD /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B020C520E0003480F6 /* NumberPadButton.m */; };
 		838206642290979A0098EABD /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
-		838206652290979A0098EABD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		838206662290979A0098EABD /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
 		838206672290979A0098EABD /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
 		838206692290979A0098EABD /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD7F03182A8D4C002FC8FC /* LogInViewController.m */; };
@@ -205,7 +202,6 @@
 		838206E72290979A0098EABD /* ANNAbelIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE2318B520A046AD00C05EB0 /* ANNAbelIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		838206F4229098D20098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		838206F5229098D20098EABD /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
-		838206F6229098D20098EABD /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		838206F7229098D20098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		838206F8229098D20098EABD /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		838206F9229098D20098EABD /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
@@ -225,7 +221,6 @@
 		83820708229098D20098EABD /* GAConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EC3B8213FDC680000EE4D /* GAConfiguration.swift */; };
 		83820709229098D20098EABD /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
 		8382070A229098D20098EABD /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
-		8382070B229098D20098EABD /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		8382070C229098D20098EABD /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		8382070D229098D20098EABD /* AudioQualityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D2F5E2191CD7C008CB2E6 /* AudioQualityViewController.swift */; };
 		8382070E229098D20098EABD /* RecentCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0B81E72B0AB00A1E509 /* RecentCallManager.swift */; };
@@ -234,7 +229,6 @@
 		83820711229098D20098EABD /* VialerDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C801BFB2E590043DED7 /* VialerDrawerViewController.m */; };
 		83820712229098D20098EABD /* SystemUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22FF28A1D0ABF3800761C9A /* SystemUser.m */; };
 		83820713229098D20098EABD /* NumberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDCC3B020C520E0003480F6 /* NumberPadButton.m */; };
-		83820714229098D20098EABD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		83820715229098D20098EABD /* EnumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE733DB12164B34600D05CA3 /* EnumHelper.swift */; };
 		83820716229098D20098EABD /* VIAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44303E1AEF8E1B0034156F /* VIAScene.m */; };
 		83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5A1F181F94CFD800F07536 /* CoreDataStackHelper.swift */; };
@@ -547,7 +541,6 @@
 		C490AD6F1D0863E3004A8F83 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
 		C490AD701D0863E3004A8F83 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		C490AD711D0863E3004A8F83 /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
-		C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		C490AD751D0863E3004A8F83 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		C490AD771D0863E3004A8F83 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		C490AD7A1D0863E3004A8F83 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
@@ -739,12 +732,6 @@
 		D4E7F2BC230C160000E76FA4 /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA45F222706A9300212371 /* AvailabilityModel.swift */; };
 		D99509E85091A372BCE8EB50 /* libPods-ANNAbel Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CE2918529B355F085BFDBB /* libPods-ANNAbel Staging.a */; };
 		E7A9119825A31543E96AB1F0 /* libPods-VoysSnapshotUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE353BD30148C20A6FBDC37 /* libPods-VoysSnapshotUITests.a */; };
-		EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
-		EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
-		EE02B3F720D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
-		EE02B3F820D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
-		EE02B3F920D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
-		EE02B3FA20D7870F006B10FD /* VialerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE02B3F420D7870F006B10FD /* VialerStats.swift */; };
 		EE1C7B7E1F87777100708D96 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		EE1C7B7F1F87777200708D96 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
 		EE1C7B801F87777200708D96 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABF91F876628002F0679 /* KeypadViewController.swift */; };
@@ -780,18 +767,12 @@
 		EE1C7B9F1F8777DD00708D96 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
 		EE1C7BA01F8777DD00708D96 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
 		EE1C7BA11F8777DE00708D96 /* SipCallingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B791F87774F00708D96 /* SipCallingButton.m */; };
-		EE1C7BA21F8777E200708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
-		EE1C7BA31F8777E300708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
-		EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
-		EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
-		EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE2317F820A0301000C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE2317F920A030BD00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE2317FA20A030C600C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE2317FB20A030CB00C05EB0 /* ColoredCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3C47FC2080DC2D00CC80E5 /* ColoredCircle.m */; };
 		EE23180C20A0468F00C05EB0 /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		EE23180D20A0468F00C05EB0 /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
-		EE23180E20A0468F00C05EB0 /* SIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1C7B7D1F87774F00708D96 /* SIPUtils.m */; };
 		EE23180F20A0468F00C05EB0 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
 		EE23181020A0468F00C05EB0 /* TwoFactorAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDC3041208725FD00C7C642 /* TwoFactorAuthenticationView.m */; };
 		EE23181120A0468F00C05EB0 /* UserProfileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F10071C7C6FEA007F30A6 /* UserProfileWebViewController.m */; };
@@ -804,7 +785,6 @@
 		EE23181920A0468F00C05EB0 /* SIPIncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFF1F876628002F0679 /* SIPIncomingCallViewController.m */; };
 		EE23181A20A0468F00C05EB0 /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43FD69A1E76F4C6002593DD /* NotificationToken.swift */; };
 		EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
-		EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
 		EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFD1F876628002F0679 /* SecondCallViewController.swift */; };
 		EE23181F20A0468F00C05EB0 /* SetupCallTransferDialPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDFABFE1F876628002F0679 /* SetupCallTransferDialPadViewController.swift */; };
@@ -1007,7 +987,6 @@
 		EE61F4021F1DDDE4006E890F /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		EE61F4031F1DDDE4006E890F /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
 		EE61F4041F1DDDE4006E890F /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0C31E72DE9400A1E509 /* NSManagedObjectContext.swift */; };
-		EE61F4061F1DDDE4006E890F /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		EE61F4071F1DDDE4006E890F /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		EE61F40A1F1DDDE4006E890F /* RecentCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BB0B81E72B0AB00A1E509 /* RecentCallManager.swift */; };
 		EE61F40B1F1DDDE4006E890F /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
@@ -1195,7 +1174,6 @@
 		F20850EC1D26935600A17E71 /* MiddlewareRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4947FD21C999DDA0065D7C1 /* MiddlewareRequestOperationManager.m */; };
 		F20850ED1D26935600A17E71 /* ForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EADD1AF24CF500C09935 /* ForgotPasswordView.m */; };
 		F20850EE1D26935600A17E71 /* NSString+SubString.m in Sources */ = {isa = PBXBuildFile; fileRef = F204B0651CFC968E00257E7D /* NSString+SubString.m */; };
-		F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		F20850F21D26935600A17E71 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DA5C941BFB64AC0043DED7 /* SideMenuViewController.m */; };
 		F20850F41D26935600A17E71 /* VailerRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF11BFCA6600012494D /* VailerRootViewController.m */; };
 		F20850F71D26935600A17E71 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CD45F41B330ADA00CE9B1D /* SettingsViewController.m */; };
@@ -1314,25 +1292,19 @@
 		F81F03853FE98746EE14894B /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F03B085CE5B30D14F8F90 /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F03CA550B2A2D9B527216 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
-		F81F03FAFC2A2FA25A78DABF /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F043BC323C743AE49E16B /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F04778F1E1F40C5982601 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F05176592A721BBC2F448 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
-		F81F056FA88CDA7542DBFB1E /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F0576C62465CD6267C091 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
-		F81F0588D0B6B0E560955CFA /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
-		F81F05D3A033CCCA9A850B1D /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F05F9A33DE91AB27CCC05 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F061A735E9FFBCFA087E1 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
-		F81F07ACAC4EDEC07D019F8A /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F07F25F3EA025CC08A045 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F080E4AD305A1B7F04FFF /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
-		F81F085C07311554C7B89228 /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F08C22534137A58809FDF /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F0902AA7DB11449C9BF84 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F09E600386851FFE9C218 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
@@ -1345,15 +1317,12 @@
 		F81F0B6C509078FEFA6A64DC /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F0C1E3FEC440514C2F5EC /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F0C2C02934F579374AFD7 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
-		F81F0C6A162B61A1E017010E /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F0CAB070A5C18D8794387 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F0D34E711C79D0F1B5D6F /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F0D862855731F8080E15A /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F0D86D19EA4C96A0B411D /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F0DB6F68BB908E2DA1214 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
-		F81F0DCE30DF249B8294BABF /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F0EAF8FE6FBF59628F102 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
-		F81F0F52613D9C71BA058DA7 /* VSLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */; };
 		F81F0FFE8C553E3F08BE7007 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
@@ -1361,8 +1330,6 @@
 		F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */; };
 		F9EEC9021CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
 		F9EEC9031CA285B1008FB612 /* PhoneNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */; };
-		F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
-		F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */; };
 		F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */; };
 		FB0CF351182267AA002D4281 /* VoIPGRIDRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */; };
 		FB10B11C1ABC18310074BB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB10B11A1ABC17900074BB78 /* CoreData.framework */; };
@@ -1863,11 +1830,8 @@
 		D449C08A230BF84F0086720A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Verbonden.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Verbonden/Pods-Verbonden.debug.xcconfig"; sourceTree = "<group>"; };
 		DA8ECD27FFFF5F670A0811A1 /* libPods-ANNAbel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ANNAbel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE02B3F420D7870F006B10FD /* VialerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VialerStats.swift; path = Helpers/VialerStats.swift; sourceTree = "<group>"; };
 		EE1C7B791F87774F00708D96 /* SipCallingButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SipCallingButton.m; sourceTree = "<group>"; };
 		EE1C7B7A1F87774F00708D96 /* SipCallingButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SipCallingButton.h; sourceTree = "<group>"; };
-		EE1C7B7C1F87774F00708D96 /* SIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIPUtils.h; sourceTree = "<group>"; };
-		EE1C7B7D1F87774F00708D96 /* SIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIPUtils.m; sourceTree = "<group>"; };
 		EE2317FF20A0442000C05EB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE23180120A0442000C05EB0 /* ANNAbel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANNAbel-Info.plist"; sourceTree = "<group>"; };
 		EE23180220A0442000C05EB0 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -1996,14 +1960,11 @@
 		F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoIPPushHandler.swift; sourceTree = "<group>"; };
 		F81F0C232DB66DD915AB9078 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
 		F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoIPPushPayloadTransformer.swift; sourceTree = "<group>"; };
-		F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSLExtensions.swift; sourceTree = "<group>"; };
 		F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPIncomingCallViewControllerTests.m; sourceTree = "<group>"; };
 		F9A71EBE1C7F5F360083C8B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SIPIncomingCallStoryboard.storyboard; sourceTree = "<group>"; };
 		F9C4FC201C6B3AE800730593 /* SIPUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPUtilsTests.m; sourceTree = "<group>"; };
 		F9EEC9001CA285B1008FB612 /* PhoneNumberUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberUtils.h; sourceTree = "<group>"; };
 		F9EEC9011CA285B1008FB612 /* PhoneNumberUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberUtils.m; sourceTree = "<group>"; };
-		F9EEC9501CA288AA008FB612 /* PhoneNumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberModel.h; sourceTree = "<group>"; };
-		F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberModel.m; sourceTree = "<group>"; };
 		F9EF27EB1C60E33B0097E3AC /* AvailabilityModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityModelTests.m; sourceTree = "<group>"; };
 		FB0CF34F182267AA002D4281 /* VoIPGRIDRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VoIPGRIDRequestOperationManager.h; path = Api/VoIPGRIDRequestOperationManager.h; sourceTree = "<group>"; };
 		FB0CF350182267AA002D4281 /* VoIPGRIDRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VoIPGRIDRequestOperationManager.m; path = Api/VoIPGRIDRequestOperationManager.m; sourceTree = "<group>"; };
@@ -2873,7 +2834,6 @@
 				C41926511BE3A67100436D92 /* TwoStep */,
 				C4C3EB051BFB88B000AA4B2A /* SIP */,
 				F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */,
-				F81F0F5DAEE87EB07DCDA299 /* VSLExtensions.swift */,
 			);
 			name = Calling;
 			sourceTree = "<group>";
@@ -2934,8 +2894,6 @@
 		EE1C7B7B1F87774F00708D96 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				EE1C7B7C1F87774F00708D96 /* SIPUtils.h */,
-				EE1C7B7D1F87774F00708D96 /* SIPUtils.m */,
 			);
 			name = Utils;
 			path = Calling/SIP/Utils;
@@ -3332,8 +3290,6 @@
 		F9EEC8FE1CA285B1008FB612 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F9EEC9501CA288AA008FB612 /* PhoneNumberModel.h */,
-				F9EEC9511CA288AA008FB612 /* PhoneNumberModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3534,7 +3490,6 @@
 				C41C42F71D5A742100813B66 /* VialerLogger.m */,
 				C43B6E251E2E524400942F9B /* VialerLogger.swift */,
 				EEF06BA420970400000CF109 /* TokenFromPasteBoard.swift */,
-				EE02B3F420D7870F006B10FD /* VialerStats.swift */,
 				EE5EC3C6214008860000EE4D /* GradientView.swift */,
 				EE733DB12164B34600D05CA3 /* EnumHelper.swift */,
 				D4107094236717CA00F0E31C /* CallEventsMonitor.swift */,
@@ -3559,6 +3514,7 @@
 				838206E62290979A0098EABD /* Embed App Extensions */,
 				838206E82290979A0098EABD /* [CP] Copy Pods Resources */,
 				838206E92290979A0098EABD /* Crashlytics */,
+				4960E9B8273B60FBDFC14822 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3584,6 +3540,7 @@
 				83820796229098D20098EABD /* Embed App Extensions */,
 				83820798229098D20098EABD /* [CP] Copy Pods Resources */,
 				83820799229098D20098EABD /* Crashlytics */,
+				086EB0FFB5BBC6F33C1217EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3609,6 +3566,7 @@
 				C43172461DFE8669005FF8EA /* Embed App Extensions */,
 				3532FA59A2DD36E4DB31CFDD /* [CP] Copy Pods Resources */,
 				EEEDF35B219DC33100D0D853 /* Crashlytics */,
+				C362ADA457B992BF5028A5A7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3629,6 +3587,7 @@
 				C41FD8F91C60A89300BBE6D7 /* Frameworks */,
 				C41FD8FA1C60A89300BBE6D7 /* Resources */,
 				6005BCA334D1556E346EBB9E /* [CP] Copy Pods Resources */,
+				F873789E6F1DE034C2769FF2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3692,6 +3651,7 @@
 				C431724A1DFE8673005FF8EA /* Embed App Extensions */,
 				34A4970CC0209C9D7D0E329D /* [CP] Copy Pods Resources */,
 				EEEDF359219DC2D900D0D853 /* Crashlytics */,
+				465E2EDA78FA4D9B0AA77786 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3712,6 +3672,7 @@
 				C490AE011D088535004A8F83 /* Frameworks */,
 				C490AE021D088535004A8F83 /* Resources */,
 				8D8E5EA888EFB1090F5C5581 /* [CP] Copy Pods Resources */,
+				8E5E61226241BCA01243EE25 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3731,7 +3692,6 @@
 				C4F49F231BF0B45700C25159 /* Sources */,
 				C4F49F241BF0B45700C25159 /* Frameworks */,
 				C4F49F251BF0B45700C25159 /* Resources */,
-				F5B3206598C9D47942CCA18C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3757,6 +3717,7 @@
 				EE2318CB20A0476400C05EB0 /* Embed App Extensions */,
 				E5C90D794402B1DA425A46E5 /* [CP] Copy Pods Resources */,
 				EEEDF35A219DC31800D0D853 /* Crashlytics */,
+				6CCBEFB9BD1C0F9C03038A65 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3796,6 +3757,7 @@
 				EE2318BF20A046BB00C05EB0 /* Frameworks */,
 				EE2318C120A046BB00C05EB0 /* Resources */,
 				6AC3DD9E9E0C6BE2549CA2BD /* [CP] Copy Pods Resources */,
+				26BF3BDC36B2EAF3E88FD408 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3820,6 +3782,7 @@
 				EE61F4871F1DDDE4006E890F /* Embed Frameworks */,
 				EE61F4BA1F1DE5E5006E890F /* Embed App Extensions */,
 				9B74100CB9322E9B866B92D2 /* [CP] Copy Pods Resources */,
+				00227AE06D3EDE2E482E3696 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3843,6 +3806,7 @@
 				F20851631D26935600A17E71 /* Update Build number */,
 				F20851641D26935600A17E71 /* Embed Frameworks */,
 				0F7A305757DC75BE40AB7907 /* [CP] Copy Pods Resources */,
+				1DC68030061A2F860C236073 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3863,6 +3827,7 @@
 				F22DE0A61CC90D41001468B3 /* Frameworks */,
 				F22DE0A71CC90D41001468B3 /* Resources */,
 				6DDE0F625C2FC239BCC302FA /* [CP] Copy Pods Resources */,
+				4D507EC5067A73BA58523E26 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3907,6 +3872,7 @@
 				F2C44A6D1DE40EDD00F7CF50 /* Embed App Extensions */,
 				156B6B5CBAE3EA760F5E1953 /* [CP] Copy Pods Resources */,
 				EEEDF356219DC18900D0D853 /* Crashlytics */,
+				FE92D0B18E9F345D82CA67A3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4474,6 +4440,110 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00227AE06D3EDE2E482E3696 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		086EB0FFB5BBC6F33C1217EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0F7A305757DC75BE40AB7907 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4483,13 +4553,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4505,17 +4575,69 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1DC68030061A2F860C236073 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer Staging/Pods-Vialer Staging-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		246420356B44B2654E6C52B0 /* [CP] Check Pods Manifest.lock */ = {
@@ -4534,6 +4656,58 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26BF3BDC36B2EAF3E88FD408 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		290D37BFCF77BB61D4C8E775 /* [CP] Check Pods Manifest.lock */ = {
@@ -4563,13 +4737,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4585,17 +4759,173 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		465E2EDA78FA4D9B0AA77786 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Verbonden/Pods-Verbonden-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4960E9B8273B60FBDFC14822 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D507EC5067A73BA58523E26 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6005BCA334D1556E346EBB9E /* [CP] Copy Pods Resources */ = {
@@ -4607,13 +4937,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4629,17 +4959,69 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbelSnapshotUITests/Pods-ANNAbelSnapshotUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CCBEFB9BD1C0F9C03038A65 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DDE0F625C2FC239BCC302FA /* [CP] Copy Pods Resources */ = {
@@ -4651,13 +5033,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-VialerSnapshotUITests/Pods-VialerSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4720,13 +5102,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel Staging/Pods-ANNAbel Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4808,13 +5190,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Verbonden Staging/Pods-Verbonden Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4849,17 +5231,69 @@
 				"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E5E61226241BCA01243EE25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VerbondenSnapshotUITests/Pods-VerbondenSnapshotUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92D7D73E457E7F726CDF19A5 /* [CP] Check Pods Manifest.lock */ = {
@@ -4889,13 +5323,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Voys Staging/Pods-Voys Staging-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4954,6 +5388,58 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C362ADA457B992BF5028A5A7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voys/Pods-Voys-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C41FD8C51C60A08400BBE6D7 /* Update Version number */ = {
@@ -5162,13 +5648,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ANNAbel/Pods-ANNAbel-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Resources/liblinphone_tester",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/liblinphone_tester",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5414,22 +5900,56 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"\n";
 		};
-		F5B3206598C9D47942CCA18C /* [CP] Copy Pods Resources */ = {
+		F873789E6F1DE034C2769FF2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/VialerSIPLib/VialerSIPLib.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/VialerSIPLib.bundle",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VialerTests/Pods-VialerTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoysSnapshotUITests/Pods-VoysSnapshotUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F8C27C5CA78E4CB93851A5ED /* [CP] Check Pods Manifest.lock */ = {
@@ -5450,6 +5970,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FE92D0B18E9F345D82CA67A3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-frameworks.sh",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-ios.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox-tester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/bctoolbox.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belcard.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belle-sip.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/belr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/lime.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/limetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphone.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/linphonetester.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mediastreamer2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msamr.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mscodec2.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msopenh264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mssilk.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/mswebrtc.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/msx264.framework",
+				"${PODS_ROOT}/linphone-sdk/linphone-sdk/apple-darwin/Frameworks/ortp.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox-tester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bctoolbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belcard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belle-sip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/belr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lime.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/limetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphone.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/linphonetester.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mediastreamer2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msamr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mscodec2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msopenh264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mssilk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mswebrtc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/msx264.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ortp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vialer/Pods-Vialer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -5459,7 +6031,6 @@
 			files = (
 				838206452290979A0098EABD /* NoAnimationSegue.m in Sources */,
 				838206462290979A0098EABD /* URLRequestExtensions.swift in Sources */,
-				838206472290979A0098EABD /* SIPUtils.m in Sources */,
 				838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */,
 				838206492290979A0098EABD /* TwoFactorAuthenticationView.m in Sources */,
 				8382064A2290979A0098EABD /* UserProfileWebViewController.m in Sources */,
@@ -5475,7 +6046,6 @@
 				838206532290979A0098EABD /* SIPIncomingCallViewController.m in Sources */,
 				838206542290979A0098EABD /* NotificationToken.swift in Sources */,
 				838206552290979A0098EABD /* NSString+SubString.m in Sources */,
-				838206562290979A0098EABD /* PhoneNumberModel.m in Sources */,
 				838206572290979A0098EABD /* NSManagedObjectContext.swift in Sources */,
 				838206582290979A0098EABD /* SecondCallViewController.swift in Sources */,
 				838206592290979A0098EABD /* GAConfiguration.swift in Sources */,
@@ -5491,7 +6061,6 @@
 				838206622290979A0098EABD /* VialerLogger.m in Sources */,
 				838206632290979A0098EABD /* NumberPadButton.m in Sources */,
 				838206642290979A0098EABD /* VIAScene.m in Sources */,
-				838206652290979A0098EABD /* VialerStats.swift in Sources */,
 				838206662290979A0098EABD /* EnumHelper.swift in Sources */,
 				838206672290979A0098EABD /* CoreDataStackHelper.swift in Sources */,
 				838206692290979A0098EABD /* LogInViewController.m in Sources */,
@@ -5561,7 +6130,6 @@
 				838206A82290979A0098EABD /* ContactsViewController.m in Sources */,
 				F81F0AF9E9216CBBAC8C2702 /* Middleware.m in Sources */,
 				F81F007C70C1441996158E9F /* VialerCallKitDelegate.swift in Sources */,
-				F81F085C07311554C7B89228 /* VSLExtensions.swift in Sources */,
 				F81F09E600386851FFE9C218 /* PushKitManager.swift in Sources */,
 				F81F05176592A721BBC2F448 /* VoIPPushHandler.swift in Sources */,
 				F81F01F0E0E7B28DB1A76166 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -5575,7 +6143,6 @@
 			files = (
 				838206F4229098D20098EABD /* NoAnimationSegue.m in Sources */,
 				838206F5229098D20098EABD /* URLRequestExtensions.swift in Sources */,
-				838206F6229098D20098EABD /* SIPUtils.m in Sources */,
 				838206F7229098D20098EABD /* FileManagerExtensions.swift in Sources */,
 				838206F8229098D20098EABD /* TwoFactorAuthenticationView.m in Sources */,
 				838206F9229098D20098EABD /* UserProfileWebViewController.m in Sources */,
@@ -5598,7 +6165,6 @@
 				83820708229098D20098EABD /* GAConfiguration.swift in Sources */,
 				83820709229098D20098EABD /* SecondCallViewController.swift in Sources */,
 				8382070A229098D20098EABD /* SetupCallTransferDialPadViewController.swift in Sources */,
-				8382070B229098D20098EABD /* PhoneNumberModel.m in Sources */,
 				8382070C229098D20098EABD /* SideMenuViewController.m in Sources */,
 				8382070D229098D20098EABD /* AudioQualityViewController.swift in Sources */,
 				8382070E229098D20098EABD /* RecentCallManager.swift in Sources */,
@@ -5607,7 +6173,6 @@
 				83820711229098D20098EABD /* VialerDrawerViewController.m in Sources */,
 				83820712229098D20098EABD /* SystemUser.m in Sources */,
 				83820713229098D20098EABD /* NumberPadButton.m in Sources */,
-				83820714229098D20098EABD /* VialerStats.swift in Sources */,
 				83820715229098D20098EABD /* EnumHelper.swift in Sources */,
 				83820716229098D20098EABD /* VIAScene.m in Sources */,
 				83820717229098D20098EABD /* CoreDataStackHelper.swift in Sources */,
@@ -5677,7 +6242,6 @@
 				83820757229098D20098EABD /* ContactsViewController.m in Sources */,
 				F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */,
 				F81F0CAB070A5C18D8794387 /* VialerCallKitDelegate.swift in Sources */,
-				F81F05D3A033CCCA9A850B1D /* VSLExtensions.swift in Sources */,
 				F81F043BC323C743AE49E16B /* PushKitManager.swift in Sources */,
 				F81F0089DD85E983BCD8E7EB /* VoIPPushHandler.swift in Sources */,
 				F81F02BD50AAF55E1E21B885 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -5690,7 +6254,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4AEB2601E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
-				EE1C7BA41F8777E400708D96 /* SIPUtils.m in Sources */,
 				C420AECB1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3045208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C41FD8581C60A08400BBE6D7 /* NoAnimationSegue.m in Sources */,
@@ -5703,7 +6266,6 @@
 				F204B0671CFC968E00257E7D /* NSString+SubString.m in Sources */,
 				EE1C7B901F87778B00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				C43FD69D1E76F4C6002593DD /* NotificationToken.swift in Sources */,
-				F9EEC9531CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C61E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B971F87779300708D96 /* SecondCallViewController.swift in Sources */,
 				83FC989E228975D500A44738 /* AvailabilityViewController.swift in Sources */,
@@ -5721,7 +6283,6 @@
 				F22FF28F1D0ABF3800761C9A /* SystemUser.m in Sources */,
 				EEDCC3BC20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				C46F10051C7C668D007F30A6 /* ActivateSIPAccountViewController.m in Sources */,
-				EE02B3F720D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE733DB42164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1B1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				C41FD86B1C60A08400BBE6D7 /* VIAScene.m in Sources */,
@@ -5793,7 +6354,6 @@
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
 				F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */,
 				F81F0576C62465CD6267C091 /* VialerCallKitDelegate.swift in Sources */,
-				F81F0F52613D9C71BA058DA7 /* VSLExtensions.swift in Sources */,
 				F81F00A2FE88CED8D0182D61 /* PushKitManager.swift in Sources */,
 				F81F0023AC88B52925828369 /* VoIPPushHandler.swift in Sources */,
 				F81F05F9A33DE91AB27CCC05 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -5835,7 +6395,6 @@
 			files = (
 				C490AD661D0863E3004A8F83 /* NoAnimationSegue.m in Sources */,
 				C4AEB2611E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
-				EE1C7BA61F8777E500708D96 /* SIPUtils.m in Sources */,
 				C420AECC1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3048208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C490AD6A1D0863E3004A8F83 /* UserProfileWebViewController.m in Sources */,
@@ -5857,7 +6416,6 @@
 				5CB1B1F0249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B931F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B941F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
-				C490AD741D0863E3004A8F83 /* PhoneNumberModel.m in Sources */,
 				C490AD751D0863E3004A8F83 /* SideMenuViewController.m in Sources */,
 				EE9D2F632191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				C47BB0BC1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
@@ -5866,7 +6424,6 @@
 				C490AD7B1D0863E3004A8F83 /* VialerDrawerViewController.m in Sources */,
 				F22FF2901D0ABF3800761C9A /* SystemUser.m in Sources */,
 				EEDCC3BE20C520E0003480F6 /* NumberPadButton.m in Sources */,
-				EE02B3F920D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE733DB62164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				C490AD7F1D0863E3004A8F83 /* VIAScene.m in Sources */,
 				EE5A1F1D1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
@@ -5937,7 +6494,6 @@
 				C490ADA91D0863E3004A8F83 /* ContactsViewController.m in Sources */,
 				F81F01DB8F0274D1C924A053 /* Middleware.m in Sources */,
 				F81F018ABBB65934950EEBDB /* VialerCallKitDelegate.swift in Sources */,
-				F81F03FAFC2A2FA25A78DABF /* VSLExtensions.swift in Sources */,
 				F81F07F25F3EA025CC08A045 /* PushKitManager.swift in Sources */,
 				F81F08C22534137A58809FDF /* VoIPPushHandler.swift in Sources */,
 				F81F0DB6F68BB908E2DA1214 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -5987,7 +6543,6 @@
 				831E6BAE22316C57003B6AAC /* ConfigureFormViewTests.m in Sources */,
 				F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */,
 				F81F03298E167AE1E469826B /* VialerCallKitDelegate.swift in Sources */,
-				F81F056FA88CDA7542DBFB1E /* VSLExtensions.swift in Sources */,
 				F81F0FFE8C553E3F08BE7007 /* PushKitManager.swift in Sources */,
 				F81F080E4AD305A1B7F04FFF /* VoIPPushHandler.swift in Sources */,
 				F81F04778F1E1F40C5982601 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -6001,7 +6556,6 @@
 			files = (
 				EE23180C20A0468F00C05EB0 /* NoAnimationSegue.m in Sources */,
 				EE23180D20A0468F00C05EB0 /* URLRequestExtensions.swift in Sources */,
-				EE23180E20A0468F00C05EB0 /* SIPUtils.m in Sources */,
 				EE23180F20A0468F00C05EB0 /* FileManagerExtensions.swift in Sources */,
 				EE23181020A0468F00C05EB0 /* TwoFactorAuthenticationView.m in Sources */,
 				EE23181120A0468F00C05EB0 /* UserProfileWebViewController.m in Sources */,
@@ -6015,7 +6569,6 @@
 				EE23181920A0468F00C05EB0 /* SIPIncomingCallViewController.m in Sources */,
 				EE23181A20A0468F00C05EB0 /* NotificationToken.swift in Sources */,
 				EE23181B20A0468F00C05EB0 /* NSString+SubString.m in Sources */,
-				EE23181C20A0468F00C05EB0 /* PhoneNumberModel.m in Sources */,
 				EE23181D20A0468F00C05EB0 /* NSManagedObjectContext.swift in Sources */,
 				83FC98A1228975D600A44738 /* AvailabilityViewController.swift in Sources */,
 				EE23181E20A0468F00C05EB0 /* SecondCallViewController.swift in Sources */,
@@ -6032,7 +6585,6 @@
 				EE23182720A0468F00C05EB0 /* VialerLogger.m in Sources */,
 				EEDCC3BF20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				EE23182920A0468F00C05EB0 /* VIAScene.m in Sources */,
-				EE02B3FA20D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE733DB72164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE23182A20A0468F00C05EB0 /* CoreDataStackHelper.swift in Sources */,
 				EE23182C20A0468F00C05EB0 /* LogInViewController.m in Sources */,
@@ -6103,7 +6655,6 @@
 				EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */,
 				F81F0175AA8D58FCE4CB0D6D /* Middleware.m in Sources */,
 				F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */,
-				F81F07ACAC4EDEC07D019F8A /* VSLExtensions.swift in Sources */,
 				F81F00D781C44E17F44C1DCC /* PushKitManager.swift in Sources */,
 				F81F01AFBEBB5192CB055407 /* VoIPPushHandler.swift in Sources */,
 				F81F0D34E711C79D0F1B5D6F /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -6136,7 +6687,6 @@
 			files = (
 				EE61F3F61F1DDDE4006E890F /* NoAnimationSegue.m in Sources */,
 				EE61F3F71F1DDDE4006E890F /* URLRequestExtensions.swift in Sources */,
-				EE1C7BA71F8777E600708D96 /* SIPUtils.m in Sources */,
 				EE61F3F81F1DDDE4006E890F /* FileManagerExtensions.swift in Sources */,
 				EEDC3047208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				EE61F3F91F1DDDE4006E890F /* UserProfileWebViewController.m in Sources */,
@@ -6158,7 +6708,6 @@
 				5CB1B1EF249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B951F87779200708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B961F87779200708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
-				EE61F4061F1DDDE4006E890F /* PhoneNumberModel.m in Sources */,
 				EE61F4071F1DDDE4006E890F /* SideMenuViewController.m in Sources */,
 				EE9D2F622191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				EE61F40A1F1DDDE4006E890F /* RecentCallManager.swift in Sources */,
@@ -6168,7 +6717,6 @@
 				EE61F40E1F1DDDE4006E890F /* VialerLogger.m in Sources */,
 				EEDCC3BD20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				EE61F4101F1DDDE4006E890F /* SystemUser.m in Sources */,
-				EE02B3F820D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE733DB52164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1C1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE61F4121F1DDDE4006E890F /* VIAScene.m in Sources */,
@@ -6238,7 +6786,6 @@
 				EE61F44C1F1DDDE4006E890F /* ContactsViewController.m in Sources */,
 				F81F028666EB76E42F957238 /* Middleware.m in Sources */,
 				F81F0205ECEC10433798CDD6 /* VialerCallKitDelegate.swift in Sources */,
-				F81F0588D0B6B0E560955CFA /* VSLExtensions.swift in Sources */,
 				F81F0D86D19EA4C96A0B411D /* PushKitManager.swift in Sources */,
 				F81F061A735E9FFBCFA087E1 /* VoIPPushHandler.swift in Sources */,
 				F81F0EAF8FE6FBF59628F102 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -6252,7 +6799,6 @@
 			files = (
 				F20850E31D26935600A17E71 /* NoAnimationSegue.m in Sources */,
 				C4AEB25F1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
-				EE1C7BA31F8777E300708D96 /* SIPUtils.m in Sources */,
 				C420AECA1E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3044208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				F20850E71D26935600A17E71 /* UserProfileWebViewController.m in Sources */,
@@ -6274,7 +6820,6 @@
 				5CB1B1EC249782B100A7337D /* SubmitFeedbackController.swift in Sources */,
 				EE1C7B991F87779300708D96 /* SecondCallViewController.swift in Sources */,
 				EE1C7B9A1F87779300708D96 /* SetupCallTransferDialPadViewController.swift in Sources */,
-				F20850F11D26935600A17E71 /* PhoneNumberModel.m in Sources */,
 				F20850F21D26935600A17E71 /* SideMenuViewController.m in Sources */,
 				EE9D2F602191CD7D008CB2E6 /* AudioQualityViewController.swift in Sources */,
 				C47BB0BA1E72B0AB00A1E509 /* RecentCallManager.swift in Sources */,
@@ -6284,7 +6829,6 @@
 				C41C42FA1D5A742100813B66 /* VialerLogger.m in Sources */,
 				EEDCC3BB20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				F20850FB1D26935600A17E71 /* SystemUser.m in Sources */,
-				EE02B3F620D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE733DB32164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				EE5A1F1A1F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				F20850FD1D26935600A17E71 /* VIAScene.m in Sources */,
@@ -6354,7 +6898,6 @@
 				F20851281D26935600A17E71 /* ContactsViewController.m in Sources */,
 				F81F0C1E3FEC440514C2F5EC /* Middleware.m in Sources */,
 				F81F021BC6ADDF94E5DDB908 /* VialerCallKitDelegate.swift in Sources */,
-				F81F0DCE30DF249B8294BABF /* VSLExtensions.swift in Sources */,
 				F81F0A42259646A520D83877 /* PushKitManager.swift in Sources */,
 				F81F03CA550B2A2D9B527216 /* VoIPPushHandler.swift in Sources */,
 				F81F030893FE17EA2BBF8F33 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -6387,7 +6930,6 @@
 			files = (
 				C45F3DF51BFCA7A70012494D /* NoAnimationSegue.m in Sources */,
 				C4AEB25E1E6D95D600550E0C /* URLRequestExtensions.swift in Sources */,
-				EE1C7BA21F8777E200708D96 /* SIPUtils.m in Sources */,
 				C420AEC91E30EF5B005B2E4E /* FileManagerExtensions.swift in Sources */,
 				EEDC3042208725FD00C7C642 /* TwoFactorAuthenticationView.m in Sources */,
 				C46F10081C7C6FEA007F30A6 /* UserProfileWebViewController.m in Sources */,
@@ -6402,7 +6944,6 @@
 				EE1C7B8E1F87778A00708D96 /* SIPIncomingCallViewController.m in Sources */,
 				C43FD69B1E76F4C6002593DD /* NotificationToken.swift in Sources */,
 				F204B0661CFC968E00257E7D /* NSString+SubString.m in Sources */,
-				F9EEC9521CA288AA008FB612 /* PhoneNumberModel.m in Sources */,
 				C47BB0C41E72DE9400A1E509 /* NSManagedObjectContext.swift in Sources */,
 				EE1C7B9B1F87779400708D96 /* SecondCallViewController.swift in Sources */,
 				EE5EC3B9213FDC680000EE4D /* GAConfiguration.swift in Sources */,
@@ -6418,7 +6959,6 @@
 				C41C42F81D5A742100813B66 /* VialerLogger.m in Sources */,
 				EEDCC3BA20C520E0003480F6 /* NumberPadButton.m in Sources */,
 				3D44303F1AEF8E1B0034156F /* VIAScene.m in Sources */,
-				EE02B3F520D7870F006B10FD /* VialerStats.swift in Sources */,
 				EE5A1F191F94CFD800F07536 /* CoreDataStackHelper.swift in Sources */,
 				EE733DB22164B34600D05CA3 /* EnumHelper.swift in Sources */,
 				FBAD7F05182A8D4C002FC8FC /* LogInViewController.m in Sources */,
@@ -6489,7 +7029,6 @@
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,
 				F81F0159A631FB06EE9EBDCD /* Middleware.m in Sources */,
 				F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */,
-				F81F0C6A162B61A1E017010E /* VSLExtensions.swift in Sources */,
 				F81F0902AA7DB11449C9BF84 /* PushKitManager.swift in Sources */,
 				F81F0C2C02934F579374AFD7 /* VoIPPushHandler.swift in Sources */,
 				F81F0AAA2DDCAB5B0A676EC4 /* VoIPPushPayloadTransformer.swift in Sources */,
@@ -7415,7 +7954,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
+					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -7479,7 +8018,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
+					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -7943,7 +8482,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = SnapshotUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
@@ -7983,7 +8522,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = SnapshotUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer;
@@ -8014,7 +8553,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/VialerIntentsExtension.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.VialerIntentsExtension;
@@ -8049,7 +8588,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/VialerIntentsExtension.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voipgrid.vialer.VialerIntentsExtension;
@@ -8108,7 +8647,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = iphoneos;
@@ -8156,7 +8695,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -8200,7 +8739,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -8254,7 +8793,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Branding/Vialer/Vialer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;

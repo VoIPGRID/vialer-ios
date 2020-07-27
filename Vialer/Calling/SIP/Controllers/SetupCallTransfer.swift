@@ -1,4 +1,5 @@
 import Foundation
+import PhoneLib
 
 class SetupCallTransfer: UIViewController {
 
@@ -9,7 +10,7 @@ class SetupCallTransfer: UIViewController {
     
     var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
     
-    var firstCall: VSLCall? {
+    var firstCall: Session? {
         didSet {
             updateUI()
         }
@@ -20,8 +21,7 @@ class SetupCallTransfer: UIViewController {
         }
     }
 
-    var currentCall: VSLCall?
-    var callManager = VialerSIPLib.sharedInstance().callManager
+    var currentCall: Session?
 
     func updateUI() {
         // Implement in sub class.

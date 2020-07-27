@@ -5,6 +5,8 @@
 
 import UIKit
 import CoreData
+import ContactsUI
+import Contacts
 
 class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
 

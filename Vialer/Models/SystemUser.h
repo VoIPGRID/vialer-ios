@@ -4,7 +4,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <VialerSIPLib/VialerSIPLib.h>
 
 /**
  *  Error Domain.
@@ -123,7 +122,7 @@ extern NSString * const SystemUserTwoFactorAuthenticationTokenNotification;
  *
  *  Current the SystemUser class also represents a lot of information maintained/stored by the VoIPGRIDRequestOperationManager in the user defaults.
  */
-@interface SystemUser : NSObject <SIPEnabledUser>
+@interface SystemUser : NSObject
 
 /**
  *  BOOL that will indicate is the user is logged in.

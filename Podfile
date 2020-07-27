@@ -1,8 +1,10 @@
-platform :ios, '10.0'
+platform :ios, '11.3'
 
 SIPlibVersion = '3.7.2'
 
 def default_pods
+    source 'https://gitlab.linphone.org/BC/public/podspec.git'
+    source 'https://github.com/CocoaPods/Specs.git'
     pod 'AFNetworkActivityLogger'
     pod 'AFNetworking'
     pod 'GoogleAnalytics'
@@ -17,7 +19,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true
     pod 'SVProgressHUD'
-    pod 'VialerSIPLib', SIPlibVersion
+    pod 'PhoneLib' ,:git => 'https://github.com/open-voip-alliance/iOSPhoneLib.git'
 end
 
 target 'Vialer' do
@@ -53,7 +55,6 @@ target 'ANNAbel Staging' do
 end
 
 target 'VialerTests' do
-    pod 'VialerSIPLib', SIPlibVersion
     pod 'OCMock'
     pod 'OHHTTPStubs'
     pod 'Firebase'
