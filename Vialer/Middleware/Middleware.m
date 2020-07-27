@@ -6,10 +6,8 @@
 #import "Middleware.h"
 @import CoreData;
 #import "MiddlewareRequestOperationManager.h"
-#import "SIPUtils.h"
 #import "SystemUser.h"
 #import "Vialer-Swift.h"
-#import "VialerSIPLib.h"
 
 static float const MiddlewareResendTimeInterval = 10.0;
 static int const MiddlewareMaxAttempts = 8;
@@ -29,13 +27,11 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
 
 #pragma mark - Lifecycle
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:VSLCallStateChangedNotification object: nil];
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callStateChanged:) name:VSLCallStateChangedNotification object:nil];
     }
     return self;
 }
@@ -187,15 +183,6 @@ NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareA
                 }
             }
         }];
-    }
-}
-
-- (void)callStateChanged:(NSNotification *)notification {
-    VSLCallState callState = [notification.userInfo[VSLNotificationUserInfoCallStateKey] intValue];
-    
-    if (callState == VSLCallStateDisconnected) {
-        VialerLogDebug(@"Call ended. Stop processing the notification");
-        self.pushNotificationProcessing = nil;
     }
 }
 

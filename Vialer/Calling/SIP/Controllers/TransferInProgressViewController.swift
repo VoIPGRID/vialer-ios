@@ -18,7 +18,7 @@ class TransferInProgressViewController: UIViewController {
     
     var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
 
-    var firstCall: Session? {
+    var firstCall: Call? {
         didSet {
 //            firstCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
             callObserversSet = true
@@ -31,7 +31,7 @@ class TransferInProgressViewController: UIViewController {
             updateUI()
         }
     }
-    var currentCall: Session? {
+    var currentCall: Call? {
         didSet {
             updateUI()
         }

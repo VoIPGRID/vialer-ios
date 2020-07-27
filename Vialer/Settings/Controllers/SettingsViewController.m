@@ -7,7 +7,6 @@
 
 #import "ActivateSIPAccountViewController.h"
 #import "EditNumberViewController.h"
-#import "SIPUtils.h"
 #import "SVProgressHUD.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"

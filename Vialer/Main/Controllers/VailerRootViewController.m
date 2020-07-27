@@ -6,7 +6,6 @@
 #import "VailerRootViewController.h"
 #import "Middleware.h"
 #import "Notifications-Bridging-Header.h"
-#import "SIPIncomingCallViewController.h"
 #import "SystemUser.h"
 #import "UIAlertController+Vialer.h"
 #import "VialerDrawerViewController.h"
@@ -20,7 +19,6 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 @interface VailerRootViewController ()
 @property (nonatomic) BOOL willPresentCallingViewController;
-@property (weak, nonatomic) VSLCall *activeCall;
 @property(weak, nonatomic) NSString *twoStepNumberToCall;
 @property (weak, nonatomic) IBOutlet GradientView *backgroundGrandientView;
 @property (weak, nonatomic) IBOutlet UIView *backgroundSolidColorView;
@@ -52,18 +50,18 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
     } @catch (NSException *exception) {
         VialerLogError(@"Error removing observer %@: %@", SystemUserTwoFactorAuthenticationTokenNotification, exception);
     }
-
-    @try {
-        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAcceptedNotification];
-    } @catch (NSException *exception) {
-        VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
-    }
-
-    @try {
-        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStartedNotification];
-    } @catch (NSException *exception) {
-        VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
-    }
+//
+//    @try {
+//        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateInboundCallAcceptedNotification];
+//    } @catch (NSException *exception) {
+//        VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
+//    }
+//
+//    @try {
+//        [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:CallKitProviderDelegateOutboundCallStartedNotification];
+//    } @catch (NSException *exception) {
+//        VialerLogError(@"Error removing observer %@: %@", CallKitProviderDelegateOutboundCallStartedNotification, exception);
+//    }
 
     @try {
         [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:MiddlewareRegistrationOnOtherDeviceNotification];
@@ -83,8 +81,8 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.backgroundSolidColorView.backgroundColor = [[ColorsConfiguration shared] colorForKey:ColorsBackgroundGradientStart];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateInboundCallAcceptedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSipCallingViewOrIncomingCallNotification:) name:CallKitProviderDelegateOutboundCallStartedNotification object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voipWasDisabled:) name:MiddlewareRegistrationOnOtherDeviceNotification object:nil];
 
@@ -207,18 +205,18 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 }
 
 - (void)showSipCallingViewOrIncomingCallNotification:(NSNotification *)notification {
-    if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
-        if (![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
-            ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
-            self.willPresentCallingViewController = YES;
-            [self dismissViewControllerAnimated:NO completion:^{
-                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
-                });
-            }];
-        }
-    }
+//    if (![self.presentedViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
+//        if (![self.presentedViewController isKindOfClass:[SIPCallingViewController class]] &&
+//            ![self.presentedViewController.presentedViewController isKindOfClass:[SIPCallingViewController class]]) {
+//            self.willPresentCallingViewController = YES;
+//            [self dismissViewControllerAnimated:NO completion:^{
+//                self.activeCall = [[notification userInfo] objectForKey:VSLNotificationUserInfoCallKey];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self performSegueWithIdentifier:VialerRootViewControllerShowSIPCallingViewSegue sender:self];
+//                });
+//            }];
+//        }
+//    }
 }
 
 - (void)startConnectABCall:(NSNotification *)notification {
@@ -247,17 +245,17 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     self.willPresentCallingViewController = NO;
-    if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
-        SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
-        sipIncomingViewController.call = self.activeCall;
-
-    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
-        sipCallingVC.activeCall = self.activeCall;
-    } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
-        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
-        [tscvc handlePhoneNumber:self.twoStepNumberToCall];
-    }
+//    if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
+//        SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;
+//        sipIncomingViewController.call = self.activeCall;
+//
+//    } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
+//        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+//        sipCallingVC.activeCall = self.activeCall;
+//    } else if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
+//        TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
+//        [tscvc handlePhoneNumber:self.twoStepNumberToCall];
+//    }
 }
 
 # pragma mark - Unwind segue

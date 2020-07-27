@@ -10,7 +10,7 @@ class SetupCallTransfer: UIViewController {
     
     var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
     
-    var firstCall: Session? {
+    var firstCall: Call? {
         didSet {
             updateUI()
         }
@@ -21,7 +21,7 @@ class SetupCallTransfer: UIViewController {
         }
     }
 
-    var currentCall: Session?
+    var currentCall: Call?
 
     func updateUI() {
         // Implement in sub class.

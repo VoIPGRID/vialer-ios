@@ -44,10 +44,6 @@ static NSString * const DDLogWrapperShouldUseRemoteLoggingKey = @"DDLogWrapperSh
     } else {
         [VialerGAITracker setupGAITracker];
     }
-
-    [VialerSIPLib sharedInstance].logCallBackBlock = ^(DDLogMessage *_Nonnull message) {
-        [VialerLogger logWithDDLogMessage:message];
-    };
 }
 
 + (void)logWithFlag:(DDLogFlag)flag file:(const char*)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format, ... {

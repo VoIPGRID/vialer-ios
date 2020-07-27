@@ -7,7 +7,6 @@
 
 #import "NSString+SubString.h"
 #import "SAMKeychain.h"
-#import "SIPUtils.h"
 #import "VoIPGRIDRequestOperationManager.h"
 #import "Vialer-Swift.h"
 
@@ -666,7 +665,7 @@ NSString *const SystemUserAvailabilityAvailabilityKey = @"AvailabilityModelAvail
     }
 
     if (self.sipEnabled) {
-        [SIPUtils updateCodecs];
+       //update codecs
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

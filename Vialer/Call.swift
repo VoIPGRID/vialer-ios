@@ -12,6 +12,12 @@ class Call {
     let direction: Direction
     let uuid: UUID
 
+    var isIncoming: Bool {
+        get {
+            self.direction == Direction.inbound
+        }
+    }
+
     init(session: Session, direction: Direction) {
         self.direction = direction
         self.uuid = UUID.init()

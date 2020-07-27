@@ -19,7 +19,7 @@ class KeypadViewController: UIViewController {
     }
 
     // MARK: - Properties
-    var call: Session?
+    var call: Call?
     var delegate: KeypadViewControllerDelegate?
 //    var callManager: VSLCallManager {
 //        get {

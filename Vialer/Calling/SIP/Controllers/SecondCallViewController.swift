@@ -19,7 +19,7 @@ class SecondCallViewController: SIPCallingViewController {
     // MARK: - Properties
     private var firstCallObserversWereSet = false
     
-    var firstCall: Session? {
+    var firstCall: Call? {
         didSet {
 //            guard let call = firstCall else { return }
 //            call.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
