@@ -1275,6 +1275,8 @@
 		F81F0089DD85E983BCD8E7EB /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F00A2FE88CED8D0182D61 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F00D781C44E17F44C1DCC /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
+		F81F0106895F689598102B6B /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
+		F81F0111C149958AC7E5AA67 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
 		F81F0159A631FB06EE9EBDCD /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F0175AA8D58FCE4CB0D6D /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F018ABBB65934950EEBDB /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
@@ -1287,27 +1289,38 @@
 		F81F021BC6ADDF94E5DDB908 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F028666EB76E42F957238 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F02BD50AAF55E1E21B885 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
+		F81F02EBC73FFC3CBE03309A /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
+		F81F0305C74494DBD0018672 /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
 		F81F030893FE17EA2BBF8F33 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F03298E167AE1E469826B /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F036BBE7D26CF30A8B4B2 /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
 		F81F03853FE98746EE14894B /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F03B085CE5B30D14F8F90 /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F03CA550B2A2D9B527216 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
+		F81F041A7A30717DB804F1E5 /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
 		F81F043BC323C743AE49E16B /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
+		F81F04674ADBD41E81CAD1F6 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
 		F81F04778F1E1F40C5982601 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F04BE4E5CEC47001387F6 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F0509460F828548F73364 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F05176592A721BBC2F448 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F0576C62465CD6267C091 /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
+		F81F05D0F0DF8E69ED56A0D6 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
 		F81F05F9A33DE91AB27CCC05 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F061A735E9FFBCFA087E1 /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F063827B8CD422734313E /* VialerCallKitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */; };
 		F81F0740FE0E7CE97908D7F1 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
+		F81F07540E072DB0B4C88E5B /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
+		F81F07B3AE3A47181602F00D /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
 		F81F07F25F3EA025CC08A045 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F080E4AD305A1B7F04FFF /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F083BB376F827AAF4CF61 /* Middleware.m in Sources */ = {isa = PBXBuildFile; fileRef = F81F05D06D0A053005A21DD8 /* Middleware.m */; };
 		F81F08C22534137A58809FDF /* VoIPPushHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */; };
 		F81F0902AA7DB11449C9BF84 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
+		F81F09851187B5CC2F62317E /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
+		F81F09C15D472DBC1C8A4BC0 /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
 		F81F09E600386851FFE9C218 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
+		F81F0A191FDF60A89469A139 /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
 		F81F0A3C5A6CDC398402A355 /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
 		F81F0A42259646A520D83877 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F0A5F107532D59815FA26 /* VoIPPushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */; };
@@ -1323,6 +1336,11 @@
 		F81F0D86D19EA4C96A0B411D /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F81F0DB6F68BB908E2DA1214 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
 		F81F0EAF8FE6FBF59628F102 /* VoIPPushPayloadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */; };
+		F81F0EC7841216A1D4E428A9 /* Sip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F01374CA7F5FBDFDABD68 /* Sip.swift */; };
+		F81F0EC91D53A25EA66F3B5C /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
+		F81F0EE0054CC44AD2CC04E8 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
+		F81F0F231356ECAA64F1FC75 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
+		F81F0F29820487582C4E5371 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F075B370E3CC7A59AC770 /* Call.swift */; };
 		F81F0FFE8C553E3F08BE7007 /* PushKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81F00F23174C5DAEA441B03 /* PushKitManager.swift */; };
 		F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F98635381C7C613200674182 /* SIPIncomingCallViewControllerTests.m */; };
 		F9A71EBF1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */; };
@@ -1954,9 +1972,11 @@
 		F2E5EF131D09736100F7C699 /* .env.verbonden */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.verbonden; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F2E622161C984D4C00BA46B2 /* Vialer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Vialer-Prefix.pch"; path = "Supporting Files/Vialer-Prefix.pch"; sourceTree = "<group>"; };
 		F81F00F23174C5DAEA441B03 /* PushKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushKitManager.swift; sourceTree = "<group>"; };
+		F81F01374CA7F5FBDFDABD68 /* Sip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sip.swift; sourceTree = "<group>"; };
 		F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VialerCallKitDelegate.swift; sourceTree = "<group>"; };
 		F81F05D06D0A053005A21DD8 /* Middleware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Middleware.m; sourceTree = "<group>"; };
 		F81F066E969B661A85EFEA3F /* VoIPPushPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoIPPushPayload.swift; sourceTree = "<group>"; };
+		F81F075B370E3CC7A59AC770 /* Call.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
 		F81F09DD0BBBFED650BD6D80 /* VoIPPushHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoIPPushHandler.swift; sourceTree = "<group>"; };
 		F81F0C232DB66DD915AB9078 /* Middleware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Middleware.h; sourceTree = "<group>"; };
 		F81F0EC66D0FD3B419A6A65C /* VoIPPushPayloadTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoIPPushPayloadTransformer.swift; sourceTree = "<group>"; };
@@ -2834,6 +2854,8 @@
 				C41926511BE3A67100436D92 /* TwoStep */,
 				C4C3EB051BFB88B000AA4B2A /* SIP */,
 				F81F023891FBFD55B74A5697 /* VialerCallKitDelegate.swift */,
+				F81F01374CA7F5FBDFDABD68 /* Sip.swift */,
+				F81F075B370E3CC7A59AC770 /* Call.swift */,
 			);
 			name = Calling;
 			sourceTree = "<group>";
@@ -6134,6 +6156,8 @@
 				F81F05176592A721BBC2F448 /* VoIPPushHandler.swift in Sources */,
 				F81F01F0E0E7B28DB1A76166 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F0B6C509078FEFA6A64DC /* VoIPPushPayload.swift in Sources */,
+				F81F036BBE7D26CF30A8B4B2 /* Sip.swift in Sources */,
+				F81F04674ADBD41E81CAD1F6 /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6246,6 +6270,8 @@
 				F81F0089DD85E983BCD8E7EB /* VoIPPushHandler.swift in Sources */,
 				F81F02BD50AAF55E1E21B885 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F0A3C5A6CDC398402A355 /* VoIPPushPayload.swift in Sources */,
+				F81F0305C74494DBD0018672 /* Sip.swift in Sources */,
+				F81F0EC91D53A25EA66F3B5C /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6358,6 +6384,8 @@
 				F81F0023AC88B52925828369 /* VoIPPushHandler.swift in Sources */,
 				F81F05F9A33DE91AB27CCC05 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F01FFF7BEC9656B4A0C73 /* VoIPPushPayload.swift in Sources */,
+				F81F0EC7841216A1D4E428A9 /* Sip.swift in Sources */,
+				F81F0EE0054CC44AD2CC04E8 /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6498,6 +6526,8 @@
 				F81F08C22534137A58809FDF /* VoIPPushHandler.swift in Sources */,
 				F81F0DB6F68BB908E2DA1214 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F03B085CE5B30D14F8F90 /* VoIPPushPayload.swift in Sources */,
+				F81F0A191FDF60A89469A139 /* Sip.swift in Sources */,
+				F81F09851187B5CC2F62317E /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6547,6 +6577,8 @@
 				F81F080E4AD305A1B7F04FFF /* VoIPPushHandler.swift in Sources */,
 				F81F04778F1E1F40C5982601 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F0A5F107532D59815FA26 /* VoIPPushPayload.swift in Sources */,
+				F81F0106895F689598102B6B /* Sip.swift in Sources */,
+				F81F0111C149958AC7E5AA67 /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6659,6 +6691,8 @@
 				F81F01AFBEBB5192CB055407 /* VoIPPushHandler.swift in Sources */,
 				F81F0D34E711C79D0F1B5D6F /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F0D862855731F8080E15A /* VoIPPushPayload.swift in Sources */,
+				F81F07540E072DB0B4C88E5B /* Sip.swift in Sources */,
+				F81F0F231356ECAA64F1FC75 /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6790,6 +6824,8 @@
 				F81F061A735E9FFBCFA087E1 /* VoIPPushHandler.swift in Sources */,
 				F81F0EAF8FE6FBF59628F102 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F01EC593DA3310FF1FD13 /* VoIPPushPayload.swift in Sources */,
+				F81F02EBC73FFC3CBE03309A /* Sip.swift in Sources */,
+				F81F0F29820487582C4E5371 /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6902,6 +6938,8 @@
 				F81F03CA550B2A2D9B527216 /* VoIPPushHandler.swift in Sources */,
 				F81F030893FE17EA2BBF8F33 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F0ACABD5C73FD32803B8B /* VoIPPushPayload.swift in Sources */,
+				F81F041A7A30717DB804F1E5 /* Sip.swift in Sources */,
+				F81F05D0F0DF8E69ED56A0D6 /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7033,6 +7071,8 @@
 				F81F0C2C02934F579374AFD7 /* VoIPPushHandler.swift in Sources */,
 				F81F0AAA2DDCAB5B0A676EC4 /* VoIPPushPayloadTransformer.swift in Sources */,
 				F81F03853FE98746EE14894B /* VoIPPushPayload.swift in Sources */,
+				F81F09C15D472DBC1C8A4BC0 /* Sip.swift in Sources */,
+				F81F07B3AE3A47181602F00D /* Call.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@ import Firebase
 import UIKit
 import UserNotifications
 import PhoneLib
+import ContactsUI
+import Contacts
 
 @UIApplicationMain
 @objc class AppDelegate: UIResponder {
@@ -48,12 +50,10 @@ import PhoneLib
     }
     var stopVibrating = false
     var vibratingTask: UIBackgroundTaskIdentifier?
-    @objc var callKitProviderDelegate: VialerCallKitDelegate!
     var callAvailabilityTimer: Timer!
     var callAvailabilityTimesFired: Int = 0
     
     var user = SystemUser.current()!
-    var mostRecentCall : VSLCall?
     let reachability = Reachability(true)!
     private var _callEventMonitor: Any? = nil
     fileprivate var callEventMonitor: CallEventsMonitor {
@@ -63,6 +63,7 @@ import PhoneLib
         return _callEventMonitor as! CallEventsMonitor
     }
     let pushKitManager = PushKitManager()
+    let sip = Sip()
 }
 
 // MARK: - UIApplicationDelegate
@@ -174,17 +175,10 @@ extension AppDelegate {
     /// Hook up the observers that AppDelegate should listen to
     fileprivate func setupObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updatedSIPCredentials), name: NSNotification.Name.SystemUserSIPCredentialsChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSIPEndpoint(_:)), name: NSNotification.Name.SystemUserEncryptionUsageChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSIPEndpoint(_:)), name: NSNotification.Name.SystemUserStunUsageChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sipDisabledNotification), name: NSNotification.Name.SystemUserLogout, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(userLoggedIn), name: NSNotification.Name.SystemUserLogin, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(callStateChanged(_:)), name: NSNotification.Name.VSLCallStateChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallAccepted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(callKitCallWasHandled(_:)), name: NSNotification.Name.CallKitProviderDelegateInboundCallRejected, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(middlewareRegistrationFinished(_:)), name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextSaved(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(tearDownSip(_:)), name: Notification.Name.teardownSip, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.receivedApnsToken, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApnsToken(_:)), name: Notification.Name.remoteLoggingStateChanged, object: nil)
         user.addObserver(self, forKeyPath: #keyPath(SystemUser.clientID), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
@@ -194,12 +188,9 @@ extension AppDelegate {
     /// Remove the observers that the AppDelegate is listening to
     fileprivate func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserSIPCredentialsChanged, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserEncryptionUsageChanged, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserStunUsageChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserSIPDisabled, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogin, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.SystemUserLogout, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.VSLCallStateChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MiddlewareAccountRegistrationIsDone, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.teardownSip, object: nil)
@@ -272,44 +263,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
     }
-
-    @objc fileprivate func callKitCallWasHandled(_ notification: NSNotification) {
-        if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallAccepted {
-            VialerGAITracker.acceptIncomingCallEvent()
-        } else if notification.name == NSNotification.Name.CallKitProviderDelegateInboundCallRejected {
-            VialerGAITracker.declineIncomingCallEvent()
-            if let mostRecentCallUnwrapped = self.mostRecentCall {
-                VialerStats.sharedInstance.incomingCallFailedDeclined(call:mostRecentCallUnwrapped)
-            }
-        }
-    }
-
-    @objc fileprivate func middlewareRegistrationFinished(_ notification: NSNotification) {
-        if callAvailabilityTimer == nil {
-            callAvailabilityTimer = Timer.scheduledTimer(timeInterval: Configuration.TimerForCall.interval, target: self, selector: #selector(runCallTimer), userInfo: nil, repeats: true)
-            VialerLogDebug("Registration of VoIP account done, start timer for receiving a call.");
-        }
-    }
-
-    @objc fileprivate func errorDuringCallSetup(_ notification: NSNotification) {
-        let statusCode = notification.userInfo![VSLNotificationUserInfoErrorStatusCodeKey] as! String
-        let statusMessage = notification.userInfo![VSLNotificationUserInfoErrorStatusMessageKey] as! String
-        if statusCode != "401" && statusCode != "407" {
-            let callId = notification.userInfo![VSLNotificationUserInfoCallIdKey] as! String
-
-            let callIncoming = callAvailabilityTimer != nil
-            if callAvailabilityTimer != nil {
-                resetCallAvailabilityTimer()
-            }
-
-            VialerStats.sharedInstance.callFailed(callId: callId, incoming: callIncoming, statusCode: statusCode)
-            VialerLogWarning("Error setting up a call with \(statusCode) / \(statusMessage)")
-        }
-    }
-
-    @objc fileprivate func tearDownSip(_ notification: NSNotification) {
-        resetVoip()
-    }
 }
 
 // MARK: - VoIP
@@ -318,22 +271,12 @@ extension AppDelegate {
     /// Make sure the VoIP parts are up and running
     fileprivate func setupVoIP() {
         VialerLogDebug("Setting up VoIP")
-        if callKitProviderDelegate == nil {
-            VialerLogDebug("Initializing CallKit")
-            callKitProviderDelegate = VialerCallKitDelegate(callManager: vialerSIPLib.callManager)
-        } else {
-            callKitProviderDelegate.refresh()
-        }
         callEventMonitor.start()
         if user.sipEnabled {
             VialerLogDebug("VoIP is enabled start the endpoint.")
             updatedSIPCredentials()
         }
-        setupIncomingCallBack()
-        setupMissedCallBack()
 
-        PhoneLib.shared.sessionDelegate = self
-        PhoneLib.shared.registrationDelegate = self
     }
 
     /// Register a callback to the sip library so that the app can handle missed calls
@@ -358,20 +301,6 @@ extension AppDelegate {
             self.registerForLocalNotifications()
             self.syncUserWithBackend()
         }
-    }
-
-    @objc fileprivate func updateSIPEndpoint(_ notification: NSNotification) {
-        VialerLogInfo("\(notification.name) fired to update SIP endpoint")
-        if !user.loggedIn {
-            VialerLogWarning("User is not logged in")
-            return
-        }
-        if !user.sipEnabled {
-            VialerLogWarning("SIP not enabled")
-            return
-        }
-
-        resetVoip()
     }
 
     @objc fileprivate func userLoggedIn() {
@@ -408,8 +337,6 @@ extension AppDelegate {
     @objc fileprivate func sipDisabledNotification() {
         VialerLogInfo("SIP has been disabled")
         DispatchQueue.main.async {
-            SIPUtils.removeSIPEndpoint()
-
             if let token = self.pushKitManager.token {
                 Middleware().deleteDeviceRegistration(token)
             } else {
@@ -453,36 +380,36 @@ extension AppDelegate {
         return true
     }
     
-    private func createLocalNotificationMissedCall(forCall call: VSLCall) {
-        let content = UNMutableNotificationContent()        
-        let callerNumber = call.callerNumber! // Possible options: a phone number or "anonymous".
-        var displayName = callerNumber
-        
-        // If the call isn't anonymous try to look up the number for a known contact.
-        if callerNumber != "anonymous" {
-            let digits = PhoneNumberUtils.removePrefix(fromPhoneNumber: callerNumber)
-            
-            if let phoneNumber = ContactModel.defaultModel.phoneNumbersToContacts[digits] {
-                displayName = phoneNumber.callerName!
-            }
-        } else {
-            displayName = NSLocalizedString("Anonymous", comment: "Anonymous")
-        }
-        
-        content.title = displayName
-        content.body = NSLocalizedString("Missed call", comment: "Missed call")
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let identifier = Configuration.Notifications.Identifiers.missed
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-        notificationCenter.add(request) { (error) in
-            if let error = error {
-                print("Could not add missed call notification: \(error.localizedDescription)")
-            }
-        }
-    }
+//    private func createLocalNotificationMissedCall(forCall call: VSLCall) {
+//        let content = UNMutableNotificationContent()
+//        let callerNumber = call.callerNumber! // Possible options: a phone number or "anonymous".
+//        var displayName = callerNumber
+//
+//        // If the call isn't anonymous try to look up the number for a known contact.
+//        if callerNumber != "anonymous" {
+//            let digits = PhoneNumberUtils.removePrefix(fromPhoneNumber: callerNumber)
+//
+//            if let phoneNumber = ContactModel.defaultModel.phoneNumbersToContacts[digits] {
+//                displayName = phoneNumber.callerName!
+//            }
+//        } else {
+//            displayName = NSLocalizedString("Anonymous", comment: "Anonymous")
+//        }
+//
+//        content.title = displayName
+//        content.body = NSLocalizedString("Missed call", comment: "Missed call")
+//        content.sound = UNNotificationSound.default
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//        let identifier = Configuration.Notifications.Identifiers.missed
+//        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+//
+//        notificationCenter.add(request) { (error) in
+//            if let error = error {
+//                print("Could not add missed call notification: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 
     /// Create a background task that will vibrate the phone.
     private func startVibratingInBackground() {
@@ -537,25 +464,6 @@ extension AppDelegate {
     }
 }
 
-// MARK: - Timed code
-extension AppDelegate {
-    @objc fileprivate func runCallTimer() {
-        callAvailabilityTimesFired += 1
-        if callAvailabilityTimesFired > Configuration.TimerForCall.maxTimesFiring {
-            resetCallAvailabilityTimer()
-            VialerStats.sharedInstance.noIncomingCallReceived()
-        }
-    }
-
-    fileprivate func resetCallAvailabilityTimer() {
-        callAvailabilityTimesFired = 0;
-        if callAvailabilityTimer != nil {
-            callAvailabilityTimer.invalidate()
-            callAvailabilityTimer = nil
-        }
-    }
-}
-
 // MARK: - Middleware
 extension AppDelegate {
 
@@ -587,56 +495,9 @@ extension AppDelegate {
 }
 
 extension Notification.Name {
-
     /**
         A notification that is emitted when a token has been received from the apns
         servers.
     */
     static let remoteLoggingStateChanged = Notification.Name("remote-logging-state-changed")
-}
-
-// MARK: - SessionDelegate
-extension AppDelegate: SessionDelegate {
-    public func didReceive(incomingSession: Session) {
-        VialerLogDebug("Incoming session didReceive")
-
-        VialerGAITracker.incomingCallRingingEvent()
-        VoIPPushHandler.incomingCallConfirmed = true
-        DispatchQueue.main.async {
-            VialerLogInfo("Incoming call block invoked, routing through CallKit.")
-            //self.mostRecentCall = call
-            //self.callKitProviderDelegate.reportIncomingCall(call: call)
-        }
-    }
-
-    public func outgoingDidInitialize(session: Session) {
-        VialerLogDebug("outgoingDidInitialize")
-    }
-
-    public func sessionUpdated(_ session: Session, message: String) {
-        VialerLogDebug("sessionUpdated")
-    }
-
-    public func sessionConnected(_ session: Session) {
-        VialerLogDebug("sessionConnected")
-    }
-
-    public func sessionEnded(_ session: Session) {
-        VialerLogDebug("sessionEnded")
-    }
-
-    public func sessionReleased(_ session: Session) {
-        VialerLogDebug("esessionReleased")
-    }
-
-    public func error(session: Session, message: String) {
-        VialerLogDebug("Error session \(message)")
-    }
-}
-
-// MARK: - RegistrationDelegate
-extension AppDelegate: RegistrationStateDelegate {
-    public func didChangeRegisterState(_ state: SipRegistrationStatus) {
-        VialerLogDebug("Reg state: \(state.rawValue)")
-    }
 }

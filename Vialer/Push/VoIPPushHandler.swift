@@ -6,16 +6,18 @@
 import Foundation
 import PushKit
 import PhoneLib
+import CallKit
 
-class VoIPPushHandler: SessionDelegate {
+class VoIPPushHandler {
 
     private let middleware = Middleware()
     private let voIPPushPayloadTransformer = VoIPPushPayloadTransformer()
-    private let vsl = VialerSIPLib.sharedInstance()
-    private let sip = SIPUtils.self
+    private lazy var sip: Sip = {
+        (UIApplication.shared.delegate as! AppDelegate).sip
+    }()
 
     private lazy var callKit: CXProvider = {
-        (UIApplication.shared.delegate as! AppDelegate).callKitProviderDelegate.provider
+        sip.callKitProviderDelegate.provider
     }()
 
     // This will be updated and set to TRUE when we have confirmation that we have received a call via SIP.
@@ -27,7 +29,6 @@ class VoIPPushHandler: SessionDelegate {
     func handle(payload: PKPushPayload, completion: @escaping () -> ()) {
         VoIPPushHandler.self.incomingCallConfirmed = false
 
-        PhoneLib.shared.sessionDelegate = self
         guard let payload = voIPPushPayloadTransformer.transform(payload: payload) else {
             VialerLogError("Unable to properly extract call information from payload. Not handling call.")
             return
@@ -55,18 +56,11 @@ class VoIPPushHandler: SessionDelegate {
                 phoneNumber = payload.phoneNumber,
                 callerId = payload.callerId
 
-        if self.vsl.hasActiveCall() {
+        if self.sip.hasActiveCall {
             respond(with: payload, available: false)
             self.rejectCall(uuid: uuid, description: "Rejecting call as there is already one in progress")
             return
         }
-
-        guard let call = VSLCall(inboundCallWith: uuid, number: phoneNumber, name: callerId ?? "") else {
-            self.rejectCall(uuid: uuid, description: "Unable to create call with the uuid \(uuid.uuidString)")
-            return
-        }
-
-        self.vsl.callManager.add(call)
     }
 
     /**
@@ -74,32 +68,28 @@ class VoIPPushHandler: SessionDelegate {
         the now ringing UI.
     */
     func establishConnection(for payload: VoIPPushPayload) {
-        if vsl.hasActiveCall() {
+        if sip.hasActiveCall {
             return
         }
 
         let uuid = payload.uuid
 
-        sip.setupSIPEndpoint()
+        let success = sip.register()
 
-        sip.registerSIPAccountWithEndpoint { (success, account) in
-            if (!success) {
-                self.rejectCall(uuid: uuid, description: "Failed to register with SIP, rejecting the call...")
-                return;
+        if !success {
+            self.rejectCall(uuid: uuid, description: "Failed to register with SIP, rejecting the call...")
+            return;
+        }
+
+        self.respond(with: payload, available: true) { error in
+            if (error != nil) {
+                self.rejectCall(uuid: uuid, description: "Unable to contact middleware")
+                return
             }
 
-            self.vsl.callManager.call(with: uuid)?.account = account
-
-            self.respond(with: payload, available: true) { error in
-                if (error != nil) {
-                    self.rejectCall(uuid: uuid, description: "Unable to contact middleware")
-                    return
-                }
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    if (!VoIPPushHandler.self.incomingCallConfirmed) {
-                        self.rejectCall(uuid: uuid, description: "Unable to get call confirmation...")
-                    }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                if (!VoIPPushHandler.self.incomingCallConfirmed) {
+                    self.rejectCall(uuid: uuid, description: "Unable to get call confirmation...")
                 }
             }
         }
