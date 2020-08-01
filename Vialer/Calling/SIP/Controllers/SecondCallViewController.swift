@@ -130,11 +130,6 @@ extension SecondCallViewController {
 //        }
         
     }
-
-    // Don't present wifi notification on second call.
-    override func shouldPresentWiFiNotification() -> Bool {
-        return false
-    }
 }
 
 // MARK: - Segues
@@ -145,21 +140,13 @@ extension SecondCallViewController {
             let transferInProgressVC = segue.destination as! TransferInProgressViewController
             transferInProgressVC.firstCall = firstCall
             transferInProgressVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-            transferInProgressVC.currentCall = activeCall
-            transferInProgressVC.currentCallPhoneNumberLabelText = phoneNumberLabelText
         case .unwindToFirstCall:
             let firstCallVC = segue.destination as! SIPCallingViewController
-            firstCallVC.activeCall = firstCall
-            firstCallVC.phoneNumberLabelText = firstCallPhoneNumberLabelText
         case .showKeypad:
             let keypadVC = segue.destination as! KeypadViewController
-            keypadVC.call = activeCall
             keypadVC.delegate = self
-            keypadVC.phoneNumberLabelText = phoneNumberLabelText
         case .unwindToActiveCall:
             let firstCallVC = segue.destination as! SIPCallingViewController
-            firstCallVC.activeCall = activeCall
-            firstCallVC.phoneNumberLabelText = phoneNumberLabelText
         }
     }
 }

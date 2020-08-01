@@ -90,6 +90,7 @@ extension AppDelegate: UIApplicationDelegate {
         DispatchQueue.global(qos: .background).async {
             // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
             if self.user.loggedIn {
+                self.sip.register()
                 self.user.updateFromVG(completion: nil)
             }
         }
@@ -103,6 +104,7 @@ extension AppDelegate: UIApplicationDelegate {
         stopVibratingInBackground()
 
         DispatchQueue.main.async {
+            self.sip.register()
             self.pushKitManager.registerForVoIPPushes()
             self.syncUserWithBackend()
         }
@@ -113,6 +115,7 @@ extension AppDelegate: UIApplicationDelegate {
         saveContext()
 
         DispatchQueue.main.async {
+            self.sip.unregister()
             self.pushKitManager.registerForVoIPPushes()
         }
     }
@@ -375,7 +378,7 @@ extension AppDelegate {
             return true;
         }
 
-        let session = PhoneLib.shared.call(to: phoneNumber)
+        let session = sip.call(number: phoneNumber)
 
         return true
     }

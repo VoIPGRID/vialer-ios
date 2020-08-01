@@ -100,11 +100,11 @@ class VialerCallKitDelegate: NSObject {
         }
 
         let update = CXCallUpdate()
-        update.localizedCallerName = call.session.displayName
+        update.localizedCallerName = call.displayName
 
         _ = CXHandle(
                 type: CXHandle.HandleType.phoneNumber,
-                value: call.session.displayName ?? call.session.remoteNumber
+                value: call.displayName ?? call.remoteNumber
         )
 
         provider.reportCall(with: call.uuid, updated: update)

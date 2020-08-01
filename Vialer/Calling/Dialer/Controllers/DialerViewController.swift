@@ -8,6 +8,10 @@ import AVFoundation
 
 class DialerViewController: UIViewController, SegueHandler {
 
+    private lazy var sip: Sip = {
+        (UIApplication.shared.delegate as! AppDelegate).sip
+    }()
+
     enum SegueIdentifier: String {
         case sipCalling = "SIPCallingSegue"
         case twoStepCalling = "TwoStepCallingSegue"
@@ -151,11 +155,15 @@ extension DialerViewController {
         switch segueIdentifier(segue: segue) {
         case .sipCalling:
             let sipCallingVC = segue.destination as! SIPCallingViewController
-            if (UIApplication.shared.delegate as! AppDelegate).isScreenshotRun {
-                sipCallingVC.handleOutgoingCallForScreenshot(phoneNumber: numberText!)
-            } else {
-                sipCallingVC.handleOutgoingCall(phoneNumber: numberText!, contact: nil)
+            checkMicrophonePermission { startCalling in
+                if startCalling {
+                    self.sip.call(number: self.numberText!)
+                } else {
+                    // No Mic, present alert
+                    self.presentEnableMicrophoneAlert()
+                }
             }
+
             numberText = nil
         case .twoStepCalling:
             let twoStepCallingVC = segue.destination as! TwoStepCallingViewController
@@ -164,6 +172,42 @@ extension DialerViewController {
         case .reachabilityBar:
             break
         }
+    }
+
+    fileprivate func checkMicrophonePermission(completion: @escaping ((_ startCalling: Bool) -> Void)) {
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+            if granted {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+
+    /// Show a notification that makes it possible to open the settings and enable the microphone
+    ///
+    /// Activating the microphone permission will terminate the app.
+    fileprivate func presentEnableMicrophoneAlert() {
+        let alertController = UIAlertController(title: NSLocalizedString("Access to microphone denied", comment: "Access to microphone denied"),
+                message: NSLocalizedString("Give permission to use your microphone.\nGo to",
+                        comment: "Give permission to use your microphone.\nGo to"),
+                preferredStyle: .alert)
+
+        // Cancel the call, without audio, calling isn't possible.
+        let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
+            DispatchQueue.main.async {
+//                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
+            }
+        }
+        alertController.addAction(noAction)
+
+        // User wants to open the settings to enable microphone permission.
+        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
+            UIApplication.shared.openURL(URL(string:UIApplication.openSettingsURLString)!)
+        }
+        alertController.addAction(settingsAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 

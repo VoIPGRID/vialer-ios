@@ -236,6 +236,7 @@ EXTERNAL SOURCES:
   "MMDrawerController+Storyboard":
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   PhoneLib:
+    branch: develop
     :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
@@ -248,7 +249,7 @@ CHECKOUT OPTIONS:
     :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   PhoneLib:
-    :commit: 6865e372437fffe99b594daf5d3e7c522bdfa9d4
+    :commit: a30abbf45e33267ae9e4f28e447bb7e6f55b9620
     :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
   SPLumberjackLogFormatter:
     :commit: c0155bfd953746f13e94c84b8b2c13908242e3e4
@@ -290,6 +291,6 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: e8f9ef64d83f2b2f08c596b7dfbc9a11851a220c
+PODFILE CHECKSUM: d9b88aa5d8eaa9ca016e7faf45fa36e42eeaf3a5
 
 COCOAPODS: 1.8.4

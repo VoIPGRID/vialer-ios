@@ -5,6 +5,7 @@
 
 import Foundation
 import PhoneLib
+import CallKit
 
 class Sip: RegistrationStateDelegate {
 
@@ -23,19 +24,21 @@ class Sip: RegistrationStateDelegate {
     init() {
         callKitProviderDelegate = VialerCallKitDelegate(sip: self)
         PhoneLib.shared.sessionDelegate = self
-        PhoneLib.shared.registrationDelegate = self
+        PhoneLib.shared.setAudioCodecs([Codec.OPUS])
     }
 
     /**
         Register with the currently logged in user.
     */
     func register() -> Bool {
-        guard let username = user?.username,
-              let password = user?.password else {
+        PhoneLib.shared.registrationDelegate = self
+
+        guard let username = user?.sipAccount,
+              let password = user?.sipPassword else {
             return false
         }
 
-        let domain = "sip.encryptedsip.com", port = "5060"
+        let domain = "sipproxy.voipgrid.nl", port = "5060"
 
         VialerLogInfo("Registering with \(username) + \(password) at \(domain):\(port)")
 
@@ -49,19 +52,20 @@ class Sip: RegistrationStateDelegate {
         return true
     }
 
+    func unregister() {
+        phone.unregister {
+            VialerLogInfo("Unregistered...")
+        }
+    }
+
     func call(number: String) {
-        let success = register()
+        let success = phone.call(to: number)
 
-        if !success {
-            return
+        if success {
+            VialerLogInfo("Call to \(number) setup")
+        } else {
+            VialerLogError("Unable to setup call to \(number)")
         }
-
-        guard let session = phone.call(to: number) else {
-            VialerLogError("Did not get session")
-            return
-        }
-
-        VialerLogInfo("Started session with \(session.remoteNumber) - \(session.displayName ?? "")")
     }
 
     func findCallByUuid(uuid: UUID) -> Call? {
@@ -72,8 +76,8 @@ class Sip: RegistrationStateDelegate {
         return nil
     }
 
-    public func didChangeRegisterState(_ state: SipRegistrationStatus) {
-        VialerLogDebug("Reg state: \(state.rawValue)")
+    func didChangeRegisterState(_ state: SipRegistrationStatus, message: String?) {
+        VialerLogDebug("Reg state: \(String(reflecting: state)) with message \(message)")
     }
 }
 
@@ -94,11 +98,31 @@ extension Sip: SessionDelegate {
 
     public func outgoingDidInitialize(session: Session) {
         VialerLogDebug("outgoingDidInitialize")
+
         self.call = Call(session: session, direction: Direction.outbound)
+
+        guard let call = self.call else {
+            VialerLogError("Unable to find call setup...")
+            return
+        }
+
+        let controller = CXCallController()
+        let handle = CXHandle(type: .phoneNumber, value: call.session.remoteNumber)
+        let startCallAction = CXStartCallAction(call: call.uuid, handle: handle)
+
+        let transaction = CXTransaction(action: startCallAction)
+        controller.request(transaction) { error in
+            if error != nil {
+                VialerLogError("ERRROR")
+            } else {
+                VialerLogInfo("SEtup!")
+            }
+        }
     }
 
     public func sessionUpdated(_ session: Session, message: String) {
-        VialerLogDebug("sessionUpdated")
+        VialerLogDebug("sessionUpdated: \(message)")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "call-update"), object: nil)
     }
 
     public func sessionConnected(_ session: Session) {
@@ -106,14 +130,28 @@ extension Sip: SessionDelegate {
     }
 
     public func sessionEnded(_ session: Session) {
-        VialerLogDebug("sessionEnded")
+        if self.call == nil {
+            VialerLogError("No call...")
+            return
+        }
+
+        VialerLogInfo("Ending call with uuid \(call!.uuid)")
+        callKitProviderDelegate.provider.reportCall(with: call!.uuid, endedAt: Date(), reason: CXCallEndedReason.remoteEnded)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "call-update"), object: nil)
+        self.call = nil
     }
 
     public func sessionReleased(_ session: Session) {
-        VialerLogDebug("esessionReleased")
+        VialerLogInfo("Session released..")
+        if let call = self.call {
+            if call.session.state == .released {
+                self.call = nil
+            }
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "call-update"), object: nil)
     }
 
     public func error(session: Session, message: String) {
-        VialerLogDebug("Error session \(message)")
+        VialerLogDebug("Error: \(message)")
     }
 }

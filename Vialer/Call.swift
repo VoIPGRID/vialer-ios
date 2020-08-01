@@ -18,6 +18,39 @@ class Call {
         }
     }
 
+    var simpleState: SimpleState {
+        get {
+            switch session.state {
+            case .idle:
+                return SimpleState.initializing
+            case .incomingReceived, .outgoingDidInitialize, .outgoingProgress, .outgoingRinging:
+                return SimpleState.ringing
+            case .connected, .streamsRunning, .outgoingEarlyMedia, .earlyUpdatedByRemote, .earlyUpdating,
+                 .incomingEarlyMedia, .paused, .pausing, .resuming, .referred, .pausedByRemote, .updatedByRemote,
+                 .updating:
+                return SimpleState.inProgress
+            case .ended, .released, .error:
+                return SimpleState.finished
+            }
+        }
+    }
+
+    var duration: Int {
+        get { session.durationInSec ?? 0 }
+    }
+
+    var state: SessionState {
+        get { session.state }
+    }
+
+    var remoteNumber: String {
+        get { session.remoteNumber }
+    }
+
+    var displayName: String? {
+        get { session.displayName }
+    }
+
     init(session: Session, direction: Direction) {
         self.direction = direction
         self.uuid = UUID.init()
@@ -28,4 +61,11 @@ class Call {
 enum Direction {
     case outbound
     case inbound
+}
+
+enum SimpleState {
+    case initializing
+    case ringing
+    case inProgress
+    case finished
 }

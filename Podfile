@@ -19,7 +19,7 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true
     pod 'SVProgressHUD'
-    pod 'PhoneLib' ,:git => 'https://github.com/open-voip-alliance/iOSPhoneLib.git'
+    pod 'PhoneLib' ,:git => 'https://github.com/open-voip-alliance/iOSPhoneLib.git', 'branch' => 'develop'
 end
 
 target 'Vialer' do

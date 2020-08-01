@@ -33,70 +33,35 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
             static let connectDurationInterval = 1.0
         }
     }
-    
-    // MARK: - Properties
-    private var activeCallObserversWereSet = false // Keep track if observers are set to prevent removing unset observers.
 
-    var activeCall: Call? {
-        didSet {
-            if let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(sip.call?.session.remoteNumber ?? "") {
-                phoneNumberLabelText = cleanedPhoneNumber
-            }
-            
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-//                PhoneNumberModel.getCallName(self.activeCall!, withCompletion: { (phoneNumberModel) in
-//                    DispatchQueue.main.async { [weak self] in
-//                        if !phoneNumberModel.callerInfo.isEmpty {
-//                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
-//                        }
-//                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
-//                    }
-//                })
-            }
-            DispatchQueue.main.async { [weak self] in
-                self?.updateUI()
-            }
+    private var call: Call? {
+        get { sip.call }
+    }
 
-           // activeCall?.addObserver(self, forKeyPath: "callState", options: .new, context: &myContext)
-            //activeCall?.addObserver(self, forKeyPath: "mediaState", options: .new, context: &myContext)
-            activeCallObserversWereSet = true
+    private var user: SystemUser {
+        get { SystemUser.current()}
+    }
+
+    private var dtmf: String = ""
+
+    /**
+        The remote number that has been called with the dialed dtmf
+        appended.
+    */
+    private var displayedNumber: String {
+        get {
+            "\(call?.remoteNumber ?? "") \(dtmf))"
         }
     }
-//    var callManager = VialerSIPLib.sharedInstance().callManager
-    let currentUser = SystemUser.current()!
-    // ReachabilityManager, needed for showing notifications.
-    fileprivate let reachability = ReachabilityHelper.instance.reachability!
-    
-    var callGotAnError = false
 
-    // The cleaned number that needs to be called.
-    var cleanedPhoneNumber: String?
-    var diplayNameForOutgoingCall: String?
-    var phoneNumberLabelText: String? {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.updateUI()
-            }
-        }
-    }
-    fileprivate var dtmfWholeValue: String = ""
-    fileprivate var dtmfSingleTimeValue: String = ""
-    fileprivate var dtmfSent: String? {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                if let unwrappedDtmfSent = self?.dtmfSent {
-                    self?.dtmfSingleTimeValue = unwrappedDtmfSent
-                }
-            }
-        }
-    }
-    fileprivate lazy var dateComponentsFormatter: DateComponentsFormatter = {
+    private lazy var dateComponentsFormatter: DateComponentsFormatter = {
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.zeroFormattingBehavior = .pad
         dateComponentsFormatter.allowedUnits = [.minute, .second]
         return dateComponentsFormatter
     }()
-    fileprivate var connectDurationTimer: Timer?
+
+    private var connectDurationTimer: Timer?
     
     // MARK: - Outlets
     @IBOutlet weak var muteButton: SipCallingButton!
@@ -110,43 +75,30 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
-    
-    deinit {
-        if activeCallObserversWereSet {
-            activeCallObserversWereSet = false
-        }
-    }
 }
 
 // MARK: - Lifecycle
 extension SIPCallingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleCallUpdate), name: NSNotification.Name(rawValue: "call-update"), object: nil)
 
         UIDevice.current.isProximityMonitoringEnabled = true
-        VialerGAITracker.trackScreenForController(name: controllerName)
         updateUI()
         startConnectDurationTimer()
-        
-        guard let call = activeCall else {
-            setupCall()
-            return
+
+        if call?.simpleState == .finished {
+            VialerLogInfo("Ending as state is ended")
+            handleCallEnded()
         }
-        
-//        if call.callState == .disconnected {
-//            handleCallEnded()
-//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        NotificationCenter.default.removeObserver(self)
+
         connectDurationTimer?.invalidate()
         UIDevice.current.isProximityMonitoringEnabled = false
-
-        if activeCallObserversWereSet {
-            activeCallObserversWereSet = false
-        }
     }
 }
 
@@ -165,6 +117,7 @@ extension SIPCallingViewController {
         controller.request(CXTransaction(action: action)) { error in
             if error != nil {
                 VialerLogError("Failed to perform \(action.description) \(error?.localizedDescription)")
+                self.dismiss(animated: true)
             }
         }
     }
@@ -222,66 +175,7 @@ extension SIPCallingViewController {
 
 // MARK: - Call setup
 extension SIPCallingViewController {
-    @objc func handleOutgoingCall(phoneNumber: String, contact: CNContact?) {
-//        NotificationCenter.default.addObserver(self, selector: #selector(errorDuringCallSetup(_:)), name: NSNotification.Name.VSLCallErrorDuringSetupCall, object: nil)
-        
-        cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
-        phoneNumberLabelText = cleanedPhoneNumber
-        
-        if let unwrappedContact = contact {
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-//                PhoneNumberModel.getCallName(from: unwrappedContact, andPhoneNumber: phoneNumber, withCompletion: { (phoneNumberModel) in
-//                    DispatchQueue.main.async { [weak self] in
-//                        if !phoneNumberModel.callerInfo.isEmpty {
-//                            self?.phoneNumberLabelText = phoneNumberModel.callerInfo
-//                        }
-//                        self?.diplayNameForOutgoingCall = phoneNumberModel.displayName
-//                    }
-//                })
-            }
-        }
-        updateUI()
-    }
-    
-    func handleOutgoingCallForScreenshot(phoneNumber: String){
-        if let unwrappedCleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber){
-            cleanedPhoneNumber = unwrappedCleanedPhoneNumber
-            phoneNumberLabelText = cleanedPhoneNumber
-        }
-    }
-    
-    /// Check 2 things before setting up a call:
-    ///
-    /// - Microphone permission
-    /// - WiFi Notification
-    fileprivate func setupCall() {
-        guard !(UIApplication.shared.delegate as! AppDelegate).isScreenshotRun else {
-            return
-        }
-        
-        // Check microphone
-        checkMicrophonePermission { startCalling in
-            if startCalling {
-                // Mic good, WiFi?
-                if self.shouldPresentWiFiNotification() {
-                    self.presentWiFiNotification()
-                } else {
-                    self.startCalling()
-                }
-            } else {
-                // No Mic, present alert
-                self.presentEnableMicrophoneAlert()
-            }
-        }
-    }
-    
-    fileprivate func startCalling() {
-        if let unwrappedCleanedPhoneNumber = self.cleanedPhoneNumber {
-            self.startConnectDurationTimer()
-            sip.call(number: unwrappedCleanedPhoneNumber)
-        }
-    }
-    
+
     fileprivate func dismissView() {
         let waitingTimeAfterDismissing = Config.Timing.waitingTimeAfterDismissing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [weak self] in
@@ -297,272 +191,95 @@ extension SIPCallingViewController {
     }
     
     fileprivate func handleCallEnded() {
+        VialerLogInfo("handleCallEnded")
         hangupButton?.isEnabled = false
-        
-//        if !self.callGotAnError {
-//            switch self.activeCall!.callAudioState {
-//            // There was no audio when the call was hung up.
-//            case .noAudioReceiving: fallthrough
-//            case .noAudioTransmitting: fallthrough
-//            case .noAudioBothDirections:
-//                VialerStats.sharedInstance.callFailedNoAudio(self.activeCall!)
-//            // There was audio during the call.
-//            case .OK: fallthrough
-//            default:
-//                VialerStats.sharedInstance.callSuccess(self.activeCall!)
-//                if #available(iOS 10.3, *) {
-//                    ReviewManager.requestReviewIfAppropriate()
-//                }
-//            }
-//        }
-//
-//        VialerStats.sharedInstance.callHangupReason(self.activeCall!)
-//        dismissView()
+        dismissView()
     }
 }
 
-// MARK: - Helper functions
+// MARK: - Handling UI updating
 extension SIPCallingViewController {
     @objc func updateUI() {
-        #if DEBUG
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.isScreenshotRun {
+        guard let call = sip.call else {
+            VialerLogError("There is no call, dismissing the UI.")
+            handleCallEnded()
+            return
+        }
+
+        if call.simpleState == .finished {
+            VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID  is \(call.uuid)")
+            handleCallEnded()
+            return
+        }
+
+        updateButtons(call: call)
+        updateLabels(call: call)
+    }
+
+    func updateButtons(call: Call) {
+        //        keypadButton?.isEnabled = !PhoneLib.shared.setHold(session: <#T##Session##PhoneLib.Session#>, onHold: <#T##Bool##Swift.Bool#>) && call.session.state == .connected
+//        holdButton?.active = call.onHold
+        muteButton?.active = phone.isMicrophoneMuted
+        speakerButton?.active = phone.isSpeakerOn
+
+        //        if callManager.audioController.hasBluetooth {
+//            speakerButton?.buttonImage = "CallButtonBluetooth"
+//            speakerLabel?.text = NSLocalizedString("audio", comment: "audio")
+//        } else {
+        speakerButton?.buttonImage = "CallButtonSpeaker"
+        speakerLabel?.text = NSLocalizedString("speaker", comment: "speaker")
+//        }
+
+        switch call.simpleState {
+        case .initializing, .ringing:
+            holdButton?.isEnabled = false
+            muteButton?.isEnabled = false
+            transferButton?.isEnabled = false
+            speakerButton?.isEnabled = true
+            hangupButton?.isEnabled = true
+        case .inProgress:
             holdButton?.isEnabled = true
             muteButton?.isEnabled = true
             transferButton?.isEnabled = true
             speakerButton?.isEnabled = true
             hangupButton?.isEnabled = true
-            statusLabel?.text = "09:41"
-            numberLabel?.isHidden = true
-            if statusLabelTopConstraint != nil {
-                statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
-            }
-            nameLabel?.text = phoneNumberLabelText
-            return
+        case .finished:
+            holdButton?.isEnabled = false
+            muteButton?.isEnabled = false
+            transferButton?.isEnabled = false
+            speakerButton?.isEnabled = false
+            hangupButton?.isEnabled = false
         }
-        #endif
-        
-//        if callManager.audioController.hasBluetooth {
-//            speakerButton?.buttonImage = "CallButtonBluetooth"
-//            speakerLabel?.text = NSLocalizedString("audio", comment: "audio")
-//        } else {
-            speakerButton?.buttonImage = "CallButtonSpeaker"
-            speakerLabel?.text = NSLocalizedString("speaker", comment: "speaker")
-//        }
-        
-        guard let call = activeCall else {
-            // if there is only a number then show it on the nameLabel
-            numberLabel?.text = " "
-            nameLabel?.text = cleanedPhoneNumber
+    }
+
+    func updateLabels(call: Call) {
+        numberLabel.text = "Hello"
+        nameLabel.text = "Hi there"
+
+        switch call.simpleState {
+        case .initializing:
             statusLabel?.text = ""
-            return
+        case .ringing:
+            if call.isIncoming {
+                statusLabel?.text = NSLocalizedString("Incoming call...", comment: "Statuslabel state text .Incoming")
+            } else {
+                statusLabel?.text = NSLocalizedString("Calling...", comment: "Statuslabel state text .Calling")
+            }
+        case .inProgress:
+            //statusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
+            statusLabel?.text = "\(dateComponentsFormatter.string(from: TimeInterval(call.duration))!)"
+        case .finished:
+            statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
         }
-        
-
-//        switch call.callState {
-//        case .null: fallthrough
-//        case .calling: fallthrough
-//        case .incoming: fallthrough
-//        case .early: fallthrough
-//        case .connecting:
-//            holdButton?.isEnabled = false
-//            muteButton?.isEnabled = false
-//            transferButton?.isEnabled = false
-//            speakerButton?.isEnabled = true
-//            hangupButton?.isEnabled = true
-//        case .confirmed:
-//            holdButton?.isEnabled = true
-//            muteButton?.isEnabled = true
-//            transferButton?.isEnabled = true
-//            speakerButton?.isEnabled = true
-//            hangupButton?.isEnabled = true
-//        case .disconnected:fallthrough
-//        default:
-//            holdButton?.isEnabled = false
-//            muteButton?.isEnabled = false
-//            transferButton?.isEnabled = false
-//            speakerButton?.isEnabled = false
-//            hangupButton?.isEnabled = false
-//        }
-//
-        // If call is active and not on hold, enable the button.
-//        keypadButton?.isEnabled = !call.onHold && call.callState == .confirmed
-//        holdButton?.active = call.onHold
-//        muteButton?.active = call.muted
-//        speakerButton?.active = callManager.audioController.output == .bluetooth || callManager.audioController.output == .speaker
-        
-        // When dtmf is sent, add that to the numberLabel
-        if dtmfSingleTimeValue != "" || dtmfWholeValue != "" {
-            if nameLabel?.text == phoneNumberLabelText {
-                numberLabel?.text = dtmfWholeValue + dtmfSingleTimeValue
-                numberLabel?.isHidden = false
-                if statusLabelTopConstraint != nil {
-                    statusLabelTopConstraint.constant = 20
-                }
-            } else {
-                numberLabel?.text = (phoneNumberLabelText ?? "") + " " + dtmfWholeValue + dtmfSingleTimeValue
-            }
-        } else {
-            if !call.isIncoming {
-                if let unwrappedDiplayNameForOutgoingCall = diplayNameForOutgoingCall{
-                    if unwrappedDiplayNameForOutgoingCall.isEmpty {
-                        nameLabel?.text = phoneNumberLabelText
-                    } else {
-                        nameLabel?.text = unwrappedDiplayNameForOutgoingCall
-                    }
-                } else {
-                    if nameLabel?.text?.isEmpty ?? false {
-                        nameLabel?.text = phoneNumberLabelText
-                    }
-                }
-                numberLabel?.text = phoneNumberLabelText
-            } else {
-                if (phoneNumberLabelText != nil) {
-                    nameLabel?.text = phoneNumberLabelText
-                } else {
-                    numberLabel?.text = PhoneNumberUtils.cleanPhoneNumber(call.session.remoteNumber ?? "")
-                    nameLabel?.text = call.session.displayName
-                    if (nameLabel?.text ?? "").isEmpty {
-                        nameLabel?.text = numberLabel?.text
-                    }
-                }
-            }
-
-            if (numberLabel?.text != nameLabel?.text && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: numberLabel?.text ?? "false it"))) || (numberLabel?.text ?? "").isEmpty {
-                numberLabel?.isHidden = false
-                if statusLabelTopConstraint != nil {
-                    statusLabelTopConstraint.constant = 20
-                }
-            } else {
-                numberLabel?.isHidden = true
-                if statusLabelTopConstraint != nil {
-                    statusLabelTopConstraint.constant = -(numberLabel?.frame.size.height ?? 0)
-                }
-            }
-        }
-        
-//        switch call.callState {
-//        case .null:
-//            statusLabel?.text = ""
-//        case .calling: fallthrough
-//        case .early:
-//            statusLabel?.text = NSLocalizedString("Calling...", comment: "Statuslabel state text .Calling")
-//        case .incoming:
-//            statusLabel?.text = NSLocalizedString("Incoming call...", comment: "Statuslabel state text .Incoming")
-//        case .connecting:
-//            statusLabel?.text = NSLocalizedString("Connecting...", comment: "Statuslabel state text .Connecting")
-//        case .confirmed:
-//            if call.onHold {
-//                statusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-//            } else {
-//                statusLabel?.text = "\(dateComponentsFormatter.string(from: call.connectDuration)!)"
-//            }
-//        case .disconnected:fallthrough
-//        default:
-//            statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
-//            connectDurationTimer?.invalidate()
-//        }
     }
     
     func startConnectDurationTimer() {
         if connectDurationTimer == nil || !connectDurationTimer!.isValid {
+            VialerLogInfo("Starting timer..")
             connectDurationTimer = Timer.scheduledTimer(timeInterval: Config.Timing.connectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+        } else {
+            VialerLogError("Failed to start timer")
         }
-    }
-}
-
-// MARK: - WiFi notification
-extension SIPCallingViewController {
-    @objc func shouldPresentWiFiNotification() -> Bool {
-        return currentUser.showWiFiNotification && reachability.status == .reachableViaWiFi && reachability.radioStatus == .reachableVia4G
-    }
-    
-    /**
-     Show alert to user if the user is on WiFi and has 4G connection.
-     */
-    fileprivate func presentWiFiNotification() {
-        let alertController = UIAlertController(title: NSLocalizedString("Tip: Disable WiFi for better audio", comment: "Tip: Disable WiFi for better audio"),
-                                                message: NSLocalizedString("With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n To disable WiFi go to Settings -> WiFi and disable WiFi.",
-                                                                           comment: "With mobile internet (4G) you get a more stable connection and that should improve the audio quality.\n\n Disable Wifi? To disable WiFi go to Settings -> WiFi and disable WiFi."),
-                                                preferredStyle: .alert)
-        
-        // User wants to use the WiFi connection.
-        let continueAction = UIAlertAction(title: NSLocalizedString("Continue calling", comment: "Continue calling"), style: .default) { action in
-            self.startCalling()
-        }
-        alertController.addAction(continueAction)
-        
-        // Add option to cancel the call.
-        let cancelCall = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .default) { action in
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
-            }
-        }
-        alertController.addAction(cancelCall)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    /**
-     Show the settings from the phone and make sure there is a notification to continue calling.
-     */
-    fileprivate func presentContinueCallingAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Continue calling", comment: "Continue calling"), message: nil, preferredStyle: .alert)
-        
-        // Make it possible to cancel the call
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
-            }
-        }
-        alertController.addAction(cancelAction)
-        
-        // Continue the call
-        let continueAction = UIAlertAction(title: NSLocalizedString("Start calling", comment: "Start calling"), style: .default) { action in
-            self.startCalling()
-        }
-        alertController.addAction(continueAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-}
-
-// MARK: - Microphone permission
-extension SIPCallingViewController {
-    fileprivate func checkMicrophonePermission(completion: @escaping ((_ startCalling: Bool) -> Void)) {
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            if granted {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    /// Show a notification that makes it possible to open the settings and enable the microphone
-    ///
-    /// Activating the microphone permission will terminate the app.
-    fileprivate func presentEnableMicrophoneAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Access to microphone denied", comment: "Access to microphone denied"),
-                                                message: NSLocalizedString("Give permission to use your microphone.\nGo to",
-                                                                           comment: "Give permission to use your microphone.\nGo to"),
-                                                preferredStyle: .alert)
-        
-        // Cancel the call, without audio, calling isn't possible.
-        let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
-            }
-        }
-        alertController.addAction(noAction)
-        
-        // User wants to open the settings to enable microphone permission.
-        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
-            UIApplication.shared.openURL(URL(string:UIApplication.openSettingsURLString)!)
-        }
-        alertController.addAction(settingsAction)
-        
-        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -572,20 +289,20 @@ extension SIPCallingViewController {
         switch segueIdentifier(segue: segue) {
         case .showKeypad:
             let keypadVC = segue.destination as! KeypadViewController
-            keypadVC.call = activeCall
+            keypadVC.call = call
             keypadVC.delegate = self
-            keypadVC.phoneNumberLabelText = phoneNumberLabelText
+            keypadVC.phoneNumberLabelText = displayedNumber
         case .setupTransfer:
             let tabBarC = segue.destination as! UITabBarController
             let transferContactListNavC = tabBarC.viewControllers![0] as! UINavigationController
             let transferDialPadNavC = tabBarC.viewControllers![1] as! UINavigationController
             let setupCallTransferContactsVC = transferContactListNavC.viewControllers[0] as! SetupCallTransferContactsViewController
             let setupCallTransferDialPadVC = transferDialPadNavC.viewControllers[0] as! SetupCallTransferDialPadViewController
-            setupCallTransferDialPadVC.firstCall = activeCall
-            setupCallTransferDialPadVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            setupCallTransferDialPadVC.firstCall = call
+            setupCallTransferDialPadVC.firstCallPhoneNumberLabelText = displayedNumber
             
-            setupCallTransferContactsVC.firstCall = activeCall
-            setupCallTransferContactsVC.firstCallPhoneNumberLabelText = phoneNumberLabelText
+            setupCallTransferContactsVC.firstCall = call
+            setupCallTransferContactsVC.firstCallPhoneNumberLabelText = displayedNumber
         case .unwindToVialerRootViewController:
             break
         }
@@ -597,33 +314,18 @@ extension SIPCallingViewController {
 
 }
 
-// MARK: - KVO
-extension SIPCallingViewController {
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        if context == &myContext {
-//            if let call = object as? VSLCall {
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.updateUI()
-//                    if call.callState == .disconnected {
-//                        self?.handleCallEnded()
-//                    }
-//                }
-//            }
-//        } else {
-//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-//        }
-    }
-}
 
 // MARK: - KeypadViewControllerDelegate
 extension SIPCallingViewController {
     func dtmfSent(_ dtmfSent: String?) {
-        self.dtmfSent = dtmfSent
+        self.dtmf += dtmfSent ?? ""
     }
 }
 
 extension SIPCallingViewController {
-    @objc func errorDuringCallSetup(_ notification: NSNotification) {
+    @objc func handleCallUpdate(_: NSNotification) {
+        updateUI()
 
+        VialerLogInfo("State \(String(reflecting: call?.state))")
     }
 }

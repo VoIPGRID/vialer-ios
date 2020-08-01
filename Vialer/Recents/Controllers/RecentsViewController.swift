@@ -176,7 +176,6 @@ extension RecentsViewController {
             twoStepCallingVC.handlePhoneNumber(phoneNumberToCall)
         case .sipCalling:
             let sipCallingVC = segue.destination as! SIPCallingViewController
-            sipCallingVC.handleOutgoingCall(phoneNumber: phoneNumberToCall, contact: nil)
         case .reachabilityBar:
             break
         }
