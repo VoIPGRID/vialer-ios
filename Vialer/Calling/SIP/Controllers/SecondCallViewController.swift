@@ -47,7 +47,6 @@ extension SecondCallViewController{
         VialerGAITracker.trackScreenForController(name: controllerName)
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
-        startConnectDurationTimer()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

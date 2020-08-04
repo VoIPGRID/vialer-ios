@@ -56,6 +56,12 @@ class Call {
         self.uuid = UUID.init()
         self.session = session
     }
+
+    init(session: Session, direction: Direction, uuid: UUID) {
+        self.direction = direction
+        self.uuid = uuid
+        self.session = session
+    }
 }
 
 enum Direction {

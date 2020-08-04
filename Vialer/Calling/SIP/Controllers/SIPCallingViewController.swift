@@ -7,6 +7,7 @@ import Contacts
 import MediaPlayer
 import PhoneLib
 import CallKit
+import AVKit
 
 private var myContext = 0
 
@@ -79,18 +80,27 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
 
 // MARK: - Lifecycle
 extension SIPCallingViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        numberLabel.text = ""
+        nameLabel.text = ""
+        statusLabel.text = ""
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleCallUpdate), name: NSNotification.Name(rawValue: "call-update"), object: nil)
 
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
-        startConnectDurationTimer()
 
         if call?.simpleState == .finished {
             VialerLogInfo("Ending as state is ended")
             handleCallEnded()
         }
+
+        connectDurationTimer = Timer.scheduledTimer(timeInterval: Config.Timing.connectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -201,8 +211,6 @@ extension SIPCallingViewController {
 extension SIPCallingViewController {
     @objc func updateUI() {
         guard let call = sip.call else {
-            VialerLogError("There is no call, dismissing the UI.")
-            handleCallEnded()
             return
         }
 
@@ -213,12 +221,13 @@ extension SIPCallingViewController {
         }
 
         updateButtons(call: call)
-        updateLabels(call: call)
+        updateCalleeLabels(call: call)
+        updateStatusLabel(call: call)
     }
 
     func updateButtons(call: Call) {
-        //        keypadButton?.isEnabled = !PhoneLib.shared.setHold(session: <#T##Session##PhoneLib.Session#>, onHold: <#T##Bool##Swift.Bool#>) && call.session.state == .connected
-//        holdButton?.active = call.onHold
+        //keypadButton?.isEnabled = !PhoneLib.shared.setHold(session: <#T##Session##PhoneLib.Session#>, onHold: <#T##Bool##Swift.Bool#>) && call.session.state == .connected
+        //holdButton?.active = call.onHold
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
 
@@ -252,10 +261,7 @@ extension SIPCallingViewController {
         }
     }
 
-    func updateLabels(call: Call) {
-        numberLabel.text = "Hello"
-        nameLabel.text = "Hi there"
-
+    func updateStatusLabel(call: Call) {
         switch call.simpleState {
         case .initializing:
             statusLabel?.text = ""
@@ -272,13 +278,16 @@ extension SIPCallingViewController {
             statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
         }
     }
-    
-    func startConnectDurationTimer() {
-        if connectDurationTimer == nil || !connectDurationTimer!.isValid {
-            VialerLogInfo("Starting timer..")
-            connectDurationTimer = Timer.scheduledTimer(timeInterval: Config.Timing.connectDurationInterval, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
+
+    func updateCalleeLabels(call: Call) {
+        let name = call.displayName,
+            number = displayedNumber
+
+        if name?.isEmpty == false {
+            nameLabel.text = name
+            numberLabel.text = number
         } else {
-            VialerLogError("Failed to start timer")
+            nameLabel.text = number
         }
     }
 }
@@ -311,7 +320,6 @@ extension SIPCallingViewController {
     @IBAction func unwindToFirstCallSegue(_ segue: UIStoryboardSegue) {}
 
     @IBAction func unwindToActiveCallSegue(_ segue: UIStoryboardSegue) {} // Seque used to make the second call the active one when the first call is ended during a transfer setup.
-
 }
 
 
@@ -327,5 +335,63 @@ extension SIPCallingViewController {
         updateUI()
 
         VialerLogInfo("State \(String(reflecting: call?.state))")
+    }
+}
+
+
+extension SIPCallingViewController {
+    private func bringupAudioDeviceSheet(availableAudioPorts:[AVAudioSessionPortDescription]) {
+        let alertController = UIAlertController(title: nil,
+                message: nil,
+                preferredStyle: .actionSheet)
+        for audioPort in availableAudioPorts {
+            let action = UIAlertAction(title: audioPort.portName, style: .default) { (action) in
+//                SoundManager.sharedInstance.setPreferredInput(audioPortDescription: audioPort.portDescription)
+            }
+//            if audioPort. {
+//                action.setValue(true, forKey: "checked")
+//            }
+            var imageName: String?  = nil;
+            switch audioPort.portType {
+            case AVAudioSession.Port.builtInMic:
+                imageName = "ic_36dp_phone"
+            case AVAudioSession.Port.builtInSpeaker:
+                imageName = "ic_36dp_speaker"
+            case AVAudioSession.Port.headsetMic:
+                imageName = "ic_36dp_headset"
+            case AVAudioSession.Port.headphones:
+                imageName = "ic_36dp_headset"
+            case AVAudioSession.Port.bluetoothHFP:
+                imageName = "ic_36dp_bluetooth"
+            case AVAudioSession.Port.bluetoothA2DP:
+                imageName = "ic_36dp_bluetooth"
+            default: break
+            }
+            if imageName != nil {
+                if let image = UIImage(named: imageName!) {
+                    action.setValue(image.resized(to: CGSize(width: 30, height: 30)), forKey: "image")
+                }
+            }
+            alertController.addAction(action)
+
+
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // Do nothing
+        }
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+        // auto dismiss after 5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            alertController.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
     }
 }

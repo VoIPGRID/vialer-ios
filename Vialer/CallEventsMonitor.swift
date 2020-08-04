@@ -1,9 +1,17 @@
 import CallKit
 
 class CallEventsMonitor:NSObject, CXCallObserverDelegate {
-    
+
+    private let appDelegate: AppDelegate
     var callObserver: CXCallObserver? = nil
-    
+    private var originalRootVc: UIViewController?
+
+    init(appDelegate: AppDelegate) {
+        self.appDelegate = appDelegate
+        self.originalRootVc = appDelegate.window?.rootViewController
+        super.init()
+    }
+
     func start() {
         if callObserver == nil {
             callObserver = CXCallObserver()
@@ -33,6 +41,14 @@ class CallEventsMonitor:NSObject, CXCallObserverDelegate {
 
         if call.hasConnected == true && call.hasEnded == false {
             VialerLogInfo("Connected to call uuid \(call.uuid).")
+            let vc = UIStoryboard(name: "SIPCallingStoryboard", bundle: nil)
+                    .instantiateViewController(withIdentifier: "SIPCallingViewController") as! SIPCallingViewController
+
+            appDelegate.window?.rootViewController = vc
+        }
+
+        if call.hasEnded == true {
+            appDelegate.window?.rootViewController = originalRootVc
         }
     }
 }

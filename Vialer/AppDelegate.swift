@@ -58,12 +58,12 @@ import Contacts
     private var _callEventMonitor: Any? = nil
     fileprivate var callEventMonitor: CallEventsMonitor {
         if _callEventMonitor == nil {
-            _callEventMonitor = CallEventsMonitor()
+            _callEventMonitor = CallEventsMonitor(appDelegate: self)
         }
         return _callEventMonitor as! CallEventsMonitor
     }
     let pushKitManager = PushKitManager()
-    let sip = Sip()
+    let sip = Sip.shared
 }
 
 // MARK: - UIApplicationDelegate
@@ -82,6 +82,7 @@ extension AppDelegate: UIApplicationDelegate {
         setupVoIP()
         setupFirebase()
         setupUNUserNotifications()
+        sip.register()
 
         return true
     }
@@ -90,7 +91,6 @@ extension AppDelegate: UIApplicationDelegate {
         DispatchQueue.global(qos: .background).async {
             // No completion necessary, because an update will follow over the "SystemUserSIPCredentialsChangedNotifications".
             if self.user.loggedIn {
-                self.sip.register()
                 self.user.updateFromVG(completion: nil)
             }
         }
@@ -104,9 +104,9 @@ extension AppDelegate: UIApplicationDelegate {
         stopVibratingInBackground()
 
         DispatchQueue.main.async {
-            self.sip.register()
             self.pushKitManager.registerForVoIPPushes()
             self.syncUserWithBackend()
+            self.sip.register()
         }
     }
 
@@ -115,7 +115,6 @@ extension AppDelegate: UIApplicationDelegate {
         saveContext()
 
         DispatchQueue.main.async {
-            self.sip.unregister()
             self.pushKitManager.registerForVoIPPushes()
         }
     }
@@ -123,7 +122,8 @@ extension AppDelegate: UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         removeObservers()
         callEventMonitor.stop()
-        
+        sip.unregister()
+
         // Saves changes in the application's managed object context before the application terminates.
         saveContext()
     }

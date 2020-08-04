@@ -34,6 +34,8 @@ class VoIPPushHandler {
             return
         }
 
+        self.sip.prepareForIncomingCall(uuid: payload.uuid)
+
         callKit.reportNewIncomingCall(with: payload.uuid, update: createCxCallUpdate(from: payload)) { error in
             if (error != nil) {
                 VialerLogError("Failed to create incoming call: \(error?.localizedDescription ?? "Unknown error")")
@@ -74,22 +76,22 @@ class VoIPPushHandler {
 
         let uuid = payload.uuid
 
-        let success = sip.register()
-
-        if !success {
-            self.rejectCall(uuid: uuid, description: "Failed to register with SIP, rejecting the call...")
-            return;
-        }
-
-        self.respond(with: payload, available: true) { error in
-            if (error != nil) {
-                self.rejectCall(uuid: uuid, description: "Unable to contact middleware")
-                return
+        sip.register { error in
+            if error != nil {
+                self.rejectCall(uuid: uuid, description: "Failed to register with SIP, rejecting the call...")
+                return;
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                if (!VoIPPushHandler.self.incomingCallConfirmed) {
-                    self.rejectCall(uuid: uuid, description: "Unable to get call confirmation...")
+            self.respond(with: payload, available: true) { error in
+                if (error != nil) {
+                    self.rejectCall(uuid: uuid, description: "Unable to contact middleware")
+                    return
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    if (!VoIPPushHandler.self.incomingCallConfirmed) {
+                        self.rejectCall(uuid: uuid, description: "Unable to get call confirmation...")
+                    }
                 }
             }
         }

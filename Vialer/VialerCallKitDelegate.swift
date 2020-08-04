@@ -106,7 +106,7 @@ class VialerCallKitDelegate: NSObject {
                 type: CXHandle.HandleType.phoneNumber,
                 value: call.displayName ?? call.remoteNumber
         )
-
+VialerLogInfo("Reporting call with uuid \(call.uuid)")
         provider.reportCall(with: call.uuid, updated: update)
     }
 
@@ -119,22 +119,9 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     }
 
     public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-        guard let call = findCallOrFail(action: action) else { return }
-
-        if (!waitForCallConfirmation(call: call)) {
-            VialerLogError("Unable to confirm call: \(call.uuid.uuidString)")
-            action.fail()
-            return
+        Sip.shared.acceptIncomingCall {
+            action.fulfill()
         }
-
-        let success = PhoneLib.shared.acceptCall(for: call.session)
-
-        if !success {
-            VialerLogError("Unable to pick up call")
-            return
-        }
-
-        action.fulfill()
     }
 
     public func provider(_ provider: CXProvider, perform action: CXEndCallAction) {

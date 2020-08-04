@@ -244,6 +244,7 @@ static NSString * const VialerRootViewControllerShowTwoStepCallingViewSegue = @"
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    VialerLogInfo(@"preparing...");
     self.willPresentCallingViewController = NO;
 //    if ([segue.destinationViewController isKindOfClass:[SIPIncomingCallViewController class]]) {
 //        SIPIncomingCallViewController *sipIncomingViewController = (SIPIncomingCallViewController *)segue.destinationViewController;

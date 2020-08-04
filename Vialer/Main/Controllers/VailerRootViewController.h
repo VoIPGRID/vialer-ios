@@ -11,4 +11,6 @@
 
 @property (strong, nonatomic) LogInViewController *loginViewController;
 
+- (UIViewController *)topViewController:(UIViewController *)rootViewController;
+
 @end
