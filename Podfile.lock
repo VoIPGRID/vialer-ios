@@ -186,17 +186,18 @@ DEPENDENCIES:
   - VialerSIPLib (= 3.7.3)
 
 SPEC REPOS:
-  trunk:
+  https://cdn.cocoapods.org/:
+    - FirebaseCore
+    - FirebaseInstallations
+  https://github.com/cocoapods/specs.git:
     - AFNetworkActivityLogger
     - AFNetworking
     - CocoaLumberjack
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
-    - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
-    - FirebaseInstallations
     - FirebasePerformance
     - FirebaseRemoteConfig
     - GoogleAnalytics
@@ -278,4 +279,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 252eea56fd4f786dbcf8ac9e32f7b5e6c9b67e98
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.7.5
