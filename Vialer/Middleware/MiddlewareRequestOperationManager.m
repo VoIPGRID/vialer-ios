@@ -128,6 +128,7 @@ static NSString * const MiddlewareMainBundleCFBundleIdentifier = @"CFBundleIdent
                              MiddlewareResponseKeyMessageStartTime: originalPayload[MiddlewareResponseKeyMessageStartTime],
                              // Wether the device is available to accept the call (optional but default True).
                              MiddlewareResponseKeyAvailable: available ? MiddlewareResponseKeyAvailableYES : MiddlewareResponseKeyAvailableNO,
+                             MiddlewareResponseKeySIPUserId: SystemUser.currentUser.sipAccount,
                              };
     
     [self POST:MiddlewareURLIncomingCallResponse parameters:params withCompletion:^(NSURLResponse *operation, NSDictionary *responseData, NSError *error) {
