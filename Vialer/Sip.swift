@@ -55,7 +55,7 @@ class Sip: NSObject, RegistrationStateDelegate  {
 
         VialerLogInfo("Registering with \(username) + \(password) at \(domain):\(port)")
 
-        let success = phone.register(domain: domain, port: port, username: username, password: "asd")
+        let success = phone.register(domain: domain, port: port, username: username, password: password)
 
         if !success {
             VialerLogError("Failed to register")
