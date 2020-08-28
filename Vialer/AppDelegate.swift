@@ -63,7 +63,7 @@ import Contacts
         return _callEventMonitor as! CallEventsMonitor
     }
     let pushKitManager = PushKitManager()
-    let sip = Sip.shared
+    @objc public let sip = Sip.shared
 }
 
 // MARK: - UIApplicationDelegate

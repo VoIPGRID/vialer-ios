@@ -51,7 +51,7 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
     */
     private var displayedNumber: String {
         get {
-            "\(call?.remoteNumber ?? "") \(dtmf))"
+            "\(call?.remoteNumber ?? "") \(dtmf)"
         }
     }
 

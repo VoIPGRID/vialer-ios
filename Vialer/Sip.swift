@@ -7,7 +7,7 @@ import Foundation
 import PhoneLib
 import CallKit
 
-class Sip: NSObject, RegistrationStateDelegate  {
+@objc class Sip: NSObject, RegistrationStateDelegate  {
 
     @objc static public let shared = Sip()
 
@@ -68,7 +68,7 @@ class Sip: NSObject, RegistrationStateDelegate  {
         }
     }
 
-    func call(number: String) {
+    @objc func call(number: String) {
         register { error in
             if error != nil {
                 VialerLogError("Unable to register")

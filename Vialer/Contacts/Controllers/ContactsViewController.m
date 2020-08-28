@@ -191,7 +191,9 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        SIPCallingViewController *sipCallingVC = (SIPCallingViewController *)segue.destinationViewController;
+        //TODO: Arrange mic permission
+        Sip *sip = [Sip shared];
+        [sip callWithNumber:self.phoneNumberToCall];
     }
 }
 

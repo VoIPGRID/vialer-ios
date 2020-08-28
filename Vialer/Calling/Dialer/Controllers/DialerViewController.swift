@@ -154,7 +154,6 @@ extension DialerViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(segue: segue) {
         case .sipCalling:
-            let sipCallingVC = segue.destination as! SIPCallingViewController
             checkMicrophonePermission { startCalling in
                 if startCalling {
                     self.sip.call(number: self.numberText!)
@@ -196,6 +195,7 @@ extension DialerViewController {
         // Cancel the call, without audio, calling isn't possible.
         let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
             DispatchQueue.main.async {
+                //TODO: implement the unwind
 //                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
             }
         }
