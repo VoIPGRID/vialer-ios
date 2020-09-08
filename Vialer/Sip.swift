@@ -29,8 +29,8 @@ import CallKit
     override init() {
         super.init()
         callKitProviderDelegate = VialerCallKitDelegate(sip: self)
-        PhoneLib.shared.sessionDelegate = self
-        PhoneLib.shared.setAudioCodecs([Codec.OPUS])
+        phone.sessionDelegate = self
+        phone.setAudioCodecs([Codec.OPUS])
     }
 
     /**

@@ -126,15 +126,19 @@ extension SIPCallingViewController {
 
         controller.request(CXTransaction(action: action)) { error in
             if error != nil {
-                VialerLogError("Failed to perform \(action.description) \(error?.localizedDescription)")
-                self.dismiss(animated: true)
+                VialerLogError("Failed to perform \(action.description) \(String(describing: error?.localizedDescription))")
+                DispatchQueue.main.async {
+                 self.dismiss(animated: true)
+                }
+            } else {
+                VialerLogDebug("Performed \(action.description))")
             }
         }
     }
 
     @IBAction func muteButtonPressed(_ sender: SipCallingButton) {
         performCallAction { uuid in
-            CXSetMutedCallAction(call: uuid, muted: true)
+            CXSetMutedCallAction(call: uuid, muted: !phone.isMicrophoneMuted)
         }
     }
     
@@ -147,7 +151,7 @@ extension SIPCallingViewController {
     }
     
     @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
-        phone.setSpeaker(phone.isSpeakerOn ? false : true)
+        _ = phone.setSpeaker(phone.isSpeakerOn ? false : true)
         updateUI()
     }
     
@@ -172,7 +176,7 @@ extension SIPCallingViewController {
     
     @IBAction func holdButtonPressed(_ sender: SipCallingButton) {
         performCallAction { uuid in
-            CXSetHeldCallAction(call: uuid, onHold: true)
+            CXSetHeldCallAction(call: uuid, onHold: !(sip.call?.session.state == .paused))
         }
     }
     
@@ -227,7 +231,7 @@ extension SIPCallingViewController {
 
     func updateButtons(call: Call) {
         //keypadButton?.isEnabled = !PhoneLib.shared.setHold(session: <#T##Session##PhoneLib.Session#>, onHold: <#T##Bool##Swift.Bool#>) && call.session.state == .connected
-        //holdButton?.active = call.onHold
+        holdButton?.active = call.session.state == .paused
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
 
