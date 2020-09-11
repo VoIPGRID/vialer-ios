@@ -12,6 +12,7 @@
 #import "NumberPadButton.h"
 #import "PasteableUILabel.h"
 #import "PhoneNumberUtils.h"
+#import "PhoneNumberModel.h"
 #import "RecentTableViewCell.h"
 #import "SAMKeychain.h"
 #import "SDStatusBarManager.h"

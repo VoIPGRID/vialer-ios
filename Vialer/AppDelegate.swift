@@ -375,7 +375,7 @@ extension AppDelegate {
             let notificationInfo = [Configuration.Notifications.connectABPhoneNumberUserInfoKey: phoneNumber]
             NotificationCenter.default.post(name: Configuration.Notifications.startConnectABCall, object: self, userInfo: notificationInfo)
 
-            return true;
+            return true
         }
 
         let session = sip.call(number: phoneNumber)

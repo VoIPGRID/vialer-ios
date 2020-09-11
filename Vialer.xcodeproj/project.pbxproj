@@ -345,6 +345,14 @@
 		838207D92292D0A70098EABD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207D82292D0A70098EABD /* GoogleService-Info.plist */; };
 		838207DA2292D0C10098EABD /* ANNAbel-Staging-LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */; };
 		838207DB2292F97A0098EABD /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838207C82292CFF80098EABD /* Config.plist */; };
+		838E12B3250A64D9009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12B4250A64DA009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12B5250A64DB009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12B6250A64DC009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12B7250A64DD009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12B8250A64DE009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12B9250A64DF009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		838E12BA250A64E0009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
 		83916FCF231D076900EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FCE231D076900EBF713 /* Snapshot-Constants.swift */; };
 		83916FD1231D09E300EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
@@ -1697,6 +1705,8 @@
 		838207C92292CFF80098EABD /* Acceptatie-ANNAbel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-ANNAbel-Info.plist"; sourceTree = "<group>"; };
 		838207CB2292CFF90098EABD /* ANNAbel-Staging-LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "ANNAbel-Staging-LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		838207D82292D0A70098EABD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		838E12B1250A64D5009AAF80 /* PhoneNumberModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneNumberModel.h; sourceTree = "<group>"; };
+		838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberModel.m; sourceTree = "<group>"; };
 		83916FCE231D076900EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Verbonden/Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
 		83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
@@ -3301,6 +3311,8 @@
 		F9EEC8FE1CA285B1008FB612 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				838E12B1250A64D5009AAF80 /* PhoneNumberModel.h */,
+				838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -6141,6 +6153,7 @@
 				F81F09E600386851FFE9C218 /* PushKitManager.swift in Sources */,
 				F81F05176592A721BBC2F448 /* VoIPPushHandler.swift in Sources */,
 				F81F01F0E0E7B28DB1A76166 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B8250A64DE009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F0B6C509078FEFA6A64DC /* VoIPPushPayload.swift in Sources */,
 				F81F036BBE7D26CF30A8B4B2 /* Sip.swift in Sources */,
 				F81F04674ADBD41E81CAD1F6 /* Call.swift in Sources */,
@@ -6254,6 +6267,7 @@
 				F81F043BC323C743AE49E16B /* PushKitManager.swift in Sources */,
 				F81F0089DD85E983BCD8E7EB /* VoIPPushHandler.swift in Sources */,
 				F81F02BD50AAF55E1E21B885 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B9250A64DF009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F0A3C5A6CDC398402A355 /* VoIPPushPayload.swift in Sources */,
 				F81F0305C74494DBD0018672 /* Sip.swift in Sources */,
 				F81F0EC91D53A25EA66F3B5C /* Call.swift in Sources */,
@@ -6367,6 +6381,7 @@
 				F81F00A2FE88CED8D0182D61 /* PushKitManager.swift in Sources */,
 				F81F0023AC88B52925828369 /* VoIPPushHandler.swift in Sources */,
 				F81F05F9A33DE91AB27CCC05 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B5250A64DB009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F01FFF7BEC9656B4A0C73 /* VoIPPushPayload.swift in Sources */,
 				F81F0EC7841216A1D4E428A9 /* Sip.swift in Sources */,
 				F81F0EE0054CC44AD2CC04E8 /* Call.swift in Sources */,
@@ -6508,6 +6523,7 @@
 				F81F07F25F3EA025CC08A045 /* PushKitManager.swift in Sources */,
 				F81F08C22534137A58809FDF /* VoIPPushHandler.swift in Sources */,
 				F81F0DB6F68BB908E2DA1214 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12BA250A64E0009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F03B085CE5B30D14F8F90 /* VoIPPushPayload.swift in Sources */,
 				F81F0A191FDF60A89469A139 /* Sip.swift in Sources */,
 				F81F09851187B5CC2F62317E /* Call.swift in Sources */,
@@ -6672,6 +6688,7 @@
 				F81F00D781C44E17F44C1DCC /* PushKitManager.swift in Sources */,
 				F81F01AFBEBB5192CB055407 /* VoIPPushHandler.swift in Sources */,
 				F81F0D34E711C79D0F1B5D6F /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B7250A64DD009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F0D862855731F8080E15A /* VoIPPushPayload.swift in Sources */,
 				F81F07540E072DB0B4C88E5B /* Sip.swift in Sources */,
 				F81F0F231356ECAA64F1FC75 /* Call.swift in Sources */,
@@ -6804,6 +6821,7 @@
 				F81F0D86D19EA4C96A0B411D /* PushKitManager.swift in Sources */,
 				F81F061A735E9FFBCFA087E1 /* VoIPPushHandler.swift in Sources */,
 				F81F0EAF8FE6FBF59628F102 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B6250A64DC009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F01EC593DA3310FF1FD13 /* VoIPPushPayload.swift in Sources */,
 				F81F02EBC73FFC3CBE03309A /* Sip.swift in Sources */,
 				F81F0F29820487582C4E5371 /* Call.swift in Sources */,
@@ -6917,6 +6935,7 @@
 				F81F0A42259646A520D83877 /* PushKitManager.swift in Sources */,
 				F81F03CA550B2A2D9B527216 /* VoIPPushHandler.swift in Sources */,
 				F81F030893FE17EA2BBF8F33 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B4250A64DA009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F0ACABD5C73FD32803B8B /* VoIPPushPayload.swift in Sources */,
 				F81F041A7A30717DB804F1E5 /* Sip.swift in Sources */,
 				F81F05D0F0DF8E69ED56A0D6 /* Call.swift in Sources */,
@@ -7049,6 +7068,7 @@
 				F81F0902AA7DB11449C9BF84 /* PushKitManager.swift in Sources */,
 				F81F0C2C02934F579374AFD7 /* VoIPPushHandler.swift in Sources */,
 				F81F0AAA2DDCAB5B0A676EC4 /* VoIPPushPayloadTransformer.swift in Sources */,
+				838E12B3250A64D9009AAF80 /* PhoneNumberModel.m in Sources */,
 				F81F03853FE98746EE14894B /* VoIPPushPayload.swift in Sources */,
 				F81F09C15D472DBC1C8A4BC0 /* Sip.swift in Sources */,
 				F81F07B3AE3A47181602F00D /* Call.swift in Sources */,

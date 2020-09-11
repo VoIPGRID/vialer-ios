@@ -11,7 +11,7 @@ import AVKit
 
 private var myContext = 0
 
-class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, SegueHandler {
+@objc class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, SegueHandler {
 
     private lazy var sip: Sip = {
         (UIApplication.shared.delegate as! AppDelegate).sip
@@ -55,6 +55,8 @@ class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, 
         }
     }
 
+    private var displayedName = ""
+    
     private lazy var dateComponentsFormatter: DateComponentsFormatter = {
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.zeroFormattingBehavior = .pad
@@ -291,7 +293,21 @@ extension SIPCallingViewController {
             nameLabel.text = name
             numberLabel.text = number
         } else {
-            nameLabel.text = number
+            setDisplayedName(phoneNumber: displayedNumber)
+            nameLabel.text = displayedName.isEmpty ? number : displayedName
+            numberLabel.text = displayedName.isEmpty ? "" : number
+        }
+    }
+    
+    func setDisplayedName(phoneNumber: String) {
+        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber) ?? ""
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+            PhoneNumberModel.getCallName(fromPhoneNumber: cleanedPhoneNumber, withCompletion: { (phoneNumberModel) in
+                DispatchQueue.main.async { [weak self] in
+                    self?.displayedName = phoneNumberModel.displayName ?? ""
+                }
+            })
         }
     }
 }
