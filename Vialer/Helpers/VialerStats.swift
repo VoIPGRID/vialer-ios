@@ -130,7 +130,7 @@ import AVFoundation
             VialerStatsConstants.APIKeys.osVersion: VialerStatsConstants.osVersion,
             VialerStatsConstants.APIKeys.appVersion: VialerStatsConstants.appVersion,
             VialerStatsConstants.APIKeys.appStatus: VialerStatsConstants.appStatus,
-        ] as [String : String]
+        ] as! [String : String]
     }
     
     private func setNetworkData(){
@@ -278,6 +278,8 @@ import AVFoundation
             defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.originatorCanceled
         case .unknown:
             defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.declined
+        @unknown default:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.FailedReason.declined
         }
         
         sendMetrics()
@@ -318,6 +320,8 @@ import AVFoundation
             case .noAudioBothDirections:
                 defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioBothDirections
             case .OK: break
+        @unknown default:
+            defaultData[VialerStatsConstants.APIKeys.failedReason] = VialerStatsConstants.NoAudioReason.audioBothDirections
         }
 
         sendMetrics()
