@@ -155,7 +155,7 @@
     XCTAssertEqual(call.error.userInfo[NSUnderlyingErrorKey], error, @"The error should have been set.");
 }
 
-- (void)testFetchedCallStatusDailingAWillSetCorrectStatus {
+- (void)testFetchedCallStatusDialingAWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.
@@ -175,7 +175,7 @@
     [mockOperationsManager stopMocking];
 }
 
-- (void)testFetchedCallStatusDailingBWillSetCorrectStatus {
+- (void)testFetchedCallStatusDialingBWillSetCorrectStatus {
     id mockOperationsManager = OCMClassMock([VoIPGRIDRequestOperationManager class]);
 
     // Return the error.

@@ -2795,7 +2795,6 @@
 			isa = PBXGroup;
 			children = (
 				EE1C7B781F87774F00708D96 /* UI */,
-				EE1C7B7B1F87774F00708D96 /* Utils */,
 				EEDFABF81F876628002F0679 /* Controllers */,
 				C4F385931D5B66AC005D8146 /* SIPCallingStoryboard.storyboard */,
 				F9A71EBD1C7F5F360083C8B4 /* SIPIncomingCallStoryboard.storyboard */,
@@ -2912,14 +2911,6 @@
 			);
 			name = UI;
 			path = Calling/SIP/UI;
-			sourceTree = "<group>";
-		};
-		EE1C7B7B1F87774F00708D96 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Utils;
-			path = Calling/SIP/Utils;
 			sourceTree = "<group>";
 		};
 		EE2317FC20A0442000C05EB0 /* ANNAbel */ = {
@@ -7307,7 +7298,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6CBB06430D4F969BB211EF27 /* Pods-ANNAbel Staging.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7356,7 +7346,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1451B6C942ADC0A1D3C4C93 /* Pods-ANNAbel Staging.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7398,7 +7387,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50C9A5D98CD87B1067835459 /* Pods-Verbonden Staging.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7446,7 +7434,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 462AC61C028E13F0CB8CD9E3 /* Pods-Verbonden Staging.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7487,7 +7474,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AB7EE9486EFC176B0F535A5 /* Pods-Voys.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7534,7 +7520,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43019F121BACD3F515C3245B /* Pods-Voys.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7784,7 +7769,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D66E10E1D7ABF8C3A1B9D19D /* Pods-Verbonden.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -7832,7 +7816,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D9DB42F29C50D5C1326FDDD /* Pods-Verbonden.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8079,7 +8062,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C5D445BD838821356805D9A /* Pods-ANNAbel.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8128,7 +8110,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03F7D705E538F64D58EC5AEE /* Pods-ANNAbel.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8316,7 +8297,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 97BDE05E53D773AA579B4B0C /* Pods-Voys Staging.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8364,7 +8344,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 044D2E78EC312E66BE9DA029 /* Pods-Voys Staging.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8672,6 +8651,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -8729,6 +8709,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -8751,8 +8732,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E2DB88BF93917B34F7126AD /* Pods-Vialer.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;
@@ -8799,8 +8780,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 404C9E98A13352F73C16A694 /* Pods-Vialer.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vialer/Vialer.entitlements;

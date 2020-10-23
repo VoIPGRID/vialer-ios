@@ -1,7 +1,5 @@
 platform :ios, '11.3'
 
-SIPlibVersion = '3.7.2'
-
 def default_pods
     source 'https://gitlab.linphone.org/BC/public/podspec.git'
     source 'https://github.com/CocoaPods/Specs.git'
@@ -19,7 +17,9 @@ def default_pods
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'SPLumberjackLogFormatter', :git => 'https://github.com/VoIPGRID/SPLumberjackLogFormatter.git', :inhibit_warnings => true
     pod 'SVProgressHUD'
-    pod 'PhoneLib' ,:git => 'https://github.com/open-voip-alliance/iOSPhoneLib.git', 'branch' => 'develop'
+    # pod 'PhoneLib' ,:git => 'https://github.com/open-voip-alliance/iOSPhoneLib.git', 'branch' => 'develop'
+    pod 'PhoneLib', :path => '/Users/chris/projects/Vialer/iOS/ios-phone-lib'
+    
 end
 
 target 'Vialer' do

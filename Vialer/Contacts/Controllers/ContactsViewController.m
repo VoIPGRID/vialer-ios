@@ -193,7 +193,10 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         //TODO: Arrange mic permission
         Sip *sip = [Sip shared];
-        [sip callWithNumber:self.phoneNumberToCall];
+        Session *session = [sip callWithNumber:self.phoneNumberToCall];
+        if (session == nil) {
+            VialerLogError(@"Not able to make call to %@", self.phoneNumberToCall);
+        }
     }
 }
 

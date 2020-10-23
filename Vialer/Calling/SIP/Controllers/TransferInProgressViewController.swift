@@ -94,30 +94,27 @@ extension TransferInProgressViewController {
 // MARK: - Helper functions
 extension TransferInProgressViewController {
     fileprivate func updateUI() {
-//        firstNumberLabel?.text = firstCallPhoneNumberLabelText
-//        currentCallNumberLabel?.text = currentCallPhoneNumberLabelText
-//
-//        guard let call = firstCall else { return }
-//
-//        switch call.transferStatus {
-//        case .unkown: fallthrough
-//        case .initialized:
-//            successfullImageView?.isHidden = true
-//            transferStatusLabel?.text = NSLocalizedString("Transfer requested for", comment:"Transfer requested for")
-//        case .trying:
-//            successfullImageView?.isHidden = true
-//            transferStatusLabel?.text = NSLocalizedString("Transfer in progress to", comment:"Transfer in progress to")
-//        case .accepted:
-//            successfullImageView?.isHidden = false
-//            successfullImageView?.image = successfullImage
-//            transferStatusLabel?.text = NSLocalizedString("Successfully connected with", comment:"Successfully connected with")
-//            VialerGAITracker.callTranferEvent(withSuccess: true)
-//        case .rejected:
-//            successfullImageView?.isHidden = false
-//            successfullImageView?.image = rejectedImage
-//            transferStatusLabel?.text = NSLocalizedString("Couldn't transfer call to", comment: "Transfer failed")
-//            VialerGAITracker.callTranferEvent(withSuccess: false)
-//        }
+        firstNumberLabel?.text = firstCallPhoneNumberLabelText
+        currentCallNumberLabel?.text = currentCallPhoneNumberLabelText
+    
+        guard let call = firstCall else { return }
+        
+        switch call.simpleState {
+        case .ringing: fallthrough
+        case .initializing:
+            successfullImageView?.isHidden = true
+            transferStatusLabel?.text = NSLocalizedString("Transfer requested for", comment:"Transfer requested for")
+        case .inProgress:
+            successfullImageView?.isHidden = false
+            successfullImageView?.image = successfullImage
+            transferStatusLabel?.text = NSLocalizedString("Successfully connected with", comment:"Successfully connected with")
+            VialerGAITracker.callTranferEvent(withSuccess: true)
+        case .finished:
+            successfullImageView?.isHidden = false
+            successfullImageView?.image = rejectedImage
+            transferStatusLabel?.text = NSLocalizedString("Couldn't transfer call to", comment: "Transfer failed")
+            VialerGAITracker.callTranferEvent(withSuccess: false)
+        }
     }
 }
 

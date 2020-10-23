@@ -156,7 +156,7 @@ extension DialerViewController {
         case .sipCalling:
             checkMicrophonePermission { startCalling in
                 if startCalling {
-                    self.sip.call(number: self.numberText!)
+                    _ = self.sip.call(number: self.numberText!)
                 } else {
                     // No Mic, present alert
                     self.presentEnableMicrophoneAlert()

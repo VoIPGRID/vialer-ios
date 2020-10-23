@@ -51,39 +51,41 @@ import CallKit
 
         self.onRegister = onRegister
 
-        let domain = "sipproxy.voipgrid.nl", port = "5060"
-
-        VialerLogInfo("Registering with \(username) + \(password) at \(domain):\(port)")
-
-        let success = phone.register(domain: domain, port: port, username: username, password: password)
+        let port = 5060,
+            user = SystemUser.current()!,
+            domain = (user.useTLS ? "sip.encryptedsip.com" : "sipproxy.voipgrid.nl")
+        
+        VialerLogInfo("Registering with \(username) + \(password) encrypted:\(user.useTLS) at \(domain):\(port)")
+        let success = phone.register(domain: domain, port: port, username: username, password: password, encrypted: user.useTLS)
 
         if !success {
-            VialerLogError("Failed to register")
+            VialerLogError("Failed to register.")
         }
     }
 
     func unregister() {
         phone.unregister {
-            VialerLogInfo("Unregistered...")
+            VialerLogInfo("Unregistered.")
         }
     }
 
-    @objc func call(number: String) {
+    @objc func call(number: String) -> Session? {
+        var session : Session?
         register { error in
             if error != nil {
-                VialerLogError("Unable to register")
+                VialerLogError("Unable to register.")
                 return
             }
 
-            VialerLogInfo("Attempting to call...")
-
-            self.phone.call(to: number)
+            VialerLogInfo("Attempting to call.")
+            session = self.phone.call(to: number)
         }
+        return session
     }
 
     func acceptIncomingCall(callback: @escaping () -> ()) {
         self.onIncomingCall = { call in
-            self.phone.acceptCall(for: call.session)
+            _ = self.phone.acceptCall(for: call.session)
             callback()
         }
 
@@ -106,7 +108,7 @@ import CallKit
     }
 
     func didChangeRegisterState(_ state: SipRegistrationStatus, message: String?) {
-        VialerLogDebug("Reg state: \(String(reflecting: state)) with message \(message)")
+        VialerLogDebug("Reg state: \(String(reflecting: state)) with message \(String(describing: message))")
 
         if state == .registered {
             onRegister?(nil)
@@ -124,6 +126,14 @@ import CallKit
 
     func prepareForIncomingCall(uuid: UUID) {
         self.incomingUuid = uuid
+    }
+    
+    func beginAttendedTransfer(session: Session, to number:String) -> AttendedTransferSession? {
+        return phone.beginAttendedTransfer(session: session, to: number)
+    }
+    
+    func finishAttendedTransfer(attendedTransferSession: AttendedTransferSession) -> Bool {
+        return phone.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
     }
 }
 
@@ -152,7 +162,7 @@ extension Sip: SessionDelegate {
     }
 
     public func outgoingDidInitialize(session: Session) {
-        VialerLogDebug("outgoingDidInitialize")
+        VialerLogDebug("On outgoingDidInitialize.")
 
         self.call = Call(session: session, direction: Direction.outbound)
 
@@ -168,9 +178,9 @@ extension Sip: SessionDelegate {
         let transaction = CXTransaction(action: startCallAction)
         controller.request(transaction) { error in
             if error != nil {
-                VialerLogError("ERRROR")
+                VialerLogError("Error on outgoing call.")
             } else {
-                VialerLogInfo("SEtup!")
+                VialerLogInfo("Setup of outgoing call.")
             }
         }
     }
@@ -186,7 +196,8 @@ extension Sip: SessionDelegate {
 
     public func sessionEnded(_ session: Session) {
         if self.call == nil {
-            VialerLogError("No call...")
+            // This happens on tranfer normal flow
+            VialerLogDebug("Session ended with nil call object.")
             return
         }
 

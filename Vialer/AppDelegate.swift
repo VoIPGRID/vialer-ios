@@ -378,7 +378,7 @@ extension AppDelegate {
             return true
         }
 
-        let session = sip.call(number: phoneNumber)
+        sip.call(number: phoneNumber)
 
         return true
     }

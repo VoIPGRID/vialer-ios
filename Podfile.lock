@@ -117,19 +117,19 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - HTCopyableLabel (0.0.7)
   - le (1.2)
-  - linphone-sdk (4.4.0):
-    - linphone-sdk/all-frameworks (= 4.4.0)
-    - linphone-sdk/app-extension (= 4.4.0)
-    - linphone-sdk/app-extension-swift (= 4.4.0)
-    - linphone-sdk/basic-frameworks (= 4.4.0)
-    - linphone-sdk/swift (= 4.4.0)
-  - linphone-sdk/all-frameworks (4.4.0)
-  - linphone-sdk/app-extension (4.4.0)
-  - linphone-sdk/app-extension-swift (4.4.0):
+  - linphone-sdk (4.4.1):
+    - linphone-sdk/all-frameworks (= 4.4.1)
+    - linphone-sdk/app-extension (= 4.4.1)
+    - linphone-sdk/app-extension-swift (= 4.4.1)
+    - linphone-sdk/basic-frameworks (= 4.4.1)
+    - linphone-sdk/swift (= 4.4.1)
+  - linphone-sdk/all-frameworks (4.4.1)
+  - linphone-sdk/app-extension (4.4.1)
+  - linphone-sdk/app-extension-swift (4.4.1):
     - linphone-sdk/app-extension
-  - linphone-sdk/basic-frameworks (4.4.0):
+  - linphone-sdk/basic-frameworks (4.4.1):
     - linphone-sdk/app-extension
-  - linphone-sdk/swift (4.4.0):
+  - linphone-sdk/swift (4.4.1):
     - linphone-sdk/app-extension-swift
     - linphone-sdk/basic-frameworks
   - MMDrawerController (0.6.0):
@@ -167,7 +167,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (9.0.0)
   - PBWebViewController (0.5.0)
   - PhoneLib (0.1.0):
-    - linphone-sdk
+    - linphone-sdk (= 4.4.1)
   - PromisesObjC (1.2.9)
   - Protobuf (3.12.0)
   - SAMKeychain (1.5.3)
@@ -190,7 +190,7 @@ DEPENDENCIES:
   - OCMock
   - OHHTTPStubs
   - PBWebViewController
-  - PhoneLib (from `https://github.com/open-voip-alliance/iOSPhoneLib.git`)
+  - PhoneLib (from `/Users/chris/projects/Vialer/iOS/ios-phone-lib`)
   - SAMKeychain
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
@@ -236,8 +236,7 @@ EXTERNAL SOURCES:
   "MMDrawerController+Storyboard":
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   PhoneLib:
-    branch: develop
-    :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
+    :path: "/Users/chris/projects/Vialer/iOS/ios-phone-lib"
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
@@ -248,9 +247,6 @@ CHECKOUT OPTIONS:
   "MMDrawerController+Storyboard":
     :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
-  PhoneLib:
-    :commit: a30abbf45e33267ae9e4f28e447bb7e6f55b9620
-    :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
   SPLumberjackLogFormatter:
     :commit: c0155bfd953746f13e94c84b8b2c13908242e3e4
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
@@ -276,14 +272,14 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   HTCopyableLabel: e67c190d2f1f8f03c9d9858a7d8ce33be7fb43fa
   le: 6854003e293bf5b3cb822ef06971f1cc23a77eb9
-  linphone-sdk: c5765e58b2b17f292e7792c6f4b231dfe4079c68
+  linphone-sdk: 91183cb3e3224d2d1a211357cd6a39d61636d17d
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   "MMDrawerController+Storyboard": 46e1a8c17041d4ee000c5730f0106cbd87ddb54f
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
-  PhoneLib: d7036554c8407bcc4530d16477a22f8940944807
+  PhoneLib: 816183e6178f9c2b62bcd9e82d498f1b153afd9b
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
@@ -291,6 +287,6 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: d9b88aa5d8eaa9ca016e7faf45fa36e42eeaf3a5
+PODFILE CHECKSUM: 7a5db877fbfef0b8c470533b8f4e89521df893bd
 
 COCOAPODS: 1.9.3

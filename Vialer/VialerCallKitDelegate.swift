@@ -129,7 +129,8 @@ extension VialerCallKitDelegate: CXProviderDelegate {
             action.fulfill()
             return
         }
-
+        
+        VialerLogInfo("Call is ending with average rating: \(call.session.getAverageRating())/5.")
         let success = PhoneLib.shared.endCall(for: call.session)
 
         if success {

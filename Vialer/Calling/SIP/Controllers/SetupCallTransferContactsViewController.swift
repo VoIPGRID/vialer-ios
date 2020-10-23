@@ -1,28 +1,37 @@
 import Foundation
 import Contacts
 import ContactsUI
+import PhoneLib
 
 private var myContext = 0
 
 class SetupCallTransferContactsViewController: SetupCallTransfer, UITableViewDataSource, UITableViewDelegate, SegueHandler {
     fileprivate var contactModel = ContactModel.defaultModel
     fileprivate var callActionSheet: UIAlertController?
+    
+    private lazy var sip: Sip = {
+        (UIApplication.shared.delegate as! AppDelegate).sip
+    }()
+    
+    var attendedTransferSession: AttendedTransferSession?
+    var transferTargetPhoneNumber: String?
 
     @IBOutlet weak var firstCallNumberLabel: UILabel!
     @IBOutlet weak var firstCallStatusLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
     override func updateUI() {
-//        if (firstCallPhoneNumberLabelText != nil) {
-//            firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
-//        }
-//
-//        guard let call = firstCall else { return }
-//        if call.callState == .disconnected {
-//            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
-//        } else {
-//            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-//        }
+        if (firstCallPhoneNumberLabelText != nil) {
+            firstCallNumberLabel?.text = firstCallPhoneNumberLabelText
+        }
+
+        guard let call = firstCall else { return }
+         
+        if call.simpleState == .finished {
+            firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
+        } else {
+            firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
+        }
     }
 
     @IBAction func cancelPressed(_ sender: AnyObject) {
@@ -122,7 +131,7 @@ extension SetupCallTransferContactsViewController {
             return // No action needed since there is no number to call.
         } else if (contact.phoneNumbers.count == 1) {
             // There is just one phone number for the selected contact, so make the call.
-            makeCall(phoneNumber: contact.phoneNumbers[0].value)
+            beginTransferByCalling(phoneNumber: contact.phoneNumbers[0].value)
         } else {
             // Create an action controller to show every number to call for the selected contact.
             let name = contactModel.displayName(for: contact)
@@ -136,7 +145,7 @@ extension SetupCallTransferContactsViewController {
                 let number = phoneNumber.value.stringValue
                 let callAction = UIAlertAction(title: "\(label): \(number)", style: .default) { (action) in
                     // Make the call if the user clicks on a specific call action.
-                    self.makeCall(phoneNumber: phoneNumber.value)
+                    self.beginTransferByCalling(phoneNumber: phoneNumber.value)
                 }
                 callActionSheet.addAction(callAction)
             }
@@ -154,56 +163,61 @@ extension SetupCallTransferContactsViewController {
 // MARK: - Segues
 extension SetupCallTransferContactsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        switch segueIdentifier(segue: segue) {
-//        case .secondCallActive:
-//            // The second call is active and a subtype of SIPCallingVC, so cast the destination to it.
-//            let secondCallVC = segue.destination as? SecondCallViewController
-//
-//            secondCallVC?.activeCall = currentCall
-//            secondCallVC?.firstCall = firstCall
-//            secondCallVC?.phoneNumberLabelText = currentCall?.numberToCall
-//            secondCallVC?.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
-//        case .unwindToFirstCall:
-//            let callVC = segue.destination as! SIPCallingViewController
+        switch segueIdentifier(segue: segue) {
+        case .secondCallActive:
+            // The second call is active and a subtype of SIPCallingVC, so cast the destination to it.
+            let secondCallVC = segue.destination as? SecondCallViewController
+            
+            //secondCallVC?.call = currentCall
+            secondCallVC?.firstCall = firstCall
+            //secondCallVC?.phoneNumberLabelText = currentCall?.remoteNumber
+            //secondCallVC?.nameLabel.text = currentCall?.displayName
+            secondCallVC?.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
+            secondCallVC?.attendedTransferSession = attendedTransferSession
+            secondCallVC?.currentCallPhoneNumberLabelText = transferTargetPhoneNumber
+            
+        case .unwindToFirstCall:
+            let callVC = segue.destination as! SIPCallingViewController
 //            if let call = currentCall, call.callState != .null && call.callState != .disconnected {
 //                callVC.activeCall = call
 //            } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
 //                callVC.activeCall = call
 //            }
-//            if let cas = callActionSheet {
-//                // If the action sheet is visible when unwinding to the first call, cancel it.
-//                cas.dismiss(animated: false, completion: nil)
-//            }
-//        }
+            if let cas = callActionSheet {
+                // If the action sheet is visible when unwinding to the first call, cancel it.
+                cas.dismiss(animated: false, completion: nil)
+            }
+        }
     }
 }
 
 // MARK: - Utils
 extension SetupCallTransferContactsViewController {
-    func makeCall(phoneNumber: CNPhoneNumber) {
-//        let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber.stringValue)!
-//
-//        callManager.startCall(toNumber: cleanedPhoneNumber, for: firstCall!.account!) { call, error in
-//            DispatchQueue.main.async { [weak self] in
-//                self?.currentCall = call
-//                self?.performSegue(segueIdentifier: .secondCallActive)
-//            }
-//        }
+    func beginTransferByCalling(phoneNumber: CNPhoneNumber) {
+        guard let cleanedPhoneNumber = PhoneNumberUtils.cleanPhoneNumber(phoneNumber.stringValue) else {return}
+        transferTargetPhoneNumber = cleanedPhoneNumber
+        
+        guard let session = sip.call?.session else {return}
+        attendedTransferSession = sip.beginAttendedTransfer(session: session, to: cleanedPhoneNumber)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.performSegue(segueIdentifier: .secondCallActive)
+        }
     }
 }
 
 // MARK: - KVO
 extension SetupCallTransferContactsViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-//        if context == &myContext {
-//            DispatchQueue.main.async { [weak self] in
-//                self?.updateUI()
-//                if let call = self?.firstCall, call.callState == .disconnected {
-//                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
-//                }
-//            }
-//        } else {
-//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-//        }
+        if context == &myContext {
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUI()
+                if let call = self?.firstCall, call.simpleState == .finished {
+                    self?.performSegue(segueIdentifier: .unwindToFirstCall)
+                }
+            }
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
     }
 }

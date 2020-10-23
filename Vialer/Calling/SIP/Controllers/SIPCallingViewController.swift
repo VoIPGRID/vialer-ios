@@ -85,9 +85,9 @@ extension SIPCallingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = ""
-        nameLabel.text = ""
-        statusLabel.text = ""
+        numberLabel?.text = ""
+        nameLabel?.text = ""
+        statusLabel?.text = ""
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,8 +95,7 @@ extension SIPCallingViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleCallUpdate), name: NSNotification.Name(rawValue: "call-update"), object: nil)
 
         UIDevice.current.isProximityMonitoringEnabled = true
-        updateUI()
-
+        
         if call?.simpleState == .finished {
             VialerLogInfo("Ending as state is ended")
             handleCallEnded()
@@ -158,27 +157,26 @@ extension SIPCallingViewController {
     }
     
     @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
-//        guard let call = activeCall, call.callState == .confirmed else { return }
-//        if call.onHold {
-//            DispatchQueue.main.async {
-//                self.performSegue(segueIdentifier: .setupTransfer)
-//            }
-//            return
-//        }
-//        callManager.toggleHold(for: call) { error in
-//            if error != nil {
-//                VialerLogError("Error holding current call: \(String(describing: error))")
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.performSegue(segueIdentifier: .setupTransfer)
-//                }
-//            }
-//        }
+        guard let call = call, call.simpleState == .inProgress else { return }
+        if call.session.state == .paused {
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .setupTransfer)
+            }
+            return
+        }
+
+        performCallAction { uuid in
+            CXSetHeldCallAction(call: uuid, onHold: true)
+        }
+        
+        DispatchQueue.main.async {
+            self.performSegue(segueIdentifier: .setupTransfer)
+        }
     }
     
     @IBAction func holdButtonPressed(_ sender: SipCallingButton) {
         performCallAction { uuid in
-            CXSetHeldCallAction(call: uuid, onHold: !(sip.call?.session.state == .paused))
+            CXSetHeldCallAction(call: uuid, onHold: !(call?.session.state == .paused))
         }
     }
     
@@ -290,11 +288,11 @@ extension SIPCallingViewController {
             number = displayedNumber
 
         if name?.isEmpty == false {
-            nameLabel.text = name
+            nameLabel?.text = name
             numberLabel.text = number
         } else {
             setDisplayedName(phoneNumber: displayedNumber)
-            nameLabel.text = displayedName.isEmpty ? number : displayedName
+            nameLabel?.text = displayedName.isEmpty ? number : displayedName
             numberLabel.text = displayedName.isEmpty ? "" : number
         }
     }
