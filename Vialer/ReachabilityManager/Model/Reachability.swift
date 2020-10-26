@@ -114,7 +114,11 @@ public class Reachability: NSObject {
         } else if mediumInternet.contains(currentRadio) {
             return .reachableVia3G
         }
-        return .reachableVia2G
+        else if slowInternet.contains(currentRadio) {
+            return .reachableVia2G
+        }
+        
+        return .reachableVia4G
     }
 
     // MARK: - Private properties.
@@ -156,10 +160,7 @@ public class Reachability: NSObject {
                                                     CTRadioAccessTechnologyeHRPD
     ]
     
-    // 4G.
-    fileprivate let fastInternet: Set<String> = [ CTRadioAccessTechnologyLTE
-    ]
-
+    fileprivate let fastInternet: Set<String> = [ CTRadioAccessTechnologyLTE ]
 
     // MARK: - Initializers
     required public init(reachabilityRef: SCNetworkReachability) {

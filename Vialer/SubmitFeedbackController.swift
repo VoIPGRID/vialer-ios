@@ -26,7 +26,7 @@ class SubmitFeedbackController: UIViewController, UITextViewDelegate, NSURLConne
                 "family_name" : user.lastName,
             ],
             "application" : [
-                "id" : Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String,
+                "id" : Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String,
                 "version" : AppInfo.currentAppVersion(),
                 "os" : "ios",
                 "os_version" : UIDevice.current.systemVersion,
@@ -48,7 +48,7 @@ class SubmitFeedbackController: UIViewController, UITextViewDelegate, NSURLConne
                 return
             }
 
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
+            if let data = data, let _ = String(data: data, encoding: .utf8) {
                 DispatchQueue.main.async {
                     self.present(self.createCompletionAlert(), animated: true, completion: nil)
                 }

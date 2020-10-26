@@ -45,7 +45,7 @@ class RecentCallManager {
     ///
     /// - Parameter completion: Completionblock that is called when completed.
     public func getLatestRecentCalls(onlyMine: Bool = false, completion: @escaping (RecentCallManagerError?)->()) {
-        var fetchDate: Date = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+        let fetchDate: Date = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
         reloading = true
 
         var resource: Resource<[JSONDictionary]>
