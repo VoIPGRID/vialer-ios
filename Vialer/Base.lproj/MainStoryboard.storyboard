@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BQ4-be-ZGE">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,13 +47,13 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kwr-Zg-43A"/>
                         <constraints>
                             <constraint firstItem="1DY-ie-kRe" firstAttribute="top" secondItem="Bti-2h-Pg1" secondAttribute="top" id="16M-tT-1es"/>
                             <constraint firstItem="Kwr-Zg-43A" firstAttribute="trailing" secondItem="1DY-ie-kRe" secondAttribute="trailing" id="7Z4-eE-fdC"/>
                             <constraint firstAttribute="bottom" secondItem="1DY-ie-kRe" secondAttribute="bottom" id="PNn-Fl-IY1"/>
                             <constraint firstItem="1DY-ie-kRe" firstAttribute="leading" secondItem="Kwr-Zg-43A" secondAttribute="leading" id="zIy-sG-KI7"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kwr-Zg-43A"/>
                     </view>
                     <connections>
                         <outlet property="backgroundGrandientView" destination="Km0-zp-Jub" id="6Kh-La-gj5"/>
@@ -101,8 +101,8 @@
                     <view key="view" contentMode="scaleToFill" id="mzC-cA-UBR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PVo-bT-P72"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="ALB-k4-yaR" kind="custom" identifier="mm_center" customClass="MMDrawerControllerSegue" id="tO0-Oo-pCK"/>
