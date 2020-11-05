@@ -72,7 +72,7 @@
 }
 
 + (BOOL)safelyRemoveSipEndpoint {
-    if ([VialerSIPLib sharedInstance].endpointAvailable && [self getFirstCall] == nil) {
+    if ([self isSafeToRemoveSipEndpoint]) {
         for (VSLAccount* account in [VialerSIPLib sharedInstance].endpoint.accounts) {
             [[VialerSIPLib sharedInstance].endpoint removeAccount:account];
         }
@@ -81,6 +81,10 @@
     }
 
     return false;
+}
+
++ (BOOL)isSafeToRemoveSipEndpoint {
+    return [VialerSIPLib sharedInstance].endpointAvailable && [self getFirstCall] == nil;
 }
 
 + (void)removeSIPEndpoint {

@@ -25,6 +25,8 @@
  */
 + (BOOL)safelyRemoveSipEndpoint;
 
++ (BOOL)isSafeToRemoveSipEndpoint;
+
 /**
  *  Only update the codecs on the SIP endpoint.
  */

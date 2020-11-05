@@ -187,22 +187,19 @@ DEPENDENCIES:
   - VialerSIPLib (= 3.7.3)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworkActivityLogger
     - AFNetworking
     - CocoaLumberjack
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
-    - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
-    - FirebaseInstallations
     - FirebasePerformance
     - FirebaseRemoteConfig
     - GoogleAnalytics
     - GoogleAppMeasurement
-    - GoogleDataTransport
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
@@ -220,6 +217,10 @@ SPEC REPOS:
     - SVProgressHUD
     - Vialer-pjsip-iOS
     - VialerSIPLib
+  trunk:
+    - FirebaseCore
+    - FirebaseInstallations
+    - GoogleDataTransport
 
 EXTERNAL SOURCES:
   le:
