@@ -663,7 +663,13 @@ extension Notification.Name {
 // Reachability
 extension AppDelegate {
     @objc func reachabilityChanged(note: NSNotification) {
-        VialerLogInfo("Reachability changed, rebooting SIP")
-        SIPUtils.safelyRemoveSipEndpoint()
+        VialerLogInfo("Reachability changed, rebooting SIP after delay")
+
+        if SIPUtils.isSafeToRemoveSipEndpoint() {
+            VialerLogInfo("Rebooting SIP if still safe")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                SIPUtils.safelyRemoveSipEndpoint()
+            }
+        }
     }
 }
