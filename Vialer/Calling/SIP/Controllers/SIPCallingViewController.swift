@@ -158,15 +158,10 @@ extension SIPCallingViewController {
     
     @IBAction func transferButtonPressed(_ sender: SipCallingButton) {
         guard let call = call, call.simpleState == .inProgress else { return }
-        if call.session.state == .paused {
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .setupTransfer)
+        if call.session.state != .paused {
+            performCallAction { uuid in
+                CXSetHeldCallAction(call: uuid, onHold: true)
             }
-            return
-        }
-
-        performCallAction { uuid in
-            CXSetHeldCallAction(call: uuid, onHold: true)
         }
         
         DispatchQueue.main.async {
@@ -214,14 +209,20 @@ extension SIPCallingViewController {
 // MARK: - Handling UI updating
 extension SIPCallingViewController {
     @objc func updateUI() {
-        guard let call = sip.call else {
+        guard var call = sip.call else {
             return
         }
 
-        if call.simpleState == .finished {
-            VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID  is \(call.uuid)")
+        //orp anything else to check here? call UUID?
+        //sip.call is still the 2nd call on first time after cancelling 2nd call
+        if call.simpleState == .finished && sip.firstTransferCall == nil {
+            VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID is \(call.uuid)")
             handleCallEnded()
             return
+        } else if call.simpleState == .finished && sip.firstTransferCall != nil {
+            VialerLogInfo("Second call of the transfer ended, load the first one.")
+            call = sip.firstTransferCall!
+            //sip.firstTransferCall = nil //orp
         }
 
         updateButtons(call: call)

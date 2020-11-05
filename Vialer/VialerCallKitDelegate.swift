@@ -106,7 +106,7 @@ class VialerCallKitDelegate: NSObject {
                 type: CXHandle.HandleType.phoneNumber,
                 value: call.displayName ?? call.remoteNumber
         )
-VialerLogInfo("Reporting call with uuid \(call.uuid)")
+        VialerLogInfo("Reporting call with uuid \(call.uuid)")
         provider.reportCall(with: call.uuid, updated: update)
     }
 

@@ -19,6 +19,7 @@ import CallKit
     @objc var callKitProviderDelegate: VialerCallKitDelegate!
 
     var call: Call?
+    var firstTransferCall: Call?
 
     @objc var hasActiveCall: Bool {
         get {
@@ -82,6 +83,10 @@ import CallKit
         }
         return session
     }
+    
+    func endCall(for session: Session) -> Bool {
+        return phone.endCall(for: session)
+    }
 
     func acceptIncomingCall(callback: @escaping () -> ()) {
         self.onIncomingCall = { call in
@@ -129,10 +134,12 @@ import CallKit
     }
     
     func beginAttendedTransfer(session: Session, to number:String) -> AttendedTransferSession? {
+        firstTransferCall = call
         return phone.beginAttendedTransfer(session: session, to: number)
     }
     
     func finishAttendedTransfer(attendedTransferSession: AttendedTransferSession) -> Bool {
+        firstTransferCall = nil
         return phone.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
     }
 }
@@ -195,8 +202,14 @@ extension Sip: SessionDelegate {
     }
 
     public func sessionEnded(_ session: Session) {
+        //orp end the correct call according to session?
+        VialerLogInfo("------//orp session ended with call displaynumber: \(String(describing: call?.displayName)).")
+        guard self.call?.session == session else {
+            VialerLogInfo("---//orp Session ended is not the same with self.call.session.----")
+            return
+        }
+        
         if self.call == nil {
-            // This happens on tranfer normal flow
             VialerLogDebug("Session ended with nil call object.")
             return
         }
@@ -209,8 +222,16 @@ extension Sip: SessionDelegate {
 
     public func sessionReleased(_ session: Session) {
         VialerLogInfo("Session released..")
+        
+        // In case of transfer's second call was cancelled or declined
+        if firstTransferCall != nil && firstTransferCall?.session.sessionId != session.sessionId {
+            self.call = firstTransferCall
+            firstTransferCall = nil
+        }
+        
         if let call = self.call {
             if call.session.state == .released {
+                VialerLogInfo("Setting call with UUID: \(call.uuid) to nil because session has been released.")
                 self.call = nil
             }
         }
@@ -218,7 +239,7 @@ extension Sip: SessionDelegate {
     }
 
     public func error(session: Session, message: String) {
-        VialerLogDebug("Error: \(message)")
+        VialerLogDebug("Error: \(message) for call with sessionUUID: \(session.sessionId)")
     }
 }
 

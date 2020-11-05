@@ -14,7 +14,9 @@ class TransferInProgressViewController: UIViewController {
     }
 
     // MARK: - Properties
-//    var callManager = VialerSIPLib.sharedInstance().callManager
+    private lazy var sip: Sip = {
+        (UIApplication.shared.delegate as! AppDelegate).sip
+    }()
     
     var callObserversSet = false // Keep track if observers are set to prevent removing unset observers.
 
@@ -74,20 +76,18 @@ extension TransferInProgressViewController {
 // MARK: - Actions
 extension TransferInProgressViewController {
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
-//        if firstCall?.callState != .disconnected {
-//            callManager.end(firstCall!) { error in
-//                if error != nil {
-//                    VialerLogError("Error disconnecting call: \(error!)")
-//                }
-//            }
-//        }
-//        if currentCall?.callState != .disconnected {
-//            callManager.end(currentCall!) { error in
-//                if error != nil {
-//                    VialerLogError("Error disconnecting call: \(error!)")
-//                }
-//            }
-//        }
+        if firstCall?.simpleState != .finished {
+            let success = sip.endCall(for: firstCall!.session)
+            if success != true {
+                VialerLogError("Error disconnecting first call.")
+            }
+        }
+        if currentCall?.simpleState != .finished {
+            let success = sip.endCall(for: currentCall!.session)
+            if success != true {
+                VialerLogError("Error disconnecting current call.")
+            }
+        }
     }
 }
 

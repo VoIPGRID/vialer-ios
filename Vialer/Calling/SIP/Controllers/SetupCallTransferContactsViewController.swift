@@ -35,22 +35,21 @@ class SetupCallTransferContactsViewController: SetupCallTransfer, UITableViewDat
     }
 
     @IBAction func cancelPressed(_ sender: AnyObject) {
-//        guard let call = currentCall else {
-//            DispatchQueue.main.async {
-//                self.performSegue(segueIdentifier: .unwindToFirstCall)
-//            }
-//            return
-//        }
-//        callManager.end(call) { error in
-//            if error != nil {
-//                VialerLogError("Could not hangup call: \(String(describing: error))")
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.performSegue(segueIdentifier: .unwindToFirstCall)
-//                }
-//            }
-//
-//        }
+        guard let call = currentCall else {
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToFirstCall)
+            }
+            return
+        }
+        
+        let success = sip.endCall(for: call.session)
+        if success == true {
+            DispatchQueue.main.async {
+                self.performSegue(segueIdentifier: .unwindToFirstCall)
+            }
+        } else {
+            VialerLogError("Could not hang up current call after cancelling.")
+        }
     }
 
 }
@@ -178,11 +177,7 @@ extension SetupCallTransferContactsViewController {
             
         case .unwindToFirstCall:
             let callVC = segue.destination as! SIPCallingViewController
-//            if let call = currentCall, call.callState != .null && call.callState != .disconnected {
-//                callVC.activeCall = call
-//            } else if let call = firstCall, call.callState != .null && call.callState != .disconnected {
-//                callVC.activeCall = call
-//            }
+            VialerLogInfo("Unwinding to first call: \(String(describing: callVC.nameLabel.text))        \(String(describing: sip.call?.remoteNumber)).")
             if let cas = callActionSheet {
                 // If the action sheet is visible when unwinding to the first call, cancel it.
                 cas.dismiss(animated: false, completion: nil)

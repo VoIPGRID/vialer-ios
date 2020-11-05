@@ -90,22 +90,14 @@ extension SecondCallViewController {
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-//        guard let activeCall = activeCall, activeCall.callState != .disconnected else {
-//            DispatchQueue.main.async {
-//                self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
-//            }
-//            return
-//        }
-//        // If current call is not disconnected, hangup the call.
-//        callManager.end(activeCall) { error in
-//            if error != nil {
-//                VialerLogError("Error hanging up call: \(String(describing: error))")
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
-//                }
-//            }
-//        }
+        guard let transferTargetSession = attendedTransferSession?.to else {return}
+        //Hang up the second call
+        let callEndSuccess = sip.endCall(for: transferTargetSession)
+        VialerLogInfo("On cancelling transfer, second call ended with success: \(callEndSuccess).")
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+        }
     }
 }
 
@@ -157,10 +149,11 @@ extension SecondCallViewController {
 }
 
 // MARK: - KVO
-//extension SecondCallViewController {
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        // If the first call is disconnected and the second call is in progress, unwind to CallViewController.
-//        // In prepare the second call will be set as the activeCall.
+extension SecondCallViewController {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        // If the first call is disconnected and the second call is in progress, unwind to CallViewController.
+        // In prepare the second call will be set as the activeCall.
 //        if let call = firstCall, call.simpleState == .finished,
 //           let activeCall = self.sip.call, activeCall.simpleState != .finished {
 //
@@ -181,5 +174,5 @@ extension SecondCallViewController {
 //        } else {
 //            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 //        }
-//    }
-//}
+    }
+}
