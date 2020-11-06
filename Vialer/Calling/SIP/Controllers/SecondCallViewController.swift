@@ -54,7 +54,7 @@ class SecondCallViewController: SIPCallingViewController {
 extension SecondCallViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        super.presentsSecondCall = true
         VialerGAITracker.trackScreenForController(name: controllerName)
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()

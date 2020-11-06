@@ -20,6 +20,8 @@ private var myContext = 0
     private lazy var phone: PhoneLib = {
         PhoneLib.shared
     }()
+    
+    var presentsSecondCall = false
 
     // MARK: - Configuration
     enum SegueIdentifier : String {
@@ -97,7 +99,7 @@ extension SIPCallingViewController {
         UIDevice.current.isProximityMonitoringEnabled = true
         
         if call?.simpleState == .finished {
-            VialerLogInfo("Ending as state is ended")
+            VialerLogInfo("Ending as state is ended.")
             handleCallEnded()
         }
 
@@ -212,17 +214,17 @@ extension SIPCallingViewController {
         guard var call = sip.call else {
             return
         }
-
-        //orp anything else to check here? call UUID?
-        //sip.call is still the 2nd call on first time after cancelling 2nd call
-        if call.simpleState == .finished && sip.firstTransferCall == nil {
-            VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID is \(call.uuid)")
-            handleCallEnded()
-            return
-        } else if call.simpleState == .finished && sip.firstTransferCall != nil {
-            VialerLogInfo("Second call of the transfer ended, load the first one.")
-            call = sip.firstTransferCall!
-            //sip.firstTransferCall = nil //orp
+        
+        if call.simpleState == .finished {
+            if sip.firstTransferCall == nil || presentsSecondCall {
+                VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID is \(call.uuid)")
+                handleCallEnded()
+                return
+            } else if sip.firstTransferCall != nil {
+                VialerLogInfo("Second call of the transfer ended, updating UI for the first one.")
+                call = sip.firstTransferCall!
+                sip.firstTransferCall = nil
+            }
         }
 
         updateButtons(call: call)
@@ -231,7 +233,7 @@ extension SIPCallingViewController {
     }
 
     func updateButtons(call: Call) {
-        //keypadButton?.isEnabled = !PhoneLib.shared.setHold(session: <#T##Session##PhoneLib.Session#>, onHold: <#T##Bool##Swift.Bool#>) && call.session.state == .connected
+        //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .connected
         holdButton?.active = call.session.state == .paused
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
