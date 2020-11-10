@@ -55,6 +55,7 @@ extension SecondCallViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         super.presentsSecondCall = true
+        sip.secondTransferCall = sip.call 
         VialerGAITracker.trackScreenForController(name: controllerName)
         UIDevice.current.isProximityMonitoringEnabled = true
         updateUI()
@@ -93,7 +94,7 @@ extension SecondCallViewController {
         guard let transferTargetSession = attendedTransferSession?.to else {return}
         //Hang up the second call
         let callEndSuccess = sip.endCall(for: transferTargetSession)
-        VialerLogInfo("On cancelling transfer, second call ended with success: \(callEndSuccess).")
+        VialerLogInfo("Cancelling transfer, second call ended with success: \(callEndSuccess).")
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)

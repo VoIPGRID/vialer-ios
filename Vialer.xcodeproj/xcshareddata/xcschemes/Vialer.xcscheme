@@ -37,13 +37,6 @@
             ReferencedContainer = "container:Vialer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
-      </AdditionalOptions>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -131,7 +124,7 @@
          <EnvironmentVariable
             key = "NSZombieEnabled"
             value = "YES"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
@@ -143,11 +136,6 @@
          <AdditionalOption
             key = "PrefersMallocStackLoggingLite"
             value = ""
-            isEnabled = "YES">
-         </AdditionalOption>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
             isEnabled = "YES">
          </AdditionalOption>
       </AdditionalOptions>

@@ -20,8 +20,6 @@ private var myContext = 0
     private lazy var phone: PhoneLib = {
         PhoneLib.shared
     }()
-    
-    var presentsSecondCall = false
 
     // MARK: - Configuration
     enum SegueIdentifier : String {
@@ -40,6 +38,8 @@ private var myContext = 0
     private var call: Call? {
         get { sip.call }
     }
+    
+    var presentsSecondCall = false
 
     private var user: SystemUser {
         get { SystemUser.current()}
@@ -206,35 +206,52 @@ extension SIPCallingViewController {
         hangupButton?.isEnabled = false
         dismissView()
     }
+    
+    @objc func handleCallUpdate(_: NSNotification) {
+        VialerLogInfo("State \(String(reflecting: call?.state))")
+        guard call != nil else {
+            handleCallEnded()
+            return
+        }
+        updateUI()
+    }
 }
 
 // MARK: - Handling UI updating
 extension SIPCallingViewController {
     @objc func updateUI() {
-        guard var call = sip.call else {
+        var presentedCall: Call?
+        if presentsSecondCall {
+            presentedCall = sip.secondTransferCall
+        } else {
+            presentedCall = sip.firstTransferCall ?? call
+        }
+        
+        guard var call = presentedCall else {
             return
         }
         
         if call.simpleState == .finished {
             if sip.firstTransferCall == nil || presentsSecondCall {
-                VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID is \(call.uuid)")
+                VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: presentedCall?.state)) and UUID is \(String(describing: presentedCall?.uuid))")
                 handleCallEnded()
                 return
             } else if sip.firstTransferCall != nil {
-                VialerLogInfo("Second call of the transfer ended, updating UI for the first one.")
+                VialerLogInfo("Second call of the transfer ended, going to update UI for the first call screen.")
                 call = sip.firstTransferCall!
                 sip.firstTransferCall = nil
             }
         }
-
+        
+        VialerLogInfo("Updating UI for call.uuid: \(call.uuid).")
         updateButtons(call: call)
         updateCalleeLabels(call: call)
         updateStatusLabel(call: call)
     }
 
     func updateButtons(call: Call) {
-        //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .connected
-        holdButton?.active = call.session.state == .paused
+        //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .conneString(describing: cted
+        holdBu)tton?.active = call.session.state == .paused
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
 
@@ -350,15 +367,6 @@ extension SIPCallingViewController {
         self.dtmf += dtmfSent ?? ""
     }
 }
-
-extension SIPCallingViewController {
-    @objc func handleCallUpdate(_: NSNotification) {
-        updateUI()
-
-        VialerLogInfo("State \(String(reflecting: call?.state))")
-    }
-}
-
 
 extension SIPCallingViewController {
     private func bringupAudioDeviceSheet(availableAudioPorts:[AVAudioSessionPortDescription]) {

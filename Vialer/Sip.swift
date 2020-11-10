@@ -20,6 +20,7 @@ import CallKit
 
     var call: Call?
     var firstTransferCall: Call?
+    var secondTransferCall: Call?
 
     @objc var hasActiveCall: Bool {
         get {
@@ -202,19 +203,18 @@ extension Sip: SessionDelegate {
     }
 
     public func sessionEnded(_ session: Session) {
-        //orp end the correct call according to session?
-        VialerLogInfo("------//orp session ended with call displaynumber: \(String(describing: call?.displayName)).")
-        guard self.call?.session == session else {
-            VialerLogInfo("---//orp Session ended is not the same with self.call.session.----")
-            return
-        }
-        
         if self.call == nil {
             VialerLogDebug("Session ended with nil call object.")
             return
         }
-
-        VialerLogInfo("Ending call with uuid \(call!.uuid)")
+        
+        //WIP
+//        if self.call?.simpleState != .finished {
+//            VialerLogDebug("Session ended but state is not finished.")
+//            return
+//        }
+            
+        VialerLogInfo("Ending call with sessionId:\(call!.session.sessionId) because session ended with uuid:\(session.sessionId)")
         callKitProviderDelegate.provider.reportCall(with: call!.uuid, endedAt: Date(), reason: CXCallEndedReason.remoteEnded)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "call-update"), object: nil)
         self.call = nil
@@ -223,10 +223,11 @@ extension Sip: SessionDelegate {
     public func sessionReleased(_ session: Session) {
         VialerLogInfo("Session released..")
         
-        // In case of transfer's second call was cancelled or declined
+        // In case of transfer's second call was cancelled or declined. //WIP
         if firstTransferCall != nil && firstTransferCall?.session.sessionId != session.sessionId {
+            VialerLogInfo("Transfer's second call was cancelled or declined.")
             self.call = firstTransferCall
-            firstTransferCall = nil
+            //firstTransferCall = nil
         }
         
         if let call = self.call {
