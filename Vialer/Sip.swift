@@ -208,11 +208,10 @@ extension Sip: SessionDelegate {
             return
         }
         
-        //WIP
-//        if self.call?.simpleState != .finished {
-//            VialerLogDebug("Session ended but state is not finished.")
-//            return
-//        }
+        if self.call?.simpleState != .finished {
+            VialerLogDebug("Session ended but state is not finished.")
+            return
+        }
             
         VialerLogInfo("Ending call with sessionId:\(call!.session.sessionId) because session ended with uuid:\(session.sessionId)")
         callKitProviderDelegate.provider.reportCall(with: call!.uuid, endedAt: Date(), reason: CXCallEndedReason.remoteEnded)
@@ -221,13 +220,11 @@ extension Sip: SessionDelegate {
     }
 
     public func sessionReleased(_ session: Session) {
-        VialerLogInfo("Session released..")
+        VialerLogInfo("Session released.")
         
-        // In case of transfer's second call was cancelled or declined. //WIP
         if firstTransferCall != nil && firstTransferCall?.session.sessionId != session.sessionId {
             VialerLogInfo("Transfer's second call was cancelled or declined.")
             self.call = firstTransferCall
-            //firstTransferCall = nil
         }
         
         if let call = self.call {

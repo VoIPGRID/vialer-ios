@@ -91,14 +91,11 @@ extension SecondCallViewController {
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        guard let transferTargetSession = attendedTransferSession?.to else {return}
-        //Hang up the second call
-        let callEndSuccess = sip.endCall(for: transferTargetSession)
-        VialerLogInfo("Cancelling transfer, second call ended with success: \(callEndSuccess).")
-        
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
-        }
+        endSecondCallAndUnwindToFirst()
+    }
+    
+    override func hangupButtonPressed(_ sender: UIButton) {
+        endSecondCallAndUnwindToFirst()
     }
 }
 
@@ -126,6 +123,17 @@ extension SecondCallViewController {
             }
         }
         
+    }
+    
+    func endSecondCallAndUnwindToFirst() {
+        guard let transferTargetSession = attendedTransferSession?.to else {return}
+        
+        let callEndSuccess = sip.endCall(for: transferTargetSession)
+        VialerLogInfo("Second call ended with success: \(callEndSuccess). Unwinding back to the first one.")
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+        }
     }
 }
 

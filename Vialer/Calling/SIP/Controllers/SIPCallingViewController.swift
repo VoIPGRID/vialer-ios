@@ -192,23 +192,25 @@ extension SIPCallingViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(waitingTimeAfterDismissing * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { [weak self] in
             if self?.sip.call?.direction == Direction.inbound {
                 DispatchQueue.main.async {
+                    VialerLogInfo("Unwinding to VialerRootViewController.")
                     self?.performSegue(segueIdentifier: .unwindToVialerRootViewController)
                 }
             } else {
                 UIDevice.current.isProximityMonitoringEnabled = false
+                VialerLogInfo("Dismissing calling view.")
                 self?.presentingViewController?.dismiss(animated: false, completion: nil)
             }
         }
     }
     
     fileprivate func handleCallEnded() {
-        VialerLogInfo("handleCallEnded")
+        VialerLogInfo("HandleCallEnded.")
         hangupButton?.isEnabled = false
         dismissView()
     }
     
     @objc func handleCallUpdate(_: NSNotification) {
-        VialerLogInfo("State \(String(reflecting: call?.state))")
+        VialerLogInfo("HandleCallUpdate: State \(String(reflecting: call?.state)).")
         guard call != nil else {
             handleCallEnded()
             return
@@ -250,7 +252,7 @@ extension SIPCallingViewController {
     }
 
     func updateButtons(call: Call) {
-        //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .conneString(describing: cted
+        //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .connected
         holdButton?.active = call.session.state == .paused
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
