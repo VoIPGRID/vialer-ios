@@ -251,7 +251,7 @@ extension SIPCallingViewController {
 
     func updateButtons(call: Call) {
         //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .conneString(describing: cted
-        holdBu)tton?.active = call.session.state == .paused
+        holdButton?.active = call.session.state == .paused
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
 
