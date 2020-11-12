@@ -38,6 +38,7 @@ import CallKit
     /**
         Register with the currently logged in user.
     */
+    @objc
     func register(onRegister: ((Error?) -> ())? = nil) {
         PhoneLib.shared.registrationDelegate = self
 
@@ -179,6 +180,8 @@ extension Sip: SessionDelegate {
             return
         }
 
+        VialerLogDebug("Have call with uuid \(call.uuid)")
+
         let controller = CXCallController()
         let handle = CXHandle(type: .phoneNumber, value: call.session.remoteNumber)
         let startCallAction = CXStartCallAction(call: call.uuid, handle: handle)
@@ -186,7 +189,7 @@ extension Sip: SessionDelegate {
         let transaction = CXTransaction(action: startCallAction)
         controller.request(transaction) { error in
             if error != nil {
-                VialerLogError("Error on outgoing call.")
+                VialerLogError("Error on outgoing call \(String(describing: error?.localizedDescription))")
             } else {
                 VialerLogInfo("Setup of outgoing call.")
             }

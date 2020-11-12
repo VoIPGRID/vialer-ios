@@ -124,9 +124,15 @@ extension DialerViewController {
         lastCalledNumber = numberText
 
         if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
-            VialerGAITracker.setupOutgoingSIPCallEvent()
             DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .sipCalling)
+                self.sip.register { error in
+                    if (error == nil) {
+                       self.performSegue(segueIdentifier: .sipCalling)
+                    } else {
+                        VialerLogError("Failed to register when attempting outgoing call \(error?.localizedDescription)")
+                        self.present(RegistrationFailedAlert.create(), animated: true)
+                    }
+                }
             }
         } else {
             VialerGAITracker.setupOutgoingConnectABCallEvent()

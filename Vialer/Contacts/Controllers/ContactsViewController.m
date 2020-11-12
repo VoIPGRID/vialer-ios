@@ -324,8 +324,13 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
-                    [VialerGAITracker setupOutgoingSIPCallEvent];
-                    [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+
+                    Sip *sip = [Sip shared];
+                    [sip registerOnRegister: ^(NSError* error) {
+                        if (error == nil) {
+                           [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                        }
+                    }];
                 } else if (!self.reachability.isReachable) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
                                                                                    message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
