@@ -3,6 +3,10 @@ import PhoneLib
 
 class SetupCallTransfer: UIViewController {
 
+    lazy var sip: Sip = {
+        (UIApplication.shared.delegate as! AppDelegate).sip
+    }()
+    
     enum SegueIdentifier: String {
         case unwindToFirstCall = "UnwindToFirstCallSegue"
         case secondCallActive = "SecondCallActiveSegue"
@@ -22,6 +26,9 @@ class SetupCallTransfer: UIViewController {
     }
 
     var currentCall: Call?
+    
+    var attendedTransferSession: AttendedTransferSession?
+    var transferTargetPhoneNumber: String?
 
     func updateUI() {
         // Implement in sub class.

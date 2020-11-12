@@ -8,13 +8,6 @@ private var myContext = 0
 class SetupCallTransferContactsViewController: SetupCallTransfer, UITableViewDataSource, UITableViewDelegate, SegueHandler {
     fileprivate var contactModel = ContactModel.defaultModel
     fileprivate var callActionSheet: UIAlertController?
-    
-    private lazy var sip: Sip = {
-        (UIApplication.shared.delegate as! AppDelegate).sip
-    }()
-    
-    var attendedTransferSession: AttendedTransferSession?
-    var transferTargetPhoneNumber: String?
 
     @IBOutlet weak var firstCallNumberLabel: UILabel!
     @IBOutlet weak var firstCallStatusLabel: UILabel!
@@ -177,7 +170,7 @@ extension SetupCallTransferContactsViewController {
             
         case .unwindToFirstCall:
             let callVC = segue.destination as! SIPCallingViewController
-            VialerLogInfo("Unwinding to first call: \(String(describing: callVC.nameLabel.text))        \(String(describing: sip.call?.remoteNumber)).")
+            VialerLogInfo("Unwinding to first call: \(String(describing: callVC.nameLabel.text))        \(String(describing: callVC.numberLabel.text)).")
             if let cas = callActionSheet {
                 // If the action sheet is visible when unwinding to the first call, cancel it.
                 cas.dismiss(animated: false, completion: nil)
