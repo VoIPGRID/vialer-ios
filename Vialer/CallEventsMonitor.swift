@@ -32,7 +32,11 @@ class CallEventsMonitor:NSObject, CXCallObserverDelegate {
         }
 
         if call.isOutgoing == true && call.hasConnected == false && call.hasEnded == false {
-            VialerLogInfo("Dialing to call uuid \(call.uuid).")
+            if call.isOnHold {
+                VialerLogInfo("Pausing call uuid \(call.uuid).")
+            } else {
+                VialerLogInfo("Dialing to call uuid \(call.uuid).")
+            }
         }
 
         if call.isOutgoing == false && call.hasConnected == false && call.hasEnded == false {

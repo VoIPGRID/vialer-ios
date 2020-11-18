@@ -186,7 +186,14 @@ extension SetupCallTransferContactsViewController {
         transferTargetPhoneNumber = cleanedPhoneNumber
         
         guard let session = sip.call?.session else {return}
+        
         attendedTransferSession = sip.beginAttendedTransfer(session: session, to: cleanedPhoneNumber)
+        if attendedTransferSession == nil {
+            if let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Warning"), message: "\(NSLocalizedString("Transfer could not start with this phonenumber", comment:"Transfer could not start with this phonenumber")): \(cleanedPhoneNumber).", andDefaultButtonText: NSLocalizedString("Ok", comment: "")) {
+                self.present(alert, animated: true)
+            }
+            return
+        }
         
         DispatchQueue.main.async { [weak self] in
             self?.performSegue(segueIdentifier: .secondCallActive)

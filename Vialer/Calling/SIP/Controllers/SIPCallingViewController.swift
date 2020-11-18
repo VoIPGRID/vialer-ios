@@ -13,7 +13,7 @@ private var myContext = 0
 
 @objc class SIPCallingViewController: UIViewController, KeypadViewControllerDelegate, SegueHandler {
 
-    private lazy var sip: Sip = {
+    lazy var sip: Sip = {
         (UIApplication.shared.delegate as! AppDelegate).sip
     }()
 
@@ -203,7 +203,7 @@ extension SIPCallingViewController {
         }
     }
     
-    fileprivate func handleCallEnded() {
+    func handleCallEnded() {
         VialerLogInfo("HandleCallEnded.")
         hangupButton?.isEnabled = false
         dismissView()
@@ -211,10 +211,10 @@ extension SIPCallingViewController {
     
     @objc func handleCallUpdate(_: NSNotification) {
         VialerLogInfo("HandleCallUpdate: State \(String(reflecting: call?.state)).")
-        guard call != nil else {
-            handleCallEnded()
-            return
-        }
+//        guard call != nil else { //wip
+//            handleCallEnded()
+//            return
+//        }
         updateUI()
     }
 }
@@ -230,25 +230,30 @@ extension SIPCallingViewController {
         }
         
         guard var call = presentedCall else {
+            VialerLogInfo("Ending from UpdateUI as call object is nil.")
+            handleCallEnded()//wip
             return
         }
-        
+                
         if call.simpleState == .finished {
-            if sip.firstTransferCall == nil || presentsSecondCall {
-                VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: presentedCall?.state)) and UUID is \(String(describing: presentedCall?.uuid))")
+            if presentsSecondCall {
+                //will be handled in subclass
+                return
+            } else if sip.firstTransferCall == nil || sip.firstTransferCall?.simpleState == .finished { //wip
+                VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID is \(String(describing: call.uuid))")
                 handleCallEnded()
                 return
-            } else if sip.firstTransferCall != nil {
+            } else {//wip if sip.firstTransferCall != nil {
                 VialerLogInfo("Second call of the transfer ended, going to update UI for the first call screen.")
                 call = sip.firstTransferCall!
-                sip.firstTransferCall = nil
+                //sip.firstTransferCall = nil //wip
             }
         }
         
-        VialerLogInfo("Updating UI for call.uuid: \(call.uuid).")
-        updateButtons(call: call)
+        VialerLogInfo("Updating UI for call.uuid: \(call.uuid).") //wip delete this line
         updateCalleeLabels(call: call)
         updateStatusLabel(call: call)
+        updateButtons(call: call)
     }
 
     func updateButtons(call: Call) {

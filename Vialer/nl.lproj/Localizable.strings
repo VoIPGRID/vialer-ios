@@ -524,3 +524,10 @@
 
 /* Incoming calls will use a special ringtone specific to this application. */
 "Incoming calls will use a special ringtone specific to this application." = "Inkomende oproepen gebruiken een speciaal voor deze applicatie ontwikkelde ringtoon";
+
+/* Warning */
+"Warning" = "Waarschuwing";
+
+/* Transfer could not start with this phone number */
+"Transfer could not start with this phone number" = "Het is niet mogelijk om met dit nummer door te verbinden";
+

@@ -17,9 +17,6 @@ class SecondCallViewController: SIPCallingViewController {
     }
 
     // MARK: - Properties
-    private lazy var sip: Sip = {
-        (UIApplication.shared.delegate as! AppDelegate).sip
-    }()
     private var firstCallObserversWereSet = false
     
     var firstCall: Call? {
@@ -81,13 +78,18 @@ extension SecondCallViewController {
         let transferSuccess = sip.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
         
         if transferSuccess == true {
+            
+//            if let targetCall = self.attendedTransferSession?.to {
+//                _ = sip.endCall(for: targetCall) //sip.call = nil //wip
+//            }
+             
+            
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
             }
         } else {
             VialerLogError("Error on merging calls.")
         }
-        
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -104,7 +106,13 @@ extension SecondCallViewController {
     override func updateUI() {
         DispatchQueue.main.async {
             super.updateUI()
-
+            
+            guard let secondCall = self.sip.secondTransferCall else {return}
+            if secondCall.simpleState == .finished {
+                VialerLogInfo("Unwind to first call from updateUI() as second call has ended.")
+                self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
+            }
+            
             // Only enable transferButton if both calls are confirmed.
             self.transferButton?.isEnabled = self.sip.call?.simpleState == .inProgress && self.firstCall?.simpleState == .inProgress
             self.firstCallNumberLabel?.text = self.firstCallPhoneNumberLabelText
@@ -114,9 +122,9 @@ extension SecondCallViewController {
                 self.statusLabelTopConstraint.constant = 20
             }
 
-            guard let call = self.firstCall else { return }
+            guard let firstCall = self.firstCall else { return }
 
-            if call.simpleState == .finished {
+            if firstCall.simpleState == .finished {
                 self.firstCallStatusLabel?.text = NSLocalizedString("Disconnected", comment: "Disconnected phone state")
             } else {
                 self.firstCallStatusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
@@ -125,15 +133,12 @@ extension SecondCallViewController {
         
     }
     
-    func endSecondCallAndUnwindToFirst() {
+// MARK: - Call setup
+    func endSecondCallAndUnwindToFirst() { //wip
         guard let transferTargetSession = attendedTransferSession?.to else {return}
         
         let callEndSuccess = sip.endCall(for: transferTargetSession)
         VialerLogInfo("Second call ended with success: \(callEndSuccess). Unwinding back to the first one.")
-        
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: SecondCallVCSegue.unwindToFirstCall.rawValue, sender: nil)
-        }
     }
 }
 
@@ -146,13 +151,26 @@ extension SecondCallViewController {
             transferInProgressVC.firstCall = firstCall
             transferInProgressVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
             transferInProgressVC.currentCallPhoneNumberLabelText = currentCallPhoneNumberLabelText
+            
+            //wip - end all calls? set sip.call and other calls to nil? update UI?
+            //sip.call einai to second call of transfer - 209
+            //sip.firstTransferCall einai nil
+            //sip.secondTransferCall einai to 209
+//            if let session = sip.call?.session {
+//                VialerLogDebug("Transfer was a success, setting calls to nil.")
+//                _ = sip.endCall(for: session)
+//                sip.secondTransferCall = nil //wip
+//                sip.call = nil
+//                sip.firstTransferCall = nil
+//            }
+            
         case .unwindToFirstCall:
-            let firstCallVC = segue.destination as! SIPCallingViewController
+            _ = segue.destination as! SIPCallingViewController
         case .showKeypad:
             let keypadVC = segue.destination as! KeypadViewController
             keypadVC.delegate = self
         case .unwindToActiveCall:
-            let firstCallVC = segue.destination as! SIPCallingViewController
+            _ = segue.destination as! SIPCallingViewController
         }
     }
 }
