@@ -147,13 +147,8 @@ import CallKit
     }
     
     func finishAttendedTransfer(attendedTransferSession: AttendedTransferSession) -> Bool {
-        firstTransferCall = nil
-        
-        //wip
-//       secondTransferCall = nil
-//        call = nil
-        //report call has ended?
-        //wip
+        self.call = firstTransferCall
+        //firstTransferCall = nil //wip
         
         return phone.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
     }
@@ -186,8 +181,6 @@ extension Sip: SessionDelegate {
     public func outgoingDidInitialize(session: Session) {
         VialerLogDebug("On outgoingDidInitialize.")
 
-        //wip
-        
         //wip
         
         self.call = Call(session: session, direction: Direction.outbound)
@@ -225,21 +218,23 @@ extension Sip: SessionDelegate {
     public func sessionEnded(_ session: Session) {
         VialerLogDebug("Session has ended with session.uuid: \(session.sessionId).")
         
-        //wip session id is empty , try remoteNumber
-//        if session.sessionId == firstTransferCall?.session.sessionId {
-//            call = firstTransferCall
-//            VialerLogDebug("First Transfer Call is ending.")
-//        } else if session.sessionId == secondTransferCall?.session.sessionId {
-//            call = secondTransferCall
-//            VialerLogDebug("Second Transfer Call is ending.")
-//        }
+        //wip
+        if session.sessionId == firstTransferCall?.session.sessionId {
+            call = firstTransferCall
+            //firstTransferCall = nil
+            VialerLogDebug("First Transfer Call is ending.")
+        } else if session.sessionId == secondTransferCall?.session.sessionId {
+            call = secondTransferCall
+            //secondTransferCall = nil
+            VialerLogDebug("Second Transfer Call is ending.")
+        }
         
         if self.call == nil {
             VialerLogDebug("Session ended with nil call object, not reporting call ended to callKitDelegate.")
             return
         }
         
-        if self.call!.simpleState != .finished  { //wip && firstTransferCall != nil {
+        if self.call!.simpleState != .finished  {//this happens after merging calls.. //wip && firstTransferCall != nil {
             VialerLogDebug("Session ended but state is \(self.call!.simpleState).")
             //return //wip self.call  remoteNumber = "209"// but session is the 630821 and firstcall is nil
         }
@@ -261,7 +256,7 @@ extension Sip: SessionDelegate {
         }
         
         if let call = self.call {
-            if call.session.state == .released {
+            if call.session.state == .released { //wip
                 VialerLogInfo("Setting call with UUID: \(call.uuid) to nil because session has been released.")
                 self.call = nil
             }

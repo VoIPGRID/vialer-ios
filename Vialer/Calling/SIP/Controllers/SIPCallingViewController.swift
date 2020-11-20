@@ -224,9 +224,18 @@ extension SIPCallingViewController {
     @objc func updateUI() {
         var presentedCall: Call?
         if presentsSecondCall {
+            VialerLogInfo("Updating UI for second transfer call.")
             presentedCall = sip.secondTransferCall
         } else {
-            presentedCall = sip.firstTransferCall ?? call
+            VialerLogInfo("Updating UI for first call.")
+            //presentedCall = sip.firstTransferCall ?? call //wip
+            
+            //wip to fix dismissed outgoing after transfer
+            if sip.firstTransferCall != nil && sip.firstTransferCall?.simpleState != .finished {
+                presentedCall = sip.firstTransferCall
+            } else {
+                presentedCall = call
+            }
         }
         
         guard var call = presentedCall else {

@@ -202,7 +202,7 @@ extension VialerCallKitDelegate {
     */
     private func findCallOrFail(action: CXCallAction) -> Call? {
         guard let call = findCall(action: action) else {
-            VialerLogError("Failed to executed action \(String(describing: type(of: action))), call not found.")
+            VialerLogError("Failed to execute action \(String(describing: type(of: action))), call not found.")
             action.fail()
             return nil
         }
