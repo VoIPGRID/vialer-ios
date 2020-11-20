@@ -137,7 +137,7 @@ import CallKit
     }
     
     func beginAttendedTransfer(session: Session, to number:String) -> AttendedTransferSession? {
-        if number == call?.session.remoteNumber { //wip
+        if number == call?.session.remoteNumber {
             VialerLogWarning("Cannot transfer to same phonenumber as first call's.")
             return nil
         }
@@ -148,8 +148,6 @@ import CallKit
     
     func finishAttendedTransfer(attendedTransferSession: AttendedTransferSession) -> Bool {
         self.call = firstTransferCall
-        //firstTransferCall = nil //wip
-        
         return phone.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
     }
 }
@@ -180,11 +178,8 @@ extension Sip: SessionDelegate {
 
     public func outgoingDidInitialize(session: Session) {
         VialerLogDebug("On outgoingDidInitialize.")
-
-        //wip
         
         self.call = Call(session: session, direction: Direction.outbound)
-
         guard let call = self.call else {
             VialerLogError("Unable to find call setup...")
             return
@@ -218,14 +213,11 @@ extension Sip: SessionDelegate {
     public func sessionEnded(_ session: Session) {
         VialerLogDebug("Session has ended with session.uuid: \(session.sessionId).")
         
-        //wip
         if session.sessionId == firstTransferCall?.session.sessionId {
             call = firstTransferCall
-            //firstTransferCall = nil
             VialerLogDebug("First Transfer Call is ending.")
         } else if session.sessionId == secondTransferCall?.session.sessionId {
             call = secondTransferCall
-            //secondTransferCall = nil
             VialerLogDebug("Second Transfer Call is ending.")
         }
         
@@ -233,15 +225,8 @@ extension Sip: SessionDelegate {
             VialerLogDebug("Session ended with nil call object, not reporting call ended to callKitDelegate.")
             return
         }
-        
-        if self.call!.simpleState != .finished  {//this happens after merging calls.. //wip && firstTransferCall != nil {
-            VialerLogDebug("Session ended but state is \(self.call!.simpleState).")
-            //return //wip self.call  remoteNumber = "209"// but session is the 630821 and firstcall is nil
-        }
             
-
-        
-        VialerLogInfo("Ending call with sessionId:\(call!.session.sessionId) because session ended with uuid:\(session.sessionId)") //wip
+        VialerLogInfo("Ending call with sessionId:\(call!.session.sessionId) because session ended with uuid:\(session.sessionId)")
         callKitProviderDelegate.provider.reportCall(with: call!.uuid, endedAt: Date(), reason: CXCallEndedReason.remoteEnded)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "call-update"), object: nil)
         self.call = nil
@@ -251,13 +236,17 @@ extension Sip: SessionDelegate {
         VialerLogInfo("Session released.")
         
         if firstTransferCall != nil && firstTransferCall?.session.sessionId != session.sessionId {
-            VialerLogInfo("Transfer's second call was cancelled or declined. Setting sip.call to first transfer call.")
+            VialerLogInfo("Transfer's second call was cancelled or declined.")
+            if let uuid = call?.uuid {
+                callKitProviderDelegate.provider.reportCall(with: uuid, endedAt: Date(), reason: CXCallEndedReason.remoteEnded)
+            }
             self.call = firstTransferCall
         }
         
         if let call = self.call {
-            if call.session.state == .released { //wip
-                VialerLogInfo("Setting call with UUID: \(call.uuid) to nil because session has been released.")
+            if call.session.state == .released {
+                VialerLogInfo("Setting call with UUID: \(call.uuid) to nil because its session has been released.")
+                callKitProviderDelegate.provider.reportCall(with: call.uuid, endedAt: Date(), reason: CXCallEndedReason.remoteEnded)
                 self.call = nil
             }
         }

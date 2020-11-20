@@ -78,12 +78,6 @@ extension SecondCallViewController {
         let transferSuccess = sip.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
         
         if transferSuccess == true {
-            
-//            if let targetCall = self.attendedTransferSession?.to {
-//                _ = sip.endCall(for: targetCall) //sip.call = nil //wip
-//            }
-             
-            
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: SecondCallVCSegue.transferInProgress.rawValue, sender: nil)
             }
@@ -134,7 +128,7 @@ extension SecondCallViewController {
     }
     
 // MARK: - Call setup
-    func endSecondCallAndUnwindToFirst() { //wip
+    func endSecondCallAndUnwindToFirst() {
         guard let transferTargetSession = attendedTransferSession?.to else {return}
         
         let callEndSuccess = sip.endCall(for: transferTargetSession)
@@ -151,19 +145,6 @@ extension SecondCallViewController {
             transferInProgressVC.firstCall = firstCall
             transferInProgressVC.firstCallPhoneNumberLabelText = firstCallPhoneNumberLabelText
             transferInProgressVC.currentCallPhoneNumberLabelText = currentCallPhoneNumberLabelText
-            
-            //wip - end all calls? set sip.call and other calls to nil? update UI?
-            //sip.call einai to second call of transfer - 209
-            //sip.firstTransferCall einai nil
-            //sip.secondTransferCall einai to 209
-//            if let session = sip.call?.session {
-//                VialerLogDebug("Transfer was a success, setting calls to nil.")
-//                _ = sip.endCall(for: session)
-//                sip.secondTransferCall = nil //wip
-//                sip.call = nil
-//                sip.firstTransferCall = nil
-//            }
-            
         case .unwindToFirstCall:
             _ = segue.destination as! SIPCallingViewController
         case .showKeypad:

@@ -211,10 +211,6 @@ extension SIPCallingViewController {
     
     @objc func handleCallUpdate(_: NSNotification) {
         VialerLogInfo("HandleCallUpdate: State \(String(reflecting: call?.state)).")
-//        guard call != nil else { //wip
-//            handleCallEnded()
-//            return
-//        }
         updateUI()
     }
 }
@@ -228,9 +224,7 @@ extension SIPCallingViewController {
             presentedCall = sip.secondTransferCall
         } else {
             VialerLogInfo("Updating UI for first call.")
-            //presentedCall = sip.firstTransferCall ?? call //wip
             
-            //wip to fix dismissed outgoing after transfer
             if sip.firstTransferCall != nil && sip.firstTransferCall?.simpleState != .finished {
                 presentedCall = sip.firstTransferCall
             } else {
@@ -240,7 +234,7 @@ extension SIPCallingViewController {
         
         guard var call = presentedCall else {
             VialerLogInfo("Ending from UpdateUI as call object is nil.")
-            handleCallEnded()//wip
+            handleCallEnded()
             return
         }
                 
@@ -248,18 +242,19 @@ extension SIPCallingViewController {
             if presentsSecondCall {
                 //will be handled in subclass
                 return
-            } else if sip.firstTransferCall == nil || sip.firstTransferCall?.simpleState == .finished { //wip
+            } else if sip.firstTransferCall == nil || sip.firstTransferCall?.simpleState == .finished {
                 VialerLogInfo("Ending from UpdateUI as state is \(String(reflecting: call.state)) and UUID is \(String(describing: call.uuid))")
                 handleCallEnded()
                 return
-            } else {//wip if sip.firstTransferCall != nil {
+            } else {
                 VialerLogInfo("Second call of the transfer ended, going to update UI for the first call screen.")
                 call = sip.firstTransferCall!
-                //sip.firstTransferCall = nil //wip
             }
         }
         
-        VialerLogInfo("Updating UI for call.uuid: \(call.uuid).") //wip delete this line
+#if DEBUG
+        VialerLogDebug("Updating UI for call.uuid: \(call.uuid).")
+#endif
         updateCalleeLabels(call: call)
         updateStatusLabel(call: call)
         updateButtons(call: call)
