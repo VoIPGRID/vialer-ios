@@ -47,16 +47,6 @@ private var myContext = 0
 
     private var dtmf: String = ""
 
-    /**
-        The remote number that has been called with the dialed dtmf
-        appended.
-    */
-    private var displayedNumber: String {
-        get {
-            "\(call?.remoteNumber ?? "") \(dtmf)"
-        }
-    }
-
     private var displayedName = ""
     
     private lazy var dateComponentsFormatter: DateComponentsFormatter = {
@@ -146,11 +136,9 @@ extension SIPCallingViewController {
     }
     
     @IBAction func keypadButtonPressed(_ sender: SipCallingButton) {
-//        dtmfWholeValue += dtmfSingleTimeValue
-//        dtmfSingleTimeValue = ""
-//        DispatchQueue.main.async {
-//            self.performSegue(segueIdentifier: .showKeypad)
-//        }
+        DispatchQueue.main.async {
+            self.performSegue(segueIdentifier: .showKeypad)
+        }
     }
     
     @IBAction func speakerButtonPressed(_ sender: SipCallingButton) {
@@ -261,7 +249,6 @@ extension SIPCallingViewController {
     }
 
     func updateButtons(call: Call) {
-        //keypadButton?.isEnabled = call.session.state == .paused && call.session.state == .connected
         holdButton?.active = call.session.state == .paused
         muteButton?.active = phone.isMicrophoneMuted
         speakerButton?.active = phone.isSpeakerOn
@@ -281,18 +268,21 @@ extension SIPCallingViewController {
             transferButton?.isEnabled = false
             speakerButton?.isEnabled = true
             hangupButton?.isEnabled = true
+            keypadButton?.isEnabled = false
         case .inProgress:
             holdButton?.isEnabled = true
             muteButton?.isEnabled = true
             transferButton?.isEnabled = true
             speakerButton?.isEnabled = true
             hangupButton?.isEnabled = true
+            keypadButton?.isEnabled = true
         case .finished:
             holdButton?.isEnabled = false
             muteButton?.isEnabled = false
             transferButton?.isEnabled = false
             speakerButton?.isEnabled = false
             hangupButton?.isEnabled = false
+            keypadButton?.isEnabled = false
         }
     }
 
@@ -316,15 +306,19 @@ extension SIPCallingViewController {
 
     func updateCalleeLabels(call: Call) {
         let name = call.displayName,
-            number = displayedNumber
+            number = call.remoteNumber
 
         if name?.isEmpty == false {
             nameLabel?.text = name
             numberLabel.text = number
         } else {
-            setDisplayedName(phoneNumber: displayedNumber)
+            setDisplayedName(phoneNumber: number)
             nameLabel?.text = displayedName.isEmpty ? number : displayedName
             numberLabel.text = displayedName.isEmpty ? "" : number
+        }
+        
+        if !dtmf.isEmpty {
+            numberLabel.text = dtmf
         }
     }
     
@@ -349,7 +343,7 @@ extension SIPCallingViewController {
             let keypadVC = segue.destination as! KeypadViewController
             keypadVC.call = call
             keypadVC.delegate = self
-            keypadVC.phoneNumberLabelText = displayedNumber
+            keypadVC.phoneNumberLabelText = dtmf.isEmpty ? call?.remoteNumber : dtmf
         case .setupTransfer:
             let tabBarC = segue.destination as! UITabBarController
             let transferContactListNavC = tabBarC.viewControllers![0] as! UINavigationController
@@ -357,10 +351,10 @@ extension SIPCallingViewController {
             let setupCallTransferContactsVC = transferContactListNavC.viewControllers[0] as! SetupCallTransferContactsViewController
             let setupCallTransferDialPadVC = transferDialPadNavC.viewControllers[0] as! SetupCallTransferDialPadViewController
             setupCallTransferDialPadVC.firstCall = call
-            setupCallTransferDialPadVC.firstCallPhoneNumberLabelText = displayedNumber
+            setupCallTransferDialPadVC.firstCallPhoneNumberLabelText = call?.remoteNumber
             
             setupCallTransferContactsVC.firstCall = call
-            setupCallTransferContactsVC.firstCallPhoneNumberLabelText = displayedNumber
+            setupCallTransferContactsVC.firstCallPhoneNumberLabelText = call?.remoteNumber
         case .unwindToVialerRootViewController:
             break
         }
@@ -375,7 +369,7 @@ extension SIPCallingViewController {
 // MARK: - KeypadViewControllerDelegate
 extension SIPCallingViewController {
     func dtmfSent(_ dtmfSent: String?) {
-        self.dtmf += dtmfSent ?? ""
+        dtmf = dtmfSent ?? dtmf
     }
 }
 

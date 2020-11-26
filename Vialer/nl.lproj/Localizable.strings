@@ -39,7 +39,7 @@
 /* No comment provided by engineer. */
 "Call canceled" = "Gesprek geannuleerd";
 
-/* Statuslabel state text .Disconnected */
+/* Statuslabel state text .finished */
 "Call ended" = "Gesprek beëindigd";
 
 /* Call has Ended, enable WiFi? */

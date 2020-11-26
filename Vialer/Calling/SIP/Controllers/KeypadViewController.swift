@@ -21,11 +21,10 @@ class KeypadViewController: UIViewController {
     // MARK: - Properties
     var call: Call?
     var delegate: KeypadViewControllerDelegate?
-//    var callManager: VSLCallManager {
-//        get {
-//            return VialerSIPLib.sharedInstance().callManager
-//        }
-//    }
+    
+    lazy var sip: Sip = {
+        (UIApplication.shared.delegate as! AppDelegate).sip
+    }()
 
     var phoneNumberLabelText: String? {
         didSet {
@@ -76,27 +75,21 @@ class KeypadViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func numberButtonPressed(_ sender: NumberPadButton) {
-//        guard let call = call, call.callState != .disconnected else { return }
-//        DispatchQueue.main.async{ [weak self] in
-//            if let numberPressed = sender.number {
-//                self?.callManager.sendDTMF(for: call, character: numberPressed) { error in
-//                    if error != nil {
-//                        VialerLogError("Error sending DTMF: \(String(describing: error))")
-//                    } else {
-//                        self?.dtmfSent = (self?.dtmfSent ?? "") + numberPressed
-//                    }
-//                }
-//            }
-//        }
+        guard let call = call, call.simpleState != .finished else { return }
+        DispatchQueue.main.async{ [weak self] in
+            if let numberPressed = sender.number {
+                self?.sip.sendDtmf(session: call.session, dtmf: numberPressed)
+                self?.dtmfSent = (self?.dtmfSent ?? "") + numberPressed
+            }
+        }
     }
 
     @IBAction func endCallButtonPressed(_ sender: SipCallingButton) {
-//        guard let call = call, call.callState != .disconnected else { return }
-//        callManager.end(call) { error in
-//            if error != nil {
-//                VialerLogError("Error ending call: \(String(describing: error))")
-//            }
-//        }
+        guard let call = call, call.simpleState != .finished else { return }
+        let success = sip.endCall(for: call.session)
+        if success != true {
+            VialerLogError("Error ending call with uuid: \(String(describing: call.uuid))")
+        }
     }
 
     @IBAction func hideButtonPressed(_ sender: UIButton) {
@@ -110,29 +103,13 @@ class KeypadViewController: UIViewController {
     // MARK: - Helper functions
 
     @objc func updateUI() {
-
-//        numberLabel.text = dtmfSent ?? phoneNumberLabelText
-//
-//        guard let call = call else { return }
-//        switch call.callState {
-//        case .null:
-//            statusLabel.text = ""
-//        case .calling: fallthrough
-//        case .early:
-//            statusLabel.text = NSLocalizedString("Calling...", comment: "Statuslabel state text .Calling")
-//        case .incoming:
-//            statusLabel.text = NSLocalizedString("Incoming call...", comment: "Statuslabel state text .Incoming")
-//        case .connecting:
-//            statusLabel.text = NSLocalizedString("Connecting...", comment: "Statuslabel state text .Connecting")
-//        case .confirmed:
-//            if call.onHold {
-//                statusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
-//            } else {
-//                statusLabel?.text = "\(dateComponentsFormatter.string(from: call.connectDuration)!)"
-//            }
-//        case .disconnected:
-//            statusLabel.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
-//        }
+        numberLabel.text = dtmfSent ?? phoneNumberLabelText
+        
+        if call?.simpleState != .finished && call != nil {
+            statusLabel.text = "\(dateComponentsFormatter.string(from: TimeInterval(call!.duration))!)"
+        } else {
+            statusLabel.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .finished")
+        }
     }
 
     private func startConnectDurationTimer() {
@@ -142,7 +119,6 @@ class KeypadViewController: UIViewController {
     }
 
     // MARK: - KVO
-
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 //        if context == &myContext , let call = object as? VSLCall {
 //            DispatchQueue.main.async { [weak self] in

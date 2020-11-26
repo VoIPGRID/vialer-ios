@@ -150,6 +150,10 @@ import CallKit
         self.call = firstTransferCall
         return phone.finishAttendedTransfer(attendedTransferSession: attendedTransferSession)
     }
+    
+    func sendDtmf(session:Session, dtmf:String){
+        phone.sendDtmf(session: session, dtmf: dtmf)
+    }
 }
 
 // MARK: - SessionDelegate
