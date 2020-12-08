@@ -209,13 +209,10 @@ extension RecentsViewController {
         if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             MicPermissionHelper.requestMicrophonePermission { startCalling in
-                if startCalling {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if startCalling {
                         self.performSegue(segueIdentifier: .sipCalling)
-                    }
-                } else {
-                    // No Mic, present alert
-                    DispatchQueue.main.async {
+                    } else {
                         let alert = MicPermissionHelper.createMicPermissionAlert()
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -227,14 +224,12 @@ extension RecentsViewController {
         } else {
             VialerGAITracker.setupOutgoingConnectABCallEvent()
             MicPermissionHelper.requestMicrophonePermission { startCalling in
-                if startCalling {
-                    DispatchQueue.main.async {
-                        self.performSegue(segueIdentifier: .twoStepCalling)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        let alert = MicPermissionHelper.createMicPermissionAlert()
-                        self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    if startCalling {
+                            self.performSegue(segueIdentifier: .twoStepCalling)
+                    } else {
+                            let alert = MicPermissionHelper.createMicPermissionAlert()
+                            self.present(alert, animated: true, completion: nil)
                     }
                 }
             }

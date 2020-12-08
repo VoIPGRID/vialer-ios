@@ -126,19 +126,17 @@ extension DialerViewController {
         let group = DispatchGroup()
         group.enter()
         
-        DispatchQueue.main.async {
-            MicPermissionHelper.requestMicrophonePermission { startCalling in
-                if !startCalling {
-                    // No Mic, present alert
-                    DispatchQueue.main.async {
-                        let alert = MicPermissionHelper.createMicPermissionAlert()
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                    return
+        MicPermissionHelper.requestMicrophonePermission { startCalling in
+            if !startCalling {
+                DispatchQueue.main.async {
+                    let alert = MicPermissionHelper.createMicPermissionAlert()
+                    self.present(alert, animated: true, completion: nil)
                 }
-                group.leave()
+                return
             }
+            group.leave()
         }
+
         group.notify(queue: .main) {
             if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
                 DispatchQueue.main.async {
