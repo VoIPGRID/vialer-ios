@@ -357,6 +357,15 @@
 		83916FD1231D09E300EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
 		83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */; };
+		83B84F87257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F88257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F89257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F8A257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F8B257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F8C257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F8D257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F8E257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
+		83B84F8F257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */; };
 		83C040FF22B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		83C0410022B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
 		83C0410122B1291600405624 /* SetupCallTransferDialPadViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0410622B1291600405624 /* SetupCallTransferDialPadViewController.storyboard */; };
@@ -1720,6 +1729,7 @@
 		83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
 		83A2427B219B1C0D0018FD6C /* MiddlewareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddlewareTests.m; sourceTree = "<group>"; };
+		83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicPermissionHelper.swift; sourceTree = "<group>"; };
 		83C0410722B1293A00405624 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SetupCallTransferDialPadViewController.storyboard; sourceTree = "<group>"; };
 		83C0410822B1295F00405624 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SetupCallTransferDialPadViewController.strings; sourceTree = "<group>"; };
 		83CB73472296C9EF00987168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -3506,6 +3516,7 @@
 		FB5D291A182BE407001DA8F2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */,
 				C4C675641D19B5430003A385 /* AppInfo.swift */,
 				C43FD69A1E76F4C6002593DD /* NotificationToken.swift */,
 				C4AEB2491E6D593100550E0C /* SegueHandler.swift */,
@@ -6095,6 +6106,7 @@
 				838206702290979A0098EABD /* ColorsConfiguration.swift in Sources */,
 				838206712290979A0098EABD /* UIAlertController+Vialer.m in Sources */,
 				838206722290979A0098EABD /* UrlsConfiguration.swift in Sources */,
+				83B84F8E257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				838206732290979A0098EABD /* EditNumberViewController.m in Sources */,
 				838206742290979A0098EABD /* VialerWebViewController.m in Sources */,
 				838206752290979A0098EABD /* UIViewControllerExtensions.swift in Sources */,
@@ -6210,6 +6222,7 @@
 				8382071F229098D20098EABD /* ColorsConfiguration.swift in Sources */,
 				83820720229098D20098EABD /* UIDeviceExtensions.swift in Sources */,
 				83820721229098D20098EABD /* UrlsConfiguration.swift in Sources */,
+				83B84F8C257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				83820722229098D20098EABD /* UIAlertController+Vialer.m in Sources */,
 				83820723229098D20098EABD /* EditNumberViewController.m in Sources */,
 				83820724229098D20098EABD /* VialerWebViewController.m in Sources */,
@@ -6325,6 +6338,7 @@
 				EE5EC3C2213FE0F70000EE4D /* ColorsConfiguration.swift in Sources */,
 				C4AEB24C1E6D593100550E0C /* SegueHandler.swift in Sources */,
 				83FC98A82289AFBD00A44738 /* SetupCallTransferContactsViewController.swift in Sources */,
+				83B84F89257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				EE5EC3AD213D08670000EE4D /* UrlsConfiguration.swift in Sources */,
 				F2C44A761DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				C41FD8701C60A08400BBE6D7 /* UIAlertController+Vialer.m in Sources */,
@@ -6468,6 +6482,7 @@
 				F2C44A771DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
 				EE5EC3C4213FE0F70000EE4D /* ColorsConfiguration.swift in Sources */,
 				EEA3C26C1F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
+				83B84F8B257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				83FC98AA2289AFBF00A44738 /* SetupCallTransferContactsViewController.swift in Sources */,
 				EE5EC3AF213D08670000EE4D /* UrlsConfiguration.swift in Sources */,
 				C490AD8A1D0863E3004A8F83 /* UIAlertController+Vialer.m in Sources */,
@@ -6585,6 +6600,7 @@
 				F81F0A5F107532D59815FA26 /* VoIPPushPayload.swift in Sources */,
 				F81F0106895F689598102B6B /* Sip.swift in Sources */,
 				F81F0111C149958AC7E5AA67 /* Call.swift in Sources */,
+				83B84F8F257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				F81F02C740AA19F43047DE0B /* RegistrationFailedAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6635,6 +6651,7 @@
 				EE23183220A0468F00C05EB0 /* UIDeviceExtensions.swift in Sources */,
 				EE5EC3C5213FE0F70000EE4D /* ColorsConfiguration.swift in Sources */,
 				EE23183320A0468F00C05EB0 /* UIAlertController+Vialer.m in Sources */,
+				83B84F8D257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				83FC98AB2289AFBF00A44738 /* SetupCallTransferContactsViewController.swift in Sources */,
 				EE5EC3B0213D08670000EE4D /* UrlsConfiguration.swift in Sources */,
 				EE23183420A0468F00C05EB0 /* EditNumberViewController.m in Sources */,
@@ -6769,6 +6786,7 @@
 				EE61F4191F1DDDE4006E890F /* SegueHandler.swift in Sources */,
 				EE5EC3C3213FE0F70000EE4D /* ColorsConfiguration.swift in Sources */,
 				EEA3C26B1F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
+				83B84F8A257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				83FC98A92289AFBE00A44738 /* SetupCallTransferContactsViewController.swift in Sources */,
 				EE5EC3AE213D08670000EE4D /* UrlsConfiguration.swift in Sources */,
 				EE61F41B1F1DDDE4006E890F /* StartCallConvertible.swift in Sources */,
@@ -6884,6 +6902,7 @@
 				C4AEB24B1E6D593100550E0C /* SegueHandler.swift in Sources */,
 				EE5EC3C1213FE0F70000EE4D /* ColorsConfiguration.swift in Sources */,
 				EEA3C2681F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
+				83B84F88257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				83FC98A72289AFBD00A44738 /* SetupCallTransferContactsViewController.swift in Sources */,
 				EE5EC3AC213D08670000EE4D /* UrlsConfiguration.swift in Sources */,
 				F2C44A751DE4149F00F7CF50 /* StartCallConvertible.swift in Sources */,
@@ -7018,6 +7037,7 @@
 				EEA3C2661F908B6700423F96 /* UIDeviceExtensions.swift in Sources */,
 				EE5EC3C0213FE0F70000EE4D /* ColorsConfiguration.swift in Sources */,
 				C45F3DFE1BFE67150012494D /* UIAlertController+Vialer.m in Sources */,
+				83B84F87257E9C3600BABAC7 /* MicPermissionHelper.swift in Sources */,
 				EE5EC3AB213D08670000EE4D /* UrlsConfiguration.swift in Sources */,
 				C46760021C46EBBE008820C8 /* EditNumberViewController.m in Sources */,
 				C4C3EAEC1BFB73B200AA4B2A /* VialerWebViewController.m in Sources */,

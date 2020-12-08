@@ -7,7 +7,6 @@ import UIKit
 import CoreData
 import ContactsUI
 import Contacts
-import AVFoundation
 
 class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
 
@@ -180,15 +179,7 @@ extension RecentsViewController {
             let twoStepCallingVC = segue.destination as! TwoStepCallingViewController
             twoStepCallingVC.handlePhoneNumber(phoneNumberToCall)
         case .sipCalling:
-            checkMicrophonePermission { startCalling in
-                if startCalling {
-                    self.sip.call(number: self.phoneNumberToCall)
-                } else {
-                    // No Mic, present alert
-                    self.presentEnableMicrophoneAlert()
-                }
-            }
-            
+            _ = self.sip.call(number: self.phoneNumberToCall)
         case .reachabilityBar:
             break
         }
@@ -212,58 +203,40 @@ extension RecentsViewController {
         reachabilityBarHeigthConstraint.constant = 0.0
         navigationController?.view.backgroundColor = colorsConfiguration.colorForKey(ColorsConfiguration.Colors.navigationBarBarTint)
     }
-    
-    fileprivate func checkMicrophonePermission(completion: @escaping ((_ startCalling: Bool) -> Void)) {
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            if granted {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    /// Show a notification that makes it possible to open the settings and enable the microphone
-        ///
-        /// Activating the microphone permission will terminate the app.
-    fileprivate func presentEnableMicrophoneAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Access to microphone denied", comment: "Access to microphone denied"),
-                message: NSLocalizedString("Give permission to use your microphone.\nGo to",
-                        comment: "Give permission to use your microphone.\nGo to"),
-                preferredStyle: .alert)
-
-        // Cancel the call, without audio, calling isn't possible.
-        let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            DispatchQueue.main.async {
-                //TODO: implement the unwind
-//                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
-            }
-        }
-        alertController.addAction(noAction)
-
-        // User wants to open the settings to enable microphone permission.
-        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
-            UIApplication.shared.openURL(URL(string:UIApplication.openSettingsURLString)!)
-        }
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
 
     fileprivate func call(_ number: String) {
         phoneNumberToCall = number
         if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .sipCalling)
+            MicPermissionHelper.requestMicrophonePermission { startCalling in
+                if startCalling {
+                    DispatchQueue.main.async {
+                        self.performSegue(segueIdentifier: .sipCalling)
+                    }
+                } else {
+                    // No Mic, present alert
+                    DispatchQueue.main.async {
+                        let alert = MicPermissionHelper.createMicPermissionAlert()
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
             }
         } else if reachability.status == .notReachable {
             let alert = UIAlertController(title: NSLocalizedString("No internet connection", comment: "No internet connection"), message: NSLocalizedString("It's not possible to setup a call. Make sure you have an internet connection.", comment: "It's not possible to setup a call. Make sure you have an internet connection."), andDefaultButtonText: NSLocalizedString("Ok", comment: "Ok"))!
             present(alert, animated: true, completion: nil)
         } else {
             VialerGAITracker.setupOutgoingConnectABCallEvent()
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .twoStepCalling)
+            MicPermissionHelper.requestMicrophonePermission { startCalling in
+                if startCalling {
+                    DispatchQueue.main.async {
+                        self.performSegue(segueIdentifier: .twoStepCalling)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let alert = MicPermissionHelper.createMicPermissionAlert()
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
             }
         }
     }

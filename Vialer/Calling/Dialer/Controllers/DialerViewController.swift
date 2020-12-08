@@ -122,22 +122,40 @@ extension DialerViewController {
         }
 
         lastCalledNumber = numberText
-
-        if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
-            DispatchQueue.main.async {
-                self.sip.register { error in
-                    if (error == nil) {
-                       self.performSegue(segueIdentifier: .sipCalling)
-                    } else {
-                        VialerLogError("Failed to register when attempting outgoing call \(error?.localizedDescription)")
-                        self.present(RegistrationFailedAlert.create(), animated: true)
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue.main.async {
+            MicPermissionHelper.requestMicrophonePermission { startCalling in
+                if !startCalling {
+                    // No Mic, present alert
+                    DispatchQueue.main.async {
+                        let alert = MicPermissionHelper.createMicPermissionAlert()
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    return
+                }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
+                DispatchQueue.main.async {
+                    self.sip.register { error in
+                        if (error == nil) {
+                           self.performSegue(segueIdentifier: .sipCalling)
+                        } else {
+                            VialerLogError("Failed to register when attempting outgoing call \(String(describing: error?.localizedDescription))")
+                            self.present(RegistrationFailedAlert.create(), animated: true)
+                        }
                     }
                 }
-            }
-        } else {
-            VialerGAITracker.setupOutgoingConnectABCallEvent()
-            DispatchQueue.main.async {
-                self.performSegue(segueIdentifier: .twoStepCalling)
+            } else {
+                VialerGAITracker.setupOutgoingConnectABCallEvent()
+                DispatchQueue.main.async {
+                    self.performSegue(segueIdentifier: .twoStepCalling)
+                }
             }
         }
     }
@@ -160,60 +178,15 @@ extension DialerViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(segue: segue) {
         case .sipCalling:
-            checkMicrophonePermission { startCalling in
-                if startCalling {
-                    _ = self.sip.call(number: self.numberText!)
-                } else {
-                    // No Mic, present alert
-                    self.presentEnableMicrophoneAlert()
-                }
-            }
-
+            _ = self.sip.call(number: self.numberText ?? "")
             numberText = nil
         case .twoStepCalling:
             let twoStepCallingVC = segue.destination as! TwoStepCallingViewController
-            twoStepCallingVC.handlePhoneNumber(numberText!)
+            twoStepCallingVC.handlePhoneNumber(numberText ?? "")
             numberText = nil
         case .reachabilityBar:
             break
         }
-    }
-
-    fileprivate func checkMicrophonePermission(completion: @escaping ((_ startCalling: Bool) -> Void)) {
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            if granted {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-
-    /// Show a notification that makes it possible to open the settings and enable the microphone
-    ///
-    /// Activating the microphone permission will terminate the app.
-    fileprivate func presentEnableMicrophoneAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Access to microphone denied", comment: "Access to microphone denied"),
-                message: NSLocalizedString("Give permission to use your microphone.\nGo to",
-                        comment: "Give permission to use your microphone.\nGo to"),
-                preferredStyle: .alert)
-
-        // Cancel the call, without audio, calling isn't possible.
-        let noAction = UIAlertAction(title: NSLocalizedString("Cancel call", comment: "Cancel call"), style: .cancel) { action in
-            DispatchQueue.main.async {
-                //TODO: implement the unwind
-//                self.performSegue(segueIdentifier: .unwindToVialerRootViewController)
-            }
-        }
-        alertController.addAction(noAction)
-
-        // User wants to open the settings to enable microphone permission.
-        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { action in
-            UIApplication.shared.openURL(URL(string:UIApplication.openSettingsURLString)!)
-        }
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
     }
 }
 

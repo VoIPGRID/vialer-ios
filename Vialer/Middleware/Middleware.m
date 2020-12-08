@@ -10,7 +10,6 @@
 #import "Vialer-Swift.h"
 
 static float const MiddlewareResendTimeInterval = 10.0;
-static int const MiddlewareMaxAttempts = 8;
 NSString * const MiddlewareRegistrationOnOtherDeviceNotification = @"MiddlewareRegistrationOnOtherDeviceNotification";
 NSString * const MiddlewareAccountRegistrationIsDoneNotification = @"MiddlewareAccountRegistrationIsDoneNotification";
 

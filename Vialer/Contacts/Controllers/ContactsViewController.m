@@ -191,7 +191,6 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
-        //TODO: Arrange mic permission
         Sip *sip = [Sip shared];
         Session *session = [sip callWithNumber:self.phoneNumberToCall];
         if (session == nil) {
@@ -324,11 +323,21 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
-
                     Sip *sip = [Sip shared];
                     [sip registerOnRegister: ^(NSError* error) {
                         if (error == nil) {
-                           [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                               [MicPermissionHelper requestMicrophonePermissionWithCompletion:^void(BOOL startCalling) {
+                                   if (startCalling == YES) {
+                                       [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                                   } else {
+                                       UIAlertController* alert = [MicPermissionHelper createMicPermissionAlert];
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self presentViewController:alert animated:YES completion:nil];
+                                       });
+                                   }
+                               }];
+                            });
                         }
                     }];
                 } else if (!self.reachability.isReachable) {
@@ -338,7 +347,18 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                     [self presentViewController:alert animated:YES completion:nil];
                 } else {
                     [VialerGAITracker setupOutgoingConnectABCallEvent];
-                    [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                       [MicPermissionHelper requestMicrophonePermissionWithCompletion:^void(BOOL startCalling) {
+                           if (startCalling == YES) {
+                               [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
+                           } else {
+                               UIAlertController* alert = [MicPermissionHelper createMicPermissionAlert];
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   [self presentViewController:alert animated:YES completion:nil];
+                               });
+                           }
+                       }];
+                    });
                 }
             });
         });

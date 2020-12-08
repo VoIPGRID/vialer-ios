@@ -331,7 +331,7 @@ extension AppDelegate {
             }
 
             if error != nil {
-                VialerLogError("Failed to enable OPUS for user: \(error)")
+                VialerLogError("Failed to enable OPUS for user: \(String(describing: error))")
             }
         }
     }
@@ -378,7 +378,7 @@ extension AppDelegate {
             return true
         }
 
-        sip.call(number: phoneNumber)
+        _ = sip.call(number: phoneNumber)
 
         return true
     }

@@ -55,8 +55,8 @@ class VoIPPushHandler {
      */
     func createLocalCallObject(from payload: VoIPPushPayload) {
         let uuid = payload.uuid,
-                phoneNumber = payload.phoneNumber,
-                callerId = payload.callerId
+                _ = payload.phoneNumber,
+                _ = payload.callerId
 
         if self.sip.hasActiveCall {
             respond(with: payload, available: false)

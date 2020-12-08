@@ -28,22 +28,6 @@ extern NSString * const _Nonnull MiddlewareAccountRegistrationIsDoneNotification
  */
 - (void)sentAPNSToken:(NSString * _Nonnull) apnsToken;
 
-/**
- *  Handle APNS Payload.
- *
- *  When an APNS message with payload is received from the Middleware, this function
- *  can be called to process it.
- *
- *  @param payload The payload received through an APNS message.
- */
-- (void)handleReceivedAPSNPayload:(NSDictionary *_Nonnull)payload;
-
-/**
- *  When remote logging is enabled in the settings, this function will update the
- *  middleware with the remote logging id.
- */
-- (void)updateDeviceRegistrationWithRemoteLoggingId;
-
 - (void)deleteDeviceRegistration: (NSString *_Nonnull) apnsToken;
 
 @end
