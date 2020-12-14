@@ -139,8 +139,8 @@ extension DialerViewController {
 
         group.notify(queue: .main) {
             if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
-                DispatchQueue.main.async {
-                    self.sip.register { error in
+                self.sip.register { error in
+                    DispatchQueue.main.async {
                         if (error == nil) {
                             self.performSegue(segueIdentifier: .sipCalling)
                         } else {

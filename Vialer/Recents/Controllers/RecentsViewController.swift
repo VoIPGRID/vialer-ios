@@ -86,6 +86,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
 
     // MARK: - Initialisation
     required init?(coder aDecoder: NSCoder) {
+        micAlert = RegistrationFailedAlert.create()
         super.init(coder: aDecoder)
         setupUI()
         
@@ -207,7 +208,6 @@ extension RecentsViewController {
 
     fileprivate func call(_ number: String) {
         phoneNumberToCall = number
-        micAlert = MicPermissionHelper.createMicPermissionAlert()
         if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             MicPermissionHelper.requestMicrophonePermission { startCalling in
