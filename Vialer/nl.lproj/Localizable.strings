@@ -153,6 +153,10 @@
 /* No comment provided by engineer. */
 "Failed to setup call" = "Opzetten van gesprek mislukt";
 
+/* No comment provided by engineer. */
+"Check your network status and permission." = ""
+//wip
+
 /* Fetching the latest recent calls from the server. */
 "Fetching the latest recent calls from the server." = "Meest recente gesprekken worden van de server gehaald.";
 

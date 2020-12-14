@@ -353,6 +353,15 @@
 		838E12B8250A64DE009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
 		838E12B9250A64DF009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
 		838E12BA250A64E0009AAF80 /* PhoneNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */; };
+		8391341125829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341225829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341325829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341425829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341525829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341625829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341725829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341825829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
+		8391341925829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */; };
 		83916FCF231D076900EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FCE231D076900EBF713 /* Snapshot-Constants.swift */; };
 		83916FD1231D09E300EBF713 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */; };
 		83A2427A219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */; };
@@ -1725,6 +1734,7 @@
 		838207D82292D0A70098EABD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		838E12B1250A64D5009AAF80 /* PhoneNumberModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneNumberModel.h; sourceTree = "<group>"; };
 		838E12B2250A64D5009AAF80 /* PhoneNumberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberModel.m; sourceTree = "<group>"; };
+		8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetworkPermissionHelper.swift; sourceTree = "<group>"; };
 		83916FCE231D076900EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Snapshot-Constants.swift"; path = "Verbonden/Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
 		83916FD0231D09E200EBF713 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = SOURCE_ROOT; };
 		83A24279219B19540018FD6C /* MiddlewareRequestOperationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MiddlewareRequestOperationManagerTests.m; path = VialerTests/MiddlewareRequestOperationManagerTests.m; sourceTree = SOURCE_ROOT; };
@@ -3517,6 +3527,7 @@
 			isa = PBXGroup;
 			children = (
 				83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */,
+				8391341025829EE000220D89 /* LocalNetworkPermissionHelper.swift */,
 				C4C675641D19B5430003A385 /* AppInfo.swift */,
 				C43FD69A1E76F4C6002593DD /* NotificationToken.swift */,
 				C4AEB2491E6D593100550E0C /* SegueHandler.swift */,
@@ -6159,6 +6170,7 @@
 				838206A42290979A0098EABD /* VialerLogger.swift in Sources */,
 				838206A52290979A0098EABD /* ContactModel.swift in Sources */,
 				838206A62290979A0098EABD /* CoreDataStack.swift in Sources */,
+				8391341825829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				D4107093235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				838206A72290979A0098EABD /* UIView+RoundedStyle.m in Sources */,
 				838206A82290979A0098EABD /* ContactsViewController.m in Sources */,
@@ -6275,6 +6287,7 @@
 				83820753229098D20098EABD /* VialerLogger.swift in Sources */,
 				83820754229098D20098EABD /* ContactModel.swift in Sources */,
 				83820755229098D20098EABD /* CoreDataStack.swift in Sources */,
+				8391341625829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				D4107091235D9BF900F0E31C /* UUIDExtension.swift in Sources */,
 				83820756229098D20098EABD /* UIView+RoundedStyle.m in Sources */,
 				83820757229098D20098EABD /* ContactsViewController.m in Sources */,
@@ -6391,6 +6404,7 @@
 				C43B6E281E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78161DE309B000B17BCF /* ContactModel.swift in Sources */,
 				C4AD4E6A1E729F940067FE40 /* CoreDataStack.swift in Sources */,
+				8391341325829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				C46F10121C7CB6DA007F30A6 /* VoIPGRIDRequestOperationManager+ForgotPassword.m in Sources */,
 				C41FD88B1C60A08400BBE6D7 /* UIView+RoundedStyle.m in Sources */,
 				C41FD88C1C60A08400BBE6D7 /* ContactsViewController.m in Sources */,
@@ -6535,6 +6549,7 @@
 				C490ADA41D0863E3004A8F83 /* NSString+Mobile.m in Sources */,
 				C43B6E291E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78171DE309B000B17BCF /* ContactModel.swift in Sources */,
+				8391341525829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				C4AD4E6B1E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C490ADA71D0863E3004A8F83 /* UIView+RoundedStyle.m in Sources */,
 				C490ADA91D0863E3004A8F83 /* ContactsViewController.m in Sources */,
@@ -6583,6 +6598,7 @@
 				C4C50F981DE6E0B700B632FA /* PhoneNumberUtilsTestCase.swift in Sources */,
 				F2A7AEFB1CF4757600889DD8 /* TestKVOObserverClass.m in Sources */,
 				F9EF27EC1C60E33B0097E3AC /* AvailabilityModelTests.m in Sources */,
+				8391341925829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				83A2427C219B1C0D0018FD6C /* MiddlewareTests.m in Sources */,
 				F9C4FC211C6B3AE800730593 /* SIPUtilsTests.m in Sources */,
 				F98635391C7C613200674182 /* SIPIncomingCallViewControllerTests.m in Sources */,
@@ -6704,6 +6720,7 @@
 				EE23186220A0468F00C05EB0 /* RecentsViewController.swift in Sources */,
 				EE23186320A0468F00C05EB0 /* VialerLogger.swift in Sources */,
 				EE23186420A0468F00C05EB0 /* ContactModel.swift in Sources */,
+				8391341725829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				EE23186520A0468F00C05EB0 /* CoreDataStack.swift in Sources */,
 				EE23186620A0468F00C05EB0 /* UIView+RoundedStyle.m in Sources */,
 				EE23186720A0468F00C05EB0 /* ContactsViewController.m in Sources */,
@@ -6839,6 +6856,7 @@
 				EE61F4471F1DDDE4006E890F /* RecentsViewController.swift in Sources */,
 				EE61F4481F1DDDE4006E890F /* VialerLogger.swift in Sources */,
 				EE61F4491F1DDDE4006E890F /* ContactModel.swift in Sources */,
+				8391341425829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				EE61F44A1F1DDDE4006E890F /* CoreDataStack.swift in Sources */,
 				EE61F44B1F1DDDE4006E890F /* UIView+RoundedStyle.m in Sources */,
 				EE61F44C1F1DDDE4006E890F /* ContactsViewController.m in Sources */,
@@ -6955,6 +6973,7 @@
 				C49A46A81E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E271E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78151DE309B000B17BCF /* ContactModel.swift in Sources */,
+				8391341225829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				C4AD4E691E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				F20851261D26935600A17E71 /* UIView+RoundedStyle.m in Sources */,
 				F20851281D26935600A17E71 /* ContactsViewController.m in Sources */,
@@ -7090,6 +7109,7 @@
 				C49A46A71E6829CE0097E808 /* RecentsViewController.swift in Sources */,
 				C43B6E261E2E524400942F9B /* VialerLogger.swift in Sources */,
 				C48B78141DE309B000B17BCF /* ContactModel.swift in Sources */,
+				8391341125829EE100220D89 /* LocalNetworkPermissionHelper.swift in Sources */,
 				C4AD4E681E729F940067FE40 /* CoreDataStack.swift in Sources */,
 				C83D5F272B3A1BCE013030B1 /* UIView+RoundedStyle.m in Sources */,
 				C406C9EB1BF4CDE9001363CA /* ContactsViewController.m in Sources */,

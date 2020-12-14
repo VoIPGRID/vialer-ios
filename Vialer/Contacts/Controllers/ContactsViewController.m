@@ -42,7 +42,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
 @property (weak, nonatomic) IBOutlet UIView *reachabilityBar;
 
 @property (nonatomic) BOOL showTitleImage;
-
+@property (strong, nonatomic) UIAlertController *micAlert;
 @end
 
 @implementation ContactsViewController
@@ -186,6 +186,8 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+#pragma mark - Segues
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[TwoStepCallingViewController class]]) {
         TwoStepCallingViewController *tscvc = (TwoStepCallingViewController *)segue.destinationViewController;
@@ -322,20 +324,22 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
          */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
+                self.micAlert = [MicPermissionHelper createMicPermissionAlert];
                 if ([[ReachabilityHelper sharedInstance] connectionFastEnoughForVoIP]) {
                     Sip *sip = [Sip shared];
                     [sip registerOnRegister: ^(NSError* error) {
                         if (error == nil) {
-                               [MicPermissionHelper requestMicrophonePermissionWithCompletion:^void(BOOL startCalling) {
-                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                       if (startCalling == YES) {
-                                           [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
-                                       } else {
-                                           UIAlertController* alert = [MicPermissionHelper createMicPermissionAlert];
-                                           [self presentViewController:alert animated:YES completion:nil];
-                                       }
-                                   });
-                               }];
+                            [MicPermissionHelper requestMicrophonePermissionWithCompletion:^void(BOOL startCalling) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    if (startCalling == YES) {
+                                        [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                                    } else {
+                                        [self presentViewController:self.micAlert animated:YES completion:nil];
+                                    }
+                                });
+                            }];
+                        } else {
+                            [self presentViewController:[RegistrationFailedAlert create] animated:YES completion:nil];
                         }
                     }];
                 } else if (!self.reachability.isReachable) {
@@ -350,8 +354,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                            if (startCalling == YES) {
                                [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
                            } else {
-                               UIAlertController* alert = [MicPermissionHelper createMicPermissionAlert];
-                               [self presentViewController:alert animated:YES completion:nil];
+                               [self presentViewController:self.micAlert animated:YES completion:nil];
                            }
                        });
                     }];

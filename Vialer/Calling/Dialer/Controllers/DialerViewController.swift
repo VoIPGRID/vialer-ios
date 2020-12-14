@@ -142,7 +142,7 @@ extension DialerViewController {
                 DispatchQueue.main.async {
                     self.sip.register { error in
                         if (error == nil) {
-                           self.performSegue(segueIdentifier: .sipCalling)
+                            self.performSegue(segueIdentifier: .sipCalling)
                         } else {
                             VialerLogError("Failed to register when attempting outgoing call \(String(describing: error?.localizedDescription))")
                             self.present(RegistrationFailedAlert.create(), animated: true)

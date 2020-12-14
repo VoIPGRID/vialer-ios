@@ -38,6 +38,7 @@ class RecentsViewController: UIViewController, SegueHandler, TableViewHandler {
     fileprivate var sipDisabled: NotificationToken?
     fileprivate var sipChanged: NotificationToken?
     fileprivate var encryptionUsageChanged: NotificationToken?
+    fileprivate var micAlert: UIAlertController
 
     var contactModel = ContactModel.defaultModel
     var onlyMyCalls = false
@@ -206,15 +207,21 @@ extension RecentsViewController {
 
     fileprivate func call(_ number: String) {
         phoneNumberToCall = number
+        micAlert = MicPermissionHelper.createMicPermissionAlert()
         if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
             VialerGAITracker.setupOutgoingSIPCallEvent()
             MicPermissionHelper.requestMicrophonePermission { startCalling in
                 DispatchQueue.main.async {
                     if startCalling {
-                        self.performSegue(segueIdentifier: .sipCalling)
+                        self.sip.register { error in
+                            if (error == nil) {
+                                self.performSegue(segueIdentifier: .sipCalling)
+                            } else {
+                                self.present(RegistrationFailedAlert.create(), animated: true, completion: nil)
+                            }
+                        }
                     } else {
-                        let alert = MicPermissionHelper.createMicPermissionAlert()
-                        self.present(alert, animated: true, completion: nil)
+                        self.present(self.micAlert, animated: true, completion: nil)
                     }
                 }
             }
@@ -228,8 +235,7 @@ extension RecentsViewController {
                     if startCalling {
                             self.performSegue(segueIdentifier: .twoStepCalling)
                     } else {
-                            let alert = MicPermissionHelper.createMicPermissionAlert()
-                            self.present(alert, animated: true, completion: nil)
+                            self.present(self.micAlert, animated: true, completion: nil)
                     }
                 }
             }

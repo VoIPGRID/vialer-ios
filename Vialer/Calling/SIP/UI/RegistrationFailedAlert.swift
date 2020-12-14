@@ -5,10 +5,10 @@
 
 import Foundation
 
-class RegistrationFailedAlert: UIAlertController {
+@objc class RegistrationFailedAlert: UIAlertController {
 
-    static func create() -> UIAlertController {
-        let alert = UIAlertController(title: nil, message: NSLocalizedString("Failed to setup call", comment: "Failed to setup call"), preferredStyle: .alert)
+    @objc static func create() -> UIAlertController {
+        let alert = UIAlertController(title: NSLocalizedString("Failed to setup call", comment: ""), message: NSLocalizedString("Check your network status and permission.", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         return alert
     }

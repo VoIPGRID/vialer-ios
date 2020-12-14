@@ -2,3 +2,5 @@ NSContactsUsageDescription = "Vialer heeft toegang tot uw contacten nodig om bel
 NSMicrophoneUsageDescription = "Vialer heeft toegang nodig tot je microfoon om bellen mogelijk te maken";
 NSCameraUsageDescription = "Vialer heeft toegang nodig tot je camera om video bellen mogelijk te maken";
 NSBluetoothPeripheralUsageDescription = "Vialer heeft toegang nodig tot je bluetooth om de naam van het verbonden apparaat te krijgen";
+//wip
+//NSLocalNetworkUsageDescription = ;
