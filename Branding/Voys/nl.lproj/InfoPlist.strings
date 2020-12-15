@@ -2,5 +2,4 @@ NSContactsUsageDescription = "Voys heeft toegang tot uw contacten nodig om belle
 NSMicrophoneUsageDescription = "Voys heeft toegang nodig tot je microfoon om bellen mogelijk te maken";
 NSCameraUsageDescription = "Voys heeft toegang nodig tot je camera om video bellen mogelijk te maken";
 NSBluetoothPeripheralUsageDescription = "Voys heeft toegang nodig tot je bluetooth om de naam van het verbonden apparaat te krijgen";
-//wip
-//NSLocalNetworkUsageDescription = ;
+NSLocalNetworkUsageDescription = "Voys heeft toegang tot het lokale netwerk nodig om bellen via wifi mogelijk te maken";
