@@ -314,7 +314,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Invalid phone number", nil)
                                                                            message:NSLocalizedString(@"It's not possible to setup this call. Please make sure you are trying to call a valid number.", nil)
                                                               andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
-            [self presentViewController:alert animated:YES completion:nil];
+            [viewController presentViewController:alert animated:YES completion:nil];
             return NO;
         }
         /**
@@ -334,19 +334,19 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                                     if (startCalling == YES) {
                                         [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
                                     } else {
-                                        [self presentViewController:self.micAlert animated:YES completion:nil];
+                                        [viewController presentViewController:self.micAlert animated:YES completion:nil];
                                     }
                                 });
                             }];
                         } else {
-                            [self presentViewController:[RegistrationFailedAlert create] animated:YES completion:nil];
+                            [viewController presentViewController:[RegistrationFailedAlert create] animated:YES completion:nil];
                         }
                     }];
                 } else if (!self.reachability.isReachable) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No internet connection", nil)
                                                                                    message:NSLocalizedString(@"It's not possible to setup a call. Make sure you have an internet connection.", nil)
                                                                       andDefaultButtonText:NSLocalizedString(@"Ok", nil)];
-                    [self presentViewController:alert animated:YES completion:nil];
+                    [viewController presentViewController:alert animated:YES completion:nil];
                 } else {
                     [VialerGAITracker setupOutgoingConnectABCallEvent];
                     [MicPermissionHelper requestMicrophonePermissionWithCompletion:^void(BOOL startCalling) {
@@ -354,7 +354,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                            if (startCalling == YES) {
                                [self performSegueWithIdentifier:ContactsViewControllerTwoStepCallingSegue sender:self];
                            } else {
-                               [self presentViewController:self.micAlert animated:YES completion:nil];
+                               [viewController presentViewController:self.micAlert animated:YES completion:nil];
                            }
                        });
                     }];
