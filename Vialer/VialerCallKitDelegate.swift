@@ -169,7 +169,7 @@ extension VialerCallKitDelegate: CXProviderDelegate {
     public func provider(_ provider: CXProvider, perform action: CXPlayDTMFCallAction) {
 //        guard let call = findCallOrFail(action: action) else { return }
 
-        VialerLogError("DTMF not supported yet")
+        VialerLogError("DTMF's sound is not supported yet") //wip
         action.fail()
     }
 
@@ -233,7 +233,7 @@ extension VialerCallKitDelegate {
     }
 
     private func isCallConfirmed() -> Bool {
-        VoIPPushHandler.incomingCallConfirmed
+        return VoIPPushHandler.incomingCallConfirmed
     }
 }
 

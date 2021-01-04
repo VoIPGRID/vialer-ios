@@ -586,8 +586,6 @@ static NSString * const LoginViewControllerSettingsNavigationControllerStoryboar
             // Show the configure the app view.
             [self animateConfigureViewToVisible:1.f delay:0.f];
             
-            [LocalNetworkPermissionHelper triggerLocalNetworkPrivacyAlert];
-            
             [self.scene runActTwo];
 
             // If a success block was provided, execute it.

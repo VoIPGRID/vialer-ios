@@ -191,7 +191,7 @@ DEPENDENCIES:
   - OCMock
   - OHHTTPStubs
   - PBWebViewController
-  - PhoneLib (from `https://github.com/open-voip-alliance/iOSPhoneLib.git`)
+  - PhoneLib (from `/Users/chris/projects/Vialer/iOS/ios-phone-lib`)
   - SAMKeychain
   - SimulatorStatusMagic
   - SPLumberjackLogFormatter (from `https://github.com/VoIPGRID/SPLumberjackLogFormatter.git`)
@@ -237,8 +237,7 @@ EXTERNAL SOURCES:
   "MMDrawerController+Storyboard":
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
   PhoneLib:
-    branch: main
-    :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
+    :path: "/Users/chris/projects/Vialer/iOS/ios-phone-lib"
   SPLumberjackLogFormatter:
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
 
@@ -249,9 +248,6 @@ CHECKOUT OPTIONS:
   "MMDrawerController+Storyboard":
     :commit: f6e7de9be7a1b595bb15a7a0c3b4e03a61117ee8
     :git: https://github.com/TomSwift/MMDrawerController-Storyboard.git
-  PhoneLib:
-    :commit: 1b7d7ff1305f045d4d9ed81d754e755bf9526f46
-    :git: https://github.com/open-voip-alliance/iOSPhoneLib.git
   SPLumberjackLogFormatter:
     :commit: c0155bfd953746f13e94c84b8b2c13908242e3e4
     :git: https://github.com/VoIPGRID/SPLumberjackLogFormatter.git
@@ -284,7 +280,7 @@ SPEC CHECKSUMS:
   OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   PBWebViewController: 6537990155ca850fb8d0563efbc12becebc953ef
-  PhoneLib: 816183e6178f9c2b62bcd9e82d498f1b153afd9b
+  PhoneLib: 0a062ca52a13fee76b5858464b5e8f12014a07ec
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
@@ -292,6 +288,6 @@ SPEC CHECKSUMS:
   SPLumberjackLogFormatter: a2290c9b880f3166b2d1bace45dc1fc1302b28ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 75cf37e0daa6d5469591f964845be134439d075e
+PODFILE CHECKSUM: b0110d9c5162f07972969738356cab5a0d3b9526
 
 COCOAPODS: 1.10.0
