@@ -1,5 +1,5 @@
 //
-//  MicPermissionAlerter.swift
+//  MicPermissionHelper.swift
 //  
 //
 //  Created by Chris Kontos on 07/12/2020.

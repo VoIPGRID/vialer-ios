@@ -194,7 +194,7 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
         [tscvc handlePhoneNumber:self.phoneNumberToCall];
     } else if ([segue.destinationViewController isKindOfClass:[SIPCallingViewController class]]) {
         Sip *sip = [Sip shared];
-        Session *session = [sip callWithNumber:self.phoneNumberToCall];
+        Session *session = [sip callWithNumber:self.phoneNumberToCall]; //wip
         if (session == nil) {
             VialerLogError(@"Not able to make call to %@", self.phoneNumberToCall);
         }
@@ -332,7 +332,17 @@ static NSTimeInterval const ContactsViewControllerReachabilityBarAnimationDurati
                             [MicPermissionHelper requestMicrophonePermissionWithCompletion:^void(BOOL startCalling) {
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     if (startCalling == YES) {
-                                        [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                                        void (^onContinueCall)(void) = ^void (){
+                                            [self performSegueWithIdentifier:ContactsViewControllerSIPCallingSegue sender:self];
+                                        };
+
+                                        [WifiAlert shouldBePresentedWithResult:^void(BOOL result) {
+                                            if (result) {
+                                                [self presentViewController:[WifiAlert createOnContinue:onContinueCall onCancelCall:nil]  animated:YES completion:nil];
+                                            } else {
+                                                onContinueCall();
+                                            }
+                                        }];
                                     } else {
                                         [viewController presentViewController:self.micAlert animated:YES completion:nil];
                                     }

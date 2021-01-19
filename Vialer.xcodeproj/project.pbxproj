@@ -54,6 +54,14 @@
 		836884B020F4B4580098A961 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836884AC20F4B4290098A961 /* CoreBluetooth.framework */; };
 		8374B85422BA85210048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */; };
 		8374B86D22C0E6A40048C7C3 /* Snapshot-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */; };
+		837C271E25B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C271F25B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C272025B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C272125B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C272225B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C272325B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C272425B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
+		837C272525B71F93008220C6 /* WifiAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C271D25B71F93008220C6 /* WifiAlert.swift */; };
 		838206452290979A0098EABD /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F3DF41BFCA7A70012494D /* NoAnimationSegue.m */; };
 		838206462290979A0098EABD /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEB25D1E6D95D600550E0C /* URLRequestExtensions.swift */; };
 		838206482290979A0098EABD /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420AEC81E30EF5B005B2E4E /* FileManagerExtensions.swift */; };
@@ -1715,6 +1723,7 @@
 		836884AC20F4B4290098A961 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8374B85122BA85210048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
 		8374B86C22C0E6A30048C7C3 /* Snapshot-Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshot-Constants.swift"; sourceTree = "<group>"; };
+		837C271D25B71F93008220C6 /* WifiAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiAlert.swift; sourceTree = "<group>"; };
 		838206ED2290979A0098EABD /* ANNAbel Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ANNAbel Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8382079D229098D20098EABD /* Verbonden Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Verbonden Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838207B22292CB530098EABD /* Acceptatie-Verbonden-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Acceptatie-Verbonden-Info.plist"; sourceTree = "<group>"; };
@@ -2466,7 +2475,6 @@
 				20631EEE6D91A0270B4B29CC /* Pods-VoysSnapshotUITests.debug.xcconfig */,
 				82450EF9831D8C877DB427BA /* Pods-VoysSnapshotUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -3513,6 +3521,7 @@
 		FB5D291A182BE407001DA8F2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				837C271D25B71F93008220C6 /* WifiAlert.swift */,
 				83B84F86257E9C3600BABAC7 /* MicPermissionHelper.swift */,
 				C4C675641D19B5430003A385 /* AppInfo.swift */,
 				C43FD69A1E76F4C6002593DD /* NotificationToken.swift */,
@@ -6178,6 +6187,7 @@
 				838206872290979A0098EABD /* SipCallingButton.m in Sources */,
 				838206882290979A0098EABD /* DialerViewController.swift in Sources */,
 				838206892290979A0098EABD /* WebserviceProtocol.swift in Sources */,
+				837C272525B71F93008220C6 /* WifiAlert.swift in Sources */,
 				8382068A2290979A0098EABD /* Webservice.swift in Sources */,
 				8382068B2290979A0098EABD /* VialerGAITracker.swift in Sources */,
 				8382068D2290979A0098EABD /* SetupCallTransferContactsViewController.swift in Sources */,
@@ -6294,6 +6304,7 @@
 				83820736229098D20098EABD /* Webservice.swift in Sources */,
 				83820737229098D20098EABD /* SipCallingButton.m in Sources */,
 				83820738229098D20098EABD /* DialerViewController.swift in Sources */,
+				837C272325B71F93008220C6 /* WifiAlert.swift in Sources */,
 				83820739229098D20098EABD /* WebserviceProtocol.swift in Sources */,
 				8382073A229098D20098EABD /* UIViewControllerExtensions.swift in Sources */,
 				8382073B229098D20098EABD /* AppDelegate.swift in Sources */,
@@ -6410,6 +6421,7 @@
 				C4B4075A1E7A869900F5FC31 /* Reachability.swift in Sources */,
 				EE1C7B9F1F8777DD00708D96 /* SipCallingButton.m in Sources */,
 				C41FD8801C60A08400BBE6D7 /* LoginFormView.m in Sources */,
+				837C272025B71F93008220C6 /* WifiAlert.swift in Sources */,
 				C4AEB2571E6D954400550E0C /* Webservice.swift in Sources */,
 				EEDCC3B620C520E0003480F6 /* DialerViewController.swift in Sources */,
 				C42B04911E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
@@ -6554,6 +6566,7 @@
 				EEA3C2751F90919200423F96 /* ReachabilityHelper.swift in Sources */,
 				EEDCC3C420C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE1C7B821F87777400708D96 /* KeypadViewController.swift in Sources */,
+				837C272225B71F93008220C6 /* WifiAlert.swift in Sources */,
 				C4AEB2581E6D954400550E0C /* Webservice.swift in Sources */,
 				EE1C7B9D1F8777DB00708D96 /* SipCallingButton.m in Sources */,
 				EEDCC3B820C520E0003480F6 /* DialerViewController.swift in Sources */,
@@ -6723,6 +6736,7 @@
 				EE23184620A0468F00C05EB0 /* KeypadViewController.swift in Sources */,
 				EEDCC3C520C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE23184720A0468F00C05EB0 /* RecentTableViewCell.m in Sources */,
+				837C272425B71F93008220C6 /* WifiAlert.swift in Sources */,
 				EE23184820A0468F00C05EB0 /* SipCallingButton.m in Sources */,
 				EEDCC3B920C520E0003480F6 /* DialerViewController.swift in Sources */,
 				EE23184B20A0468F00C05EB0 /* WebserviceProtocol.swift in Sources */,
@@ -6858,6 +6872,7 @@
 				EEA3C2741F90919200423F96 /* ReachabilityHelper.swift in Sources */,
 				EEDCC3C320C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE1C7B811F87777300708D96 /* KeypadViewController.swift in Sources */,
+				837C272125B71F93008220C6 /* WifiAlert.swift in Sources */,
 				EE61F42F1F1DDDE4006E890F /* ActivateSIPAccountViewController.m in Sources */,
 				EE1C7B9E1F8777DC00708D96 /* SipCallingButton.m in Sources */,
 				EE61F4301F1DDDE4006E890F /* RecentTableViewCell.m in Sources */,
@@ -6974,6 +6989,7 @@
 				EEA3C2711F90919200423F96 /* ReachabilityHelper.swift in Sources */,
 				EEDCC3C120C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				EE1C7B7F1F87777200708D96 /* KeypadViewController.swift in Sources */,
+				837C271F25B71F93008220C6 /* WifiAlert.swift in Sources */,
 				F20851151D26935600A17E71 /* ActivateSIPAccountViewController.m in Sources */,
 				EE1C7BA01F8777DD00708D96 /* SipCallingButton.m in Sources */,
 				F20851161D26935600A17E71 /* RecentTableViewCell.m in Sources */,
@@ -7109,6 +7125,7 @@
 				EEDCC3C020C520E0003480F6 /* PasteableUILabel.m in Sources */,
 				C46743111BF726AA0032D77B /* RecentTableViewCell.m in Sources */,
 				EE1C7BA11F8777DE00708D96 /* SipCallingButton.m in Sources */,
+				837C271E25B71F93008220C6 /* WifiAlert.swift in Sources */,
 				EEDCC3B420C520E0003480F6 /* DialerViewController.swift in Sources */,
 				C42B048F1E7936FD00280381 /* WebserviceProtocol.swift in Sources */,
 				C4AEB2551E6D954400550E0C /* Webservice.swift in Sources */,
@@ -8066,7 +8083,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
+					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -8130,7 +8147,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Vialer-pjsip-iOS\"",
 					"\"${PODS_ROOT}/Headers/Public/VialerSIPLib\"",
 					"\"${PODS_ROOT}/Headers/Public/le\"",
-					"$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources",
+					$CONFIGURATION_TEMP_DIR/Vialer.build/DerivedSources,
 				);
 				INFOPLIST_FILE = VialerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

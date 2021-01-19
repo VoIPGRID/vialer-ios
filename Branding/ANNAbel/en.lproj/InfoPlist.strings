@@ -2,4 +2,3 @@ NSContactsUsageDescription = "ANNAbel needs access to your contacts to make call
 NSMicrophoneUsageDescription = "ANNAbel needs access to your microphone to make calling possible";
 NSCameraUsageDescription = "ANNAbel needs access to your camera to make video calls";
 NSBluetoothPeripheralUsageDescription = "ANNAbel needs access to your bluetooth to get the name of the device";
-NSLocalNetworkUsageDescription = "ANNAbel needs access to your local network to make calling through wifi possible";

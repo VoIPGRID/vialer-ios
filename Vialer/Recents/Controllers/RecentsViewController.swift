@@ -213,11 +213,19 @@ extension RecentsViewController {
             MicPermissionHelper.requestMicrophonePermission { startCalling in
                 DispatchQueue.main.async {
                     if startCalling {
-                        self.sip.register { error in
+                        let onContinueCall = { self.sip.register { error in
                             if (error == nil) {
                                 self.performSegue(segueIdentifier: .sipCalling)
                             } else {
                                 self.present(RegistrationFailedAlert.create(), animated: true, completion: nil)
+                            }
+                        }}
+                        
+                        WifiAlert.shouldBePresented { should in
+                            if should {
+                                self.present(WifiAlert.create(onContinue:onContinueCall), animated: true, completion: nil)
+                            } else {
+                                onContinueCall()
                             }
                         }
                     } else {

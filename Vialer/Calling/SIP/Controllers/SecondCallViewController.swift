@@ -127,6 +127,11 @@ extension SecondCallViewController {
         
     }
     
+//// Don't present wifi notification on second call. //wip
+//override func shouldPresentWiFiNotification() -> Bool {
+//    return false
+//}
+    
 // MARK: - Call setup
     func endSecondCallAndUnwindToFirst() {
         guard let transferTargetSession = attendedTransferSession?.to else {return}

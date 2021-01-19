@@ -266,7 +266,7 @@ extension SIPCallingViewController {
             holdButton?.isEnabled = false
             muteButton?.isEnabled = false
             transferButton?.isEnabled = false
-            speakerButton?.isEnabled = true
+            speakerButton?.isEnabled = false
             hangupButton?.isEnabled = true
             keypadButton?.isEnabled = false
         case .inProgress:
@@ -292,15 +292,15 @@ extension SIPCallingViewController {
             statusLabel?.text = ""
         case .ringing:
             if call.isIncoming {
-                statusLabel?.text = NSLocalizedString("Incoming call...", comment: "Statuslabel state text .Incoming")
+                statusLabel?.text = NSLocalizedString("Incoming call...", comment: "statusLabel state text .Incoming")
             } else {
-                statusLabel?.text = NSLocalizedString("Calling...", comment: "Statuslabel state text .Calling")
+                statusLabel?.text = NSLocalizedString("Calling...", comment: "statusLabel state text .Calling")
             }
         case .inProgress:
             //statusLabel?.text = NSLocalizedString("On hold", comment: "On hold")
             statusLabel?.text = "\(dateComponentsFormatter.string(from: TimeInterval(call.duration))!)"
         case .finished:
-            statusLabel?.text = NSLocalizedString("Call ended", comment: "Statuslabel state text .Disconnected")
+            statusLabel?.text = NSLocalizedString("Call ended", comment: "statusLabel state text .Disconnected")
         }
     }
 

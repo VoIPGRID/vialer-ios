@@ -139,7 +139,7 @@ extension DialerViewController {
 
         group.notify(queue: .main) {
             if ReachabilityHelper.instance.connectionFastEnoughForVoIP() {
-                self.sip.register { error in
+                let onContinueCall = { self.sip.register { error in
                     DispatchQueue.main.async {
                         if (error == nil) {
                             self.performSegue(segueIdentifier: .sipCalling)
@@ -147,6 +147,14 @@ extension DialerViewController {
                             VialerLogError("Failed to register when attempting outgoing call \(String(describing: error?.localizedDescription))")
                             self.present(RegistrationFailedAlert.create(), animated: true)
                         }
+                    }
+                }}
+                
+                WifiAlert.shouldBePresented { should in
+                    if should {
+                        self.present(WifiAlert.create(onContinue:onContinueCall), animated: true, completion: nil)
+                    } else {
+                        onContinueCall()
                     }
                 }
             } else {

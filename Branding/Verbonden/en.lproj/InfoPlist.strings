@@ -2,5 +2,3 @@ NSContactsUsageDescription = "Verbonden needs access to your contacts to make ca
 NSMicrophoneUsageDescription = "Verbonden needs access to your microphone to make calling possible";
 NSCameraUsageDescription= "Verbonden needs access to your camera to make video calls";
 NSBluetoothPeripheralUsageDescription = "Verbonden needs access to your bluetooth to get the name of the device";
-NSLocalNetworkUsageDescription = "Verbonden needs access to your local network to make calling through wifi possible";
-
